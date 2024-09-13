@@ -1,247 +1,385 @@
 - en: Keras Hyperparameter Tuning in Google Colab Using Hyperas
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Keras 超参数调整在 Google Colab 中使用 Hyperas
 - en: 原文：[https://www.kdnuggets.com/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html](https://www.kdnuggets.com/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html](https://www.kdnuggets.com/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Nils Schlüter](https://www.nilsschlueter.de/), Software Engineer**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Nils Schlüter](https://www.nilsschlueter.de/) 提供，软件工程师**'
 - en: '![Figure](../Images/74dd91f3826239a8e41b79238d097c74.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/74dd91f3826239a8e41b79238d097c74.png)'
 - en: Tuning Hyperparameters for your neural network can be tricky (Photo by [Anthony
     Roberts](https://unsplash.com/@aroberts1228) on [Unsplash](https://unsplash.com/))
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 为你的神经网络调整超参数可能会很棘手（照片由 [Anthony Roberts](https://unsplash.com/@aroberts1228)
+    提供，来自 [Unsplash](https://unsplash.com/)）
 - en: Hyperparameter Tuning is one of the most computationally expensive tasks when
     creating deep learning networks. Luckily, you can use Google Colab to speed up
     the process significantly. In this post, I will show you how you can tune the
     hyperparameters of your existing keras models using Hyperas and run everything
     in a Google Colab Notebook.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 超参数调整是创建深度学习网络时最耗费计算资源的任务之一。幸运的是，你可以使用 Google Colab 显著加快这个过程。在这篇文章中，我将向你展示如何使用
+    Hyperas 调整现有 Keras 模型的超参数，并在 Google Colab 笔记本中运行所有操作。
 - en: '**Creating a new notebook and enable the GPU Runtime**'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '**创建一个新的笔记本并启用 GPU 运行时**'
 - en: '![](../Images/0c1e8c2d44298030433f11f92ebf900a.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0c1e8c2d44298030433f11f92ebf900a.png)'
 - en: Dialog to change the runtime to GPU
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 更改运行时为 GPU 的对话框
 - en: 'First, you need to create a new notebook. Open your [Colab Console ](https://colab.research.google.com/)and
     select **New Python 3 Notebook.** In your notebook, choose **Runtime **from the
     menu and then **Change runtime type.** Select Hardware accelerator: GPU and hit
     save. This will significantly speed up every calculation you do in this notebook.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，你需要创建一个新的笔记本。打开你的 [Colab 控制台](https://colab.research.google.com/) 并选择 **新建
+    Python 3 笔记本**。在笔记本中，从菜单中选择 **运行时**，然后选择 **更改运行时类型**。选择硬件加速器：GPU 并点击保存。这将显著加快你在这个笔记本中进行的所有计算。
 - en: '**Installing the packages**'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**安装包**'
 - en: 'You can install new packages using *pip*. In this case, we need [hyperas](https://github.com/maxpumperla/hyperas) and [hyperopt](https://github.com/hyperopt/hyperopt).
     Copy and paste the following into the first cell of your notebook:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用 *pip* 安装新包。在这种情况下，我们需要 [hyperas](https://github.com/maxpumperla/hyperas)
+    和 [hyperopt](https://github.com/hyperopt/hyperopt)。将以下内容复制并粘贴到笔记本的第一个单元格中：
 - en: '[PRE0]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: When you run the cell you will see that pip is downloading and installing the
     dependencies.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你运行单元格时，你会看到 pip 正在下载和安装依赖项。
 - en: '**Getting the data and creating the model**'
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**获取数据并创建模型**'
 - en: For this post I’m going to use the example from the [hyperas github page](https://github.com/maxpumperla/hyperas).
     You can find the finished Colab Notebook [here](https://colab.research.google.com/drive/184Tas98M-pPQanCfTbOHRBRUeE9dtdM9#scrollTo=rdo3mScvBHF4).
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我将使用 [hyperas github 页面](https://github.com/maxpumperla/hyperas) 的示例。你可以在
+    [这里](https://colab.research.google.com/drive/184Tas98M-pPQanCfTbOHRBRUeE9dtdM9#scrollTo=rdo3mScvBHF4)
+    找到完成的 Colab 笔记本。
 - en: '****Data Function****'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '****数据函数****'
 - en: 'You’ll need a data function to load your data. It needs to return your X_train,
     Y_train, X_test and Y_test values. Here is an example for a data function:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 你需要一个数据函数来加载你的数据。它需要返回你的 X_train、Y_train、X_test 和 Y_test 值。下面是一个数据函数的示例：
 - en: '**Note: **Your data function needs to return the values in exactly this order:
     X_train, Y_train, X_test, Y_test. Be careful if you’re using scikit learns [train_test_split](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html),
     as this returns the values in a different order'
+  id: totrans-19
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**注意：**你的数据函数需要按照确切的顺序返回这些值：X_train、Y_train、X_test、Y_test。如果你使用 scikit-learn
+    的 [train_test_split](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)，要小心，因为它返回值的顺序可能不同。'
 - en: '****Model Function****'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '****模型函数****'
 - en: The Model Function is where you define your model. You can use your all available
     keras functions and layers. To add Hyperparameters for tuning, you can use the
     **{{uniform()}}** and **{{choice()}}** keywords.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型函数是你定义模型的地方。你可以使用所有可用的 Keras 函数和层。为了添加用于调整的超参数，你可以使用 **{{uniform()}}** 和 **{{choice()}}**
+    关键字。
 - en: 'Let’s say you want to try out different values for your *batch_size*. You can
     simply write *batch_size={{choice([32, 64, 128])}}* and during each trial, one
     of the values will be chosen and tried out . A more in-depth explanation on how
     to define the parameters to tune can be found on the [Hyperas Github Page](https://github.com/maxpumperla/hyperas) or
     you can look at the example:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你想尝试不同的*batch_size*值。你可以简单地写*batch_size={{choice([32, 64, 128])}}*，在每次试用中，将会选择并尝试其中一个值。关于如何定义待调整的参数的更详细说明可以在
+    [Hyperas Github 页面](https://github.com/maxpumperla/hyperas) 上找到，或者你可以查看示例：
 - en: '**Note: **Your model function has to return a python dictionary with a loss
     key and a status key'
+  id: totrans-23
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**注意：** 你的模型函数必须返回一个包含 loss 键和 status 键的 Python 字典'
 - en: Problems with Colab
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Colab 的问题
 - en: If you try to run this example now, the trial will fail because Hyperas won’t
     be able to find your notebook. You need to copy your notebook and upload it again
     to your google drive folder. Luckily, you can do this from inside your notebook
     as described in this [stackoverflow answer](https://stackoverflow.com/questions/49920031/get-the-path-of-the-notebook-on-google-colab).
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你现在尝试运行这个示例，试用将会失败，因为 Hyperas 无法找到你的笔记本。你需要复制你的笔记本并重新上传到你的 Google Drive 文件夹中。幸运的是，你可以从笔记本内部完成此操作，详见这个
+    [stackoverflow 回答](https://stackoverflow.com/questions/49920031/get-the-path-of-the-notebook-on-google-colab)。
 - en: '**Note: **In lines 16 and 18, you’ll need to change *HyperasMediumExample *to
     the name of your own notebook'
+  id: totrans-26
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**注意：** 在第 16 行和第 18 行，你需要将*HyperasMediumExample*更改为你自己的笔记本名称'
 - en: 'After running this cell, you will be prompted to open a website in your browser
     and copy & paste a code back into the notebook:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行此单元格后，你将被提示在浏览器中打开一个网站并将代码复制并粘贴回笔记本中：
 - en: '![](../Images/a63e8b80c734ae22092fabe6bdbe1844.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a63e8b80c734ae22092fabe6bdbe1844.png)'
 - en: The output after you run the cell above
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 你运行上面单元格后的输出
 - en: Follow the link, log in with your google account and copy & paste the code back
     into the notebook. If you open the **Files **Tab in the left sidebar, you should
     now see a File called <YourNotebook>.ipynb
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 跟随链接，用你的 Google 账户登录，并将代码复制并粘贴回笔记本。如果你打开左侧边栏中的**文件**选项卡，你现在应该能看到一个名为 <YourNotebook>.ipynb
+    的文件
 - en: '**Starting the Trial**'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**开始试用**'
 - en: 'Now you can start the trial. Be careful, you have to set the parameter *notebook_name* to
     the name of your Notebook. Otherwise the Trial will fail:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你可以开始试用。请注意，你必须将参数*notebook_name*设置为你的笔记本名称。否则试用将会失败：
 - en: After running this cell, the Scan starts you can see the result in the output
     of the cell.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行此单元格后，扫描将开始，你可以在单元格的输出中查看结果。
 - en: '**Troubleshooting**'
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**故障排除**'
 - en: 'If you have any problems while doing this, I recommend to do the following:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你在操作过程中遇到任何问题，我建议你执行以下操作：
 - en: In the left sidebar, open **Files. **There will be a file called <YourNotebook>.ipynb.
     Delete that file
+  id: totrans-36
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在左侧边栏中，打开**文件**。会有一个名为 <YourNotebook>.ipynb 的文件。删除该文件
 - en: In the menu, select **Runtime **and then **Restart Runtime**.
+  id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在菜单中，选择**运行时**，然后选择**重启运行时**。
 - en: Reload the page
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 重新加载页面
 - en: After your runtime is connected again, you can start again by running every
     cell from top to bottom
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在你的运行时重新连接后，你可以通过从上到下运行每个单元格来重新开始
 - en: Conclusion
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: With just a few tweaks you can use Google colab to tune the hyperparameters
     of your keras network. Again, the full example can be found [here](https://colab.research.google.com/drive/184Tas98M-pPQanCfTbOHRBRUeE9dtdM9#scrollTo=rdo3mScvBHF4).
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 只需进行一些调整，你就可以使用 Google Colab 来调整 Keras 网络的超参数。再次提醒，完整示例可以在 [这里](https://colab.research.google.com/drive/184Tas98M-pPQanCfTbOHRBRUeE9dtdM9#scrollTo=rdo3mScvBHF4)
+    找到。
 - en: '**Bio: [Nils Schlüter](https://www.nilsschlueter.de/)** (**[@schlueter_nils](https://twitter.com/schlueter_nils)**)
     is a Software Engineer & Machine learning enthusiast.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Nils Schlüter](https://www.nilsschlueter.de/)** (**[@schlueter_nils](https://twitter.com/schlueter_nils)**)
+    是一位软件工程师及机器学习爱好者。'
 - en: '[Original](https://towardsdatascience.com/keras-hyperparameter-tuning-in-google-colab-using-hyperas-624fa4bbf673).
     Reposted with permission.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/keras-hyperparameter-tuning-in-google-colab-using-hyperas-624fa4bbf673)。已获转载许可。'
 - en: '**Related:**'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[The Current State of Automated Machine Learning](/2017/01/current-state-automated-machine-learning.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动化机器学习的当前状态](/2017/01/current-state-automated-machine-learning.html)'
 - en: '[Auto-Keras, or How You can Create a Deep Learning Model in 4 Lines of Code](/2018/08/auto-keras-create-deep-learning-model-4-lines-code.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Auto-Keras，或如何用 4 行代码创建深度学习模型](/2018/08/auto-keras-create-deep-learning-model-4-lines-code.html)'
 - en: '[Automated Machine Learning vs Automated Data Science](/2018/07/automated-machine-learning-vs-automated-data-science.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动化机器学习与自动化数据科学](/2018/07/automated-machine-learning-vs-automated-data-science.html)'
 - en: '* * *'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-49
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT'
 - en: '* * *'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Fine Tuning LLAMAv2 with QLora on Google Colab for Free](https://www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Google Colab 上免费微调 LLAMAv2 与 QLora](https://www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free)'
 - en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用网格搜索和随机搜索进行超参数调整](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
 - en: '[Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超参数调整：GridSearchCV 和 RandomizedSearchCV 的解释](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
 - en: '[From Google Colab to a Ploomber Pipeline: ML at Scale with GPUs](https://www.kdnuggets.com/2022/03/google-colab-ploomber-pipeline-ml-scale-gpus.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从 Google Colab 到 Ploomber 管道：利用 GPU 进行大规模机器学习](https://www.kdnuggets.com/2022/03/google-colab-ploomber-pipeline-ml-scale-gpus.html)'
 - en: '[Running Mixtral 8x7b On Google Colab For Free](https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Google Colab 上免费运行 Mixtral 8x7b](https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free)'
 - en: '[Running Redis on Google Colab](https://www.kdnuggets.com/2022/01/running-redis-google-colab.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Google Colab 上运行 Redis](https://www.kdnuggets.com/2022/01/running-redis-google-colab.html)'
