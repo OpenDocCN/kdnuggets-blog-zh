@@ -1,198 +1,308 @@
 - en: Building a Basic Keras Neural Network Sequential Model
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 构建一个基本的 Keras 神经网络 Sequential 模型
 - en: 原文：[https://www.kdnuggets.com/2018/06/basic-keras-neural-network-sequential-model.html](https://www.kdnuggets.com/2018/06/basic-keras-neural-network-sequential-model.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/06/basic-keras-neural-network-sequential-model.html](https://www.kdnuggets.com/2018/06/basic-keras-neural-network-sequential-model.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: As the title suggest, this post approaches building a basic Keras neural network
     using the Sequential model API. The specific task herein is a common one (training
     a classifier on the MNIST dataset), but this can be considered an example of a
     template for approaching any such similar task.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如标题所示，本篇文章介绍了如何使用 Sequential 模型 API 构建一个基本的 Keras 神经网络。这里的具体任务是一个常见任务（在 MNIST
+    数据集上训练分类器），但这可以被视为处理任何类似任务的模板示例。
 - en: The approach basically coincides with Chollet's [Keras 4 step workflow](/2018/06/keras-4-step-workflow.html),
     which he outlines in his book "[Deep Learning with Python](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438),"
     and really amounts to little more than what can be found as an example in the
     early chapters of the book, or the official Keras tutorials.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种方法基本上与 Chollet 的 [Keras 4 步工作流程](/2018/06/keras-4-step-workflow.html) 相符，他在他的书
+    "[Python 深度学习](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438)"
+    中概述了这一流程，实际上无非就是在书的早期章节或官方 Keras 教程中可以找到的示例。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织进行 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: The motivation for producing such a post is to use it is a foundational reference
     for a series of upcoming posts configuring Keras in a variety of different ways.
     This seemed a better idea than covering the same things over and over again at
     the start of each post. The content should be useful on its own for those who
     do not have experience approaching building a neural network in Keras.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 制作这样一篇文章的动机是将其作为一系列即将发布的文章的基础参考，这些文章将以不同的方式配置 Keras。这似乎比在每篇文章开头一遍又一遍地覆盖相同的内容要更好。对于那些没有在
+    Keras 中构建神经网络经验的人来说，内容应该本身就很有用。
 - en: '![Header image](../Images/2f500fab517e06ac7164e13b054b02a1.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![标题图片](../Images/2f500fab517e06ac7164e13b054b02a1.png)'
 - en: Image taken from screenshot of the [Keras documentation website](https://keras.io/models/sequential/)
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来自 [Keras 文档网站](https://keras.io/models/sequential/) 的截图
 - en: The dataset used is MNIST, and the model built is a Sequential network of Dense
     layers, intentionally avoiding CNNs for now.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用的数据集是 MNIST，构建的模型是一个密集层的 Sequential 网络，暂时故意避免使用 CNN。
 - en: First are the imports and a few hyperparameter and data resizing variables.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先是导入库和一些超参数以及数据调整大小的变量。
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Next is a function for outputting some simple (but useful) metadata of our dataset.
     Since we will be using it a few times, it makes sense to put the few lines in
     a callable function. Reusable code is an end in and of itself :)
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来是一个用于输出我们数据集的简单（但有用的）元数据的函数。由于我们会使用几次，将这些几行代码放在一个可调用的函数中是有意义的。可重用的代码本身就是一个目标
+    :)
 - en: '[PRE1]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Next we load our dataset (MNIST, using Keras' dataset utilities), and then use
     the function above to get some dataset metadata.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来我们加载我们的数据集（MNIST，使用 Keras 的数据集工具），然后使用上述函数获取一些数据集元数据。
 - en: '[PRE2]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[PRE3]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: To feed MNIST instances into a neural network, they need to be reshaped, from
     a 2 dimensional image representation to a single dimension sequence. We also convert
     our class vector to a binary matrix (using `to_categorical`). This is accomplished
     below, after which the same function defined above is called again in order to
     show the effects of our data reshaping.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了将 MNIST 实例输入神经网络，它们需要从二维图像表示转换为一维序列。我们还将类向量转换为二进制矩阵（使用 `to_categorical`）。下面完成了这一转换，然后再次调用之前定义的相同函数以展示数据重塑的效果。
 - en: '[PRE4]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '[PRE5]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Both of the required data transformations have been accomplished. Now it's time
     to build, compile, and train a neural network. You can see more about this process
     in [this previous post](/2018/06/keras-4-step-workflow.html).
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有所需的数据转换都已完成。现在是时候构建、编译和训练神经网络了。你可以在 [这篇文章](/2018/06/keras-4-step-workflow.html)
+    中查看更多关于此过程的内容。
 - en: '[PRE6]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The only unorthodox (as far as using the Keras library standalone) step has
     been the use of the [Live Loss Plot callback](https://github.com/stared/livelossplot)
     which outputs epoch-by-epoch loss functions and accuracies at the end of each
     epoch of training. Make sure you have installed Live Loss Plot prior to running
     the above code. We are also given the final loss and accuracy on our test dataset.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 唯一的不传统步骤（就使用 Keras 库而言）是使用 [Live Loss Plot 回调](https://github.com/stared/livelossplot)，该回调在每个训练周期结束时输出逐周期的损失函数和准确率。确保在运行上述代码之前已安装
+    Live Loss Plot。我们还给出了测试数据集上的最终损失和准确率。
 - en: '![Image](../Images/a2adbfb18cdab3aa422284c8325f9b93.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/a2adbfb18cdab3aa422284c8325f9b93.png)'
 - en: '[PRE7]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Almost done, but first let's output a summary of the neural network we built.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 几乎完成了，但首先让我们输出我们构建的神经网络的总结。
 - en: '[PRE8]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '[PRE9]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'And finally, visualize the model:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，视觉化模型：
 - en: '[PRE10]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '![Image](../Images/18b8a2587d440a56daa34f40129a7bfb.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/18b8a2587d440a56daa34f40129a7bfb.png)'
 - en: 'The full code is shown below:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 完整代码如下：
 - en: As previously stated, this post doesn't cover anything innovative, but we will
     publish a series of upcoming posts using Keras which hopefully will be more interesting
     to the reader, and this common starting point should be beneficial for reference.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 如前所述，这篇文章并没有涉及任何创新内容，但我们将发布一系列使用 Keras 的后续文章，希望能更吸引读者，并且这个常见的起点对参考应该是有益的。
 - en: Also, for those looking for a streamlined approach to building neural networks
     using the Keras Sequential model, this post should serve as a basic guide to hitting
     all the important points along the way. What you do after training is up to you
     (at this point), but we will circle back around to this in the future as well.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，对于那些寻找使用 Keras Sequential 模型构建神经网络的简化方法的读者，这篇文章应该能作为一个基础指南，涵盖沿途所有重要的点。训练后的工作由你决定（目前），但我们未来也会再次讨论这个话题。
 - en: '**Related**:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[The Keras 4 Step Workflow](/2018/06/keras-4-step-workflow.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Keras 4 步工作流](/2018/06/keras-4-step-workflow.html)'
 - en: '[7 Steps to Mastering Deep Learning with Keras](/2017/10/seven-steps-deep-learning-keras.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握 Keras 深度学习的 7 个步骤](/2017/10/seven-steps-deep-learning-keras.html)'
 - en: '[Today I Built a Neural Network During My Lunch Break with Keras](/2017/12/today-built-neural-network-during-lunch-break-keras.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[今天我在午休时使用 Keras 构建了一个神经网络](/2017/12/today-built-neural-network-during-lunch-break-keras.html)'
 - en: More On This Topic
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 和 Keras 构建并训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[Learn Deep Learning by Building 15 Neural Network Projects in 2022](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过构建 15 个神经网络项目在 2022 年学习深度学习](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)'
 - en: '[Building a Convolutional Neural Network with PyTorch](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 PyTorch 构建卷积神经网络](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)'
 - en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 AIMET 进行神经网络优化](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
 - en: '[The Importance of Permutation in Neural Network Predictions](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[神经网络预测中排列的重要性](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)'
 - en: '[Keras 3.0: Everything You Need To Know](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Keras 3.0：你需要知道的一切](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)'
