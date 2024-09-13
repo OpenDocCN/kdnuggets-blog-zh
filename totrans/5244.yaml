@@ -3,54 +3,68 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SQL 中的可扩展随机行选择
 - en: 原文：[https://www.kdnuggets.com/2018/04/scalable-select-random-rows-sql.html](https://www.kdnuggets.com/2018/04/scalable-select-random-rows-sql.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/04/scalable-select-random-rows-sql.html](https://www.kdnuggets.com/2018/04/scalable-select-random-rows-sql.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By Pavel Tiunov, [Statsbot](https://statsbot.co/)**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Pavel Tiunov，[Statsbot](https://statsbot.co/)**'
 - en: '![Header image](../Images/65a6d842e8e568f47b9eef4a27cf66c3.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![标题图像](../Images/65a6d842e8e568f47b9eef4a27cf66c3.png)'
 - en: '* * *'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您组织的 IT 部门'
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: If you’re new to the big data world and also migrating from tools like Google
     Analytics or Mixpanel for your web analytics, you probably noticed performance
     differences. Google Analytics can show you predefined reports in seconds, while
@@ -61,11 +75,16 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果您刚刚进入大数据领域，并且还从 Google Analytics 或 Mixpanel 等工具迁移过来进行网络分析，您可能注意到了性能差异。Google
+    Analytics 可以在几秒钟内显示预定义的报告，而在您的数据仓库中对相同数据的相同查询可能需要几分钟甚至更长时间。这样的性能提升是通过选择随机行或[sampling
+    technique](https://en.wikipedia.org/wiki/Sampling_(statistics))实现的。让我们学习如何在 SQL
+    中选择随机行。
 - en: Sample and Population
   id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 样本与总体
 - en: Before we start to work on sampling implementation, it is worth mentioning some
     sampling fundamentals. Sampling is based on a subset selection of individuals
     from some population to describe this population’s properties. So if you have
@@ -75,23 +94,27 @@
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们开始进行抽样实现之前，值得提及一些抽样基础知识。抽样是基于从某些总体中选择个体的子集来描述该总体的属性。因此，如果您有一些事件数据，您可以选择一个唯一用户及其事件的子集来计算描述所有用户行为的指标。另一方面，如果您选择一个事件子集，它不会准确描述总体的行为。
 - en: Given this fact, we assume all data sets to which sampling is applied have unique
     user identifiers. Moreover, if you have both anonymous user identifiers and authorized
     user identifiers, we assume using the last one as it delivers more accurate results.
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 鉴于这一事实，我们假设所有应用了抽样的数据集都有唯一的用户标识符。此外，如果您同时拥有匿名用户标识符和授权用户标识符，我们建议使用后者，因为它提供更准确的结果。
 - en: Selecting Random Rows in SQL
   id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在 SQL 中选择随机行
 - en: 'There’re [plenty of different methods](https://en.wikipedia.org/wiki/Sampling_(statistics)#Sampling_methods) you
     can use to select a subset of users. We’ll consider only two of those as the most
     obvious and simple to implement: simple random sampling and systematic sampling.'
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 有很多不同的方法可以用来选择用户子集，您可以查看这些方法中的[多种选择](https://en.wikipedia.org/wiki/Sampling_(statistics)#Sampling_methods)。我们只考虑其中最明显和最简单实现的两种方法：简单随机抽样和系统抽样。
 - en: Simple random sampling can be implemented as giving a unique number to each
     user in a range from 0 to N-1 and then selecting X random numbers from 0 to N-1\.
     N denotes the total number of users here and X is the sample size. Although this
@@ -102,6 +125,8 @@
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单随机采样可以实现为给每个用户一个唯一的编号，范围从 0 到 N-1，然后从 0 到 N-1 中选择 X 个随机数。N 表示用户的总数，X 是样本大小。尽管这种方法易于理解，但在
+    SQL 环境中实现起来有点棘手，主要是因为随机数生成器输出在样本大小达到数十亿时不太稳定。此外，也不清楚如何在时间上获得均匀分布的样本。
 - en: Bearing this in mind, we’ll use systematic sampling which can overcome these
     obstacles from an SQL implementation perspective. Simple systematic sampling may
     be implemented as selecting one user from each M users at a specified interval.
@@ -111,17 +136,21 @@
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑到这一点，我们将使用系统采样，它可以从 SQL 实现的角度克服这些障碍。简单的系统采样可以实现为在指定间隔内从每 M 个用户中选择一个用户。在这种情况下，样本大小将等于
+    N / M。选择 M 个用户中的一个，同时保持样本桶间的均匀分布，是这种方法的主要挑战。让我们看看如何在 SQL 中实现这一点。
 - en: Sequence Generated User Identifiers
   id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 序列生成的用户标识符
 - en: 'You’re lucky if your user IDs are integers generated as a strict sequence without
     gaps like those generated by `AUTO_INCREMENT` primary key fields. In this case,
     you can implement systematic sampling as simple as:'
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你的用户 ID 是生成的严格序列的整数且没有间隙（如由 `AUTO_INCREMENT` 主键字段生成的那样），你就很幸运。在这种情况下，你可以将系统采样实现得非常简单：
 - en: '[PRE0]'
   id: totrans-21
   prefs: []
@@ -137,10 +166,14 @@
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个 SQL 查询和下面的所有 SQL 查询都采用标准 BigQuery SQL。在这个示例中，我们从 10 个用户中选择一个，这是一个 10% 的样本。7
+    是采样桶的随机数，它可以是 0 到 9 之间的任何数字。我们使用 MOD 操作来创建代表在这种情况下除以 10 余数的采样桶。很容易证明，如果 `user_id`
+    是严格的整数序列，则当用户数量足够高时，用户计数在所有采样桶中是均匀分布的。
 - en: 'To estimate the event count, for example, you can write something like:'
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 要估计事件数量，例如，你可以写如下内容：
 - en: '[PRE1]'
   id: totrans-24
   prefs: []
@@ -152,12 +185,14 @@
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意这个查询中的乘以 10。考虑到我们使用了 10% 的样本，所有估计的加性度量应按 1/10% 进行缩放，以匹配实际值。
 - en: 'One can question how precise this sampling approach is for a specific dataset.
     You can estimate it by checking how uniform the distribution is within sampling
     buckets. To do that you can query something like:'
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以质疑这种采样方法对特定数据集的准确性。你可以通过检查采样桶内分布的均匀性来估计。为此，你可以查询如下内容：
 - en: '[PRE2]'
   id: totrans-27
   prefs: []
@@ -167,10 +202,12 @@
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们考虑这个查询的一些示例结果：
 - en: '![](../Images/c62f4fe96b983935965418997009139e.png)'
   id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c62f4fe96b983935965418997009139e.png)'
 - en: 'We can calculate the mean and confidence interval for an alpha coefficient
     equal to 0.01 for these sampling bucket sizes. The [confidence interval](https://en.wikipedia.org/wiki/Confidence_interval#Basic_steps) will
     be equal to 0.01% of the sampling bucket average size. This means that with 99%
@@ -181,6 +218,8 @@
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以计算这些采样桶大小的 alpha 系数为 0.01 的均值和置信区间。该 [置信区间](https://en.wikipedia.org/wiki/Confidence_interval#Basic_steps)
+    将等于采样桶平均大小的 0.01%。这意味着有 99% 的概率，采样桶大小的差异不超过 0.01%。不同的度量值与这些采样桶计算的统计数据相关联但并不继承它。因此，为了计算事件计数估计的精度，你可以计算每个样本的事件计数如下：
 - en: '[PRE3]'
   id: totrans-31
   prefs: []
