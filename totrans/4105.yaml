@@ -1,210 +1,319 @@
 - en: How to Anonymise Places in Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何在 Python 中匿名化地点
 - en: 原文：[https://www.kdnuggets.com/2022/12/anonymise-places-python.html](https://www.kdnuggets.com/2022/12/anonymise-places-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/12/anonymise-places-python.html](https://www.kdnuggets.com/2022/12/anonymise-places-python.html)
 - en: '![How to Anonymise Places in Python](../Images/a7359356a8dc0b6bb623713f503486cf.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![如何在 Python 中匿名化地点](../Images/a7359356a8dc0b6bb623713f503486cf.png)'
 - en: Photo by [Max Chen](https://unsplash.com/@maxchen2k?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由 [Max Chen](https://unsplash.com/@maxchen2k?utm_source=medium&utm_medium=referral)
+    提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: In this article, I illustrate how to identify and anonymise places in Python, **without
     the usage of NLP techniques, such as Named Entity Recognition.**
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我展示了如何在 Python 中识别和匿名化地点，**而无需使用 NLP 技术，如命名实体识别**。
 - en: Places identification is based on a gazetteer, which is built from the [Geonames
     Database](http://www.geonames.org/).
+  id: totrans-5
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 地点识别基于地名表，该表从[Geonames 数据库](http://www.geonames.org/)构建。
 - en: '**Geonames is a Web service, containing (almost) all the places in the world.**
     The Geonames database can be downloaded for free at this [link](https://download.geonames.org/export/dump/).
     You can download the full database, covering all the world countries, or only
     one specific country.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Geonames 是一个网络服务，包含（几乎）世界上所有地点。** Geonames 数据库可以在[此链接](https://download.geonames.org/export/dump/)免费下载。你可以下载包含所有世界国家的完整数据库，或只下载一个特定国家的数据库。'
 - en: The idea behind this article is to build a **gazetteer **from the Geonames Database
     and exploit it to recognise places in a sentence. In practice, **the implemented
     algorithm searches whether every word in the sentence is contained in the gazetteer
     or not**. In order to search also for places longer than one word, **ngrams are
     considered**.
+  id: totrans-7
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 本文的核心思想是从 Geonames 数据库构建一个**地名表**并利用它来识别句子中的地点。实际上，**实施的算法搜索句子中的每个单词是否包含在地名表中**。为了搜索多于一个单词的地点，**考虑了
+    n-gram**。
 - en: 'The article is organised as follows:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文的组织结构如下：
 - en: import the Geonames Database
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 导入 Geonames 数据库
 - en: identify places in a sentence
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 识别句子中的地点
 - en: anonymise places in a sentence
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 匿名化句子中的地点
 - en: extend the anonymise function
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 扩展匿名化函数
 - en: Import the Geonames Database
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 导入 Geonames 数据库
 - en: The first step involves importing the Geonames Database, which can be downloaded
     from [this link](https://download.geonames.org/export/dump/). You can choose whether
     to import the full database (AllCountries.zip) or a specific country (e.g. IT.zip
     for Italy). Every country is identified by its identification code.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一步涉及导入 Geonames 数据库，可以从[此链接](https://download.geonames.org/export/dump/)下载。你可以选择导入完整数据库（AllCountries.zip）或特定国家的数据库（例如，意大利的
+    IT.zip）。每个国家都通过其识别码来标识。
 - en: The full database is more complete, but it requires more processing time than
     a single-country database.
+  id: totrans-15
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 完整数据库更为详尽，但处理时间比单一国家数据库要长。
 - en: Thus, you should choose the right database, according to the text to be processed.
     In this tutorial, I focus on the Italian database, but the same code can be also
     exploited by other databases.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，你应根据要处理的文本选择合适的数据库。在本教程中，我重点关注意大利数据库，但相同的代码也可以用于其他数据库。
 - en: 'From the [Geonames link](https://download.geonames.org/export/dump/), I download
     the IT.zip file, I decompress it and I put in my working directory:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 从 [Geonames 链接](https://download.geonames.org/export/dump/)下载 IT.zip 文件，解压后放入工作目录：
 - en: '![How to Anonymise Places in Python](../Images/d385c71a7b50481fc793614b03dd93f5.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![如何在 Python 中匿名化地点](../Images/d385c71a7b50481fc793614b03dd93f5.png)'
 - en: Image by Author
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片作者提供
 - en: 'Then I import it into a Pandas dataframe:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后将其导入 Pandas 数据框中：
 - en: '[PRE0]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![How to Anonymise Places in Python](../Images/5bc2b21827b501363c019affc257fb98.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![如何在 Python 中匿名化地点](../Images/5bc2b21827b501363c019affc257fb98.png)'
 - en: Image by Author
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片作者提供
 - en: 'The column 1 of the dataframe contains the list of places, which is used to
     build the gazetteer:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据框的第1列包含用于构建地名表的地点列表：
 - en: '[PRE1]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The implemented gazetteer contains 119.539 places.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 实施的地名表包含 119,539 个地点。
 - en: Identify Places in a Sentence
+  id: totrans-27
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 识别句子中的地点
 - en: 'Now I define a function which receives as input a text and then returns all
     the places contained in the text. The function performs the following operations:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我定义一个接收文本作为输入并返回文本中所有地点的函数。该函数执行以下操作：
 - en: remove all punctuation from the text
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从文本中删除所有标点符号
 - en: split the sentence in tokens, separated by the space character. This can be
     done through the `split()` function
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将句子拆分为以空格字符分隔的标记。可以通过`split()`函数完成
 - en: 'starting from the identified tokens, build all the possible ngrams, with n
     ? 5\. I exploit the `ngrams` function of the `nltk` library to split the text
     into ngrams. For example in the sentence: *Oggi sono andata a Parigi*, the ngrams
     with n ? 5 include:'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从识别的标记开始，构建所有可能的 ngram，n ? 5。我利用 `nltk` 库的 `ngrams` 函数将文本拆分成 ngram。例如在句子：*Oggi
+    sono andata a Parigi* 中，n ? 5 的 ngram 包括：
 - en: '[PRE2]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: starting from the biggest ngrams (n = 5), search if each ngram is contained
     in the gazetteer. If so, a place is found and can be added to the list of found
     places and remove the place from the original text, otherwise, continue. Note
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从最大的 ngram（n = 5）开始，搜索每个 ngram 是否包含在地名词典中。如果是，则找到一个地点，并可以将其添加到找到的地点列表中，并从原文本中移除该地点，否则继续。注意
 - en: 'The full code of the function is the following one:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 函数的完整代码如下：
 - en: '[PRE3]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Now I can test the function with an example:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我可以用一个例子来测试这个函数：
 - en: '[PRE4]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'which gives the following output:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这会产生以下输出：
 - en: '[PRE5]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Anonymise Places in a Sentence
+  id: totrans-40
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在句子中匿名化地点
 - en: Now, I’m ready to exploit the previous defined function to anonymise function.
     Simply, I can replace the found places with a symbolic character, such as X. All
     the searching operations must be done on a copy of the original text, in order
     to preserve the original text (i.e. punctuation is remove for manipulation).
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我准备利用之前定义的函数来匿名化地点。简单来说，我可以用一个符号字符（例如 X）来替换找到的位置。所有搜索操作必须在原文本的副本上进行，以便保留原文本（即标点符号在操作时被移除）。
 - en: 'Here the complete function for anonymisation:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是完整的匿名化函数：
 - en: '[PRE6]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Extend the Anonymise Function
+  id: totrans-44
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 扩展匿名化函数
 - en: 'The implemented function can be extended with a gazetteer covering all the
     world. However, the GeoNames database for all the world is about 1.5 GB thus resulting
     difficult to manage. For this reason, you can download it, load in Pandas and
     then select only the interesting column (which corresponds to column 1) and export
     the result as a new csv file, which is about 274 MB:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 实现的函数可以通过覆盖全世界的地名词典来扩展。然而，全球的 GeoNames 数据库约为 1.5 GB，因此管理起来较为困难。为此，你可以下载它，加载到
+    Pandas 中，然后仅选择感兴趣的列（即第 1 列），并将结果导出为新的 csv 文件，约为 274 MB：
 - en: '[PRE7]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: The previous operation may require a while, since the file is quite huge. Then,
     you can exploit this new file as a gazetteer, instead of IT.txt.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于文件相当大，之前的操作可能需要一些时间。然后，你可以利用这个新文件作为地名词典，代替 IT.txt。
 - en: Summary
+  id: totrans-48
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 总结
 - en: In this article, I have described how to anonymise places in Python without
     the usage of NLP techniques. The proposed methodology is based on the usage of
     a gazetteer, which is built from the Geonames Database.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我描述了如何在 Python 中匿名化地点，而无需使用 NLP 技术。所提出的方法基于使用一个地名词典，该词典是从 Geonames 数据库构建的。
 - en: The full code of this tutorial can be downloaded from my [Github Repository](https://github.com/alod83/data-science/blob/master/TextAnalysis/Anonymise%20Places.ipynb).
     The tutorial also contains a function test in `gradio`, a very powerful Python
     library for Web Apps. Stay tuned for a tutorial on `gradio` :)
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程的完整代码可以从我的 [Github Repository](https://github.com/alod83/data-science/blob/master/TextAnalysis/Anonymise%20Places.ipynb)
+    下载。教程还包含在 `gradio` 中的一个函数测试，`gradio` 是一个非常强大的 Python Web 应用库。敬请关注有关 `gradio` 的教程
+    :)
 - en: '**[Angelica Lo Duca](https://alod83.altervista.org/)** ([Medium](https://alod83.medium.com/))
     (@alod83)works as a researcher at the Institute of Informatics and Telematics
     of the National Research Council (IIT-CNR) in Pisa, Italy. She is a professor
@@ -213,62 +322,97 @@
     Text Analysis, Open Data, Web Applications, and Data Journalism, applied to society,
     tourism, and cultural heritage. She used to work on Data Security, Semantic Web,
     and Linked Data. Angelica is also an enthusiastic tech writer.'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Angelica Lo Duca](https://alod83.altervista.org/)** ([Medium](https://alod83.medium.com/))
+    (@alod83)在意大利比萨的国家研究委员会信息学与远程通讯研究所（IIT-CNR）担任研究员。她是比萨大学数字人文学科硕士课程中的“数据新闻学”教授。她的研究兴趣包括数据科学、数据分析、文本分析、开放数据、网络应用程序和数据新闻，应用于社会、旅游和文化遗产。她曾从事数据安全、语义网和关联数据的工作。Angelica
+    还是一位热情的技术作家。'
 - en: '[Original](https://towardsdatascience.com/how-to-anonymise-places-in-python-55597d0ded24).
     Reposted with permission.'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/how-to-anonymise-places-in-python-55597d0ded24)。转载许可。'
 - en: '* * *'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-54
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全领域的职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 工作'
 - en: '* * *'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[The 5 Best Places To Host Your Data Science Portfolio](https://www.kdnuggets.com/2022/07/5-best-places-host-data-science-portfolio.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[托管数据科学作品集的 5 个最佳平台](https://www.kdnuggets.com/2022/07/5-best-places-host-data-science-portfolio.html)'
 - en: '[Step up your Python game with Fast Python for Data Science!](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过《快速 Python 数据科学》提升你的 Python 技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
 - en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化 Python 代码性能：深入了解 Python 分析工具](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
 - en: '[Python Enum: How To Build Enumerations in Python](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python Enum：如何在 Python 中构建枚举](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)'
 - en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过 Python 和 Scikit-learn 简化决策树的可解释性](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
 - en: '[Sparse Matrix Representation in Python](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的稀疏矩阵表示](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)'
