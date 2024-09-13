@@ -1,108 +1,164 @@
 - en: 'PyTorch LSTM: Text Generation Tutorial'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: PyTorch LSTM：文本生成教程
 - en: 原文：[https://www.kdnuggets.com/2020/07/pytorch-lstm-text-generation-tutorial.html](https://www.kdnuggets.com/2020/07/pytorch-lstm-text-generation-tutorial.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/07/pytorch-lstm-text-generation-tutorial.html](https://www.kdnuggets.com/2020/07/pytorch-lstm-text-generation-tutorial.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Domas Bitvinskas](https://domasbitvinskas.com/), Closeheat**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Domas Bitvinskas](https://domasbitvinskas.com/)，Closeheat**'
 - en: Long Short Term Memory (LSTM) is a popular Recurrent Neural Network (RNN) architecture.
     This tutorial covers using LSTMs on PyTorch for generating text; in this case
     - pretty lame jokes.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 长短期记忆（LSTM）是一种流行的递归神经网络（RNN）架构。本教程讲解如何在PyTorch上使用LSTM生成文本；在这种情况下 - 一些相当无聊的笑话。
 - en: 'For this tutorial you need:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程需要：
 - en: Basic familiarity with Python, PyTorch, and machine learning
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 基本的Python、PyTorch和机器学习知识
 - en: A locally installed [Python](https://www.python.org/) v3+, [PyTorch](https://pytorch.org/) v1+, [NumPy](https://numpy.org/) v1+
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 本地安装的 [Python](https://www.python.org/) v3+， [PyTorch](https://pytorch.org/)
+    v1+， [NumPy](https://numpy.org/) v1+
 - en: '* * *'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 加速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的IT'
 - en: '* * *'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: What is LSTM?
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是LSTM？
 - en: LSTM is a variant of RNN used in deep learning. You can use LSTMs if you are
     working on sequences of data.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: LSTM是RNN的一种变体，广泛应用于深度学习。如果你在处理数据序列时，可以使用LSTM。
 - en: 'Here are the most straightforward use-cases for LSTM networks you might be
     familiar with:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是你可能熟悉的LSTM网络的最直接应用场景：
 - en: Time series forecasting (for example, stock prediction)
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 时间序列预测（例如，股票预测）
 - en: Text generation
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 文本生成
 - en: Video classification
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 视频分类
 - en: Music generation
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 音乐生成
 - en: Anomaly detection
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 异常检测
 - en: RNN
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: RNN
 - en: Before you start using LSTMs, you need to understand how RNNs work.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开始使用LSTM之前，你需要了解RNN的工作原理。
 - en: RNNs are neural networks that are good with sequential data. It can be video,
     audio, text, stock market time series or even a single image cut into a sequence
     of its parts.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: RNN是处理序列数据的神经网络。它可以是视频、音频、文本、股市时间序列甚至单张图像被切割成序列的各部分。
 - en: Standard neural networks (convolutional or vanilla) have one major shortcoming
     when compared to RNNs - they cannot reason about previous inputs to inform later
     ones. You cannot solve some machine learning problems without some kind of memory
     of past inputs.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 与RNN相比，标准神经网络（卷积神经网络或普通神经网络）有一个主要缺点 - 它们不能利用之前的输入来指导后续的预测。没有某种形式的记忆，无法解决某些机器学习问题。
 - en: 'For example, you might run into a problem when you have some video frames of
     a ball moving and want to predict the direction of the ball. The way a standard
     neural network sees the problem is: you have a ball in one image and then you
@@ -111,254 +167,387 @@
     images of the ball to the concept of “the ball is moving.” All it sees is that
     there is a ball in the image #1 and that there''s a ball in the image #2, but
     network outputs are separate.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，当你有一些视频帧显示一个球的移动，并想预测球的方向时，你可能会遇到问题。标准神经网络看到的问题是：你在一张图像中看到一个球，在另一张图像中也看到一个球。它没有机制将这两张图像作为序列连接起来。标准神经网络不能将两个独立的球的图像与“球在移动”的概念联系起来。它只看到图像#1中有一个球，图像#2中也有一个球，但网络输出是分开的。
 - en: '![CNN Prediction](../Images/baa3bd7a309f8f353a6148d3b91b7a0c.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![CNN预测](../Images/baa3bd7a309f8f353a6148d3b91b7a0c.png)'
 - en: Compare this to the RNN, which remembers the last frames and can use that to
     inform its next prediction.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 将其与RNN进行比较，RNN记住最后的帧，并可以用来指导下一次预测。
 - en: '![RNN Prediction](../Images/07258636d83044d793a5b5e1d3dc6c8a.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![RNN预测](../Images/07258636d83044d793a5b5e1d3dc6c8a.png)'
 - en: LSTM vs RNN
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: LSTM与RNN
 - en: Typical RNNs can't memorize long sequences. The effect called “vanishing gradients”
     happens during the backpropagation phase of the RNN cell network. The gradients
     of cells that carry information from the start of a sequence goes through matrix
     multiplications by small numbers and reach close to 0 in long sequences. In other
     words - information at the start of the sequence has almost no effect at the end
     of the sequence.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 典型的RNN无法记忆长序列。所谓的“梯度消失”效应发生在RNN单元网络的反向传播阶段。携带序列开始部分信息的单元梯度经过小数的矩阵乘法后在长序列中接近0。换句话说，序列开始部分的信息对序列末端几乎没有影响。
 - en: You can see that illustrated in the Recurrent Neural Network example. Given
     long enough sequence, the information from the first element of the sequence has
     no impact on the output of the last element of the sequence.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在递归神经网络示例中看到这一点。给定足够长的序列，序列第一个元素的信息对序列最后一个元素的输出没有影响。
 - en: LSTM is an RNN architecture that can memorize long sequences - up to 100 s of
     elements in a sequence. LSTM has a memory gating mechanism that allows the long
     term memory to continue flowing into the LSTM cells.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: LSTM是一种RNN架构，可以记忆长序列 - 最多100个元素。LSTM具有记忆门控机制，使长期记忆能够继续流入LSTM单元。
 - en: '![LSTM Cell](../Images/c94720cbdb164fbdc2e54c03668782df.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![LSTM单元](../Images/c94720cbdb164fbdc2e54c03668782df.png)'
 - en: Text generation with PyTorch
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用PyTorch进行文本生成
 - en: 'You will train a joke text generator using LSTM networks in PyTorch and follow
     the best practices. Start by creating a new folder where you''ll store the code:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 你将使用PyTorch中的LSTM网络训练一个笑话文本生成器，并遵循最佳实践。首先，创建一个新的文件夹来存储代码：
 - en: '`$ mkdir text-generation`'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '`$ mkdir text-generation`'
 - en: Model
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型
 - en: 'To create an LSTM model, create a file `model.py` in the `text-generation`
     folder with the following content:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 要创建一个LSTM模型，在`text-generation`文件夹中创建一个名为`model.py`的文件，内容如下：
 - en: '[PRE0]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: This is a standard looking PyTorch model. `Embedding` layer converts word indexes
     to word vectors. `LSTM` is the main learnable part of the network - PyTorch implementation
     has the gating mechanism implemented inside the `LSTM` cell that can learn long
     sequences of data.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个标准的PyTorch模型。`Embedding`层将单词索引转换为单词向量。`LSTM`是网络的主要可学习部分 - PyTorch实现中的`LSTM`单元内部实现了门控机制，可以学习长序列的数据。
 - en: As described in the earlier [What is LSTM?](https://closeheat.com/blog/pytorch-lstm-text-generation-tutorial#what-is-lstm) section
     - RNNs and LSTMs have extra state information they carry between training episodes.
     `forward` function has a `prev_state` argument. This state is kept outside the
     model and passed manually.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 如早前[什么是LSTM？](https://closeheat.com/blog/pytorch-lstm-text-generation-tutorial#what-is-lstm)部分所述
+    - RNN和LSTM具有在训练周期之间传递的额外状态信息。`forward`函数具有一个`prev_state`参数。这个状态保持在模型外部，并手动传递。
 - en: It also has `init_state` function. Calling this at the start of every epoch
     to initializes the right shape of the state.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 它还具有`init_state`函数。在每个epoch开始时调用此函数，以初始化正确形状的状态。
 - en: Dataset
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据集
 - en: For this tutorial, we use Reddit clean jokes dataset to train the network. [Download
     (139KB)](https://raw.githubusercontent.com/amoudgl/short-jokes-dataset/master/data/reddit-cleanjokes.csv) the
     dataset and put it in the `text-generation/data/` folder.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们使用Reddit清理笑话数据集来训练网络。[下载 (139KB)](https://raw.githubusercontent.com/amoudgl/short-jokes-dataset/master/data/reddit-cleanjokes.csv)数据集，并将其放入`text-generation/data/`文件夹中。
 - en: 'The dataset has 1623 jokes and looks like this:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集包含1623个笑话，内容如下：
 - en: '[PRE1]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'To load the data into PyTorch, use PyTorch `Dataset` class. Create a `dataset.py`
     file with the following content:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 要将数据加载到PyTorch中，请使用PyTorch的`Dataset`类。创建一个名为`dataset.py`的文件，内容如下：
 - en: '[PRE2]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: This `Dataset` inherits from the PyTorch's `torch.utils.data.Dataset` class
     and defines two important methods `__len__` and `__getitem__`. Read more about
     how `Dataset` classes work in PyTorch [Data loading tutorial](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html#dataset-class).
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个`Dataset`类继承自PyTorch的`torch.utils.data.Dataset`类，并定义了两个重要的方法`__len__`和`__getitem__`。详细了解PyTorch中`Dataset`类的工作原理，请参考[数据加载教程](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html#dataset-class)。
 - en: '`load_words` function loads the dataset. Unique words are calculated in the
     dataset to define the size of the network''s vocabulary and embedding size. `index_to_word`
     and `word_to_index` converts words to number indexes and visa versa.'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '`load_words`函数加载数据集。数据集中计算独特的词汇量，以定义网络的词汇表大小和嵌入大小。`index_to_word`和`word_to_index`将单词转换为数字索引，反之亦然。'
 - en: This is part of the process is *tokenization*. In the future, [torchtext](https://github.com/pytorch/text) team
     plan to improve this part, but they are re-designing it and the new API is too
     unstable for this tutorial today.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是过程的一部分是 *分词*。未来，[torchtext](https://github.com/pytorch/text) 团队计划改进这一部分，但他们正在重新设计，新的
+    API 对于本教程来说过于不稳定。
 - en: Training
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 训练
 - en: Create a `train.py` file and define a `train` function.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个 `train.py` 文件并定义一个 `train` 函数。
 - en: '[PRE3]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Use PyTorch `DataLoader` and `Dataset` abstractions to load the jokes data.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 PyTorch `DataLoader` 和 `Dataset` 抽象来加载笑话数据。
 - en: Use `CrossEntropyLoss` as a loss function and `Adam` as an optimizer with default
     params. You can tweak it later.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 `CrossEntropyLoss` 作为损失函数，并使用 `Adam` 作为默认参数的优化器。你可以稍后进行调整。
 - en: In his famous [post](https://karpathy.github.io/2019/04/25/recipe/) Andrew Karpathy
     also recommends keeping this part simple at first.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 在他著名的 [帖子](https://karpathy.github.io/2019/04/25/recipe/) 中，Andrew Karpathy
+    也建议最初保持这一部分的简单。
 - en: Text generation
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文本生成
 - en: 'Add `predict` function to the `train.py` file:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 `predict` 函数添加到 `train.py` 文件中：
 - en: '[PRE4]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Execute predictions
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 执行预测
 - en: 'Add the following code to `train.py` file to execute the defined functions:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 将以下代码添加到 `train.py` 文件中以执行已定义的函数：
 - en: '[PRE5]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Run the `train.py` script with:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用以下命令运行 `train.py` 脚本：
 - en: '`$ python train.py`'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '`$ python train.py`'
 - en: You can see the loss along with the epochs. The model predicts the next 100
     words after `Knock knock. Whos there?` when the training finishes. By default,
     it runs for 10 epochs and takes around 15 mins to finish training.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以看到损失随训练轮次变化。当训练结束时，模型在 `Knock knock. Whos there?` 之后预测接下来的 100 个词。默认情况下，它运行
+    10 个轮次，训练大约需要 15 分钟。
 - en: '[PRE6]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: If you skipped to this part and want to run the code, here's a Github [repository](https://github.com/closeheat/pytorch-lstm-text-generation-tutorial) you
     can clone.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你跳过了这部分并想运行代码，这里有一个可以克隆的 Github [仓库](https://github.com/closeheat/pytorch-lstm-text-generation-tutorial)。
 - en: Next steps
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 下一步
 - en: Congratulations! You've written your first PyTorch LSTM network and generated
     some jokes.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 恭喜！你已经编写了第一个 PyTorch LSTM 网络并生成了一些笑话。
 - en: 'Here''s what you can do next to improve the model:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来你可以做的事情来改进模型是：
 - en: Clean up the data by removing non-letter characters.
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过去除非字母字符来清理数据。
 - en: Increase the model capacity by adding more `Linear` or `LSTM` layers.
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过添加更多的 `Linear` 或 `LSTM` 层来增加模型的容量。
 - en: Split the dataset into train, test, and validation sets.
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将数据集拆分为训练、测试和验证集。
 - en: Add checkpoints so you don't have to train the model every time you want to
     run prediction.
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加检查点，以便你不必每次都训练模型才能运行预测。
 - en: '**Bio: [Domas Bitvinskas](https://domasbitvinskas.com/)** (**[@domasbitvinskas](https://twitter.com/domasbitvinskas)**)
     leads machine learning and growth experiments at Closeheat.'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Domas Bitvinskas](https://domasbitvinskas.com/)** (**[@domasbitvinskas](https://twitter.com/domasbitvinskas)**)
+    在 Closeheat 领导机器学习和增长实验。'
 - en: '[Original](https://closeheat.com/blog/pytorch-lstm-text-generation-tutorial).
     Reposted with permission.'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://closeheat.com/blog/pytorch-lstm-text-generation-tutorial)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[PyTorch for Deep Learning: The Free eBook](/2020/07/pytorch-deep-learning-free-ebook.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyTorch 深度学习：免费电子书](/2020/07/pytorch-deep-learning-free-ebook.html)'
 - en: '[Generating cooking recipes using TensorFlow and LSTM Recurrent Neural Network:
     A step-by-step guide](/2020/07/generating-cooking-recipes-using-tensorflow.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 和 LSTM 循环神经网络生成烹饪食谱：逐步指南](/2020/07/generating-cooking-recipes-using-tensorflow.html)'
 - en: '[The Most Important Fundamentals of PyTorch you Should Know](/2020/06/fundamentals-pytorch.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你应该知道的 PyTorch 最重要的基础知识](/2020/06/fundamentals-pytorch.html)'
 - en: More On This Topic
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Retrieval Augmented Generation: Where Information Retrieval Meets…](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[检索增强生成：信息检索与…的交汇点](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)'
 - en: '[Text-2-Video Generation: Step-by-Step Guide](https://www.kdnuggets.com/2023/08/text2video-generation-stepbystep-guide.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本到视频生成：逐步指南](https://www.kdnuggets.com/2023/08/text2video-generation-stepbystep-guide.html)'
 - en: '[LSTMs Rise Again: Extended-LSTM Models Challenge the Transformer…](https://www.kdnuggets.com/lstms-rise-again-extended-lstm-models-challenge-the-transformer-superiority)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LSTM 再次崛起：扩展 LSTM 模型挑战 Transformer…](https://www.kdnuggets.com/lstms-rise-again-extended-lstm-models-challenge-the-transformer-superiority)'
 - en: '[YOLOv5 PyTorch Tutorial](https://www.kdnuggets.com/2022/12/yolov5-pytorch-tutorial.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[YOLOv5 PyTorch 教程](https://www.kdnuggets.com/2022/12/yolov5-pytorch-tutorial.html)'
 - en: '[Text Summarization Development: A Python Tutorial with GPT-3.5](https://www.kdnuggets.com/2023/04/text-summarization-development-python-tutorial-gpt35.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本摘要生成开发：使用 GPT-3.5 的 Python 教程](https://www.kdnuggets.com/2023/04/text-summarization-development-python-tutorial-gpt35.html)'
 - en: '[Bark: The Ultimate Audio Generation Model](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Bark: 终极音频生成模型](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'

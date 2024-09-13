@@ -1,116 +1,181 @@
 - en: A Complete Guide To Survival Analysis In Python, part 2
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 生存分析在Python中的完整指南，第2部分
 - en: 原文：[https://www.kdnuggets.com/2020/07/guide-survival-analysis-python-part-2.html](https://www.kdnuggets.com/2020/07/guide-survival-analysis-python-part-2.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/07/guide-survival-analysis-python-part-2.html](https://www.kdnuggets.com/2020/07/guide-survival-analysis-python-part-2.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Pratik Shukla](https://medium.com/@shuklapratik22), Aspiring machine
     learning engineer**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Pratik Shukla](https://medium.com/@shuklapratik22)，有志的机器学习工程师**。'
 - en: In the [first article of this three-part series](https://www.kdnuggets.com/2020/07/complete-guide-survival-analysis-python-part1.html),
     we saw the basics of the Kaplan-Meier Estimator. Now, it’s time to implement the
     theory we discussed in the first part.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 [这一三部分系列的第一篇文章](https://www.kdnuggets.com/2020/07/complete-guide-survival-analysis-python-part1.html)中，我们了解了Kaplan-Meier估计器的基础知识。现在，是时候实现我们在第一部分讨论的理论了。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速入门网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'Example 1: Kaplan-Meier Estimator (Without any groups)'
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 示例1：Kaplan-Meier 估计器（没有任何分组）
 - en: 'Let’s code:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们编写代码：
 - en: '**(1) Import required libraries:**'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(1) 导入所需的库：**'
 - en: '![](../Images/ea17a33a34abdd2d558870ad09929871.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ea17a33a34abdd2d558870ad09929871.png)'
 - en: '**(2) Read the dataset:**'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(2) 读取数据集：**'
 - en: '![](../Images/187a2546b6389939b1dd9180484386a1.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/187a2546b6389939b1dd9180484386a1.png)'
 - en: '**(3) Columns of our dataset:**'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(3) 数据集的列：**'
 - en: '![](../Images/a9b07d0cf3e9354737eca4b10b8bc29c.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a9b07d0cf3e9354737eca4b10b8bc29c.png)'
 - en: '**(4) Additional info about dataset:**'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(4) 数据集的附加信息：**'
 - en: It gives us information about the data types and the number of rows in each
     column that has null values. It’s very important for us to remove the rows with
     a null value for some of the methods in survival analysis.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这提供了有关数据类型和每列中具有空值的行数的信息。对于生存分析中的某些方法，去除具有空值的行非常重要。
 - en: '![](../Images/88dff26ae6e1e545e2c79084c608b3d2.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/88dff26ae6e1e545e2c79084c608b3d2.png)'
 - en: '**(5) Statistical info about dataset:**'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(5) 数据集的统计信息：**'
 - en: It gives us some statistical information like the total number of rows, mean,
     standard deviation, minimum value, 25th percentile, 50th percentile, 75th percentile,
     and maximum value for each column in our dataset.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这提供了一些统计信息，如总行数、均值、标准差、最小值、第25百分位数、第50百分位数、第75百分位数和每列的最大值。
 - en: '![](../Images/72b0fb00ba66a70c727d6273d8cd0250.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/72b0fb00ba66a70c727d6273d8cd0250.png)'
 - en: '**(6) Find out sex distribution using histogram:**'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(6) 使用直方图查看性别分布：**'
 - en: This gives us a general idea about how our data is distributed. In the following
     graph, you can see that around 139 values have a status of 1, and around 90 values
     have a status of 2\. It means that in our dataset, there are 139 males and around
     90 females.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这让我们对数据的分布有一个总体了解。在下面的图表中，你可以看到大约有139个值的状态为1，大约90个值的状态为2。这意味着在我们的数据集中，有139名男性和约90名女性。
 - en: '![](../Images/a97dfc46129576dc3aecfcb5993188b2.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a97dfc46129576dc3aecfcb5993188b2.png)'
 - en: '**(7) Create an object for KaplanMeierFitter:**'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(7) 为KaplanMeierFitter创建对象：**'
 - en: '![](../Images/67d223752b4c5f19fdf904627d5b6b2a.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/67d223752b4c5f19fdf904627d5b6b2a.png)'
 - en: '**(8) Organize the data:**'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(8) 组织数据：**'
 - en: Now we need to organize our data. We’ll add a new column in our dataset that
     is called “dead”. It stores the data about whether a person that is a part of
     our experiment is dead or alive (based on the status value). If our status value
@@ -120,146 +185,224 @@
     data stores the value of dead persons in a specific timeline and censored data
     stores the value of alive persons or persons that we’re not going to investigate
     at that timeline.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们需要组织数据。我们将在数据集中添加一个名为“dead”的新列。它存储有关实验中人员是否生存的数据（基于状态值）。如果我们的状态值为1，则该人活着；如果状态值为2，则该人已死。这是我们在下一步需要做的非常关键的一步。因为我们将把数据存储在名为censored和observed的列中。观察数据存储特定时间线中死者的值，而censored数据存储活人或我们在该时间点不会调查的人的值。
 - en: '![](../Images/5c8e0a899f28b1679841154557f1c142.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5c8e0a899f28b1679841154557f1c142.png)'
 - en: '**(9) Fitting our data into object:**'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(9) 将数据拟合到对象中:**'
 - en: Here our goal is to find the number of days a patient survived before they died.
     So our event of interest will be “death”, which is stored in the “dead” column.
     The first argument it takes is the timeline for our experiment.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的目标是找到患者在死亡前存活的天数。因此，我们感兴趣的事件将是“死亡”，它存储在“dead”列中。它接受的第一个参数是我们实验的时间线。
 - en: '![](../Images/dc4ddb3f430925fdde21f8e0c113e731.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/dc4ddb3f430925fdde21f8e0c113e731.png)'
 - en: '**(10) Event table :**'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(10) 事件表:**'
 - en: One most important method of *kmf* object is “event_table”. It gives us various
     information for our data fitted. Let’s have a look at it column-by-column.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '*kmf*对象的一个最重要的方法是“event_table”。它为我们提供了适配数据的各种信息。让我们逐列查看。'
 - en: '(1) *Event_at*: It stores the value of the timeline for our dataset, i.e.,
     when was the patient observed in our experiment or when was the experiment conducted.
     It can be the number of minutes, days, months, years etc. In our case, it’s going
     to be the number of days. It basically stores the value of survival days for a
     patient.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '(1) *事件时间*: 存储数据集中时间线的值，即患者在实验中被观察到的时间或实验进行的时间。可以是分钟、天、月、年等。在我们的案例中，它将是天数。它基本上存储患者的生存天数。'
 - en: '(2) *At_risk*: It stores the number of current patients. At the start, it will
     be the total number of patients we are going to observe in our experiment. If
     at a certain time, new patients are added, then we have to increase it’s value
     accordingly. Basically, we can say that:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '(2) *风险中*: 存储当前患者的数量。一开始，它将是我们在实验中要观察的总患者数。如果在某个时间点新增患者，我们需要相应地增加它的值。基本上，我们可以这样说：'
 - en: '*at_risk = current patients at_risk + entrance — removed*'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '*at_risk = 当前患者 at_risk + 入口 — 移除*'
 - en: '(3) *Entrance*: It stores the value of new patients in a given timeline. It’
     possible that while we have other patients, some new patients are also diagnosed
     with cancer. That’s why we add it here.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '(3) *入口*: 存储特定时间线中新患者的值。在我们有其他患者时，也可能有一些新患者被诊断出癌症。因此我们将其添加在这里。'
 - en: '(4) *Censored*: Our ultimate goal is to find the survival probability for a
     patient. If at a specific timeline person under experiment is alive, then that
     person goes into the censored category. If we don’t have information about when
     a patient died, then we add it to the censored data. Other possibilities are if
     a patient chooses to shift to another town where the experiment can’t be conducted,
     then we add that patient into the censored category.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '(4) *审查*: 我们的终极目标是找到患者的生存概率。如果在特定时间线上，实验中的人仍然活着，则该人进入审查类别。如果我们没有关于患者死亡时间的信息，则将其添加到审查数据中。其他可能性是如果患者选择搬到另一个无法进行实验的城镇，我们将该患者添加到审查类别中。'
 - en: '(5) *Observed*: The number of patients that died during the experiment.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '(5) *观察到*: 实验期间死亡的患者数量。'
 - en: '(6) *Removed*: It stores the values of patients that are no longer part of
     our experiment. If a person died or is censored, then they fall into this category.
     In short,'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '(6) *移除*: 存储不再参与实验的患者的值。如果一个人死亡或被审查，则他们属于这一类别。简而言之，'
 - en: '*Removed = Observed + Censored*'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '*移除 = 观察 + 审查*'
 - en: '![](../Images/fdfcf4cec13132d202af843d8cf41ba2.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fdfcf4cec13132d202af843d8cf41ba2.png)'
 - en: '**(11) Calculating the probability of survival for individual timelines:**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(11) 计算单个时间线的生存概率:**'
 - en: 'Here we are going to use the following formula to count it by hand:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用以下公式手动计算：
 - en: '![](../Images/5e2377712258505b01fc86552f643ddc.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5e2377712258505b01fc86552f643ddc.png)'
 - en: '![](../Images/c2a7cfba382ee59764789d1b68206ab0.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c2a7cfba382ee59764789d1b68206ab0.png)'
 - en: '![](../Images/45043c392cd42193c0fd2ea9172dcedf.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/45043c392cd42193c0fd2ea9172dcedf.png)'
 - en: '**(12) Event_At_5:**'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(12) Event_At_5:**'
 - en: '![](../Images/4dc17dd9a0b3bf38d0452b4ac1ffbf4e.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4dc17dd9a0b3bf38d0452b4ac1ffbf4e.png)'
 - en: '![](../Images/7a5659fc394847d57ba7e7fac4c2ef38.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7a5659fc394847d57ba7e7fac4c2ef38.png)'
 - en: '**(13) Event_At_11:**'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(13) Event_At_11:**'
 - en: '![](../Images/56dcccebaeec8a13b3d75388b65c751b.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/56dcccebaeec8a13b3d75388b65c751b.png)'
 - en: '![](../Images/ab2167e555e77b5bf9dfedc7189756da.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ab2167e555e77b5bf9dfedc7189756da.png)'
 - en: Now what we found here is the probability for a certain period of time only.
     What we want is the probability for the entire time period for a patient, i.e.,
     the probability of the patient surviving all the rounds of experiment.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们在这里找到的是某一特定时间段的概率。我们想要的是患者在整个时间段内的概率，即患者在所有实验回合中存活的概率。
 - en: This seems confusing, right?
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 这似乎很令人困惑，对吗？
 - en: Let’s take a very simple example to understand the concept of conditional probability.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们用一个非常简单的例子来理解条件概率的概念。
 - en: Let’ say we have a total of 15 balls in a non-transparent box. Out of the 15
     balls, we have 7 black balls, 5 red balls, and 3 green balls. Here’s a pictorial
     view for that.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们在一个不透明的盒子里总共有15个球。在这15个球中，有7个黑球、5个红球和3个绿球。这是一个图示视图。
 - en: '![](../Images/4bf652b5c6d9f1a73f6225c0a51faa2a.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4bf652b5c6d9f1a73f6225c0a51faa2a.png)'
 - en: Now let’s find some probabilities!
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们找出一些概率吧！
 - en: 'Probability for choosing a red ball :'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 选择红球的概率：
 - en: Notice that we have a total of 5 red balls out of 15 balls.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，我们总共有15个球中的5个是红球。
 - en: '![](../Images/754f1c8d2a482be7104e2ef024c27713.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/754f1c8d2a482be7104e2ef024c27713.png)'
 - en: 'probability of choosing 2nd red ball:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 选择第二个红球的概率：
 - en: Since we’ve removed a ball that was red, the total number of red balls we have
     is 4, and the total number of balls we have is 14.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们已经移除了一个红球，因此我们剩下的红球总数是4，总球数是14。
 - en: '![](../Images/c7d6a6314f7e8b1e99c6c4740445b616.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c7d6a6314f7e8b1e99c6c4740445b616.png)'
 - en: 'Now what my point here is: What if we want to find the probability of both
     the balls selected to be red. This is our case here. Like we want to find the
     probability that we know that a patient has survived the 1st time interval, and
@@ -267,327 +410,520 @@
     that they have survived the 1st time interval. My point here is we just don’t
     want to find the probability of the 2nd time interval only. We want the total
     probability of them surviving the time period.'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我的意思是：如果我们想找出两个选中的球都是红色的概率。这就是我们的情况。比如我们想找出一个患者在第一次时间区间存活的情况下，第二次时间区间存活的概率。我的意思是我们不仅仅想找出第二个时间区间的概率，我们想要的是他们在这个时间段内存活的总概率。
 - en: In the case of the balls, we want to find out what’s the probability that both
     of the selected balls are red?
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，我们想找出选中的两个球都是红色的概率是多少？
 - en: '![](../Images/d89fcf9507e0b23d409a98cdafb08549.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d89fcf9507e0b23d409a98cdafb08549.png)'
 - en: '*Probability of both red balls.*'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '*两个红球的概率。*'
 - en: 'Here our goal is to find the probability for the entire timeline of that person.
     Like they survived the 1st, 2^(nd), and 3rd timeslines, then our survival probability
     will be:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们的目标是找出这个人整个时间线上的概率。比如他们在第一次、第二次和第三次时间线中存活，那么他们的生存概率将是：
 - en: '![](../Images/b196ce9676cf4e3225be5ccec91574b5.png)'
+  id: totrans-75
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b196ce9676cf4e3225be5ccec91574b5.png)'
 - en: 'Getting back to our main example:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 回到我们的主要示例：
 - en: '**(14) Surv_After_probability:**'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(14) Surv_After_probability:**'
 - en: We want to find the probability that a patient has survived through all the
     timeline till now. Now we need to find the actual survival probability for a patient.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们想找出一个患者到目前为止存活的概率。现在我们需要找出患者的实际生存概率。
 - en: '![](../Images/aa8edf86f301d539450b61f0a89b37e1.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/aa8edf86f301d539450b61f0a89b37e1.png)'
 - en: '![](../Images/c26f9b51e9cb0cd1d1b1e356a65a95e4.png)'
+  id: totrans-80
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c26f9b51e9cb0cd1d1b1e356a65a95e4.png)'
 - en: '![](../Images/8654f363ae9c31a5ed9fb7931c9d3fa6.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8654f363ae9c31a5ed9fb7931c9d3fa6.png)'
 - en: '**(15) Predict function:**'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(15) Predict function:**'
 - en: Now the *kmf* object’s predict function does all of this work for us. But it’s
     always good to know the logic behind it.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，*kmf*对象的预测函数会为我们完成所有这些工作。但了解其背后的逻辑总是好的。
 - en: '![](../Images/e7f822e9679fb550a9a988ac2251a478.png)'
+  id: totrans-84
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e7f822e9679fb550a9a988ac2251a478.png)'
 - en: '**(16) Finding survival probability for an array of the timeline:**'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(16) Finding survival probability for an array of the timeline:**'
 - en: We can find the probability for an array of time.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以找到一系列时间的概率。
 - en: '![](../Images/a08ace7735561584c5951ae0c7918668.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a08ace7735561584c5951ae0c7918668.png)'
 - en: '**(17) Get survival probability for the whole timeline:**'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '**（17）获取整个时间线的生存概率：**'
 - en: The *kmf* object’s *survival_function_* gives us the complete data for our timeline.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '*kmf* 对象的 *survival_function_* 提供了我们时间线的完整数据。'
 - en: '![](../Images/a58b9bfafa592ff2fe0df27c70eefb7e.png)'
+  id: totrans-90
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a58b9bfafa592ff2fe0df27c70eefb7e.png)'
 - en: 'Explanation:'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 解释：
 - en: The survival probability for a patient at timeline 0 is 1\. If you think it
     over, then you can understand that the probability that a person dies on the 1st
     day of diagnosis is nearly equal to 0\. So we can say that the survival probability
     is as high as possible. As the timeline increases, the probability of survival
     decreases for a patient.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 在时间线 0 时，患者的生存概率为 1。如果你仔细考虑，就会明白在诊断后的第 1 天一个人死亡的概率几乎为 0。因此，我们可以说生存概率尽可能高。随着时间线的增加，患者的生存概率会降低。
 - en: '**(18) Median:**'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '**（18）中位数：**'
 - en: It provides the number of days where on average, 50% of patients survived.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 它提供了在平均情况下，50% 的患者存活的天数。
 - en: '![](../Images/0b87bdfb43c0b4d8c43c4499a91a1b7d.png)'
+  id: totrans-95
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0b87bdfb43c0b4d8c43c4499a91a1b7d.png)'
 - en: From the above code, we can say that, on average, a person lives 310 days after
     the day of diagnosis.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 从上述代码中，我们可以说，平均来说，一个人在诊断后的 310 天后生存。
 - en: '**(19) Plot the graph:**'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '**（19）绘制图表：**'
 - en: Here we can plot the graph for survival probability.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们可以绘制生存概率的图表。
 - en: '![](../Images/cee4e745e27ffbed64bdc436f835273c.png)'
+  id: totrans-99
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cee4e745e27ffbed64bdc436f835273c.png)'
 - en: '**(20) Confidence interval:**'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '**（20）置信区间：**'
 - en: The confidence interval gives us the range of values we are fairly sure our
     true values lie in. Here you can see in the above graph the light blue color shade
     represents the confidence interval of survival. From that, we can say that the
     probability at that timeline certainly lies between that confidence interval only.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 置信区间给出了我们较为确定的真实值所在的范围。你可以在上面的图表中看到，浅蓝色阴影表示生存的置信区间。从中我们可以说该时间线上的概率确实位于该置信区间之间。
 - en: '![](../Images/d27ee7049bd6d6edc7fe7d64350488b4.png)'
+  id: totrans-102
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d27ee7049bd6d6edc7fe7d64350488b4.png)'
 - en: Now all the information we have is for the survival of a person. Now we are
     going to see what is the probability for a person to die at a certain timeline.
     Here notice that a higher survival probability is good for a person, but higher
     cumulative density (probability of a person to die) is not so good!
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们掌握的所有信息都是关于一个人的生存。现在我们将查看某个时间线上的人死亡的概率。在这里要注意，高生存概率对一个人来说是好的，但更高的累积分布密度（死亡概率）则不那么好！
 - en: '**(21) Probability of a person to die:**'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '**（21）一个人死亡的概率：**'
 - en: '![](../Images/9e60d447937823fbe829840b8942984e.png)'
+  id: totrans-105
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9e60d447937823fbe829840b8942984e.png)'
 - en: Here notice that the denominator value is the subjects at risk just before time
     (t). In a simple way, we can say that the person *at_risk* of the previous row.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里注意到，分母值是时间 (t) 之前的风险对象。简单来说，我们可以说前一行的对象 *at_risk*。
 - en: 'The formula for cumulative density:'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 累积分布密度的公式：
 - en: '![](../Images/b8bf4961186172b185cda37252c51cda.png)'
+  id: totrans-108
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b8bf4961186172b185cda37252c51cda.png)'
 - en: Cumulative Density.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 累积分布密度。
 - en: 'Calculate the probability by hand:'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 手动计算概率：
 - en: '![](../Images/39c7a1109b9694e849780dac311372f0.png)'
+  id: totrans-111
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/39c7a1109b9694e849780dac311372f0.png)'
 - en: '*t = 0*'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '*t = 0*'
 - en: '![](../Images/41a445fc7e08cce76657f82ecc1e6efa.png)'
+  id: totrans-113
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/41a445fc7e08cce76657f82ecc1e6efa.png)'
 - en: '*t = 5*'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '*t = 5*'
 - en: '![](../Images/f22a5b780438e55dcf2bb7e7c3863865.png)'
+  id: totrans-115
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f22a5b780438e55dcf2bb7e7c3863865.png)'
 - en: '*t = 11*'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '*t = 11*'
 - en: 'Find the cumulative density:'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 查找累积分布密度：
 - en: '![](../Images/8064b0096eae86d08ac1f045c08e4c8b.png)'
+  id: totrans-118
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8064b0096eae86d08ac1f045c08e4c8b.png)'
 - en: '![](../Images/0d2007990349a8abcbb73e05e22acb56.png)'
+  id: totrans-119
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0d2007990349a8abcbb73e05e22acb56.png)'
 - en: '![](../Images/42ec10b7f1b369f3526d4f23fb8fc64d.png)'
+  id: totrans-120
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/42ec10b7f1b369f3526d4f23fb8fc64d.png)'
 - en: '**(22) Plot the graph:**'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '**（22）绘制图表：**'
 - en: '![](../Images/6834c2a374cbca7e9fbe5c6f368ba535.png)'
+  id: totrans-122
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6834c2a374cbca7e9fbe5c6f368ba535.png)'
 - en: Notice that, as the number of survival days increases, the probability of a
     person dying increases.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意到，随着生存天数的增加，死亡概率也增加。
 - en: 'Example 2: Estimating hazard rates using Nelson-Aalen'
+  id: totrans-124
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 示例 2：使用 Nelson-Aalen 估计风险率
 - en: '**Hazard function:**'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '**风险函数：**'
 - en: 'The survival functions are a great way to summarize and visualize the survival
     dataset. However, it is not the only way. If we are curious about the hazard function
     h(t) of a population, we, unfortunately, can’t transform the Kaplan Meier estimate.
     For that, we use the Nelson-Aalen hazard function:'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 生存函数是总结和可视化生存数据集的好方法。然而，这并不是唯一的方法。如果我们对一个人群的危险函数 h(t) 感到好奇，不幸的是，我们不能转化 Kaplan-Meier
+    估计。为此，我们使用 Nelson-Aalen 危险函数：
 - en: '![](../Images/cf963b5dd953218aa0959c4b84e28312.png)'
+  id: totrans-127
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cf963b5dd953218aa0959c4b84e28312.png)'
 - en: '*Hazard Function*'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: '*危险函数*'
 - en: Where,
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中，
 - en: '*di* = number of deaths at time *ti*'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: '*di* = 时间 *ti* 的死亡人数'
 - en: '*ni* = number of patients at the start.'
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: '*ni* = 开始时的患者数量。'
 - en: '**(23) Import library:**'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(23) 导入库：**'
 - en: '![](../Images/0b37bf1bf58d4eb48c7d1bee88e8271b.png)'
+  id: totrans-133
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0b37bf1bf58d4eb48c7d1bee88e8271b.png)'
 - en: '**(24) Fitting the data:**'
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(24) 拟合数据：**'
 - en: '![](../Images/ee157da56fb9eaa6872bd1a437132319.png)'
+  id: totrans-135
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ee157da56fb9eaa6872bd1a437132319.png)'
 - en: '**(25) Cumulative hazard:**'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(25) 累积危险度：**'
 - en: 'Keep in mind we take *at_risk* of the current row:'
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 请记住我们考虑当前行的 *at_risk*：
 - en: '![](../Images/22dd1a24a5e064b69aa95846cfcd3848.png)'
+  id: totrans-138
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/22dd1a24a5e064b69aa95846cfcd3848.png)'
 - en: '![](../Images/539dc0f8ff0ff19b003e47b9fbd8ba57.png)'
+  id: totrans-139
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/539dc0f8ff0ff19b003e47b9fbd8ba57.png)'
 - en: '![](../Images/591e70756bee336c30a0853c9d0e3571.png)'
+  id: totrans-140
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/591e70756bee336c30a0853c9d0e3571.png)'
 - en: '![](../Images/e8c61d60b356f98c4fcd83074065cb7e.png)'
+  id: totrans-141
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e8c61d60b356f98c4fcd83074065cb7e.png)'
 - en: '![](../Images/9155f052dd21f86632d0d3834e73ff96.png)'
+  id: totrans-142
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9155f052dd21f86632d0d3834e73ff96.png)'
 - en: '![](../Images/e413ca91ce0cc8c0ec555363ccb13b2c.png)'
+  id: totrans-143
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e413ca91ce0cc8c0ec555363ccb13b2c.png)'
 - en: '**(26) Plot the data:**'
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(26) 绘制数据：**'
 - en: '![](../Images/c15ccfe05d3ef6b5766dc90929a29593.png)'
+  id: totrans-145
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c15ccfe05d3ef6b5766dc90929a29593.png)'
 - en: The cumulative hazard has less obvious understanding than the survival functions,
     but the hazard functions are the basis of more advanced techniques in survival
     analysis.
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: 累积危险度不如生存函数那么直观易懂，但危险函数是更高级生存分析技术的基础。
 - en: '**(27) Predict a value:**'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: '**(27) 预测一个值：**'
 - en: '![](../Images/c8170c41ed8ec977ddac5413cb272c2a.png)'
+  id: totrans-148
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c8170c41ed8ec977ddac5413cb272c2a.png)'
 - en: 'Putting it all together:'
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 综合起来：
 - en: '**[You can download the jupyter notebooks from here.](https://drive.google.com/open?id=1Vj9UNMfcsqP3S7D3-oQRjEuc2Gnw43dF)**'
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[你可以从这里下载 Jupyter 笔记本。](https://drive.google.com/open?id=1Vj9UNMfcsqP3S7D3-oQRjEuc2Gnw43dF)**'
 - en: In [the next article](https://www.kdnuggets.com/2020/07/guide-survival-analysis-python-part-3.html),
     we’ll discuss the log-rank test and cox regression with an example.
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[下一篇文章](https://www.kdnuggets.com/2020/07/guide-survival-analysis-python-part-3.html)中，我们将讨论对数秩检验和
+    Cox 回归，并提供示例。
 - en: '[Original](https://medium.com/@shuklapratik22/a-complete-guide-to-survival-analysis-in-python-b0e6354d599d).
     Reposted with permission.'
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始](https://medium.com/@shuklapratik22/a-complete-guide-to-survival-analysis-in-python-b0e6354d599d)。已获许可转载。'
 - en: '**Bio:** [Pratik Shukla](https://medium.com/@shuklapratik22) is an aspiring
     machine learning engineer who loves to put complex theories in simple ways. Pratik
     pursued his undergraduate in computer science and is going for a master''s program
     in computer science at University of Southern California.  “Shoot for the moon.
     Even if you miss it you will land among the stars. -- Les Brown”'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：** [Pratik Shukla](https://medium.com/@shuklapratik22) 是一位有抱负的机器学习工程师，喜欢将复杂理论以简单的方式呈现。Pratik
+    在计算机科学专业完成了本科，并正在南加州大学攻读计算机科学硕士学位。 “向月亮射击。即使错过，你也会落在星星之间。 -- Les Brown”'
 - en: '**Related:**'
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[A Complete Guide To Survival Analysis In Python, part 1](https://www.kdnuggets.com/2020/07/complete-guide-survival-analysis-python-part1.html)'
+  id: totrans-155
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中生存分析的完整指南，第1部分](https://www.kdnuggets.com/2020/07/complete-guide-survival-analysis-python-part1.html)'
 - en: '[Survival Analysis for Business Analytics](https://www.kdnuggets.com/2017/11/survival-analysis-business-analytics.html)'
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[商业分析中的生存分析](https://www.kdnuggets.com/2017/11/survival-analysis-business-analytics.html)'
 - en: '[The Challenges of Building a Predictive Churn Model](https://www.kdnuggets.com/2017/03/datascience-building-predictive-churn-model.html)'
+  id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建预测流失模型的挑战](https://www.kdnuggets.com/2017/03/datascience-building-predictive-churn-model.html)'
 - en: More On This Topic
+  id: totrans-158
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关信息
 - en: '[The Complete Collection of Data Science Cheat Sheets - Part 1](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)'
+  id: totrans-159
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学备忘单的完整集合 - 第1部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)'
 - en: '[The Complete Collection of Data Science Cheat Sheets - Part 2](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)'
+  id: totrans-160
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学备忘单的完整集合 - 第2部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)'
 - en: '[The Complete Collection Of Data Repositories - Part 1](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-1.html)'
+  id: totrans-161
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据仓库完整合集 - 第 1 部分](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-1.html)'
 - en: '[The Complete Collection Of Data Repositories - Part 2](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-2.html)'
+  id: totrans-162
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据仓库完整合集 - 第 2 部分](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-2.html)'
 - en: '[The Complete Collection of Data Science Books - Part 1](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)'
+  id: totrans-163
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学书籍完整合集 - 第 1 部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)'
 - en: '[The Complete Collection of Data Science Books - Part 2](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html)'
+  id: totrans-164
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学书籍完整合集 - 第 2 部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html)'

@@ -3,29 +3,35 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Tensorflow Serving 构建 REST API（第 1 部分）
 - en: 原文：[https://www.kdnuggets.com/2020/07/building-rest-api-tensorflow-serving-part-1.html](https://www.kdnuggets.com/2020/07/building-rest-api-tensorflow-serving-part-1.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/07/building-rest-api-tensorflow-serving-part-1.html](https://www.kdnuggets.com/2020/07/building-rest-api-tensorflow-serving-part-1.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Guillermo Gomez](https://www.linkedin.com/in/mlgxmez/), Data Scientist
     & Machine Learning Engineer**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Guillermo Gomez](https://www.linkedin.com/in/mlgxmez/)，数据科学家和机器学习工程师**'
 - en: '![Image](../Images/db70da63fa526846f86b9986f26b5dbc.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/db70da63fa526846f86b9986f26b5dbc.png)'
 - en: What is Tensorflow Serving?
   id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是 Tensorflow Serving？
 - en: One of the features that I personally think is undervalued from Tensorflow is
     the capability of serving Tensorflow models. At the moment of writing this post,
     the API that helps you do that is named Tensorflow Serving, and is part of the
@@ -33,6 +39,8 @@
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我个人认为 Tensorflow 中一个被低估的功能是服务 Tensorflow 模型的能力。在撰写这篇文章时，帮助你做到这一点的 API 叫做 Tensorflow
+    Serving，并且是 Tensorflow Extended 生态系统的一部分，简称 TFX。
 - en: During the first releases of Tensorflow Serving, I found the documentation somehow
     daunting. And there were many concepts that a data scientist is not very used
     to work with: *Servables, sources, loaders, managers…* All these elements are
@@ -40,6 +48,8 @@
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Tensorflow Serving 的第一次发布期间，我发现文档有些令人生畏。还有许多数据科学家不太习惯使用的概念：*服务对象、来源、加载器、管理器……*
+    所有这些元素都是 Tensorflow Serving 架构的一部分。更多细节，见[这里](https://github.com/tensorflow/serving/blob/master/tensorflow_serving/g3doc/architecture.md)。
 - en: So, as a gentle introduction, I will show you **how you can build a REST API
     with Tensorflow Serving**. From saving a Tensorflow object (this is what we call
     a *servable*) until testing the API endpoint. The first part will explain how
@@ -47,16 +57,20 @@
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，作为一个简单的介绍，我将向你展示**如何使用 Tensorflow Serving 构建 REST API**。从保存 Tensorflow 对象（这就是我们所说的*可服务对象*）到测试
+    API 端点。第一部分将解释如何创建和保存准备投入生产的 Tensorflow 对象。
 - en: The meaning of servables
   id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 服务对象的含义
 - en: Functions, embeddings or saved models are some of the objects that can be used
     as servables. But how do we define those servables in Tensorflow?
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 函数、嵌入或保存的模型是可以作为服务对象使用的一些对象。那么我们如何在 Tensorflow 中定义这些服务对象呢？
 - en: 'Well, this is up to you but they must be able to be saved in what’s is called
     the **SavedModel format**. This format keeps all the components of a Tensorflow
     object in the same state once we load this object in a new environment. What are
@@ -64,31 +78,37 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 好吧，这取决于你，但它们必须能够保存为所谓的**SavedModel 格式**。这种格式在我们将对象加载到新环境中时，能够保持 Tensorflow 对象的所有组件处于相同状态。这些组件是什么？相关的有：权重、图、附加资产等。
 - en: 'The module to be called to save Tensorflow objects is `tf.saved_model`. And
     as we’ll see shortly it’s simple to use. For now, let’s see how we can generate
     two types of servables:'
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于保存 Tensorflow 对象的模块是 `tf.saved_model`。正如我们将很快看到的那样，它使用起来很简单。现在，让我们看看如何生成两种类型的服务对象：
 - en: Tensorflow functions
   id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Tensorflow 函数
 - en: Keras models
   id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Keras 模型
 - en: TensorFlow function as servable
   id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TensorFlow 函数作为可服务对象
 - en: 'Tensorflow functions are saved as valid servables if are defined in this way:'
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 Tensorflow 函数是这样定义的，它们会被保存为有效的服务对象：
 - en: '[PRE0]'
   id: totrans-17
   prefs: []
@@ -99,29 +119,34 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 类内部的函数定义
 - en: The parent class has to be `tf.Module`
   id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 父类必须是 `tf.Module`
 - en: The `@tf.function` decorator somehow **translates the function definition into
     a Tensorflow graph**
   id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`@tf.function` 装饰器以某种方式**将函数定义转换为 Tensorflow 图**'
 - en: The `input_signature` argument defines the type and shape of tensors that are
     accepted to be passed in the function
   id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`input_signature` 参数定义了函数接受的张量的类型和形状'
 - en: 'In this case we specify tensors with two dimensions, the second one be fixed
     to have three elements while the type is going to be `float32`. Another example
     of a Tensorflow function is:'
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，我们指定了两个维度的张量，第二维被固定为三个元素，而类型将是 `float32`。另一个 Tensorflow 函数的示例是：
 - en: '[PRE1]'
   id: totrans-23
   prefs: []
@@ -132,10 +157,12 @@
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，`input_signature` 参数并不是必须的，但在函数投入生产时，包含一些安全测试总是好的。
 - en: 'Later, we create an instance of the class and we save them:'
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 后续，我们创建类的实例并保存它们：
 - en: '[PRE2]'
   id: totrans-26
   prefs: []
@@ -147,17 +174,20 @@
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '`tf.saved_model.save`的第一个参数指向类的实例对象，而第二个参数是本地文件系统中的路径，模型将在该路径下保存。'
 - en: Keras model as servable
   id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 可服务的Keras模型
 - en: You can follow a similar procedure for saving Keras models. This example focuses
     on a pretrained image classification model, loaded with TensorFlow Hub. In addition,
     we are going to build a custom class around it to preprocess input images.
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以采用类似的程序来保存Keras模型。这个示例关注于一个预训练的图像分类模型，它通过TensorFlow Hub加载。此外，我们将围绕它构建一个自定义类来预处理输入图像。
 - en: '[PRE3]'
   id: totrans-30
   prefs: []
@@ -168,12 +198,14 @@
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 该类继承自`tf.keras.Model`，关于它有几点需要讨论：
 - en: The input to the model is a string of bytes, which come in a JSON file, with
     a specific set of key|value pairs. More on that in the second part of the tutorial.
   id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 模型的输入是一个字节字符串，这些字节以JSON文件的形式出现，其中包含特定的键|值对。有关更多信息，请参见教程的第二部分。
 - en: tf.reshape is the first function in the preprocessing stage because images are
     put into an array in the JSON file. Since we impose restrictions in the input
     with `@tf.function` it is required to do this kind of transformation.
@@ -181,6 +213,7 @@
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`tf.reshape`是预处理阶段的第一个函数，因为图像被放入JSON文件中的数组中。由于我们使用了`@tf.function`对输入进行限制，因此需要进行这种转换。'
 - en: The attribute `labels` store the image labels of *ImageNet* (available [here](https://storage.googleapis.com/download.tensorflow.org/data/ImageNetLabels.txt)).
     We want the model to output not the label index of the output layer of the model
     but the label with text format. The reason why it is defined in this way is explained
@@ -189,11 +222,13 @@
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 属性`labels`存储了*ImageNet*的图像标签（可在[这里](https://storage.googleapis.com/download.tensorflow.org/data/ImageNetLabels.txt)获取）。我们希望模型输出的是文本格式的标签，而不是模型输出层的标签索引。其定义方式的原因如下所述。
 - en: 'As per usual we save the model following the same procedure but with a little
     addition:'
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 像往常一样，我们遵循相同的程序保存模型，但有所增加：
 - en: '[PRE4]'
   id: totrans-36
   prefs: []
@@ -207,45 +242,54 @@
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了将额外的组件存储到SavedModel对象中，我们必须定义一个资产。我们使用`tf.saved_model.Asset`来实现，我在类定义之外调用此函数以使其更为明确。如果我们在类定义中进行，也可能会以相同的方式工作。**请注意，我们必须在保存模型之前将资产作为类实例的属性保存。**
 - en: Further details
   id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 进一步的细节
 - en: These are the folders that have been generated in the local filesystem when
     we saved the custom Keras model.
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些是我们在保存自定义Keras模型时在本地文件系统中生成的文件夹。
 - en: '![](../Images/804c6f74f982c1da6a5b3ec4440cd907.png)'
   id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/804c6f74f982c1da6a5b3ec4440cd907.png)'
 - en: 'The files generated are:'
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成的文件有：
 - en: the graph of the function or model, saved in a Protobuf file with extension `.pb`
   id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 函数或模型的图形，保存在扩展名为`.pb`的Protobuf文件中。
 - en: the weights of the model or any TensorFlow Variable used in the servable, saved
     in the `variables` folder
   id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型的权重或在可服务的过程中使用的任何TensorFlow变量，保存在`variables`文件夹中。
 - en: extra components are saved in the `assets` folder but it is empty in our examples
   id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 额外的组件保存在`assets`文件夹中，但在我们的示例中是空的。
 - en: 'There are some questions that may arise when you build your own functions or
     models:'
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 在构建自己的函数或模型时，可能会出现一些问题：
 - en: '**What’s the reasoning behind the choice of parent classes?** Attaching `tf.Module` class
     to a `tf.function` allows the latter to be saved with `tf.saved_model`. The same
     goes for the `tf.keras.Model`. You can find more info [here](https://www.tensorflow.org/guide/saved_model#reusing_savedmodels_in_python).'
@@ -253,6 +297,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**选择父类的理由是什么？** 将`tf.Module`类附加到`tf.function`上允许后者使用`tf.saved_model`进行保存。`tf.keras.Model`也是如此。你可以在[这里](https://www.tensorflow.org/guide/saved_model#reusing_savedmodels_in_python)找到更多信息。'
 - en: '**Why you add `/1` in the model’s path?** Servables must have an ID indicating
     the version of the model we are running inside the container. It’s helpful to
     keep track of multiple versions of your model when you are monitoring their metrics.
@@ -261,10 +306,12 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**为什么在模型路径中添加`/1`？** 可服务的模型必须有一个ID，以指示我们在容器中运行的模型版本。这有助于在监控模型的指标时跟踪多个版本。你可以在以下[链接](https://stackoverflow.com/a/45552938)中找到更详细的解释。'
 - en: This is all for now. Thanks for reading!
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前就这些，谢谢阅读！
 - en: '**Bio: [Guillermo Gomez](https://www.linkedin.com/in/mlgxmez/)** builds machine
     learning-based products in the public infrastructure and services industry. His
     website where more tutorials can be found: [http://thelongrun.blog](http://thelongrun.blog)'
