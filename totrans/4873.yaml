@@ -1,29 +1,42 @@
 - en: 'Web Scraping with Python: Illustration with CIA World Factbook'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Python 进行网络爬取：以 CIA 世界概况为例
 - en: 原文：[https://www.kdnuggets.com/2018/03/web-scraping-python-cia-world-factbook.html](https://www.kdnuggets.com/2018/03/web-scraping-python-cia-world-factbook.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/03/web-scraping-python-cia-world-factbook.html](https://www.kdnuggets.com/2018/03/web-scraping-python-cia-world-factbook.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '![Header image](../Images/c4416a7cb71936d981cf6bfc60ccf10a.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![Header image](../Images/c4416a7cb71936d981cf6bfc60ccf10a.png)'
 - en: In a data science project, almost always the most time consuming and messy part
     is the data gathering and cleaning. Everyone likes to build a cool deep neural
     network (or XGboost) model or two and show off one’s skills with cool 3D interactive
     plots. But the models need raw data to start with and they don’t come easy and
     clean.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在数据科学项目中，几乎总是最耗时且最麻烦的部分是数据收集和清洗。每个人都喜欢构建一个炫酷的深度神经网络（或 XGboost）模型，并展示自己用炫酷的 3D
+    交互式图表的技能。但这些模型需要原始数据作为起点，而这些数据并不容易获得且不干净。
 - en: '**Life, after all, is not Kaggle where a zip file full of data is waiting for
     you to be unpacked and modeled :-)**'
+  id: totrans-5
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**毕竟，生活不是 Kaggle，那里一个装满数据的 zip 文件等着你去解压和建模 :-)**'
 - en: '**But why gather data or build model anyway**? The fundamental motivation is
     to answer a business or scientific or social question. *Is there a trend*? *Is
     this thing related to that*? *Can the measurement of this entity predict the outcome
@@ -32,8 +45,10 @@
     opposed to test tubes like a chemist or magnets like a physicist) to test your
     hypothesis and prove/disprove it scientifically. **That is the ‘science’ part
     of the data science. Nothing more, nothing less…**'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '**那么，为什么要收集数据或建立模型呢**？根本的动机是为了回答一个商业、科学或社会问题。*是否有趋势*？*这个东西与那个东西有关吗*？*测量这个实体是否能预测那个现象的结果*？这是因为回答这个问题将验证你作为科学家/从业者的假设。你只是使用数据（与化学家用试管或物理学家用磁铁不同）来测试你的假设并从科学上证明或证伪它。**这就是数据科学中的‘科学’部分。没有更多，也没有更少……**'
 - en: Trust me, it is not that hard to come up with a good quality question which
     requires a bit of application of data science techniques to answer. Each such
     question then becomes a small little project of your which you can code up and
@@ -41,128 +56,194 @@
     you are not a data scientist by profession, nobody can stop you writing cool program
     to answer a good data question. That showcases you as a person who is comfortable
     around data and one who can tell a story with data.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 相信我，提出一个需要稍微应用数据科学技术来回答的高质量问题并不那么难。每一个这样的问提都会成为你的小项目，你可以将其编写成代码并在像 Github 这样的开源平台上展示给朋友。即使你不是职业数据科学家，没有人可以阻止你编写炫酷的程序来回答一个好的数据问题。这展示了你作为一个对数据熟悉并能够讲述数据故事的人的形象。
 - en: Let’s tackle one such question today…
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天让我们处理这样一个问题……
 - en: '**Is there any relationship between the GDP (in terms of purchasing power parity)
     of a country and the percentage of its Internet users? And is this trend similar
     for low-income/middle-income/high-income countries?**'
+  id: totrans-9
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**一个国家的 GDP（按购买力平价计算）与其互联网用户百分比之间是否存在关系？这种趋势在低收入/中等收入/高收入国家中是否相似？**'
 - en: Now, there can be any number of sources you can think of to gather data for
     answering this question. I found that an website from CIA (Yes, the ‘AGENCY’),
     which hosts basic factual information about all countries around the world, is
     a good place to scrape the data from.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，你可以想到任何数量的来源来收集数据以回答这个问题。我发现来自 CIA 的一个网站（是的，就是那个‘机构’），提供有关全球所有国家的基本事实信息，是抓取数据的好地方。
 - en: So, we will use following Python modules to build our database and visualizations,
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，我们将使用以下 Python 模块来构建我们的数据库和可视化，
 - en: '**Pandas**, **Numpy, matplotlib/seaborn**'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Pandas**，**Numpy, matplotlib/seaborn**'
 - en: Python **urllib** (for sending the HTTP requests)
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Python **urllib**（用于发送 HTTP 请求）
 - en: '**BeautifulSoup** (for HTML parsing)'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**BeautifulSoup**（用于 HTML 解析）'
 - en: '**Regular expression module **(for finding the exact matching text to search
     for)'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**正则表达式模块**（用于查找精确匹配的文本）'
 - en: Let’s talk about the program structure to answer this data science question.
     The [entire boiler plate code is available here](https://github.com/tirthajyoti/Web-Database-Analytics-Python/blob/master/CIA-Factbook-Analytics2.ipynb) in
     my [Github repository](https://github.com/tirthajyoti/Web-Database-Analytics-Python).
     Please feel free to fork and star if you like it.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们讨论一下程序结构，以回答这个数据科学问题。我的 [Github 仓库](https://github.com/tirthajyoti/Web-Database-Analytics-Python)
+    中提供了 [完整的代码模板](https://github.com/tirthajyoti/Web-Database-Analytics-Python/blob/master/CIA-Factbook-Analytics2.ipynb)。如果你喜欢，可以随意
+    fork 和 star。
 - en: '**Reading the front HTML page and passing on to BeautifulSoup**'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**读取前 HTML 页面并传递给 BeautifulSoup**'
 - en: Here is how the [front page of the CIA World Factbook](https://www.cia.gov/library/publications/the-world-factbook/) looks
     like,
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是 [CIA 世界概况书前页](https://www.cia.gov/library/publications/the-world-factbook/)
+    的样子，
 - en: '![](../Images/22915ed2c9976abdc65e383474499133.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/22915ed2c9976abdc65e383474499133.png)'
 - en: 'Fig: CIA World Factbook front page'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 图：CIA 世界概况书前页
 - en: We use a simple urllib request with a SSL error ignore context to retrieve this
     page and then pass it on to the magical BeautifulSoup, which parses the HTML for
     us and produce a pretty text dump. For those, who are not familiar with the BeautifulSoup
     library, they can watch the following video or read this [great informative article
     on Medium](https://medium.freecodecamp.org/how-to-scrape-websites-with-python-and-beautifulsoup-5946935d93fe).
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用带有 SSL 错误忽略上下文的简单 urllib 请求来检索该页面，然后将其传递给神奇的 BeautifulSoup，它为我们解析 HTML 并生成漂亮的文本转储。对于那些不熟悉
+    BeautifulSoup 库的人，他们可以观看以下视频或阅读这篇 [很棒的 Medium 文章](https://medium.freecodecamp.org/how-to-scrape-websites-with-python-and-beautifulsoup-5946935d93fe)。
 - en: So, here is the code snippet for reading the front page HTML,
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是读取前页 HTML 的代码片段，
 - en: '[PRE0]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Here is how we pass it on to BeautifulSoup and use the `find_all` method to
     find all the country names and codes embedded in the HTML. Basically, the idea
     is to **find the HTML tags named ‘option’**. The text in that tag is the country
     name and the char 5 and 6 of the tag value represent the 2-character country code.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是我们如何将数据传递给 BeautifulSoup，并使用 `find_all` 方法查找 HTML 中嵌入的所有国家名称和代码。基本思想是 **查找名为‘option’的
+    HTML 标签**。该标签中的文本是国家名称，而标签值的第 5 和第 6 个字符代表 2 字符的国家代码。
 - en: Now, you may ask how would you know that you need to extract 5th and 6th character
     only? The simple answer is that **you have to examine the soup text i.e. parsed
     HTML text yourself and determine those indices**. There is no universal method
     to determine this. Each HTML page and the underlying structure is unique.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，你可能会问，如何知道只需要提取第 5 和第 6 个字符？简单的答案是 **你必须检查 soup 文本，即解析后的 HTML 文本，并确定这些索引**。没有通用的方法来确定这一点。每个
+    HTML 页面及其底层结构都是独一无二的。
 - en: '[PRE1]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '**Crawling: Download all the text data of all countries into a dictionary by
     scraping each page individually**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**抓取：通过单独抓取每一页，将所有国家的文本数据下载到字典中**'
 - en: This step is the essential scraping or crawling as they say. To do this, **the
     key thing to identify is how the URL of each countries information page is structured**.
     Now, in general case, this is may be hard to get. In this particular case, quick
     examination shows a very simple and regular structure to follow. Here is the screenshot
     of Australia for example,
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个步骤是所谓的基本抓取或爬取。要做到这一点，**关键是要确定每个国家信息页面的 URL 是如何结构化的**。一般情况下，这可能很难获取。在这个特定的案例中，快速检查显示了一个非常简单且规律的结构可以遵循。以下是澳大利亚的截图，
 - en: '![](../Images/a73eaa4c4c6033315122e3fef1c36433.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a73eaa4c4c6033315122e3fef1c36433.png)'
 - en: That means there is a fixed URL to which you have to append the 2-character
     country code and you get to the URL of that country’s page. So, we can just iterate
     over the country codes’ list and use BeautifulSoup to extract all the text and
     store in our local dictionary. Here is the code snippet,
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着有一个固定的 URL，你需要将 2 字符的国家代码附加到这个 URL 上，就能到达该国家页面的 URL。因此，我们可以遍历国家代码列表，使用 BeautifulSoup
+    提取所有文本并存储在本地字典中。以下是代码片段，
 - en: '[PRE2]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '**Store in a Pickle dump if you like**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**如果你喜欢，可以存储在 Pickle 转储中**'
 - en: For good measure, I prefer to serialize and **store this data in a **[**Python
     pickle object**](https://pythontips.com/2013/08/02/what-is-pickle-in-python/)anyway.
     That way I can just read the data directly next time I open the Jupyter notebook
     without repeating the web crawling steps.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了更好地处理，我喜欢将这些数据序列化并 **存储在一个 [Python pickle 对象](https://pythontips.com/2013/08/02/what-is-pickle-in-python/)
+    中**。这样，下次打开 Jupyter notebook 时，我可以直接读取数据，而无需重复网络爬取步骤。
 - en: '[PRE3]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '**Using regular expression to extract the GDP/capita data from the text dump**'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用正则表达式从文本转储中提取GDP/人数据**'
 - en: This is the core text analytics part of the program, where we take help of [***regular
     expression*** module](https://docs.python.org/3/howto/regex.html) to find what
     we are looking for in the huge text string and extract the relevant numerical
@@ -173,54 +254,79 @@
     and then read few characters after that, extract the positions of certain symbols
     like $ and parentheses to eventually extract the numerical value of GDP/capita.
     Here is the idea illustrated with a figure.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是程序的核心文本分析部分，我们借助 [***正则表达式*** 模块](https://docs.python.org/3/howto/regex.html) 来查找在庞大的文本字符串中寻找我们需要的信息，并提取相关的数字数据。正则表达式是Python（或几乎所有高级编程语言）中的丰富资源。它允许在大文本语料库中搜索/匹配特定模式的字符串。在这里，我们使用非常简单的正则表达式方法来匹配如“*GDP — per
+    capita (PPP):*”这样的确切词汇，然后读取其后的几个字符，提取某些符号如$和括号的位置，最终提取GDP/人均的数值。这里用一个图示例说明了这个想法。
 - en: '![](../Images/7fd03b238605dbf2e7f7d7bd351fe3af.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7fd03b238605dbf2e7f7d7bd351fe3af.png)'
 - en: 'Fig: Illustration of the text analytics'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 图：文本分析的示意图
 - en: There are other regular expression tricks used in this notebook, for example
     to extract the total GDP properly regardless whether the figure is given in billions
     or trillions.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个笔记本中使用了其他正则表达式技巧，例如提取总GDP，无论数字是以十亿还是万亿表示。
 - en: '[PRE4]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Here is the example code snippet. **Notice the multiple error-handling checks
     placed in the code**. This is necessary because of the supremely unpredictable
     nature of HTML pages. Not all country may have the GDP data, not all pages may
     have the exact same wordings for the data, not all numbers may look same, not
     all strings may have $ and () placed similarly. Any number of things can go wrong.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是示例代码片段。**注意代码中放置的多个错误处理检查**。这是必要的，因为HTML页面的不可预测性极高。不是所有国家都有GDP数据，页面上的数据表述可能不完全相同，数字的形式也可能不同，字符串中的$和()也可能放置得不同。可能会发生各种错误。
 - en: It is almost impossible to plan and write code for all scenarios but at least
     you have to have code to handle the exception if they occur so that your program
     does not come to a halt and can gracefully move on to the next page for processing.
+  id: totrans-42
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 准备和编写所有场景的代码几乎是不可能的，但至少你需要有代码来处理异常，以防出现异常，这样你的程序不会中断，并可以优雅地继续处理下一个页面。
 - en: '[PRE5]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '**Don’t forget to use pandas inner/left join method**'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**不要忘记使用pandas的内连接/左连接方法**'
 - en: One thing to remember is that all these text analytics will produce dataframes
     with slightly different set of countries as different types of data may be unavailable
     for different countries. One could use a [**Pandas left join**](https://pandas.pydata.org/pandas-docs/stable/merging.html) to
     create a dataframe with intersection of all common countries for which all the
     pieces of data is available/could be extracted.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 需要记住的一点是，这些文本分析将生成具有略微不同国家集的数据框，因为不同类型的数据可能在不同国家不可用。可以使用 [**Pandas 左连接**](https://pandas.pydata.org/pandas-docs/stable/merging.html) 来创建一个包含所有公共国家交集的数据框，这些国家的数据是可用的或可以提取的。
 - en: '[PRE6]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '**Ah the cool stuff now, Modeling…but wait! Let’s do filtering first!**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**现在进入有趣的部分，建模……但等等！先做过滤吧！**'
 - en: After all the hard work of HTML parsing, page crawling, and text mining, now
     you are ready to reap the benefits — eager to run the regression algorithms and
     cool visualization scripts! But wait, often you need to clean up your data (particularly
@@ -233,135 +339,203 @@
     The following code, for example, creates filters to keep out small countries with
     < 50 billion of total GDP and low and high income boundaries of $5,000 and $25,000
     respectively (GDP/capita).
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 在完成HTML解析、页面抓取和文本挖掘的所有艰苦工作后，现在你已经准备好获得成果——迫不及待地运行回归算法和酷炫的可视化脚本！但等等，通常你需要在生成这些图表之前对数据进行更多的清理（特别是对于这类社会经济问题）。基本上，你想要过滤掉离群值，例如非常小的国家（如岛国），这些国家的参数值可能极度偏斜，但不符合你想要调查的主要动态。几行代码足以完成这些过滤。虽然可能有更*Pythonic*的实现方式，但我尽量保持简单易懂。以下代码例如创建了过滤器，以排除总GDP小于500亿以及收入边界低于5000美元和高于25000美元的国家（人均GDP）。
 - en: '[PRE7]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '**Finally, the visualization**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**最后，数据可视化**'
 - en: We use [**seaborn regplot** function](https://seaborn.pydata.org/generated/seaborn.regplot.html) to
     create the scatter plots (Internet users % vs. GDP/capita) with linear regression
     fit and 95% confidence interval bands shown. They look like following. One can
     interpret the result as
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用了[**seaborn regplot** 函数](https://seaborn.pydata.org/generated/seaborn.regplot.html)来创建散点图（互联网用户比例
+    vs. 人均GDP），并显示线性回归拟合和95%的置信区间带。它们看起来如下。可以将结果解释为
 - en: There is a strong positive correlation between Internet users % and GDP/capita
     for a country. Moreover, the strength of correlation is significantly higher for
     low-income/low-GDP countries than the high-GDP, advanced nations. **That could
     mean access to internet helps the lower income countries to grow faster and improve
     the average condition of their citizens more than it does for the advanced nations**.
+  id: totrans-52
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 国家互联网用户比例与人均GDP之间存在强正相关关系。此外，低收入/低GDP国家的相关性强度显著高于高GDP发达国家。**这可能意味着互联网访问帮助低收入国家更快地发展，并且在改善公民平均状况方面比发达国家更有效**。
 - en: '![](../Images/b8cef33d49e1aa46fc0e38ede954c667.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b8cef33d49e1aa46fc0e38ede954c667.png)'
 - en: '**Summary**'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '**总结**'
 - en: This article goes over a demo Python notebook to illustrate how to crawl webpages
     for downloading raw information by HTML parsing using BeautifulSoup. Thereafter,
     it also illustrates the use of Regular Expression module to search and extract
     important pieces of information what the user demands.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文介绍了一个演示Python笔记本，说明如何通过使用BeautifulSoup进行HTML解析来抓取网页以下载原始信息。随后，它还说明了使用正则表达式模块来搜索和提取用户所需的重要信息。
 - en: Above all, it demonstrates how or why there can be no simple, universal rule
     or program structure while mining messy HTML parsed texts. One has to examine
     the text structure and put in place appropriate error-handling checks to gracefully
     handle all the situations to maintain the flow of the program (and not crash)
     even if it cannot extract data for all those scenarios.
+  id: totrans-56
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 总而言之，这展示了在挖掘混乱的HTML解析文本时，为什么没有简单、普遍的规则或程序结构。必须检查文本结构，并设置适当的错误处理检查，以优雅地处理所有情况，确保程序流程顺畅（不会崩溃），即使不能提取所有场景的数据。
 - en: I hope readers can benefit from the provided Notebook file and build upon it
     as per their own requirement and imagination. For more web data analytics notebooks, [**please
     see my repository.**](https://github.com/tirthajyoti/Web-Database-Analytics-Python)
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望读者能从提供的Notebook文件中受益，并根据自己的需求和想象进行扩展。有关更多网络数据分析的笔记本，[**请查看我的代码库。**](https://github.com/tirthajyoti/Web-Database-Analytics-Python)
 - en: Ifyou have any questions or ideas to share, please contact the author at [**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com).
     Also you can check author’s [**GitHub repositories**](https://github.com/tirthajyoti?tab=repositories) for
     other fun code snippets in Python, R, or MATLAB and machine learning resources.
     If you are, like me, passionate about machine learning/data science, please feel
     free to [add me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) or [follow
     me on Twitter.](https://twitter.com/tirthajyotiS)
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有任何问题或想法，请通过 [**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com)
+    联系作者。你也可以查看作者的 [**GitHub 仓库**](https://github.com/tirthajyoti?tab=repositories)
+    以获取其他有趣的 Python、R 或 MATLAB 代码片段和机器学习资源。如果你像我一样，对机器学习/数据科学充满热情，请随时 [在 LinkedIn
+    上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) 或 [在 Twitter 上关注我](https://twitter.com/tirthajyotiS)。
 - en: '**Bio: [Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)**
     is a semiconductor technologist, machine learning/data science zealot, Ph.D. in
     EE, blogger and writer.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)**
+    是一位半导体技术专家，机器学习/数据科学爱好者，电气工程博士，博客作者和作家。'
 - en: '[Original](https://towardsdatascience.com/data-analytics-with-python-by-web-scraping-illustration-with-cia-world-factbook-abbdaa687a84).
     Reposted with permission.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/data-analytics-with-python-by-web-scraping-illustration-with-cia-world-factbook-abbdaa687a84)。经允许转载。'
 - en: '**Related:**'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Web Scraping Tutorial with Python: Tips and Tricks](/2018/02/web-scraping-tutorial-python.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 的网页抓取教程：技巧与窍门](/2018/02/web-scraping-tutorial-python.html)'
 - en: '[Why You Should Forget ‘for-loop’ for Data Science Code and Embrace Vectorization](/2017/11/forget-for-loop-data-science-code-vectorization.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么你应该忘记数据科学代码中的‘for-loop’，而接受矢量化](/2017/11/forget-for-loop-data-science-code-vectorization.html)'
 - en: '[How Much Mathematics Does an IT Engineer Need to Learn to Get Into Data Science](/2017/12/mathematics-needed-learn-data-science-machine-learning.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[IT 工程师需要学习多少数学才能进入数据科学领域](/2017/12/mathematics-needed-learn-data-science-machine-learning.html)'
 - en: '* * *'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-66
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-71
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[A Beginner’s Guide to Web Scraping Using Python](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[初学者 Python 网页抓取指南](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
 - en: '[A Step-by-Step Guide to Web Scraping with Python and Beautiful Soup](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[逐步指南：使用 Python 和 Beautiful Soup 进行网页抓取](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
 - en: '[Mastering Web Scraping with BeautifulSoup](https://www.kdnuggets.com/mastering-web-scraping-with-beautifulsoup)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握使用 BeautifulSoup 进行网页抓取](https://www.kdnuggets.com/mastering-web-scraping-with-beautifulsoup)'
 - en: '[Octoparse 8.5: Empowering Local Scraping and More](https://www.kdnuggets.com/2022/02/octoparse-85-empowering-local-scraping.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Octoparse 8.5：赋能本地抓取及更多功能](https://www.kdnuggets.com/2022/02/octoparse-85-empowering-local-scraping.html)'
 - en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 创建一个从音频中提取主题的 Web 应用程序](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
 - en: '[Build a Web Scraper with Python in 5 Minutes](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 5 分钟内使用 Python 构建一个网页抓取器](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)'
