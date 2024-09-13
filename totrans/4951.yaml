@@ -119,6 +119,8 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 [Google Cloud Dataproc](https://cloud.google.com/dataproc/) 管理服务部署 Spark
+    集群非常容易。我发现一个由 1 个主节点和 8 个 “n1-highmem-4” 实例类型（约 4 个 CPU 核心和 16 GB RAM）组成的集群能够在大约一个小时内处理所有竞赛数据，包括连接大表、转换特征和存储向量。
 - en: My main development environment was Jupyter notebooks, a very productive Python
     interface. [This GCP tutorial](https://cloud.google.com/dataproc/docs/tutorials/jupyter-notebook)
     describes how to easily set up Jupyter in Dataproc master node, making PySpark
@@ -126,6 +128,8 @@
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 我的主要开发环境是 Jupyter notebooks，这是一个非常高效的 Python 接口。[这个 GCP 教程](https://cloud.google.com/dataproc/docs/tutorials/jupyter-notebook)描述了如何在
+    Dataproc 主节点中轻松设置 Jupyter，使 PySpark 库可供使用。
 - en: Dataproc Spark clusters use [Google Cloud Storage](https://cloud.google.com/storage/)
     (GCS) as distributed file system instead of default HDFS. As a managed storage,
     it makes it easy to transfer and store large files between instances. Spark jobs
@@ -133,6 +137,8 @@
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: Dataproc Spark 集群使用 [Google Cloud Storage](https://cloud.google.com/storage/)（GCS）作为分布式文件系统，而不是默认的
+    HDFS。作为一种托管存储，它使得在实例之间传输和存储大型文件变得简单。Spark 作业可以直接从 GCS 使用数据进行分布式处理。
 - en: I also employed some machine learning frameworks (FTRL, FFM, GBM, etc.), which
     worked on parallelized — not distributed — computation, requiring high CPU cores
     and RAM memory for large datasets. A ‘n1-highmem-32’ instance (32 CPUs and 256
@@ -142,16 +148,22 @@
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我还使用了一些机器学习框架（FTRL、FFM、GBM 等），这些框架在并行化计算上工作——而不是分布式计算——需要大量的 CPU 核心和 RAM 以处理大数据集。在
+    [Google Compute Engine (GCE)](https://cloud.google.com/compute/) 上部署的 ‘n1-highmem-32’
+    实例（32 个 CPU 和 256 GB RAM）使得在不到一个小时内运行作业成为可能。由于它们的处理非常 I/O 密集，我为实例附加了一个 SSD 硬盘，以避免瓶颈。
 - en: In the [second part](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)
     of this post series, I will talk more about those machine learning models.
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 [这篇文章系列的第二部分](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)
+    中，我将更多地讨论这些机器学习模型。
 - en: First approach
   id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第一个方法
 - en: The [competition evaluation metric](https://www.kaggle.com/c/outbrain-click-prediction/details/evaluation)
     was MAP@12 (Mean Average Precision at 12), which measures the quality of ad ranking.
     In other words, this metric assesses whether the actual clicked ad was well ranked
@@ -159,12 +171,15 @@
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[竞赛评估指标](https://www.kaggle.com/c/outbrain-click-prediction/details/evaluation)是
+    MAP@12（12 的平均精度均值），它衡量广告排名的质量。换句话说，这个指标评估模型是否对实际点击的广告进行了良好的排名。'
 - en: 'It’s common sense that the ads’ average popularity may be a good predictor
     of new clicks. The main idea was then to rank ads displayed for users by their
     decreasing CTR (*#clicks / #views*).'
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '常识认为广告的平均受欢迎程度可能是新点击的一个良好预测因素。因此，主要的思路是按照广告的点击率（*#clicks / #views*）对用户展示的广告进行排序。'
 - en: In the following Python snippets, I show how to compute ads CTR based on train
     set (click_trains.csv) using PySpark. This CSV file has more than 87 million rows
     and was stored on GCS. The full script runs in less than 30 seconds in a Dataproc
@@ -172,11 +187,14 @@
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 在以下的 Python 代码片段中，我展示了如何使用 PySpark 基于训练集（click_trains.csv）计算广告点击率（CTR）。这个 CSV
+    文件包含超过 8700 万行，并存储在 GCS 上。完整的脚本在一个有 8 个工作节点的 Dataproc Spark 集群中运行时间不到 30 秒。
 - en: Loads training data (click_train.csv) into a Spark DataFrame and get rows count.Get
     count of distinct ads.
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 将训练数据（click_train.csv）加载到 Spark DataFrame 中并获取行数。获取不同广告的数量。
 - en: 'In the next snippet, I define a new DataFrame grouping rows by ad_id and aggregating
     the sum of clicks and count of views. The processing of the CTR is made by a UDF
     (User Defined Function) named *ctr_udf*. The snippet output is a table with a
@@ -184,10 +202,13 @@
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '在下一个代码片段中，我定义了一个新的 DataFrame，通过 ad_id 分组并聚合点击数的总和和观看数的计数。CTR 的处理是通过一个名为 *ctr_udf*
+    的 UDF（用户定义函数）完成的。代码片段的输出是一个包含 10 个 ad_ids 及其各自 #clicks、#views 和 CTR 的样本表格。'
 - en: Calculating average CTR for ads.
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算广告的平均 CTR。
 - en: To increase the CTR confidence, we can consider only ads with more than five
     views. With the *collectAsMap()* action, the distributed collection is converted
     to an in-memory lookup dictionary, whose key is the ad_id and the value is the
@@ -195,6 +216,7 @@
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了提高CTR的置信度，我们可以只考虑浏览次数超过五次的广告。使用*collectAsMap()*操作，将分布式集合转换为内存中的查找字典，其中键是ad_id，值是相应的平均CTR。
 - en: This was the submitted baseline by most of the competitors and, even without
     any machine learning algorithm, would give you MAP@12 of **0.637**. As a reference,
     the official baseline competition was based on ads ranking by their ids (random-like
@@ -203,11 +225,13 @@
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是大多数竞争者提交的基线，即使没有任何机器学习算法，也能给你MAP@12的**0.637**。作为参考，官方基线竞赛基于按广告ID排名（类似随机方法），MAP@12为**0.485**。因此，这种初步方法在点击预测中实际上做得很好。
 - en: Data Analysis
   id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据分析
 - en: As always, before applying any machine learning technique, it is very important
     to analyze the data and to formulate hypotheses about which features and algorithms
     would be useful to tackle the problem. I implemented an EDA (Exploratory Data
@@ -215,6 +239,8 @@
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 像往常一样，在应用任何机器学习技术之前，分析数据并制定关于哪些特征和算法对于解决问题有用的假设是非常重要的。我实现了一个EDA（探索性数据分析），使用PySpark揭示了最大的
+    数据集（page_views.csv ~ 100 GB）。
 - en: My [EDA Kernel](https://www.kaggle.com/gspmoreira/outbrain-click-prediction/unveiling-page-views-csv-with-pyspark),
     showing how to use Python, Spark SQL, and Jupyter notebooks in Dataproc to analyze
     the competition largest dataset, was shared with other competitors and turned
@@ -225,6 +251,10 @@
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我的[EDA Kernel](https://www.kaggle.com/gspmoreira/outbrain-click-prediction/unveiling-page-views-csv-with-pyspark)，展示了如何使用Python、Spark
+    SQL和Jupyter notebooks在Dataproc中分析竞争中最大的 数据集，已与其他竞争者分享，并成为第二个最受投票的贡献（金牌）。根据我的Kernel
+    [评论](https://www.kaggle.com/gspmoreira/outbrain-click-prediction/unveiling-page-views-csv-with-pyspark)，看来许多Kagglers正在考虑尝试Google
+    Dataproc和Spark用于机器学习竞赛。
 - en: My analysis helped me to figure out how to extract value from the dataset, by
     joining it with training and test data (events.csv). For example, in the cumulative
     chart shown below, we can see that 65% of the users have only one page view, 77%,
@@ -232,19 +262,23 @@
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 我的分析帮助我弄清楚了如何从数据集中提取价值，通过将其与训练数据和测试数据（events.csv）结合。例如，在下图所示的累积图中，我们可以看到65%的用户只有一次页面浏览，77%的用户最多有两次浏览，89%的用户最多有五次浏览。
 - en: '![](../Images/b821f026d86c4d98ddde68f3b835a9dd.png)'
   id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b821f026d86c4d98ddde68f3b835a9dd.png)'
 - en: Cumulative percentage of users with at most N page views.
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 用户最多拥有N次页面浏览的累积百分比。
 - en: This is a typical ‘cold-start’ scenario where we know almost nothing about most
     users and need to predict which recommended content they will click on.
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个典型的“冷启动”场景，我们对大多数用户几乎一无所知，需要预测他们会点击哪些推荐内容。
 - en: In general, traditional recommender system techniques like Collaborative Filtering
     and Content-Based Filtering will fail in this scenario. My strategy was then to
     employ machine learning algorithms that are able to leverage contextual information
@@ -252,30 +286,36 @@
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 一般来说，传统的推荐系统技术如协同过滤和基于内容的过滤在这种情况下会失败。因此，我的策略是采用能够利用用户事件和推荐的赞助内容的上下文信息的机器学习算法。
 - en: Feature Engineering
   id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 特征工程
 - en: Feature engineering refers to the essential step of selecting or creating the
     right features to be used in a machine learning model. Usually, it may consume
     up to 80% of the total effort, depending on the data complexity.
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征工程指的是选择或创建适用于机器学习模型的正确特征的关键步骤。通常，根据数据的复杂性，这可能占总工作量的80%。
 - en: In the following picture, I show the competition original data model, with features
     colored by their data type.
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下图中，我展示了竞争的原始数据模型，按数据类型对特征进行着色。
 - en: '![](../Images/e54a298f669725bc5b88d1209febaeab.png)'
   id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e54a298f669725bc5b88d1209febaeab.png)'
 - en: Outbrain Click Prediction large relational database.
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: Outbrain点击预测大型关系型数据库。
 - en: All categorical fields were originally represented as integer numbers. Depending
     on the machine learning algorithm, ids represented as ordinal values may teach
     the model that one category has a greater relevance than the other. For example,
@@ -288,6 +328,7 @@
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有的分类字段最初都被表示为整数。根据机器学习算法的不同，作为序数值表示的id可能会让模型认为某个类别比另一个类别更重要。例如，如果阿根廷的id是1，巴西的id是2，算法可能会推断出巴西的代表性是阿根廷的两倍。为了解决这个问题，常用的方法是像[独热编码](https://en.wikipedia.org/wiki/One-hot)（OHE）这样的技术，其中每个分类字段都被转换为一个稀疏向量。在稀疏向量中，所有位置的值均为零，只有对应于id值的位置有非零值。
 - en: Another popular technique for categorical features with large number of unique
     values is [Feature Hashing](https://en.wikipedia.org/wiki/Feature_hashing), which
     maps categories to a fixed length vector using hashing functions. This approach
@@ -299,6 +340,7 @@
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种处理具有大量唯一值的分类特征的流行技术是[特征哈希](https://en.wikipedia.org/wiki/Feature_hashing)，它使用哈希函数将类别映射到固定长度的向量。与OHE相比，这种方法提供了更低的稀疏度和更高的压缩率，并且对新出现和稀有的分类值（例如之前未见过的用户代理）处理得很好。它也可能在将多个特征映射到相同的向量位置时导致一些冲突，但机器学习算法通常足够健壮，能够处理这些冲突。我在我的方法中使用了这两种技术。
 - en: I also used ‘B[inning’](https://en.wikipedia.org/wiki/Data_binning) for the
     numerical scalar features. Some features are very noisy, and we'd better reduce
     the effects of minor observation errors or differences with this transformation.
@@ -308,6 +350,7 @@
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 我还对数值标量特征使用了‘[分箱](https://en.wikipedia.org/wiki/Data_binning)’。一些特征非常嘈杂，我们最好通过这种转换减少次要观测误差或差异的影响。例如，我将事件‘小时’分箱为早晨、中午、下午、晚上等，因为我的假设是，如果在上午10点或11点观察，用户行为不会有太大不同。
 - en: 'For long-tail distributed variables, like *user_views_count*, most users had
     only one page view logged and very few users with high number of views were present.
     Applying transformations like log(1 + #views) was useful to smooth out the distribution.
@@ -316,6 +359,7 @@
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '对于长尾分布的变量，比如*user_views_count*，大多数用户只有一个页面浏览记录，而很少有高浏览量的用户。应用诸如log(1 + #views)这样的转换对平滑分布是有用的。一个有1,000次页面浏览的用户可能与一个有500次浏览的用户差异不大，他们在这个上下文中都是相似的离群点。'
 - en: '[Standardization and normalization](http://sebastianraschka.com/Articles/2014_about_feature_scaling.html)
     are also important for most machine learning algorithms using optimization techniques
     like gradient descent. In general, only Decision Trees based models are robust
@@ -323,11 +367,13 @@
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '[标准化和归一化](http://sebastianraschka.com/Articles/2014_about_feature_scaling.html)对于大多数使用优化技术如梯度下降的机器学习算法也很重要。一般来说，只有基于决策树的模型能够处理不同尺度和方差的原始数值特征。'
 - en: A more detailed presentation of the main Feature Engineering techniques I have
     used can be found in this [slides](https://www.slideshare.net/gabrielspmoreira/feature-engineering-getting-most-out-of-data-for-predictive-models).
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 我使用的主要特征工程技术的更详细介绍可以在这份[幻灯片](https://www.slideshare.net/gabrielspmoreira/feature-engineering-getting-most-out-of-data-for-predictive-models)中找到。
 - en: Based on insights and hypotheses I gleaned from my EDA, I managed to create
     and transform features for my machine learning models, besides the original features
     provided in the [competition data](https://www.kaggle.com/c/outbrain-click-prediction/data).
@@ -335,22 +381,26 @@
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据我从EDA中获得的见解和假设，我成功地为我的机器学习模型创建和转换了特征，除了原始的[竞赛数据](https://www.kaggle.com/c/outbrain-click-prediction/data)中提供的特征。以下是其中的一些特征。
 - en: '***User profiles***'
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '***用户画像***'
 - en: '**user_has_already_viewed_doc -** For each content recommended to the user,
     verify whether the user had previously visited that pages.'
   id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**user_has_already_viewed_doc -** 对于推荐给用户的每一条内容，验证用户是否之前已经访问过该页面。'
 - en: '**user_views_count -** Do eager readers behave differently from other users?
     Let’s add this feature and let machine learning models guess that.'
   id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**user_views_count -** 热衷阅读的用户与其他用户行为有何不同？让我们添加这个特征，让机器学习模型来猜测。'
 - en: '**user_views_categories, user_views_topics, user_views_entities -** User profile
     vectors based on categories, topics and entities of documents that users have
     previously viewed (weighted by confidence and TF-IDF), to model users preferences
@@ -359,16 +409,19 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**user_views_categories, user_views_topics, user_views_entities -** 基于用户之前查看过的文档的类别、主题和实体的用户画像向量（按置信度和TF-IDF加权），用于在基于内容的过滤方法中建模用户偏好。'
 - en: '**user_avg_views_of_distinct_docs -** Ratio between*(#user_distinct_docs_views
     / #user_views)*, indicating how often users read previously visited pages again.'
   id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**user_avg_views_of_distinct_docs -** 比率*(#user_distinct_docs_views / #user_views)*，表示用户重新阅读之前访问过的页面的频率。'
 - en: '***Ads and Documents***'
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '***广告与文档***'
 - en: '**doc_ad_days_since_published, doc_event_days_since_published -** Days elapsed
     since the ad document was published in a given user visit. The general assumption
     is that new content is more relevant to users. But if you are reading an old post,
@@ -377,21 +430,25 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**doc_ad_days_since_published, doc_event_days_since_published -** 自广告文档在特定用户访问中发布以来经过的天数。一般假设是新内容对用户更相关。但是，如果你在阅读一篇旧文章，你可能对其他旧文章感兴趣。'
 - en: '**doc_avg_views_by_distinct_users_cf -** Average page views of the ad document
     by distinct users. Is this a webpage people usually return to?'
   id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**doc_avg_views_by_distinct_users_cf -** 广告文档被不同用户的平均页面浏览次数。这是一个人们通常会返回的网页吗？'
 - en: '**ad_views_count, doc_views_count -** How popular is a document or ad?'
   id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ad_views_count, doc_views_count -** 一个文档或广告有多受欢迎？'
 - en: '***Events***'
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '***事件***'
 - en: '**event_local_hour (binned), event_weekend** — Event timestamps were in UTC-4,
     so I processed event geolocation to get timezones and adjust for users'' local
     time. They were binned in periods like morning, afternoon, midday, evening, night.
@@ -401,12 +458,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**event_local_hour (binned), event_weekend** — 事件时间戳为UTC-4，因此我处理了事件地理位置以获取时区并调整用户的本地时间。时间段被分为早晨、下午、正午、傍晚、夜晚。还包含了一个指示是否为周末的标志。假设时间会影响用户阅读的内容类型。'
 - en: '**event_country, event_country_state -** The field *event_geolocation* was
     parsed to extract the user’s country and state in a page visit.'
   id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**event_country, event_country_state -** 字段*event_geolocation*被解析以提取用户在页面访问中的国家和州。'
 - en: '**ad_id, doc_event_id, doc_ad_id, ad_advertiser, …** — All of the original
     categorical fields were One-Hot Encoded to be used by the models, generating about
     126,000 features.'
@@ -414,10 +473,12 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ad_id, doc_event_id, doc_ad_id, ad_advertiser, …** — 所有原始类别字段都进行了独热编码以供模型使用，生成了大约126,000个特征。'
 - en: '***Average CTR***'
   id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '***平均点击率***'
 - en: '**avg_ctr_ad_id, avg_ctr_publisher_id, avg_ctr_advertiser_id, avg_ctr_campain_id,
     avg_ctr_entity_id_country … -** Average CTR *(#clicks / #views)* given some categorical
     combinations and CTR confidence (details on [Part II](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)
@@ -426,10 +487,15 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**avg_ctr_ad_id, avg_ctr_publisher_id, avg_ctr_advertiser_id, avg_ctr_campain_id,
+    avg_ctr_entity_id_country … -** 给定某些类别组合和CTR置信度的平均点击率*(#clicks / #views)*（详细信息请参见[Part
+    II](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)帖子）。例如：P(click
+    | category01, category02)。'
 - en: '***Content-Based Similarities***'
   id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '***基于内容的相似性***'
 - en: These features used [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) technique
     to build profile vectors for the users and landing pages, modeling user preferences
     and context respectively. The profiles were compared to candidate ad documents
@@ -439,12 +505,15 @@
   id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些特征使用了[TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)技术来构建用户和着陆页面的画像向量，分别建模用户偏好和上下文。使用[余弦相似度](https://en.wikipedia.org/wiki/Cosine_similarity)来比较画像与候选广告文档的相似性，这是一种非常流行的信息检索方法，基于两个向量之间的角度，忽略其大小。
 - en: '**user_doc_ad_sim_categories, user_doc_ad_sim_topics, user_doc_ad_sim_entities
     -** Cosine similarity between user profile and ad document profile vectors (TF-IDF).'
   id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**user_doc_ad_sim_categories, user_doc_ad_sim_topics, user_doc_ad_sim_entities
+    -** 用户画像与广告文档画像向量（TF-IDF）之间的余弦相似度。'
 - en: '**doc_event_doc_ad_sim_categories, doc_event_doc_ad_sim_topics, doc_event_doc_ad_sim_entities
     -** Cosine similarity between event document (landing page context) and ad document
     profile vectors (TF-IDF).'
@@ -590,13 +659,16 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[生成型 AI 如何帮助你改进数据可视化图表](https://www.kdnuggets.com/how-generative-ai-can-help-you-improve-your-data-visualization-charts)'
 - en: '[Free Python Resources That Can Help You Become a Pro](https://www.kdnuggets.com/free-python-resources-that-can-help-you-become-a-pro)'
   id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[免费 Python 资源助你成为专家](https://www.kdnuggets.com/free-python-resources-that-can-help-you-become-a-pro)'
 - en: '[How a Level System can Help Forecast AI Costs](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'
   id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[等级系统如何帮助预测 AI 成本](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'

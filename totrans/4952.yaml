@@ -1,99 +1,142 @@
 - en: 'Machine Learning Workflows in Python from Scratch Part 2: k-means Clustering'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 从零开始的 Python 机器学习工作流 第 2 部分：k-均值聚类
 - en: 原文：[https://www.kdnuggets.com/2017/06/machine-learning-workflows-python-scratch-part-2.html](https://www.kdnuggets.com/2017/06/machine-learning-workflows-python-scratch-part-2.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/06/machine-learning-workflows-python-scratch-part-2.html](https://www.kdnuggets.com/2017/06/machine-learning-workflows-python-scratch-part-2.html)
 - en: In the first part of this series, we started off rather slowly but deliberately.
     [The previous post](/2017/05/machine-learning-workflows-python-scratch-part-1.html)
     laid out our goals, and started off with some basic building blocks for our machine
     learning workflows and pipelines we will eventually get to. If you have not yet
     read the first installment in this series, I suggest that you do so before moving
     on.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这一系列的第一部分，我们起步较慢但稳健。[上一篇文章](/2017/05/machine-learning-workflows-python-scratch-part-1.html)列出了我们的目标，并从一些机器学习工作流和管道的基本构建块开始。如果你还没有阅读这一系列的第一部分，建议你在继续之前先阅读它。
 - en: This time around we pick up steam, and will be doing so with an implementation
     of the k-means clustering algorithm. We will discuss specific aspects of k-means
     as they come up while coding, but if you are interested in a superficial overview
     of what the algorithm is about, as well as how it relates to other clustering
     methods, you could [check this out](/2016/09/comparing-clustering-techniques-concise-technical-overview.html).
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一次我们加速前进，将通过实现 k-均值聚类算法来完成。我们将在编码过程中讨论 k-均值的具体方面，但如果你对该算法的概述以及它与其他聚类方法的关系感兴趣，你可以
+    [查看这个](/2016/09/comparing-clustering-techniques-concise-technical-overview.html)。
 - en: '![ML workflows header](../Images/decb4017351d3ef6e708866e8c04fed4.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![ML workflows header](../Images/decb4017351d3ef6e708866e8c04fed4.png)'
 - en: The k-means clustering algorithm in Python. From scratch.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 中的 k-均值聚类算法。从零开始。
 - en: The only real prerequisites moving forward are the [dataset.py](https://gist.github.com/mmmayo13/9859a457760db10ec4842be3aa1a2334)
     module we created in the first post, along with the original [iris.csv](https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv)
     file, so make sure you have both of those handy.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 继续前进的唯一真实先决条件是我们在第一篇文章中创建的 [dataset.py](https://gist.github.com/mmmayo13/9859a457760db10ec4842be3aa1a2334)
+    模块，以及原始的 [iris.csv](https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv)
+    文件，因此请确保你手头有这两者。
 - en: The k-means Clustering Algorithm
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: k-均值聚类算法
 - en: k-means is a simple, yet often effective, approach to clustering. k points are
     randomly chosen as cluster centers, or centroids, and all training instances are
     plotted and added to the closest cluster. After all instances have been added
     to clusters, the centroids, representing the mean of the instances of each cluster
     are re-calculated, with these re-calculated centroids becoming the new centers
     of their respective clusters.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: k-均值是一种简单但常常有效的聚类方法。k 个点被随机选择作为簇中心或质心，所有训练实例被绘制并添加到最近的簇中。在所有实例都被添加到簇中之后，代表每个簇实例均值的质心被重新计算，这些重新计算的质心成为各自簇的新中心。
 - en: At this point, all cluster membership is reset, and all instances of the training
     set are re-plotted and -added to their closest, possibly re-centered, cluster.
     This iterative process continues until there is no change to the centroids or
     their membership, and the clusters are considered settled.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 此时，所有的簇成员资格被重置，所有训练集实例被重新绘制并添加到它们最接近的、可能重新中心化的簇中。这个迭代过程会继续，直到质心或其成员资格没有变化为止，簇被认为已稳定。
 - en: As far as approaches to clustering go, k-means is about as simple as they come
     -- its conceptual simplicity is elegant, almost poetic. It's also a proven workhorse,
     lending to its staying power, often producing useful results.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 就聚类方法而言，k-均值算法是最简单的之一——其概念上的简单性优雅得几乎如诗一般。它也是一个经过验证的有效工具，具有持久的表现力，常常能够产生有用的结果。
 - en: What were going to do, in a nutshell, is code up a simple k-means implementation
     that will group similar things together and keep dissimilar things apart, at least
     theoretically. Simple enough. Keep in mind that "similar" here is reduced to meaning
     "relatively closely co-located in Euclidean space," or something very non-philosophical
     like that.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们要做的，简而言之，就是编码一个简单的 k-均值实现，这将把相似的东西分到一起，把不相似的东西分开，至少在理论上是这样。足够简单。请记住，这里的“相似”被简化为“在欧几里得空间中相对接近”，或者类似这样非常非哲学的东西。
 - en: 'We will need a few functions here. Thinking about the steps involved in the
     algorithm can help us solidify what those might be:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在这里需要几个函数。考虑算法中的步骤可以帮助我们确定这些函数的内容：
 - en: Set initial centroids
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 设置初始质心
 - en: Measure distances between data instances and centroids
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 测量数据实例与质心之间的距离
 - en: Add data instances as members of closest centroid
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将数据实例添加为最近质心的成员
 - en: Re-calculate centroids
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 重新计算质心
 - en: If necessary, re-measure, re-cluster, re-calculate
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如有必要，重新测量，重新聚类，重新计算
 - en: That's the algorithm in a nutshell. But before we get there, a (temporary) step
     backward.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是算法的核心。但在我们到达那之前，先做一步（暂时的）后退。
 - en: Data Preparation... Again
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据准备……再次
 - en: While writing this post, it eventually occurred to me that an important part
     of our data preparation workflow was missing. Before we convert our pandas DataFrame
     to a numpy ndarray (matrix), we will want to make sure our numeric values are
@@ -101,8 +144,11 @@
     we read our data from a CSV file last time, even our numeric values were being
     stored as strings (apparent at the bottom of the previous post by the fact that
     the numbers are surrounded by single quotes -- e.g. '5.7').
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在撰写这篇文章时，我突然意识到我们的数据准备工作流程中缺少了一个重要部分。在将我们的 pandas DataFrame 转换为 numpy ndarray（矩阵）之前，我们需要确保我们的数值确实是*数字*，而不是伪装成数字的字符串。由于我们上次从
+    CSV 文件中读取数据，即使是我们的数值也被存储为字符串（在之前的帖子底部明显可见，因为数字被单引号包围——例如 '5.7'）。
 - en: 'So, the best way to deal with this is to create another function and add it
     to our dataset.py file, which will convert strings to their numeric value representations
     (we already have a function for converting class names to numeric values, and
@@ -112,62 +158,89 @@
     from strings to floats; 2) a dataset and a list of attribute names...; and 3)
     a dataset and either a single attribute as a string, or a list of attributes as
     a **gasp** list.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，处理此问题的最佳方法是创建另一个函数并将其添加到我们的 dataset.py 文件中，该函数将字符串转换为其数值表示（我们已经有一个函数用于将类名转换为数值，并跟踪这些更改）。该函数经历了
+    3 次具体的迭代，我在操作过程中即接受了：1）一个数据集和一个单一属性的名称，该属性对应的列中的所有值应从字符串转换为浮点数；2）一个数据集和属性名称列表……；以及
+    3）一个数据集和一个单一属性作为字符串，或一个属性列表作为**哎呀**列表。
 - en: The final iteration (the third, more flexible, option) is the one shown below.
     Let's add it to the dataset.py module from last time.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终的迭代（第三种，更灵活的选项）就是下面显示的那个。让我们将其添加到上次的 dataset.py 模块中。
 - en: OK, with that out of the way, we will be able to load a dataset, clean it, and
     create a (fully numeric) matrix representation, which can then be fed into our
     k-means clustering algorithm, once we have one. Speaking of which...
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，既然这些问题解决了，我们将能够加载数据集、清理数据，并创建一个（完全数值化的）矩阵表示，然后可以将其输入到我们的 k-means 聚类算法中，一旦我们有了算法。说到这一点……
 - en: Initializing Centroids
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 初始化质心
 - en: 'The first thing our algorithm needs to do is to create a set of k initial centroids.
     There are a variety of ways to approach this, but we will start with the most
     basic: random initialization. We need a function that accepts a dataset and an
     integer k, and which will return an ndarray of that number of randomly-generated
     centroids.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的算法需要做的第一件事是创建一组 k 个初始质心。这里有多种方法可以实现，但我们将从最基本的开始：随机初始化。我们需要一个接受数据集和整数 k 的函数，并返回一个包含该数量随机生成质心的
+    ndarray。
 - en: You may have already imagined how random initialization could go awry. As a
     quick example, think about 5 distinct, tightly clustered classes in 2 dimensional
     space, with a poorly initialized set of centroids, as shown below.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能已经想象到随机初始化可能会出错。举个简单的例子，考虑在二维空间中有 5 个不同的、紧密聚集的类别，配有初始化不良的质心，如下所示。
 - en: '![Poor initialization](../Images/a358cc3edb5802c92183f5a3e01fc170.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![糟糕的初始化](../Images/a358cc3edb5802c92183f5a3e01fc170.png)'
 - en: Obviously non-optimal centroid initialization.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然是不理想的质心初始化。
 - en: Even without the mathematics to support the intuition, it's clear that these
     centroids are not optimally placed. However, one of k-means' strong attributes
     is its ability to recover from such initialization, with successive rounds of
     clustering moving toward optimal placement by minimizing the mean distance between
     cluster instance members and cluster centroids.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使没有数学支持直观感受，很明显这些质心的位置并不最优。然而，k-means 的一个强大特点是它能够从这种初始化中恢复，随着聚类的轮次逐步趋向最优位置，通过最小化簇实例成员与簇质心之间的均值距离。
 - en: While this can happen remarkably quickly, poor initialization with sufficient
     amounts of high-dimensionality data can lead to a greater number of clustering
     iterations. The initial data space survey for random placement can also, itself,
     become lengthy. And so alternative methods for centroid initialization are available,
     some of which we may look at in the future.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然这可能发生得非常快，但在高维数据量大的情况下，较差的初始化可能会导致更多的聚类迭代。随机放置的初始数据空间调查本身也可能变得漫长。因此，存在替代的质心初始化方法，其中一些我们可能在未来会研究。
 - en: 'A quick note about testing our code: doing so as we go with heavily contrived
     scenarios seems more trouble than it''s worth, so we will hold out until the end
     to see how we did in total.'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于测试代码的简要说明：在我们进行的过程中用高度构造的场景进行测试似乎麻烦不堪，因此我们会等到最后再看看我们的整体表现。
 - en: Measuring Distances
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 测量距离
 - en: With a dataset in hand and a collection of initialized centroids, we will eventually
     have to perform a lot of measurement calculations. In fact, for each clustering
     iteration we will have to measure from each data point to each centroid, in order
@@ -177,59 +250,89 @@
     [Scipy includes a function](https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.spatial.distance.euclidean.html)
     optimized for such calculations on vectors, which, conveniently, is exactly what
     we will be doing.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 拥有数据集和一组初始化质心后，我们最终必须进行大量的测量计算。实际上，对于每次聚类迭代，我们需要测量每个数据点到每个质心的距离，以确定实例属于哪个簇（也许是暂时的）。因此，让我们为欧几里得空间编写一个测量函数。我们将使用
+    [Scipy](https://www.scipy.org/) 来完成繁重的工作；虽然编写一个距离测量函数并不难，[Scipy 包含一个函数](https://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.spatial.distance.euclidean.html)
+    来优化这种向量计算，方便的是，这正是我们要做的。
 - en: Let's wrap this functionality in our own function, in case we want to later
     change or experiment with how we calculate distance.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们将这个功能封装在我们自己的函数中，以便以后我们可以改变或实验距离计算的方法。
 - en: With the ability to initialize centroids and to make our measurements, we can
     now write a function to control the logic of our clustering algorithm, and perform
     the few additional required steps.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 凭借初始化质心和进行测量的能力，我们现在可以编写一个函数来控制我们聚类算法的逻辑，并执行几个额外的必要步骤。
 - en: Clustering Instances
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 聚类实例
 - en: Before we look at the code, here is a simple overview of the process our algorithm
     will be following, taking into account the few functions from above, as well as
     below.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 在查看代码之前，以下是我们的算法将遵循的过程的简单概述，考虑到上述和以下的几个函数。
 - en: '![k-means diagram](../Images/5d017022938992c978fc2e1c85279b66.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![k-means 图示](../Images/5d017022938992c978fc2e1c85279b66.png)'
 - en: Our k-means clustering algorithm process.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的 k-means 聚类算法过程。
 - en: The code below is well-commented, but let's walk through a few of the main points.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码有很好的注释，但让我们逐步查看几个主要点。
 - en: 'First, our function accepts a dataset as a numpy ndarray, as well as the number
     of clusters we want to use in the clustering process. It returns several things:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们的函数接受一个作为 numpy ndarray 的数据集，以及我们希望在聚类过程中使用的簇数量。它返回几个东西：
 - en: the resulting centroids after clustering is finished
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 聚类完成后的结果质心
 - en: the cluster assignments after clustering
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 聚类后的簇分配
 - en: the number of iterations which were required by clustering algorithm
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 聚类算法所需的迭代次数
 - en: the original centroids
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 原始质心
 - en: An ndarray to store instance cluster assignments and their errors are created,
     and then centroids are initialized, with a copy held to return later.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个 ndarray 来存储实例簇分配及其误差，然后初始化质心，并保留一份副本以便稍后返回。
 - en: A while loop then continues until there has been no change to cluster assignments,
     meaning that convergence has been reached -- note that no additional mechanism
     to limit the number of iterations exists at this point. Instances to centroid
@@ -237,15 +340,20 @@
     determine cluster assignment. The closest centroid is then recorded, along with
     the actual distance between the 2 entities (the error), and a check is performed
     to see if the cluster assignment for the particular instances has changed.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，`while` 循环将继续运行，直到聚类分配没有发生变化，意味着已经达到了收敛——请注意，此时并不存在限制迭代次数的额外机制。计算实例到质心的距离，跟踪最小距离，并用其来确定聚类分配。然后记录最近的质心及两个实体之间的实际距离（误差），并检查特定实例的聚类分配是否发生变化。
 - en: After this has been performed for each instance, the centroid locations are
     updated, simply by using the mean values of the member instances as centroid coordinates.
     The number of iterations are also recorded. A check as to whether convergence
     has been reached kicks control out of the while loop once appropriate, and the
     items outlined above are returned.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 在对每个实例执行完上述操作后，质心位置会被更新，仅仅是通过使用成员实例的均值作为质心坐标。同时记录迭代次数。当适当时，检查是否已经收敛，将控制权转出 `while`
+    循环，并返回上述项。
 - en: I want to point out that some of this code, as well as additional inspiration,
     comes from the book "[Machine Learning in Action](https://www.amazon.com/Machine-Learning-Action-Peter-Harrington/dp/1617290181/)"
     (MLIA), by Peter Harrington. I bought this book when it was first released, and
@@ -256,16 +364,23 @@
     to fight through code which may need tuning, or which is simply enough that you
     can provide your own changes, MLIA can be a useful resource to anyone looking
     to make their first foray into coding machine learning algorithms.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 我想指出，部分代码以及额外的灵感来源于 Peter Harrington 的书籍《[机器学习实战](https://www.amazon.com/Machine-Learning-Action-Peter-Harrington/dp/1617290181/)》（MLIA）。我在这本书首次发布时购买了它，并且它在许多方面证明了其无价之处，尽管这本书常常受到批评，大部分批评集中在理论不足和/或代码问题上。然而，在我看来，这些恰恰是它的优势。如果你像我一样，在阅读这本书时有理论基础，并且愿意并能够调整需要优化的代码，或者可以自行修改代码，MLIA
+    对于任何希望初次涉足机器学习算法编码的人来说，都可以是一个有用的资源。
 - en: Testing Our k-means Clustering Algorithm
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 测试我们的 k-means 聚类算法
 - en: There are a few typical tasks which we are going to forego for this post and
     will revisit later, but I wanted to point them out here.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 有一些典型任务我们将在这篇文章中跳过，稍后会再讨论，但我想在这里指出这些任务。
 - en: First, when clustering, especially with attributes of varying scales, it is
     generally a good idea to at least consider the idea of scaling or otherwise normalizing
     the data, to ensure that a single attribute (or collection of attributes) of a
@@ -273,8 +388,11 @@
     it should. If we have 3 attributes, with the first 2 in the range [0, 1] and the
     third in the range [0, 100], it's easy to see that the third variable will dominate
     the measurements and subsequent cluster membership allocations.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，在进行聚类时，特别是对于尺度不同的属性，通常最好至少考虑数据的缩放或归一化，以确保某个单一属性（或属性集合）的尺度远大于其他属性时，不会过多地影响结果。如果我们有
+    3 个属性，其中前两个在 [0, 1] 范围内，而第三个在 [0, 100] 范围内，那么很容易看出第三个变量将主导测量结果及后续的聚类成员分配。
 - en: Second, when clustering (as with much of machine learning), we can split a dataset
     into training and testing sets, allowing us to train a model on one subset of
     data, and then test the model on the other (separate) set of data. While this
@@ -283,108 +401,163 @@
     instances, it often can be. We will proceed with our test code below without taking
     either of these into consideration at this point, but may double back in a subsequent
     post.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 其次，在聚类（就像许多机器学习任务一样）时，我们可以将数据集拆分为训练集和测试集，从而在一个数据子集上训练模型，然后在另一个（独立的）数据集上测试模型。虽然这并不总是特定聚类任务的目标，因为我们可能只是想构建一个聚类模型，而不关心用它来分类后续实例，但它通常是可行的。我们将在下面继续测试代码，而不考虑这些因素，但可能会在后续的文章中回顾。
 - en: Before moving ahead, make sure you have added the dataset-related function outlined
     further above to the existing [dataset.py](https://gist.github.com/mmmayo13/935684dd226ef05f7d291e8cf5ed873a)
     module, and have created a [kmeans.py](https://gist.github.com/mmmayo13/956937ec1fc695163b8e052b55c09208)
     module to house all of the relevant functions.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 在继续之前，确保你已经将上面提到的数据集相关函数添加到现有的 [dataset.py](https://gist.github.com/mmmayo13/935684dd226ef05f7d291e8cf5ed873a)
+    模块中，并创建了一个 [kmeans.py](https://gist.github.com/mmmayo13/956937ec1fc695163b8e052b55c09208)
+    模块来存放所有相关函数。
 - en: 'Let''s try our code:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们尝试一下我们的代码：
 - en: '[PRE0]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Looks good! This particular test of our code resulted in the above, but you
     will find that subsequent iterations return different results -- at least, different
     numbers of iterations and sets of original centroids.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 看起来不错！我们代码的这次测试结果如上，但你会发现后续迭代会返回不同的结果——至少是不同的迭代次数和原始质心的集合。
 - en: Looking Ahead
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 展望未来
 - en: Though we have not yet evaluated our clustering results, we will stop here for
     now... but, on that note, I bet you can guess what is in store for the next post.
     Next time we will focus on a few more clustering-related activities. We have an
     algorithm which we can use to build models, but there needs to be some mechanisms
     for evaluating and visualizing their results. This is what we will get to next.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管我们尚未评估我们的聚类结果，但现在就到这里……不过，话说回来，我敢打赌你可以猜到下一篇文章的内容。下次我们将专注于更多的聚类相关活动。我们有一个算法可以用来构建模型，但还需要一些机制来评估和可视化它们的结果。这就是我们接下来要做的。
 - en: Thinking further ahead, I then plan to turn our attention to classification
     using the k-nearest neighbors algorithm, as well a number of classification-related
     tasks. Once again, I hope you have found this helpful enough to check the next
     installment.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 深入思考之后，我计划将我们的注意力转向使用k最近邻算法进行分类，以及一些与分类相关的任务。希望你发现这些内容足够有用，以便查看下一篇文章。
 - en: '**Related**:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[Machine Learning Workflows in Python from Scratch Part 1: Data Preparation](/2017/05/machine-learning-workflows-python-scratch-part-1.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从头开始的 Python 机器学习工作流 第1部分：数据准备](/2017/05/machine-learning-workflows-python-scratch-part-1.html)'
 - en: '[Toward Increased k-means Clustering Efficiency with the Naive Sharding Centroid
     Initialization Method](/2017/03/naive-sharding-centroid-initialization-method.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提高 k-means 聚类效率的朴素分片质心初始化方法](/2017/03/naive-sharding-centroid-initialization-method.html)'
 - en: '[K-Means & Other Clustering Algorithms: A Quick Intro with Python](/2017/03/k-means-clustering-algorithms-intro-python.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[K-Means 和其他聚类算法：Python 快速入门](/2017/03/k-means-clustering-algorithms-intro-python.html)'
 - en: '* * *'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-66
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT 工作'
 - en: '* * *'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-71
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Clustering Unleashed: Understanding K-Means Clustering](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[聚类释放：理解 K-Means 聚类](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
 - en: '[Hands-On with Unsupervised Learning: K-Means Clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[无监督学习实战：K-Means 聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
 - en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[k-means 聚类的质心初始化方法](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
 - en: '[What is K-Means Clustering and How Does its Algorithm Work?](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是 K-Means 聚类及其算法如何运作？](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
 - en: '[DBSCAN Clustering Algorithm in Machine Learning](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的 DBSCAN 聚类算法](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
 - en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyCaret 中的 Python 聚类简介](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
