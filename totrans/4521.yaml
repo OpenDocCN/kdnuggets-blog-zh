@@ -1,133 +1,200 @@
 - en: Intent Recognition with BERT using Keras and TensorFlow 2
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Keras 和 TensorFlow 2 的 BERT 意图识别
 - en: 原文：[https://www.kdnuggets.com/2020/02/intent-recognition-bert-keras-tensorflow.html](https://www.kdnuggets.com/2020/02/intent-recognition-bert-keras-tensorflow.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/02/intent-recognition-bert-keras-tensorflow.html](https://www.kdnuggets.com/2020/02/intent-recognition-bert-keras-tensorflow.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Venelin Valkov](https://www.linkedin.com/in/venelin-valkov/), Machine
     Learning Engineer**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Venelin Valkov](https://www.linkedin.com/in/venelin-valkov/)，机器学习工程师**'
 - en: Recognizing intent (IR) from text is very useful these days. Usually, you get
     a short text (sentence or two) and have to classify it into one (or multiple)
     categories.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 从文本中识别意图（IR）现在非常有用。通常，你会得到一段简短的文本（一个或两个句子），并需要将其分类到一个（或多个）类别中。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织进行 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Multiple product support systems (help centers) use IR to reduce the need for
     a large number of employees that copy-and-paste boring responses to frequently
     asked questions. Chatbots, automated email responders, answer recommenders (from
     a knowledge base with questions and answers) strive to not let you take the time
     of a real person.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 多个产品支持系统（帮助中心）使用 IR 来减少大量员工重复回答常见问题的需要。聊天机器人、自动电子邮件回复者、答案推荐系统（来自含有问答的知识库）都力求不让你占用真正人员的时间。
 - en: This guide will show you how to use a pre-trained NLP model that might solve
     the (technical) support problem that many business owners have. I mean, BERT is
     freaky good! It is really easy to use, too!
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 本指南将展示如何使用预训练的 NLP 模型，这可能解决许多企业主的（技术）支持问题。我的意思是，BERT 实在是太强大了！而且使用起来也非常简单！
 - en: '[**Run the complete notebook in your browser**](https://colab.research.google.com/drive/1WQY_XxdiCVFzjMXnDdNfUjDFi0CN5hkT)'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**在浏览器中运行完整笔记本**](https://colab.research.google.com/drive/1WQY_XxdiCVFzjMXnDdNfUjDFi0CN5hkT)'
 - en: '[**The complete project on GitHub**](https://github.com/curiousily/Deep-Learning-For-Hackers)'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**在 GitHub 上的完整项目**](https://github.com/curiousily/Deep-Learning-For-Hackers)'
 - en: Data
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据
 - en: The data contains various user queries categorized into seven intents. It is
     hosted on [GitHub](https://github.com/snipsco/nlu-benchmark/tree/master/2017-06-custom-intent-engines) and
     is first presented in [this paper](https://arxiv.org/abs/1805.10190).
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据包含各种用户查询，分类为七个意图。它托管在 [GitHub](https://github.com/snipsco/nlu-benchmark/tree/master/2017-06-custom-intent-engines)
+    上，并首次在 [这篇论文](https://arxiv.org/abs/1805.10190) 中展示。
 - en: 'Here are the intents:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是意图：
 - en: SearchCreativeWork (e.g. Find me the I, Robot television show)
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: SearchCreativeWork（例如：找到 I, Robot 电视节目）
 - en: GetWeather (e.g. Is it windy in Boston, MA right now?)
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: GetWeather（例如：现在波士顿，MA 风很大吗？）
 - en: BookRestaurant (e.g. I want to book a highly rated restaurant for me and my
     boyfriend tomorrow night)
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: BookRestaurant（例如：我想为我和我的男朋友预定一家高评分的餐厅，明晚去）
 - en: PlayMusic (e.g. Play the last track from Beyoncé off Spotify)
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: PlayMusic（例如：播放 Spotify 上的 Beyoncé 最新曲目）
 - en: AddToPlaylist (e.g. Add Diamonds to my roadtrip playlist)
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: AddToPlaylist（例如：将 Diamonds 添加到我的公路旅行播放列表中）
 - en: RateBook (e.g. Give 6 stars to Of Mice and Men)
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: RateBook（例如：给《鼠与人》打 6 星）
 - en: SearchScreeningEvent (e.g. Check the showtimes for Wonder Woman in Paris)
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: SearchScreeningEvent（例如：查看 Wonder Woman 在巴黎的放映时间）
 - en: 'I’ve done a bit of preprocessing and converted the JSON files into easy to
     use/load CSVs. Let’s download them:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我做了一些预处理，并将 JSON 文件转换为易于使用/加载的 CSV 文件。我们来下载它们：
 - en: '[PRE0]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'We’ll load the data into data frames and expand the training data by merging
     the training and validation intents:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将数据加载到数据框中，并通过合并训练和验证意图来扩展训练数据：
 - en: '[PRE1]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'We have `13,784` training examples and two columns - `text` and `intent`. Let’s
     have a look at the number of texts per intent:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们有`13,784`个训练样本和两列 - `text`和`intent`。我们来看看每个意图下的文本数量：
 - en: '![](../Images/a7450a08fc0d97efd88b1912b26faed7.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
 - en: The amount of texts per intent is quite balanced, so we’ll not be needing any
     imbalanced modeling techniques.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: BERT
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -136,385 +203,573 @@
     made possible achieving State-of-the-art results in a variety of NLP tasks, for
     the regular ML practitioner. And you can do it without having a large dataset!
     But how is this possible?'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: BERT is a pre-trained Transformer Encoder stack. It is trained on Wikipedia
     and the [Book Corpus](https://arxiv.org/pdf/1506.06724.pdf) dataset. It has two
     versions - Base (12 encoders) and Large (24 encoders).
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: BERT is built on top of multiple clever ideas by the NLP community. Some examples
     are [ELMo](https://arxiv.org/abs/1802.05365), [The Transformer](https://arxiv.org/abs/1706.03762),
     and the [OpenAI Transformer](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf).
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: ELMo introduced contextual word embeddings (one word can have a different meaning
     based on the words around it). The Transformer uses attention mechanisms to understand
     the context in which the word is being used. That context is then encoded into
     a vector representation. In practice, it does a better job with long-term dependencies.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: BERT is a bidirectional model (looks both forward and backward). And the best
     of all, BERT can be easily used as a feature extractor or fine-tuned with small
     amounts of data. How good is it at recognizing intent from text?
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: Intent Recognition with BERT
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Luckily, the authors of the BERT paper [open-sourced their work](https://github.com/google-research/bert) along
     with multiple pre-trained models. The original implementation is in TensorFlow,
     but there are [very good PyTorch implementations](https://github.com/huggingface/transformers) too!
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: 'Let’s start by downloading one of the simpler pre-trained models and unzip
     it:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: This will unzip a checkpoint, config, and vocabulary, along with other files.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: Unfortunately, the original implementation is not compatible with TensorFlow
     2\. The [bert-for-tf2](https://github.com/kpe/bert-for-tf2) package solves this
     issue.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: Preprocessing
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'We need to convert the raw texts into vectors that we can feed into our model.
     We’ll go through 3 steps:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: Tokenize the text
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Convert the sequence of tokens into numbers
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Pad the sequences so each one has the same length
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Let’s start by creating the BERT tokenizer:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Let’s take it for a spin:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '[PRE5]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'The tokens are in lowercase and the punctuation is available. Next, we’ll convert
     the tokens to numbers. The tokenizer can do this too:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '[PRE7]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: We’ll do the padding part ourselves. You can also use the Keras padding utils
     for that part.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: 'We’ll package the preprocessing into a class that is heavily based on the one
     from [this notebook](https://github.com/kpe/bert-for-tf2/blob/master/examples/gpu_movie_reviews.ipynb):'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将预处理打包成一个类，这个类主要基于[这个笔记本](https://github.com/kpe/bert-for-tf2/blob/master/examples/gpu_movie_reviews.ipynb)：
 - en: '[PRE8]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'We figure out the padding length by taking the minimum between the longest
     text and the max sequence length parameter. We also surround the tokens for each
     text with two special tokens: start with `[CLS]` and end with `[SEP]`.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们通过取最长文本和最大序列长度参数之间的最小值来确定填充长度。我们还将每个文本的标记用两个特殊标记包围：以`[CLS]`开头，以`[SEP]`结尾。
 - en: Fine-tuning
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 微调
 - en: 'Let’s make BERT usable for text classification! We’ll load the model and attach
     a couple of layers on it:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们让BERT用于文本分类吧！我们将加载模型并在其上附加几个层：
 - en: '[PRE9]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: We’re fine-tuning the pre-trained BERT model using our inputs (text and intent).
     We also flatten the output and add Dropout with two Fully-Connected layers. The
     last layer has a softmax activation function. The number of outputs is equal to
     the number of intents we have - seven.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用我们的输入（文本和意图）微调预训练的BERT模型。我们还将输出展平，并添加两个全连接层和Dropout。最后一层具有softmax激活函数。输出数量等于我们拥有的意图数量——七个。
 - en: You can now use BERT to recognize intents!
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你可以使用BERT来识别意图了！
 - en: Training
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 训练
 - en: 'It is time to put everything together. We’ll start by creating the data object:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是将一切整合在一起的时候了。我们将从创建数据对象开始：
 - en: '[PRE10]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'We can now create the model using the maximum sequence length:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以使用最大序列长度来创建模型：
 - en: '[PRE11]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Looking at the model summary:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看模型摘要：
 - en: '[PRE12]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: You’ll notice that even this “slim” BERT has almost 110 million parameters.
     Indeed, your model is HUGE (that’s what she said).
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 你会注意到，即使是这个“精简版”的BERT也有近1.1亿个参数。确实，你的模型非常庞大（她是这么说的）。
 - en: 'Fine-tuning models like BERT is both art and doing tons of failed experiments.
     Fortunately, the authors made some recommendations:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 微调像BERT这样的模型既是一门艺术，也涉及大量的失败实验。幸运的是，作者提出了一些建议：
 - en: 'Batch size: 16, 32'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 批量大小：16，32
 - en: 'Learning rate (Adam): 5e-5, 3e-5, 2e-5'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 学习率（Adam）：5e-5，3e-5，2e-5
 - en: 'Number of epochs: 2, 3, 4'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 轮次数量：2，3，4
 - en: '[PRE13]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: We’ll use Adam with a slightly different learning rate (cause we’re badasses)
     and use sparse categorical crossentropy, so we don’t have to one-hot encode our
     labels.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用Adam，并使用略微不同的学习率（因为我们很牛逼），并使用稀疏分类交叉熵，因此我们不必对标签进行独热编码。
 - en: 'Let’s fit the model:'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们拟合模型：
 - en: '[PRE14]'
+  id: totrans-81
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'We store the training logs, so you can explore the training process in [Tensorboard](https://www.tensorflow.org/tensorboard).
     Let’s have a look:'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们存储训练日志，以便你可以在[Tensorboard](https://www.tensorflow.org/tensorboard)中查看训练过程。让我们来看一下：
 - en: '![](../Images/880f4ce53de05f06386b7e08afbde3db.png)![](../Images/b1e36a67c88c06cd6e88ac96ad8b327f.png)'
+  id: totrans-83
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/880f4ce53de05f06386b7e08afbde3db.png)![](../Images/b1e36a67c88c06cd6e88ac96ad8b327f.png)'
 - en: Evaluation
+  id: totrans-84
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 评估
 - en: 'I got to be honest with you. I was impressed with the results. Training using
     only 12.5k samples we got:'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 我必须对你诚实。我对结果感到惊讶。仅使用12.5k样本进行训练，我们得到了：
 - en: '[PRE15]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '[PRE16]'
+  id: totrans-87
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: 'Impressive, right? Let’s have a look at the confusion matrix:'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 很了不起，对吧？让我们看看混淆矩阵：
 - en: '![](../Images/a37bea84a0725c75db91a07cf296851c.png)'
+  id: totrans-89
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a37bea84a0725c75db91a07cf296851c.png)'
 - en: 'Finally, let’s use the model to detect intent from some custom sentences:'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，让我们使用模型从一些自定义句子中检测意图：
 - en: '[PRE17]'
+  id: totrans-91
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: '[PRE18]'
+  id: totrans-92
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: Man, that’s (clearly) gangsta! Ok, the examples might not be as diverse as real
     queries might be. But hey, go ahead and try it on your own!
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 哇，那真是（显然）很酷！好吧，虽然这些示例可能没有实际查询那么多样化，但嘿，赶紧自己试试吧！
 - en: Conclusion
+  id: totrans-94
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: You now know how to fine-tune a BERT model for text classification. You probably
     already know that you can use it for a variety of other tasks, too! You just have
     to fiddle with the layers. EASY!
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你知道如何对BERT模型进行微调以进行文本分类。你可能已经知道，它还可以用于各种其他任务！你只需要调整层即可。简单！
 - en: '[**Run the complete notebook in your browser**](https://colab.research.google.com/drive/1WQY_XxdiCVFzjMXnDdNfUjDFi0CN5hkT)'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**在浏览器中运行完整笔记本**](https://colab.research.google.com/drive/1WQY_XxdiCVFzjMXnDdNfUjDFi0CN5hkT)'
 - en: '[**The complete project on GitHub**](https://github.com/curiousily/Deep-Learning-For-Hackers)'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**GitHub上的完整项目**](https://github.com/curiousily/Deep-Learning-For-Hackers)'
 - en: Doing AI/ML feels a lot like having superpowers, right? Thanks to the wonderful
     NLP community, you can have superpowers, too! What will you use them for?
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 做AI/ML感觉就像拥有超能力，对吧？感谢美妙的NLP社区，你也可以拥有超能力！你会用它们做什么呢？
 - en: References
+  id: totrans-99
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考资料
 - en: '[BERT Fine-Tuning Tutorial with PyTorch](https://mccormickml.com/2019/07/22/BERT-fine-tuning/)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[BERT微调教程与PyTorch](https://mccormickml.com/2019/07/22/BERT-fine-tuning/)'
 - en: '[SNIPS dataset](https://github.com/snipsco/nlu-benchmark/tree/master/2017-06-custom-intent-engines)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SNIPS数据集](https://github.com/snipsco/nlu-benchmark/tree/master/2017-06-custom-intent-engines)'
 - en: '[The Illustrated BERT, ELMo, and co.](https://jalammar.github.io/illustrated-bert/)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[插图版BERT、ELMo等](https://jalammar.github.io/illustrated-bert/)'
 - en: '[BERT for dummies — Step by Step Tutorial](https://towardsdatascience.com/bert-for-dummies-step-by-step-tutorial-fb90890ffe03)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[BERT傻瓜教程——逐步指南](https://towardsdatascience.com/bert-for-dummies-step-by-step-tutorial-fb90890ffe03)'
 - en: '[Multi-label Text Classification using BERT – The Mighty Transformer](https://medium.com/huggingface/multi-label-text-classification-using-bert-the-mighty-transformer-69714fa3fb3d)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用BERT的多标签文本分类——强大的变换器](https://medium.com/huggingface/multi-label-text-classification-using-bert-the-mighty-transformer-69714fa3fb3d)'
 - en: '[Deep Learning](https://www.curiousily.com/tag/deep-learning/)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习](https://www.curiousily.com/tag/deep-learning/)'
 - en: '[Keras](https://www.curiousily.com/tag/keras/)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Keras](https://www.curiousily.com/tag/keras/)'
 - en: '[NLP](https://www.curiousily.com/tag/nlp/)'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理（NLP）](https://www.curiousily.com/tag/nlp/)'
 - en: '[Text Classification](https://www.curiousily.com/tag/text-classification/)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本分类](https://www.curiousily.com/tag/text-classification/)'
 - en: '[Python](https://www.curiousily.com/tag/python/)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python](https://www.curiousily.com/tag/python/)'
 - en: 'Continue Your Machine Learning Journey:'
+  id: totrans-110
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 继续你的机器学习之旅：
 - en: '[![](../Images/c7f0e800e0a4fe82a04944c026cdf6bd.png)](http://bit.ly/Hackers-Guide-to-Machine-Learning-with-Python)'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/c7f0e800e0a4fe82a04944c026cdf6bd.png)](http://bit.ly/Hackers-Guide-to-Machine-Learning-with-Python)'
 - en: '***Hacker''s Guide to Machine Learning with Python***'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '***Python黑客机器学习指南***'
 - en: A hands-on guide to solving real-world Machine Learning problems with Scikit-Learn,
     TensorFlow 2, and Keras
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过使用Scikit-Learn、TensorFlow 2和Keras解决实际机器学习问题的实践指南
 - en: '[BUY THE BOOK](http://bit.ly/Hackers-Guide-to-Machine-Learning-with-Python)'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '[购买此书](http://bit.ly/Hackers-Guide-to-Machine-Learning-with-Python)'
 - en: '[![](../Images/c5323a2dc7769caab61657e19077dc2f.png)](http://bit.ly/hands-on-machine-learning-from-scratch)'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/c5323a2dc7769caab61657e19077dc2f.png)](http://bit.ly/hands-on-machine-learning-from-scratch)'
 - en: '***Hands-On Machine Learning from Scratch***'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '***从零开始的实用机器学习***'
 - en: Develop a deeper understanding of Machine Learning models, tools and concepts
     by building them from scratch with Python
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过从头开始使用Python构建机器学习模型、工具和概念，深入理解它们
 - en: '[BUY THE BOOK](http://bit.ly/hands-on-machine-learning-from-scratch)'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '[购买此书](http://bit.ly/hands-on-machine-learning-from-scratch)'
 - en: '[![](../Images/ad6654296ab3297e4e122de002cc6519.png)](http://bit.ly/deep-learning-for-javascript-hackers)'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/ad6654296ab3297e4e122de002cc6519.png)](http://bit.ly/deep-learning-for-javascript-hackers)'
 - en: '***Deep Learning for JavaScript Hackers***'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: '***JavaScript黑客深度学习***'
 - en: Beginners guide to understanding Machine Learning in the browser with TensorFlow.js
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 初学者在浏览器中使用TensorFlow.js理解机器学习的指南
 - en: '[BUY THE BOOK](http://bit.ly/deep-learning-for-javascript-hackers)'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: '[购买此书](http://bit.ly/deep-learning-for-javascript-hackers)'
 - en: '**Bio: [Venelin Valkov](https://www.linkedin.com/in/venelin-valkov/)** (**[GitHub](https://github.com/curiousily)**)
     is a Machine Learning Engineer working on document data extraction using Deep
     Learning. In his free time, he likes to write, work on side projects, ride his
     bike, and do deadlifts!'
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Venelin Valkov](https://www.linkedin.com/in/venelin-valkov/)** (**[GitHub](https://github.com/curiousily)**)
+    是一名机器学习工程师，专注于使用深度学习进行文档数据提取。在空闲时间，他喜欢写作、做副项目、骑自行车和做硬拉！'
 - en: '[Original](https://www.curiousily.com/posts/intent-recognition-with-bert-using-keras-and-tensorflow-2/).
     Reposted with permission.'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.curiousily.com/posts/intent-recognition-with-bert-using-keras-and-tensorflow-2/)。经允许转载。'
 - en: '**Related:**'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[BERT is changing the NLP landscape](/2019/09/bert-changing-nlp-landscape.html)'
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[BERT正在改变NLP领域](/2019/09/bert-changing-nlp-landscape.html)'
 - en: '[Lit BERT: NLP Transfer Learning In 3 Steps](/2019/11/lit-bert-nlp-transfer-learning-3-steps.html)'
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Lit BERT：3步完成NLP迁移学习](/2019/11/lit-bert-nlp-transfer-learning-3-steps.html)'
 - en: '[BERT, RoBERTa, DistilBERT, XLNet: Which one to use?](/2019/09/bert-roberta-distilbert-xlnet-one-use.html)'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[BERT、RoBERTa、DistilBERT、XLNet：选择哪个？](/2019/09/bert-roberta-distilbert-xlnet-one-use.html)'
 - en: More On This Topic
+  id: totrans-129
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用TensorFlow和Keras构建和训练第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用BERT分类长文本文档](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
 - en: '[Extractive Summarization with LLM using BERT](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用BERT的抽取式总结](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
 - en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[图像识别和自然语言处理中的迁移学习](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
 - en: '[The Evolution of Speech Recognition Metrics](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[语音识别指标的发展](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
 - en: '[5 IT Jobs That Are High in Demand But Don’t Get Enough Recognition](https://www.kdnuggets.com/5-it-jobs-that-are-high-in-demand-but-dont-get-enough-recognition)'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5个需求高但不被重视的IT职位](https://www.kdnuggets.com/5-it-jobs-that-are-high-in-demand-but-dont-get-enough-recognition)'

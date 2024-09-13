@@ -1,630 +1,1020 @@
 - en: Geovisualization with Open Data
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 开放数据的地理可视化
 - en: 原文：[https://www.kdnuggets.com/2020/01/open-data-germany-maps-viz.html](https://www.kdnuggets.com/2020/01/open-data-germany-maps-viz.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/01/open-data-germany-maps-viz.html](https://www.kdnuggets.com/2020/01/open-data-germany-maps-viz.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Dr. Juan Camilo Orduz](https://juanitorduz.github.io/), Mathematician
     & Data Scientist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Dr. Juan Camilo Orduz](https://juanitorduz.github.io/)，数学家与数据科学家**'
 - en: In this post I want to show how to use public available (open) data to create
     geo visualizations in python. Maps are a great way to communicate and compare
     information when working with geolocation data. There are many frameworks to plot
     maps, here I focus on [matplotlib](https://matplotlib.org/) and [geopandas](http://geopandas.org/)
     (and give a glimpse of [mplleaflet](https://github.com/jwass/mplleaflet)).
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我想展示如何使用公开（开放）数据在 Python 中创建地理可视化。地图是处理地理定位数据时传达和比较信息的绝佳方式。有许多框架可以绘制地图，这里我重点介绍
+    [matplotlib](https://matplotlib.org/) 和 [geopandas](http://geopandas.org/)（并简要介绍
+    [mplleaflet](https://github.com/jwass/mplleaflet)）。
 - en: '**Reference:** A very good introduction to matplotlib is the chapter on [Visualization
     with Matplotlib](https://jakevdp.github.io/PythonDataScienceHandbook/04.00-introduction-to-matplotlib.html) from
     the [Python Data Science Handbook](https://jakevdp.github.io/PythonDataScienceHandbook/) by [Jake
     VanderPlas](https://jakevdp.github.io/pages/about.html).'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '**参考：** 一个非常好的 matplotlib 介绍是来自 [Python 数据科学手册](https://jakevdp.github.io/PythonDataScienceHandbook/)
+    的 [Matplotlib 可视化](https://jakevdp.github.io/PythonDataScienceHandbook/04.00-introduction-to-matplotlib.html)
+    章节，由 [Jake VanderPlas](https://jakevdp.github.io/pages/about.html) 撰写。'
 - en: '**Remark:** When I finished writing this notebook, I discovered a similar analysis
     done in R [here](https://www.r-bloggers.com/case-study-mapping-german-zip-codes-in-r/).
     Please check it out!'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '**备注：** 当我完成写这本笔记本时，我发现 R 语言中有类似的分析 [在这里](https://www.r-bloggers.com/case-study-mapping-german-zip-codes-in-r/)。请查看一下！'
 - en: Prepare Notebook
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 准备笔记本
 - en: '[PRE0]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Get Germany Data
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 获取德国数据
 - en: 'The main data source for this post is [www.suche-postleitzahl.org/downloads](https://www.suche-postleitzahl.org/downloads).
     Here we download three data sets:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文的主要数据来源是 [www.suche-postleitzahl.org/downloads](https://www.suche-postleitzahl.org/downloads)。我们在这里下载了三个数据集：
 - en: '`plz-gebiete.shp`: shapefile with germany postal codes polygons.'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plz-gebiete.shp`：包含德国邮政编码多边形的 shapefile。'
 - en: '`zuordnung_plz_ort.csv`: postal code to city and bundesland mapping.'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`zuordnung_plz_ort.csv`：邮政编码到城市和联邦州的映射。'
 - en: '`plz_einwohner.csv`: population is assigned to each postal code area.'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`plz_einwohner.csv`：人口分配到每个邮政编码区域。'
 - en: Germany Maps
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 德国地图
 - en: We begin by generating a Germany map with the most important cities.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们首先生成一个包含最重要城市的德国地图。
 - en: '[PRE1]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '|  | plz | note | geometry |'
+  id: totrans-17
   prefs: []
   type: TYPE_TB
+  zh: '|  | plz | note | geometry |'
 - en: '| --- | --- | --- | --- |'
+  id: totrans-18
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- |'
 - en: '| 0 | 52538 | 52538 Gangelt, Selfkant | POLYGON ((5.86632 51.05110, 5.86692
     51.05124, … |'
+  id: totrans-19
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 52538 | 52538 Gangelt, Selfkant | POLYGON ((5.86632 51.05110, 5.86692
+    51.05124, … |'
 - en: '| 1 | 47559 | 47559 Kranenburg | POLYGON ((5.94504 51.82354, 5.94580 51.82409,
     … |'
+  id: totrans-20
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 47559 | 47559 Kranenburg | POLYGON ((5.94504 51.82354, 5.94580 51.82409,
+    … |'
 - en: '| 2 | 52525 | 52525 Waldfeucht, Heinsberg | POLYGON ((5.96811 51.05556, 5.96951
     51.05660, … |'
+  id: totrans-21
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 52525 | 52525 Waldfeucht, Heinsberg | POLYGON ((5.96811 51.05556, 5.96951
+    51.05660, … |'
 - en: '| 3 | 52074 | 52074 Aachen | POLYGON ((5.97486 50.79804, 5.97495 50.79809,
     … |'
+  id: totrans-22
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 52074 | 52074 亚琛 | POLYGON ((5.97486 50.79804, 5.97495 50.79809, … |'
 - en: "| 4 | 52531 | 52531 Ã\x9Cbach-Palenberg | POLYGON ((6.01507 50.94788, 6.03854\
     \ 50.93561, … |"
+  id: totrans-23
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 52531 | 52531 Übach-Palenberg | POLYGON ((6.01507 50.94788, 6.03854 50.93561,
+    … |'
 - en: The `geometry` column contains the polygons which define the postal code’s shape.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '`geometry` 列包含定义邮政编码形状的多边形。'
 - en: We can use [geopandas mapping tools](http://geopandas.org/mapping.html) to generate
     the map with the `plot` method.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用 [geopandas 映射工具](http://geopandas.org/mapping.html) 来通过 `plot` 方法生成地图。
 - en: '[PRE2]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![png](../Images/ebc81095f2ae5fbe048b1fb8a15c6571.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/ebc81095f2ae5fbe048b1fb8a15c6571.png)'
 - en: First-Digit-Postalcodes Areas
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 首位数字邮政编码区域
 - en: Next, let us plot different regions corresponding to the first digit of each
     postal code.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，让我们绘制不同地区对应于每个邮政编码的第一个数字。
 - en: '[PRE3]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![png](../Images/e9eb67e648bbc1d497bd41ff550020e1.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/e9eb67e648bbc1d497bd41ff550020e1.png)'
 - en: Bundesland Map
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 联邦州地图
 - en: 'Let us now map each postal code to the corresponding region:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们将每个邮政编码映射到相应的区域：
 - en: '[PRE5]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '|  | ort | plz | bundesland |'
+  id: totrans-36
   prefs: []
   type: TYPE_TB
+  zh: '|  | ort | plz | bundesland |'
 - en: '| --- | --- | --- | --- |'
+  id: totrans-37
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- |'
 - en: '| 0 | Aach | 78267 | Baden-Württemberg |'
+  id: totrans-38
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | Aach | 78267 | 巴登-符腾堡 |'
 - en: '| 1 | Aach | 54298 | Rheinland-Pfalz |'
+  id: totrans-39
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | Aach | 54298 | 莱茵兰-普法尔茨 |'
 - en: '| 2 | Aachen | 52062 | Nordrhein-Westfalen |'
+  id: totrans-40
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 亚琛 | 52062 | 北莱茵-威斯特法伦 |'
 - en: '| 3 | Aachen | 52064 | Nordrhein-Westfalen |'
+  id: totrans-41
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 亚琛 | 52064 | 北莱茵-威斯特法伦 |'
 - en: '| 4 | Aachen | 52066 | Nordrhein-Westfalen |'
+  id: totrans-42
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 亚琛 | 52066 | 北莱茵-威斯特法伦 |'
 - en: '[PRE6]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '|  | plz | geometry | first_dig_plz | ort | bundesland |'
+  id: totrans-44
   prefs: []
   type: TYPE_TB
+  zh: '|  | plz | 几何 | first_dig_plz | 城市 | 联邦州 |'
 - en: '| --- | --- | --- | --- | --- | --- |'
+  id: totrans-45
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- | --- | --- |'
 - en: '| 0 | 52538 | POLYGON ((5.86632 51.05110, 5.86692 51.05124, … | 5 | Gangelt
     | Nordrhein-Westfalen |'
+  id: totrans-46
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 52538 | POLYGON ((5.86632 51.05110, 5.86692 51.05124, … | 5 | 甘根特 | 北莱茵-威斯特法伦
+    |'
 - en: '| 1 | 52538 | POLYGON ((5.86632 51.05110, 5.86692 51.05124, … | 5 | Selfkant
     | Nordrhein-Westfalen |'
+  id: totrans-47
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 52538 | POLYGON ((5.86632 51.05110, 5.86692 51.05124, … | 5 | 塞尔夫坎特 |
+    北莱茵-威斯特法伦 |'
 - en: '| 2 | 47559 | POLYGON ((5.94504 51.82354, 5.94580 51.82409, … | 4 | Kranenburg
     | Nordrhein-Westfalen |'
+  id: totrans-48
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 47559 | POLYGON ((5.94504 51.82354, 5.94580 51.82409, … | 4 | 克拉能堡 |
+    北莱茵-威斯特法伦 |'
 - en: '| 3 | 52525 | POLYGON ((5.96811 51.05556, 5.96951 51.05660, … | 5 | Heinsberg
     | Nordrhein-Westfalen |'
+  id: totrans-49
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 52525 | POLYGON ((5.96811 51.05556, 5.96951 51.05660, … | 5 | 海因斯贝格 |
+    北莱茵-威斯特法伦 |'
 - en: '| 4 | 52525 | POLYGON ((5.96811 51.05556, 5.96951 51.05660, … | 5 | Waldfeucht
     | Nordrhein-Westfalen |'
+  id: totrans-50
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 52525 | POLYGON ((5.96811 51.05556, 5.96951 51.05660, … | 5 | 瓦尔德费赫特
+    | 北莱茵-威斯特法伦 |'
 - en: 'Generate Bundesland map:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成联邦州地图：
 - en: '[PRE7]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![png](../Images/55d1533532248f13a617c61686bf4303.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/55d1533532248f13a617c61686bf4303.png)'
 - en: Number of Inhabitants
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 居民数量
 - en: 'Now we include the number of inhabitants per postal code:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将包括每个邮政编码的居民数量：
 - en: '[PRE8]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '|  | plz | einwohner |'
+  id: totrans-57
   prefs: []
   type: TYPE_TB
+  zh: '|  | plz | 居民数 |'
 - en: '| --- | --- | --- |'
+  id: totrans-58
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- |'
 - en: '| 0 | 01067 | 11957 |'
+  id: totrans-59
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 01067 | 11957 |'
 - en: '| 1 | 01069 | 25491 |'
+  id: totrans-60
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 01069 | 25491 |'
 - en: '| 2 | 01097 | 14811 |'
+  id: totrans-61
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 01097 | 14811 |'
 - en: '| 3 | 01099 | 28021 |'
+  id: totrans-62
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 01099 | 28021 |'
 - en: '| 4 | 01108 | 5876 |'
+  id: totrans-63
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 01108 | 5876 |'
 - en: '[PRE9]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '|  | plz | geometry | first_dig_plz | ort | bundesland | einwohner |'
+  id: totrans-65
   prefs: []
   type: TYPE_TB
+  zh: '|  | plz | 几何 | first_dig_plz | 城市 | 联邦州 | 居民数 |'
 - en: '| --- | --- | --- | --- | --- | --- | --- |'
+  id: totrans-66
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- | --- | --- | --- |'
 - en: '| 0 | 52538 | POLYGON ((5.86632 51.05110, 5.86692 51.05124, … | 5 | Gangelt
     | Nordrhein-Westfalen | 21390 |'
+  id: totrans-67
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 52538 | POLYGON ((5.86632 51.05110, 5.86692 51.05124, … | 5 | 甘根特 | 北莱茵-威斯特法伦
+    | 21390 |'
 - en: '| 1 | 52538 | POLYGON ((5.86632 51.05110, 5.86692 51.05124, … | 5 | Selfkant
     | Nordrhein-Westfalen | 21390 |'
+  id: totrans-68
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 52538 | POLYGON ((5.86632 51.05110, 5.86692 51.05124, … | 5 | 塞尔夫坎特 |
+    北莱茵-威斯特法伦 | 21390 |'
 - en: '| 2 | 47559 | POLYGON ((5.94504 51.82354, 5.94580 51.82409, … | 4 | Kranenburg
     | Nordrhein-Westfalen | 10220 |'
+  id: totrans-69
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 47559 | POLYGON ((5.94504 51.82354, 5.94580 51.82409, … | 4 | 克拉能堡 |
+    北莱茵-威斯特法伦 | 10220 |'
 - en: '| 3 | 52525 | POLYGON ((5.96811 51.05556, 5.96951 51.05660, … | 5 | Heinsberg
     | Nordrhein-Westfalen | 49737 |'
+  id: totrans-70
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 52525 | POLYGON ((5.96811 51.05556, 5.96951 51.05660, … | 5 | 海因斯贝格 |
+    北莱茵-威斯特法伦 | 49737 |'
 - en: '| 4 | 52525 | POLYGON ((5.96811 51.05556, 5.96951 51.05660, … | 5 | Waldfeucht
     | Nordrhein-Westfalen | 49737 |'
+  id: totrans-71
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 52525 | POLYGON ((5.96811 51.05556, 5.96951 51.05660, … | 5 | 瓦尔德费赫特
+    | 北莱茵-威斯特法伦 | 49737 |'
 - en: 'Generate map:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成地图：
 - en: '[PRE10]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '![png](../Images/71ab1c3e70cba4906a33a3a3c2974d1a.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/71ab1c3e70cba4906a33a3a3c2974d1a.png)'
 - en: City Maps
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 城市地图
 - en: We can now filter for cities using the `ort` feature.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以使用 `ort` 特征筛选城市。
 - en: Munich
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 慕尼黑
 - en: '[PRE11]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '![png](../Images/b2bc83046f1e0e632fbd5ad8e5065712.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/b2bc83046f1e0e632fbd5ad8e5065712.png)'
 - en: Berlin
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 柏林
 - en: '[PRE12]'
+  id: totrans-81
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '![png](../Images/e905a6c238ae309666f1fad72e8afac6.png)'
+  id: totrans-82
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/e905a6c238ae309666f1fad72e8afac6.png)'
 - en: Berlin
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 柏林
 - en: 'We can use the portal [https://www.statistik-berlin-brandenburg.de](https://www.statistik-berlin-brandenburg.de/) to
     get the official postal code to area mapping in Berlin [here](https://www.statistik-berlin-brandenburg.de/produkte/verzeichnisse/ZuordnungderBezirkezuPostleitzahlen.xls).
     After some formating (not structured raw data):'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用门户网站 [https://www.statistik-berlin-brandenburg.de](https://www.statistik-berlin-brandenburg.de/)
+    获取柏林的官方邮政编码与区域映射信息，详见 [这里](https://www.statistik-berlin-brandenburg.de/produkte/verzeichnisse/ZuordnungderBezirkezuPostleitzahlen.xls)。经过一些格式化处理（非结构化原始数据）：
 - en: '[PRE13]'
+  id: totrans-85
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '|  | plz | area |'
+  id: totrans-86
   prefs: []
   type: TYPE_TB
+  zh: '|  | plz | 区域 |'
 - en: '| --- | --- | --- |'
+  id: totrans-87
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- |'
 - en: '| 0 | 10115 | Mitte |'
+  id: totrans-88
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 10115 | 中心 |'
 - en: '| 1 | 10117 | Mitte |'
+  id: totrans-89
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 10117 | 中心 |'
 - en: '| 2 | 10119 | Mitte |'
+  id: totrans-90
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 10119 | 中心 |'
 - en: '| 3 | 10178 | Mitte |'
+  id: totrans-91
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 10178 | 中心 |'
 - en: '| 4 | 10179 | Mitte |'
+  id: totrans-92
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 10179 | 中心 |'
 - en: 'Note however that this map is not one-to-one, i.e. a postal code can correspond
     to many areas:'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 但请注意，这张地图不是一对一的，即一个邮政编码可以对应多个区域：
 - en: '[PRE14]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '|  | plz | area |'
+  id: totrans-95
   prefs: []
   type: TYPE_TB
+  zh: '|  | plz | 区域 |'
 - en: '| --- | --- | --- |'
+  id: totrans-96
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- |'
 - en: '| 2 | 10119 | Mitte |'
+  id: totrans-97
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 10119 | 中心 |'
 - en: '| 41 | 10119 | Pankow |'
+  id: totrans-98
   prefs: []
   type: TYPE_TB
+  zh: '| 41 | 10119 | 帕克诺 |'
 - en: '| 4 | 10179 | Mitte |'
+  id: totrans-99
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 10179 | 中心 |'
 - en: '| 26 | 10179 | Friedrichshain-Kreuzberg |'
+  id: totrans-100
   prefs: []
   type: TYPE_TB
+  zh: '| 26 | 10179 | 弗里德里希斯海因-克罗伊茨贝格 |'
 - en: '| 42 | 10247 | Pankow |'
+  id: totrans-101
   prefs: []
   type: TYPE_TB
+  zh: '| 42 | 10247 | 帕克诺 |'
 - en: '| … | … | … |'
+  id: totrans-102
   prefs: []
   type: TYPE_TB
+  zh: '| … | … | … |'
 - en: '| 133 | 14197 | Steglitz-Zehlendorf |'
+  id: totrans-103
   prefs: []
   type: TYPE_TB
+  zh: '| 133 | 14197 | 施特格利茨-泽尔多夫 |'
 - en: '| 95 | 14197 | Charlottenburg-Wilmersdorf |'
+  id: totrans-104
   prefs: []
   type: TYPE_TB
+  zh: '| 95 | 14197 | 夏洛滕堡-威尔默斯多夫 |'
 - en: '| 165 | 14197 | Tempelhof-Schöneberg |'
+  id: totrans-105
   prefs: []
   type: TYPE_TB
+  zh: '| 165 | 14197 | 恩赫尔霍夫-舍讷贝格 |'
 - en: '| 134 | 14199 | Steglitz-Zehlendorf |'
+  id: totrans-106
   prefs: []
   type: TYPE_TB
+  zh: '| 134 | 14199 | 施特格利茨-泽尔多夫 |'
 - en: '| 96 | 14199 | Charlottenburg-Wilmersdorf |'
+  id: totrans-107
   prefs: []
   type: TYPE_TB
+  zh: '| 96 | 14199 | 夏洛滕堡-威尔默斯多夫 |'
 - en: 99 rows × 2 columns
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 99 行 × 2 列
 - en: Hence, we need to change the postal code grouping variable.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，我们需要更改邮政编码分组变量。
 - en: Berlin Neighbourhoods
+  id: totrans-110
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 柏林社区
 - en: 'Fortunately, the website [http://insideairbnb.com/get-the-data.html](http://insideairbnb.com/get-the-data.html),
     containing AirBnB data for many cities (which is definitely worth investigatinig!),
     has a convinient data set `neighbourhoods.geojson` which maps Berlin’s area to *neighbourhoods*:'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，网站[http://insideairbnb.com/get-the-data.html](http://insideairbnb.com/get-the-data.html)，包含了许多城市的AirBnB数据（这绝对值得研究！），有一个方便的数据集`neighbourhoods.geojson`，它将柏林的区域映射到*邻里*：
 - en: '[PRE15]'
+  id: totrans-112
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '|  | neighbourhood | neighbourhood_group | geometry |'
+  id: totrans-113
   prefs: []
   type: TYPE_TB
+  zh: '|  | 邻里 | 邻里组 | 几何 |'
 - en: '| --- | --- | --- | --- |'
+  id: totrans-114
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- |'
 - en: '| 0 | Blankenfelde/Niederschönhausen | Pankow | MULTIPOLYGON (((13.41191 52.61487,
     13.41183 52… |'
+  id: totrans-115
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | Blankenfelde/Niederschönhausen | Pankow | MULTIPOLYGON (((13.41191 52.61487,
+    13.41183 52… |'
 - en: '| 1 | Helmholtzplatz | Pankow | MULTIPOLYGON (((13.41405 52.54929, 13.41422
     52… |'
+  id: totrans-116
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | Helmholtzplatz | Pankow | MULTIPOLYGON (((13.41405 52.54929, 13.41422
+    52… |'
 - en: '| 2 | Wiesbadener Straße | Charlottenburg-Wilm. | MULTIPOLYGON (((13.30748
     52.46788, 13.30743 52… |'
+  id: totrans-117
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | Wiesbadener Straße | Charlottenburg-Wilm. | MULTIPOLYGON (((13.30748
+    52.46788, 13.30743 52… |'
 - en: '| 3 | Schmöckwitz/Karolinenhof/Rauchfangswerder | Treptow - Köpenick | MULTIPOLYGON
     (((13.70973 52.39630, 13.70926 52… |'
+  id: totrans-118
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | Schmöckwitz/Karolinenhof/Rauchfangswerder | Treptow - Köpenick | MULTIPOLYGON
+    (((13.70973 52.39630, 13.70926 52… |'
 - en: '| 4 | Müggelheim | Treptow - Köpenick | MULTIPOLYGON (((13.73762 52.40850,
     13.73773 52… |'
+  id: totrans-119
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | Müggelheim | Treptow - Köpenick | MULTIPOLYGON (((13.73762 52.40850,
+    13.73773 52… |'
 - en: '[PRE16]'
+  id: totrans-120
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: '![png](../Images/96fa7e23ac495fa53dd674754af1b7fe.png)Here the divisions correspond
     to `Neighbourhood` ⊂⊂ `Neighbourhood Group`.'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '![png](../Images/96fa7e23ac495fa53dd674754af1b7fe.png)这里的划分对应于`Neighbourhood`⊂⊂`Neighbourhood
+    Group`。'
 - en: Selected Locations in Berlin
+  id: totrans-122
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 柏林精选地点
 - en: Sometimes it is useful to include well-known locations on the maps so that the
     user can identify them and understand the distances and scales. One way to do
     it is to manualy input the latitude and longitude of each point (as above). This
     of course can be time consuming and prone to errors. As expected, there is a library
     which can fetch this type of data automatically, namely [geopy](https://github.com/geopy/geopy).
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时候，将著名地点包含在地图上是很有用的，以便用户可以识别它们并理解距离和比例。实现这一点的一种方法是手动输入每个点的纬度和经度（如上所述）。当然，这可能耗时且容易出错。正如预期的那样，有一个可以自动获取这种数据的库，即[geopy](https://github.com/geopy/geopy)。
 - en: 'Here is a simple example:'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个简单的例子：
 - en: '[PRE17]'
+  id: totrans-125
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: Humboldt-Universität zu Berlin, Dorotheenstraße, Spandauer Vorstadt, Mitte,
     Berlin, 10117, Deutschland
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 柏林洪堡大学，Dorotheenstraße，Spandauer Vorstadt，Mitte，柏林，10117，德国
 - en: 'Let us write a function to get the latitude and longitude coordinates:'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们编写一个函数来获取纬度和经度坐标：
 - en: '[PRE18]'
+  id: totrans-128
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: '[PRE19]'
+  id: totrans-129
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: 'Let us see the resulting map:'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们查看结果地图：
 - en: '[PRE20]'
+  id: totrans-131
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: '![png](../Images/d0167d8636642b4f5ce310934bff3af0.png)'
+  id: totrans-132
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/d0167d8636642b4f5ce310934bff3af0.png)'
 - en: Christmas Markets
+  id: totrans-133
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 圣诞市场
 - en: 'Let us enrich the maps by including other type of information. There is a great
     resource for publicly available data for Berlin: [Berlin Open Data](https://daten.berlin.de/).
     Among many interesting datasets, I found one on the Christmas markets around the
     city (which are really fun to visit!) [here](https://daten.berlin.de/datensaetze/berliner-weihnachtsm%C3%A4rkte-2019).
     You can accces the data via a public API. Let us use the `requests` module to
     do this:'
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们通过包含其他类型的信息来丰富地图。有关柏林公开数据的绝佳资源是[柏林开放数据](https://daten.berlin.de/)。在许多有趣的数据集中，我找到了一份关于城市周边圣诞市场的数据（这些市场真的很有趣！）[在这里](https://daten.berlin.de/datensaetze/berliner-weihnachtsm%C3%A4rkte-2019)。你可以通过公共API访问这些数据。让我们使用`requests`模块来完成这项任务：
 - en: '[PRE21]'
+  id: totrans-135
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: Convert to pandas dataframe.
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 转换为 pandas 数据框。
 - en: '[PRE22]'
+  id: totrans-137
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: We do not have a postal code feature, but we can create one by extracting it
     from the `plz_ort` column.
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们没有邮政编码功能，但我们可以通过从`plz_ort`列中提取来创建一个。
 - en: '[PRE23]'
+  id: totrans-139
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: '|  | name | bezirk | lat | lng | plz |'
+  id: totrans-140
   prefs: []
   type: TYPE_TB
+  zh: '|  | 名称 | 区域 | 纬度 | 经度 | 邮政编码 |'
 - en: '| --- | --- | --- | --- | --- | --- |'
+  id: totrans-141
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- | --- | --- |'
 - en: '| 0 | Weihnachtsmarkt vor dem Schloss Charlottenburg | Charlottenburg-Wilmersdorf
     | 52.519951 | 13.295946 | 14059 |'
+  id: totrans-142
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | Charlottenburg宫前的圣诞市场 | Charlottenburg-Wilmersdorf | 52.519951 | 13.295946
+    | 14059 |'
 - en: '| 1 |'
+  id: totrans-143
   prefs: []
   type: TYPE_TB
+  zh: '| 1 |'
 - en: Weihnachtsmarkt an der Gedächtniskirche
+  id: totrans-144
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Gedächtniskirche圣诞市场
 - en: '| Charlottenburg-Wilmersdorf | 52.504886 | 13.335511 | 10789 |'
+  id: totrans-145
   prefs: []
   type: TYPE_TB
+  zh: '| Charlottenburg-Wilmersdorf | 52.504886 | 13.335511 | 10789 |'
 - en: '| 2 | Weihnachtsmarkt in der Fußgängerzone Wilmersdo… | Charlottenburg-Wilmersdorf
     | 52.509313 | 13.305994 | 10627 |'
+  id: totrans-146
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | Wilmersdorf步行区的圣诞市场 | Charlottenburg-Wilmersdorf | 52.509313 | 13.305994
+    | 10627 |'
 - en: '| 3 | Weihnachten in Westend | Charlottenburg-Wilmersdorf | 52.512538 | 13.259213
     | 14052 |'
+  id: totrans-147
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 圣诞市场在西区 | Charlottenburg-Wilmersdorf | 52.512538 | 13.259213 | 14052
+    |'
 - en: '| 4 | Weihnachtsmarkt Berlin-Grunewald des Johannisc… | Charlottenburg-Wilmersdorf
     | 52.488350 | 13.277250 | 14193 |'
+  id: totrans-148
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | Johannisstraße的柏林-Grunewald圣诞市场 | Charlottenburg-Wilmersdorf | 52.488350
+    | 13.277250 | 14193 |'
 - en: 'Let us plot the Christmas markets locations:'
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们绘制圣诞市场的位置：
 - en: '[PRE24]'
+  id: totrans-150
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: '![png](../Images/d4837146030f223f6245220676889ae8.png)'
+  id: totrans-151
   prefs: []
   type: TYPE_IMG
+  zh: '![png](../Images/d4837146030f223f6245220676889ae8.png)'
 - en: Interactive Maps
+  id: totrans-152
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 互动地图
 - en: We can use the [mplleaflet](https://github.com/jwass/mplleaflet) library which *converts
     a matplotlib plot into a webpage containing a pannable, zoomable Leaflet map*.
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用 [mplleaflet](https://github.com/jwass/mplleaflet) 库，它*将 matplotlib 图表转换为包含可平移、可缩放的
+    Leaflet 地图的网页*。
 - en: Berlin Neighbourhoods
+  id: totrans-154
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 柏林邻里
 - en: '[PRE25]'
+  id: totrans-155
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: Christmas Markets
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 圣诞市场
 - en: '[PRE26]'
+  id: totrans-157
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE26]'
 - en: I hope these data sources and code snippets serve as a starting point to explore
     geodata analysis and visualization with python.
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望这些数据源和代码片段能作为探索使用 Python 进行地理数据分析和可视化的起点。
 - en: '**Bio: [Dr. Juan Camilo Orduz](https://juanitorduz.github.io/)** ([@juanitorduz](https://twitter.com/juanitorduz))
     in a Berlin based mathematician & data scientist.'
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [胡安·卡米洛·奥尔杜斯博士](https://juanitorduz.github.io/)** ([@juanitorduz](https://twitter.com/juanitorduz))
+    是一位总部位于柏林的数学家和数据科学家。'
 - en: '[Original](https://juanitorduz.github.io/germany_plots/). Reposted with permission.'
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://juanitorduz.github.io/germany_plots/)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[6 Books About Open Data Every Data Scientist Should Read](/2019/02/6-books-open-data-every-data-scientist-read.html)'
+  id: totrans-162
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每位数据科学家都应阅读的6本关于开放数据的书籍](/2019/02/6-books-open-data-every-data-scientist-read.html)'
 - en: '[Eight iconic examples of data visualisation](/2018/08/iconic-data-visualisation.html)'
+  id: totrans-163
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据可视化的八个经典例子](/2018/08/iconic-data-visualisation.html)'
 - en: '[Metadata Enrichment is Essential to Realize the Value of Open Datasets](/2018/11/metadata-enrichment-value-open-datasets.html)'
+  id: totrans-164
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[元数据丰富化对实现开放数据集的价值至关重要](/2018/11/metadata-enrichment-value-open-datasets.html)'
 - en: '* * *'
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-166
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-167
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-169
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织进行 IT'
 - en: '* * *'
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-171
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Open Assistant: Explore the Possibilities of Open and Collaborative…](https://www.kdnuggets.com/2023/04/open-assistant-explore-possibilities-open-collaborative-chatbot-development.html)'
+  id: totrans-172
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[开放助手：探索开放和协作的可能性…](https://www.kdnuggets.com/2023/04/open-assistant-explore-possibilities-open-collaborative-chatbot-development.html)'
 - en: '[Introducing MetaGPT''s Data Interpreter: SOTA Open Source LLM-based…](https://www.kdnuggets.com/metagpt-data-interpreter-open-source-llm-based-data-solutions)'
+  id: totrans-173
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[介绍 MetaGPT 的数据解释器：SOTA 开源 LLM 基于…](https://www.kdnuggets.com/metagpt-data-interpreter-open-source-llm-based-data-solutions)'
 - en: '[Generate Synthetic Time-series Data with Open-source Tools](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)'
+  id: totrans-174
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用开源工具生成合成时间序列数据](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)'
 - en: '[A Comparative Overview of the Top 10 Open Source Data Science Tools in 2023](https://www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023)'
+  id: totrans-175
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2023年十大开源数据科学工具比较概述](https://www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023)'
 - en: '[Open Data and Why it is Necessary](https://www.kdnuggets.com/2022/03/open-data-necessary.html)'
+  id: totrans-176
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[开放数据及其必要性](https://www.kdnuggets.com/2022/03/open-data-necessary.html)'
 - en: '[The Role of Open Source Tools in Accelerating Data Science Progress](https://www.kdnuggets.com/2023/05/role-open-source-tools-accelerating-data-science-progress.html)'
+  id: totrans-177
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[开源工具在加速数据科学进步中的作用](https://www.kdnuggets.com/2023/05/role-open-source-tools-accelerating-data-science-progress.html)'

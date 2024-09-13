@@ -1,551 +1,841 @@
 - en: 'Audio File Processing: ECG Audio Using Python'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 音频文件处理：使用Python的心电图音频
 - en: 原文：[https://www.kdnuggets.com/2020/02/audio-file-processing-ecg-audio-python.html](https://www.kdnuggets.com/2020/02/audio-file-processing-ecg-audio-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/02/audio-file-processing-ecg-audio-python.html](https://www.kdnuggets.com/2020/02/audio-file-processing-ecg-audio-python.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Taposh Dutta Roy](https://www.linkedin.com/in/taposh/), Kaiser Permanente**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Taposh Dutta Roy](https://www.linkedin.com/in/taposh/)，凯瑟 Permanente**'
 - en: '![](../Images/7b8f48ae23706fa2aae3aea5c20770e6.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7b8f48ae23706fa2aae3aea5c20770e6.png)'
 - en: In my last post on “[Basics of Audio File Processing](https://medium.com/@taposhdr/basics-of-audio-file-processing-in-r-81c31a387e8e) in
     R” we talked about the fundamentals of audio processing and looked into some examples
     in R. In this post, we will look into an application of audio file processing,
     for a good cause — Analysis of ECG Heart beat and write code in python.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我上一篇关于 “[R中的音频文件处理基础](https://medium.com/@taposhdr/basics-of-audio-file-processing-in-r-81c31a387e8e)”
+    的文章中，我们讨论了音频处理的基础知识，并查看了一些R语言的示例。在这篇文章中，我们将探讨音频文件处理的一个应用——心电图心跳分析，并用Python编写代码。
 - en: 'To understand this better, we will look into : Basic anatomy of the heart,
     measurements, origin and characteristics of heart sounds, techniques for heart
     sound analysis and python code for analyzing the sound. Our python code in this
     article will discuss how to read, and process data and develop a very simple model.
     In the next article, we will do more processing of data and develop a better model.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了更好地理解这一点，我们将探讨：心脏的基本解剖、测量、心音的起源和特征、心音分析技术以及用于分析声音的Python代码。本文中的Python代码将讨论如何读取、处理数据并开发一个非常简单的模型。在下一篇文章中，我们将进行更多的数据处理并开发更好的模型。
 - en: Further, note that I am not a clinician, thus all my knowledge is generated
     by reading papers, blogs and articles. I have listed all my sources and references.
     I will start with the location of heart in the [thoracic cavity](https://www.britannica.com/science/thoracic-cavity),
     as shown below
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 进一步说明，我不是临床医生，因此我的所有知识都是通过阅读论文、博客和文章获得的。我列出了所有的来源和参考文献。我将从心脏在 [胸腔](https://www.britannica.com/science/thoracic-cavity)
+    的位置开始，如下所示
 - en: '![](../Images/0ce449771d078af447901847a7d914a0.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0ce449771d078af447901847a7d914a0.png)'
 - en: 'Source: Google'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：Google
 - en: '**Basic Anatomy of Mammalian Heart**'
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**哺乳动物心脏的基本解剖**'
 - en: '![Figure](../Images/70f0cb04e69acf7a59fa0dcf0ff80357.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/70f0cb04e69acf7a59fa0dcf0ff80357.png)'
 - en: 'source : medmov'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：medmov
 - en: 'There are 5 basic anatomical areas of a mammalian heart :'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 哺乳动物心脏的5个基本解剖区域：
 - en: The four cardiac chambers
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 四个心脏腔室
 - en: The four cardiac valves
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 四个心脏瓣膜
 - en: The four layers of cardiac tissue
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 四层心脏组织
 - en: The great heart vessels
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 大心脏血管
 - en: The natural cardiac pacemakers and the conduction system of the heart
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 自然心脏起搏器和心脏传导系统
 - en: Human Heart
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 人类心脏
 - en: The human heart is a four-chambered pump with two *atria* for collection of
     blood from the veins and two *ventricles* for pumping out the blood to the arteries.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 人类心脏是一个四腔室的泵，有两个*心房*用于从静脉收集血液，两个*心室*用于将血液泵送到动脉。
 - en: '![Figure](../Images/deae6bf9c9cfbfa73c49a746b70502c2.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/deae6bf9c9cfbfa73c49a746b70502c2.png)'
 - en: 'Source : Research work of [Dr. Amit Guy](https://fhs.mcmaster.ca/medicine/cardiology/faculty_member_amit.htm)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源： [阿密特·盖伊博士](https://fhs.mcmaster.ca/medicine/cardiology/faculty_member_amit.htm)
+    的研究工作
 - en: The right side of the heart pumps blood to the pulmonary circulation (lungs),
     and the left side pumps blood to the systemic circulation (the rest of the body).
     The blood from the pulmonary circulation returns to the left atrium (through the
     pulmonary veins), and the blood from the systemic circulation returns to the right
     atrium (through the superior/inferior vena cava).
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 心脏的右侧将血液泵送到肺循环（肺部），左侧将血液泵送到体循环（身体其余部分）。来自肺循环的血液通过肺静脉返回到左心房，来自体循环的血液通过上/下腔静脉返回到右心房。
 - en: 'Two sets of valves control the flow of blood: the AV-valves (mitral and tricuspid)
     between the atria and the ventricles, and the semilunar valves (aortic and pulmonary)
     between the ventricles and the arteries.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 两组瓣膜控制血液的流动：房室瓣（僧帽瓣和三尖瓣）在心房和心室之间，半月瓣（主动脉瓣和肺动脉瓣）在心室和动脉之间。
 - en: Electrical Control
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 电控
 - en: '![](../Images/e71aebfb802cd512adc647144e09e081.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e71aebfb802cd512adc647144e09e081.png)'
 - en: The periodic activity of the heart is controlled by an electrical conducting
     system. The electrical signal originates in specialized pacemaker cells in the
     right atrium (the *sino-atria node)*, and is propagated through the atria to the
     AV-node (a delay junction) and to the ventricles. The electrical action potential
     excites the muscle cells and causes the mechanical contraction of the heart chambers.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 心脏的周期性活动由电传导系统控制。电信号源自右心房中的专门起搏细胞（*sino-atria node*），并通过心房传播到AV结（一个延迟连接点）以及心室。电动作电位激发心肌细胞，引起心腔的机械收缩。
 - en: 'Mechanical System : Systole & Diastole'
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 机械系统：收缩期与舒张期
 - en: '![](../Images/20ee09a66c1336b731417db4027b9b26.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/20ee09a66c1336b731417db4027b9b26.png)'
 - en: The contraction phase of the ventricles is called *systole*. The ventricular
     systole is followed by a resting or filling phase that is called *diastole*. The
     mechanical activity of the heart includes blood flow, vibrations of the chamber
     walls and opening and closing of the valves.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 心室的收缩阶段称为*systole*。心室收缩后是一个称为*diastole*的休息或充血阶段。心脏的机械活动包括血液流动、心腔壁的振动以及瓣膜的开合。
 - en: 'The systole is sub-divided into :'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 收缩期细分为：
 - en: '![](../Images/a73d6a6c015719cdacb742ea8679ad6f.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a73d6a6c015719cdacb742ea8679ad6f.png)'
 - en: The diastole is sub-divided into
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 舒张期细分为
 - en: '![](../Images/bf3f88a387562cfc72035292648d9c2a.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bf3f88a387562cfc72035292648d9c2a.png)'
 - en: '![Figure](../Images/c0180ff64d96efc098cd6dc9c3312185.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/c0180ff64d96efc098cd6dc9c3312185.png)'
 - en: 'Right side: vertical section of the cardiac muscle shows the internal structure
     of the heart. Left side: schematic representation of a reciprocating type pump
     having a pumping chamber and input output ports with oppositely oriented valves.
     (Source : [https://www.morganclaypool.com/doi/pdf/10.2200/S00187ED1V01Y200904BME031](https://www.morganclaypool.com/doi/pdf/10.2200/S00187ED1V01Y200904BME031))'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 右侧：心脏肌肉的垂直切面显示了心脏的内部结构。左侧：一个往复泵的示意图，具有泵腔和输入输出端口以及方向相反的阀门。(来源： [https://www.morganclaypool.com/doi/pdf/10.2200/S00187ED1V01Y200904BME031](https://www.morganclaypool.com/doi/pdf/10.2200/S00187ED1V01Y200904BME031))
 - en: Modulating System
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 调节系统
 - en: Human body is a complex system with a variety of sub-systems that work in tandem.
     Some of these systems that help our heart modulate are — Autonomous Nervous System,
     Hormonal System, Respiratory System. These along with electrical and mechanical
     factors make our heart work.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 人体是一个复杂的系统，具有多种协同工作的子系统。其中一些帮助我们调节心脏的系统有——自主神经系统、内分泌系统、呼吸系统。这些系统与电气和机械因素共同作用，使我们的心脏正常运作。
 - en: 'The autonomous nervous system regulates the heart rate: the sympathetic system
     enhances automaticity, while the parasympathetic system (vagus nerve) inhibits
     it. The nervous system also modulates the mechanical contractility of the heart
     chambers.'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 自主神经系统调节心率：交感神经系统增强自动性，而副交感神经系统（迷走神经）则抑制它。神经系统还调节心腔的机械收缩性。
 - en: The hormonal system secretes hormones like insulin and epinephrine, which effect
     the contractility of the heart muscle.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 内分泌系统分泌如胰岛素和肾上腺素等激素，这些激素影响心肌的收缩性。
 - en: The respiratory system causes periodic changes in the thoracic pressure, and
     thus effect the blood flow, venous pressure and venous return, triggering a reflex
     responses (baroreceptor reflex, bainbridge reflex) that modulates the heart rate.
     The heart rate is increased during inspiration and decreased during expiration.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 呼吸系统导致胸腔压力的周期性变化，从而影响血流、静脉压力和静脉回流，触发反射反应（压力感受器反射、贝恩布里奇反射），进而调节心率。心率在吸气时增加，呼气时减少。
 - en: Other mechanical factors are the peripheral resistance of the blood vessels,
     that can change due to internal or external factors (stenosis), the resulting
     venous return, the state of the valves (torn, calcified)
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他机械因素包括血管的周围阻力，可能因内外因素（如狭窄）而变化，导致的静脉回流，瓣膜的状态（撕裂、钙化）
 - en: Other electrical factors are ectopic pacemaker cells, conduction problems, reentry
     circuits
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他电气因素包括异位起搏细胞、传导问题、再入环路
 - en: The complexity and interaction of the system as depicted by Dr. Guy Amit is
     shown below -
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 如Amit Guy博士所示，系统的复杂性和相互作用如下所示—
 - en: '![Figure](../Images/9d01b8e574d965bdfdee6ef9c1d1c088.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/9d01b8e574d965bdfdee6ef9c1d1c088.png)'
 - en: 'Source: Research by Dr. Amit Guy'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：Amit Guy 博士的研究
 - en: Heart Sounds
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 心音
 - en: '![Figure](../Images/773f06278986563a3ea481bb14394bc3.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/773f06278986563a3ea481bb14394bc3.png)'
 - en: Source: [https://www.youtube.com/watch?v=FtXNnmifbhE&list=PL3n8cHP87ijDnqI8_5WQlS4tN37D6P4dH](https://www.youtube.com/watch?v=FtXNnmifbhE&list=PL3n8cHP87ijDnqI8_5WQlS4tN37D6P4dH)
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '来源: [https://www.youtube.com/watch?v=FtXNnmifbhE&list=PL3n8cHP87ijDnqI8_5WQlS4tN37D6P4dH](https://www.youtube.com/watch?v=FtXNnmifbhE&list=PL3n8cHP87ijDnqI8_5WQlS4tN37D6P4dH)'
 - en: 'Four locations are most often used to listen to the heart sounds, which are
     named according to the positions where the valves can be best heard:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 最常用来监听心音的四个位置是根据可以最好地听到心瓣膜的部位来命名的：
 - en: Aortic area — centered at the second right intercostal space.
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 主动脉区 — 位于第二右肋间隙中心。
 - en: Pulmonic area — in the second intercostal space along the left sternal border.
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 肺动脉区 — 在左侧胸骨边缘的第二肋间隙。
 - en: Tricuspid area — in the fourth intercostal space along the left sternal edge.
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 三尖瓣区 — 在左侧胸骨边缘的第四肋间隙。
 - en: Mitral area — at the cardiac apex, in the fifth intercostal space on the midclavicular
     line.
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 二尖瓣区 — 在心尖部，位于第五肋间隙的锁骨中线处。
 - en: 'The different types of heart sounds are as follows :'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 不同类型的心音如下：
 - en: '**S1** — onset of the ventricular contraction'
+  id: totrans-56
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**S1** — 心室收缩开始'
 - en: '**S2** — closure of the semilunar valves'
+  id: totrans-57
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**S2** — 半月瓣关闭'
 - en: '**S3 **— ventricular gallop'
+  id: totrans-58
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**S3** — 心室奔马律'
 - en: '**S4** — atrial gallop'
+  id: totrans-59
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**S4** — 房性奔马律'
 - en: '**EC** — Systolic ejection click'
+  id: totrans-60
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**EC** — 收缩期射血音'
 - en: '**MC** — Mid-systolic click'
+  id: totrans-61
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**MC** — 中收缩期音'
 - en: '**OS** — Diastolic sound or opening snap'
+  id: totrans-62
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**OS** — 舒张音或开瓣音'
 - en: '**Murmurs**'
+  id: totrans-63
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**杂音**'
 - en: Fundamental heart sounds (FHSs) usually include the first (S1) and second (S2)
     heart sounds.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 基本心音（FHS）通常包括第一心音（S1）和第二心音（S2）。
 - en: S1 occurs at the beginning of isovolumetric ventricular contraction, when the
     mitral and tricuspid valves close due to the rapid increase in pressure within
     the ventricles.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: S1 发生在等容收缩期开始时，当二尖瓣和三尖瓣因心室内压力快速增加而关闭。
 - en: S2 occurs at the beginning of diastole with the closure of the aortic and pulmonic
     valves.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: S2 发生在舒张期开始时，主动脉瓣和肺动脉瓣关闭。
 - en: While the FHSs are the most recognizable sounds of the heart cycle, the mechanical
     activity of the heart may also cause other audible sounds, such as the third heart
     sound (S3), the fourth heart sound (S4), systolic ejection click (EC), mid-systolic
     click (MC), diastolic sound or opening snap (OS), as well as heart murmurs caused
     by the turbulent, high-velocity flow of blood.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然 FHS 是最易识别的心周期声音，但心脏的机械活动也可能导致其他可听见的声音，如第三心音（S3）、第四心音（S4）、收缩期射血音（EC）、中收缩期音（MC）、舒张音或开瓣音（OS），以及由血流湍流和高速流动引起的心脏杂音。
 - en: Data
+  id: totrans-68
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据
 - en: We obtain the ECG data from [Physionet challenge site](https://physionet.org/content/challenge-2016/1.0.0/)’s
     2016 challenge — Classification of Heart Sound Recordings. The goal for this challenge
     is to classify normal vs abnormal vs unclear heart sounds. For our purpose we
     will classify into 2 categories — normal and abnormal ( to make it easy for demonstration
     purpose)
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们从 [Physionet 挑战网站](https://physionet.org/content/challenge-2016/1.0.0/) 的
+    2016 挑战 — 心音记录分类中获取 ECG 数据。该挑战的目标是分类正常、异常和不明确的心音。为了演示目的，我们将其分类为 2 类 — 正常和异常（以便于演示）。
 - en: '**Python Code**'
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**Python 代码**'
 - en: Similar to R, there are several libraries used to process audio data in python.
     In this code we will use the one of the libraries — [librosa](https://librosa.github.io/librosa/)
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 类似于 R，Python 中有几个用于处理音频数据的库。在这段代码中，我们将使用其中一个库 — [librosa](https://librosa.github.io/librosa/)
 - en: librosa
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: librosa
 - en: scipy
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: scipy
 - en: wav
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: wav
 - en: We will use librosa since we can use it for audio feature extraction as well.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用 librosa，因为它也可以用于音频特征提取。
 - en: '![Figure](../Images/80a65853cb9f18e0b864e61f2f7abb83.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/80a65853cb9f18e0b864e61f2f7abb83.png)'
 - en: Installing Libraries
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 安装库
 - en: Librosa returns the data and the sampling rate which is by default set to 22050,
     but you can change this or use raw sampling rate. Lets load a single audio file
     and look at the signal.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: Librosa 返回数据和默认设置为 22050 的采样率，但你可以更改此设置或使用原始采样率。让我们加载一个音频文件并查看信号。
 - en: '![](../Images/af16372e694f6eaea53c33977b0f9906.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/af16372e694f6eaea53c33977b0f9906.png)'
 - en: Next, reload all the training data-sets and create a complete training file.
     The code below explains on how to do this. We will also classify the data into
     normal and abnormal data.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，重新加载所有训练数据集并创建一个完整的训练文件。下面的代码解释了如何做到这一点。我们还将数据分类为正常和异常数据。
 - en: '![](../Images/8e9a9b5e968a0a2b0d9bb8471fd8e4de.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8e9a9b5e968a0a2b0d9bb8471fd8e4de.png)'
 - en: '![](../Images/09ed2f3e202f0e8f40dfc8bf884084e5.png)'
+  id: totrans-82
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/09ed2f3e202f0e8f40dfc8bf884084e5.png)'
 - en: '![](../Images/6d8815f15ed36ff7515007d35e65f036.png)'
+  id: totrans-83
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6d8815f15ed36ff7515007d35e65f036.png)'
 - en: 'Observe : the length of the files are different'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 观察：文件长度不同
 - en: '![](../Images/22b8415ba0aa828de857521be100e366.png)'
+  id: totrans-85
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/22b8415ba0aa828de857521be100e366.png)'
 - en: 'One other thing to note here is the audio file duration. The first file was
     20 sec while the 2nd one was 35 secs. There are two approaches to addressing this
     are:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里需要注意的另一点是音频文件的时长。第一个文件为20秒，而第二个为35秒。处理这个问题有两种方法：
 - en: 1\. Pad the audio with zeros to given length
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 1\. 用零填充音频到给定长度
 - en: 2\. Repeat audio to given length, for example max length of all audio samples
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 2\. 重复音频以达到给定长度，例如所有音频样本的最大长度
 - en: 'Also, note our library Librosa has the default sampling rate set to 22050 (
     fyi, you can change this or use raw sampling rate). Please check the definition
     of Sampling rate and other details in the prior post : “[Basics of Audio File
     Processing in R](https://medium.com/@taposhdr/basics-of-audio-file-processing-in-r-81c31a387e8e)”'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 同时，请注意我们的库Librosa的默认采样率设置为22050（仅供参考，你可以更改此设置或使用原始采样率）。有关采样率的定义和其他细节，请参见之前的帖子：“[R中的音频文件处理基础](https://medium.com/@taposhdr/basics-of-audio-file-processing-in-r-81c31a387e8e)”
 - en: '![Figure](../Images/4ac0de6ba1f0fd588f485f11d5df0083.png)'
+  id: totrans-90
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/4ac0de6ba1f0fd588f485f11d5df0083.png)'
 - en: Sampling & Setting all files to be of same length
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 采样 & 将所有文件设置为相同长度
 - en: Helper functions for Zero Padding and Repeating Audio
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于零填充和音频重复的辅助函数
 - en: '![Figure](../Images/2867472698ba8df33ca02527a4c704a3.png)'
+  id: totrans-93
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/2867472698ba8df33ca02527a4c704a3.png)'
 - en: 'Get data for processing by a model (note: this process takes time)![Figure](../Images/879ef1c084429620e2a0ef7bd2cbf593.png)'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 获取模型处理的数据（注意：此过程需要时间）![图](../Images/879ef1c084429620e2a0ef7bd2cbf593.png)
 - en: All files of same length and zero padded
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有文件长度相同并且填充零
 - en: Lets review the wave_files, we see below we have a row for each file and a value
     for each of the 110250 columns. (Remember our audio length is 110250)
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们查看`wave_files`，我们看到每个文件都有一行，每行有110250列的值。（记住我们的音频长度是110250）
 - en: '![](../Images/1868bf248f349a61858a6a70b1861c0e.png)'
+  id: totrans-97
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1868bf248f349a61858a6a70b1861c0e.png)'
 - en: We are almost ready to get pass this data to an algorithm. We need to create
     our test and training data-sets. This is training the model with raw data and
     no feature engineering of any sort. Let’s see what we get.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经快准备好将这些数据传递给算法了。我们需要创建测试和训练数据集。这是用原始数据训练模型，而不进行任何特征工程。让我们看看结果如何。
 - en: '![](../Images/a356bb2ffd81cc918a76b77bdfe1e0b4.png)'
+  id: totrans-99
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a356bb2ffd81cc918a76b77bdfe1e0b4.png)'
 - en: We will use “adam” optimizer and binary_crossentropy, for details on these,
     please check the [paper](https://arxiv.org/abs/1412.6980).
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用“adam”优化器和binary_crossentropy，详细信息请查看[论文](https://arxiv.org/abs/1412.6980)。
 - en: '![](../Images/ab4f8afd1eb44526fd1265cda3611764.png)'
+  id: totrans-101
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ab4f8afd1eb44526fd1265cda3611764.png)'
 - en: '![Figure](../Images/971dd759c34e6fcfa11e54bac300c069.png)'
+  id: totrans-102
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/971dd759c34e6fcfa11e54bac300c069.png)'
 - en: In the next article we will use some frequency strategies that we discussed
     in the initial article with python to improve to score.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下一篇文章中，我们将使用在初始文章中讨论的频率策略，并用python改进分数。
 - en: Source code: [https://github.com/taposh/audio_processing/blob/master/code/python-code/heart_beat_python.ipynb](https://github.com/taposh/audio_processing/blob/master/code/python-code/heart_beat_python.ipynb)
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 源代码：[https://github.com/taposh/audio_processing/blob/master/code/python-code/heart_beat_python.ipynb](https://github.com/taposh/audio_processing/blob/master/code/python-code/heart_beat_python.ipynb)
 - en: '**Bio: Taposh Dutta Roy** leads Innovation Team of KPInsight at Kaiser Permanente.
     These are his thoughts based on his personal research. These thoughts and recommendations
     are not of Kaiser Permanente and Kaiser Permanente is not responsible for the
     content. If you have questions Mr. Dutta Roy can be reached via [linkedin](https://www.linkedin.com/in/taposh/).'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：Taposh Dutta Roy** 领导Kaiser Permanente的KPInsight创新团队。这些是基于他个人研究的想法。这些想法和建议并不代表Kaiser
+    Permanente，Kaiser Permanente对内容不承担任何责任。如果你有问题，可以通过[linkedin](https://www.linkedin.com/in/taposh/)联系Dutta
+    Roy先生。'
 - en: '**References:**'
+  id: totrans-106
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**参考文献：**'
 - en: 'Goldberger AL, Amaral LAN, Glass L, Hausdorff JM, Ivanov PCh, Mark RG, Mietus
     JE, Moody GB, Peng C-K, Stanley HE. PhysioBank, PhysioToolkit, and PhysioNet:
     Components of a New Research Resource for Complex Physiologic Signals (2003).
     Circulation. 101(23):e215-e220.'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: Goldberger AL, Amaral LAN, Glass L, Hausdorff JM, Ivanov PCh, Mark RG, Mietus
+    JE, Moody GB, Peng C-K, Stanley HE. PhysioBank, PhysioToolkit, 和 PhysioNet：复杂生理信号的新研究资源组件（2003）。《循环》101(23)：e215-e220。
 - en: '[Basics of Audio File Processing in R](https://medium.com/@taposhdr/basics-of-audio-file-processing-in-r-81c31a387e8e)'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: '[R中的音频文件处理基础](https://medium.com/@taposhdr/basics-of-audio-file-processing-in-r-81c31a387e8e)'
 - en: In today’s day and age, digital audio has been part and parcel of our life.
     One can talk to Siri or Alexa or “Ok…
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 在当今时代，数字音频已成为我们生活的一部分。你可以与 Siri、Alexa 交流或说“好的……
 - en: '[Basic anatomy of the human heart - The Cardio Research Web Project](http://www.cardio-research.com/basic-anatomy-of-the-human-heart)'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '[人体心脏基础解剖 - 心血管研究网络项目](http://www.cardio-research.com/basic-anatomy-of-the-human-heart)'
 - en: The heart has evolved in mammals to deliver its unique and crucial function
     of ejecting and collecting blood to and…
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 心脏在哺乳动物中进化以履行其独特而关键的功能，即将血液排出和收集……
 - en: '[Basic anatomy of the human heart - The Cardio Research Web Project](http://www.cardio-research.com/basic-anatomy-of-the-human-heart)'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '[人体心脏基础解剖 - 心血管研究网络项目](http://www.cardio-research.com/basic-anatomy-of-the-human-heart)'
 - en: The heart has evolved in mammals to deliver its unique and crucial function
     of ejecting and collecting blood to and…
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 心脏在哺乳动物中进化以履行其独特而关键的功能，即将血液排出和收集……
 - en: '[McMaster University Department of Medicine >> Cardiology](https://fhs.mcmaster.ca/medicine/cardiology/faculty_member_amit.htm)'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '[麦克马斯特大学医学院 >> 心脏科](https://fhs.mcmaster.ca/medicine/cardiology/faculty_member_amit.htm)'
 - en: The Division of Cardiology participates actively in undergraduate MD teaching
     and the training of Residents in…
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 心脏科部门积极参与本科医学教育及住院医生的培训……
 - en: '[LibROSA - librosa 0.7.2 documentation](https://librosa.github.io/librosa/)'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '[LibROSA - librosa 0.7.2 文档](https://librosa.github.io/librosa/)'
 - en: LibROSA is a python package for music and audio analysis. It provides the building
     blocks necessary to create music…
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: LibROSA 是一个用于音乐和音频分析的 Python 包。它提供了创建音乐所需的构建块……
 - en: '[https://arxiv.org/abs/1412.6980](https://arxiv.org/abs/1412.6980)'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://arxiv.org/abs/1412.6980](https://arxiv.org/abs/1412.6980)'
 - en: '[https://www.researchgate.net/publication/210290203_Phonocardiography_Signal_Processing](https://www.researchgate.net/publication/210290203_Phonocardiography_Signal_Processing)'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://www.researchgate.net/publication/210290203_Phonocardiography_Signal_Processing](https://www.researchgate.net/publication/210290203_Phonocardiography_Signal_Processing)'
 - en: '[Thoracic cavity | anatomy](https://www.britannica.com/science/thoracic-cavity)'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: '[胸腔 | 解剖学](https://www.britannica.com/science/thoracic-cavity)'
 - en: Thoracic cavity, the second largest hollow space of the body. It is enclosed
     by the ribs, the vertebral column, and the…
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 胸腔是身体第二大空腔，由肋骨、脊柱和……
 - en: '[Original](https://medium.com/@taposhdr/audio-file-processing-ecg-audio-using-python-a919a9351952).
     Reposted with permission.'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/@taposhdr/audio-file-processing-ecg-audio-using-python-a919a9351952)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Building an Audio Classifier using Deep Neural Networks](/2017/12/audio-classifier-deep-neural-networks.html)'
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用深度神经网络构建音频分类器](/2017/12/audio-classifier-deep-neural-networks.html)'
 - en: '[5 Ways AI Is Changing The Healthcare Industry](/2020/01/5-ways-ai-changing-healthcare-industry.html)'
+  id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[人工智能改变医疗行业的5种方式](/2020/01/5-ways-ai-changing-healthcare-industry.html)'
 - en: '[10 Python String Processing Tips & Tricks](/2020/01/python-string-processing-primer.html)'
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[10 个 Python 字符串处理技巧与窍门](/2020/01/python-string-processing-primer.html)'
 - en: '* * *'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-128
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 工作'
 - en: '* * *'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-133
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Parallel Processing Large File in Python](https://www.kdnuggets.com/2022/07/parallel-processing-large-file-python.html)'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的大文件并行处理](https://www.kdnuggets.com/2022/07/parallel-processing-large-file-python.html)'
 - en: '[KDnuggets News, July 20: Machine Learning Algorithms Explained in…](https://www.kdnuggets.com/2022/n29.html)'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，7月20日：机器学习算法解释](https://www.kdnuggets.com/2022/n29.html)'
 - en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 创建一个从音频中提取话题的 Web 应用程序](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
 - en: '[Monitor Your File System With Python’s Watchdog](https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog)'
+  id: totrans-137
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 的 Watchdog 监控你的文件系统](https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog)'
 - en: '[Bark: The Ultimate Audio Generation Model](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
+  id: totrans-138
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Bark: 终极音频生成模型](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
 - en: '[WavJourney: A Journey into the World of Audio Storyline Generation](https://www.kdnuggets.com/wavjourney-a-journey-into-the-world-of-audio-storyline-generation)'
+  id: totrans-139
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[WavJourney: 音频故事生成的探索之旅](https://www.kdnuggets.com/wavjourney-a-journey-into-the-world-of-audio-storyline-generation)'
