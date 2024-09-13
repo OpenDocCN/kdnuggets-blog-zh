@@ -1,300 +1,470 @@
 - en: 'SQL Case Study: Helping a Startup CEO Manage His Data'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SQL 案例研究：帮助初创公司 CEO 管理数据
 - en: 原文：[https://www.kdnuggets.com/2018/09/sql-case-study-helping-startup-ceo-manage-data.html/2](https://www.kdnuggets.com/2018/09/sql-case-study-helping-startup-ceo-manage-data.html/2)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/09/sql-case-study-helping-startup-ceo-manage-data.html/2](https://www.kdnuggets.com/2018/09/sql-case-study-helping-startup-ceo-manage-data.html/2)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/09/sql-case-study-helping-startup-ceo-manage-data.html?page=2#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2018/09/sql-case-study-helping-startup-ceo-manage-data.html?page=2#comments)'
 - en: '**How many rows do exist in a table?**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**表中存在多少行？**'
 - en: 'We would like to know how many persons in this startup. We do that by counting
     the number of rows using count(*):'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们想知道这个初创公司有多少人。我们通过使用 count(*) 计算行数来实现：
 - en: '[PRE0]'
+  id: totrans-5
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '**How many rows with minimum values in a column?**'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '**列中有多少行具有最小值？**'
 - en: 'We would like to know which persons in the startup have the lowest salary and
     how many of them. Let’s try this query:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们想知道在初创公司中哪些人的薪水最低以及有多少人。让我们尝试这个查询：
 - en: '[PRE1]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'This will introduce an error which says:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将导致一个错误，提示：
 - en: '[PRE2]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Aggregate functions are like COUNT(), MIN(), MAX(), AVG(), SUM(), etc. which
     take values in a column as an input and returns a single value (or NULL) . Here
     MIN() is used after WHERE clause, so we can do that by checking the salary if
     it equals the minimum value (or not) which we can get from another query, not
     by aggregating it, like this:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 聚合函数如 COUNT()、MIN()、MAX()、AVG()、SUM() 等，它们将列中的值作为输入并返回一个单一值（或 NULL）。这里 MIN()
+    在 WHERE 子句之后使用，因此我们可以通过检查薪水是否等于最小值（或不是）来实现，这个最小值我们可以从另一个查询中获取，而不是通过聚合来获取，如下所示：
 - en: '[PRE3]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: But this will produce illogical value which is 1000$, so what happened?!
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 但这将产生不合理的值，即 1000$，那么发生了什么？！
 - en: This is done because of the collation sequence, if you are interested in the
     ASCII collating orders you can see this [link](https://www.ibm.com/support/knowledgecenter/SS6SG3_6.1.0/com.ibm.cobol61.ent.doc/PGandLR/ref/rlebcasc.html).
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是因为排序顺序，如果你对 ASCII 排序顺序感兴趣，可以查看这个[链接](https://www.ibm.com/support/knowledgecenter/SS6SG3_6.1.0/com.ibm.cobol61.ent.doc/PGandLR/ref/rlebcasc.html)。
 - en: So, what should we do now?
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，我们现在应该怎么做？
 - en: Actually, I did something not efficient at the beginning of creating the table
     which is storing the column salary as varchar. The reason exists at the *RidFilter*‘s
     *answer* of this [stackoverflow question](https://stackoverflow.com/questions/3008371/storing-numbers-as-varchar).
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，我在创建表的开始阶段做了一些效率不高的事情，那就是将薪水列存储为 varchar。原因存在于这个[stackoverflow 问题](https://stackoverflow.com/questions/3008371/storing-numbers-as-varchar)的*RidFilter*的*回答*中。
 - en: But believe it or not, I dealt with some data like that. It includes dollar
     sign stored as varachar so let’s fix it to be able to do some operations on it.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 相信与否，我处理过一些类似的数据。它包括存储为 varachar 的美元符号，因此让我们修复它，以便能够对其进行操作。
 - en: '**Removing a character from a string:**'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**从字符串中删除字符：**'
 - en: This problem can be solved by first removing the dollar sign and then converting
     this varchar to numeric value which can be integer.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个问题可以通过首先删除美元符号，然后将该 varchar 转换为可以是整数的数值来解决。
 - en: '[PRE4]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: This REPLACE() function will result in the values in salary column without the
     dollar sign (i.e. replacing the $ by nothing), but beware that this is not edited
     into the table. So, we need to use it next time we need to operate on it. Also,
     beware that this column is still string not numeric, so we need to cast it into
     decimal.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个 REPLACE() 函数将导致薪水列中的值去除美元符号（即用空替换 $），但请注意这并没有编辑到表中。所以，下次我们需要操作时需要使用它。此外，请注意，这一列仍然是字符串而非数值，因此我们需要将其转换为小数。
 - en: 'Now, we can apply the MIN() on the casted replaced values of the salaries:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们可以对转换后的薪水值应用 MIN()：
 - en: '[PRE5]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The CAST() function converts the new salary column into decimal values.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: CAST() 函数将新的薪水列转换为小数值。
 - en: Remember, we still see the salary with the dollar sign in the startup table.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 记住，我们在初创公司表中仍然看到带有美元符号的薪水。
 - en: 'To make it available in the table without the dollar sign, we use the UPDATE()
     function:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了在表中去除美元符号，我们使用 UPDATE() 函数：
 - en: '[PRE6]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: We, now, return to our problem which is finding out the persons inside the startup
     who have the lowest salary.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们回到我们的难题，即找出初创公司中薪水最低的人员。
 - en: '[PRE7]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'We could use just one query with a subquery instead of the last two separate
     queries:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以只使用一个带有子查询的查询，而不是最后两个独立的查询：
 - en: '[PRE8]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'We can also count them using COUNT(*):'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以使用 COUNT(*) 进行计数：
 - en: '[PRE9]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '**The three lowest paid:**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**最低薪水的三个人：**'
 - en: We would like to get the three lowest paid engineers in the startup. We can
     do that by first querying all the rows using ORDER BY clause followed by ASC or
     just ORDER BY which will order the output ascendingly by default.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们希望获取初创公司中薪资最低的三名工程师。我们可以通过首先使用 ORDER BY 子句并跟随 ASC，或者仅使用 ORDER BY，这将默认按升序排列输出。
 - en: '[PRE10]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Adding to ‘LIMIT 3’ will bring the first three corresponding to the rows with
     the lowest salaries.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 添加 ‘LIMIT 3’ 将带来前三个对应薪资最低的行。
 - en: '**The three highest paid:**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**薪资最高的三名：**'
 - en: Notice what we changed!
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意我们做了什么改变！
 - en: '[PRE11]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '**Total salaries:**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**总薪资：**'
 - en: 'Let’s say the CEO wants to know the total cost of the salaries, so we can do
     that using the aggregate function SUM():'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设 CEO 想了解薪资总成本，我们可以使用聚合函数 SUM() 来实现。
 - en: '[PRE12]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '**Adding a column to a table:**'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**向表中添加列：**'
 - en: 'Let’s say, he wants now to hire females, so he would add another column named
     sex. This can be done using ALTER clause:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设他现在想雇佣女性，因此他会添加一个名为 sex 的列。这可以通过 ALTER 子句完成：
 - en: '[PRE13]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'We should update each row like that:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们应该这样更新每一行：
 - en: '[PRE14]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '**Using for loop:**'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 for 循环：**'
 - en: Of course, this is a cumbersome if we do it manually. That’s why we should use
     loops instead.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，如果我们手动操作，这会很繁琐。因此，我们应该改用循环。
 - en: 'SQL does not have loops, but it can only be used inside a procedural language
     function or a ‘Do’ statement as answered [here](https://stackoverflow.com/questions/19145761/postgres-for-loop):'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: SQL 没有循环，但可以在过程性语言函数或 ‘Do’ 语句中使用，如 [这里](https://stackoverflow.com/questions/19145761/postgres-for-loop)
+    所答：
 - en: '[PRE15]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '**(Kind of) histogram:**'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**（类似）直方图：**'
 - en: 'One of the possible requirements is to know the frequency of something occurrence.
     We can get the frequency of the city among the engineers in the startup by counting
     each row occurrence for each city value. That’s why we use GROUPY BY clause:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中一个可能的要求是了解某事发生的频率。我们可以通过计算每个城市值的每行出现次数来获取城市在初创公司工程师中的频率。这就是我们使用 GROUP BY 子句的原因：
 - en: '[PRE16]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: This is like histogram; it shows us how frequent value occurs.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 这类似于直方图；它展示了值出现的频率。
 - en: 'We can name any column if we follow it by AS:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们跟随 AS，可以为任何列命名：
 - en: '[PRE17]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: 'I hope you find this article useful. If you want to know about my story before
     getting the first internship in data science, I wrote an [article](https://medium.com/@ezzeddinabdullah/from-electronics-and-communications-engineering-to-data-science-a373448a783d)
     at medium about it. If you want to see more updates and challenges, please follow
     me on:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望你觉得这篇文章有用。如果你想了解我在获得第一个数据科学实习之前的故事，我在 Medium 上写了一篇 [文章](https://medium.com/@ezzeddinabdullah/from-electronics-and-communications-engineering-to-data-science-a373448a783d)。如果你想看到更多更新和挑战，请关注我：
 - en: 'Linkedin: [https://www.linkedin.com/in/ezzeddinabdullah/](https://www.linkedin.com/in/ezzeddinabdullah/)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'Linkedin: [https://www.linkedin.com/in/ezzeddinabdullah/](https://www.linkedin.com/in/ezzeddinabdullah/)'
 - en: 'Medium: [https://medium.com/@ezzeddinabdullah](https://medium.com/@ezzeddinabdullah)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'Medium: [https://medium.com/@ezzeddinabdullah](https://medium.com/@ezzeddinabdullah)'
 - en: 'Twitter: [https://twitter.com/EzzEddinAbdulah](https://twitter.com/EzzEddinAbdulah)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'Twitter: [https://twitter.com/EzzEddinAbdulah](https://twitter.com/EzzEddinAbdulah)'
 - en: 'Quora: [https://www.quora.com/profile/Ezz-El-Din-Abdullah](https://www.quora.com/profile/Ezz-El-Din-Abdullah)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'Quora: [https://www.quora.com/profile/Ezz-El-Din-Abdullah](https://www.quora.com/profile/Ezz-El-Din-Abdullah)'
 - en: '**Bio: [Ezz El Din Abdullah](https://www.linkedin.com/in/ezzeddinabdullah/)
     is a former Data Scientist Intern & Programming Tutor.**'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历： [Ezz El Din Abdullah](https://www.linkedin.com/in/ezzeddinabdullah/)
+    是前数据科学实习生和编程导师。**'
 - en: '**Related:**'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[SQL Cheat Sheet](/2018/07/sql-cheat-sheet.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 备忘单](/2018/07/sql-cheat-sheet.html)'
 - en: '[Scalable Select of Random Rows in SQL](/2018/04/scalable-select-random-rows-sql.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 中的可扩展随机行选择](/2018/04/scalable-select-random-rows-sql.html)'
 - en: '[To SQL or not To SQL: that is the question!](/2018/05/sql-not-sql-question.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[选择 SQL 还是不选择 SQL：这是一个问题！](/2018/05/sql-not-sql-question.html)'
 - en: '* * *'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-70
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 门课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织进行IT管理'
 - en: '* * *'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 主题更多信息
 - en: '[Automated Machine Learning with Python: A Case Study](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Python的自动化机器学习：案例研究](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)'
 - en: '[12 Tips: From Data Analyst to Startup Co-Founder](https://www.kdnuggets.com/2021/12/12-tips-data-analyst-to-co-founder.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[12个建议：从数据分析师到创业公司联合创始人](https://www.kdnuggets.com/2021/12/12-tips-data-analyst-to-co-founder.html)'
 - en: '[10 Hurdles of Building a Deep Tech Startup in the Age of ChatGPT](https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ChatGPT时代建立深科技创业公司的10个障碍](https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html)'
 - en: '[KDnuggets News, August 31: The Complete Data Science Study Roadmap…](https://www.kdnuggets.com/2022/n35.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets新闻，8月31日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)'
 - en: '[Super Study Guide: A Free Algorithms and Data Structures eBook](https://www.kdnuggets.com/2022/06/super-study-guide-free-algorithms-data-structures-ebook.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超级学习指南：一本免费的算法与数据结构电子书](https://www.kdnuggets.com/2022/06/super-study-guide-free-algorithms-data-structures-ebook.html)'
 - en: '[The Complete Data Science Study Roadmap](https://www.kdnuggets.com/2022/08/complete-data-science-study-roadmap.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[完整的数据科学学习路线图](https://www.kdnuggets.com/2022/08/complete-data-science-study-roadmap.html)'
