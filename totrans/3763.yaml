@@ -1,14 +1,20 @@
 - en: 'Deep Learning Reading Group: Skip-Thought Vectors'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 深度学习阅读组：Skip-Thought 向量
 - en: 原文：[https://www.kdnuggets.com/2016/11/deep-learning-group-skip-thought-vectors.html](https://www.kdnuggets.com/2016/11/deep-learning-group-skip-thought-vectors.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/11/deep-learning-group-skip-thought-vectors.html](https://www.kdnuggets.com/2016/11/deep-learning-group-skip-thought-vectors.html)
 - en: '![Books header](../Images/ba0272f2ae69ebcf2a399dfabc406a69.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![书籍头图](../Images/ba0272f2ae69ebcf2a399dfabc406a69.png)'
 - en: Continuing the tour of older papers that started with our [ResNet blog post](https://gab41.lab41.org/lab41-reading-group-deep-residual-learning-for-image-recognition-ffeb94745a1f#.bc3hiquop),
     we now take on [Skip-Thought Vectors](https://arxiv.org/abs/1506.06726) by [Kiros](http://www.cs.toronto.edu/~rkiros/) *et
     al*. Their goal was to come up with a useful embedding for sentences that was
@@ -16,8 +22,12 @@
     inspiration from Word2Vec skip-gram (you can find [my explanation of that algorithm
     here](https://gab41.lab41.org/python2vec-word-embeddings-for-source-code-3d14d030fe8f#.e301tsg77))
     and attempt to extend it to sentences.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 继续我们从[ResNet 博客文章](https://gab41.lab41.org/lab41-reading-group-deep-residual-learning-for-image-recognition-ffeb94745a1f#.bc3hiquop)开始的旧论文巡展，我们现在探讨[Kiros](http://www.cs.toronto.edu/~rkiros/)的[Skip-Thought
+    向量](https://arxiv.org/abs/1506.06726)*等*。他们的目标是提出一种有用的句子嵌入，该嵌入未针对单一任务进行调整，并且不需要标记数据进行训练。他们从
+    Word2Vec skip-gram 获取灵感（你可以在[这里找到我对该算法的解释](https://gab41.lab41.org/python2vec-word-embeddings-for-source-code-3d14d030fe8f#.e301tsg77)），并试图将其扩展到句子。
 - en: Skip-thought vectors are created using an encoder-decoder model. The encoder
     takes in the training sentence and outputs a vector. There are two decoders both
     of which take the vector as input. The first attempts to predict the previous
@@ -29,41 +39,60 @@
     from uni- and bi-skip. Only minimal tokenization is done to the input sentences.
     A diagram indicating the input sentence and the two predicted sentences is shown
     below.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: Skip-thought 向量是使用编码器-解码器模型创建的。编码器接收训练句子并输出一个向量。解码器有两个，都以向量作为输入。第一个尝试预测前一句话，第二个尝试预测下一句话。编码器和解码器都由递归神经网络（RNN）构建。尝试了多种编码器类型，包括
+    uni-skip、bi-skip 和 combine-skip。Uni-skip 以正向阅读句子。Bi-skip 既正向又反向阅读句子，并将结果连接起来。Combined-skip
+    将 uni-skip 和 bi-skip 的向量连接起来。对输入句子只进行了最小限度的标记化。下图显示了输入句子和两个预测句子。
 - en: '![](../Images/45e90413b5490ed4bd69beb3b4bca739.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/45e90413b5490ed4bd69beb3b4bca739.png)'
 - en: '*Given a sentence (the grey dots), skip-thought attempts to predict the preceding
     sentence (red dots) and the next sentence (green dots). Figure from the paper.*'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '*给定一个句子（灰点），skip-thought 尝试预测前一句话（红点）和下一句话（绿点）。图示来自论文。*'
 - en: Their model requires groups of sentences in order to train, and so trained on
     the BookCorpus Dataset. The dataset consists of novels by unpublished authors
     and is (unsurprisingly) dominated by romance and fantasy novels. This “bias” in
     the dataset will become apparent later when discussing some of the sentences used
     to test the skip-thought model; some of the retrieved sentences are quite exciting!
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 他们的模型需要句子组进行训练，因此在 BookCorpus 数据集上进行训练。该数据集由未出版作者的小说组成，(不足为奇) 被浪漫和奇幻小说主导。这种数据集中的“偏见”将在后面讨论一些用于测试
+    skip-thought 模型的句子时变得明显；一些检索到的句子非常令人兴奋！
 - en: 'Building a model that accounts for the meaning of an entire sentence is tough
     because language is remarkably flexible. Changing a single word can either completely
     change the meaning of a sentence or leave it unaltered. The same is true for moving
     words around. As an example:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 构建考虑整个句子意义的模型很困难，因为语言非常灵活。改变一个词语可能会完全改变句子的意义，也可能不会改变句子。移动词语也是如此。举个例子：
 - en: One difficulty in building a model to handle sentences is that a single word
     can be changed and yet the meaning of the sentence is the same.
+  id: totrans-9
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 构建处理句子的模型的一个难点在于单个词语的改变可能不会改变句子的意义。
 - en: 'Put a different way:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 换句话说：
 - en: One challenge in building a model to handle sentences is that a single word
     can be changed and yet the meaning of the sentence is the same.
+  id: totrans-11
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 构建处理句子的模型的一个挑战在于单个词语的改变可能不会改变句子的意义。
 - en: 'Changing a single word has had almost no effect on the meaning of that sentence.
     To account for these word level changes, the skip-thought model needs to be able
     to handle a large variety of words, some of which were not present in the training
@@ -72,52 +101,74 @@
     the word vectors in their sentences. Below are shown the nearest neighbor words
     after the vocabulary expansion using query words that do not appear in the training
     vocabulary:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 改变一个单词几乎没有对句子的意义产生影响。为了处理这些单词层级的变化，skip-thought模型需要能够处理大量词汇，其中一些在训练句子中并不存在。作者通过使用预训练的连续词袋（CBOW）Word2Vec模型，并学习从Word2Vec向量到他们句子中的词向量的翻译来解决这个问题。以下展示了在词汇扩展后，使用未出现在训练词汇中的查询词的最近邻词：
 - en: '![](../Images/da2cb4c3ebfcd31a0af039184b790316.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/da2cb4c3ebfcd31a0af039184b790316.png)'
 - en: '*Nearest neighbor words for various words that were not included in the training
     vocabulary. Table from the paper.*'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '*未包含在训练词汇中的各种单词的最近邻词。表格来自论文。*'
 - en: 'So how well does the model work? One way to probe it is to retrieve the closest
     sentence to a query sentence; here are some examples:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么模型的效果如何呢？一种探测方法是检索与查询句子最接近的句子；以下是一些例子：
 - en: Query: “I’m sure you’ll have a glamorous evening,” she said, giving an exaggerated
     wink.
+  id: totrans-16
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 查询：“我相信你今晚会有一个辉煌的夜晚，”她说，夸张地眨了眨眼。
 - en: Retrieved: “I’m really glad you came to the party tonight,” he said, turning
     to her.
+  id: totrans-17
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 检索结果：“我真的很高兴你今晚来参加聚会，”他说，转向她。
 - en: 'And:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有：
 - en: Query: Although she could tell he hadn’t been too interested in any of their
     other chitchat, he seemed genuinely curious about this.
+  id: totrans-19
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 查询：虽然她可以告诉他对他们其他的闲聊不太感兴趣，但他似乎对这个话题真的很感兴趣。
 - en: Retrieved: Although he hadn’t been following her career with a microscope, he’d
     definitely taken notice of her appearance.
+  id: totrans-20
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 检索结果：虽然他并没有用显微镜跟踪她的职业生涯，但他肯定注意到了她的外貌。
 - en: The sentences are in fact very similar in both structure and meaning (and a
     bit salacious, as I warned earlier) so the model appears to be doing a good job.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些句子在结构和意义上实际上非常相似（如我之前警告的那样，有点猥亵），因此模型似乎表现良好。
 - en: To perform more rigorous experimentation, and to test the value of skip-thought
     vectors as a generic sentence feature extractor, the authors run the model through
     a series of tasks using the encoded vectors with simple, linear classifiers trained
     on top of them.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了进行更严格的实验，并测试skip-thought向量作为通用句子特征提取器的价值，作者通过一系列任务运行模型，使用编码向量和在其上训练的简单线性分类器。
 - en: They find that their generic skip-thought representation performs very well
     for detecting the semantic relatedness of two sentences and for detecting where
     a sentence is paraphrasing another one. Skip-thought vectors perform relatively
@@ -125,20 +176,25 @@
     extract image feature vectors). Skip-thought performs poorly for sentiment analysis,
     producing equivalent results to various bag of word models but at a much higher
     computational cost.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 他们发现，通用的skip-thought表示在检测两个句子的语义相关性和检测句子是否在释义另一个句子方面表现非常好。Skip-thought向量在图像检索和标注中表现相对良好（在这些任务中，他们使用了[VGG](https://arxiv.org/pdf/1409.1556.pdf)来提取图像特征向量）。Skip-thought在情感分析中的表现较差，产生的结果与各种词袋模型相当，但计算成本高得多。
 - en: We have used skip-thought vectors a little bit at the Lab, most recently for
     the [Pythia challenge](https://gab41.lab41.org/tell-me-something-i-dont-know-detecting-novelty-and-redundancy-with-natural-language-processing-818124e4013c#.6xf8nejr9).
     We found them to be useful for novelty detection, but incredibly slow. Running
     skip-thought vectors on a corpus of about 20,000 documents took many hours, where
     as simpler (and as effective) methods took seconds or minutes. I will update with
     a link to their blog post when it comes online.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在实验室中使用了skip-thought向量，最近用于[Pythia挑战赛](https://gab41.lab41.org/tell-me-something-i-dont-know-detecting-novelty-and-redundancy-with-natural-language-processing-818124e4013c#.6xf8nejr9)。我们发现它们在新颖性检测中很有用，但速度极慢。在约20,000份文档的语料库上运行skip-thought向量需要很多小时，而更简单（且同样有效）的方法只需几秒钟或几分钟。当他们的博客文章上线时，我会更新链接。
 - en: '**[Alexander Gude](https://twitter.com/alex_gude)** is currently a data scientist
     at Lab41 working on investigating recommender system algorithms. He holds a BA
     in physics from University of California, Berkeley, and a PhD in Elementary Particle
     Physics from University of Minnesota-Twin Cities.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: '**[Lab41](http://www.lab41.org)** is a “challenge lab” where the U.S. Intelligence
@@ -147,77 +203,96 @@
     to ideas, talent, and technology to explore what works and what doesn’t in data
     analytics. An open, collaborative environment, Lab41 fosters valuable relationships
     between participants.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://gab41.lab41.org/lab41-reading-group-skip-thought-vectors-fec68c05aa92).
     Reposted with permission.'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: '[In Deep Learning, Architecture Engineering is the New Feature Engineering](/2016/07/deep-learning-architecture-engineering-feature-engineering.html)'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Up to Speed on Deep Learning: July Update](/2016/08/deep-learning-july-update.html)'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Why Do Deep Learning Networks Scale?](/2016/07/deep-learning-networks-scale.html)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-33
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Reading Minds with AI: Researchers Translate Brain Waves to Images](https://www.kdnuggets.com/2023/03/reading-minds-ai-researchers-translate-brain-waves-images.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[A Step by Step Guide to Reading and Understanding SQL Queries](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[2024 Reading List: 5 Essential Reads on Artificial Intelligence](https://www.kdnuggets.com/2024-reading-list-5-essential-reads-on-artificial-intelligence)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[SQL Group By and Partition By Scenarios: When and How to Combine…](https://www.kdnuggets.com/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[KDnuggets News, June 8: 21 Cheat Sheets for Data Science…](https://www.kdnuggets.com/2022/n23.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
