@@ -1,12 +1,15 @@
 - en: Tidying Data in Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2017/01/tidying-data-python.html](https://www.kdnuggets.com/2017/01/tidying-data-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '**By Jean-Nicholas Hould, JeanNicholasHould.com.**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: 'I recently came across a paper named [Tidy Data](http://vita.had.co.nz/papers/tidy-data.pdf) by
@@ -15,6 +18,7 @@
     paper, Wickham demonstrates how any dataset can be structured in a standardized
     way prior to analysis. He presents in detail the different types of data sets
     and how to wrangle them into a standard format.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: As a data scientist, I think you should get very familiar with this standardized
@@ -23,92 +27,119 @@
     are performing, you will have to clean the data at some point. Tidying your data
     in a standard format makes things easier down the road. You can reuse a standard
     set of tools across your different analysis.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: In this post, I will summarize some tidying examples Wickham uses in his paper
     and I will demonstrate how to do so using the Python [pandas](http://pandas.pydata.org/) library.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Defining tidy data
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'The structure Wickham defines as tidy has the following attributes:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: Each *variable* forms a column and contains *values*
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Each *observation* forms a row
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Each type of *observational unit* forms a table
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'A few definitions:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: 'Variable: A measurement or an attribute. *Height, weight, sex, etc.*'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Value: The actual measurement or attribute. *152 cm, 80 kg, female, etc.*'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Observation: All values measure on the same unit. *Each person.*'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'An example of a *messy dataset*:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: '|  | Treatment A | Treatment B |'
+  id: totrans-16
   prefs: []
   type: TYPE_TB
 - en: '| --- | --- | --- |'
+  id: totrans-17
   prefs: []
   type: TYPE_TB
 - en: '| John Smith | - | 2 |'
+  id: totrans-18
   prefs: []
   type: TYPE_TB
 - en: '| Jane Doe | 16 | 11 |'
+  id: totrans-19
   prefs: []
   type: TYPE_TB
 - en: '| Mary Johnson | 3 | 1 |'
+  id: totrans-20
   prefs: []
   type: TYPE_TB
 - en: 'An example of a *tidy dataset*:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: '| Name | Treatment | Result |'
+  id: totrans-22
   prefs: []
   type: TYPE_TB
 - en: '| --- | --- | --- |'
+  id: totrans-23
   prefs: []
   type: TYPE_TB
 - en: '| John Smith | a | - |'
+  id: totrans-24
   prefs: []
   type: TYPE_TB
 - en: '| Jane Doe | a | 16 |'
+  id: totrans-25
   prefs: []
   type: TYPE_TB
 - en: '| Mary Johnson | a | 3 |'
+  id: totrans-26
   prefs: []
   type: TYPE_TB
 - en: '| John Smith | b | 2 |'
+  id: totrans-27
   prefs: []
   type: TYPE_TB
 - en: '| Jane Doe | b | 11 |'
+  id: totrans-28
   prefs: []
   type: TYPE_TB
 - en: '| Mary Johnson | b | 1 |'
+  id: totrans-29
   prefs: []
   type: TYPE_TB
 - en: Tidying messy datasets
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -116,613 +147,909 @@
     messy datasets into the tidy format. The goal here is not to analyze the datasets
     but rather prepare them in a standardized way prior to the analysis. These are
     the five types of messy datasets we’ll tackle:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: Column headers are values, not variable names.
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Multiple variables are stored in one column.
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Variables are stored in both rows and columns.
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Multiple types of observational units are stored in the same table.
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: A single observational unit is stored in multiple tables.
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '*Note: All of the code presented in this post is available on [Github](https://github.com/nickhould/tidy-data-python).*'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: Column headers are values, not variable names
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '**Pew Research Center Dataset**'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: This dataset explores the relationship between income and religion.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: 'Problem: The columns headers are composed of the possible income values.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 问题：列标题由可能的收入值组成。
 - en: '[PRE0]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '| religion | <$10k | $10-20k | $20-30k | $30-40k | $40-50k | $50-75k |'
+  id: totrans-43
   prefs: []
   type: TYPE_TB
+  zh: '| 宗教 | <$10k | $10-20k | $20-30k | $30-40k | $40-50k | $50-75k |'
 - en: '| --- | --- | --- | --- | --- | --- | --- |'
+  id: totrans-44
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- | --- | --- | --- |'
 - en: '| Agnostic | 27 | 34 | 60 | 81 | 76 | 137 |'
+  id: totrans-45
   prefs: []
   type: TYPE_TB
+  zh: '| 无神论者 | 27 | 34 | 60 | 81 | 76 | 137 |'
 - en: '| Atheist | 12 | 27 | 37 | 52 | 35 | 70 |'
+  id: totrans-46
   prefs: []
   type: TYPE_TB
+  zh: '| 无神论者 | 12 | 27 | 37 | 52 | 35 | 70 |'
 - en: '| Buddhist | 27 | 21 | 30 | 34 | 33 | 58 |'
+  id: totrans-47
   prefs: []
   type: TYPE_TB
+  zh: '| 佛教徒 | 27 | 21 | 30 | 34 | 33 | 58 |'
 - en: '| Catholic | 418 | 617 | 732 | 670 | 638 | 1116 |'
+  id: totrans-48
   prefs: []
   type: TYPE_TB
+  zh: '| 天主教 | 418 | 617 | 732 | 670 | 638 | 1116 |'
 - en: '| Dont know/refused | 15 | 14 | 15 | 11 | 10 | 35 |'
+  id: totrans-49
   prefs: []
   type: TYPE_TB
+  zh: '| 不知道/拒绝 | 15 | 14 | 15 | 11 | 10 | 35 |'
 - en: '| Evangelical Prot | 575 | 869 | 1064 | 982 | 881 | 1486 |'
+  id: totrans-50
   prefs: []
   type: TYPE_TB
+  zh: '| 福音派新教 | 575 | 869 | 1064 | 982 | 881 | 1486 |'
 - en: '| Hindu | 1 | 9 | 7 | 9 | 11 | 34 |'
+  id: totrans-51
   prefs: []
   type: TYPE_TB
+  zh: '| 印度教 | 1 | 9 | 7 | 9 | 11 | 34 |'
 - en: '| Historically Black Prot | 228 | 244 | 236 | 238 | 197 | 223 |'
+  id: totrans-52
   prefs: []
   type: TYPE_TB
+  zh: '| 历史性黑人新教 | 228 | 244 | 236 | 238 | 197 | 223 |'
 - en: '| Jehovahs Witness | 20 | 27 | 24 | 24 | 21 | 30 |'
+  id: totrans-53
   prefs: []
   type: TYPE_TB
+  zh: '| 耶和华见证人 | 20 | 27 | 24 | 24 | 21 | 30 |'
 - en: '| Jewish | 19 | 19 | 25 | 25 | 30 | 95 |'
+  id: totrans-54
   prefs: []
   type: TYPE_TB
+  zh: '| 犹太教 | 19 | 19 | 25 | 25 | 30 | 95 |'
 - en: A tidy version of this dataset is one in which the income values would not be
     columns headers but rather values in an `income` column. In order to tidy this
     dataset, we need to [melt](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.melt.html) it.
     The *pandas* library has a built-in function that allows to do just that. It “unpivots”
     a DataFrame from a wide format to a long format. We’ll reuse this function a few
     times through the post.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集的整洁版本是收入值不会成为列标题，而是作为`income`列中的值。为了整理这个数据集，我们需要[转化](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.melt.html)它。*pandas*库有一个内置函数可以做到这一点，它将数据框从宽格式“反转”成长格式。我们将在本文中多次重用这个函数。
 - en: '[PRE1]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'This outputs a tidy version of the dataset:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将输出数据集的整洁版本：
 - en: '| religion | income | freq |'
+  id: totrans-58
   prefs: []
   type: TYPE_TB
+  zh: '| 宗教 | 收入 | 频率 |'
 - en: '| --- | --- | --- |'
+  id: totrans-59
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- |'
 - en: '| Agnostic | <$10k | 27 |'
+  id: totrans-60
   prefs: []
   type: TYPE_TB
+  zh: '| 无神论者 | <$10k | 27 |'
 - en: '| Agnostic | $30-40k | 81 |'
+  id: totrans-61
   prefs: []
   type: TYPE_TB
+  zh: '| 无神论者 | $30-40k | 81 |'
 - en: '| Agnostic | $40-50k | 76 |'
+  id: totrans-62
   prefs: []
   type: TYPE_TB
+  zh: '| 无神论者 | $40-50k | 76 |'
 - en: '| Agnostic | $50-75k | 137 |'
+  id: totrans-63
   prefs: []
   type: TYPE_TB
+  zh: '| 无神论者 | $50-75k | 137 |'
 - en: '| Agnostic | $10-20k | 34 |'
+  id: totrans-64
   prefs: []
   type: TYPE_TB
+  zh: '| 无神论者 | $10-20k | 34 |'
 - en: '| Agnostic | $20-30k | 60 |'
+  id: totrans-65
   prefs: []
   type: TYPE_TB
+  zh: '| 无神论者 | $20-30k | 60 |'
 - en: '| Atheist | $40-50k | 35 |'
+  id: totrans-66
   prefs: []
   type: TYPE_TB
+  zh: '| 无神论者 | $40-50k | 35 |'
 - en: '| Atheist | $20-30k | 37 |'
+  id: totrans-67
   prefs: []
   type: TYPE_TB
+  zh: '| 无神论者 | $20-30k | 37 |'
 - en: '| Atheist | $10-20k | 27 |'
+  id: totrans-68
   prefs: []
   type: TYPE_TB
+  zh: '| 无神论者 | $10-20k | 27 |'
 - en: '| Atheist | $30-40k | 52 |'
+  id: totrans-69
   prefs: []
   type: TYPE_TB
+  zh: '| 无神论者 | $30-40k | 52 |'
 - en: '**Billboard Top 100 Dataset**'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '**公告牌前100名数据集**'
 - en: This dataset represents the weekly rank of songs from the moment they enter
     the Billboard Top 100 to the subsequent 75 weeks.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个数据集表示从歌曲进入《公告牌》前100名时开始到接下来的75周的每周排名。
 - en: 'Problems:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 问题：
 - en: 'The columns headers are composed of values: the week number (`x1st.week`, …)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 列标题由值组成：周数（`x1st.week`，…）
 - en: If a song is in the Top 100 for less than 75 weeks, the remaining columns are
     filled with missing values.
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果一首歌在前100名中停留少于75周，剩余的列将填充缺失值。
 - en: '[PRE2]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '| year | artist.inverted | track | time | genre | date.entered | date.peaked
     | x1st.week | x2nd.week | ... |'
+  id: totrans-76
   prefs: []
   type: TYPE_TB
+  zh: '| 年份 | 艺术家.倒序 | 曲目 | 时长 | 风格 | 进入日期 | 高峰日期 | 第一周 | 第二周 | ... |'
 - en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |'
+  id: totrans-77
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |'
 - en: '| 2000 | Destiny''s Child | Independent Women Part I | 3:38 | Rock | 2000-09-23
     | 2000-11-18 | 78 | 63.0 | ... |'
+  id: totrans-78
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 命运之子 | 独立女性第一部分 | 3:38 | 摇滚 | 2000-09-23 | 2000-11-18 | 78 | 63.0
+    | ... |'
 - en: '| 2000 | Santana | Maria, Maria | 4:18 | Rock | 2000-02-12 | 2000-04-08 | 15
     | 8.0 | ... |'
+  id: totrans-79
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 桑坦娜 | 玛利亚，玛利亚 | 4:18 | 摇滚 | 2000-02-12 | 2000-04-08 | 15 | 8.0 | ...
+    |'
 - en: '| 2000 | Savage Garden | I Knew I Loved You | 4:07 | Rock | 1999-10-23 | 2000-01-29
     | 71 | 48.0 | ... |'
+  id: totrans-80
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 野人花园 | 我知道我爱你 | 4:07 | 摇滚 | 1999-10-23 | 2000-01-29 | 71 | 48.0 |
+    ... |'
 - en: '| 2000 | Madonna | Music | 3:45 | Rock | 2000-08-12 | 2000-09-16 | 41 | 23.0
     | ... |'
+  id: totrans-81
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 麦当娜 | 音乐 | 3:45 | 摇滚 | 2000-08-12 | 2000-09-16 | 41 | 23.0 | ... |'
 - en: '| 2000 | Aguilera, Christina | Come On Over Baby (All I Want Is You) | 3:38
     | Rock | 2000-08-05 | 2000-10-14 | 57 | 47.0 | ... |'
+  id: totrans-82
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 克里斯蒂娜·阿奎莱拉 | 来吧宝贝（我只要你） | 3:38 | 摇滚 | 2000-08-05 | 2000-10-14 | 57
+    | 47.0 | ... |'
 - en: '| 2000 | Janet | Doesn''t Really Matter | 4:17 | Rock | 2000-06-17 | 2000-08-26
     | 59 | 52.0 | ... |'
+  id: totrans-83
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 贾妮特 | 无关紧要 | 4:17 | 摇滚 | 2000-06-17 | 2000-08-26 | 59 | 52.0 | ...
+    |'
 - en: '| 2000 | Destiny''s Child | Say My Name | 4:31 | Rock | 1999-12-25 | 2000-03-18
     | 83 | 83.0 | ... |'
+  id: totrans-84
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 命运之子 | 说我的名字 | 4:31 | 摇滚 | 1999-12-25 | 2000-03-18 | 83 | 83.0 | ...'
 - en: '| 2000 | Iglesias, Enrique | Be With You | 3:36 | Latin | 2000-04-01 | 2000-06-24
     | 63 | 45.0 | ... |'
+  id: totrans-85
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 恩里克·伊格莱西亚斯 | 和你在一起 | 3:36 | 拉丁 | 2000-04-01 | 2000-06-24 | 63 | 45.0
+    | ... |'
 - en: '| 2000 | Sisqo | Incomplete | 3:52 | Rock | 2000-06-24 | 2000-08-12 | 77 |
     66.0 | ... |'
+  id: totrans-86
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 西斯科 | 不完整 | 3:52 | 摇滚 | 2000-06-24 | 2000-08-12 | 77 | 66.0 | ...
+    |'
 - en: '| 2000 | Lonestar | Amazed | 4:25 | Country | 1999-06-05 | 2000-03-04 | 81
     | 54.0 | ... |'
+  id: totrans-87
   prefs: []
   type: TYPE_TB
 - en: A tidy version of this dataset is one without the week’s numbers as columns
     but rather as values of a single column. In order to do so, we’ll *melt* the weeks
     columns into a single `date` column. We will create one row per week for each
     record. If there is no data for the given week, we will not create a row.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-89
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'A tidier version of the dataset is shown below. There is still a lot of repetition
     of the song details: the track name, time and genre. For this reason, this dataset
     is still not completely tidy as per Wickham’s definition. We will address this
     in the next example.'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
 - en: '| year | artist.inverted | track | time | genre | week | rank | date |'
+  id: totrans-91
   prefs: []
   type: TYPE_TB
 - en: '| --- | --- | --- | --- | --- | --- | --- | --- |'
+  id: totrans-92
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 1 | 87
     | 2000-02-26 |'
+  id: totrans-93
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 2 | 82
     | 2000-03-04 |'
+  id: totrans-94
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 3 | 72
     | 2000-03-11 |'
+  id: totrans-95
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 4 | 77
     | 2000-03-18 |'
+  id: totrans-96
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 5 | 87
     | 2000-03-25 |'
+  id: totrans-97
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 6 | 94
     | 2000-04-01 |'
+  id: totrans-98
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 7 | 99
     | 2000-04-08 |'
+  id: totrans-99
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
     | R&B | 1 | 91 | 2000-09-02 |'
+  id: totrans-100
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
     | R&B | 2 | 87 | 2000-09-09 |'
+  id: totrans-101
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
     | R&B | 3 | 92 | 2000-09-16 |'
+  id: totrans-102
   prefs: []
   type: TYPE_TB
 - en: Multiple types in one table
+  id: totrans-103
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Following up on the Billboard dataset, we’ll now address the repetition problem
     of the previous table.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
 - en: 'Problems:'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
 - en: Multiple observational units (the `song` and its `rank`) in a single table.
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'We’ll first create a `songs` table which contains the details of each song:'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-108
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '| year | artist.inverted | track | time | genre | song_id |'
+  id: totrans-109
   prefs: []
   type: TYPE_TB
 - en: '| --- | --- | --- | --- | --- | --- |'
+  id: totrans-110
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 0 |'
+  id: totrans-111
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
     | R&B | 1 |'
+  id: totrans-112
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 3 Doors Down | Kryptonite | 3:53 | Rock | 2 |'
+  id: totrans-113
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 3 Doors Down | Loser | 4:24 | Rock | 3 |'
+  id: totrans-114
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 504 Boyz | Wobble Wobble | 3:35 | Rap | 4 |'
+  id: totrans-115
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | 98° | Give Me Just One Night (Una Noche) | 3:24 | Rock | 5 |'
+  id: totrans-116
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | A*Teens | Dancing Queen | 3:44 | Pop | 6 |'
+  id: totrans-117
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | Aaliyah | I Don''t Wanna | 4:15 | Rock | 7 |'
+  id: totrans-118
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | Aaliyah | Try Again | 4:03 | Rock | 8 |'
+  id: totrans-119
   prefs: []
   type: TYPE_TB
 - en: '| 2000 | Adams, Yolanda | Open My Heart | 5:30 | Gospel | 9 |'
+  id: totrans-120
   prefs: []
   type: TYPE_TB
 - en: We’ll then create a `ranks` table which only contains the `song_id`, `date` and
     the `rank`.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-122
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '| song_id | date | rank |'
+  id: totrans-123
   prefs: []
   type: TYPE_TB
 - en: '| --- | --- | --- |'
+  id: totrans-124
   prefs: []
   type: TYPE_TB
 - en: '| 0 | 2000-02-26 | 87 |'
+  id: totrans-125
   prefs: []
   type: TYPE_TB
 - en: '| 0 | 2000-03-04 | 82 |'
+  id: totrans-126
   prefs: []
   type: TYPE_TB
 - en: '| 0 | 2000-03-11 | 72 |'
+  id: totrans-127
   prefs: []
   type: TYPE_TB
 - en: '| 0 | 2000-03-18 | 77 |'
+  id: totrans-128
   prefs: []
   type: TYPE_TB
 - en: '| 0 | 2000-03-25 | 87 |'
+  id: totrans-129
   prefs: []
   type: TYPE_TB
 - en: '| 0 | 2000-04-01 | 94 |'
+  id: totrans-130
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 2000-04-01 | 94 |'
 - en: '| 0 | 2000-04-08 | 99 |'
+  id: totrans-131
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 2000-04-08 | 99 |'
 - en: '| 1 | 2000-09-02 | 91 |'
+  id: totrans-132
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 2000-09-02 | 91 |'
 - en: '| 1 | 2000-09-09 | 87 |'
+  id: totrans-133
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 2000-09-09 | 87 |'
 - en: '| 1 | 2000-09-16 | 92 |'
+  id: totrans-134
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 2000-09-16 | 92 |'
 - en: Multiple variables stored in one column
+  id: totrans-135
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一列中存储多个变量
 - en: '**Tubercolosis Records from World Health Organization**'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: '**世界卫生组织的结核病记录**'
 - en: This dataset documents the count of confirmed tuberculosis cases by country,
     year, age and sex.
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个数据集记录了按国家、年份、年龄和性别确认的结核病病例数量。
 - en: 'Problems:'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 问题：
 - en: 'Some columns contain multiple values: sex and age.'
+  id: totrans-139
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一些列包含多个值：性别和年龄。
 - en: Mixture of zeros and missing values `NaN`. This is due to the data collection
     process and the distinction is important for this dataset.
+  id: totrans-140
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 零值和缺失值`NaN`的混合。这是由于数据收集过程中的原因，区分这些值对于这个数据集很重要。
 - en: '[PRE6]'
+  id: totrans-141
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '| country | year | m014 | m1524 | m2534 | m3544 | m4554 | m5564 | m65 | mu
     | f014 |'
+  id: totrans-142
   prefs: []
   type: TYPE_TB
+  zh: '| country | year | m014 | m1524 | m2534 | m3544 | m4554 | m5564 | m65 | mu
+    | f014 |'
 - en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |'
+  id: totrans-143
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |'
 - en: '| AD | 2000 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | NaN | NaN |'
+  id: totrans-144
   prefs: []
   type: TYPE_TB
+  zh: '| AD | 2000 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | NaN | NaN |'
 - en: '| AE | 2000 | 2 | 4 | 4 | 6 | 5 | 12 | 10 | NaN | 3 |'
+  id: totrans-145
   prefs: []
   type: TYPE_TB
+  zh: '| AE | 2000 | 2 | 4 | 4 | 6 | 5 | 12 | 10 | NaN | 3 |'
 - en: '| AF | 2000 | 52 | 228 | 183 | 149 | 129 | 94 | 80 | NaN | 93 |'
+  id: totrans-146
   prefs: []
   type: TYPE_TB
+  zh: '| AF | 2000 | 52 | 228 | 183 | 149 | 129 | 94 | 80 | NaN | 93 |'
 - en: '| AG | 2000 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | NaN | 1 |'
+  id: totrans-147
   prefs: []
   type: TYPE_TB
+  zh: '| AG | 2000 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | NaN | 1 |'
 - en: '| AL | 2000 | 2 | 19 | 21 | 14 | 24 | 19 | 16 | NaN | 3 |'
+  id: totrans-148
   prefs: []
   type: TYPE_TB
+  zh: '| AL | 2000 | 2 | 19 | 21 | 14 | 24 | 19 | 16 | NaN | 3 |'
 - en: '| AM | 2000 | 2 | 152 | 130 | 131 | 63 | 26 | 21 | NaN | 1 |'
+  id: totrans-149
   prefs: []
   type: TYPE_TB
+  zh: '| AM | 2000 | 2 | 152 | 130 | 131 | 63 | 26 | 21 | NaN | 1 |'
 - en: '| AN | 2000 | 0 | 0 | 1 | 2 | 0 | 0 | 0 | NaN | 0 |'
+  id: totrans-150
   prefs: []
   type: TYPE_TB
+  zh: '| AN | 2000 | 0 | 0 | 1 | 2 | 0 | 0 | 0 | NaN | 0 |'
 - en: '| AO | 2000 | 186 | 999 | 1003 | 912 | 482 | 312 | 194 | NaN | 247 |'
+  id: totrans-151
   prefs: []
   type: TYPE_TB
+  zh: '| AO | 2000 | 186 | 999 | 1003 | 912 | 482 | 312 | 194 | NaN | 247 |'
 - en: '| AR | 2000 | 97 | 278 | 594 | 402 | 419 | 368 | 330 | NaN | 121 |'
+  id: totrans-152
   prefs: []
   type: TYPE_TB
+  zh: '| AR | 2000 | 97 | 278 | 594 | 402 | 419 | 368 | 330 | NaN | 121 |'
 - en: '| AS | 2000 | NaN | NaN | NaN | NaN | 1 | 1 | NaN | NaN | NaN |'
+  id: totrans-153
   prefs: []
   type: TYPE_TB
+  zh: '| AS | 2000 | NaN | NaN | NaN | NaN | 1 | 1 | NaN | NaN | NaN |'
 - en: In order to tidy this dataset, we need to remove the different values from the
     header and unpivot them into rows. We’ll first need to melt the `sex + age group`columns
     into a single one. Once we have that single column, we’ll derive three columns
     from it: `sex`, `age_lower` and `age_upper`. With those, we’ll be able to properly
     build a tidy dataset.
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了整理这个数据集，我们需要从标题中删除不同的值，并将其展开成行。我们首先需要将`sex + age group`列融化成一个单一列。一旦我们有了那个单一列，我们将从中派生出三列：`sex`、`age_lower`和`age_upper`。有了这些，我们将能够正确地构建一个整洁的数据集。
 - en: '[PRE7]'
+  id: totrans-155
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: This results in a *tidy dataset*.
+  id: totrans-156
   prefs: []
   type: TYPE_NORMAL
+  zh: 这导致了一个*整洁的数据集*。
 - en: '| country | year | cases | sex | age |'
+  id: totrans-157
   prefs: []
   type: TYPE_TB
+  zh: '| country | year | cases | sex | age |'
 - en: '| --- | --- | --- | --- | --- |'
+  id: totrans-158
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- | --- |'
 - en: '| AD | 2000 | 0 | m | 0-14 |'
+  id: totrans-159
   prefs: []
   type: TYPE_TB
+  zh: '| AD | 2000 | 0 | m | 0-14 |'
 - en: '| AD | 2000 | 0 | m | 15-24 |'
+  id: totrans-160
   prefs: []
   type: TYPE_TB
+  zh: '| AD | 2000 | 0 | m | 15-24 |'
 - en: '| AD | 2000 | 1 | m | 25-34 |'
+  id: totrans-161
   prefs: []
   type: TYPE_TB
+  zh: '| AD | 2000 | 1 | m | 25-34 |'
 - en: '| AD | 2000 | 0 | m | 35-44 |'
+  id: totrans-162
   prefs: []
   type: TYPE_TB
+  zh: '| AD | 2000 | 0 | m | 35-44 |'
 - en: '| AD | 2000 | 0 | m | 45-54 |'
+  id: totrans-163
   prefs: []
   type: TYPE_TB
+  zh: '| AD | 2000 | 0 | m | 45-54 |'
 - en: '| AD | 2000 | 0 | m | 55-64 |'
+  id: totrans-164
   prefs: []
   type: TYPE_TB
+  zh: '| AD | 2000 | 0 | m | 55-64 |'
 - en: '| AE | 2000 | 3 | f | 0-14 |'
+  id: totrans-165
   prefs: []
   type: TYPE_TB
+  zh: '| AE | 2000 | 3 | f | 0-14 |'
 - en: '| AE | 2000 | 2 | m | 0-14 |'
+  id: totrans-166
   prefs: []
   type: TYPE_TB
+  zh: '| AE | 2000 | 2 | m | 0-14 |'
 - en: '| AE | 2000 | 4 | m | 15-24 |'
+  id: totrans-167
   prefs: []
   type: TYPE_TB
+  zh: '| AE | 2000 | 4 | m | 15-24 |'
 - en: '| AE | 2000 | 4 | m | 25-34 |'
+  id: totrans-168
   prefs: []
   type: TYPE_TB
+  zh: '| AE | 2000 | 4 | m | 25-34 |'
 - en: Variables are stored in both rows and columns
+  id: totrans-169
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 变量既存储在行中，也存储在列中
 - en: '**Global Historical Climatology Network Dataset**'
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: '**全球历史气候网络数据集**'
 - en: This dataset represents the daily weather records for a weather station (MX17004)
     in Mexico for five months in 2010.
+  id: totrans-171
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个数据集记录了2010年墨西哥一个气象站（MX17004）五个月的每日天气记录。
 - en: 'Problems:'
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: 问题：
 - en: Variables are stored in both rows (`tmin`, `tmax`) and columns (`days`).
+  id: totrans-173
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 变量既存储在行（`tmin`、`tmax`）中，也存储在列（`days`）中。
 - en: '[PRE8]'
+  id: totrans-174
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '| id | year | month | element | d1 | d2 | d3 | d4 | d5 | d6 | d7 | d8 |'
+  id: totrans-175
   prefs: []
   type: TYPE_TB
+  zh: '| id | year | month | element | d1 | d2 | d3 | d4 | d5 | d6 | d7 | d8 |'
 - en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |'
+  id: totrans-176
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |'
 - en: '| MX17004 | 2010 | 1 | tmax | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
     |'
+  id: totrans-177
   prefs: []
   type: TYPE_TB
+  zh: '| MX17004 | 2010 | 1 | tmax | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
+    |'
 - en: '| MX17004 | 2010 | 1 | tmin | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
     |'
+  id: totrans-178
   prefs: []
   type: TYPE_TB
+  zh: '| MX17004 | 2010 | 1 | tmin | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
+    |'
 - en: '| MX17004 | 2010 | 2 | tmax | NaN | 27.3 | 24.1 | NaN | NaN | NaN | NaN | NaN
     |'
+  id: totrans-179
   prefs: []
   type: TYPE_TB
+  zh: '| MX17004 | 2010 | 2 | tmax | NaN | 27.3 | 24.1 | NaN | NaN | NaN | NaN | NaN
+    |'
 - en: '| MX17004 | 2010 | 2 | tmin | NaN | 14.4 | 14.4 | NaN | NaN | NaN | NaN | NaN
     |'
+  id: totrans-180
   prefs: []
   type: TYPE_TB
+  zh: '| MX17004 | 2010 | 2 | tmin | NaN | 14.4 | 14.4 | NaN | NaN | NaN | NaN | NaN
+    |'
 - en: '| MX17004 | 2010 | 3 | tmax | NaN | NaN | NaN | NaN | 32.1 | NaN | NaN | NaN
     |'
+  id: totrans-181
   prefs: []
   type: TYPE_TB
+  zh: '| MX17004 | 2010 | 3 | tmax | NaN | NaN | NaN | NaN | 32.1 | NaN | NaN | NaN
+    |'
 - en: '| MX17004 | 2010 | 3 | tmin | NaN | NaN | NaN | NaN | 14.2 | NaN | NaN | NaN
     |'
+  id: totrans-182
   prefs: []
   type: TYPE_TB
+  zh: '| MX17004 | 2010 | 3 | tmin | NaN | NaN | NaN | NaN | 14.2 | NaN | NaN | NaN
+    |'
 - en: '| MX17004 | 2010 | 4 | tmax | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
     |'
+  id: totrans-183
   prefs: []
   type: TYPE_TB
 - en: '| MX17004 | 2010 | 4 | tmin | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
     |'
+  id: totrans-184
   prefs: []
   type: TYPE_TB
 - en: '| MX17004 | 2010 | 5 | tmax | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
     |'
+  id: totrans-185
   prefs: []
   type: TYPE_TB
 - en: '| MX17004 | 2010 | 5 | tmin | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
     |'
+  id: totrans-186
   prefs: []
   type: TYPE_TB
 - en: In order to make this dataset tidy, we want to move the three misplaced variables
     (`tmin`, `tmax` and `days`) as three individual columns: `tmin`. `tmax` and `date`.
+  id: totrans-187
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE9]'
+  id: totrans-188
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '| id | date | tmax | tmin |'
+  id: totrans-189
   prefs: []
   type: TYPE_TB
 - en: '| --- | --- | --- | --- |'
+  id: totrans-190
   prefs: []
   type: TYPE_TB
 - en: '| MX17004 | 2010-02-02 | 27.3 | 14.4 |'
+  id: totrans-191
   prefs: []
   type: TYPE_TB
 - en: '| MX17004 | 2010-02-03 | 24.1 | 14.4 |'
+  id: totrans-192
   prefs: []
   type: TYPE_TB
 - en: '| MX17004 | 2010-03-05 | 32.1 | 14.2 |'
+  id: totrans-193
   prefs: []
   type: TYPE_TB
 - en: One type in multiple tables
+  id: totrans-194
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'Dataset: Illinois Male Baby Names for the year 2014/2015.'
+  id: totrans-195
   prefs: []
   type: TYPE_NORMAL
 - en: 'Problems:'
+  id: totrans-196
   prefs: []
   type: TYPE_NORMAL
 - en: The data is spread across multiple tables/files.
+  id: totrans-197
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The “Year” variable is present in the file name.
+  id: totrans-198
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: In order to load those different files into a single DataFrame, we can run a
     custom script that will append the files together. Furthermore, we’ll need to
     extract the “Year” variable from the file name.
+  id: totrans-199
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE10]'
+  id: totrans-200
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '| rank | name | frequency | sex | year |'
+  id: totrans-201
   prefs: []
   type: TYPE_TB
 - en: '| --- | --- | --- | --- | --- |'
+  id: totrans-202
   prefs: []
   type: TYPE_TB
 - en: '| 1 | Noah | 837 | Male | 2014 |'
+  id: totrans-203
   prefs: []
   type: TYPE_TB
 - en: '| 2 | Alexander | 747 | Male | 2014 |'
+  id: totrans-204
   prefs: []
   type: TYPE_TB
 - en: '| 3 | William | 687 | Male | 2014 |'
+  id: totrans-205
   prefs: []
   type: TYPE_TB
 - en: '| 4 | Michael | 680 | Male | 2014 |'
+  id: totrans-206
   prefs: []
   type: TYPE_TB
 - en: '| 5 | Liam | 670 | Male | 2014 |'
+  id: totrans-207
   prefs: []
   type: TYPE_TB
 - en: Final Thoughts
+  id: totrans-208
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -731,87 +1058,118 @@
     to mention that there is a significant section of his paper that covers the tools
     and visualizations from which you can benefit by tidying your dataset. I did not
     cover those in this post.
+  id: totrans-209
   prefs: []
   type: TYPE_NORMAL
 - en: Overall, I enjoyed preparing this post and wrangling the datasets into a streamlined
     format. The defined format makes it easier to query and filter the data. This
     approach makes it easier to reuse libraries and code across analysis. It also
     makes it easier to share a dataset with other data analysts.
+  id: totrans-210
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: Jean-Nicholas Hould** is a [Data Scientist from Montreal, Canada](http://jeannicholashould.com/?utm_source=kdnugget).
     Author at JeanNicholasHould.com.'
+  id: totrans-211
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](http://www.jeannicholashould.com/tidy-data-in-python.html). Reposted
     with permission.'
+  id: totrans-212
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-213
   prefs: []
   type: TYPE_NORMAL
 - en: '[Data Science Statistics 101](/2016/07/data-science-statistics-101.html)'
+  id: totrans-214
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Central Limit Theorem for Data Science](/2016/08/central-limit-theorem-data-science.html)'
+  id: totrans-215
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Doing Statistics with SQL](/2016/08/doing-statistics-sql.html)'
+  id: totrans-216
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-217
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-218
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-219
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-220
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-221
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 工作'
 - en: '* * *'
+  id: totrans-222
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-223
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多相关主题
 - en: '[Step up your Python game with Fast Python for Data Science!](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
+  id: totrans-224
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过《数据科学的快速 Python》提升你的 Python 技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
 - en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  id: totrans-225
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化 Python 代码性能：深入了解 Python 性能分析工具](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
 - en: '[Python Enum: How To Build Enumerations in Python](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)'
+  id: totrans-226
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 枚举：如何在 Python 中构建枚举](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)'
 - en: '[Collection of Guides on Mastering SQL, Python, Data Cleaning, Data…](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)'
+  id: totrans-227
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握 SQL、Python、数据清洗、数据处理与探索性数据分析的指南集](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)'
 - en: '[Top 38 Python Libraries for Data Science, Data Visualization &…](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)'
+  id: totrans-228
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学、数据可视化及其他的 38 个顶级 Python 库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)'
 - en: '[KDnuggets News 22:n16, Apr 20: Top YouTube Channels for Learning…](https://www.kdnuggets.com/2022/n16.html)'
+  id: totrans-229
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻 22:n16, 4月 20日：学习的顶级 YouTube 频道](https://www.kdnuggets.com/2022/n16.html)'
