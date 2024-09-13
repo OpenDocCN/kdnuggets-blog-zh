@@ -1,106 +1,158 @@
 - en: An Overview of Outlier Detection Methods from PyOD – Part 1
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 来自 PyOD 的异常检测方法概述 – 第 1 部分
 - en: 原文：[https://www.kdnuggets.com/2019/06/overview-outlier-detection-methods-pyod.html](https://www.kdnuggets.com/2019/06/overview-outlier-detection-methods-pyod.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/06/overview-outlier-detection-methods-pyod.html](https://www.kdnuggets.com/2019/06/overview-outlier-detection-methods-pyod.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: 'A previous post from Matthew Mayo titled: [Intuitive Visualization of Outlier
     Detection Methods](/2019/02/outlier-detection-methods-cheat-sheet.html) gave an
     overview of the [PyOD](https://github.com/yzhao062/pyod) package developed by
     [Yue Zhao](https://www.yuezhao.me/).'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: Matthew Mayo 以前的一篇文章标题为：[异常检测方法的直观可视化](/2019/02/outlier-detection-methods-cheat-sheet.html)
+    概述了由 [Yue Zhao](https://www.yuezhao.me/) 开发的 [PyOD](https://github.com/yzhao062/pyod)
+    包。
 - en: This post will continue from there into a multiple part series to outline the
     different outlier detection methods available in the package. I will be using
     information from the PyOD documentation so as to not to cause confusion from overlapping
     techniques.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文将从这里继续，形成一个多部分系列，概述包中提供的不同异常检测方法。我将使用 PyOD 文档中的信息，以避免因重叠技术而造成混淆。
 - en: '[1\. PCA (Principal Component Analysis)](https://pyod.readthedocs.io/en/latest/pyod.models.html#module-pyod.models.pca)'
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[1\. PCA (主成分分析)](https://pyod.readthedocs.io/en/latest/pyod.models.html#module-pyod.models.pca)'
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '[PRE0]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: PCA is a linear dimensionality reduction using Singular Value Decomposition
     of the data to project it to a lower dimensional space. In this procedure, covariance
     matrix of the data can be decomposed to orthogonal vectors, called eigenvectors,
     associated with eigenvalues. The eigenvectors with high eigenvalues capture most
     of the variance in the data.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: PCA 是一种线性降维方法，通过对数据进行奇异值分解，将其投影到较低维空间。在此过程中，数据的协方差矩阵可以分解为与特征值相关的正交向量，称为特征向量。具有较高特征值的特征向量捕捉数据中的大部分方差。
 - en: Therefore, a low dimensional hyperplane constructed by k eigenvectors can capture
     most of the variance in the data. However, outliers are different from normal
     data points, which is more obvious on the hyperplane constructed by the eigenvectors
     with small eigenvalues. Therefore, outlier scores can be obtained as the sum of
     the projected distance of a sample on all eigenvectors.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，由 k 个特征向量构建的低维超平面可以捕捉数据中的大部分方差。然而，异常点与正常数据点不同，这在由特征值较小的特征向量构建的超平面上更为明显。因此，可以将样本在所有特征向量上的投影距离之和作为异常分数。
 - en: '[2\. MCD (Minimum Covariance Determinant)](https://pyod.readthedocs.io/en/latest/pyod.models.html#module-pyod.models.mcd)'
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[2\. MCD (最小协方差行列式)](https://pyod.readthedocs.io/en/latest/pyod.models.html#module-pyod.models.mcd)'
 - en: '[PRE1]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The Minimum Covariance Determinant covariance estimator is to be applied on
     Gaussian-distributed data, but could still be relevant on data drawn from a unimodal,
     symmetric distribution. It is not meant to be used with multi-modal data (the
     algorithm used to fit a MinCovDet object is likely to fail in such a case). One
     should consider projection pursuit methods to deal with multi-modal datasets.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 最小协方差行列式协方差估计器用于高斯分布的数据，但也可能对从单峰对称分布中提取的数据仍然相关。它不适用于多模态数据（在这种情况下，用于拟合 MinCovDet
+    对象的算法可能会失败）。应考虑使用投影追寻方法来处理多模态数据集。
 - en: '[3\. OCSVM (Once-Class Support Vector Machine)](https://pyod.readthedocs.io/en/latest/pyod.models.html#module-pyod.models.ocsvm)'
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[3\. OCSVM (一类支持向量机)](https://pyod.readthedocs.io/en/latest/pyod.models.html#module-pyod.models.ocsvm)'
 - en: '[PRE2]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: This is a type of unsupervised learning outlier detection method. The OCSVM
     algorithm maps input data into a high dimensional feature space (via a kernel)
     and iteratively finds the maximal margin hyperplane which best separates the training
     data from the origin.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一种无监督学习的异常检测方法。OCSVM 算法将输入数据映射到高维特征空间（通过核函数），并迭代地寻找最佳的最大间隔超平面，以最有效地将训练数据与原点分离。
 - en: '[4\. LOF (Local Outlier Factor)](https://pyod.readthedocs.io/en/latest/pyod.models.html#module-pyod.models.lof)'
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '[4\. LOF（局部异常因子）](https://pyod.readthedocs.io/en/latest/pyod.models.html#module-pyod.models.lof)'
 - en: '[PRE3]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The anomaly score of each sample is called Local Outlier Factor. It measures
     the local deviation of density of a given sample with respect to its neighbors.
     It is local in that the anomaly score depends on how isolated the object is with
@@ -109,48 +161,72 @@
     comparing the local density of a sample to the local densities of its neighbors,
     one can identify samples that have a substantially lower density than their neighbors.
     These are considered outliers.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个样本的异常评分称为局部异常因子。它衡量给定样本相对于其邻居的局部密度偏差。局部性在于异常评分依赖于对象与周围邻域的隔离程度。更准确地说，局部性由k近邻确定，其距离用于估计局部密度。通过将样本的局部密度与其邻居的局部密度进行比较，可以识别出那些密度明显低于其邻居的样本。这些样本被视为异常值。
 - en: '**Related:**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Intuitive Visualization of Outlier Detection Methods](/2019/02/outlier-detection-methods-cheat-sheet.html)'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[异常检测方法的直观可视化](/2019/02/outlier-detection-methods-cheat-sheet.html)'
 - en: '[Four Techniques for Outlier Detection](/2018/12/four-techniques-outlier-detection.html)'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[异常检测的四种技术](/2018/12/four-techniques-outlier-detection.html)'
 - en: '[How to Make Your Machine Learning Models Robust to Outliers](/2018/08/make-machine-learning-models-robust-outliers.html)'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使你的机器学习模型对异常值具有鲁棒性](/2018/08/make-machine-learning-models-robust-outliers.html)'
 - en: More On This Topic
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Density Kernel Depth for Outlier Detection in Functional Data](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[功能数据中异常检测的密度核深度](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)'
 - en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[k-means 聚类的质心初始化方法](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
 - en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的替代特征选择方法](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
 - en: '[Python String Methods](https://www.kdnuggets.com/2022/12/python-string-methods.html)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 字符串方法](https://www.kdnuggets.com/2022/12/python-string-methods.html)'
 - en: '[Data Science Methods Drive Business Success](https://www.kdnuggets.com/2023/10/nwu-data-science-methods-drive-business-success)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学方法推动业务成功](https://www.kdnuggets.com/2023/10/nwu-data-science-methods-drive-business-success)'
 - en: '[11 Python Magic Methods Every Programmer Should Know](https://www.kdnuggets.com/11-python-magic-methods-every-programmer-should-know)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个程序员都应该知道的11种 Python 魔法方法](https://www.kdnuggets.com/11-python-magic-methods-every-programmer-should-know)'
