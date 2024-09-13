@@ -1,19 +1,27 @@
 - en: Building Convolutional Neural Network using NumPy from Scratch
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 从头开始使用 NumPy 构建卷积神经网络
 - en: 原文：[https://www.kdnuggets.com/2018/04/building-convolutional-neural-network-numpy-scratch.html](https://www.kdnuggets.com/2018/04/building-convolutional-neural-network-numpy-scratch.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/04/building-convolutional-neural-network-numpy-scratch.html](https://www.kdnuggets.com/2018/04/building-convolutional-neural-network-numpy-scratch.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: Using already existing models in ML/DL libraries might be helpful in some cases.
     But to have better control and understanding, you should try to implement them
     yourself. This article shows how a CNN is implemented just using NumPy.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 ML/DL 库中已有的模型在某些情况下可能很有帮助。但为了更好的控制和理解，你应该尝试自己实现这些模型。本文展示了如何仅使用 NumPy 实现 CNN。
 - en: Convolutional neural network (CNN) is the state-of-art technique for analyzing
     multidimensional signals such as images. There are different libraries that already
     implements CNN such as TensorFlow and Keras. Such libraries isolates the developer
@@ -23,338 +31,507 @@
     The solution in such situation is to build every piece of such model your own.
     This gives the highest possible level of control over the network. Also, it is
     recommended to implement such models to have better understanding over them.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 卷积神经网络（CNN）是分析多维信号（如图像）的最先进技术。已经有许多库实现了CNN，如 TensorFlow 和 Keras。这些库将开发者与一些细节隔离开，只提供了一个抽象的
+    API，以简化开发过程并避免实现中的复杂性。但实际上，这些细节可能会有所不同。有时候，数据科学家需要深入这些细节以提升性能。在这种情况下，解决方案是自己构建每个模型的部分。这可以对网络进行尽可能高的控制。此外，推荐实现这些模型以更好地理解它们。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能。'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT 需求。'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'In this article, CNN is created using only NumPy library. Just three layers
     are created which are convolution (conv for short), ReLU, and max pooling. The
     major steps involved are as follows:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文使用仅 NumPy 库创建 CNN。仅创建了三个层，即卷积（conv 简写）、ReLU 和最大池化。涉及的主要步骤如下：
 - en: Reading the input image.
+  id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 读取输入图像。
 - en: Preparing filters.
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 准备滤波器。
 - en: 'Conv layer: Convolving each filter with the input image.'
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 卷积层：对输入图像应用每个滤波器进行卷积。
 - en: 'ReLU layer: Applying ReLU activation function on the feature maps (output of
     conv layer).'
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: ReLU 层：对特征图（卷积层的输出）应用 ReLU 激活函数。
 - en: 'Max Pooling layer: Applying the pooling operation on the output of ReLU layer.'
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 最大池化层：对 ReLU 层的输出应用池化操作。
 - en: Stacking conv, ReLU, and max pooling layers.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 堆叠卷积、ReLU 和最大池化层。
 - en: 1\. Reading input image
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1. 读取输入图像
 - en: The following code reads an already existing image from the skimage Python library
     and converts it into gray.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码从 skimage Python 库中读取一个已存在的图像，并将其转换为灰度图像。
 - en: '[PRE0]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Reading image is the first step because next steps depend on the input size.
     The image after being converted into gray is shown below.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 读取图像是第一步，因为接下来的步骤依赖于输入的大小。图像转换为灰度后如下所示。
 - en: '![](../Images/9918355e27eee617861e7da70ab64717.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9918355e27eee617861e7da70ab64717.png)'
 - en: 2\. Preparing filters
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2. 准备滤波器
 - en: 'The following code prepares the filters bank for the first conv layer (**l1** for
     short):'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码为第一个卷积层（**l1** 的简写）准备滤波器库：
 - en: '[PRE1]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: A zero array is created according to the number of filters and the size of each
     filter. **2** filters of size **3x3** are created that is why the zero array is
     of size (**2**=num_filters, **3**=num_rows_filter, **3**=num_columns_filter).
     Size of the filter is selected to be 2D array without depth because the input
     image is gray and has no depth (i.e. 2D ). If the image is RGB with 3 channels,
     the filter size must be (3, 3, **3**=depth).
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据滤波器的数量和每个滤波器的大小创建一个零数组。创建了**2**个**3x3**大小的滤波器，因此零数组的大小为（**2**=num_filters，**3**=num_rows_filter，**3**=num_columns_filter）。滤波器的大小被选择为二维数组而无深度，因为输入图像是灰度图像且没有深度（即二维）。如果图像是RGB的，有3个通道，则滤波器大小必须为（3，3，**3**=深度）。
 - en: The size of the filters bank is specified by the above zero array but not the
     actual values of the filters. It is possible to override such values as follows
     to detect vertical and horizontal edges.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 滤波器组的大小由上面的零数组指定，而不是滤波器的实际值。可以通过以下方式覆盖这些值以检测垂直和水平边缘。
 - en: '[PRE2]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 3\. Conv Layer
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3\. 卷积层
 - en: 'After preparing the filters, next is to convolve the input image by them. The
     next line convolves the image with the filters bank using a function called **conv**:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 在准备好滤波器后，接下来是对输入图像进行卷积。下一行使用名为**conv**的函数对图像和滤波器组进行卷积：
 - en: '[PRE3]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Such function accepts just two arguments which are the image and the filter
     bank which is implemented as below.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 该函数只接受两个参数，即图像和滤波器组，具体实现如下。
 - en: '[PRE4]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: The function starts by ensuring that the depth of each filter is equal to the
     number of image channels. In the code below, the outer **if** checks if the channel
     and the filter have a depth. If a depth already exists, then the inner **if** checks
     their inequality. If there is no match, then the script will exit.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 该函数首先确保每个滤波器的深度等于图像通道的数量。在下面的代码中，外层**if**检查通道和滤波器是否具有深度。如果已经存在深度，则内层**if**检查它们是否不相等。如果不匹配，脚本将退出。
 - en: '[PRE5]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Moreover, the size of the filter should be odd and filter dimensions are equal
     (i.e. number of rows and columns are odd and equal). This is checked according
     to the following two **if**blocks. If such conditions don’t met, the script will
     exit.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，滤波器的大小应为奇数，并且滤波器的维度应相等（即行数和列数都是奇数且相等）。这通过以下两个**if**块进行检查。如果条件不满足，脚本将退出。
 - en: '[PRE6]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Not satisfying any of the conditions above is a proof that the filter depth
     is suitable with the image and convolution is ready to be applied. Convolving
     the image by the filter starts by initializing an array to hold the outputs of
     convolution (i.e. feature maps) by specifying its size according to the following
     code:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 不满足上述任何条件证明滤波器深度与图像适配，卷积可以应用。通过滤波器对图像进行卷积的过程开始于初始化一个数组以存放卷积输出（即特征图），并通过以下代码指定其大小：
 - en: '[PRE7]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Because there is no stride nor padding, the feature map size will be equal to
     (img_rows-filter_rows+1, image_columns-filter_columns+1, num_filters) as above
     in the code. Note that there is an output feature map for every filter in the
     bank. That is why the number of filters in the filter bank (**conv_filter.shape[0]**)
     is used to specify the size as a third argument.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于没有步幅和填充，特征图的大小将等于（img_rows-filter_rows+1，image_columns-filter_columns+1，num_filters），如上代码所示。请注意，每个滤波器都有一个输出特征图。这就是为什么滤波器组中的滤波器数量（**conv_filter.shape[0]**）被用来作为第三个参数来指定大小。
 - en: '[PRE8]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'The outer loop iterates over each filter in the filter bank and returns it
     for further steps according to this line:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 外层循环遍历滤波器组中的每个滤波器，并根据这一行返回它以供进一步处理：
 - en: '[PRE9]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'If the image to be convolved has more than one channel, then the filter must
     has a depth equal to such number of channels. Convolution in this case is done
     by convolving each image channel with its corresponding channel in the filter.
     Finally, the sum of the results will be the output feature map. If the image has
     just a single channel, then convolution will be straight forward. Determining
     such behavior is done in such **if-else** block:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果要卷积的图像有多个通道，则滤波器的深度必须等于这些通道的数量。在这种情况下，卷积是通过将每个图像通道与滤波器中的相应通道进行卷积来完成的。最终，结果的总和将是输出特征图。如果图像只有一个通道，那么卷积将直接进行。确定这种行为是在**if-else**块中完成的：
 - en: '[PRE10]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'You might notice that the convolution is applied by a function called **conv_** which
     is different from the **conv** function. The function **conv** just accepts the
     input image and the filter bank but doesn’t apply convolution its own. It just
     passes each set of input-filter pairs to be convolved to the **conv_** function.
     This is just for making the code simpler to investigate. Here is the implementation
     of the **conv_** function:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能会注意到，卷积是通过一个叫做**conv_**的函数来实现的，这与**conv**函数不同。函数**conv**只是接受输入图像和滤波器组，但不会自行执行卷积。它只是将每一组输入-滤波器对传递给**conv_**函数。这只是为了使代码更易于调试。以下是**conv_**函数的实现：
 - en: '[PRE11]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'It iterates over the image and extracts regions of equal size to the filter
     according to this line:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 它遍历图像并提取与滤波器大小相等的区域，如下行所示：
 - en: '[PRE12]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'Then it apply element-wise multiplication between the region and the filter
     and summing them to get a single value as the output according to these lines:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，它在区域和滤波器之间执行逐元素乘法，并将它们相加以根据这些行获得一个单一的值作为输出：
 - en: '[PRE13]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: After convolving each filter by the input, the feature maps are returned by
     the **conv** function. The following figure shows the feature maps returned by
     such conv layer.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 在对每个滤波器进行卷积后，特征图由**conv**函数返回。下图显示了此卷积层返回的特征图。
 - en: '![](../Images/e4c0c0a326887a12ba8bba90e0b89ef6.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e4c0c0a326887a12ba8bba90e0b89ef6.png)'
 - en: The output of such layer will be applied to the ReLU layer.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种层的输出将应用于ReLU层。
 - en: 4\. ReLU Layer
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 4\. ReLU层
 - en: 'The ReLU layer applies the ReLU activation function over each feature map returned
     by the conv layer. It is called using the **relu** function according to the following
     line of code:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: ReLU层在每个由卷积层返回的特征图上应用ReLU激活函数。它通过以下代码行调用**relu**函数：
 - en: '[PRE14]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'The **relu** function is implemented as follows:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**relu**函数的实现如下：'
 - en: '[PRE15]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: It is very simple. Just loop though each element in the feature map and return
     the original value in the feature map if it is larger than 0\. Otherwise, return
     0\. The outputs of the ReLU layer are shown in the next figure.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 这非常简单。只需循环遍历特征图中的每个元素，如果元素大于0，则返回特征图中的原始值。否则，返回0。ReLU层的输出在下图中显示。
 - en: '![](../Images/6a34742304b4eb20efa413b0db333e45.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6a34742304b4eb20efa413b0db333e45.png)'
 - en: The output of the ReLU layer is applied to the max pooling layer.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: ReLU层的输出会应用到最大池化层中。
 - en: 5\. Max Pooling Layer
+  id: totrans-63
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 5\. 最大池化层
 - en: 'The max pooling layer accepts the output of the ReLU layer and applies the
     max pooling operation according to the following line:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 最大池化层接受ReLU层的输出，并根据以下行应用最大池化操作：
 - en: '[PRE16]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: 'It is implemented using the **pooling** function as follows:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 它使用**pooling**函数实现，如下所示：
 - en: '[PRE17]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: 'The function accepts three inputs which are the output of the ReLU layer, pooling
     mask size, and stride. It simply creates an empty array, as previous, that holds
     the output of such layer. The size of such array is specified according to the
     size and stride arguments as in such line:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 该函数接受三个输入，即ReLU层的输出、池化掩模尺寸和步幅。它简单地创建一个空数组，正如之前所述，用于保存该层的输出。该数组的大小根据尺寸和步幅参数来指定，如下行所示：
 - en: '[PRE18]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: 'Then it loops through the input, channel by channel according to the outer
     loop that uses the looping variable **map_num**. For each channel in the input,
     max pooling operation is applied. According to the stride and size used, the region
     is clipped and the max of it is returned in the output array according to this
     line:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后它通过外层循环按通道逐个处理输入，外层循环使用循环变量**map_num**。对于输入中的每个通道，应用最大池化操作。根据使用的步幅和尺寸，区域被裁剪，最大值会被返回到输出数组中，如下行所示：
 - en: '[PRE19]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: The outputs of such pooling layer are shown in the next figure. Note that the
     size of the pooling layer output is smaller than its input even if they seem identical
     in their graphs.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种池化层的输出在下图中显示。请注意，即使池化层的输出在图中看起来与输入相同，它的尺寸仍然小于输入。
 - en: '![](../Images/88b52b4406486be95476b61cb4d73864.png)'
+  id: totrans-73
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/88b52b4406486be95476b61cb4d73864.png)'
 - en: 6\. Stacking Layers
+  id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 6\. 堆叠层
 - en: Up to this point, the CNN architecture with conv, ReLU, and max pooling layers
     is complete. There might be some other layers to be stacked in addition to the
     previous ones as below.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，包含卷积、ReLU和最大池化层的CNN架构已经完成。可能还会有一些其他层需要堆叠在之前的层之上，如下所示。
 - en: '[PRE20]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: The previous conv layer uses **3** filters with their values generated randomly.
     That is why there will be **3** feature maps resulted from such conv layer. This
     is also the same for the successive ReLU and pooling layers. Outputs of such layers
     are shown below.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 前一卷积层使用了**3**个随机生成的过滤器。这就是为什么从该卷积层会产生**3**个特征图。后续的 ReLU 和池化层也是如此。这些层的输出如下所示。
 - en: '![](../Images/7cd7d3910289c53ae3909123d2aed941.png)'
+  id: totrans-78
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7cd7d3910289c53ae3909123d2aed941.png)'
 - en: '[PRE21]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: The following figure shows the outputs of the previous layers. The previous
     conv layer accepts just a single filter. That is why there is only one feature
     map as output.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 下图展示了前面层的输出。前一卷积层只使用了一个过滤器。这就是为什么只有一个特征图作为输出。
 - en: '![](../Images/5f5d177e21f6fa407f83af913641b829.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5f5d177e21f6fa407f83af913641b829.png)'
 - en: But remember, the output of each previous layer is the input to the next layer.
     For example, such lines accepts the previous outputs as their inputs.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 但请记住，每一层的输出都是下一层的输入。例如，这些线条接受之前的输出作为它们的输入。
 - en: '[PRE22]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: 7\. Complete Code
+  id: totrans-84
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 7\. 完整代码
 - en: The complete code is available in [**github**](https://github.com/ahmedfgad/NumPyCNN) ([https://github.com/ahmedfgad/NumPyCNN](https://github.com/ahmedfgad/NumPyCNN)).
     The code contains the visualization of the outputs from each layer using the **Matplotlib** library.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 完整代码可以在 [**github**](https://github.com/ahmedfgad/NumPyCNN) ([https://github.com/ahmedfgad/NumPyCNN](https://github.com/ahmedfgad/NumPyCNN))
+    上找到。代码中包含了使用**Matplotlib**库可视化每一层输出的功能。
 - en: '**Bio: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** received his B.Sc.
     degree with excellent with honors in information technology from the Faculty of
     Computers and Information (FCI), Menoufia University, Egypt, in July 2015\. For
@@ -363,52 +540,79 @@
     assistant and a researcher in his faculty. His current research interests include
     deep learning, machine learning, artificial intelligence, digital signal processing,
     and computer vision.'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** 于2015年7月获得埃及Menoufia大学计算机与信息学院（FCI）信息技术专业的优秀荣誉学士学位。由于在学院中排名第一，他于2015年被推荐到埃及某研究所担任助教，随后于2016年回到学院担任助教和研究员。他目前的研究兴趣包括深度学习、机器学习、人工智能、数字信号处理和计算机视觉。'
 - en: '[Original](https://www.linkedin.com/pulse/building-convolutional-neural-network-using-numpy-from-ahmed-gad/).
     Reposted with permission.'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.linkedin.com/pulse/building-convolutional-neural-network-using-numpy-from-ahmed-gad/).
+    经许可转载。'
 - en: '**Related:**'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关:**'
 - en: '[Derivation of Convolutional Neural Network from Fully Connected Network Step-By-Step](/2018/04/derivation-convolutional-neural-network-fully-connected-step-by-step.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[逐步推导卷积神经网络从全连接网络](/2018/04/derivation-convolutional-neural-network-fully-connected-step-by-step.html)'
 - en: '[Is Learning Rate Useful in Artificial Neural Networks?](/2018/01/learning-rate-useful-neural-network.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习率在人工神经网络中有用吗？](/2018/01/learning-rate-useful-neural-network.html)'
 - en: '[Avoid Overfitting with Regularization](/2018/02/avoid-overfitting-regularization.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过正则化避免过拟合](/2018/02/avoid-overfitting-regularization.html)'
 - en: More On This Topic
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Building a Convolutional Neural Network with PyTorch](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 PyTorch 构建卷积神经网络](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并以此寻找目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个 $9B 的人工智能失败，详解](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么 Python 是初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'

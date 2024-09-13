@@ -1,50 +1,75 @@
 - en: 'Implementing Deep Learning Methods and Feature Engineering for Text Data: The
     GloVe Model'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 实现深度学习方法和文本数据特征工程：GloVe模型
 - en: 原文：[https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-glove.html](https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-glove.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-glove.html](https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-glove.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**Editor''s note:** This post is only one part of a far more thorough and in-depth
     original, [found here](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa),
     which covers much more than what is included here.'
+  id: totrans-3
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**编辑注：** 本文仅为更为全面深入原文的一部分，原文[在此](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa)提供，涵盖了远超本文的内容。'
 - en: The GloVe Model
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: GloVe 模型
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'The GloVe model stands for Global Vectors which is an unsupervised learning
     model which can be used to obtain dense word vectors similar to Word2Vec. However
     the technique is different and training is performed on an aggregated global word-word
@@ -53,8 +78,11 @@
     to read the original paper on GloVe, [*‘GloVe: Global Vectors for Word Representation’* by
     Pennington et al.](https://nlp.stanford.edu/pubs/glove.pdf) which is an excellent
     read to get some perspective on how this model works.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 'GloVe模型代表全球向量，是一种无监督学习模型，可以用来获取类似于Word2Vec的稠密词向量。然而，技术上有所不同，训练是在聚合的全球词词共现矩阵上进行的，为我们提供了具有有意义子结构的向量空间。这种方法由Pennington等人在斯坦福大学发明，我推荐你阅读原始论文[*《GloVe:
+    Global Vectors for Word Representation》*由Pennington等人撰写](https://nlp.stanford.edu/pubs/glove.pdf)，这是一篇出色的文章，可以帮助你了解这个模型的工作原理。'
 - en: We won’t cover the implementation of the model from scratch in too much detail
     here but if you are interested in the actual code, you can check out the [*official
     GloVe page*](https://nlp.stanford.edu/projects/glove/). We will keep things simple
@@ -65,21 +93,29 @@
     do relatively poorly on the word analogy task like how we found out semantically
     similar words. Methods like skip-gram may do better on the analogy task, but they
     poorly utilize the statistics of the corpus on a global level.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们不会在这里过多详细讲解模型的从零实现，但如果你对实际代码感兴趣，可以查看[*官方GloVe页面*](https://nlp.stanford.edu/projects/glove/)。我们在这里保持简单，尝试理解GloVe模型背后的基本概念。我们已经讨论过基于计数的矩阵分解方法，如LSA，以及预测方法，如Word2Vec。论文声称，目前这两类方法都存在显著缺陷。像LSA这样的算法有效地利用了统计信息，但在诸如词语类比任务（比如发现语义相似的词汇）上表现较差。像skip-gram这样的方法在类比任务上可能表现更好，但在全局层面上对语料库的统计信息利用不充分。
 - en: The basic methodology of the GloVe model is to first create a huge word-context
     co-occurence matrix consisting of (word, context) pairs such that each element
     in this matrix represents how often a word occurs with the context (which can
     be a sequence of words). The idea then is to apply matrix factorization to approximate
     this matrix as depicted in the following figure.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: GloVe 模型的基本方法是首先创建一个巨大的词语-上下文共现矩阵，该矩阵包含（词语，上下文）对，每个元素表示一个词语与上下文（可以是一系列词语）共现的频率。然后，应用矩阵因式分解来近似这个矩阵，如下图所示。
 - en: '![](../Images/80cf078c73ceb2a6e7c36fc8d7cc3d69.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/80cf078c73ceb2a6e7c36fc8d7cc3d69.png)'
 - en: Conceptual model for the GloVe model’s implementation
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: GloVe 模型实现的概念模型
 - en: Considering the ***Word-Context (WC)*** matrix, ***Word-Feature (WF)*** matrix
     and ***Feature-Context (FC)*** matrix, we try to factorize `**WC = WF x FC**`,
     such that we we aim to reconstruct ***WC*** from ***WF*** and ***FC*** by multiplying
@@ -95,12 +131,21 @@
     context and semantics. Word2Vec starts with local individual examples of word
     co-occurrence pairs and GloVe starts with global aggregated co-occurrence statistics
     across all words in the corpus.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑到***词语-上下文 (WC)*** 矩阵、***词语-特征 (WF)*** 矩阵和***特征-上下文 (FC)*** 矩阵，我们尝试因式分解`**WC
+    = WF x FC**`，以便通过将 ***WF*** 和 ***FC*** 相乘来重建 ***WC***。为此，我们通常将 ***WF*** 和 ***FC***
+    初始化为一些随机权重，并尝试将它们相乘以得到 ***WC’***（WC 的近似值），并测量其与 ***WC*** 的接近程度。我们使用[*随机梯度下降 (SGD)*](https://en.wikipedia.org/wiki/Stochastic_gradient_descent)
+    多次进行此操作，以最小化误差。最终，***词语-特征矩阵 (WF)*** 为每个词语提供了词语嵌入，其中 ***F*** 可以设置为特定的维度。一个非常重要的点是，Word2Vec
+    和 GloVe 模型在工作方式上非常相似。它们都旨在构建一个向量空间，其中每个词语的位置受到其邻近词语的上下文和语义的影响。Word2Vec 从词语共现对的局部个体示例开始，而
+    GloVe 从语料库中所有词语的全局聚合共现统计数据开始。
 - en: Applying GloVe features for Machine Learning Tasks
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 将 GloVe 特征应用于机器学习任务
 - en: Let’s try and leverage GloVe based embeddings for our document clustering task.
     The very popular `[**spacy**](https://spacy.io/)` framework comes with capabilities
     to leverage GloVe embeddings based on different language models. You can also [get
@@ -108,121 +153,187 @@
     up as needed using `gensim` or `spacy`. We will first install spacy and use the [en_vectors_web_lg](https://spacy.io/models/en#en_vectors_web_lg) model
     which consists of 300-dimensional word vectors trained on [Common Crawl](http://commoncrawl.org/) with
     GloVe.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们尝试利用基于 GloVe 的嵌入进行文档聚类任务。非常流行的`[**spacy**](https://spacy.io/)` 框架具有利用不同语言模型的
+    GloVe 嵌入的功能。你还可以 [获取预训练词向量](https://nlp.stanford.edu/projects/glove/) 并根据需要使用
+    `gensim` 或 `spacy` 加载它们。我们将首先安装 spacy 并使用 [en_vectors_web_lg](https://spacy.io/models/en#en_vectors_web_lg)
+    模型，该模型包含 300 维的词向量，基于 GloVe 在 [Common Crawl](http://commoncrawl.org/) 上训练。
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: There are automated ways to install models in `spacy` too, you can check their [Models
     & Languages page](https://spacy.io/usage/models) for more information if needed.
     I had some issues with the same so I had to manually load them up. We will now
     load up our language model using `spacy`.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 `spacy` 中也有自动安装模型的方法，如果需要更多信息，你可以查看他们的 [Models & Languages page](https://spacy.io/usage/models)。我遇到了一些问题，因此必须手动加载模型。现在我们将使用
+    `spacy` 加载我们的语言模型。
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: This validates that everything is working and in order. Let’s get the GloVe
     embeddings for each of our words now in our toy corpus.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这验证了所有内容正常工作。现在让我们获取玩具语料库中每个词的 GloVe 嵌入。
 - en: '![](../Images/7d4096fb874254581b44b3fe25a6a800.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7d4096fb874254581b44b3fe25a6a800.png)'
 - en: GloVe embeddings for words in our toy corpus
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们玩具语料库中词语的 GloVe 嵌入
 - en: We can now use t-SNE to visualize these embeddings similar to what we did using
     our Word2Vec embeddings.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以使用 t-SNE 来可视化这些嵌入，类似于我们使用 Word2Vec 嵌入时所做的那样。
 - en: '![](../Images/29df7fbe8977356b425429931fd7e3f3.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/29df7fbe8977356b425429931fd7e3f3.png)'
 - en: Visualizing GloVe word embeddings on our toy corpus
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的玩具语料库上可视化GloVe词嵌入
 - en: The beauty of `spacy` is that it will automatically provide you the averaged
     embeddings for words in each document without having to implement a function like
     we did in Word2Vec. We will leverage the same to get document features for our
     corpus and use [***k-means***](https://en.wikipedia.org/wiki/K-means_clustering) clustering
     to cluster our documents.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '`spacy` 的美妙之处在于，它会自动为每个文档中的词提供平均嵌入，而无需像我们在Word2Vec中实现的那样编写函数。我们将利用这一点来获取我们语料库的文档特征，并使用[***k-means***](https://en.wikipedia.org/wiki/K-means_clustering)
+    聚类来对文档进行分类。'
 - en: '![](../Images/81a9b2a64f3a39b1e19db9ea6bcaa6b7.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/81a9b2a64f3a39b1e19db9ea6bcaa6b7.png)'
 - en: Clusters assigned based on our document features from GloVe
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于我们文档特征的GloVe分配的簇
 - en: We see consistent clusters similar to what we obtained from our Word2Vec model
     which is good! The GloVe model claims to perform better than the Word2Vec model
     in many scenarios as illustrated in the following graph from the [original paper
     by Pennington el al.](https://nlp.stanford.edu/pubs/glove.pdf)
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们观察到一致的簇，类似于我们从Word2Vec模型中获得的结果，这很好！GloVe模型声称在许多场景下性能优于Word2Vec模型，如下图所示，来自[Pennington等人的原始论文](https://nlp.stanford.edu/pubs/glove.pdf)。
 - en: '![](../Images/f091c4c53dea7145f115373f5c3fe01f.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f091c4c53dea7145f115373f5c3fe01f.png)'
 - en: GloVe vs Word2Vec performance (Source: [https://nlp.stanford.edu/pubs/glove.pdf](https://nlp.stanford.edu/pubs/glove.pdf) by
     Pennington et al.)
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: GloVe与Word2Vec性能比较（来源：[https://nlp.stanford.edu/pubs/glove.pdf](https://nlp.stanford.edu/pubs/glove.pdf)由Pennington等人提供）
 - en: The above experiments were done by training 300-dimensional vectors on the same
     6B token corpus (Wikipedia 2014 + Gigaword 5) with the same 400,000 word vocabulary
     and a symmetric context window of size 10 in case anyone is interested in the
     details.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述实验是在相同的6B令牌语料库（维基百科2014 + Gigaword 5）上训练300维向量，使用相同的400,000词汇表和对称的10大小上下文窗口完成的，如果有人对细节感兴趣的话。
 - en: '**Bio: [Dipanjan Sarkar](https://www.linkedin.com/in/dipanzan)** is a Data
     Scientist @Intel, an author, a mentor @Springboard, a writer, and a sports and
     sitcom addict.'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Dipanjan Sarkar](https://www.linkedin.com/in/dipanzan)** 是一位 @Intel
+    的数据科学家、作者、@Springboard 的导师、作家以及体育和情景喜剧迷。'
 - en: '[Original](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa).
     Reposted with permission.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa)。已获转载许可。'
 - en: '**Related:**'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Text Data Preprocessing: A Walkthrough in Python](/2018/03/text-data-preprocessing-walkthrough-python.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本数据预处理：Python中的逐步指南](/2018/03/text-data-preprocessing-walkthrough-python.html)'
 - en: '[A General Approach to Preprocessing Text Data](/2017/12/general-approach-preprocessing-text-data.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本数据预处理的通用方法](/2017/12/general-approach-preprocessing-text-data.html)'
 - en: '[A Framework for Approaching Textual Data Science Tasks](/2017/11/framework-approaching-textual-data-tasks.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[接近文本数据科学任务的框架](/2017/11/framework-approaching-textual-data-tasks.html)'
 - en: More On This Topic
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征商店峰会2022：免费特征工程会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
 - en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的替代特征选择方法](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
 - en: '[A Practical Approach To Feature Engineering In Machine Learning](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的实用特征工程方法](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)'
 - en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建可处理的多变量特征工程管道](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
 - en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用RAPIDS cuDF利用GPU进行特征工程](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
 - en: '[Feature Engineering for Beginners](https://www.kdnuggets.com/feature-engineering-for-beginners)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[初学者的特征工程](https://www.kdnuggets.com/feature-engineering-for-beginners)'
