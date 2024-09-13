@@ -133,119 +133,150 @@
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 这很清楚，不是吗？取出 `df` 中 `'x'>3` 的子集，然后将列 'y' 中的值更改为 50。
 - en: 'Let''s do that:'
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们来做一下：
 - en: '[PRE8]    x    y   w  0  1  0.1  11  1  5  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15
     [PRE9]`'
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE8]    x    y   w  0  1  0.1  11  1  5  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15
+    [PRE9]`'
 - en: I probably did a typo or something, let me run this once again.
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我可能打错了什么，让我再运行一次。
 - en: '[PRE10] df[df[''x'']>3][''y'']=50       x    y   w  0  1  0.1  11  1  5  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15
     [PRE11]`'
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE10] df[df[''x'']>3][''y'']=50       x    y   w  0  1  0.1  11  1  5  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15
+    [PRE11]`'
 - en: No change whatsoever! Why?
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 完全没有变化！为什么呢？
 - en: We've encountered a so called 'chained indexing' effect, where essentially two
     indexers are used one after another e.g. `df[][]`
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们遇到了所谓的“链式索引”效应，即一个接一个地使用两个索引器，例如 `df[][]`
 - en: 'Let''s decompose our command:'
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们分解一下我们的命令：
 - en: '`df[df[''x'']>3]` results in Pandas creating a separate copy of the original
     DataFrame'
   id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`df[df[''x'']>3]` 会导致 Pandas 创建一个原始 DataFrame 的独立副本。'
 - en: '`df[df[''x'']>3][''y''] = 50` assigns the new values to the column ''y'' but
     on this temporarily created copy, not our original DataFrame.'
   id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`df[df[''x'']>3][''y''] = 50` 将新值分配给 ''y'' 列，但是在这个临时创建的副本上，而不是我们的原始 DataFrame
+    上。'
 - en: A way of observing this explicitly is to use [the base 'id' function](https://docs.python.org/3/library/functions.html#id)
     which returns the address of the given object in the memory of the machine.
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 观察这个情况的一种方法是使用 [基础的 'id' 函数](https://docs.python.org/3/library/functions.html#id)，它返回给定对象在机器内存中的地址。
 - en: '[PRE12] id(df)  2838845867680    id(df[df[''x'']>3])  2838845989832    id(id)
     == id(df[df[''x'']>3])  False [PRE13]`'
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE12] id(df)  2838845867680    id(df[df[''x'']>3])  2838845989832    id(id)
+    == id(df[df[''x'']>3])  False [PRE13]`'
 - en: 'Interestingly, when we invert the order of the slice in our command i.e. call
     the columns first and then the criterion we want to satisfy, we get the expected
     result:'
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 有趣的是，当我们反转命令中的切片顺序，即先调用列然后再使用我们想要满足的条件时，我们得到了预期的结果：
 - en: '[PRE14] df[''y''][df[''x'']>3]=50       x     y   w  0  1   0.1  11  1  5  50.0  15  2  4  50.0  14  3  3   0.3  13  4  4  50.0  14  5  5  50.0  15
     [PRE15]`'
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE14] df[''y''][df[''x'']>3]=50       x     y   w  0  1   0.1  11  1  5  50.0  15  2  4  50.0  14  3  3   0.3  13  4  4  50.0  14  5  5  50.0  15
+    [PRE15]`'
 - en: That's down to a fact, that when we select only one column from the DataFrame,
     Pandas creates a view, not a copy.
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是因为，当我们只从 DataFrame 中选择一列时，Pandas 创建的是一个视图，而不是副本。
 - en: What's a view? It's essentially a proxy for the same object i.e. no new objects
     are created in the process.
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 什么是视图？本质上，它是同一对象的代理，即在这个过程中不会创建新的对象。
 - en: '[PRE16] z = df[''y''] #z being a view of df[''y'']  id(df[''y'']) == id(z)  True
     [PRE17]`'
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE16] z = df[''y''] #z 是 df[''y''] 的视图  id(df[''y'']) == id(z)  True [PRE17]`'
 - en: 'Even though we''ve achieved our goal, some side effects might have been triggered:'
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管我们达到了目标，但可能会触发一些副作用：
 - en: Let's look at this sequence of commands.
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看这组命令。
 - en: '[PRE18] df # original dataframe     x    y   w  0  1  0.1  11  1  5  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15    z
     = df[''y''] # view of column ''y''  z[z>=0.5] = 30    z  0     0.1  1    30.0  2     0.4  3     0.3  4     0.4  5    30.0    df     x     y   w  0  1   0.1  11  1  5  30.0  15  2  4   0.4  14  3  3   0.3  13  4  4   0.4  14  5  5  30.0  15
     [PRE19]`'
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE18] df # 原始 DataFrame     x    y   w  0  1  0.1  11  1  5  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15    z
+    = df[''y''] # ''y'' 列的视图  z[z>=0.5] = 30    z  0     0.1  1    30.0  2     0.4  3     0.3  4     0.4  5    30.0    df     x     y   w  0  1   0.1  11  1  5  30.0  15  2  4   0.4  14  3  3   0.3  13  4  4   0.4  14  5  5  30.0  15
+    [PRE19]`'
 - en: Whoa! We though we created a separate object, called 'z' that is independent
     from `df` and the values of `df` are safe when we manipulate 'z'. Nope.
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 哇！我们以为创建了一个与 `df` 独立的对象 'z'，在我们操作 'z' 时 `df` 的值是安全的。结果并非如此。
 - en: We've only created a view. The good thing is that Pandas will display the good
     ol' warning.
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们只创建了一个视图。好消息是 Pandas 会显示那个老旧的警告。
 - en: Pandas is doing this because it doesn't know if we want to change just the 'y'
     series (via proxy 'z'), or the value of the original `df`.
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 这样做是因为它不知道我们是否想要仅仅改变 'y' 系列（通过代理 'z'），还是改变原始 `df` 的值。
 - en: OK, so what if we wanted to extract 'z' as an independent object? The Pandas
     method `.copy()` serves exactly this purpose.
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 好吧，那么如果我们想将 'z' 提取为一个独立的对象呢？Pandas 方法 `.copy()` 正是为了这个目的。
 - en: When we update our command to the one shown below, we will create a completely
     new object with its own address in the memory, and any updated on 'z' will leave
     `df` unaffected.
@@ -398,3 +429,4 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每位数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
