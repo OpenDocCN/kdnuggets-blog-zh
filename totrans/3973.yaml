@@ -1,378 +1,554 @@
 - en: Masked Arrays in NumPy to Handle Missing Data
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: NumPy 中处理缺失数据的掩码数组
 - en: 原文：[https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data](https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data](https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data)
 - en: '![Masked Arrays in NumPy to Handle Missing Data](../Images/3e6cefa0a51bdb948693bd090ff75e54.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![NumPy 中处理缺失数据的掩码数组](../Images/3e6cefa0a51bdb948693bd090ff75e54.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图像
 - en: Imagine trying to solve a puzzle with missing pieces. This can be frustrating,
     right? This is a common scenario when dealing with incomplete datasets. Masked
     arrays in NumPy are specialized array structures that allow you to handle missing
     or invalid data efficiently. They are particularly useful in scenarios where you
     must perform computations on datasets containing unreliable entries.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象一下试图解决一个缺少拼图块的谜题。这会很令人沮丧，对吧？这是处理不完整数据集时的常见情境。NumPy 中的掩码数组是专门的数组结构，允许你高效地处理缺失或无效的数据。在必须对包含不可靠条目的数据集进行计算的情境下，它们特别有用。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 为你的组织提供 IT 支持'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'A masked array is essentially a combination of two arrays:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 掩码数组本质上是两个数组的组合：
 - en: '**Data Array**: The primary array containing the actual data values.'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**数据数组**：包含实际数据值的主要数组。'
 - en: '**Mask Array**: A boolean array of the same shape as the data array, where
     each element indicates whether the corresponding data element is valid or masked
     (invalid/missing).'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**掩码数组**：一个与数据数组形状相同的布尔数组，其中每个元素指示对应的数据元素是有效还是被掩码（无效/缺失）。'
 - en: Data Array
+  id: totrans-14
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 数据数组
 - en: 'The Data Array is the core component of a masked array, holding the actual
     data values you want to analyze or manipulate. This array can contain any numerical
     or categorical data, just like a standard NumPy array. Here are some important
     points to consider:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据数组是掩码数组的核心组件，保存了你想分析或处理的实际数据值。这个数组可以包含任何数值或分类数据，就像标准的 NumPy 数组一样。以下是一些重要的考虑点：
 - en: '**Storage**: The data array stores the values you need to work with, including
     valid and invalid entries (such as `NaN` or specific values representing missing
     data).'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**存储**：数据数组存储了你需要处理的值，包括有效和无效的条目（如 `NaN` 或代表缺失数据的特定值）。'
 - en: '**Operations**: When performing operations, NumPy uses the data array to compute
     results but will consider the mask array to determine which elements to include
     or exclude.'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**操作**：在执行操作时，NumPy 使用数据数组来计算结果，但会考虑掩码数组以确定包含或排除哪些元素。'
 - en: '**Compatibility**: The data array in a masked array supports all standard NumPy
     functionalities, making it easy to switch between regular and masked arrays without
     significantly altering your existing codebase.'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**兼容性**：掩码数组中的数据数组支持所有标准的 NumPy 功能，使得在常规数组和掩码数组之间切换变得容易，而不会显著改变现有代码库。'
 - en: '**Example**:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**示例**：'
 - en: '[PRE0]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Mask Array
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 掩码数组
 - en: 'The Mask Array is a boolean array of the same shape as the data array. Each
     element in the mask array corresponds to an element in the data array and indicates
     whether that element is valid (**False**) or masked (**True**). Here are some
     detailed points:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 掩码数组是一个与数据数组形状相同的布尔数组。掩码数组中的每个元素对应于数据数组中的一个元素，并指示该元素是有效（**False**）还是被掩码（**True**）。以下是一些详细的点：
 - en: '**Structure**: The mask array is created with the same shape as the data array
     to ensure that each data point has a corresponding mask value.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**结构**：掩码数组的创建形状与数据数组相同，以确保每个数据点都有一个对应的掩码值。'
 - en: '**Indicating Invalid Data**: A **True** value in the mask array marks the corresponding
     data point as invalid or missing, while a **False** value indicates valid data.
     This allows NumPy to ignore or exclude invalid data points during computations.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**标识无效数据**：掩码数组中的 **True** 值将相应的数据点标记为无效或缺失，而 **False** 值则表示有效数据。这允许 NumPy
+    在计算过程中忽略或排除无效数据点。'
 - en: '**Automatic Masking**: NumPy provides functions to automatically create mask
     arrays based on specific conditions (e.g., `np.ma.masked_invalid()` to mask **NaN**
     values).'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**自动掩码**：NumPy 提供了根据特定条件自动创建掩码数组的函数（例如，`np.ma.masked_invalid()` 用于掩盖 **NaN**
+    值）。'
 - en: '**Example**:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**示例**：'
 - en: '[PRE1]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The power of masked arrays lies in the relationship between the data and mask
     arrays. When you perform operations on a masked array, NumPy considers both arrays
     to ensure computations are based only on valid data.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 掩码数组的强大之处在于数据与掩码数组之间的关系。当你对掩码数组执行操作时，NumPy 会考虑这两个数组，确保计算仅基于有效数据。
 - en: Benefits of Masked Arrays
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 掩码数组的好处
 - en: 'Masked Arrays in NumPy offer several advantages, especially when dealing with
     datasets containing missing or invalid data, some of which includes:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: NumPy 中的掩码数组提供了多种优势，尤其是在处理包含缺失或无效数据的数据集时，其中包括：
 - en: '**Efficient Handling of Missing Data**: Masked arrays allow you to easily mark
     invalid or missing data, such as NaNs, and handle them automatically in computations.
     Operations are performed only on valid data, ensuring missing or invalid entries
     do not skew results.'
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**缺失数据的高效处理**：掩码数组允许你轻松标记无效或缺失的数据，例如 NaN，并在计算中自动处理它们。操作仅在有效数据上执行，确保缺失或无效的条目不会扭曲结果。'
 - en: '**Simplified Data Cleaning**: Functions like `numpy.ma.masked_invalid()` can
     automatically mask common invalid values (e.g., NaNs or infinities) without requiring
     additional code to manually identify and handle these values. You can define custom
     masks based on specific criteria, allowing flexible data-cleaning strategies.'
+  id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**简化数据清理**：像 `numpy.ma.masked_invalid()` 这样的函数可以自动掩盖常见的无效值（例如 NaN 或无穷大），而无需额外的代码来手动识别和处理这些值。你可以根据特定标准定义自定义掩码，允许灵活的数据清理策略。'
 - en: '**Seamless Integration with NumPy Functions**: Masked arrays work with most
     standard NumPy functions and operations. This means you can use familiar NumPy
     methods without manually excluding or preprocessing masked values.'
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**与 NumPy 函数的无缝集成**：掩码数组与大多数标准 NumPy 函数和操作兼容。这意味着你可以使用熟悉的 NumPy 方法，而无需手动排除或预处理掩码值。'
 - en: '**Improved Accuracy in Calculations**: When performing calculations (e.g.,
     mean, sum, standard deviation), masked values are automatically excluded from
     the computation, leading to more accurate and meaningful results.'
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**提高计算准确性**：在执行计算（例如，均值、总和、标准差）时，掩码值会自动从计算中排除，从而得到更准确和有意义的结果。'
 - en: '**Enhanced Data Visualization**: When visualizing data, masked arrays ensure
     that invalid or missing values are not plotted, resulting in clearer and more
     accurate visual representations. You can plot only the valid data, avoiding clutter
     and improving the interpretability of graphs and charts.'
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**增强数据可视化**：在可视化数据时，掩码数组确保无效或缺失值不会被绘制，从而产生更清晰和准确的视觉表示。你可以仅绘制有效数据，避免杂乱，提高图表的可解释性。'
 - en: Using Masked Arrays to Handle Missing Data in NumPy
+  id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用掩码数组处理 NumPy 中的缺失数据
 - en: 'This section will demonstrate how to use masked array to handle missing data
     in Numpy. First of all, let''s have a look at a straightforward example:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 本节将演示如何使用掩码数组处理 NumPy 中的缺失数据。首先，让我们看一个简单的示例：
 - en: '[PRE2]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '**Output**:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出**：'
 - en: '25.0'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '25.0'
 - en: '**Explanation**:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**说明**：'
 - en: '**Data Creation**: `data` is an array of integers where **-999** represents
     missing values.'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**数据创建**：`data` 是一个整数数组，其中 **-999** 代表缺失值。'
 - en: '**Mask Creation**: `mask` is a boolean array that marks positions with **-999**
     as **True** (indicating missing data).'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**掩码创建**：`mask` 是一个布尔数组，将 **-999** 位置标记为 **True**（表示缺失数据）。'
 - en: '**Masked Array Creation**: `np.ma.array(data, mask=mask)` creates a masked
     array, applying the mask to `data`.'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**掩码数组创建**：`np.ma.array(data, mask=mask)` 创建一个掩码数组，将掩码应用于 `data`。'
 - en: '**Calculation**: `masked_array.mean()`.'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**计算**：`masked_array.mean()`。'
 - en: computes the mean while ignoring masked values (i.e., **-999**), resulting in
     the average of the remaining valid values.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算平均值时忽略掩码值（即**-999**），结果是剩余有效值的平均值。
 - en: In this example, the mean is calculated only from **[10, 20, 30, 40]**, excluding
     **-999** values.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 在此示例中，平均值仅从 **[10, 20, 30, 40]** 计算，不包括 **-999** 值。
 - en: Let’s explore a more comprehensive example using masked arrays to handle missing
     data in a larger dataset. We'll use a scenario involving a dataset of temperature
     readings from multiple sensors across several days. The dataset contains some
     missing values due to sensor malfunctions.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们通过一个更全面的示例来探索使用掩码数组处理较大数据集中缺失数据的情况。我们将使用涉及多个传感器跨多个日期的温度读数数据集的场景。数据集中包含一些由于传感器故障而缺失的值。
 - en: 'Use Case: Analyzing Temperature Data from Multiple Sensors'
+  id: totrans-49
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 用例：分析来自多个传感器的温度数据
 - en: '**Scenario**: You have temperature readings from five sensors over ten days.
     Some readings are missing due to sensor issues. We need to compute the average
     daily temperature while ignoring the missing data.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**场景**：你有来自五个传感器的十天温度读数。由于传感器问题，一些读数缺失。我们需要计算平均每日温度，同时忽略缺失数据。'
 - en: '**Dataset**: The dataset is represented as a 2D NumPy array, with rows representing
     days and columns representing sensors. Missing values are denoted by `np.nan`.'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据集**：数据集表示为二维NumPy数组，行表示日期，列表示传感器。缺失值由`np.nan`表示。'
 - en: 'Steps to follow:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 步骤：
 - en: '**Import NumPy**: For array operations and handling masked arrays.'
+  id: totrans-53
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**导入NumPy**：用于数组操作和处理掩码数组。'
 - en: '**Define the Data**: Create a 2D array of temperature readings with some missing
     values.'
+  id: totrans-54
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**定义数据**：创建一个包含一些缺失值的二维温度读数数组。'
 - en: '**Create a Mask**: Identify missing values (NaNs) in the dataset.'
+  id: totrans-55
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**创建掩码**：识别数据集中的缺失值（NaNs）。'
 - en: '**Create Masked Arrays**: Apply the mask to handle missing values.'
+  id: totrans-56
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**创建掩码数组**：应用掩码以处理缺失值。'
 - en: Compute Daily Averages Calculate the average temperature for each day, ignoring
     missing values.
+  id: totrans-57
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 计算每日平均温度：计算每一天的平均温度，忽略缺失值。
 - en: '**Output Results**: Display the results for analysis.'
+  id: totrans-58
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**输出结果**：显示分析结果。'
 - en: '**Code**:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '**代码**：'
 - en: '[PRE3]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '**Output:**'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出：**'
 - en: '![Masked arrays example-III](../Images/2f82b19dc3d74d02be449c6b5010d167.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![掩码数组示例-III](../Images/2f82b19dc3d74d02be449c6b5010d167.png)'
 - en: '**Explanation**:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解释**：'
 - en: '**Import NumPy**: Import the **NumPy** library to utilize its functions.'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**导入NumPy**：导入**NumPy**库以利用其功能。'
 - en: '**Define Data**: Create a 2D array `temperature_data` where each row represents
     temperatures from sensors on a specific day, and some values are missing (`np.nan`).'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**定义数据**：创建一个二维数组`temperature_data`，其中每行代表特定日期传感器的温度，且有些值缺失（`np.nan`）。'
 - en: '**Create Mask**: Generate a boolean mask using `np.isnan(temperature_data)`
     to identify missing values (**True** where values are `np.nan`).'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**创建掩码**：使用`np.isnan(temperature_data)`生成布尔掩码，以识别缺失值（**True**表示值为`np.nan`）。'
 - en: '**Create Masked Array**: Use `np.ma.masked_array(temperature_data, mask=mask)`
     to create `masked_data`. This array masks out missing values, allowing operations
     to ignore them.'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**创建掩码数组**：使用`np.ma.masked_array(temperature_data, mask=mask)`创建`masked_data`。这个数组屏蔽掉缺失值，使操作忽略它们。'
 - en: '**Compute Daily Averages**: Compute the average temperature for each day using
     `.mean(axis=1)`. Here, `axis=1` means calculating the mean across sensors for
     each day.'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**计算每日平均温度**：使用`.mean(axis=1)`计算每天的平均温度。这里，`axis=1`表示在每一天的传感器之间计算均值。'
 - en: '**Output Results**: Print the average temperature for each day. The masked
     values are excluded from the calculation, providing accurate daily averages.'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**输出结果**：打印每天的平均温度。掩码值被排除在计算之外，提供准确的每日平均值。'
 - en: Conclusion
+  id: totrans-70
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: 'In this article, we explored the concept of masked arrays and how they can
     be leveraged to deal with missing data. We discussed the two key components of
     masked arrays: the data array, which holds the actual values, and the mask array,
     which indicates which values are valid or missing. We also examined their benefits,
     including efficient handling of missing data, seamless integration with NumPy
     functions, and improved calculation accuracy.'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们探讨了掩码数组的概念以及如何利用它们处理缺失数据。我们讨论了掩码数组的两个关键组成部分：数据数组，它包含实际值，和掩码数组，它指示哪些值是有效的或缺失的。我们还考察了它们的好处，包括高效处理缺失数据、与NumPy函数的无缝集成以及提高计算准确性。
 - en: We demonstrated the use of masked arrays through straightforward and more complex
     examples. The initial example illustrated how to handle missing values represented
     by specific markers like **-999**, while the more comprehensive example showed
     how to analyze temperature data from multiple sensors, where missing values are
     denoted by `np.nan`. Both examples highlighted the ability of masked arrays to
     compute results accurately by ignoring invalid data.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们通过简单和复杂的示例演示了掩码数组的使用。初始示例展示了如何处理由特定标记如 **-999** 表示的缺失值，而更全面的示例则展示了如何分析来自多个传感器的温度数据，其中缺失值由
+    `np.nan` 表示。这两个示例都突出了掩码数组通过忽略无效数据来准确计算结果的能力。
 - en: 'For further reading check out these two resources:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 进一步阅读请查看以下两个资源：
 - en: '[The numpy.ma module](https://numpy.org/doc/stable/reference/maskedarray.generic.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[numpy.ma模块](https://numpy.org/doc/stable/reference/maskedarray.generic.html)'
 - en: '[Masked arrays](https://numpy.org/doc/1.21/user/tutorial-ma.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掩码数组](https://numpy.org/doc/1.21/user/tutorial-ma.html)'
 - en: '[](https://www.linkedin.com/in/olumide-shittu)****[Shittu Olumide](https://www.linkedin.com/in/olumide-shittu/)****
     is a software engineer and technical writer passionate about leveraging cutting-edge
     technologies to craft compelling narratives, with a keen eye for detail and a
     knack for simplifying complex concepts. You can also find Shittu on [Twitter](https://twitter.com/Shittu_Olumide_).'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '[](https://www.linkedin.com/in/olumide-shittu)****[Shittu Olumide](https://www.linkedin.com/in/olumide-shittu/)****
+    是一位软件工程师和技术写作者，热衷于利用前沿技术来编写引人入胜的叙述，具有敏锐的细节观察力和简化复杂概念的天赋。你也可以在 [Twitter](https://twitter.com/Shittu_Olumide_)
+    上找到Shittu。'
 - en: More On This Topic
+  id: totrans-77
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How to Handle Missing Data with Scikit-learn''s Imputer Module](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用Scikit-learn的Imputer模块处理缺失数据](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)'
 - en: '[How to Apply Padding to Arrays with NumPy](https://www.kdnuggets.com/how-to-apply-padding-to-arrays-with-numpy)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用NumPy对数组进行填充](https://www.kdnuggets.com/how-to-apply-padding-to-arrays-with-numpy)'
 - en: '[How to Compute the Cross-Correlation Between Two NumPy Arrays](https://www.kdnuggets.com/how-to-compute-the-cross-correlation-between-two-numpy-arrays)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何计算两个NumPy数组之间的互相关](https://www.kdnuggets.com/how-to-compute-the-cross-correlation-between-two-numpy-arrays)'
 - en: '[KDnuggets News, August 31: The Complete Data Science Study Roadmap…](https://www.kdnuggets.com/2022/n35.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，8月31日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)'
 - en: '[7 Techniques to Handle Imbalanced Data](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理不平衡数据的7种技术](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)'
 - en: '[How to Handle Outliers in Dataset with Pandas](https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用Pandas处理数据集中的异常值](https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas)'
