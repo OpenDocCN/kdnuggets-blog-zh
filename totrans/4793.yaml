@@ -1,152 +1,231 @@
 - en: Multi-Class Text Classification with Scikit-Learn
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Scikit-Learn 的多类别文本分类
 - en: 原文：[https://www.kdnuggets.com/2018/08/multi-class-text-classification-scikit-learn.html](https://www.kdnuggets.com/2018/08/multi-class-text-classification-scikit-learn.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/08/multi-class-text-classification-scikit-learn.html](https://www.kdnuggets.com/2018/08/multi-class-text-classification-scikit-learn.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Susan Li](https://www.linkedin.com/in/susanli/), Sr. Data Scientist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Susan Li](https://www.linkedin.com/in/susanli/), 高级数据科学家**'
 - en: '![Header iamge](../Images/be0b63e6281d95bf41066b2df2b31734.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![Header iamge](../Images/be0b63e6281d95bf41066b2df2b31734.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: There are lots of applications of text classification in the commercial world.
     For example, news stories are typically organized by topics; content or products
     are often tagged by categories; users can be classified into cohorts based on
     how they talk about a product or brand online...
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 文本分类在商业世界中有许多应用。例如，新闻报道通常按主题组织；内容或产品通常按类别标记；用户可以根据他们在线谈论产品或品牌的方式被分类到不同的群体中...
 - en: 'However, the vast majority of text classification articles and tutorials on
     the internet are binary text classification such as email spam filtering (spam
     vs. ham), sentiment analysis (positive vs. negative). In most cases, our real
     world problem are much more complicated than that. Therefore, this is what we
     are going to do today: Classifying Consumer Finance Complaints into 12 pre-defined
     classes. The data can be downloaded from [data.gov](https://catalog.data.gov/dataset/consumer-complaint-database).'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，互联网上绝大多数的文本分类文章和教程都是二分类文本分类，例如电子邮件垃圾过滤（垃圾邮件与正常邮件）、情感分析（积极与消极）。在大多数情况下，我们现实中的问题要复杂得多。因此，这就是我们今天要做的事情：将消费者金融投诉分类为12个预定义类别。数据可以从[data.gov](https://catalog.data.gov/dataset/consumer-complaint-database)下载。
 - en: We use [Python](https://www.python.org/) and [Jupyter Notebook](http://jupyter.org/) to
     develop our system, relying on [Scikit-Learn](http://scikit-learn.org/stable/) for
     the machine learning components. If you would like to see an implementation in [PySpark](https://spark.apache.org/docs/0.9.0/mllib-guide.html),
     read the [next article](https://medium.com/@actsusanli/multi-class-text-classification-with-pyspark-7d78d022ed35).
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用 [Python](https://www.python.org/) 和 [Jupyter Notebook](http://jupyter.org/) 来开发我们的系统，依靠 [Scikit-Learn](http://scikit-learn.org/stable/) 进行机器学习组件。如果你想查看 [PySpark](https://spark.apache.org/docs/0.9.0/mllib-guide.html)的实现，可以阅读 [下一篇文章](https://medium.com/@actsusanli/multi-class-text-classification-with-pyspark-7d78d022ed35)。
 - en: Problem Formulation
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题制定
 - en: The problem is supervised text classification problem, and our goal is to investigate
     which supervised machine learning methods are best suited to solve it.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个问题是监督文本分类问题，我们的目标是研究哪些监督机器学习方法最适合解决这个问题。
 - en: Given a new complaint comes in, we want to assign it to one of 12 categories.
     The classifier makes the assumption that each new complaint is assigned to one
     and only one category. This is multi-class text classification problem. I can’t
     wait to see what we can achieve!
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设有一个新的投诉进来，我们希望将其分配到12个类别中的一个。分类器假设每个新的投诉被分配到一个且只有一个类别。这是一个多类别文本分类问题。我迫不及待想看看我们能取得什么成果！
 - en: Data Exploration
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据探索
 - en: 'Before diving into training machine learning models, we should look at some
     examples first and the number of complaints in each class:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在深入训练机器学习模型之前，我们应该先查看一些示例以及每个类别中的投诉数量：
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![](../Images/97c9210f6dafaff433f843ba7c445543.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/97c9210f6dafaff433f843ba7c445543.png)'
 - en: Figure 1
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 图1
 - en: For this project, we need only two columns — “Product” and “Consumer complaint
     narrative”.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这个项目，我们只需要两列——“产品”和“消费者投诉叙述”。
 - en: '**Input**: Consumer_complaint_narrative'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输入**：Consumer_complaint_narrative'
 - en: 'Example: “I have outdated information on my credit report that I have previously
     disputed that has yet to be removed this information is more then seven years
     old and does not meet credit reporting requirements”'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例：“我在我的信用报告上有过时的信息，我之前已提出异议，这些信息尚未被删除，这些信息超过七年且不符合信用报告要求”
 - en: '**Output**: product'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出**：产品'
 - en: 'Example: Credit reporting'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例：信用报告
 - en: We will remove missing values in “Consumer complaints narrative” column, and
     add a column encoding the product as an integer because categorical variables
     are often better represented by integers than strings.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将删除“消费者投诉叙述”列中的缺失值，并添加一个将产品编码为整数的列，因为分类变量通常用整数比用字符串表示更好。
 - en: We also create a couple of dictionaries for future use.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还创建了几个字典以备将来使用。
 - en: 'After cleaning up, this is the first five rows of the data we will be working
     on:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 清理之后，这是我们将要处理的数据的前五行：
 - en: '[PRE1]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![](../Images/807df708fc7b3049cd05f88e958d8c0c.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/807df708fc7b3049cd05f88e958d8c0c.png)'
 - en: Figure 2
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 图2
 - en: Imbalanced Classes
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 不平衡类
 - en: We see that the number of complaints per product is imbalanced. Consumers’ complaints
     are more biased towards Debt collection, Credit reporting and Mortgage.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们看到每个产品的投诉数量不平衡。消费者的投诉更倾向于债务催收、信用报告和抵押贷款。
 - en: '[PRE2]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![](../Images/aaf1ebe71d3affac992417b2fda835de.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/aaf1ebe71d3affac992417b2fda835de.png)'
 - en: Figure 3
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 图3
 - en: When we encounter such problems, we are bound to have difficulties solving them
     with standard algorithms. Conventional algorithms are often biased towards the
     majority class, not taking the data distribution into consideration.In the worst
@@ -155,945 +234,1439 @@
     our model or artificially balance the dataset, for example by [undersampling or
     oversampling](https://en.wikipedia.org/wiki/Oversampling_and_undersampling_in_data_analysis) each
     class.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们遇到这种问题时，使用标准算法往往会有困难。传统算法往往偏向于主要类别，而不考虑数据分布。在最坏的情况下，少数类别会被视为异常值并被忽略。对于一些情况，如欺诈检测或癌症预测，我们需要仔细配置模型或人工平衡数据集，例如通过[欠采样或过采样](https://en.wikipedia.org/wiki/Oversampling_and_undersampling_in_data_analysis)每个类别。
 - en: However, in our case of learning imbalanced data, the majority classes might
     be of our great interest. It is desirable to have a classifier that gives high
     prediction accuracy over the majority class, while maintaining reasonable accuracy
     for the minority classes. Therefore, we will leave it as it is.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，在我们学习不平衡数据的情况下，主要类别可能是我们非常感兴趣的。希望有一个分类器能够对主要类别提供高预测准确度，同时对少数类别保持合理的准确度。因此，我们将保持原样。
 - en: Text Representation
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文本表示
 - en: The classifiers and learning algorithms can not directly process the text documents
     in their original form, as most of them expect numerical feature vectors with
     a fixed size rather than the raw text documents with variable length. Therefore,
     during the preprocessing step, the texts are converted to a more manageable representation.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 分类器和学习算法不能直接处理原始文本文档，因为它们大多数期望固定大小的数值特征向量，而不是具有可变长度的原始文本文档。因此，在预处理步骤中，文本会被转换为更易于处理的表示。
 - en: 'One common approach for extracting features from text is to use the bag of
     words model: a model where for each document, a complaint narrative in our case,
     the presence (and often the frequency) of words is taken into consideration, but
     the order in which they occur is ignored.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 从文本中提取特征的一种常见方法是使用词袋模型：在该模型中，对于每个文档（在我们这里是投诉叙述），考虑的是词的出现（通常还有频率），但忽略它们出现的顺序。
 - en: 'Specifically, for each term in our dataset, we will calculate a measure called
     Term Frequency, Inverse Document Frequency, abbreviated to tf-idf. We will use
     `sklearn.feature_extraction.text.TfidfVectorizer` to calculate a `tf-idf` vector
     for each of consumer complaint narratives:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 具体来说，对于数据集中每个术语，我们将计算一个叫做词频-逆文档频率的度量，简称tf-idf。我们将使用`sklearn.feature_extraction.text.TfidfVectorizer`为每个消费者投诉叙述计算`tf-idf`向量：
 - en: '`sublinear_df` is set to `True` to use a logarithmic form for frequency.'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`sublinear_df`设置为`True`以使用频率的对数形式。'
 - en: '`min_df` is the minimum numbers of documents a word must be present in to be
     kept.'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`min_df`是词必须出现在的最小文档数量，以便保留。'
 - en: '`norm` is set to `l2`, to ensure all our feature vectors have a euclidian norm
     of 1.'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`norm` 设置为 `l2`，以确保我们所有的特征向量都有一个欧几里得范数为1。'
 - en: '`ngram_range` is set to `(1, 2)` to indicate that we want to consider both
     unigrams and bigrams.'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ngram_range` 设置为 `(1, 2)` 以表示我们希望同时考虑单词和双词组合。'
 - en: '`stop_words` is set to `"english"` to remove all common pronouns (`"a"`, `"the"`, ...)
     to reduce the number of noisy features.'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`stop_words` 设置为 `"english"` 以去除所有常见代词（`"a"`、`"the"` 等），以减少噪声特征的数量。'
 - en: '[PRE3]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '`(4569, 12633)`'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '`(4569, 12633)`'
 - en: Now, each of 4569 consumer complaint narratives is represented by 12633 features,
     representing the tf-idf score for different unigrams and bigrams.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，每个4569个消费者投诉叙述由12633个特征表示，表示不同单词和双词组合的tf-idf分数。
 - en: 'We can use `sklearn.feature_selection.chi2` to find the terms that are the
     most correlated with each of the products:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用 `sklearn.feature_selection.chi2` 来找到与每个产品最相关的术语：
 - en: '[PRE4]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '‘**Bank account or service**’:'
+  id: totrans-54
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '''**银行账户或服务**'':'
 - en: 'Most correlated unigrams:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的单词：
 - en: bank
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 银行
 - en: overdraft
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 透支
 - en: 'Most correlated bigrams:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的双词组合：
 - en: overdraft fees
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 透支费用
 - en: checking account
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 活期账户
 - en: '‘**Consumer Loan**’:'
+  id: totrans-61
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '''**消费贷款**'':'
 - en: 'Most correlated unigrams:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的单词：
 - en: car
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 汽车
 - en: vehicle
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 车辆
 - en: 'Most correlated bigrams:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的双词组合：
 - en: vehicle xxxx
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 车辆 xxxx
 - en: toyota financial
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 丰田金融
 - en: '‘**Credit card**’:'
+  id: totrans-68
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '''**信用卡**'':'
 - en: 'Most correlated unigrams:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的单词：
 - en: citi
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 花旗
 - en: card
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 卡
 - en: 'Most correlated bigrams:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的双词组合：
 - en: annual fee
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 年费
 - en: credit card
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 信用卡
 - en: '‘**Credit reporting**’:'
+  id: totrans-75
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '''**信用报告**'':'
 - en: 'Most correlated unigrams:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的单词：
 - en: experian
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Experian
 - en: equifax
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Equifax
 - en: 'Most correlated bigrams:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的双词组合：
 - en: trans union
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: TransUnion
 - en: credit report
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 信用报告
 - en: '‘**Debt collection**’:'
+  id: totrans-82
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '''**债务催收**'':'
 - en: 'Most correlated unigrams:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的单词：
 - en: collection
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 讨债
 - en: debt
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 债务
 - en: 'Most correlated bigrams:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的双词组合：
 - en: collect debt
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 收债
 - en: collection agency
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 讨债机构
 - en: '‘**Money transfers**’:'
+  id: totrans-89
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '''**汇款**'':'
 - en: 'Most correlated unigrams:'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的单词：
 - en: wu
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 吴
 - en: paypal
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: PayPal
 - en: 'Most correlated bigrams:'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的双词组合：
 - en: western union
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 西联汇款
 - en: money transfer
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 汇款
 - en: '‘**Mortgage**’:'
+  id: totrans-96
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '''**按揭**'':'
 - en: 'Most correlated unigrams:'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的单词：
 - en: modification
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 修改
 - en: mortgage
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 抵押贷款
 - en: 'Most correlated bigrams:'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的双词组合：
 - en: mortgage company
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 抵押贷款公司
 - en: loan modification
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 贷款修改
 - en: '‘**Other financial service**’:'
+  id: totrans-103
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '''**其他金融服务**'':'
 - en: 'Most correlated unigrams:'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的单词：
 - en: dental
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 牙科
 - en: passport
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 护照
 - en: 'Most correlated bigrams:'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的双词组合：
 - en: help pay
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 帮助支付
 - en: stated pay
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 声明支付
 - en: '‘**Payday loan**’:'
+  id: totrans-110
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '''**发薪日贷款**'':'
 - en: 'Most correlated unigrams:'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的单词：
 - en: borrowed
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 借款
 - en: payday
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 发薪日
 - en: 'Most correlated bigrams:'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的双词组合：
 - en: big picture
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 大致情况
 - en: payday loan
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 发薪日贷款
 - en: '‘**Prepaid card**’:'
+  id: totrans-117
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '''**预付卡**'':'
 - en: 'Most correlated unigrams:'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的单词：
 - en: serve
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 服务
 - en: prepaid
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 预付
 - en: 'Most correlated bigrams:'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的双词组合：
 - en: access money
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 获取资金
 - en: prepaid card
+  id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 预付卡
 - en: '‘**Student loan**’:'
+  id: totrans-124
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '''**学生贷款**'':'
 - en: 'Most correlated unigrams:'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的单词：
 - en: student
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 学生
 - en: navient
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Navient
 - en: 'Most correlated bigrams:'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的双词组合：
 - en: student loans
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 学生贷款
 - en: student loan
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 学生贷款
 - en: '‘**Virtual currency**’:'
+  id: totrans-131
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '''**虚拟货币**'':'
 - en: 'Most correlated unigrams:'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的单词：
 - en: handles
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 处理
 - en: https
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: https
 - en: 'Most correlated bigrams:'
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 最相关的双词组合：
 - en: xxxx provider
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: xxxx服务提供商
 - en: money want
+  id: totrans-137
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 资金需求
 - en: They all make sense, don’t you think so?
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些都很有道理，不是吗？
 - en: '**Multi-Class Classifier: Features and Design**'
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: '**多类别分类器：特征与设计**'
 - en: To train supervised classifiers, we first transformed the “Consumer complaint
     narrative” into a vector of numbers. We explored vector representations such as
     TF-IDF weighted vectors.
+  id: totrans-140
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为了训练监督分类器，我们首先将“消费者投诉叙述”转换为数字向量。我们探索了诸如TF-IDF加权向量等向量表示。
 - en: After having this vector representations of the text we can train supervised
     classifiers to train unseen “Consumer complaint narrative” and predict the “product”
     on which they fall.
+  id: totrans-141
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在获得文本的向量表示后，我们可以训练监督分类器，以训练未见的“消费者投诉叙述”并预测它们属于哪个“产品”。
 - en: After all the above data transformation, now that we have all the features and
     labels, it is time to train the classifiers. There are a number of algorithms
     we can use for this type of problem.
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 在完成上述所有数据转换后，现在我们已经拥有了所有特征和标签，是时候训练分类器了。对于这种类型的问题，我们可以使用多种算法。
 - en: '**Naive Bayes Classifier**: the one most suitable for word counts is the multinomial
     variant:'
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: '**朴素贝叶斯分类器**：最适合词频统计的是多项式变体：'
 - en: '[PRE5]'
+  id: totrans-144
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: After fitting the training set, let’s make some predictions.
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 在拟合训练集之后，让我们做一些预测。
 - en: '[PRE6]'
+  id: totrans-146
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '`[‘Debt collection’]`'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: '`[‘债务催收’]`'
 - en: '[PRE7]'
+  id: totrans-148
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![](../Images/c56b05736e00cea1f083ecc4bf8f7726.png)'
+  id: totrans-149
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c56b05736e00cea1f083ecc4bf8f7726.png)'
 - en: Figure 4
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 图4
 - en: '[PRE8]'
+  id: totrans-151
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '`[‘Credit reporting’]`'
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: '`[‘信用报告’]`'
 - en: '[PRE9]'
+  id: totrans-153
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![](../Images/2086ae633dd9e4e36b9ba17aeafd6736.png)'
+  id: totrans-154
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2086ae633dd9e4e36b9ba17aeafd6736.png)'
 - en: Figure 5
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: 图5
 - en: Not too shabby!
+  id: totrans-156
   prefs: []
   type: TYPE_NORMAL
+  zh: 不错哦！
 - en: Model Selection
+  id: totrans-157
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型选择
 - en: We are now ready to experiment with different machine learning models, evaluate
     their accuracy and find the source of any potential issues.
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在准备实验不同的机器学习模型，评估它们的准确性，并找到潜在问题的来源。
 - en: 'We will benchmark the following four models:'
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将对以下四个模型进行基准测试：
 - en: Logistic Regression
+  id: totrans-160
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Logistic Regression
 - en: (Multinomial) Naive Bayes
+  id: totrans-161
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: （Multinomial）朴素贝叶斯
 - en: Linear Support Vector Machine
+  id: totrans-162
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 线性支持向量机
 - en: Random Forest
+  id: totrans-163
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 随机森林
 - en: '[PRE10]'
+  id: totrans-164
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '![](../Images/e6c6e2e6283254136c4b1d3729aa82e3.png)'
+  id: totrans-165
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e6c6e2e6283254136c4b1d3729aa82e3.png)'
 - en: Figure 6
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 6
 - en: '[PRE11]'
+  id: totrans-167
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: model_name
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: model_name
 - en: '**LinearSVC: **0.822890'
+  id: totrans-169
   prefs: []
   type: TYPE_NORMAL
+  zh: '**LinearSVC:** 0.822890'
 - en: '**LogisticRegression:** 0.792927'
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: '**LogisticRegression:** 0.792927'
 - en: '**MultinomialNB:** 0.688519'
+  id: totrans-171
   prefs: []
   type: TYPE_NORMAL
+  zh: '**MultinomialNB:** 0.688519'
 - en: '**RandomForestClassifier:** 0.443826'
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: '**RandomForestClassifier:** 0.443826'
 - en: 'Name: accuracy, dtype: float64'
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: 名称：accuracy，dtype：float64
 - en: LinearSVC and Logistic Regression perform better than the other two classifiers,
     with LinearSVC having a slight advantage with a median accuracy of around 82%.
+  id: totrans-174
   prefs: []
   type: TYPE_NORMAL
+  zh: LinearSVC 和 Logistic Regression 比其他两个分类器表现更好，其中 LinearSVC 具有略微的优势，中位数准确率约为 82%。
 - en: Model Evaluation
+  id: totrans-175
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型评估
 - en: Continue with our best model (LinearSVC), we are going to look at the confusion
     matrix, and show the discrepancies between predicted and actual labels.
+  id: totrans-176
   prefs: []
   type: TYPE_NORMAL
+  zh: 继续使用我们最好的模型（LinearSVC），我们将查看混淆矩阵，并展示预测标签与实际标签之间的差异。
 - en: '[PRE12]'
+  id: totrans-177
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '![](../Images/f8fbabd453d6a7a8637fd755bdc4903e.png)'
+  id: totrans-178
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f8fbabd453d6a7a8637fd755bdc4903e.png)'
 - en: Figure 7
+  id: totrans-179
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 7
 - en: 'The vast majority of the predictions end up on the diagonal (predicted label
     = actual label), where we want them to be. However, there are a number of misclassifications,
     and it might be interesting to see what those are caused by:'
+  id: totrans-180
   prefs: []
   type: TYPE_NORMAL
+  zh: 大多数预测结果都落在对角线（预测标签 = 实际标签）上，这是我们期望的。然而，也存在一些误分类，了解这些误分类的原因可能会很有趣：
 - en: '[PRE13]'
+  id: totrans-181
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '[PRE14]'
+  id: totrans-182
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '![](../Images/66a1a34905edd60666acad6ce28f03a3.png)'
+  id: totrans-183
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/66a1a34905edd60666acad6ce28f03a3.png)'
 - en: Figure 8![](../Images/03e695d7ef265ff1f060cc879fe5bed4.png)
+  id: totrans-184
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 8 ![](../Images/03e695d7ef265ff1f060cc879fe5bed4.png)
 - en: Figure 9
+  id: totrans-185
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 9
 - en: As you can see, some of the misclassified complaints are complaints that touch
     on more than one subjects (for example, complaints involving both credit card
     and credit report). This sort of errors will always happen.
+  id: totrans-186
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，一些误分类的投诉涉及多个主题（例如，涉及信用卡和信用报告的投诉）。这种错误将始终发生。
 - en: 'Again, we use the [chi-squared test](https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test) to
     find the terms that are the most correlated with each of the categories:'
+  id: totrans-187
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们再次使用[卡方检验](https://en.wikipedia.org/wiki/Pearson%27s_chi-squared_test)来找出与各类别相关性最高的术语：
 - en: '[PRE15]'
+  id: totrans-188
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '‘**Bank account or service**’:'
+  id: totrans-189
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ‘**银行账户或服务**’：
 - en: 'Top unigrams:'
+  id: totrans-190
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级单词组：
 - en: bank
+  id: totrans-191
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: bank
 - en: account
+  id: totrans-192
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: account
 - en: 'Top bigrams:'
+  id: totrans-193
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级双词组：
 - en: debit card
+  id: totrans-194
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: debit card
 - en: overdraft fees
+  id: totrans-195
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: overdraft fees
 - en: '‘**Consumer Loan**’:'
+  id: totrans-196
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ‘**消费者贷款**’：
 - en: 'Top unigrams:'
+  id: totrans-197
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级单词组：
 - en: vehicle
+  id: totrans-198
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: vehicle
 - en: car
+  id: totrans-199
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: car
 - en: 'Top bigrams:'
+  id: totrans-200
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级双词组：
 - en: personal loan
+  id: totrans-201
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: personal loan
 - en: history xxxx
+  id: totrans-202
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: history xxxx
 - en: '‘**Credit card**’:'
+  id: totrans-203
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ‘**信用卡**’：
 - en: 'Top unigrams:'
+  id: totrans-204
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级单词组：
 - en: card
+  id: totrans-205
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: card
 - en: discover
+  id: totrans-206
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: discover
 - en: 'Top bigrams:'
+  id: totrans-207
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级双词组：
 - en: credit card
+  id: totrans-208
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: credit card
 - en: discover card
+  id: totrans-209
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: discover card
 - en: '‘**Credit reporting**’:'
+  id: totrans-210
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ‘**信用报告**’：
 - en: 'Top unigrams:'
+  id: totrans-211
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级单词组：
 - en: equifax
+  id: totrans-212
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: equifax
 - en: transunion
+  id: totrans-213
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: transunion
 - en: 'Top bigrams:'
+  id: totrans-214
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级双词组：
 - en: xxxx account
+  id: totrans-215
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: xxxx account
 - en: trans union
+  id: totrans-216
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: trans union
 - en: '‘**Debt collection**’:'
+  id: totrans-217
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ‘**债务催收**’：
 - en: 'Top unigrams:'
+  id: totrans-218
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级单词组：
 - en: debt
+  id: totrans-219
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: debt
 - en: collection
+  id: totrans-220
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: collection
 - en: 'Top bigrams:'
+  id: totrans-221
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级双词组：
 - en: account credit
+  id: totrans-222
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: account credit
 - en: time provided
+  id: totrans-223
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: time provided
 - en: '‘**Money transfers**’:'
+  id: totrans-224
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ‘**资金转移**’：
 - en: 'Top unigrams:'
+  id: totrans-225
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级单词组：
 - en: paypal
+  id: totrans-226
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: paypal
 - en: transfer
+  id: totrans-227
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: transfer
 - en: 'Top bigrams:'
+  id: totrans-228
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级双词组：
 - en: money transfer
+  id: totrans-229
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: money transfer
 - en: send money
+  id: totrans-230
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: send money
 - en: '‘**Mortgage**’:'
+  id: totrans-231
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ‘**按揭**’：
 - en: 'Top unigrams:'
+  id: totrans-232
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级单词组：
 - en: mortgage
+  id: totrans-233
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: mortgage
 - en: escrow
+  id: totrans-234
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: escrow
 - en: 'Top bigrams:'
+  id: totrans-235
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级双词组：
 - en: loan modification
+  id: totrans-236
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: loan modification
 - en: mortgage company
+  id: totrans-237
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: mortgage company
 - en: '‘**Other financial service**’:'
+  id: totrans-238
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ‘**其他金融服务**’：
 - en: 'Top unigrams:'
+  id: totrans-239
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级单词组：
 - en: passport
+  id: totrans-240
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: passport
 - en: dental
+  id: totrans-241
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: dental
 - en: 'Top bigrams:'
+  id: totrans-242
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级双词组：
 - en: stated pay
+  id: totrans-243
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: stated pay
 - en: help pay
+  id: totrans-244
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: help pay
 - en: '‘**Payday loan**’:'
+  id: totrans-245
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ‘**发薪日贷款**’：
 - en: 'Top unigrams:'
+  id: totrans-246
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级单词组：
 - en: payday
+  id: totrans-247
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: payday
 - en: loan
+  id: totrans-248
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: loan
 - en: 'Top bigrams:'
+  id: totrans-249
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级双词组：
 - en: payday loan
+  id: totrans-250
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: payday loan
 - en: pay day
+  id: totrans-251
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: pay day
 - en: '‘**Prepaid card**’:'
+  id: totrans-252
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ‘**预付卡**’：
 - en: 'Top unigrams:'
+  id: totrans-253
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级单词组：
 - en: prepaid
+  id: totrans-254
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: prepaid
 - en: serve
+  id: totrans-255
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: serve
 - en: 'Top bigrams:'
+  id: totrans-256
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级双词组：
 - en: prepaid card
+  id: totrans-257
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 预付卡
 - en: use card
+  id: totrans-258
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: use card
 - en: '‘**Student loan**’:'
+  id: totrans-259
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ‘**学生贷款**’：
 - en: 'Top unigrams:'
+  id: totrans-260
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级单词组：
 - en: navient
+  id: totrans-261
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: navient
 - en: loans
+  id: totrans-262
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: loans
 - en: 'Top bigrams:'
+  id: totrans-263
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级双词组：
 - en: student loan
+  id: totrans-264
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: student loan
 - en: sallie mae
+  id: totrans-265
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: sallie mae
 - en: '‘**Virtual currency**’:'
+  id: totrans-266
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ‘**虚拟货币**’：
 - en: 'Top unigrams:'
+  id: totrans-267
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级单词组：
 - en: https
+  id: totrans-268
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: https
 - en: tx
+  id: totrans-269
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: tx
 - en: 'Top bigrams:'
+  id: totrans-270
   prefs: []
   type: TYPE_NORMAL
+  zh: 顶级双词组：
 - en: money want
+  id: totrans-271
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: money want
 - en: xxxx provider
+  id: totrans-272
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: xxxx provider
 - en: They are consistent within our expectation.
+  id: totrans-273
   prefs: []
   type: TYPE_NORMAL
+  zh: 它们在我们的预期范围内保持一致。
 - en: 'Finally, we print out the classification report for each class:'
+  id: totrans-274
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们打印出每个类别的分类报告：
 - en: '[PRE16]'
+  id: totrans-275
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: '![](../Images/441988d26ccea0a588f2939d9cdc863f.png)'
+  id: totrans-276
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/441988d26ccea0a588f2939d9cdc863f.png)'
 - en: Figure 9
+  id: totrans-277
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 9
 - en: Source code can be found on [Github](https://github.com/susanli2016/Machine-Learning-with-Python/blob/master/Consumer_complaints.ipynb).
     I look forward to hear any feedback or questions.
+  id: totrans-278
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Susan Li](https://www.linkedin.com/in/susanli/)** is changing the world,
     one article at a time. She is a Sr. Data Scientist, located in Toronto, Canada.'
+  id: totrans-279
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://towardsdatascience.com/multi-class-text-classification-with-scikit-learn-12f1e60e0a9f).
     Reposted with permission.'
+  id: totrans-280
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-281
   prefs: []
   type: TYPE_NORMAL
 - en: '[Text Classification & Embeddings Visualization Using LSTMs, CNNs, and Pre-trained
     Word Vectors](/2018/07/text-classification-lstm-cnn-pre-trained-word-vectors.html)'
+  id: totrans-282
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[WTF is TF-IDF?](/2018/08/wtf-tf-idf.html)'
+  id: totrans-283
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Natural Language Processing Nuggets: Getting Started with NLP](/2018/06/getting-started-natural-language-processing.html)'
+  id: totrans-284
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-285
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[What is Text Classification?](https://www.kdnuggets.com/2022/07/text-classification.html)'
+  id: totrans-286
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Best Architecture for Your Text Classification Task: Benchmarking…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
+  id: totrans-287
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[More Performance Evaluation Metrics for Classification Problems You…](https://www.kdnuggets.com/2020/04/performance-evaluation-metrics-classification.html)'
+  id: totrans-288
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Introduction to Binary Classification with PyCaret](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)'
+  id: totrans-289
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  id: totrans-290
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Machine Learning Algorithms for Classification](https://www.kdnuggets.com/2022/03/machine-learning-algorithms-classification.html)'
+  id: totrans-291
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
