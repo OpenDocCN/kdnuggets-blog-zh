@@ -1,53 +1,83 @@
 - en: Fine-Tuning Transformer Model for Invoice Recognition
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 微调变换器模型以进行发票识别
 - en: 原文：[https://www.kdnuggets.com/2021/06/fine-tuning-transformer-model-invoice-recognition.html](https://www.kdnuggets.com/2021/06/fine-tuning-transformer-model-invoice-recognition.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/06/fine-tuning-transformer-model-invoice-recognition.html](https://www.kdnuggets.com/2021/06/fine-tuning-transformer-model-invoice-recognition.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/), Founder
     of UBIAI**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)，UBIAI
+    创始人**'
 - en: '![Figure](../Images/bef1163c62c44789046be68101904276.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/bef1163c62c44789046be68101904276.png)'
 - en: Invoice recognition
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 发票识别
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织 IT 部门'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Introduction
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: Building on my recent tutorial on [how to annotate PDFs and scanned images for
     NLP applications](https://towardsdatascience.com/how-to-annotate-pdfs-and-scanned-images-for-nlp-applications-f7b7b1db5c4a),
     we will attempt to fine-tune the recently released Microsoft’s [Layout LM model](https://github.com/microsoft/unilm/tree/master/layoutlm)
@@ -55,12 +85,18 @@
     the previous tutorials focused on using the publicly available [FUNSD dataset](https://guillaumejaume.github.io/FUNSD/)
     to fine-tune the model, here we will show the entire process starting from annotation
     and pre-processing to training and inference.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于我最近关于[如何为 NLP 应用标注 PDF 和扫描图像](https://towardsdatascience.com/how-to-annotate-pdfs-and-scanned-images-for-nlp-applications-f7b7b1db5c4a)的教程，我们将尝试对最近发布的微软[Layout
+    LM 模型](https://github.com/microsoft/unilm/tree/master/layoutlm)进行微调，使用包含法语和英语发票的自定义标注数据集。虽然之前的教程集中于使用公开的[FUNSD
+    数据集](https://guillaumejaume.github.io/FUNSD/)来微调模型，但这里我们将展示从标注和预处理到训练和推断的整个过程。
 - en: LayoutLM Model
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: LayoutLM 模型
 - en: The LayoutLM model is based on BERT architecture but with two additional types
     of input embeddings. The first is a 2-D position embedding that denotes the relative
     position of a token within a document, and the second is an image embedding for
@@ -68,272 +104,426 @@
     results in several downstream tasks, including form understanding (from 70.72
     to 79.27), receipt understanding (from 94.02 to 95.24), and document image classification
     (from 93.07 to 94.42). For more information, refer to the [original article](https://arxiv.org/abs/1912.13318).
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: LayoutLM 模型基于 BERT 架构，但增加了两种额外的输入嵌入。第一个是 2-D 位置嵌入，用于表示文档中令牌的相对位置，第二个是用于文档中扫描令牌图像的图像嵌入。该模型在多个下游任务中取得了新的最先进结果，包括表单理解（从
+    70.72 提升到 79.27）、收据理解（从 94.02 提升到 95.24）和文档图像分类（从 93.07 提升到 94.42）。欲了解更多信息，请参阅[原始文章](https://arxiv.org/abs/1912.13318)。
 - en: Thankfully, the model was open sourced and made available in huggingface library.
     Thanks, Microsoft!
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，该模型已开源并在 huggingface 库中提供。感谢微软！
 - en: For this tutorial, we will clone the model directly from the huggingface library
     and fine-tune it on our own dataset. But first, we need to create the training
     data.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于本教程，我们将直接从 huggingface 库中克隆模型，并在我们自己的数据集上进行微调。但首先，我们需要创建训练数据。
 - en: Invoice Annotation
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 发票标注
 - en: 'Using the [UBIAI text annotation tool](https://ubiai.tools/), I have annotated
     around 50 personal invoices. I am interested to extract both the keys and values
     of the entities; for example in the following text “Date: 06/12/2021” we would
     annotate “Date” as DATE_ID and “06/12/2021” as DATE. Extracting both the keys
     and values will help us correlate the numerical values to their attributes. Here
     are all the entities that have been annotated:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '使用[UBIAI文本注释工具](https://ubiai.tools/)，我已经注释了大约50份个人发票。我感兴趣的是提取实体的键和值；例如在以下文本“Date:
+    06/12/2021”中，我们会将“Date”标注为DATE_ID，将“06/12/2021”标注为DATE。提取键和值将帮助我们将数值与其属性关联起来。以下是所有已标注的实体：'
 - en: '`DATE_ID, DATE, INVOICE_ID, INVOICE_NUMBER,SELLER_ID, SELLER, MONTANT_HT_ID,
     MONTANT_HT, TVA_ID, TVA, TTC_ID, TTC`'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '`DATE_ID, DATE, INVOICE_ID, INVOICE_NUMBER, SELLER_ID, SELLER, MONTANT_HT_ID,
+    MONTANT_HT, TVA_ID, TVA, TTC_ID, TTC`'
 - en: 'Here are a few entity definitions:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有一些实体定义：
 - en: '`MONTANT_HT`: Total price pre-tax'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '`MONTANT_HT`：税前总价'
 - en: '`TTC`: Total price with tax'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '`TTC`：含税总价'
 - en: '`TVA`: Tax amount'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '`TVA`：税额'
 - en: 'Below is an example of an annotated invoice using [UBIAI](https://ubiai.tools/):'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是使用[UBIAI](https://ubiai.tools/)的标注发票示例：
 - en: '![Figure](../Images/3e4f6a78e483720e4c57e014d09a4e86.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/3e4f6a78e483720e4c57e014d09a4e86.png)'
 - en: Invoice Annotation in UBIAI
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在UBIAI中的发票注释
 - en: 'After annotation, we export the train and test files from UBIAI directly in
     the correct format without any [pre-processing step](https://colab.research.google.com/github/NielsRogge/Transformers-Tutorials/blob/master/LayoutLM/Fine_tuning_LayoutLMForTokenClassification_on_FUNSD.ipynb).
     The export will include three files for each training and test datasets and one
     text file containing all the labels named labels.txt:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 注释完成后，我们直接从UBIAI以正确格式导出训练和测试文件，无需任何[预处理步骤](https://colab.research.google.com/github/NielsRogge/Transformers-Tutorials/blob/master/LayoutLM/Fine_tuning_LayoutLMForTokenClassification_on_FUNSD.ipynb)。导出将包括每个训练和测试数据集的三个文件以及一个名为labels.txt的文本文件，包含所有标签：
 - en: '[PRE0]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Train/Test_box.txt (contain bounding box for each token):'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: Train/Test_box.txt（包含每个token的边界框）：
 - en: '[PRE1]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Train/Test_image.txt (contain bounding box, document size, and name):'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: Train/Test_image.txt（包含边界框、文档大小和名称）：
 - en: '[PRE2]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'labels.txt:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: labels.txt：
 - en: '[PRE3]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Fine-Tuning LayoutLM Model:'
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 微调LayoutLM模型：
 - en: Here, we use google colab with GPU to fine — tune the model. The code below
     is based on the [original layoutLM paper](https://github.com/microsoft/unilm/tree/master/layoutlm)
     and [this tutorial ](https://colab.research.google.com/github/NielsRogge/Transformers-Tutorials/blob/master/LayoutLM/Fine_tuning_LayoutLMForTokenClassification_on_FUNSD.ipynb).
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们使用带GPU的google colab来微调模型。下面的代码基于[原始LayoutLM论文](https://github.com/microsoft/unilm/tree/master/layoutlm)和[本教程](https://colab.research.google.com/github/NielsRogge/Transformers-Tutorials/blob/master/LayoutLM/Fine_tuning_LayoutLMForTokenClassification_on_FUNSD.ipynb)。
 - en: First, install the layoutLM package…
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，安装layoutLM包……
 - en: '[PRE4]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '…as well as the transformer package from where the model will be downloaded:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: …以及从中下载模型的transformer包：
 - en: '[PRE5]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Next, create a list containing the unique labels from labels.txt:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，创建一个包含labels.txt中唯一标签的列表：
 - en: '[PRE6]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Then, create a pytorch dataset and dataloader:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，创建一个pytorch数据集和数据加载器：
 - en: '[PRE7]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Load the model from huggingface. This will be fine-tuned on the dataset.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 从huggingface加载模型。这将根据数据集进行微调。
 - en: '[PRE8]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Finally, start the training:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，开始训练：
 - en: '[PRE9]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: You should be able to see the training progress and the loss getting getting
     updated.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 你应该能看到训练进度和损失的实时更新。
 - en: '![Figure](../Images/5f7edf6f1f21ad58ecd42d5ca57bb657.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/5f7edf6f1f21ad58ecd42d5ca57bb657.png)'
 - en: Layout LM training in progress
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: Layout LM 训练中
 - en: 'After training, evaluate the model performance with the following function:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练后，使用以下函数评估模型性能：
 - en: '[PRE10]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'With only 50 documents, we get the following scores:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅使用50份文档，我们获得了以下分数：
 - en: '![Figure](../Images/502e7dc4d3cf4980404707d92117a61c.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/502e7dc4d3cf4980404707d92117a61c.png)'
 - en: Evaluation score after training
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练后的评估得分
 - en: With more annotations, we should certainly get higher scores.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过更多的注释，我们肯定能获得更高的分数。
 - en: 'Finally, save the model for future prediction:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，保存模型以备将来预测：
 - en: '[PRE11]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Inference:'
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 推断：
 - en: 'Now comes the fun part, let’s upload an invoice, OCR it, and extract relevant
     entities. For this test, we are using an invoice that was not in the training
     or test dataset. To parse the text from the invoice, we use the open source Tesseract
     package. Let’s install the package:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在进入有趣的部分，我们来上传发票，进行OCR处理，并提取相关实体。此次测试使用的发票不在训练集或测试集中。为了从发票中解析文本，我们使用开源的Tesseract包。让我们来安装这个包：
 - en: '[PRE12]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'Before running predictions, we need to parse the text from the image and pre-process
     the tokens and bounding boxes into features. To do so, I have created a preprocess
     python file [layoutLM_preprocess.py](https://github.com/UBIAI/layout_lm_tutorial.git)
     that will make it easier to preprocess the image:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 在运行预测之前，我们需要从图像中解析文本，并将标记和边界框预处理成特征。为此，我创建了一个预处理的python文件 [layoutLM_preprocess.py](https://github.com/UBIAI/layout_lm_tutorial.git)，这将使图像的预处理更容易：
 - en: '[PRE13]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'Next, load the model and get word predictions with their bounding boxes:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，加载模型并获取单词预测及其边界框：
 - en: '[PRE14]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'Finally, display the image with the predicted entities and bounding boxes:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，展示包含预测实体和边界框的图像：
 - en: '[PRE15]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'Et voila:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 如此：
 - en: '![Figure](../Images/0626ffc346644832631cd9c7b7534b66.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/0626ffc346644832631cd9c7b7534b66.png)'
 - en: Invoice entity extraction using LayoutLM
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用LayoutLM进行发票实体提取
 - en: The model was able to extract the seller, invoice number, date, and TTC correctly
     but made a mistake by assigning the TTC label to a purchased item. The results
     are impressive and very promising given the low number of annotated documents
     (only 50)! With more annotated invoices, we will be able to reach higher F scores
     and more accurate predictions.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 该模型能够正确提取卖家、发票号、日期和TTC，但在将TTC标签分配给购买的物品时出现了错误。考虑到标注文档数量（仅50份）较少，结果令人印象深刻，非常有前景！随着标注发票数量的增加，我们将能够达到更高的F分数和更准确的预测。
 - en: 'Conclusion:'
+  id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论：
 - en: Overall, the results from the LayoutLM model are very promising and demonstrate
     the usefulness of transformers in analyzing semi-structured text. The model can
     be fine-tuned on any other semi-structured documents such as driver licences,
     contracts, government documents, financial documents, etc.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 总体而言，LayoutLM模型的结果非常有前景，展示了transformers在分析半结构化文本中的实用性。该模型可以在任何其他半结构化文档上进行微调，例如驾驶执照、合同、政府文件、财务文件等。
 - en: If you have any question, don’t hesitate to ask below or send us an email at
     admin@ubiai.tools.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有任何问题，请在下方提问或通过邮件发送至 admin@ubiai.tools。
 - en: If you liked this article, please clap, like, and share!
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你喜欢这篇文章，请点赞、喜欢并分享！
 - en: '**Bio: [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)**
     is the Founder of UBIAI, an annotation tool for NLP applications, and holds a
     PhD in Physics.'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)**
+    是UBIAI的创始人，UBIAI是一个用于NLP应用的标注工具，并拥有物理学博士学位。'
 - en: '**Related:**'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Building a Knowledge Graph for Job Search Using BERT](/2021/06/knowledge-graph-job-search-bert.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用BERT构建用于职位搜索的知识图谱](/2021/06/knowledge-graph-job-search-bert.html)'
 - en: '[How to Fine-Tune BERT Transformer with spaCy 3](/2021/06/fine-tune-bert-transformer-spacy.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何用spaCy 3微调BERT Transformer](/2021/06/fine-tune-bert-transformer-spacy.html)'
 - en: '[The Best Way to Learn Practical NLP?](/2021/06/best-way-learn-practical-nlp.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习实用NLP的最佳方法？](/2021/06/best-way-learn-practical-nlp.html)'
 - en: More On This Topic
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[RAG vs Finetuning: Which Is the Best Tool to Boost Your LLM Application?](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[RAG与微调：哪个是提升LLM应用的最佳工具？](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)'
 - en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何从零开始构建和训练Transformer模型…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
 - en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[图像识别与自然语言处理的迁移学习](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
 - en: '[The Evolution of Speech Recognition Metrics](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[语音识别指标的演变](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
 - en: '[5 IT Jobs That Are High in Demand But Don’t Get Enough Recognition](https://www.kdnuggets.com/5-it-jobs-that-are-high-in-demand-but-dont-get-enough-recognition)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5个需求高但未获得足够认可的IT职位](https://www.kdnuggets.com/5-it-jobs-that-are-high-in-demand-but-dont-get-enough-recognition)'
 - en: '[LSTMs Rise Again: Extended-LSTM Models Challenge the Transformer…](https://www.kdnuggets.com/lstms-rise-again-extended-lstm-models-challenge-the-transformer-superiority)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LSTM的复兴：扩展LSTM模型挑战Transformer的优势…](https://www.kdnuggets.com/lstms-rise-again-extended-lstm-models-challenge-the-transformer-superiority)'
