@@ -1,76 +1,111 @@
 - en: Creating a Web Application to Extract Topics from Audio with Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 创建一个从音频中提取主题的 Web 应用程序
 - en: 原文：[https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)
 - en: '![Creating a Web Application to Extract Topics from Audio with Python](../Images/dec9cc3aab0728cb753ff456ee486922.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![创建一个从音频中提取主题的 Web 应用程序](../Images/dec9cc3aab0728cb753ff456ee486922.png)'
 - en: Photo by [israel palacio](https://unsplash.com/@othentikisra) on [Unsplash](https://unsplash.com/photos/Y20JJ_ddy9M)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由[israel palacio](https://unsplash.com/@othentikisra)拍摄，来自[Unsplash](https://unsplash.com/photos/Y20JJ_ddy9M)
 - en: The article is in continuation of the story [How to build a Web App to Transcribe
     and Summarize audio with Python](https://towardsdatascience.com/how-to-build-a-web-app-to-transcribe-and-summarize-audio-with-python-dc719cb9e1f5?sk=96f349f866419fe55cd6a1496e740069).
     In the previous post, I have shown how to build an app that transcribes and summarizes
     the content of your favourite Spotify Podcast. The summary of a text can be useful
     for listeners to decide if the episode is interesting or not before listening
     to it.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇文章是[如何构建一个使用 Python 转录和总结音频的 Web 应用程序](https://towardsdatascience.com/how-to-build-a-web-app-to-transcribe-and-summarize-audio-with-python-dc719cb9e1f5?sk=96f349f866419fe55cd6a1496e740069)的续集。在之前的帖子中，我展示了如何构建一个转录和总结你喜欢的
+    Spotify 播客内容的应用程序。文本的总结对听众来说是有用的，可以在听之前决定这一集是否有趣。
 - en: But there are other possible features that can be extracted from audio. The
     topics. Topic modelling is one of the many natural language processing that enables
     the automatic extraction of topics from different types of sources, such as reviews
     of hotels, job offers, and social media posts.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 但音频中还有其他可能提取的功能。主题。主题建模是许多自然语言处理技术之一，它使自动提取来自不同来源的主题成为可能，比如酒店评论、招聘信息和社交媒体帖子。
 - en: In this post, we are going to build an app that collects the topics from a podcast
     episode with Python and analyzes the importance of each topic extracted with nice
     data visualizations. In the end, we’ll deploy the web app to Heroku for free.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将构建一个应用程序，使用 Python 从播客集中过滤主题并分析每个提取主题的重要性，配以优美的数据可视化。最后，我们将免费将 Web
+    应用程序部署到 Heroku。
 - en: Requirements
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 要求
 - en: Create a **GitHub repository**, that will be needed to deploy the web application
     into production to Heroku!
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个**GitHub 仓库**，这将用于将 Web 应用程序部署到 Heroku 生产环境！
 - en: 'Clone the repository on your local PC with `git clone <name-repository>.git`.
     In my case, I will use VS code, which is an IDE really efficient to work with
     python scripts, includes Git support and integrates the terminal. Copy the following
     commands on the terminal:'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在你的本地电脑上克隆代码库，使用`git clone <name-repository>.git`。在我的案例中，我将使用 VS code，它是一个非常高效的
+    IDE，支持 Python 脚本，包含 Git 支持并集成了终端。请在终端中输入以下命令：
 - en: '[PRE0]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Create a virtual environment in Python.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 Python 中创建虚拟环境。
 - en: 'Part 1: Create the Web Application to Extract Topics'
+  id: totrans-12
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 第 1 部分：创建提取主题的 Web 应用程序
 - en: This tutorial is split into two main parts. In the first part, we create our
     simple web application to extract the topics from the podcast. The remaining part
     focuses on the deployment of the app, which is an important step for sharing your
     app with the world anytime. Let’s get started!
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程分为两个主要部分。在第一部分中，我们创建了一个简单的 Web 应用程序来提取播客中的主题。剩下的部分则专注于应用程序的部署，这是将应用程序随时分享给世界的重要步骤。让我们开始吧！
 - en: 1\. Extract Episode’s URL from Listen Notes
+  id: totrans-14
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 1\. 从 Listen Notes 提取集的 URL
 - en: '![Creating a Web Application to Extract Topics from Audio with Python](../Images/0d49888cda0a6f0afbf0715c91f77593.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![创建一个从音频中提取主题的 Web 应用程序](../Images/0d49888cda0a6f0afbf0715c91f77593.png)'
 - en: We are going to discover the topics from an episode of Unconfirmed, called Want
     a Job in Crypto? Exchanges are hiring — Ep. 110\. You can find the link to the
     episode [here](https://www.listennotes.com/podcasts/unconfirmed/want-a-job-in-crypto-p0QLnhWKHbl/).
@@ -78,227 +113,345 @@
     is exploding and there is the esigence to keep updated in the opening of jobs
     in that field. Surely, they will need data engineers and data scientists to manage
     data and extract values from these huge amounts of data.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将要发现《Unconfirmed》的一期主题，名为“想在加密货币领域找工作？交易所正在招聘——第110期”。你可以在[这里](https://www.listennotes.com/podcasts/unconfirmed/want-a-job-in-crypto-p0QLnhWKHbl/)找到这一期的链接。正如你从电视和报纸上的新闻中可能了解到的，区块链行业正在迅猛发展，需要保持对该领域职位开放情况的更新。毫无疑问，他们会需要数据工程师和数据科学家来管理数据并从这些海量数据中提取价值。
 - en: Listen Notes is a podcast search engine and database online, allowing us to
     get access to podcast audio through their APIs. We need to define the function
     to extract the episode’s URL from the web page. First, you need to create an account
     to retrieve the data and subscribe to [free plan](https://www.listennotes.com/podcast-api/pricing/) to
     use the Listen Notes API.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: Listen Notes是一个播客搜索引擎和在线数据库，允许我们通过他们的API访问播客音频。我们需要定义一个函数从网页中提取节目的URL。首先，你需要创建一个账户来检索数据，并订阅[免费计划](https://www.listennotes.com/podcast-api/pricing/)来使用Listen
+    Notes API。
 - en: Then, you click the episode you are interested in and select the option “Use
     API to fetch this episode” at the right of the page. Once you pressed it, you
     can change the default coding language to Python and click the requests option
     to use that python package. After, you copy the code and adapt it into a function.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，你点击你感兴趣的节目，并在页面右侧选择“使用API获取此节目”选项。按下后，你可以将默认的编码语言更改为Python，并点击requests选项以使用该python包。之后，你复制代码并将其改编为一个函数。
 - en: '[PRE1]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'It takes the credentials from a separate file, **secrets.yaml**, which is composed
     of a collection of key-value pairs like the dictionaries:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 它从一个单独的文件中获取凭据，**secrets.yaml**，该文件由一系列键值对组成，类似于字典：
 - en: '[PRE2]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 2\. Retrieve Transcription and Topics from Audio
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 2\. 从音频中提取转录和主题
 - en: To extract the topics, we first need to send a post request to AssemblyAI’s
     transcript endpoint by giving in input the audio URL retrieved in the previous
     step. After we can obtain the transcription and the topics of our podcast by sending
     a GET request to [AssemblyAI](https://www.assemblyai.com/).
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 要提取主题，我们首先需要向AssemblyAI的转录端点发送一个POST请求，输入上一步中检索到的音频URL。之后，我们可以通过向[AssemblyAI](https://www.assemblyai.com/)发送GET请求来获取播客的转录和主题。
 - en: '[PRE3]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The results will be saved into two different files:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果将被保存到两个不同的文件中：
 - en: '[PRE4]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Below I show an example of transcription:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是一个转录的示例：
 - en: '[PRE5]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Now, I show the output of the topics extracted from the podcast’s episode:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我展示从播客的某一期提取的主题的输出：
 - en: '[PRE6]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: We have obtained a JSON file, containing all the topics detected by AssemblyAI.
     Essentially, we transcribed the podcast into text, which is split up into different
     sentences and their corresponding relevance. For each sentence, we have a list
     of topics. At the end of this big dictionary, there is a summary of topics that
     have been extracted from all the sentences.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经获得了一个JSON文件，包含了AssemblyAI检测到的所有主题。本质上，我们将播客转录为文本，文本被拆分成不同的句子及其对应的相关性。对于每个句子，我们都有一个主题列表。在这个大字典的末尾，有一个从所有句子中提取的主题的总结。
 - en: It’s worth noticing that Careers and JobSearch constitute the most relevant
     topic. In the top five labels, we also find Business and Finance, Startups, Economy,
     Business and Banking, Venture Capital, and other similar topics.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 值得注意的是，职业和求职是最相关的话题。在前五个标签中，我们还发现了商业和金融、初创企业、经济、商业和银行、风险投资以及其他类似的话题。
 - en: 3\. Build a Web Application with Streamlit
+  id: totrans-33
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 3\. 使用Streamlit构建Web应用程序
 - en: '![Creating a Web Application to Extract Topics from Audio with Python](../Images/607bb4aed0df9fbaa0e5572de9c40e90.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![使用Python创建一个从音频中提取主题的Web应用程序](../Images/607bb4aed0df9fbaa0e5572de9c40e90.png)'
 - en: The link to the App deployed is [here](https://topic-web-app-heroku.herokuapp.com/)
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 部署的应用程序链接在[这里](https://topic-web-app-heroku.herokuapp.com/)
 - en: 'Now, we put all the functions defined in the previous steps into the main block,
     in which we build our web application with Streamlit, a free open-source framework
     that allows building applications with few lines of code using Python:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们将前面步骤中定义的所有函数放入主块中，在其中我们使用Streamlit构建我们的Web应用程序，Streamlit是一个免费的开源框架，可以用Python编写几行代码来构建应用程序：
 - en: The main title of the app is displayed using `st.markdown`.
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 应用程序的主标题是通过`st.markdown`显示的。
 - en: A left panel sidebar is created using `st.sidebar`. We need it to insert the
     episode id of our podcast.
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 左侧面板侧边栏是使用`st.sidebar`创建的。我们需要它来插入我们播客的集数 ID。
 - en: After pressing the button “Submit”, a bar plot will appear, showing the most
     relevant 5 topics extracted.
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 按下“提交”按钮后，将出现一个条形图，显示提取出的最相关的 5 个主题。
 - en: there is the Download button in case you want to download the transcription,
     the topics, and the data visualization
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你想下载转录、主题和数据可视化，那里有一个下载按钮。
 - en: '[PRE7]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'To run the web application, you need to write the following command line on
     the terminal:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 要运行 web 应用程序，你需要在终端中输入以下命令行：
 - en: '[PRE8]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Amazing! Now two URL should appear, click one of these and the web application
     is ready to be used!
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 太棒了！现在应该会出现两个 URL，点击其中一个，网络应用程序就准备好了！
 - en: 'Part 2: Deploy the Web Application to Heroku'
+  id: totrans-45
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 第 2 部分：将 Web 应用程序部署到 Heroku
 - en: Once you completed the code of the web application and you checked if it works
     well, the next step is to deploy it on the Internet to Heroku.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦你完成了 web 应用程序的代码并检查其运行良好，下一步就是将其部署到互联网上的 Heroku。
 - en: You are probably wondering what [Heroku](https://www.heroku.com/home) is. It’s
     a cloud platform that allows the development and deployment of web applications
     using different coding languages.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能会想知道[Heroku](https://www.heroku.com/home)是什么。它是一个云平台，允许使用不同的编程语言开发和部署 web
+    应用程序。
 - en: 1\. Create requirements.txt, Procfile, and setup.sh
+  id: totrans-48
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 1\. 创建 requirements.txt、Procfile 和 setup.sh
 - en: After, we create a file **requirements.txt**, that includes all the python packages
     requested by your script. We can automatically create it using the following command
     line by using this marvellous python library [pipreqs](https://pypi.org/project/pipreqs/).
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们创建一个**requirements.txt**文件，包含脚本请求的所有 Python 包。我们可以使用这个神奇的 Python 库[pipreqs](https://pypi.org/project/pipreqs/)自动创建它。
 - en: '[PRE9]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'It will magically generate a *requirements.txt *file:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 它将神奇地生成一个*requirements.txt*文件：
 - en: '[PRE10]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Avoid using the command line `pip freeze > requirements` like [this article](https://towardsdatascience.com/stop-using-pip-freeze-for-your-python-projects-9c37181730f9) suggested.
     The problem is that it returns more python packages that could not be required
     from that specific project.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 避免使用命令行`pip freeze > requirements`，就像[这篇文章](https://towardsdatascience.com/stop-using-pip-freeze-for-your-python-projects-9c37181730f9)建议的那样。问题在于它会返回更多的
+    python 包，这些包可能并不是该特定项目所需的。
 - en: In addition to **requirements.txt**, we also need Procfile, which specifies
     the commands that are needed to run the web application.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了**requirements.txt**，我们还需要 Procfile，它指定了运行 web 应用程序所需的命令。
 - en: '[PRE11]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'The last requirement is to have a **setup.sh **file that contains the following
     code:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一个要求是有一个**setup.sh**文件，包含以下代码：
 - en: '[PRE12]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 2\. Connect to Heroku
+  id: totrans-58
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 2\. 连接到 Heroku
 - en: 'If you didn’t register yet on [Heroku](https://id.heroku.com/login)’s website,
     you need to create a free account to be able to exploit its services. It’s also
     necessary to install Heroku on your local PC. Once you accomplished these two
     requirements, we can begin the fun part! Copy the following command line on the
     terminal:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你还没有在[Heroku](https://id.heroku.com/login)网站上注册，你需要创建一个免费的帐户才能使用其服务。还需要在本地
+    PC 上安装 Heroku。一旦完成这两个要求，我们就可以开始有趣的部分了！在终端中输入以下命令：
 - en: '[PRE13]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'After pressing the command, a window of Heroku will appear on your browser
     and you’ll need to put the email and password of your account. If it works, you
     should have the following result:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 按下命令后，Heroku 的窗口会出现在你的浏览器中，你需要输入帐户的电子邮件和密码。如果成功，你应该会看到以下结果：
 - en: '![Creating a Web Application to Extract Topics from Audio with Python](../Images/36ee549765643344effe682113e6be0a.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![创建一个使用 Python 从音频中提取主题的 Web 应用程序](../Images/36ee549765643344effe682113e6be0a.png)'
 - en: 'So, you can return on VS code and write the command to create your web application
     on the terminal:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，你可以返回到 VS 代码中，在终端上输入命令来创建你的 web 应用程序：
 - en: '[PRE14]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'Output:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '[PRE15]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'To deploy the app to Heroku, we need this command line:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 要将应用程序部署到 Heroku，我们需要这个命令行：
 - en: '[PRE16]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: 'It’s used to push the code from the local repository’s main branch to heroku
     remote. After you push the changes to your repository with other commands:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 它用于将代码从本地仓库的主分支推送到 heroku 远程。在使用其他命令将更改推送到你的仓库之后：
 - en: '[PRE17]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: We are finally done! Now you should see your app that is finally deployed!
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们终于完成了！现在你应该看到你的应用程序已经成功部署！
 - en: Final Thoughts
+  id: totrans-72
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 最后的思考
 - en: I hope you appreciated this mini-project! It can be really fun to create and
     deploy apps. The first time can be a little intimidating, but once you finish,
     you won’t have any regrets! I also want to highlight that it’s better to deploy
@@ -306,68 +459,104 @@
     memory requirements. Other alternatives can be bigger cloud platform frameworks,
     like AWS Lambda and Google Cloud. The GitHub code is [here](https://github.com/eugeniaring/topic-web-app-heroku).
     Thanks for reading. Have a nice day!
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望你喜欢这个小项目！创建和部署应用程序真的很有趣。第一次可能有点令人生畏，但一旦完成，你不会后悔！我还想强调，对于小型项目和低内存要求的应用程序，最好将其部署到
+    Heroku。其他替代方案可以是更大的云平台框架，如 AWS Lambda 和 Google Cloud。GitHub 代码在 [这里](https://github.com/eugeniaring/topic-web-app-heroku)。感谢阅读。祝你有美好的一天！
 - en: '**[Eugenia Anello](https://www.linkedin.com/in/eugenia-anello/)** is currently
     a research fellow at the Department of Information Engineering of the University
     of Padova, Italy. Her research project is focused on Continual Learning combined
     with Anomaly Detection.'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[尤金尼亚·安内洛](https://www.linkedin.com/in/eugenia-anello/)** 目前是意大利帕多瓦大学信息工程系的研究员。她的研究项目专注于将持续学习与异常检测相结合。'
 - en: '[Original](https://medium.com/towards-data-science/creating-a-web-application-to-extract-topics-from-audio-with-python-21c3f541f3ca).
     Reposted with permission.'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/towards-data-science/creating-a-web-application-to-extract-topics-from-audio-with-python-21c3f541f3ca)。经许可转载。'
 - en: '* * *'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-77
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三推荐课程
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您组织的 IT 工作'
 - en: '* * *'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Bark: The Ultimate Audio Generation Model](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Bark: 终极音频生成模型](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
 - en: '[WavJourney: A Journey into the World of Audio Storyline Generation](https://www.kdnuggets.com/wavjourney-a-journey-into-the-world-of-audio-storyline-generation)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[WavJourney: 进入音频故事情节生成的世界](https://www.kdnuggets.com/wavjourney-a-journey-into-the-world-of-audio-storyline-generation)'
 - en: '[Back to Basics Week 4: Advanced Topics and Deployment](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回到基础第4周：高级主题与部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)'
 - en: '[Building a Geospatial Application in Python with Google Earth…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 和 Google Earth 构建地理空间应用程序…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
 - en: '[Build An AI Application with Python in 10 Easy Steps](https://www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 轻松构建 AI 应用程序的 10 个步骤](https://www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps)'
 - en: '[RAG vs Finetuning: Which Is the Best Tool to Boost Your LLM Application?](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[RAG 与 Finetuning：哪个是提升您的 LLM 应用程序的最佳工具？](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)'
