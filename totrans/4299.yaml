@@ -161,33 +161,40 @@
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个 DAG 有 3 个任务。`say_bye()` 和 `print_date()` 都依赖于 `say_hi()`。让我们看看在 Airflow 中是如何表现的。
 - en: '![DAG](../Images/9a353147bdd205ed61664413027c2749.png)'
   id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![DAG](../Images/9a353147bdd205ed61664413027c2749.png)'
 - en: Now, let’s look at how we can build the DAG Factory ????
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们来看看如何构建 DAG 工厂 ????
 - en: How to code it?
   id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何编码？
 - en: To be honest, it is pretty simple. We first create a class that will have all
     methods that we need to run in order to create a DAG with its tasks.
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 说实话，这很简单。我们首先创建一个类，该类将包含我们创建 DAG 及其任务所需的所有方法。
 - en: Below is the full code for the DAG Factory.
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是 DAG 工厂的完整代码。
 - en: The main method that we’re going to call in order to get a fully usable DAG
     is `get_airflow_dag()`.
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将要调用的主要方法以获取一个完全可用的 DAG 是 `get_airflow_dag()`。
 - en: 'This method will receive 2 mandatory parameters: the DAG’s name and the tasks
     that it should run. The rest of the parameters are optional since we can set a
     default in the function’s implementation. When implementing, feel free to make
@@ -197,16 +204,20 @@
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 该方法将接收 2 个必填参数：DAG 的名称和它应该运行的任务。其余参数是可选的，因为我们可以在函数的实现中设置默认值。在实现时，可以根据你的用例将任何这些可选参数设置为必填参数，例如，可能会有用将
+    *cron* (`schedule_interval`) 设置为必填参数，或者甚至是 DAG 的所有者。
 - en: The `default_args` parameter is going to be a dictionary that will hold any
     keys and values that you may want to override. If not specified, the default default_args
     are going to be used.
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '`default_args` 参数将是一个字典，用于保存任何你可能想要覆盖的键值对。如果未指定，将使用默认的 default_args。'
 - en: 'In our case, the defaults are:'
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的例子中，默认值为：
 - en: '[PRE0]'
   id: totrans-36
   prefs: []
@@ -217,6 +228,7 @@
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 另外 3 个参数是用于描述 DAG 的主要参数。还有更多选项，可以自由指定更多。
 - en: '`get_airflow_dag()` will run `create_dag()` in order to create the DAG object
     and return it. `add_tasks_to_dag()` is a little bit more complicated since we
     want to make it easy for the user to specify a way to create dependencies on tasks
@@ -224,17 +236,21 @@
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '`get_airflow_dag()` 将运行 `create_dag()` 以创建 DAG 对象并返回它。`add_tasks_to_dag()`
+    稍微复杂一些，因为我们希望让用户容易指定创建任务依赖关系的方式，而无需编写 *Operators*。'
 - en: In our case, we always use the *PythonOperator* for our tasks, so it made sense
     for us to assume that as the norm.
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的例子中，我们总是为任务使用 *PythonOperator*，因此我们认为将其作为规范是合理的。
 - en: The implementation aims to facilitate the data engineer’s job, so we avoid setting
     extra things like the task’s name, we just assume it’s the same as the function’s
     name — so we use a little bit of *reflection* to figure it out.
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个实现旨在简化数据工程师的工作，因此我们避免设置额外的内容，比如任务的名称，我们仅假设它与函数名称相同——因此我们使用了一点 *反射* 来搞清楚。
 - en: '[PRE1]'
   id: totrans-41
   prefs: []
@@ -247,38 +263,46 @@
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 该函数首先创建一个辅助字典，以保存任务名称:任务对象的键值对。这是为了只拥有一组任务对象，并在以后用于设置依赖关系。然后，对于原始提供的任务字典中的每个键，使用辅助字典设置依赖关系。
 - en: After this is done, the DAG object is ready to be returned and used by the team
     ????.
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 在此操作完成后，DAG 对象准备好被返回并供团队使用 ????。
 - en: Gotcha!
   id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 懂了！
 - en: There’s a little trick in the file in order for Airflow to recognize it’s a
     proper DAG that we’re returning.
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 文件中有一个小技巧，以便 Airflow 能够识别我们返回的是一个有效的 DAG。
 - en: 'When Airflow starts, the so-called DagBag process will parse all the files
     looking for DAGs. The way the current implementation works is something like this:'
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 当 Airflow 启动时，所谓的 DagBag 过程会解析所有文件以寻找 DAG。当前实现的工作方式大致如下：
 - en: The DagBag spawns different processes that look through the files of the dag
     folder.
   id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: DagBag 生成不同的进程，这些进程会检查 dag 文件夹中的文件。
 - en: The function called `process_file` [here](https://airflow.apache.org/docs/apache-airflow/stable/_modules/airflow/models/dagbag.html) runs
     for each file to figure out if there’s a DAG there.
   id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 名为 `process_file` 的函数 [这里](https://airflow.apache.org/docs/apache-airflow/stable/_modules/airflow/models/dagbag.html)
+    会为每个文件运行，以确定是否存在 DAG。
 - en: The code runs `might_contain_dag` which returns a True depending if the file
     contains both “dag” and “airflow” in their code. Implementation [here](https://github.com/apache/airflow/blob/c61f3d45b4a1799e92ead1532d36f232ebc4686e/airflow/utils/file.py#L198).
   id: totrans-49
