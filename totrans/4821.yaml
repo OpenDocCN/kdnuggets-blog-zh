@@ -1,108 +1,167 @@
 - en: Inside the Mind of a Neural Network with Interactive Code in Tensorflow
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 走进神经网络的内部，带有Tensorflow的互动代码
 - en: 原文：[https://www.kdnuggets.com/2018/06/inside-mind-neural-network-interactive-code-tensorflow.html](https://www.kdnuggets.com/2018/06/inside-mind-neural-network-interactive-code-tensorflow.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/06/inside-mind-neural-network-interactive-code-tensorflow.html](https://www.kdnuggets.com/2018/06/inside-mind-neural-network-interactive-code-tensorflow.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/06/inside-mind-neural-network-interactive-code-tensorflow.html?page=2#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2018/06/inside-mind-neural-network-interactive-code-tensorflow.html?page=2#comments)'
 - en: '**By [Jae Duk Seo](https://jaedukseo.me/), Ryerson University**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Jae Duk Seo](https://jaedukseo.me/)，瑞尔森大学**'
 - en: '![Image](../Images/a4da8f275f7ca7b1878ead38e8e6fccb.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/a4da8f275f7ca7b1878ead38e8e6fccb.png)'
 - en: GIF from this [website](https://giphy.com/gifs/trippy-9lRBSGg6l68Hm)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: GIF来自这个[网站](https://giphy.com/gifs/trippy-9lRBSGg6l68Hm)
 - en: I have been wanting to understand the inner workings of my models, for such
     a long time. And starting from today, I wish to learn about the topics related
     to this subject. And for this post I want to cover three topics, histogram of
     weights, visualizing the activation of neurons, [interior / integral gradients.](https://arxiv.org/pdf/1703.01365.pdf)
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我一直想了解我的模型的内部工作原理，已经很久了。从今天开始，我希望学习与这个主题相关的内容。对于这篇文章，我想覆盖三个主题：权重直方图、神经元激活的可视化，[内部/积分梯度](https://arxiv.org/pdf/1703.01365.pdf)。
 - en: '**Please note that this post is for my future self to review these materials.**'
+  id: totrans-7
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**请注意，这篇文章是为了我未来自己复习这些材料。**'
 - en: '**Before Reading On**'
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**在继续阅读之前**'
 - en: Original Video from TechTalksTV ([https://vimeo.com/user72337760](https://vimeo.com/user72337760))
     If any problem arises I will delete the video asap. Original video Link here: [https://vimeo.com/238242575](https://vimeo.com/238242575)
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 原视频来自TechTalksTV ([https://vimeo.com/user72337760](https://vimeo.com/user72337760))
+    如果出现任何问题，我会尽快删除视频。原视频链接： [https://vimeo.com/238242575](https://vimeo.com/238242575)
 - en: This video, is out of scope for this post, but it really helped me to understand
     Interior and Integral gradient as well as general overview of how can we understand
     the inner workings of neural network.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个视频超出了本文的范围，但它确实帮助我理解了内部和积分梯度，以及如何了解神经网络的内部工作原理。
 - en: '**Data Set / Network Architecture / Accuracy / Class Numbers**'
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**数据集 / 网络架构 / 准确性 / 类别数量**'
 - en: '![](../Images/af8e4afbaff1d7d1dfa91156b7a15eee.png)![](../Images/e33ace5e093d9f0b2ca6f6542c2527be.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/af8e4afbaff1d7d1dfa91156b7a15eee.png)![](../Images/e33ace5e093d9f0b2ca6f6542c2527be.png)'
 - en: Image from this website
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 图像来自这个网站
 - en: '**Red Rectangle **→ Input Image (32*32*3)'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**红色矩形** → 输入图像（32*32*3）'
 - en: '**Black Rectangle **→ Convolution with ELU() with / without mean pooling'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '**黑色矩形** → 使用ELU()进行卷积，有/没有均值池化'
 - en: '**Orange Rectangle **→ Softmax for classification'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**橙色矩形** → 分类的Softmax'
 - en: As usual we are going to use the CIFAR 10 data set to train our [All Convolutional
     Network](https://towardsdatascience.com/iclr-2015-striving-for-simplicity-the-all-convolutional-net-with-interactive-code-manual-b4976e206760) and
     try to see why the network have predicted certain image into it’s class.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 一如既往，我们将使用CIFAR 10数据集来训练我们的[全卷积网络](https://towardsdatascience.com/iclr-2015-striving-for-simplicity-the-all-convolutional-net-with-interactive-code-manual-b4976e206760)，并尝试了解网络为何将某些图像预测为特定类别。
 - en: And one thing to note, since this post is more about getting to know the inner
     workings of the network. I am only going to use 50 images from the test set to
     measure the accuracy.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 需要注意的一点是，由于这篇文章更多的是为了了解网络的内部工作原理。我只会使用测试集中50张图像来测量准确性。
 - en: '![](../Images/b24a63688c6bb3253076ba8f6cd87ccf.png)![](../Images/8c6d61d1bc614a70916de7465f04a928.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b24a63688c6bb3253076ba8f6cd87ccf.png)![](../Images/8c6d61d1bc614a70916de7465f04a928.png)'
 - en: '**Left Image** → Accuracy / Cost over time for Test Image (50 images)'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '**左图** → 测试图像（50张图像）的准确性/成本随时间变化'
 - en: '**Right Image** → Accuracy / Cost over time for Training Image (50000 images)'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**右图** → 训练图像（50000张图像）的准确性/成本随时间变化'
 - en: '![](../Images/f0ec4efc84c79de081b0168401a6e4ad.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f0ec4efc84c79de081b0168401a6e4ad.png)'
 - en: As seen above, the model had a final accuracy of 81 percent, on the 7 epoch.
     (If you wish to access the full training log, [please click here](https://github.com/JaeDukSeo/Daily-Neural-Network-Practice-2/blob/master/Understanding_Concepts/COUNTERFACTUALS/viz/z_viz.txt).)
     Finally, lets take a look at what each number represents for each class.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所示，模型在第7个周期时的最终准确率为81%。（如果你希望查看完整的训练日志，[请点击这里](https://github.com/JaeDukSeo/Daily-Neural-Network-Practice-2/blob/master/Understanding_Concepts/COUNTERFACTUALS/viz/z_viz.txt)。）最后，让我们看看每个数字代表了每个类别的什么。
 - en: '![](../Images/a731e3ab8e9e13dd818a977c4656f3f1.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a731e3ab8e9e13dd818a977c4656f3f1.png)'
 - en: Image from this [website](https://github.com/EN10/CIFAR)
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于这个 [网站](https://github.com/EN10/CIFAR)
 - en: '**Histogram of Weights (Before / After Training )**'
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**权重的直方图（训练前 / 训练后）**'
 - en: '![](../Images/601705b2077ada4a42dd471c99e0157c.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/601705b2077ada4a42dd471c99e0157c.png)'
 - en: Histogram of weighs before training
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练前权重的直方图
 - en: Above image is histogram of weights for each layer, for easy visualization I
     divided into three layers for each histogram. At the very left we can observer
     the weights generally have a mean value of 0 and standard deviation (stddev) value
@@ -110,140 +169,221 @@
     different stddev values. Also the reason why some curves are smaller than others
     is due to different numbers of weights per layers. (e.g. layer 0 only have 3 *
     3 * 128 weights, while layer 2 have 3 * 128 * 128 weights.)
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 上图是每层权重的直方图，为了方便可视化，我将每个直方图分为三层。在最左边，我们可以观察到权重的均值通常为 0，标准差（stddev）值在 0.04 到
+    0.06 之间。这是预期中的情况，因为我们为每一层声明了不同的标准差值。某些曲线比其他曲线小的原因是由于每层的权重数量不同。（例如，第 0 层只有 3 *
+    3 * 128 个权重，而第 2 层有 3 * 128 * 128 个权重。）
 - en: '![](../Images/e6a2ac82dc52da96d1cf867bcb4c8978.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e6a2ac82dc52da96d1cf867bcb4c8978.png)'
 - en: Different stddev values![](../Images/9a9a8c0bbc3af2032a4463163434f23f.png)
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 不同的标准差值![](../Images/9a9a8c0bbc3af2032a4463163434f23f.png)
 - en: Histogram of weighs after training
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练后权重的直方图
 - en: Right off the bat, we can observe a clear difference. especially for the first
     three layers. The range of the distribution have increase from -5 to 5\. However,
     it seems like most of the weights exist between -1 and 1 (Or close to zero.) For
     layer 4 to 6, it seems like the mean value have shifted as well as the final three
     layers.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 一开始，我们可以观察到明显的差异，尤其是对于前三层。分布的范围从 -5 增加到 5。然而，似乎大多数权重存在于 -1 和 1 之间（或接近零）。对于第
+    4 层到第 6 层，均值似乎也发生了变化，最后三层也是如此。
 - en: '**Visualizing the Activation Values for Certain Layers**'
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**可视化特定层的激活值**'
 - en: '![](../Images/a232b4af38654cb6efe3556e31821e77.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a232b4af38654cb6efe3556e31821e77.png)'
 - en: Test Input for the network
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 网络的测试输入
 - en: Using the technique done by [Yosinski and his colleagues](https://arxiv.org/pdf/1506.06579.pdf),
     lets visualize how the image above gets modified after layer 3, 6 and 9\. (Please
     note I originally found this method used by [Arthur Juliani](https://medium.com/@awjuliani?source=post_header_lockup) in
     this [blog post](https://medium.com/@awjuliani/visualizing-neural-network-layer-activation-tensorflow-tutorial-d45f8bf7bbc4).)
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 [Yosinski 和他的同事们](https://arxiv.org/pdf/1506.06579.pdf) 采用的技术，让我们可视化上述图像在第
+    3 层、第 6 层和第 9 层之后的变化。（请注意，我最初是在 [Arthur Juliani](https://medium.com/@awjuliani?source=post_header_lockup)
+    的 [博客文章](https://medium.com/@awjuliani/visualizing-neural-network-layer-activation-tensorflow-tutorial-d45f8bf7bbc4)
+    中发现该方法的。）
 - en: '![](../Images/9e203f792f2e37e543c7279c8a815ec2.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9e203f792f2e37e543c7279c8a815ec2.png)'
 - en: Activation after layer 3
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 第 3 层后的激活
 - en: '**Green Box **→ Channels where Green Values are captured'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**绿色框** → 捕捉绿色值的通道'
 - en: '**Blue Box** → Channels where Blue Values are captured'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**蓝色框** → 捕捉蓝色值的通道'
 - en: Now there is 128 channels so I won’t visualize them all. Rather I’ll visualize
     the first 27 channels as seen above. We can see that after layer 3 certain color
     values gets captured within the network.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在有 128 个通道，所以我不会全部可视化。而是像上面那样可视化前 27 个通道。我们可以看到，在第 3 层之后，网络中捕捉到了一些颜色值。
 - en: '![](../Images/ad2a1aa223f7176144fb0bd7e1b9bb34.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ad2a1aa223f7176144fb0bd7e1b9bb34.png)'
 - en: Activation for layer 6
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 第 6 层的激活
 - en: '**Red Box** → Channels where Red Colors are captured'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**红色框** → 捕捉红色的通道'
 - en: However after the sixth layer, it seems like certain filters are able to capture
     the color red better than color green or blue.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，在第六层之后，似乎某些过滤器能够比绿色或蓝色更好地捕捉红色。
 - en: <cener>![](../Images/9bbc0ff32982fe294cfc501dd22f3ee6.png)
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: <cener>![](../Images/9bbc0ff32982fe294cfc501dd22f3ee6.png)
 - en: Activation after layer 9</cener>
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 第 9 层后的激活</cener>
 - en: Finally, after ninth layer (right before global average pooling) we can visualize
     each channel with depth 1 (hence it looks like a gray scale image). However (at
     least for me), it does not seem to be human intelligible. All images can be [found
     here ](https://github.com/JaeDukSeo/Daily-Neural-Network-Practice-2/tree/master/Understanding_Concepts/COUNTERFACTUALS/viz)and
     I created a GIF accumulating all of the changes.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，在第九层（全局平均池化之前），我们可以可视化每个通道的深度为1（因此它看起来像灰度图像）。然而（至少对我而言），它似乎不容易被人类理解。所有图像可以在[这里找到](https://github.com/JaeDukSeo/Daily-Neural-Network-Practice-2/tree/master/Understanding_Concepts/COUNTERFACTUALS/viz)，我还创建了一个GIF，汇集了所有变化。
 - en: '![](../Images/903cfcf07afc8b305a6892c902b1f520.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/903cfcf07afc8b305a6892c902b1f520.png)'
 - en: '**Order of GIF **→ Input Image, Activation after Layer 3, Activation After
     Layer 6, and Activation After Layer 9'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**GIF顺序**→ 输入图像，第3层后的激活，第6层后的激活，以及第9层后的激活'
 - en: '* * *'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-53
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行IT支持'
 - en: '* * *'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用TensorFlow和Keras构建并训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[6 ChatGPT mind-blowing extensions to use anywhere](https://www.kdnuggets.com/2023/04/6-chatgpt-mindblowing-extensions-anywhere.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[6个让人惊叹的ChatGPT扩展插件](https://www.kdnuggets.com/2023/04/6-chatgpt-mindblowing-extensions-anywhere.html)'
 - en: '[5 Things to Keep in Mind Before Selecting Your Next Data Science Job](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[选择下一个数据科学职位前要牢记的5件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)'
 - en: '[Data Management: How to Stay on Top of Your Customer''s Mind?](https://www.kdnuggets.com/2022/04/data-management-stay-top-customer-mind.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据管理：如何保持在客户心中？](https://www.kdnuggets.com/2022/04/data-management-stay-top-customer-mind.html)'
 - en: '[Inside DeepMind’s New Efforts to Use Deep Learning to Advance Mathematics](https://www.kdnuggets.com/2021/12/inside-deepmind-new-efforts-deep-learning-advance-mathematics.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深入了解DeepMind利用深度学习推动数学发展的新努力](https://www.kdnuggets.com/2021/12/inside-deepmind-new-efforts-deep-learning-advance-mathematics.html)'
 - en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AIMET进行神经网络优化](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
