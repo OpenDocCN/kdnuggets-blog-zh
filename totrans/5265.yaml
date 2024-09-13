@@ -1,309 +1,459 @@
 - en: 'How To Write Better SQL Queries: The Definitive Guide – Part 1'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何编写更好的 SQL 查询：权威指南 – 第1部分
 - en: 原文：[https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-1.html/2](https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-1.html/2)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-1.html/2](https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-1.html/2)
 - en: 3\. Don’t Make Queries More Complex Than They Need To Be
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3\. 不要让查询变得比需要的更复杂
 - en: 'The data type conversions bring you to a next point: you should not over-engineer
     your queries. Try to keep them simple and efficient. This might seem too simple
     or stupid to even be a tip, especially because queries can get complex.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据类型转换引出下一个要点：你不应该过度设计你的查询。尽量保持简单和高效。这可能看起来太简单或愚蠢，尤其是因为查询可能会变得复杂。
 - en: However, you’ll see in the examples that are mentioned in the next sections
     that you can easily start making simple queries more complex than they need to
     be.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，你将在接下来的示例中看到，你可以轻易地使简单的查询变得比需要的更复杂。
 - en: '**The `OR` Operator**'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '**`OR`运算符**'
 - en: When you use the `OR` operator in your query, it’s likely that you’re not using
     an index.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你在查询中使用`OR`运算符时，很可能你没有使用索引。
 - en: '**Remember** that an index is a data structure that improves the speed of the
     data retrieval in your database table, but it comes at a cost: there will be additional
     writes and additional storage space is needed to maintain the index data structure.
     Indexes are used to quickly locate or look up data without having to search every
     row in a database every time the database table is accessed. Indexes can be created
     by using one or more columns in a database table.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '**记住**，索引是一种数据结构，可以提高数据库表中数据检索的速度，但代价是：需要额外的写入和额外的存储空间来维护索引数据结构。索引用于快速定位或查找数据，而不必每次访问数据库表时都搜索每一行数据。索引可以通过使用数据库表中的一个或多个列来创建。'
 - en: If you don’t make use of the indexes that the database includes, your query
     will inevitably take longer to run. That’s why it’s best to look for alternatives
     to using the `OR` operator in your query;
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你不利用数据库中包含的索引，你的查询将不可避免地运行得更慢。因此，最好寻找替代`OR`运算符的方法；
 - en: 'Consider the following query:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑以下查询：
 - en: '[PRE0]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'You can replace the operator by:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过以下方式替换运算符：
 - en: A condition with IN; or
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 带有 IN 的条件；或
 - en: '[PRE1]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Two `SELECT` statements with a `UNION`.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 两个`SELECT`语句与一个`UNION`。
 - en: '**Tip**: here, you need to be careful not to unnecessarily use the `UNION`operation
     because you go through the same table multiple times. At the same time, you have
     to realize that when you use a `UNION` in your query, the execution time will
     increase. Alternatives to the `UNION` operation are: reformulating the query in
     such a way that all conditions are placed in one `SELECT` instruction, or using
     an `OUTER JOIN` instead of `UNION`.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '**提示**：在这里，你需要小心不要不必要地使用`UNION`操作，因为你会多次遍历同一个表。同时，你需要意识到，当你在查询中使用`UNION`时，执行时间会增加。`UNION`操作的替代方案包括：重新制定查询，将所有条件放在一个`SELECT`语句中，或者使用`OUTER
+    JOIN`代替`UNION`。'
 - en: '**Tip**: keep in mind also here that, even though `OR` -and also the other
     operators that will be mentioned in the following sections- likely isn’t using
     an index, index lookups aren’t always preferred!'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**提示**：在这里也要记住，尽管`OR`—以及接下来会提到的其他运算符—可能不使用索引，但索引查找并不总是优选的！'
 - en: '**The `NOT` Operator**'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**`NOT`运算符**'
 - en: 'When your query contains the `NOT` operator, it’s likely that the index is
     not used, just like with the `OR` operator. This will inevitably slow down your
     query. If you don’t know what is meant here, consider the following query:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你的查询包含`NOT`运算符时，很可能索引不会被使用，就像`OR`运算符一样。这将不可避免地降低查询速度。如果你不知道这里的意思，考虑以下查询：
 - en: '[PRE2]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'This query will definitely run slower than you would maybe expect, mainly because
     it’s formulated a lot more complex than it could be: in cases like this one, it’s
     best to look for an alternative. Consider replacing `NOT` by comparison operators,
     such as `>`, `<>` or `!>`; The example above might indeed be rewritten and become
     something like this:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个查询会比你预期的要慢很多，主要是因为它的表达方式比实际需要的要复杂：在这种情况下，最好寻找替代方案。考虑用比较运算符如`>`、`<>`或`!>`来替代`NOT`；上面的示例确实可以重写成如下形式：
 - en: '[PRE3]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: That already looks way neater, doesn’t it?
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这看起来已经整洁多了，不是吗？
 - en: '**The `AND` Operator**'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**`AND`运算符**'
 - en: 'The `AND` operator is another operator that doesn’t make use of the index and
     that can slow your query down if used in an overly complex and inefficient way,
     like in the example below:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '`AND`操作符是另一个不使用索引的操作符，如果以过于复杂和低效的方式使用，如下面的例子，会使查询变慢：'
 - en: '[PRE4]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'It’s better to rewrite this query and use `BETWEEN` operator:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 最好是重写这个查询，并使用`BETWEEN`操作符：
 - en: '[PRE5]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '**The **ANY** and **ALL** Operators**'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**`ANY`和`ALL`操作符**'
 - en: Also the `ALL` and `ALL` operators are some that you should be careful with
     because, by including these into your queries, the index won’t be used. Alternatives
     that will come in handy here are aggregation functions like `MIN`or `MAX`.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ALL`操作符也是需要小心的，因为在查询中包含这些操作符时，索引不会被使用。这里的有用替代方案是像`MIN`或`MAX`这样的聚合函数。'
 - en: '**Tip**: in cases where you make use of the proposed alternatives, you should
     be aware of the fact that all aggregation functions like `SUM`, `AVG`, `MIN`, `MAX`over
     many rows can result in a long-running query. In such cases, you can try to either
     minimize the amount of rows to handle or pre-calculate these values. You see once
     again that it’s important to be aware of your environment, your query goal, …
     when you make decisions on which query to use!'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**提示**：在使用建议的替代方案时，你应该意识到，像`SUM`、`AVG`、`MIN`、`MAX`等聚合函数在处理大量行时可能会导致查询时间较长。在这种情况下，你可以尝试减少处理的行数或预先计算这些值。你会再次发现，了解你的环境、查询目标等在决定使用哪种查询时非常重要！'
 - en: '**Isolate Columns in Conditions**'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在条件中隔离列**'
 - en: 'Also in cases where a column is used in a calculation or in a scalar function,
     the index isn’t used. A possible solution would be to simply isolate the specific
     column so that it no longer is a part of the calculation or the function. Consider
     the following example:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样地，当一个列在计算或标量函数中使用时，索引也不会被使用。一个可能的解决方案是简单地隔离特定的列，使其不再是计算或函数的一部分。考虑以下示例：
 - en: '[PRE6]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'This is looks funky, huh? Instead, try to reconsider the calculation and rewrite
     the query to something like this:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 这看起来有点怪吧？相反，可以重新考虑计算方式，并将查询重写成如下形式：
 - en: '[PRE7]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 4\. No Brute Force
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 4\. 避免暴力破解
 - en: This last tip actually means that you shouldn’t try to restrict the query too
     much because it can affect its performance. This is especially true for joins
     and for the `HAVING` clause.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一条提示实际上意味着你不应该过度限制查询，因为这可能会影响其性能。这在连接操作和`HAVING`子句中特别如此。
 - en: '**Joins**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**连接操作**'
 - en: '**The Order Of Tables**'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**表的顺序**'
 - en: When you join two tables, it can be important to consider the order of the tables
     in your join. If you notice that one table is considerably larger than the other
     one, you might want to rewrite your query so that the biggest table is placed
     last in the join.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你连接两个表时，考虑表在连接中的顺序可能很重要。如果你发现一个表明显比另一个表大，你可能需要重写查询，以便将最大表放在连接的最后。
 - en: '**Redundant Conditions on Joins**'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**连接中的冗余条件**'
 - en: When you add too many conditions to your joins, you basically obligate SQL to
     choose a certain path. It could be, though, that this path isn’t always the more
     performant one.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你为连接添加过多条件时，你基本上强迫SQL选择某条路径。然而，这条路径可能并不总是性能最优的。
 - en: '**The `HAVING` Clause**'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**`HAVING`子句**'
 - en: The `HAVING` clause was originally added to SQL because the `WHERE` keyword
     could not be used with aggregate functions. `HAVING` is typically used with the `GROUP
     BY` clause to restrict the groups of returned rows to only those that meet certain
     conditions. However, if you use this clause in your query, the index is not used,
     which -as you already know- can result in a query that doesn’t really perform
     all that well.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '`HAVING`子句最初是因为`WHERE`关键字不能与聚合函数一起使用而添加到SQL中的。`HAVING`通常与`GROUP BY`子句一起使用，以将返回的行组限制为仅符合某些条件的组。然而，如果你在查询中使用这个子句，索引将不会被使用，正如你已经知道的，这可能会导致查询的性能不佳。'
 - en: 'If you’re looking for an alternative, consider using the `WHERE` clause. Consider
     the following queries:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你在寻找替代方案，可以考虑使用`WHERE`子句。考虑以下查询：
 - en: '[PRE8]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '[PRE9]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: The first query uses the `WHERE` clause to restrict the number of rows that
     need to be summed, whereas the second query sums up all the rows in the table
     and then uses `HAVING` to throw away the sums it calculated. In these types of
     cases, the alternative with the `WHERE` clause is obviously the better one, as
     you don’t waste any resources.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个查询使用`WHERE`子句来限制需要求和的行数，而第二个查询则对表中的所有行进行求和，然后使用`HAVING`来丢弃计算出的总和。在这种情况下，显然使用`WHERE`子句的替代方法更好，因为你不会浪费任何资源。
 - en: You see that this is not about limiting the result set, rather about limiting
     the intermediate number of records within a query.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 你会看到这不是关于限制结果集，而是关于限制查询中的中间记录数。
 - en: '**Note** that the difference between these two clauses lies in the fact that
     the `WHERE` clause introduces a condition on individual rows, while the `HAVING`clause
     introduces a condition on aggregations or results of a selection where a single
     result, such as `MIN`, `MAX`, `SUM`,… has been produced from multiple rows.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意** 这两个子句之间的区别在于 `WHERE` 子句对单独的行引入条件，而 `HAVING` 子句对聚合或选择结果引入条件，其中产生了一个结果，如 `MIN`、 `MAX`、 `SUM`…
+    这是从多行中生成的。'
 - en: You see, evaluating the quality, writing and rewriting of queries is not an
     easy job when you take into account that they need to be as performant as possible;
     Avoiding anti-patterns and considering alternatives will also be a part of responsibility
     when you write queries that you want to run on databases in a professional environment.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 你看，评估查询的质量、编写和重写查询不是一项容易的工作，尤其是在考虑到它们需要尽可能高效的情况下；避免反模式并考虑替代方案也是你在专业环境中编写要在数据库上运行的查询时的责任之一。
 - en: This list was just a small overview of some anti-patterns and tips that will
     hopefully help beginners; If you’d like to get an insight into what more senior
     developers consider the most frequent anti-patterns, check out [this discussion](https://stackoverflow.com/questions/346659/what-are-the-most-common-sql-anti-patterns).
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个列表只是一些反模式和提示的小概述，希望对初学者有所帮助；如果你想了解更多资深开发人员认为最常见的反模式，可以查看 [这个讨论](https://stackoverflow.com/questions/346659/what-are-the-most-common-sql-anti-patterns)。
 - en: '**Bio: [Karlijn Willems](https://www.linkedin.com/in/karlijnwillems)** is a
     data science journalist and writes for the [DataCamp community](https://www.datacamp.com/community/authors/karlijn-willems),
     focusing on data science education, the latest news and the hottest trends. She
     holds degrees in Literature and Linguistics and Information Management.'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Karlijn Willems](https://www.linkedin.com/in/karlijnwillems)** 是一位数据科学记者，为
+    [DataCamp 社区](https://www.datacamp.com/community/authors/karlijn-willems)撰写文章，专注于数据科学教育、最新新闻和热门趋势。她拥有文学、语言学和信息管理方面的学位。'
 - en: '[Original](https://www.datacamp.com/community/tutorials/sql-tutorial-query#gs.QQP_Fhg).
     Reposted with permission.'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.datacamp.com/community/tutorials/sql-tutorial-query#gs.QQP_Fhg)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[7 Steps to Mastering SQL for Data Science](/2016/06/seven-steps-mastering-sql-data-science.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握数据科学的 SQL 七步法](/2016/06/seven-steps-mastering-sql-data-science.html)'
 - en: '[The Most Underutilized Function in SQL](/2017/03/most-underutilized-function-sql.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 中最被低估的函数](/2017/03/most-underutilized-function-sql.html)'
 - en: '[Doing Statistics with SQL](/2016/08/doing-statistics-sql.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 SQL 进行统计分析](/2016/08/doing-statistics-sql.html)'
 - en: '* * *'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-60
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的捷径。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT'
 - en: '* * *'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[The Definitive Guide To Switching Your Career Into Data Science](https://www.kdnuggets.com/2022/05/definitive-guide-switching-career-data-science.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[转行数据科学的权威指南](https://www.kdnuggets.com/2022/05/definitive-guide-switching-career-data-science.html)'
 - en: '[Python Function Arguments: A Definitive Guide](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 函数参数：权威指南](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)'
 - en: '[The Definitive Guide to Solving the Phantom Read in MySQL](https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[解决 MySQL 中幻读问题的权威指南](https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html)'
 - en: '[A Step by Step Guide to Reading and Understanding SQL Queries](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[逐步指南：阅读和理解 SQL 查询](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
 - en: '[How to Write SQL in Native Python](https://www.kdnuggets.com/2022/02/easy-sql-native-python.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在原生 Python 中编写 SQL](https://www.kdnuggets.com/2022/02/easy-sql-native-python.html)'
 - en: '[KDnuggets News, December 7: Top 10 Data Science Myths Busted • 4…](https://www.kdnuggets.com/2022/n47.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，12月7日：破解数据科学十大迷思 • 4…](https://www.kdnuggets.com/2022/n47.html)'

@@ -1,0 +1,607 @@
+- en: 'How To Write Better SQL Queries: The Definitive Guide – Part 1'
+  id: totrans-0
+  prefs:
+  - PREF_H1
+  type: TYPE_NORMAL
+  zh: 如何编写更好的 SQL 查询：终极指南 - 第一部分
+- en: 原文：[https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-1.html](https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-1.html)
+  id: totrans-1
+  prefs:
+  - PREF_BQ
+  type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-1.html](https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-1.html)
+- en: '**By Karlijn Willems, Data Science Journalist & [DataCamp](https://www.datacamp.com/)
+    Contributor**.'
+  id: totrans-2
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**由 Karlijn Willems，数据科学记者及[DataCamp](https://www.datacamp.com/) 贡献者**。'
+- en: Structured Query Language (SQL) is an indispensable skill in the data science
+    industry and generally speaking, learning this skill is fairly easy. However,
+    most forget that SQL isn’t just about writing queries, which is just the first
+    step down the road. Ensuring that queries are performant or that they fit the
+    context that you’re working in is a whole other thing.
+  id: totrans-3
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 结构化查询语言（SQL）是数据科学行业中不可或缺的技能，通常来说，学习这项技能是相对简单的。然而，大多数人忽视了 SQL 不仅仅是编写查询，这只是走向最终目标的第一步。确保查询的性能或其适合你所工作的上下文是另一回事。
+- en: '* * *'
+  id: totrans-4
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '* * *'
+- en: Our Top 3 Course Recommendations
+  id: totrans-5
+  prefs:
+  - PREF_H2
+  type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
+    track to a career in cybersecurity.'
+  id: totrans-6
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
+- en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
+    your data analytics game'
+  id: totrans-7
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
+- en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
+    your organization in IT'
+  id: totrans-8
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 管理'
+- en: '* * *'
+  id: totrans-9
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '* * *'
+- en: 'That’s why this SQL tutorial will provide you with a small peek at some steps
+    that you can go through to evaluate your query:'
+  id: totrans-10
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 这就是为什么本 SQL 教程将为你提供一些步骤，让你可以评估你的查询：
+- en: First off, you’ll start with a short overview of the [importance of learning
+    SQL](https://www.datacamp.com/community/tutorials/sql-tutorial-query#importance) for
+    jobs in data science;
+  id: totrans-11
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: 首先，你将简要了解[学习 SQL 对数据科学工作的重视](https://www.datacamp.com/community/tutorials/sql-tutorial-query#importance)；
+- en: 'Next, you’ll first learn more about how [SQL query processing and execution](https://www.datacamp.com/community/tutorials/sql-tutorial-query#execution) so
+    that you can properly understand the importance of writing qualitative queries:
+    more specifically, you’ll see that the query is parsed, rewritten, optimized and
+    finally evaluated;'
+  id: totrans-12
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: 接下来，你将首先了解更多关于[SQL 查询处理和执行](https://www.datacamp.com/community/tutorials/sql-tutorial-query#execution)，以便你能正确理解编写高质量查询的重要性：更具体地说，你将看到查询被解析、重写、优化并最终评估；
+- en: With that in mind, you’ll not only go over some [query anti-patterns](https://www.datacamp.com/community/tutorials/sql-tutorial-query#antipattern) that
+    beginners make when writing queries, but you’ll also learn more about alternatives
+    and solutions to those possible mistakes; You’ll also learn more about the [set-based
+    versus the procedural approach](https://www.datacamp.com/community/tutorials/sql-tutorial-query#setbased) to
+    querying.
+  id: totrans-13
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: 记住这一点，你不仅会讨论一些初学者在编写查询时常犯的[查询反模式](https://www.datacamp.com/community/tutorials/sql-tutorial-query#antipattern)，还会了解这些可能错误的替代方案和解决方案；你还将了解[基于集合与过程化方法](https://www.datacamp.com/community/tutorials/sql-tutorial-query#setbased)的查询方法。
+- en: You’ll also see that these anti-patterns stem from performance concerns and
+    that, besides the “manual” approach to improving SQL queries, you can [analyze
+    your queries](https://www.datacamp.com/community/tutorials/sql-tutorial-query#queryplan) also
+    in a more structured, in-depth way by making use of some other tools that help
+    you to see the query plan; And,
+  id: totrans-14
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: 你还将看到这些反模式源于性能问题，除了“手动”改进 SQL 查询的方法，你还可以通过使用其他工具，以更结构化、深入的方式[分析你的查询](https://www.datacamp.com/community/tutorials/sql-tutorial-query#queryplan)，以查看查询计划；另外，
+- en: You’ll briefly go more into [time complexity and the big O notation](https://www.datacamp.com/community/tutorials/sql-tutorial-query#bigo) to
+    get an idea about the time complexity of an execution plan before you execute
+    your query; Lastly,
+  id: totrans-15
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: 你将简要了解[时间复杂度和大 O 符号](https://www.datacamp.com/community/tutorials/sql-tutorial-query#bigo)，以便在执行查询前了解执行计划的时间复杂度；最后，
+- en: You’ll briefly get some pointers on how you can [tune your query](https://www.datacamp.com/community/tutorials/sql-tutorial-query#tune) further.
+  id: totrans-16
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: 你将简要获得一些关于如何进一步[优化你的查询](https://www.datacamp.com/community/tutorials/sql-tutorial-query#tune)的建议。
+- en: '![](../Images/3fec2cbe3c0764a970df9ee5b3657839.png)'
+  id: totrans-17
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/3fec2cbe3c0764a970df9ee5b3657839.png)'
+- en: Are you interested in an SQL course? Take DataCamp’s [Intro to SQL for Data
+    Science](https://www.datacamp.com/courses/intro-to-sql-for-data-science) course!
+  id: totrans-18
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 你对 SQL 课程感兴趣吗？快来参加 DataCamp 的[数据科学 SQL 入门课程](https://www.datacamp.com/courses/intro-to-sql-for-data-science)吧！
+- en: Why Should I Learn SQL For Data Science?
+  id: totrans-19
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+  zh: 我为什么要学习数据科学中的 SQL？
+- en: 'SQL is far from dead: it’s one of the most in-demand skills that you find in
+    job descriptions from the data science industry, whether you’re applying for a
+    data analyst, a data engineer, a data scientist or [any other roles](https://www.datacamp.com/community/tutorials/data-science-industry-infographic).
+    This is confirmed by 70% of the respondents of the 2016 O’Reilly Data Science
+    Salary Survey, who indicate that they use SQL in their professional context. What’s
+    more, in this survey, SQL stands out way above the R (57%) and Python (54%) programming
+    languages.'
+  id: totrans-20
+  prefs: []
+  type: TYPE_NORMAL
+  zh: SQL 远未过时：它是数据科学行业中职位描述中最受欢迎的技能之一，无论你是申请数据分析师、数据工程师、数据科学家还是[其他职位](https://www.datacamp.com/community/tutorials/data-science-industry-infographic)。这一点在
+    2016 年 O'Reilly 数据科学薪资调查中得到了证实，70% 的受访者表示他们在职业中使用 SQL。此外，在这项调查中，SQL 的使用频率远高于 R
+    (57%) 和 Python (54%) 编程语言。
+- en: 'You get the picture: SQL is a must-have skill when you’re working towards getting
+    a job in the data science industry.'
+  id: totrans-21
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 你明白了吧：SQL 是你在数据科学行业找工作时必备的技能。
+- en: Not bad for a language that was developed in the early 1970s, right?
+  id: totrans-22
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 对于一种在 1970 年代初期开发的语言来说，这算是不赖吧？
+- en: But why exactly is it that it is so frequently used? And why isn’t it dead even
+    though it has been around for such a long time?
+  id: totrans-23
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 但为什么它如此频繁地被使用？为什么尽管它已经存在了这么长时间，它仍然没有过时？
+- en: 'There are several reasons: one of the first reasons would be that companies
+    mostly store data in Relational Database Management Systems (RDBMS) or in Relational
+    Data Stream Management Systems (RDSMS) and you need SQL to access that data. SQL
+    is the lingua franca of data: it gives you the ability to interact with almost
+    any database or to even build your own locally!'
+  id: totrans-24
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 原因有很多：其中一个主要原因是公司大多数数据都存储在关系型数据库管理系统（RDBMS）或关系型数据流管理系统（RDSMS）中，你需要 SQL 来访问这些数据。SQL
+    是数据的通用语言：它使你能够与几乎任何数据库交互，甚至在本地构建自己的数据库！
+- en: As if this wasn’t enough yet, keep in mind that there are quite a few SQL implementations
+    that are incompatible between vendors and do not necessarily follow standards.
+    Knowing the standard SQL is thus a requirement for you to find your way around
+    in the (data science) industry.
+  id: totrans-25
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 如果这还不够，请记住，不同供应商的 SQL 实现有很多不兼容之处，并且不一定遵循标准。因此，了解标准 SQL 是你在（数据科学）行业中找到路途的必要条件。
+- en: On top of that, it’s safe to say that SQL has also been embraced by newer technologies,
+    such as Hive, a SQL-like query language interface to query and manage large datasets,
+    or Spark SQL, which you can use to execute SQL queries. Once again, the SQL that
+    you find there will differ from the standard that you might have learned, but
+    the learning curve will be considerably easier.
+  id: totrans-26
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 更重要的是，可以说 SQL 也被新技术所接受，比如 Hive，这是一种类似 SQL 的查询语言接口，用于查询和管理大型数据集，或 Spark SQL，你可以用它来执行
+    SQL 查询。再一次，你在这些环境中遇到的 SQL 会与标准 SQL 略有不同，但学习曲线会容易得多。
+- en: 'If you do want to make a comparison, consider it as learning linear algebra:
+    by putting all that effort into this one subject, you know that you will be able
+    to use it to master machine learning as well!'
+  id: totrans-27
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 如果你想做个比较，可以把它当作学习线性代数：投入所有精力到这个学科，你就知道你将能够利用它来掌握机器学习！
+- en: 'In short, this is why you should learn this query language:'
+  id: totrans-28
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 简而言之，这就是为什么你应该学习这个查询语言的原因：
+- en: It’s is fairly easy to learn, even for total newbies. The learning curve is
+    quite easy and gradual, so you’ll be writing queries in no time.
+  id: totrans-29
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: 它相对容易学习，即使是完全的新手也能很快掌握。学习曲线非常平缓，你很快就能编写查询。
+- en: It follows the “learn once, use anywhere” principle, so it’s a great investment
+    of your time!
+  id: totrans-30
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: 它遵循“学习一次，随处使用”的原则，所以这是你时间的绝佳投资！
+- en: It’s an excellent addition to programming languages; In some cases, writing
+    a query is even preferred over writing code because it’s more performant!
+  id: totrans-31
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: SQL 是编程语言的一个优秀补充；在某些情况下，编写查询甚至比编写代码更受欢迎，因为它性能更好！
+- en: …
+  id: totrans-32
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: …
+- en: What are you still waiting for? :)
+  id: totrans-33
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 你还在等什么？ :)
+- en: SQL Processing & Query Execution
+  id: totrans-34
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+  zh: SQL 处理与查询执行
+- en: To improve the performance of your SQL query, you first have to know what happens
+    internally when you press the shortcut to run the query.
+  id: totrans-35
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 要提高 SQL 查询的性能，首先必须了解在你按下快捷键运行查询时内部发生了什么。
+- en: First, the query is parsed into a “parse tree”; The query is analyzed to see
+    if it satisfies the syntactical and semantical requirements. The parser creates
+    an internal representation of the input query. This output is then passed on to
+    the rewrite engine.
+  id: totrans-36
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 首先，查询会被解析成一个“解析树”；查询会被分析以确定是否满足语法和语义要求。解析器创建了输入查询的内部表示。然后，这个输出会传递给重写引擎。
+- en: It is then the task of the optimizer to find the optimal execution or query
+    plan for the given query. The execution plan defines exactly what algorithm is
+    used for each operation, and how the execution of the operations is coordinated.
+  id: totrans-37
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 然后，优化器的任务是为给定的查询找到最优的执行或查询计划。执行计划精确地定义了每个操作使用的算法以及操作执行的协调方式。
+- en: To indeed find the most optimal execution plan, the optimizer enumerates all
+    possible execution plans, determines the quality or cost of each plan, takes information
+    about the current database state and then chooses the best one as the final execution
+    plan. Because query optimizers can be imperfect, database users and administrators
+    sometimes need to manually examine and tune the plans produced by the optimizer
+    to get better performance.
+  id: totrans-38
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 为了确实找到最优的执行计划，优化器会列举所有可能的执行计划，确定每个计划的质量或成本，获取当前数据库状态的信息，然后选择最佳的计划作为最终执行计划。由于查询优化器可能并不完美，数据库用户和管理员有时需要手动检查和调整优化器生成的计划以获得更好的性能。
+- en: Now you probably wonder what is considered to be a “good query plan”.
+  id: totrans-39
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 现在你可能想知道什么是被认为的“良好查询计划”。
+- en: As you already read, the quality of cost of a plan plays a huge role. More specifically,
+    things such as the number of disk I/Os that are required to evaluate the plan,
+    the plan’s CPU cost and the overall response time that can be observed by the
+    database client and the total execution time are essential. That is where the
+    notion of time complexity will come in. You’ll read more about this later on.
+  id: totrans-40
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 如你所读到的，计划的成本质量扮演着重要角色。更具体地说，评估计划所需的磁盘 I/O 次数、计划的 CPU 成本以及数据库客户端观察到的整体响应时间和总执行时间都是至关重要的。这就是时间复杂度概念的作用所在。你将在后文中了解更多内容。
+- en: Next, the chosen query plan is executed, evaluated by the system’s execution
+    engine and the results of your query are returned.
+  id: totrans-41
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 接下来，选择的查询计划会被执行，由系统的执行引擎进行评估，并返回查询结果。
+- en: '![](../Images/1d9ed9522e2baf1b62b9ec5d87a3dbf0.png)'
+  id: totrans-42
+  prefs: []
+  type: TYPE_IMG
+  zh: '![](../Images/1d9ed9522e2baf1b62b9ec5d87a3dbf0.png)'
+- en: Writing SQL Queries
+  id: totrans-43
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+  zh: 编写 SQL 查询
+- en: 'What might not have become clear from the previous section is that the Garbage
+    In, Garbage Out (GIGO) principle naturally surfaces within the query processing
+    and execution: the one who formulates the query also holds the keys to the performance
+    of your SQL queries. If the optimizer gets a badly formulated query, it will only
+    be able to do as much…'
+  id: totrans-44
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 从前一节中可能没有明确的是，垃圾进，垃圾出（GIGO）原则自然在查询处理和执行中显现：编写查询的人也掌握了 SQL 查询性能的关键。如果优化器收到一个格式不良的查询，它只能做得有限……
+- en: 'That means that there are some things that *you* can do when you’re writing
+    a query. As you already saw in the introduction, the responsibility is two-fold:
+    it’s not only about writing queries that live up to a certain standard, but also
+    about gathering an idea of where performance problems might be lurking within
+    your query.'
+  id: totrans-45
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 这意味着在编写查询时，有一些事情是*你*可以做的。正如你在介绍中看到的，责任是双重的：不仅仅是编写符合某种标准的查询，还需要了解查询中可能潜在的性能问题所在。
+- en: 'An ideal starting point is to think of “spots” within your queries where issues
+    might sneak in. And, in general, there are four clauses and keywords where newbies
+    can expect performance issues to occur:'
+  id: totrans-46
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 理想的起点是思考查询中可能出现问题的“点”。通常来说，有四个子句和关键字是新手容易遇到性能问题的地方：
+- en: The `WHERE` clause;
+  id: totrans-47
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '`WHERE` 子句；'
+- en: Any `INNER JOIN` or `LEFT JOIN` keywords; And,
+  id: totrans-48
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: 任何 `INNER JOIN` 或 `LEFT JOIN` 关键字；并且，
+- en: The `HAVING` clause;
+  id: totrans-49
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '`HAVING` 子句；'
+- en: Granted, this approach is simple and naive, but as a beginner, these clauses
+    and statements are nice pointers and it’s safe to say that when you’re just starting
+    out, these spots are the ones where mistakes happen and, ironically enough, where
+    they’re also hard to spot.
+  id: totrans-50
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 诚然，这种方法简单而天真，但作为初学者，这些子句和语句是很好的指针，可以说，当你刚开始时，这些地方最容易出错，讽刺的是，这些地方也最难发现错误。
+- en: 'However, you should also realize that performance is something that needs a
+    context to become meaningful: simply saying that these clauses and keywords are
+    bad isn’t the way to go when you’re thinking about SQL performance. Having a `WHERE` or `HAVING` clause
+    in your query doesn’t necessarily mean that it’s a bad query…'
+  id: totrans-51
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 然而，你也应该意识到性能是需要上下文来变得有意义的：仅仅说这些子句和关键词不好，并不是你考虑SQL性能时的正确方法。在查询中拥有`WHERE`或`HAVING`子句并不一定意味着它是一个坏查询……
+- en: Take a look at the following section to learn more about anti-patterns and alternative
+    approaches to building up your query. These tips and tricks are meant as a guide.
+    How and if you actually need to rewrite your query depends on the amount of data,
+    the database and the number of times you need to execute the query, among other
+    things. It entirely depends on the goal of your query and having some prior knowledge
+    about the database that you want to query is crucial!
+  id: totrans-52
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 查看下面的部分以了解更多关于反模式和构建查询的替代方法。这些技巧和窍门旨在作为指南。你是否真的需要重写你的查询取决于数据量、数据库以及你需要执行查询的次数等因素。这完全取决于你的查询目标，并且对你要查询的数据库有一些前期了解是至关重要的！
+- en: 1\. Only Retrieve The Data You Need
+  id: totrans-53
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+  zh: 1. 只检索你需要的数据
+- en: 'The mindset of “the more data, the better” isn’t one that you should necessarily
+    live by when you’re writing SQL queries: not only do you risk obscuring your insights
+    by getting more than what you actually need, but also your performance might suffer
+    from the fact that your query pulls up too much data.'
+  id: totrans-54
+  prefs: []
+  type: TYPE_NORMAL
+  zh: “数据越多越好”的心态并不是你在编写SQL查询时应该遵循的：不仅你可能会因为获取了比实际需要更多的数据而掩盖你的见解，而且你的性能可能会受到影响，因为你的查询提取了过多的数据。
+- en: That’s why it’s generally a good idea to look out for the `SELECT` statement,
+    the `DISTINCT` clause and the `LIKE` operator.
+  id: totrans-55
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 这就是为什么一般来说，注意`SELECT`语句、`DISTINCT`子句和`LIKE`操作符是个好主意。
+- en: '**The `SELECT` Statement**'
+  id: totrans-56
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**`SELECT` 语句**'
+- en: A first thing that you can already check when you have written your query is
+    whether the `SELECT` statement is as compact as possible. Your aim here should
+    be to remove unncessary columns from `SELECT`. This way you force yourself to
+    only pull up data that serves your query goal.
+  id: totrans-57
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 当你编写查询时，你可以首先检查`SELECT`语句是否尽可能简洁。你的目标是从`SELECT`中移除不必要的列。这样你迫使自己只提取对查询目标有用的数据。
+- en: In case you have correlated subqueries that have `EXISTS`, you should try to
+    use a constant in the `SELECT` statement of that subquery instead of selecting
+    the value of an actual column. This is especially handy when you’re checking the
+    existence only.
+  id: totrans-58
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 如果你有包含`EXISTS`的相关子查询，你应该尝试在该子查询的`SELECT`语句中使用常量，而不是选择实际列的值。这在你只检查存在性时尤其有用。
+- en: '**Remember** that a correlated subquery is a subquery that uses values from
+    the outer query. And note that, even though `NULL` can work in this context as
+    a “constant”, it’s very confusing!'
+  id: totrans-59
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**记住**，相关子查询是一个使用外部查询中的值的子查询。并且注意，即使`NULL`在这个上下文中可以作为“常量”使用，但它非常令人困惑！'
+- en: 'Consider the following example to understand what is meant by using a constant:'
+  id: totrans-60
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 考虑以下示例，以理解使用常量的意义：
+- en: '[PRE0]'
+  id: totrans-61
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE0]'
+- en: '**Tip**: it’s handy to know that having a correlated subquery isn’t always
+    a good idea. You can always consider getting rid of them by, for example, rewriting
+    them with an `INNER JOIN`:'
+  id: totrans-62
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**提示**：了解相关子查询并不总是一个好主意是很有用的。你总是可以考虑通过例如用`INNER JOIN`来重写它们，从而去掉相关子查询。'
+- en: '[PRE1]'
+  id: totrans-63
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE1]'
+- en: '**The `DISTINCT` Clause**'
+  id: totrans-64
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**`DISTINCT` 子句**'
+- en: The `SELECT DISTINCT` statement is used to return only distinct (different)
+    values. `DISTINCT` is a clause that you should definitely try to avoid if you
+    can; Like you have read in other examples, the execution time only increases if
+    you add this clause to your query. It’s therefore always a good idea to consider
+    whether you really need this `DISTINCT` operation to take place to get the results
+    that you want to accomplish.
+  id: totrans-65
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '`SELECT DISTINCT`语句用于返回仅不同的（不同的）值。如果可以的话，你应该尽量避免使用`DISTINCT`子句；正如你在其他示例中所读到的，执行时间仅会因添加此子句而增加。因此，总是一个好主意考虑你是否真的需要执行这个`DISTINCT`操作以获得你想要的结果。'
+- en: '**The `LIKE` Operator**'
+  id: totrans-66
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**`LIKE` 运算符**'
+- en: When you use the `LIKE` operator in a query, the index isn’t used if the pattern
+    starts with `%` or `_`. It will prevent the database from using an index (if it
+    exists). Of course, from another point of view, you could also argue that this
+    type of query potentially leaves the door open to retrieve too many records that
+    don’t necessarily satisfy your query goal.
+  id: totrans-67
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 当你在查询中使用 `LIKE` 运算符时，如果模式以 `%` 或 `_` 开头，则不会使用索引。这将阻止数据库使用索引（如果存在）。当然，从另一个角度看，也可以争辩说，这种查询可能会检索到过多不一定符合查询目标的记录。
+- en: Once again, your knowledge of the data that is stored in the database can help
+    you to formulate a pattern that will filter correctly through all the data to
+    find only the rows that really matter for your query.
+  id: totrans-68
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 再次强调，你对存储在数据库中的数据的了解可以帮助你制定一个模式，这个模式能够正确过滤所有数据，只找到真正对你的查询有用的行。
+- en: 2\. Limit Your Results
+  id: totrans-69
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+  zh: 2\. 限制你的结果
+- en: When you can not avoid filtering down on your `SELECT` statement, you can consider
+    limiting your results in other ways. Here’s where approaches such as the `LIMIT` clause
+    and data type conversions come in.
+  id: totrans-70
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 当你无法避免在 `SELECT` 语句中进行筛选时，可以考虑通过其他方式限制结果。这就是 `LIMIT` 子句和数据类型转换派上用场的地方。
+- en: '**`TOP`, `LIMIT` And `ROWNUM` Clauses**'
+  id: totrans-71
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**`TOP`、`LIMIT` 和 `ROWNUM` 子句**'
+- en: 'You can add the `LIMIT` or `TOP` clauses to your queries to set a maximum number
+    of rows for the result set. Here are some examples:'
+  id: totrans-72
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 你可以在查询中添加 `LIMIT` 或 `TOP` 子句，以设置结果集的最大行数。以下是一些示例：
+- en: '[PRE2]'
+  id: totrans-73
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE2]'
+- en: '**Note** that you can further specify the `PERCENT`, for example, if you change
+    the first line of the query by `SELECT TOP 50 PERCENT *`.'
+  id: totrans-74
+  prefs: []
+  type: TYPE_NORMAL
+  zh: '**注意** 你还可以进一步指定 `PERCENT`，例如，如果你将查询的第一行改为 `SELECT TOP 50 PERCENT *`。'
+- en: '[PRE3]'
+  id: totrans-75
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE3]'
+- en: 'Additionally, you can also add the `ROWNUM` clause, which is equivalent to
+    using `LIMIT` in your query:'
+  id: totrans-76
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 此外，你还可以添加 `ROWNUM` 子句，它等同于在查询中使用 `LIMIT`：
+- en: '[PRE4]'
+  id: totrans-77
+  prefs: []
+  type: TYPE_PRE
+  zh: '[PRE4]'
+- en: Data Type Conversions
+  id: totrans-78
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+  zh: 数据类型转换
+- en: You should always use the most efficient, that is, smallest, data types possible.
+    There’s always a risk when you provide a huge data type when a smaller one will
+    be more sufficient.
+  id: totrans-79
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 你应该始终使用最有效的，即最小的数据类型。使用比实际需要更大的数据类型总是有风险的。
+- en: However, when you add data type conversion to your query, you only increase
+    the execution time.
+  id: totrans-80
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 然而，当你在查询中添加数据类型转换时，只会增加执行时间。
+- en: An alternative is just to avoid data type conversion as much as possible. Note
+    also here that it’s not always possible to remove or omit the data type conversion
+    from your queries, but that you should definitely aim to be careful in including
+    them and that when you do, you test the effect of the addition before you run
+    the query.
+  id: totrans-81
+  prefs: []
+  type: TYPE_NORMAL
+  zh: 另一种选择是尽量避免数据类型转换。还要注意，虽然并不总是可能完全移除或省略数据类型转换，但你应该尽量小心地添加这些转换，并且在运行查询之前测试添加的效果。
+- en: More On This Topic
+  id: totrans-82
+  prefs:
+  - PREF_H3
+  type: TYPE_NORMAL
+  zh: 相关话题
+- en: '[The Definitive Guide To Switching Your Career Into Data Science](https://www.kdnuggets.com/2022/05/definitive-guide-switching-career-data-science.html)'
+  id: totrans-83
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[转行数据科学的权威指南](https://www.kdnuggets.com/2022/05/definitive-guide-switching-career-data-science.html)'
+- en: '[Python Function Arguments: A Definitive Guide](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)'
+  id: totrans-84
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[Python 函数参数：权威指南](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)'
+- en: '[The Definitive Guide to Solving the Phantom Read in MySQL](https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html)'
+  id: totrans-85
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[解决 MySQL 中幽灵读的权威指南](https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html)'
+- en: '[A Step by Step Guide to Reading and Understanding SQL Queries](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
+  id: totrans-86
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[逐步阅读和理解 SQL 查询的指南](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
+- en: '[How to Write SQL in Native Python](https://www.kdnuggets.com/2022/02/easy-sql-native-python.html)'
+  id: totrans-87
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[如何在本地 Python 中编写 SQL](https://www.kdnuggets.com/2022/02/easy-sql-native-python.html)'
+- en: '[KDnuggets News, December 7: Top 10 Data Science Myths Busted • 4…](https://www.kdnuggets.com/2022/n47.html)'
+  id: totrans-88
+  prefs:
+  - PREF_UL
+  type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，12 月 7 日：破解十大数据科学神话 • 4…](https://www.kdnuggets.com/2022/n47.html)'
