@@ -1,29 +1,36 @@
 - en: Using AutoML to Generate Machine Learning Pipelines with TPOT
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-4.html](https://www.kdnuggets.com/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-4.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
 - en: 'Thus far in this series of posts we have:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: '[Introduced Scikit-learn''s pipelines](/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html)'
+  id: totrans-4
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Showed how [grid search and pipelines together are a powerful tool](/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-2.html)
     for hyperparameter optimization
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Demonstrated [numerous combinations of models, pipelines, and grid searches
     all together](/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-3.html),
     and their evaluation and selection
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -32,40 +39,49 @@
     optimization, and performing model selection ourselves, we will instead automate
     these processes. We will use the automated machine learning tool TPOT to do some
     of our heavy lifting.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![Header image](../Images/fc517000300a1dc91de487be20edfd12.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
 - en: But first, what is [automated machine learning (AutoML)](https://www.kdnuggets.com/2017/01/current-state-automated-machine-learning.html)?
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: 'Data scientist and leading automated machine learning proponent [Randy Olson](http://www.randalolson.com/)
     states that [effective machine learning design requires us to](https://www.kdnuggets.com/2016/05/tpot-python-automating-data-science.html/2):'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: Always tune the hyperparameters for our models
+  id: totrans-11
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
 - en: Always try out many different models
+  id: totrans-12
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
 - en: Always explore numerous feature representations for our data
+  id: totrans-13
   prefs:
   - PREF_BQ
   - PREF_UL
   type: TYPE_NORMAL
 - en: Therefore, at a fundamental level, we can consider AutoML to be the tasks of
     algorithm selection, hyperparameter tuning, iterative modeling, and model assessment.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: 'For insight into why this is so, consider what AI Researcher and Stanford University
     PhD candidate [S. Zayd Enam](https://twitter.com/zaydenam) wrote some time ago
     in his fantastic blog post titled "[Why is machine learning ''hard''?](http://ai.stanford.edu/~zayd/why-is-machine-learning-hard.html)":'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: 'The difficulty is that machine learning is a fundamentally hard debugging problem.
@@ -73,18 +89,22 @@
     work or 2) your algorithm doesn''t work well enough.[...] Very rarely does an
     algorithm work the first time and so this ends up being where the majority of
     time is spent in building algorithms.'
+  id: totrans-16
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Basically, if an algorithm does not work, or does not do so well enough, and
     the process of choosing and refinining becomes iterative, this exposes an opportunity
     for automation, hence automated machine learning.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: 'I have [previously attempted to capture](https://www.linkedin.com/pulse/case-machine-learning-business-matthew-mayo)
     AutoML''s essence as follows:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我曾[尝试捕捉](https://www.linkedin.com/pulse/case-machine-learning-business-matthew-mayo)AutoML的本质，如下所示：
 - en: 'If, as [Sebastian Raschka has described it](https://www.kdnuggets.com/2016/05/explain-machine-learning-software-engineer.html),
     computer programming is about automation, and machine learning is "all about automating
     automation," then automated machine learning is "the automation of automating
@@ -92,10 +112,13 @@
     machine learning allows computers to learn how to best perform these rote tasks;
     automated machine learning allows for computers to learn how to optimize the outcome
     of learning how to perform these rote actions.'
+  id: totrans-19
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 如果，正如[Sebastian Raschka所描述的](https://www.kdnuggets.com/2016/05/explain-machine-learning-software-engineer.html)，计算机编程是关于自动化的，而机器学习是“关于自动化自动化的”，那么自动化机器学习就是“自动化自动化的自动化”。跟随我，在这里：编程通过管理机械任务来减轻我们的负担；机器学习允许计算机学习如何最好地执行这些机械任务；自动化机器学习允许计算机学习如何优化学习如何执行这些机械操作的结果。
 - en: ''
+  id: totrans-20
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
@@ -103,15 +126,19 @@
     parameters and hyperparameters, automated machine learning systems can learn the
     best way to tune these for optimal outcomes by a number of different possible
     methods.
+  id: totrans-21
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这是一个非常强大的想法；虽然我们以前必须担心调整参数和超参数，但自动化机器学习系统可以通过多种不同的方法学习调整这些参数以获得最佳结果。
 - en: 'The rationale for AutoML stems from this idea: if numerous machine learning
     models must be built, using a variety of algorithms and a number of differing
     hyperparameter configurations, then this model building can be automated, as can
     the comparison of model performance and accuracy.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: AutoML的基本原理来自这个想法：如果必须构建众多机器学习模型，使用各种算法和不同的超参数配置，那么这个模型构建过程可以自动化，模型性能和准确性的比较也可以自动化。
 - en: So how do we actually do this? [TPOT](https://github.com/EpistasisLab/tpot)
     is a Python tool which "automatically creates and optimizes machine learning pipelines
     using genetic programming." TPOT works in tandem with Scikit-learn, describing
@@ -121,64 +148,91 @@
     end result is automated hyperparameter selection, modeling with a variety of algorithms,
     and exploration of numerous feature representations, all leading to iterative
     model building and model evaluation.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么我们实际如何做到这一点？[TPOT](https://github.com/EpistasisLab/tpot)是一个Python工具，它“自动创建和优化机器学习管道，使用遗传编程。”
+    TPOT与Scikit-learn协同工作，自我描述为Scikit-learn的包装器。TPOT是开源的，用Python编写，旨在通过基于[遗传编程](https://en.wikipedia.org/wiki/Genetic_programming)的AutoML方法简化机器学习过程。最终结果是自动化超参数选择、使用各种算法建模以及探索众多特征表示，所有这些都导致了迭代模型构建和模型评估。
 - en: You can read [more about using TPOT here](https://www.kdnuggets.com/2016/05/tpot-python-automating-data-science.html),
     and can read an [interview with the project's (former) lead developer here](https://www.kdnuggets.com/2016/11/autoamted-machine-learning-interview-randy-olson-tpot.html).
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在[这里阅读关于使用TPOT的更多信息](https://www.kdnuggets.com/2016/05/tpot-python-automating-data-science.html)，并且可以在[这里阅读与项目（前）首席开发者的访谈](https://www.kdnuggets.com/2016/11/autoamted-machine-learning-interview-randy-olson-tpot.html)。
 - en: '![TPOT](../Images/49a6192aa0b8ec1192da08cbbdf0e83e.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![TPOT](../Images/49a6192aa0b8ec1192da08cbbdf0e83e.png)'
 - en: And now back to the topic at hand. We are interested in using TPOT to generate
     optimized machine learning pipelines for us. You will likely be surprised at how
     easy it is to do so.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在回到我们讨论的话题。我们有兴趣使用TPOT为我们生成优化的机器学习管道。你可能会对这样做的简单性感到惊讶。
 - en: 'The code:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码：
 - en: 'Note that almost everything we need is accomplished with [this single line](http://epistasislab.github.io/tpot/):'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，我们几乎需要的一切都可以通过[这一行](http://epistasislab.github.io/tpot/)完成：
 - en: '[PRE0]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: This begins the genetic programming-based hyperparameter selection, modeling
     with a variety of algorithms, and feature representations exploration. The result
     should be an optimized model.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 这开始了基于遗传编程的超参数选择、使用各种算法建模以及特征表示探索。结果应该是一个优化的模型。
 - en: When it is finished, TPOT will display the "best" model (based on test data
     accuracy) hyperparameters, and will also output the pipelines as an execution-ready
     Python script file for later use, and further investigation.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: 'Let''s run the code with this:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'And here''s what happens:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: And there you have it. The process took just under 7 minutes to complete, and
     the resulting XGBoost-based pipeline was able to accurately classify 100% of test
     data instances. This is obviously a toy dataset, and the cross-validation score
     was not altered much at all during the genetic process, but since we have come
     this far with using iris for a variety of pipeline construction (including using
     TPOT), we are definitely ready to move beyond and onto some other data.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: 'The above execution generates this Python pipeline script and saves it as `tpot_iris_pipeline.py''`:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: Remember that TPOT uses a genetic approach to optimization, and so subsequent
     executions result in different results. Don't blame me; blame evolution.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: This process may have generated more questions than answers, especially if automated
@@ -186,81 +240,100 @@
     post to expand on these concepts. For now just remember that AutoML likely seems
     -- from a single example, mind you -- that it may be a powerful tool for model
     optimization.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: You may want to follow this up by reading [The Current State of Automated Machine
     Learning](https://www.kdnuggets.com/2017/01/current-state-automated-machine-learning.html),
     an article I wrote one year ago, but which is still relevant.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: '[Managing Machine Learning Workflows with Scikit-learn Pipelines Part 1: A
     Gentle Introduction](/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Managing Machine Learning Workflows with Scikit-learn Pipelines Part 2: Integrating
     Grid Search](/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-2.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Managing Machine Learning Workflows with Scikit-learn Pipelines Part 3: Multiple
     Models, Pipelines, and Grid Searches](/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-3.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[4 Ways to Generate Passive Income Using ChatGPT](https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Generate Music From Text Using Google MusicLM](https://www.kdnuggets.com/2023/06/generate-music-text-google-musiclm.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[3 Ways to Generate Hyper-Realistic Faces Using Stable Diffusion](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[How to Generate Synthetic Tabular Dataset](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Generate Synthetic Time-series Data with Open-source Tools](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
