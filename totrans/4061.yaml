@@ -3,56 +3,70 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 4 个你可能不知道的 Python Itertools 过滤函数
 - en: 原文：[https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html](https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html](https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html)
 - en: '![4 Python Itertools Filter Functions You Probably Didn''t Know](../Images/9ce8e2d289bae33f8ee329b84d5e8275.png)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![4 个你可能不知道的 Python Itertools 过滤函数](../Images/9ce8e2d289bae33f8ee329b84d5e8275.png)'
 - en: Image by Author
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: In Python, iterators help you write more Pythonic code—and work more efficiently—with
     long sequences. The built-in [itertools](https://docs.python.org/3/library/itertools.html)
     module provides several helpful functions that create iterators.
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Python中，迭代器帮助你编写更具Python风格的代码，并在处理长序列时更高效。内置的[itertools](https://docs.python.org/3/library/itertools.html)模块提供了几个有用的函数来创建迭代器。
 - en: '* * *'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'These are especially helpful when you want to just loop through the iterator,
     retrieve elements in the sequence, and process them—all without having to store
     them in memory. Today we’ll learn how to use the following four itertools filter
@@ -60,39 +74,47 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你只想遍历迭代器、检索序列中的元素并处理它们时，这些功能特别有用——而无需将它们存储在内存中。今天我们将学习如何使用以下四个itertools过滤函数：
 - en: filterfalse
   id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: filterfalse
 - en: takewhile
   id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: takewhile
 - en: dropwhile
   id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: dropwhile
 - en: islice
   id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: islice
 - en: Let's get started!
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始吧！
 - en: 'Before You Begin: A Note on Code Examples'
   id: totrans-17
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 开始之前：关于代码示例的说明
 - en: 'In this tutorial:'
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中：
 - en: All the four functions that we’ll discuss give *iterators*. For clarity, we’ll
     work with simple sequences and use `list()` to get a list containing all the elements
     returned by the iterator. But refrain from doing so—unless necessary—when working
@@ -102,22 +124,26 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们将讨论的四个函数都提供*迭代器*。为了清晰起见，我们将使用简单的序列，并使用`list()`来获取包含迭代器返回的所有元素的列表。但在处理长序列时，除非必要，否则应避免这样做，因为这样会失去迭代器带来的内存节省。
 - en: For simple predicate functions, you can also use *lambdas*. But for better readability,
     we’ll define regular functions and use them as predicates.
   id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于简单的谓词函数，你也可以使用*lambdas*。但为了更好的可读性，我们将定义常规函数并将其用作谓词。
 - en: 1\. filterfalse
   id: totrans-21
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 1\. filterfalse
 - en: 'If you’ve been programming in Python for a while, you’ll have likely used the
     built-in `filter` function with the syntax:'
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你已经编程Python有一段时间，你可能已经使用过内置的`filter`函数，语法如下：
 - en: '[PRE0]'
   id: totrans-23
   prefs: []
@@ -128,10 +154,12 @@
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '`filter`函数返回一个迭代器，该迭代器从序列中返回谓词返回`True`的元素。'
 - en: 'Let’s take an example:'
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看一个例子：
 - en: '[PRE1]'
   id: totrans-26
   prefs: []
@@ -142,10 +170,12 @@
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，`nums`列表和`is_even`函数分别是序列和谓词。
 - en: 'To get the list of all *even* numbers in `nums`, we use the `filter` as shown:'
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 要获取`nums`中所有*偶数*的列表，我们使用如下的`filter`：
 - en: '[PRE2]'
   id: totrans-29
   prefs: []
@@ -161,12 +191,14 @@
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们了解一下`filterfalse`。我们将从**itertools**模块导入`filterfalse`函数（以及我们将讨论的所有其他函数）。
 - en: 'As the name suggests, `filterfalse` does the opposite of what the `filter`
     function does. It gives an iterator that returns elements for which the predicate
     returns `False`. Here’s the syntax to use the `filterfalse` function:'
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如名称所示，`filterfalse`的功能与`filter`函数相反。它返回一个迭代器，该迭代器返回谓词返回`False`的元素。以下是使用`filterfalse`函数的语法：
 - en: '[PRE4]'
   id: totrans-33
   prefs: []
