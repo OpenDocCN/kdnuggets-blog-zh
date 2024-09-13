@@ -1,49 +1,77 @@
 - en: Get Interactive Plots Directly With Pandas
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 直接使用 Pandas 获取交互式图表
 - en: 原文：[https://www.kdnuggets.com/2021/06/interactive-plots-directly-pandas.html](https://www.kdnuggets.com/2021/06/interactive-plots-directly-pandas.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/06/interactive-plots-directly-pandas.html](https://www.kdnuggets.com/2021/06/interactive-plots-directly-pandas.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Parul Pandey](https://pandeyparul.medium.com/), Data Science at H2O.ai
     | Editor @wicds**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Parul Pandey](https://pandeyparul.medium.com/) 撰写，H2O.ai 数据科学家 | @wicds
+    编辑**。'
 - en: '![](../Images/968a61e7731ce2f257dea78119cb80ae.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/968a61e7731ce2f257dea78119cb80ae.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '*[Infographic vector created by macrovector — www.freepik.com](https://www.freepik.com/vectors/infographic).*'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[信息图矢量图由 macrovector 创建 — www.freepik.com](https://www.freepik.com/vectors/infographic)。*'
 - en: Data exploration is by far one of the most important aspects of any data analysis
     task. The initial probing and preliminary checks that we perform, using the vast
     catalog of visualization tools, give us actionable insights into the nature of
@@ -53,8 +81,10 @@
     that render interactivity but have a considerable learning curve. Fortunately,
     some open-source libraries have been created that try to address this pain point
     effectively.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据探索是任何数据分析任务中最重要的方面之一。我们进行的初步探查和检查，通过各种可视化工具的广泛目录，给予我们对数据性质的可操作性见解。然而，有时选择可视化工具比任务本身更为复杂。一方面，我们有一些易于使用的库，但在展示数据中的复杂关系时并不太有用。另一方面，还有一些提供交互性的库，但学习曲线相当陡峭。幸运的是，一些开源库已经被创建出来，试图有效地解决这个痛点。
 - en: In this article, we’ll look at two such libraries, namely **pandas_bokeh** and
     **cufflinks**. We’ll learn how to create plotly and bokeh charts with the basic
     pandas plotting syntax, which we all are comfortable with. Since the article's
@@ -62,507 +92,806 @@
     to the five basic charts, i.e., line charts, bar charts, histograms, scatter plots,
     and pie charts. We’ll create each of these charts first with pandas plotting library
     and then recreate them in plotly and bokeh, albeit with a twist.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将讨论两个这样的库，即 **pandas_bokeh** 和 **cufflinks**。我们将学习如何使用基本的 pandas 绘图语法创建
+    plotly 和 bokeh 图表，这种语法我们都很熟悉。由于文章的重点是语法而非图表类型，我们将限制在五种基本图表，即折线图、柱状图、直方图、散点图和饼图。我们将首先使用
+    pandas 绘图库创建这些图表，然后再在 plotly 和 bokeh 中重建这些图表，但会有一些变化。
 - en: Import the Dataset
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导入数据集
 - en: We’ll work with the **NIFTY-50 dataset**. The NIFTY 50 index is the [National
     Stock Exchange of India’s](https://en.wikipedia.org/wiki/National_Stock_Exchange_of_India) benchmark
     for the Indian equity market. The dataset is openly available on [Kaggle](https://www.kaggle.com/sudalairajkumar/nifty-indices-dataset),
     but we’ll be using a subset of the data containing the stock value of only four
     sectors, i.e., bank, pharma, IT, and FMCG.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用**NIFTY-50 数据集**。NIFTY 50 指数是 [印度国家证券交易所](https://en.wikipedia.org/wiki/National_Stock_Exchange_of_India)
+    对印度股票市场的基准。该数据集在 [Kaggle](https://www.kaggle.com/sudalairajkumar/nifty-indices-dataset)
+    上公开提供，但我们将使用包含四个行业股票价值的子集，即银行、制药、IT 和快速消费品（FMCG）。
 - en: '*You can download the sample dataset from *[*here*](https://github.com/parulnith/Data-Science-Articles/tree/main/Get%20Interactive%20plots%20directly%20with%C2%A0pandas.)*.*'
+  id: totrans-16
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*你可以从*[*这里*](https://github.com/parulnith/Data-Science-Articles/tree/main/Get%20Interactive%20plots%20directly%20with%C2%A0pandas.)*下载示例数据集。*'
 - en: 'Let’s import the necessary libraries and dataset required for the visualization
     purpose:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们导入所需的库和数据集以进行可视化：
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![](../Images/5757588301ba14734a8189a4e9271c47.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5757588301ba14734a8189a4e9271c47.png)'
 - en: '*Combined dataframe consisting of NIFTY indices of the bank, pharma, IT, and
     FMCG sectors.*'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '*包含银行、制药、IT 和快速消费品部门的 NIFTY 指数的合并数据框。*'
 - en: We can also resample/aggregate the data by month-end. The pandas’ library has
     a *[resample()](https://pandas.pydata.org/docs/reference/api/pandas.Series.resample.html)* function,
     which resamples the time series data.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以按月末重新采样/聚合数据。pandas 库具有一个 * [resample()](https://pandas.pydata.org/docs/reference/api/pandas.Series.resample.html)*
+    函数，用于重新采样时间序列数据。
 - en: '[PRE1]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![](../Images/38aa1885b05d487b5e89f909a74b4b61.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/38aa1885b05d487b5e89f909a74b4b61.png)'
 - en: Now that we have our dataframes ready, it is time to visualize them via different
     plots.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经准备好了数据框，是时候通过不同的图表来可视化它们了。
 - en: Plotting with Pandas directly
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 直接使用 Pandas 绘图
 - en: Let’s begin with the most straightforward plotting technique — pandas’ [plotting
     functions](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html#plotting-tools).
     To plot a graph using pandas, we’ll call the *.plot()* method on the dataframe.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从最简单的绘图技术开始 — pandas 的 [绘图函数](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html#plotting-tools)。要使用
+    pandas 绘制图表，我们将调用 * .plot() * 方法。
 - en: '**Syntax**: *dataframe.plot()*'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**语法**：*dataframe.plot()*'
 - en: 'The *plot *method is just a simple wrapper around matplotlib’s *[plt.plot()](https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.plot.html#matplotlib.axes.Axes.plot)***. **We
     can also specify some additional parameters like the ones mentioned below:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '*plot* 方法只是 matplotlib 的一个简单封装，* [plt.plot()](https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.plot.html#matplotlib.axes.Axes.plot)
+    *。我们还可以指定一些额外的参数，如下所述：'
 - en: '[PRE2]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: For a complete list of the parameters and their usage, please refer to the [documentation](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html#basic-plotting-plot).
     Let’s now look at ways to create different plots. In this article, we’ll not go
     into detail explaining each plot. We’ll only focus on the syntax, which is self-explanatory
     if you have some experience in pandas. For a detailed understanding of the pandas’
     plots, [this article](https://neptune.ai/blog/pandas-plot-deep-dive-into-plotting-directly-with-pandas)
     will be helpful.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关参数及其用法的完整列表，请参考 [文档](https://pandas.pydata.org/pandas-docs/stable/user_guide/visualization.html#basic-plotting-plot)。现在我们来看一下创建不同图表的方法。在本文中，我们不会详细解释每种图表。我们只关注语法，如果你有一些
+    pandas 经验，这些语法是自解释的。要详细了解 pandas 图表，[这篇文章](https://neptune.ai/blog/pandas-plot-deep-dive-into-plotting-directly-with-pandas)
+    将很有帮助。
 - en: '**Line Plot**'
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**折线图**'
 - en: '[PRE3]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![](../Images/4cb5475c62f79164170c11b619b3472f.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4cb5475c62f79164170c11b619b3472f.png)'
 - en: '*Line plot with pandas plotting.*'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 pandas 绘制的折线图。*'
 - en: '**Scatter Plot**'
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**散点图**'
 - en: '[PRE4]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![](../Images/55094fa001774b0a62c9a08624f9a470.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/55094fa001774b0a62c9a08624f9a470.png)'
 - en: '*Scatter plot with pandas plotting.*'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 pandas 绘制的散点图。*'
 - en: '**Histograms**'
+  id: totrans-39
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**直方图**'
 - en: '[PRE5]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![](../Images/dcbf63b106a61115bdaf62702c863fcc.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/dcbf63b106a61115bdaf62702c863fcc.png)'
 - en: '*Histogram with pandas plotting.*'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 pandas 绘制的直方图。*'
 - en: '**Bar plots**'
+  id: totrans-43
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**柱状图**'
 - en: '[PRE6]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![](../Images/39a8f04e95478d1d6e90ec049924bfc8.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/39a8f04e95478d1d6e90ec049924bfc8.png)'
 - en: '*Bar plot with pandas plotting.*'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 pandas 绘制的柱状图。*'
 - en: '**Stacked bar plots**'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**堆叠柱状图**'
 - en: '[PRE7]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![](../Images/f8ae46c325dd38fb9ae64fe870a613c7.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f8ae46c325dd38fb9ae64fe870a613c7.png)'
 - en: '*Stacked Bar plot with pandas plotting.*'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 pandas 绘制的堆叠柱状图。*'
 - en: '**Pie Charts**'
+  id: totrans-51
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**饼图**'
 - en: '[PRE8]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![](../Images/7a494b9bcdeec1fd6f68f54ef3d8447e.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7a494b9bcdeec1fd6f68f54ef3d8447e.png)'
 - en: '*Pie Chart with pandas plotting.*'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 pandas 绘制的饼图。*'
 - en: These were some of the charts that can be directly created with pandas’ dataframes.
     However, these charts lack interactivity and capabilities like zoom and pan. Let’s
     now change these existing charts in syntax into their fully interactive counterparts
     with just a slight change in the syntax.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些是可以直接使用 pandas 数据框创建的一些图表。然而，这些图表缺乏交互性和缩放、平移等功能。现在，让我们将这些现有图表的语法稍微修改一下，使其变成完全互动的图表。
 - en: Bokeh Backend for Pandas — plotting with Pandas-Bokeh.
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Pandas 的 Bokeh 后端 — 使用 Pandas-Bokeh 绘图。
 - en: '![](../Images/85dd71f67809047542c956a3ae667922.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/85dd71f67809047542c956a3ae667922.png)'
 - en: '*Image by Author.*'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '*作者提供的图片。*'
 - en: The [bokeh](https://docs.bokeh.org/en/latest/) library clearly stands out when
     it comes to data visualizations*. *The[Pandas-Bokeh](https://github.com/PatrikHlobil/Pandas-Bokeh) provides
     a bokeh plotting backend for [Pandas](https://pandas.pydata.org/), [GeoPandas](http://geopandas.org/),
     and [Pyspark](https://spark.apache.org/docs/latest/api/python/index.html) DataFrames.
     This backend adds a plot_bokeh() method to the DataFrames and Series.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '[bokeh](https://docs.bokeh.org/en/latest/) 库在数据可视化方面明显突出。*[Pandas-Bokeh](https://github.com/PatrikHlobil/Pandas-Bokeh)*
+    为 [Pandas](https://pandas.pydata.org/)、[GeoPandas](http://geopandas.org/) 和 [Pyspark](https://spark.apache.org/docs/latest/api/python/index.html)
+    DataFrames 提供了 bokeh 绘图后端。该后端向 DataFrames 和 Series 添加了 plot_bokeh() 方法。'
 - en: '**Installation**'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**安装**'
 - en: 'Pandas-Bokeh can be installed from [PyPI](https://pypi.org/project/pandas-bokeh/) via *pip*
     or *conda*:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas-Bokeh 可以通过 [PyPI](https://pypi.org/project/pandas-bokeh/) 使用 *pip* 或
+    *conda* 安装：
 - en: '[PRE9]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '**Usage**'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '**用法**'
 - en: The Pandas-Bokeh library should be imported after Pandas, GeoPandas, or Pyspark.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas-Bokeh 库应在 Pandas、GeoPandas 或 Pyspark 之后导入。
 - en: '[PRE10]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'Then one needs to define the plotting output, which can be either of the two:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后需要定义绘图输出，这可以是以下两者之一：
 - en: '[PRE11]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '**Syntax**'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '**语法**'
 - en: Now, the plotting API is accessible for a Pandas DataFrame via the *dataframe.plot_bokeh()*.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，绘图 API 通过 *dataframe.plot_bokeh()* 可用于 Pandas DataFrame。
 - en: For more details about the plotting outputs, see the reference here or the Bokeh
     documentation. Let’s now plot all the five kinds of plots as plotted in the above
     section. We’ll be using the same datasets as used above.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关绘图输出的更多详细信息，请参见此处的参考资料或 Bokeh 文档。现在，我们将绘制上节中绘制的五种图表。我们将使用与上面相同的数据集。
 - en: '[PRE12]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '![](../Images/4bcc6e22d687af83f3a7f0b1e76b60df.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4bcc6e22d687af83f3a7f0b1e76b60df.png)'
 - en: '**Line Plot**'
+  id: totrans-73
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**折线图**'
 - en: '[PRE13]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '![](../Images/8325f213afe3184739b6db992da01636.png)'
+  id: totrans-75
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8325f213afe3184739b6db992da01636.png)'
 - en: '*Line plot with pandas_bokeh.*'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 pandas_bokeh 绘制的折线图。*'
 - en: '**Scatter Plot**'
+  id: totrans-77
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**散点图**'
 - en: '[PRE14]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '![](../Images/a210dfcaa36cfae21c28ee53e94baf76.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a210dfcaa36cfae21c28ee53e94baf76.png)'
 - en: '*Scatter plot with pandas_bokeh.*'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 pandas_bokeh 绘制的散点图。*'
 - en: '**Histograms**'
+  id: totrans-81
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**直方图**'
 - en: '[PRE15]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '![](../Images/900cde9b590c4092369825c14a12c526.png)'
+  id: totrans-83
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/900cde9b590c4092369825c14a12c526.png)'
 - en: '*Histogram with pandas_bokeh.*'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 pandas_bokeh 绘制的直方图。*'
 - en: '**Bar plots**'
+  id: totrans-85
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**条形图**'
 - en: '[PRE16]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: '![](../Images/506b06965bcd30dcb74a888e659653e6.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/506b06965bcd30dcb74a888e659653e6.png)'
 - en: '*Bar plot with pandas_bokeh.*'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 pandas_bokeh 绘制的条形图。*'
 - en: '**Stacked bar plots**'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**堆叠条形图**'
 - en: '[PRE17]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: '![](../Images/a4677e8551b90690b55f6d94d916112f.png)'
+  id: totrans-91
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a4677e8551b90690b55f6d94d916112f.png)'
 - en: '*Stacked bar plot with pandas_bokeh.*'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 pandas_bokeh 绘制的堆叠条形图。*'
 - en: '**Pie Charts**'
+  id: totrans-93
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**饼图**'
 - en: '[PRE18]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: '![](../Images/d06da34bb0163c4b5b9ebf1753c6aceb.png)'
+  id: totrans-95
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d06da34bb0163c4b5b9ebf1753c6aceb.png)'
 - en: '*Pie chart with pandas_bokeh.*'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 pandas_bokeh 绘制的饼图。*'
 - en: 'Additionally, you can also create multiple nested pie plots within the same
     plot:'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，你还可以在同一图表中创建多个嵌套的饼图：
 - en: '[PRE19]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: '![](../Images/439ee72f9cb86f3698b3227a343ae6d5.png)'
+  id: totrans-99
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/439ee72f9cb86f3698b3227a343ae6d5.png)'
 - en: '*Nested pie chart with pandas_bokeh.*'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 pandas_bokeh 绘制的嵌套饼图。*'
 - en: This section saw how we could seamlessly create bokeh plots without any significant
     change in the pandas plotting syntax. Now we can have the best of both worlds
     without having to learn any new format.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 本节展示了如何在不显著改变 pandas 绘图语法的情况下无缝创建 bokeh 图表。现在，我们可以在不需要学习任何新格式的情况下享受两者的最佳结合。
 - en: Plotly Backend for Pandas — plotting with Cufflinks.
+  id: totrans-102
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Plotly 后端用于 Pandas — 使用 Cufflinks 绘图。
 - en: '![](../Images/50ca2394513e21c8fab1a5cb37006404.png)'
+  id: totrans-103
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/50ca2394513e21c8fab1a5cb37006404.png)'
 - en: '*Image by Author.*'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '*作者提供的图片。*'
 - en: Another commonly used library for data visualization is [Plotly](https://plotly.com/graphing-libraries/).
     With plotly, you can make interactive charts in Python, R, and JavaScript. As
     of version 4.8, Plotly came out with a [Plotly Express-powered](https://plotly.com/python/plotly-express/) backend
     for Pandas plotting, which meant that one even does not need to import plotly
     to create plotly like visualizations.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个常用的数据可视化库是 [Plotly](https://plotly.com/graphing-libraries/)。使用 Plotly，你可以在
+    Python、R 和 JavaScript 中创建交互式图表。从 4.8 版本开始，Plotly 推出了一个 [Plotly Express 驱动的](https://plotly.com/python/plotly-express/)
+    Pandas 绘图后端，这意味着即使不导入 plotly，也可以创建类似 plotly 的可视化。
 - en: However, the library I want to mention here is not plotly express, but an independent
     third-party wrapper library around Plotly called [**Cufflinks**](https://github.com/santosjorge/cufflinks)**. **The
     beauty of cufflinks is that it is more versatile, has more functionalities, and
     has an API similar to pandas plotting. This means you only need to add a *.iplot() *method
     to Pandas dataframes for plotting graphs.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，我在这里要提到的库不是 plotly express，而是围绕 Plotly 的一个独立第三方包装库 [**Cufflinks**](https://github.com/santosjorge/cufflinks)**。**
+    Cufflinks 的优势在于它更加灵活，功能更多，并且 API 类似于 pandas 绘图。这意味着你只需向 Pandas 数据框添加一个 *.iplot()*
+    方法即可绘制图表。
 - en: '**Installation**'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '**安装**'
 - en: Make sure you have plotly installed before installing cufflinks. Read [this](https://plotly.com/python/getting-started/) guide
     for instructions.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 确保在安装 cufflinks 之前已安装 plotly。阅读 [这篇](https://plotly.com/python/getting-started/)
+    指南以获取说明。
 - en: '[PRE20]'
+  id: totrans-109
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: '**Usage**'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用**'
 - en: The [repository](https://nbviewer.jupyter.org/gist/santosjorge/aba934a0d20023a136c2) has
     a lot of useful examples and notebooks to get started.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: '[代码库](https://nbviewer.jupyter.org/gist/santosjorge/aba934a0d20023a136c2) 提供了许多有用的示例和笔记本以供入门。'
 - en: '[PRE21]'
+  id: totrans-112
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: That is all. We can now create visualizations with the power of plotly but with
     the ease of pandas. The only change in the syntax is *dataframe.iplot()*.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这些了。我们现在可以利用 plotly 的强大功能，但使用 pandas 的简便性。唯一的语法变化是*dataframe.iplot()*。
 - en: '**Line Plot**'
+  id: totrans-114
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**折线图**'
 - en: '[PRE22]'
+  id: totrans-115
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: '![](../Images/521251ca2f2a1ebf69ee391119286827.png)'
+  id: totrans-116
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/521251ca2f2a1ebf69ee391119286827.png)'
 - en: '*Line plot with cufflinks.*'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '*带有 cufflinks 的折线图。*'
 - en: '**Scatter Plot**'
+  id: totrans-118
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**散点图**'
 - en: You need to mention the plotting **mode** for scatter trace while creating a
     scatterplot. The mode could be lines, markers, text, or a combination of either
     of them.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建散点图时，你需要提及散点轨迹的 **模式**。模式可以是线条、标记、文本或它们的组合。
 - en: '[PRE23]'
+  id: totrans-120
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: '![](../Images/b8abd1e76d29c5055309eb68f37e66ef.png)'
+  id: totrans-121
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b8abd1e76d29c5055309eb68f37e66ef.png)'
 - en: '*Scatter plot with cufflinks.*'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: '*带有 cufflinks 的散点图。*'
 - en: '**Histograms**'
+  id: totrans-123
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**直方图**'
 - en: '[PRE24]'
+  id: totrans-124
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: '![](../Images/46214cdbb9c319d9a843d050aeda0efd.png)'
+  id: totrans-125
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/46214cdbb9c319d9a843d050aeda0efd.png)'
 - en: '*Histogram with cufflinks.*'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: '*带有 cufflinks 的直方图。*'
 - en: '**Bar plots**'
+  id: totrans-127
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**条形图**'
 - en: '[PRE25]'
+  id: totrans-128
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: '![](../Images/f3df2db115caa94e2bc77745d9e95df9.png)'
+  id: totrans-129
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f3df2db115caa94e2bc77745d9e95df9.png)'
 - en: '*Barplots with cufflinks.*'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: '*带有 cufflinks 的条形图。*'
 - en: '**Stacked bar plots**'
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**堆叠条形图**'
 - en: '[PRE26]'
+  id: totrans-132
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE26]'
 - en: '![](../Images/d20b4f330f7f63ffe043dbe00c0fe163.png)'
+  id: totrans-133
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d20b4f330f7f63ffe043dbe00c0fe163.png)'
 - en: '*Stacked bar plots with cufflinks.*'
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: '*带有 cufflinks 的堆叠条形图。*'
 - en: '**Pie Charts**'
+  id: totrans-135
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**饼图**'
 - en: '[PRE27]'
+  id: totrans-136
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE27]'
 - en: '![](../Images/a478d6c6135e343a8b134e169135807d.png)'
+  id: totrans-137
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a478d6c6135e343a8b134e169135807d.png)'
 - en: '*Pie charts with cufflinks.*'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: '*带有 cufflinks 的饼图。*'
 - en: The Cufflinks library provides an easy way to get the power of plotly within
     plotly. The similarity in syntax is another point of advantage.
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: Cufflinks 库提供了一种在 Plotly 内部获得 Plotly 强大功能的简单方法。语法的相似性是另一个优势。
 - en: Conclusion
+  id: totrans-140
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: The Bokeh or a Plotly plot is self-sufficient in conveying the entire information.
     Based on your choice and preference, you can choose both or either of them while
     keeping a focus on the primary purpose of making visualizations more intuitive
     and interactive at the same time.
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: Bokeh 或 Plotly 图表可以独立传达所有信息。根据你的选择和偏好，你可以选择其中一个或两个，同时关注使可视化更直观和互动的主要目的。
 - en: '[Original](https://towardsdatascience.com/get-interactive-plots-directly-with-pandas-13a311ebf426).
     Reposted with permission.'
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/get-interactive-plots-directly-with-pandas-13a311ebf426)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Animated Bar Chart Races in Python](https://www.kdnuggets.com/2021/05/animated-race-bar-charts-python.html)'
+  id: totrans-144
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的动画条形图比赛](https://www.kdnuggets.com/2021/05/animated-race-bar-charts-python.html)'
 - en: '[How to Make Sure Your Analysis Actually Gets Used](https://www.kdnuggets.com/2021/04/make-analysis-used.html)'
+  id: totrans-145
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何确保你的分析实际得到应用](https://www.kdnuggets.com/2021/04/make-analysis-used.html)'
 - en: '[Know your data much faster with the new Sweetviz Python library](https://www.kdnuggets.com/2021/03/know-your-data-much-faster-sweetviz-python-library.html)'
+  id: totrans-146
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用新的 Sweetviz Python 库更快地了解你的数据](https://www.kdnuggets.com/2021/03/know-your-data-much-faster-sweetviz-python-library.html)'
 - en: More On This Topic
+  id: totrans-147
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-148
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并寻找目标以……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-149
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一桩 $9B 的 AI 失败，经过审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-150
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学学习的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-151
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功的数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-152
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么 Python 是初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-153
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'

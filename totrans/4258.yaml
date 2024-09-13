@@ -1,28 +1,42 @@
 - en: Building a Knowledge Graph for Job Search Using BERT
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用BERT构建职位搜索知识图谱
 - en: 原文：[https://www.kdnuggets.com/2021/06/knowledge-graph-job-search-bert.html](https://www.kdnuggets.com/2021/06/knowledge-graph-job-search-bert.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/06/knowledge-graph-job-search-bert.html](https://www.kdnuggets.com/2021/06/knowledge-graph-job-search-bert.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/), Founder
     of UBIAI**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)，UBIAI创始人**'
 - en: '![Figure](../Images/b8badc45ee277fc3662f0bddcc1bae93.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/b8badc45ee277fc3662f0bddcc1bae93.png)'
 - en: Knowledge Graph Network
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 知识图谱网络
 - en: 'Introduction:'
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍：
 - en: While the NLP field has been growing at an exponential rate for the last two
     years — thanks to the development of transfer based models — their applications
     have been limited in scope for the job search field. LinkedIn, the leading company
@@ -31,19 +45,27 @@
     Program Manager at MongoDB and a Go Developer position at Toptal which are both
     web developing companies that are not relevant to my background. This feeling
     of irrelevancy is shared by many users and is a cause of big frustration.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管NLP领域在过去两年中由于转移学习模型的发展而呈指数增长，但这些模型在职位搜索领域的应用范围仍然有限。LinkedIn作为职位搜索和招聘领域的领先公司就是一个很好的例子。尽管我拥有材料科学的博士学位和物理学的硕士学位，但我却收到如MongoDB的技术项目经理和Toptal的Go开发者职位的推荐，这些都是与我的背景不相关的网络开发公司。这种不相关感被许多用户所共有，并且是一个主要的挫折来源。
 - en: '![LinkedIn job recommendations](../Images/2cd1dbe1c05318b0f79eaeb68dca6fe5.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![LinkedIn职位推荐](../Images/2cd1dbe1c05318b0f79eaeb68dca6fe5.png)'
 - en: LinkedIn job recommendations
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: LinkedIn职位推荐
 - en: Job seekers should have access to the best tools to help them find the perfect
     match to their profile without wasting time in irrelevant recommendations and
     manual search...
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 求职者应有机会使用最佳工具，以帮助他们找到与自身背景最匹配的职位，而不浪费时间在不相关的推荐和手动搜索上……
 - en: In general, however, traditional job recommendation systems are based on simple
     keyword and/or semantic similarity that are usually not well suited to providing
     good job recommendations since they don’t take into account the interlinks between
@@ -53,51 +75,71 @@
     have extensive skills in Python programming, but the job description of interest
     requires knowledge in Django framework, which is essentially based on Python;
     a simple keyword search will miss that connection.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，总体而言，传统的职位推荐系统基于简单的关键词和/或语义相似性，这些方法通常不适合提供良好的职位推荐，因为它们未考虑实体之间的相互联系。此外，随着申请者跟踪系统（ATS）的兴起，在简历中列出与领域相关的技能以及揭示哪些行业技能变得更加重要至关重要。例如，我可能在Python编程方面具有广泛的技能，但感兴趣的职位描述要求对Django框架有了解，而Django框架本质上基于Python；简单的关键词搜索将无法发现这种联系。
 - en: In this tutorial, we will build a job recommendation and skill discovery script
     that will take unstructured text as input, and will then output job recommendations
     and skill suggestions based on entities such as skills, years of experience, diploma,
     and major. Building on [my previous article](https://towardsdatascience.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c),
     we will extract entities and relations from job descriptions using the BERT model
     and we will attempt to build a knowledge graph from skills and years of experience.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将构建一个职位推荐和技能发现脚本，该脚本将接受非结构化文本作为输入，然后根据技能、工作经验年限、学位和专业等实体输出职位推荐和技能建议。在[我之前的文章](https://towardsdatascience.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c)的基础上，我们将使用BERT模型从职位描述中提取实体和关系，并尝试从技能和经验年限中构建知识图谱。
 - en: '![Job analysis pipeline](../Images/415726197a797205a6164805956bccea.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![职业分析流程](../Images/415726197a797205a6164805956bccea.png)'
 - en: Job analysis pipeline
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 职业分析流程
 - en: In order to train the NER and relation extraction model, we performed data annotation
     using the [UBIAI tool](https://ubiai.tools/) and model training on google colab
     as described in my previous article.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了训练NER和关系提取模型，我们使用了[UBIAI工具](https://ubiai.tools/)进行了数据注释，并在Google Colab上进行了模型训练，如我之前的文章所述。
 - en: 'Data Extraction:'
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据提取：
 - en: 'For this tutorial, I have collected job descriptions related to software engineering,
     hardware engineering, and research from 5 major companies: Facebook, Google, Microsoft,
     IBM, and Intel. Data was stored in a csv file.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我收集了来自5家主要公司的与软件工程、硬件工程和研究相关的职位描述：Facebook、谷歌、微软、IBM和英特尔。数据存储在一个csv文件中。
 - en: In order to extract the entities and relations from the job descriptions, I
     created a Named Entity Recognition (NER) and Relation extraction pipeline using
     previously trained transformer models (for more information, check out [my previous
     article](https://towardsdatascience.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c)).
     We will store the extracted entities in a JSON file for further analysis using
     the code below.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了从职位描述中提取实体和关系，我创建了一个命名实体识别（NER）和关系抽取管道，使用了之前训练的变换器模型（有关更多信息，请查看[我的上一篇文章](https://towardsdatascience.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c)）。我们将把提取出的实体存储在一个JSON文件中，以便进一步分析，使用以下代码。
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Data Exploration:'
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据探索：
 - en: 'After extracting the entities from the job descriptions, we can now start exploring
     the data. First, I am interested to know the distribution of the required diploma
     across multiple fields. In the box plot below, we notice few things: the most
@@ -107,14 +149,20 @@
     is more homogenous. This might seem very intuitive but it is remarkable that we
     got this structured data automatically from purely unstructured text with just
     few lines of code!'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 提取职位描述中的实体后，我们现在可以开始探索数据。首先，我有兴趣了解在多个领域中所需学位的分布。在下方的箱形图中，我们注意到一些事情：在软件工程领域，最受欢迎的学位是学士学位，其次是硕士学位和博士学位。而在研究领域，博士学位和硕士学位的需求则更多，这是我们预期的结果。对于硬件工程，分布则较为均匀。这可能看起来很直观，但值得注意的是，我们只用几行代码就从完全非结构化的文本中自动获得了这些结构化的数据！
 - en: '![Diploma distribution across multiple fields](../Images/c233c77e90d522d1524a9e866f52fe4c.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![各领域的学位分布](../Images/c233c77e90d522d1524a9e866f52fe4c.png)'
 - en: Diploma distribution across multiple fields
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 各领域的学位分布
 - en: I am interested to know which company is looking for PhDs in Physics and Material
     Science since my background is in these two majors. We see that Google and Intel
     are leading the search for these types of PhDs. Facebook is looking for more PhDs
@@ -122,45 +170,65 @@
     sample size of this dataset, this distribution might not be representative of
     the real distribution. Larger sample sizes will definitely lead to better results,
     but that’s outside the scope of this tutorial.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我有兴趣了解哪些公司在寻找物理学和材料科学的博士，因为我的背景正好涵盖这两个专业。我们看到谷歌和英特尔在寻找这类博士。Facebook则更关注计算机科学和电气工程领域的博士。请注意，由于数据集的样本量较小，这种分布可能并不代表真实的分布。更大的样本量肯定会得到更好的结果，但这超出了本教程的范围。
 - en: '![Diploma major distribution](../Images/30eccf5299671263c48a58deee60a24c.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![学位专业分布](../Images/30eccf5299671263c48a58deee60a24c.png)'
 - en: Diploma major distribution
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 学位专业分布
 - en: 'Since this is a tutorial about NLP, lets look at which diploma and majors are
     required when “NLP” or “natural language processing” is mentioned:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于这是关于NLP的教程，让我们看看当提到“NLP”或“自然语言处理”时需要哪些学位和专业：
 - en: '[PRE1]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Companies mentioning NLP, are seeking candidates with a Masters or PhD in computer
     science, engineering, machine learning or statistics. On the other hand, there
     is less demand for a Bachelor.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 提到NLP的公司在寻找具有计算机科学、工程、机器学习或统计学硕士或博士学位的候选人。另一方面，对学士学位的需求较少。
 - en: Knowledge Graph
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 知识图谱
 - en: With the skills and years of experience extracted, we can now build a knowledge
     graph where the source nodes are job description IDs, target nodes are the skills,
     and the strength of the connection is the year of experience. We use the python
     library pyvis and networkx to build our graph; we link job descriptions to their
     extracted skills using the years of experience as weights.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 利用提取的技能和经验年限，我们现在可以构建一个知识图谱，其中源节点是职位描述ID，目标节点是技能，连接的强度是经验年限。我们使用python库pyvis和networkx来构建我们的图谱；我们将职位描述与提取的技能链接，使用经验年限作为权重。
 - en: '[PRE2]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Let’s visualize our knowledge graph! For the sake of clarity, I have only displayed
     a few jobs in the knowledge graph. For this test, I am using a sample resume in
     the machine learning field.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们可视化我们的知识图谱！为了清晰起见，我仅显示了知识图谱中的一些职位。在这个测试中，我使用了一个机器学习领域的样本简历。
 - en: The red nodes are the sources which can be job descriptions or a resume. The
     blue nodes are the skills. The color and label of the connection represent the
     years of experience required (yellow = 1–5 years; red = > 5 years; dashed = no
@@ -168,48 +236,72 @@
     of which require 2 years of experience. For the machine learning connection, no
     experience is required. We can now begin to glean valuable insights from our unstructured
     texts!
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 红色节点是来源，可以是职位描述或简历。蓝色节点是技能。连接的颜色和标签表示所需的经验年限（黄色 = 1–5年；红色 = > 5年；虚线 = 无经验）。在下面的例子中，Python
+    将简历与4个职位相连接，这些职位都需要2年的经验。对于机器学习连接，无需经验。我们现在可以开始从我们的非结构化文本中获得有价值的见解！
 - en: '![Knowledge graph](../Images/646fdb09c0a785af19f9f10a6ee20433.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![知识图谱](../Images/646fdb09c0a785af19f9f10a6ee20433.png)'
 - en: Knowledge graph
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 知识图谱
 - en: 'Let’s find out which jobs have the highest connections to the resume:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们找出哪些职位与简历的联系最多：
 - en: '[PRE3]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Now let’s look at the knowledge graph network containing few of the highest
     matches:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们看看包含少量最高匹配的知识图谱网络：
 - en: '![Knowledge graph of the highest job matches](../Images/b5d038c12ee5ce9e84a29185daeda012.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![最高职位匹配的知识图谱](../Images/b5d038c12ee5ce9e84a29185daeda012.png)'
 - en: Knowledge graph of the highest job matches
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 最高职位匹配的知识图谱
 - en: Notice the importance of co-reference resolution in this case (which has not
     been done in this tutorial). The skills machine-learning, machine learning models
     and machine learning were counted as different skills but they are obviously the
     same skill and should be counted as one. This can make our matching algorithm
     inaccurate and highlights the importance of co-reference resolution when doing
     NER extraction.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意到在这个案例中（该教程中未进行），共指解析的重要性。技能“机器学习”、“机器学习模型”和“机器学习”被计算为不同的技能，但它们显然是相同的技能，应当计为一项。这会导致我们的匹配算法不准确，并突显了在进行NER提取时共指解析的重要性。
 - en: That being said, with the knowledge graph we can directly see that both GO5957370192396288
     and GO5859529717907456 are a good match since they don’t require extensive experience
     whereas FB189313482022978 requires 2–4 years of experience in various skills.
     Et voila!
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 话虽如此，通过知识图谱我们可以直接看到 GO5957370192396288 和 GO5859529717907456 都是很好的匹配，因为它们不需要广泛的经验，而
+    FB189313482022978 需要2–4年的各种技能经验。瞧！
 - en: Skills Augmentation
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 技能增强
 - en: 'Now that we have identified the connections between the resume and job descriptions,
     the goal is to discover relevant skills that might not be in the resume but are
     important to the field we are analyzing. For this purpose, we filter the job descriptions
@@ -217,142 +309,219 @@
     we query all neighboring jobs connected to resume skills and for each job found,
     extract the associated skills. For clear visual rendering, I have plotted word
     frequency as a word cloud. Let’s look at the field of software engineering:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经识别出简历与职位描述之间的联系，目标是发现那些可能未出现在简历中但对我们分析的领域重要的相关技能。为此，我们按领域过滤职位描述——即软件工程、硬件工程和研究。接下来，我们查询所有与简历技能相关的邻近职位，并为每个找到的职位提取相关技能。为了清晰的可视化，我将词频绘制成了词云。让我们来看一下软件工程领域：
 - en: '![Word cloud of skills in software engineering](../Images/9859251b68539b8ee48889c9505ed923.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![软件工程技能词云](../Images/9859251b68539b8ee48889c9505ed923.png)'
 - en: Word cloud of skills in software engineering
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 软件工程中的技能词云
 - en: Notice that Spark, SOLR, and PLSQL are mentioned frequently in jobs having connection
     to the resume and might be important to the field.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意到 Spark、SOLR 和 PLSQL 在与简历相关的职位中被频繁提及，可能对该领域很重要。
 - en: 'On the other hand, for hardware engineering:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一方面，对于硬件工程：
 - en: '![Word cloud of skills in hardware engineering](../Images/54de32cd7b2816072358fcba61a0c33e.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![硬件工程技能词云](../Images/54de32cd7b2816072358fcba61a0c33e.png)'
 - en: Word cloud of skills in hardware engineering
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 硬件工程中的技能词云
 - en: Design, RF, and RFIC are definite needs here.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 设计、RF 和 RFIC 是这里的确切需求。
 - en: 'And for the research field:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于研究领域：
 - en: '![Word cloud of skills in research](../Images/4caba12ad0c177ee94149a7ef22f92bc.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![研究中的技能词云](../Images/4caba12ad0c177ee94149a7ef22f92bc.png)'
 - en: Word cloud of skills in research
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 研究中技能的词云
 - en: Popular skills include machine learning, signal processing, tensorflow, PyTorch,
     model analyzing , etc…
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 热门技能包括机器学习、信号处理、TensorFlow、PyTorch、模型分析等…
 - en: With just few lines of code, we have transformed unstructured data into structured
     information and extracted valuable insights!
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅需几行代码，我们便将非结构化数据转化为结构化信息，并提取了有价值的见解！
 - en: 'Conclusion:'
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论：
 - en: With the recent breakthroughs in the NLP field — whether it be named entity
     recognition, relation classification, question answering, or text classification
     — it is becoming a necessity for companies to apply NLP in their businesses to
     remain competitive.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着 NLP 领域的最新突破——无论是命名实体识别、关系分类、问答还是文本分类——对于公司而言，应用 NLP 以保持竞争力已成为一种必要。
 - en: In this tutorial, we have built a job recommendation and skill discovery app
     using NER and relation extraction model (using BERT transformer). We achieved
     this by building a knowledge graph linking jobs and skills together.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们使用 NER 和关系提取模型（使用 BERT transformer）构建了一个职位推荐和技能发现应用。我们通过构建一个连接职位和技能的知识图谱实现了这一目标。
 - en: Knowledge graphs combined with NLP provide a powerful tool for data mining and
     discovery. Please feel free to share your use case demonstrating how NLP can be
     applied to different fields. If you have any questions or want to create custom
     models for your specific case, leave a note below or send us an email at admin@ubiai.tools.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 知识图谱与 NLP 相结合，为数据挖掘和发现提供了强大的工具。欢迎分享您展示 NLP 如何应用于不同领域的用例。如果您有任何问题或想为您的具体情况创建自定义模型，请在下方留言或发送邮件至
+    admin@ubiai.tools。
 - en: '**Bio: [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)**
     is the Founder of UBIAI, an annotation tool for NLP applications, and holds a
     PhD in Physics.'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)**
+    是 UBIAI 的创始人，该公司开发了用于 NLP 应用的注释工具，并拥有物理学博士学位。'
 - en: '[Original](https://medium.com/mlearning-ai/building-a-knowledge-graph-for-job-search-using-bert-transformer-8677c8b3a2e7).
     Reposted with permission.'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/mlearning-ai/building-a-knowledge-graph-for-job-search-using-bert-transformer-8677c8b3a2e7)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[How to Fine-Tune BERT Transformer with spaCy 3](/2021/06/fine-tune-bert-transformer-spacy.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 spaCy 3 微调 BERT Transformer](/2021/06/fine-tune-bert-transformer-spacy.html)'
 - en: '[How to Create and Deploy a Simple Sentiment Analysis App via API](/2021/06/create-deploy-sentiment-analysis-app-api.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何通过 API 创建和部署一个简单的情感分析应用](/2021/06/create-deploy-sentiment-analysis-app-api.html)'
 - en: '[How to Apply Transformers to Any Length of Text](/2021/04/apply-transformers-any-length-text.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何将 Transformer 应用于任意长度的文本](/2021/04/apply-transformers-any-length-text.html)'
 - en: '* * *'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-69
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织 IT'
 - en: '* * *'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多相关话题
 - en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第 2 部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
 - en: '[8 Innovative BERT Knowledge Distillation Papers That Have Changed…](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[8 篇创新的 BERT 知识蒸馏论文，它们改变了…](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)'
 - en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 进行网格搜索和随机搜索的超参数调优](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
 - en: '[Elevate Your Search Engine Skills with Uplimit''s Search with ML Course!](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过 Uplimit 的 ML 搜索课程提升您的搜索引擎技能！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
 - en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 BERT 对长文本进行分类](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
 - en: '[Extractive Summarization with LLM using BERT](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用 BERT 的 LLM 提取式摘要](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
