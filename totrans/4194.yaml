@@ -1,47 +1,73 @@
 - en: 'Serving ML Models in Production: Common Patterns'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ML模型服务：常见模式
 - en: 原文：[https://www.kdnuggets.com/2021/10/serving-ml-models-production-common-patterns.html](https://www.kdnuggets.com/2021/10/serving-ml-models-production-common-patterns.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/10/serving-ml-models-production-common-patterns.html](https://www.kdnuggets.com/2021/10/serving-ml-models-production-common-patterns.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Simon Mo](https://www.anyscale.com/blog?author=simon-mo), [Edward Oakes](https://www.anyscale.com/blog?author=edward-oakes)
     and [Michael Galarnyk](https://www.anyscale.com/blog?author=michael-galarnyk)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Simon Mo](https://www.anyscale.com/blog?author=simon-mo)、[Edward Oakes](https://www.anyscale.com/blog?author=edward-oakes)
+    和 [Michael Galarnyk](https://www.anyscale.com/blog?author=michael-galarnyk) 撰写**'
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的捷径。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行IT管理'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: This post is based on Simon Mo’s “Patterns of Machine Learning in Production” [talk](https://www.youtube.com/watch?v=mM4hJLelzSw) from
     Ray Summit 2021.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文基于Simon Mo在Ray Summit 2021上的“生产中的机器学习模式”[讲座](https://www.youtube.com/watch?v=mM4hJLelzSw)。
 - en: 'Over the past couple years, we''ve listened to ML practitioners across many
     different industries to learn and improve the tooling around ML production use
     cases. Through this, we''ve seen 4 common patterns of machine learning in production:
@@ -51,253 +77,380 @@
     built to support these patterns by being both easy to develop and production ready.
     It is a scalable and programmable serving framework built on top of [Ray](https://www.ray.io/) to
     help you scale your microservices and ML models in production.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在过去几年中，我们听取了来自多个不同行业的ML从业者的意见，以改进围绕ML生产用例的工具。通过这些反馈，我们发现了生产中机器学习的4种常见模式：管道、集成、业务逻辑和在线学习。在ML服务领域，实现这些模式通常涉及开发的便利性和生产准备性的权衡。[Ray
+    Serve](https://docs.ray.io/en/latest/serve/index.html)旨在支持这些模式，既易于开发，又具备生产准备性。它是一个可扩展的可编程服务框架，建立在[Ray](https://www.ray.io/)之上，帮助你扩展微服务和生产中的ML模型。
 - en: 'This post goes over:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文涵盖：
 - en: What is Ray Serve
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 什么是Ray Serve
 - en: Where Ray Serve fits in the ML Serving Space
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Ray Serve在ML服务领域的位置
 - en: Some common patterns of ML in production
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 生产中ML的一些常见模式
 - en: How to implement these patterns using Ray Serve
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如何使用Ray Serve实现这些模式
 - en: What is Ray Serve?
+  id: totrans-17
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 什么是Ray Serve?
 - en: '![Ray Ecosystem Serving ML Models in Production: Common Patterns](../Images/4bf023c751a82dcc888c87fd498e4ab9.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![Ray生态系统中的ML模型服务：常见模式](../Images/4bf023c751a82dcc888c87fd498e4ab9.png)'
 - en: Ray Serve is built on top of the Ray distributed computing platform, allowing
     it to easily scale to many machines, both in your datacenter and in the cloud.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: Ray Serve建立在Ray分布式计算平台之上，使其能够轻松扩展到多个机器，无论是在数据中心还是云中。
 - en: 'Ray Serve is an easy-to-use scalable model serving library built on Ray. Some
     advantages of the library include:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: Ray Serve是一个易于使用的可扩展模型服务库，建立在Ray之上。该库的一些优势包括：
 - en: 'Scalability: Horizontally scale across hundreds of processes or machines, while
     keeping the overhead in single-digit milliseconds'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可扩展性：横向扩展到数百个进程或机器，同时保持开销在单数字毫秒内
 - en: 'Multi-model composition: Easily compose multiple models, mix model serving
     with business logic, and independently scale components, without complex microservices.'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多模型组合：轻松组合多个模型，将模型服务与业务逻辑混合，并独立扩展组件，无需复杂的微服务。
 - en: '[Batching](https://docs.ray.io/en/latest/serve/tutorials/batch.html): Native
     support for batching requests to better utilize hardware and improve throughput.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[批处理](https://docs.ray.io/en/latest/serve/tutorials/batch.html)：原生支持批处理请求，以更好地利用硬件并提高吞吐量。'
 - en: '[FastAPI Integration](https://docs.ray.io/en/latest/serve/http-servehandle.html#serve-fastapi-http): Scale
     an existing FastAPI server easily or define an HTTP interface for your model using
     its simple, elegant API.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[FastAPI 集成](https://docs.ray.io/en/latest/serve/http-servehandle.html#serve-fastapi-http):
+    轻松扩展现有的 FastAPI 服务器，或使用其简单优雅的 API 为你的模型定义 HTTP 接口。'
 - en: 'Framework-agnostic: Use a single toolkit to serve everything from deep learning
     models built with frameworks like [PyTorch](https://docs.ray.io/en/master/serve/tutorials/pytorch.html), [Tensorflow
     and Keras](https://docs.ray.io/en/latest/serve/tutorials/tensorflow.html), to [Scikit-Learn
     models](https://docs.ray.io/en/latest/serve/tutorials/sklearn.html), to [arbitrary
     Python business logic](https://www.anyscale.com/blog/how-ikigai-labs-serves-interactive-ai-workflows-at-scale-using-ray-serve).'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 框架无关：使用一个工具包服务从基于 [PyTorch](https://docs.ray.io/en/master/serve/tutorials/pytorch.html)、[Tensorflow
+    和 Keras](https://docs.ray.io/en/latest/serve/tutorials/tensorflow.html) 构建的深度学习模型，到
+    [Scikit-Learn 模型](https://docs.ray.io/en/latest/serve/tutorials/sklearn.html)，再到
+    [任意 Python 业务逻辑](https://www.anyscale.com/blog/how-ikigai-labs-serves-interactive-ai-workflows-at-scale-using-ray-serve)。
 - en: You can get started with Ray Serve by checking out the [Ray Serve Quickstart.](https://docs.ray.io/en/latest/serve/index.html)
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过查看 [Ray Serve 快速入门](https://docs.ray.io/en/latest/serve/index.html) 开始使用
+    Ray Serve。
 - en: Where Ray Serve fits in the ML Serving Space
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Ray Serve 在 ML 服务领域的适配
 - en: '![WhereRayServeFitsIn](../Images/b4eed5d580a6125b7245a30168ed04ba.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![Ray Serve 在 ML 服务领域的适配](../Images/b4eed5d580a6125b7245a30168ed04ba.png)'
 - en: The image above shows that In the ML serving space, there is typically a tradeoff
     between ease of development and production readiness.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 上图显示，在 ML 服务领域，通常存在开发简易性与生产就绪性之间的权衡。
 - en: '**Web Frameworks**'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Web 框架**'
 - en: To deploy a ML service, people typically start with the simplest systems out
     of the box like Flask or FastAPI. However, even though they can deliver a single
     prediction well and work well in proofs of concept, they cannot achieve high performance
     and scaling up is often costly.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 部署 ML 服务时，人们通常从最简单的开箱即用系统开始，例如 Flask 或 FastAPI。然而，尽管它们可以很好地提供单次预测，并在概念验证中表现良好，但它们无法实现高性能，扩展通常成本高昂。
 - en: '**Custom Tooling**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**自定义工具**'
 - en: If web frameworks fail, teams typically transition to some sort of custom tooling
     by gluing together several tools to make the system ready for production. However,
     these custom toolings are typically hard to develop, deploy, and manage.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 web 框架失败，团队通常会转向某种自定义工具，通过将多个工具粘合在一起来使系统准备好投入生产。然而，这些自定义工具通常难以开发、部署和管理。
 - en: '**Specialized Systems**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**专门化系统**'
 - en: There is a group of specialized systems for deploying and managing ML models
     in production. While these systems are great at managing and serving ML models,
     they often have less flexibility than web frameworks and often have a high learning
     curve.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 有一类专门的系统用于在生产环境中部署和管理 ML 模型。虽然这些系统在管理和服务 ML 模型方面表现出色，但它们通常不如 web 框架灵活，并且学习曲线往往较高。
 - en: '**Ray Serve**'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Ray Serve**'
 - en: Ray Serve is a web framework specialized for ML model serving. It aspires to
     be easy to use, easy to deploy, and production ready.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: Ray Serve 是一个专注于 ML 模型服务的 web 框架。它旨在易于使用、易于部署，并且适合生产环境。
 - en: What makes Ray Serve Different?
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Ray Serve 有什么不同？
 - en: '![Many Tools Run 1 Model Well](../Images/4b40ac8b5d230e62b6a366aa3861b83a.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![许多工具良好运行 1 个模型](../Images/4b40ac8b5d230e62b6a366aa3861b83a.png)'
 - en: 'There are so many tools for training and serving one model. These tools help
     you run and deploy one model very well. The problem is that machine learning in
     real life is usually not that simple. In a production setting, you can encounter
     problems like:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 有这么多工具用于训练和服务一个模型。这些工具帮助你很好地运行和部署一个模型。问题在于，现实中的机器学习通常没有那么简单。在生产环境中，你可能会遇到以下问题：
 - en: Wrangling with infrastructure to scale beyond one copy of a model.
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 处理基础设施以超越一个模型的拷贝进行扩展。
 - en: Having to work through complex YAML configuration files, learn custom tooling,
     and develop MLOps expertise.
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 需要处理复杂的 YAML 配置文件、学习自定义工具，并开发 MLOps 专业知识。
 - en: Hit scalability or performance issues, unable to deliver business SLA objectives.
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 遇到可扩展性或性能问题，无法实现业务 SLA 目标。
 - en: Many tools are very costly and can often lead to underutilization of resources.
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 许多工具非常昂贵，且通常会导致资源的利用不足。
 - en: Scaling out a single model is hard enough. For many ML in production use cases,
     we observed that complex workloads require composing many different models together.
     Ray Serve is natively built for this kind of use case involving many models spanning
     multiple nodes. You can check out [this part of the talk](https://youtu.be/mM4hJLelzSw?t=651) where
     we go in depth about Ray Serve’s architectural components.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 扩展单个模型已经足够困难。对于许多生产中的机器学习用例，我们观察到复杂的工作负载需要将多个不同的模型组合在一起。Ray Serve天生适用于涉及多个节点的多个模型的这种用例。你可以查看[这部分讲座](https://youtu.be/mM4hJLelzSw?t=651)，我们深入探讨了Ray
+    Serve的架构组件。
 - en: Patterns of ML Models in Production
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 生产中的机器学习模型模式
 - en: '![13PatternsMLProduction](../Images/5373302cc6c845b5e4c850313e950697.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![13PatternsMLProduction](../Images/5373302cc6c845b5e4c850313e950697.png)'
 - en: 'A significant portion of ML applications in production follow 4 model patterns:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 生产中的大部分机器学习应用遵循4种模型模式：
 - en: pipeline
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 管道
 - en: ensemble
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 集成
 - en: business logic
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 业务逻辑
 - en: online learning
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在线学习
 - en: This section will describe each of these patterns, show how they are used, go
     over how existing tools typically implement them, and show how Ray Serve can solve
     these challenges.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 本节将描述这些模式中的每一种，展示它们的使用方式，讲解现有工具如何实现它们，并展示Ray Serve如何解决这些挑战。
 - en: Pipeline Pattern
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 管道模式
 - en: '![Figure](../Images/54548db95bd65dc4919d3abfdede19df.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/54548db95bd65dc4919d3abfdede19df.png)'
 - en: A typical computer vision pipeline
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个典型的计算机视觉管道
 - en: 'The image above shows a typical computer vision pipeline that uses multiple
     deep learning models to caption the object in the picture. This pipeline consists
     of the following steps:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的图示展示了一个典型的计算机视觉管道，该管道使用多个深度学习模型为图像中的物体生成描述。该管道包括以下步骤：
 - en: 1) The raw image goes through common preprocessing like image decoding, augmentation
     and clipping.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 1) 原始图像经过常见的预处理，如图像解码、增强和裁剪。
 - en: 2) A detection classifier model is used to identify the bounding box and the
     category. It's a cat.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 2) 检测分类器模型用于识别边界框和类别。它是一只猫。
 - en: 3) The image is passed into a keypoint detection model to identify the posture
     of the object. For the cat image, the model could identify key points like paws,
     neck, and head.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 3) 图像被传递到关键点检测模型中，以识别物体的姿势。对于猫的图像，模型可以识别像爪子、脖子和头部这样的关键点。
 - en: 4) Lastly, an NLP synthesis model generates a category of what the picture shows.
     In this case, a standing cat.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 4) 最后，一个NLP合成模型生成图像所展示的类别。在这个例子中，是一只站立的猫。
 - en: A typical pipeline rarely consists of just one model. To tackle real-life issues,
     ML applications often use many different models to perform even simple tasks.
     In general, pipelines break a specific task into many steps, where each step is
     conquered by a machine learning algorithm or some procedure. Let’s now go over
     a couple pipelines you might already be familiar with.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 典型的管道很少只包含一个模型。为了解决现实中的问题，机器学习应用通常使用多个不同的模型来执行即使是简单的任务。一般而言，管道将一个特定任务拆分为多个步骤，每个步骤由机器学习算法或某些过程解决。现在让我们来看看几个你可能已经熟悉的管道。
 - en: '**Scikit-Learn Pipeline**'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Scikit-Learn管道**'
 - en: '`Pipeline([(‘scaler’, StandardScaler()), (‘svc’, SVC())])`'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '`Pipeline([(‘scaler’, StandardScaler()), (‘svc’, SVC())])`'
 - en: '[scikit-learn’s pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html) can
     be used to combine multiple “models” and “processing objects” together.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[scikit-learn的管道](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html)可以用于将多个“模型”和“处理对象”结合在一起。'
 - en: '**Recommendation Systems**'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**推荐系统**'
 - en: '`[EmbeddingLookup(), FeatureInteraction(), NearestNeighbors(), Ranking()]`'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '`[EmbeddingLookup(), FeatureInteraction(), NearestNeighbors(), Ranking()]`'
 - en: There are common pipeline patterns in recommendation systems. Item and video
     recommendations like those that you might see at [Amazon](https://www.amazon.science/publications/two-decades-of-recommender-systems-at-amazon-com) and [YouTube](https://research.google/pubs/pub45530/),
     respectively,  typically go through multiple stages like embedding lookup, feature
     interaction, nearest neighbor models, and ranking models.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 推荐系统中有常见的管道模式。像在[亚马逊](https://www.amazon.science/publications/two-decades-of-recommender-systems-at-amazon-com)和[YouTube](https://research.google/pubs/pub45530/)中看到的物品和视频推荐，通常经过多个阶段，如嵌入查找、特征交互、最近邻模型和排名模型。
 - en: '**Common Preprocessing**'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '**常见预处理**'
 - en: '`[HeavyWeightMLMegaModel(), DecisionTree()/BoostingModel()]`'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '`[HeavyWeightMLMegaModel(), DecisionTree()/BoostingModel()]`'
 - en: There are some very common use cases where some massive ML models are used to
     take care of common processing for text or images. For example, at Facebook, groups
     of ML researchers at [FAIR](https://ai.facebook.com/) create state of the art
@@ -305,211 +458,310 @@
     models to tackle their business use case (e.g. [suicide prevention](https://ai.facebook.com/blog/under-the-hood-suicide-prevention-tools-powered-by-ai/))
     by implementing smaller models using random forest. The shared common preprocessing
     step oftentimes are materialized into a [feature store pipeline](https://www.tecton.ai/blog/what-is-a-feature-store/).
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些非常常见的用例中，使用了大量的机器学习模型来处理文本或图像的常见处理。例如，在Facebook，FAIR的机器学习研究人员团队创建了用于视觉和文本的最先进的重量级模型。然后，不同的产品团队创建下游模型来解决他们的业务用例（例如，[自杀预防](https://ai.facebook.com/blog/under-the-hood-suicide-prevention-tools-powered-by-ai/)），通过使用随机森林实现较小的模型。共享的常见预处理步骤通常会被具体化为[特征存储管道](https://www.tecton.ai/blog/what-is-a-feature-store/)。
 - en: General Pipeline Implementation Options
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一般管道实施选项
 - en: '![17PipelineImplementation](../Images/79bbb459ea0883039df1a9aef463ae8a.png)'
+  id: totrans-73
   prefs: []
   type: TYPE_IMG
+  zh: '![17PipelineImplementation](../Images/79bbb459ea0883039df1a9aef463ae8a.png)'
 - en: Before Ray Serve, implementing pipelines generally meant you had to choose between
     wrapping your models in a web server or using many specialized microservices.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Ray Serve之前，实现管道通常意味着你必须在将模型封装在网络服务器中或使用许多专门的微服务之间进行选择。
 - en: 'In general, there are two approaches to implement a pipeline: wrap your models
     in a web server or use many specialized microservices.'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 一般来说，实现管道有两种方法：将你的模型封装在一个网络服务器中，或者使用许多专门的微服务。
 - en: '**Wrap Models in a Web Server**'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '**将模型封装在网络服务器中**'
 - en: The left side of the image above shows models that get run in a for loop during
     the web handling path. Whenever a request comes in, models get loaded (they can
     also be cached) and run through the pipeline. While this is simple and easy to
     implement, a major flaw is that this is hard to scale and not performant because
     each request gets handled sequentially.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 上图的左侧显示了在网络处理路径中以循环方式运行的模型。每当请求到来时，模型会被加载（也可以被缓存）并通过管道运行。虽然这种方法简单易行，但主要缺陷是难以扩展，并且性能较差，因为每个请求都被顺序处理。
 - en: '**Many Specialized Microservices**'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '**许多专门的微服务**'
 - en: The right side of the image above shows many specialized microservices where
     you essentially build and deploy one microservice per model. These microservices
     can be native ML platforms, [Kubeflow](https://www.kubeflow.org/), or even hosted
     services like AWS [SageMaker](https://aws.amazon.com/sagemaker/). However, as
     the number of models grow, the complexity and operational cost drastically increases.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 上图的右侧显示了许多专门的微服务，你基本上为每个模型构建和部署一个微服务。这些微服务可以是本地机器学习平台，[Kubeflow](https://www.kubeflow.org/)，甚至是像AWS
+    [SageMaker](https://aws.amazon.com/sagemaker/)这样的托管服务。然而，随着模型数量的增加，复杂性和操作成本急剧上升。
 - en: Implementing Pipelines in Ray Serve
+  id: totrans-80
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在Ray Serve中实现管道
 - en: '[PRE0]'
+  id: totrans-81
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Pseudocode showing how Ray Serve allows deployments to call other deployments
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 伪代码展示了Ray Serve如何允许部署调用其他部署
 - en: In Ray Serve, you can directly call other deployments within your deployment. 
     In this code above, there are three deployments. `Featurizer` and `Predictor`
     are just regular deployments containing the models. The `Orchestrator` receives
     the web input, passes it to the featurizer process via the featurizer handle,
     and then passes the computed feature to the predictor process. The interface is
     just Python and you don’t need to learn any new framework or domain-specific language.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Ray Serve中，你可以在你的部署内直接调用其他部署。在上面的代码中，有三个部署。`Featurizer`和`Predictor`只是包含模型的常规部署。`Orchestrator`接收网络输入，通过featurizer
+    handle将其传递给特征提取过程，然后将计算出的特征传递给预测过程。接口只是Python，你无需学习任何新的框架或领域特定语言。
 - en: Ray Serve achieves this with a mechanism called ServeHandle which gives you
     a similar flexibility to embed everything in the web server, without sacrificing
     performance or scalability. It allows you to directly call other deployments that
     live in other processes on other nodes. This allows you to scale out each deployment
     individually and load balance calls across the replicas.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: Ray Serve通过一种名为ServeHandle的机制实现这一点，它赋予你将所有内容嵌入到网络服务器中的类似灵活性，而不会牺牲性能或可扩展性。它允许你直接调用存在于其他节点上其他进程中的其他部署。这使你能够单独扩展每个部署，并在副本之间进行负载均衡。
 - en: If you would like to get a deeper understanding of how this works, [check out
     this section of Simon Mo’s talk](https://youtu.be/mM4hJLelzSw?t=650) to learn
     about Ray Serve’s architecture. If you would like an example of a computer vision
     pipeline in production, [check out how Robovision used 5 ML models for vehicle
     detection](https://www.anyscale.com/blog/the-third-generation-of-production-ml-architectures#:~:text=A%20Tool%20for%20High%20Performance%20ML%20Systems).
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想深入了解它是如何工作的，[查看 Simon Mo 演讲的这一部分](https://youtu.be/mM4hJLelzSw?t=650) 以了解
+    Ray Serve 的架构。如果你想了解生产中的计算机视觉管道的示例，[查看 Robovision 如何使用 5 个 ML 模型进行车辆检测](https://www.anyscale.com/blog/the-third-generation-of-production-ml-architectures#:~:text=A%20Tool%20for%20High%20Performance%20ML%20Systems)。
 - en: Ensemble Pattern
+  id: totrans-86
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 集成模式
 - en: '![Ensemble Pattern](../Images/16434d4cd2a985d8583f19809d92c256.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![集成模式](../Images/16434d4cd2a985d8583f19809d92c256.png)'
 - en: In a lot of production use cases, a pipeline is appropriate. However, one limitation
     of pipelines is that there can often be many upstream models for a given downstream
     model. This is where ensembles are useful.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 在许多生产使用案例中，管道是合适的。然而，管道的一个限制是，给定的下游模型往往有许多上游模型。这时，集成就显得很有用。
 - en: '![Figure](../Images/3322debd6651907f43438df2050ec8ac.png)'
+  id: totrans-89
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/3322debd6651907f43438df2050ec8ac.png)'
 - en: Ensemble Use Cases
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 集成使用案例
 - en: Ensemble patterns involve mixing output from one or more models. They are also
     called model stacking in some cases. Below are three use cases of ensemble patterns.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 集成模式涉及将一个或多个模型的输出混合。在某些情况下，它们也被称为模型堆叠。以下是三种集成模式的使用案例。
 - en: '**Model Update**'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '**模型更新**'
 - en: New models are developed and trained over time. This means there will always
     be new versions of the model in production. The question becomes, how do you make
     sure the new models are valid and performant in live online traffic scenarios?
     One way to do this is by putting some portion of the traffic through the new model.
     You still select the output from the known good model, but you are also collecting
     live output from the newer version of the models in order to validate it.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 新模型随着时间的推移不断开发和训练。这意味着在生产中总会有新版本的模型。问题在于，你如何确保新模型在实时在线流量场景中有效和性能良好？一种方法是将部分流量通过新模型。你仍然选择已知良好的模型的输出，但你也在收集新版本模型的实时输出以进行验证。
 - en: '**Aggregation**'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '**聚合**'
 - en: The most widely known use case is for aggregation. For regression models, outputs
     from multiple models are averaged. For classification models, the output will
     be a voted version of multiple models’ output. For example, if two models vote
     for cat and one model votes for dog, then the aggregated output will be cat. Aggregation
     helps combat inaccuracy in individual models and generally makes the output more
     accurate and “safer”.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 最广为人知的使用案例是聚合。对于回归模型，多模型的输出会被平均。对于分类模型，输出将是多个模型输出的投票结果。例如，如果两个模型投票选猫，一个模型投票选狗，则聚合后的输出将是猫。聚合有助于对抗单个模型的不准确性，并且通常使输出更准确和“安全”。
 - en: '**Dynamic Selection**'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '**动态选择**'
 - en: Another use case for ensemble models is to dynamically perform model selection
     given input attributes. For example, if the input contains a cat, model A will
     be used because it is specialized for cats.  If the input contains a dog, model
     B will be used because it is specialized for dogs. Note that this dynamic selection
     doesn’t necessarily mean the pipeline itself has to be static. It could also be
     selecting models given user feedback.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 集成模型的另一个使用案例是根据输入属性动态进行模型选择。例如，如果输入包含猫，则使用模型 A，因为它专门针对猫。如果输入包含狗，则使用模型 B，因为它专门针对狗。请注意，这种动态选择并不一定意味着管道本身必须是静态的。它也可以根据用户反馈选择模型。
 - en: General Ensemble Implementation Options
+  id: totrans-98
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 通用集成实现选项
 - en: '![General Ensemble Implementation](../Images/1749b4e53b9e59fc2b20a77e30ca3589.png)'
+  id: totrans-99
   prefs: []
   type: TYPE_IMG
+  zh: '![通用集成实现](../Images/1749b4e53b9e59fc2b20a77e30ca3589.png)'
 - en: Before Ray Serve, implementing ensembles generally meant you had to choose between
     wrapping your models in a web server or using many specialized microservices.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Ray Serve 之前，实现集成通常意味着你必须在将模型封装在网络服务器中或使用许多专门的微服务之间做出选择。
 - en: Ensemble implementations suffer the same sort of issues as pipelines. It is
     simple to wrap models in a web server, but it is not performant. When you use
     specialized microservices, you end up having a lot of operational overhead as
     the number of microservices scale with the number of models.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 集成实现面临与管道相同的问题。虽然将模型封装在网络服务器中很简单，但性能却不足。当使用专门的微服务时，随着微服务数量的增加，你会面临大量的操作开销。
 - en: '![Figure](../Images/cef1f239a6ce6e2c866380f7578463f6.png)'
+  id: totrans-102
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/cef1f239a6ce6e2c866380f7578463f6.png)'
 - en: Ensemble example from the [2020 Anyscale demo](https://youtu.be/8GTd8Y_JGTQ)
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2020 Anyscale 演示](https://youtu.be/8GTd8Y_JGTQ)中的集成示例'
 - en: With Ray Serve, the kind of pattern is incredibly simple. You can look at the [2020
     Anyscale demo](https://youtu.be/8GTd8Y_JGTQ) to see how to utilize Ray Serve’s
     handle mechanism to perform dynamic model selection.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Ray Serve，这种模式非常简单。你可以查看[2020 Anyscale 演示](https://youtu.be/8GTd8Y_JGTQ)，以了解如何利用
+    Ray Serve 的处理机制来执行动态模型选择。
 - en: Another example of using Ray Serve for ensembling is Wildlife Studios combining
     output of many classifiers for a single prediction. You can check out how they
     were able to [serve in-game offers 3x faster with Ray Serve](https://www.anyscale.com/blog/wildlife-studios-serves-in-game-offers-3x-faster-at-1-10th-the-cost-with-ray).
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个使用 Ray Serve 进行集成的例子是 Wildlife Studios 将多个分类器的输出结合起来进行单一预测。你可以查看他们如何[用 Ray
+    Serve 提供游戏内优惠速度提高 3 倍](https://www.anyscale.com/blog/wildlife-studios-serves-in-game-offers-3x-faster-at-1-10th-the-cost-with-ray)。
 - en: Business Logic Pattern
+  id: totrans-106
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 业务逻辑模式
 - en: 'Productionizing machine learning will always involve business logic. No models
     can stand-alone and serve requests by themselves. Business logic patterns involve
     everything that’s involved in a common ML task that is not ML model inference.
     This includes:'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 生产化机器学习将始终涉及业务逻辑。没有模型可以单独存在并自行处理请求。业务逻辑模式涉及到所有常见 ML 任务中与 ML 模型推理无关的内容。这包括：
 - en: Database lookups for relational records
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 关系记录的数据库查询
 - en: Web API calls for external services
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对外部服务的 Web API 调用
 - en: Feature store lookup for pre-compute feature vectors
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 特征存储查找预计算特征向量
 - en: Feature transformations like data validation, encoding, and decoding.
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 特征转换，如数据验证、编码和解码。
 - en: General Business Logic Implementation Options
+  id: totrans-112
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一般业务逻辑实施选项
 - en: '![General Business Logic Implementation Options](../Images/0563870ba1f93676e64c2abf3153cea3.png)'
+  id: totrans-113
   prefs: []
   type: TYPE_IMG
+  zh: '![一般业务逻辑实施选项](../Images/0563870ba1f93676e64c2abf3153cea3.png)'
 - en: 'The pseudocode for the web handler above does the following things:'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述 web 处理程序的伪代码执行以下操作：
 - en: It loads the model (let’s say from S3)
+  id: totrans-115
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它加载模型（假设从 S3）
 - en: Validates the input from the database
+  id: totrans-116
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 验证来自数据库的输入
 - en: Looks up some pre-computed features from the feature store.
+  id: totrans-117
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从特征存储中查找一些预计算的特征。
 - en: Only after the web handler completes these business logic steps are the inputs
     passed through to ML models. The problem is that the requirements of model inference
     and business logic lead to the server being *both network bounded and compute
@@ -517,50 +769,73 @@
     store lookups being network bounded and I/O heavy as well as the model inference
     being compute bound and memory hungry. The combination of these factors lead to
     an inefficient utilization of resources. Scaling will be expensive.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅在 web 处理程序完成这些业务逻辑步骤后，输入才会传递给 ML 模型。问题在于模型推理和业务逻辑的要求导致服务器*既受网络限制又受计算限制*。这是因为模型加载步骤、数据库查询和特征存储查询是网络限制和
+    I/O 密集型的，而模型推理则受计算限制且内存需求大。这些因素的组合导致了资源利用效率低下。扩展将会很昂贵。
 - en: '![Figure](../Images/0f770ce2d44b93326cd3be5d2f05d86d.png)'
+  id: totrans-119
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/0f770ce2d44b93326cd3be5d2f05d86d.png)'
 - en: Web handler approach (left) and microservices approach (right)
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: Web 处理程序方法（左）和微服务方法（右）
 - en: A common way to increase utilization is to split models out into model servers
     or microservices.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 提高利用率的一种常见方法是将模型拆分到模型服务器或微服务中。
 - en: The web app is purely network bounded while the model servers are compute bounded.
     However, a common problem is the interface between the two. If you put too much
     business logic into the model server, then the model servers become a mix of network
     bounded and compute bounded calls.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: Web 应用程序纯粹受网络限制，而模型服务器则受计算限制。然而，一个常见的问题是二者之间的接口。如果你把过多的业务逻辑放入模型服务器，那么模型服务器将变成网络限制和计算限制调用的混合体。
 - en: If you let the model servers be pure model servers, then you have the “**tensor-in,
     tensor-out**” interface problem. The input types for model servers are typically
     very constrained to just tensors or some alternate form of it. This makes it hard
     to keep the pre-processing, post-processing, and business logic in sync with the
     model itself.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你让模型服务器成为纯模型服务器，那么你就会遇到“**张量输入，张量输出**”接口问题。模型服务器的输入类型通常仅限于张量或其某种替代形式。这使得保持预处理、后处理和业务逻辑与模型本身的同步变得困难。
 - en: It becomes hard to reason about the interaction between the processing logic
     and the model itself because during training, the processing logic and models
     are tightly coupled, but when serving, they are split across two servers and two
     implementations.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 在训练过程中，由于处理逻辑和模型紧密耦合，因此很难推理处理逻辑与模型本身之间的交互，但在服务时，它们被拆分到两个服务器和两个实现中。
 - en: Neither the web handler approach nor the microservices approach is satisfactory.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 无论是 Web 处理程序方法还是微服务方法都不令人满意。
 - en: Implementing Business Logic in Ray Serve
+  id: totrans-126
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在 Ray Serve 中实现业务逻辑
 - en: '![Figure](../Images/d89c6e5d4fea7fa9ed2e67228e990351.png)'
+  id: totrans-127
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/d89c6e5d4fea7fa9ed2e67228e990351.png)'
 - en: Business Logic in Ray Serve
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: Ray Serve 中的业务逻辑
 - en: With Ray Serve, you just have to make some simple changes to the old web server
     to alleviate the issues described above. Instead of loading the model directly,
     you can retrieve a ServeHandle that wraps the model, and offload the computation
@@ -570,99 +845,149 @@
     together with the prediction handler. This makes it easy to understand and debug
     the code. `model.remote` looks like just a function and you can easily trace it
     to the model deployment class.
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Ray Serve，你只需对旧的 Web 服务器进行一些简单的更改，就可以缓解上述问题。你可以检索一个包装了模型的 ServeHandle，而不是直接加载模型，将计算任务卸载到另一个部署中。所有数据类型都被保留，不需要编写“tensor-in,
+    tensor-out” API 调用--你可以直接传入普通的 Python 类型。此外，模型部署类可以保留在同一个文件中，与预测处理程序一起部署。这使得理解和调试代码变得简单。`model.remote`
+    看起来只是一个函数，你可以轻松追踪到模型部署类。
 - en: In this way, Ray Serve helps you split up the business logic and inference into
     two separation components, one I/O heavy and the other compute heavy. This allows
     you to scale each piece individually, without losing the ease of deployment. Additionally,
     because `model.remote` is just a function call, it’s a lot easier to test and
     debug than separate external services.
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过这种方式，Ray Serve 帮助你将业务逻辑和推理拆分为两个独立的组件，一个 I/O 密集型，另一个计算密集型。这使你可以单独扩展每个组件，而不会失去部署的便利性。此外，因为
+    `model.remote` 只是一个函数调用，所以比单独的外部服务更容易测试和调试。
 - en: Ray Serve FastAPI Integration
+  id: totrans-131
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Ray Serve FastAPI 集成
 - en: '![Figure](../Images/8595ad1b26ebf6e48945fe49e0c55bab.png)'
+  id: totrans-132
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/8595ad1b26ebf6e48945fe49e0c55bab.png)'
 - en: 'Ray Serve: Ingress with FastAPI'
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 'Ray Serve: 使用 FastAPI 的入口'
 - en: An important part of implementing business logic and other patterns is authentication
     and input validation. [Ray Serve natively integrates with FastAPI](https://docs.ray.io/en/latest/serve/http-servehandle.html#serve-fastapi-http),
     which is a type safe and ergonomic web framework. [FastAPI](https://fastapi.tiangolo.com/) has
     features like automatic dependency injection, type checking and validation, and
     OpenAPI doc generation.
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 实现业务逻辑和其他模式的一个重要部分是身份验证和输入验证。[Ray Serve 本地集成了 FastAPI](https://docs.ray.io/en/latest/serve/http-servehandle.html#serve-fastapi-http)，这是一个类型安全且符合人体工程学的
+    Web 框架。[FastAPI](https://fastapi.tiangolo.com/) 具有自动依赖注入、类型检查和验证以及 OpenAPI 文档生成等功能。
 - en: With Ray Serve, you can directly pass the FastAPI app object into it with `@serve.ingress`.
     This decorator makes sure that all existing FastAPI routes still work and that
     you can attach new routes with the deployment class so states like loaded models,
     and networked database connections can easily be managed. Architecturally, we
     just made sure that your FastAPI app is correctly embedded into the replica actor
     and the FastAPI app can scale out across many Ray nodes.
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Ray Serve，你可以直接将 FastAPI 应用对象传入，并使用 `@serve.ingress` 装饰器。这个装饰器确保所有现有的 FastAPI
+    路由仍然有效，并且你可以通过部署类附加新的路由，以便像加载的模型和网络数据库连接这样的状态可以轻松管理。在架构上，我们只是确保你的 FastAPI 应用正确地嵌入到副本演员中，并且
+    FastAPI 应用可以在多个 Ray 节点上扩展。
 - en: Online Learning
+  id: totrans-136
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在线学习
 - en: Online learning is an emerging pattern that’s become more and more widely used.
     It refers to a model running in production that is constantly being updated, trained,
     validated and deployed. Below are three use cases of online learning patterns.
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 在线学习是一种新兴模式，使用越来越广泛。它指的是在生产中运行的模型不断被更新、训练、验证和部署。以下是在线学习模式的三个用例。
 - en: '**Dynamically Learn Model Weights**'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: '**动态学习模型权重**'
 - en: There are use cases for dynamically learning model weights online. As users
     interact with your services, these updated model weights can contribute to a personalized
     model for each user or group.
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 有动态学习模型权重的使用案例。当用户与你的服务互动时，这些更新的模型权重可以有助于为每个用户或群体提供个性化的模型。
 - en: '![Figure](../Images/f7f04df0e61fb914656ea0ffd641fc7f.png)'
+  id: totrans-140
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/f7f04df0e61fb914656ea0ffd641fc7f.png)'
 - en: '[Online Learning example at Ant Group](https://www.anyscale.com/blog/online-resource-allocation-with-ray-at-ant-group) (image
     courtesy of Ant Group)'
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Ant Group的在线学习示例](https://www.anyscale.com/blog/online-resource-allocation-with-ray-at-ant-group)（图片由Ant
+    Group提供）'
 - en: One case study of online learning consists of an online resource allocation
     business solution at Ant Group. The model is trained from offline data, then combined
     with real time streaming data source, and then served live traffic. One thing
     to note is that online learning systems are drastically more complex than their
     static serving counterparts. In this case, putting models in the web server, or
     even splitting it up into multiple microservices, would not help with the implementation.
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个在线学习的案例研究包括Ant Group的在线资源分配业务解决方案。该模型从离线数据中训练，然后与实时流数据源结合，最后提供实时流量。值得注意的是，在线学习系统比静态服务系统复杂得多。在这种情况下，将模型放在Web服务器中，甚至拆分成多个微服务，都无法帮助实现。
 - en: '**Dynamically Learn Parameters to Orchestrate Models**'
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: '**动态学习参数以协调模型**'
 - en: There are also use cases for learning parameters to orchestrate or compose models,
     for example, [learning which model a user prefers](https://dl.acm.org/doi/fullHtml/10.1145/3383313.3411550).
     This manifests often in model selection scenarios or contextual bandit algorithms.
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有一些使用案例是学习参数以协调或组合模型，例如，[学习用户喜欢哪个模型](https://dl.acm.org/doi/fullHtml/10.1145/3383313.3411550)。这通常出现在模型选择场景或上下文赌博算法中。
 - en: '**Reinforcement Learning**'
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: '**强化学习**'
 - en: Reinforcement learning is the branch of machine learning that trains agents
     to interact with the environment. The environment can be the physical world or
     a simulated environment. You can learn about reinforcement learning [here](https://www.anyscale.com/blog/an-introduction-to-reinforcement-learning-with-openai-gym-rllib-and-google) and
     see how you can deploy a RL model using Ray Serve [here](https://docs.ray.io/en/latest/serve/tutorials/rllib.html#serve-rllib-tutorial).
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: 强化学习是机器学习的一个分支，训练智能体与环境进行互动。环境可以是物理世界或模拟环境。你可以在[这里](https://www.anyscale.com/blog/an-introduction-to-reinforcement-learning-with-openai-gym-rllib-and-google)了解强化学习，并查看如何使用Ray
+    Serve部署RL模型[这里](https://docs.ray.io/en/latest/serve/tutorials/rllib.html#serve-rllib-tutorial)。
 - en: Conclusion
+  id: totrans-147
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: '![Figure](../Images/2f8011f22aa2376f8e75a951ce194e89.png)'
+  id: totrans-148
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/2f8011f22aa2376f8e75a951ce194e89.png)'
 - en: Ray Serve is easy to develop and production ready.
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: Ray Serve 易于开发并准备投入生产。
 - en: This post went over 4 main patterns of machine learning in production, how Ray
     Serve can help you natively scale and work with complex architectures, and how
     ML in production often means many models in production. Ray Serve is built with
@@ -670,52 +995,78 @@
     in learning more about Ray, you can check out the [documentation](https://ray.io/),
     join us on [Discourse](https://discuss.ray.io/), and check out the [whitepaper](https://tinyurl.com/ray-white-paper)!
     If you're interested in working with us to make it easier to leverage Ray, we're [hiring](https://jobs.lever.co/anyscale)!
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文介绍了生产环境中机器学习的4种主要模式，Ray Serve如何帮助你原生扩展和处理复杂架构，以及生产中的机器学习通常意味着许多模型在生产。Ray Serve在分布式运行时Ray的基础上，考虑了所有这些因素。如果你对Ray感兴趣，可以查看[文档](https://ray.io/)，加入我们的[讨论区](https://discuss.ray.io/)，并查看[白皮书](https://tinyurl.com/ray-white-paper)！如果你有兴趣与我们合作，使Ray的使用变得更容易，我们正在[招聘](https://jobs.lever.co/anyscale)！
 - en: '[Original](https://www.anyscale.com/blog/serving-ml-models-in-production-common-patterns).
     Reposted with permission.'
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.anyscale.com/blog/serving-ml-models-in-production-common-patterns)。转载授权。'
 - en: '**Related:**'
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Getting Started with Distributed Machine Learning with PyTorch and Ray](/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)'
+  id: totrans-153
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用PyTorch和Ray入门分布式机器学习](/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)'
 - en: '[How to Speed up Scikit-Learn Model Training](/2021/02/speed-up-scikit-learn-model-training.html)'
+  id: totrans-154
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何加速Scikit-Learn模型训练](/2021/02/speed-up-scikit-learn-model-training.html)'
 - en: '[How to Build a Data Science Portfolio](/2018/07/build-data-science-portfolio.html)'
+  id: totrans-155
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何构建数据科学投资组合](/2018/07/build-data-science-portfolio.html)'
 - en: More On This Topic
+  id: totrans-156
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 关于这个话题的更多内容
 - en: '[Top 7 Model Deployment and Serving Tools](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)'
+  id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[前7名模型部署与服务工具](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)'
 - en: '[Prioritizing Data Science Models for Production](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)'
+  id: totrans-158
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为生产环境优先排序数据科学模型](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)'
 - en: '[Feature Store Summit 2023: Practical Strategies for Deploying ML…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
+  id: totrans-159
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Feature Store峰会2023：部署ML模型的实用策略](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
 - en: '[Design Patterns in Machine Learning for MLOps](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)'
+  id: totrans-160
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MLOps中的机器学习设计模式](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)'
 - en: '[Unveiling Hidden Patterns: An Introduction to Hierarchical Clustering](https://www.kdnuggets.com/unveiling-hidden-patterns-an-introduction-to-hierarchical-clustering)'
+  id: totrans-161
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[揭示隐藏模式：层次聚类介绍](https://www.kdnuggets.com/unveiling-hidden-patterns-an-introduction-to-hierarchical-clustering)'
 - en: '[A Full End-to-End Deployment of a Machine Learning Algorithm into a…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
+  id: totrans-162
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习算法的完整端到端部署](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'

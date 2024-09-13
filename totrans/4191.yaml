@@ -1,509 +1,759 @@
 - en: Training BPE, WordPiece, and Unigram Tokenizers from Scratch using Hugging Face
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Hugging Face 从零开始训练 BPE、WordPiece 和 Unigram 分词器
 - en: 原文：[https://www.kdnuggets.com/2021/10/bpe-wordpiece-unigram-tokenizers-using-hugging-face.html](https://www.kdnuggets.com/2021/10/bpe-wordpiece-unigram-tokenizers-using-hugging-face.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/10/bpe-wordpiece-unigram-tokenizers-using-hugging-face.html](https://www.kdnuggets.com/2021/10/bpe-wordpiece-unigram-tokenizers-using-hugging-face.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/), Data Science
     Instructor | Mentor | YouTuber**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)，数据科学讲师 | 导师
+    | YouTuber**'
 - en: Continuing the deep dive into the sea of NLP, this post is all about training
     tokenizers from scratch by leveraging **Hugging Face’s tokenizers package.**
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在深入探讨 NLP 的海洋时，这篇文章全部关于通过利用 **Hugging Face 的 tokenizers 包** 从零开始训练分词器。
 - en: Tokenization is often regarded as a subfield of NLP but it has its own [story
     of evolution](https://dswharshit.substack.com/p/the-evolution-of-tokenization-byte) and
     how it has reached its current stage where it is underpinning the state-of-the-art
     NLP models.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 分词通常被视为自然语言处理（NLP）的一个子领域，但它有其自身的 [演变故事](https://dswharshit.substack.com/p/the-evolution-of-tokenization-byte) 以及如何发展到目前的阶段，支撑了最先进的
+    NLP 模型。
 - en: Before we get to the fun part of training and comparing the different tokenizers,
     I want to give you a brief summary of the key differences between the algorithms.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们进入训练和比较不同分词器的有趣部分之前，我想简要总结一下这些算法之间的主要区别。
 - en: The main difference lies in the **choice of character pairs** to merge and t**he
     merging policy** that each of these algorithms uses to generate the final set
     of tokens.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 主要区别在于 **字符对的选择** 和 **每种算法使用的合并策略**，这些算法用于生成最终的令牌集合。
 - en: '![Image](../Images/673d4a24d1ac87e138a8959acc3f40ef.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/673d4a24d1ac87e138a8959acc3f40ef.png)'
 - en: BPE - a frequency-based model
+  id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: BPE - 基于频率的模型
 - en: Byte Pair Encoding uses the frequency of subword patterns to shortlist them
     for merging.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 字节对编码（Byte Pair Encoding）利用子词模式的频率来筛选它们进行合并。
 - en: The drawback of using frequency as the driving factor is that you can end up
     having ambiguous final encodings that might not be useful for the new input text.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用频率作为驱动因素的缺点是，最终编码可能会产生模糊的结果，这对新输入文本可能没有用处。
 - en: It still has the scope of improvement in terms of generating unambiguous tokens.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在生成明确的令牌方面仍有改进的空间。
 - en: Unigram - a probability-based model
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Unigram - 基于概率的模型
 - en: Comes in the Unigram model that approaches to solve the merging problem by calculating
     the likelihood of each subword combination rather than picking the most frequent
     pattern.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 作为 Unigram 模型的一部分，它通过计算每个子词组合的可能性来解决合并问题，而不是选择最频繁的模式。
 - en: It calculates the probability of every subword token and then drops it based
     on a loss function that is explained in [this research paper.](https://arxiv.org/pdf/1804.10959.pdf)
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它计算每个子词令牌的概率，然后根据在 [这篇研究论文](https://arxiv.org/pdf/1804.10959.pdf)中解释的损失函数来舍弃。
 - en: Based on a certain threshold of the loss value, you can then trigger the model
     to drop the bottom 20-30% of the subword tokens.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 根据损失值的某个阈值，你可以触发模型丢弃底部 20-30% 的子词令牌。
 - en: Unigram is a completely probabilistic algorithm that chooses both the pairs
     of characters and the final decision to merge(or not) in each iteration based
     on probability.
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Unigram 是一种完全基于概率的算法，它在每次迭代中基于概率选择字符对和最终的合并决定（或不合并）。
 - en: WordPiece
+  id: totrans-18
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: WordPiece
 - en: With the release of BERT in 2018, there came a new subword tokenization algorithm
     called WordPiece which can be considered as an intermediary of BPE and Unigram
     algorithms.
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 随着 2018 年 BERT 的发布，出现了一种新的子词分词算法，称为 WordPiece，它可以被视为 BPE 和 Unigram 算法之间的中介。
 - en: WordPiece is also a greedy algorithm that leverages likelihood instead of count
     frequency to merge the best pair in each iteration but the choice of characters
     to pair is based on count frequency.
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: WordPiece 也是一种贪婪算法，它利用似然而不是计数频率来在每次迭代中合并最佳的对，但字符配对的选择基于计数频率。
 - en: So, it is similar to BPE in terms of choosing characters to pair and similar
     to Unigram in terms of choosing the best pair to merge.
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 因此，它在选择配对字符方面类似于 BPE，在选择最佳配对进行合并方面类似于 Unigram。
 - en: With the algorithmic differences covered, I tried to implement each of these
     algorithms(not from scratch) to compare the output generated by each of them.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 介绍完算法差异后，我尝试实现每种算法（不是从零开始），以比较它们生成的输出。
 - en: Training the BPE, Unigram, and WordPiece Algorithms
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 训练 BPE、Unigram 和 WordPiece 算法
 - en: Now, in order to have an unbiased comparison of outputs, I didn’t want to use
     pretrained algorithms as that would bring size, quality, and the content of the
     dataset into the picture.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，为了对输出进行无偏比较，我不想使用预训练算法，因为那样会将模型的大小、质量和数据集的内容考虑在内。
 - en: One way could be to code these algorithms from scratch using the research papers
     and then test them out which is a good approach in order to truly understand the
     working of each algorithm but you might end up spending weeks doing that.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 一种方法是从头编写这些算法，使用研究论文，然后进行测试，这是一种真正理解每种算法工作原理的好方法，但你可能会花费数周的时间来完成这个过程。
 - en: I instead used the [Hugging Face’s tokenizers](https://huggingface.co/docs/tokenizers/python/latest/quicktour.html) package
     that offers the implementation of all today’s most used tokenizers. It also allows
     me to train these models from scratch on my choice of dataset and then tokenize
     the input string of our own choice.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 我则使用了[Hugging Face的tokenizers](https://huggingface.co/docs/tokenizers/python/latest/quicktour.html)包，它提供了今天最常用的所有分词器的实现。它还允许我在选择的数据集上从头开始训练这些模型，然后对我们选择的输入字符串进行分词。
 - en: '**Training datasets**'
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**训练数据集**'
 - en: I chose two different datasets to train these models, one is a free book from
     Gutenberg which serves as a small dataset and the other one is the [wikitext-103](https://blog.einstein.ai/the-wikitext-long-term-dependency-language-modeling-dataset/) which
     is 516M of text.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我选择了两个不同的数据集来训练这些模型，一个是来自Gutenberg的免费书籍，作为一个小数据集，另一个是[wikitext-103](https://blog.einstein.ai/the-wikitext-long-term-dependency-language-modeling-dataset/)，它包含516M的文本。
 - en: In the Colab, you can download the datasets first and unzip them(if required),
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Colab中，你可以先下载数据集并解压（如果需要的话），
 - en: '[PRE0]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '[PRE2]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '**Import the required models and trainers**'
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**导入所需的模型和训练器**'
 - en: Going through the documentation, you’ll find that the main API of the package
     is the class `Tokenizer.`
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过文档，你会发现包的主要API是`Tokenizer`类。
 - en: You can then instantiate any tokenizer with your choice of model(BPE/ Unigram/
     WordPiece).
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，你可以用你选择的模型（BPE/Unigram/WordPiece）实例化任何分词器。
 - en: Here, I imported the main class, all the models I wanted to test, and their
     trainers as I want to train these models from scratch.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我导入了主类、所有我想要测试的模型以及它们的训练器，因为我希望从头开始训练这些模型。
 - en: '[PRE3]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '**3-Step process to automate training and tokenization**'
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**自动化训练和分词的3步过程**'
 - en: Since I need to perform somewhat similar processes for three different models,
     I broke the processes into 3 functions. I’ll only need to call these functions
     for each model and my job here would be done.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我需要对三种不同的模型执行类似的过程，我将这些过程分解为3个函数。我只需要为每个模型调用这些函数，我的工作就完成了。
 - en: So, what do these functions look like?
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，这些函数是什么样的呢？
 - en: '**Step 1 - Prepare the tokenizer**'
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**第1步 - 准备分词器**'
 - en: Preparing the tokenizer requires us to instantiate the Tokenizer class with
     a model of our choice but since we have four models(added a simple Word-level
     algorithm as well) to test, we’ll write if/else cases to instantiate the tokenizer
     with the right model.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 准备分词器要求我们用我们选择的模型实例化`Tokenizer`类，但由于我们有四个模型（还添加了一个简单的词级算法）需要测试，我们将编写if/else语句来用正确的模型实例化分词器。
 - en: To train the instantiated tokenizer on the small and large datasets, we will
     also need to instantiate a trainer, in our case, these would be **[`BpeTrainer`](https://huggingface.co/docs/tokenizers/python/latest/api/reference.html#tokenizers.trainers.BpeTrainer)`,
     WordLevelTrainer, WordPieceTrainer, and UnigramTrainer.`**
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了在小数据集和大数据集上训练实例化的分词器，我们还需要实例化一个训练器，在我们的案例中，这些将是**[`BpeTrainer`](https://huggingface.co/docs/tokenizers/python/latest/api/reference.html#tokenizers.trainers.BpeTrainer)`、WordLevelTrainer、WordPieceTrainer和UnigramTrainer`**。
 - en: The instantiation and training will need us to specify some special tokens.
     These are tokens for unknown words and other special tokens that we’d need to
     use later on to add to our vocabulary.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 实例化和训练将需要我们指定一些特殊的标记。这些标记用于未知词汇以及我们以后需要添加到词汇表中的其他特殊标记。
 - en: You can also specify other training arguments vocabulary size or minimum frequency
     here.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 你也可以在这里指定其他训练参数，如词汇表大小或最小频率。
 - en: '[PRE4]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'We’ll also need to add a pre-tokenizer to split our input to words as without
     a pre-tokenizer, we might get tokens that overlap several words: for instance,
     we could get an **`"there is"`** token since those two words often appear next
     to each other.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还需要添加一个预分词器，以将输入拆分为单词，因为没有预分词器，我们可能会得到重叠多个单词的标记：例如，我们可能会得到**`"there is"`**标记，因为这两个词经常出现在一起。
 - en: '*Using a pre-tokenizer will ensure no token is bigger than a word returned
     by the pre-tokenizer.*'
+  id: totrans-48
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*使用预分词器将确保没有标记比预分词器返回的单词更长。*'
 - en: This function will return the tokenizer and its trainer object which can be
     used to train the model on a dataset.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 该函数将返回分词器及其训练器对象，这些对象可以用于在数据集上训练模型。
 - en: Here, we are using the same pre-tokenizer (`Whitespace`) for all the models.
     You can choose to test it with [others](https://huggingface.co/docs/tokenizers/python/latest/api/reference.html#module-tokenizers.pre_tokenizers).
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们对所有模型使用相同的预分词器（`Whitespace`）。你可以选择用 [其他](https://huggingface.co/docs/tokenizers/python/latest/api/reference.html#module-tokenizers.pre_tokenizers)
+    进行测试。
 - en: '**Step 2 - Train the tokenizer**'
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**步骤 2 - 训练分词器**'
 - en: After preparing the tokenizers and trainers, we can start the training process.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 准备好分词器和训练器后，我们可以开始训练过程。
 - en: Here’s a function that will take the file(s) on which we intend to train our
     tokenizer along with the algorithm identifier.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个函数，将接受我们打算训练分词器的文件（们）以及算法标识符。
 - en: '`‘WLV’` - Word Level Algorithm'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`‘WLV’` - Word Level Algorithm'
 - en: '`‘WPC’` - WordPiece Algorithm'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`‘WPC’` - WordPiece Algorithm'
 - en: '`‘BPE’` - Byte Pair Encoding'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`‘BPE’` - Byte Pair Encoding'
 - en: '`‘UNI’` - Unigram'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`‘UNI’` - Unigram'
 - en: '[PRE5]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: This is the main function that we’ll need to call for training the tokenizer,
     it will first prepare the tokenizer and trainer and then start training the tokenizers
     with the provided files.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我们需要调用的主要函数，用于训练分词器，它将首先准备分词器和训练器，然后开始使用提供的文件训练分词器。
 - en: After training, it saves the model in a JSON file, loads it from the file, and
     returns the trained tokenizer to start encoding the new input.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练后，它将模型保存在 JSON 文件中，从文件中加载模型，并返回训练好的分词器以开始对新输入进行编码。
 - en: '**Step 3 - Tokenize the input string**'
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**步骤 3 - 对输入字符串进行分词**'
 - en: The last step is to start encoding the new input strings and compare the tokens
     generated by each algorithm.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一步是开始对新输入字符串进行编码，并比较每种算法生成的标记。
 - en: Here, we’ll be writing a nested for loop to train each model on the smaller
     dataset first followed by training on the larger dataset and tokenizing the input
     string as well.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们将编写一个嵌套的 for 循环，先在较小的数据集上训练每个模型，然后在较大的数据集上训练，并对输入字符串进行分词。
 - en: '**Input string - **“This is a deep learning tokenization tutorial. Tokenization
     is the first step in a deep learning NLP pipeline. We will be comparing the tokens
     generated by each tokenization model. Excited much?!????”'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输入字符串 - **“这是一个深度学习分词教程。分词是深度学习 NLP 流程中的第一步。我们将比较各个分词模型生成的标记。很兴奋吗？！????”'
 - en: '[PRE6]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '**##output:**'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**##输出：**'
 - en: '[![](../Images/198a394da78449354ccb0821037853a1.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F43eb1a88-36a1-4343-be1e-ac65843e3837_1306x430.png)'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/198a394da78449354ccb0821037853a1.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F43eb1a88-36a1-4343-be1e-ac65843e3837_1306x430.png)'
 - en: 'Analysis of the output:'
+  id: totrans-68
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 输出分析：
 - en: Looking at the output, you’ll see the difference in how the tokens were generated
     which in turn led to a different number of tokens generated.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看输出，你将看到标记生成方式的差异，这反过来导致生成的标记数量不同。
 - en: A simple **word-level algorithm** created 35 tokens no matter which dataset
     it was trained on.
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个简单的 **word-level algorithm** 无论在什么数据集上训练都会生成 35 个标记。
 - en: '**BPE** algorithm created 55 tokens when trained on a smaller dataset and 47
     when trained on a larger dataset. This shows that it was able to merge more pairs
     of characters when trained on a larger dataset.'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**BPE** 算法在较小的数据集上生成了 55 个标记，在较大的数据集上生成了 47 个标记。这表明在较大的数据集上，它能够合并更多的字符对。'
 - en: 'The **Unigram model** created a similar(68 and 67) number of tokens with both
     datasets. But you could see the difference in the generated tokens:'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Unigram 模型** 在两个数据集上生成了相似（68 和 67）的标记。但你可以看到生成的标记之间的差异：'
 - en: '[![](../Images/19bbf33161f11709f988096b3a59efb5.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fbdf3d128-641c-4680-9b43-0e04a505d67c_428x43.png)'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/19bbf33161f11709f988096b3a59efb5.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fbdf3d128-641c-4680-9b43-0e04a505d67c_428x43.png)'
 - en: With a larger dataset, merging came closer to generating tokens that are better
     suited to encode real-world English language that we often use.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用较大的数据集时，合并更接近生成更适合编码我们常用的真实世界英语的标记。
 - en: '[![](../Images/28734781ce5a4cafcbc9aba5f363a43e.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Feb49063b-8896-496e-acec-0dea60d6ea37_260x40.png)'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/28734781ce5a4cafcbc9aba5f363a43e.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Feb49063b-8896-496e-acec-0dea60d6ea37_260x40.png)'
 - en: '**WordPiece** created 52 tokens when trained on a smaller dataset and 48 when
     trained on a larger dataset. The generated tokens have double ## to denote the
     use of the token as a prefix/suffix.[![](../Images/ac28c07cbcdf72cb828877c152386ca3.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fa5225119-6158-45e7-83b1-26bf587791f3_391x45.png)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**WordPiece**在较小的数据集上生成了52个令牌，在较大的数据集上生成了48个令牌。生成的令牌有双##以表示将令牌用作前缀/后缀。[![](../Images/ac28c07cbcdf72cb828877c152386ca3.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fa5225119-6158-45e7-83b1-26bf587791f3_391x45.png)'
 - en: All three algorithms generated lesser and better subword tokens when trained
     on a larger dataset.
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 所有三种算法在较大的数据集上生成了更少的子词令牌和更好的子词令牌。
 - en: Comparing the Tokens
+  id: totrans-78
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 比较令牌
 - en: To compare the tokens, I stored the output of each algorithm in a dictionary
     and I’ll turn it into a dataframe to view the differences in tokens better.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了比较令牌，我将每种算法的输出存储在一个字典中，并将其转化为数据框，以更好地查看令牌之间的差异。
 - en: Since the number of tokens generated by each model is different, I’ve added
     a <PAD> token to make the data rectangular and fit a dataframe.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于每个模型生成的令牌数量不同，我已添加了一个<PAD>令牌，以使数据矩形并适配数据框。
 - en: <PAD> is basically nan in the dataframe.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: <PAD>在数据框中基本上是nan。
 - en: '[PRE7]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '**##output:**'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '**##输出：**'
 - en: '[![](../Images/5049300edd0a6d1c89ab139f3b07f95c.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F856ab4bc-7343-4114-9867-27e64a71d21a_306x474.png)'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/5049300edd0a6d1c89ab139f3b07f95c.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F856ab4bc-7343-4114-9867-27e64a71d21a_306x474.png)'
 - en: 'You can also look at the difference in tokens using sets:'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以使用集合查看令牌的差异：
 - en: '[![](../Images/34a662dd103b84cdcf7f2eb321c1a8ea.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F7be68b1a-d979-4688-94e9-b19219f2259d_370x692.png)[![](../Images/76e9e0b32184034f37d1b848d86aa050.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F8942a6e1-d1bc-4a6e-bbec-3473a87ef9ca_370x626.png)'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/34a662dd103b84cdcf7f2eb321c1a8ea.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F7be68b1a-d979-4688-94e9-b19219f2259d_370x692.png)[![](../Images/76e9e0b32184034f37d1b848d86aa050.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F8942a6e1-d1bc-4a6e-bbec-3473a87ef9ca_370x626.png)'
 - en: All the code can be found in this [Colab notebook.](https://colab.research.google.com/drive/10gwzRY55JqzgeEQOX6nwFs6bQ84-mB9f?usp=sharing)
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有代码可以在这个[Colab笔记本](https://colab.research.google.com/drive/10gwzRY55JqzgeEQOX6nwFs6bQ84-mB9f?usp=sharing)中找到。
 - en: Closing thoughts and next steps!
+  id: totrans-88
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结束思考和下一步！
 - en: Based on the kind of tokens generated, WPC does seem to generate subword tokens
     that are more commonly found in the English language but don’t hold me accountable
     for this observation.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于生成的令牌类型，WPC确实似乎生成了更常见于英语中的子词令牌，但不要对这一观察结果负责。
 - en: These algorithms are slightly different from each other and do a somewhat similar
     job of developing a decent NLP model. But much of the performance depends on the
     use case of your language model, the vocabulary size, speed, and other factors.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些算法彼此略有不同，并且在开发一个不错的NLP模型时做了些类似的工作。但性能在很大程度上取决于语言模型的使用场景、词汇量、速度以及其他因素。
 - en: A further advancement to these algorithms is the [SentencePiece algorithm](https://arxiv.org/pdf/1808.06226.pdf) which
     is a wholesome approach to the whole tokenization problem but much of this problem
     is alleviated by HuggingFace and even better, they have all the algorithms implemented
     in a single GitHub repo.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 对这些算法的进一步改进是 [SentencePiece算法](https://arxiv.org/pdf/1808.06226.pdf)，它是对整个分词问题的全面方法，但
+    HuggingFace 已经缓解了大部分问题，更棒的是，他们在一个 GitHub 仓库中实现了所有这些算法。
 - en: This concludes the tokenization algorithms and the next step is to understand
     what are embeddings, how tokenization plays a vital role in creating these embeddings,
     and how they affect a model’s performance.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 这部分介绍了分词算法，下一步是理解什么是嵌入，分词在创建这些嵌入中的关键作用，以及它们如何影响模型的性能。
 - en: References and Notes
+  id: totrans-93
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考文献和注释
 - en: 'If you disagree with my analysis or any of my work in this post, I find highly
     encourage you to check out these resources for a precise understanding of the
     working of each algorithm:'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你不同意我的分析或本文中的任何工作，我强烈鼓励你查看这些资源，以准确理解每个算法的工作原理：
 - en: '[Subword regularization: Improving Neural Network Translation Models with Multiple
     Subword Candidates](https://arxiv.org/pdf/1804.10959.pdf) by Taku Kudo'
+  id: totrans-95
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[子词正则化：通过多个子词候选改善神经网络翻译模型](https://arxiv.org/pdf/1804.10959.pdf) 由 Taku Kudo
+    发表'
 - en: '[Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/pdf/1508.07909.pdf) -
     Research paper that discusses different segmentation techniques based BPE compression
     algorithm.'
+  id: totrans-96
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[用子词单元的稀有词神经机器翻译](https://arxiv.org/pdf/1508.07909.pdf) - 研究论文讨论了基于BPE压缩算法的不同分割技术。'
 - en: '[Hugging Face’s tokenizer package.](https://huggingface.co/docs/tokenizers/python/latest/quicktour.html)'
+  id: totrans-97
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[Hugging Face的分词器包。](https://huggingface.co/docs/tokenizers/python/latest/quicktour.html)'
 - en: If you’re looking to start in the field of data science or ML, check out my
     course on [Foundations of Data Science & ML](https://www.wiplane.com/p/foundations-for-data-science-ml).
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想开始数据科学或机器学习领域的学习，可以查看我关于 [数据科学与机器学习基础](https://www.wiplane.com/p/foundations-for-data-science-ml)
+    的课程。
 - en: If you would like to see more of such content and you are not a subscriber,
     consider subscribing to my newsletter using the button below.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你希望查看更多类似内容而又不是订阅者，可以通过下面的按钮订阅我的通讯。
 - en: Have something to add or suggest, reply to this email, or comment on the post
     on Substack.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 有什么要补充或建议的，可以回复此邮件或在Substack上的帖子中评论。
 - en: '**Bio: [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)** is an engineer
     with amalgamated experience in web technologies and data science(aka full-stack
     data science). He has mentored over 1000 AI/Web/Data Science aspirants, and is
     designing data science and ML engineering learning tracks. Previously, Harshit
     developed data processing algorithms with research scientists at Yale, MIT, and
     UCLA.'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介: [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)** 是一名在网络技术和数据科学（即全栈数据科学）方面具有丰富经验的工程师。他指导了超过1000名人工智能/网络/数据科学的学员，并正在设计数据科学和机器学习工程学习路径。此前，Harshit
+    曾与耶鲁大学、麻省理工学院和加州大学洛杉矶分校的研究科学家共同开发数据处理算法。'
 - en: '[Original](https://dswharshit.substack.com/p/ecde3224-cb0f-425b-97a2-853ea873d279).
     Reposted with permission.'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始](https://dswharshit.substack.com/p/ecde3224-cb0f-425b-97a2-853ea873d279)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Simple Question Answering Web App with HuggingFace Pipelines](/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用HuggingFace管道的简单问答网络应用](/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
 - en: '[The Evolution of Tokenization – Byte Pair Encoding in NLP](/2021/10/evolution-tokenization-byte-pair-encoding-nlp.html)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分词的演变 – 自然语言处理中的字节对编码](/2021/10/evolution-tokenization-byte-pair-encoding-nlp.html)'
 - en: '[Text Preprocessing Methods for Deep Learning](/2021/09/text-preprocessing-methods-deep-learning.html)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习的文本预处理方法](/2021/09/text-preprocessing-methods-deep-learning.html)'
 - en: '* * *'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-108
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速入门网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你在 IT 方面的组织'
 - en: '* * *'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-113
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[How to Use the Hugging Face Tokenizers Library to Preprocess Text Data](https://www.kdnuggets.com/how-to-use-the-hugging-face-tokenizers-library-to-preprocess-text-data)'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Hugging Face Tokenizers 库来预处理文本数据](https://www.kdnuggets.com/how-to-use-the-hugging-face-tokenizers-library-to-preprocess-text-data)'
 - en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何从头开始构建和训练一个 Transformer 模型，使用…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
 - en: '[Using Hugging Face Transformers for Emotion Detection in Text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Hugging Face Transformers 进行文本情感检测](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
 - en: '[Build AI Chatbot in 5 Minutes with Hugging Face and Gradio](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Hugging Face 和 Gradio 在 5 分钟内构建 AI 聊天机器人](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)'
 - en: '[How to Translate Languages with MarianMT and Hugging Face Transformers](https://www.kdnuggets.com/how-to-translate-languages-with-marianmt-and-hugging-face-transformers)'
+  id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 MarianMT 和 Hugging Face Transformers 翻译语言](https://www.kdnuggets.com/how-to-translate-languages-with-marianmt-and-hugging-face-transformers)'
 - en: '[Top 10 Machine Learning Demos: Hugging Face Spaces Edition](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)'
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[前 10 大机器学习演示：Hugging Face Spaces 版](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)'
