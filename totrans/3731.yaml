@@ -1,20 +1,29 @@
 - en: 'oBERT: Compound Sparsification Delivers Faster Accurate Models for NLP'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 'oBERT: 复合稀疏化为 NLP 提供更快、更准确的模型'
 - en: 原文：[https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)
 - en: '![Comparison of reported inference performance speedups for The Optimal BERT
     Surgeon](../Images/120c07b58ced24c19051c4e1d1908546.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![The Optimal BERT Surgeon 推理性能加速比较](../Images/120c07b58ced24c19051c4e1d1908546.png)'
 - en: Comparison of reported inference performance speedups for The Optimal BERT Surgeon
     (oBERT) with other methods on the SQuAD dataset. oBERT performance was measured
     using the DeepSparse Engine on a c5.12xlarge AWS instance.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 比较了在 SQuAD 数据集上，The Optimal BERT Surgeon (oBERT) 与其他方法的推理性能加速。oBERT 的性能是在 c5.12xlarge
+    AWS 实例上使用 DeepSparse Engine 测量的。
 - en: The modern world is made up of constant communication happening through text.
     Think messaging apps, social networks, documentation and collaboration tools,
     or books. This communication generates enormous amounts of actionable data for
@@ -26,56 +35,82 @@
     answering. It did this in a very “over-parameterized” way, though. Its 500MB model
     size and slow inference prohibit many efficient deployment scenarios, especially
     at the edge. And cloud deployments become fairly expensive, fairly quickly.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 现代世界由通过文本进行的持续沟通构成。想想消息应用、社交网络、文档和协作工具，或者书籍。这种沟通为希望利用这些数据改善用户体验的公司生成了大量可操作的数据。例如，下面这个视频展示了用户如何使用
+    NLP 神经网络 – [BERT](https://arxiv.org/abs/1810.04805) 在 Twitter 上跟踪加密货币的总体情感。通过许多创新贡献，BERT
+    显著提升了 NLP 任务的最先进水平，如文本分类、标记分类和问答。然而，它是以非常“过度参数化”的方式实现的。其 500MB 的模型大小和慢速推理限制了许多高效的部署场景，尤其是在边缘设备上。而云部署变得相当昂贵，速度也很快。
 - en: 'BERT’s inefficient nature has not gone unnoticed. Many researchers have pursued
     ways to reduce its cost and size. Some of the most active research is in model
     compression techniques such as smaller architectures (structured pruning), distillation,
     quantization, and unstructured pruning. A few of the more impactful papers include:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: BERT 的低效特性并未被忽视。许多研究人员致力于降低其成本和规模。当前最活跃的研究之一是模型压缩技术，如更小的架构（结构化剪枝）、蒸馏、量化和非结构化剪枝。几个更具影响力的论文包括：
 - en: '[DistilBERT](https://arxiv.org/abs/1910.01108) used [knowledge distillation](https://en.wikipedia.org/wiki/Knowledge_distillation)
     to transfer knowledge from a BERT base model to a 6-layer version.'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[DistilBERT](https://arxiv.org/abs/1910.01108) 使用了 [知识蒸馏](https://en.wikipedia.org/wiki/Knowledge_distillation)
+    将知识从 BERT 基础模型转移到一个 6 层版本。'
 - en: '[TinyBERT](https://arxiv.org/abs/1909.10351) implemented a more complicated
     distillation setup to better transfer the knowledge from the baseline model into
     a 4-layer version.'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TinyBERT](https://arxiv.org/abs/1909.10351) 实现了一个更复杂的蒸馏设置，以更好地将知识从基线模型转移到一个
+    4 层版本。'
 - en: '[The Lottery Ticket Hypothesis](https://arxiv.org/abs/1803.03635) applied [magnitude
     pruning](https://towardsdatascience.com/pruning-neural-networks-1bb3ab5791f9)
     during pre-training of a BERT model to create a sparse architecture that generalized
     well across fine-tuning tasks.'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[彩票票假说](https://arxiv.org/abs/1803.03635) 在 BERT 模型的预训练过程中应用了 [幅度剪枝](https://towardsdatascience.com/pruning-neural-networks-1bb3ab5791f9)，以创建一个在微调任务中泛化良好的稀疏架构。'
 - en: '[Movement Pruning](https://arxiv.org/abs/2005.07683) applied a combination
     of the magnitude and gradient information to remove redundant parameters while
     fine-tuning with distillation.'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[运动剪枝](https://arxiv.org/abs/2005.07683)结合了幅度和梯度信息，以在使用蒸馏进行微调时移除冗余参数。'
 - en: '![DistilBERT training illustration](../Images/2b69b82b72a797d19cc1d44de32d5070.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![DistilBERT 训练示意图](../Images/2b69b82b72a797d19cc1d44de32d5070.png)'
 - en: DistilBERT training illustration![TinyBERT training illustration](../Images/7ef98e9a8e1ed4db71abe59f3559b84d.png)
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: DistilBERT 训练示意图 ![TinyBERT 训练示意图](../Images/7ef98e9a8e1ed4db71abe59f3559b84d.png)
 - en: TinyBERT training illustration
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: TinyBERT 训练示意图
 - en: BERT is Highly Over-Parameterized
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: BERT 是高度过参数化的
 - en: We show that BERT is highly over-parameterized in our recent paper, [*The Optimal
     BERT Surgeon*](https://arxiv.org/pdf/2203.07259.pdf). **Ninety percent of the
     network can be removed with minimal effect on the model and its accuracy**!
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在最近的论文中展示了BERT的高度过度参数化，[*The Optimal BERT Surgeon*](https://arxiv.org/pdf/2203.07259.pdf)。**网络的90%可以在对模型和其准确性影响最小的情况下移除**！
 - en: Really, 90%? Yes! Our research team at Neural Magic in collaboration with IST
     Austria improved the prior best 70% sparsity to 90% by implementing a second-order
     pruning algorithm, Optimal BERT Surgeon. The algorithm uses a Taylor expansion
@@ -83,18 +118,24 @@
     we know exactly which weights are redundant in the network and are safe to remove.
     When combining this technique with distillation while training, we are able to
     get to 90% sparsity while recovering to 99% of the baseline accuracy!
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 真的，90%？是的！我们在Neural Magic的研究团队与IST Austria合作，通过实施二阶剪枝算法Optimal BERT Surgeon，将之前最佳的70%稀疏度提高到了90%。该算法使用泰勒展开来近似每个权重对损失函数的影响——这意味着我们确切知道网络中哪些权重是多余的，可以安全移除。当将此技术与蒸馏训练结合时，我们能够实现90%的稀疏度，同时恢复99%的基准准确性！
 - en: '![Performance overview relative to current state-of-the-art unstructured pruning
     methods on the 12-layer BERT-base-uncased model and the question-answering SQuAD
     v1.1 dataset.](../Images/3bce90acca3987094978000a4b979dbc.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![相对于当前最先进的无结构剪枝方法在12层BERT-base-uncased模型和问答SQuAD v1.1数据集上的性能概述。](../Images/3bce90acca3987094978000a4b979dbc.png)'
 - en: Performance overview relative to current state-of-the-art unstructured pruning
     methods on the 12-layer BERT-base-uncased model and the question-answering SQuAD
     v1.1 dataset.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 相对于当前最先进的无结构剪枝方法在12层BERT-base-uncased模型和问答SQuAD v1.1数据集上的性能概述。
 - en: But, are structured pruned versions of BERT over-parameterized as well? In trying
     to answer this question, we removed up to 3/4 of the layers to create our 6-layer
     and 3-layer sparse versions. We first retrained these compressed models with distillation
@@ -103,8 +144,12 @@
     affecting the accuracy. For example, our 3-layer model removes 81 million of the
     110 million parameters in BERT while recovering 95% of the accuracy, creating
     our **Optimal BERT Surgeon models (oBERT)**.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，BERT的结构化剪枝版本是否也过度参数化了呢？为了解答这个问题，我们移除了最多3/4的层来创建我们的6层和3层稀疏版本。我们首先用蒸馏技术重新训练了这些压缩模型，然后应用了Optimal
+    BERT Surgeon剪枝。通过这样做，我们发现这些已经压缩的模型中80%的权重可以进一步移除而不影响准确性。例如，我们的3层模型在保留95%准确性的同时移除了BERT中的1.1亿个参数中的8100万个，从而创建了我们的**Optimal
+    BERT Surgeon模型（oBERT）**。
 - en: Given the high level of sparsity, we introduced with oBERT models, we measured
     the inference performance using the [DeepSparse](https://github.com/neuralmagic/deepsparse)
     [Engine](https://github.com/neuralmagic/deepsparse) – a freely-available, sparsity-aware
@@ -114,12 +159,18 @@
     pruned 3-layer that outperforms TinyBERT. With the combination of DeepSparse Engine
     and oBERT, highly accurate NLP CPU deployments are now measured in a few milliseconds
     (few = single digits).
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 鉴于我们引入的oBERT模型的高稀疏度，我们使用了[DeepSparse](https://github.com/neuralmagic/deepsparse)
+    [Engine](https://github.com/neuralmagic/deepsparse)来测量推理性能——这是一种自由提供的、稀疏感知的推理引擎，旨在提高稀疏神经网络在普通CPU上的性能，比如笔记本电脑中的CPU。下图显示了经过剪枝的12层模型和3层模型的加速结果，前者优于DistilBERT，后者优于TinyBERT。结合DeepSparse
+    Engine和oBERT，高准确度的NLP CPU部署现在的时间为几毫秒（几=个位数）。
 - en: Better Algorithms Enable Performant and Efficient Deep Learning, Anywhere
+  id: totrans-20
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 更好的算法使得深度学习在任何地方都能高效运作
 - en: After applying the structured pruning and Optimal BERT Surgeon pruning techniques,
     we include quantization-aware training to take advantage of the DeepSparse Engine’s
     sparse quantization support for X86 CPUs. Combining quantization and our sparse
@@ -127,35 +178,50 @@
     [VNNI support](https://www.intel.com/content/dam/www/public/us/en/documents/product-overviews/dl-boost-product-overview.pdf)
     results in a quantized, 80% sparse 12-layer model that achieves the 99% recovery
     target. The combination of all these techniques is what we termed “[compound sparsification](https://neuralmagic.com/blog/pruning-hugging-face-bert-compound-sparsification/).”
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 在应用结构化剪枝和Optimal BERT Surgeon剪枝技术后，我们结合了量化感知训练，以利用DeepSparse Engine对X86 CPU的稀疏量化支持。将量化和我们的稀疏模型与[4块剪枝](https://arxiv.org/pdf/2203.07259.pdf)及DeepSparse
+    [VNNI支持](https://www.intel.com/content/dam/www/public/us/en/documents/product-overviews/dl-boost-product-overview.pdf)结合，最终得到了一个量化的、80%稀疏的12层模型，达到了99%的恢复目标。这些技术的结合被称为“[复合稀疏化](https://neuralmagic.com/blog/pruning-hugging-face-bert-compound-sparsification/)”。
 - en: '![Latency inference comparisons at batch size 1, sequence length 128 for oBERT
     on CPUs and GPUs.](../Images/120c07b58ced24c19051c4e1d1908546.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![oBERT在CPU和GPU上以批处理大小1、序列长度128进行的延迟推理比较。](../Images/120c07b58ced24c19051c4e1d1908546.png)'
 - en: Latency inference comparisons at batch size 1, sequence length 128 for oBERT
     on CPUs and GPUs.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: oBERT在CPU和GPU上以批处理大小1、序列长度128进行的延迟推理比较。
 - en: The result is GPU-level performance for BERT models on readily available CPUs.
     With the sparse quantized oBERT 12-layer model, a 4-core Intel MacBook is now
     more performant than a T4 GPU and an 8-core server outperforms a V100 for latency-sensitive
     applications. Even further speedups are realized when using the 3 and 6-layer
     models for slightly less accuracy.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果是BERT模型在现成的CPU上达到了GPU级别的性能。使用稀疏量化的oBERT 12层模型时，4核Intel MacBook的性能现在优于T4 GPU，而8核服务器在对延迟敏感的应用中表现优于V100。使用3层和6层模型会进一步加速，但准确率稍低。
 - en: '**“A 4-core Intel MacBook is now more performant than a T4 GPU and an 8-core
     server outperforms a V100 for latency-sensitive applications.”**'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**“4核Intel MacBook的性能现在比T4 GPU更强，而8核服务器在对延迟敏感的应用中表现优于V100。”**'
 - en: Making Compound Sparsification Work for You
+  id: totrans-26
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 让复合稀疏化为你服务
 - en: Twitter natural language processing video comparing the performance improvements
     from oBERT to an unoptimized, baseline model.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: Twitter自然语言处理视频对比了从oBERT到未经优化的基线模型的性能改进。
 - en: In spirit with the research community and enabling continued contributions,
     the source code for creating oBERT models is open sourced through [SparseML](https://github.com/neuralmagic/sparseml)
     and the models are freely available on the [SparseZoo](https://sparsezoo.neuralmagic.com/?domain=nlp&sub_domain=masked_language_modeling&page=1&dataset=wikipedia_bookcorpus).
@@ -164,65 +230,100 @@
     Try it out to performantly track crypto trends, or any other trends, on your hardware!
     Finally, we’ve pushed up simple [use-case walkthroughs](https://neuralmagic.com/use-cases/#nlp)
     to highlight the base flows needed to apply this research to your data.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 结合研究社区的精神并促进持续贡献，创建oBERT模型的源代码已通过[SparseML](https://github.com/neuralmagic/sparseml)开源，模型也可以在[SparseZoo](https://sparsezoo.neuralmagic.com/?domain=nlp&sub_domain=masked_language_modeling&page=1&dataset=wikipedia_bookcorpus)上免费获取。此外，DeepSparse
+    Twitter加密示例在[DeepSparse仓库](https://github.com/neuralmagic/deepsparse/tree/main/examples/twitter-nlp)中开源。试试它来高效跟踪加密趋势或其他趋势！最后，我们还推出了简单的[用例演示](https://neuralmagic.com/use-cases/#nlp)，以突出应用这些研究到数据中所需的基本流程。
 - en: '**[Mark Kurtz](https://www.linkedin.com/in/markkurtzjr/)** ([@markurtz_](https://twitter.com/markurtz_))
     is Director of Machine Learning at Neural Magic, and an experienced software and
     machine learning leader. Mark is proficient across the full stack for engineering
     and machine learning, and is passionate about model optimizations and efficient
     inference.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Mark Kurtz](https://www.linkedin.com/in/markkurtzjr/)** ([@markurtz_](https://twitter.com/markurtz_))
+    是Neural Magic的机器学习总监，并且是一位经验丰富的软件和机器学习领导者。Mark精通工程和机器学习的全栈，并对模型优化和高效推理充满热情。'
 - en: '* * *'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织在 IT 领域'
 - en: '* * *'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Explain NLP Models with LIME](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 LIME 解释 NLP 模型](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)'
 - en: '[A Faster Way to Prepare Time-Series Data with the AI & Analytics Engine](https://www.kdnuggets.com/2021/12/piexchange-faster-way-prepare-timeseries-data-ai-analytics-engine.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 AI 和分析引擎更快地准备时间序列数据](https://www.kdnuggets.com/2021/12/piexchange-faster-way-prepare-timeseries-data-ai-analytics-engine.html)'
 - en: '[Learn Machine Learning 4X Faster by Participating in Competitions](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过参与比赛以 4 倍速度学习机器学习](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)'
 - en: '[Become Data-Driven Faster with DataCamp’s Analyst Takeover](https://www.kdnuggets.com/2022/10/datacamp-data-driven-faster-analyst-takeover.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过 DataCamp 的分析师接管更快成为数据驱动](https://www.kdnuggets.com/2022/10/datacamp-data-driven-faster-analyst-takeover.html)'
 - en: '[How to Optimize SQL Queries for Faster Data Retrieval](https://www.kdnuggets.com/2023/06/optimize-sql-queries-faster-data-retrieval.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何优化 SQL 查询以加快数据检索速度](https://www.kdnuggets.com/2023/06/optimize-sql-queries-faster-data-retrieval.html)'
 - en: '[7 Ways ChatGPT Makes You Code Better and Faster](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7 种 ChatGPT 使你编码更好更快的方法](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)'
