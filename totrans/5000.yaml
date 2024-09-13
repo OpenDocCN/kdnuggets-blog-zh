@@ -1,22 +1,31 @@
 - en: Random Forests® in Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 随机森林® 在 Python 中
 - en: 原文：[https://www.kdnuggets.com/2016/12/random-forests-python.html](https://www.kdnuggets.com/2016/12/random-forests-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/12/random-forests-python.html](https://www.kdnuggets.com/2016/12/random-forests-python.html)
 - en: This post originally appeared on the [Yhat blog](http://blog.yhat.com/). [**Yhat**](https://www.yhat.com/)
     is a Brooklyn based company whose goal is to make data science applicable for
     developers, data scientists, and businesses alike. Yhat provides a software platform
     for deploying and managing predictive algorithms as REST APIs, while eliminating
     the painful engineering obstacles associated with production environments like
     testing, versioning, scaling and security.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇文章最初发表于 [Yhat 博客](http://blog.yhat.com/)。[**Yhat**](https://www.yhat.com/)
+    是一家位于布鲁克林的公司，旨在使数据科学适用于开发人员、数据科学家和企业。Yhat 提供一个软件平台，用于将预测算法部署和管理为 REST API，同时消除与生产环境相关的痛苦工程障碍，如测试、版本控制、扩展和安全。
 - en: '* * *'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '[Random forest](https://en.wikipedia.org/wiki/Random_forest "random forest
     - wikipedia") is a highly versatile machine learning method with numerous applications
     ranging from marketing to healthcare and insurance. It can be used to [model the
@@ -25,357 +34,544 @@
     customer acquisition, retention, and churn or to [predict disease risk and susceptibility](http://www.biomedcentral.com/1472-6947/11/51
     "Predicting disease risks from highly imbalanced data using random forest") in
     patients.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '[随机森林](https://en.wikipedia.org/wiki/Random_forest "random forest - wikipedia")
+    是一种高度多用途的机器学习方法，应用广泛，从市场营销到医疗保健和保险。它可以用于[建模市场营销的影响](http://epubl.ltu.se/1653-0187/2008/014/LTU-PB-EX-08014-SE.pdf
+    "Response Rate Modeling - a Data Mining Based Approach for Target Selection")，如客户获取、留存和流失，或用于[预测疾病风险和易感性](http://www.biomedcentral.com/1472-6947/11/51
+    "Predicting disease risks from highly imbalanced data using random forest")。'
 - en: Random forest is capable of regression and classification. It can handle a large
     number of features, and it's helpful for estimating which of your variables are
     important in the underlying data being modeled.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林可以进行回归和分类。它能处理大量特征，并且有助于估计在建模的基础数据中哪些变量是重要的。
 - en: This is a post about random forests using Python.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个关于使用 Python 的随机森林的帖子。
 - en: What is a Random Forest?
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是随机森林？
 - en: Random forest is solid choice for nearly any prediction problem (even non-linear
     ones). It's a relatively new machine learning strategy (it came out of Bell Labs
     in the 90s) and it can be used for just about anything. It belongs to a larger
     class of machine learning algorithms called ensemble methods.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林是几乎任何预测问题的可靠选择（即使是非线性问题）。这是一种相对较新的机器学习策略（它起源于 90 年代的贝尔实验室），可以用于几乎任何用途。它属于一种称为集成方法的更大类的机器学习算法。
 - en: '**Ensemble Learning**'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '**集成学习**'
 - en: '[Ensemble learning](https://en.wikipedia.org/wiki/Ensemble_learning) involves
     the combination of several models to solve a single prediction problem. It works
     by generating multiple classifiers/models which learn and make predictions independently.
     Those predictions are then combined into a single (mega) prediction that should
     be as good or better than the prediction made by any one classifer.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '[集成学习](https://en.wikipedia.org/wiki/Ensemble_learning)涉及将多个模型组合在一起解决单一预测问题。它通过生成多个分类器/模型来工作，这些模型独立学习并进行预测。然后将这些预测组合成一个单一的（超级）预测，这个预测应该与任何一个分类器的预测一样好或更好。'
 - en: Random forest is a brand of ensemble learning, as it relies on an ensemble of
     decision trees. More on ensemble learning in Python here: [Scikit-Learn docs](http://scikit-learn.org/dev/modules/ensemble.html).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林是集成学习的一种，它依赖于决策树的集成。有关 Python 中集成学习的更多信息，请参见：[Scikit-Learn 文档](http://scikit-learn.org/dev/modules/ensemble.html)。
 - en: '**Randomized Decision Trees**'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '**随机化决策树**'
 - en: So we know that random forest is an aggregation of other models, but what types
     of models is it aggregating? As you might have guessed from its name, random forest
     aggregates [Classification (or Regression) Trees](https://en.wikipedia.org/wiki/Decision_tree_learning
     "decision tree learning - wikipedia"). A decision tree is composed of a series
     of decisions that can be used to classify an observation in a dataset.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以我们知道随机森林是其他模型的聚合，但它聚合了哪些类型的模型呢？正如你可能从名字中猜到的那样，随机森林聚合了[分类（或回归）树](https://en.wikipedia.org/wiki/Decision_tree_learning
+    "decision tree learning - wikipedia")。决策树由一系列决策组成，这些决策可以用来对数据集中一个观察值进行分类。
 - en: '***Random* Forest**'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '***随机* 森林**'
 - en: The algorithm to induce a random forest will create a bunch of random decision
     trees automatically. Since the trees are generated at random, most won't be all
     that meaningful to learning your classification/regression problem (maybe 99.9%
     of trees).
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于生成随机森林的算法会自动创建一堆随机决策树。由于这些树是随机生成的，大多数树对你的分类/回归问题并没有什么有意义的帮助（可能有99.9%的树）。
 - en: '![](../Images/8b2ffa2eb8e26a731d7ca9f9fbd27da6.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8b2ffa2eb8e26a731d7ca9f9fbd27da6.png)'
 - en: If an observation has a length of 45, blue eyes, and 2 legs, it's going to be
     classified as **red**.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果一个观测值的长度为45，蓝色眼睛，2 条腿，它将被分类为 **红色**。
 - en: '**Arboreal Voting**'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**树木投票**'
 - en: So what good are 10000 (probably) bad models? Well it turns out that they really
     aren't that helpful. But *what is helpful* are the few really good decision trees
     that you also generated along with the bad ones.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，10000 个（可能）糟糕的模型有什么用呢？结果证明，它们真的不是很有帮助。但 *有帮助的* 是那些你同时生成的少数几个非常好的决策树。
 - en: When you make a prediction, the new observation gets pushed down each decision
     tree and assigned a predicted value/label. Once each of the trees in the forest
     have reported its predicted value/label, the predictions are tallied up and the
     mode vote of all trees is returned as the final prediction.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你做出预测时，新的观测值会被推入每棵决策树，并被分配一个预测值/标签。一旦森林中的每棵树都报告了其预测值/标签，预测结果将被汇总，并以所有树的模式投票作为最终预测。
 - en: Simply, the 99.9% of trees that are irrelevant make predictions that are all
     over the map and cancel each another out. The predictions of the minority of trees
     that are good top that noise and yield a good prediction.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单来说，那99.9% 的无关树做出的预测到处都是，并相互抵消。而少数几棵好的树的预测超越了这些噪音，得出了好的预测结果。
 - en: '![](../Images/1089e8b31317d5481c2c9f906914a3d4.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1089e8b31317d5481c2c9f906914a3d4.png)'
 - en: Why you should I use it?
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么你应该使用它？
 - en: '**It''s Easy**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**很简单**'
 - en: Random forest is the [Leatherman](http://www.leatherman.com/product/Super_Tool_300
     "leatherman super tool") of learning methods. You can throw pretty much anything
     at it and it'll do a serviceable job. It does a particularly good job of estimating
     inferred transformations, and, as a result, doesn't require much tuning like SVM
     (i.e. it's good for folks with tight deadlines).
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林是 [Leatherman](http://www.leatherman.com/product/Super_Tool_300 "leatherman
+    super tool") 的学习方法。你几乎可以对它进行任何操作，它都会做得很好。它特别擅长估计推断转换，因此不像 SVM 那样需要大量调优（即适合于时间紧迫的人）。
 - en: '**An Example Transformation**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**一个示例转换**'
 - en: Random forest is capable of learning without carefully crafted data transformations.
     Take the the `f(x) = log(x)` function for example.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林能够在没有精心设计的数据转换的情况下进行学习。例如，考虑 `f(x) = log(x)` 函数。
 - en: Alright let's write some code. We'll be writing our Python code in Yhat's very
     own interactive environment built for analyzing data, Rodeo. You can download
     Rodeo for Mac, Windows or Linux [here](https://www.yhat.com/products/rodeo).
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，我们来写一些代码。我们将在 Yhat 自家的交互式环境 Rodeo 中编写 Python 代码。你可以在 [这里](https://www.yhat.com/products/rodeo)
+    下载适用于 Mac、Windows 或 Linux 的 Rodeo。
 - en: First, create some fake data and add a little noise.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，创建一些虚假数据并添加一点噪声。
 - en: '[PRE0]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[Check out the gist here](https://gist.github.com/glamp/5716253)'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '[在这里查看要点](https://gist.github.com/glamp/5716253)'
 - en: We'll be doing our Python analysis and visualization in Rodeo, Yhat's open source
     data science environment. Want to follow along? You can download Yhat's Python
     IDE for Mac, Windows or Linux [here](https://www.yhat.com/products/rodeo).
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将在 Rodeo 中进行 Python 分析和可视化，Yhat 是一个开源的数据科学环境。想要跟随吗？你可以在 [这里](https://www.yhat.com/products/rodeo)
+    下载适用于 Mac、Windows 或 Linux 的 Yhat Python IDE。
 - en: Following along in Rodeo? Here's what you should see.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Rodeo 中跟随？这是你应该看到的内容。
 - en: '[![](../Images/60c88f42a3be91a24868ac8a456551d6.png)](http://blog.yhat.com/static/img/random-forest-1.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/60c88f42a3be91a24868ac8a456551d6.png)](http://blog.yhat.com/static/img/random-forest-1.png)'
 - en: Let's take a closer look at that plot.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们更详细地查看一下那个图表。
 - en: '![](../Images/229d178dff3a906a4900b8e77bfff9a3.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/229d178dff3a906a4900b8e77bfff9a3.png)'
 - en: If we try and build a basic linear model to predict `y` using `x` we wind up
     with a straight line that sort of bisects the `log(x)` function. Whereas if we
     use a random forest, it does a much better job of approximating the `log(x)` curve
     and we get something that looks much more like the true function.![](../Images/ba71b34f9c50bf4ec9f6ab94eef89633.png)![](../Images/e0f2fd97697a9bdf57bfc60630e0d7aa.png)
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们尝试建立一个基本的线性模型来预测`y`，使用`x`的话，我们最终会得到一条直线，这条直线大致上是将`log(x)`函数分开。相比之下，如果我们使用随机森林，它在近似`log(x)`曲线方面表现得更好，我们得到的结果看起来更像真实函数。![](../Images/ba71b34f9c50bf4ec9f6ab94eef89633.png)![](../Images/e0f2fd97697a9bdf57bfc60630e0d7aa.png)
 - en: You could argue that the random forest overfits the `log(x)` function a little
     bit. Either way, I think this does a nice job of illustrating how the random forest
     isn't bound by linear constraints.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以说随机森林对`log(x)`函数进行了些许过拟合。无论如何，我认为这很好地说明了随机森林不受线性约束的限制。
 - en: Uses
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 用途
 - en: '**Variable Selection**'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**变量选择**'
 - en: One of the best use cases for random forest is feature selection. One of the
     byproducts of trying lots of decision tree variations is that you can examine
     which variables are working best/worst in each tree.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林最好的使用案例之一是特征选择。尝试许多决策树变体的副产品之一是你可以检查哪些变量在每棵树中表现最好/最差。
 - en: When a certain tree uses one variable and another doesn't, you can compare the
     value lost or gained from the inclusion/exclusion of that variable. The good random
     forest implementations are going to do that for you, so all you need to do is
     know which method or variable to look at.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 当某棵树使用一个变量而另一棵树不使用时，你可以比较因包括/排除该变量而丢失或获得的价值。好的随机森林实现会为你完成这项工作，所以你只需知道查看哪种方法或变量即可。
 - en: In the following examples, we're trying to figure out which variables are most
     important for classifying a wine as being red or white.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 在接下来的例子中，我们试图找出哪些变量对于将酒分类为红酒或白酒最为重要。
 - en: '![](../Images/35593bee262ea31d7ff57b2424fa7bfd.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/35593bee262ea31d7ff57b2424fa7bfd.png)'
 - en: '![](../Images/1dc88ad49fcdbdee484b7eeba6868983.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1dc88ad49fcdbdee484b7eeba6868983.png)'
 - en: '**Classification**'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '**分类**'
 - en: Random forest is also great for classification. It can be used to make predictions
     for categories with multiple possible values and it can be calibrated to output
     probabilities as well. One thing you do need to watch out for is [overfitting](https://en.wikipedia.org/wiki/Overfitting).
     Random forest can be prone to overfitting, especially when working with relatively
     small datasets. You should be suspicious if your model is making "too good" of
     predictions on our test set.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林在分类方面也表现出色。它可以用于预测具有多个可能值的类别，并且可以校准以输出概率。然而，你需要注意的是[过拟合](https://en.wikipedia.org/wiki/Overfitting)。随机森林容易出现过拟合，尤其是在处理相对较小的数据集时。如果你的模型在测试集上的预测“过于准确”，你应该保持怀疑态度。
 - en: One way to overfitting is to only use really relevant features in your model.
     While this isn't always cut and dry, using a feature selection technique (like
     the one mentioned previously) can make it a lot easier.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 避免过拟合的一种方法是只在模型中使用真正相关的特征。虽然这并不总是简单明了，但使用特征选择技术（如前面提到的那种）可以使这变得容易得多。
 - en: '![](../Images/51000c974461f8fb2e93691cf81fc5f4.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/51000c974461f8fb2e93691cf81fc5f4.png)'
 - en: '**Regression**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**回归**'
 - en: Yep. It does regression too.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 是的，它也做回归。
 - en: I've found that random forest--unlike other algorithms--does really well learning
     on categorical variables or a mixture of categorical and real variables. Categorical
     variables with high cardinality (# of possible values) can be tricky, so having
     something like this in your back pocket can come in quite useful.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 我发现与其他算法不同，随机森林在学习分类变量或分类变量与实际变量混合时表现非常好。具有高基数（可能值数量）的分类变量可能会很棘手，因此拥有类似的工具在你手头会非常有用。
 - en: A Short Python Example
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一个简短的 Python 示例
 - en: Scikit-Learn is a great way to get started with random forest. The scikit-learn
     API is extremely consistent across algorithms, so you horse race and switch between
     models very easily. A lot of times I start with something simple and then move
     to random forest.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: Scikit-Learn 是入门随机森林的绝佳选择。scikit-learn API 在各种算法中非常一致，因此你可以非常容易地进行模型比较和切换。很多时候我从简单的模型开始，然后转向随机森林。
 - en: One of the best features of the random forest implementation in scikit-learn
     is the `n_jobs` parameter. This will automatically parallelize fitting your random
     forest based on the number of cores you want to use. [Here's a great presentation](https://vimeo.com/63269736
     "Vimeo - Scaling Machine Learning in Python") by scikit-learn contributor Olivier
     Grisel where he talks about training a random forest on a 20 node EC2 cluster.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: scikit-learn中随机森林实现的最佳特性之一是`n_jobs`参数。这将根据你希望使用的核心数量自动并行化随机森林的拟合。[这是一个很棒的演示](https://vimeo.com/63269736
+    "Vimeo - Scaling Machine Learning in Python")，由scikit-learn贡献者Olivier Grisel介绍，他讲述了如何在20节点EC2集群上训练随机森林。
 - en: '[PRE1]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Following along? Here's what you should see(ish). We're using *randomly* selected
     data, so your exact values will differ each time.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 跟上进度了吗？这是你应该看到的（大致）。我们使用的是*随机*选择的数据，因此你的确切值每次可能会有所不同。
 - en: '| preds | sertosa | versicolor | virginica |'
+  id: totrans-58
   prefs: []
   type: TYPE_TB
+  zh: '| preds | sertosa | versicolor | virginica |'
 - en: '| actual |  |  |  |'
+  id: totrans-59
   prefs: []
   type: TYPE_TB
+  zh: '| actual |  |  |  |'
 - en: '| sertosa | 6 | 0 | 0 |'
+  id: totrans-60
   prefs: []
   type: TYPE_TB
+  zh: '| sertosa | 6 | 0 | 0 |'
 - en: '| versicolor | 0 | 16 | 1 |'
+  id: totrans-61
   prefs: []
   type: TYPE_TB
+  zh: '| versicolor | 0 | 16 | 1 |'
 - en: '| virginica | 0 | 0 | 12 |'
+  id: totrans-62
   prefs: []
   type: TYPE_TB
+  zh: '| virginica | 0 | 0 | 12 |'
 - en: '[![](../Images/2a2215f7c85231cf599969e6d2a4400d.png)](http://blog.yhat.com/static/img/random-forest-3.png)'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/2a2215f7c85231cf599969e6d2a4400d.png)](http://blog.yhat.com/static/img/random-forest-3.png)'
 - en: Final Thoughts
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最终思考
 - en: Random forests are remarkably easy to use given how advanced they are. As with
     any modeling, be wary of overfitting. If you're interested in getting started
     with random forest in `R`, check out the [`randomForest`](http://cran.r-project.org/web/packages/randomForest/randomForest.pdf) package.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林尽管非常先进，但使用起来却异常简单。与任何建模一样，要小心过拟合。如果你对在`R`中使用随机森林感兴趣，可以查看[`randomForest`](http://cran.r-project.org/web/packages/randomForest/randomForest.pdf)包。
 - en: '[Berkley Resources](http://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm
     "random forests - UC Berkley Resources")'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[伯克利资源](http://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm "random
+    forests - UC Berkley Resources")'
 - en: '[Kaggle blogpost](https://www.kaggle.com/wiki/RandomForests "Random Forests
     Blog Post from Kaggle")'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kaggle博客文章](https://www.kaggle.com/wiki/RandomForests "Random Forests Blog
+    Post from Kaggle")'
 - en: '[Andy Mueller''s blog (scikit-learn contributor)](http://peekaboo-vision.blogspot.de/
     "Andy Mueller''s blog")'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Andy Mueller的博客（scikit-learn贡献者）](http://peekaboo-vision.blogspot.de/ "Andy
+    Mueller''s blog")'
 - en: '[Random Forest Guide](http://www.stanford.edu/~stephsus/R-randomforest-guide.pdf
     "Random Forests for Classification - Stephanie Shih")'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[随机森林指南](http://www.stanford.edu/~stephsus/R-randomforest-guide.pdf "Random
+    Forests for Classification - Stephanie Shih")'
 - en: '[Olivier Grisel''s website](http://ogrisel.com/ ">Olivier Grisel")'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Olivier Grisel的网站](http://ogrisel.com/ ">Olivier Grisel")'
 - en: '[Original](http://blog.yhat.com/posts/python-random-forest.html). Reposted
     with permission.'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](http://blog.yhat.com/posts/python-random-forest.html)。经许可转载。'
 - en: RANDOM FORESTS and RANDOMFORESTS are registered marks of Minitab, LLC.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: RANDOM FORESTS和RANDOMFORESTS是Minitab, LLC的注册商标。
 - en: '**Related:**'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Random Forest: A Criminal Tutorial](/2016/09/reandom-forest-criminal-tutorial.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[随机森林：犯罪教程](/2016/09/reandom-forest-criminal-tutorial.html)'
 - en: '[When Does Deep Learning Work Better Than SVMs or Random Forests?](/2016/04/deep-learning-vs-svm-random-forest.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习何时优于SVM或随机森林？](/2016/04/deep-learning-vs-svm-random-forest.html)'
 - en: '[The Great Algorithm Tutorial Roundup](/2016/09/great-algorithm-tutorial-roundup.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[伟大的算法教程汇总](/2016/09/great-algorithm-tutorial-roundup.html)'
 - en: '* * *'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-78
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全领域。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的IT'
 - en: '* * *'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[集成学习技术：Python中的随机森林实战](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
 - en: '[Decision Trees vs Random Forests, Explained](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[决策树与随机森林，解析](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)'
 - en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用网格搜索和随机搜索进行超参数调优](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
 - en: '[Random Forest vs Decision Tree: Key Differences](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[随机森林与决策树：主要区别](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
 - en: '[Does the Random Forest Algorithm Need Normalization?](https://www.kdnuggets.com/2022/07/random-forest-algorithm-need-normalization.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[随机森林算法是否需要标准化？](https://www.kdnuggets.com/2022/07/random-forest-algorithm-need-normalization.html)'
 - en: '[Generating Random Data with NumPy](https://www.kdnuggets.com/generating-random-data-with-numpy)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 NumPy 生成随机数据](https://www.kdnuggets.com/generating-random-data-with-numpy)'
