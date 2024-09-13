@@ -1,169 +1,262 @@
 - en: Speech to Text with Wav2Vec 2.0
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Wav2Vec 2.0 进行语音转文本
 - en: 原文：[https://www.kdnuggets.com/2021/03/speech-text-wav2vec.html](https://www.kdnuggets.com/2021/03/speech-text-wav2vec.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/03/speech-text-wav2vec.html](https://www.kdnuggets.com/2021/03/speech-text-wav2vec.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Dhilip Subramanian](https://medium.com/@sdhilip), Data Scientist and
     AI Enthusiast**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Dhilip Subramanian](https://medium.com/@sdhilip)，数据科学家和 AI 爱好者**'
 - en: '![Figure](../Images/f1afdce2c2ee8cce809cd1a6f89536a7.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/f1afdce2c2ee8cce809cd1a6f89536a7.png)'
 - en: 'From [Wav2vec 2.0: Learning the structure of speech from raw audio](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/)'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '来源于 [Wav2vec 2.0: 从原始音频学习语音结构](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/)'
 - en: '[In my previous blog](https://towardsdatascience.com/easy-speech-to-text-with-python-3df0d973b426),
     I explained how to convert speech into text using the Speech Recognition library
     with the help of Google speech recognition API. In this blog, we see how to convert
     speech into text using Facebook Wav2Vec 2.0 model.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '[在我之前的博客中](https://towardsdatascience.com/easy-speech-to-text-with-python-3df0d973b426)，我解释了如何使用
+    Speech Recognition 库和 Google 语音识别 API 将语音转换为文本。在本博客中，我们将探讨如何使用 Facebook Wav2Vec
+    2.0 模型将语音转换为文本。'
 - en: '[Facebook](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio) recently
     introduced and [open-sourced their new framework](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio) for
     self-supervised learning of representations from raw audio data called Wav2Vec
     2.0\. Facebook researchers claim this framework can enable [automatic speech recognition
     models](https://analyticsindiamag.com/facebook-makes-advancements-in-automatic-speech-recognition/) with
     just 10 minutes of transcribed speech data.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Facebook](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio)
+    最近推出并 [开源了他们的新框架](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio)，用于从原始音频数据中自监督学习表示，称为
+    Wav2Vec 2.0。Facebook 研究人员声称，这个框架可以使 [自动语音识别模型](https://analyticsindiamag.com/facebook-makes-advancements-in-automatic-speech-recognition/)
+    仅凭 10 分钟的转录语音数据实现。'
 - en: As everyone knows, Transformers are playing a major role in Natural Language
     Processing. The latest version of Hugging Face transformers is version 4.30 and
     it comes with Wav2Vec 2.0\. This is the first Automatic Speech recognition speech
     model included in the Transformers.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 众所周知，Transformers 在自然语言处理中的作用重大。Hugging Face transformers 的最新版本是 4.30，它包含了 Wav2Vec
+    2.0。这是 Transformers 中首个包含的自动语音识别模型。
 - en: Model Architecture is beyond the scope of this blog. For detailed Wav2Vec model
     architecture, please check [here](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/).
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型架构超出了本博客的范围。有关详细的 Wav2Vec 模型架构，请查看 [这里](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/)。
 - en: Let’s see how we can convert the audio file into text using Hugging Face transformers
     with some simple lines of code.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看如何使用 Hugging Face transformers 通过一些简单的代码将音频文件转换为文本。
 - en: Installing Transformer library
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 安装 Transformer 库
 - en: '[PRE0]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Importing necessary libraries
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导入必要的库
 - en: '[PRE1]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Wav2Vec2 is a speech model that accepts a float array corresponding to the
     raw waveform of the speech signal. Wav2Vec2 model was trained using connectionist
     temporal classification (CTC) so the model output has to be decoded using Wav2Vec2Tokenizer
     ([Ref: Hugging Face)](https://huggingface.co/transformers/model_doc/wav2vec2.html)'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 'Wav2Vec2 是一个语音模型，它接受一个浮点数组，该数组对应于语音信号的原始波形。Wav2Vec2 模型使用连接时序分类（CTC）进行训练，因此模型输出需要使用
+    Wav2Vec2Tokenizer 进行解码（[参考: Hugging Face](https://huggingface.co/transformers/model_doc/wav2vec2.html)）'
 - en: Reading the audio file
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 阅读音频文件
 - en: I have used Liam Neeson famous dialogue audio clip from the movie “Taken” in
     this example which says *“I will look for you, I will find you and I will kill
     you”*
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个示例中，我使用了来自电影《Taken》的 Liam Neeson 著名对话音频片段，其中说 *“我会找你，我会找到你，我会杀了你”*
 - en: Please note the Wav2Vec model is pre-trained on 16 kHz frequency, so we make
     sure our raw audio file is also resampled to a 16 kHz sampling rate. I have used
     online [audio tool conversion](https://audio.online-convert.com/convert-to-wav) to
     resample the ‘taken’ audio clip into 16kHz.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，Wav2Vec 模型是在 16 kHz 频率下预训练的，因此我们需要确保我们的原始音频文件也被重采样为 16 kHz 采样率。我使用了在线 [音频工具转换](https://audio.online-convert.com/convert-to-wav)
+    将“Taken”音频片段重采样为 16kHz。
 - en: Loading the audio file using the librosa library and mentioning my audio clip
     size is 16000 Hz. It converts the audio clip into an array and is stored into
     the ‘audio’ variable.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 librosa 库加载音频文件，并提到我的音频片段大小为 16000 Hz。它将音频片段转换为数组，并存储到‘audio’变量中。
 - en: '[PRE2]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[PRE3]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Importing pre-trained Wav2Vec model
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导入预训练的 Wav2Vec 模型
 - en: '[PRE5]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The next step is taking the input values, passing the audio (array) into tokenizer
     and we want our tensors in PyTorch format instead of Python integers. return_tensors
     = “pt” which is nothing more than PyTorch format.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是获取输入值，将音频（数组）传递给分词器，并希望我们的张量采用 PyTorch 格式而不是 Python 整数。return_tensors =
+    “pt” 仅仅是 PyTorch 格式。
 - en: '[PRE6]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Getting the logit values (non-normalized values)
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 获取 logits 值（非标准化值）
 - en: '[PRE7]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Passing the logit values to softmax to get the predicted values
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 logits 值传递给 softmax 以获取预测值
 - en: '[PRE8]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Converting audio to text
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 将音频转换为文本
 - en: The final step is to pass the prediction to the tokenizer decode to get the
     transcription
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一步是将预测结果传递给分词器解码器以获取转录文本
 - en: '[PRE9]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '[PRE10]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: It exactly matches our audio clip.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 它完全匹配我们的音频片段。
 - en: In this blog, we have seen how to convert speech into text using Wav2Vec pretrained
     model using Transformers. This would be very helpful for NLP projects especially
     handling audio transcripts data. If you have anything to add, please feel free
     to leave a comment!
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇博客中，我们了解了如何使用 Transformers 中的预训练 Wav2Vec 模型将语音转换为文本。这对 NLP 项目尤其是处理音频转录数据非常有帮助。如果你有任何补充，请随时留言！
 - en: You can find the entire code and data in my [GitHub repo](https://github.com/sdhilip200/speech-to-text).
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在我的 [GitHub 仓库](https://github.com/sdhilip200/speech-to-text) 中找到完整的代码和数据。
 - en: Thanks for reading. Keep learning and stay tuned for more!
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢阅读。继续学习，敬请关注更多内容！
 - en: Reference
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考
 - en: '[https://huggingface.co/transformers/model_doc/wav2vec2.html](https://huggingface.co/transformers/model_doc/wav2vec2.html)'
+  id: totrans-40
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://huggingface.co/transformers/model_doc/wav2vec2.html](https://huggingface.co/transformers/model_doc/wav2vec2.html)'
 - en: '[https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/)'
+  id: totrans-41
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/)'
 - en: '**Bio: [Dhilip Subramanian](https://medium.com/@sdhilip)** is a Mechanical
     Engineer and has completed his Master''s in Analytics. He has 9 years of experience
     with specialization in various domains related to data including IT, marketing,
@@ -171,77 +264,120 @@
     He is a contributor to the [SAS community](https://communities.sas.com/t5/user/viewprofilepage/user-id/271305)
     and loves to write technical articles on various aspects of data science on the
     Medium platform.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Dhilip Subramanian](https://medium.com/@sdhilip)** 是一名机械工程师，已完成分析学硕士学位。他在数据相关的多个领域拥有
+    9 年的经验，包括 IT、市场营销、银行、电力和制造业。他对 NLP 和机器学习充满热情。他是[SAS 社区](https://communities.sas.com/t5/user/viewprofilepage/user-id/271305)的贡献者，喜欢在
+    Medium 平台上撰写有关数据科学各个方面的技术文章。'
 - en: '[Original](https://pub.towardsai.net/speech-to-text-with-wav2vec-2-0-b21c1e1ad701).
     Reposted with permission.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://pub.towardsai.net/speech-to-text-with-wav2vec-2-0-b21c1e1ad701)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Easy Speech-to-Text with Python](/2020/06/easy-speech-text-python.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 进行简单的语音转文本](/2020/06/easy-speech-text-python.html)'
 - en: '[Getting Started with 5 Essential Natural Language Processing Libraries](/2021/02/getting-started-5-essential-nlp-libraries.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[入门 5 个必备的自然语言处理库](/2021/02/getting-started-5-essential-nlp-libraries.html)'
 - en: '[Hugging Face Transformers Package – What Is It and How To Use It](/2021/02/hugging-face-transformer-basics.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Hugging Face Transformers 包 – 这是什么，如何使用](/2021/02/hugging-face-transformer-basics.html)'
 - en: '* * *'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-49
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Build a Text-to-Speech Converter with Python in 5 Minutes](https://www.kdnuggets.com/2022/09/build-texttospeech-converter-python-5-minutes.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 在 5 分钟内构建文本转语音转换器](https://www.kdnuggets.com/2022/09/build-texttospeech-converter-python-5-minutes.html)'
 - en: '[The Evolution of Speech Recognition Metrics](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[语音识别指标的发展](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)'
 - en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 BERT 对长文本进行分类](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
 - en: '[Approaches to Text Summarization: An Overview](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本摘要的方法概述](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)'
 - en: '[Getting Started with Automated Text Summarization](https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动化文本摘要入门](https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html)'
 - en: '[What is Text Classification?](https://www.kdnuggets.com/2022/07/text-classification.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是文本分类？](https://www.kdnuggets.com/2022/07/text-classification.html)'

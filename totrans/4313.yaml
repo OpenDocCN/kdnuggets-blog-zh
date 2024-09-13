@@ -1,595 +1,920 @@
 - en: Are You Still Using Pandas to Process Big Data in 2021? Here are two better
     options
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 你还在用 Pandas 处理大数据吗？这里有两个更好的选择
 - en: 原文：[https://www.kdnuggets.com/2021/03/pandas-big-data-better-options.html](https://www.kdnuggets.com/2021/03/pandas-big-data-better-options.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/03/pandas-big-data-better-options.html](https://www.kdnuggets.com/2021/03/pandas-big-data-better-options.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Roman Orac](https://www.linkedin.com/in/romanorac/), Data Scientist**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Roman Orac](https://www.linkedin.com/in/romanorac/)，数据科学家**。'
 - en: '![](../Images/a59832f76b253613a4a80482402949fc.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a59832f76b253613a4a80482402949fc.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '*Photo by [NASA](https://unsplash.com/@nasa?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral).*'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '*照片由 [NASA](https://unsplash.com/@nasa?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*'
 - en: 'I recently wrote two introductory articles about processing Big Data with [Dask](https://towardsdatascience.com/are-you-still-using-pandas-for-big-data-12788018ba1a) and [Vaex](https://towardsdatascience.com/how-to-process-a-dataframe-with-billions-of-rows-in-seconds-c8212580f447) —
     libraries for processing bigger than memory datasets. While writing, a question
     popped up in my mind:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我最近写了两篇关于用 [Dask](https://towardsdatascience.com/are-you-still-using-pandas-for-big-data-12788018ba1a) 和 [Vaex](https://towardsdatascience.com/how-to-process-a-dataframe-with-billions-of-rows-in-seconds-c8212580f447) 处理大数据的入门文章——这些库用于处理超出内存的数据集。在写作过程中，我心里产生了一个问题：
 - en: '***Can these libraries really process bigger than memory datasets, or is it
     all just a sales slogan?***'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '***这些库真的能处理超出内存的数据集吗，还是仅仅是销售口号？***'
 - en: This intrigued meto do a practical experiment with Dask and Vaex and try to
     process a bigger than memory dataset. The dataset was so big that you cannot even
     open it with pandas.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 这让我产生了用 Dask 和 Vaex 进行实际实验的兴趣，尝试处理一个超出内存的数据集。数据集大到连 Pandas 都无法打开。
 - en: What do I mean by Big Data?
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我所说的大数据是什么意思？
 - en: '![](../Images/b05d980e9599377d490e9e4c223bf940.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b05d980e9599377d490e9e4c223bf940.png)'
 - en: '*Photo by [ev](https://unsplash.com/@ev?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral).*'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '*照片由 [ev](https://unsplash.com/@ev?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*'
 - en: Big Data is a loosely defined term, which has as many definitions as there are
     hits on Google. In this article, I use the term to describe a dataset that is
     so big that we need specialized software to process it. With Big, I am referring
     to “bigger than the main memory on a single machine.”
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 大数据是一个松散定义的术语，其定义如同 Google 上的点击次数一样多。在本文中，我用这个术语来描述一个如此庞大的数据集，以至于我们需要专业的软件来处理它。这里的“大”指的是“超出单台机器的主内存”。
 - en: '*Definition from Wikipedia:*'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '*维基百科定义：*'
 - en: '*Big data is a field that treats ways to analyze, systematically extract information
     from, or otherwise deal with data sets that are too large or complex to be dealt
     with by traditional data-processing application software.*'
+  id: totrans-20
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*大数据是一个领域，处理分析、系统性提取信息或以其他方式处理数据集的方法，这些数据集太大或复杂，传统的数据处理应用程序软件无法处理。*'
 - en: What are Dask and Vaex?
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Dask 和 Vaex 是什么？
 - en: '![](../Images/e319d9a66acd1c1cb7cdc578de9de774.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e319d9a66acd1c1cb7cdc578de9de774.png)'
 - en: '*Photo by [JESHOOTS.COM](https://unsplash.com/@jeshoots?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral).*'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '*照片由 [JESHOOTS.COM](https://unsplash.com/@jeshoots?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*'
 - en: '**Dask** provides advanced parallelism for analytics, enabling performance
     at scale for the tools you love. This includes numpy, pandas, and sklearn. It
     is open-source and freely available. It uses existing Python APIs and data structures
     to make it easy to switch between Dask-powered equivalents.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Dask** 提供了先进的并行处理分析能力，使你喜爱的工具在规模上表现优异。这包括numpy、pandas和sklearn。它是开源的，并且免费提供。它使用现有的Python
+    API和数据结构，方便你在Dask驱动的等效工具之间切换。'
 - en: '**Vaex** is a high-performance Python library for lazy Out-of-Core DataFrames
     (similar to Pandas) to visualize and explore big tabular datasets. It can calculate
     basic statistics for more than a billion rows per second. It supports multiple
     visualizations allowing interactive exploration of big data.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Vaex** 是一个高性能的Python库，用于懒加载的Out-of-Core DataFrames（类似于Pandas），用于可视化和探索大型表格数据集。它可以每秒计算超过十亿行的基本统计数据。它支持多种可视化，允许对大数据进行交互式探索。'
 - en: Dask and Vaex Dataframes are not fully compatible with Pandas Dataframes, but
     some most common “data wrangling” operations are supported by both tools. Dask
     is more focused on scaling the code to compute clusters, while Vaex makes it easier
     to work with large datasets on a single machine.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask和Vaex Dataframes与Pandas Dataframes并不完全兼容，但一些最常见的“数据整理”操作都被这两种工具所支持。Dask更专注于将代码扩展到计算集群，而Vaex则使在单台机器上处理大型数据集变得更加容易。
 - en: The Experiment
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实验
 - en: '![](../Images/4da59230f2fce0a9b76164579c4ad52f.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4da59230f2fce0a9b76164579c4ad52f.png)'
 - en: '*Photo by [Louis Reed](https://unsplash.com/@_louisreed?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral).*'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '*由[Louis Reed](https://unsplash.com/@_louisreed?utm_source=medium&utm_medium=referral)拍摄，发布在[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)上的照片。*'
 - en: I generated two CSV files with 1 million rows and 1000 columns. The size of
     a file was 18.18 GB, which is 36.36 GB combined. Files have random numbers from
     a Uniform distribution between 0 and 100.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我生成了两个包含100万行和1000列的CSV文件。每个文件的大小为18.18 GB，两个文件合计36.36 GB。文件中包含从0到100的均匀分布的随机数。
 - en: '![](../Images/8b82f45e3ed2c9ba9fd4563b24b34750.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8b82f45e3ed2c9ba9fd4563b24b34750.png)'
 - en: '*Two CSV files with random data. Photo made by the author.*'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '*两个包含随机数据的CSV文件。作者拍摄的照片。*'
 - en: '[PRE0]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![](../Images/f3bb04e9acfcf77f4b3132f4998b3bf3.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f3bb04e9acfcf77f4b3132f4998b3bf3.png)'
 - en: '*Head of a file. Photo made by the author.*'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '*文件头。作者拍摄的照片。*'
 - en: The experiment was run on a MacBook Pro with 32 GB of main memory — quite a
     beast. When testing the limits of a pandas Dataframe, I surprisingly found that
     reaching a Memory Error on such a machine is quite a challenge!
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 实验在一台具有32 GB主内存的MacBook Pro上运行——真是一个强大的机器。在测试pandas Dataframe的极限时，我惊讶地发现，在这样的机器上遇到内存错误是相当有挑战性的！
 - en: macOS starts dumping data from the main memory to SSD when the memory is running
     near its capacity. The upper limit for pandas Dataframe was 100 GB of free disk
     space on the machine.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 当内存接近其容量时，macOS会开始将数据从主内存转储到SSD上。pandas Dataframe的上限是机器上100 GB的自由磁盘空间。
 - en: When your Mac needs memory, it will push something that isn’t currently being
     used into a swapfile for temporary storage. When it needs access again, it will
     read the data from the swap file and back into memory.
+  id: totrans-38
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 当你的Mac需要内存时，它会将当前未使用的内容推送到交换文件中进行临时存储。当再次需要访问时，它会从交换文件中读取数据并恢复到内存中。
 - en: I’ve spent some time thinking about how I should address this issue so that
     the experiment would be fair. The first idea that came to my mind was to disable
     swapping so that each library would have only the main memory available — good
     luck with that on macOS. After spending a few hours, I wasn’t able to disable
     swapping.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 我花了一些时间思考如何解决这个问题，以确保实验的公平性。我想到的第一个想法是禁用交换空间，这样每个库只有主内存可用——在macOS上实现这一点真是困难重重。经过几个小时的努力，我无法禁用交换空间。
 - en: The second idea was to use a brute force approach. I’ve filled the SSD to its
     full capacity so that the operating system couldn’t use swap as there was no free
     space left on the device.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二个想法是使用暴力破解的方法。我将SSD填满了它的全部容量，以至于操作系统无法使用交换空间，因为设备上没有剩余空间。
 - en: '![](../Images/5594b5fa18db9949a1b52d09e74538b8.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5594b5fa18db9949a1b52d09e74538b8.png)'
 - en: '*Your disk is almost full notification during the experiment. Photo made by
     the author.*'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '*实验期间的“磁盘几乎已满”通知。作者拍摄的照片。*'
 - en: This worked! pandas couldn’t read two 18 GB files, and Jupyter Kernel crashed.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这有效！pandas无法读取两个18 GB的文件，Jupyter内核崩溃了。
 - en: If I performed this experiment again, I would create a virtual machine with
     less memory. That way, it would be easier to show the limits of these tools.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我再次进行这个实验，我会创建一个内存较少的虚拟机。这样，更容易展示这些工具的限制。
 - en: Can Dask or Vaex help us and process these large files? Which one is faster?
     Let’s find out.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask 或 Vaex 能否帮助我们处理这些大文件？哪个更快？让我们来找出答案。
 - en: Vaex vs. Dask
+  id: totrans-46
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Vaex 与 Dask
 - en: '![](../Images/722af4abc5eb2948aa97ad5840048134.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/722af4abc5eb2948aa97ad5840048134.png)'
 - en: '*Photo by [Frida Bredesen](https://unsplash.com/@fridooh?utm_source=medium&utm_medium=referral) on [Unsplash](https://www.kdnuggets.com/2021/02/data-science-learning-roadmap-2021.html).*'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '*照片由 [Frida Bredesen](https://unsplash.com/@fridooh?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://www.kdnuggets.com/2021/02/data-science-learning-roadmap-2021.html)提供。*'
 - en: 'When designing the experiment, I thought about basic operations when performing
     Data Analysis, like grouping, filtering, and visualizing data. I came up with
     the following operations:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 在设计实验时，我考虑了进行数据分析时的基本操作，如分组、过滤和数据可视化。我提出了以下操作：
 - en: calculating 10th quantile of a column,
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 计算一列的第 10 分位数，
 - en: adding a new column,
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加新列，
 - en: filtering by column,
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 按列过滤，
 - en: grouping by column and aggregating,
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 按列分组并聚合，
 - en: visualizing a column.
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可视化一列。
 - en: 'All of the above operations perform a calculation using a single column, e.g.:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述所有操作都使用单列进行计算，例如：
 - en: '[PRE1]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'So I was intrigued to try an operation, which requires all data to be processed:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此我对尝试一个需要处理所有数据的操作产生了兴趣：
 - en: calculate the sum of all of the columns.
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 计算所有列的总和。
 - en: This can be achieved by breaking down the calculation into smaller chunks. E.g.,
     reading each column separately and calculating the sum, and in the last step calculating
     the overall sum. These types of computational problems are known as [Embarrassingly
     parallel](https://en.wikipedia.org/wiki/Embarrassingly_parallel) — no effort is
     required to separate the problem into separate tasks.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过将计算分解成更小的块可以实现这一点。例如，单独读取每一列并计算总和，最后一步计算整体总和。这类计算问题被称为 [Embarrassingly parallel](https://en.wikipedia.org/wiki/Embarrassingly_parallel) ——
+    不需要费力将问题分解成独立任务。
 - en: Vaex
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Vaex
 - en: '![](../Images/bf4fceb8c4267f23beeb74631c57105a.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bf4fceb8c4267f23beeb74631c57105a.png)'
 - en: '*Photo by [Photos by Lanty](https://unsplash.com/@photos_by_lanty?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral).*'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '*照片由 [Photos by Lanty](https://unsplash.com/@photos_by_lanty?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)提供。*'
 - en: Let’s start with Vaex. The experiment was designed in a way that follows best
     practices for each tool — this is using binary format HDF5 for Vaex. So we need
     to convert CSV files to HDF5 format (The Hierarchical Data Format version 5).
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从 Vaex 开始。实验设计遵循了每个工具的最佳实践——这就是使用 Vaex 的二进制格式 HDF5。因此，我们需要将 CSV 文件转换为 HDF5
+    格式（层次数据格式第 5 版）。
 - en: '[PRE2]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Vaex needed 405 seconds to covert two CSV files (36.36 GB) to two HDF5 files,
     which have 16 GB combined. Conversion from text to binary format reduced the file
     size.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: Vaex 需要 405 秒将两个 CSV 文件（36.36 GB）转换为两个 HDF5 文件（总共 16 GB）。从文本到二进制格式的转换减少了文件大小。
 - en: '**Open HDF5 dataset with Vaex:**'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 Vaex 打开 HDF5 数据集：**'
 - en: '[PRE3]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Vaex needed 1218 seconds to read the HDF5 files. I expected it to be faster
     as Vaex claims near-instant opening of files in binary format.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: Vaex 读取 HDF5 文件花费了 1218 秒。我原本期望它更快，因为 Vaex 声称可以瞬间打开二进制格式的文件。
 - en: '*[From Vaex documentation](https://vaex.readthedocs.io/en/latest/example_io.html#Binary-file-formats):*'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[来自 Vaex 文档](https://vaex.readthedocs.io/en/latest/example_io.html#Binary-file-formats):*'
 - en: '*Opening such data is instantenous regardless of the file size on disk: Vaex
     will just memory-map the data instead of reading it in memory. This is the optimal
     way of working with large datasets that are larger than available RAM.*'
+  id: totrans-70
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*打开此类数据是瞬时的，无论磁盘上的文件大小如何：Vaex 只会将数据映射到内存中，而不是读取到内存中。这是处理比可用 RAM 更大的数据集的最佳方式。*'
 - en: '**Display head with Vaex:**'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 Vaex 显示表头：**'
 - en: '[PRE4]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Vaex needed 1189 seconds to display head. I am not sure why displaying the first
     5 rows of each column took so long.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: Vaex 显示表头花费了 1189 秒。我不确定为什么显示每列的前 5 行需要这么长时间。
 - en: '**Calculate 10th quantile with Vaex:**'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 Vaex 计算第 10 分位数：**'
 - en: Note, Vaex has percentile_approx function, which calculates an approximation
     of quantile.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，Vaex 具有 percentile_approx 函数，用于计算分位数的近似值。
 - en: '[PRE5]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Vaex needed 0 seconds to calculate the approximation of the 10th quantile for
     the col1 column.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: Vaex 计算 col1 列第 10 分位数的近似值花费了 0 秒。
 - en: '**Add a new column with Vaex:**'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 Vaex 添加新列：**'
 - en: '[PRE6]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Vaex has a concept of virtual columns, which stores an expression as a column.
     It does not take up any memory and is computed on the fly when needed. A virtual
     column is treated just like a normal column. As expected, Vaex needed 0 seconds
     to execute the command above.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: Vaex 有一个虚拟列的概念，它将表达式存储为列。它不占用任何内存，并在需要时动态计算。虚拟列与普通列一样对待。正如预期的那样，Vaex 执行上述命令所需的时间为
+    0 秒。
 - en: '**Filter data with Vaex:**'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 Vaex 过滤数据：**'
 - en: Vaex has a concept of [selections](https://vaex.readthedocs.io/en/latest/tutorial.html#Selections-and-filtering),
     which I didn’t use as Dask doesn’t support selections, which would make the experiment
     unfair. The filter below is similar to filtering with pandas, except that Vaex
     does not copy the data.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: Vaex 有一个 [选择](https://vaex.readthedocs.io/en/latest/tutorial.html#Selections-and-filtering)
+    的概念，我没有使用，因为 Dask 不支持选择，这会使实验不公平。下面的过滤器类似于用 pandas 进行的过滤，只不过 Vaex 不会复制数据。
 - en: '[PRE7]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Vaex needed 0 seconds to execute the filter above.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: Vaex 执行上述过滤器所需的时间为 0 秒。
 - en: '**Grouping and aggregating data with Vaex:**'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 Vaex 进行数据分组和聚合：**'
 - en: 'The command below is slightly different from pandas as it combines grouping
     and aggregation. The command groups the data by col1_binary and calculate the
     mean for col3:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的命令与 pandas 稍有不同，因为它结合了分组和聚合。该命令按 col1_binary 对数据进行分组，并计算 col3 的均值：
 - en: '[PRE8]'
+  id: totrans-87
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![](../Images/581272a415640561ab96338e7ae15211.png)'
+  id: totrans-88
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/581272a415640561ab96338e7ae15211.png)'
 - en: '*Calculating mean with Vaex. Photo made by the author.*'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 Vaex 计算均值。照片由作者拍摄。*'
 - en: Vaex needed 0 seconds to execute the command above.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: Vaex 执行上述命令所需的时间为 0 秒。
 - en: '**Visualize the histogram:**'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '**可视化直方图：**'
 - en: Visualization with bigger datasets is problematic as traditional tools for data
     analysis are not optimized to handle them. Let’s try if we can make a histogram
     of col3 with Vaex.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用更大数据集进行可视化是有问题的，因为传统的数据分析工具未针对处理这些数据集进行优化。让我们尝试用 Vaex 制作 col3 的直方图。
 - en: '[PRE9]'
+  id: totrans-93
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![](../Images/5bf52454450d54aebabc992f73988d29.png)'
+  id: totrans-94
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5bf52454450d54aebabc992f73988d29.png)'
 - en: '*Visualizing data with Vaex. Photo made by the author.*'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用 Vaex 可视化数据。照片由作者拍摄。*'
 - en: Vaex needed 0 seconds to display the plot, which was surprisingly fast.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: Vaex 显示图表所需的时间为 0 秒，这速度令人惊讶。
 - en: '**Calculate the sum of all columns**'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '**计算所有列的总和**'
 - en: Memory is not an issue when processing a single column at a time. Let’s try
     to calculate the sum of all the numbers in the dataset with Vaex.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 在一次处理单列时，内存不是问题。让我们尝试用 Vaex 计算数据集中所有数字的总和。
 - en: '[PRE10]'
+  id: totrans-99
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Vaex needed 40 seconds to calculate the sum of all columns.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: Vaex 需要 40 秒计算所有列的总和。
 - en: Dask
+  id: totrans-101
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Dask
 - en: '![](../Images/d913642addcb5e4a15d313d4664e79b5.png)'
+  id: totrans-102
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d913642addcb5e4a15d313d4664e79b5.png)'
 - en: '*Photo by [Kelly Sikkema](https://unsplash.com/@kellysikkema?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral).*'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '*照片由 [Kelly Sikkema](https://unsplash.com/@kellysikkema?utm_source=medium&utm_medium=referral)
+    贡献，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*'
 - en: Now, let’s repeat the operations above but with Dask. The Jupyter Kernel was
     restarted before running Dask commands.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们用 Dask 重复以上操作。Jupyter 内核在运行 Dask 命令之前已重新启动。
 - en: Instead of reading CSV files directly with Dask’s read_csv function, we convert
     the CSV files to HDF5 to make the experiment fair.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将 CSV 文件转换为 HDF5，以使实验公平，而不是直接使用 Dask 的 read_csv 函数读取 CSV 文件。
 - en: '[PRE11]'
+  id: totrans-106
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Dask needed 763 seconds for conversion. Let me know in the comments if there
     is a faster way to convert the data with Dask. I tried to read the HDF5 files
     that were converted with Vaex with no luck.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask 需要 763 秒进行转换。如果你知道更快的转换方法，请在评论中告诉我。我尝试读取用 Vaex 转换的 HDF5 文件但没有成功。
 - en: '*[Best practices with Dask](https://docs.dask.org/en/latest/dataframe-best-practices.html#store-data-in-apache-parquet-format):*'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[Dask 的最佳实践](https://docs.dask.org/en/latest/dataframe-best-practices.html#store-data-in-apache-parquet-format):*'
 - en: '*HDF5 is a popular choice for Pandas users with high performance needs. We
     encourage Dask DataFrame users to store and load data using Parquet instead.*'
+  id: totrans-109
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*HDF5 是 Pandas 用户在高性能需求下的热门选择。我们鼓励 Dask DataFrame 用户使用 Parquet 存储和加载数据。*'
 - en: '**Open HDF5 dataset with Dask:**'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '**用 Dask 打开 HDF5 数据集：**'
 - en: '[PRE12]'
+  id: totrans-111
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Dask needed 0 seconds to open the HDF5 file. This is because I didn’t explicitly
     run the compute command, which would actually read the file.
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask 需要 0 秒打开 HDF5 文件。这是因为我没有明确运行计算命令，这实际上会读取文件。
 - en: '**Display head with Dask:**'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '**用 Dask 显示头部：**'
 - en: '[PRE13]'
+  id: totrans-114
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Dask needed 9 seconds to output the first 5 rows of the file.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask 需要 9 秒钟输出文件的前 5 行。
 - en: '**Calculate the 10th quantile with Dask:**'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 Dask 计算第 10 个分位数：**'
 - en: Dask has a quantile function, which calculates actual quantile, not an approximation.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask有一个分位数函数，它计算实际分位数，而不是近似值。
 - en: '[PRE14]'
+  id: totrans-118
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: Dask wasn’t able to calculate quantile as Juptyter Kernel crashed.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask无法计算分位数，因为Jupyter Kernel崩溃了。
 - en: '**Define a new column with Dask:**'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用Dask定义新列：**'
 - en: The function below uses the quantile function to define a new binary column.
     Dask wasn’t able to calculate it because it uses quantile.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的函数使用分位数函数定义一个新的二进制列。Dask无法计算，因为它使用了分位数。
 - en: '[PRE15]'
+  id: totrans-122
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '**Filter data with Dask:**'
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用Dask过滤数据：**'
 - en: '[PRE16]'
+  id: totrans-124
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: The command above needed 0 seconds to execute as Dask uses the delayed execution
     paradigm.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的命令执行了0秒，因为Dask使用延迟执行范式。
 - en: '**Grouping and aggregating data with Dask:**'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用Dask对数据进行分组和聚合：**'
 - en: '[PRE17]'
+  id: totrans-127
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: Dask wasn’t able to group and aggregate the data.
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask无法对数据进行分组和聚合。
 - en: '**Visualize the histogram of col3:**'
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: '**可视化col3的直方图：**'
 - en: '[PRE18]'
+  id: totrans-130
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: Dask wasn’t able to visualize the data.
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask无法可视化数据。
 - en: '**Calculate the sum of all columns:**'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '**计算所有列的总和：**'
 - en: '[PRE19]'
+  id: totrans-133
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: Dask wasn’t able to sum all the data.
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask无法对所有数据进行求和。
 - en: Results
+  id: totrans-135
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结果
 - en: The table below shows the execution times of the Vaex vs. Dask experiment. NA
     means that the tool couldn’t process the data, and Jupyter Kernel crashed.
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 下表显示了Vaex与Dask实验的执行时间。NA表示该工具无法处理数据，Jupyter Kernel崩溃。
 - en: '![](../Images/aa55cde9fad098a6a6a7f56d384a39f0.png)'
+  id: totrans-137
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/aa55cde9fad098a6a6a7f56d384a39f0.png)'
 - en: '*Summary of execution times in the experiment. Photo made by the author.*'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: '*实验中的执行时间总结。照片由作者提供。*'
 - en: Conclusion
+  id: totrans-139
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: '![](../Images/cfd642a6a0627b6902b4f66e752a8bb1.png)'
+  id: totrans-140
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cfd642a6a0627b6902b4f66e752a8bb1.png)'
 - en: '*Photo by [Joshua Golde](https://unsplash.com/@joshgmit?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral).*'
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: '*照片由 [Joshua Golde](https://unsplash.com/@joshgmit?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*'
 - en: Vaex requires conversion of CSV to HDF5 format, which doesn’t bother me as you
     can go to lunch, come back, and the data will be converted. I also understand
     that in harsh conditions (like in the experiment) with little or no main memory
     reading data will take longer.
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: Vaex需要将CSV转换为HDF5格式，这对我来说没问题，因为你可以去吃午餐，回来时数据就会被转换。我也理解，在恶劣条件下（如实验中）主内存不足或没有主内存的情况下，读取数据将需要更长时间。
 - en: What I don’t understand is the time that Vaex needed to display the head of
     the file (1189 seconds for the first 5 rows!). Other operations in Vaex are heavily
     optimized, which enables us to do interactive data analysis on bigger than main
     memory datasets.
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 我不明白的是Vaex显示文件头部所需的时间（前5行需要1189秒！）。Vaex中的其他操作经过了大量优化，使我们能够对大于主内存的数据集进行交互式数据分析。
 - en: I kinda expected the problems with Dask as it is more optimized for compute
     clusters instead of a single machine. Dask is built on top of pandas, which means
     that operations that are slow in pandas, stay slow in Dask.
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 我有点预期Dask会出现问题，因为它更优化用于计算集群而非单台机器。Dask建立在pandas之上，这意味着在pandas中缓慢的操作在Dask中仍然缓慢。
 - en: The winner of the experiment is clear. Vaex was able to process bigger than
     the main memory file on a laptop while Dask couldn’t. This experiment is specific
     as I am testing performance on a single machine, not a compute cluster.
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 实验的赢家已经明确。Vaex能够处理大于主内存的文件，而Dask不能。这个实验是具体的，因为我是在单台机器上测试性能，而不是计算集群。
 - en: '[Original](https://towardsdatascience.com/are-you-still-using-pandas-to-process-big-data-in-2021-850ab26ad919).
     Reposted with permission.'
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/are-you-still-using-pandas-to-process-big-data-in-2021-850ab26ad919)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Pandas on Steroids: End to End Data Science in Python with Dask](https://www.kdnuggets.com/2020/11/pandas-steroids-dask-python-data-science.html)'
+  id: totrans-148
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用Dask进行全流程数据科学的Pandas升级版](https://www.kdnuggets.com/2020/11/pandas-steroids-dask-python-data-science.html)'
 - en: '[Why and How to Use Dask with Big Data](https://www.kdnuggets.com/2020/04/dask-big-data.html)'
+  id: totrans-149
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为何及如何在大数据中使用Dask](https://www.kdnuggets.com/2020/04/dask-big-data.html)'
 - en: '[Good-bye Big Data. Hello, Massive Data!](https://www.kdnuggets.com/2020/10/sqream-massive-data.html)'
+  id: totrans-150
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[告别大数据。你好，大规模数据！](https://www.kdnuggets.com/2020/10/sqream-massive-data.html)'
 - en: More On This Topic
+  id: totrans-151
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  id: totrans-152
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
 - en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  id: totrans-153
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[建立一个强大的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
 - en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  id: totrans-154
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
 - en: '[Best Architecture for Your Text Classification Task: Benchmarking…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
+  id: totrans-155
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本分类任务的最佳架构：基准测试…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
 - en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个初学者数据科学家都应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
