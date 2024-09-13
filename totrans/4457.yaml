@@ -166,11 +166,13 @@
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于数据是分区加载的，一些 Pandas 函数如 `sort_values()` 可能会失败。解决方法是使用 `nlargest()` 函数。
 - en: Dask Clusters
   id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Dask 集群
 - en: Parallel computation is key in Dask, as it allows one to run computations on
     multiple cores. Dask provides a machine scheduler that works on a single machine.
     It does not scale. It also offers a distributed scheduler that can scale to multiple
@@ -178,6 +180,7 @@
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 并行计算是 Dask 的关键，因为它允许在多个核心上运行计算。Dask 提供了一个在单台计算机上工作的机器调度器。它不具备扩展性。它还提供了一个可以扩展到多台计算机的分布式调度器。
 - en: Using `dask.distributed` requires that you set up a `Client`. This should be
     the first thing you do if you intend to use `dask.distributed` in your analysis.
     It offers low latency, data locality, data sharing between the workers, and is
@@ -185,6 +188,7 @@
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 `dask.distributed` 需要你设置一个 `Client`。如果你打算在分析中使用 `dask.distributed`，这应该是你首先做的事情。它提供了低延迟、数据本地性、工作节点之间的数据共享，并且易于设置。
 - en: '[PRE3]'
   id: totrans-29
   prefs: []
@@ -194,22 +198,26 @@
   id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5c70485c72f6d940cbc7583df741811a.png)'
 - en: Using `dask.distributed` is advantageous even on a single machine, because it
     offers some diagnostic features via a dashboard.
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使在单台机器上使用 `dask.distributed` 也是有利的，因为它通过仪表板提供了一些诊断功能。
 - en: Failure to declare a `Client` will leave you using the single machine scheduler
     by default. It provides parallelism on a single computer by using processes or
     threads.
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果未声明 `Client`，默认将使用单机调度器。它通过使用进程或线程在单台计算机上提供并行性。
 - en: Dask ML
   id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Dask ML
 - en: Dask also enables you to perform machine learning training and prediction in
     a parallel manner. The goal of `dask-ml` is to offer machine learning that’s scalable.
     When you declare `n_jobs = -1` in scikit-learn, you can run your computations
@@ -220,15 +228,20 @@
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask 还使你能够以并行方式进行机器学习训练和预测。`dask-ml` 的目标是提供可扩展的机器学习。当你在 scikit-learn 中声明 `n_jobs
+    = -1` 时，你可以并行运行计算。Dask 利用这一能力来使你能够在集群中分配计算。这是通过 [joblib](https://joblib.readthedocs.io/en/latest/)
+    实现的，该包允许 Python 中的并行处理和管道化。使用 Dask ML，你可以实现 scikit-learn 模型以及其他库，如 XGboost。
 - en: This is what a simple implementation would look like.
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是简单实现的样子。
 - en: First import `train_test_split` as usual for splitting your data into training
     and testing sets.
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先像往常一样导入 `train_test_split`，用于将数据分成训练集和测试集。
 - en: '[PRE4]'
   id: totrans-37
   prefs: []
@@ -238,6 +251,7 @@
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，导入你想使用的模型并实例化它。
 - en: '[PRE5]'
   id: totrans-39
   prefs: []
@@ -247,6 +261,7 @@
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后你需要导入 `joblib` 以启用并行计算。
 - en: '[PRE6]'
   id: totrans-41
   prefs: []
@@ -256,6 +271,7 @@
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，使用并行后端运行你的训练和预测。
 - en: '[PRE7]'
   id: totrans-43
   prefs: []
@@ -268,11 +284,13 @@
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 机器学习正迅速接近数据采集地点——边缘设备。[订阅 Fritz AI 新闻通讯以了解更多关于这一过渡以及如何帮助扩展你的业务。](https://www.fritz.ai/newsletter?utm_campaign=fritzai-newsletter-scale6&utm_source=heartbeat)
 - en: Limitations and Memory Usage
   id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 限制和内存使用
 - en: Individual tasks in Dask can’t run in parallel. The workers are Python processes
     that inherit all the advantages and disadvantages of Python computations. Care
     should also be taken when working in a distributed environment to ensure data
@@ -280,6 +298,7 @@
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask 中的单个任务不能并行运行。工作节点是继承了 Python 计算的所有优缺点的 Python 进程。在分布式环境中工作时，还应注意确保数据安全和隐私。
 - en: Dask has a central scheduler that tracks data on worker nodes and on the cluster.
     This scheduler also controls the freeing of data from the cluster. Once a task
     is completed it clears it from the memory in order to free up memory for other
@@ -288,6 +307,8 @@
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask 有一个中央调度器，用于跟踪工作节点和集群上的数据。这个调度器还控制从集群中释放数据。一旦任务完成，它会从内存中清除数据，以释放内存供其他任务使用。如果某个
+    `client` 需要某些数据，或者它对正在进行的计算很重要，它会保留在内存中。
 - en: Another Dask limitation is that it doesn’t implement all functions in Pandas.
     The Pandas interface is large, so Dask doesn’t implement it in its entirety. This
     means that trying some of these operations on Dask can be an uphill climb. Also,
