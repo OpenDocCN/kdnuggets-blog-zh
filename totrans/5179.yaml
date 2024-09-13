@@ -1,65 +1,95 @@
 - en: Build a synthetic data pipeline using Gretel and Apache Airflow
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Gretel 和 Apache Airflow 构建合成数据管道
 - en: 原文：[https://www.kdnuggets.com/2021/09/build-synthetic-data-pipeline-gretel-apache-airflow.html](https://www.kdnuggets.com/2021/09/build-synthetic-data-pipeline-gretel-apache-airflow.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/09/build-synthetic-data-pipeline-gretel-apache-airflow.html](https://www.kdnuggets.com/2021/09/build-synthetic-data-pipeline-gretel-apache-airflow.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Drew Newberry](https://www.linkedin.com/in/drew-newberry/), Software
     Engineer at Gretel.ai**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Drew Newberry](https://www.linkedin.com/in/drew-newberry/)，Gretel.ai
+    的软件工程师**'
 - en: '![Build a synthetic data pipeline using Gretel and Apache Airflow](../Images/29acd8e3a97b7f0238c65040f5ef4354.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Gretel 和 Apache Airflow 构建合成数据管道](../Images/29acd8e3a97b7f0238c65040f5ef4354.png)'
 - en: Hey folks, my name is Drew, and I'm a software engineer here at Gretel. I've
     recently been thinking about patterns for integrating Gretel APIs into existing
     tools so that it's easy to build data pipelines where security and customer privacy
     are first-class features, not just an afterthought or box to check.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 大家好，我是 Drew，我是 Gretel 的一名软件工程师。我最近一直在思考如何将 Gretel API 集成到现有工具中的模式，以便轻松构建安全性和客户隐私为首要特性的数据管道，而不仅仅是事后的考虑或需要打勾的选项。
 - en: One data engineering tool that is popular amongst Gretel engineers and customers
     is Apache Airflow. It also happens to work great with Gretel. In this blog post,
     we'll show you how to build a synthetic data pipeline using Airflow, Gretel and
     PostgreSQL. Let's jump in!
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Gretel 的工程师和客户中，Apache Airflow 是一个很受欢迎的数据工程工具。它也与 Gretel 配合得很好。在这篇博客文章中，我们将展示如何使用
+    Airflow、Gretel 和 PostgreSQL 构建一个合成数据管道。让我们开始吧！
 - en: What is Airflow
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 什么是 Airflow
 - en: '[Airflow](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/index.html) is
     a workflow automation tool commonly used to build data pipelines. It enables data
     engineers or data scientists to programmatically define and deploy these pipelines
     using Python and other familiar constructs. At the core of Airflow is the concept
     of a DAG, or directed acyclic graph. An Airflow DAG provides a model and set of
     APIs for defining pipeline components, their dependencies and execution order.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Airflow](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/index.html)
+    是一个常用于构建数据管道的工作流自动化工具。它使数据工程师或数据科学家能够使用 Python 和其他熟悉的构造程序化地定义和部署这些管道。Airflow 的核心概念是
+    DAG，即有向无环图。Airflow DAG 提供了一个模型和一组 API，用于定义管道组件、它们的依赖关系和执行顺序。'
 - en: 'You might find Airflow pipelines replicating data from a product database into
     a data warehouse. Other pipelines might execute queries that join normalized data
     into a single dataset suitable for analytics or modeling. Yet another pipeline
     might publish a daily report aggregating key business metrics. A common theme
     shared amongst these use cases: coordinating the movement of data across systems.
     This is where Airflow shines.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能会发现 Airflow 管道将数据从产品数据库复制到数据仓库。其他管道可能会执行将规范化数据连接到一个适合分析或建模的单一数据集的查询。还有的管道可能会发布每日报告，汇总关键业务指标。这些用例的共同主题是：协调跨系统的数据流动。这正是
+    Airflow 擅长的地方。
 - en: Leveraging Airflow and its rich ecosystem of [integrations](https://registry.astronomer.io/),
     data engineers and scientists can orchestrate any number of disparate tools or
     services into a single unified pipeline that is easy to maintain and operate.
     With an understanding of these integration capabilities, we’ll now start talking
     about how Gretel might be integrated into an Airflow pipeline to improve common
     data ops workflows.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 利用 Airflow 及其丰富的 [集成](https://registry.astronomer.io/) 生态系统，数据工程师和科学家可以将任意数量的异构工具或服务编排成一个易于维护和操作的统一管道。了解这些集成功能后，我们将开始讨论
+    Gretel 如何集成到 Airflow 管道中，以改进常见的数据操作工作流程。
 - en: How does Gretel fit in?
+  id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Gretel 如何融入其中？
 - en: At Gretel, our mission is to make data easier and safer to work with. Talking
     to customers, one pain point we often hear about is the time and effort required
     to get data scientists access to sensitive data. Using[ Gretel Synthetics](https://gretel.ai/synthetics),
@@ -67,78 +97,114 @@
     copy of the dataset. By integrating Gretel with Airflow, it’s possible to create
     self-serve pipelines that make it easy for data scientists to quickly get the
     data they need without requiring a data engineer for every new data request.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Gretel，我们的使命是让数据处理变得更加简单和安全。在与客户交流时，我们经常听到的一个痛点是，获取敏感数据所需的时间和精力。通过使用[ Gretel
+    Synthetics](https://gretel.ai/synthetics)，我们可以通过生成数据集的合成副本来减少处理敏感数据的风险。通过将 Gretel
+    与 Airflow 集成，可以创建自助服务管道，使数据科学家能够快速获取所需的数据，而不需要每个新数据请求都依赖数据工程师。
 - en: To demonstrate these capabilities, we’ll build an ETL pipeline that extracts
     user activity features from a database, generates a synthetic version of the dataset,
     and saves the dataset to S3\. With the synthetic dataset saved in S3, it can then
     be used by data scientists for downstream modeling or analysis without compromising
     customer privacy.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了演示这些功能，我们将构建一个 ETL 管道，该管道从数据库中提取用户活动特征，生成数据集的合成版本，并将数据集保存到 S3。将合成数据集保存到 S3
+    后，它可以被数据科学家用于下游建模或分析，而不会影响客户隐私。
 - en: To kick things off, let’s first take a bird’s eye view of the pipeline. Each
     node in this diagram represents a pipeline step, or “task” in Airflow terms.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们从鸟瞰图开始了解管道。图中的每个节点代表一个管道步骤，或 Airflow 术语中的“任务”。
 - en: '![](../Images/9776c937553639c4bd8886936d454f38.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9776c937553639c4bd8886936d454f38.png)'
 - en: '*Example Gretel synthetics pipeline on Airflow.*'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '*示例 Gretel 合成管道在 Airflow 上。*'
 - en: 'We can break the pipeline up into 3 stages, similar to what you might find
     in an ETL pipeline:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以将管道分为三个阶段，这类似于你在 ETL 管道中可能遇到的情况：
 - en: '**Extract** - The extract_features task will query a database, and transform
     the data into a set of features that can be used by data scientists for building
     models.'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**提取** - extract_features 任务将查询数据库，并将数据转换为数据科学家可以用来构建模型的特征集。'
 - en: '**Synthesize** - generate_synthetic_features will take the extracted features
     as input, train a synthetic model, and then generate a synthetic set of features
     using Gretel APIs and cloud services.'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**合成** - generate_synthetic_features 将提取的特征作为输入，训练一个合成模型，然后使用 Gretel API 和云服务生成合成特征集。'
 - en: ‍**Load** - upload_synthetic_features saves the synthetic set of features to
     S3 where it can be ingested into any downstream model or analysis.
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**加载** - upload_synthetic_features 将合成特征集保存到 S3 中，在那里可以被下游模型或分析程序使用。'
 - en: In the next few sections we’ll dive into each of these three steps in greater
     detail. If you wish to follow along with each code sample, you can head over to [gretelai/gretel-airflow-pipelines](https://github.com/gretelai/gretel-airflow-pipelines) and
     download all the code used in this blog post. The repo also contains instructions
     you can follow to start an Airflow instance and run the pipeline end to end.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 在接下来的几个部分，我们将更详细地探讨这三个步骤。如果你希望跟随每个代码示例，你可以前往 [gretelai/gretel-airflow-pipelines](https://github.com/gretelai/gretel-airflow-pipelines) 下载本博客文章中使用的所有代码。该仓库还包含启动
+    Airflow 实例和运行整个管道的说明。
 - en: Additionally, it may be helpful to view the Airflow pipeline in its entirety,
     before we dissect each component, [dags/airbnb_user_bookings.py](https://github.com/gretelai/gretel-airflow-pipelines/blob/main/dags/airbnb_user_bookings.py).
     The code snippets in the following sections are extracted from the linked user
     booking pipeline.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，在我们剖析每个组件之前，查看整个 Airflow 管道可能会很有帮助，[dags/airbnb_user_bookings.py](https://github.com/gretelai/gretel-airflow-pipelines/blob/main/dags/airbnb_user_bookings.py)。以下部分的代码片段是从链接的用户预订管道中提取的。
 - en: Extract Features
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 提取特征
 - en: The first task, extract_features is responsible for extracting raw data from
     the source database and transforming it into a set of features. This is a common [feature
     engineering](https://en.wikipedia.org/wiki/Feature_engineering) problem you might
     find in any machine learning or analytics pipeline.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个任务，extract_features 负责从源数据库中提取原始数据并将其转换为特征集。这是任何机器学习或分析管道中可能遇到的常见[特征工程](https://en.wikipedia.org/wiki/Feature_engineering)问题。
 - en: In our example pipeline we will provision a PostgreSQL database and load it
     with booking data from an [Airbnb Kaggle Competition](https://www.kaggle.com/c/airbnb-recruiting-new-user-bookings).
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的示例管道中，我们将配置一个 PostgreSQL 数据库，并从 [Airbnb Kaggle 竞赛](https://www.kaggle.com/c/airbnb-recruiting-new-user-bookings)
+    中加载预订数据。
 - en: This dataset contains two tables, Users and Sessions. Sessions contains a foreign
     key reference, user_id. Using this relationship, we’ll create a set of features
     containing various booking metrics aggregated by user. The following figure represents
     the SQL query used to build the features.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个数据集包含两个表格，**Users** 和 **Sessions**。**Sessions** 包含一个外键引用，`user_id`。利用这种关系，我们将创建一个特征集，包含按用户聚合的各种预订指标。下图展示了用于构建这些特征的
+    SQL 查询。
 - en: '[PRE0] WITH session_features_by_user AS (    SELECT      user_id,      count(*)
     AS number_of_actions_taken,      count(DISTINCT action_type) AS number_of_unique_actions,      round(avg(secs_elapsed))
     AS avg_session_time_seconds,      round(max(secs_elapsed)) AS max_session_time_seconds,      round(min(secs_elapsed))
@@ -159,5 +225,26 @@
     [PRE5] feature_path = extract_features(  "/opt/airflow/dags/sql/session_rollups__by_user.sql"      )  synthetic_data
     = generate_synthetic_features(feature_path)  upload_synthetic_features(synthetic_data)
     [PRE6]`'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE0] WITH session_features_by_user AS (    SELECT      user_id,      count(*)
+    AS number_of_actions_taken,      count(DISTINCT action_type) AS number_of_unique_actions,      round(avg(secs_elapsed))
+    AS avg_session_time_seconds,      round(max(secs_elapsed)) AS max_session_time_seconds,      round(min(secs_elapsed))
+    AS min_session_time_seconds,      (        SELECT          count(*)        FROM          sessions
+    s        WHERE          s.user_id = user_id          AND s.action_type = ''booking_request'')
+    AS total_bookings      FROM        sessions      GROUP BY        user_id  )  SELECT    u.id
+    AS user_id,    u.gender,    u.age,    u.language,    u.signup_method,    u.date_account_created,    s.number_of_actions_taken,    s.number_of_unique_actions,    s.avg_session_time_seconds,    s.min_session_time_seconds,    s.max_session_time_seconds  FROM    session_features_by_user
+    s    LEFT JOIN users u ON u.id = s.user_id  LIMIT 5000 [PRE1] @task()  def extract_features(sql_file:
+    str) -> str:      context = get_current_context()      sql_query = Path(sql_file).read_text()      key
+    = f"{context[''dag_run''].run_id}_booking_features.csv"      with NamedTemporaryFile(mode="r+",
+    suffix=".csv") as tmp_csv:          postgres.copy_expert(              f"copy
+    ({sql_query}) to stdout with csv header", tmp_csv.name          )          s3.load_file(              filename=tmp_csv.name,              key=key,          )      return
+    key [PRE2] from hooks.gretel import GretelHook     gretel = GretelHook()  project
+    = gretel.get_project() [PRE3] @task()  def generate_synthetic_features(data_source:
+    str) -> str:      project = gretel.get_project()      model = project.create_model_obj(          model_config="synthetics/default",           data_source=s3.download_file(data_source)      )      model.submit_cloud()      poll(model)      return
+    model.get_artifact_link("data_preview") [PRE4] @task()  def upload_synthetic_features(data_set:
+    str):      context = get_current_context()      with open(data_set, "rb") as synth_features:          s3.load_file_obj(              file_obj=synth_features,              key=f"{..._booking_features_synthetic.csv",          )
+    [PRE5] feature_path = extract_features(  "/opt/airflow/dags/sql/session_rollups__by_user.sql"      )  synthetic_data
+    = generate_synthetic_features(feature_path)  upload_synthetic_features(synthetic_data)
+    [PRE6]'
