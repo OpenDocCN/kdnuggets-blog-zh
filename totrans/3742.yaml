@@ -106,6 +106,7 @@
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 首要步骤是将分散在各种网页上的数据整合到一个表格中。这个[文章](https://github.com/yogeshhk/DataFrameChatbot)很好地解释了网络抓取的过程。输出是一个以国家为行、以各个字段为列的表格。
 - en: Now we need to build a natural language interface to fields or cells of this
     table. For query like “What’s the population of China?”, we need to fetch value
     in the cell which is at intersection of a row for “Country==China” and a column
@@ -115,11 +116,14 @@
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们需要构建一个自然语言接口来访问这个表的字段或单元格。对于像“China的总人口是多少？”这样的查询，我们需要获取位于“Country==China”行和名为“Population”的列交叉处的单元格中的值。简单来说，从自然语言查询中，我们需要提取两个实体，“Population作为列”和“China作为行”（在“Country”列中）。这里使用Rasa
+    NLU进行实体提取。
 - en: Entity Extraction
   id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实体提取
 - en: Entity extraction is a process of finding words/tokens in the sentence mapping
     to pre-defined entity types. Named Entity Recognition (NER) is the supervised
     method to extract the entities, using algorithms such as Conditional Random Fields
@@ -127,20 +131,24 @@
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 实体提取是一个在句子中找到映射到预定义实体类型的单词/标记的过程。命名实体识别（NER）是提取实体的监督方法，使用如条件随机场（CRF）等算法。
 - en: To train RASA NLU’s NER, we need to provide training data which has sample sentences
     with entities annotated.  Sample training file is shown in **Figure 2**.
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 要训练RASA NLU的NER，我们需要提供带有注释实体的样本句子的训练数据。**图2**中展示了样本训练文件。
 - en: '![RASA NLU](../Images/8c43ea0be0a268b33fffbf3a3566b153.png)'
   id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![RASA NLU](../Images/8c43ea0be0a268b33fffbf3a3566b153.png)'
 - en: Here “savings” and “yen” are the actual values of the entity types “source account”
     and “currency” respectively.
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里“savings”和“yen”分别是“source account”和“currency”实体类型的实际值。
 - en: Building such training data for the given table, would again be a manual and
     thus a tedious process. The annotation process can be automated by iterating over
     rows and columns of the table . There is no need to provide examples of all the
@@ -149,10 +157,12 @@
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 为给定的表构建这种训练数据，将再次是一个手动的、繁琐的过程。通过对表的行和列进行迭代，注释过程可以自动化。不需要提供所有列或行的示例，因为学到的是抽象模式，而不是单元格中的硬编码实际值。
 - en: 'Code sample for generation of training file can be seen below:'
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成训练文件的代码示例如下：
 - en: '[PRE0]'
   id: totrans-23
   prefs: []
@@ -163,6 +173,7 @@
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管上述仅显示了两种句子格式，但可以添加更多变体。自动生成的NLU训练文件如下：
 - en: '[PRE1]'
   id: totrans-25
   prefs: []
@@ -174,140 +185,173 @@
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用训练数据训练NER模型。当用户查询出现时，模型能够提取“行”和“列”名称。有了这两个信息，就可以在给定的表中定位值。值返回给用户。
 - en: 'Sample conversation workflow is shown below:'
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是样本对话工作流：
 - en: '![Chatbot conversation](../Images/352c7696999f11ca4d0b8612156fe833.png)Source
     code of the chatbot can be found at "[DataFrame Chatbot](https://github.com/yogeshhk/DataFrameChatbot)".'
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '![聊天机器人对话](../Images/352c7696999f11ca4d0b8612156fe833.png)聊天机器人的源代码可以在“[DataFrame
+    Chatbot](https://github.com/yogeshhk/DataFrameChatbot)”找到。'
 - en: Limitations and Future Scope
   id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 限制与未来展望
 - en: 'The chatbot example shown is very simplistic. It can be enhanced further with
     following capabilities:'
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 展示的聊天机器人示例非常简化。它可以通过以下功能进一步增强：
 - en: Queries across multiple tables.
   id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 跨多个表的查询。
 - en: Queries with aggregations and relations, like “Which countries have more than
     100 Million population and GDP per capita less than $1000?”.
   id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 查询带有聚合和关系的，例如“哪些国家人口超过1亿且人均GDP低于$1000？”。
 - en: Partial/Full SQL support ie to convert natural language query into an equivalent
     SQL query.
   id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 部分/完整SQL支持，即将自然语言查询转换为等效的SQL查询。
 - en: Conclusion
   id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: This article demonstrates building of a chatbot to interface with a datatable
     in a user-friendly manner. It has varied applications for the domains where such
     tabular data is available.
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文演示了如何构建一个聊天机器人，以用户友好的方式与数据表进行交互。它在那些提供这种表格数据的领域有多种应用。
 - en: '**Bio: [Yogesh Kulkarni](https://www.linkedin.com/in/yogeshkulkarni)** is a
     Data Science Instructor-Researcher at Yati.io.'
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Yogesh Kulkarni](https://www.linkedin.com/in/yogeshkulkarni)** 是 Yati.io
+    的数据科学讲师兼研究员。'
 - en: '**Related:**'
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Build Your First Chatbot Using Python & NLTK](/2019/05/build-chatbot-python-nltk.html)'
   id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 和 NLTK 构建你的第一个聊天机器人](/2019/05/build-chatbot-python-nltk.html)'
 - en: '[TNLP –  Building a Question Answering Model](/2018/04/nlp-question-answering-model.html)'
   id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TNLP –  构建一个问答模型](/2018/04/nlp-question-answering-model.html)'
 - en: '[Using Deep Learning To Extract Knowledge From Job Descriptions](/2017/05/deep-learning-extract-knowledge-job-descriptions.html)'
   id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用深度学习从职位描述中提取知识](/2017/05/deep-learning-extract-knowledge-job-descriptions.html)'
 - en: '* * *'
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-42
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT 工作'
 - en: '* * *'
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
   id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[ChatGPT CLI: Transform Your Command-Line Interface Into ChatGPT](https://www.kdnuggets.com/2023/07/chatgpt-cli-transform-commandline-interface-chatgpt.html)'
   id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ChatGPT CLI：将你的命令行界面转变为 ChatGPT](https://www.kdnuggets.com/2023/07/chatgpt-cli-transform-commandline-interface-chatgpt.html)'
 - en: '[Introducing DataCamps AI-Powered Chat Interface: DataLab](https://www.kdnuggets.com/introducing-datacamps-ai-powered-chat-interface-datalab)'
   id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[介绍 DataCamp 的 AI 驱动聊天界面：DataLab](https://www.kdnuggets.com/introducing-datacamps-ai-powered-chat-interface-datalab)'
 - en: '[N-gram Language Modeling in Natural Language Processing](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)'
   id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理中的 N-gram 语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)'
 - en: '[Natural Language Processing Key Terms, Explained](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)'
   id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理关键术语解释](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)'
 - en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
   id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理任务的数据表示](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
 - en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
   id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用于图像识别和自然语言处理的迁移学习](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
