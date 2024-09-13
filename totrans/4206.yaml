@@ -1,572 +1,882 @@
 - en: Building a Structured Financial Newsfeed Using Python, SpaCy and Streamlit
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Python、SpaCy 和 Streamlit 构建结构化金融新闻源
 - en: 原文：[https://www.kdnuggets.com/2021/09/-structured-financial-newsfeed-using-python-spacy-and-streamlit.html](https://www.kdnuggets.com/2021/09/-structured-financial-newsfeed-using-python-spacy-and-streamlit.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/09/-structured-financial-newsfeed-using-python-spacy-and-streamlit.html](https://www.kdnuggets.com/2021/09/-structured-financial-newsfeed-using-python-spacy-and-streamlit.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/), Data Science
     Instructor | Mentor | YouTuber**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)，数据科学讲师 | 导师
+    | YouTuber**'
 - en: '![Building a Structured Financial Newsfeed Using Python, SpaCy and Streamlit](../Images/525c4bf0536a3f880f235189e8c33d1c.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Python、SpaCy 和 Streamlit 构建结构化金融新闻源](../Images/525c4bf0536a3f880f235189e8c33d1c.png)'
 - en: One of the very interesting and widely used applications of NLP is Named Entity
     Recognition(NER).
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 自然语言处理的一个非常有趣且广泛使用的应用是命名实体识别（NER）。
 - en: Getting insights from raw and unstructured data is of vital importance. Uploading
     a document and getting the important bits of information from it is called information
     retrieval.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 从原始和非结构化数据中获取洞察至关重要。上传文档并从中提取重要信息被称为信息检索。
 - en: Information retrieval has been a major task/challenge in NLP. And NER(or NEL
     — Named Entity Linking) is used in several domains(finance, drugs, e-commerce,
     etc.) for information retrieval purposes.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 信息检索一直是自然语言处理中的一项主要任务/挑战。命名实体识别（或命名实体链接）在多个领域（如金融、药品、电子商务等）中用于信息检索目的。
 - en: In this tutorial post, I’ll show you how you can leverage NEL to develop a custom
     stock market news feed that lists down the buzzing stocks on the internet.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个教程帖子中，我将展示你如何利用 NEL 开发一个自定义的股票市场新闻源，列出互联网上的热门股票。
 - en: Pre-requisites
+  id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 先决条件
 - en: There are no such pre-requisites as such. You might need to have some familiarity
     with python and the basic tasks of NLP like tokenization, POS tagging, dependency
     parsing, et cetera.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 没有特别的先决条件。你可能需要对 Python 和 NLP 的基本任务（如分词、词性标注、依存解析等）有一些了解。
 - en: I’ll cover the important bits in more detail, so even if you’re a complete beginner
     you’ll be able to wrap your head around what’s going on.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将详细介绍重要的部分，所以即使你是完全的初学者，也能理解发生了什么。
 - en: So, let’s get on with it, follow along and you’ll have a minimal stock news
     feed that you can start researching.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，让我们开始吧，跟着做，你将会有一个简洁的股票新闻源，你可以开始研究了。
 - en: '**Tools/setup you’ll need:**'
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '**你需要的工具/设置：**'
 - en: Google Colab for initial testing and exploration of data and the SpaCy library.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Google Colab 用于数据和 SpaCy 库的初步测试和探索。
 - en: VS Code(or any editor) to code the Streamlit application.
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 VS Code（或任何编辑器）来编写 Streamlit 应用程序。
 - en: Source of stock market information(news) on which we’ll perform NER and later
     NEL.
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 股票市场信息（新闻）的来源，我们将对其进行 NER 和后续的 NEL。
 - en: A virtual python environment(I am using conda) along with libraries like Pandas,
     SpaCy, Streamlit, Streamlit-Spacy(if you want to show some SpaCy renders.)
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 需要一个虚拟的 Python 环境（我使用的是 conda），以及 Pandas、SpaCy、Streamlit 和 Streamlit-Spacy（如果你想展示一些
+    SpaCy 渲染结果的话）等库。
 - en: Objective
+  id: totrans-18
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 目标
 - en: The goal of this project is to learn and apply Named Entity Recognition to extract
     important entities(publicly traded companies in our example) and then link each
     entity with some information using a knowledge base(Nifty500 companies list).
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 本项目的目标是学习并应用命名实体识别，提取重要的实体（在我们的示例中为上市公司），然后使用知识库（Nifty500 公司名单）将每个实体与一些信息进行链接。
 - en: We’ll get the textual data from RSS feeds on the internet, extract the names
     of buzzing stocks, and then pull their market price data to test the authenticity
     of the news before taking any position in those stocks.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将从互联网上的 RSS 源获取文本数据，提取热门股票的名称，然后获取这些股票的市场价格数据，以在对这些股票采取任何操作之前测试新闻的真实性。
 - en: 'Note: NER may not be a state-of-the-art problem but it has many applications
     in the industry.'
+  id: totrans-21
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 注意：命名实体识别可能不是最前沿的问题，但在行业中有许多应用。
 - en: 'Moving on to Google Colab for experimentation and testing:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 继续使用 Google Colab 进行实验和测试：
 - en: 'Step 1: Extracting the trending stocks news data'
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第一步：提取热门股票新闻数据
 - en: To get some reliable authentic stock market news, I’ll be using [Economic Times](https://economictimes.indiatimes.com/markets/stocks/rssfeeds/2146842.cms) and [Money
     Control](https://www.moneycontrol.com/rss/buzzingstocks.xml) RSS feeds for this
     tutorial but you can also use/add your country’s RSS feeds or Twitter/Telegram(groups)
     data to make your feed more informative/accurate.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了获得可靠的真实股市新闻，我将使用[Economic Times](https://economictimes.indiatimes.com/markets/stocks/rssfeeds/2146842.cms)和[Money
+    Control](https://www.moneycontrol.com/rss/buzzingstocks.xml) RSS 源进行本教程，但你也可以使用/添加你所在国家的
+    RSS 源或 Twitter/Telegram（群组）数据，以使你的源更具信息性/准确性。
 - en: The opportunities are immense. This tutorial should serve as a stepping stone
     to apply NEL to build apps in different domains solving different kinds of information
     retrieval problems.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 机会是巨大的。本教程应作为应用 NEL 构建不同领域应用程序的垫脚石，解决不同类型的信息检索问题。
 - en: 'If you go on to look at the RSS feed, it looks something like this:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你查看 RSS 源，它看起来像这样：
 - en: '![](../Images/cc1a6f5d622cf5f3e83e7bc7d0f6315a.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cc1a6f5d622cf5f3e83e7bc7d0f6315a.png)'
 - en: '[https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms](https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms)'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms](https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms)'
 - en: Our goal is to get the textual headlines from this RSS feed and then we’ll use
     the SpaCy to extract the main entities from the headlines.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的目标是从这个 RSS 源中获取文本标题，然后使用 SpaCy 提取标题中的主要实体。
 - en: The headlines are present inside the <title> tag of the XML here.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 标题位于 XML 的<title>标签中。
 - en: Firstly, we need to capture the entire XML document and we can use the `**requests**` library
     to do that. Make sure you have these packages installed in your runtime environment
     in colab.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们需要捕获整个 XML 文档，可以使用`**requests**`库来完成。确保你在 colab 的运行时环境中安装了这些包。
 - en: 'You can run the following command to install almost any package right from
     a colab’s code cell:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以运行以下命令来从 colab 的代码单元中安装几乎任何包：
 - en: '[PRE0]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Send a `GET` request at the provided link to capture the XML doc.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 发送一个`GET`请求到提供的链接以获取 XML 文档。
 - en: '[PRE1]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Run the cell to check what you get in the response object.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行单元以检查响应对象中得到的内容。
 - en: 'It should give you a successful response with HTTP code 200 as follows:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 它应该会给你一个带有 HTTP 代码 200 的成功响应，如下所示：
 - en: '![](../Images/32fa6a5235798fcfe47128fcc891a836.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/32fa6a5235798fcfe47128fcc891a836.png)'
 - en: 'Now that you have this response object, we can pass its content to the BeautifulSoup
     class to parse the XML document as follows:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你有了这个响应对象，我们可以将其内容传递给 BeautifulSoup 类来解析 XML 文档，如下所示：
 - en: '[PRE2]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'This should give you all the headlines inside a Python list:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将给你一个包含所有标题的 Python 列表：
 - en: '![](../Images/d243f2acf112117879f8e373ee8221c3.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d243f2acf112117879f8e373ee8221c3.png)'
 - en: Image by author
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Awesome, we have the textual data out of which we will extract the main entities(which
     are publicly traded companies in this case) using NLP.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 太棒了，我们已经得到了文本数据，我们将使用 NLP 从中提取主要实体（在本例中是上市公司）。
 - en: It’s time to put NLP into action.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是将 NLP 应用到实践中的时候了。
 - en: 'Step 2: Extracting entities from the headlines'
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第 2 步：从标题中提取实体
 - en: This is the exciting part. We’ll be using a **pre-trained core language model **from
     the `**spaCy**` library to extract the main entities in a headline.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是激动人心的部分。我们将使用来自`**spaCy**`库的**预训练核心语言模型**来提取标题中的主要实体。
 - en: A little about spaCy and the core models.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于 spaCy 和核心模型的简要介绍。
 - en: '**spaCy** is an open-source NLP library that processes textual data at a superfast
     speed. It is the leading library in NLP research which is being used in enterprise-grade
     applications at scale. spaCy is well-known for scaling with the problem. And it
     supports more than 64 languages and works well with both TensorFlow and PyTorch.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**spaCy**是一个开源 NLP 库，以超快的速度处理文本数据。它是 NLP 研究中的领先库，被广泛用于企业级应用中。spaCy 以其适应问题的能力而闻名，并且支持超过
+    64 种语言，能够很好地与 TensorFlow 和 PyTorch 兼容。'
 - en: Talking about core models, spaCy has two major classes of pretrained language
     models that are trained on different sizes of textual data to give us state-of-the-art
     inferences.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 说到核心模型，spaCy 具有两个主要类别的预训练语言模型，这些模型在不同大小的文本数据上进行训练，以提供最先进的推断。
 - en: Core Models — for general-purpose basic NLP tasks.
+  id: totrans-51
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 核心模型——用于通用的基础 NLP 任务。
 - en: Starter Models — for niche applications that require transfer learning. We can
     leverage the model’s learned weights to fine-tune our custom models without having
     to train the model from scratch.
+  id: totrans-52
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 起始模型——用于需要迁移学习的特定应用程序。我们可以利用模型的学习权重来微调我们的自定义模型，而无需从头开始训练模型。
 - en: Since our use case is basic in this tutorial, we are going to stick with the `en_core_web_sm` core
     model pipeline.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们在这个教程中的用例是基本的，我们将继续使用 `en_core_web_sm` 核心模型管道。
 - en: 'So, let’s load this into our notebook:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，让我们将它加载到笔记本中：
 - en: '[PRE3]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '***Note:*** Colab already has this downloaded for us but if you try to run
     it in your local system, you’ll have to download the model first using the following
     command:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '***注意：*** Colab 已经为我们下载了这个模型，但如果你尝试在本地系统中运行，你需要使用以下命令首先下载模型：'
 - en: '[PRE4]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'en_core_web_sm is basically an English pipeline optimized for CPU which has
     the following components:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '`en_core_web_sm` 基本上是一个针对 CPU 优化的英语管道，具有以下组件：'
 - en: tok2vec — token to vectors(performs tokenization on the textual data),
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: tok2vec — 将令牌转换为向量（对文本数据进行标记化），
 - en: tagger — adds relevant metadata to each token. spaCy makes use of some statistical
     models to predict the part of speech(POS) of each token. More in the [documentation](https://spacy.io/models/en).
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: tagger — 为每个令牌添加相关的元数据。spaCy 利用一些统计模型来预测每个令牌的词性（POS）。更多信息请参见 [文档](https://spacy.io/models/en)。
 - en: parser — dependency parser establishes relationships among the tokens.
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: parser — 依赖解析器在令牌之间建立关系。
 - en: Other components include senter, ner, attribute_ruler, lemmatizer.
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 其他组件包括 senter、ner、attribute_ruler、lemmatizer。
 - en: Now, to test what this model can do for us, I’ll pass a single headline through
     the instantiated model and then check the different parts of a sentence.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，为了测试这个模型能为我们做什么，我会将一个单独的标题传递给实例化的模型，然后检查句子的不同部分。
 - en: '[PRE5]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'The pipeline performs all the tasks from tokenization to NER. Here we have
     the tokens first:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 该管道执行从标记化到命名实体识别（NER）的所有任务。这里我们首先得到令牌：
 - en: '![](../Images/6d2917dbe55b3aaa0813afa881b488a9.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6d2917dbe55b3aaa0813afa881b488a9.png)'
 - en: Image by author
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于作者
 - en: You can look at the tagged part of speech using the `pos_ `attribute.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用 `pos_` 属性查看标记的词性。
 - en: '![](../Images/5efb57780795368a90a99a8bafe56987.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5efb57780795368a90a99a8bafe56987.png)'
 - en: Image by author
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于作者
 - en: Each token is tagged with some metadata. For example, Trade is a Proper Noun,
     Setup is a Noun, `:` is punctuation, so on, and so forth. The entire list of Tags
     is given [here](https://spacy.io/models/en).
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个令牌都带有一些元数据。例如，“Trade”是专有名词，“Setup”是名词，“:`” 是标点符号，等等。所有标签的完整列表可以在 [这里](https://spacy.io/models/en)
+    找到。
 - en: 'And then, you can look at how they are related by looking at the dependency
     graph using `dep_` attribute:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，你可以通过查看依赖图来了解它们之间的关系，使用 `dep_` 属性：
 - en: '![](../Images/45aabe9dbacbb7638e622b37d4f2b7a8.png)'
+  id: totrans-73
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/45aabe9dbacbb7638e622b37d4f2b7a8.png)'
 - en: Image by author
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于作者
 - en: Here, Trade is a Compound, Setup is Root, Nifty is appos(Appositional modifier).
     Again, all the syntactic tags can be found [here](https://spacy.io/models/en).
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里，“Trade”是复合词，“Setup”是根词，“Nifty”是同位语修饰语。再次说明，所有语法标签可以在 [这里](https://spacy.io/models/en)
+    找到。
 - en: 'You can also visualize the relationship dependencies among the tokens using
     the following displacy `render()` method:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以使用以下的 displacy `render()` 方法来可视化令牌之间的关系依赖：
 - en: '[PRE6]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'which will give this graph:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将生成如下图表：
 - en: '![](../Images/aaf67d47e41b6990f01d0a7e67f61cc6.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/aaf67d47e41b6990f01d0a7e67f61cc6.png)'
 - en: Image by author
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于作者
 - en: Entity extraction
+  id: totrans-81
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 实体提取
 - en: 'And to look at the important entities of the sentence, you can pass `**''ent’**` as
     style in the same code:'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 要查看句子的主要实体，你可以在同一代码中将 `**'ent’**` 作为样式传递：
 - en: '![](../Images/aca72aeee53f1c5d7988bf6430bc89e4.png)'
+  id: totrans-83
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/aca72aeee53f1c5d7988bf6430bc89e4.png)'
 - en: Image by author — I used another headline because the one we used above didn’t
     have any entities.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于作者 — 我使用了另一个标题，因为我们上面用的那个没有任何实体。
 - en: We have different tags for different entities like the day has DATE, Glasscoat
     has GPE which can be Countries/Cities/States. We are majorly looking for entities
     that have ORG tag that’ll give us Companies, agencies, institutions, etc.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们对不同的实体有不同的标签，例如“day”有 DATE 标签，“Glasscoat”有 GPE 标签，可以是国家/城市/州。我们主要寻找带有 ORG
+    标签的实体，这些标签能给我们公司、机构、组织等信息。
 - en: We are now capable of extracting entities from the text. Let’s get down to extracting
     the organizations from all the headlines using ORG entities.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在能够从文本中提取实体。让我们来提取所有标题中的组织实体。
 - en: 'This will return a list of all the companies as follows:'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将返回如下的公司列表：
 - en: '![](../Images/ea49df1fea8fe173af6aa627ea237b75.png)'
+  id: totrans-88
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ea49df1fea8fe173af6aa627ea237b75.png)'
 - en: Image by author
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于作者
 - en: So easy, right?
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 很简单，对吧？
 - en: That’s the magic of spaCy now!
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是 spaCy 的魔力！
 - en: The next step is to look up all these companies in a knowledge base to extract
     the right stock symbol for that company and then use libraries like yahoo-finance
     to extract their market details like price, return, etc.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是查找所有这些公司在知识库中，以提取该公司的正确股票符号，然后使用像yahoo-finance这样的库提取市场详情，如价格、收益等。
 - en: Step 3 — Named Entity Linking
+  id: totrans-93
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第三步 — 命名实体链接
 - en: To learn about what stocks are buzzing in the market and get their details on
     your dashboard is the goal for this project.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 了解市场上哪些股票在活跃，并在你的仪表板上获取其详细信息是这个项目的目标。
 - en: We have the company names but in order to get their trading details, we’ll need
     the company’s trading stock symbol.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们有公司名称，但为了获取它们的交易详情，我们需要公司的交易股票符号。
 - en: Since I am extracting the details and news of Indian Companies, I am going to
     use an external database of [Nifty 500 companies(a CSV file).](https://www1.nseindia.com/products/content/equities/indices/nifty_500.htm)
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我在提取印度公司的详细信息和新闻，我将使用[Nifty 500公司（一个CSV文件）](https://www1.nseindia.com/products/content/equities/indices/nifty_500.htm)的外部数据库。
 - en: For every company, we’ll look it up in the list of companies using pandas, and
     then we’ll capture the stock market statistics using the [yahoo-finance ](https://pypi.org/project/yfinance/)library.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于每家公司，我们将使用pandas在公司列表中查找它，然后使用[yahoo-finance](https://pypi.org/project/yfinance/)库捕获股票市场统计数据。
 - en: Image by author
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: One thing that you should notice here is that I’ve added a “.NS” after each
     stock symbol before passing it to the `Ticker` class of the `yfinance` library.
     It is because indian NSE stock symbols are stored with a `.NS` suffix in `yfinance`.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 你应该注意到的一点是，我在将每个股票符号传递给`yfinance`库的`Ticker`类之前，添加了一个“.NS”后缀。这是因为印度NSE股票符号在`yfinance`中以`.NS`后缀存储。
 - en: 'And the buzzing stocks would turn up in a dataframe like below:'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后，流行的股票将会出现在如下的数据框中：
 - en: '![](../Images/8a464b3bde7133a42af081ddc2a1cce0.png)'
+  id: totrans-101
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8a464b3bde7133a42af081ddc2a1cce0.png)'
 - en: Image by author
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Voila! isn’t this great? Such a simple yet profound app that could point you
     in the right direction with the right stocks.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 太好了！这是不是很棒？这样一个简单却深刻的应用程序，可以帮助你找到正确的股票方向。
 - en: Now to make it more accessible, we can create a web application out of the code
     that we have just written using Streamlit.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，为了使其更易于访问，我们可以使用Streamlit将刚刚编写的代码创建为Web应用程序。
 - en: Step 4 — Building a web app using Streamlit
+  id: totrans-105
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 第四步 — 使用Streamlit构建Web应用程序
 - en: It’s time to move to an editor and create a new project and virtual environment
     for the NLP application.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 该是移动到编辑器，创建一个新项目和虚拟环境来进行NLP应用程序的时候了。
 - en: Getting started with Streamlit is super easy for such demo data applications.
     Make sure you have streamlit installed.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 开始使用Streamlit对于这样的演示数据应用程序非常简单。确保你已经安装了streamlit。
 - en: '[PRE7]'
+  id: totrans-108
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Now, let’s create a new file called app.py and start writing functional code
     to get the app ready.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们创建一个名为app.py的新文件，并开始编写功能代码以准备应用程序。
 - en: Import all the required libraries at the top.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 在顶部导入所有所需的库。
 - en: '[PRE8]'
+  id: totrans-111
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Add a title to your application:'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 给你的应用程序添加一个标题：
 - en: '[PRE9]'
+  id: totrans-113
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Test your app by running `streamlit run app.p`y in your terminal. It should
     open up an app in your web browser.
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过在终端中运行`streamlit run app.p`y来测试你的应用程序。它应该会在你的Web浏览器中打开一个应用程序。
 - en: I have added some extra functionality to capture data from multiple sources.
     Now, you can add an RSS feed URL of your choice into the application and the data
     will be processed and the trending stocks will be displayed in a dataframe.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 我添加了一些额外的功能，以从多个来源捕获数据。现在，你可以将你选择的RSS源URL添加到应用程序中，数据将被处理，趋势股票将在数据框中显示出来。
 - en: 'To get access to the entire code base, you can check out my repository here:'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 要访问完整的代码库，你可以查看我的仓库：
 - en: '**[GitHub - dswh/NER_News_Feed](https://github.com/dswh/NER_News_Feed)**'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[GitHub - dswh/NER_News_Feed](https://github.com/dswh/NER_News_Feed)**'
 - en: You can add multiple styling elements, different data sources, and other types
     of processing to make it more efficient and useful.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以添加多个样式元素、不同的数据源和其他类型的处理，以提高其效率和实用性。
 - en: My app in its current state looks like the image in the banner.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 我当前状态下的应用程序看起来像横幅中的图片。
 - en: 'If you want to follow me step-by-step, watch me code this application here:'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想逐步跟随我，请在这里观看我编写这个应用程序的过程：
 - en: Next Steps!
+  id: totrans-121
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 下一步！
 - en: Instead of picking a financial use case, you can also pick any other application
     of your choice. Healthcare, e-commerce, research, and many others. All industries
     require documents to be processed and important entities to be extracted and linked.
     Try out another idea.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了选择一个金融应用案例外，你也可以选择其他你喜欢的应用。医疗保健、电子商务、研究等等。所有行业都需要处理文档并提取和链接重要实体。尝试另一个想法。
 - en: A simple idea is extracting all the important entities of a research paper and
     then creating a knowledge graph of it using the Google Search API.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个简单的想法是提取研究论文中所有重要的实体，然后使用谷歌搜索 API 创建一个知识图谱。
 - en: Also, if you want to take the stock news feed app to another level, you can
     add some trading algorithms to generate buy and sell signals as well.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，如果你想将股票新闻推送应用提升到另一个水平，你还可以添加一些交易算法来生成买卖信号。
 - en: I encourage you to go wild with your imagination.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 我鼓励你放飞你的想象力。
 - en: How you can connect with me!
+  id: totrans-126
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 如何与我联系！
 - en: If you liked this post and would like to see more of such content, you can subscribe
     to [**my newsletter**](https://dswharshit.substack.com/publish/settings#twitter-account)** or **[**my
     YouTube channel**](https://www.youtube.com/channel/UCH-xwLTKQaABNs2QmGxK2bQ) where
     I’ll keep sharing such useful and quick projects that one can build.
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你喜欢这篇文章并想看到更多类似内容，你可以订阅[**我的新闻通讯**](https://dswharshit.substack.com/publish/settings#twitter-account)**或**[**我的
+    YouTube 频道**](https://www.youtube.com/channel/UCH-xwLTKQaABNs2QmGxK2bQ)，我会继续分享这样有用且快捷的项目。
 - en: If you’re someone who is just getting started with programming or want to get
     into data science or ML, you can check out my course at [**WIP Lane Academy**](https://www.wiplane.com/p/foundations-for-data-science-ml)**.**
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你是刚开始编程的人或想进入数据科学或机器学习领域，你可以查看我在[**WIP Lane Academy**](https://www.wiplane.com/p/foundations-for-data-science-ml)**的课程**。
 - en: Thanks to Elliot Gunn.
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢 Elliot Gunn。
 - en: '**Bio: [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)** is an engineer
     with amalgamated experience in web technologies and data science(aka full-stack
     data science). He has mentored over 1000 AI/Web/Data Science aspirants, and is
     designing data science and ML engineering learning tracks. Previously, Harshit
     developed data processing algorithms with research scientists at Yale, MIT, and
     UCLA.'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)** 是一位具有综合网页技术和数据科学（即全栈数据科学）经验的工程师。他已经指导了超过1000名AI/网页/数据科学的求职者，并设计了数据科学和机器学习工程学习课程。此前，Harshit与耶鲁大学、麻省理工学院和加州大学洛杉矶分校的研究科学家一起开发了数据处理算法。'
 - en: '[Original](https://dswharshit.medium.com/d19736fdd70c). Reposted with permission.'
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://dswharshit.medium.com/d19736fdd70c). 经许可转载。'
 - en: '**Related:**'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Data Science Learning Roadmap for 2021](/2021/02/data-science-learning-roadmap-2021.html)'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2021年数据科学学习路线图](/2021/02/data-science-learning-roadmap-2021.html)'
 - en: '[How Machine Learning Leverages Linear Algebra to Solve Data Problems](/2021/09/machine-learning-leverages-linear-algebra-solve-data-problems.html)'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习如何利用线性代数解决数据问题](/2021/09/machine-learning-leverages-linear-algebra-solve-data-problems.html)'
 - en: '[Learning Data Science and Machine Learning: First Steps After The Roadmap](/2021/08/learn-data-science-machine-learning.html)'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学和机器学习：路线图后的第一步](/2021/08/learn-data-science-machine-learning.html)'
 - en: '* * *'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-137
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能。'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 维护。'
 - en: '* * *'
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-142
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[A Structured Approach To Building a Machine Learning Model](https://www.kdnuggets.com/2022/06/structured-approach-building-machine-learning-model.html)'
+  id: totrans-143
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建机器学习模型的结构化方法](https://www.kdnuggets.com/2022/06/structured-approach-building-machine-learning-model.html)'
 - en: '[Getting Started with spaCy for NLP](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
+  id: totrans-144
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 spaCy 进行 NLP 入门](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
 - en: '[Natural Language Processing with spaCy](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
+  id: totrans-145
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用spaCy进行自然语言处理](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
 - en: '[Deploying a Streamlit WebApp to Heroku using DAGsHub](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)'
+  id: totrans-146
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用DAGsHub将Streamlit WebApp部署到Heroku](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)'
 - en: '[Answering Questions with HuggingFace Pipelines and Streamlit](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
+  id: totrans-147
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用HuggingFace Pipelines和Streamlit回答问题](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
 - en: '[DIY Automated Machine Learning with Streamlit](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)'
+  id: totrans-148
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Streamlit进行DIY自动化机器学习](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)'

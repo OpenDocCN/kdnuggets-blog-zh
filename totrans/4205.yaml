@@ -1,348 +1,535 @@
 - en: How To Build A Database Using Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用 Python 构建数据库
 - en: 原文：[https://www.kdnuggets.com/2021/09/build-database-using-python.html](https://www.kdnuggets.com/2021/09/build-database-using-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/09/build-database-using-python.html](https://www.kdnuggets.com/2021/09/build-database-using-python.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Irfan Alghani Khalid](https://www.linkedin.com/in/alghaniirfan/), Computer
     Science Student**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Irfan Alghani Khalid](https://www.linkedin.com/in/alghaniirfan/)，计算机科学学生**'
 - en: '![](../Images/ce52fd46adf211dce1be3d55a04ee65c.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ce52fd46adf211dce1be3d55a04ee65c.png)'
 - en: Photo by [Taylor Vick](https://unsplash.com/@tvick?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/server?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 由[Taylor Vick](https://unsplash.com/@tvick?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)在[Unsplash](https://unsplash.com/s/photos/server?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)上的照片
 - en: Introduction
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 介绍
 - en: SQLAlchemy is a Python library for implementing SQL databases without using
     the SQL language itself. In other words, all you need to do is to implement your
     database using the Python language.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: SQLAlchemy 是一个 Python 库，用于在不使用 SQL 语言的情况下实现 SQL 数据库。换句话说，你只需要使用 Python 语言实现你的数据库。
 - en: Flask-SQLAlchemy is a library for connecting the SQLAlchemy library inside your
     Flask project, and it makes your database implementation easier than ever. This
     article will show you how to build your database using the Flask-SQLAlchemy library.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: Flask-SQLAlchemy 是一个用于在 Flask 项目中连接 SQLAlchemy 库的库，它使你的数据库实现比以往任何时候都更简单。本文将向你展示如何使用
+    Flask-SQLAlchemy 库构建你的数据库。
 - en: Without further, let’s get started!
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 不再废话，我们开始吧！
 - en: Database
+  id: totrans-10
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 数据库
 - en: Before we get into the implementation, let me explain to you about the database.
     What is a database? The database is a collection of data that is integrated by
     each other, where we can access it using our computer.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们进行实现之前，让我给你讲解一下数据库。什么是数据库？数据库是一个相互关联的数据集合，我们可以通过计算机访问它。
 - en: In data science, you probably will insert and analyze the data in a form like
     a spreadsheet. In the software development field, it’s a bit different. Let’s
     take a look at this spreadsheet.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在数据科学中，你可能会以类似电子表格的形式插入和分析数据。在软件开发领域，这稍有不同。让我们来看看这个电子表格。
 - en: '![](../Images/6e533ae64100beee9b91915fe965f58d.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6e533ae64100beee9b91915fe965f58d.png)'
 - en: The image is captured by the author.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者拍摄。
 - en: Inside the spreadsheet, we can see there are two columns. There are the book’s
     title and the author’s name. If you look at the author column, you will see that
     some values are repeated several times. This condition we called redundancy.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在电子表格中，我们可以看到有两列。一列是书名，另一列是作者姓名。如果你查看作者列，你会发现有些值被重复了几次。我们称这种情况为冗余。
 - en: It’s not a best practice to use the whole dataset as one table, especially for
     those who want to build a website or an app. Instead, we have to separate the
     table, where we called it normalization.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 将整个数据集作为一个表来使用并不是最佳实践，特别是对于那些想要构建网站或应用程序的人。相反，我们需要分离表，这被称为规范化。
 - en: 'In summary, the normalization process will separate the dataset into several
     tables, and each table contains their unique identifier to it. We will call each
     of the identifiers as the primary key. If we separate the dataset above, we will
     have a dataset that looks like this:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结一下，规范化过程会将数据集分成几个表，每个表包含其独特的标识符。我们将每个标识符称为主键。如果我们对上述数据集进行分离，我们将得到如下所示的数据集：
 - en: '![](../Images/50d8ae1eb5820bbc625bca7eae4307c1.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/50d8ae1eb5820bbc625bca7eae4307c1.png)'
 - en: The image is captured by the author.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者拍摄。
 - en: As you can see from above, the dataset is already separated into two tables.
     There are the Book table and the Author table. The author’s name is on the Author
     table. Therefore, we cannot access the name directly like what we’ve done on the
     spreadsheet.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所示，数据集已经分为两个表。分别是图书表和作者表。作者姓名在作者表中。因此，我们不能像在电子表格中那样直接访问姓名。
 - en: To retrieve the author’s name, we must connect the Book table with the Author
     table by taking the id from the author table. We treat the author’s id as the
     foreign key of the Book table.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 要检索作者姓名，我们必须通过从作者表中获取 ID 来将图书表与作者表连接起来。我们将作者的 ID 视为图书表的外键。
 - en: Maybe it is complicated, but if you start implementing a database for building
     apps, it will improve your app’s performance.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可能有些复杂，但如果你开始为构建应用程序实现数据库，它会提升你应用程序的性能。
 - en: Implementation
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 实现
 - en: Install the library
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 安装库
 - en: 'Before we get into the implementation, the first thing that we need to do is
     to install the library inside our computer. To install it, we can use pip for
     doing that. Here is the syntax for installing the library:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们开始实现之前，首先需要在计算机上安装库。为了安装它，我们可以使用 pip。以下是安装库的语法：
 - en: 'To load the library, we can call the syntax below:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了加载库，我们可以调用以下语法：
 - en: As you know from the library’s name, we also need to load the Flask library.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 从库的名称可以知道，我们还需要加载 Flask 库。
 - en: Starting the database engine
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 启动数据库引擎
 - en: After we load the library, the next step is to set up our SQLAlchemy object
     and the path to our database. By default, SQLAlchemy comes with SQLite software.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们加载库之后，下一步是设置我们的 SQLAlchemy 对象和数据库的路径。默认情况下，SQLAlchemy 配有 SQLite 软件。
 - en: 'SQLite is a database management system where we can build and analyze databases
     that we have build. You can use another DBMS, such as MySQL, PostgreSQL, or any
     DBMS that you prefer. To set up our database, Please add these lines of code:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: SQLite 是一个数据库管理系统，我们可以在其中构建和分析我们构建的数据库。你可以使用其他 DBMS，例如 MySQL、PostgreSQL 或任何你喜欢的
+    DBMS。为了设置我们的数据库，请添加以下代码行：
 - en: This code will initialize the Flask and the SQLAlchemy object, and we set a
     parameter that contains the path to our database. In this case, the database path
     is sqlite:///C:\\sqlite\\library.db.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 这段代码将初始化 Flask 和 SQLAlchemy 对象，并设置一个包含我们数据库路径的参数。在这种情况下，数据库路径是 sqlite:///C:\\sqlite\\library.db。
 - en: Implement the database
+  id: totrans-32
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 实现数据库
 - en: 'After we set up objects and parameters, we can start to implement the database.
     Let’s recall our database tables above:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们设置对象和参数之后，我们可以开始实现数据库。让我们回顾一下我们上面的数据库表：
 - en: '![](../Images/7b9c4c9111b45a12f0401e85f8eff70b.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7b9c4c9111b45a12f0401e85f8eff70b.png)'
 - en: The image is captured by the author.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者拍摄。
 - en: 'As you can see from above, there are two tables on it. Each table will have
     its class, where we can initialize the column’s name and the relationship between
     tables. We will inherit a class called Model for implementing our tables. Based
     on the figure above, the code looks like this:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所示，上面有两个表。每个表都有其类，我们可以在其中初始化列的名称和表之间的关系。我们将继承一个名为 Model 的类来实现我们的表。根据上图，代码如下：
 - en: Insert the value
+  id: totrans-37
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 插入值
 - en: 'After we create the class, we can build our database. To build the database,
     you can access your terminal and run this command:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们创建类之后，我们可以构建我们的数据库。为了构建数据库，你可以访问终端并运行此命令：
 - en: 'Now let’s try to insert values on our tables. For this example, let’s input
     the data from the previous spreadsheet above. You can follow this code below for
     inserting values:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们尝试在表格中插入值。对于这个例子，让我们输入之前电子表格中的数据。你可以参考下面的代码来插入值：
 - en: Query the table
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 查询表格
 - en: 'After you insert values inside the tables, now let’s run the query to see if
     the data exist. Here is the code for doing that:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 在你向表格中插入值之后，现在我们来运行查询，以检查数据是否存在。这里是执行此操作的代码：
 - en: As you can see from above, our submission is successful. Well, it’s still an
     introduction, but I hope you can grasp the concept and implement it on a larger
     project.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所示，我们的提交成功。虽然这仍然是介绍部分，但希望你能掌握这个概念，并在更大的项目中应用它。
 - en: 'Addition: The SQL Query'
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 附加：SQL 查询
 - en: 'In addition to the Flask-SQLAlchemy library, I will demonstrate to you how
     to access the database using the native SQLite. We do this for making sure that
     our database has already been created on it. For accessing SQLite, you can open
     your terminal and write this script:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了 Flask-SQLAlchemy 库之外，我将向你演示如何使用原生 SQLite 访问数据库。我们这样做是为了确保我们的数据库已经创建。在访问 SQLite
+    时，你可以打开终端并输入以下脚本：
 - en: '[PRE0]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'After that, It will show the interface of SQLite like this:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后，它将显示 SQLite 的界面，如下所示：
 - en: '![](../Images/1d9e8b3434bc88c1343b334ec12dc725.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1d9e8b3434bc88c1343b334ec12dc725.png)'
 - en: The image is captured by the author.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者拍摄。
 - en: 'In the next step, you can open your database by using the .open command and
     add the path to the database like this:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下一步中，你可以使用 .open 命令打开你的数据库，并添加数据库的路径，如下所示：
 - en: '[PRE1]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'To make sure that we have opened the database, please write .tables on the
     terminal like this:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了确保我们已经打开了数据库，请在终端中输入 .tables，如下所示：
 - en: '[PRE2]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'And it will generate this result:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 它将生成如下结果：
 - en: '![](../Images/4875eeee1a17496754dd8de667edd35b.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4875eeee1a17496754dd8de667edd35b.png)'
 - en: The image is captured by the author.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者拍摄。
 - en: 'Nice, It works. Now let’s try the SQL language for querying our database:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 很好，它工作正常。现在让我们尝试使用 SQL 语言查询我们的数据库：
 - en: '[PRE3]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'And here is the result:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是结果：
 - en: '![](../Images/9b320fb36608d78b40b98eebc96c8044.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9b320fb36608d78b40b98eebc96c8044.png)'
 - en: The image is captured by the author.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者拍摄。
 - en: 'Now let’s try to combine both tables as one. You can write this line of code
     on your terminal:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们来尝试将两个表合并为一个。你可以在终端中输入以下代码：
 - en: '[PRE4]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'And here is the result:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是结果：
 - en: '![](../Images/89026163943c619d7c977e4804f93a21.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/89026163943c619d7c977e4804f93a21.png)'
 - en: The image is captured by the author.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者拍摄。
 - en: Final Remarks
+  id: totrans-66
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 最后的评论
 - en: Well done! Now you have implemented your database using the Flask-SQLAlchemy
     library. I hope this article helps you for implementing a database in your projects,
     especially when you want to build a web application using Flask.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 做得好！现在你已经使用 Flask-SQLAlchemy 库实现了你的数据库。希望这篇文章对你在项目中实现数据库有所帮助，特别是当你想使用 Flask
+    构建 Web 应用时。
 - en: In case that you are interested in my article, you can follow me on Medium or
     you can subscribe to my newsletter. Also, if you have any questions or just want
     to say hi, you can follow me on [**LinkedIn**](https://www.linkedin.com/in/alghaniirfan/).
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你对我的文章感兴趣，可以在 Medium 上关注我或订阅我的新闻通讯。如果你有任何问题或只是想打个招呼，你也可以在 [**LinkedIn**](https://www.linkedin.com/in/alghaniirfan/)
+    上关注我。
 - en: Thank you for reading my article!
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢阅读我的文章！
 - en: '**Bio: [Irfan Alghani Khalid](https://www.linkedin.com/in/alghaniirfan/)**
     is a Computer Science Student @ IPB University, interested in Data Science, Machine
     Learning, and Open Source.'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历： [Irfan Alghani Khalid](https://www.linkedin.com/in/alghaniirfan/)** 是
+    IPB 大学的计算机科学学生，感兴趣于数据科学、机器学习和开源。'
 - en: '[Original](https://towardsdatascience.com/how-to-build-a-database-using-python-f4b62a19d190).
     Reposted with permission.'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/how-to-build-a-database-using-python-f4b62a19d190)。转载已获许可。'
 - en: '**Related:**'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to Build An Image Classifier in Few Lines of Code with Flash](/2021/07/build-image-classifier-in-few-lines-of-code-with-flash.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何用 Flash 在几行代码中构建图像分类器](/2021/07/build-image-classifier-in-few-lines-of-code-with-flash.html)'
 - en: '[Easy SQL in Native Python](/2021/09/easy-sql-native-python.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[原生 Python 中的简单 SQL](/2021/09/easy-sql-native-python.html)'
 - en: '[How to Query Your Pandas Dataframe](/2021/08/query-pandas-dataframe.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何查询你的 Pandas 数据框](/2021/08/query-pandas-dataframe.html)'
 - en: '* * *'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-77
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让 Python 成为初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并以寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学统计学习的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
