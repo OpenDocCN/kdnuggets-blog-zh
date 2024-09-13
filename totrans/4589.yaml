@@ -926,6 +926,73 @@
   id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE31] 导入 `speech_recognition` 作为 sr 导入 os 导入 sys 导入 re 导入 webbrowser 导入 smtplib
+    导入 requests 导入 subprocess 从 pyowm 导入 OWM 导入 youtube_dl 导入 vlc 导入 urllib 导入 urllib2
+    导入 json 从 bs4 导入 BeautifulSoup 作为 soup 从 urllib2 导入 urlopen 导入 wikipedia 导入 random
+    从 time 导入 strftime def sofiaResponse(audio): "说出传递的音频" print(audio) for line in
+    audio.splitlines(): os.system("say " + audio) def myCommand(): "监听命令" r = sr.Recognizer()
+    with sr.Microphone() as source: print(''说点什么...'') r.pause_threshold = 1 r.adjust_for_ambient_noise(source,
+    duration=1) audio = r.listen(source) try: command = r.recognize_google(audio).lower()
+    print(''你说: '' + command + ''\n'') #loop back to continue to listen for commands
+    if unrecognizable speech is received except sr.UnknownValueError: print(''....'')
+    command = myCommand(); return command def assistant(command): "执行命令的 if 语句" #打开
+    subreddit Reddit if ''open reddit'' in command: reg_ex = re.search(''open reddit
+    (.*)'', command) url = ''https://www.reddit.com/'' if reg_ex: subreddit = reg_ex.group(1)
+    url = url + ''r/'' + subreddit webbrowser.open(url) sofiaResponse(''Reddit 内容已为您打开。'')
+    elif ''shutdown'' in command: sofiaResponse(''再见。祝您有美好的一天'') sys.exit() #打开网站
+    elif ''open'' in command: reg_ex = re.search(''open (.+)'', command) if reg_ex:
+    domain = reg_ex.group(1) print(domain) url = ''https://www.'' + domain webbrowser.open(url)
+    sofiaResponse(''您请求的网站已为您打开。'') else: pass #问候 elif ''hello'' in command: day_time
+    = int(strftime(''%H'')) if day_time < 12: sofiaResponse(''您好。早上好'') elif 12 <=
+    day_time < 18: sofiaResponse(''您好。下午好'') else: sofiaResponse(''您好。晚上好'') elif
+    ''help me'' in command: sofiaResponse(""" 您可以使用这些命令，我会帮助您: 1\. 打开 reddit subreddit
+    : 在默认浏览器中打开 subreddit。 2\. 打开 xyz.com : 将 xyz 替换为任何网站名称 3\. 发送电子邮件/email : 会依次询问收件人姓名、内容等问题。
+    4\. {cityname} 当前天气 : 告诉您当前的天气情况和温度 5\. 你好 6\. 播放视频 : 在 VLC 媒体播放器中播放歌曲 7\. 更改壁纸
+    : 更改桌面壁纸 8\. 今日新闻 : 阅读今日的头条新闻 9\. 时间 : 当前系统时间 10\. Google 新闻的头条故事 (RSS feeds)
+    11\. 告诉我关于 xyz 的信息 : 告诉您关于 xyz 的信息 """) #笑话 elif ''joke'' in command: res = requests.get(
+    ''https://icanhazdadjoke.com/'', headers={"Accept":"application/json"}) if res.status_code
+    == requests.codes.ok: sofiaResponse(str(res.json()[''joke''])) else: sofiaResponse(''哎呀！笑话讲完了'')
+    #Google 新闻的头条故事 elif ''news for today'' in command: try: news_url="https://news.google.com/news/rss"
+    Client=urlopen(news_url) xml_page=Client.read() Client.close() soup_page=soup(xml_page,"xml")
+    news_list=soup_page.findAll("item") for news in news_list[:15]: sofiaResponse(news.title.text.encode(''utf-8''))
+    except Exception as e: print(e) #当前天气 elif ''current weather'' in command: reg_ex
+    = re.search(''current weather in (.*)'', command) if reg_ex: city = reg_ex.group(1)
+    owm = OWM(API_key=''ab0d5e80e8dafb2cb81fa9e82431c1fa'') obs = owm.weather_at_place(city)
+    w = obs.get_weather() k = w.get_status() x = w.get_temperature(unit=''celsius'')
+    sofiaResponse(''当前 %s 的天气是 %s。最高温度是 %0.2f 度，最低温度是 %0.2f 度'' % (city, k, x[''temp_max''],
+    x[''temp_min''])) #时间 elif ''time'' in command: import datetime now = datetime.datetime.now()
+    sofiaResponse(''当前时间是 %d 小时 %d 分钟'' % (now.hour, now.minute)) elif ''email'' in
+    command: sofiaResponse(''收件人是谁？'') recipient = myCommand() if ''rajat'' in recipient:
+    sofiaResponse(''我应该对他说些什么？'') content = myCommand() mail = smtplib.SMTP(''smtp.gmail.com'',
+    587) mail.ehlo() mail.starttls() mail.login(''your_email_address'', ''your_password'')
+    mail.sendmail(''sender_email'', ''receiver_email'', content) mail.close() sofiaResponse(''电子邮件已成功发送。您可以查看收件箱。'')
+    else: sofiaResponse(''我不明白您的意思！'') #启动任何应用程序 elif ''launch'' in command: reg_ex
+    = re.search(''launch (.*)'', command) if reg_ex: appname = reg_ex.group(1) appname1
+    = appname+".app" subprocess.Popen(["open", "-n", "/Applications/" + appname1],
+    stdout=subprocess.PIPE) sofiaResponse(''我已启动所需的应用程序'') #播放 YouTube 歌曲 elif ''play
+    me a song'' in command: path = ''/Users/nageshsinghchauhan/Documents/videos/''
+    folder = path for the_file in os.listdir(folder): file_path = os.path.join(folder,
+    the_file) try: if os.path.isfile(file_path): os.unlink(file_path) except Exception
+    as e: print(e) sofiaResponse(''我应该播放什么歌曲？'') mysong = myCommand() if mysong: flag
+    = 0 url = "https://www.youtube.com/results?search_query=" + mysong.replace(''
+    '', ''+'') response = urllib2.urlopen(url) html = response.read() soup1 = soup(html,"lxml")
+    url_list = [] for vid in soup1.findAll(attrs={''class'':''yt-uix-tile-link''}):
+    if (''https://www.youtube.com'' + vid[''href'']).startswith("https://www.youtube.com/watch?v="):
+    flag = 1 final_url = ''https://www.youtube.com'' + vid[''href''] url_list.append(final_url)
+    url = url_list[0] ydl_opts = {} os.chdir(path) with youtube_dl.YoutubeDL(ydl_opts)
+    as ydl: ydl.download([url]) vlc.play(path) if flag == 0: sofiaResponse(''我在 YouTube
+    上没有找到任何内容'') #更改壁纸 elif ''change wallpaper'' in command: folder = ''/Users/nageshsinghchauhan/Documents/wallpaper/''
+    for the_file in os.listdir(folder): file_path = os.path.join(folder, the_file)
+    try: if os.path.isfile(file_path): os.unlink(file_path) except Exception as e:
+    print(e) api_key = ''fd66364c0ad9e0f8aabe54ec3cfbed0a947f3f4014ce3b841bf2ff6e20948795''
+    url = ''https://api.unsplash.com/photos/random?client_id='' + api_key #从 unspalsh.com
+    获取图片 f = urllib2.urlopen(url) json_string = f.read() f.close() parsed_json = json.loads(json_string)
+    photo = parsed_json[''urls''][''full''] urllib.urlretrieve(photo, "/Users/nageshsinghchauhan/Documents/wallpaper/a")
+    # 下载图片的位置 subprocess.call(["killall Dock"], shell=True) sofiaResponse(''壁纸已成功更换'')
+    #问我任何事 elif ''tell me about'' in command: reg_ex = re.search(''tell me about (.*)'',
+    command) try: if reg_ex: topic = reg_ex.group(1) ny = wikipedia.page(topic) sofiaResponse(ny.content[:500].encode(''utf-8''))
+    except Exception as e: print(e) sofiaResponse(e) sofiaResponse(''您好用户，我是 Sofia，您的个人语音助手，请给出命令或说
+    "help me" 我将告诉您我能做什么。'') #循环以继续执行多个命令 while True: assistant(myCommand()) [PRE32]'
 - en: So you have seen how just by writing simple lines of python code we can create
     a very cool voice-based desktop/laptop assistant. Apart from these features, you
     can also include many different features in your voice assistant.

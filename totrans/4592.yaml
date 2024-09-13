@@ -1,415 +1,629 @@
 - en: An Overview of Topics Extraction in Python with Latent Dirichlet Allocation
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python中基于潜在狄利克雷分配的主题提取概述
 - en: 原文：[https://www.kdnuggets.com/2019/09/overview-topics-extraction-python-latent-dirichlet-allocation.html](https://www.kdnuggets.com/2019/09/overview-topics-extraction-python-latent-dirichlet-allocation.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/09/overview-topics-extraction-python-latent-dirichlet-allocation.html](https://www.kdnuggets.com/2019/09/overview-topics-extraction-python-latent-dirichlet-allocation.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[comments](#comments)'
 - en: '**By [Félix Revert](https://towardsdatascience.com/@FelixRvrt), DataRobot and
     Velocity**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Félix Revert](https://towardsdatascience.com/@FelixRvrt)，DataRobot和Velocity**'
 - en: A recurring subject in NLP is to understand large corpus of texts through topics
     extraction. Whether you analyze users’ online reviews, products’ descriptions,
     or text entered in search bars, understanding key topics will always come in handy.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 自然语言处理中的一个反复出现的主题是通过主题提取来理解大量文本数据。无论是分析用户的在线评论、产品描述，还是搜索框中输入的文本，理解关键主题总是非常有用的。
 - en: '![figure-name](../Images/7e62aca1e72dce666a6a4a9b1d01926c.png)Popular picture
     used in literature to explain LDA'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/7e62aca1e72dce666a6a4a9b1d01926c.png) 文献中常用的图示来解释LDA'
 - en: Before going into the LDA method, let me remind you that not reinventing the
     wheel and going for the quick solution is usually the best start. Several providers
     have great API for topic extraction (and it is free up to a certain number of
     calls): [Google](https://cloud.google.com/natural-language/), [Microsoft](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-entity-linking), [MeaningCloud](https://www.meaningcloud.com/developer/topics-extraction)…
     I tried all of the three and all work very well.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在介绍LDA方法之前，我想提醒你，通常避免重复发明轮子并选择快速解决方案是最佳的开始。许多提供商提供了很棒的主题提取API（且在一定调用次数内是免费的）：[Google](https://cloud.google.com/natural-language/)、[Microsoft](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-entity-linking)、[MeaningCloud](https://www.meaningcloud.com/developer/topics-extraction)…
+    我试过这三者，它们都非常有效。
 - en: However, if your data is highly specific, and no generic topic can represent
     it, then you will have to go for a more personalized approach. This article focuses
     on one of these approaches: **LDA**.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，如果你的数据非常具体，且没有通用的主题可以代表它，那么你将需要采用更个性化的方法。本文关注其中的一种方法：**LDA**。
 - en: Understanding LDA
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 理解LDA
 - en: '**Intuition**'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '**直观理解**'
 - en: LDA (*short for Latent Dirichlet Allocation*) is an unsupervised machine-learning
     model that takes documents as input and finds topics as output. The model also
     says in what percentage each document talks about each topic.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: LDA（*潜在狄利克雷分配*）是一个无监督的机器学习模型，它以文档作为输入，并以主题作为输出。该模型还会说明每个文档涉及每个主题的百分比。
 - en: 'A topic is represented as a weighted list of words. An example of a topic is
     shown below:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个主题被表示为一个加权的词列表。下面是一个主题的示例：
 - en: flower * 0,2 | rose * 0,15 | plant * 0,09 |…
+  id: totrans-12
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: flower * 0,2 | rose * 0,15 | plant * 0,09 |…
 - en: '![figure-name](../Images/88c72a06f8f42663072cabb086f9195a.png)Illustration
     of LDA input/output workflow'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/88c72a06f8f42663072cabb086f9195a.png) LDA输入/输出工作流的示意图'
 - en: 'There are 3 main parameters of the model:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 该模型有三个主要参数：
 - en: the number of topics
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 主题的数量
 - en: the number of words per topic
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每个主题的单词数量
 - en: the number of topics per document
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每个文档的主题数量
 - en: In reality, the last two parameters are not exactly designed like this in the
     algorithm, but I prefer to stick to these simplified versions which are easier
     to understand.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，最后两个参数在算法中的设计并不完全是这样，但我更倾向于使用这些简化的版本，因为它们更容易理解。
 - en: '**Implementation**'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**实现**'
 - en: '*[A dedicated Jupyter notebook is shared at the end]*'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[专门的Jupyter笔记本在文末分享]*'
 - en: In this example, I use a dataset of articles taken from BBC’s website.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个例子中，我使用了从BBC网站获取的文章数据集。
 - en: To implement the LDA in Python, I use the package *gensim*.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在Python中实现LDA，我使用了*gensim*包。
 - en: A simple implementation of LDA, where we ask the model to create 20 topics
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: LDA的简单实现，我们要求模型创建20个主题
 - en: 'The parameters shown previously are:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前展示的参数是：
 - en: the number of topics is equal to **num_topics**
+  id: totrans-25
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 主题的数量等于**num_topics**
 - en: the *[distribution of the] *number of words per topic is handled by **eta**
+  id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*[每个主题的]* 单词分布由**eta**处理'
 - en: the *[distribution of the]* number of topics per document is handled by **alpha**
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*[每个文档的]* 主题分布由**alpha**处理'
 - en: 'To print topics found, use the following:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 要打印发现的主题，可以使用以下代码：
 - en: '[PRE0]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '*[the first 3 topics are shown with their first 20 most relevant words]* Topic
     0 seems to be about military and war.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[显示前3个主题及其前20个最相关的词]* 主题0似乎与军事和战争有关。'
 - en: Topic 1 about health in India, involving women and children.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于印度健康的主题 1，涉及女性和儿童。
 - en: Topic 2 about Islamists in Northern Mali.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于北马里的伊斯兰主义者的主题 2。
 - en: 'To print the % of topics a document is about, do the following:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 要打印文档涉及的主题百分比，请执行以下操作：
 - en: '[PRE1]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The first document is 99.8% about topic 14.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个文档关于主题 14 的比例为99.8%。
 - en: 'Predicting topics on an unseen document is also doable, as shown below:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于未见过的文档进行主题预测也是可行的，如下所示：
 - en: '[PRE2]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: This new document talks 52% about topic 1, and 44% about topic 3\. Note that
     4% could not be labelled as existing topics.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这份新文档讨论了52%的主题 1，和44%的主题 3。注意有4%无法标记为现有主题。
 - en: '**Exploration**'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**探索**'
 - en: 'There is a nice way to visualize the LDA model you built using the package *pyLDAvis*:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 有一种很好的方式可以使用*pyLDAvis*包可视化你构建的 LDA 模型：
 - en: '![figure-name](../Images/5e42302952b7900bb2f3408c0cc6047f.png)Output of the
     pyLDAvis'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/5e42302952b7900bb2f3408c0cc6047f.png)pyLDAvis的输出'
 - en: This visualization allows you to compare topics on two reduced dimensions and
     observe the distribution of words in topics.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种可视化方法允许你在两个降维的维度上比较主题，并观察主题中词汇的分布。
 - en: Another nice visualization is to show all the documents according to their major
     topic in a diagonal format.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个很好的可视化方法是按照主要主题以对角格式显示所有文档。
 - en: '![figure-name](../Images/8b714cb93412b8eefe740c4c79b2b77d.png)Visualization
     of the proportion of topics in the documents *(Documents are rows, topic are columns)*![figure-name](../Images/d0630db2532f240dabfe4840a1da2343.png)Topic
     18 is the most represented topic among documents: 25 documents are mainly about
     it.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/8b714cb93412b8eefe740c4c79b2b77d.png)文档中主题的比例可视化 *(文档为行，主题为列)*
+    ![figure-name](../Images/d0630db2532f240dabfe4840a1da2343.png)主题 18 是文档中最主要的主题：25
+    个文档主要讨论它。'
 - en: How to successfully implement LDA
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何成功实现 LDA
 - en: LDA is a complex algorithm which is generally perceived as hard to fine-tune
     and interpret. Indeed, getting relevant results with LDA requires a strong knowledge
     of how it works.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: LDA 是一个复杂的算法，通常被认为难以微调和解释。确实，使用 LDA 获得相关结果需要对其工作原理有深入了解。
 - en: '**Data cleaning**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据清理**'
 - en: A common thing you will encounter with LDA is that words appear in multiple
     topics. One way to cope with this is to add these words to your stopwords list.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 LDA 时你会遇到的一个常见问题是词汇出现在多个主题中。应对这种情况的一种方法是将这些词加入到停用词列表中。
 - en: Another thing is plural and singular forms. I would recommend lemmatizing —
     or stemming if you cannot lemmatize but having stems in your topics is not easily
     understandable.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个需要注意的是复数和单数形式。我建议进行词形还原——或者如果无法进行词形还原，则进行词干提取，但在主题中出现的词干不容易理解。
 - en: Removing words with digits in them will also clean the words in your topics.
     Keeping years (2006, 1981) can be relevant if you believe they are meaningful
     in your topics.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 去除包含数字的词也会清理你的主题中的词。如果你认为年份（2006年，1981年）在你的主题中有意义，可以保留这些年份。
 - en: Filtering words that appear in at least 3 (or more) documents is a good way
     to remove rare words that will not be relevant in topics.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 过滤出至少在 3 个（或更多）文档中出现的词是去除不相关稀有词的好方法。
 - en: '**Data preparation**'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据准备**'
 - en: Include bi- and tri-grams to grasp more relevant information.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 包括双词组和三词组，以获取更相关的信息。
 - en: 'Another classic preparation step is to use only nouns and verbs using [POS
     tagging](https://en.wikipedia.org/wiki/Part-of-speech_tagging) (POS: Part-Of-Speech).'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个经典的准备步骤是仅使用名词和动词，使用[词性标注](https://en.wikipedia.org/wiki/Part-of-speech_tagging)（POS：词性）。
 - en: '**Fine-tuning**'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '**微调**'
 - en: 'Number of topics: try out several numbers of topics to understand which amount
     makes sense. You actually need to *see *the topics to know if your model makes
     sense or not. As for K-Means, LDA converges and the model makes sense at a mathematical
     level, but it does not mean it makes sense at a human level.'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 主题数量：尝试几个不同的主题数量，以了解哪个数量是合理的。你实际上需要*查看*这些主题，才能知道你的模型是否合理。与 K-Means 相比，LDA 收敛且模型在数学层面上合理，但这并不意味着它在人的层面上也合理。
 - en: 'Cleaning your data: adding stop words that are too frequent in your topics
     and re-running your model is a common step. Keeping only nouns and verbs, removing
     templates from texts, testing different cleaning methods iteratively will improve
     your topics. Be prepared to spend some time here.'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 清理数据：添加在主题中出现过于频繁的停用词，并重新运行模型是一种常见步骤。仅保留名词和动词，去除文本中的模板，迭代测试不同的清理方法，将改善你的主题。准备花费一些时间在这里。
 - en: Alpha, Eta. If you’re not into technical stuff, forget about these. Otherwise,
     you can tweak alpha and eta to adjust your topics. Start with ‘auto’, and if the
     topics are not relevant, try other values. I recommend using low values of Alpha
     and Eta to have a small number of topics in each document and a small number of
     relevant words in each topic.
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Alpha、Eta。如果你不懂技术细节，就忘了这些吧。否则，你可以调整alpha和eta来调整你的主题。从‘auto’开始，如果主题不相关，可以尝试其他值。我建议使用低值的Alpha和Eta，以便每个文档中有较少的主题，每个主题中有较少的相关词汇。
 - en: Increase the number of *passes *to have a better model. 3 or 4 is a good number,
     but you can go higher.
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加 *passes* 的数量以获得更好的模型。3到4次是一个不错的数字，但你可以尝试更多。
 - en: '**Assessing results**'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**评估结果**'
 - en: Are your topics interpretable?
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你的主题是否可解释？
 - en: Are your topics unique? (two different topics have different words)
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你的主题是否独特？（两个不同的主题是否有不同的词汇）
 - en: Are your topics exhaustive? (are all your documents well represented by these
     topics?)
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你的主题是否详尽？（这些主题是否很好地代表了你的所有文档？）
 - en: If your model follows these 3 criteria, it looks like a good model :)
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你的模型符合这3个标准，它看起来是一个好的模型 :)
 - en: Main advantages of LDA
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: LDA的主要优点
 - en: '**It’s fast**'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**速度快**'
 - en: 'Use the *%time* command in Jupyter to verify it. The model is usually fast
     to run. Of course, it depends on your data. Several factors can slow down the
     model:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 *%time* 命令在Jupyter中验证它。模型通常运行很快。当然，这取决于你的数据。有几个因素可能会拖慢模型的速度：
 - en: Long documents
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 长文档
 - en: Large number of documents
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 大量文档
 - en: Large vocabulary size (especially if you use n-grams with a large n)
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 大的词汇表大小（尤其是当你使用大n的n-gram时）
 - en: '**It’s intuitive**'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '**直观性**'
 - en: Modelling topics as weighted lists of words is a simple approximation yet a
     very intuitive approach if you need to interpret it. No embedding nor hidden dimensions,
     just bags of words with weights.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 将主题建模为加权的词汇列表是一种简单的近似方法，但如果你需要解释，它是非常直观的方法。没有嵌入或隐藏维度，只有加权的词袋。
 - en: '**It can predict topics for new unseen documents**'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '**它可以预测新未见文档的主题**'
 - en: Once the model has run, it is ready to allocate topics to any document. Of course,
     if your training dataset is in English and you want to predict the topics of a
     Chinese document it won’t work. But if the new documents have the same structure
     and should have more or less the same topics, it will work.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦模型运行完成，它就可以为任何文档分配主题。当然，如果你的训练数据集是英语的，而你想预测中文文档的主题，这将不起作用。但如果新文档具有相同的结构，并且应该有更多或更少相同的主题，它将有效。
 - en: Main disadvantages of LDA
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: LDA的主要缺点
 - en: '**Lots of fine-tuning**'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '**大量微调**'
 - en: If LDA is fast to run, it will give you some trouble to get good results with
     it. That’s why knowing in advance how to fine-tune it will really help you.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果LDA运行很快，但要得到好的结果却会遇到一些麻烦。这就是为什么提前了解如何微调它会真正帮助你。
 - en: '**It needs human interpretation**'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '**需要人工解释**'
 - en: Topics are found by a machine. A human needs to label them in order to present
     the results to non-experts people.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 主题由机器发现。人类需要给它们标注，以便向非专家展示结果。
 - en: '**You cannot influence topics**'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**你无法影响主题**'
 - en: Knowing that some of your documents talk about a topic you know, and not finding
     it in the topics found by LDA will definitely be frustrating. And there’s no way
     to say to the model that some words should belong together. You have to sit and
     wait for the LDA to give you what you want.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 知道你的某些文档讨论了你熟悉的话题，但在LDA找到的主题中找不到它，肯定会让人感到沮丧。而且没有办法告诉模型某些词应该放在一起。你必须等待LDA给你想要的结果。
 - en: Conclusion
+  id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: LDA remains one of my favourite model for topics extraction, and I have used
     it many projects. However, it requires some practice to master it. That’s why
     I made this article so that you can jump over the barrier to entry of using LDA
     and use it painlessly.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: LDA仍然是我最喜欢的主题提取模型之一，我在许多项目中使用过它。然而，它需要一些练习才能掌握。这就是为什么我写了这篇文章，以便你可以轻松使用LDA，跳过使用它的入门障碍。
 - en: Code: [https://github.com/FelixChop/MediumArticles/blob/master/LDA-BBC.ipynb](https://github.com/FelixChop/MediumArticles/blob/master/LDA-BBC.ipynb)
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码： [https://github.com/FelixChop/MediumArticles/blob/master/LDA-BBC.ipynb](https://github.com/FelixChop/MediumArticles/blob/master/LDA-BBC.ipynb)
 - en: '**Bio: [Félix Revert](https://towardsdatascience.com/@FelixRvrt)** is a Customer
     Facing Data Scientist at DataRobot and Velocity'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Félix Revert](https://towardsdatascience.com/@FelixRvrt)** 是DataRobot和Velocity的客户数据科学家'
 - en: '[Original](https://towardsdatascience.com/the-complete-guide-for-topics-extraction-in-python-a6aaa6cedbbc).
     Reposted with permission.'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/the-complete-guide-for-topics-extraction-in-python-a6aaa6cedbbc)。已获得许可转载。'
 - en: '**Related:**'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Topic Modeling with LSA, PLSA, LDA & lda2Vec](/2018/08/topic-modeling-lsa-plsa-lda-lda2vec.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用LSA、PLSA、LDA和lda2Vec进行主题建模](/2018/08/topic-modeling-lsa-plsa-lda-lda2vec.html)'
 - en: '[Unlock and Extract Data from Your PDF Documents](/2019/01/datalogics-unlock-extract-data-pdf-documents.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从PDF文档中解锁并提取数据](/2019/01/datalogics-unlock-extract-data-pdf-documents.html)'
 - en: '[Domain-Specific Language Processing Mines Value From Unstructured Data](/2019/08/domain-specific-language-processing.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[领域特定语言处理从非结构化数据中挖掘价值](/2019/08/domain-specific-language-processing.html)'
 - en: '* * *'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-92
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行IT管理'
 - en: '* * *'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-97
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[创建一个Web应用程序以从音频中提取主题（使用Python）](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
 - en: '[Back to Basics Week 4: Advanced Topics and Deployment](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回归基础第4周：高级主题与部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)'
 - en: '[Approaches to Text Summarization: An Overview](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本总结方法：概述](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)'
 - en: '[Data Labeling for Machine Learning: Market Overview, Approaches, and Tools](https://www.kdnuggets.com/2021/12/data-labeling-ml-overview-and-tools.html)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习数据标注：市场概述、方法与工具](https://www.kdnuggets.com/2021/12/data-labeling-ml-overview-and-tools.html)'
 - en: '[An Overview of Logistic Regression](https://www.kdnuggets.com/2022/02/overview-logistic-regression.html)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[逻辑回归概述](https://www.kdnuggets.com/2022/02/overview-logistic-regression.html)'
 - en: '[An Overview of Mercury: Creating Data Science Portfolio and…](https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[汞概述：创建数据科学投资组合及…](https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html)'
