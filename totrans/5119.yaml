@@ -3,30 +3,36 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SQL中的数据清理：如何为分析准备混乱的数据
 - en: 原文：[https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)
 - en: '![Data Cleaning in SQL: How To Prepare Messy Data for Analysis](../Images/cefee85bcf1824dbe72931f73db523ea.png)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![SQL中的数据清理：如何为分析准备混乱的数据](../Images/cefee85bcf1824dbe72931f73db523ea.png)'
 - en: Image generated with Segmind SSD-1B model
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用Segmind SSD-1B模型生成的图像
 - en: Excited to start analyzing data using SQL? Well, you may have to wait just a
     bit. But why?
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 想要开始使用SQL分析数据吗？那么，你可能需要稍等片刻。但为什么呢？
 - en: Data in database tables can often be messy. Your data may contain missing values,
     duplicate records, outliers, inconsistent data entries, and more. So cleaning
     the data before you can analyze it using SQL is super important.
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据库表中的数据往往很混乱。你的数据可能包含缺失值、重复记录、异常值、不一致的数据条目等。因此，在使用SQL分析数据之前清理数据是非常重要的。
 - en: When you're learning SQL, you can spin up database tables, alter them, update
     and delete records as you like. But in practice, this is almost never the case.
     You may not have permission to alter tables, update and delete records. But you’ll
@@ -34,20 +40,24 @@
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你学习SQL时，你可以创建数据库表，修改它们，更新和删除记录。但在实际操作中，几乎不会出现这种情况。你可能没有权限修改表格、更新和删除记录。但你会有读取数据库的权限，并能够运行一系列SELECT查询。
 - en: In this tutorial, we’ll spin up a database table, populate it with records,
     and see how we can clean the data with SQL. Let's start coding!
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将创建一个数据库表，填充记录，并查看如何使用SQL清理数据。让我们开始编码吧！
 - en: Creating a Database Table with Records
   id: totrans-8
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 创建带有记录的数据库表
 - en: 'For this tutorial, let’s create an `employees` table like so:'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，让我们创建一个如下的`employees`表：
 - en: '[PRE0]'
   id: totrans-10
   prefs: []
@@ -57,6 +67,7 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，让我们向表中插入一些虚构的样本记录：
 - en: '[PRE1]'
   id: totrans-12
   prefs: []
@@ -68,32 +79,38 @@
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你能看出来，我使用了一小组名字来从中采样并构建记录的名字字段。不过，你可以在记录中更具创意。
 - en: '**Note**: All the queries in this tutorial are for [MySQL](https://www.mysql.com/).
     But you’re free to use the RDBMS of your choice.'
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意**：本教程中的所有查询都适用于[MySQL](https://www.mysql.com/)。但你可以自由使用你选择的RDBMS。'
 - en: 1\. Missing Values
   id: totrans-15
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 1\. 缺失值
 - en: Missing values in data records are always a problem. So you have to handle them
     accordingly.
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据记录中的缺失值总是一个问题。因此，你必须相应地处理它们。
 - en: A naive approach is to drop all the records that contain missing values for
     one or more fields. However, you should not do this unless you’re sure there is
     no other better way of handling missing values.
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 一种幼稚的方法是删除所有包含一个或多个字段缺失值的记录。然而，除非你确定没有其他更好的处理缺失值的方法，否则不应该这样做。
 - en: 'In the `employees` table, we see that there is a NULL value in the ‘department’
     column (see row of employee_id 13) indicating that the field is missing:'
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在`employees`表中，我们看到‘department’列中有一个NULL值（见employee_id 13的那一行），这表示该字段缺失：
 - en: '[PRE2]'
   id: totrans-19
   prefs: []
@@ -103,11 +120,13 @@
   id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![SQL中的数据清理：如何为分析准备混乱的数据](../Images/182a6d2a11cfa7a62989c7966dae25e5.png)'
 - en: 'You can use the [COALESCE() function](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce)
     to use the ‘Unknown’ string for the NULL value:'
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用[COALESCE()函数](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce)将‘Unknown’字符串用于NULL值：
 - en: '[PRE3]'
   id: totrans-22
   prefs: []
@@ -117,25 +136,30 @@
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行上述查询应给你以下结果：
 - en: '![Data Cleaning in SQL: How To Prepare Messy Data for Analysis](../Images/0c9890c3c0762ab25515a03e3561d51e.png)'
   id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![SQL中的数据清理：如何为分析准备混乱的数据](../Images/0c9890c3c0762ab25515a03e3561d51e.png)'
 - en: 2\. Duplicate Records
   id: totrans-25
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 2\. 重复记录
 - en: Duplicate records in a database table can distort the results of analysis. We’ve
     chosen the employee_id as the primary key in our database table. So we’ll not
     have any repeating employee records in the `employee_data` table.
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据库表中的重复记录可能会扭曲分析结果。我们选择了employee_id作为数据库表中的主键。因此，`employee_data`表中不会有重复的员工记录。
 - en: 'You can still the SELECT DISTINCT statement:'
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 你仍然可以使用SELECT DISTINCT语句：
 - en: '[PRE4]'
   id: totrans-28
   prefs: []
@@ -145,21 +169,26 @@
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 如预期的那样，结果集包含了所有20条记录：
 - en: '![Data Cleaning in SQL: How To Prepare Messy Data for Analysis](../Images/e5d4d878576c2bc007f8781ef7f5a7ac.png)'
   id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![SQL中的数据清洗：如何准备混乱的数据进行分析](../Images/e5d4d878576c2bc007f8781ef7f5a7ac.png)'
 - en: 3\. Data Type Conversion
   id: totrans-31
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 3\. 数据类型转换
 - en: 'If you notice, the ‘hire_date’ column is currently VARCHAR and not a date type.
     To make it easier when working with dates, it’s helpful to use the [STR_TO_DATE()](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_str-to-date)
     function like so:'
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你注意到，‘hire_date’ 列当前是VARCHAR而不是日期类型。为了在处理日期时更方便，使用 [STR_TO_DATE()](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_str-to-date)
+    函数会很有帮助，如下所示：
 - en: '[PRE5]'
   id: totrans-33
   prefs: []
@@ -171,36 +200,43 @@
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们仅选择了‘hire_date’列，并未对日期值进行任何操作。因此，查询输出应与之前的查询相同。
 - en: But if you want to perform operations such as adding an offset date to the values,
     this function can be helpful.
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 但如果你想执行例如添加偏移日期到值的操作，这个函数可能会有帮助。
 - en: 4\. Outliers
   id: totrans-36
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 4\. 异常值
 - en: Outliers in one or more numeric fields can skew analysis. So we should check
     for and remove outliers so as to filter out the data that is not relevant.
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个或多个数字字段中的异常值可能会影响分析。因此，我们应检查并移除异常值，以过滤掉不相关的数据。
 - en: But deciding which values constitute outliers requires domain knowledge and
     data using knowledge of both the domain and historical data.
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 但决定哪些值构成异常值需要领域知识和数据使用领域及历史数据的知识。
 - en: In our example, let's say we *know* that the ‘salary’ column has an upper limit
     of 100000\. So any entry in the ‘salary’ column can be at most 100000\. And entries
     greater than this value are outliers.
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的例子中，假设我们 *知道* ‘salary’ 列的上限为100000。因此，‘salary’ 列中的任何条目最多为100000。超过此值的条目为异常值。
 - en: 'We can check for such records by running the following query:'
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过运行以下查询来检查这些记录：
 - en: '[PRE6]'
   id: totrans-41
   prefs: []
@@ -211,25 +247,30 @@
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所示，‘salary’ 列中的所有条目都是有效的。因此结果集为空：
 - en: '![Data Cleaning in SQL: How To Prepare Messy Data for Analysis](../Images/0c5dd3614ce2ebe99e7e9742d9e30e4e.png)'
   id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![SQL中的数据清洗：如何准备混乱的数据进行分析](../Images/0c5dd3614ce2ebe99e7e9742d9e30e4e.png)'
 - en: 5\. Inconsistent Data Entry
   id: totrans-44
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 5\. 数据条目不一致
 - en: Inconsistent data entries and formatting are quite common especially in date
     and string columns.
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据条目和格式不一致在日期和字符串列中尤为常见。
 - en: In the `employees` table, we see that the record corresponding to employee ‘joe
     smith’ is not in the title case.
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 `employees` 表中，我们看到对应员工‘joe smith’的记录不是标题大小写。
 - en: 'But for consistency let''s select all the names formatted in the title case.
     You have to use the [CONCAT()](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
     function in conjunction with [UPPER()](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_upper)
@@ -238,6 +279,10 @@
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 但为了保持一致性，我们选择所有格式为标题大小写的名称。你需要使用 [CONCAT()](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_concat)
+    函数与 [UPPER()](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_upper)
+    和 [SUBSTRING()](https://dev.mysql.com/doc/refman/8.0/en/string-functions.html#function_substring)
+    函数一起使用，如下所示：
 - en: '[PRE7]'
   id: totrans-48
   prefs: []
@@ -247,23 +292,27 @@
   id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![SQL中的数据清洗：如何准备混乱的数据进行分析](../Images/f20a9e444f3ac9c7ff43f46a632d57a9.png)'
 - en: 6\. Validating Ranges
   id: totrans-50
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 6\. 验证范围
 - en: When talking about outliers, we mentioned how we’d like the upper limit on the
     ‘salary’ column to be 100000 and considered any salary entry above 100000 to be
     an outlier.
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 在讨论异常值时，我们提到希望将‘salary’列的上限设为100000，并将任何超过100000的工资条目视为异常值。
 - en: 'But it''s also true that you don''t want any negative values in the ‘salary’
     column. So you can run the following query to validate that all employee records
     contain values between 0 and 100000:'
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 但同样重要的是，你不希望‘salary’列中出现任何负值。因此，你可以运行以下查询来验证所有员工记录的值是否在0到100000之间：
 - en: '[PRE8]'
   id: totrans-53
   prefs: []
@@ -273,21 +322,25 @@
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所示，结果集为空：
 - en: '![Data Cleaning in SQL: How To Prepare Messy Data for Analysis](../Images/b58b8b318272b4a2d110c21337adb4fc.png)'
   id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![SQL中的数据清洗：如何准备混乱的数据进行分析](../Images/b58b8b318272b4a2d110c21337adb4fc.png)'
 - en: 7\. Deriving New Columns
   id: totrans-56
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 7\. 派生新列
 - en: Deriving new columns is not essentially a data cleaning step. However, in practice,
     you may need to use existing columns to derive new columns that are more helpful
     in analysis.
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 派生新列不一定是数据清洗步骤。然而，在实际操作中，你可能需要使用现有列来派生对分析更有帮助的新列。
 - en: For example, the `employees` table contains a ‘hire_date’ column. A more helpful
     field is, perhaps, a ‘years_of_service’ column that indicates how long an employee
     has been with the company.
