@@ -1,280 +1,443 @@
 - en: A Simple XGBoost Tutorial Using the Iris Dataset
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Iris 数据集的简单 XGBoost 教程
 - en: 原文：[https://www.kdnuggets.com/2017/03/simple-xgboost-tutorial-iris-dataset.html](https://www.kdnuggets.com/2017/03/simple-xgboost-tutorial-iris-dataset.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/03/simple-xgboost-tutorial-iris-dataset.html](https://www.kdnuggets.com/2017/03/simple-xgboost-tutorial-iris-dataset.html)
 - en: '**By Ieva Zarina, Software Developer, Nordigen.**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Ieva Zarina，软件开发员，Nordigen。**'
 - en: I had the opportunity to start using [xgboost](https://xgboost.readthedocs.io/en/latest/) machine
     learning algorithm, it is fast and shows [good results](https://github.com/dmlc/xgboost/tree/master/demo#usecases).
     Here I will be using multiclass prediction with the [iris dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set)
     from[ scikit-learn](http://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html).
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 我有机会开始使用 [xgboost](https://xgboost.readthedocs.io/en/latest/) 机器学习算法，它快速且显示出
+    [良好的结果](https://github.com/dmlc/xgboost/tree/master/demo#usecases)。在这里，我将使用 [iris
+    数据集](https://en.wikipedia.org/wiki/Iris_flower_data_set) 进行多分类预测，数据集来自 [scikit-learn](http://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html)。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT 工作'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![XGBoost](../Images/6ecd41b989b70db02e5ee3380e71a510.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![XGBoost](../Images/6ecd41b989b70db02e5ee3380e71a510.png)'
 - en: The XGBoost algorithm ([source](https://www.slideshare.net/JaroslawSzymczak1/xgboost-the-algorithm-that-wins-every-competition)).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: XGBoost 算法 ([source](https://www.slideshare.net/JaroslawSzymczak1/xgboost-the-algorithm-that-wins-every-competition))。
 - en: Installing Anaconda and xgboost
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 安装 Anaconda 和 xgboost
 - en: 'In order to work with the data, I need to install various scientific libraries
     for python. The best way I have found is to use [Anaconda](https://www.continuum.io/downloads).
     It simply installs all the libs and helps to [install new ones](http://conda.pydata.org/docs/using/pkgs.html#install-a-package).
     You can download the installer for Windows, but if you want to install it on a
     Linux server, you can just copy-paste this into the terminal:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了处理数据，我需要安装各种 Python 科学库。我发现最好的方法是使用 [Anaconda](https://www.continuum.io/downloads)。它可以简单地安装所有库，并帮助
+    [安装新的库](http://conda.pydata.org/docs/using/pkgs.html#install-a-package)。你可以下载适用于
+    Windows 的安装程序，但如果你想在 Linux 服务器上安装，只需将以下内容复制粘贴到终端：
 - en: '[PRE0]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'After this, **use conda to install pip** which you will need for installing
     xgboost. It is important to install it using Anaconda (in Anaconda’s directory),
     so that pip installs other libs there as well:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在此之后，**使用 conda 安装 pip**，你将需要它来安装 xgboost。重要的是使用 Anaconda（在 Anaconda 的目录中）来安装它，以便
+    pip 也能在那里安装其他库：
 - en: '[PRE1]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Now, a very important step: **install [xgboost Python Package](https://github.com/dmlc/xgboost/tree/master/python-package)
     dependencies** beforehand. I install these ones from experience:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，一个非常重要的步骤：**预先安装 [xgboost Python 包](https://github.com/dmlc/xgboost/tree/master/python-package)
+    的依赖项**。根据经验，我会安装这些依赖项：
 - en: '[PRE2]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'I upgrade my python virtual environment to have no [trouble](https://github.com/dmlc/xgboost/issues/463)
     with python versions:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我升级了我的 Python 虚拟环境，以避免 [trouble](https://github.com/dmlc/xgboost/issues/463)
+    与 Python 版本相关的问题：
 - en: '[PRE3]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'And finally I can install xgboost with pip (keep fingers crossed):'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我可以用 pip 安装 xgboost（祈祷好运）：
 - en: '[PRE4]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'This command installs the latest xgboost version, but if you want to use a
     previous one, just specify it with:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 此命令安装最新版本的 xgboost，但如果你想使用之前的版本，只需指定：
 - en: '[PRE5]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Now test if everything is has gone well – type **python** in the terminal and
     try to import xgboost:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在测试一下是否一切正常 – 在终端中输入 **python** 并尝试导入 xgboost：
 - en: '[PRE6]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: If you see no errors – perfect.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果没有看到错误 – 完美。
 - en: Xgboost Demo with the Iris Dataset
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Xgboost 与 Iris 数据集的演示
 - en: Here I will use the Iris dataset to show a simple example of how to use Xgboost.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我将使用 Iris 数据集来展示如何使用 Xgboost 的简单示例。
 - en: 'First you **load the dataset** from sklearn, where X will be the data, y –
     the class labels:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，你**加载数据集**来自 sklearn，其中 X 是数据，y 是类别标签：
 - en: '[PRE7]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Then you **split the data** into train and test sets with 80-20% [split](http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.train_test_split.html):'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后你将数据**拆分**成80-20%的训练集和测试集，[拆分](http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.train_test_split.html)：
 - en: '[PRE8]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Next you need to create the Xgboost specific **[DMatrix](http://xgboost.readthedocs.io/en/latest/python/python_intro.html)**
     data format from the numpy array. Xgboost can work with numpy arrays directly,
     load data from svmlignt files and other formats. Here is how to work with **numpy
     arrays**:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，你需要从numpy数组创建Xgboost特定的**[DMatrix](http://xgboost.readthedocs.io/en/latest/python/python_intro.html)**数据格式。Xgboost可以直接处理numpy数组，加载svmlignt文件及其他格式。以下是如何处理**numpy数组**：
 - en: '[PRE9]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'If you want to use svmlight for less memory consumption, first **[dump](http://scikit-learn.org/stable/modules/generated/sklearn.datasets.dump_svmlight_file.html)**the
     numpy array into **svmlight format **and then just pass the filename to DMatrix:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想使用svmlight以减少内存消耗，首先**[导出](http://scikit-learn.org/stable/modules/generated/sklearn.datasets.dump_svmlight_file.html)**numpy数组到**svmlight格式**，然后只需将文件名传递给DMatrix：
 - en: '[PRE10]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'Now for the Xgboost to work you need to set the **[parameters](https://github.com/dmlc/xgboost/blob/master/doc/parameter.md)**:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在为了让Xgboost工作，你需要设置**[参数](https://github.com/dmlc/xgboost/blob/master/doc/parameter.md)**：
 - en: '[PRE11]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Different datasets perform better with different parameters. The result can
     be really low with one set of params and really good with others. You can look
     at [this Kaggle script](https://www.kaggle.com/tanitter/introducing-kaggle-scripts/grid-search-xgboost-with-scikit-learn) how
     to search for the best ones. Generally try with eta 0.1, 0.2, 0.3, max_depth in
     range of 2 to 10 and num_round around few hundred.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 不同的数据集在不同的参数下表现不同。一个参数组合的结果可能很低，而另一个可能非常好。你可以查看[这个Kaggle脚本](https://www.kaggle.com/tanitter/introducing-kaggle-scripts/grid-search-xgboost-with-scikit-learn)了解如何寻找最佳参数。通常尝试eta
+    0.1、0.2、0.3，max_depth在2到10的范围内，num_round在几百左右。
 - en: Train
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 训练
 - en: 'Finally the training can begin. You just type:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终训练可以开始。你只需输入：
 - en: '[PRE12]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'To see how the model looks you can also [dump](http://xgboost.readthedocs.io/en/latest/python/python_intro.html#training)
     it in human readable form:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 要查看模型的样子，你也可以将其[导出](http://xgboost.readthedocs.io/en/latest/python/python_intro.html#training)为人类可读的形式：
 - en: '[PRE13]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'And it looks something like this (f0, f1, f2 are features):'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 它看起来像这样（f0、f1、f2是特征）：
 - en: '[PRE14]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: You can see that each tree is no deeper than 3 levels as set in the params.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以看到每棵树的深度不超过设置的3层。
 - en: 'Use the model to [**predict classes**](http://xgboost.readthedocs.io/en/latest/python/python_intro.html#prediction)
     for the test set:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用模型来[**预测类别**](http://xgboost.readthedocs.io/en/latest/python/python_intro.html#prediction)测试集的类别：
 - en: '[PRE15]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'But the predictions look something like this:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 但预测结果看起来像这样：
 - en: '[PRE16]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: 'Here each column represents class number 0, 1, or 2\. For each line you need
     to select that column **where the probability is the highest**:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，每一列代表类别0、1或2。对于每一行，你需要选择**概率最高**的那一列：
 - en: '[PRE17]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: 'Now you get a nice list with **predicted classes**:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你会得到一个包含**预测类别**的漂亮列表：
 - en: '[PRE18]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: 'Determine the [**precision**](http://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html)
     of this prediction:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 确定此预测的[**准确率**](http://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html)：
 - en: '[PRE19]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: 'Perfect! Now **[save](http://scikit-learn.org/stable/modules/model_persistence.html)**
     the model for later use:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 完美！现在**[保存](http://scikit-learn.org/stable/modules/model_persistence.html)**模型以备后用：
 - en: '[PRE20]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: Now you have a working model saved for later use, and ready for more prediction.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你有一个保存下来的工作模型，并准备进行更多预测。
 - en: 'See the full code on [github](https://gist.github.com/IevaZarina/ef63197e089169a9ea9f3109058a9679)
     or below:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看完整代码在[github](https://gist.github.com/IevaZarina/ef63197e089169a9ea9f3109058a9679)或下方：
 - en: '**Bio: [Ieva Zarina](https://www.linkedin.com/in/ieva-zarina-60515a72/)** is
     a Software Developer at Nordigen.'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Ieva Zarina](https://www.linkedin.com/in/ieva-zarina-60515a72/)** 是Nordigen的软件开发人员。'
 - en: '[Original](http://ieva.rocks/2016/08/25/iris_dataset_and_xgboost_simple_tutorial/).
     Reposted with permission.'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始链接](http://ieva.rocks/2016/08/25/iris_dataset_and_xgboost_simple_tutorial/)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[7 More Steps to Mastering Machine Learning With Python](/2017/03/seven-more-steps-machine-learning-python.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握Python机器学习的7个额外步骤](/2017/03/seven-more-steps-machine-learning-python.html)'
 - en: '[What I Learned Implementing a Classifier from Scratch in Python](/2017/02/learned-implementing-classifier-scratch-python.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我在Python中从头实现分类器的学习经历](/2017/02/learned-implementing-classifier-scratch-python.html)'
 - en: '[XGBoost: Implementing the Winningest Kaggle Algorithm in Spark and Flink](/2016/03/xgboost-implementing-winningest-kaggle-algorithm-spark-flink.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[XGBoost：在 Spark 和 Flink 中实现获胜的 Kaggle 算法](/2016/03/xgboost-implementing-winningest-kaggle-algorithm-spark-flink.html)'
 - en: More On This Topic
+  id: totrans-69
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何加速 XGBoost 模型训练](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
 - en: '[What are the Assumptions of XGBoost?](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[XGBoost 的假设是什么？](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
 - en: '[Tuning XGBoost Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[调整 XGBoost 超参数](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
 - en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用 XGBoost 进行时间序列预测](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
 - en: '[WTF is the Difference Between GBM and XGBoost?](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[GBM 和 XGBoost 之间有什么区别？](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
 - en: '[Pydantic Tutorial: Data Validation in Python Made Simple](https://www.kdnuggets.com/pydantic-tutorial-data-validation-in-python-made-simple)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Pydantic 教程：Python 数据验证简化版](https://www.kdnuggets.com/pydantic-tutorial-data-validation-in-python-made-simple)'
