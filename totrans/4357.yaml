@@ -3,63 +3,80 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在 Python 中合并 Pandas DataFrames
 - en: 原文：[https://www.kdnuggets.com/2020/12/merging-pandas-dataframes-python.html](https://www.kdnuggets.com/2020/12/merging-pandas-dataframes-python.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/12/merging-pandas-dataframes-python.html](https://www.kdnuggets.com/2020/12/merging-pandas-dataframes-python.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Dean McGrath](https://deanjmcgrath.com/), Aspiring Data Analyst**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Dean McGrath](https://deanjmcgrath.com/), 渴望成为数据分析师**'
 - en: '![Figure](../Images/145f203ebc56525355843ed2542e415c.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/145f203ebc56525355843ed2542e415c.png)'
 - en: Photo by [MILKOVÍ](https://unsplash.com/@milkovi?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由 [MILKOVÍ](https://unsplash.com/@milkovi?utm_source=medium&utm_medium=referral)
+    提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: '* * *'
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT'
 - en: '* * *'
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Introduction
   id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: As Data Scientist, we will often find that we are required to analyse data from
     multiple data sources at the one time. To be successful at achieving this, we
     need to be able to merge different data sources using a variety of methods efficiently.
@@ -68,11 +85,14 @@
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为数据科学家，我们经常需要同时分析来自多个数据源的数据。要成功实现这一目标，我们需要能够高效地使用各种方法合并不同的数据源。今天我们将探讨使用 Pandas
+    内置的 `.merge()` 函数来通过几种不同的连接方法合并两个数据源。
 - en: Getting Started
   id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 入门
 - en: For those of you that are new to data science or haven’t been exposed to Python
     Pandas yet, we recommend first beginning with [Pandas Series & DataFrame Explained](https://towardsdatascience.com/pandas-series-dataframe-explained-a178f9748d46) or [Python
     Pandas Iterating a DataFrame](https://towardsdatascience.com/python-pandas-iterating-a-dataframe-eb7ce7db62f8).
@@ -81,34 +101,42 @@
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于那些刚接触数据科学或尚未接触 Python Pandas 的人，我们建议首先阅读 [Pandas 系列 & DataFrame 解析](https://towardsdatascience.com/pandas-series-dataframe-explained-a178f9748d46)
+    或 [Python Pandas 迭代 DataFrame](https://towardsdatascience.com/python-pandas-iterating-a-dataframe-eb7ce7db62f8)。这两篇文章将为你提供安装说明和今天文章的背景知识。
 - en: Pandas Merge
   id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Pandas 合并
 - en: The Pandas built-in function `.merge()` provides a powerful method for joining
     two DataFrames using database-style joins.
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 内置的 `.merge()` 函数提供了一种强大的方法，通过数据库风格的连接来合并两个 DataFrames。
 - en: '**Syntax**'
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**语法**'
 - en: The above Python snippet shows the syntax for Pandas .merge() function.
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述 Python 代码片段显示了 Pandas `.merge()` 函数的语法。
 - en: Parameters
   id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参数
 - en: '`right` — This will be the DataFrame that you are joining.'
   id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`right` — 这将是你要连接的 DataFrame。'
 - en: '`how` — Here, you can specify how you would like the two DataFrames to join.
     The default is `inner` however, you can pass `left` for left outer join, `right` for
     right outer join and `outer` for a full outer join.'
@@ -116,12 +144,15 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`how` — 在这里，你可以指定你希望两个 DataFrame 如何连接。默认值是 `inner`，但是你可以传递 `left` 进行左外连接，`right`
+    进行右外连接，`outer` 进行完全外连接。'
 - en: '`on` — If both DataFrames contain a shared column or set of columns, then you
     can pass these to `on` as keys to merge.'
   id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`on` — 如果两个 DataFrame 都包含一个共享的列或一组列，你可以将这些列传递给 `on` 作为合并的键。'
 - en: '`left_on` — Here, you can specify a column or list of labels that you would
     like to join the left DataFrame. This parameter is handy when the columns that
     you would like to join on in both DataFrames are named differently.'
@@ -129,12 +160,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`left_on` — 在这里，你可以指定一个列或标签列表，用于连接左侧 DataFrame。当你希望在两个 DataFrame 中连接的列名不同的时候，这个参数非常有用。'
 - en: '`right_on` — Same conditions apply as with `left_on` however, for the right
     DataFrame.'
   id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`right_on` — 条件与 `left_on` 相同，只是针对右侧 DataFrame。'
 - en: '`left_index` — If you would like to join the left DataFrame using the index,
     then pass `True`.'
   id: totrans-26
@@ -295,35 +328,42 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 右连接
 - en: Pandas right join performs a similar function to the left join however the join
     method is applied to the Right DataFrame.
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 右连接执行的功能类似于左连接，但连接方法应用于右侧 DataFrame。
 - en: The above Python snippet shows the syntax for merging the two DataFrames using
     Pandas right join.
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的 Python 代码片段展示了使用 Pandas 右连接合并两个 DataFrame 的语法。
 - en: '![Figure](../Images/64ae2e7853d6cde563c7b5860c3316bd.png)'
   id: totrans-52
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/64ae2e7853d6cde563c7b5860c3316bd.png)'
 - en: The above screenshot shows the result of merging the two DataFrames using the
     right join.
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的截图显示了使用右连接合并两个 DataFrame 的结果。
 - en: As seen above, any key that does not exist from the right, in the left DataFrame,
     will have a `NaN` value inserted.
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所示，右侧 DataFrame 中不存在的任何键，在左侧 DataFrame 中将插入一个 `NaN` 值。
 - en: Outer Join
   id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 外连接
 - en: Pandas outer join merges both DataFrames and essentially reflects the outcome
     of combining a left and right outer join. The outer join will return all values
     from both the left and right DataFrame. Where Pandas cannot find a value within
@@ -331,20 +371,25 @@
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 外连接合并两个 DataFrame，并本质上反映了左外连接和右外连接的结果。外连接将返回左侧和右侧 DataFrame 的所有值。如果 Pandas
+    无法在合并的 DataFrame 中找到一个值，将使用 `NaN` 代替。
 - en: The above Python snippet shows the syntax for joining the two DataFrames using
     an outer join.
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的 Python 代码片段展示了使用外连接连接两个 DataFrame 的语法。
 - en: '![Figure](../Images/a13036a5997863b5d3cc1aa8e5201a32.png)'
   id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/a13036a5997863b5d3cc1aa8e5201a32.png)'
 - en: The above screenshot shows the result of merging the two DataFrames using an
     outer join.
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的截图显示了使用外连接合并两个 DataFrame 的结果。
 - en: When merging two DataFrames using an outer join, it is sometimes useful information
     to know where the record within the new DataFrame originated. You can view the
     origin of a record by passing `indicator=True` as a parameter to the `.merge()` function
@@ -352,11 +397,14 @@
   id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 在使用外连接合并两个 DataFrame 时，有时了解新 DataFrame 中记录的来源是有用的信息。你可以通过将 `indicator=True`
+    作为参数传递给 `.merge()` 函数来查看记录的来源，这将创建一个标题为 `_merge` 的新列。
 - en: Summary
   id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结
 - en: To be successful as a Data Scientist, you need to be skilled in handling data
     from multiple data sources often at the same time. Frequently we will need to
     combine data sources sometimes to enrich a dataset or merge historical snapshots
@@ -366,72 +414,89 @@
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 要成为成功的数据科学家，你需要具备处理来自多个数据源的数据的技能，并且经常是同时进行的。我们常常需要结合数据源来丰富数据集或在当前数据中合并历史快照。Pandas
+    提供了一个强大的方法来通过内置的 `.merge()` 函数连接数据集。Pandas `.merge()` 函数提供了创建不同类型连接的灵活性，以实现所需的输出。
 - en: Thank you for taking the time to read our story — we hope you have found it
     valuable!
   id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢你抽出时间阅读我们的故事——希望你觉得它有价值！
 - en: '**Bio: [Dean McGrath](https://deanjmcgrath.com/)** ([@DeanMcGrath8](https://twitter.com/DeanMcGrath8))
     is an Aspiring Data Analyst, and contributor to Towards Data Science.'
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Dean McGrath](https://deanjmcgrath.com/)** ([@DeanMcGrath8](https://twitter.com/DeanMcGrath8))
+    是一名有志的数据分析师，并且是 Towards Data Science 的贡献者。'
 - en: '[Original](https://towardsdatascience.com/python-pandas-merging-dataframes-aebbf898a9ff).
     Reposted with permission.'
   id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/python-pandas-merging-dataframes-aebbf898a9ff)。经许可转载。'
 - en: '**Related:**'
   id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Pandas on Steroids: End to End Data Science in Python with Dask](/2020/11/pandas-steroids-dask-python-data-science.html)'
   id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Pandas 升级版：使用 Dask 完成端到端的数据科学](/2020/11/pandas-steroids-dask-python-data-science.html)'
 - en: '[Every Complex DataFrame Manipulation, Explained & Visualized Intuitively](/2020/11/dataframe-manipulation-explained-visualized.html)'
   id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个复杂的 DataFrame 操作，直观解释与可视化](/2020/11/dataframe-manipulation-explained-visualized.html)'
 - en: '[10 Underrated Python Skills](/2020/10/10-underrated-python-skills.html)'
   id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[10 个被低估的 Python 技能](/2020/10/10-underrated-python-skills.html)'
 - en: More On This Topic
   id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Query Your Pandas DataFrames with SQL](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
   id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 SQL 查询你的 Pandas DataFrames](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
 - en: '[Using the apply() Method with Pandas Dataframes](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)'
   id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Pandas DataFrame 中使用 apply() 方法](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)'
 - en: '[Combining Pandas DataFrames Made Simple](https://www.kdnuggets.com/2022/09/combining-pandas-dataframes-made-simple.html)'
   id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[简化 Pandas DataFrames 合并](https://www.kdnuggets.com/2022/09/combining-pandas-dataframes-made-simple.html)'
 - en: '[How to Merge Pandas DataFrames](https://www.kdnuggets.com/2023/01/merge-pandas-dataframes.html)'
   id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何合并 Pandas DataFrames](https://www.kdnuggets.com/2023/01/merge-pandas-dataframes.html)'
 - en: '[3 Ways to Merge Pandas DataFrames](https://www.kdnuggets.com/2023/03/3-ways-merge-pandas-dataframes.html)'
   id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[合并 Pandas DataFrame 的 3 种方法](https://www.kdnuggets.com/2023/03/3-ways-merge-pandas-dataframes.html)'
 - en: '[Converting JSONs to Pandas DataFrames: Parsing Them the Right Way](https://www.kdnuggets.com/converting-jsons-to-pandas-dataframes-parsing-them-the-right-way)'
   id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将 JSON 转换为 Pandas DataFrame：正确解析的方法](https://www.kdnuggets.com/converting-jsons-to-pandas-dataframes-parsing-them-the-right-way)'
