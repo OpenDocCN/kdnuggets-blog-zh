@@ -1,46 +1,71 @@
 - en: 'Automate Stacking In Python: How to Boost Your Performance While Saving Time'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在 Python 中自动化堆叠：如何在节省时间的同时提升性能
 - en: 原文：[https://www.kdnuggets.com/2019/08/automate-stacking-python-boost-performance.html](https://www.kdnuggets.com/2019/08/automate-stacking-python-boost-performance.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/08/automate-stacking-python-boost-performance.html](https://www.kdnuggets.com/2019/08/automate-stacking-python-boost-performance.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Lukas Frei](https://www.linkedin.com/in/lukas-k-frei/), PwC**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Lukas Frei](https://www.linkedin.com/in/lukas-k-frei/)，PwC**'
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Utilizing stacking (stacked generalizations) is a very hot topic when it comes
     to pushing your machine learning algorithm to new heights. For instance, most
     if not all winning Kaggle submissions nowadays make use of some form of stacking
@@ -54,15 +79,23 @@
     architectures would significantly simplify this process. The remainder of this
     article will deal with the package ***vecstack ***I recently came across that
     is attempting just this***.***
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用堆叠（堆叠泛化）在提升机器学习算法到新高度时是一个非常热门的话题。例如，如今大多数甚至所有获奖的 Kaggle 提交都使用某种形式的堆叠或其变体。堆叠泛化首次在
+    1992 年的论文*Stacked Generalization*中由**David Wolpert**提出，*其主要目的是减少泛化误差*。根据 Wolpert
+    的说法，它们可以被理解为“交叉验证的更复杂版本”*。虽然Wolpert 自己当时指出堆叠泛化的许多部分是“黑艺”，但似乎构建越来越大的堆叠泛化模型比小的堆叠泛化模型更有优势。然而，随着这些模型规模的不断扩大，它们的复杂性也在增加。自动化构建不同架构的过程将显著简化这一过程。本文的其余部分将讨论我最近遇到的一个包***vecstack***，它正试图实现这一点***。
 - en: '![figure-name](../Images/6a9a0a6d18107156947e2b316d8415e7.png)Source: [https://giphy.com/gifs/funny-food-hRsayJrDAx8WY](https://giphy.com/gifs/funny-food-hRsayJrDAx8WY)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/6a9a0a6d18107156947e2b316d8415e7.png)来源：[https://giphy.com/gifs/funny-food-hRsayJrDAx8WY](https://giphy.com/gifs/funny-food-hRsayJrDAx8WY)'
 - en: What Does a Stacked Generalization Look like?
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 堆叠泛化是什么样的？
 - en: 'The main idea behind the structure of a stacked generalization is to use one
     or more first level models, make predictions using these models and then use these
     predictions as features to fit one or more second level models on top. To avoid
@@ -71,224 +104,342 @@
     but I’m going to describe ‘Variant A’ in this paragraph. To get the final predictions
     in this variant, we take the mean or mode of all of our predictions. The whole
     process can be visualized using this GIF from vecstacks’ documentation:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 堆叠泛化结构的主要思想是使用一个或多个第一层模型，通过这些模型进行预测，然后使用这些预测作为特征来拟合一个或多个第二层模型。为了避免过拟合，通常使用交叉验证来预测训练集的
+    OOF（折外）部分。这个包中有两种不同的变体，但我将在这一段中描述“变体 A”。在这种变体中，我们通过计算所有预测值的均值或众数来得到最终预测。整个过程可以使用以下来自
+    vecstack 文档的 GIF 进行可视化：
 - en: '![figure-name](../Images/b67acfb1d333e7cee31dbb4f3056a430.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/b67acfb1d333e7cee31dbb4f3056a430.png)'
 - en: 'Use Case: Building a Stacked Generalization for Classification'
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '用例: 为分类构建堆叠泛化'
 - en: After having taken a look at the documentation, it was time to try using the
     package myself and see how it works. To do so, I decided to use the wine data
     set available on the UCI Machine Learning Repository. The problem statement for
     this data set is to use the 13 features, which all represent different aspects
     of the wine, to predict from which of three cultivars in Italy the wine was derived.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在查看了文档之后，是时候亲自尝试使用这个包，看看它如何工作。为此，我决定使用 UCI 机器学习库中提供的葡萄酒数据集。这个数据集的问题陈述是使用 13
+    个特征，这些特征代表了葡萄酒的不同方面，以预测葡萄酒来自意大利的哪个三种品种之一。
 - en: 'To get started, let’s first import the packages we are going to need for our
     project:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 要开始，让我们首先导入项目中需要的包：
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Now we are ready to import our data and take a look at it to gain a better
     understanding of what it looks like:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们准备好导入数据并查看，以更好地了解数据的样子：
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Running the code chunk above gives us:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行上述代码块，我们得到：
 - en: '![figure-name](../Images/6c4f3cb721feca132d0a79ac81fab88d.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/6c4f3cb721feca132d0a79ac81fab88d.png)'
 - en: Note that I used **.sample()** instead if **.head()** to avoid being potentially
     misled by assuming the entire data set has the structure of the first five rows.
     Luckily, this data set does not have any missing values, so we can easily use
     it to test our package right away without any of the usually required data cleaning
     and preparation.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，我使用了**.sample()**而不是**.head()**，以避免由于假设整个数据集具有前五行的结构而可能被误导。幸运的是，这个数据集没有任何缺失值，因此我们可以直接使用它来测试我们的包，而无需进行通常需要的数据清理和准备。
 - en: Following this, we are going to separate the response from the input variables
     and perform an 80:20 train-test-split following the example on vecstacks’ documentation.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将把响应变量从输入变量中分离出来，并按照 vecstacks 文档中的示例执行 80:20 的训练-测试-拆分。
 - en: '[PRE2]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'We are getting closer to the interesting part. Remember the GIF from earlier?
     It is time now to define a few first level models for our stacked generalization.
     This step definitely deserves its own article but for purposes of simplicity,
     we are going to use three models: A KNN-Classifier, a Random Forest Classifier
     and an XGBoost Classifier.'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们离有趣的部分越来越近了。还记得之前的GIF吗？现在是定义几个第一层模型进行堆叠泛化的时候了。这一步绝对值得单独写一篇文章，但为了简单起见，我们将使用三个模型：KNN
+    分类器、随机森林分类器和 XGBoost 分类器。
 - en: '[PRE3]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: These parameters were not tuned prior to setting them as the purpose of this
     article is testing the package. If you were to optimize performance, you should
     not just copy and paste these.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些参数在设置之前没有进行调优，因为本文的目的是测试包。如果你想优化性能，不应该仅仅复制和粘贴这些。
 - en: 'Taking the next part of code from the documentation, we are essentially performing
     the GIF’s first part using first level models to make predictions:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 从文档中获取下一部分代码，我们实际上是使用第一层模型进行预测，以执行 GIF 的第一部分：
 - en: '[PRE4]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'The stacking function takes several inputs:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 堆叠函数接受几个输入：
 - en: '***models***: the first level models we defined earlier'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***models***: 我们之前定义的第一层模型'
 - en: '***X_train, y_train, X_test***: our data'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***X_train, y_train, X_test***: 我们的数据'
 - en: '***regression***: Boolean indicating whether we want to use the function for
     regression. In our case set to False since this is a classification'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***regression***: 布尔值，指示是否要将函数用于回归。在我们的情况下设置为 False，因为这是一个分类问题'
 - en: '***mode:*** using the earlier describe out-of-fold during cross-validation'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***模式:*** 使用之前描述的交叉验证中的外折'
 - en: '***needs_proba***: Boolean indicating whether you need the probabilities of
     class labels'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***needs_proba***: 布尔值，指示是否需要类别标签的概率'
 - en: '***save_dir***: save the result to directory Boolean'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***save_dir***: 将结果保存到目录布尔值'
 - en: '***metric***: what evaluation metric to use (we imported the accuracy_score
     in the beginning)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***metric***: 使用什么评估指标（我们在开始时导入了 accuracy_score）'
 - en: '***n_folds***: how many folds to use for cross-validation'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***n_folds***: 用于交叉验证的折数'
 - en: '***stratified***: whether to use stratified cross-validation'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***stratified***: 是否使用分层交叉验证'
 - en: '***shuffle***: whether to shuffle the data'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***shuffle***: 是否打乱数据'
 - en: '***random_state***: setting a random state for reproducibility'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***random_state***: 设置随机状态以确保可重复性'
 - en: '***verbose***: 2 here refers to printing all info'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***verbose***: 这里的 2 指打印所有信息'
 - en: 'Doing so, we get the following output:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这样做后，我们得到如下输出：
 - en: '[PRE5]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Again, referring to the GIF, all that’s left to do now is fit the second level
     model(s) of our choice on our predictions to make our final predictions. In our
     case, we are going to use an XGBoost Classifier. This step is not significantly
     different from a regular fit-and-predict in sklearn except for the fact that instead
     of using X_train to train our model, we are using our predictions S_train.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次参考 GIF，现在只需在我们的预测上拟合我们选择的第二级模型以做出最终预测。在我们的案例中，我们将使用 XGBoost 分类器。这一步骤与 sklearn
+    中的常规拟合和预测没有显著不同，只是我们用预测值 S_train 代替 X_train 来训练模型。
 - en: '[PRE6]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Conclusion
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: Using vecstacks’ stacking automation, we’ve managed to predict the correct wine
     cultivar with an accuracy of approximately 97.2%! As you can see, the API does
     not collide with the sklearn API and could, therefore, provide a helpful tool
     when trying to speed up your stacking workflow.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 利用 vecstacks 的堆叠自动化，我们已经成功预测出正确的葡萄酒品种，准确率约为 97.2%！如你所见，该 API 与 sklearn API 不冲突，因此在尝试加快堆叠工作流时，它可以提供一个有用的工具。
 - en: As always, if you have any feedback or found mistakes, please don’t hesitate
     to reach out to me.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 一如既往，如果你有任何反馈或发现错误，请随时与我联系。
 - en: '*References*:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '*参考文献*：'
 - en: '[1] David H. Wolpert, [Stacked Generalization](https://www.researchgate.net/publication/222467943_Stacked_Generalization) (1992),
     Neural Networks'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] David H. Wolpert, [堆叠泛化](https://www.researchgate.net/publication/222467943_Stacked_Generalization)
+    (1992), 神经网络'
 - en: '[2] Igor Ivanov, [Vecstack](https://github.com/vecxoz/vecstack) (2016), GitHub'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2] Igor Ivanov, [Vecstack](https://github.com/vecxoz/vecstack) (2016), GitHub'
 - en: '[3] M. Forina et al, [Wine Data Set](https://archive.ics.uci.edu/ml/datasets/wine) (1991),
     UCI Machine Learning Repository'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '[3] M. Forina 等, [葡萄酒数据集](https://archive.ics.uci.edu/ml/datasets/wine) (1991),
+    UCI 机器学习库'
 - en: '**Bio: [Lukas Frei](https://www.linkedin.com/in/lukas-k-frei/)** is a Data
     Science Consultant at PwC.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Lukas Frei](https://www.linkedin.com/in/lukas-k-frei/)** 是 PwC 的数据科学顾问。'
 - en: '[Original](https://towardsdatascience.com/automate-stacking-in-python-fc3e7834772e).
     Reposted with permission.'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/automate-stacking-in-python-fc3e7834772e).
+    经许可转载。'
 - en: '**Related:**'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Here’s how you can accelerate your Data Science on GPU](/2019/07/accelerate-data-science-on-gpu.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[这里是你如何加速你的数据科学工作在 GPU 上](/2019/07/accelerate-data-science-on-gpu.html)'
 - en: '[One Simple Trick for Speeding up your Python Code with Numpy](/2019/06/speeding-up-python-code-numpy.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Numpy 加速你的 Python 代码的一个简单技巧](/2019/06/speeding-up-python-code-numpy.html)'
 - en: '[GPU Accelerated Data Analytics & Machine Learning](/2019/08/gpu-accelerated-data-analytics-machine-learning.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[GPU 加速的数据分析与机器学习](/2019/08/gpu-accelerated-data-analytics-machine-learning.html)'
 - en: More On This Topic
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How Big Data Is Saving Lives in Real Time: IoV Data Analytics Helps…](https://www.kdnuggets.com/how-big-data-is-saving-lives-in-real-time-iov-data-analytics-helps-prevent-accidents)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[大数据如何实时拯救生命：IoV 数据分析帮助…](https://www.kdnuggets.com/how-big-data-is-saving-lives-in-real-time-iov-data-analytics-helps-prevent-accidents)'
 - en: '[5 Mistakes I Made While Switching to Data Science Career](https://www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[转行数据科学时犯的 5 个错误](https://www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html)'
 - en: '[Boost your machine learning model performance!](https://www.kdnuggets.com/2023/04/manning-boost-machine-learning-model-performance.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提升你的机器学习模型性能！](https://www.kdnuggets.com/2023/04/manning-boost-machine-learning-model-performance.html)'
 - en: '[Automate Your Codebase with Promptr and GPT](https://www.kdnuggets.com/2023/04/automate-codebase-promptr-gpt.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Promptr 和 GPT 自动化你的代码库](https://www.kdnuggets.com/2023/04/automate-codebase-promptr-gpt.html)'
 - en: '[5 Tasks To Automate With Python](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 自动化的 5 个任务](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)'
 - en: '[Automate Microsoft Excel and Word Using Python](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 自动化 Microsoft Excel 和 Word](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'

@@ -1,25 +1,31 @@
 - en: 'Deep Learning for NLP: Creating a Chatbot with Keras!'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2019/08/deep-learning-nlp-creating-chatbot-keras.html](https://www.kdnuggets.com/2019/08/deep-learning-nlp-creating-chatbot-keras.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
 - en: '**By [Jaime Zornoza](https://www.linkedin.com/in/jaime-zornoza/), Universidad
     Politecnica de Madrid**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/466171708fa0abb0c85f38ffa04addb0.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
 - en: In the previous post, we learned what **Artificial Neural Networks and Deep
     Learning **are. Also, some neural network structures for exploiting sequential
     data like text or audio were introduced. If you haven’t read that post, you should
     sit back, grab a coffee, and slowly enjoy it. **It can be found **[**here**](https://towardsdatascience.com/deep-learning-for-nlp-anns-rnns-and-lstms-explained-95866c1db2e4?source=friends_link&sk=3f07244ea80a8ceaf23ee8a4e8a4beea)**.**
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: This new post will cover** how to use Keras**, a very popular library for neural
@@ -28,24 +34,29 @@
     yes/no **answering bot in Python**. We will use the easy going nature of Keras
     to implement a RNN structure from the paper “*End to End Memory Networks*” by
     Sukhbaatar et al (which you can find [here](https://arxiv.org/pdf/1503.08895.pdf)).
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
 - en: This is interesting because having defined a task or application (creating a
     yes/no chatbot to answer specific questions), we will learn how **to translate
     the insights from a research work onto an actual model** that we can then use
     to reach our application goals.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: Don’t be scared if this is your first time **implementing an NLP model**; I
     will go through every step, and put a link to the code at the end. For the **best
     learning experience**, I suggest you first read the post, and then go through
     the code while glancing at the sections of the post that go along with it.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: Lets get to it then!
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '**Keras: Easy Neural Networks in Python**'
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -55,136 +66,189 @@
     training it, and then using it to make predictions, **easy and accessible for
     anyone with a basic programming knowledge**, while still allowing developers to
     fully customise the parameters of the ANN.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: Basically, Keras is actually just an interface that can run on top of different
     Deep Learning frameworks like** CNTK, Tensorflow, or Theano** for example. It
     works the same, independently of the back-end that is used.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/216ff5898cd42996150f992a83cd0b75.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
 - en: Layered structure of the Keras API. As it can be seen, it can run on top of
     different frameworks seamlessly.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: As we mentioned in the previous post, in a Neural Network each node in a specific
     layer takes the weighted sum of the outputs from the previous layer, applies a
     mathematical function to them, and then passes that result to the next layer.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们在上一篇文章中提到的，在神经网络中，每个特定层的节点都会对来自上一层的输出进行加权求和，应用数学函数，然后将结果传递到下一层。
 - en: With Keras we can create a block representing each layer, where these mathematical
     operations and the number of nodes in the layer can be easily defined. These different
     layers can be created by typing an intuitive and **single line of code.**
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Keras，我们可以创建一个表示每一层的模块，其中这些数学操作和层中的节点数量可以轻松定义。这些不同的层可以通过输入直观的**单行代码**来创建。
 - en: 'The **steps for creating a Keras model** are the following:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**创建 Keras 模型的步骤**如下：'
 - en: '**Step 1:** First we must define a network model, which most of the time will
     be the **S*equential* model:** the network will be defined as a sequence of layers,
     each with its own customisable size and activation function. In these models the
     first layer will be the **input layer**, which requires us to define the size
     of the input that we will be feeding to the network. After this more and more
     layers can be added and customised until we reach the final output layer.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 1：** 首先，我们必须定义一个网络模型，大多数时候，这将是**顺序模型**：网络将被定义为一系列层，每层具有其自定义大小和激活函数。在这些模型中，第一层将是**输入层**，我们需要定义将输入到网络中的输入大小。之后，可以添加更多层并进行自定义，直到达到最终的输出层。'
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '**Step 2:** After creating the structure of the network in this manner we have
     to **compile it**, which transforms the simple sequence of layers that we have
     previously defined, into a complex group of matrix operations that dictate how
     the network behaves. Here we must define the optimisation algorithm that will
     be used to train the network, and also choose the loss function that will be minimised.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 2：** 在以这种方式创建网络结构之后，我们需要**编译它**，这将简单的层序列转变为复杂的矩阵运算组，这些运算组决定了网络的行为。在这里，我们必须定义将用于训练网络的优化算法，并选择需要最小化的损失函数。'
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '**Step 3: **Once this is done, we can *train* or ***fit*** the network, which
     is done using the back-propagation algorithm mentioned in the previous post.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 3：** 一旦完成，我们可以*训练*或***拟合***网络，这将使用上一篇文章中提到的反向传播算法完成。'
 - en: '[PRE2]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '**Step 4: **Hurray! Our network is trained. Now we can use it to make predictions
     on new data.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 4：** 太棒了！我们的网络已经训练好了。现在我们可以用它对新数据进行预测。'
 - en: As you can see,** it is fairly easy to build a network using Keras,** so lets
     get to it and use it to create our chatbot! The blocks of code used above are
     not representative of an actual concrete neural network model, they are just examples
     of each of the steps to help illustrate how straightforward it is to build a Neural
     Network using the Keras API.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如你所看到的，**使用 Keras 构建网络非常简单**，所以让我们开始并使用它来创建我们的聊天机器人吧！上述代码块并不代表实际的具体神经网络模型，它们只是帮助说明如何使用
+    Keras API 简单地构建神经网络的每一步的示例。
 - en: You can find all the documentation about Keras and how to install it in its [official
     web page](https://keras.io/).
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在其[官方网站](https://keras.io/)上找到所有关于 Keras 的文档以及如何安装它的信息。
 - en: 'The Project: Using Recurrent Neural Networks to build a Chatbot'
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 项目：使用递归神经网络构建一个聊天机器人
 - en: Now we know what all these different types of neural networks are, lets use
     them to **build a chat-bo**t that can answer some questions for us!
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们知道了所有这些不同类型的神经网络，让我们使用它们来**构建一个聊天机器人**，它可以回答我们的一些问题！
 - en: Most of the time, neural network structures are more complex than just the standard
     input-hidden layer-output. Sometimes we might want to **invent a neural network
     ourselfs** and play around with the different node or layer combinations. Also,
     in some occasions we might want to **implement a model we have seen somewhere**,
     like in a scientific paper.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 大多数时候，神经网络的结构比标准的输入-隐藏层-输出更复杂。有时我们可能会想要**自己设计一个神经网络**，并尝试不同的节点或层组合。此外，在某些情况下，我们可能会想要**实现我们在某处看到的模型**，比如在科学论文中。
 - en: In this post we will go through an example of this second case, and **construct
     the neural model from the paper “*End to End Memory Networks*”** by Sukhbaatar
     et al (which you can find [here](https://arxiv.org/pdf/1503.08895.pdf)).
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将通过一个例子来说明这种第二种情况，并**构建来自论文“*端到端记忆网络*”**的神经模型，由 Sukhbaatar 等人编写（你可以在[这里](https://arxiv.org/pdf/1503.08895.pdf)找到）。
 - en: Also we will see how to save the trained model, so that we don’t have to train
     the network every time we want to make predictions using the model we have built. **Lets
     go then!**
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还将看到如何保存训练好的模型，以便在使用我们构建的模型进行预测时无需每次都重新训练网络。**那么我们开始吧！**
 - en: 'The model: Inspiration'
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型：灵感
 - en: As mentioned earlier, the RNN used in this post, has been taken from the paper [“*End
     to End Memory Networks*”](https://arxiv.org/pdf/1503.08895.pdf) , so I recommend
     you take a look at it before proceeding, although I will explain the most relevant
     parts in the following lines.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 如前所述，本篇文章中使用的RNN来源于论文[“*End to End Memory Networks*”](https://arxiv.org/pdf/1503.08895.pdf)，因此建议你在继续之前先查看一下，尽管我会在接下来的内容中解释最相关的部分。
 - en: This paper implements an RNN like structure that uses an **attention model** to
     compensate for the long term memory issue about RNNs that we discussed in the
     previous post.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文实现了一个类似RNN的结构，使用**注意力模型**来弥补我们在前一篇文章中讨论的RNN的长期记忆问题。
 - en: Don’t know what an attention model is? **Do not worry**, I will explain it in
     simple terms to you. Attention models gathered a lot of interest because of their
     very good results in tasks like** machine translation**. They address the issue
     of** long sequences** and short term memory of RNNs that was mentioned previously.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 不知道什么是注意力模型？**不用担心**，我会用简单的术语来解释。注意力模型引起了很多关注，因为它们在**机器翻译**等任务中取得了很好的结果。它们解决了之前提到的**长序列**和RNN的短期记忆问题。
 - en: To gather an **intuition **of what attention does, think of how a **human would
     translate **a long sentence from one language to another. **Instead** of taking
     the **whoooooole** sentence and then translating it in one go, you would split
     the sentence into smaller chunks and translate these smaller pieces one by one.
     We work part by part with the sentence because **it is really difficult to memorise
     it entirely** and then translate it at once.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了获取**注意力的直观理解**，想象一下一个**人类如何翻译**一个长句子从一种语言到另一种语言。**而不是**一次性翻译**整句话**，你会将句子拆分成更小的部分，然后逐一翻译这些小块。我们逐部分处理句子，因为**一次性记住整个句子真的很困难**。
 - en: '![Figure](../Images/488803d9ccddb53671a3a9824af3406a.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/488803d9ccddb53671a3a9824af3406a.png)'
 - en: How a human would translate the text on the top from English to Spanish
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 人类如何将上面的文本从英语翻译成西班牙语
 - en: An attention mechanism does just this. In each time step, t**he model gives
     a higher weight** in the output to those parts of the input sentence that are
     more relevant towards the task that we are trying to complete. This is where the
@@ -192,239 +256,346 @@
     above illustrates this very well; to translate the first part of the sentence,
     it makes little sense to be looking at the entire sentence or to the last part
     of the sentence.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意力机制正是实现了这一点。在每个时间步，t**模型会在输出中对输入句子中与任务相关性更高的部分赋予更大的权重**。这就是名字的由来：**它*关注*重要的部分**。上面的例子很好的说明了这一点；为了翻译句子的第一部分，查看整个句子或最后一部分几乎没有意义。
 - en: The following figure shows the** performance of RNN vs Attention models as we
     increase the length of the input sentence**. When faced with a very long sentence,
     and ask to perform a specific task, the RNN, after processing all the sentence
     will have probably forgotten about the first inputs it had.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 下图展示了**RNN与Attention模型在输入句子长度增加时的表现**。当面对一个非常长的句子并要求执行特定任务时，RNN在处理完所有句子后可能已经忘记了最初的输入。
 - en: '![Figure](../Images/c75d59aeca6037776c61928c03b776f4.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/c75d59aeca6037776c61928c03b776f4.png)'
 - en: Performance vs Sentence Length for RNNs and Attention models.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: RNN和注意力模型的性能与句子长度的关系。
 - en: Okay, now that we know what an attention model is, lets take a loser look at
     the structure of the model we will be using. This model takes an **input *xi*** (a
     sentence), a** query *q ***about such sentence, and outputs a yes/ no **answer** ***a***.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 好了，现在我们知道什么是注意力模型了，我们来详细看看我们将使用的模型结构。这个模型接收**输入 *xi***（一个句子），一个**查询 *q***关于这个句子的，并输出一个是/否的**答案**
+    *a*。
 - en: '![Figure](../Images/23e823c3de7f5094234cd219bf9a515e.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/23e823c3de7f5094234cd219bf9a515e.png)'
 - en: On the left (a) a representation of a single layer of the model. On the right
     (b) 3 of these layers stacked together.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 左侧（a）是模型单层的表示。右侧（b）是堆叠在一起的3层。
 - en: On the left part of the previous image we can see a representation of a **single
     layer of this model**. Two different embeddings are calculated for each sentence, ***A*** and ***C***.
     Also, the query or question q is embedded, using the ***B*** embedding.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 在之前图像的左侧部分，我们可以看到**该模型的单层表示**。每个句子计算两个不同的嵌入，***A*** 和 ***C***。同时，查询或问题 q 也被嵌入，使用
+    ***B*** 嵌入。
 - en: The A embeddings ***mi***, are then computed using an inner product with the
     question embedding ***u*** (this is the part where the **attention is taking place**,
     as by computing the **inner product** between these embeddings what we are doing
     is looking for **matches of words from the query and the sentence**, to then give
     more importance to these matches using a *Softmax* function on the resulting terms
     of the dot product).
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: A 嵌入的 ***mi***，然后通过与问题嵌入 ***u*** 的内积计算（这是进行**注意力机制**的部分，通过计算这些嵌入之间的**内积**，我们实际上是在寻找**查询和句子中的词汇匹配**，然后使用*Softmax*
+    函数对点积结果进行加权）。
 - en: Lastly, we compute the output vector ***o*** using the embeddings from C ***(ci)***,
     and the weights or probabilities ***pi*** obtained from the dot product. With
     this output vector ***o***, the weight matrix ***W***, and the embedding of the
     question ***u***, we can finally calculate the predicted answer ***a hat***.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们使用来自 C 的嵌入 ***(ci)*** 和从点积获得的权重或概率 ***pi*** 计算输出向量 ***o***。有了这个输出向量 ***o***、权重矩阵
+    ***W*** 和问题的嵌入 ***u***，我们最终可以计算预测答案 ***a hat***。
 - en: To build the **entire network**, we just repeat these procedure on the different
     layers, using the predicted output from one of them as the input for the next
     one. This is shown on the right part of the previous image.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了构建**整个网络**，我们只需在不同层上重复这些过程，使用一个层的预测输出作为下一个层的输入。这在之前图像的右侧部分展示了。
 - en: Don’t worry if all these came too quick at you, hopefully you will get a better
     and complete understanding as we go through the different steps to **implement
     this model in Python**.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果所有这些内容对你来说来得太快，不用担心，希望在我们通过不同步骤**在 Python 中实现这个模型**时，你会有更好、更完整的理解。
 - en: 'The data: Stories, questions and answers'
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据：故事、问题和答案
 - en: In 2015, Facebook came up with a **bAbI data-set** and 20 tasks for testing
     text understanding and reasoning in the bAbI project. **The tasks are described
     in detail in the paper **[**here**](https://arxiv.org/abs/1502.05698#)**.**
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 2015 年，Facebook 提出了**bAbI 数据集**及 20 个用于测试文本理解和推理的任务，这些任务在 bAbI 项目中进行。**任务的详细描述可以在论文中找到[**这里**](https://arxiv.org/abs/1502.05698#)**。**
 - en: The goal of each task is to **challenge a unique aspect of machine-text related
     activities**, testing different capabilities of learning models. In this post
     we will face one of these tasks, specifically the “*QA with single supporting
     fact*”.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个任务的目标是**挑战机器文本相关活动的独特方面**，测试学习模型的不同能力。在这篇文章中，我们将面临其中一个任务，特别是“*具有单一支持事实的 QA*”。
 - en: 'The block bellow shows an example of the expected behaviour from this kind
     of QA bot:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 下方的块展示了这种 QA 机器人期望的行为示例：
 - en: '[PRE3]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The data-set comes already separated into** training data (10k instances)** and **test
     data (1k instances)**, where each instance has a **fact**, a **question**, and
     a yes/no **answer** to that question.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集已分为**训练数据（10k 实例）** 和 **测试数据（1k 实例）**，每个实例包含一个**事实**、一个**问题**和对该问题的“是/否”**答案**。
 - en: Now that we have seen the structure of our data, we need to **build a vocabulary**out
     of it. On a **Natural Language Processing** model a vocabulary is basically a **set
     of words** that the model knows and therefore can understand. If after building
     a vocabulary the model sees inside a sentence a word that is not in the vocabulary,
     it will either give it a 0 value on its sentence vectors, or represent it as unknown.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经了解了数据的结构，我们需要**构建一个词汇表**。在**自然语言处理**模型中，词汇表基本上是一个**模型了解并能够理解的词汇集合**。如果在构建词汇表后，模型在句子中看到一个词不在词汇表中，它将给该词在句子向量中的值设为
+    0，或者将其表示为未知。
 - en: '[PRE4]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: As our** training data is not very varied **(most questions use the same verbs
     and nouns but with different combinations), our vocabulary is not very big, but
     in **moderately sized NLP projects** the vocabulary can be very large.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们的**训练数据变化不大**（大多数问题使用相同的动词和名词，但组合不同），我们的词汇表不是很大，但在**中等规模的 NLP 项目**中，词汇表可能非常庞大。
 - en: Take into account that to build a vocabulary we should only use the **training
     data** most of the time; the **test data should be separated** from the training
     data at the very beginning of a Machine Learning project and not touched until
     it is time to **asses the performance** on the model that has been chosen and
     tuned.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，为了构建词汇表，我们大多数时候只应该使用**训练数据**；**测试数据应该从一开始就与训练数据分开**，直到评估所选择和调整的模型性能时才触碰。
 - en: After building the vocabulary we need to ***vectorize*** our data. As we are
     using normal words as the inputs to our models and **computers can only deal with
     numbers under the hood**, we need a way to **represent** our sentences, which
     are groups of words, **as vectors of numbers. Vectorizing does just this**.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 构建词汇表后，我们需要***向量化***我们的数据。由于我们使用的是普通单词作为模型的输入，而**计算机在底层只能处理数字**，我们需要一种方式来**表示**我们的句子，即单词组，**作为数字向量。向量化就是做这件事的**。
 - en: There are many ways of vectorizing our sentences, like ***Bag of Words*** models,
     or ***Tf-Idf***, however, for simplicity, we are going to just use an indexing
     vectorizing technique, in which we give each of the words in the vocabulary a
     unique index from 1 to the length of the vocabulary.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 向量化句子的方式有很多种，比如***词袋模型***或***Tf-Idf***，然而，为了简便，我们将只使用一种索引向量化技术，即给词汇表中的每个单词分配一个从
+    1 到词汇表长度的唯一索引。
 - en: '[PRE5]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Take into account that this vectorization is done using a random seed to start,
     so even tough you are using the same data as me, **you might get different indexes
     for each word**. Don’t worry; this will not affect the results of the project.
     Also, the words in our vocabulary were in upper and lowercase; when doing this
     vectorization all the words get **lowercased** for uniformity.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，这种向量化是使用随机种子开始的，因此即使你使用与我相同的数据，**你可能会得到每个单词的不同索引**。不要担心；这不会影响项目的结果。此外，我们的词汇表中的单词有大写和小写；在进行这种向量化时，为了统一性，所有单词都被**转为小写**。
 - en: After this, **because of the way Keras works**, we **need to pad **the sentences.
     What does this mean? It means that we need to search for the length of the longest
     sentence, convert every sentence to a vector of that length, and fill the gap
     between the number of words of each sentence, and the number of words of the longest
     sentences with zeros.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这之后，**由于 Keras 的工作方式**，我们**需要对句子进行填充**。这是什么意思？这意味着我们需要找到最长句子的长度，将每个句子转换为该长度的向量，并用零填充每个句子的单词数量与最长句子的单词数量之间的差距。
 - en: 'After doing this, a random sentence of the dataset should look like:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 完成后，数据集中的一个随机句子应该是这样的：
 - en: '[PRE6]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'As we can see, it has zeros everywhere except in the end (this sentence was
     a lot shorter than the longest sentence), where it has some numbers. What are
     these numbers? Well, they are the indexes representing the different words of
     the sentence: 20 is the index representing the word ***Mary****, *30 *is ****moved****, *24
     is ***to***, 1 is ***the***, 3 represents ***bathroom ***and so on. The actual
     sentence is:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 如我们所见，它到处都是零，除了末尾（这个句子比最长句子短很多），那里有一些数字。这些数字是什么？嗯，它们是代表句子中不同单词的索引：20 是代表单词***Mary***的索引，*30*
+    是****moved****，*24 是***to***，1 是***the***，3 代表***bathroom***，依此类推。实际句子是：
 - en: '[PRE7]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Okay, now that we have prepared the data, we are ready to build our Neural Network!
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，既然我们已经准备好了数据，我们现在可以开始构建我们的神经网络了！
 - en: 'The Neural Network: Building the model'
+  id: totrans-71
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 神经网络：构建模型
 - en: The first step to creating the network is to create what in Keras is known as ***placeholders*** for
     the inputs, which in our case are the **stories** and the **questions**. In an
     easy manner, these placeholders are containers where batches of our training data
     will be placed before being fed to the model.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建网络的第一步是在 Keras 中创建被称为***占位符***的输入，在我们的案例中是**故事**和**问题**。简单来说，这些占位符是容器，批量的训练数据会被放置在这些容器中，然后再输入到模型中。
 - en: '[PRE8]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: They have to have the same dimension as the data that will be fed, and can also
     have a batch size defined, although we can leave it blank if we dont know it at
     the time of creating the placeholders.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 它们必须具有与将要输入的数据相同的维度，并且还可以定义一个批量大小，尽管如果在创建占位符时不知道这个值，我们可以留空。
 - en: Now we have to create the **embeddings** mentioned in the paper, **A, C and
     B. **An embedding turns an integer number (in this case the index of a word) into
     a ***d***dimensional vector, where **context is taken into account**. Word embeddings
     are**widely used in NLP** and is one of the techniques that has made the field
     progress so much in the recent years.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们需要创建论文中提到的**嵌入**，**A, C 和 B**。嵌入将一个整数（在本例中是单词的索引）转换为***d***维向量，其中**考虑了上下文**。单词嵌入在**自然语言处理（NLP）中被广泛使用**，并且是近年来使这一领域取得显著进展的技术之一。
 - en: '[PRE9]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: The code above is an example of one of the embeddings done in the paper (A embedding).
     Like always in **Keras**, we first define the model (Sequential), and then add
     the embedding layer and a dropout layer, which reduces the chance of the model
     over-fitting by triggering off nodes of the network.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的代码是论文中完成的一个嵌入（A 嵌入）的示例。像往常一样，在**Keras**中，我们首先定义模型（Sequential），然后添加嵌入层和一个丢弃层，通过触发网络节点的关闭来减少模型过拟合的机会。
 - en: 'Once we have created the two embeddings for the input sentences, and the embeddings
     for the questions, we can start defining the operations that take place in our
     model. As mentioned previously, we compute the attention by doing the **dot product** between
     the embedding of the questions and one of the embeddings of the stories, and then
     doing a softmax. The following block shows how this is done:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们创建了输入句子的两个嵌入和问题的嵌入，我们可以开始定义模型中发生的操作。如前所述，我们通过计算问题的嵌入和故事嵌入之间的**点积**来计算注意力，然后进行softmax。下面的代码块展示了如何实现这一点：
 - en: '[PRE10]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: After this, we need to calculate the output ***o*** adding the match matrix
     with the second input vector sequence, and then calculate the **response** using
     this output and the encoded question.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们需要计算输出***o***，将匹配矩阵与第二个输入向量序列相加，然后使用这个输出和编码的问题来计算**响应**。
 - en: '[PRE11]'
+  id: totrans-81
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Lastly, once this is done we add the rest of the layers of the model, adding
     an **LSTM **layer (instead of an RNN like in the paper), a dropout layer and a
     final softmax to compute the output.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，完成这一过程后，我们将添加模型的其余层，包括一个**LSTM**层（而不是像论文中提到的RNN）、一个丢弃层和一个最终的softmax来计算输出。
 - en: '[PRE12]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Notice here that the output is a vector of the size of the vocabulary (that
     is, the length of the number of words known by the model), where all the positions
     should be zero except the ones at the indexes of** ‘yes’ and ‘no’.**
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，这里的输出是一个词汇表大小的向量（即模型已知的单词数量的长度），其中所有位置应该是零，除了**‘yes’ 和 ‘no’**的索引位置。
 - en: 'Learning from the data: Training the model'
+  id: totrans-85
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 从数据中学习：训练模型
 - en: Now we are ready to compile the model, and train it!
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们准备好编译模型并进行训练了！
 - en: '[PRE13]'
+  id: totrans-87
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: With these two lines we **build the final model**, and compile it, that is,
     define all the maths that will be going on in the background by specifying an **optimiser**,
     a **loss function** and a **metric** to optimise.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用这两行代码我们**构建最终模型**并编译它，也就是通过指定一个**优化器**、一个**损失函数**和一个**度量标准**来定义后台的所有数学运算。
 - en: Now its **time to train the model**, here we need to define the **inputs to
     the training**, (the input stories, questions and answers), the **batch size** that
     we will be feeding the model with (that is, how many inputs at once), and the **number
@@ -432,191 +603,288 @@
     will go through the training data in order to update the weights). I used 1000
     epochs and obtained an accuracy of 98%, but even with 100 to 200 epochs you should
     get some pretty good results.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是**训练模型的时候**，在这里我们需要定义**训练的输入**（即输入故事、问题和答案）、**批量大小**（即一次输入的数量）和**训练轮数**（即模型将通过训练数据的次数以更新权重）。我使用了1000轮训练，并获得了98%的准确率，但即使使用100到200轮，你也应该能获得相当不错的结果。
 - en: Note that depending on your hardware, this training might take a while. Just
     relax, sit back, **keep reading Medium** and wait until its done.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，根据你的硬件，这个训练可能需要一段时间。放轻松，坐下来，**继续阅读Medium**，等到训练完成。
 - en: After its completed the training you might be left wondering *“am I going to
     have to wait this long every time I want to use the model?”* the obvious answer
     my friend is, ***NO***. Keras allows developers to **save a certain model** it
     has trained, with the weights and all the configurations. The following block
     of code shows how this is done.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练完成后，你可能会想*“每次使用模型时我都需要等待这么久吗？”* 明显的答案是，***不***。Keras 允许开发者**保存特定的模型**，包括权重和所有配置。下面的代码块展示了如何实现这一点。
 - en: '[PRE14]'
+  id: totrans-92
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'Now, when we want to use the model is as easy as **loading** it like so:'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，当我们想要使用模型时，可以像这样**加载**它：
 - en: '[PRE15]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: Cool cool. Now that we have trained our model, lets see how it performs on new
     data, and** play a little bit with it!**
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 很酷。现在我们已经训练了模型，让我们看看它在新数据上的表现，并**玩一玩吧！**
 - en: 'Seeing the results: Testing and playing'
+  id: totrans-96
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 看到结果：测试和玩耍
 - en: Lets see how our model performs on the test data!
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看我们的模型在测试数据上的表现吧！
 - en: '[PRE16]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: These results are **an array**, as mentioned earlier that contain in every position
     the probabilities of each of the words in the vocabulary being the answer to the
     question. If we look at the first element of this array, we will see a vector
     of the size of the** vocabulary**, where all the times are close to 0 except the
     ones corresponding to **yes or no**.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些结果是**一个数组**，如前所述，包含每个词汇位置的概率，表示每个词是问题答案的概率。如果我们查看这个数组的第一个元素，我们会看到一个词汇表大小的向量，其中所有的值接近0，除了对应于**yes或no**的值。
 - en: Out of these, if we pick the **index of the highest value of the array **and
     then see to which word it corresponds to, we should **find out if the answer** is
     affirmative or negative.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 从这些中，如果我们选择**数组中最大值的索引**，然后查看它对应的单词，我们应该**找出答案**是肯定的还是否定的。
 - en: One fun thing that we can do now, is **create our own stories and questions**,
     and feed them to the bot to see what he says!
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以做一件有趣的事，那就是**创建我们自己的故事和问题**，并将其输入到机器人中，看看它会怎么说！
 - en: '[PRE17]'
+  id: totrans-102
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: I created a story and a question somehow** similar to what our little bot has
     seen before**, and after adapting it to the format that the neural network wants
     the bot answered ‘***YES***’ (in lowercase tough, he is not as enthusiastic as
     I am).
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 我创建了一个故事和一个问题，某种程度上**类似于我们的小机器人之前见过的内容**，并在将其调整为神经网络希望的格式后，机器人回答了‘***yes***’（虽然是小写的，他不像我那样热情）。
 - en: 'Let''s try with something different:'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们换点不同的东西试试：
 - en: '[PRE18]'
+  id: totrans-105
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: 'The answer this time was: ‘***Of course, who doesn’t?***’'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 这次的回答是：‘***当然了，谁不呢？***’
 - en: Just kidding, I didn’t try that story/question combination, as many of the words
     included are** not inside the vocabulary** of our little answering machine. Also,
     he only knows how to say ‘yes’ and ‘no’, and does not usually give out any other
     answers. **However, with more training data and some workarounds this could be
     easily achieved.**
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 只是开个玩笑，我没有尝试那个故事/问题组合，因为包含的许多词汇**不在我们小回答机器的词汇表中**。而且，它只会说‘yes’和‘no’，通常不会给出其他答案。**不过，通过更多的训练数据和一些变通方法，这是可以轻松实现的。**
 - en: That is it for today! I hope you guys enjoyed reading the post as much as I
     enjoyed writing it. Have a good day, take care, and enjoy AI!
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天就到这里！我希望你们阅读这篇文章和我写它时一样开心。祝你们一天愉快，保重，并享受人工智能！
 - en: You can find the code and the data on my [Github](https://github.com/jaimezorno/Deep-Learning-for-NLP-Creating-a-Chatbot/blob/master/Deep%20Learning%20for%20NLP-%20Creating%20a%20chatbot.ipynb) page.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在我的[Github](https://github.com/jaimezorno/Deep-Learning-for-NLP-Creating-a-Chatbot/blob/master/Deep%20Learning%20for%20NLP-%20Creating%20a%20chatbot.ipynb)页面找到代码和数据。
 - en: 'Other resources:'
+  id: totrans-110
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 其他资源：
 - en: If you want to go deeper into attention models, or understand some word vectorizing
     techniques that I mentioned, check out these additional resources I’ve put together
     for you. Enjoy!
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想深入了解注意力模型，或者理解我提到的一些词向量化技术，查看我为你整理的这些额外资源吧。祝好运！
 - en: '[A Beginner’s Guide to Attention Mechanisms and Memory Networks](https://skymind.ai/wiki/attention-mechanism-memory-network)'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '[初学者的注意力机制和记忆网络指南](https://skymind.ai/wiki/attention-mechanism-memory-network)'
 - en: '[Andrew’s Ng video with the intuition to attention models.](https://www.youtube.com/watch?v=SysgYptB198&t=486s)'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Andrew的Ng关于注意力模型的直观视频。](https://www.youtube.com/watch?v=SysgYptB198&t=486s)'
 - en: '[A Begginner’s Guide to Tf-Idf and Bag of Words](https://skymind.ai/wiki/bagofwords-tf-idf).'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '[初学者的Tf-Idf和词袋指南](https://skymind.ai/wiki/bagofwords-tf-idf)。'
 - en: '[Keras guide to building this same model.](https://keras.io/examples/babi_memnn/)'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Keras构建同一模型的指南。](https://keras.io/examples/babi_memnn/)'
 - en: Feel Free to connect with me on [LinkedIn](https://www.linkedin.com/in/jaime-zornoza/) or
     follow me on Twitter at @jaimezorno. Also, you can take a look at my other posts
     on Data Science and Machine Learning [here](https://medium.com/@jaimezornoza). **Have
     a good read!**
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 随时可以在[LinkedIn](https://www.linkedin.com/in/jaime-zornoza/)上与我联系，或在Twitter上关注我@jaimezorno。同时，你也可以查看我在数据科学和机器学习方面的其他文章[这里](https://medium.com/@jaimezornoza)。**阅读愉快！**
 - en: '**Bio: [Jaime Zornoza](https://www.linkedin.com/in/jaime-zornoza/)** is an
     Industrial Engineer with a bachelor specialized in Electronics and a Masters degree
     specialized in Computer Science.'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Jaime Zornoza](https://www.linkedin.com/in/jaime-zornoza/)** 是一位工业工程师，拥有电子学学士学位和计算机科学硕士学位。'
 - en: '[Original](https://towardsdatascience.com/deep-learning-for-nlp-creating-a-chatbot-with-keras-da5ca051e051).
     Reposted with permission.'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/deep-learning-for-nlp-creating-a-chatbot-with-keras-da5ca051e051)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Deep Learning for NLP: ANNs, RNNs and LSTMs explained!](/2019/08/deep-learning-nlp-explained.html)'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习 NLP：ANNs、RNNs 和 LSTMs 解释！](/2019/08/deep-learning-nlp-explained.html)'
 - en: '[Training a Neural Network to Write Like Lovecraft](/2019/07/training-neural-network-write-like-lovecraft.html)'
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[训练神经网络以模仿洛夫克拉夫特风格写作](/2019/07/training-neural-network-write-like-lovecraft.html)'
 - en: '[Adapters: A Compact and Extensible Transfer Learning Method for NLP](/2019/07/adapters-compact-extensible-transfer-learning-method-nlp.html)'
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[适配器：一种紧凑且可扩展的 NLP 转移学习方法](/2019/07/adapters-compact-extensible-transfer-learning-method-nlp.html)'
 - en: '* * *'
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-124
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 部门'
 - en: '* * *'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-129
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并通过找到目标……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个90亿美元的 AI 失败，深入探讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
