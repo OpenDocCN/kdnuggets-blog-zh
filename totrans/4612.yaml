@@ -1,68 +1,99 @@
 - en: Lagrange multipliers with visualizations and code
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 拉格朗日乘子法的可视化和代码
 - en: 原文：[https://www.kdnuggets.com/2019/08/lagrange-multipliers-visualizations-code.html](https://www.kdnuggets.com/2019/08/lagrange-multipliers-visualizations-code.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/08/lagrange-multipliers-visualizations-code.html](https://www.kdnuggets.com/2019/08/lagrange-multipliers-visualizations-code.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Rohit Pandey](https://www.linkedin.com/in/ropandey576), Senior Data Scientist
     at LinkedIn**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Rohit Pandey](https://www.linkedin.com/in/ropandey576)，LinkedIn 高级数据科学家**'
 - en: 'In this story, we’re going to take an aerial tour of optimization with Lagrange
     multipliers. When do we need them? Whenever we have an optimization problem with
     constraints. Here are some examples:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个故事中，我们将进行一次关于拉格朗日乘子法的空中游览。我们什么时候需要它？每当我们有一个带有约束的优化问题时。以下是一些例子：
 - en: A hedge fund wants to decide the proportions of stocks to include in their portfolio
     such that they get the maximum possible expected return, staying within some risk
     appetite (the risk might be measured in terms of the variance of the return for
     example).
+  id: totrans-5
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一家对冲基金想决定在其投资组合中包括哪些比例的股票，以获得尽可能高的预期回报，同时保持在某个风险承受范围内（风险可以通过回报的方差来衡量等）。
 - en: A school district wants to determine an allocation for various items on their
     lunch menu for their students. They want to minimize the cost per lunch while
     making sure the kids get a certain quantity of all required nutrients.
+  id: totrans-6
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一个学区希望确定他们的午餐菜单上各种项目的分配。他们想要在确保孩子们获得所需的所有营养素的同时，最小化每顿午餐的成本。
 - en: A trucking company wants to transport goods from source warehouses to destination
     cities. Given the costs of transport for each warehouse-city pair, the total supply
     at each warehouse and total demand at each city, decide how much to ship from
     each warehouse to each city so that overall cost is minimized and demand met (constraint).
+  id: totrans-7
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一家货运公司想将货物从源仓库运送到目的城市。给定每个仓库-城市对的运输成本、每个仓库的总供应量和每个城市的总需求量，决定从每个仓库到每个城市的运输量，以便在满足需求的同时最小化整体成本（约束条件）。
 - en: '* * *'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-9
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业领域。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的 IT 部门'
 - en: '* * *'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: We can see that constrained optimization can solve many practical, real world
     problems arising in domains from logistics to finance. In the rest of the blog,
     we will start with vanilla optimization without constraints. Then, we will add
@@ -73,18 +104,26 @@
     the book by Nocedal and Wright the bible of numerical optimization and we will
     roughly follow chapter 13, side-stepping rigorous proofs (which can always be
     read from the text) and focusing more on visual intuition.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到，受限优化可以解决从物流到金融等领域的许多实际问题。在接下来的博客中，我们将从无约束优化开始。然后，我们将添加等式约束。接着，我们将描述完全通用的受限优化问题的解决方案，包括等式和不等式约束（这些条件称为
+    KKT——Karush、Kuhn、Tucker 条件）。最后，我们展示这些条件在一些玩具问题上的力量。许多人认为 Nocedal 和 Wright 的书是数值优化的经典之作，我们将大致遵循第
+    13 章，略过严格的证明（可以从文本中阅读）而更多关注于直观理解。
 - en: Un-constrained optimization
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 无约束优化
 - en: In this scenario, we have some variables in our control and an objective function
     that depends on them. There is no constraint on the variables and the objective
     function is to be minimized (if it were a maximization problem, we could simply
     negate the objective function and it would then become a minimization problem).
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，我们控制了一些变量，并且目标函数依赖于这些变量。变量没有约束，目标函数需要被最小化（如果是最大化问题，我们可以简单地将目标函数取负值，那么它就变成了一个最小化问题）。
 - en: At any point, for a one dimensional function, the derivative of the function
     points in a direction that increases it (at least for small steps). Meaning that
     if we have a function f(x) and the derivative *f’(x)* is positive, then increasing
@@ -92,22 +131,31 @@
     f(x), we would just take a small step opposite to the sign of *f’(x)*to decrease
     f(x). What if we’re at a point where *f’(x)*=0? Then, we might have reached an
     optima of f(x) since there’s no where else to go.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在任何点，对于一维函数，函数的导数指向增加它的方向（至少对于小步而言）。这意味着如果我们有一个函数 \( f(x) \) 并且导数 *\( f'(x)
+    \)* 为正，那么增加 \( x \) 会增加 \( f(x) \)，减少 \( x \) 会减少 \( f(x) \)。如果我们在最小化 \( f(x)
+    \)，我们只需沿着 *\( f'(x) \)* 符号相反的方向迈出小步来减少 \( f(x) \)。如果我们在 *\( f'(x) \)* = 0 的点上怎么办？那么，我们可能已经达到了
+    \( f(x) \) 的最优点，因为没有其他地方可去。
 - en: If there are multiple variables (say x and y), we can have a derivative with
     each of them. If we take these two numbers and construct a 2-d vector from them,
     we get the gradient of the function. Now, moving along the direction of the gradient
     will increase the function while moving opposite to it will decrease it (for small
     steps).
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果有多个变量（比如 \( x \) 和 \( y \)），我们可以分别计算它们的导数。如果我们取这两个数字并构造一个二维向量，就得到了函数的梯度。现在，沿着梯度的方向移动会增加函数值，而沿着相反的方向移动会减少函数值（对于小步而言）。
 - en: This means that as long as the gradient is non-zero, we can’t be at a minima
     since we can simply take a small step along the direction opposite to the gradient
     and decrease the function further. This means that a necessary (but not sufficient)
     condition for a point minimizing the function is that the gradient must be zero
     at that point.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着只要梯度不为零，我们就不能处于极小值，因为我们可以沿着梯度的相反方向迈出小步，从而进一步减少函数值。这意味着，一个点成为函数极小值的必要（但不充分）条件是该点的梯度必须为零。
 - en: Let’s take a concrete example so we can visualize what this looks like. Consider
     the function f(x,y) = x²+y². This is a paraboloid and minimized when x=0 and y=0\.
     The derivatives with respect to x and y become 2x and 2y respectively. So, the
@@ -118,19 +166,32 @@
     is minimized at the green point (0,0). The purple arrows are the gradients, which
     point in the direction where f(x,y) will increase. So to decrease it, we move
     in the opposite direction until we reach the green point.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们举一个具体的例子，以便可视化它的样子。考虑函数 \( f(x, y) = x^2 + y^2 \)。这是一个抛物面，当 \( x = 0 \) 和
+    \( y = 0 \) 时达到最小值。对于 \( x \) 和 \( y \) 的导数分别是 \( 2x \) 和 \( 2y \)。因此，梯度变成了向量
+    ∇f = [2x, 2y]。我们可以看到，当 \( x = 0 \) 和 \( y = 0 \) 时梯度为零。否则，梯度指向的方向会使 \( f(x, y)
+    \) 增加。因此，梯度的相反方向会减少 \( f(x, y) \)。这在下面的图中展示了。粉色曲线是目标函数 \( f(x, y) \)，在绿色点 (0,0)
+    处最小化。紫色箭头是梯度，它们指向 \( f(x, y) \) 增加的方向。因此，为了减少 \( f(x, y) \)，我们需要朝着相反的方向移动，直到到达绿色点。
 - en: '![figure-name](../Images/bbadd9ac6c8513fefb1ffb05ea6089de.png)Fig 1: Paraboloid
     with gradients. Made using [https://github.com/ryu577/pyray](https://github.com/ryu577/pyray)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/bbadd9ac6c8513fefb1ffb05ea6089de.png)图 1：带梯度的抛物面。使用 [https://github.com/ryu577/pyray](https://github.com/ryu577/pyray)
+    制作'
 - en: 'To summarize, when optimizing a function, f in an unconstrained optimization
     problem, a necessary (but not sufficient) condition to be at a local optima is:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结一下，在优化一个函数 \( f \) 的无约束优化问题时，成为局部最优点的必要（但不充分）条件是：
 - en: '**∇f = 0**'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**∇f = 0**'
 - en: It’s like when you’re at the top of a mountain (which would be a maxima). How
     do you know you’re at the top? No matter which direction you step along, you end
     up *decreasing *your altitude. So you’re definitely at an optima in your local
@@ -140,18 +201,24 @@
     function), you’re at a local optima if you’re at the top of any old mountain (or
     building) but the global optima only if that mountain is Everest. In this article,
     we’re going to be content with finding a local optima.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就像你站在山顶（这就是一个极大值）。你怎么知道你在山顶？无论你沿哪个方向迈步，你都会*降低*你的高度。所以你肯定在你所在的局部邻域内达到了一个最优解。现在，可能在你旁边还有另一座更高的山。所以，你可能没有达到*全局*最优解。实际上，如果我们把地球的表面作为我们的领域（海拔高度作为我们的目标函数），那么你如果在任何一座山（或建筑物）的顶端，都是局部最优解，但只有当那座山是珠穆朗玛峰时，你才会达到全局最优解。在这篇文章中，我们将满足于寻找局部最优解。
 - en: Now what if we wanted to stay within the confines of a country? That would mean
     constraining the space in which we can search for our optima, making this an example
     of constrained optimization. In a way, un-constrained optimization is just a special
     case of constrained optimization.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，如果我们想要保持在一个国家的范围内呢？这意味着要限制我们可以搜索最优解的空间，这就成了一个约束优化的例子。在某种程度上，无约束优化只是约束优化的一个特例。
 - en: Equality constraints
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 等式约束
 - en: For unconstrained minimization/maximization problems, we simply look for a point
     where the gradient is the zero vector. If the gradient is not zero, we just take
     a small step in the direction opposite to where it is pointing (if we’re minimizing;
@@ -170,40 +237,53 @@
     have a positive shadow along the red one (reverse gradient). So, moving along
     them will result in points that yield negative numbers when plugged into the equation
     of the plane (“decrease” it).
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于无约束的最小化/最大化问题，我们简单地寻找梯度为零向量的点。如果梯度不为零，我们只需朝着与梯度相反的方向（如果我们在最小化；如果我们在最大化则沿梯度方向）迈出一小步，并不断重复这个过程，直到我们找到一个梯度*为*零的点，这样就没有其他方向可以移动了（这种优化方法称为梯度下降）。注意，我们不必完全沿梯度方向移动。只要我们沿着在梯度方向上有正投影（影子）的方向移动，我们最终会增加目标函数（如果我们在负梯度方向上有正投影则会减少目标函数）。下图对此进行了说明。绿色箭头是蓝色平面的梯度（因此与之垂直），红色箭头是负梯度。由于浅蓝色箭头位于平面上，如果我们沿着这些箭头迈出一步，平面的方程将会得到0。黄色箭头在绿色箭头方向上有正影子（投影）。因此，沿着这些箭头移动会得到在平面方程中代入后会得到正数的点（即“增加”它）。类似地，粉色箭头在红色箭头（反梯度）方向上有正影子。因此，沿这些箭头移动会得到在平面方程中代入后会得到负数的点（即“减少”它）。
 - en: '![figure-name](../Images/b88e565b8f78ec31d542947bb2ab4da2.png)Fig 2: Vectors
     on opposite sides of a plane. See text for explanation. Made using [https://github.com/ryu577/pyray](https://github.com/ryu577/pyray)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/b88e565b8f78ec31d542947bb2ab4da2.png)图 2：平面两侧的向量。具体解释见正文。使用 [https://github.com/ryu577/pyray](https://github.com/ryu577/pyray)
+    制作。'
 - en: For un-constrained minimization, we looked for a point where the gradient was
     zero. This was because if it wasn’t, we could decrease the objective function
     by going opposite to the gradient.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于无约束最小化问题，我们寻找梯度为零的点。这是因为如果梯度不为零，我们可以通过沿梯度的反方向来降低目标函数。
 - en: The same idea can be extended to the case when we have equality constraints.
     Like before, we need to find a point where we can’t find any *possible* direction
     to move where the objective function decreases. For unconstrained optimization,
     this simply meant that no such direction exists. When we have a constraint, there
     is another possibility. What if a direction that decreases the objective function
     exists, but the constraints forbid us from taking any step along it.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 相同的想法可以扩展到我们有等式约束的情况。像之前一样，我们需要找到一个无法找到任何*可能*移动方向的点，其中目标函数减少。对于无约束优化，这仅意味着不存在这样的方向。当我们有约束时，还有另一种可能性。如果存在一个减少目标函数的方向，但约束条件禁止我们沿着它迈出任何一步怎么办？
 - en: Let’s say you want to maximize the amount of money in your bank account. One
     way to immediately boost your earnings is to sell a kidney. But you probably have
     a constraint saying you’re not going to lose a vital organ. So, even though an
     easy path to increasing your earnings exists, your constraint prevents you from
     accessing it.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你想最大化银行账户中的资金。一种立即增加收入的方法是卖掉一个肾脏。但你可能有一个约束条件，表示你不会失去一个重要的器官。因此，即使存在一种简单的方法来增加你的收入，你的约束条件也阻止了你访问它。
 - en: This means that the presence of the equality constraint actually reduces the
     strictness of the condition on the gradient. While it needed to be zero for a
     local optima without the equality constraint, it’s now okay for it to be non-zero
     as long as moving in any direction that has a positive shadow along it causes
     us to violate the constraint. This can only happen when the plane of the constraint
     is perpendicular to the gradient (like the plane and green arrow in figure 2).
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着等式约束的存在实际上减少了对梯度的条件的严格性。在没有等式约束的情况下，它需要为零才能获得局部最优解，而现在只要朝着有正投影的任何方向移动会导致我们违反约束，它非零也是可以的。这只有在约束平面与梯度垂直时才会发生（如图2中的平面和绿色箭头）。
 - en: Let’s go back to our objective function f(x,y)=x²+y². Let’s add an equality
     constraint, y=1\. This is a plane. In figure 3 below, the objective function is
     in pink and the plane is blue. Since we’re constrained to stay on the plane, we
@@ -219,12 +299,17 @@
     at the green point in figure 3 below, the pink arrow (gradient of objective function)
     has no projection whatsoever along the blue plane. In other words, the pink arrow
     is parallel to the blue arrow (which is the gradient of the constraint plane).
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们回到目标函数 f(x,y)=x²+y²。我们增加一个等式约束，y=1。这是一个平面。在下面的图3中，目标函数是粉色的，平面是蓝色的。由于我们被限制在平面上，我们不能沿平面的梯度（下图中的蓝色箭头）朝任何方向移动，因为那会增加或减少约束方程，而我们希望保持它不变。平面与目标函数方程（粉色抛物面）相交形成一条抛物线。下图中的粉色箭头是沿这条抛物线的目标函数的梯度。如果粉色箭头在蓝色平面上有一个投影，我们可以朝着与该投影对应的向量的相反方向移动。这将保持我们在平面上，确保我们不违反约束，同时减少目标函数。然而，在下图3中的绿色点，粉色箭头（目标函数的梯度）在蓝色平面上没有任何投影。换句话说，粉色箭头与蓝色箭头（即约束平面梯度）平行。
 - en: '![figure-name](../Images/dfba488251bad308d135387eb8333acf.png)Fig 3: Constraint
     gradient aligns with objective function gradient at optima. Made using [https://github.com/ryu577/pyray](https://github.com/ryu577/pyray)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/dfba488251bad308d135387eb8333acf.png)图3：约束梯度在最优点与目标函数梯度对齐。制作使用了
+    [https://github.com/ryu577/pyray](https://github.com/ryu577/pyray)'
 - en: 'To decrease the objective function, we need to move in a direction that has
     a shadow along the negative gradient. But as soon as we do that, we’ll end up
     leaving the plane of the constraint. So, the constraint makes it impossible to
@@ -234,19 +319,28 @@
     constraint plane. And if two vectors are parallel, we can write one as a multiple
     of the other. Let’s call this multiple λ. If the gradient of the objective function
     is ∇f and that of the constraint is ∇c, the condition above is:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了减少目标函数，我们需要朝着具有负梯度分量的方向移动。但一旦我们这样做，就会离开约束平面。因此，约束使得在绿色点进一步减少目标函数变得不可能。这意味着它必须是局部极小值。检查这个条件的简单方法是要求目标函数的粉色梯度与约束平面的蓝色梯度平行。如果两个向量平行，我们可以将一个写作另一个的倍数。我们将这个倍数称为
+    λ。如果目标函数的梯度是 ∇f，约束的梯度是 ∇c，上述条件是：
 - en: '**∇f = λ ∇c**'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '**∇f = λ ∇c**'
 - en: The λ above is called the Lagrange multiplier. So, we now have a concrete condition
     to check for when looking for the local optima of a constrained optimization problem.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述 λ 称为拉格朗日乘子。因此，我们现在有了一个具体的条件，用来检查约束优化问题的局部最优解。
 - en: Inequality constraints
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 不等式约束
 - en: 'Inequality constraints mean you have to stay on one side of a boundary defining
     a constraint function as opposed to on it (which was the case for equality constraints).
     For example, staying inside the boundary of a fence. If we know how to deal with
@@ -254,8 +348,11 @@
     is because equality constraints can be converted to inequality constraints. Let’s
     say we require: c(x) = 0\. Another way to express this is: c(x)≥0 and c(x)≤ 0\.
     So, each equality constraint can always be replaced with two inequality constraints.'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 不等式约束意味着你必须保持在定义约束函数的边界的一侧，而不是在边界上（这在等式约束的情况下）。例如，保持在栅栏的边界内。如果我们知道如何处理不等式约束，我们就可以解决任何约束优化问题。这是因为等式约束可以转换为不等式约束。假设我们要求：c(x)
+    = 0\. 另一种表达方式是：c(x)≥0 和 c(x)≤0\. 因此，每个等式约束总是可以替换为两个不等式约束。
 - en: Just as constrained optimization with equality constraints can be handled with
     Lagrange multipliers as described in the previous section, so can constrained
     optimization with inequality constraints. What sets the inequality constraint
@@ -266,131 +363,199 @@
     minimizing); we can’t be at a maxima/minima. For inequality constraints, this
     translates to the Lagrange multiplier being positive. To see why, let’s go back
     to the constrained optimization problem we considered earlier (figure 3).
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 就像前一节中描述的那样，使用拉格朗日乘子处理等式约束的优化问题，不等式约束的优化问题也可以用拉格朗日乘子来处理。不等式约束条件与等式约束条件的区别在于，不等式约束的拉格朗日乘子必须是正值。为什么呢？我们可以考虑在梯度方向上取一个小步。如果我们能在这个方向上（如果我们是在最大化；如果我们是在最小化，则方向相反）迈出一步，那我们就不能处于极大值/极小值点。对于不等式约束来说，这意味着拉格朗日乘子必须是正值。为了理解这一点，我们可以回顾一下之前考虑的约束优化问题（图3）。
 - en: 'Minimize: f(x,y) = x²+y²'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 最小化：f(x,y) = x²+y²
 - en: 'Subject to: c(x,y)=y-1=0'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 约束条件：c(x,y)=y-1=0
 - en: 'Now, let’s change the equality constraint to inequality. This can be done in
     two ways with completely different results. We can either require:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们将等式约束改为不等式约束。这可以通过两种完全不同的方式完成。我们可以要求：
 - en: 'c(x,y) = y-1 ≥0\. In this case, the constraint allows for anything in front
     of the blue plane in figure 3\. It is easy to see that the green point in figure
     3 continues to be a local optima. Also, since the blue arrow representing the
     constraints gradient and the pink arrow representing the objective function’s
     gradient point in the same direction, we have:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: c(x,y) = y-1 ≥0。在这种情况下，约束允许在图3中蓝色平面的前方的任何位置。很容易看出，图3中的绿色点仍然是局部最优点。此外，由于表示约束梯度的蓝色箭头和表示目标函数梯度的粉色箭头指向相同的方向，我们有：
 - en: '**∇f = λ ∇c**'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**∇f = λ ∇c**'
 - en: with λ>0.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中 λ>0。
 - en: 'The other possibility is, c(x,y) = y-1≤0\. Now, the feasible region becomes
     everything *behind *the blue plane. The constraint gradients will flip. So, figure
     3 will end up looking like this:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种可能性是，c(x,y) = y-1≤0。现在，可行区域变为 *蓝色平面* 后面的所有区域。约束梯度将翻转。因此，图 3 将变成这样：
 - en: '![figure-name](../Images/010eb4d038664bb190d8d4eda5e7dcd7.png)Fig 4: Flipping
     the sign of inequality constraint from figure 3.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/010eb4d038664bb190d8d4eda5e7dcd7.png)图 4: 翻转图 3 中的不等式约束符号。'
 - en: Note that now,
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，现在，
 - en: The green point is no longer the local optima since we’re free to move to (0,0);
     which is the yellow point in figure 4 above.
+  id: totrans-50
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 绿色点不再是局部最优点，因为我们可以自由移动到 (0,0)；这是图 4 中的黄色点。
 - en: At the green point, we still have ∇f=λ ∇c. since the blue vector points opposite
     to the pink vector, we have λ<0.
+  id: totrans-51
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在绿色点，我们仍然有 ∇f=λ ∇c。由于蓝色向量指向与粉色向量相反的方向，我们有 λ<0。
 - en: So, it is clear that for an inequality constraint, the condition ∇f=λ ∇c indicates
     we’re at a local optima only when λ>0.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，对于不等式约束，条件 ∇f=λ ∇c 仅当 λ>0 时表明我们在局部最优点。
 - en: 'Putting all of this together, for a general optimization problem:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 综合这些，对于一般优化问题：
 - en: Minimize f(**x**)
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 最小化 f(**x**)
 - en: 'Subject to:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 受限于：
 - en: c_i(**x**)=0 for i ∈ Equality
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: c_i(**x**)=0 对于 i ∈ 等式
 - en: c_i(**x**)≥0 for i ∈ Inequality
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: c_i(**x**)≥0 对于 i ∈ 不等式
 - en: 'We get the full suite of conditions required to be at a local optima:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们得到了成为局部最优点所需的完整条件：
 - en: 'Lagrange multiplier condition:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 拉格朗日乘子条件：
 - en: '**∇f =∑_i λ_i ∇c_i(x) +∑_j λ_j ∇c_j(x); **Eq(1)'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**∇f =∑_i λ_i ∇c_i(x) +∑_j λ_j ∇c_j(x);** Eq(1)'
 - en: Where i ∈ Equality and j ∈ Inequality constraints.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中 i ∈ 等式约束，j ∈ 不等式约束。
 - en: c_i(**x**)=0 for all i; Eq(2)
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: c_i(**x**)=0 对所有 i; Eq(2)
 - en: c_j(**x**)≥0 for all j; Eq(3)
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: c_j(**x**)≥0 对所有 j; Eq(3)
 - en: λ_j ≥ 0; Eq(4)
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: λ_j ≥ 0; Eq(4)
 - en: Also note that for the two inequality constraint problems we considered, when
     we had y-1≥0, the green point in figure 3 was the solution. At this point, we
     were on the constraint plane (y-1=0). So, we actually had c(**x**)=0 and λ>0.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样注意，对于我们考虑的两个不等式约束问题，当我们有 y-1≥0 时，图 3 中的绿色点是解。此时，我们在约束平面 (y-1=0) 上。因此，我们实际上有
+    c(**x**)=0 和 λ>0。
 - en: 'When we considered y-1≤0 on the other hand, the yellow point (x=0,y=0) in figure
     4 became the local minima. This point was also the solution to the un-constrained
     problem. So, we simply had ∇f=0 here. Since the Lagrange condition requires ∇f
     = λ ∇c, we get λ ∇c = 0\. Now, ∇c ≠0 at this point, which means we must have had:
     λ=0.'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们考虑 y-1≤0 时，图 4 中的黄色点 (x=0,y=0) 成为局部最小值。这个点也是无约束问题的解。因此，我们这里有 ∇f=0。由于拉格朗日条件要求
+    ∇f = λ ∇c，我们得到 λ ∇c = 0。现在，∇c ≠0，这意味着我们必须有：λ=0。
 - en: 'This means that if the constraint is active (c(**x**)=0), we should have λ≥0
     while if it is not (c(**x**)≠ 0) we should have λ=0\. So, one of them should be
     zero in all cases. This leads to the final condition (the complimentarity condition):'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着如果约束是活跃的 (c(**x**)=0)，我们应该有 λ≥0，而如果它不是 (c(**x**)≠ 0)，我们应该有 λ=0。因此，在所有情况下，其中一个应该是零。这导致最终条件（互补条件）：
 - en: λ_j c_j(**x**) = 0 for all j ∈ Inequality; Eq(5)
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: λ_j c_j(**x**) = 0 对所有 j ∈ 不等式; Eq(5)
 - en: Equations (1) through (5) are called the KKT conditions. Note that we haven’t
     really provided rigorous proofs for them, just constructing them based on the
     simple example. For a proof, the reader should refer to chapter 13 of the book
     by Nocedal and Wright.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 方程（1）至（5）被称为 KKT 条件。请注意，我们实际上没有提供严格的证明，仅仅是基于简单示例进行构造。要获得证明，读者应参阅 Nocedal 和 Wright
+    的书第 13 章。
 - en: A lot of people when they see these five equations feel like the problem has
     become even more complicated. How do these equations actually help us solve constrained
     optimization problems. The best way to get a feel for this is to go through some
     concrete examples. In the next section, we take a sample problem to which we know
     the answer in advance and see how the KKT conditions help us correctly identify
     all local optima.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多人看到这五个方程时，觉得问题变得更加复杂。这些方程如何实际帮助我们解决约束优化问题呢？最好的方法是通过一些具体的例子来感受这一点。在下一节中，我们将用一个我们已知答案的样本问题来看看
+    KKT 条件如何帮助我们正确识别所有局部最优点。
 - en: Example with code
+  id: totrans-71
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 带代码的示例
 - en: Special cases of the generalized optimization problem involve a linear objective
     function and linear constraints. This is called a linearly constrained linear
     program (LCLP). The objective function and constraints can also be quadratic and
@@ -408,95 +573,144 @@
     There is a python library called “sympy” that uses algorithms like this behind
     the scenes and solves general systems of polynomial equations. So without further
     ado, let’s frame our first constrained optimization problem.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 一般化优化问题的特例涉及线性目标函数和线性约束。这被称为线性约束线性规划（LCLP）。目标函数和约束也可以是二次的，这样的优化问题称为二次约束二次规划（QCQP）。有些软件包能够解决这些优化问题，即使约束数量极大（达百万级）。然而，对于约束数量较少的简单问题，我们可以利用能够解决大多数（更一般的）多项式约束多项式规划的算法。这意味着目标函数和约束可以是任意的多项式函数。这是因为存在一种通用的框架来解决多项式方程组，称为“布赫伯格算法”，而上述KKT条件可以简化为一个多项式方程组。我在[这里](https://medium.com/@rohitpandey576/solving-systems-of-polynomial-equations-with-object-oriented-programming-797eb8add0fc)写了一篇关于布赫伯格算法解决多项式方程组的详细博客。还有一个名为“sympy”的Python库在后台使用类似的算法来解决通用的多项式方程组。因此，事不宜迟，让我们开始构建第一个约束优化问题。
 - en: Equality constraints
+  id: totrans-73
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 等式约束
 - en: '[PRE0]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Notice that the constraint (x²+y²=1) implies we’re on the boundary of a circle
     with unit radius. So, we can say: x=cos(t), y=sin(t). The objective function then
     becomes: sin³(t)+cos³(t). If we plot this with t, we get the following graph:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意到约束（x²+y²=1）意味着我们在单位半径圆的边界上。因此，我们可以说：x=cos(t)，y=sin(t)。目标函数变为：sin³(t)+cos³(t)。如果我们以t绘制这个函数，我们会得到以下图像：
 - en: '![figure-name](../Images/25827d516137b19cabf8978ee3d057f2.png)Fig 5: Objective
     function sin³(t)+cos³(t) plotted with t at the boundary of the constraint.'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/25827d516137b19cabf8978ee3d057f2.png)图 5：目标函数 sin³(t)+cos³(t)
+    绘制在约束边界上。'
 - en: We can see that t=0, π/2 and 5π/4 correspond to local maxima while t=π/4, π
     and 3π/2 correpond to local maxima. Now that we know the answer in advance, let’s
     see if the KKT conditions described above can find these as well.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到，t=0、π/2 和 5π/4 对应局部最大值，而 t=π/4、π 和 3π/2 对应局部最小值。既然我们已经提前知道答案了，让我们看看上面描述的KKT条件是否也能找到这些答案。
 - en: 'Equation (1) gives (taking derivatives of objective function and constraint):'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 方程（1）给出（对目标函数和约束条件进行求导）：
 - en: '[3x², 3y²] = λ[2x, 2y]'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '[3x², 3y²] = λ[2x, 2y]'
 - en: 'Equating the two components of the vectors on the two sides leads to the two
     equations:'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 将两个向量两边的分量进行等式比较得到两个方程：
 - en: 3x²-2λx=0
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 3x²-2λx=0
 - en: 3y²-2λy=0
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 3y²-2λy=0
 - en: 'Equation (2) simply requires that the equality constraint be satisfied:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 方程（2）只要求满足等式约束：
 - en: x²+y²=1
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: x²+y²=1
 - en: And since there are no inequality constraints, we don’t need equations (3) to
     (6). Now, we can enter the three equations above into the symbolic equation solver
     the python library sympy provides.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于没有不等式约束，我们不需要方程（3）到（6）。现在，我们可以将上述三个方程输入到Python库sympy提供的符号方程求解器中。
 - en: 'This leads to the following result (all possible solutions to the system above
     with values of x, y and λ in that order):'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 这导致了以下结果（上述系统中x、y和λ的所有可能解，按此顺序）：
 - en: '[PRE1]'
+  id: totrans-87
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: (-1,0) corresponds to t=π; (0,-1) corresponds to t=3π/2; (-sqrt(2)/2,-sqrt(2)/2)
     corresponds to t=5π/4 and (sqrt(2)/2,sqrt(2)/2) corresponds to t=π/4\. So, we
     can see that all the local maxima and local minima we identified above have been
     identified by the KKT conditions. Now, we can simply find the maximum and minimum
     values of the objective function at these candidate points.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: (-1,0) 对应 t=π；(0,-1) 对应 t=3π/2；(-sqrt(2)/2,-sqrt(2)/2) 对应 t=5π/4，而 (sqrt(2)/2,sqrt(2)/2)
+    对应 t=π/4。因此，我们可以看到，上述识别的所有局部极大值和局部极小值都已被 KKT 条件识别。现在，我们可以简单地在这些候选点处找到目标函数的最大值和最小值。
 - en: Inequality constraints
+  id: totrans-89
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 不等式约束
 - en: Now, let’s change our equality constraint from the problem above to an inequality
     constraint and see how that changes our solution.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们将上述问题的等式约束改为不等式约束，看看这如何改变我们的解。
 - en: '[PRE2]'
+  id: totrans-91
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Where the constraint implied we could only be on the boundary of the unit circle
     in the previous case, we can now be anywhere inside it.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 在之前的情况下，约束表明我们只能位于单位圆的边界上，而现在我们可以在圆盘内部的任何地方。
 - en: The full heat-map of the objective function within the constraint disk is plotted
     below (looks like a planet with a star somewhere around the top-right corner).
     The red arrows are the gradients of the boundary of the constraint while the black
     ones are the gradients of the objective function.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 约束圆盘内目标函数的完整热图如下绘制（看起来像一个行星，星星位于右上角附近）。红色箭头是约束边界的梯度，而黑色箭头是目标函数的梯度。
 - en: '![figure-name](../Images/e76c9f71f2a256ac51768d54ead06f35.png)Fig 6: x³+y³
     plotted within the disk x²+y²≤1'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/e76c9f71f2a256ac51768d54ead06f35.png)图 6: x³+y³ 在圆盘
+    x²+y²≤1 内的绘制'
 - en: While the equality constrained problem was a one dimensional problem, this inequality
     constrained optimization problem is two dimensional. While there are only two
     ways to approach a point in one dimension (from left or right); there are an infinite
@@ -505,43 +719,61 @@
     optima since they are maxima when you approach them from one direction but minima
     when you approach them from another. The figure below shows what a saddle point
     looks like.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然等式约束问题是一个一维问题，但这个不等式约束优化问题是二维的。在一维中，只有两种方式接近一个点（从左或右）；而在二维中，有无数种方式接近它。这意味着我们需要警惕鞍点。这些点符合最优点的条件，但实际上并不是最优点，因为从一个方向接近它时它是极大值，而从另一个方向接近时它是极小值。下图展示了鞍点的样子。
 - en: '![figure-name](../Images/56e66bfac53b0da6b9f69652c0a2ddd6.png)Fig 7: A saddle
     point. Maxima when you approach it from one direction, but minima when you approach
     it from another.'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/56e66bfac53b0da6b9f69652c0a2ddd6.png)图 7: 一个鞍点。从一个方向接近时是极大值，从另一个方向接近时是极小值。'
 - en: So, we need to re-evaluate all the points that were local minima or maxima in
     the case of the equality constraint and make sure none of them become saddle points.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，我们需要重新评估在等式约束情况下的所有局部极小值或极大值点，并确保其中没有变成鞍点的点。
 - en: Figure 5 tells us that t=0 (x=1,y=0) is a local maxima when approached along
     the boundary. And when we approach the point from inside the disk as well (say
     along the line joining x=0,y=0 to this point), the value of the objective function
     increases as we approach it. So, t=0 is a local maxima no matter where we approach
     it from. Using similar arguments (or noting the symmetry in x and y), so is t=π/2.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 5 告诉我们，当沿边界接近 t=0 (x=1,y=0) 时，它是局部极大值。而当我们从圆盘内部接近该点时（例如沿着 x=0,y=0 到该点的直线），目标函数的值在接近时增加。因此，无论从哪个方向接近，t=0
+    都是局部极大值。类似的论证（或注意 x 和 y 的对称性）适用于 t=π/2。
 - en: Similarly we can argue that t=π and t=3π/2 are local minima no matter where
     we approach them from inside the feasible region.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样地，我们可以认为 t=π 和 t=3π/2 是局部极小值，无论从可行区域内部的哪个方向接近它们。
 - en: Looking at t=π/4 however, we note from figure 5 that approaching it along the
     boundary makes it a local minima. However, approaching it from inside the disk
     (along the line joining the origin to this point for example) makes it a local
     maxima. So, it is overall neither a local maxima nor a local minima. Such a point
     is called a saddle point. Using similar arguments, t=5π/4 is also a saddle point.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，当观察 t=π/4 时，我们从图 5 中可以看到，沿边界接近它会使其成为局部极小值。然而，从圆盘内部接近它（例如沿着连接原点到这个点的直线）则使其成为局部极大值。因此，它总体上既不是局部极大值也不是局部极小值。这样的点称为鞍点。类似地，t=5π/4
+    也是一个鞍点。
 - en: 'Now, let’s see what the KKT conditions say for our problem. Plugging the objective
     function and constraints into the KKT equations (1) through (5) we get:'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们看看KKT条件对我们的问题有什么说法。将目标函数和约束代入KKT方程（1）至（5），我们得到：
 - en: '![figure-name](../Images/11017fa088c4ab8843a6cacb7164f0df.png)Equations 6 (a)
     through (e).'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/11017fa088c4ab8843a6cacb7164f0df.png)方程6 (a)至(e)。'
 - en: To leverage polynomial equation solvers, we need to convert these to a system
     of polynomial equations. The first two conditions (6-(a) and (b))are already equations.
     The third one, x²+y²≤1 (6-(c)) is an inequality. But we can convert it into an
@@ -549,18 +781,26 @@
     is similarly an inequality, but we can do away with it if we simply replace λ
     with λ². Now, we demonstrate how to enter these into the symbolic equation solving
     library python provides.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了利用多项式方程求解器，我们需要将这些方程转换为一个多项式方程系统。前两个条件（6-(a)和(b)）已经是方程。第三个，x²+y²≤1（6-(c)）是一个不等式。但我们可以通过引入一个松弛变量k将其转换为等式；x²+y²+k²=1。最后一个方程，λ≥0也是不等式，但如果我们将λ替换为λ²，就可以省略它。现在，我们演示如何将这些输入到Python提供的符号方程求解库中。
 - en: '*Code solving the KKT conditions for optimization problem mentioned earlier.*'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '*解决上述提到的优化问题的KKT条件的代码。*'
 - en: 'This produces the following result (the various solutions of the system above
     with variables x,y,λ,k in order):'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 这会产生如下结果（按顺序给出系统的各种解，其中包含变量x, y, λ, k）：
 - en: '[PRE3]'
+  id: totrans-106
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The capital ‘I’ in the solutions above refers to the square root of unity.
     We want to reject these solutions since we require λ²≥0\. This means that the
     points that satisfy the KKT conditions are: (-1,0); (0,-1); (0,0); (-1/sqrt(2),-1/sqrt(2)).
@@ -569,57 +809,85 @@
     that are also caught in the net. But note that none of the local maxima are caught.
     I’ll leave you with a small challenge. Change the code above so that it catches
     the maxima instead of the minima.'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述解中的大写‘I’指的是单位根。我们想要排除这些解，因为我们要求λ²≥0。这意味着满足KKT条件的点是：(-1,0)；(0,-1)；(0,0)；(-1/sqrt(2),-1/sqrt(2))。如前所述，点(-1,0)（对应t=π）和(0,-1)（对应t=3π/2）是极小值。(0,0)和(-1/sqrt(2),-1/sqrt(2))是也被网捕获的鞍点。但请注意，没有局部极大值被捕获。我留给你一个小挑战。改变上述代码，使其捕获极大值而不是极小值。
 - en: '**Bio: [Rohit Pandey](https://www.linkedin.com/in/ropandey576)** is a Senior
     Data Scientist at LinkedIn'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Rohit Pandey](https://www.linkedin.com/in/ropandey576)** 是LinkedIn的高级数据科学家'
 - en: '[Original](https://towardsdatascience.com/lagrange-multipliers-with-pictures-and-code-ace8018dac5e).
     Reposted with permission.'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/lagrange-multipliers-with-pictures-and-code-ace8018dac5e)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Optimization with Python: How to make the most amount of money with the least
     amount of risk?](/2019/06/optimization-python-money-risk.html)'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Python优化：如何用最少的风险获得最多的收益？](/2019/06/optimization-python-money-risk.html)'
 - en: '[Linear Programming and Discrete Optimization with Python using PuLP](/2019/05/linear-programming-discrete-optimization-python-pulp.html)'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用PuLP进行线性规划和离散优化](/2019/05/linear-programming-discrete-optimization-python-pulp.html)'
 - en: '[How Optimization Works](/2019/04/how-optimization-works.html)'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化如何运作](/2019/04/how-optimization-works.html)'
 - en: More On This Topic
+  id: totrans-114
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多
 - en: '[The Easiest Way to Make Beautiful Interactive Visualizations With Pandas](https://www.kdnuggets.com/2021/12/easiest-way-make-beautiful-interactive-visualizations-pandas.html)'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用Pandas制作美丽的交互式可视化的最简单方法](https://www.kdnuggets.com/2021/12/easiest-way-make-beautiful-interactive-visualizations-pandas.html)'
 - en: '[Learn How Different Data Visualizations Work](https://www.kdnuggets.com/2022/09/datacamp-learn-different-data-visualizations-work.html)'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[了解不同数据可视化的工作原理](https://www.kdnuggets.com/2022/09/datacamp-learn-different-data-visualizations-work.html)'
 - en: '[10 Amazing Machine Learning Visualizations You Should Know in 2023](https://www.kdnuggets.com/2022/11/10-amazing-machine-learning-visualizations-know-2023.html)'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2023年你应该了解的10个惊人的机器学习可视化](https://www.kdnuggets.com/2022/11/10-amazing-machine-learning-visualizations-know-2023.html)'
 - en: '[Make Amazing Visualizations with Python Graph Gallery](https://www.kdnuggets.com/2022/12/make-amazing-visualizations-python-graph-gallery.html)'
+  id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用Python图表库制作惊人的可视化](https://www.kdnuggets.com/2022/12/make-amazing-visualizations-python-graph-gallery.html)'
 - en: '[3 Tools to Track and Visualize the Execution of Your Python Code](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)'
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[跟踪和可视化Python代码执行的3个工具](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)'
 - en: '[KDnuggets™ News 22:n01, Jan 5: 3 Tools to Track and Visualize…](https://www.kdnuggets.com/2022/n01.html)'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets™ 新闻 22:n01, 1月 5日: 3 个跟踪和可视化工具…](https://www.kdnuggets.com/2022/n01.html)'
