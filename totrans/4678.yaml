@@ -1,114 +1,169 @@
 - en: 'Graduating in GANs: Going From Understanding Generative Adversarial Networks
     to Running Your Own'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: GANs 的毕业：从理解生成对抗网络到运行你自己的 GAN
 - en: 原文：[https://www.kdnuggets.com/2019/04/graduating-gans-understanding-generative-adversarial-networks.html](https://www.kdnuggets.com/2019/04/graduating-gans-understanding-generative-adversarial-networks.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/04/graduating-gans-understanding-generative-adversarial-networks.html](https://www.kdnuggets.com/2019/04/graduating-gans-understanding-generative-adversarial-networks.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/04/graduating-gans-understanding-generative-adversarial-networks.html?page=2#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/04/graduating-gans-understanding-generative-adversarial-networks.html?page=2#comments)'
 - en: '**By [Cecilia Shao](https://www.linkedin.com/in/ceceliashao/), Product Growth
     at [comet.ml](https://www.comet.ml/)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Cecilia Shao](https://www.linkedin.com/in/ceceliashao/)，[comet.ml](https://www.comet.ml/)
+    的产品增长**'
 - en: '![mnist-latent-space](../Images/d757d9e5e97d515b566d4f17d11d1070.png)Visualization
     of the latent space for the MNIST dataset — you can make your own GAN that generates
     MNIST-like handwritten digits later in the post!'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '![mnist-latent-space](../Images/d757d9e5e97d515b566d4f17d11d1070.png)MNIST
+    数据集的潜在空间可视化——你可以在文章后面制作自己的 GAN，生成类似 MNIST 的手写数字！'
 - en: Generative Adversarial Networks (GANs) have taken over the public imagination
     —permeating pop culture with [AI- generated celebrities](https://www.technologyreview.com/the-download/609290/meet-the-fake-celebrities-dreamed-up-by-ai/)
     and creating art that is [selling for thousands of dollars](https://www.christies.com/features/A-collaboration-between-two-artists-one-human-one-a-machine-9332-1.aspx)
     at high-brow art auctions.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成对抗网络（GANs）已经占据了公众的想象——渗透流行文化，出现了[AI 生成的名人](https://www.technologyreview.com/the-download/609290/meet-the-fake-celebrities-dreamed-up-by-ai/)并在高端艺术拍卖会上[以数千美元的价格出售](https://www.christies.com/features/A-collaboration-between-two-artists-one-human-one-a-machine-9332-1.aspx)。
 - en: 'In this post, we’ll explore:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将探讨：
 - en: '**Brief primer on GANs**'
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**GANs 简介**'
 - en: '**Understanding and Evaluating GANs**'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**理解和评估 GANs**'
 - en: '**Running your own GAN**'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**运行你自己的 GAN**'
 - en: There is a wealth of resources for catching up on GANs, so our focus for this
     article is to understand how GANs can be evaluated. We’ll also walk you through
     running your own GAN to generate handwritten digits like MNIST.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于 GANs 有大量的资源可供学习，因此本文的重点是理解如何评估 GANs。我们还将指导你运行自己的 GAN，生成类似 MNIST 的手写数字。
 - en: '![figure-name](../Images/73f05e6c26e0c67ae6ecd8b196667f73.png)Here’s one run
     of the GAN we’ll show you how to implement later on — see how the handwritten
     digits it generates become increasingly realistic as training progresses!'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/73f05e6c26e0c67ae6ecd8b196667f73.png)这是我们稍后将向你展示如何实现的
+    GAN 的一次运行——看看它生成的手写数字在训练过程中变得越来越真实！'
 - en: '**Brief primer on GANs**'
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**GANs 简介**'
 - en: Since its inception in 2014 with Ian Goodfellow’s ‘[Generative Adversarial Networks](https://arxiv.org/abs/1406.2661)’
     paper, progress with GANs has exploded and led to increasingly realistic outputs.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 自 2014 年 Ian Goodfellow 的‘[生成对抗网络](https://arxiv.org/abs/1406.2661)’论文问世以来，GANs
+    的进展迅猛，导致了越来越逼真的输出。
 - en: '4.5 years of GAN progress on face generation:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 4.5 年的 GAN 面部生成进展：
 - en: '[https://t.co/kiQkuYULMC](https://t.co/kiQkuYULMC)'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://t.co/kiQkuYULMC](https://t.co/kiQkuYULMC)'
 - en: '[https://t.co/8di6K6BxVC](https://t.co/8di6K6BxVC)'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://t.co/8di6K6BxVC](https://t.co/8di6K6BxVC)'
 - en: 'Just three years ago, you could find Ian Goodfellow’s reply on [this Reddit
     thread](https://www.reddit.com/r/MachineLearning/comments/40ldq6/generative_adversarial_networks_for_text/)
     to a user asking about whether you can use GANs for text:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 就在三年前，你可以在[这个 Reddit 线程](https://www.reddit.com/r/MachineLearning/comments/40ldq6/generative_adversarial_networks_for_text/)上找到
+    Ian Goodfellow 对一位询问是否可以将 GANs 用于文本的用户的回复：
 - en: '![figure-name](../Images/31214937a5af80aff8525f2b59783624.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/31214937a5af80aff8525f2b59783624.png)'
 - en: “GANs have not been applied to NLP because GANs are only defined for real-valued
     data.
+  id: totrans-19
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: “GANs 尚未应用于 NLP，因为 GANs 仅定义用于实值数据。
 - en: GANs work by training a generator network that outputs synthetic data, then
     running a discriminator network on the synthetic data. The gradient of the output
     of the discriminator network with respect to the synthetic data tells you how
     to slightly change the synthetic data to make it more realistic.
+  id: totrans-20
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: GANs 的工作原理是训练一个生成器网络来输出合成数据，然后对合成数据运行一个判别器网络。判别器网络输出相对于合成数据的梯度告诉你如何稍微改变合成数据以使其更逼真。
 - en: You can make slight changes to the synthetic data only if it is based on continuous
     numbers. If it is based on discrete numbers, there is no way to make a slight
     change.
+  id: totrans-21
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 你只能对基于连续数字的合成数据进行轻微修改。如果是基于离散数字，则无法进行轻微修改。
 - en: For example, if you output an image with a pixel value of 1.0, you can change
     that pixel value to 1.0001 on the next step.
+  id: totrans-22
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 例如，如果你输出一张像素值为1.0的图像，你可以在下一步将该像素值更改为1.0001。
 - en: If you output the word “penguin”, you can’t change that to “penguin + .001”
     on the next step, because there is no such word as “penguin + .001”. You have
     to go all the way from “penguin” to “ostrich”.
+  id: totrans-23
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 如果你输出单词“penguin”，你不能在下一步将其更改为“penguin + .001”，因为没有“penguin + .001”这样的词。你必须从“penguin”完全转换到“ostrich”。
 - en: Since all NLP is based on discrete values like words, characters, or bytes,
     no one really knows how to apply GANs to NLP yet.”
+  id: totrans-24
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 由于所有自然语言处理（NLP）都是基于离散值如单词、字符或字节，没有人真正知道如何将 GAN 应用于 NLP。
 - en: Now GANs are being used to create all kinds of content including images, video,
     audio, and (yup) [text](https://www.semanticscholar.org/paper/Adversarial-Generation-of-Natural-Language-Rajeswar-Subramanian/cea578d555fbc1aa72c04a83f834c4a3add302ef).
     These outputs can be used as synthetic data for training other models or just
@@ -116,206 +171,305 @@
     [thisairbnbdoesnotexist.com/](https://thisairbnbdoesnotexist.com/), and [This
     Machine Learning Medium post does not exist](https://medium.com/comet-ml/this-machine-learning-medium-post-does-not-exist-c4705215b4a0).
     ????
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在 GANs 被用来创建各种内容，包括图像、视频、音频以及（是的）[文本](https://www.semanticscholar.org/paper/Adversarial-Generation-of-Natural-Language-Rajeswar-Subramanian/cea578d555fbc1aa72c04a83f834c4a3add302ef)。这些输出可以作为合成数据用于训练其他模型，或者仅用于产生有趣的副项目，如
+    [thispersondoesnotexist.com](https://thispersondoesnotexist.com)、[thisairbnbdoesnotexist.com/](https://thisairbnbdoesnotexist.com/)
+    和 [这篇机器学习 Medium 文章不存在](https://medium.com/comet-ml/this-machine-learning-medium-post-does-not-exist-c4705215b4a0)。????
 - en: Behind the GAN
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: GAN 背后的秘密
 - en: A GAN is comprised of two neural networks — a **generator** that synthesizes
     new samples from scratch, and a **discriminator** that compares training samples
     with these generated samples from the generator. The discriminator’s goal is to
     distinguish between ‘real’ and ‘fake’ inputs (ie. classify if the samples came
     from the model distribution or the real distribution). As we described, these
     samples can be images, videos, audio snippets, and text.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个 GAN 由两个神经网络组成——一个**生成器**从零开始合成新样本，一个**判别器**将训练样本与生成器生成的样本进行比较。判别器的目标是区分“真实”和“伪造”输入（即判断样本是否来自模型分布或真实分布）。正如我们所描述的，这些样本可以是图像、视频、音频片段和文本。
 - en: '![gan-overiew](../Images/5521f4e3212e4ed43d468d962ce19069.png)Simple GAN overview
     from [Kiran Sudhir](https://medium.com/@kiransudhir95)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![gan-overiew](../Images/5521f4e3212e4ed43d468d962ce19069.png)来自 [Kiran Sudhir](https://medium.com/@kiransudhir95)
+    的简单 GAN 概述'
 - en: To synthesize these new samples, the generator is given random noise and attempts
     to generate realistic images from the learnt distribution of the training data.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了合成这些新样本，生成器接收随机噪声，并尝试从训练数据的学习分布中生成逼真的图像。
 - en: The gradient of the output of the discriminator network (a convolutional neural
     network) with respect to the synthetic data informs how to slightly change the
     synthetic data to make it more realistic. Eventually the generator converges on
     parameters that reproduce the real data distribution, and the discriminator is
     unable to detect the difference.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 判别器网络（卷积神经网络）输出的梯度相对于合成数据，告诉我们如何稍微修改合成数据以使其更逼真。最终，生成器收敛到再现真实数据分布的参数，而判别器无法检测到差异。
 - en: '**You see and play with these converging data distributions with GAN Lab:**'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**你可以通过 GAN 实验室查看和玩这些收敛的数据分布：**'
 - en: '[**GAN Lab: Play with Generative Adversarial Networks in Your Browser!**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**GAN 实验室：在浏览器中玩生成对抗网络！**](https://poloclub.github.io/ganlab/)'
 - en: '*GAN Lab was created by Minsuk Kahng, Nikhil Thorat, Polo Chau, Fernanda Viégas,
     and Martin Wattenberg, which was the…*poloclub.github.io](https://poloclub.github.io/ganlab/)'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '*GAN 实验室由 Minsuk Kahng、Nikhil Thorat、Polo Chau、Fernanda Viégas 和 Martin Wattenberg
+    创建，更多信息请参见…*poloclub.github.io](https://poloclub.github.io/ganlab/)'
 - en: '**Here’s a selection of the best guides on GANs :**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**以下是关于 GANs 的最佳指南：**'
 - en: '[Stanford CS231 Lecture 13 — Generative Models](https://www.youtube.com/watch?v=5WoItGTWV54)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[斯坦福 CS231 讲座 13 — 生成模型](https://www.youtube.com/watch?v=5WoItGTWV54)'
 - en: '[Style-based GANs](https://www.lyrn.ai/2018/12/26/a-style-based-generator-architecture-for-generative-adversarial-networks/)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基于风格的 GANs](https://www.lyrn.ai/2018/12/26/a-style-based-generator-architecture-for-generative-adversarial-networks/)'
 - en: '[Understanding Generative Adversarial Networks](https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解生成对抗网络](https://towardsdatascience.com/understanding-generative-adversarial-networks-gans-cd6e4651a29)'
 - en: '[Introduction to Generative Adversarial Networks](https://heartbeat.fritz.ai/introduction-to-generative-adversarial-networks-gans-35ef44f21193)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[生成对抗网络简介](https://heartbeat.fritz.ai/introduction-to-generative-adversarial-networks-gans-35ef44f21193)'
 - en: '[Lillian Weng: From Gan to WGAN](https://lilianweng.github.io/lil-log/2017/08/20/from-GAN-to-WGAN.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Lillian Weng: 从GAN到WGAN](https://lilianweng.github.io/lil-log/2017/08/20/from-GAN-to-WGAN.html)'
 - en: '[Dive head first into advanced GANs: exploring self-attention and spectral
     norm](https://medium.freecodecamp.org/dive-head-first-into-advanced-gans-exploring-self-attention-and-spectral-norm-d2f7cdb55ede)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深入探讨高级GANs：探索自注意力和谱范数](https://medium.freecodecamp.org/dive-head-first-into-advanced-gans-exploring-self-attention-and-spectral-norm-d2f7cdb55ede)'
 - en: '[Guim Perarnau: Fantastic GANs and where to find them](http://guimperarnau.com/blog/2017/03/Fantastic-GANs-and-where-to-find-them)
     (Parts I & II)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Guim Perarnau: 令人惊叹的GAN及其发现途径](http://guimperarnau.com/blog/2017/03/Fantastic-GANs-and-where-to-find-them)（第一部分和第二部分）'
 - en: '**Understanding and Evaluating GANs**'
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**理解和评估GANs**'
 - en: Quantifying the progress of a GAN can feel very subjective —* “Does this generated
     face look realistic enough?” , “Are these generated images diverse enough?” — *and
     GANs can feel like black boxes where it’s not clear which components of the model
     impact learning or result quality.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 量化GAN的进展可能感觉非常主观——*“这个生成的面孔看起来是否足够真实？”*，*“这些生成的图像是否足够多样？”*——而GANs可能会像黑箱一样，让人不清楚模型的哪些组件影响学习或结果质量。
 - en: 'To this end, a group from the MIT Computer Science and Artificial Intelligence
     (CSAIL) Lab, recently released a paper, ‘[GAN Dissection: Visualizing and Understanding
     Generative Adversarial Networks](https://arxiv.org/abs/1811.10597)’, that introduced
     a method for visualizing GANs and how GAN units relate to objects in an image
     as well as the relationship between objects.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，麻省理工学院计算机科学与人工智能实验室（CSAIL）的一个团队最近发布了一篇论文，‘[GAN分解：可视化和理解生成对抗网络](https://arxiv.org/abs/1811.10597)’，介绍了一种可视化GANs及其单元如何与图像中的对象以及对象之间的关系相关的方法。
 - en: '![figure-name](../Images/d7b61822362d83148c2dec6eb5067e74.png)Figure 1 from
     [Bau et. al 2019](https://arxiv.org/pdf/1811.10597v2.pdf) showing image modification
     through intervention with certain GAN units.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/d7b61822362d83148c2dec6eb5067e74.png)图1来自[Bau等，2019](https://arxiv.org/pdf/1811.10597v2.pdf)，展示了通过干预特定GAN单元进行图像修改。'
 - en: Using a segmentation-based network dissection method, the paper’s framework
     allow us to dissect and visualize the inner workings of a generator neural network.
     This occurs by looking for agreements between a set of GAN units, referred to
     as neurons, and concepts in the output image such as tree, sky, clouds, and more.
     As a result, we’re able to identify neurons that are responsible for certain objects
     such as buildings or clouds.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过基于分割的网络分解方法，该论文的框架使我们能够解剖和可视化生成神经网络的内部工作。这是通过寻找一组GAN单元（称为神经元）与输出图像中的概念（如树、天空、云等）之间的匹配来实现的。因此，我们能够识别负责某些对象（如建筑物或云）的神经元。
 - en: Having this level of granularity into the neurons allows for edits to existing
     images (e.g. to add or remove trees as shown in the image) by forcefully activating
     and deactivating (ablating) the corresponding units for those objects.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 拥有如此细致的神经元信息使我们可以对现有图像进行编辑（例如，如图所示添加或删除树木），通过强制激活和去激活（切除）这些对象的相应单元。
 - en: 'However, it’s not clear if the network is able to reason about objects in a
     scene or if it’s simply memorizing these objects. One way to get closer to an
     answer for this question was to try to distort the image in unrealistic ways.
     Perhaps the most impressive part of [MIT CSAIL’s interactive web demo of GAN Paint](https://gandissect.csail.mit.edu/)
     was how the model is seemingly able to limit these edits to ‘photorealistic’ changes.
     If you try to impose grass onto the sky, here’s what happens:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，目前尚不清楚网络是否能够推理场景中的对象，还是仅仅在记忆这些对象。接近这个问题的一个方法是尝试以不现实的方式扭曲图像。也许[MIT CSAIL GAN
+    Paint的互动网页演示](https://gandissect.csail.mit.edu/)最令人印象深刻的部分是模型似乎能够将这些编辑限制在“逼真的”变化范围内。如果你尝试在天空中加上草，这里会发生什么：
 - en: '![figure-name](../Images/03f687a052952abcca8a603a3b9d25e1.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/03f687a052952abcca8a603a3b9d25e1.png)'
 - en: Even though we’re activating the corresponding neurons, it appears as though
     the GAN has suppressed the signal in later layers.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使我们激活了相应的神经元，似乎GAN在后续层中抑制了信号。
 - en: '![figure-name](../Images/700d2acc1fbb617c452a50a4bda84775.png)Figure 11 from
     [Bau et. al. 2019](https://arxiv.org/pdf/1811.10597v2.pdf) shows how the local
     context for an object impacts the likelihood of the object synthesis (in this
     case, the likelihood of a door being generated on a building versus on a tree
     or in the sky).'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/700d2acc1fbb617c452a50a4bda84775.png)图 11 来自 [Bau
+    等，2019](https://arxiv.org/pdf/1811.10597v2.pdf) 显示了对象的局部上下文如何影响对象合成的可能性（在这种情况下，是门在建筑物上生成的可能性与在树上或天空中的可能性）。'
 - en: Another interesting way of visualizing GANs is to conduct **latent space interpolation**
     (remember, the GAN generate new instances by sampling from the learned latent
     space). This can be a useful way of seeing how smooth the transitions across generated
     samples are.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种有趣的可视化 GAN 的方式是进行**潜在空间插值**（记住，GAN 通过从学习到的潜在空间中采样生成新的实例）。这可以是一种有用的方法，用于观察生成样本之间的过渡是否平滑。
 - en: '![figure-name](../Images/cf5ee9e58a32b3a50968934fa023895d.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/cf5ee9e58a32b3a50968934fa023895d.png)'
 - en: '**These visualizations can help us understand the internal representations
     of a GAN, but finding quantifiable ways to understand GAN progress and output
     quality is still an active area of research.**'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '**这些可视化可以帮助我们理解 GAN 的内部表示，但找到可量化的方法来理解 GAN 的进展和输出质量仍然是一个活跃的研究领域。**'
 - en: 'Two commonly used evaluation metrics for image quality and diversity are: the
     **Inception Score** and the **Fréchet Inception Distance (FID)**. Most practitioners
     have shifted from the Inception Score to FID after Shane Barratt and Rishi Sharma
     released their paper ‘[A Note on the Inception Score](https://arxiv.org/pdf/1801.01973.pdf)’
     on key shortcomings of the former.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 两种常用的图像质量和多样性评估指标是：**Inception 评分** 和 **Fréchet Inception 距离 (FID)**。大多数从业者在
+    Shane Barratt 和 Rishi Sharma 发布了论文 ‘[关于 Inception 评分的说明](https://arxiv.org/pdf/1801.01973.pdf)’
+    后，已从 Inception 评分转向 FID，因为该论文指出了前者的关键不足之处。
 - en: '* * *'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-57
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速入门网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT 需求'
 - en: '* * *'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How to Stay on Top of What''s Going on in the AI World](https://www.kdnuggets.com/2022/03/stay-top-going-ai-world.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何跟踪 AI 世界的最新动态](https://www.kdnuggets.com/2022/03/stay-top-going-ai-world.html)'
 - en: '[Sentiment Analysis in Python: Going Beyond Bag of Words](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的情感分析：超越词袋模型](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
 - en: '[LangChain 101: Build Your Own GPT-Powered Applications](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LangChain 101: 构建你自己的 GPT 驱动应用](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)'
 - en: '[Build Your Own PandasAI with LlamaIndex](https://www.kdnuggets.com/build-your-own-pandasai-with-llamaindex)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 LlamaIndex 构建你自己的 PandasAI](https://www.kdnuggets.com/build-your-own-pandasai-with-llamaindex)'
 - en: '[Make Your Own GPTs with ChatGPT''s GPTs!](https://www.kdnuggets.com/make-your-own-gpts-with-chatgpts-gpts)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 ChatGPT 的 GPTs 创建你自己的 GPT！](https://www.kdnuggets.com/make-your-own-gpts-with-chatgpts-gpts)'
 - en: '[What is Adversarial Machine Learning?](https://www.kdnuggets.com/2022/03/adversarial-machine-learning.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是对抗性机器学习？](https://www.kdnuggets.com/2022/03/adversarial-machine-learning.html)'
