@@ -3,15 +3,18 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何避免在 TensorFlow 图中编程错误
 - en: 原文：[https://www.kdnuggets.com/2017/05/how-not-program-tensorflow-graph.html](https://www.kdnuggets.com/2017/05/how-not-program-tensorflow-graph.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/05/how-not-program-tensorflow-graph.html](https://www.kdnuggets.com/2017/05/how-not-program-tensorflow-graph.html)
 - en: '**By Aaron Schumacher, Deep Learning Analytics.**'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 Aaron Schumacher, Deep Learning Analytics 提供。**'
 - en: Using TensorFlow from Python is like using Python to program [another computer](http://planspace.org/20170328-tensorflow_as_a_distributed_virtual_machine/).
     Some Python statements build your TensorFlow program, some Python statements execute
     that program, and of course some Python statements aren’t involved with TensorFlow
@@ -20,52 +23,66 @@
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 从 Python 使用 TensorFlow 就像是用 Python 编程 [另一台计算机](http://planspace.org/20170328-tensorflow_as_a_distributed_virtual_machine/)。一些
+    Python 语句构建你的 TensorFlow 程序，一些 Python 语句执行该程序，当然，一些 Python 语句根本不涉及 TensorFlow。对你构建的图进行深思熟虑可以帮助你避免混淆和性能陷阱。以下是一些注意事项。![](../Images/e09c1745abd025c932b954fd964eedfb.png)
 - en: Avoid having many identical ops
   id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 避免拥有许多相同的操作
 - en: Lots of methods in TensorFlow create ops in the computation graph, but do not
     execute them. You may want to execute multiple times, but that doesn’t mean you
     should create lots of copies of the same ops.
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: TensorFlow 中许多方法创建了计算图中的操作，但并不会执行它们。你可能希望多次执行，但这并不意味着你应该创建许多相同操作的副本。
 - en: '* * *'
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: A clear example is `tf.global_variables_initializer()`.
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个清晰的例子是 `tf.global_variables_initializer()`。
 - en: '[PRE0]'
   id: totrans-13
   prefs: []
@@ -76,6 +93,7 @@
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 `tf.global_variables_initializer()` 的调用被重复执行，例如直接作为 `session.run()` 的参数，会有一些负面影响。
 - en: '[PRE1]'
   id: totrans-15
   prefs: []
@@ -90,11 +108,13 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 每次在 `session.run()` 中评估参数时，都会创建一个新的初始化器操作。这在图中创建了多个初始化器操作。对于交互式会话中的小操作，拥有多个副本并不是大问题，如果你创建了更多需要初始化的变量，可能甚至希望这样做。但要考虑是否真的需要许多重复的操作。
 - en: Creating ops inside `session.run()`, you also don’t have a Python variable referring
     to those ops, so you can’t easily reuse them.
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 `session.run()` 中创建操作时，你也没有一个 Python 变量引用这些操作，因此无法轻松重用它们。
 - en: In Python, if you create an object that nothing refers to, it can be garbage
     collected. The abandoned object will be deleted and and memory it used will be
     freed. That doesn’t happen to things in the TensorFlow graph; everything you put
@@ -102,15 +122,18 @@
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Python 中，如果你创建了一个没有任何引用的对象，它可以被垃圾回收。被遗弃的对象将被删除，使用的内存将被释放。在 TensorFlow 图中并不会发生这种情况；你放入图中的一切都会留在那里。
 - en: It’s pretty clear that `tf.global_variables_initializer()` returns an op. But
     ops are also created in less obvious ways.
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 很明显，`tf.global_variables_initializer()` 返回一个操作。但操作也可以通过不那么明显的方式创建。
 - en: Let’s compare to how NumPy works.
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来对比一下 NumPy 的工作方式。
 - en: '[PRE2]'
   id: totrans-21
   prefs: []
@@ -122,10 +145,12 @@
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 此时内存中有两个数组，`x` 和 `y`。`y` 的值为 2.0，但没有记录 *它是如何* 得到这个值的。加法没有留下任何记录。
 - en: TensorFlow is different.
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: TensorFlow 是不同的。
 - en: '[PRE3]'
   id: totrans-24
   prefs: []
@@ -136,10 +161,12 @@
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在只有 `x` 是 TensorFlow 变量；`y` 是一个 `add` 操作，如果我们运行它，它可以返回那个加法的结果。
 - en: One more comparison.
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 再做一个比较。
 - en: '[PRE4]'
   id: totrans-27
   prefs: []
@@ -150,6 +177,7 @@
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，`y` 被赋值为指向一个结果数组 `x + 1.0`，然后重新赋值为指向另一个数组。第一个数组将被垃圾回收并消失。
 - en: '[PRE5]'
   id: totrans-29
   prefs: []
@@ -162,12 +190,16 @@
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，`y` 指代 TensorFlow 图中的一个 `add` 操作，然后 `y` 被重新赋值为指向图中的另一个 `add` 操作。由于 `y`
+    现在只指向第二个 `add`，我们没有方便的方法来处理第一个操作。但这两个 `add` 操作仍然存在于图中，并将保持在那里。
 - en: (As an aside, Python’s mechanism for defining class-specific addition [and so
     on](http://www.python-course.eu/python3_magic_methods.php), which is how `+` is
     made to create TensorFlow ops, is pretty neat.)
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: （顺便提一下，Python 定义类特定加法的机制 [以及其他方法](http://www.python-course.eu/python3_magic_methods.php)，即
+    `+` 如何用于创建 TensorFlow 操作，实际上很巧妙。）
 - en: Especially if you’re just working with the default graph and running interactively
     in a regular REPL or a notebook, you can end up with a lot of abandoned ops in
     your graph. Every time you re-run a notebook cell that defines any graph ops,
@@ -175,11 +207,13 @@
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 尤其是当你仅使用默认图并在常规 REPL 或笔记本中进行交互时，你的图中可能会有很多废弃的操作。每次你重新运行定义任何图操作的笔记本单元时，你不仅是在重新定义操作——你还在创建新的操作。
 - en: Often it’s okay to have a few extra ops floating around when you’re experimenting.
     But things can get out of hand.
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在实验时，拥有一些额外的操作是可以的。但事情可能会失控。
 - en: '[PRE6]'
   id: totrans-34
   prefs: []
@@ -190,16 +224,19 @@
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 `x` 是一个 NumPy 数组，或只是一个普通的 Python 数字，这将以恒定的内存运行，并用一个值完成 x。
 - en: But if `x` is a TensorFlow variable, there will be over a million ops in your
     TensorFlow graph, just defining a computation and not even *doing* it.
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 但如果 `x` 是一个 TensorFlow 变量，你的 TensorFlow 图中将会有超过一百万个操作，仅仅是定义一个计算，甚至没有 *执行* 它。
 - en: One immediate fix for TensorFlow is to use a `tf.assign` op, which gives behavior
     more like what you might expect.
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: TensorFlow 的一个直接解决方法是使用 `tf.assign` 操作，它的行为更符合你的期望。
 - en: '[PRE7]'
   id: totrans-38
   prefs: []
@@ -212,6 +249,8 @@
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个修订版本在循环中没有创建任何操作，这通常是个好建议。TensorFlow 确实有 [控制流构造](https://www.tensorflow.org/api_guides/python/control_flow_ops)，包括
+    [while 循环](https://www.tensorflow.org/api_docs/python/tf/while_loop)。但仅在真正需要时使用这些构造。
 - en: Be conscious of when you’re creating ops, and only create the ones you need.
     Try to keep op creation distinct from op execution. And after interactive experimentation,
     eventually get to a state, probably in a script, where you’re only creating the
@@ -219,16 +258,19 @@
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意你何时创建操作，并仅创建你需要的操作。尽量将操作创建与操作执行分开。在进行交互式实验后，最终将状态转移到一个脚本中，只创建你需要的操作。
 - en: Avoid constants in the graph
   id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 避免在图中使用常量
 - en: A particularly unfortunate op to needlessly add to a graph is accidental constant
     ops, especially large ones.
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个特别不幸的操作是无意中将常量操作添加到图中，尤其是大型常量。
 - en: '[PRE8]'
   id: totrans-43
   prefs: []
@@ -238,6 +280,7 @@
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: NumPy 数组 `many_ones` 中有一百万个一。我们可以将它们加起来。
 - en: '[PRE9]'
   id: totrans-45
   prefs: []
@@ -247,6 +290,7 @@
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们使用 TensorFlow 来加总它们会怎样？
 - en: '[PRE10]'
   id: totrans-47
   prefs: []
@@ -258,17 +302,20 @@
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果是相同的，但机制却大相径庭。这不仅将一些操作添加到图中——它将整个百万元素数组的副本作为常量放入图中。
 - en: Variations on this pattern can result in accidentally loading an entire data
     set into the graph as constants. A program might still run, for small data sets.
     Or your system might fail.
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种模式的变体可能会意外地将整个数据集加载到图中作为常量。程序可能仍然运行，适用于小数据集。否则，你的系统可能会失败。
 - en: One simple way to avoid storing data in the graph is to use the `feed_dict`
     mechanism.
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 避免在图中存储数据的一种简单方法是使用 `feed_dict` 机制。
 - en: '[PRE11]'
   id: totrans-51
   prefs: []
@@ -279,11 +326,13 @@
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 和以前一样，要明确你在何时以及如何向图中添加内容。具体数据通常只在评估时进入图中。
 - en: TensorFlow as Functional Programming
   id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TensorFlow 作为函数式编程
 - en: TensorFlow ops are like functions. This is especially clear when an op has one
     or more placeholder inputs; evaluating the op in a session is like calling a function
     with those arguments. So Python functions that return TensorFlow ops are like
@@ -291,12 +340,15 @@
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: TensorFlow 操作类似于函数。当一个操作有一个或多个占位符输入时，这一点尤为明显；在会话中评估操作就像用这些参数调用一个函数。因此，返回 TensorFlow
+    操作的 Python 函数就像 [高阶函数](https://en.wikipedia.org/wiki/Higher-order_function)。
 - en: You might decide that it’s worth putting a constant into the graph. For example,
     if you have to reshape a lot of tensors to 28×28, you might make an op that does
     that.
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能会决定将常量放入图中。例如，如果你需要将许多张量调整为 28×28，你可能会创建一个执行此操作的操作。
 - en: '[PRE12]'
   id: totrans-56
   prefs: []
@@ -309,86 +361,110 @@
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 这类似于 [柯里化](https://en.wikipedia.org/wiki/Currying)，因为 `shape` 参数现在已经设置好了。`[28,
+    28]` 已经成为图中的常量并指定了该参数。现在要评估 `reshape_to_28`，我们只需提供 `input_tensor`。
 - en: Broader connections have been suggested between [neural networks, types, and
     functional programming](http://colah.github.io/posts/2015-09-NN-Types-FP/). It’s
     interesting to think of TensorFlow as a system that supports this kind of construction.
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 有人建议 [神经网络、类型和函数式编程](http://colah.github.io/posts/2015-09-NN-Types-FP/) 之间存在更广泛的联系。将
+    TensorFlow 视为支持这种构建方式的系统很有趣。
 - en: '* * *'
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: I’m working on [Building TensorFlow systems from components](http://conferences.oreilly.com/oscon/oscon-tx/public/schedule/detail/57823),
     a workshop at [OSCON 2017](https://conferences.oreilly.com/oscon/oscon-tx).
   id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 我正在进行 [构建 TensorFlow 系统的组件](http://conferences.oreilly.com/oscon/oscon-tx/public/schedule/detail/57823)，这是
+    [OSCON 2017](https://conferences.oreilly.com/oscon/oscon-tx) 上的一个研讨会。
 - en: '* * *'
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Find [Aaron](http://planspace.org/aaron/) on [Twitter](https://twitter.com/planarrowspace)
     | [LinkedIn](https://www.linkedin.com/in/ajschumacher) | [Google+](https://plus.google.com/112658546306232777448/)
     | [GitHub](https://github.com/ajschumacher) | [email](mailto:ajschumacher@gmail.com)
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 [Twitter](https://twitter.com/planarrowspace) | [LinkedIn](https://www.linkedin.com/in/ajschumacher)
+    | [Google+](https://plus.google.com/112658546306232777448/) | [GitHub](https://github.com/ajschumacher)
+    | [email](mailto:ajschumacher@gmail.com) 找到 [Aaron](http://planspace.org/aaron/)
 - en: '[Original](http://planspace.org/20170404-how_not_to_program_the_tensorflow_graph/).
     Reposted with permission.'
   id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](http://planspace.org/20170404-how_not_to_program_the_tensorflow_graph/)。已获许可转载。'
 - en: '**Bio: [Aaron Schumacher](https://www.linkedin.com/in/ajschumacher/)** is a
     Senior Data Scientist and Software Engineer at Deep Learning Analytics. He tweets
     at [@planarrowspace](https://twitter.com/planarrowspace).'
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：[Aaron Schumacher](https://www.linkedin.com/in/ajschumacher/)** 是 Deep
+    Learning Analytics 的高级数据科学家和软件工程师。他在 [@planarrowspace](https://twitter.com/planarrowspace)
+    上发推文。'
 - en: '**Related:**'
   id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to Build a Recurrent Neural Network in TensorFlow](/2017/04/build-recurrent-neural-network-tensorflow.html)'
   id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在 TensorFlow 中构建递归神经网络](/2017/04/build-recurrent-neural-network-tensorflow.html)'
 - en: '[The Gentlest Introduction to Tensorflow – Part 1](/2016/08/gentlest-introduction-tensorflow-part-1.html)'
   id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Tensorflow 的最温和介绍 – 第 1 部分](/2016/08/gentlest-introduction-tensorflow-part-1.html)'
 - en: '[An Overview of Python Deep Learning Frameworks](/2017/02/python-deep-learning-frameworks-overview.html)'
   id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 深度学习框架概述](/2017/02/python-deep-learning-frameworks-overview.html)'
 - en: More On This Topic
   id: totrans-69
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[AWS AI & ML Scholarship Program Overview](https://www.kdnuggets.com/2022/09/aws-ai-ml-scholarship-program-overview.html)'
   id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AWS AI & ML 奖学金项目概述](https://www.kdnuggets.com/2022/09/aws-ai-ml-scholarship-program-overview.html)'
 - en: '[Enroll in a 4-year Computer Science Degree Program For Free](https://www.kdnuggets.com/enroll-in-a-4-year-computer-science-degree-program-for-free)'
   id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[免费报名参加 4 年制计算机科学学位课程](https://www.kdnuggets.com/enroll-in-a-4-year-computer-science-degree-program-for-free)'
 - en: '[Join UC''s Information Session for the Master''s in Business…](https://www.kdnuggets.com/2022/10/ucincinnati-join-ucs-information-session-masters-business-analytics-program.html)'
   id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[加入 UC 的商业硕士课程信息会话](https://www.kdnuggets.com/2022/10/ucincinnati-join-ucs-information-session-masters-business-analytics-program.html)'
 - en: '[Maximize Your Value With The 3rd Best Online Master’s In Data…](https://www.kdnuggets.com/2023/05/bay-path-maximize-value-online-masters-data-science.html)'
   id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[最大化您的价值，通过第三名最佳在线数据硕士课程](https://www.kdnuggets.com/2023/05/bay-path-maximize-value-online-masters-data-science.html)'
 - en: '[Advance your Career with the 3rd Best Online Master''s in Data…](https://www.kdnuggets.com/2023/07/bay-path-advance-career-3rd-best-online-masters-data-science-program.html)'
   id: totrans-74
   prefs:
