@@ -1,185 +1,296 @@
 - en: How to Generate FiveThirtyEight Graphs in Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何在Python中生成FiveThirtyEight图表
 - en: 原文：[https://www.kdnuggets.com/2017/12/generate-fivethirtyeight-graphs-python.html](https://www.kdnuggets.com/2017/12/generate-fivethirtyeight-graphs-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/12/generate-fivethirtyeight-graphs-python.html](https://www.kdnuggets.com/2017/12/generate-fivethirtyeight-graphs-python.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Alex Olteanu](https://www.dataquest.io/blog/author/alex-olteanu/), Student
     Success Specialist at Dataquest.io**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Alex Olteanu](https://www.dataquest.io/blog/author/alex-olteanu/)，Dataquest.io的学生成功专家**'
 - en: If you read data science articles, you may have already stumbled upon [FiveThirtyEight's](https://fivethirtyeight.com/) content.
     Naturally, you were impressed by their [awesome visualizations](https://fivethirtyeight.com/features/the-52-best-and-weirdest-charts-we-made-in-2016/).
     You wanted to make your own awesome visualizations and so asked [Quora](https://www.quora.com/How-does-FiveThirtyEight-create-their-data-visualizations) and [Reddit](https://www.reddit.com/r/statistics/comments/2jon2b/anyone_knows_how_are_made_the_graphs_on/) how
     to do it. You received some answers, but they were rather vague. You still can't
     get the graphs done yourself.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你阅读数据科学文章，可能已经碰到过[FiveThirtyEight](https://fivethirtyeight.com/)的内容。自然，你对他们的[精彩可视化](https://fivethirtyeight.com/features/the-52-best-and-weirdest-charts-we-made-in-2016/)印象深刻。你想制作自己的精彩可视化，因此询问了[Quora](https://www.quora.com/How-does-FiveThirtyEight-create-their-data-visualizations)和[Reddit](https://www.reddit.com/r/statistics/comments/2jon2b/anyone_knows_how_are_made_the_graphs_on/)怎么做。你收到了些回答，但它们相当模糊。你仍然无法自己制作图表。
 - en: In this post, we'll help you. Using Python's [matplotlib](https://matplotlib.org/index.html#) and [pandas](http://pandas.pydata.org/pandas-docs/stable/index.html),
     we'll see that it's rather easy to replicate the core parts of any FiveThirtyEight
     (FTE) visualization.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将帮助你。使用Python的[matplotlib](https://matplotlib.org/index.html#)和[pandas](http://pandas.pydata.org/pandas-docs/stable/index.html)，我们将看到复制任何FiveThirtyEight（FTE）可视化的核心部分是相当简单的。
 - en: 'We''ll start here:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们从这里开始：
 - en: '![default_graph](../Images/0c08238c4969eb5ff53e0ccfa7e48e54.png)'
+  id: totrans-7
   prefs: []
   type: TYPE_IMG
+  zh: '![default_graph](../Images/0c08238c4969eb5ff53e0ccfa7e48e54.png)'
 - en: 'And, at the end of the tutorial, arrive here:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，在教程结束时，达到这里：
 - en: '![final3](../Images/02b129309908aee0d2db50c351d3d94d.png)'
+  id: totrans-9
   prefs: []
   type: TYPE_IMG
+  zh: '![final3](../Images/02b129309908aee0d2db50c351d3d94d.png)'
 - en: To follow along, you'll need at least some basic knowledge of Python. If you
     know what's the difference between methods and attributes, then you're good to
     go.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 要跟随教程，你至少需要一些Python的基础知识。如果你知道方法和属性之间的区别，那么你已经准备好了。
 - en: Introducing the dataset
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍数据集
 - en: We'll work with data describing the percentages of Bachelors conferred to women
     in the US from 1970 to 2011\. We'll use a dataset compiled by data scientist [Randal
     Olson](http://www.randalolson.com/2014/06/14/percentage-of-bachelors-degrees-conferred-to-women-by-major-1970-2012/),
     who collected the data from the [National Center for Education Statistics](https://nces.ed.gov/about/).
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用描述1970年至2011年间美国女性获得学士学位百分比的数据。我们将使用数据科学家[Randal Olson](http://www.randalolson.com/2014/06/14/percentage-of-bachelors-degrees-conferred-to-women-by-major-1970-2012/)编制的数据集，他从[国家教育统计中心](https://nces.ed.gov/about/)收集了这些数据。
 - en: 'If you want to follow along by writing code yourself, you can download the
     data from [Randal''s blog](http://www.randalolson.com/wp-content/uploads/percent-bachelors-degrees-women-usa.csv).
     To save yourself some time, you can skip downloading the file, and just pass in
     the direct link to pandas'' `read_csv()` [function](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html?highlight=read_csv#pandas.read_csv).
     In the following code cell, we:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想自己动手编写代码，可以从[Randal's blog](http://www.randalolson.com/wp-content/uploads/percent-bachelors-degrees-women-usa.csv)下载数据。为了节省时间，你可以跳过下载文件，直接将直接链接传递给pandas的`read_csv()`[函数](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html?highlight=read_csv#pandas.read_csv)。在下面的代码单元中，我们：
 - en: Import the pandas module.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 导入pandas模块。
 - en: Assign the direct link toward the dataset as a `string` to a variable named `direct_link`.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将指向数据集的直接链接分配给名为`direct_link`的变量。
 - en: Read in the data by using `read_csv()`, and assign the content to `women_majors`.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`read_csv()`读取数据，并将内容分配给`women_majors`。
 - en: Print information about the dataset by using the `info()` [method](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.info.html?highlight=dataframe%20info#pandas.DataFrame.info).
     We're looking for the number of rows and columns, and checking for null values
     at the same time.
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过使用 `info()` [方法](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.info.html?highlight=dataframe%20info#pandas.DataFrame.info)
+    打印数据集的信息。我们要找出行数和列数，同时检查空值。
 - en: Show the first five rows to understand better the structure of the dataset by
     using the `head()` [method](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.head.html?highlight=dataframe%20head#pandas.DataFrame.head).
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 `head()` [方法](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.head.html?highlight=dataframe%20head#pandas.DataFrame.head)
+    显示前五行，以便更好地了解数据集的结构。
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '|  | YEAR | AGRICULTURE | ARCHITECTURE | ART AND PERFORMANCE | BIOLOGY | BUSINESS
     | COMMUNICATIONS AND JOURNALISM | COMPUTER SCIENCE | EDUCATION | ENGINEERING |
     ENGLISH | FOREIGN LANGUAGES | HEALTH PROFESSIONS | MATH AND STATISTICS | PHYSICAL
     SCIENCES | PSYCHOLOGY | PUBLIC ADMINISTRATION | SOCIAL SCIENCES AND HISTORY |'
+  id: totrans-21
   prefs: []
   type: TYPE_TB
+  zh: '|  | YEAR | AGRICULTURE | ARCHITECTURE | ART AND PERFORMANCE | BIOLOGY | BUSINESS
+    | COMMUNICATIONS AND JOURNALISM | COMPUTER SCIENCE | EDUCATION | ENGINEERING |
+    ENGLISH | FOREIGN LANGUAGES | HEALTH PROFESSIONS | MATH AND STATISTICS | PHYSICAL
+    SCIENCES | PSYCHOLOGY | PUBLIC ADMINISTRATION | SOCIAL SCIENCES AND HISTORY |'
 - en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
     | --- | --- | --- | --- | --- | --- |'
+  id: totrans-22
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- |'
 - en: '| 0 | 1970 | 4.229798 | 11.921005 | 59.7 | 29.088363 | 9.064439 | 35.3 | 13.6
     | 74.535328 | 0.8 | 65.570923 | 73.8 | 77.1 | 38.0 | 13.8 | 44.4 | 68.4 | 36.8
     |'
+  id: totrans-23
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 1970 | 4.229798 | 11.921005 | 59.7 | 29.088363 | 9.064439 | 35.3 | 13.6
+    | 74.535328 | 0.8 | 65.570923 | 73.8 | 77.1 | 38.0 | 13.8 | 44.4 | 68.4 | 36.8
+    |'
 - en: '| 1 | 1971 | 5.452797 | 12.003106 | 59.9 | 29.394403 | 9.503187 | 35.5 | 13.6
     | 74.149204 | 1.0 | 64.556485 | 73.9 | 75.5 | 39.0 | 14.9 | 46.2 | 65.5 | 36.2
     |'
+  id: totrans-24
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 1971 | 5.452797 | 12.003106 | 59.9 | 29.394403 | 9.503187 | 35.5 | 13.6
+    | 74.149204 | 1.0 | 64.556485 | 73.9 | 75.5 | 39.0 | 14.9 | 46.2 | 65.5 | 36.2
+    |'
 - en: '| 2 | 1972 | 7.420710 | 13.214594 | 60.4 | 29.810221 | 10.558962 | 36.6 | 14.9
     | 73.554520 | 1.2 | 63.664263 | 74.6 | 76.9 | 40.2 | 14.8 | 47.6 | 62.6 | 36.1
     |'
+  id: totrans-25
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 1972 | 7.420710 | 13.214594 | 60.4 | 29.810221 | 10.558962 | 36.6 | 14.9
+    | 73.554520 | 1.2 | 63.664263 | 74.6 | 76.9 | 40.2 | 14.8 | 47.6 | 62.6 | 36.1
+    |'
 - en: '| 3 | 1973 | 9.653602 | 14.791613 | 60.2 | 31.147915 | 12.804602 | 38.4 | 16.4
     | 73.501814 | 1.6 | 62.941502 | 74.9 | 77.4 | 40.9 | 16.5 | 50.4 | 64.3 | 36.4
     |'
+  id: totrans-26
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 1973 | 9.653602 | 14.791613 | 60.2 | 31.147915 | 12.804602 | 38.4 | 16.4
+    | 73.501814 | 1.6 | 62.941502 | 74.9 | 77.4 | 40.9 | 16.5 | 50.4 | 64.3 | 36.4
+    |'
 - en: '| 4 | 1974 | 14.074623 | 17.444688 | 61.9 | 32.996183 | 16.204850 | 40.5 |
     18.9 | 73.336811 | 2.2 | 62.413412 | 75.3 | 77.9 | 41.8 | 18.2 | 52.6 | 66.1 |
     37.3 |'
+  id: totrans-27
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 1974 | 14.074623 | 17.444688 | 61.9 | 32.996183 | 16.204850 | 40.5 |
+    18.9 | 73.336811 | 2.2 | 62.413412 | 75.3 | 77.9 | 41.8 | 18.2 | 52.6 | 66.1 |
+    37.3 |'
 - en: Besides the `Year` column, every other column name indicates the subject of
     a Bachelor degree. Every datapoint in the Bachelor columns represents the percentage
     of Bachelor degrees conferred to women. Thus, every row describes the percentage
     for various Bachelors conferred to women in a given year.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了 `Year` 列外，其他每一列的名称表示学士学位的学科。学士列中的每个数据点表示授予女性的学士学位的百分比。因此，每一行描述了给定年份授予女性的各种学士学位的百分比。
 - en: 'As mentioned before, we have data from 1970 to 2011\. To confirm the latter
     limit, let''s print the last five rows of the dataset by using the `tail()` [method](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.tail.html?highlight=tail#pandas.DataFrame.tail):'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 如前所述，我们的数据从1970年到2011年。为了确认后一个限制，让我们使用 `tail()` [方法](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.tail.html?highlight=tail#pandas.DataFrame.tail)
+    打印数据集的最后五行：
 - en: '[PRE2]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '|  | YEAR | AGRICULTURE | ARCHITECTURE | ART AND PERFORMANCE | BIOLOGY | BUSINESS
     | COMMUNICATIONS AND JOURNALISM | COMPUTER SCIENCE | EDUCATION | ENGINEERING |
     ENGLISH | FOREIGN LANGUAGES | HEALTH PROFESSIONS | MATH AND STATISTICS | PHYSICAL
     SCIENCES | PSYCHOLOGY | PUBLIC ADMINISTRATION | SOCIAL SCIENCES AND HISTORY |'
+  id: totrans-31
   prefs: []
   type: TYPE_TB
+  zh: '|  | YEAR | AGRICULTURE | ARCHITECTURE | ART AND PERFORMANCE | BIOLOGY | BUSINESS
+    | COMMUNICATIONS AND JOURNALISM | COMPUTER SCIENCE | EDUCATION | ENGINEERING |
+    ENGLISH | FOREIGN LANGUAGES | HEALTH PROFESSIONS | MATH AND STATISTICS | PHYSICAL
+    SCIENCES | PSYCHOLOGY | PUBLIC ADMINISTRATION | SOCIAL SCIENCES AND HISTORY |'
 - en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
     | --- | --- | --- | --- | --- | --- |'
+  id: totrans-32
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    | --- | --- | --- | --- | --- | --- |'
 - en: '| 37 | 2007 | 47.605026 | 43.100459 | 61.4 | 59.411993 | 49.000459 | 62.5 |
     17.6 | 78.721413 | 16.8 | 67.874923 | 70.2 | 85.4 | 44.1 | 40.7 | 77.1 | 82.1
     | 49.3 |'
+  id: totrans-33
   prefs: []
   type: TYPE_TB
+  zh: '| 37 | 2007 | 47.605026 | 43.100459 | 61.4 | 59.411993 | 49.000459 | 62.5 |
+    17.6 | 78.721413 | 16.8 | 67.874923 | 70.2 | 85.4 | 44.1 | 40.7 | 77.1 | 82.1
+    | 49.3 |'
 - en: '| 38 | 2008 | 47.570834 | 42.711730 | 60.7 | 59.305765 | 48.888027 | 62.4 |
     17.8 | 79.196327 | 16.5 | 67.594028 | 70.2 | 85.2 | 43.3 | 40.7 | 77.2 | 81.7
     | 49.4 |'
+  id: totrans-34
   prefs: []
   type: TYPE_TB
+  zh: '| 38 | 2008 | 47.570834 | 42.711730 | 60.7 | 59.305765 | 48.888027 | 62.4 |
+    17.8 | 79.196327 | 16.5 | 67.594028 | 70.2 | 85.2 | 43.3 | 40.7 | 77.2 | 81.7
+    | 49.4 |'
 - en: '| 39 | 2009 | 48.667224 | 43.348921 | 61.0 | 58.489583 | 48.840474 | 62.8 |
     18.1 | 79.532909 | 16.8 | 67.969792 | 69.3 | 85.1 | 43.3 | 40.7 | 77.1 | 82.0
     | 49.4 |'
+  id: totrans-35
   prefs: []
   type: TYPE_TB
+  zh: '| 39 | 2009 | 48.667224 | 43.348921 | 61.0 | 58.489583 | 48.840474 | 62.8 |
+    18.1 | 79.532909 | 16.8 | 67.969792 | 69.3 | 85.1 | 43.3 | 40.7 | 77.1 | 82.0
+    | 49.4 |'
 - en: '| 40 | 2010 | 48.730042 | 42.066721 | 61.3 | 59.010255 | 48.757988 | 62.5 |
     17.6 | 79.618625 | 17.2 | 67.928106 | 69.0 | 85.0 | 43.1 | 40.2 | 77.0 | 81.7
     | 49.3 |'
+  id: totrans-36
   prefs: []
   type: TYPE_TB
+  zh: '| 40 | 2010 | 48.730042 | 42.066721 | 61.3 | 59.010255 | 48.757988 | 62.5 |
+    17.6 | 79.618625 | 17.2 | 67.928106 | 69.0 | 85.0 | 43.1 | 40.2 | 77.0 | 81.7
+    | 49.3 |'
 - en: '| 41 | 2011 | 50.037182 | 42.773438 | 61.2 | 58.742397 | 48.180418 | 62.2 |
     18.2 | 79.432812 | 17.5 | 68.426730 | 69.5 | 84.8 | 43.1 | 40.1 | 76.7 | 81.9
     | 49.2 |'
+  id: totrans-37
   prefs: []
   type: TYPE_TB
+  zh: '| 41 | 2011 | 50.037182 | 42.773438 | 61.2 | 58.742397 | 48.180418 | 62.2 |
+    18.2 | 79.432812 | 17.5 | 68.426730 | 69.5 | 84.8 | 43.1 | 40.1 | 76.7 | 81.9
+    | 49.2 |'
 - en: The context of our FiveThirtyEight graph
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我们 FiveThirtyEight 图形的背景
 - en: Almost every FTE graph is part of an article. The graphs complement the text
     by illustrating a little story, or an interesting idea. We'll need to be mindful
     of this while replicating our FTE graph.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 几乎每个 FTE 图表都是文章的一部分。图表通过展示小故事或有趣的想法来补充文本。在复制我们的 FTE 图表时，我们需要注意这一点。
 - en: To avoid digressing from our main task in this tutorial, let's just pretend
     we've already written most of an article about the evolution of gender disparity
     in US education. We now need to create a graph to help readers visualize the evolution
@@ -187,233 +298,351 @@
     in 1970\. We've already set a threshold of 20%, and now we want to graph the evolution
     for every Bachelor where the percentage of women graduates was less than 20% in
     1970.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了避免在本教程中跑题，我们假装已经写了大部分关于美国教育性别差距演变的文章。现在我们需要创建一个图表，帮助读者可视化1970年女性情况非常糟糕的学士学位的性别差距演变。我们已经设置了20%的阈值，现在我们想要绘制所有1970年女性毕业生百分比低于20%的学士学位的演变。
 - en: 'Let''s first identify those specific Bachelors. In the following code cell,
     we will:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先识别这些特定的学士学位。在以下代码单元中，我们将：
 - en: 'Use `.loc`, a [label-based indexer](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.loc.html?highlight=loc#pandas.DataFrame.loc),
     to:'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`.loc`，这是一个[基于标签的索引器](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.loc.html?highlight=loc#pandas.DataFrame.loc)，来：
 - en: select the first row (the one that corresponds to 1970);
+  id: totrans-43
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 选择第一行（对应于1970年）；
 - en: select the items in the first row only where the values are less than 20; the `Year` field
     will be checked as well, but will obviously not be included because 1970 is much
     greater than 20.
+  id: totrans-44
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 选择第一行中值小于20的项；`Year`字段也将被检查，但显然不会包含在内，因为1970远大于20。
 - en: Assign the resulting content to `under_20`.
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将结果内容分配给`under_20`。
 - en: '[PRE3]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Using matplotlib's default style
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 matplotlib 的默认样式
 - en: 'Let''s begin working on our graph. We''ll first take a peek at what we can
     build by default. In the following code block, we will:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始制作我们的图表。我们将首先查看默认情况下可以构建的内容。在以下代码块中，我们将：
 - en: Run the Jupyter magic `%matplotlib` to [enable Jupyter and matplotlib work together
     effectively](http://ipython.readthedocs.io/en/stable/interactive/plotting.html#id1),
     and add `inline` to have our graphs displayed inside the notebook.
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 运行 Jupyter 魔法`%matplotlib`来[启用 Jupyter 和 matplotlib 的有效协作](http://ipython.readthedocs.io/en/stable/interactive/plotting.html#id1)，并添加`inline`以使我们的图表显示在笔记本内部。
 - en: 'Plot the graph by using the `plot()` [method](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.plot.html?highlight=plot#pandas.DataFrame.plot) on `women_majors`.
     We pass in to `plot()`the following parameters:'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`plot()` [方法](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.plot.html?highlight=plot#pandas.DataFrame.plot)绘制图形，应用于`women_majors`。我们传入`plot()`以下参数：
 - en: '`x` - specifies the column from `women_majors` to use for the x-axis;'
+  id: totrans-52
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`x` - 指定用于 x 轴的`women_majors`中的列；'
 - en: '`y` - specifies the columns from `women_majors` to use for the y-axis; we''ll
     use the index labels of `under_20` which are stored in the `.index` attribute
     of this object;'
+  id: totrans-53
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`y` - 指定用于 y 轴的`women_majors`中的列；我们将使用`under_20`的索引标签，这些标签存储在该对象的`.index`属性中；'
 - en: '`figsize` - sets the size of the figure as a `tuple` with the format `(width,
     height)` in inches.'
+  id: totrans-54
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`figsize` - 将图形的大小设置为`tuple`格式的`(宽度, 高度)`，单位为英寸。'
 - en: Assign the plot object to a variable named `under_20_graph`, and print its type
     to show that pandas uses `matplotlib` objects under the hood.
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将绘图对象分配给名为 `under_20_graph` 的变量，并打印其类型以显示 pandas 在幕后使用 `matplotlib` 对象。
 - en: '[PRE5]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![](../Images/a593bbd04871b2356ba6b00209b670ab.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a593bbd04871b2356ba6b00209b670ab.png)'
 - en: Using matplotlib's fivethirtyeight style
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 matplotlib 的 fivethirtyeight 样式
 - en: The graph above has certain characteristics, like the width and color of the
     spines, the font size of the y-axis label, the absence of a grid, etc. All of
     these characteristics make up matplotlib's default style.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 上图具有一些特征，例如脊柱的宽度和颜色、y轴标签的字体大小、没有网格等。所有这些特征构成了 matplotlib 的默认样式。
 - en: As a short parenthesis, it's worth mentioning that we'll use a few technical
     terms about the parts of a graph throughout this post. If you feel lost at any
     point, you can refer to the legend below.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 简短插曲，值得一提的是，在本文中我们将使用一些图形部分的技术术语。如果你在任何时候感到迷失，可以参考下面的图例。
 - en: '![anatomy1](../Images/0f47f940dc093daadce8595661fb8dca.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![anatomy1](../Images/0f47f940dc093daadce8595661fb8dca.png)'
 - en: Source: [Matplotlib.org](http://matplotlib.org/faq/usage_faq.html#parts-of-a-figure)
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：[Matplotlib.org](http://matplotlib.org/faq/usage_faq.html#parts-of-a-figure)
 - en: 'Besides the default style, matplotlib comes with several built-in styles that
     we can use readily. To see a list of the available styles, we will:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了默认样式外，matplotlib 还带有几个内置样式，我们可以直接使用。要查看可用样式的列表，我们将：
 - en: Import the `matplotlib.style` [module](https://matplotlib.org/api/style_api.html?highlight=style%20available#module-matplotlib.style) under
     the name `style`.
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 导入 `matplotlib.style` [模块](https://matplotlib.org/api/style_api.html?highlight=style%20available#module-matplotlib.style)，并命名为
+    `style`。
 - en: Explore the content of `matplotlib.style.available` (a predefined variable of
     this module), which contains a list of all the available in-built styles.
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 探索 `matplotlib.style.available` 的内容（这是该模块的一个预定义变量），其中包含所有可用的内置样式列表。
 - en: '[PRE6]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '[PRE7]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: You might have already observed that there's a built-in style called `fivethirtyeight`.
     Let's use this style, and see where that leads. For that, we'll use the aptly
     named `use()` [function](https://matplotlib.org/api/style_api.html?highlight=style%20available#matplotlib.style.use)from
     the same `matplotlib.style` module (which we imported under the name `style`).
     Then we'll generate our graph using the same code as earlier.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能已经观察到，有一个内置样式叫做 `fivethirtyeight`。让我们使用这个样式，看看会发生什么。为此，我们将使用同一 `matplotlib.style`
+    模块中恰如其分命名的 `use()` [函数](https://matplotlib.org/api/style_api.html?highlight=style%20available#matplotlib.style.use)（我们以
+    `style` 名义导入）。然后我们将使用之前相同的代码生成图形。
 - en: '[PRE8]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![538_graphs_AO_11_1](../Images/cdee0cf7d81b8bba45d2ceb49508800d.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![538_graphs_AO_11_1](../Images/cdee0cf7d81b8bba45d2ceb49508800d.png)'
 - en: '![](../Images/c69d43b978cacd11f996c059d1cb2047.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c69d43b978cacd11f996c059d1cb2047.png)'
 - en: Wow, that's a major change! With respect to our first graph, we can see that
     this one has a different background color, it has grid lines, there are no spines
     whatsoever, the weight and the font size of the major tick labels are different,
     etc.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 哇，这真是一个重大变化！与我们的第一个图形相比，我们可以看到这个图形有不同的背景颜色，有网格线，完全没有脊柱，主要刻度标签的粗细和字体大小也不同等。
 - en: You can read a technical description of the `fivethirtyeight` style [here](https://github.com/matplotlib/matplotlib/blob/38be7aeaaac3691560aeadafe46722dda427ef47/lib/matplotlib/mpl-data/stylelib/fivethirtyeight.mplstyle) -
     it should also give you a good idea about what code runs under the hood when we
     use this style. The author of the style sheet, [Cameron David-Pilon](https://github.com/CamDavidsonPilon),
     discusses some of the characteristics [here](https://dataorigami.net/blogs/napkin-folding/17543615-replicating-538s-plot-styles-in-matplotlib).
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在 [这里](https://github.com/matplotlib/matplotlib/blob/38be7aeaaac3691560aeadafe46722dda427ef47/lib/matplotlib/mpl-data/stylelib/fivethirtyeight.mplstyle)
+    阅读 `fivethirtyeight` 样式的技术描述，这也应能让你对使用此样式时运行的代码有一个很好的了解。样式表的作者，[卡梅伦·大卫-皮隆](https://github.com/CamDavidsonPilon)，在
+    [这里](https://dataorigami.net/blogs/napkin-folding/17543615-replicating-538s-plot-styles-in-matplotlib)
+    讨论了一些特征。
 - en: '*For more on generating FiveThirtyEight graphs in Python, see the rest of the
     [original article here](https://www.dataquest.io/blog/making-538-plots/).*'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '*有关在 Python 中生成 FiveThirtyEight 图形的更多信息，请参见 [原始文章的其余部分](https://www.dataquest.io/blog/making-538-plots/)。*'
 - en: '**Bio: [Alex Olteanu](https://www.dataquest.io/blog/author/alex-olteanu/)**
     is a Student Success Specialist at Dataquest.io. He enjoys learning and sharing
     knowledge, and is getting ready for the new AI revolution.'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历: [亚历克斯·奥尔特亚努](https://www.dataquest.io/blog/author/alex-olteanu/)** 是
+    Dataquest.io 的学生成功专员。他喜欢学习和分享知识，并为新的 AI 革命做准备。'
 - en: '[Original](https://www.dataquest.io/blog/making-538-plots/). Reposted with
     permission.'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始文章](https://www.dataquest.io/blog/making-538-plots/)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Analyzing the Migration of Scientific Researchers](/2017/11/analyzing-migration-scientific-researchers.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分析科学研究人员的迁移](/2017/11/analyzing-migration-scientific-researchers.html)'
 - en: '[7 Techniques to Visualize Geospatial Data](/2017/10/7-techniques-visualize-geospatial-data.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7 种技术可视化地理空间数据](/2017/10/7-techniques-visualize-geospatial-data.html)'
 - en: '[The Python Graph Gallery](/2017/11/python-graph-gallery.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 图表画廊](/2017/11/python-graph-gallery.html)'
 - en: '* * *'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-82
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT 部门'
 - en: '* * *'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-87
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[How to Generate Synthetic Tabular Dataset](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何生成合成表格数据集](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)'
 - en: '[Generate Synthetic Time-series Data with Open-source Tools](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用开源工具生成合成时间序列数据](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)'
 - en: '[4 Ways to Generate Passive Income Using ChatGPT](https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用 ChatGPT 生成被动收入的 4 种方法](https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html)'
 - en: '[Generate Music From Text Using Google MusicLM](https://www.kdnuggets.com/2023/06/generate-music-text-google-musiclm.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Google MusicLM 从文本生成音乐](https://www.kdnuggets.com/2023/06/generate-music-text-google-musiclm.html)'
 - en: '[3 Ways to Generate Hyper-Realistic Faces Using Stable Diffusion](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用 Stable Diffusion 生成超真实的面孔的 3 种方法](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)'
 - en: '[Combining Data Management and Data Storytelling to Generate Value](https://www.kdnuggets.com/combining-data-management-and-data-storytelling-to-generate-value)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[结合数据管理与数据讲述以创造价值](https://www.kdnuggets.com/combining-data-management-and-data-storytelling-to-generate-value)'

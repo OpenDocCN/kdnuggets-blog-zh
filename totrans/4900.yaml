@@ -1,25 +1,35 @@
 - en: Building an Audio Classifier using Deep Neural Networks
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用深度神经网络构建音频分类器
 - en: 原文：[https://www.kdnuggets.com/2017/12/audio-classifier-deep-neural-networks.html](https://www.kdnuggets.com/2017/12/audio-classifier-deep-neural-networks.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/12/audio-classifier-deep-neural-networks.html](https://www.kdnuggets.com/2017/12/audio-classifier-deep-neural-networks.html)
 - en: '[comments](/2017/12/audio-classifier-deep-neural-networks.html/#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](/2017/12/audio-classifier-deep-neural-networks.html/#comments)'
 - en: '**By** [Narayan Srinivasan](https://www.linkedin.com/in/narayansrinivasan97/).'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者** [Narayan Srinivasan](https://www.linkedin.com/in/narayansrinivasan97/)。'
 - en: Understanding sound is one of the basic tasks that our brain performs. This
     can be broadly classified into Speech and Non-Speech sounds. We have noise robust
     speech recognition systems in place but there is still no general purpose acoustic
     scene classifier which can enable a computer to listen and interpret everyday
     sounds and take actions based on those like humans do, like moving out of the
     way when we listen to a horn or hear a dog barking behind us etc.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 理解声音是我们大脑执行的基本任务之一。这可以大致分为语音和非语音声音。我们已有了噪声鲁棒的语音识别系统，但仍然没有通用的声学场景分类器，能使计算机像人类一样听取和解释日常声音并据此采取行动，比如在听到喇叭声或听到狗在身后吠叫时移开。
 - en: Our model is only as complex as our data, thus getting labelled ‘data is very
     important in machine learning’. The complexity of the Machine Learning systems
     arise from the data itself and not from the algorithms. In the past few years
@@ -30,18 +40,29 @@
     classified at above 95% accuracy (top 5 accuracy). This was due to a large amount
     of labelled dataset that were available for the Models to train on and also faster
     computers with GPU acceleration which makes it easier to train Deep Models.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的模型复杂度取决于我们的数据，因此，获得标注的数据在机器学习中非常重要。机器学习系统的复杂性来源于数据本身，而不是算法。近年来，我们看到深度学习系统在图像识别和标注领域取得了突破性进展，像
+    [ResNet](https://arxiv.org/abs/1512.03385)、[GoogleNet](https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Szegedy_Going_Deeper_With_2015_CVPR_paper.pdf)
+    等架构在 ImageNet 竞赛中打破了基准，在 1000 个图像类别中的分类准确率超过了 95%（前 5 名准确率）。这得益于大量的标注数据集和带有 GPU
+    加速的更快计算机，这使得训练深度模型变得更加容易。
 - en: The problem we face with building a noise robust acoustic classifier is the
     lack of a large dataset, but Google recently launched the [AudioSet](https://research.google.com/audioset/)
     - which is a large collection of labelled audio taken from YouTube videos (10s
     excerpts). Earlier, we had the [ESC-50](https://github.com/karoldvl/ESC-50) dataset
     with 2000 recordings, 40 from each class covering many everyday sounds.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们面临的构建噪声鲁棒声学分类器的问题是缺乏大规模的数据集，但谷歌最近推出了 [AudioSet](https://research.google.com/audioset/)
+    —— 这是一个来自 YouTube 视频的大量标注音频集合（10 秒片段）。之前，我们有 [ESC-50](https://github.com/karoldvl/ESC-50)
+    数据集，包含 2000 个录音，每个类别 40 个，涵盖了许多日常声音。
 - en: '**Step 1\. Extracting Features**'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 1\. 提取特征**'
 - en: Although deep learning eliminates the need for hand-engineered features, we
     have to choose a representation model for our data. Instead of directly using
     the sound file as an amplitude vs time signal we use a log-scaled mel-spectrogram
@@ -54,63 +75,95 @@
     an insight into converting audio files into spectrogram images. We use glob and
     librosa library - this code is a standard one for conversion into spectrogram
     and you’re free to make modifications to suit the needs.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管深度学习消除了对手工设计特征的需求，但我们仍然需要为数据选择一个表示模型。我们没有直接使用音频文件作为振幅与时间信号，而是使用具有128个组件（频带）的对数尺度mel频谱图，覆盖听觉频率范围（0-22050
+    Hz），使用23毫秒（44.1 kHz下的1024个样本）的窗口大小和相同持续时间的跳跃大小。这种转换考虑到人耳以对数尺度听取声音，且人耳蜗对频率相近的声音区分度不高。随着频率的增加，这种效应变得更强。因此，我们仅考虑不同频带的功率。这个示例代码提供了将音频文件转换为频谱图图像的见解。我们使用了glob和librosa库
+    - 这段代码是转换为频谱图的标准代码，你可以根据需要进行修改。
 - en: In the code that follows,
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 在接下来的代码中，
 - en: parent_dir = string with name of main directory.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: parent_dir = 主目录的名称字符串。
 - en: sub_dirs = a list of directories inside parent we want to explore
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: sub_dirs = 要探索的父目录内的目录列表
 - en: So all *.wav files in the area parent_dir/sub_dirs/*.wav are extracted, iterating
     through all subdirs.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，所有位于 area parent_dir/sub_dirs/*.wav 的 *.wav 文件被提取，遍历所有子目录。
 - en: There is an interesting article about mel-scale and mfcc coefficients for people
     who are interested. [Ref](https://practicalcryptography.com/miscellaneous/machine-learning/guide-mel-frequency-cepstral-coefficients-mfccs/).
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于感兴趣的人，有一篇关于mel尺度和mfcc系数的有趣文章。 [Ref](https://practicalcryptography.com/miscellaneous/machine-learning/guide-mel-frequency-cepstral-coefficients-mfccs/)。
 - en: Now the audio file is represented as a 128(frames) x 128(bands) spectrogram
     image.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，音频文件被表示为一个 128（帧）x 128（频带）的频谱图图像。
 - en: '![Audio Classifier Code](../Images/794b6ba0f37b7c82566bca64995ba0b0.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![音频分类代码](../Images/794b6ba0f37b7c82566bca64995ba0b0.png)'
 - en: '![](../Images/ffb438457a621ff28aa5db91e4ef8223.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ffb438457a621ff28aa5db91e4ef8223.png)'
 - en: The Audio-classification problem is now transformed into an image classification
     problem. We need to detect presence of a particular entity ( ‘Dog’,’Cat’,’Car’
     etc) in this image.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 音频分类问题现在被转化为图像分类问题。我们需要检测图像中是否存在特定实体（‘狗’、‘猫’、‘车’等）。
 - en: '**Step 2\. Choosing an Architecture**'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 2：选择架构**'
 - en: We use a convolutional Neural Network, to classify the spectrogram images.This
     is because CNNs work better in detecting local feature patterns (edges etc) in
     different parts of the image and are also good at capturing hierarchical features
     which become subsequently complex with every layer as illustrated in the image
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用卷积神经网络（CNN）来分类频谱图图像。这是因为CNN在检测图像中不同部分的局部特征模式（例如边缘）方面表现更好，并且在捕捉逐层变得越来越复杂的层次特征方面也很擅长，如图中所示。
 - en: '![](../Images/03c83c4f60de3b6acb959d2753c28df5.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/03c83c4f60de3b6acb959d2753c28df5.png)'
 - en: Another way to think about this is to use a Recurrent Neural Network to capture
     the sequential information in sound data by passing one frame at a time, but as
     in most cases CNNs have outperformed standalone RNNs - we haven’t used it in this
     particular experiment. In many cases RNNs are used along with CNNs to improve
     performance of networks and we would be experimenting with those architectures
     in the future. [[Ref]](https://arxiv.org/abs/1704.07709)
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种思考方式是使用递归神经网络（RNN）来捕捉声音数据中的序列信息，通过一次传递一帧，但由于在大多数情况下CNN的表现优于独立的RNN - 我们在这个实验中没有使用RNN。在许多情况下，RNN与CNN一起使用以提高网络性能，我们将在未来实验这些架构。[[Ref]](https://arxiv.org/abs/1704.07709)
 - en: '**Step 3\. Transfer Learning**'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 3：迁移学习**'
 - en: As the CNNs learn features hierarchically, we can observe that the initial few
     layers learn basic features like various edges which are common to many different
     types of images. Transfer learning is the concept of training the model on a dataset
@@ -118,134 +171,205 @@
     on the target task where we do not have a lot of data. This is also called ***fine-tuning***
     - [this blog](https://sebastianruder.com/transfer-learning/index.html) explains
     transfer learning very well.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于卷积神经网络（CNN）逐层学习特征，我们可以观察到最初的几层学习到基本特征，如各种边缘，这些边缘在许多不同类型的图像中是共同的。迁移学习是指在一个包含大量相似数据的数据集上训练模型，然后修改网络以便在目标任务上表现良好，而在目标任务中我们没有很多数据。这也叫做
+    ***微调*** - [这个博客](https://sebastianruder.com/transfer-learning/index.html) 对迁移学习进行了很好的解释。
 - en: '**Step 4\. Data Augmentation**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 4. 数据增强**'
 - en: While dealing with small datasets, learning complex representations of the data
     is very prone to overfitting as the model just memorises the dataset and fails
     to generalise. One way to beat this is to augment the audio files into producing
     many files each with a slight variation.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 在处理小数据集时，学习数据的复杂表示非常容易过拟合，因为模型只是记忆数据集而无法泛化。击败这一问题的一种方法是将音频文件增强成许多具有轻微变化的文件。
 - en: The ones we used here are time-stretching and pitch-shifting - [Rubberband](https://github.com/breakfastquay/rubberband)
     is an easy to use library for this purpose.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在这里使用的技术是时间拉伸和音调移动 - [Rubberband](https://github.com/breakfastquay/rubberband)
+    是一个易于使用的库，用于此目的。
 - en: '[PRE0]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: This one line terminal command, gives us a new audio file which is 50% longer
     than original and has pitch shifted up by one octave.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 这条单行终端命令给我们一个新的音频文件，长度比原始文件长 50%，且音调上升了一个八度。
 - en: To visualise what this means, look at this image of a cat I took from the internet.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了可视化这意味着什么，请查看我从互联网获取的这张猫的图片。
 - en: '![](../Images/06ff45551a975c58b22cca5b6fe5b348.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/06ff45551a975c58b22cca5b6fe5b348.png)'
 - en: If we only have the image on our right, we can use data augmentation to make
     a mirror image of that image and it’s still a cat (Additional training data!).
     For a computer these are two completely different pixel distributions and helps
     it learn more general concepts (if A is a dog, mirror image of A is dog too).
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们只有右侧的图像，我们可以使用数据增强来制作该图像的镜像，结果仍然是一只猫（额外的训练数据！）。对于计算机来说，这两者是完全不同的像素分布，有助于它学习更通用的概念（如果
+    A 是狗，那么 A 的镜像也是狗）。
 - en: Similarly we apply time-stretching (either slow down the sound or speed it up)
     , and
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样地，我们应用时间拉伸（无论是减慢声音还是加快声音），以及
 - en: pitch-shifting (make it more or less shrill) to get more generalised training
     data for our network (also improved the validation accuracy by 8-9% in this case
     due to a small training set).
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 音调移动（使其更尖锐或更柔和）以获得更通用的训练数据（由于训练集较小，这在此情况下也提高了 8-9% 的验证准确性）。
 - en: We observed that the performance of the model for each sound class is influenced
     differently by each augmentation set, suggesting that the performance of the model
     could be improved further by applying class-conditional data augmentation.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们观察到每个声音类别的模型性能受到每组增强方式的不同影响，这表明通过应用类别条件数据增强可以进一步提高模型性能。
 - en: Overfitting is a major problem in the field of deep learning and we can use
     Data Augmentation as one way to combat this problem , other ways of implicitly
     generalising include using dropout layers and L1,L2 regularisation. [[Ref]](https://www.jmlr.org/papers/volume15/srivastava14a.old/source/srivastava14a.pdf)
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 过拟合是深度学习领域的一个主要问题，我们可以使用数据增强作为应对这一问题的一种方法，其他隐式泛化的方法包括使用 dropout 层和 L1、L2 正则化。[[Ref]](https://www.jmlr.org/papers/volume15/srivastava14a.old/source/srivastava14a.pdf)
 - en: So in this article we proposed a deep convolutional neural network architecture
     which helps us classify audio and how to effectively use transfer learning and
     data-augmentation to improve model accuracy in case of small datasets.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，在这篇文章中，我们提出了一种深度卷积神经网络架构，它帮助我们对音频进行分类，并且如何有效地使用迁移学习和数据增强来提高模型在小数据集情况下的准确性。
 - en: '**Bio:** [Narayan Srinivasan](https://www.linkedin.com/in/narayansrinivasan97/)
     is interested in building autonomous vehicle. He is a graduate of Indian Institute
     of Technology, Madras.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：** [Narayan Srinivasan](https://www.linkedin.com/in/narayansrinivasan97/)
+    对构建自动驾驶车辆感兴趣。他是印度理工学院马德拉斯分校的毕业生。'
 - en: '**Related**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容**'
 - en: '[**The 10 Deep Learning Methods AI Practitioners Need to Apply**](https://www.kdnuggets.com/2017/12/10-deep-learning-methods-ai-practitioners-need-apply.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**AI 从业者需要应用的 10 种深度学习方法**](https://www.kdnuggets.com/2017/12/10-deep-learning-methods-ai-practitioners-need-apply.html)'
 - en: '[**MLDB: The Machine Learning Database**](https://www.kdnuggets.com/2016/10/mldb-machine-learning-database.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**MLDB：机器学习数据库**](https://www.kdnuggets.com/2016/10/mldb-machine-learning-database.html)'
 - en: '[**Bill Inmon on Hearing The Voice Of Your Customer**](https://www.kdnuggets.com/2017/12/hearing-voice-your-customer.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**比尔·英蒙谈如何听到客户的声音**](https://www.kdnuggets.com/2017/12/hearing-voice-your-customer.html)'
 - en: '* * *'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT 工作'
 - en: '* * *'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题
 - en: '[From Theory to Practice: Building a k-Nearest Neighbors Classifier](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从理论到实践：构建 k-最近邻分类器](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)'
 - en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[创建一个使用 Python 从音频中提取主题的 Web 应用程序](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
 - en: '[Bark: The Ultimate Audio Generation Model](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Bark: 终极音频生成模型](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
 - en: '[WavJourney: A Journey into the World of Audio Storyline Generation](https://www.kdnuggets.com/wavjourney-a-journey-into-the-world-of-audio-storyline-generation)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[WavJourney：探索音频故事生成的世界](https://www.kdnuggets.com/wavjourney-a-journey-into-the-world-of-audio-storyline-generation)'
 - en: '[Neural Networks and Deep Learning: A Textbook (2nd Edition)](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[神经网络与深度学习：教科书（第2版）](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)'
 - en: '[Deep Neural Networks Don''t Lead Us Towards AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度神经网络不会引领我们走向 AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
