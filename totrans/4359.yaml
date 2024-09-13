@@ -3,15 +3,18 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: TensorFlow 中的机器学习模型剪枝
 - en: 原文：[https://www.kdnuggets.com/2020/12/pruning-machine-learning-models-tensorflow.html](https://www.kdnuggets.com/2020/12/pruning-machine-learning-models-tensorflow.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/12/pruning-machine-learning-models-tensorflow.html](https://www.kdnuggets.com/2020/12/pruning-machine-learning-models-tensorflow.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '[In a previous article](https://heartbeat.fritz.ai/research-guide-pruning-techniques-for-neural-networks-d9b8440ab10d),
     we reviewed some of the pre-eminent literature on pruning neural networks. We
     learned that pruning is a model optimization technique that involves eliminating
@@ -20,75 +23,93 @@
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[在上一篇文章中](https://heartbeat.fritz.ai/research-guide-pruning-techniques-for-neural-networks-d9b8440ab10d)，我们回顾了一些关于剪枝神经网络的主要文献。我们了解到剪枝是一种模型优化技术，涉及到在权重张量中消除不必要的值。这将导致更小的模型，其准确性非常接近基线模型。'
 - en: In this article, we’ll work through an example as we apply pruning and view
     the effect on the final model size and prediction errors.
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将通过一个示例来应用剪枝，并查看对最终模型大小和预测误差的影响。
 - en: Import the Usual Suspects
   id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导入常见库
 - en: '* * *'
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT 工作'
 - en: '* * *'
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'Our first step is to get a couple of imports out of the way:'
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的第一步是处理几个导入：
 - en: '`Os` and `Zipfile` will help us in assessing the size of the models.'
   id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Os` 和 `Zipfile` 将帮助我们评估模型的大小。'
 - en: '`tensorflow_model_optimization` for model pruning.'
   id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`tensorflow_model_optimization` 用于模型剪枝。'
 - en: '`load_model` for loading a saved model.'
   id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`load_model` 用于加载已保存的模型。'
 - en: and of course `tensorflow` and `keras`.
   id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当然还包括 `tensorflow` 和 `keras`。
 - en: 'Finally, we initialize TensorBoard so that we’ll able to visualize the models:'
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们初始化 TensorBoard，以便能够可视化模型：
 - en: '[PRE0]'
   id: totrans-18
   prefs: []
@@ -99,11 +120,13 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据集生成
 - en: 'For this experiment, we’ll generate a regression dataset using scikit-learn.
     Thereafter, we split the dataset into a training and test set:'
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个实验中，我们将使用 scikit-learn 生成一个回归数据集。然后，我们将数据集拆分为训练集和测试集：
 - en: '[PRE1]'
   id: totrans-21
   prefs: []
@@ -114,17 +137,20 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型无剪枝
 - en: We’ll create a simple neural network to predict the target variable `y`. We’ll
     then check the mean squared error. After this, we’ll compare this with the entire
     model pruned, and then with just the `Dense` layer pruned.
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将创建一个简单的神经网络来预测目标变量 `y`。然后检查均方误差。在此之后，我们将其与整个模型剪枝后的结果进行比较，然后与仅剪枝 `Dense` 层后的结果进行比较。
 - en: Next, we step up a callback to stop training the model once it stops improving,
     after 30 epochs.
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们设置一个回调，在模型停止改进后停止训练，经过 30 轮。
 - en: '[PRE2]'
   id: totrans-25
   prefs: []
@@ -135,6 +161,7 @@
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们打印出模型的摘要，以便将其与剪枝模型的摘要进行比较。
 - en: '[PRE3]'
   id: totrans-27
   prefs: []
@@ -144,10 +171,12 @@
   id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子图像](../Images/2557a1d142f91122421703dfb64bc1dd.png)'
 - en: Let’s compile the model and train it.
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们编译模型并训练它。
 - en: '[PRE4]'
   id: totrans-30
   prefs: []
@@ -158,11 +187,13 @@
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于这是一个回归问题，我们监控的是平均绝对误差和均方误差。
 - en: Here’s the model plotted to an image. The input is 10 since the dataset we generated
     has 10 features.
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是绘制为图像的模型。输入是 10，因为我们生成的数据集有 10 个特征。
 - en: '[PRE5]'
   id: totrans-33
   prefs: []
@@ -172,11 +203,13 @@
   id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子图像](../Images/17359d8f180680b7254944b99f740797.png)'
 - en: Let’s now check the mean squared error. We can move on to the next section and
     see how this error changes when we prune the entire model.
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们检查均方误差。我们可以继续到下一部分，看看剪枝整个模型时该误差如何变化。
 - en: '[PRE6]'
   id: totrans-36
   prefs: []
@@ -187,6 +220,7 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 ConstantSparsity 剪枝计划剪枝整个模型
 - en: Let’s compared the above MSE with the one obtained upon pruning the entire model.
     The first step is to define the pruning parameters. The weight pruning is magnitude-based.
     This means that some weights are converted to zeros during the training process.
@@ -195,47 +229,57 @@
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们将上述均方误差与修剪整个模型后获得的均方误差进行比较。第一步是定义修剪参数。权重修剪是基于大小的。这意味着一些权重在训练过程中被转换为零。模型变得稀疏，从而使其更容易压缩。稀疏模型还使推理更快，因为零值可以被跳过。
 - en: The parameters expected are the pruning schedule, the block size, and the block
     pooling type.
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 期望的参数是修剪计划、块大小和块池化类型。
 - en: In this case, we’re setting a 50% [sparsity](https://www.tensorflow.org/model_optimization/api_docs/python/tfmot/sparsity/keras/ConstantSparsity),
     meaning that 50% of the weights will be zeroed.
   id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在这种情况下，我们设置了 50% 的 [稀疏性](https://www.tensorflow.org/model_optimization/api_docs/python/tfmot/sparsity/keras/ConstantSparsity)，意味着
+    50% 的权重将被置零。
 - en: '`block_size` — The dimensions (height, weight) for the block'
   id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`block_size` — 块的尺寸（高度、宽度）'
 - en: sparse pattern in matrix weight tensors.
   id: totrans-42
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 矩阵权重张量中的稀疏模式。
 - en: '`block_pooling_type` — The function to use to pool weights in the'
   id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`block_pooling_type` — 用于池化权重的函数'
 - en: block. Must be `AVG` or `MAX`.
   id: totrans-44
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 块。必须是 `AVG` 或 `MAX`。
 - en: We can now prune the entire model by applying our pruning parameters.
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以通过应用我们的修剪参数来修剪整个模型。
 - en: Let’s check the model summary. Compare this with the summary of the unpruned
     model. From the image below we can see that the entire model has been pruned—we’ll
     see the difference shortly with the summary obtained after pruning one dense layer.
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们查看模型摘要。将其与未修剪模型的摘要进行比较。从下面的图像中我们可以看到整个模型已经被修剪——稍后我们将通过修剪一个密集层后获得的摘要看到不同之处。
 - en: '[PRE7]'
   id: totrans-47
   prefs: []
@@ -245,11 +289,13 @@
   id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子图片](../Images/600a83cad46033ad4505372e7850a817.png)'
 - en: We have to compile the model before we can fit it to the training and testing
     set.
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们可以将模型拟合到训练和测试集之前，我们必须编译模型。
 - en: '[PRE8]'
   id: totrans-50
   prefs: []
@@ -261,15 +307,18 @@
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们正在应用修剪，我们需要定义几个修剪回调函数，除了早期停止回调函数外。我们定义了记录模型的文件夹，然后创建了一个包含回调函数的列表。
 - en: '`tfmot.sparsity.keras.UpdatePruningStep()` updates pruning wrappers with the
     optimizer step. Failure to specify it will result in an error.'
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '`tfmot.sparsity.keras.UpdatePruningStep()` 更新修剪包装器与优化器步骤。如果不指定它，将会导致错误。'
 - en: '`tfmot.sparsity.keras.PruningSummaries()` adds pruning summaries to the Tensorboard.'
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '`tfmot.sparsity.keras.PruningSummaries()` 将修剪摘要添加到 Tensorboard。'
 - en: '[PRE9]'
   id: totrans-54
   prefs: []
@@ -279,6 +328,7 @@
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 解决了这些问题后，我们可以将模型拟合到训练集。
 - en: '[PRE10]'
   id: totrans-56
   prefs: []
@@ -289,6 +339,7 @@
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 检查该模型的均方误差时，我们注意到它略高于未修剪模型的均方误差。
 - en: '[PRE11]'
   id: totrans-58
   prefs: []
@@ -299,16 +350,20 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 仅使用 PolynomialDecay 修剪计划修剪密集层
 - en: Let’s now implement the same model—but this time, we’ll prune the dense layer
     only. Notice the use of the `[PolynomialDecay](https://www.tensorflow.org/model_optimization/api_docs/python/tfmot/sparsity/keras/PolynomialDecay)`[ function](https://www.tensorflow.org/model_optimization/api_docs/python/tfmot/sparsity/keras/PolynomialDecay) in
     the pruning schedule.
   id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们实现相同的模型——但这一次，我们只修剪密集层。注意在修剪计划中使用的 `[PolynomialDecay](https://www.tensorflow.org/model_optimization/api_docs/python/tfmot/sparsity/keras/PolynomialDecay)`
+    [函数](https://www.tensorflow.org/model_optimization/api_docs/python/tfmot/sparsity/keras/PolynomialDecay)。
 - en: From the summary, we can see that only the first dense layer will be pruned.
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 从摘要中，我们可以看到只有第一个密集层将被修剪。
 - en: '[PRE12]'
   id: totrans-62
   prefs: []
@@ -318,10 +373,12 @@
   id: totrans-63
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子图片](../Images/cb575b67fcf38555ae54a9132353e9bc.png)'
 - en: We then compile and fit the model.
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们编译并拟合模型。
 - en: '[PRE13]'
   id: totrans-65
   prefs: []
@@ -331,6 +388,7 @@
   id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们检查均方误差。
 - en: '[PRE14]'
   id: totrans-67
   prefs: []
@@ -345,51 +403,63 @@
   id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们无法将此处获得的 MSE 与之前的进行比较，因为我们使用了不同的剪枝参数。如果你想比较它们，请确保剪枝参数相似。经过测试，`layer_pruning_params`
+    在这种特定情况下比 `pruning_params` 的误差更低。比较不同剪枝参数获得的 MSE 很有用，以便你可以选择不会降低模型性能的参数。
 - en: Comparing Model Sizes
   id: totrans-69
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 比较模型大小
 - en: Let’s now compare the sizes of the models with and without pruning. We start
     by training and saving the model weights for later use.
   id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们比较有剪枝和无剪枝模型的大小。我们首先训练并保存模型权重以供后续使用。
 - en: We’ll set up our base model and load the saved weights. We then prune the entire
     model. We compile, fit the model, and visualize the results on Tensorboard.
   id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将设置基础模型并加载保存的权重。然后我们剪枝整个模型。我们编译、训练模型，并在 Tensorboard 上可视化结果。
 - en: Here’s a single snapshot of the pruning summaries from TensorBoard.
   id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是 TensorBoard 上剪枝总结的一个快照。
 - en: '![Image for post](../Images/869fe54127f831eb2c443bd69ffb8251.png)'
   id: totrans-73
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子图片](../Images/869fe54127f831eb2c443bd69ffb8251.png)'
 - en: The other pruning summaries can also be viewed on Tensorboard.
   id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他剪枝总结也可以在 Tensorboard 上查看。
 - en: '![Image for post](../Images/1df0795bf97341e8e19402d6820ba186.png)'
   id: totrans-75
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子图片](../Images/1df0795bf97341e8e19402d6820ba186.png)'
 - en: Let’s now define a function to compute the sizes of the models.
   id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们定义一个函数来计算模型的大小。
 - en: And now we define the model for export and then compute the sizes.
   id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们定义导出模型并计算其大小。
 - en: For a pruned model,` tfmot.sparsity.keras.strip_pruning()` is used to restore
     the original model with the sparse weights. Notice the difference in size for
     the stripped and unstripped models.
   id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于剪枝模型，` tfmot.sparsity.keras.strip_pruning()` 用于恢复原始模型的稀疏权重。注意被剪枝和未剪枝模型的大小差异。
 - en: '[PRE15]'
   id: totrans-79
   prefs: []
@@ -405,6 +475,7 @@
   id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 对两个模型进行预测，我们发现它们具有相同的均方误差。
 - en: '[PRE17]'
   id: totrans-82
   prefs: []
@@ -415,6 +486,7 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最终思考
 - en: You can go ahead and test how different pruning schedules affect the size of
     the model. Obviously, the observations made here are not universal. You’ll have
     to try different pruning parameters and learn how they affect your model size,
@@ -422,51 +494,62 @@
   id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以测试不同的剪枝计划如何影响模型的大小。显然，这里的观察结果并不普遍。你需要尝试不同的剪枝参数，了解它们如何影响你的模型大小、预测误差和/或准确性，具体取决于你的问题。
 - en: To optimize the model even more, **you could quantize it**. If you’d like to
     explore that and more, check the repo and the resources below.
   id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 要进一步优化模型，**你可以对其进行量化**。如果你想深入了解这一点以及更多内容，请查看下面的资源和仓库。
 - en: Resources
   id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 资源
 - en: '[**Pruning in Keras example | TensorFlow Model Optimization**](https://www.tensorflow.org/model_optimization/guide/pruning/pruning_with_keras)'
   id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**Keras 中的剪枝示例 | TensorFlow 模型优化**](https://www.tensorflow.org/model_optimization/guide/pruning/pruning_with_keras)'
 - en: Welcome to an end-to-end example for magnitude-based weight pruning. For an
     introduction to what pruning is and to…
   id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 欢迎来到基于幅度的权重剪枝的端到端示例。有关剪枝是什么以及如何...
 - en: '[**Pruning comprehensive guide | TensorFlow Model Optimization**](https://www.tensorflow.org/model_optimization/guide/pruning/comprehensive_guide)'
   id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**剪枝综合指南 | TensorFlow 模型优化**](https://www.tensorflow.org/model_optimization/guide/pruning/comprehensive_guide)'
 - en: TensorFlow Lite for mobile and embedded devices
   id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 适用于移动和嵌入式设备的 TensorFlow Lite
 - en: '[**mwitiderrick/Pruning-in-TensorFlow**](https://github.com/mwitiderrick/Pruning-in-TensorFlow)'
   id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**mwitiderrick/TensorFlow 中的剪枝**](https://github.com/mwitiderrick/Pruning-in-TensorFlow)'
 - en: In this article, we comb through an example as we apply pruning and view the
     effect on the final model size …
   id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们通过一个示例来应用剪枝，并查看对最终模型大小的影响...
 - en: '[**8-Bit Quantization and TensorFlow Lite: Speeding up mobile inference with
     low precision**](https://heartbeat.fritz.ai/8-bit-quantization-and-tensorflow-lite-speeding-up-mobile-inference-with-low-precision-a882dfcafbbd)'
   id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**8 位量化和 TensorFlow Lite：通过低精度加速移动推理**](https://heartbeat.fritz.ai/8-bit-quantization-and-tensorflow-lite-speeding-up-mobile-inference-with-low-precision-a882dfcafbbd)'
 - en: heartbeat.fritz.ai
   id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: heartbeat.fritz.ai
 - en: '**Bio: Derrick Mwiti** is a data scientist who has a great passion for sharing
     knowledge. He is an avid contributor to the data science community via blogs such
     as Heartbeat, Towards Data Science, Datacamp, Neptune AI, KDnuggets just to mention
