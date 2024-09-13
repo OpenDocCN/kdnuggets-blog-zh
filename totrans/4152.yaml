@@ -1,142 +1,213 @@
 - en: Building a Geospatial Application in Python with Google Earth Engine and Greppo
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Google Earth Engine 和 Greppo 在 Python 中构建地理空间应用
 - en: 原文：[https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)
 - en: '![Building a Geospatial Application in Python with Google Earth Engine and
     Greppo](../Images/5664095a43f9f5f9138ecffae1bbe32b.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Google Earth Engine 和 Greppo 在 Python 中构建地理空间应用](../Images/5664095a43f9f5f9138ecffae1bbe32b.png)'
 - en: The final web-app using Greppo and GEE. Image by author.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Greppo 和 GEE 的最终网络应用。图像由作者提供。
 - en: Google Earth Engine is an amazing tool in a data scientists toolbox for working
     with geospatial data. However, building a web-app with the GEE code editor requires
     a steep learning curve. The JavaScript based app-creator requires a large investment
     of time for data scientists who are solely Python developers
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: Google Earth Engine 是数据科学家工具箱中处理地理空间数据的一个了不起的工具。然而，使用 GEE 代码编辑器构建网络应用需要一个陡峭的学习曲线。基于
+    JavaScript 的应用创建器对仅使用 Python 的数据科学家而言需要大量时间投入。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Greppo is the perfect tool to bridge this gap.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: Greppo 是弥补这一差距的完美工具。
 - en: In this blog post I will be building a web-application with Greppo with a a
     popular GEE use-case with DEM (Digital Elevation Model). I will walk you through
     understanding the basics of GEE, the client-server model, how the API works and
     the GEE data model. With that background, the post will use Greppo to create an
     app using GEE’s Python interface and highlight Greppo’s mental model and easy
     to use interface.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇博客文章中，我将使用 Greppo 构建一个流行的 GEE 用例（数字高程模型 DEM）的网络应用。我将带你了解 GEE 的基础知识、客户端-服务器模型、API
+    的工作原理以及 GEE 数据模型。了解这些背景后，文章将使用 Greppo 创建一个使用 GEE Python 接口的应用，并突出 Greppo 的思维模型和易用界面。
 - en: '**Note**: All the code here is in Python. They are ported from the GEE’s sample
     JavaScript code in the [**documentation**](https://developers.google.com/earth-engine/guides?hl=en)**.**'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意**：这里的所有代码都是用 Python 编写的。它们从 [**文档**](https://developers.google.com/earth-engine/guides?hl=en)**
+    中的 GEE 示例 JavaScript 代码移植而来**。'
 - en: '**Getting started**'
+  id: totrans-14
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '**入门指南**'
 - en: Before we get started, you need to get access to Google Earth Engine. Follow
     the instruction [here to signup](https://earthengine.google.com/signup/) and get
     access.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开始之前，你需要获取 Google Earth Engine 的访问权限。请按 [这里的说明进行注册](https://earthengine.google.com/signup/)
+    并获取访问权限。
 - en: 'Here is a quick tutorial on Greppo and how to use it: [**Build a geospatial
     dashboard in Python using Greppo**](https://towardsdatascience.com/build-a-geospatial-dashboard-in-python-using-greppo-60aff44ba6c9)'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个关于 Greppo 的简要教程以及如何使用它：[**在 Python 中使用 Greppo 构建地理空间仪表板**](https://towardsdatascience.com/build-a-geospatial-dashboard-in-python-using-greppo-60aff44ba6c9)
 - en: Next, let’s setup our Python environment to install the dependencies. To understand
     what Python environments are and how to set it up, [read this](https://krishadi.com/zettelkasten/python.html).
     Install the following packages into the Python environment.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，让我们设置 Python 环境以安装依赖项。要了解什么是 Python 环境及如何设置它，[阅读此处](https://krishadi.com/zettelkasten/python.html)。将以下包安装到
+    Python 环境中。
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The code for the web-app will go into **app.py,** and the app is served and
     run through the command line using the command greppo serve app.py.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 网络应用的代码将放在 **app.py** 中，应用程序通过命令行使用命令 greppo serve app.py 提供和运行。
 - en: 'Note: To run the `greppo` command in the command line, you need to activate
     the python environment where greppo is installed. The file app.py can be renamed
     to anything, but be sure to be in the folder when you run the command `greppo
     serve app.py` or in a relative folder structure `greppo serve /demo/folder/app.py`.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：要在命令行中运行`greppo`命令，你需要激活安装了greppo的Python环境。文件app.py可以重命名，但确保在运行命令`greppo
+    serve app.py`时处于该文件所在的文件夹中，或者在相对文件夹结构`greppo serve /demo/folder/app.py`中。
 - en: 'Greppo’s GitHub repository: [https://github.com/greppo-io/greppo](https://github.com/greppo-io/greppo)'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: Greppo的GitHub仓库：[https://github.com/greppo-io/greppo](https://github.com/greppo-io/greppo)
 - en: For any issues reach out to us on [GitHub](https://github.com/greppo-io/greppo)
     using ‘issues’ or in the [Discord channel here](https://discord.gg/RNJBjgh8gz).
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 如有任何问题，请通过[GitHub](https://github.com/greppo-io/greppo)上的“issues”或在[Discord频道](https://discord.gg/RNJBjgh8gz)联系我们。
 - en: '****GEE Authentication and Initialisation****'
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '****GEE认证与初始化****'
 - en: To be able to use Google Earth Engine, you need to create a service account
     and get an access-key-file associated with that account. This will only take a
     few minutes, but make sure to follow the instructions properly. Follow the instructions
     [here](https://developers.google.com/earth-engine/guides/service_account?hl=en).
     To use the service account and the key-file, use the following code to initialise.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 要使用Google Earth Engine，你需要创建一个服务帐户并获取与该帐户关联的访问密钥文件。这只需几分钟，但确保按照说明正确操作。请按照[这里](https://developers.google.com/earth-engine/guides/service_account?hl=en)的说明进行操作。要使用服务帐户和密钥文件，请使用以下代码进行初始化。
 - en: 'Note: Make sure to keep the key-file.json in another location, preferably safely
     in the root folder of your computer and not commit it into a public repository.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：确保将key-file.json保存在其他位置，最好安全地保存在计算机的根文件夹中，并且不要提交到公共仓库中。
 - en: '**Understanding GEE’s client-server model**'
+  id: totrans-26
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '**理解GEE的客户端-服务器模型**'
 - en: As the developer docs of GEE puts it, Earth Engine is not like any GIS or geospatial
     tool you’ve used before. GEE is primarily a cloud-platform, and all the processing
     is done in the cloud and not on your machine. The interactions with GEE that you
     will do are merely instructions that are translated and sent to GEE’s cloud platform.
     To understand this better, we would have to go through GEE’s Client vs. Server
     and its lazy computational model.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如GEE的开发文档所说，Earth Engine不像你之前用过的任何GIS或地理空间工具。GEE主要是一个云平台，所有处理都在云端完成，而不是在你的机器上。你与GEE的互动仅仅是将指令翻译并发送到GEE的云平台。为了更好地理解这一点，我们需要深入了解GEE的客户端与服务器以及其惰性计算模型。
 - en: '**[**Client vs. Server**](https://developers.google.com/earth-engine/guides/client_server)**'
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '**[**客户端与服务器**](https://developers.google.com/earth-engine/guides/client_server)**'
 - en: Let’s start with what I mentioned before, **GEE is primarily a cloud-platform**.
     It lets you do all the processing in the cloud. So, how do you access this processing-functions?
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 从我之前提到的开始，**GEE主要是一个云平台**。它让你在云端进行所有处理。那么，你如何访问这些处理功能呢？
 - en: Here is where the `earthengine-api` library comes to use. The Python package
     `earthengine-api` provides objects to the client (which is you) that act as proxy
     to the server objects which is passed and processed in the cloud.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里就是`earthengine-api`库发挥作用的地方。Python包`earthengine-api`为客户端（也就是你）提供了作为服务器对象代理的对象，这些对象在云端传递和处理。
 - en: To understand the client-server model better, let’s take an example of a String
     variable in the client and a String variable in the server. On creating a String
     in the client and printing its type, we get the Python `class str` object to represent
@@ -144,63 +215,97 @@
     the cloud, we would use the `ee.String` to wrap up the data in a proxy container
     which can be read in the server. To be more specific, the `ee. objects` are an
     `ee.computedObject` which is the parent class to the proxy objects.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了更好地理解客户端-服务器模型，我们以客户端中的字符串变量和服务器中的字符串变量为例。在客户端创建字符串并打印其类型时，我们得到的是Python的`class
+    str`对象来表示字符串。如果我们想将字符串发送到服务器进行使用或操作，我们会使用`ee.String`将数据包装在一个代理容器中，这样服务器就可以读取。更具体地说，`ee.objects`是`ee.computedObject`，它是代理对象的父类。
 - en: '[PRE1]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '>> # Client side string'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '>> # 客户端字符串'
 - en: '>> client_string = ''I am a Python String object'''
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '>> client_string = ''I am a Python String object'''
 - en: '>> print(type(client_string))'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '>> print(type(client_string))'
 - en: '>> # Server side string'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '>> # 服务器端字符串'
 - en: '>> server_string = ee.String(''I am proxy ee String object!'');'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '>> server_string = ee.String(''I am proxy ee String object!'');'
 - en: '>> print(type(server_string))'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '>> print(type(server_string))'
 - en: <class></class>
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: <class></class>
 - en: '[PRE2]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The proxy objects do not contain any actual data or processing functions/algorithms.
     They are just handles for the objects on the server (cloud-platform), to merely
     convey the instructions that are to be executed in the server. Think of it as
     a way to communicate to the server using code, and to do that you need to wrap
     the data and instruction in a `ee.computedObject` container of the specific type.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 代理对象不包含任何实际的数据或处理函数/算法。它们只是服务器（云平台）上对象的句柄，仅仅传达要在服务器上执行的指令。可以把它看作是使用代码与服务器沟通的一种方式，为此你需要将数据和指令包装在
+    `ee.computedObject` 特定类型的容器中。
 - en: This understanding becomes even more relevant when performing loops or using
     conditional statements on the data. To perform these, the instructions are to
     be sent to the server to execute them. To understand how these are implemented
     [check this page out](https://developers.google.com/earth-engine/guides/client_server)
     for more details.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 当对数据进行循环或使用条件语句时，这种理解变得更加重要。要执行这些操作，需要将指令发送到服务器以执行。要了解这些是如何实现的，[查看此页面](https://developers.google.com/earth-engine/guides/client_server)
+    获取更多详细信息。
 - en: '**[**Lazy computational model (Deferred execution)**](https://developers.google.com/earth-engine/guides/deferred_execution)**'
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '**[**惰性计算模型（延迟执行）**](https://developers.google.com/earth-engine/guides/deferred_execution)**'
 - en: So, from the above we know that the earthengine-api package is merely to send
     instructions to the server. So, how and when does the execution happen?
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 从上面的内容我们知道，earthengine-api 包仅用于向服务器发送指令。那么，执行是如何以及何时发生的呢？
 - en: The client side library earthengine-api compiles all the instructions into a
     JSON object and is sent to the server. However, this is not executed immediately.
     The execution is deferred until there is a request for the result. The request
     for the result can be a `print` statement, or the `image` object to be displayed.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 客户端库 earthengine-api 将所有指令编译成 JSON 对象并发送到服务器。然而，这并不会立即执行。执行会被推迟，直到有请求结果。结果请求可以是
+    `print` 语句，或者是要显示的 `image` 对象。
 - en: This on-demand computation as affects what is return to the client (you the
     user). The result from the earthengine-api is a url to the GEE tile server where
     the data is to be fetched. So, the images that are within the mentioned area of
@@ -208,53 +313,76 @@
     zoom level and the center location of the map in the client display. And, as you
     move and zoom, the images are processed and sent to the client to be viewed. The
     images are thus computed lazily.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种按需计算会影响返回给客户端（即用户）的内容。earthengine-api 的结果是一个指向 GEE 瓦片服务器的 URL，其中包含需要提取的数据。因此，在提到的兴趣区域内的图像会被选择性地处理。兴趣区域由客户端显示中的地图的缩放级别和中心位置确定。当你移动和缩放时，图像会被处理并发送给客户端以供查看。因此，这些图像是惰性计算的。
 - en: '**Using Greppo with GEE**'
+  id: totrans-47
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '**使用 Greppo 结合 GEE**'
 - en: 'Using Greppo to display and visualise Earth Engine image objects are fairly
     straight forward, all you need to use is: `app.ee_layer()`. The basic data types
     where geospatial data is stored in GEE is in,'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Greppo 显示和可视化 Earth Engine 图像对象是相当简单的，你只需要使用：`app.ee_layer()`。GEE 中存储地理空间数据的基本数据类型是，
 - en: '`Image` : fundamental raster data type in Earth Engine.'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Image`：Earth Engine 中的基本栅格数据类型。'
 - en: '`ImageCollection` : stack or time-series of images.'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ImageCollection`：图像的堆叠或时间序列。'
 - en: '`Geometry` : fundamental vector data type in Earth Engine.'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Geometry`：Earth Engine 中的基本矢量数据类型。'
 - en: '`Feature` : a Geometry with attributes.'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Feature`：带有属性的 Geometry。'
 - en: '`FeatureCollection` : a set of Feature.'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`FeatureCollection`：一组特征。'
 - en: After understanding the client-server and lazy computational model of GEE, we
     can extrapolate that these data types are processed on demand, upon the request
     for its visualisation.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 了解 GEE 的客户端-服务器和惰性计算模型后，我们可以推测这些数据类型是按需处理的，在请求其可视化时。
 - en: '****So, How to Use Greppo with GEE?****'
+  id: totrans-55
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '****那么，如何将 Greppo 与 GEE 结合使用？****'
 - en: It is best explained with an example. Let’s start with the scaffolding of the
     `app`. You would first have to import the app object from `greppo` as this will
     be your entry point to communicate with the frontend. You would then have to `import
     ee`, authenticate yourself to Earth Engine and initialise your session with the
     credentials from your service account mentioned above.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过一个例子来解释是最好的。首先，我们从 `app` 的搭建开始。你需要从 `greppo` 中导入 app 对象，因为它将是你与前端沟通的入口点。接下来，你需要
+    `import ee`，验证你的 Earth Engine 身份，并使用上述服务账户的凭据初始化你的会话。
 - en: Next, let’s start with selecting the dataset from the catalog. Here, we are
     using the **USGS/SRTMGL1_003** to get the Digital Elevation map. We need to first
     get a land mask for all the values in the DEM image data greater than 0, for which
@@ -263,162 +391,240 @@
     as our `ee_dem` to be visualised. Since all the data is stored as int16 (matrix
     of values between 32767 and -32768), we would have to visualise the matrix using
     a palette.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，让我们从目录中选择数据集。在这里，我们使用 **USGS/SRTMGL1_003** 获取数字高程图。我们首先需要为 DEM 图像数据中所有大于
+    0 的值获取一个地面掩码，为此我们使用 `dem.get(0)`。接下来，我们需要在 DEM 上应用掩码，只可视化土地区域，为此我们使用 `dem.updateMask(dem.gt(0))`，并将结果指定为我们要可视化的
+    `ee_dem`。由于所有数据存储为 int16（值在 32767 和 -32768 之间的矩阵），我们需要使用调色板来可视化矩阵。
 - en: 'To add a palette we create a visualisation parameter object containing the
     instruction for producing an RGM or greyscale image. Here we use a palette containing
     the Hex values: `[‘006633’, ‘E5FFCC’, ‘662A00’, ‘D8D8D8’, ‘F5F5F5’]` and map it
     linearly to the values corresponding to the `min -> #006633and max -> #F5F5F5`
     specified.'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '要添加调色板，我们创建一个可视化参数对象，其中包含生成 RGM 或灰度图像的指令。在这里，我们使用包含以下 Hex 值的调色板：`[‘006633’,
+    ‘E5FFCC’, ‘662A00’, ‘D8D8D8’, ‘F5F5F5’]`，并将其线性映射到指定的 `min -> #006633 和 max ->
+    #F5F5F5` 对应的值。'
 - en: 'Note: The data stored in the DEM is a raster, represented as a matrix and each
     cell contains the elevation in meters of the point representing the cell.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：DEM 中存储的数据是栅格，表示为矩阵，每个单元格包含表示该单元格的点的海拔高度（单位：米）。
 - en: To then visualise this map in the web-application using Greppo, all you need
     to use is app.ee_layer(). The `ee_object` is the earth engine image object, `vis_param`
     is the visualisation parameter dictionary, name corresponds to the unique identifier
     which will be used in the web-app frontend, and a `description` is optional to
     provide additional direction to the app user. More on this can be found in the
     documentation [**here**](https://docs.greppo.io/map-components/ee-layer.html).
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在使用 Greppo 的 Web 应用程序中可视化此地图，你只需使用 `app.ee_layer()`。`ee_object` 是地球引擎图像对象，`vis_param`
+    是可视化参数字典，name 对应于在 Web 应用前端使用的唯一标识符，而 `description` 是可选的，用于向应用用户提供额外的说明。有关更多信息，请参见文档
+    [**此处**](https://docs.greppo.io/map-components/ee-layer.html)。
 - en: '![Building a Geospatial Application in Python with Google Earth Engine and
     Greppo](../Images/779e70a54ff2b5f2543b1c82524fed60.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 Google Earth Engine 和 Greppo 在 Python 中构建地理空间应用](../Images/779e70a54ff2b5f2543b1c82524fed60.png)'
 - en: View of the web-app from the above step. Image by author.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 上一步骤的 Web 应用视图。图片由作者提供。
 - en: '**End-to-end Communication: Complete Web App**'
+  id: totrans-63
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '**端到端通信：完整 Web 应用**'
 - en: So far we’ve seen how to only visualise the earth engine object in Greppo. However,
     Greppo is capable of complex interaction between the frontend and backend. Let’s
     use an example of finding the elevation of a point specified by the user. We’ll
     be using three of Greppo’s API features.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，我们只看到了如何在 Greppo 中可视化地球引擎对象。然而，Greppo 能够实现前端和后端之间的复杂交互。我们来举一个找到用户指定点的海拔高度的例子。我们将使用
+    Greppo 的三个 API 特性。
 - en: '`app.display()` : To display a text or markdown in the frontend.'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`app.display()`：在前端显示文本或 Markdown。'
 - en: '`app.number()` : A number input feature in the frontend for the user to enter
     a value. The variable to which it is bound in the backend will be updated to the
     value specified by the user.'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`app.number()`：前端中的数字输入功能，供用户输入一个值。与之绑定的后端变量将更新为用户指定的值。'
 - en: '`app.text()` : A text input feature in the frontend for the user to enter a
     value. The variable to which it is bound in the backend will be updated to the
     value specified by the user.'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`app.text()`：前端中的文本输入功能，供用户输入一个值。与之绑定的后端变量将更新为用户指定的值。'
 - en: Refer to the [**documentation here**](https://docs.greppo.io/index.html) for
     more details.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关更多详细信息，请参见 [**文档此处**](https://docs.greppo.io/index.html)。
 - en: Let’s start with using the `app.display` (`name` is the unique identifier and
     the value is the text displayed which can be a multiline string) to display some
     text for guiding the web-app user. After which lets create two number inputs one
     each for the longitude and latitude of the point using `app.number()`.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始使用 `app.display`（`name` 是唯一标识符，值是显示的文本，可以是多行字符串）来为 Web 应用用户显示一些文本。之后，让我们创建两个数字输入框，每个用于输入点的经度和纬度，使用
+    `app.number()`。
 - en: '`app.number()` takes in name, the identifier displayed on the frontend, and
     value, which is the default value for this element. Next let’s also create a text
     input for getting the name of the point using `app.text()` with `name` and `value`
     as mentioned for `app.number()`.'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '`app.number()` 接受名称（前端显示的标识符）和值（此元素的默认值）。接下来，我们还将创建一个文本输入框，用于获取点的名称，使用`app.text()`，并将`name`和`value`作为`app.number()`中提到的参数。'
 - en: 'Using the latitude and longitude of the point, we can now create an earth engine
     Geometry object for the point with the visualisation parameters `color: ‘red’`.
     We can now display this using the `app.ee_layer()` as mentioned above.'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '使用该点的纬度和经度，我们现在可以创建一个带有可视化参数`color: ‘red’`的地球引擎Geometry对象。我们可以使用上述提到的`app.ee_layer()`来显示这个对象。'
 - en: To find the elevation of the point, we make use of the earth engine method `sample`
     on the DEM object. We sample the point in the DEM to get the properties from the
     DEM. We take the first point from the output and use the `.get` method to find
     the value associated with the property elevation. And, finally we compose a multiline
     string to display the output.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 要查找该点的高程，我们使用`sample`方法在DEM对象上进行地球引擎操作。我们在DEM中对该点进行采样以获取DEM的属性。我们从输出中获取第一个点，并使用`.get`方法查找与高程属性相关的值。最后，我们组合一个多行字符串来显示输出。
 - en: 'Note: To center the map to a point and at a zoom level on the initial load,
     make use of `app.map(center=[lat, lon], zoom=level)`.'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 注：要在初始加载时将地图居中于某个点并设置缩放级别，请使用`app.map(center=[lat, lon], zoom=level)`。
 - en: '![Building a Geospatial Application in Python with Google Earth Engine and
     Greppo](../Images/fb4df010040335931e2d2978fbf16a1e.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![用Python、Google Earth Engine和Greppo构建地理空间应用](../Images/fb4df010040335931e2d2978fbf16a1e.png)'
 - en: View of the web-app with the interaction feature. Image by author.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 带有交互功能的Web应用视图。图像由作者提供。
 - en: '**Conclusion**'
+  id: totrans-76
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '**结论**'
 - en: Our goal was to create a web-app completely in Python, using the data and computation
     feature of google earth engine and Greppo’s web-app development library. We went
     through understanding the working of GEE, understood how to integrate Greppo with
     GEE. Learned to use `app.ee_layer(), app.display(), app.number() and app.text()`
     to create a complete web-app that communicates end-to-end with the frontend and
     backend.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的目标是使用Python完全创建一个Web应用，利用Google Earth Engine的数据和计算功能以及Greppo的Web应用开发库。我们了解了GEE的工作原理，了解了如何将Greppo与GEE集成。学会使用`app.ee_layer(),
+    app.display(), app.number() 和 app.text()`来创建一个完整的Web应用，实现前端和后端的全程通信。
 - en: 'All the files for the demo can be found here: [https://github.com/greppo-io/greppo-demo/tree/main/ee-demo](https://github.com/greppo-io/greppo-demo/tree/main/ee-demo)'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 演示的所有文件可以在这里找到： [https://github.com/greppo-io/greppo-demo/tree/main/ee-demo](https://github.com/greppo-io/greppo-demo/tree/main/ee-demo)
 - en: 'Check out the [**GitHub repository: here**](https://github.com/greppo-io/greppo)
     to be updated on the latest on Greppo. In case of bugs, issues or feature requests
     for your use-case reach out on the [Discord channel](https://discord.gg/RNJBjgh8gz)
     or open an issue on GitHub. Built something with Greppo? Post it GitHub.'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看[**GitHub库：这里**](https://github.com/greppo-io/greppo)，了解Greppo的最新动态。如果发现错误、问题或需要功能请求，请通过[Discord频道](https://discord.gg/RNJBjgh8gz)联系，或在GitHub上提出问题。用Greppo构建了什么？在GitHub上发布它。
 - en: 'GitHub repository: [https://github.com/greppo-io/greppo](https://github.com/greppo-io/greppo)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: GitHub库： [https://github.com/greppo-io/greppo](https://github.com/greppo-io/greppo)
 - en: 'Documentation: [https://docs.greppo.io/](https://docs.greppo.io/)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 文档： [https://docs.greppo.io/](https://docs.greppo.io/)
 - en: 'Website: [https://greppo.io/](https://greppo.io/)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 网站： [https://greppo.io/](https://greppo.io/)
 - en: '**[Adithya Krishnan](https://www.linkedin.com/in/adithyakrishnan/)** ([@krish_adi_](https://twitter.com/krish_adi_))
     is a scientist, developer, founder and climber. Interested in building web-applications,
     cloud-utility, data-science and AI/ML projects. [Find out more here](https://krishadi.com/).'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Adithya Krishnan](https://www.linkedin.com/in/adithyakrishnan/)** ([@krish_adi_](https://twitter.com/krish_adi_))
+    是一名科学家、开发者、创始人和攀登者。他对构建Web应用、云服务、数据科学以及AI/ML项目感兴趣。 [了解更多](https://krishadi.com/)。'
 - en: More On This Topic
+  id: totrans-84
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第2部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
 - en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第1部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
 - en: '[5 Python Packages For Geospatial Data Analysis](https://www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5 个用于地理空间数据分析的 Python 包](https://www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html)'
 - en: '[Leveraging Geospatial Data in Python with GeoPandas](https://www.kdnuggets.com/leveraging-geospatial-data-in-python-with-geopandas)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Python 中利用 GeoPandas 处理地理空间数据](https://www.kdnuggets.com/leveraging-geospatial-data-in-python-with-geopandas)'
 - en: '[Geospatial Data Analysis with Geemap](https://www.kdnuggets.com/geospatial-data-analysis-with-geemap)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Geemap 进行地理空间数据分析](https://www.kdnuggets.com/geospatial-data-analysis-with-geemap)'
 - en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[创建一个使用 Python 从音频中提取主题的 Web 应用程序](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
