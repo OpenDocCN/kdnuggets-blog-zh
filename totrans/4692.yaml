@@ -1,466 +1,711 @@
 - en: 'Data Pipelines, Luigi, Airflow: Everything you need to know'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据管道、Luigi、Airflow：你需要知道的一切
 - en: 原文：[https://www.kdnuggets.com/2019/03/data-pipelines-luigi-airflow-everything-need-know.html](https://www.kdnuggets.com/2019/03/data-pipelines-luigi-airflow-everything-need-know.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/03/data-pipelines-luigi-airflow-everything-need-know.html](https://www.kdnuggets.com/2019/03/data-pipelines-luigi-airflow-everything-need-know.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Lorenzo Peppoloni](https://www.linkedin.com/in/lorenzo-peppoloni/), Lyft**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Lorenzo Peppoloni](https://www.linkedin.com/in/lorenzo-peppoloni/)，Lyft**'
 - en: '![Figure](../Images/aeac3093429c504079d98150e17d2689.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/aeac3093429c504079d98150e17d2689.png)'
 - en: Photo by [Gerrie van der Walt](https://unsplash.com/photos/m3TYLFI_mDo) on [Unsplash](https://unsplash.com/search/photos/pipeline)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 照片由 [Gerrie van der Walt](https://unsplash.com/photos/m3TYLFI_mDo) 提供，发布在 [Unsplash](https://unsplash.com/search/photos/pipeline)
 - en: This post is based on a talk I recently gave to my colleagues about Airflow.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇文章基于我最近给同事讲解Airflow的讲座。
 - en: 'In particular, the focus of the talk was: what’s Airflow, what can you do with
     it and how it differs from Luigi.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 特别地，讲座的重点是：什么是Airflow，你可以用它做什么，以及它与Luigi的不同之处。
 - en: Why do you need a WMS
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么你需要一个WMS
 - en: It’s really common in a company to have to move and transform data.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 在公司中，移动和转换数据非常常见。
 - en: For example, you have plenty of logs stored somewhere on S3, and you want to
     periodically take that data, extract and aggregate meaningful information and
     then store them in an analytics DB (e.g., Redshift).
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 比如，你有大量的日志存储在S3上，你希望定期获取这些数据，提取和汇总有意义的信息，然后将其存储在分析数据库中（例如，Redshift）。
 - en: Usually, this kind of tasks are first performed manually, then, as things need
     to scale up, the process is automated and for example, triggered with cron. Ultimately,
     you reach a point where the good old cron is not able to guarantee a stable and
     robust performance. It’s simply not enough anymore.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，这类任务最初是手动执行的，然后随着事情需要扩展，过程会自动化，例如用cron触发。最终，你会达到一个好老的cron无法保证稳定和可靠性能的地步。它已经不够用了。
 - en: That’s when you need a workflow management system (WMS).
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 这时你需要一个工作流管理系统（WMS）。
 - en: Airflow
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Airflow
 - en: Airflow was developed at Airbnb in 2014 and it was later open-sourced. In 2016
     it joined the Apache Software Foundation’s incubation program.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: Airflow是在2014年由Airbnb开发的，后来开源了。2016年，它加入了Apache软件基金会的孵化程序。
 - en: 'When asked “What makes Airflow different in the WMS landscape?”, Maxime Beauchemin
     (creator or Airflow) answered:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 当被问到“Airflow在WMS领域有什么不同？”时，Maxime Beauchemin（Airflow的创建者）回答说：
 - en: A key differentiator is the fact that Airflow pipelines are defined as code
     and that tasks are instantiated dynamically.
+  id: totrans-16
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 一个关键的区别在于Airflow管道被定义为代码，并且任务是动态实例化的。
 - en: Hopefully, at the end of this post, you will be able to understand and, more
     importantly, to agree (or disagree) with this statement.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望在这篇文章的最后，你能够理解，并且更重要的是，同意（或不同意）这一观点。
 - en: Let’s first define the main concepts.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们首先定义主要概念。
 - en: Workflows as DAGs
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 作为DAG的工作流
 - en: In Airflow, a workflow is defined as a collection of tasks with directional
     dependencies, basically a directed acyclic graph (DAG).
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Airflow中，工作流被定义为具有方向性依赖关系的任务集合，基本上是一个有向无环图（DAG）。
 - en: Each node in the graph is a task, and edges define dependencies among the tasks.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 图中的每个节点都是一个任务，边缘定义了任务之间的依赖关系。
 - en: 'Tasks belong to two categories:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 任务分为两个类别：
 - en: '**Operators**: they execute some operation'
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**操作符**：它们执行某些操作'
 - en: '**Sensors**: they check for the state of a process or a data structure'
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**传感器**：它们检查进程或数据结构的状态'
 - en: Real-life workflows can go from just one task per workflow (you don’t always
     have to be fancy) to very complicated DAGs, almost impossible to visualise.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 现实中的工作流可以从每个工作流只有一个任务（你不必总是追求花哨）到非常复杂的DAG，几乎无法可视化。
 - en: '**Main components**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**主要组件**'
 - en: 'The main components of Airflow are:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: Airflow的主要组件是：
 - en: a **Metadata Database**
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个 **元数据数据库**
 - en: a **Scheduler**
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个 **调度器**
 - en: an **Executor**
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个 **执行器**
 - en: '![Figure](../Images/5d50f2047d09246177836cbcdca064ea.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/5d50f2047d09246177836cbcdca064ea.png)'
 - en: Airflow architecture
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: Airflow架构
 - en: The metadata database stores the state of tasks and workflows. The scheduler
     uses the DAGs definitions, together with the state of tasks in the metadata database,
     and decides what needs to be executed.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 元数据数据库存储任务和工作流的状态。调度器使用DAG定义，加上元数据数据库中的任务状态，决定需要执行的内容。
 - en: The executor is a message queuing process (usually [Celery](http://www.celeryproject.org/]%28http://www.celeryproject.org/))
     which decides which worker will execute each task.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行器是一个消息队列进程（通常是 [Celery](http://www.celeryproject.org/)），它决定哪个工作进程将执行每个任务。
 - en: With the Celery executor, it is possible to manage the distributed execution
     of tasks. An alternative is to run the scheduler and executor on the same machine.
     In that case, the parallelism will be managed using multiple processes.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Celery 执行器，可以管理任务的分布式执行。另一种选择是将调度器和执行器运行在同一台机器上。在这种情况下，平行处理将通过多个进程来管理。
 - en: Airflow provides also a very powerful UI. The user is able to monitor DAGs and
     tasks execution and directly interact with them through a web UI.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: Airflow 还提供了一个非常强大的用户界面。用户能够通过网页 UI 监控 DAG 和任务执行，并直接与其交互。
 - en: It is common to read that Airflow follows a *“set it and forget it”* approach,
     but what does that mean?
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 读到 Airflow 采用 *“设置并忘记”* 方法是很常见的，但这是什么意思呢？
 - en: It means that once a DAG is set, the scheduler will automatically schedule it
     to run according to the specified scheduling interval.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着一旦设置了 DAG，调度器将自动根据指定的调度间隔安排其运行。
 - en: Luigi
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Luigi
 - en: The easiest way to understand Airflow is probably to compare it to Luigi.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 理解 Airflow 最简单的方法可能是将其与 Luigi 进行比较。
 - en: Luigi is a python package to build complex pipelines and it was developed at
     Spotify.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: Luigi 是一个用于构建复杂流水线的 Python 包，它是在 Spotify 开发的。
 - en: In Luigi, as in Airflow, you can specify workflows as tasks and dependencies
     between them.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Luigi 中，与 Airflow 一样，你可以将工作流指定为任务以及它们之间的依赖关系。
 - en: The two building blocks of Luigi are **Tasks** and **Targets**. A target is
     a file usually outputted by a task, a task performs computations and consumes
     targets generated by other tasks.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: Luigi 的两个基本构建块是 **Tasks** 和 **Targets**。目标是任务通常输出的文件，任务执行计算并消耗由其他任务生成的目标。
 - en: '![Figure](../Images/0e6b19ba7f5f2673c8507fa2232e1dbc.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/0e6b19ba7f5f2673c8507fa2232e1dbc.png)'
 - en: Luigi pipeline structure
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: Luigi 流水线结构
 - en: You can think about it as an actual pipeline. A task does its job and generates
     a target as a result, a second task takes the target file in input, performs some
     operations and output a second target file and so on.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以把它看作是一个实际的流水线。一个任务完成其工作并生成一个目标，第二个任务将目标文件作为输入，进行一些操作并输出第二个目标文件，依此类推。
 - en: '![Figure](../Images/ae0083e7ca72412d3d52d851497d7423.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/ae0083e7ca72412d3d52d851497d7423.png)'
 - en: Coffee break (Photo by [rawpixel](https://unsplash.com/photos/qbrmH8y1jHY) on [Unsplash](https://unsplash.com/search/photos/break))
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 咖啡休息（照片由 [rawpixel](https://unsplash.com/photos/qbrmH8y1jHY) 提供，来源于 [Unsplash](https://unsplash.com/search/photos/break)）
 - en: A simple workflow
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一个简单的工作流
 - en: Let’s see how we can implement a simple pipeline composed of two tasks.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看如何实现一个由两个任务组成的简单流水线。
 - en: The first task generate a .txt file with a word (“pipeline” in this case), a
     second task reads the file and decorate the line adding “My”. The new line is
     written on a new file.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个任务生成一个包含单词（在此情况下为“pipeline”）的 .txt 文件，第二个任务读取该文件并装饰行，添加“我的”。新行被写入一个新文件中。
 - en: Luigi simple pipeline
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: Luigi 简单流水线
 - en: Each task is specified as a class derived from `luigi.Task`, the method `output()` specifies
     the output thus the target, `run()`specifies the actual computations performed
     by the task.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个任务都指定为从 `luigi.Task` 派生的类，方法 `output()` 指定输出即目标，`run()` 指定任务执行的实际计算。
 - en: The method `requires()` specifies the dependencies between the tasks.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 方法 `requires()` 指定任务之间的依赖关系。
 - en: From the code, it’s pretty straightforward to see that the input of a task is
     the output of the other and so on.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 从代码中可以很清楚地看到，一个任务的输入是另一个任务的输出，以此类推。
 - en: Let’s see how we can do the same thing in Airflow.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看如何在 Airflow 中做同样的事情。
 - en: Airflow simple DAG
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: Airflow 简单 DAG
 - en: First, we define and initialise the DAG, then we add two operators to the DAG.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们定义并初始化 DAG，然后将两个操作符添加到 DAG 中。
 - en: The first one is a `BashOperator` which can basically run every bash command
     or script, the second one is a `PythonOperator` executing python code (I used
     two different operators here for the sake of presentation).
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个是 `BashOperator`，它基本上可以运行任何 bash 命令或脚本，第二个是 `PythonOperator`，执行 Python 代码（为了展示，我在这里使用了两个不同的操作符）。
 - en: 'As you can see, there are no concepts of input and output. No information is
     shared between the two operators. There are ways to share information between
     operators (you basically share a string), but as a general rule: if two operators
     need to share information, then they should be probably combined into a single
     one.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如你所见，没有输入和输出的概念。两个操作员之间没有信息共享。确实存在在操作员之间共享信息的方法（你基本上是共享一个字符串），但作为一般规则：如果两个操作员需要共享信息，那么它们可能应该合并成一个。
 - en: A more complex workflow
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更复杂的工作流
 - en: Let’s now consider the case where we want to process more files at the same
     time.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们考虑一下我们想同时处理更多文件的情况。
 - en: In Luigi we can do it in multiple ways, none of which is really straightforward.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Luigi 中我们可以用多种方式做到这一点，但没有一种方式是特别直接的。
 - en: Luigi a pipeline managing multiple files
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: Luigi 管理多个文件的管道
 - en: In this case, we have two tasks, each one of them processes all the files. The
     dependent task (`t2`) has to wait until `t1` has processed all the files.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，我们有两个任务，每个任务处理所有文件。依赖任务（`t2`）必须等到 `t1` 处理完所有文件后才能开始。
 - en: We used an empty file as a target to flag when each task finished its job.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用一个空文件作为目标来标记每个任务何时完成其工作。
 - en: We could add some parallelisation writing parallel for loops.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过编写并行的循环来增加一些并行化。
 - en: The problem with this solution is that `t2` could start to process files gradually
     as soon as `t1` started to produce its output, actually `t2` does not have to
     wait until all the files are created by `t1`.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个解决方案的问题在于 `t2` 可能会在 `t1` 开始产生输出后逐渐开始处理文件，实际上 `t2` 不必等到 `t1` 创建所有文件。
 - en: A common pattern in Luigi to do this is to create a wrapper task and use multiple
     workers.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Luigi 中，一个常见的做法是创建一个包装任务并使用多个工作者。
 - en: Here is the code.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是代码。
 - en: Luigi a pipeline using multiple workers
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: Luigi 使用多个工作者的管道
 - en: To run the task with multiple workers we can specify `— workers number_of_workers` when
     running the task.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了用多个工作者运行任务，我们可以在运行任务时指定 `— workers number_of_workers`。
 - en: A very common approach that you see in real life is to delegate the parallelisation.
     Basically, you use the first approach presented and you use Spark for example,
     inside the `run()` function, to actually do the processing.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 现实中你常见的一种方法是委托并行化。基本上，你使用前面介绍的第一个方法，并在 `run()` 函数内部使用 Spark 等来实际处理。
 - en: Let’s do it with Airflow
+  id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 让我们用 Airflow 来实现
 - en: Do you remember that in the initial quote it was written that DAGs are instantiated
     dynamically with code?
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还记得最初的引言中提到 DAG 是如何用代码动态实例化的吗？
 - en: But what does that mean exactly?
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 那这到底意味着什么呢？
 - en: It means that with Airflow you can do this
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着通过 Airflow 你可以做到这一点
 - en: Airflow a parallel DAG with multiple files
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: Airflow 通过多个文件实现并行 DAG
 - en: Tasks (and dependencies) can be added programmatically (e.g. in a for loop).
     The corresponding DAG looks like this.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 任务（和依赖项）可以通过编程方式添加（例如，在循环中）。相应的 DAG 如下所示。
 - en: '![Figure](../Images/6c81e7e1b879cc3a2261322ddba3d115.png)'
+  id: totrans-80
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/6c81e7e1b879cc3a2261322ddba3d115.png)'
 - en: Parallel DAG
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 并行 DAG
 - en: At this point, you don’t have to worry about parallelisation. The Airflow executor
     knows from the DAG definition, that each branch can be run in parallel and that’s
     what it does!
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个阶段，你不需要担心并行化。Airflow 执行器从 DAG 定义中知道每个分支可以并行运行，这就是它所做的！
 - en: Final Considerations
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最终考虑
 - en: We touched a lot of points in this post, we spoke about workflows, about Luigi,
     about Airflow and how they differ.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中我们讨论了很多点，我们谈到了工作流、Luigi、Airflow 以及它们之间的区别。
 - en: Let’s make a quick recap.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们快速回顾一下。
 - en: '**Luigi**'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Luigi**'
 - en: It’s generally based on pipelines, tasks input and output share information
     and is connected together
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它通常基于管道，任务的输入和输出共享信息并且互相连接
 - en: Target-based approach
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 基于目标的方法
 - en: UI is minimal, there is no user interaction with running processes
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 界面最小，没有用户与运行中的进程交互
 - en: Does not have it’s own triggering
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 没有自己的触发机制
 - en: Luigi does not support distributed execution
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Luigi 不支持分布式执行
 - en: '**Airflow**'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Airflow**'
 - en: Based on DAGs representation
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 基于 DAG 的表示
 - en: In general, no information is shared between tasks, we want to parallelise as
     much as possible
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通常，任务之间没有信息共享，我们希望尽可能并行化
 - en: No powerful mechanism to communicate between tasks
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 没有强大的任务间通信机制
 - en: It has an executor, which manages distributed execution (you need to set it
     up)
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它有一个执行器，管理分布式执行（你需要设置它）
 - en: The approach is “set it and forget it“ since it has its own scheduler
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这种方法是“设定后忘记”，因为它有自己的调度程序
 - en: Powerful UI, you can see executions and interact with running tasks.
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 强大的 UI，你可以看到执行情况并与运行中的任务互动。
 - en: 'Conclusions: In the article we had a look at Airflow and Luigi and how the
     two differs in the landscape of workflow management systems. We had a look at
     some very simple examples of pipelines and how they can implement with both the
     tools. Finally we summed up the main differences between Luigi and Airflow.'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 结论：在这篇文章中，我们查看了Airflow和Luigi，以及这两者在工作流管理系统中的差异。我们看了一些非常简单的管道示例，并展示了如何使用这两种工具来实现它们。最后，我们总结了Luigi和Airflow之间的主要区别。
 - en: If you enjoy the article and you found it useful feel free to ???? or share.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你喜欢这篇文章并且觉得有用，请随意????或分享。
 - en: Cheers
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 祝好
 - en: '**Bio: [Lorenzo Peppoloni](https://www.linkedin.com/in/lorenzo-peppoloni/)**
     is a tech enthusiast, life-long learner, with a PhD in Robotics. He writes about
     his day to day experience in Software and Data Engineering.'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[洛伦佐·佩波洛尼](https://www.linkedin.com/in/lorenzo-peppoloni/)** 是一位技术爱好者，终身学习者，拥有机器人学博士学位。他撰写有关他在软件和数据工程领域的日常经验。'
 - en: '[Original](https://towardsdatascience.com/data-pipelines-luigi-airflow-everything-you-need-to-know-18dc741449b7).
     Reposted with permission.'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/data-pipelines-luigi-airflow-everything-you-need-to-know-18dc741449b7)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[A Beginner’s Guide to the Data Science Pipeline](/2018/05/beginners-guide-data-science-pipeline.html)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学管道初学者指南](/2018/05/beginners-guide-data-science-pipeline.html)'
 - en: '[How A Data Scientist Can Improve Productivity](/2017/05/data-scientist-improve-productivity.html)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家如何提高生产力](/2017/05/data-scientist-improve-productivity.html)'
 - en: '[Manage your Machine Learning Lifecycle with MLflow  –  Part 1](/2018/07/manage-machine-learning-lifecycle-mlflow.html)'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用MLflow管理你的机器学习生命周期  –  第1部分](/2018/07/manage-machine-learning-lifecycle-mlflow.html)'
 - en: '* * *'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-109
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速入门网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行IT管理'
 - en: '* * *'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-114
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[KDnuggets News, April 13: Python Libraries Data Scientists Should…](https://www.kdnuggets.com/2022/n15.html)'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets新闻，4月13日：数据科学家应该了解的Python库…](https://www.kdnuggets.com/2022/n15.html)'
 - en: '[5 Airflow Alternatives for Data Orchestration](https://www.kdnuggets.com/5-airflow-alternatives-for-data-orchestration)'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5种Airflow替代方案用于数据编排](https://www.kdnuggets.com/5-airflow-alternatives-for-data-orchestration)'
 - en: '[Everything You Need to Know About Data Lakehouses](https://www.kdnuggets.com/2022/09/everything-need-know-data-lakehouses.html)'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于数据湖屋的一切](https://www.kdnuggets.com/2022/09/everything-need-know-data-lakehouses.html)'
 - en: '[Naïve Bayes Algorithm: Everything You Need to Know](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)'
+  id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[朴素贝叶斯算法：你需要知道的一切](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)'
 - en: '[Everything You Need to Know About Tensors](https://www.kdnuggets.com/2022/05/everything-need-know-tensors.html)'
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于张量的一切](https://www.kdnuggets.com/2022/05/everything-need-know-tensors.html)'
 - en: '[Everything You Need to Know About MLOps: A KDnuggets Tech Brief](https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops)'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于MLOps的一切：KDnuggets技术简报](https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops)'
