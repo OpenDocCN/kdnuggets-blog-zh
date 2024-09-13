@@ -1,44 +1,62 @@
 - en: Building NLP Classifiers Cheaply With Transfer Learning and Weak Supervision
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 以低成本构建自然语言处理分类器的迁移学习和弱监督方法
 - en: 原文：[https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html](https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html](https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html?page=2#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html?page=2#comments)'
 - en: '**By [Abraham Starosta](https://www.linkedin.com/in/abraham-starosta-ba662764/),
     Stanford University**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Abraham Starosta](https://www.linkedin.com/in/abraham-starosta-ba662764/)，斯坦福大学**'
 - en: '![Figure](../Images/d212ffd35c6a8cfd800cf7e15607aafb.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/d212ffd35c6a8cfd800cf7e15607aafb.png)'
 - en: Text + Intelligence = Gold… But, how can we mine it cheaply?
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 文本 + 智能 = 黄金……但我们如何以低成本开采呢？
 - en: Introduction
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: 'There is a catch to training state-of-the-art NLP models: their reliance on
     massive hand-labeled training sets. That’s why [data labeling is usually the bottleneck](https://arxiv.org/pdf/1812.00417.pdf) in
     developing NLP applications and keeping them up-to-date. For example, imagine
     how much it would cost to pay medical specialists to label thousands of electronic
     health records. In general, having domain experts label thousands of examples
     is too expensive.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练最先进的自然语言处理模型有一个难题：它们依赖于大量手工标记的训练集。这就是为什么[data labeling is usually the bottleneck](https://arxiv.org/pdf/1812.00417.pdf)在开发自然语言处理应用和保持其更新中通常是瓶颈的原因。例如，想象一下，支付医学专家标记成千上万的电子健康记录要花费多少成本。一般来说，让领域专家标记成千上万的例子是非常昂贵的。
 - en: On top of the initial labeling cost, there is another huge cost in keeping models
     up-to-date with changing contexts in the real-world. Louise Matsakis on [Wired](https://www.wired.com/story/break-hate-speech-algorithm-try-love/) explains
     that the main reasons social media platforms find it so hard to detect hate speech
     are “shifting contexts, changing circumstances, and disagreements between people.”
     That’s mainly because when context changes, we usually have to label thousands
     of new examples or relabel a big part of our dataset. Again, this is very expensive.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了初始标记成本外，还有另一个巨大的成本是让模型保持与现实世界中不断变化的环境同步。Louise Matsakis 在[Wired](https://www.wired.com/story/break-hate-speech-algorithm-try-love/)上解释说，社交媒体平台发现检测仇恨言论如此困难的主要原因是“背景的变化、环境的变化以及人们之间的分歧。”这主要是因为当背景发生变化时，我们通常需要标记成千上万的新例子或重新标记我们数据集的大部分。再一次，这非常昂贵。
 - en: This is an important problem to solve if we want to automate knowledge acquisition
     from text data, but it’s also very hard to solve. Thankfully, new technologies
     like transfer learning, multitask learning and weak supervision are pushing NLP
@@ -47,31 +65,45 @@
     anti-semitic tweets, with no public dataset available, by combining weak supervision
     and transfer learning. I hope that by the end you’ll be able to follow this approach
     to build your own classifiers relatively cheaply.**
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们想要从文本数据中自动化知识获取，那么解决这个问题是非常重要的，但它也很难解决。值得庆幸的是，像迁移学习、多任务学习和弱监督这样的新技术正在推动自然语言处理的发展，并可能最终趋向于提供解决方案。**在本博客中，我将带你了解一个个人项目，在这个项目中，我通过结合弱监督和迁移学习，以低成本构建了一个分类器来检测反犹太主义的推文，且没有公开的数据集可用。我希望到最后，你能够跟随这种方法，以相对低廉的成本构建你自己的分类器。**
 - en: '**We have 3 steps:**'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '**我们有3个步骤：**'
 - en: Collect a small number of labeled examples (~600)
+  id: totrans-11
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 收集少量标记示例（约600个）
 - en: Use weak supervision to build a training set from many unlabeled examples using
     weak supervision
+  id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用弱监督从大量未标记的示例中构建训练集
 - en: Use a large pre-trained language model for transfer learning
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用大型预训练语言模型进行迁移学习
 - en: Background
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 背景
 - en: '****Weak Supervision****'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '****弱监督****'
 - en: '[Weak supervision (WS)](https://hazyresearch.github.io/snorkel/blog/ws_blog_post.html) helps
     us alleviate the **data bottleneck** problem by enabling us to cheaply leverage
     subject matter expertise to programmatically label millions of data points. More
@@ -81,162 +113,246 @@
     just published a [paper](https://arxiv.org/abs/1812.00417) in December 2018 describing
     Snorkel DryBell, an internal tool they built to use WS to build 3 powerful text
     classifiers in a fraction of the time.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[弱监督 (WS)](https://hazyresearch.github.io/snorkel/blog/ws_blog_post.html)帮助我们通过便宜地利用主题知识来程序化标记数百万数据点，从而缓解**数据瓶颈**问题。更具体地说，它是一个框架，帮助主题专家（SMEs）将他们的知识以手工编写的启发式规则或远程监督的形式注入
+    AI 系统。作为弱监督在现实世界中增加价值的一个例子，谷歌刚刚在 2018 年 12 月发布了一篇[论文](https://arxiv.org/abs/1812.00417)，描述了他们构建的
+    Snorkel DryBell 内部工具，用于利用弱监督在短时间内构建 3 个强大的文本分类器。'
 - en: '![Figure](../Images/a91891363f2df9bff6e3b9ef53a6bff6.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/a91891363f2df9bff6e3b9ef53a6bff6.png)'
 - en: Overview of the [Data Programming](https://hazyresearch.github.io/snorkel/blog/ws_blog_post.html) Paradigm
     with Snorkel
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '[数据编程](https://hazyresearch.github.io/snorkel/blog/ws_blog_post.html)范式概述与
+    Snorkel'
 - en: Throughout this project, I used the same general approach Google took: [Snorkel](https://arxiv.org/abs/1711.10160) (Ratner
     et al., 2018.) The Stanford Infolab implements the Snorkel framework in this handy
     Python package called [Snorkel Metal](https://github.com/HazyResearch/metal).
     I suggest you go through [this ](https://github.com/HazyResearch/metal/blob/master/tutorials/Basics.ipynb)tutorial
     to learn the basic workflow and [this](https://github.com/HazyResearch/babble/blob/master/tutorial/Tutorial3_Tradeoffs.ipynb) one
     to learn how to get the most out of it.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在整个项目中，我采用了与谷歌相同的通用方法：[Snorkel](https://arxiv.org/abs/1711.10160)（Ratner 等，2018）。斯坦福
+    Infolab 在这个方便的 Python 包中实现了 Snorkel 框架，名为 [Snorkel Metal](https://github.com/HazyResearch/metal)。我建议你阅读[这个](https://github.com/HazyResearch/metal/blob/master/tutorials/Basics.ipynb)教程以了解基本工作流程，以及[这个](https://github.com/HazyResearch/babble/blob/master/tutorial/Tutorial3_Tradeoffs.ipynb)教程以了解如何充分利用它。
 - en: 'In Snorkel, the heuristics are called ***Labeling Functions (LFs).*** Here
     are some common types of LFs:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Snorkel 中，这些启发式方法称为***标签函数（LFs）***。以下是一些常见类型的 LFs：
 - en: '**Hard-coded heuristics**: usually regular expressions (regexes)'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**硬编码的启发式方法：**通常是正则表达式（regexes）'
 - en: '**Syntactics:** for instance, [Spacy’s dependency trees](https://explosion.ai/demos/displacy)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**句法学：**例如，[Spacy 的依赖树](https://explosion.ai/demos/displacy)'
 - en: '**Distant supervision:** external knowledge bases'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**远程监督：**外部知识库'
 - en: '**Noisy manual labels:** crowdsourcing'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**嘈杂的手动标签：**众包'
 - en: '**External models: **other models with useful signals'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**外部模型：**其他具有有用信号的模型'
 - en: 'After you write your LFs, Snorkel will train a **Label Model** that takes advantage
     of conflicts between all LFs to estimate their accuracy. Then, when labeling a
     new data point, each LF will cast a vote: positive, negative, or abstain. Based
     on those votes and the LF accuracy estimates, the Label Model can programmatically
     assign **probabilistic labels** to millions of data points. Finally, the goal
     is to train a classifier that can **generalize beyond our LFs**.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 在你编写了你的 LFs 后，Snorkel 将训练一个**标签模型**，利用所有 LFs 之间的冲突来估计它们的准确性。然后，当标记新数据点时，每个 LF
+    将投票：正面、负面或弃权。根据这些投票和 LF 准确性估计，标签模型可以程序化地为数百万数据点分配**概率标签**。最终的目标是训练一个能够**超越我们 LFs
+    的通用分类器**。
 - en: For example, below is the code for an LF I wrote to detect anti-semitic tweets.
     This LF focuses on catching common conspiracy theories that depict wealthy Jews
     as controlling the media and politics.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，下面是我编写的一个 LF 代码，用于检测反犹太主义的推文。这个 LF 重点在于捕捉将富有的犹太人描绘成控制媒体和政治的常见阴谋论。
 - en: '[PRE0]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '**Key advantages of Weak Supervision:**'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**弱监督的关键优势：**'
 - en: '**Flexibility: **when we want to update our model, all we need to do is update
     the LFs, rebuild our training set and retrain our classifier.'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**灵活性：**当我们想更新模型时，我们所需做的就是更新 LFs，重建训练集并重新训练分类器。'
 - en: '**Improvement in recall: **a discriminative model will be able to generalize
     beyond the rules in our WS model, thus often giving us a bump in recall.'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**召回率的提高：**一个区分性模型能够超越我们 WS 模型中的规则，从而通常提高我们的召回率。'
 - en: '****Transfer Learning and ULMFiT****'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '****迁移学习和 ULMFiT****'
 - en: Transfer Learning has greatly impacted computer vision. Using a pre-trained
     ConvNet on ImageNet as initialization or fine-tuning it to your task at hand has
     become [very common](http://cs231n.github.io/transfer-learning/). But, that hadn’t
     translated into NLP until [ULMFiT](http://nlp.fast.ai/classification/2018/05/15/introducting-ulmfit.html)
     came about.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 迁移学习对计算机视觉产生了巨大影响。使用在 ImageNet 上预训练的 ConvNet 作为初始化或微调到手头任务已经变得 [非常普遍](http://cs231n.github.io/transfer-learning/)。但是，这在自然语言处理领域尚未实现，直到
+    [ULMFiT](http://nlp.fast.ai/classification/2018/05/15/introducting-ulmfit.html)
+    的出现。
 - en: '![Figure](../Images/4237eb9977df9f002176bf7898485a41.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/4237eb9977df9f002176bf7898485a41.png)'
 - en: '[ULMFiT](http://nlp.fast.ai/classification/2018/05/15/introducting-ulmfit.html)'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '[ULMFiT](http://nlp.fast.ai/classification/2018/05/15/introducting-ulmfit.html)'
 - en: Similar to how computer vision engineers use ConvNets pre-trained on ImageNet,
     Fast.ai provides a Universal Language Model, pre-trained on millions of Wikipedia
     pages, which we can fine-tune to our specific domain space. Then, we can train
     a text classification model that leverages the LM’s learned text representations
     which can learn with very few examples (up to 100x less data).
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 类似于计算机视觉工程师如何使用在 ImageNet 上预训练的 ConvNet，Fast.ai 提供了一个通用语言模型，该模型在数百万个 Wikipedia
+    页面上进行了预训练，我们可以对其进行微调以适应我们特定的领域。然后，我们可以训练一个文本分类模型，该模型利用语言模型的文本表示，并能通过非常少量的样本进行学习（最多减少
+    100 倍的数据）。
 - en: '![Figure](../Images/314a231817b92b29b71f716dcc97d9c3.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/314a231817b92b29b71f716dcc97d9c3.png)'
 - en: '[Introduction to ULMFiT](http://nlp.fast.ai/classification/2018/05/15/introducting-ulmfit.html)'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '[ULMFiT 介绍](http://nlp.fast.ai/classification/2018/05/15/introducting-ulmfit.html)'
 - en: '**ULMFiT consists of 3 stages:**'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**ULMFiT 包含 3 个阶段：**'
 - en: Pre-trained an LM on a general purpose corpus (Wikipedia)
+  id: totrans-40
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在通用语料库（Wikipedia）上预训练了语言模型
 - en: Fine-tune the LM for the task at hand with a large corpus of unlabeled data
     points
+  id: totrans-41
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用大量未标记的数据点微调语言模型以适应当前任务
 - en: Train a discriminative classifier by fine-tuning it with gradual unfreezing
+  id: totrans-42
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通过逐步解冻来微调判别分类器
 - en: '**Key advantages of ULMFiT:**'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**ULMFiT 的主要优势：**'
 - en: With only 100 labels, it can match the performance of training from scratch
     on 100x more data
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 只需 100 个标签，就能与在 100 倍更多数据上从头开始训练的性能相匹配
 - en: Fastai’s API is very easy to use. [This tutorial](https://github.com/fastai/fastai/blob/master/examples/text.ipynb) is
     very good
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Fastai 的 API 非常易于使用。 [这个教程](https://github.com/fastai/fastai/blob/master/examples/text.ipynb)
+    非常好。
 - en: Produces a PyTorch model we can deploy in production
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 生成一个我们可以在生产中部署的 PyTorch 模型
 - en: '**Step-By-Step Guide for Building an Anti-Semitic Tweet Classifier**'
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**构建反犹太主义推文分类器的逐步指南**'
 - en: In this section, we’ll dive more deeply into the steps I took to build an anti-semitic
     tweet classifier and I’ll share some more general things I learned throughout
     this process.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本节中，我们将深入探讨我构建反犹太主义推文分类器所采取的步骤，并分享在这个过程中学到的一些更一般的东西。
 - en: '****First step: Data Collection and Setting a Target****'
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '****第一步：数据收集和设定目标****'
 - en: '**Collecting unlabeled data:** The first step is to put together a large set
     of unlabeled examples (at least 20,000). For the anti-semitic tweet classifier,
     I downloaded close to 25,000 tweets that mention the word “jew.”'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**收集未标记数据：** 第一步是整理出一个大规模的未标记样本集（至少 20,000 个）。对于反犹太主义推文分类器，我下载了近 25,000 条提到“jew”一词的推文。'
 - en: '**Label 600 examples: **600 isn’t a large number but I consider this is a good
     place to start for most tasks because we’ll have about 200 examples in each data
     split. If you already have the labeled examples, then use those! Otherwise, just
     pick 600 examples at random and label them.'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**标记 600 个样本：** 600 个样本不是一个很大的数量，但我认为这是大多数任务的一个好的起点，因为我们将在每个数据拆分中大约有 200 个样本。如果你已经有了标记样本，就使用那些！否则，只需随机选择
+    600 个样本并标记它们。'
 - en: As a labeling tool, you can use Google Sheets. Or, if you’re like me and would
     rather label on your phone, you can use [**Airtable.**](https://airtable.com/)
     Airtable is free and it has a slick iPhone app. If you’re working in teams, it
@@ -244,86 +360,133 @@
     on how to use Airtable for labeling. You can just label as you scroll through
     examples. If you’re curious about how I set up Airtable for labeling, feel free
     to reach out to me.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为标注工具，你可以使用 Google Sheets。或者，如果你像我一样更愿意在手机上标注，你可以使用 [**Airtable**](https://airtable.com/)。Airtable
+    是免费的，并且有一个非常好用的 iPhone 应用。如果你在团队中工作，它还允许你轻松分配工作。我可能会写另一篇博客专注于如何使用 Airtable 进行标注。你可以在浏览样本时直接进行标注。如果你对我如何设置
+    Airtable 进行标注感到好奇，可以随时联系我。
 - en: '![Figure](../Images/10dff01b2d2aaa79587d784bf8cdaf21.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/10dff01b2d2aaa79587d784bf8cdaf21.png)'
 - en: View of Airtable for Text Labeling
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: Airtable 的文本标注视图
 - en: '**Split data: **for the purpose of this project, we’ll have a train, test and
     an LF set. The purpose of the LF set is to both help validate our LFs and to get
     ideas for new LFs. The test set is used to check the performance of your models
     (we can’t look at it). If you want to do hyperparameter tuning, you would want
     to label about 200 more samples for a validation set.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据拆分：**对于本项目，我们将有一个训练集、测试集和一个 LF 集。LF 集的目的是帮助验证我们的 LF 并获得新的 LF 想法。测试集用于检查模型的性能（我们不能查看它）。如果你想进行超参数调优，你可能需要标注大约
+    200 个样本用于验证集。'
 - en: I have 24,738 unlabeled tweets (train set), 733 labeled tweets for building
     LFs, and 438 labeled tweets for testing. So I labeled a total of 1,171, but I
     realized that was probably too many.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 我有 24,738 条未标记的推文（训练集），733 条用于构建 LF 的标记推文，以及 438 条用于测试的标记推文。因此我总共标记了 1,171 条，但我意识到这可能太多了。
 - en: '[PRE1]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '**Setting our goals: **after labeling a few hundred examples you’ll have a
     better idea of how hard the task is and you’ll be able to set a goal for yourself.
     I considered that for anti-semitism classification, it was very important to have
     high precision so I set myself the goal of getting at least 90% precision and
     30% recall.'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**设定目标：**在标注几百个样本后，你将对任务的难度有更好的了解，并能够为自己设定目标。我认为反犹太主义分类非常重要的是高精度，因此我给自己设定了至少
+    90% 的精度和 30% 的召回率的目标。'
 - en: '* * *'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-60
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的 IT 需求'
 - en: '* * *'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Weak Supervision Modeling, Explained](https://www.kdnuggets.com/2022/05/weak-supervision-modeling-explained.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[弱监督建模，解释](https://www.kdnuggets.com/2022/05/weak-supervision-modeling-explained.html)'
 - en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用于图像识别和自然语言处理的迁移学习](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
 - en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow 在计算机视觉中的应用 - 简化迁移学习](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
 - en: '[What is Transfer Learning?](https://www.kdnuggets.com/2022/01/transfer-learning.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是迁移学习？](https://www.kdnuggets.com/2022/01/transfer-learning.html)'
 - en: '[A Practical Guide to Transfer Learning using PyTorch](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 PyTorch 的迁移学习实用指南](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)'
 - en: '[Exploring the Potential of Transfer Learning in Small Data Scenarios](https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[探索迁移学习在小数据场景中的潜力](https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios)'

@@ -1,452 +1,686 @@
 - en: Building NLP Classifiers Cheaply With Transfer Learning and Weak Supervision
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用迁移学习和弱监督廉价构建 NLP 分类器
 - en: 原文：[https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html/2](https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html/2)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html/2](https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html/2)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html?page=2#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html?page=2#comments)'
 - en: '****Second Step: Building a Training Set With Snorkel****'
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '****第二步：使用 Snorkel 构建训练集****'
 - en: Building our Labeling Functions is a pretty hands-on stage, but it will pay
     off! I expect that if you already have domain knowledge, this should take about
     a day (and if you don’t then it might take a couple days.) Also, **this section
     is a mix of what I did for my project specifically and some general advice** of
     how to use Snorkel that you can apply to your own projects.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 构建标签功能是一个非常动手的阶段，但这会得到回报！我预计如果你已经有领域知识，这应该花费一天时间（如果没有，可能需要几天）。此外，**本节内容结合了我为我的项目所做的具体工作和一些通用建议**，这些建议可以应用于你自己的项目。
 - en: Since most people haven’t used Weak Supervision with Snorkel before, I’ll try
     to explain the approach I took in as much detail as possible. This [tutorial](https://github.com/HazyResearch/metal/blob/master/tutorials/Basics.ipynb) is
     a good way to understand the main ideas, but reading through my workflow will
     hopefully save you a lot of time of trial and error.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于大多数人以前没有使用过 Snorkel 的弱监督，我会尽可能详细地解释我所采用的方法。这个 [教程](https://github.com/HazyResearch/metal/blob/master/tutorials/Basics.ipynb)
+    是理解主要概念的好方法，但阅读我的工作流程应该能为你节省大量的试错时间。
 - en: Below is an example of a LF that returns **Positive **if the tweet has one of
     the common insults against jew. Otherwise, it abstains.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是一个 LF 的示例，如果推文包含对犹太人的常见侮辱之一，则返回 **正面**。否则，它将保持中立。
 - en: '* * *'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-8
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '[PRE0]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Here’s an example of a LF that returns **Negative** if the tweet’s author mentions
     he or she is Jewish, which commonly means the tweet is not anti-semitic.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是一个 LF 的示例，如果推文的作者提到他或她是犹太人，则返回 **负面**，这通常意味着该推文不是反犹太主义的。
 - en: '[PRE1]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: When designing LFs it’s important to keep in mind that **we are prioritizing
     high precision over recall**. Our hope is that the classifier will pick up more
     patterns, increasing recall. But, don’t worry if LFs don’t have super high precision
     or high recall, Snorkel will take care of it.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在设计 LF 时，重要的是要记住 **我们优先考虑高精度而非召回率**。我们希望分类器能够识别更多模式，从而提高召回率。但如果 LF 的精度或召回率不是特别高，也不必担心，Snorkel
+    会处理这些问题。
 - en: Once you have some LFs, you just need to build a matrix with a tweet in each
     row and the LF values in the columns. Snorkel Metal has a very handy util function
     to display a summary of your LFs.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦你有了一些 LF，你只需构建一个矩阵，每行一个推文，每列 LF 值。Snorkel Metal 有一个非常方便的工具函数来显示你的 LF 摘要。
 - en: '[PRE2]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: I have a total of 24 LFs, but here’s how the LF summary looks like for a sample
     of my LFs. Below the table you can find what each column means.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我总共有 24 个 LF，但以下是我部分 LF 的 LF 摘要。你可以在表格下方找到每一列的含义。
 - en: '![Figure](../Images/61cbdc47a245bcd4a768cf0151c13ee0.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/61cbdc47a245bcd4a768cf0151c13ee0.png)'
 - en: LF Summary
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: LF 摘要
 - en: 'Column meanings:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 列的含义：
 - en: '**Emp. Accuracy: **fractionof correct LF predictions. You should make sure
     this is at least 0.5 for all LFs.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**精确度：** 正确 LF 预测的比例。你应该确保所有 LF 的精确度至少为 0.5。'
 - en: '**Coverage:** % of samples for which at least one LF votes positive or negative.
     You want to maximize this, while keeping a good accuracy.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**覆盖率：** 至少有一个 LF 投票为正或负的样本百分比。你要最大化这一点，同时保持良好的准确性。'
 - en: '**Polarity:** tells you what values the LF returns.'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**极性：** 告诉你 LF 返回的值是什么。'
 - en: '**Overlaps & Conflicts: **this tells you how an LF overlaps and conflicts with
     other LFs. Don’t worry about it too much, the Label Model will actually use this
     to estimate the accuracy for each LF.'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**重叠与冲突：** 这告诉你一个 LF 如何与其他 LFs 重叠和冲突。不必过于担心，标签模型实际上会利用这些信息来估计每个 LF 的准确性。'
 - en: 'Let’s check out our coverage:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们检查一下我们的覆盖率：
 - en: '[PRE3]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: That’s pretty good!
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 这相当不错！
 - en: Now, as a baseline for our weak supervision, we’ll evaluate our LFs by using
     a Majority Label Voter model to predict the classes in our LF set. This just assigns
     a positive label if most of the LFs are positive, so it’s basically assuming that
     all LFs have the same accuracy.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为我们弱监督的基线，我们将通过使用多数标签投票模型来评估我们的 LFs，以预测 LF 集中的类。这只是分配一个积极标签，如果大多数 LF 是积极的，所以它基本上假设所有
+    LF 具有相同的准确性。
 - en: '[PRE4]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![Figure](../Images/d2ae2e4485ec439f323acc6f507f227b.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/d2ae2e4485ec439f323acc6f507f227b.png)'
 - en: Classification Report for Majority Voter Baseline
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 多数投票者基线的分类报告
 - en: We can see that we get an F1-score of 0.61 for the positive class (“1”). To
     improve this, I made a spreadsheet where each row has a tweet, its true label,
     its assigned label based on each LF. The goal is to find where an LF disagrees
     with the true label, and fix the LF accordingly.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到，对正类（“1”）的 F1-score 是 0.61。为了提高这一点，我制作了一个电子表格，其中每一行都有一条推文、它的真实标签、以及基于每个
+    LF 的分配标签。目标是找到 LF 与真实标签不一致的地方，并相应地修正 LF。
 - en: '![Figure](../Images/4c9dd3dfd4e27c6de09cd16e169f6f34.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/4c9dd3dfd4e27c6de09cd16e169f6f34.png)'
 - en: Google Sheet I used for tuning my LFs
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 我用来调整我的 LFs 的 Google 表格
 - en: After my LFs had about 60% precision and 60% recall, I went ahead and trained
     the Label Model.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我的 LFs 具有约 60% 精度和 60% 召回率之后，我继续训练了标签模型。
 - en: '[PRE5]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Now to test the Label Model, I validated it against my test set and plotted
     a Precision-Recall curve. We can see that we are able to get about 80% precision
     and 20% recall, which is pretty good. A big advantage of using the Label Model
     is that we can now tune the prediction probability threshold to get better precision.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在要测试标签模型，我将其与我的测试集进行了验证，并绘制了精度-召回率曲线。我们可以看到，我们能够获得大约 80% 的精度和 20% 的召回率，这相当不错。使用标签模型的一个重大优势是我们现在可以调整预测概率阈值，以获得更好的精度。
 - en: '![Figure](../Images/44c2019443a72a3723541b05f77eaf72.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/44c2019443a72a3723541b05f77eaf72.png)'
 - en: Precision-Recall Curve for Label Model
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 标签模型的精度-召回率曲线
 - en: 'I also validated my Label Model was working by checking the top 100 most anti-semitic
     tweets in my train set according to the Label Model and making sure it made sense.
     Now that we are happy with our Label Model, we produce our training labels:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 我还通过检查根据标签模型的前 100 个反犹太主义最强的推文，确保它们有意义来验证我的标签模型是否正常工作。现在我们对我们的标签模型满意了，我们生成了我们的训练标签：
 - en: '[PRE6]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'So, here’s a summary of my WS workflow:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我 WS 工作流程的总结：
 - en: Go through the examples in the LF set and identify a new potential LF.
+  id: totrans-45
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通过 LF 集中的示例，识别一个新的潜在 LF。
 - en: Add it to the Label Matrix and check that its accuracy is at least 50%. Try
     to get the highest accuracy possible, while keeping a good coverage. I grouped
     different LFs together if they relate to the same topic.
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将其添加到标签矩阵中，并检查其准确性是否至少为 50%。尽量获得最高的准确性，同时保持良好的覆盖率。如果 LFs 相关，我会将不同的 LFs 组合在一起。
 - en: Every once in a while you’ll want to use the baseline Majority Vote model (provided
     in Snorkel Metal) to label your LF set. Update your LFs accordingly to get a pretty
     good score just with the Majority Vote model.
+  id: totrans-47
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 有时你会想使用基础的多数投票模型（在 Snorkel Metal 中提供）来标注你的 LF 集。相应地更新你的 LFs，仅使用多数投票模型即可获得相当不错的得分。
 - en: If your Majority Vote model isn’t good enough, then you can fix your LFs or
     go back to step 1 and repeat.
+  id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果你的多数投票模型不够好，那么你可以修正你的 LFs 或返回第 1 步并重复操作。
 - en: Once your Majority Vote model works, then run your LFs over your Train set.
     You should have at least 60% coverage.
+  id: totrans-49
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一旦你的多数投票模型有效，那么就对你的训练集运行你的 LFs。你应该至少有 60% 的覆盖率。
 - en: Once this is done, train your Label Model!
+  id: totrans-50
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 完成后，训练你的标签模型！
 - en: To validate the Label Model, I ran the Label Model over my Training set and
     printed the top 100 most anti-semitic tweets and 100 least anti-semitic tweets
     to make sure it was working correctly.
+  id: totrans-51
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为了验证标签模型，我对我的训练集运行了标签模型，并打印了前 100 个反犹太主义最强的推文和 100 个反犹太主义最弱的推文，以确保它正常工作。
 - en: Now that we have our Label Model, we can compute probabilistic labels for **25
     thousand of tweets and use them as a training set**. Now, let’s go ahead and train
     our classification model!
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了标签模型，我们可以为**2.5万条推文计算概率标签，并将其用作训练集**。现在，继续训练我们的分类模型吧！
 - en: 'General Tips for Snorkel:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: Snorkel的一般提示：
 - en: 'On LF accuracy: In the WS step, we’re going for high precision. All of your
     LFs should have at least 50% accuracy on the LF set. If you can get 75% or more
     that’s even better.'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 关于LF准确率：在WS步骤中，我们追求高精度。你的所有LF在LF集合上的准确率应至少达到50%。如果能达到75%或更高，那就更好了。
 - en: 'On LF coverage: You want to have at least one LF voting positive/negative for
     at least 65% of our training set. This is called LF Coverage by Snorkel.'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 关于LF覆盖率：你需要确保至少65%的训练集有一个LF投票为正或负。这被称为Snorkel的LF覆盖率。
 - en: If you’re not a domain expert to start, you’ll get ideas for new LFs as you
     label your 600 initial data points.
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你一开始不是领域专家，你将在标记600个初始数据点的过程中获得新LF的想法。
 - en: '**Third Step: Build **Classification Model****'
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**第三步：构建**分类模型****'
 - en: The last step is to train our classifier to generalize beyond our noisy hand-made
     rules.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一步是训练我们的分类器，使其能够在噪声较多的手工规则之外进行泛化。
 - en: '**Baselines**'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '**基准线**'
 - en: We’ll start by setting some baselines**. **I tried to build the best model possible
     without deep learning. I tried Tf-idf featurization coupled with logistic regression
     from sklearn, XGBoost, and Feed Forward Neural Networks.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将从设定一些基准线开始**。我尝试在没有深度学习的情况下构建最佳模型。我尝试了Tf-idf特征化结合sklearn的逻辑回归、XGBoost和前馈神经网络。
 - en: Below are the results. To get these numbers I plotted a Precision-Recall curve
     against the Development set, and then picked my preferable classification threshold
     (trying to get a minimum of 90% precision if possible with recall as high as possible).
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是结果。为了获得这些数字，我绘制了一个针对开发集的精确度-召回率曲线，然后选择了我喜欢的分类阈值（尽可能争取90%以上的精确度，同时召回率尽可能高）。
 - en: '![Figure](../Images/ebc7de5adec8e85b81bdad411fd25e76.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/ebc7de5adec8e85b81bdad411fd25e76.png)'
 - en: Baselines
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 基准线
 - en: '**Trying ULMFiT**'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**尝试ULMFiT**'
 - en: Once we download the ULM trained on Wikipedia, we need to tune it to tweets
     since they have a pretty different language. I followed all the steps and code
     in [this awesome blog](https://towardsdatascience.com/transfer-learning-in-nlp-for-tweet-stance-classification-8ab014da8dde),
     and I also used the [Twitter Sentiment140 dataset](https://www.kaggle.com/kazanova/sentiment140)from
     Kaggle to fine-tune the LM.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们下载了在维基百科上训练的ULM，我们需要调整它以适应推文，因为它们的语言差异较大。我按照[这个很棒的博客](https://towardsdatascience.com/transfer-learning-in-nlp-for-tweet-stance-classification-8ab014da8dde)中的所有步骤和代码操作，并且我还使用了来自Kaggle的[Twitter
+    Sentiment140数据集](https://www.kaggle.com/kazanova/sentiment140)来微调语言模型。
 - en: We sample 1 million tweets from that dataset randomly, and fine-tune the LM
     on those tweets. This way, the LM will learn be able to generalize in the twitter
     domain.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们从数据集中随机抽取100万条推文，并在这些推文上微调语言模型。这样，语言模型将能够在推特领域进行泛化。
 - en: The code below loads the tweets and trains the LM. I used a GPU from Paperspace
     using the fastai public image, this worked wonders. You can follow [these steps ](https://github.com/reshamas/fastai_deeplearn_part1/blob/master/tools/paperspace.md)to
     set it up.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的代码加载推文并训练语言模型。我使用了Paperspace的GPU和fastai的公共镜像，这效果非常好。你可以按照[这些步骤](https://github.com/reshamas/fastai_deeplearn_part1/blob/master/tools/paperspace.md)进行设置。
 - en: '[PRE7]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'We unfreeze all the layers in the LM:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们解冻语言模型中的所有层：
 - en: '[PRE8]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: We let it run for 20 cycles. I put the cycles in a for loop so that I could
     save the model after every iteration. I didn’t find a way to do this easily with
     fastai.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们运行了20个周期。我将周期放入一个循环中，以便在每次迭代后保存模型。我没找到使用fastai轻松做到这一点的方法。
 - en: '[PRE9]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'Then we should test the LM to make sure it’s making at least a little bit of
     sense:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们应该测试语言模型，以确保它至少有一点道理：
 - en: '[PRE10]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: The weird tokens like “xxmaj” are some special tokens that fastai adds that
     help with text understanding. For example, they add special tokens for capital
     letters, beginning of a sentence, repeated words, etc. The LM is not really making
     that much sense, but that’s fine.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 像“xxmaj”这样的奇怪标记是fastai添加的一些特殊标记，有助于文本理解。例如，它们为大写字母、句子的开头、重复的词等添加了特殊标记。语言模型的表现可能不是很理想，但这没关系。
 - en: 'Now we’ll train our classifier:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将训练我们的分类器：
 - en: '[PRE11]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Using fastai’s method for finding a good learning rate:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用fastai的方法寻找合适的学习率：
 - en: '[PRE12]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '![](../Images/085c485797cd64642a08e461f5295ae2.png)'
+  id: totrans-80
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/085c485797cd64642a08e461f5295ae2.png)'
 - en: 'We’ll fine-tune the classifier with gradual unfreezing:'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将通过逐渐解冻来微调分类器：
 - en: '[PRE13]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '![Figure](../Images/60007d60c67b4d38edde397b5a420512.png)'
+  id: totrans-83
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/60007d60c67b4d38edde397b5a420512.png)'
 - en: A few training epochs
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些训练轮次
 - en: After fine-tuning, let’s plot our Precision-Recall curve! It was very nice to
     see this after the first try.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 在微调后，让我们绘制我们的精确率-召回率曲线！看到第一次尝试后的结果非常好。
 - en: '![Figure](../Images/905e709274b4cbfaba8028d2682a822e.png)'
+  id: totrans-86
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/905e709274b4cbfaba8028d2682a822e.png)'
 - en: Precision-Recall curve of ULMFiT with Weak Supervision
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: ULMFiT在弱监督下的精确率-召回率曲线
 - en: I picked probability threshold of 0.63, which gives us **95% precision and 39%
     recall. **This is a very large boost mainly in recall but also in precision.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 我选择了0.63的概率阈值，这使我们获得了**95% 的精准率和39% 的召回率**。这在召回率上有了很大的提升，同时在精准率上也有所提高。
 - en: '![Figure](../Images/8d2c36dbb72e91604057d120b11e3b54.png)'
+  id: totrans-89
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/8d2c36dbb72e91604057d120b11e3b54.png)'
 - en: Classification Report for ULMFiT Model
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: ULMFiT模型的分类报告
 - en: '**Having Fun With Our Model**'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '**与我们的模型玩得开心**'
 - en: Below is a pretty cool example of how the model catches that “doesn’t” changes
     the tweet’s meaning!
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是一个非常酷的例子，展示了模型如何捕捉到“doesn’t”改变了推文的含义！
 - en: '[PRE14]'
+  id: totrans-93
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'Here are some insults against jews:'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有一些针对犹太人的侮辱：
 - en: '[PRE15]'
+  id: totrans-95
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'Here is a person calling out anti-semitic tweets:'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有一个人呼吁反犹太主义的推文：
 - en: '[PRE16]'
+  id: totrans-97
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: 'And here are other non anti-semitic tweets:'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是其他非反犹太主义的推文：
 - en: '[PRE17]'
+  id: totrans-99
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: '****Does Weak Supervision Actually Help?****'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '****弱监督真的有帮助吗？****'
 - en: 'I was curious if WS was necessary to obtain this performance, so I ran a little
     experiment. I ran the same process as before, but without the WS labels, and got
     this Precision-Recall curve:'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 我很好奇是否需要弱监督才能获得这种性能，因此我进行了一个小实验。我进行了与之前相同的过程，但没有WS标签，并得到了这个精确率-召回率曲线：
 - en: '![Figure](../Images/887a4d2d3e0a53f16609374ca2f158e2.png)'
+  id: totrans-102
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/887a4d2d3e0a53f16609374ca2f158e2.png)'
 - en: Precision-Recall curve of ULMFiT without Weak Supervision
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: ULMFiT在没有弱监督下的精确率-召回率曲线
 - en: We can see a big drop in recall (we only get about **10% recall** for a 90%
     precision) and ROC-AUC **(-0.15)**, compared to the previous Precision-Recall
     curve in which we used our WS labels.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到召回率大幅下降（我们只有**10% 的召回率**，而精准率为90%）和ROC-AUC **(-0.15)**，与我们使用WS标签的之前精确率-召回率曲线相比。
 - en: '**Conclusions**'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '**结论**'
 - en: Weak supervision + ULMFiT helped us hit 95% precision and 39% recall. That was
     much better than all the baselines, so that was very exciting. I was not expecting
     that at all.
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 弱监督 + ULMFiT帮助我们达到了95%的精准率和39%的召回率。这远远超过了所有基准，因此非常令人兴奋。我完全没有预料到这一点。
 - en: This model is very easy to keep up-to-date. There’s no need for relabeling,
     we just update the LFs and rerun the WS + ULMFiT pipeline.
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这个模型非常容易保持最新。无需重新标注，我们只需更新LFs并重新运行WS + ULMFiT管道。
 - en: Weak supervision makes a big difference by allowing ULMFiT to generalize better.
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 弱监督通过允许ULMFiT更好地泛化，带来了很大的不同。
 - en: '****Next Steps****'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '****下一步****'
 - en: I believe we can get the most gains by putting some more effort into my LFs
     to improve the Weak Supervision model. I would first include LFs based on external
     knowledge bases like [Hatebase’s](https://hatebase.org/) repository of hate speech
     patterns. Then, I would write new LFs based on Spacy’s dependency tree parsing.
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我相信我们可以通过进一步努力改进我的LFs来获得最大的收益，以提高弱监督模型。我会首先包含基于外部知识库如[Hatebase’s](https://hatebase.org/)的仇恨言论模式的LFs。然后，我会基于Spacy的依赖树解析编写新的LFs。
 - en: We didn’t do any hyperparameter tuning but that could likely help improve both
     the Label Model and ULMFiT performance.
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们没有进行任何超参数调整，但这可能会帮助提升Label Model和ULMFiT的性能。
 - en: We can try different classification models such as fine-tuning BERT or OpenAI’s
     Transformer.
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们可以尝试不同的分类模型，比如微调BERT或OpenAI的Transformer。
 - en: '**Bio: [Abraham Starosta](https://www.linkedin.com/in/abraham-starosta-ba662764/)**
     (**[starosta@stanford.edu](mailto:starosta@stanford.edu)**) is originally from
     Venezuela and is now finishing his Master''s in Computer Science at Stanford University,
@@ -456,52 +690,80 @@
     for top startups that started at Stanford. Over the years, he also had the opportunity
     to be a software engineer at other top startups like Livongo, Zugata and Splunk.
     In his spare time he enjoys playing soccer and ping pong.'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介: [Abraham Starosta](https://www.linkedin.com/in/abraham-starosta-ba662764/)**
+    (**[starosta@stanford.edu](mailto:starosta@stanford.edu)**) 来自委内瑞拉，目前在斯坦福大学完成计算机科学硕士学位，专注于人工智能和自然语言处理。在开始斯坦福的硕士课程之前，他曾是Primer
+    AI的数据科学家，这是一家开发文本理解和总结技术的初创公司。他还是Nav Talent的共同创始人，这是一家为顶级初创公司提供技术招聘服务的机构，该机构起步于斯坦福大学。多年来，他还有机会在其他顶级初创公司如Livongo、Zugata和Splunk担任软件工程师。在闲暇时，他喜欢踢足球和打乒乓球。'
 - en: '[Original](https://towardsdatascience.com/a-technique-for-building-nlp-classifiers-efficiently-with-transfer-learning-and-weak-supervision-a8e2f21ca9c8).
     Reposted with permission.'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始文章](https://towardsdatascience.com/a-technique-for-building-nlp-classifiers-efficiently-with-transfer-learning-and-weak-supervision-a8e2f21ca9c8)。已获转载许可。'
 - en: '**Related:**'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关:**'
 - en: '[How to solve 90% of NLP problems: a step-by-step guide](/2019/01/solve-90-nlp-problems-step-by-step-guide.html)'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何解决90%的自然语言处理问题：逐步指南](/2019/01/solve-90-nlp-problems-step-by-step-guide.html)'
 - en: '[OpenAI’s GPT-2: the model, the hype, and the controversy](/2019/03/openai-gpt-2-model-hype-controversy.html)'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[OpenAI的GPT-2：模型、炒作与争议](/2019/03/openai-gpt-2-model-hype-controversy.html)'
 - en: '[More Effective Transfer Learning for NLP](/2018/10/more-effective-transfer-learning-nlp.html)'
+  id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[更有效的自然语言处理迁移学习](/2018/10/more-effective-transfer-learning-nlp.html)'
 - en: More On This Topic
+  id: totrans-119
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Weak Supervision Modeling, Explained](https://www.kdnuggets.com/2022/05/weak-supervision-modeling-explained.html)'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[弱监督建模解析](https://www.kdnuggets.com/2022/05/weak-supervision-modeling-explained.html)'
 - en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[迁移学习在图像识别和自然语言处理中的应用](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
 - en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow在计算机视觉中的应用 - 迁移学习简化版](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
 - en: '[What is Transfer Learning?](https://www.kdnuggets.com/2022/01/transfer-learning.html)'
+  id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是迁移学习？](https://www.kdnuggets.com/2022/01/transfer-learning.html)'
 - en: '[A Practical Guide to Transfer Learning using PyTorch](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)'
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用PyTorch的迁移学习实用指南](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)'
 - en: '[Exploring the Potential of Transfer Learning in Small Data Scenarios](https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios)'
+  id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[探索小数据场景中的迁移学习潜力](https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios)'
