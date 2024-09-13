@@ -1,442 +1,656 @@
 - en: 'Python Vector Databases and Vector Indexes: Architecting LLM Apps'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python 向量数据库和向量索引：LLM 应用的架构设计
 - en: 原文：[https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)
 - en: '![Python Vector Databases and Vector Indexes: Architecting LLM Apps](../Images/98929da7efaaff613b06428c080125f9.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![Python 向量数据库和向量索引：LLM 应用的架构设计](../Images/98929da7efaaff613b06428c080125f9.png)'
 - en: Photo by [Christina Morillo](https://www.pexels.com/photo/man-standing-infront-of-white-board-1181345/)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由 [Christina Morillo](https://www.pexels.com/photo/man-standing-infront-of-white-board-1181345/)
+    提供
 - en: Because of Generative AI applications created using their hardware, Nvidia has
     experienced significant growth. Another software innovation, the vector database,
     is also riding the Generative AI wave.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于使用其硬件创建的生成 AI 应用，Nvidia 体验到了显著的增长。另一项软件创新——向量数据库——也在乘上生成 AI 的浪潮。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Developers are building AI-powered applications in Python on Vector Databases.
     By encoding data as vectors, they can leverage the mathematical properties of
     vector spaces to achieve fast similarity search across very large datasets.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 开发者们正在使用 Python 和向量数据库构建 AI 驱动的应用程序。通过将数据编码为向量，他们可以利用向量空间的数学属性，实现对非常大数据集的快速相似性搜索。
 - en: Let's start with the basics!
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从基础开始吧！
 - en: Vector Database Basics
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 向量数据库基础
 - en: A vector database stores data as numeric vectors in a coordinate space. This
     allows similarities between vectors to be calculated via operations like cosine
     similarity.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 向量数据库将数据存储为坐标空间中的数值向量。这使得可以通过如余弦相似度等操作计算向量之间的相似性。
 - en: The closest vectors represent the most similar data points. Unlike scalar databases,
     vector databases are optimized for similarity searches rather than complex queries
     or transactions.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 最近的向量代表最相似的数据点。与标量数据库不同，向量数据库被优化用于相似性搜索，而不是复杂的查询或事务。
 - en: Retrieving similar vectors takes milliseconds versus minutes, even across billions
     of data points.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 检索相似向量只需几毫秒，而非几分钟，即使在数十亿数据点中也是如此。
 - en: Vector databases build indexes to efficiently query vectors by proximity. This
     is somewhat analogous to how text search engines index documents for fast full-text
     search.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 向量数据库构建索引，以通过接近度高效地查询向量。这有点类似于文本搜索引擎如何为快速全文搜索对文档进行索引。
 - en: Benefits of Vector Search Over Traditional Databases for Developers
+  id: totrans-18
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 向量搜索相较于传统数据库的好处
 - en: 'For developers, vector databases provide:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于开发者来说，向量数据库提供：
 - en: Fast similarity search - Find similar vectors in milliseconds
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 快速相似性搜索 - 毫秒级找到相似向量
 - en: Support for dynamic data - Continuously update vectors with new data
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 动态数据支持 - 持续用新数据更新向量
 - en: Scalability - Scale vector search across multiple machines
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可扩展性 - 在多台机器上扩展向量搜索
 - en: Flexible architectures - Vectors can be stored locally, in cloud object stores,
     or managed databases
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 灵活的架构 - 向量可以存储在本地、云对象存储或托管数据库中
 - en: High dimensionality - Index thousands of dimensions per vector
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 高维度 - 每个向量索引数千维度
 - en: APIs - If you go for a managed vector database, it usually comes with clean
     query APIs and integrations with some existing data science toolkits or platforms.
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: API - 如果你选择托管的向量数据库，它通常附带干净的查询 API 和与现有数据科学工具包或平台的集成。
 - en: 'The example of popular use cases supported by the vector searches (the key
     feature offering of a vector database) are:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 向量搜索（向量数据库的关键功能）支持的流行用例示例如下：
 - en: Visual search - Find similar product images
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 视觉搜索 - 查找相似的产品图片
 - en: Recommendations - Suggest content
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 推荐 - 建议内容
 - en: Chatbots - Match queries to intent
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 聊天机器人 - 匹配查询意图
 - en: Search - Surface relevant documents from text vectors
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 搜索 - 从文本向量中提取相关文档
 - en: 'Use cases where vector searches are starting to gain traction are :'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 向量搜索开始获得关注的用例有：
 - en: Anomaly detection - Identify outlier vectors
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 异常检测 - 识别异常向量
 - en: Drug discovery - Relate molecules by property vectors
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 药物发现 - 按属性向量关联分子
 - en: What is a Python Vector Database?
+  id: totrans-34
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是Python向量数据库？
 - en: A Vector database which includes Python libraries that supports a full lifecycle
     of a vector database is a Python vector database.  The database itself does not
     need to be built in Python.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个包含支持向量数据库完整生命周期的Python库的向量数据库就是一个Python向量数据库。 数据库本身不需要用Python构建。
 - en: What Should be Supported by these Python Vector Database Libraries?
+  id: totrans-36
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 这些Python向量数据库库应该支持什么？
 - en: The calls to a vector database can be separated into two categories - **Data
     related** and **Management related**.  The good news here is that they follow
     similar patterns as a traditional database.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 对向量数据库的调用可以分为两类 - **数据相关**和**管理相关**。 好消息是它们遵循与传统数据库类似的模式。
 - en: '**Data related functions which libraries should support**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据相关功能库应支持的内容**'
 - en: '![Python Vector Databases and Vector Indexes: Architecting LLM Apps](../Images/ba01fe739413d52def0874e7ec45b89f.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![Python向量数据库和向量索引：架构LLM应用](../Images/ba01fe739413d52def0874e7ec45b89f.png)'
 - en: Standard management related functions which libraries should support
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 标准管理相关功能库应支持的内容
 - en: '![Python Vector Databases and Vector Indexes: Architecting LLM Apps](../Images/f6af30a16edc73f25c8958765157f192.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![Python向量数据库和向量索引：架构LLM应用](../Images/f6af30a16edc73f25c8958765157f192.png)'
 - en: Let’s now move on to a little more advanced concept where we talk about building
     LLM Apps on  top of these databases
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们进入一个稍微复杂的概念，即在这些数据库之上构建LLM应用
 - en: Architecting LLM Apps
+  id: totrans-43
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 架构LLM应用
 - en: Let’s understand what is involved from a workflow perspective before we go deeper
     into the architecture of vector search powered LLM Apps.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 在深入了解由向量搜索驱动的LLM应用架构之前，让我们从工作流的角度理解涉及的内容。
 - en: 'A typical ***workflow*** involves:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个典型的***工作流***包括：
 - en: Enriching or cleaning the data. This is a lightweight data transformation step
     to help with data quality and consistent content formatting. It is also where
     data may need to be enriched.
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 数据的丰富或清洗。这是一个轻量的数据转换步骤，有助于数据质量和一致的内容格式化。这也是需要对数据进行丰富的地方。
 - en: Encoding data as vectors via models. The models have some transformers included
     (e.g. sentence transformers)
+  id: totrans-47
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通过模型将数据编码为向量。这些模型包含一些变换器（例如句子变换器）
 - en: Inserting vectors into a vector database or vector index (something which we
     will explain shortly)
+  id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将向量插入向量数据库或向量索引（稍后会解释）
 - en: Exposing search via a Python API
+  id: totrans-49
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通过Python API暴露搜索
 - en: Document orchestrating workflow
+  id: totrans-50
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 文档协调工作流
 - en: Testing and visualizing results in apps and UIs (e.g. Chat UI)
+  id: totrans-51
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在应用程序和用户界面中测试和可视化结果（例如聊天用户界面）
 - en: Now let’s see how we enable different parts of this workflow using different
     architecture components.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们看看如何使用不同的架构组件来启用这个工作流的不同部分。
 - en: For 1) you might need to start getting metadata from other source systems (including
     relational databases or content management systems.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于1)，你可能需要开始从其他源系统（包括关系型数据库或内容管理系统）获取元数据。
 - en: Pretrained models are almost always preferred for step  2) above.  OpenAI models
     are the most well-liked models offered through hosted offerings. You might host
     local models for privacy and security reasons.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 预训练模型几乎总是优选用于上面的步骤2）。 OpenAI模型是通过托管服务提供的最受欢迎的模型。 出于隐私和安全原因，你也可以托管本地模型。
 - en: For 3), you need a vector database or vector index if you need to perform large
     similarity searches, such as in datasets with more than one billion records. From
     an enterprise standpoint, you typically have a little more context before you
     conduct the "search".
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于3)，如果需要进行大规模相似性搜索（例如数据集超过十亿条记录），你需要一个向量数据库或向量索引。从企业的角度来看，通常在进行“搜索”之前会有更多背景信息。
 - en: 'For 4) above, the good news is that the exposed search typically follows a
     similar pattern.  Something along the lines of the following code:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于4)上面的内容，好消息是，暴露的搜索通常遵循类似的模式。类似于以下代码：
 - en: From [Pinecone](https://docs.pinecone.io/docs/metadata-filtering#:~:text=eq%22%3A%20%5B%22comedy%22%2C%20%22documentary%22%5D%7D%7D-,Inserting%20metadata%20into%20an%20index,-Metadata%20can%20be)
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 来自 [Pinecone](https://docs.pinecone.io/docs/metadata-filtering#:~:text=eq%22%3A%20%5B%22comedy%22%2C%20%22documentary%22%5D%7D%7D-,Inserting%20metadata%20into%20an%20index,-Metadata%20can%20be)。
 - en: '[PRE0]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'An interesting line here is this:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有一句有趣的话：
 - en: '[PRE1]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: It really filters the results to vectors near the ‘genre’ and ‘year’.  You can
     also filter vectors by concepts or themes.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 它真的将结果筛选到接近“类型”和“年份”的向量。你还可以按概念或主题筛选向量。
 - en: The challenge now, in an enterprise setting, is that it includes other business
     filters. It is important to address the lack of modeling for data coming from
     data sources (think table structure and metadata). It would be important to improve
     text fidelity with fewer incorrect expressions that contradict the structured
     data. . A "data pipelining" strategy is required in this situation, and enterprise
     "content matching" starts to matter.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在的挑战是在企业环境中，它包括其他业务过滤器。重要的是解决来自数据源（如表结构和元数据）的数据建模缺失的问题。需要改进文本的准确性，减少与结构化数据相矛盾的错误表达。在这种情况下，需要一种“数据管道”策略，企业“内容匹配”变得重要。
 - en: For 5) Other than the usual challenges of scaling ingest, a changing corpus
     has its own challenges. New documents may require re-encoding and re-indexing
     of the entire corpus to keep vectors relevant.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于 5) 除了常见的扩展挑战外，变化中的语料库也有其挑战。新文档可能需要重新编码和重新索引整个语料库，以保持向量的相关性。
 - en: For 6) This is a completely new area and a human in the loop approach is required
     on top of testing similarity levels to ensure there is quality across the spectrum
     of search.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于 6) 这是一个全新的领域，除了测试相似度水平外，还需要一种人工干预的方法，以确保搜索质量在各个范围内的一致性。
 - en: Automated search scoring along with different types of context scoring is not
     an easily accomplished task.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 自动搜索评分和不同类型的上下文评分不是一个容易完成的任务。
 - en: 'Python Vector Index: a simpler vector search alternative for your existing
     database.'
+  id: totrans-66
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python 向量索引：为你现有数据库提供一种更简单的向量搜索替代方案。
 - en: A **vector database** is a complex system that enables contextual search as
     in the above examples plus all the additional database functionalities (create,
     insert, update, delete, manage, …).
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '**向量数据库** 是一个复杂的系统，能够实现如上例所示的上下文搜索，并具备所有额外的数据库功能（创建、插入、更新、删除、管理等）。'
 - en: Examples of vector databases include Weaviate and Pinecone. Both of these expose
     Python API’s.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 向量数据库的例子包括 Weaviate 和 Pinecone。这两个都提供了 Python API。
 - en: Sometimes, a simpler setup is enough. As a lighter alternative, you can use
     whatever storage you were already using, and add a **vector index** based on it.
     This vector index is used for retrieving only your search queries with context,
     for example, for your generative AI use.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时，更简单的设置已经足够。作为一种更轻量的替代方案，你可以使用已经在用的存储，并基于此添加一个 **向量索引**。这个向量索引用于检索带有上下文的搜索查询，例如用于你的生成性
+    AI。
 - en: 'In a vector index setup, you have:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 在向量索引设置中，你需要：
 - en: 'Your usual data storage (e.g. PostgreSQL or disk directory with files) provides
     the basic operations you need: create, insert, update, delete.'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你通常的数据存储（例如 PostgreSQL 或带文件的磁盘目录）提供了你需要的基本操作：创建、插入、更新、删除。
 - en: Your vector index which enables fast context-based search on your data.
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你的向量索引，能够在你的数据上实现快速的基于上下文的搜索。
 - en: Standalone Python libraries which implement vector indices for you include FAISS,
     Pathway LLM, Annoy.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 实现向量索引的独立 Python 库包括 FAISS、Pathway LLM、Annoy。
 - en: The good news is that the LLM application workflow for vector databases and
     Vector indexes is the same. The main difference is that in addition to the Python
     Vector Index library, you continue to also use your existing data library for
     “normal” data operations and for data management. For example, this could be Psycopg
     if you are using PostgreSQL, or the standard Python “fs” module if you are storing
     data in files.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 好消息是，向量数据库和向量索引的 LLM 应用流程是相同的。主要区别在于，除了使用 Python 向量索引库外，你还需要继续使用现有的数据库进行“普通”数据操作和数据管理。例如，如果你使用
+    PostgreSQL，可能会用到 Psycopg；如果你将数据存储在文件中，可以使用标准的 Python “fs” 模块。
 - en: 'Proponents of vector indexes focus on the following advantages:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 向量索引的支持者关注以下优点：
 - en: 'Data Privacy: Keeps original data secure and undisturbed, minimizing data exposure
     risk.'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据隐私：保持原始数据安全且不受干扰，减少数据暴露风险。
 - en: 'Cost-Efficiency: Lessens costs associated with extra storage, compute power,
     and licensing.'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 成本效率：减少与额外存储、计算能力和许可相关的成本。
 - en: 'Scalability: Simplifies scaling by decreasing the number of components to manage.'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可扩展性：通过减少管理的组件数量来简化扩展。
 - en: When to use Vector Databases vs Vector Indexes?
+  id: totrans-79
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么时候使用向量数据库与向量索引？
 - en: Vector Databases are useful when one or more of the following is true
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 当以下一个或多个条件成立时，向量数据库是有用的：
 - en: You have a specialized need for working with vector data at scale
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你对大规模处理向量数据有特殊需求。
 - en: You are creating a standalone purpose-built application for vectors
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你正在为向量创建一个独立的定制应用程序。
 - en: You do not expect other types of use for your stored data in other types of
     applications.
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你不期望在其他类型的应用程序中使用存储的数据。
 - en: Vector Indexes are useful when one or more of the following is true
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 向量索引在以下一个或多个条件成立时是有用的：
 - en: You do not want to trust new technology for your data storage
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你不想信任新技术来进行数据存储。
 - en: Your existing storage is easy to access from Python.
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你现有的存储可以从Python中轻松访问。
 - en: Your similarity search is just one capability among other larger enterprise
     BI and database  needs
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你的相似性搜索只是其他更大企业BI和数据库需求中的一种能力。
 - en: You need the ability to attach vectors to existing scalar records
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你需要将向量附加到现有的标量记录中。
 - en: You need one unified way of dealing with pipelines for your data engineering
     team
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你需要一种统一的方法来处理数据工程团队的管道。
 - en: You need index and graph structures on the data to help with your [LLM apps](https://github.com/pathwaycom/llm-app)
     or tasks
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你需要在数据上使用索引和图结构，以帮助你的[LLM应用程序](https://github.com/pathwaycom/llm-app)或任务。
 - en: You need augmented output or augmented context coming from other sources
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你需要来自其他来源的增强输出或增强上下文。
 - en: You want to create rules from your corpus which can apply to your transactional
     data
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你想从语料库中创建规则，以应用于你的事务数据。
 - en: The Future of Enterprise Vector Search
+  id: totrans-93
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 企业向量搜索的未来
 - en: Vector search unlocks game-changing capabilities for developers. As models and
     techniques improve, expect vector databases or vector indexes to become an integral
     part of the application stack.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 向量搜索为开发者解锁了颠覆性的能力。随着模型和技术的进步，预计向量数据库或向量索引将成为应用程序堆栈的核心部分。
 - en: I hope this overview provides a solid starting point for exploring vector databases
     and vector indexes  in Python. If you are curious about a recently developed vector
     index please check this [open source project](https://github.com/pathwaycom/llm-app).
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望这个概述为你探索Python中的向量数据库和向量索引提供一个坚实的起点。如果你对最近开发的向量索引感兴趣，请查看这个[开源项目](https://github.com/pathwaycom/llm-app)。
 - en: '**[Anup Surendran](https://www.linkedin.com/in/anupsurendran/)** is a VP of
     Product and Product Marketing who specializes in bringing AI products to market.
     He has worked with startups that have had two successful exits (to SAP and Kroll)
     and enjoys teaching others about how AI products can improve productivity within
     an organization.'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Anup Surendran](https://www.linkedin.com/in/anupsurendran/)** 是一位产品和产品营销副总裁，专注于将AI产品推向市场。他曾与两家成功退出（被SAP和Kroll收购）的初创公司合作，并喜欢教授其他人如何利用AI产品提高组织的生产力。'
 - en: More On This Topic
+  id: totrans-97
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Vector Databases in AI and LLM Use Cases](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AI和LLM用例中的向量数据库](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)'
 - en: '[How To Speed Up SQL Queries Using Indexes [Python Edition]](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用索引加速SQL查询【Python版】](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)'
 - en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据库优化：探索SQL中的索引](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
 - en: '[Beginner’s Guide to Building LLM Apps with Python](https://www.kdnuggets.com/beginners-guide-to-building-llm-apps-with-python)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python构建LLM应用程序的初学者指南](https://www.kdnuggets.com/beginners-guide-to-building-llm-apps-with-python)'
 - en: '[What are Vector Databases and Why Are They Important for LLMs?](https://www.kdnuggets.com/2023/06/vector-databases-important-llms.html)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是向量数据库，它们为什么对LLM如此重要？](https://www.kdnuggets.com/2023/06/vector-databases-important-llms.html)'
 - en: '[An Honest Comparison of Open Source Vector Databases](https://www.kdnuggets.com/an-honest-comparison-of-open-source-vector-databases)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[开源向量数据库的诚实比较](https://www.kdnuggets.com/an-honest-comparison-of-open-source-vector-databases)'
