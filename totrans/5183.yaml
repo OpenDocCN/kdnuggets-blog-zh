@@ -1,359 +1,544 @@
 - en: dbt for Data Transformation – Hands-on Tutorial
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: dbt 数据转换 – 实操教程
 - en: 原文：[https://www.kdnuggets.com/2021/07/dbt-data-transformation-tutorial.html](https://www.kdnuggets.com/2021/07/dbt-data-transformation-tutorial.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/07/dbt-data-transformation-tutorial.html](https://www.kdnuggets.com/2021/07/dbt-data-transformation-tutorial.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Essi Alizadeh](https://www.linkedin.com/in/alizadehesmaeil/) is an engineer
     and a senior data scientist, in permanent beta**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Essi Alizadeh](https://www.linkedin.com/in/alizadehesmaeil/) 是一名工程师和高级数据科学家，处于永久测试状态**。'
 - en: '![](../Images/570cfd46355d3e26b449a45bfa4b1b3f.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/570cfd46355d3e26b449a45bfa4b1b3f.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: dbt (data build tool) is a data transformation tool that uses select SQL statements.
     It allows you to create complex models, use variables and macros (aka functions),
     run tests, generate documentation, and many more features.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: dbt（数据构建工具）是一个数据转换工具，使用 SQL 选择语句。它允许你创建复杂的模型，使用变量和宏（即函数），运行测试，生成文档等。
 - en: dbt does not extract or load data, but it’s powerful at transforming data that’s
     already available in the database —dbt does the **T** in ELT (Extract, Load, Transform)
     processes.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: dbt 不提取或加载数据，但它在转换已存在于数据库中的数据方面非常强大——dbt 执行 ELT（提取、加载、转换）过程中的**T**。
 - en: 'In this post, you will learn how to:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文章中，你将学习如何：
 - en: Configure a dbt project.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 配置 dbt 项目。
 - en: Create dbt models (SELECT statements).
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建 dbt 模型（SELECT 语句）。
 - en: Build complex dbt models using global variables and macros.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用全局变量和宏构建复杂的 dbt 模型。
 - en: Build complex models by referring to other dbt models.
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过引用其他 dbt 模型来构建复杂的模型。
 - en: Run tests.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 运行测试。
 - en: Generate documentation.
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 生成文档。
 - en: Pre-requisite
+  id: totrans-20
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 先决条件
 - en: Signup
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 注册
 - en: You can sign up at [getdbt.com](https://cloud.getdbt.com/). The free plan is
     a great plan for small projects and testing.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在[getdbt.com](https://cloud.getdbt.com/)注册。免费计划对于小型项目和测试来说是一个很好的选择。
 - en: Database with populated data
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 具有填充数据的数据库
 - en: You can check my post on [how to deploy a *free* PostgreSQL database on Heroku](https://ealizadeh.com/blog/deploy-postgresql-db-heroku).
     The post provides step-by-step instructions on how to do it. You can also check
     the [data ingestion script](https://github.com/e-alizadeh/sample_dbt_project/blob/master/data/data_ingestion.py)
     in the [GitHub repo](https://github.com/e-alizadeh/sample_dbt_project) accompanying
     this article.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以查看我关于[如何在 Heroku 上部署一个 *免费的* PostgreSQL 数据库](https://ealizadeh.com/blog/deploy-postgresql-db-heroku)的文章。该文章提供了逐步的操作说明。你也可以查看[数据摄取脚本](https://github.com/e-alizadeh/sample_dbt_project/blob/master/data/data_ingestion.py)以及附带的[GitHub
+    仓库](https://github.com/e-alizadeh/sample_dbt_project)。
 - en: Following the above, we generated two tables in a PostgreSQL database that we
     are going to use in this post. There are two tables in the database, named covid_latest
     and population_prosperity. You can find the ingestion script on the GitHub repo
     for this post.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据上述内容，我们在 PostgreSQL 数据库中生成了两个表，这些表将在本文章中使用。数据库中有两个表，分别命名为 covid_latest 和 population_prosperity。你可以在本文章的
+    GitHub 仓库中找到摄取脚本。
 - en: dbt CLI Installation
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: dbt CLI 安装
 - en: You can install the dbt command-line interface (CLI) by following the instructions
     on the following [dbt documentation page](https://docs.getdbt.com/dbt-cli/installation/).
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以按照以下[dbt 文档页面](https://docs.getdbt.com/dbt-cli/installation/)上的说明安装 dbt 命令行界面
+    (CLI)。
 - en: Basics of a dbt project
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: dbt 项目的基础知识
 - en: 'There are three main things to know about in order to use the dbt tool:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 dbt 工具时需要了解三件主要的事情：
 - en: dbt project
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: dbt 项目
 - en: database connection
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据库连接
 - en: dbt commands
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: dbt 命令
 - en: How to use dbt?
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何使用 dbt？
 - en: 'A dbt project is a directory containing *.sql* and *.yml* files. The minimum
     required files are:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个 dbt 项目是一个包含 *.sql* 和 *.yml* 文件的目录。所需的最低文件包括：
 - en: 'A project file named *dbt_project.yml*: This file contains configurations of
     a dbt project.'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个名为*dbt_project.yml*的项目文件：该文件包含dbt项目的配置。
 - en: 'Model(s) (*.sql* files): A model in dbt is simply a single *.sql* file containing
     a **single** ***select*** **statement**.'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型（*.sql*文件）：dbt中的模型只是一个包含**单个** ***select*** **语句**的*.sql*文件。
 - en: Every dbt project needs a *dbt_project.yml* file — this is how dbt knows a directory
     is a dbt project. It also contains important information that tells dbt how to
     operate on your project.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个dbt项目都需要一个*dbt_project.yml*文件——这是dbt识别目录是否为dbt项目的方式。它还包含重要的信息，告诉dbt如何操作你的项目。
 - en: You can find more information about dbt projects [here](https://docs.getdbt.com/docs/introduction#dbt-projects).
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在[这里](https://docs.getdbt.com/docs/introduction#dbt-projects)找到更多关于dbt项目的信息。
 - en: A **dbt model** is basically a *.sql* file with a **SELECT** statement.
+  id: totrans-39
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 一个**dbt模型**基本上是一个*.sql*文件，包含一个**SELECT**语句。
 - en: dbt Commands
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: dbt命令
 - en: 'dbt commands start with *dbt* and can be executed using one of the following
     ways:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: dbt命令以*dbt*开头，可以通过以下方式之一执行：
 - en: dbt Cloud (the command section at the bottom of the dbt Cloud dashboard),
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: dbt Cloud（在dbt Cloud仪表板底部的命令部分），
 - en: dbt CLI
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: dbt CLI
 - en: Some commands can only be used in dbt CLI like *dbt init*. Some dbt commands
     we will use in this post are
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些命令只能在dbt CLI中使用，如*dbt init*。在这篇文章中我们将使用的一些dbt命令包括
 - en: '*dbt init* (only in dbt CLI)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*dbt init*（仅在dbt CLI中）'
 - en: '*dbt run*'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*dbt run*'
 - en: '*dbt test*'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*dbt test*'
 - en: '*dbt docs generate*'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*dbt docs generate*'
 - en: dbt Project Setup
+  id: totrans-49
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: dbt项目设置
 - en: 'Step 1: Initialize a dbt project (sample files) using dbt CLI'
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第一步：使用dbt CLI初始化一个dbt项目（示例文件）
 - en: 'You can use [dbt init](https://docs.getdbt.com/reference/commands/init) to
     generate sample files/folders. In particular, *dbt init project_name* will create
     the following:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用[dbt init](https://docs.getdbt.com/reference/commands/init)来生成示例文件/文件夹。特别是，*dbt
+    init project_name*将创建以下内容：
 - en: a *~/.dbt/profiles.yml *file if one does not already exist
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果还不存在的话，创建一个*~/.dbt/profiles.yml*文件
 - en: a new folder called *[project_name]*
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个名为*[project_name]*的新文件夹
 - en: directories and sample files necessary to get started with dbt
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 必要的目录和示例文件，以便开始使用dbt
 - en: '**Caution**: Since *dbt init* generates a directory named *project_name*, and
     in order to avoid any conflict, you should *not have any existing folder with
     an identical name*.'
+  id: totrans-55
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**注意**：由于*dbt init*生成一个名为*project_name*的目录，为避免任何冲突，你应该*没有任何具有相同名称的现有文件夹*。'
 - en: '![](../Images/d65e97387ef5c3e9288422b2cb3d5ecb.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d65e97387ef5c3e9288422b2cb3d5ecb.png)'
 - en: '*dbt init <project_name>*'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '*dbt init <project_name>*'
 - en: The result is a directory with the following sample files.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果是一个包含以下示例文件的目录。
 - en: '[PRE0]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: For this post, we will just consider the minimum files and remove the extra
     stuff.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这篇文章，我们只考虑最小文件并去除多余内容。
 - en: '[PRE1]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Step 2: Set Up a Git Repository'
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第二步：设置Git代码库
 - en: You can use an existing repo, as specified during the setup. You can configure
     the repositories by following the dbt documentation [here](https://docs.getdbt.com/docs/dbt-cloud/cloud-configuring-dbt-cloud/cloud-configuring-repositories).
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用现有的代码库，如设置过程中所述。你可以通过查看dbt文档[这里](https://docs.getdbt.com/docs/dbt-cloud/cloud-configuring-dbt-cloud/cloud-configuring-repositories)来配置代码库。
 - en: '**Or, if you want to create a new repo...**'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**或者，如果你想创建一个新的代码库...**'
 - en: 'You can create a new repository from inside the created directory. You can
     do that as below:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在创建的目录内创建一个新的代码库。可以按如下方式进行：
 - en: '[PRE2]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Step 3: Set Up a New Project on dbt Cloud Dashboard'
+  id: totrans-67
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第三步：在dbt Cloud仪表板上设置新项目
 - en: In the previous step, we created a sample dbt project containing sample models
     and configurations. Now, we want to create a new project and connect our database
     and repository on the dbt Cloud dashboard.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 在前一步中，我们创建了一个包含示例模型和配置的示例dbt项目。现在，我们想创建一个新项目，并在dbt Cloud仪表板上连接我们的数据库和代码库。
 - en: Before we continue, you should have
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 在继续之前，你应该已经拥有
 - en: some data already available in a database,
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据库中已存在的一些数据，
 - en: a repository with the files generated at the previous step
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个包含前一步生成的文件的代码库
 - en: You can follow the steps below to set up a new project in dbt Cloud (keep in
     mind this step is different than the previous step in that we only generated some
     sample files).
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以按照下面的步骤在dbt Cloud中设置一个新项目（请记住，这一步与前一步不同，因为我们仅生成了一些示例文件）。
 - en: The *dbt_project.yml* file for our project is shown below (you can find the
     complete version in the [GitHub repo](https://github.com/e-alizadeh/sample_dbt_project.git)
     to this post).
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们项目的*dbt_project.yml*文件如下所示（你可以在[GitHub repo](https://github.com/e-alizadeh/sample_dbt_project.git)中找到完整版本）。
 - en: '[PRE3]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '*dbt_project.yml*'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '*dbt_project.yml*'
 - en: dbt Models and Features
+  id: totrans-76
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: dbt模型和功能
 - en: dbt models
+  id: totrans-77
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: dbt模型
 - en: Let's create simple dbt models that retrieve few columns of the tables.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们创建一些简单的dbt模型来检索表中的几个列。
 - en: '[PRE4]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '***covid19_latest_stats** dbt model (models/covid19_latest_stats.sql)*'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '***covid19_latest_stats** dbt模型（models/covid19_latest_stats.sql）*'
 - en: '[PRE5]'
+  id: totrans-81
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '***population** dbt model (models/population.sql)*'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '***population** dbt模型（models/population.sql）*'
 - en: '**Caution:** The dbt model name is the filename of the sql file in the *models*
     directory. The model name may differ from the table name in the database. For
     instance, in the above, the dbt model *population* is the result of a *SELECT*
     statement on *population_prosperity* table in the database.'
+  id: totrans-83
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**注意：** dbt模型名称是*models*目录下sql文件的文件名。模型名称可能与数据库中的表名不同。例如，在上述示例中，dbt模型*population*是对数据库中*population_prosperity*表的*SELECT*语句的结果。'
 - en: Run models
+  id: totrans-84
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 运行模型
 - en: You can run all models in your dbt project by executing *dbt run*. A sample
     dbt run output is shown below. You can see a summary or detailed log of running
     all dbt models. This helps a lot to debug any issue you may have in the queries.
     For instance, you can see a failed model that throws a Postgres error.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过执行*dbt run*来运行dbt项目中的所有模型。下面显示了一个示例dbt运行输出。你可以查看运行所有dbt模型的摘要或详细日志。这对于调试查询中的任何问题非常有帮助。例如，你可以看到一个抛出Postgres错误的失败模型。
 - en: '![](../Images/5afcff8ce22f5e73cb4b0bc0374d7436.png)'
+  id: totrans-86
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5afcff8ce22f5e73cb4b0bc0374d7436.png)'
 - en: '*Detailed log of failed **jinja_and_variable_usage** dbt model.*'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '*详细记录失败的**jinja_and_variable_usage** dbt 模型。*'
 - en: Jinja & Macros
+  id: totrans-88
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Jinja & 宏
 - en: dbt uses the [Jinja](https://jinja.palletsprojects.com/) templating language,
     which makes a dbt project an ideal programming environment for SQL. With Jinja,
     you can do transformations that are not normally possible in SQL, like using environment
@@ -361,357 +546,553 @@
     programming languages. Whenever you see a *{{ ... }}*, you're already using Jinja.
     For more information about Jinja and additional Jinja-style functions defined,
     you can check [dbt documentation](https://docs.getdbt.com/docs/building-a-dbt-project/jinja-macros/).
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: dbt 使用了[Jinja](https://jinja.palletsprojects.com/)模板语言，这使得dbt项目成为一个理想的SQL编程环境。通过Jinja，你可以进行SQL中通常不可能的转换，例如使用环境变量或宏——抽象的SQL片段，类似于大多数编程语言中的函数。每当你看到*{{
+    ... }}*时，你实际上是在使用Jinja。有关Jinja及额外定义的Jinja风格函数的更多信息，请查看[dbt 文档](https://docs.getdbt.com/docs/building-a-dbt-project/jinja-macros/)。
 - en: Later in this post, we will cover custom macros defined by dbt.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章的后面，我们将介绍由dbt定义的自定义宏。
 - en: Using Variables
+  id: totrans-91
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用变量
 - en: '**Define a variable**'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '**定义变量**'
 - en: You can define your variables under the *vars* section in your *dbt_project.yml*.
     For instance, let's define a variable called *selected_country* whose default
     value is *USA* and another one called *selected_year* whose default value is *2019*.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在*dbt_project.yml*中的*vars*部分定义变量。例如，让我们定义一个名为*selected_country*的变量，其默认值为*USA*，以及另一个名为*selected_year*的变量，其默认值为*2019*。
 - en: '[PRE6]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '*dbt_project.yml*'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '*dbt_project.yml*'
 - en: '**Use a Variable**'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用变量**'
 - en: You can use variables in your dbt models via the [*var()*](https://docs.getdbt.com/reference/dbt-jinja-functions/var)
     Jinja function (*{{ var("var_key_name") }}*) .
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过[*var()*](https://docs.getdbt.com/reference/dbt-jinja-functions/var) Jinja函数（*{{
+    var("var_key_name") }}*）在dbt模型中使用变量。
 - en: Macros
+  id: totrans-98
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 宏
 - en: There are many useful transformations and useful macros in *dbt_utils* that
     can be used in your project. For a list of all available macros, you can check
     their [GitHub repo](https://hub.getdbt.com/dbt-labs/dbt_utils/latest/).
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 在*dbt_utils*中有许多有用的转换和宏可以在你的项目中使用。有关所有可用宏的列表，你可以查看它们的[GitHub 仓库](https://hub.getdbt.com/dbt-labs/dbt_utils/latest/)。
 - en: 'Now, let''s add dbt_utils to our project and install it by following the below
     steps:'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们按照以下步骤将dbt_utils添加到我们的项目中并安装：
 - en: 'Add dbt_utils macro to your *packages.yml* file, as follows:'
+  id: totrans-101
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将dbt_utils宏添加到你的*packages.yml*文件中，如下所示：
 - en: '[PRE7]'
+  id: totrans-102
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '*Add **dbt_utils** package to packages.yml.*'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '*将**dbt_utils**包添加到packages.yml中。*'
 - en: Run *dbt deps* to install the package.
+  id: totrans-104
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 运行*dbt deps*以安装包。
 - en: '![](../Images/2028a0e2a0e1b6af8f7bc1f4f7dde969.png)'
+  id: totrans-105
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2028a0e2a0e1b6af8f7bc1f4f7dde969.png)'
 - en: '*Install packages using **dbt deps**.*'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: '*使用**dbt deps**安装包。*'
 - en: Complex dbt models
+  id: totrans-107
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 复杂的dbt模型
 - en: The models (selects) are usually stacked on top of one another. For building
     more complex models, you will have to use [ref()](https://docs.getdbt.com/reference/dbt-jinja-functions/ref)
     macro. *ref()* is the most important function in dbt as it allows you to refer
     to other models. For instance, you may have a model (aka SELECT query) that does
     multiple stuff, and you don’t want to use it in other models. It will be difficult
     to build a complex model without using macros introduced earlier.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型（选择）通常是相互堆叠的。为了构建更复杂的模型，你需要使用 [ref()](https://docs.getdbt.com/reference/dbt-jinja-functions/ref)
+    宏。*ref()* 是 dbt 中最重要的函数，因为它允许你引用其他模型。例如，你可能有一个模型（即 SELECT 查询），它执行多个操作，但你不希望在其他模型中使用它。如果不使用之前介绍的宏，将很难构建复杂模型。
 - en: '**dbt model using *ref()* and global variables**'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '**dbt 模型使用 *ref()* 和全局变量**'
 - en: We can build more complex models using the two dbt models defined earlier in
     the post. For instance, let's create a new dbt model that joins the above two
     tables on the country code and then filters based on selected country and year.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用前面定义的两个 dbt 模型来构建更复杂的模型。例如，我们可以创建一个新的 dbt 模型，将上述两个表按国家代码连接起来，然后根据选定的国家和年份进行筛选。
 - en: '[PRE8]'
+  id: totrans-111
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '***jinja_and_variable_usage** dbt model (models/jinja_and_variable_usage.sql).*'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '***jinja_and_variable_usage** dbt 模型 (models/jinja_and_variable_usage.sql)。*'
 - en: 'A few points about the query above:'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于上述查询的几点说明：
 - en: '*{{ref(''dbt_model_name'')}}* is used to refer to dbt models available in the
     project.'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*{{ref(''dbt_model_name'')}}* 用于引用项目中可用的 dbt 模型。'
 - en: You can get a column from the model like *{{ref('dbt_model_name')}}.column_name*.
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你可以从模型中获取一个列，例如*{{ref('dbt_model_name')}}.column_name*。
 - en: You can use variables defined in *dbt_project.yml* file by *{{var("variable_name)}}*.
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你可以通过*{{var("variable_name")}}* 使用在 *dbt_project.yml* 文件中定义的变量。
 - en: The above code snippet joins the data from population and covid19_latest_stats
     models on the country code and filters them based on the selected_country=USA
     and selected_year=2019\. The output of the model is shown below.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述代码片段将人口和 covid19_latest_stats 模型的数据按国家代码连接起来，并根据 selected_country=USA 和 selected_year=2019
+    进行筛选。模型的输出如下所示。
 - en: '![](../Images/536bc58271b80fed3154adcbe66cc106.png)'
+  id: totrans-118
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/536bc58271b80fed3154adcbe66cc106.png)'
 - en: '*The output of the **jinja_and_variable_usage** dbt model.*'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '* **jinja_and_variable_usage** dbt 模型的输出。*'
 - en: You can also see the compiled SQL code snippet by clicking on **compile sql**
     button. This is very useful, particularly if you want to run the query outside
     the dbt tool.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 你也可以通过点击**compile sql**按钮查看编译后的 SQL 代码片段。这非常有用，特别是如果你想在 dbt 工具之外运行查询时。
 - en: '![](../Images/e65cf74e2b860e338dcbf5376561fd6d.png)'
+  id: totrans-121
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e65cf74e2b860e338dcbf5376561fd6d.png)'
 - en: '*Compiled SQL code for **jinja_and_variable_usage** dbt model.*'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: '*编译后的 SQL 代码用于 **jinja_and_variable_usage** dbt 模型。*'
 - en: '**dbt model using dbt_utils package and macros**'
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: '**dbt 模型使用 dbt_utils 包和宏**'
 - en: The *dbt_utils* package contains macros (aka functions) you can use in your
     dbt projects. A list of all macros is available on [dbt_utils' GitHub page](https://github.com/dbt-labs/dbt-utils/).
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '*dbt_utils* 包含可以在 dbt 项目中使用的宏（即函数）。所有宏的列表可以在 [dbt_utils 的 GitHub 页面](https://github.com/dbt-labs/dbt-utils/)
+    上找到。'
 - en: 'Let''s use dbt_utils [pivot()](https://github.com/dbt-labs/dbt-utils/#pivot-source)
     and [get_column_values()](https://github.com/dbt-labs/dbt-utils/#get_column_values-source)
     macros in a dbt model as below:'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们在 dbt 模型中使用 dbt_utils 的 [pivot()](https://github.com/dbt-labs/dbt-utils/#pivot-source)
+    和 [get_column_values()](https://github.com/dbt-labs/dbt-utils/#get_column_values-source)
+    宏，如下所示：
 - en: '[PRE9]'
+  id: totrans-126
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '***using_dbt_utils_macros** dbt model (models/using_dbt_utils_macros.sql).*'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: '***using_dbt_utils_macros** dbt 模型 (models/using_dbt_utils_macros.sql)。*'
 - en: The above dbt model will compile to the following SQL query in dbt.
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述 dbt 模型将在 dbt 中编译为以下 SQL 查询。
 - en: '[PRE10]'
+  id: totrans-129
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '*Compiled SQL query from **using_dbt_utils_macros** dbt model.*'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: '*编译后的 SQL 查询来自 **using_dbt_utils_macros** dbt 模型。*'
 - en: Run Tests in dbt
+  id: totrans-131
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在 dbt 中运行测试
 - en: 'Another benefit of using dbt is the ability to test your data. Out of the box,
     dbt has the following generic tests: *unique*, *not_null*, *accepted_values*,
     and *relationships*. An example of these tests on the model is shown below:'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 dbt 的另一个好处是能够测试你的数据。开箱即用，dbt 提供了以下通用测试：*unique*，*not_null*，*accepted_values*
+    和 *relationships*。下方展示了这些测试在模型上的示例：
 - en: '[PRE11]'
+  id: totrans-133
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '*schema.yml (dbt testing).*'
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: '*schema.yml（dbt 测试）。*'
 - en: You can run the tests via *dbt test*. You can see the output below.
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过 *dbt test* 运行测试。你可以看到下面的输出。
 - en: '![](../Images/15b74802bbc411868a0a0777cc846927.png)'
+  id: totrans-136
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/15b74802bbc411868a0a0777cc846927.png)'
 - en: '*Results of running dbt test on the dbt Cloud dashboard.*'
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: '*在 dbt Cloud 仪表板上运行 dbt 测试的结果。*'
 - en: For more information on testing in dbt, you can visit [dbt documentation](https://docs.getdbt.com/docs/building-a-dbt-project/tests).
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 了解有关 dbt 测试的更多信息，可以访问 [dbt 文档](https://docs.getdbt.com/docs/building-a-dbt-project/tests)。
 - en: Generate Documentation in dbt
+  id: totrans-139
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在 dbt 中生成文档
 - en: You can generate documentation for your dbt project by simply running *dbt docs
     generate* in the command section as shown below.
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过在命令部分简单地运行 *dbt docs generate* 来生成你的 dbt 项目的文档，如下所示。
 - en: '![](../Images/a58d67a7303b580ee42a5ccf732e536b.png)'
+  id: totrans-141
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a58d67a7303b580ee42a5ccf732e536b.png)'
 - en: '*Generate documentation for a dbt project.*'
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: '*为 dbt 项目生成文档。*'
 - en: You can browse through the generated documentation by clicking on **view docs**.
     You can see an overview of the generated docs below.
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过点击 **查看文档** 来浏览生成的文档。你可以在下面看到生成的文档概述。
 - en: In addition to dbt docs generate, dbt docs can also serve a webserver with the
     generated documentation. To do so, you need to simply run dbt docs serve. More
     information about generating docs for your dbt project is available [here](https://docs.getdbt.com/docs/building-a-dbt-project/documentation).
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了 dbt docs generate，dbt docs 还可以提供一个 web 服务器来展示生成的文档。为此，你只需运行 dbt docs serve。有关为你的
+    dbt 项目生成文档的更多信息，请点击 [这里](https://docs.getdbt.com/docs/building-a-dbt-project/documentation)。
 - en: Other Features
+  id: totrans-145
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 其他功能
 - en: Database administration using Hooks & Operations
+  id: totrans-146
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用钩子和操作进行数据库管理
 - en: 'There are database management tasks that require running additional SQL queries,
     such as:'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 有些数据库管理任务需要运行额外的 SQL 查询，例如：
 - en: Create user-defined functions
+  id: totrans-148
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建用户定义的函数
 - en: Grant privileges on a table
+  id: totrans-149
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 授予表的权限
 - en: and many more
+  id: totrans-150
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 以及更多
 - en: dbt has two interfaces (hooks and operations) for executing these tasks, and,
     importantly, version controls them. Hooks and operations are briefly introduced
     here. For more info, you can check [dbt documentation](https://docs.getdbt.com/docs/building-a-dbt-project/hooks-operations).
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: dbt 有两个接口（钩子和操作）来执行这些任务，并且重要的是对它们进行版本控制。这里简要介绍了钩子和操作。有关更多信息，你可以查看 [dbt 文档](https://docs.getdbt.com/docs/building-a-dbt-project/hooks-operations)。
 - en: Hooks
+  id: totrans-152
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 钩子
 - en: 'Hooks are simply SQL snippets that are executed at different times. Hooks are
     defined in the *dbt_project.yml* file. Different hooks are:'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: 钩子只是会在不同时间执行的 SQL 片段。钩子在 *dbt_project.yml* 文件中定义。不同的钩子有：
 - en: '*pre-hook*: executed before a model is built'
+  id: totrans-154
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*pre-hook*: 在模型构建之前执行'
 - en: '*post-hook*: executed after a model is built'
+  id: totrans-155
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*post-hook*: 在模型构建后执行'
 - en: '*on-run-start*: executed at the start of dbt run'
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*on-run-start*: 在 dbt 运行开始时执行'
 - en: '*on-run-end*: executed at the end of dbt run'
+  id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*on-run-end*: 在 dbt 运行结束时执行'
 - en: Operations
+  id: totrans-158
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 操作
 - en: Operations are a convenient way to invoke a macro without running a model. Operations
     are triggered using [dbt run-operation](https://docs.getdbt.com/reference/commands/run-operation)
     command. Note that, unlike hooks, you need to explicitly execute the SQL in a
     [dbt operation](https://docs.getdbt.com/docs/building-a-dbt-project/hooks-operations#operations).
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: 操作是一种方便的方式，可以在不运行模型的情况下调用宏。操作是通过 [dbt run-operation](https://docs.getdbt.com/reference/commands/run-operation)
+    命令触发的。请注意，与钩子不同，你需要显式执行 [dbt 操作](https://docs.getdbt.com/docs/building-a-dbt-project/hooks-operations#operations)
+    中的 SQL。
 - en: Conclusion
+  id: totrans-160
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: 'dbt is a nice tool that is definitely worth giving a try as it may simplify
     your data ELT(or ETL) pipeline. In this post, we learned how to set up and use
     dbt for data transformation. I walked you through the different features of this
     tool. In particular, I provided a step-by-step guide on:'
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: dbt 是一个非常值得尝试的好工具，因为它可能简化你的数据 ELT（或 ETL）管道。在这篇文章中，我们学习了如何设置和使用 dbt 进行数据转换。我向你介绍了这个工具的不同功能。特别是，我提供了一个逐步指南：
 - en: Configuring a dbt project
+  id: totrans-162
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 配置 dbt 项目
 - en: Creating dbt models (SELECT statements)
+  id: totrans-163
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建 dbt 模型（SELECT 语句）
 - en: Build complex dbt models using global variables and macros
+  id: totrans-164
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用全局变量和宏构建复杂的 dbt 模型
 - en: Building complex models by referring to other dbt models
+  id: totrans-165
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过引用其他 dbt 模型构建复杂模型
 - en: Running tests
+  id: totrans-166
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 运行测试
 - en: Generating documentation
+  id: totrans-167
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 生成文档
 - en: You can find the [GitHub repo](https://github.com/e-alizadeh/sample_dbt_project)
     containing all scripts (including the data ingestion script) below. *Feel free
     to fork the source code of this article.*
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在下面找到包含所有脚本（包括数据摄取脚本）的 [GitHub 仓库](https://github.com/e-alizadeh/sample_dbt_project)。*随意克隆本文的源代码。*
 - en: '**Bio:** [Essi Alizadeh](https://ealizadeh.com/) ([@es_alizadeh](https://twitter.com/es_alizadeh))
     is an engineer and a senior data scientist who is in permanent beta. He likes
     to write about different technologies, Statistics, Time Series, and Machine Learning.'
+  id: totrans-169
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：** [Essi Alizadeh](https://ealizadeh.com/) ([@es_alizadeh](https://twitter.com/es_alizadeh))
+    是一名工程师和高级数据科学家，始终保持不断进步。他喜欢写作关于不同的技术、统计学、时间序列和机器学习的文章。'
 - en: '**Related:**'
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Introducing dbt, the ETL and ELT Disrupter](https://www.kdnuggets.com/2021/03/dbt-etl-elt-disrupter.html)'
+  id: totrans-171
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[介绍dbt，ETL和ELT的颠覆者](https://www.kdnuggets.com/2021/03/dbt-etl-elt-disrupter.html)'
 - en: '[Top 4 Data Extraction Tools](https://www.kdnuggets.com/2021/05/top-4-data-extraction-tools.html)'
+  id: totrans-172
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[前4名数据提取工具](https://www.kdnuggets.com/2021/05/top-4-data-extraction-tools.html)'
 - en: '[Data Preparation in SQL, with Cheat Sheet!](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'
+  id: totrans-173
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL中的数据准备，附备忘单！](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'
 - en: More On This Topic
+  id: totrans-174
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Hands-on Reinforcement Learning Course Part 3: SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)'
+  id: totrans-175
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动手强化学习课程第3部分：SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)'
 - en: '[Hands-On Reinforcement Learning Course, Part 1](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)'
+  id: totrans-176
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动手强化学习课程，第1部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)'
 - en: '[Hands-On Reinforcement Learning Course, Part 2](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)'
+  id: totrans-177
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动手强化学习课程，第2部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)'
 - en: '[Generative AI with Large Language Models: Hands-On Training](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)'
+  id: totrans-178
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[大型语言模型生成式AI：动手培训](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)'
 - en: '[Hands-On with Supervised Learning: Linear Regression](https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression)'
+  id: totrans-179
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动手实践监督学习：线性回归](https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression)'
 - en: '[Hands-On with Unsupervised Learning: K-Means Clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
+  id: totrans-180
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动手实践无监督学习：K-Means聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
