@@ -1,60 +1,86 @@
 - en: 'Doing Data Science: A Kaggle Walkthrough – Cleaning Data'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 做数据科学：Kaggle 演练 – 数据清理
 - en: 原文：[https://www.kdnuggets.com/2016/03/doing-data-science-kaggle-walkthrough-cleaning-data.html](https://www.kdnuggets.com/2016/03/doing-data-science-kaggle-walkthrough-cleaning-data.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/03/doing-data-science-kaggle-walkthrough-cleaning-data.html](https://www.kdnuggets.com/2016/03/doing-data-science-kaggle-walkthrough-cleaning-data.html)
 - en: '**By Brett Romero, Open Data Kosovo**.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 Brett Romero, Open Data Kosovo**。'
 - en: '*This article on cleaning data is Part III in a series looking at data science
     and machine learning by walking through a Kaggle competition. If you have not
     done so already, it is recommended that you go back and read [Part I](http://brettromero.com/wordpress/data-science-a-kaggle-walkthrough-introduction/)
     and [Part II](http://brettromero.com/wordpress/data-science-a-kaggle-walkthrough-understanding-the-data/)*.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*这篇关于数据清理的文章是关于数据科学和机器学习的一系列文章的第三部分，通过走一遍 Kaggle 竞赛来讲解。如果你还没有阅读，建议你回去阅读 [第一部分](http://brettromero.com/wordpress/data-science-a-kaggle-walkthrough-introduction/)
+    和 [第二部分](http://brettromero.com/wordpress/data-science-a-kaggle-walkthrough-understanding-the-data/)*。'
 - en: In this part we will focus on cleaning the data provided for the Airbnb Kaggle
     competition.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这一部分，我们将重点关注为 Airbnb Kaggle 竞赛提供的数据清理。
 - en: '![Dirty data](../Images/9cccd97cf0197adc18e3a221a9c4dbde.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![脏数据](../Images/9cccd97cf0197adc18e3a221a9c4dbde.png)'
 - en: Cleaning Data
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据清理
 - en: 'When we talk about cleaning data, what exactly are we talking about? Generally
     when people talk about cleaning data, there are a few specific things they are
     referring to:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们谈论数据清理时，我们到底在谈论什么？通常，当人们谈论数据清理时，他们指的是几个具体的内容：
 - en: '**Fixing up formats** – Often when data is saved or translated from one format
     to another (for example in our case from CSV to Python), some data may not be
     translated correctly. We saw a good example of this in the last article in csv.
     The timestamp_first_active column contained numbers like 20090609231247 instead
     of timestamps in the expected format: 2009-06-09 23:12:47\. A typical job when
     it comes to cleaning data is correcting these types of issues.'
+  id: totrans-8
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**修正格式** – 数据保存或从一种格式转换为另一种格式时（例如在我们的案例中从 CSV 到 Python），有些数据可能无法正确转换。我们在上一篇文章的
+    csv 中看到一个很好的例子。timestamp_first_active 列包含了像 20090609231247 这样的数字，而不是预期格式的时间戳：2009-06-09
+    23:12:47。数据清理中的一个典型任务是纠正这些类型的问题。'
 - en: '**Filling in missing values** – As we also saw in Part II, it is quite common
     for some values to be missing from datasets. This typically means that a piece
     of information was simply not collected. There are several options for handling
     missing data that will be covered below.'
+  id: totrans-9
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**填补缺失值** – 正如我们在第二部分中所见，数据集中缺失一些值是很常见的。这通常意味着某些信息根本没有被收集。处理缺失数据有几种选项，下面将进行详细介绍。'
 - en: '**Correcting erroneous values** – For some columns, there are values that can
     be identified as obviously incorrect. This may be a ‘gender’ column where someone
     has entered a number, or an ‘age’ column where someone has entered a value well
     over 100\. These values either need to be corrected (if the correct value can
     be determined) or assumed to be missing.'
+  id: totrans-10
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**纠正错误值** – 对于某些列，可以识别出明显不正确的值。这可能是一个“性别”列，其中有人输入了一个数字，或者一个“年龄”列，其中有人输入了一个超过
+    100 的值。这些值要么需要被纠正（如果可以确定正确值），要么被视为缺失。'
 - en: '**Standardizing categories** – More of a subcategory of ‘correcting erroneous
     values’, this type of data cleansing is so common it is worth special mention.
     In many (all?) cases where data is collected from users directly – particularly
@@ -65,29 +91,38 @@
     same country (e.g. USA, United States, U.S. and so on). One of the main cleaning
     tasks often involves standardizing these values to ensure that there is only one
     version of each value.'
+  id: totrans-11
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**标准化类别** – 这是“纠正错误值”的一个子类别，这种数据清理非常常见，因此值得特别提及。在许多（或所有？）从用户直接收集数据的情况下，特别是使用自由文本字段时，拼写错误、语言差异或其他因素会导致同一答案以多种方式提供。例如，在收集出生国家数据时，如果用户没有提供标准化的国家列表，数据中不可避免地会包含相同国家的多种拼写（例如
+    USA, United States, U.S. 等）。主要的清理任务之一通常是标准化这些值，以确保每个值只有一个版本。'
 - en: Options for Dealing With Missing Data
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理缺失数据的选项
 - en: 'Missing data in general is one of the trickier issues that is dealt with when
     cleaning data. Broadly there are two solutions:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: '**1\. Deleting/Ignoring rows with missing values**'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: The simplest solution available when faced with missing values is to not use
     the records with missing values when training your model. However, there are some
     issues to be aware of before you starting deleting masses of rows from your dataset.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: The first is that this approach only makes sense if the number of rows with
     missing data is relatively small compared to the dataset. If you are finding that
     you will be deleting more than around 10% of your dataset due to rows having missing
     values, you may need to reconsider.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: The second issue is that in order to delete the rows containing missing data,
@@ -99,14 +134,17 @@
     privacy conscious user, and therefore a user that is likely to make different
     choices on which countries to visit? If the answer is the latter, we probably
     do not want to just delete the records.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: '**2\. Filling in the Values**'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: The second broad option for dealing with missing data is to fill the missing
     values with a value. But what value to use? This depends on a range of factors,
     including the type of data you are trying to fill.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: If the data is categorical (i.e. countries, device types, etc.), it may make
@@ -114,6 +152,7 @@
     may be to fill the values with the most common value for that column (the mode).
     However, because these are broad methods for filling the missing values, this
     may oversimplify your data and/or make your final model less accurate.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: For numerical values (for example the age column) there are some other options.
@@ -121,6 +160,7 @@
     instead use the mean or median. We could even take an average based on some other
     criteria – for example filling the missing age values based on an average age
     for users that selected the same `country_destination`.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: For both types of data (categorical and numerical), we can also use far more
@@ -131,58 +171,90 @@
     of ways this can be done, which won’t be detailed here. For more information on
     this topic, the [orange Python library](http://docs.orange.biolab.si/reference/rst/Orange.feature.imputation.html)
     provides some excellent documentation.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于两种类型的数据（分类数据和数值数据），我们还可以使用更复杂的方法来填补缺失值。实际上，我们可以使用类似于我们计划用来预测`country_destination`的方法，根据已有数据的列来预测其他任何列的值。就像一般的建模一样，这种方法几乎有无尽的变化方式，这里不再详细说明。有关更多信息，[橙色
+    Python 库](http://docs.orange.biolab.si/reference/rst/Orange.feature.imputation.html)提供了一些很好的文档。
 - en: '* * *'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-24
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT 需求'
 - en: '* * *'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Classification Metrics Walkthrough: Logistic Regression with…](https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html)'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分类指标演练：逻辑回归与…](https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html)'
 - en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[集成学习技术：Python 中的随机森林演练](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
 - en: '[7 Free Kaggle Micro-Courses for Data Science Beginners](https://www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7 门免费的 Kaggle 微课程供数据科学初学者学习](https://www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners)'
 - en: '[Top 10 Kaggle Machine Learning Projects to Become Data Scientist in 2024](https://www.kdnuggets.com/top-10-kaggle-machine-learning-projects-to-become-data-scientist-in-2024)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2024 年成为数据科学家的前 10 个 Kaggle 机器学习项目](https://www.kdnuggets.com/top-10-kaggle-machine-learning-projects-to-become-data-scientist-in-2024)'
 - en: '[Top 4 tricks for competing on Kaggle and why you should start](https://www.kdnuggets.com/2022/05/packt-top-4-tricks-competing-kaggle-start.html)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Kaggle 竞争的 4 个顶级技巧及其重要性](https://www.kdnuggets.com/2022/05/packt-top-4-tricks-competing-kaggle-start.html)'
 - en: '[The Most Comprehensive List of Kaggle Solutions and Ideas](https://www.kdnuggets.com/2022/11/comprehensive-list-kaggle-solutions-ideas.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[最全面的 Kaggle 解决方案和创意列表](https://www.kdnuggets.com/2022/11/comprehensive-list-kaggle-solutions-ideas.html)'
