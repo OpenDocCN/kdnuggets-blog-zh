@@ -1,107 +1,160 @@
 - en: 'Text Data Preprocessing: A Walkthrough in Python'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 文本数据预处理：Python 实战指南
 - en: 原文：[https://www.kdnuggets.com/2018/03/text-data-preprocessing-walkthrough-python.html](https://www.kdnuggets.com/2018/03/text-data-preprocessing-walkthrough-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/03/text-data-preprocessing-walkthrough-python.html](https://www.kdnuggets.com/2018/03/text-data-preprocessing-walkthrough-python.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: In a pair of previous posts, we first discussed a [framework for approaching
     textual data science tasks](/2017/11/framework-approaching-textual-data-tasks.html),
     and followed that up with a discussion on a [general approach to preprocessing
     text data](/2017/12/general-approach-preprocessing-text-data.html). This post
     will serve as a practical walkthrough of a text data preprocessing task using
     some common Python tools.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在之前的一对帖子中，我们首先讨论了一个 [处理文本数据科学任务的框架](/2017/11/framework-approaching-textual-data-tasks.html)，接着讨论了
+    [文本数据预处理的一般方法](/2017/12/general-approach-preprocessing-text-data.html)。这篇文章将作为使用一些常见
+    Python 工具进行文本数据预处理任务的实用指南。
 - en: '![Data preprocessing](../Images/ba19ee311c44299a9d508a3af2321675.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![数据预处理](../Images/ba19ee311c44299a9d508a3af2321675.png)'
 - en: Preprocessing, in the context of the textual data science framework.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在文本数据科学框架的背景下进行预处理。
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT 部门'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our goal is to go from what we will describe as a chunk of text (not to be confused
     with text chunking), a lengthy, unprocessed single string, and end up with a list
     (or several lists) of cleaned tokens that would be useful for further text mining
     and/or natural language processing tasks.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的目标是从我们将描述的文本块（不要与文本块化混淆），一个冗长的未处理单一字符串，开始，最后得到一个（或几个）清理后的标记列表，这些标记将对进一步的文本挖掘和/或自然语言处理任务有用。
 - en: First we start with our imports.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先我们从导入开始。
 - en: 'Beyond the standard Python libraries, we are also using the following:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了标准的 Python 库，我们还使用以下库：
 - en: '[NLTK](http://www.nltk.org/) - The Natural Language ToolKit is one of the best-known
     and most-used NLP libraries in the Python ecosystem, useful for all sorts of tasks
     from tokenization, to stemming, to part of speech tagging, and beyond'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[NLTK](http://www.nltk.org/) - 自然语言工具包是 Python 生态系统中最知名和最常用的 NLP 库之一，适用于从标记化、词干提取到词性标注等各种任务'
 - en: '[BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) - BeautifulSoup
     is a useful library for extracting data from HTML and XML documents'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) - BeautifulSoup
+    是一个用于从 HTML 和 XML 文档中提取数据的有用库'
 - en: '[Inflect](https://pypi.python.org/pypi/inflect) - This is a simple library
     for accomplishing the natural language related tasks of generating plurals, singular
     nouns, ordinals, and indefinite articles, and (of most interest to us) converting
     numbers to words'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Inflect](https://pypi.python.org/pypi/inflect) - 这是一个简单的库，用于完成生成复数、单数名词、序数词和不定冠词等自然语言相关任务，以及（最吸引我们的是）将数字转换为单词'
 - en: '[Contractions](https://github.com/kootenpv/contractions) - Another simple library,
     solely for expanding contractions'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Contractions](https://github.com/kootenpv/contractions) - 另一个简单的库，仅用于扩展缩写词'
 - en: If you have NLTK installed, yet require the download of its any additional data,
     [see here](https://www.nltk.org/data.html).
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你已安装 NLTK，但需要下载其任何额外的数据，[请查看这里](https://www.nltk.org/data.html)。
 - en: We need some sample text. We'll start with something very small and artificial
     in order to easily see the results of what we are doing step by step.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要一些示例文本。我们将从非常小且人为的数据开始，以便能够一步步清楚地看到我们所做的结果。
 - en: A toy dataset indeed, but make no mistake; the steps we are taking here to preprocessing
     this data are fully transferable.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 确实是一个玩具数据集，但不要误解；我们在这里进行的数据预处理步骤是完全可迁移的。
 - en: '![Preprocessing framework](../Images/ea02e5c68f0307f085eecd2b417016f5.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
 - en: The text data preprocessing framework.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: Noise Removal
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -109,20 +162,25 @@
     which often take place prior to tokenization. I would argue that, while the other
     2 major steps of the preprocessing framework (tokenization and normalization)
     are basically task-independent, noise removal is much more task-specific.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: 'Sample noise removal tasks could include:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: removing text file headers, footers
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: removing HTML, XML, etc. markup and metadata
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: extracting valuable data from other formats, such as JSON
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -131,12 +189,14 @@
     and normalization is blurred on the other. Given its close relationship with specific
     texts and their collection and assembly, many denoising tasks, such as parsing
     a JSON structure, would obviously need to be implemented prior to tokenization.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: In our data preprocessing pipeline, we will strip away HTML markup with the
     help of the BeautifulSoup library, and use regular expressions to remove open
     and close double brackets and anything in between them (we assume this is necessary
     based on our sample text).
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: While not mandatory to do at this stage prior to tokenization (you'll find that
@@ -145,15 +205,20 @@
     point, since our word tokenizer will split words like "didn't" into "did" and
     "n't." It's not impossible to remedy this tokenization at a later stage, but doing
     so prior makes it easier and more straightforward.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: And here is the result of de-noising on our sample text.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Tokenization
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -165,19 +230,25 @@
     refer to the breakdown of a large chunk of text into pieces larger than words
     (e.g. paragraphs or sentences), while tokenization is reserved for the breakdown
     process which results exclusively in words.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: For our task, we will tokenize our sample text into a list of words. This is
     done using NTLK's `word_tokenize()` function.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: 'And here are our word tokens:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Normalization
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -186,84 +257,106 @@
     lower), removing punctuation, converting numbers to their word equivalents, and
     so on. Normalization puts all words on equal footing, and allows processing to
     proceed uniformly.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: 'Normalizing text can mean performing a number of tasks, but for our framework
     we will approach normalization in 3 distinct steps: (1) stemming, (2) lemmatization,
     and (3) everything else. For specifics on what these distinct steps may be, [see
     this post](/2017/12/general-approach-preprocessing-text-data.html).'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: Remember, after tokenization, we are no longer working at a text level, but
     now at a word level. Our normalization functions, shown below, reflect this. Function
     names and comments should provide the necessary insight into what each does.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: 'After calling the normalization function:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Calling the stemming and lemming functions are done as below:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: 'This results in a return of 2 new lists: one of stemmed tokens, and another
     of lemmatized tokens with respect to verbs. Depending on your upcoming NLP task
     or preference, one of these may be more appropriate than the other. See here for
     a [discussion on lemmatization vs. stemming](https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html).'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: And there you have a walkthrough of a simple text data preprocessing process
     using Python on a sample piece of text. I would encourage you to perform these
     tasks on some additional texts to verify the results. We will use this same process
     to clean the text data for our next task, in which we will undertake some actual
     NLP task, as opposed to spending time preparing our data for such an actual task.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related**:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: '[A General Approach to Preprocessing Text Data](/2017/12/general-approach-preprocessing-text-data.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[A Framework for Approaching Textual Data Science Tasks](/2017/11/framework-approaching-textual-data-tasks.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Natural Language Processing Key Terms, Explained](/2017/02/natural-language-processing-key-terms-explained.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
