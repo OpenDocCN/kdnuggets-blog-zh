@@ -1,25 +1,35 @@
 - en: 'Machine Learning Workflows in Python from Scratch Part 1: Data Preparation'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 从头开始的 Python 机器学习工作流程 第一部分：数据准备
 - en: 原文：[https://www.kdnuggets.com/2017/05/machine-learning-workflows-python-scratch-part-1.html](https://www.kdnuggets.com/2017/05/machine-learning-workflows-python-scratch-part-1.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/05/machine-learning-workflows-python-scratch-part-1.html](https://www.kdnuggets.com/2017/05/machine-learning-workflows-python-scratch-part-1.html)
 - en: It seems that, anymore, the perception of machine learning is often reduced
     to passing a series of arguments to a growing number of libraries and APIs, hoping
     for magic, and awaiting the results. Maybe you have a very good idea of what's
     going on under the hood in these libraries -- from data preparation to model building
     to results interpretation and visualization and beyond -- but you are still relying
     on these various tools to get the job done.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，机器学习的认知似乎常常被简化为将一系列参数传递给越来越多的库和 API，期望得到魔法般的结果并等待输出。也许你对这些库的内部运作非常了解——从数据准备到模型构建，再到结果解释、可视化等——但你仍然依赖这些各种工具来完成任务。
 - en: '![Python ML](../Images/121f3d758c7beab31102198c7374013c.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![Python ML](../Images/121f3d758c7beab31102198c7374013c.png)'
 - en: Machine learning workflows in Python. From scratch.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 从头开始的 Python 机器学习工作流程。
 - en: And that's fine. Using well-tested and proven implementations of tools for performing
     regular tasks makes sense for a whole host of reasons. Reinventing wheels which
     don't roll efficiently is not best practice... it's limiting, and it takes an
@@ -27,8 +37,10 @@
     to get your work done, these implementations have been honed by teams of individuals
     ensuring that you get your hands on the best quality instruments with which to
     accomplish your goals.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 这没问题。使用经过良好测试和验证的工具实现常规任务是有意义的，有很多原因。重新发明不高效的轮子并不是最佳实践……这会限制你，而且花费时间不必要地长。无论你是使用开源工具还是专有工具来完成工作，这些实现都经过团队的精心打磨，确保你能获得最优质的工具来实现你的目标。
 - en: However, there is often value in doing the dirty work yourself, even if as an
     educational endeavor. I wouldn't suggest coding your own distributed deep learning
     training framework from scratch -- at least, not normally -- but having gone through
@@ -37,15 +49,22 @@
     but I don't think the vast majority of people learning machine learning, data
     science, artificial intelligence, or *<< insert related buzzword here >>* today
     are actually doing this.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，自己动手做这些“肮脏的工作”往往是有价值的，即使只是作为一种教育尝试。我不会建议你从头开始编写自己的分布式深度学习训练框架——至少，通常情况下不建议这样做——但经历一次自己从头实现算法和支持工具的过程是一个好主意。我可能错了，但我不认为今天学习机器学习、数据科学、人工智能或*<<
+    插入相关流行词 >>*的绝大多数人实际上是在这样做的。
 - en: So let's build some machine learning workflows in Python. From scratch.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以让我们从头开始构建一些 Python 机器学习工作流程。
 - en: What Do We Mean by "From Scratch?"
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我们所说的“从头开始”是什么意思？
 - en: 'First, let''s clarify: when I say "from scratch," I mean using as few helping
     hands as possible. It''s all relative, but for our purposes I will draw the line
     this side of writing our own matrix, dataframe, and/or graphing libraries, and
@@ -54,162 +73,234 @@
     as we will see shortly, bypassing them in the name of better understanding. Anything
     in the standard Python library is also fair game. Beyond that, however, we''re
     on our own.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们澄清一下：当我说“从头开始”时，我的意思是尽可能少地借助帮助。这个定义是相对的，但为了我们的目的，我会在编写我们自己的矩阵、数据框和/或绘图库这方面画出界限，因此我们将分别依赖
+    numpy、pandas 和 matplotlib。在某些情况下，我们甚至不会使用这些库的所有可用功能，正如我们将很快看到的那样，我们会绕过它们以更好地理解。标准
+    Python 库中的任何东西也是可以使用的。然而，除此之外，我们将独立完成。
 - en: We will need to start somewhere, and so this post will begin by looking at some
     simple data preparation tasks. We're going to start slowly, but ramp up quickly
     over the next few posts after we get a feel for what it is we're doing. Beyond
     data preparation, we will also need additional data transformation, results interpretation,
     and visualization tools -- not to mention machine learning algorithms -- to complete
     our journey, all of which we will get to.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要从某个地方开始，因此这篇文章将从一些简单的数据准备任务开始。我们将慢慢开始，但在对我们正在做的事情有了感觉之后，接下来的几篇文章中会迅速推进。除了数据准备之外，我们还需要额外的数据转换、结果解释和可视化工具——更不用说机器学习算法——来完成我们的旅程，我们会逐一讲解这些内容。
 - en: The idea is to manually cobble together whatever non-trivial functionality we
     need to accomplish our machine learning tasks. As the series unfolds, we can add
     new tools and algorithms, as well as rethink some of our previous assumptions,
     making the entire process as much iterative as it will be progressive. Step by
     step, we will focus on what our goals are, strategize on how to accomplish them,
     implement them in Python, and then test them to see if they work.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个想法是手动拼凑出完成机器学习任务所需的任何非平凡功能。随着系列的展开，我们可以添加新的工具和算法，以及重新考虑我们之前的一些假设，使整个过程既具有迭代性又具有进步性。一步一步地，我们将关注我们的目标是什么，制定实现目标的策略，在
+    Python 中实现这些策略，然后测试它们是否有效。
 - en: The end result, as it is presently envisioned, will be a set of **simple** Python
     modules organized into our own **simple** machine learning library. For the uninitiated,
     I believe this will be invaluable experience toward understanding how machine
     learning processes, workflows, and algorithms work.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终结果，如目前设想，将是一组**简单**的 Python 模块，组织成我们自己的**简单**机器学习库。对于未接触过的人来说，我相信这将是理解机器学习过程、工作流和算法如何工作的宝贵经验。
 - en: What Do We Mean by Workflow?
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我们所说的工作流是什么意思？
 - en: 'Workflow can mean different things to different people, but we are generally
     talking about the entire process considered to be part of a machine learning project.
     There are numerous [process frameworks](/2016/03/data-science-process-rediscovered.html)
     which can help us keep track of what it is we are doing, but let''s simplify things
     for now to include the following:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 工作流对不同的人可能意味着不同的东西，但我们通常谈论的是被视为机器学习项目一部分的整个过程。有许多[过程框架](/2016/03/data-science-process-rediscovered.html)可以帮助我们跟踪我们正在做的事情，但现在我们简化为包括以下内容：
 - en: Get some data
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 获取一些数据
 - en: Process and/or prepare the data
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 处理和/或准备数据
 - en: Build a model
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 构建模型
 - en: Interpret the results
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 解释结果
 - en: We can expand on these as we go, but this is our simple machine learning process
     framework for now. Also, "pipeline" implies the ability to chain workflow functionality
     together, and so we will also keep this in mind moving forward.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以随着进展对这些进行扩展，但这就是我们目前的简单机器学习过程框架。此外，“管道”意味着能够将工作流功能链在一起，因此我们在前进时也会记住这一点。
 - en: '![](../Images/8c3fd95a2ad1af6bf6aab320fe16eeb7.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8c3fd95a2ad1af6bf6aab320fe16eeb7.png)'
 - en: Very simple machine learning process framework.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 非常简单的机器学习过程框架。
 - en: Getting Our Data
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 获取我们的数据
 - en: Before we get to building any models, we need some data, and need to make sure
     this data conforms to some reasonable expectations. For testing purposes (not
     in the sense of training/testing, but testing our infrastructure), we will use
     the iris dataset, [which you can download here](https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv).
     Given that various versions of the dataset can be found online, I suggest we all
     start from the same raw data in order to ensure all of our preparation steps work.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们开始构建模型之前，我们需要一些数据，并确保这些数据符合一些合理的预期。为了测试目的（不是训练/测试的意义上，而是测试我们的基础设施），我们将使用鸢尾花数据集，[你可以在这里下载](https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.csv)。考虑到数据集的各种版本可以在网上找到，我建议我们都从相同的原始数据开始，以确保我们的所有准备步骤都能正常工作。
 - en: 'Let''s take a look:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看看：
 - en: '![Iris head](../Images/a1b16b920d9db20d37557fb649789604.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![鸢尾花头部](../Images/a1b16b920d9db20d37557fb649789604.png)'
 - en: 'Given what we know about such a simple dataset and its file, let''s first think
     about what it is we will need to do to go from raw data to results:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 鉴于我们对这样一个简单数据集及其文件的了解，让我们首先考虑一下从原始数据到结果我们需要做什么：
 - en: Data is stored in CSV file
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据存储在 CSV 文件中
 - en: Instances are made up mostly of numeric attribute values
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 实例主要由数值属性值组成
 - en: Class is categorical text
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 类别是分类文本
 - en: Now, none of what is above is universally applicable to *all* datasets, but
     neither is any of it specific to *this* dataset. This affords us the opportunity
     to write code we can hopefully later re-use. Good coding practices we will focus
     on herein will include both reusability and modularity.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，上述内容并不适用于*所有*数据集，但也不特定于*这个*数据集。这使我们有机会编写可以在以后重复使用的代码。我们将在此关注的良好编码实践将包括重用性和模块化。
 - en: Some simple [exploratory data analysis](/2017/04/value-exploratory-data-analysis.html)
     is shown below.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些简单的[探索性数据分析](/2017/04/value-exploratory-data-analysis.html)如下所示。
 - en: '![Iris describe](../Images/b92651aef94bc787ab47401ac1b5bad2.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![鸢尾花描述](../Images/b92651aef94bc787ab47401ac1b5bad2.png)'
 - en: '![Iris histogram](../Images/60acdb508037bf752b6dd1d35d72a6fe.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![鸢尾花直方图](../Images/60acdb508037bf752b6dd1d35d72a6fe.png)'
 - en: 'Very simple exploratory data analysis of the iris dataset: description of the
     dataset (above), and default attribute distribution histograms (below).'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 对鸢尾花数据集的非常简单的探索性数据分析：数据集描述（上），默认属性分布直方图（下）。
 - en: Preparing Our Data
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 准备我们的数据
 - en: While the data preparation we need in this particular scenario is minimal, there
     is still some needed. Specifically, we need to ensure that we account for the
     header row, remove any indexing that pandas automatically performs, and convert
     our class values from nominal to numeric. Since we have no nominal values in the
     features we will use for modeling, there will be no more complex transformations
     required -- at least, not yet.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然在这个特定场景中我们所需的数据准备是最小的，但仍然是必需的。具体而言，我们需要确保考虑到标题行，移除 pandas 自动执行的任何索引，并将我们的类值从名义值转换为数值。由于我们将用于建模的特征中没有名义值，因此不需要更复杂的转换——至少目前不需要。
 - en: 'Ultimately, we need a better data representation for our algorithm as well,
     and so we will make sure we end up with a matrix -- or numpy ndarray -- before
     we move on. Our data preparation workflow, then, should take the following form:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终，我们还需要为我们的算法提供更好的数据表示方式，因此我们在继续之前将确保得到一个矩阵——或 numpy ndarray。我们的数据准备工作流程应该如下：
 - en: '![Data processing preparation process framework](../Images/2b1892e803954b3888cf48f32e0c71b7.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![数据处理准备过程框架](../Images/2b1892e803954b3888cf48f32e0c71b7.png)'
 - en: Very simple data preparation process.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 非常简单的数据准备过程。
 - en: Also, note that there is no reason to believe that all interesting data is stored
     in comma separated files. We may want to grab data from a SQL database or directly
     from the web at some point, which we will come back to and visit in the future.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 另外，请注意，并非所有有趣的数据都存储在逗号分隔的文件中。我们可能会在某个时候从 SQL 数据库或直接从网络获取数据，届时我们会再次处理这个问题。
 - en: First, let's write a simple function to load a CSV file into DataFrame; sure,
     it's simple to do inline, but thinking ahead we may want to add some additional
     steps to our dataset loading function in the future. Trust me here.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们编写一个简单的函数，将 CSV 文件加载到 DataFrame 中；当然，这样做很简单，但考虑到未来，我们可能想要向数据集加载函数中添加一些额外的步骤。相信我。
 - en: This code is quite straightforward. Reading data files line by line easily allows
     for some additional pre-processing, such as ignoring non-data lines (we are assuming
     comments in data files begin with '#' at the moment, however ridiculous). We can
     specify whether or not the dataset file includes a header, and we also allow for
     both CSV and TSV files, with CSV being the default.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 这段代码非常简单。逐行读取数据文件可以轻松进行一些额外的预处理，比如忽略非数据行（我们暂时假设数据文件中的注释以‘#’开头，尽管这很荒谬）。我们可以指定数据集文件是否包括标题，并且支持
+    CSV 和 TSV 文件，默认是 CSV。
 - en: A bit of error checking exists, but it isn't terribly robust yet, so we may
     want to come back to this later. Also, reading a file line by line and making
     decisions on what to do with these lines one by one will be slower than using
@@ -217,8 +308,11 @@
     but the trade-off to allow for more flexibility is worth it at this stage (but
     may take considerably longer with larger files). Don't forget, if some of these
     inner workings don't seem like the best approach, we can always make changes later.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 存在一些错误检查，但目前还不够健壮，因此我们可能想在以后再回来处理。此外，逐行读取文件并逐个决策这些行的处理方式会比使用内置功能直接将符合条件的 CSV
+    文件读取到 DataFrame 中要慢，但为了更多的灵活性，这个权衡在这个阶段是值得的（但在处理较大的文件时可能会花费相当长的时间）。不要忘记，如果这些内部操作似乎不是最佳方法，我们可以在以后随时进行更改。
 - en: Before we try out our code, we need to first write a function to convert the
     nominal class values to numeric values. To generalize the function, we should
     allow it to be used on any attribute in the dataset, not only the class. We should
@@ -226,136 +320,198 @@
     Given our previous step of loading CSV or TSV data files into pandas DataFrames,
     this function should accept both a pandas DataFrame as well as the attribute name
     to convert to numeric.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们尝试运行代码之前，我们需要首先编写一个函数，将名义类值转换为数值。为了使函数更加通用，我们应该允许它用于数据集中任何属性，而不仅仅是类属性。我们还应跟踪属性名称与最终变为整数的映射。鉴于我们之前将
+    CSV 或 TSV 数据文件加载到 pandas DataFrame 中的步骤，这个函数应该接受 pandas DataFrame 以及要转换为数值的属性名称。
 - en: Also note that we are sidestepping a conversation about using one-hot encoding
     as relates to categorical non-class attributes, but I suspect we will return to
     that later.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 另请注意，我们暂时跳过了关于使用独热编码处理类别非类属性的讨论，但我怀疑我们会在之后回到这个话题。
 - en: The above function is, again, simple, but accomplishes what we want it to. We
     could have approached this task in a number of different ways, including using
     built-in functionality of pandas, but starting off by getting our hands a bit
     dirty is what this is all about.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述函数虽然简单，但能完成我们想要的功能。我们本可以通过多种不同的方法来完成这项任务，包括使用 pandas 的内置功能，但从实际操作开始正是我们所要做的。
 - en: At this point we can now load a dataset from file, and replace categorical attribute
     values with numeric values (we also keep a dictionary of those mappings for later).
     As previously mentioned, we want our dataset ultimately in the form of a numpy
     ndarray, in order to most easily use it with our algorithms. Again, a simple task,
     but making it a function will allow us to build on it in the future if necessary.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前，我们可以从文件中加载数据集，并将类别属性值替换为数值（我们还会保留这些映射的字典以备后用）。如前所述，我们希望最终将数据集转换为 numpy ndarray，以便最方便地与我们的算法一起使用。再次，这是一项简单的任务，但将其做成函数会使我们在将来需要时能够继续扩展。
 - en: Even if any of the preceding functions did not look like overkill, this one
     probably does. But bear with me; we're actually following sound -- if overly cautious
     -- programming principles. There is a good chance as we move forward that we will
     come up with changes or additions to the functions we have built thus far. Being
     able to implement these changes in one place, and have these changes well-documented,
     makes sense in the long term.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使之前的函数看起来并不过于复杂，这个函数可能会显得有些过头。但请耐心等待；我们实际上是在遵循合理的 —— 尽管过于谨慎 —— 编程原则。随着我们前进，可能会对目前构建的函数进行更改或添加新的功能。在一个地方实施这些更改，并对其进行良好的文档记录，从长远来看是明智的。
 - en: Testing our Data Preparation Workflow
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 测试我们的数据准备工作流程
 - en: Out workflow thus far may still be in building block form, but let's give our
     code a test.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们目前的工作流程可能仍处于构建块形式，但让我们给代码做个测试。
 - en: '[PRE0]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: With our code working as we hoped it would, let's do some quick house cleaning.
     We will come up with a more comprehensive organizational structure for our code
     once we get rolling, but for now we should [add all of these functions to a single
     file](https://gist.github.com/mmmayo13/9859a457760db10ec4842be3aa1a2334), and
     save it as **dataset.py**. This will allow for more convenient reuse, which we
     will see next time.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 既然我们的代码按预期工作，让我们做一些快速的清理工作。我们会在后续工作中为我们的代码制定更全面的组织结构，但现在我们应该将[所有这些函数添加到一个文件](https://gist.github.com/mmmayo13/9859a457760db10ec4842be3aa1a2334)中，并将其保存为**dataset.py**。这将使重用更加方便，下一次我们会看到这一点。
 - en: Looking Ahead
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 展望未来
 - en: Next, we will turn our attention to something of greater substance, an implementation
     of the k-means clustering algorithm. Then we will have a look at a simple classification
     algorithm, k-nearest neighbors. We will see how we can build both classification
     and clustering models in the context of our simple workflows. Undoubtedly, this
     will require coding some additional tools to help with out project, and I'm sure
     modifications will be needed to what we have done already.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将关注更重要的内容，即 k-means 聚类算法的实现。然后我们将看看一个简单的分类算法，k-最近邻算法。我们将了解如何在简单的工作流程中构建分类和聚类模型。这无疑需要编写一些额外的工具来帮助我们的项目，并且我相信我们之前做的内容会需要进行一些修改。
 - en: But that's alright; *practicing* machine learning is the best prescription for
     *understanding* machine learning. Implementing the algorithms and support tools
     we need for our workflows should ultimately prove useful. I hope you have found
     this helpful enough to check the next installment.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 但这没关系；*练习*机器学习是*理解*机器学习的最佳方法。实施我们工作流所需的算法和支持工具最终应当证明有用。希望你觉得这些内容足够有帮助，以至于去查看下一期。
 - en: '**Related**:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容**：'
 - en: '[Data Preparation Tips, Tricks, and Tools: An Interview with the Insiders](/2016/10/data-preparation-tips-tricks-tools.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据准备技巧、窍门和工具：与业内人士的访谈](/2016/10/data-preparation-tips-tricks-tools.html)'
 - en: '[Pandas Cheat Sheet: Data Science and Data Wrangling in Python](/2017/01/pandas-cheat-sheet.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Pandas备忘单：Python中的数据科学与数据处理](/2017/01/pandas-cheat-sheet.html)'
 - en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过Python和Scikit-learn简化决策树解释](/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
 - en: '* * *'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-61
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行IT工作'
 - en: '* * *'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每位数据科学家都应了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
 - en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么使Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目的，并通过寻找目的来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学统计学习的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[建立一个坚实的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
