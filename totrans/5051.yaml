@@ -93,6 +93,7 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们修正了日期格式，就可以用更正后的数据替换现有的日期列。最后，由于`date_account_created`列有时为空，我们使用[fillna](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.fillna.html)函数将空值替换为`date_account_created`列中的值。此步骤的代码如下：
 - en: '[PRE1]'
   id: totrans-12
   prefs: []
@@ -102,6 +103,7 @@
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**移除预订日期字段**'
 - en: Those following along and/or paying attention may have noticed that in the original
     dataset, there are three date fields, but we have only covered two above. The
     remaining date field, `date_first_booking`, we are going to drop (remove) from
@@ -114,10 +116,13 @@
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 那些跟随和/或关注的可能注意到，在原始数据集中有三个日期字段，但我们上面只覆盖了两个。剩下的日期字段`date_first_booking`，我们将从训练数据中完全删除。原因是这个字段仅对已进行预订的用户进行填充。对于训练_users_2.csv中的数据，所有具有首次预订国家的用户在`date_first_booking`列中都有值，对于那些未进行预订的用户（`country_destination`
+    = NDF），该值是缺失的。然而，对于`test_users.csv`中的数据，`date_first_booking`列在所有记录中都是空的。
 - en: '![Clean data](../Images/24e861db776514b0deb4604084003055.png)'
   id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![清理数据](../Images/24e861db776514b0deb4604084003055.png)'
 - en: 'This means that this column is not going to be useful for predicting which
     country a booking will be made. What is more, if we leave it in the training dataset
     when building the model, it will likely increase the chances that the model predicts
@@ -126,6 +131,7 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着这个列对于预测预订将在哪个国家进行没有帮助。更重要的是，如果在构建模型时将其保留在训练数据集中，可能会增加模型预测NDF的机会，因为这些记录在训练数据集中没有日期。移除该列的代码如下：
 - en: '[PRE2]'
   id: totrans-17
   prefs: []
@@ -135,6 +141,7 @@
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**清理年龄列**'
 - en: As identified in [Part II](http://brettromero.com/wordpress/data-science-a-kaggle-walkthrough-understanding-the-data/),
     there are several age values that are clearly incorrect (unreasonably high or
     too low). In this step, we replace these incorrect values with ‘NaN’, which literally
@@ -147,6 +154,7 @@
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 如[第二部分](http://brettromero.com/wordpress/data-science-a-kaggle-walkthrough-understanding-the-data/)所述，有几个人年龄值明显不正确（不合理的高或低）。在这一步，我们将这些错误值替换为‘NaN’，NaN字面意思是“不是一个数字”，但意味着我们不知道年龄值。换句话说，我们将错误的值转换为缺失值。为此，我们创建了一个简单的函数，该函数接收一个数据框（表格）、一个列名、一个最大可接受值（90）和一个最小可接受值（15）。然后，该函数将指定列中超出可接受范围的值替换为NaN。
 - en: Again from [Part II](http://brettromero.com/wordpress/data-science-a-kaggle-walkthrough-understanding-the-data/)
     we know there were also a significant number of users who did not provide their
     age at all – so they also show up as NaN in the dataset. After we have converted
@@ -154,10 +162,12 @@
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次来自[第二部分](http://brettromero.com/wordpress/data-science-a-kaggle-walkthrough-understanding-the-data/)，我们知道有相当多的用户完全没有提供年龄——因此它们在数据集中也显示为NaN。在将错误的年龄值转换为NaN后，我们将所有NaN值更改为-1。
 - en: 'The code for these steps is shown below:'
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些步骤的代码如下所示：
 - en: '[PRE3]'
   id: totrans-22
   prefs: []
@@ -169,12 +179,14 @@
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 如前所述，有几种更复杂的方法可以填补年龄列中的缺失值。我们选择这种简单的方法有两个主要原因：
 - en: Clarity – this series of articles is going to be long enough without adding
     the complication of a complex methodology for imputing missing ages.
   id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 清晰性——这系列文章会很长，不希望添加复杂的缺失年龄填补方法。
 - en: Questionable results – in my testing during the actual competition, I did test
     several more complex imputation methodologies. However, none of the methods I
     tested actually produced a better end result than the methodology outlined above.
