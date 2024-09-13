@@ -1,17 +1,25 @@
 - en: How To Create Custom Context Managers in Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何创建自定义上下文管理器
 - en: 原文：[https://www.kdnuggets.com/how-to-create-custom-context-managers-in-python](https://www.kdnuggets.com/how-to-create-custom-context-managers-in-python)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/how-to-create-custom-context-managers-in-python](https://www.kdnuggets.com/how-to-create-custom-context-managers-in-python)
 - en: '![custom-context-manager](../Images/e2b0dab861aafbb308d4bcbea8052ae4.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![custom-context-manager](../Images/e2b0dab861aafbb308d4bcbea8052ae4.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Context managers in Python let you work more efficiently with resources—facilitating
     setup and teardown of resources even if there are errors when working with the
     resources. In the tutorial on [writing efficient Python code](https://www.kdnuggets.com/how-to-write-efficient-python-code-a-tutorial-for-beginners),
@@ -19,134 +27,194 @@
     Uses of Python's Context Managers](https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers),
     I went over the use of context managers in managing subprocesses, database connections,
     and more.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: Python中的上下文管理器让你更高效地使用资源——即使在处理资源时出现错误，也能方便地进行资源的设置和拆卸。在关于[编写高效的Python代码](https://www.kdnuggets.com/how-to-write-efficient-python-code-a-tutorial-for-beginners)的教程中，我介绍了上下文管理器是什么以及它们的帮助作用。而在[Python上下文管理器的三个有趣用途](https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers)中，我讨论了上下文管理器在管理子进程、数据库连接等方面的应用。
 - en: In this tutorial, you’ll learn how to create your own custom context managers.
     We’ll review how context manages work and then look at the different ways you
     can write your own. Let's get started.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，你将学习如何创建自定义上下文管理器。我们将回顾上下文管理器是如何工作的，然后看看你可以用什么方法编写自己的上下文管理器。让我们开始吧。
 - en: What Are Context Managers in Python?
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Python中的上下文管理器是什么？
 - en: Context managers in Python are objects that enable the management of resources
     such as file operations, database connections, or network sockets within a controlled
     block of code. They ensure that resources are properly initialized before the
     block of code executes and automatically cleaned up afterward, regardless of whether
     the code block completes normally or raises an exception.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: Python中的上下文管理器是对象，它们使得在受控的代码块中管理资源（如文件操作、数据库连接或网络套接字）成为可能。它们确保资源在代码块执行前得到正确初始化，并在执行后自动清理，无论代码块是正常完成还是抛出异常。
 - en: 'In general, context managers in Python have the following two special methods:
     `__enter__()` and `__exit__()`. These methods define the behavior of the context
     manager when entering and exiting a context.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 一般来说，Python中的上下文管理器具有以下两个特殊方法：`__enter__()`和`__exit__()`。这些方法定义了在进入和退出上下文时上下文管理器的行为。
 - en: How Do Context Managers Work?
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 上下文管理器是如何工作的？
 - en: 'When working with resources in Python, you have to consider setting up the
     resource, anticipate errors, implement exception handling, and finally free up
     the resource. To do this, you’ll probably use a `try-except-finally` block like
     so:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Python中处理资源时，你必须考虑设置资源、预见错误、实现异常处理，并最终释放资源。为此，你可能会使用类似这样的`try-except-finally`块：
 - en: '[PRE0]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Essentially, we try provisioning and working with the resource, except for any
     errors that may arise during the process, and finally free up the resource. The
     `finally` block is always executed regardless of whether the operation succeeds
     or not. But with context managers and the `with` statement, you can have reusable
     `try-except-finally` blocks.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 从本质上讲，我们尝试配置并使用资源，除了在过程中可能出现的任何错误，最后释放资源。`finally` 块总是会执行，无论操作是否成功。但借助上下文管理器和`with`语句，你可以拥有可重用的`try-except-finally`块。
 - en: Now let’s go over how context managers work.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们来探讨一下上下文管理器的工作原理。
 - en: '**Enter Phase (`__enter__()` method)**:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**进入阶段（`__enter__()`方法）**：'
 - en: When a `with` statement is encountered, the `__enter__()` method of the context
     manager is invoked. This method is responsible for initializing and setting up
     the resource such as opening a file, establishing a database connection, and the
     like. The value returned by `__enter__()` (if any) is made available to the context
     block after the `as` keyword.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 当遇到`with`语句时，将调用上下文管理器的`__enter__()`方法。这个方法负责初始化和设置资源，例如打开文件、建立数据库连接等。`__enter__()`返回的值（如果有的话）将在`as`关键字后提供给上下文块。
 - en: '**Execute the Block of Code**:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**执行代码块**：'
 - en: Once the resource is set up (after `__enter__()` is executed), the code block
     associated with the `with` statement is executed. This is the operation you want
     to perform on the resource.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦资源设置完成（在`__enter__()`执行后），与`with`语句关联的代码块将被执行。这是你希望在资源上执行的操作。
 - en: '**Exit Phase (`__exit__()` method)**:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**退出阶段（`__exit__()` 方法）**：'
 - en: After the code block completes execution—either normally or due to an exception—the
     `__exit__()` method of the context manager is called. The `__exit__()` method
     handles cleanup tasks, such as closing the resources. If an exception occurs within
     the code block, information about the exception (type, value, traceback) is passed
     to `__exit__()` for error handling.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在代码块执行完成后——无论是正常完成还是由于异常——上下文管理器的 `__exit__()` 方法会被调用。`__exit__()` 方法处理清理任务，例如关闭资源。如果代码块内发生异常，异常的信息（类型、值、回溯）会传递给
+    `__exit__()` 方法进行错误处理。
 - en: 'To sum up:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结：
 - en: Context managers provide a way to manage resources efficiently by ensuring that
     resources are properly initialized and cleaned up.
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 上下文管理器提供了一种有效管理资源的方式，通过确保资源得到正确初始化和清理。
 - en: We use the `with` statement to define a context where resources are managed.
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们使用 `with` 语句来定义一个资源管理的上下文。
 - en: The `__enter__()` method initializes the resource, and the `__exit__()` method
     cleans up the resource after the context block completes.
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`__enter__()` 方法初始化资源，而 `__exit__()` 方法在上下文块完成后清理资源。'
 - en: Now that we know how context managers work, let’s proceed to write a custom
     context manager for handling database connections.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 既然我们知道了上下文管理器的工作原理，让我们继续编写一个自定义上下文管理器，用于处理数据库连接。
 - en: Creating Custom Context Managers in Python
+  id: totrans-25
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在 Python 中创建自定义上下文管理器
 - en: 'You can write your own context managers in Python using one of the following
     two methods:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用以下两种方法中的一种在 Python 中编写自定义上下文管理器：
 - en: Writing a class with `__enter__()` and `__exit__()` methods.
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 编写一个包含 `__enter__()` 和 `__exit__()` 方法的类。
 - en: Using the `contextlib` module which provides the `contextmanager` decorator
     to write a context manager using generator functions.
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 `contextlib` 模块，该模块提供了 `contextmanager` 装饰器来使用生成器函数编写上下文管理器。
 - en: 1\. Writing a Class with __enter__() and __exit__() Methods
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1. 编写一个包含 `__enter__()` 和 `__exit__()` 方法的类
 - en: 'You can define a class that implements the two special methods: `__enter__()`
     and `__exit__()` that control resource setup and teardown respectively. Here we
     write a `ConnectionManager` class that establishes a connection to an SQLite database
     and closes the database connection:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以定义一个实现两个特殊方法的类：`__enter__()` 和 `__exit__()`，它们分别控制资源的设置和清理。这里我们编写了一个 `ConnectionManager`
+    类，用于建立与 SQLite 数据库的连接，并关闭数据库连接：
 - en: '[PRE1]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Let’s break down how the `ConnectionManager` works:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来详细了解 `ConnectionManager` 是如何工作的：
 - en: 'The `__enter__()` method is called when the execution enters the context of
     the `with` statement. It is responsible for setting up the context, in this case,
     connecting to a database. It returns the resource that needs to be managed: the
@@ -154,119 +222,178 @@
     module](https://docs.python.org/3/library/typing.html) for the connection object
     `conn`. We use `Optional` when the value can be one of two types: here a valid
     connection object or None.'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当执行进入 `with` 语句的上下文时，会调用 `__enter__()` 方法。它负责设置上下文，在这种情况下就是连接到数据库。它返回需要管理的资源：数据库连接。注意，我们使用了来自
+    [typing 模块](https://docs.python.org/3/library/typing.html) 的 `Optional` 类型来表示连接对象
+    `conn`。当值可以是两种类型之一时，我们使用 `Optional`：这里是一个有效的连接对象或 None。
 - en: 'The `__exit__()` method: It''s called when the execution leaves the context
     of the `with` statement. It handles the cleanup action of closing the connection.
     The parameters `exc_type`, `exc_value`, and `traceback` are for handling exceptions
     within the `with` block. These can be used to determine whether the context was
     exited due to an exception.'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`__exit__()` 方法：当执行离开 `with` 语句的上下文时会调用此方法。它处理关闭连接的清理操作。参数 `exc_type`、`exc_value`
+    和 `traceback` 用于处理 `with` 块内的异常。这些参数可以用来判断上下文是否由于异常而退出。'
 - en: 'Now let’s use the `ConnectionManager` in the `with` statement. We do the following:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们在 `with` 语句中使用 `ConnectionManager`。我们做如下操作：
 - en: Try to connect to the database
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 尝试连接到数据库
 - en: Create a cursor to run queries
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个游标来运行查询
 - en: Create a table and insert records
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个表并插入记录
 - en: Query the database table and retrieve the results of the query
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 查询数据库表并检索查询结果
 - en: '[PRE2]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Running the above code should give you the following output:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行上述代码应给出以下输出：
 - en: '[PRE3]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 2\. Using the @contextmanager Decorator From contextlib
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2. 使用来自 `contextlib` 的 `@contextmanager` 装饰器
 - en: 'The `contextlib` module provides the `@contextmanager` decorator which can
     be used to define a generator function as a context manager. Here''s how we do
     it for the database connection example:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '`contextlib`模块提供了`@contextmanager`装饰器，可以用来将生成器函数定义为上下文管理器。以下是我们如何在数据库连接示例中做到这一点：'
 - en: '[PRE4]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Here’s how the `database_connection` function works:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是`database_connection`函数的工作原理：
 - en: The `database_connection` function first establishes a connection which the
     `yield` statement then provisions the connection to the block of code in the `with`
     statement block. Note that because `yield` itself is not immune to exceptions,
     we wrap it in a `try` block.
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`database_connection` 函数首先建立连接，然后`yield`语句将连接提供给`with`语句块中的代码。请注意，由于`yield`本身对异常并不免疫，我们将其包装在`try`块中。'
 - en: The `finally` block ensures that the connection is always closed, whether an
     exception was raised or not, ensuring there are no resource leaks.
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`finally`块确保连接始终关闭，无论是否引发异常，确保没有资源泄漏。'
 - en: 'Like we did previously, let’s use this in a `with` statement:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 就像之前做的那样，让我们在`with`语句中使用这个：
 - en: '[PRE5]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'We connect to the database, insert some more records, query the db, and fetch
     the results of the query. Here’s the output:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们连接到数据库，插入更多记录，查询数据库，并获取查询结果。以下是输出：
 - en: '[PRE6]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Note that we open and close the cursor object. So you can also use the cursor
     object in a with statement. I suggest trying that as a quick exercise!
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，我们打开和关闭了游标对象。因此，你也可以在`with`语句中使用游标对象。我建议将其作为一个快速练习来尝试一下！
 - en: Wrapping Up
+  id: totrans-54
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 总结
 - en: 'And that’s a wrap. I hope you learned how to create your own custom context
     managers. We looked at two approaches: using a class with `__enter__()` and `__exit()__`
     methods and using a generator function decorated with the `@contextmanager` decorator.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样。我希望你学会了如何创建自己的自定义上下文管理器。我们看了两种方法：使用具有`__enter__()`和`__exit()__`方法的类，以及使用用`@contextmanager`装饰的生成器函数。
 - en: 'It’s quite easy to see that you get the following advantages when using a context
     manager:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用上下文管理器时，你可以清楚地看到以下优势：
 - en: Setup and teardown of resources are automatically managed, minimizing resource
     leaks.
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 资源的设置和拆解会自动管理，最大限度减少资源泄漏。
 - en: The code is cleaner and easier to maintain.
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 代码更简洁，更易于维护。
 - en: Cleaner exception handling when working with resources.
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在处理资源时，异常处理更为干净。
 - en: As always, you can [find the code on GitHub](https://github.com/balapriyac/python-basics/blob/main/custom_context_manager/main.py).
     Keep coding!
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 与往常一样，你可以 [在 GitHub 上找到代码](https://github.com/balapriyac/python-basics/blob/main/custom_context_manager/main.py)。继续编码！
 - en: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
     is a developer and technical writer from India. She likes working at the intersection
     of math, programming, data science, and content creation. Her areas of interest
@@ -275,58 +402,91 @@
     and sharing her knowledge with the developer community by authoring tutorials,
     how-to guides, opinion pieces, and more. Bala also creates engaging resource overviews
     and coding tutorials.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
+    是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在通过撰写教程、操作指南、评论文章等，学习和分享她的知识。Bala
+    还创建了引人入胜的资源概述和编码教程。'
 - en: '* * *'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-63
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 工作'
 - en: '* * *'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-68
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多相关主题
 - en: '[3 Interesting Uses of Python''s Context Managers](https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 上下文管理器的 3 个有趣用法](https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers)'
 - en: '[Context, Consistency, And Collaboration Are Essential For Data…](https://www.kdnuggets.com/2022/01/context-consistency-collaboration-essential-data-science-success.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[上下文、一致性和协作对数据科学成功至关重要](https://www.kdnuggets.com/2022/01/context-consistency-collaboration-essential-data-science-success.html)'
 - en: '[Qualities Hiring Managers Are Looking For in Data Scientists](https://www.kdnuggets.com/2022/04/qualities-hiring-managers-looking-data-scientists.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[招聘经理在数据科学家身上寻找的品质](https://www.kdnuggets.com/2022/04/qualities-hiring-managers-looking-data-scientists.html)'
 - en: '[Introducing OpenChat: The Free & Simple Platform for Building…](https://www.kdnuggets.com/2023/06/introducing-openchat-free-simple-platform-building-custom-chatbots-minutes.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[介绍 OpenChat：一个免费且简单的平台，用于构建自定义聊天机器人](https://www.kdnuggets.com/2023/06/introducing-openchat-free-simple-platform-building-custom-chatbots-minutes.html)'
 - en: '[Tailor ChatGPT to Fit Your Needs with Custom Instructions](https://www.kdnuggets.com/2023/08/tailor-chatgpt-fit-needs-custom-instructions.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过自定义指令将 ChatGPT 调整为符合你的需求](https://www.kdnuggets.com/2023/08/tailor-chatgpt-fit-needs-custom-instructions.html)'
 - en: '[Create a Dashboard Using Python and Dash](https://www.kdnuggets.com/2023/08/create-dashboard-python-dash.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 和 Dash 创建仪表板](https://www.kdnuggets.com/2023/08/create-dashboard-python-dash.html)'
