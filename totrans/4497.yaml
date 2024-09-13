@@ -701,21 +701,25 @@
   id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 在计算聚合时，我们需要跟踪由于分组而形成的桶。如果表按组列排序，则由于组已在RAM中连续收集，聚合会更快。执行时间在Pandas中降至约三分之一，在R中降至一半，在kdb+中降至五分之一。以下是具有类型优化的大小为10亿的排序表的执行时间。
 - en: '![No alt text provided for this image](../Images/f76b3f1c536fe46463888ba67835d7b9.png)'
   id: totrans-101
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供替代文本](../Images/f76b3f1c536fe46463888ba67835d7b9.png)'
 - en: Parallelization
   id: totrans-102
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 并行化
 - en: All modern computers have multiple CPU cores. Pandas by default operate on a
     single core. What do we need to do to make the computation parallel and exploit
     multiple cores?
   id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有现代计算机都有多个CPU核心。Pandas默认在单核上操作。我们需要做什么才能使计算并行并利用多个核心？
 - en: Python libraries [Dask](https://dask.org/) and [Ray](https://github.com/ray-project/ray) are
     the two most famous libraries for running parallel computations. Library [Modin](https://modin.readthedocs.io/en/latest/) is
     a wrapper above these engines for Pandas data frames. The "media" is loud from
@@ -724,24 +728,29 @@
   id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: Python库 [Dask](https://dask.org/) 和 [Ray](https://github.com/ray-project/ray) 是运行并行计算的两个最著名的库。库 [Modin](https://modin.readthedocs.io/en/latest/) 是这些引擎的Pandas数据框的封装器。关于这一点的“媒体”报道很大声，声称通过替换一行代码，你可以在普通笔记本电脑上获得显著的查询性能提升。
 - en: '![No alt text provided for this image](../Images/cbd9819fe215b1dfa1a2eebe966e7882.png)'
   id: totrans-105
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供替代文本](../Images/cbd9819fe215b1dfa1a2eebe966e7882.png)'
 - en: to
   id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 到
 - en: '![No alt text provided for this image](../Images/3ca36daed1406cf034705e2564d9f129.png)'
   id: totrans-107
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供替代文本](../Images/3ca36daed1406cf034705e2564d9f129.png)'
 - en: This is probably true for a small number of textbook examples but does not apply
     in real life. With my simple exercise, I run into several issues both with Ray
     and with Dask. Let me describe the problem one-by-one starting with Ray.
   id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可能对于少量的教科书示例来说是对的，但在现实生活中并不适用。在我的简单实验中，我遇到了Ray和Dask的几个问题。让我一个个描述这些问题，从Ray开始。
 - en: First, the category type is not supported. Second, function [apply](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply) and [agg](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html#pandas.DataFrame.agg) behaves
     differently than the corresponding Pandas functions. Using multiple aggregates
     with a group-by in function [agg](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html#pandas.DataFrame.agg) is
@@ -753,15 +762,18 @@
   id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，类别类型不被支持。其次，函数 [apply](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply) 和 [agg](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html#pandas.DataFrame.agg) 的行为与相应的Pandas函数不同。函数 [agg](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html#pandas.DataFrame.agg) 中使用多个聚合与分组操作不被支持，因此操作会回退到Pandas操作。函数 [apply](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply) 只处理返回标量的lambda函数。这禁用了第二种更优雅的Pandas解决方案。此外，apply返回的是Modin数据框而不是系列。你需要转置结果并将列索引（0）重命名为有意义的列名，例如。
 - en: '![No alt text provided for this image](../Images/2921d63f8270367cfdd8f64cebfde02c.png)'
   id: totrans-110
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供替代文本](../Images/2921d63f8270367cfdd8f64cebfde02c.png)'
 - en: Finally, the code ran significantly slower than the Pandas equivalent and broke
     with 100M rows. Pandas and the others handle 1B rows easily.
   id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终，代码运行明显比Pandas等效版本要慢，并且在处理1亿行时崩溃。Pandas和其他工具能够轻松处理10亿行数据。
 - en: Moving to the library Dask also has some nuisances. First, it does not handle
     the weighted average if the bucket’s type is categorical. We lose an important
     performance improvement technique. Second, you need to provide type hinting to
@@ -773,10 +785,14 @@
   id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 转移到库时，Dask 也有一些麻烦。首先，如果桶的类型是分类类型，它不处理加权平均数。我们失去了一个重要的性能提升技术。其次，你需要提供类型提示以抑制警告。这意味着又一次的列名重复。在更优雅的基于应用的解决方案中，你需要四次输入输出列名（如
+    TOTAL_QTY）☹️。因此，看来转移到 Dask 并不像通过简单的 [compute](https://docs.dask.org/en/latest/dataframe.html)
+    语句来触发计算那样简单。
 - en: '![No alt text provided for this image](../Images/c43adaa24c846a34ec6614a449924c16.png)'
   id: totrans-113
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/c43adaa24c846a34ec6614a449924c16.png)'
 - en: '**Parallelization in kdb+ is automatic** for on-disk, partitioned tables and
     for in-memory tables in version 4.0\. You won''t observe any type problem - everything
     works smoothly. All you need is to start kdb+ in multiprocess mode via [command
@@ -789,18 +805,27 @@
   id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '**kdb+ 中的并行化是自动的** 对于磁盘上的分区表和版本 4.0 的内存表。你不会遇到任何类型问题——一切运行顺畅。你只需通过 [命令行参数 -s](https://code.kx.com/q/basics/syscmds/#s-number-of-slaves)
+    以多进程模式启动 kdb+。内置的 [map-reduce](https://code.kx.com/q4m3/14_Introduction_to_Kdb+/#1437-map-reduce)
+    分解将计算分散到多个核心，涵盖了大多数操作，包括 [sum](https://code.kx.com/q/ref/sum/)， [avg](https://code.kx.com/q/ref/avg/)，
+    [count](https://code.kx.com/q/ref/count/)， [wavg](https://code.kx.com/q/ref/avg/)，
+    [cor](https://code.kx.com/q/ref/cor/) 等。你也可以通过手动分区表并使用函数 [peach](https://code.kx.com/v2/ref/each/)
+    获得性能提升，该函数并行执行。我们只需更改'
 - en: '![No alt text provided for this image](../Images/b008380e3dddeb72d3431f2b32531649.png)'
   id: totrans-115
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/b008380e3dddeb72d3431f2b32531649.png)'
 - en: to
   id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 到
 - en: '![No alt text provided for this image](../Images/9644443ab45161925cc211f122377808.png)'
   id: totrans-117
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/9644443ab45161925cc211f122377808.png)'
 - en: This simple code modification resulted in almost an order of magnitude faster
     execution on a 16-core box with kdb+ version 3.6\. Since version 4.0 already employs
     parallel computing, manual parallelization adds no value. If you are aiming for
@@ -808,32 +833,40 @@
   id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个简单的代码修改使得在 16 核心的机器上使用 kdb+ 版本 3.6 的执行速度快了近一个数量级。由于版本 4.0 已经采用了并行计算，手动并行化没有任何价值。如果你追求最佳性能，那么使用
+    kdb+ 4.0 的代码会比 3.6 更简单。
 - en: '**R data.table also uses multiple threads by default** and executes queries
     in parallel behind the scene. You can check and set the number of threads that
     the data.table uses via function [setDTthreads](https://www.rdocumentation.org/packages/data.table/versions/1.12.8/topics/setDTthreads).'
   id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '**R data.table 默认也使用多个线程** 并在后台并行执行查询。你可以通过函数 [setDTthreads](https://www.rdocumentation.org/packages/data.table/versions/1.12.8/topics/setDTthreads)
+    检查和设置 data.table 使用的线程数量。'
 - en: Let us compare the execution times of the most performant versions of all languages.
     For SQL we evaluated BigQuery which is considered to be the fastest SQL implementation
     for huge datasets due to its massive parallelization.
   id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们比较所有语言的最优版本的执行时间。对于 SQL，我们评估了 BigQuery，因为它被认为是处理巨大数据集的最快 SQL 实现，得益于其大规模并行化。
 - en: '![No alt text provided for this image](../Images/ae75206d32368a5a479ea33b41000b14.png)'
   id: totrans-121
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/ae75206d32368a5a479ea33b41000b14.png)'
 - en: kdb+ is again the winner in this category, BigQuery being the runner-up. R data.table
     is two times faster than Pandas.
   id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: kdb+ 在这一类别中再次获胜，BigQuery 是亚军。R data.table 的速度是 Pandas 的两倍。
 - en: Above 1 billion rows
   id: totrans-123
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 超过 10 亿行
 - en: The largest tables in our experience contained one billion rows. Above this
     number the table does not fit into the memory, hence Pandas is out of the league.
     Dask and Ray which is designed for parallel processing and cluster of computers
