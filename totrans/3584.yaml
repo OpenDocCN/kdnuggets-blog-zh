@@ -1,110 +1,158 @@
 - en: Managing Model Drift in Production with MLOps
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在生产中管理模型漂移与 MLOps
 - en: 原文：[https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)
 - en: Machine learning models are powerful tools that could help businesses make more
     informed decisions and optimize their operations. However, as these models are
     deployed and run in production, they are subject to a phenomenon known as model
     drift.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习模型是强大的工具，可以帮助企业做出更明智的决策并优化运营。然而，随着这些模型的部署和运行，它们会受到称为模型漂移的现象的影响。
 - en: Model drift occurs when the performance of a machine learning model degrades
     over time due to changes in the underlying data, leading to inaccurate predictions
     and potentially significant consequences for a business. To address this challenge,
     organizations are turning to MLOps, a set of practices and tools that help manage
     the lifecycle of production machine learning.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型漂移发生在机器学习模型的性能因底层数据的变化而随着时间下降，导致不准确的预测，并可能对企业产生重大影响。为了解决这一挑战，组织正在转向 MLOps，这是一套帮助管理生产机器学习生命周期的实践和工具。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 需求'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In this article, we'll explore model drift, the different types of it, how to
     detect it, and most importantly, how to handle it in production using MLOps. By
     understanding and managing model drift, businesses can ensure that their machine
     learning models remain accurate and effective over time, delivering the insights
     and outcomes that they need to thrive.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将深入探讨模型漂移、不同类型的模型漂移、如何检测模型漂移以及最重要的，如何在生产中使用 MLOps 来处理模型漂移。通过理解和管理模型漂移，企业可以确保其机器学习模型随时间保持准确和有效，提供他们所需的洞察和结果以蓬勃发展。
 - en: '![Managing Model Drift in Production with MLOps](../Images/e494e029c562afb95ebea73c828ecc93.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![在生产中管理模型漂移与 MLOps](../Images/e494e029c562afb95ebea73c828ecc93.png)'
 - en: Photo by [Nicolas Peyrol](https://unsplash.com/ko/@nicolaspeyrol?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
     on [Unsplash](https://unsplash.com/photos/wRIqMJE-XaU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由 [Nicolas Peyrol](https://unsplash.com/ko/@nicolaspeyrol?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    提供，来源于 [Unsplash](https://unsplash.com/photos/wRIqMJE-XaU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 - en: What is Model Drift?
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是模型漂移？
 - en: Model drift, also known as model decay, is a phenomenon in machine learning
     in which the model performance decreases over time. This means that the model
     will gradually start to give bad predicitions that will decrease the accuracy
     over time.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型漂移，也称为模型衰退，是一种机器学习现象，指模型性能随着时间的推移而降低。这意味着模型会逐渐开始给出不准确的预测，从而导致准确性随时间降低。
 - en: There are different reasons for model shifting such as changes in data collection
     or the underlying relationships between variables. Therefore the model will fail
     to catch these changes and the performance will decrease as the changes increase.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型漂移的原因有很多，例如数据收集的变化或变量之间的基本关系变化。因此，模型无法捕捉这些变化，随着变化的增加，性能会下降。
 - en: Detecting and addressing model drift is one of the essential tasks that MLOps
     solve. Techniques such as model monitoring are used to detect the presence of
     model drift and model retraining is one of the main techniques used to overcome
     model drift.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 发现和解决模型漂移是 MLOps 解决的基本任务之一。技术如模型监控被用来检测模型漂移的存在，而模型重新训练是克服模型漂移的主要技术之一。
 - en: Types of Drift
+  id: totrans-17
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 漂移的类型
 - en: 'Understanding the type of model drift is essential to update the model based
     on the changes that occurred in the data. There are three main types of drift:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 理解模型漂移的类型对于根据数据变化更新模型至关重要。模型漂移主要有三种类型：
 - en: Concept Drift
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 概念漂移
 - en: 'Concept drift occurs when the relationship between the target and the input
     changes. Therefore the machine learning algorithm will not provide an accurate
     prediction. There are four main types of concept drift:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 概念漂移发生在目标与输入之间的关系发生变化时。因此，机器学习算法将无法提供准确的预测。概念漂移主要有四种类型：
 - en: '**Sudden Drift**: A sudden concept drift occurs if the relationship between
     the independent and dependent variables occurs suddenly. A very famous example
     is the sudden occurrence of the covid 19 pandemic. The occurrence of the pandemic
     has suddenly changed the relationship between the target variable and the features
     in different fields so a predictive model trained on pre-trained data will not
     be able to predict during the pandemic time accurately.'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**突发漂移**：如果自变量与因变量之间的关系突然发生变化，就会发生突发概念漂移。一个非常著名的例子是新冠疫情的突然爆发。疫情的发生突然改变了目标变量与不同领域特征之间的关系，因此，基于预训练数据的预测模型将无法在疫情期间提供准确的预测。'
 - en: '**Gradual Drift**: In a gradual concept drift, the relation between the input
     and the target may change slowly and subtly. This can result in a slow decline
     in the performance of a machine learning model, as the model becomes less accurate
@@ -120,199 +168,278 @@
     result in incremental drift, where the model''s accuracy gradually deteriorates
     over time as it becomes less effective at capturing the changing relationship
     between the variables.'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**渐进漂移**：在渐进概念漂移中，输入与目标之间的关系可能会缓慢而微妙地变化。这会导致机器学习模型的性能缓慢下降，因为模型随着时间推移变得不那么准确。渐进概念漂移的一个例子是欺诈行为。欺诈者往往会了解欺诈检测系统的工作原理，并随着时间的推移调整自己的行为以逃避系统。因此，基于历史欺诈交易数据训练的机器学习模型将无法准确预测欺诈者行为的渐进变化。例如，考虑一个用于预测股票价格的机器学习模型，该模型以过去五年的数据进行训练，并在当前年份的新数据上评估其性能。然而，随着时间的推移，市场动态可能会发生变化，影响股票价格的变量之间的关系可能会逐渐演变。这可能导致渐进漂移，即模型的准确性随着时间的推移逐渐恶化，因为它变得越来越难以捕捉变量之间不断变化的关系。'
 - en: '**Incremental Drift:** Incremental drift occurs when the relationship between
     the target variable and the input changes gradually over time which occurs usually
     due to changes in the data generating process.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**增量漂移**：增量漂移发生在目标变量与输入之间的关系随时间逐渐变化时，这通常是由于数据生成过程的变化。'
 - en: '**Recurring Drift**: This is also known as seasonality. A typical example is
     the increase in sales during Christmas or Black Friday. A machine learning model
     that will not inaccurate these seasonal changes into account will end up providing
     inaccurate predictions for these seasonal changes.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**重复漂移**：这也称为季节性漂移。一个典型的例子是圣诞节或黑色星期五期间销售的增加。如果机器学习模型未能准确考虑这些季节性变化，将最终提供不准确的预测。'
 - en: These four types of concept drift are shown in the figure below.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的图中展示了这四种概念漂移类型。
 - en: '![Managing Model Drift in Production with MLOps](../Images/d94f4c339029cc96f6f588eb6bd18ea1.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![生产环境中的模型漂移管理与MLOps](../Images/d94f4c339029cc96f6f588eb6bd18ea1.png)'
 - en: 'Types of concept drift | Image from [Learning under Concept Drift: A Review](https://arxiv.org/pdf/2004.05785.pdf).'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 概念漂移类型 | 图片来源于[在概念漂移下学习：综述](https://arxiv.org/pdf/2004.05785.pdf)。
 - en: Data Drift
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 数据漂移
 - en: Data drift occurs when the statistical properties of the input data change. 
     An example of this is the change in the age distribution of the user of a certain
     application over time, therefore a model trained on a specific age distribution
     that is used for marketing strategies will have to be changed as the change in
     the age will affect the marketing strategies.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据漂移发生在输入数据的统计属性发生变化时。一个例子是某个应用程序用户的年龄分布随时间变化，因此，训练时基于特定年龄分布的模型将需要调整，因为年龄变化会影响营销策略。
 - en: Upstream Data Changes
+  id: totrans-30
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 上游数据变化
 - en: The third type of drift is the upstream data changes. This refers to the operational
     data changes in the data pipeline. A typical example of this is when a specific
     feature is no longer generated resulting in a missing value. Another example is
     a change in the unit of measurement for example if a certain sensor measure quantity
     in Celsius and then changes into Fahrenheit.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 第三种类型的漂移是上游数据变化。这指的是数据管道中的操作数据变化。一个典型的例子是某个特征不再生成，导致缺失值。另一个例子是测量单位的变化，例如某个传感器原本用摄氏度测量数量，然后改为华氏度。
 - en: Detecting Model Drift
+  id: totrans-32
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 检测模型漂移
 - en: 'Detecting model drift is not straightforward and there is no universal method
     to detect it. However, we will discuss some of the popular methods to detect it:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 检测模型漂移并不简单，并且没有通用的方法来检测它。然而，我们将讨论一些流行的方法来检测它：
 - en: '**The Kolmogorov-Smirnov test (K-S test)**: The K-S test is a nonparametric
     test to detect the change in the data distribution. It is used to compare the
     training data and the post-training data and find the distribution changes between
     them. The null hypothesis for this test set states that the distribution from
     the two datasets is the same so if the null hypothesis is rejected, therefore
     there will be a model shift.'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Kolmogorov-Smirnov检验（K-S检验）：** K-S检验是一种非参数检验，用于检测数据分布的变化。它用于比较训练数据和训练后数据之间的分布变化。该检验的零假设是两个数据集的分布相同，因此如果零假设被拒绝，则说明存在模型漂移。'
 - en: '**The Population Stability Index (PSI)**: PSI is a statistical measure that
     is used to measure the similarity in the distribution of categorical variables
     in two different datasets. Therefore it can be used to measure the changes in
     the characteristics of categorical variables in the training and post-training
     dataset.'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**人口稳定性指数（PSI）：** PSI 是一种统计度量，用于测量两个不同数据集中类别变量分布的相似性。因此，它可以用来测量训练数据集和训练后数据集类别变量特征的变化。'
 - en: '**Page-Hinkley Method**: The Page-Hinkely is also a statistical method that
     is used to observe changes in the mean of data over time. It is usually used to
     detect the small changes in the mean that is not apparent when looking at the
     data.'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Page-Hinkley方法：** Page-Hinkley方法也是一种统计方法，用于观察数据均值随时间的变化。它通常用于检测数据中不明显的小变化。'
 - en: '**Performance Monitoring:** One of the most important methods to detect the
     concept shift is monitoring the performance of the machine learning model in production
     and observing its change and if it crosses a certain threshold we can trigger
     a certain action to correct this concept shift.'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**性能监控：** 监控机器学习模型在生产环境中的性能并观察其变化是检测概念漂移的重要方法之一。如果性能变化超过某个阈值，我们可以触发某种动作来纠正这种概念漂移。'
 - en: Handling Drift in Production
+  id: totrans-38
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 处理生产环境中的漂移
 - en: '![Managing Model Drift in Production with MLOps](../Images/cfd44c9d4cee28036a3b63391fa3cdc1.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![在生产环境中通过MLOps管理模型漂移](../Images/cfd44c9d4cee28036a3b63391fa3cdc1.png)'
 - en: Handling Drift in Production | Image by [ijeab](https://www.freepik.com/author/ijeab)
     on Freepik.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 处理生产环境中的漂移 | 图片由 [ijeab](https://www.freepik.com/author/ijeab) 提供，来自 Freepik。
 - en: 'Finally, let''s see how to handle the detected model drift in production. There
     is a wide spectrum of strategies used to handle the model drift depending on the
     type of drift, the data we are working on, and the project in production. Here
     is a summary of the popular methods that are used to handle model drift in production:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，让我们来看看如何处理生产环境中检测到的模型漂移。处理模型漂移的策略有广泛的范围，取决于漂移类型、我们所处理的数据以及生产中的项目。以下是处理生产环境中模型漂移的几种流行方法的总结：
 - en: '**Online Learning**: Since most of the real-world applications run on streaming
     data, online learning is one of the common methods that are used to handle the
     drift. In online learning the model is updated on the fly as the model deal with
     one sample at a time.'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**在线学习：** 由于大多数现实世界应用运行在流数据上，在线学习是处理漂移的常见方法之一。在在线学习中，模型在处理一个样本时会实时更新。'
 - en: '**Periodically Model Re-train:** Once the model performance falls below a certain
     threshold or a data shift is observed a trigger can be set to retrain the model
     with recent data.'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**定期重新训练模型：** 一旦模型性能下降到某个阈值以下或观察到数据漂移，可以设置触发器，用最新数据重新训练模型。'
 - en: '**Periodically Re-train on a Representative Subsample**: A more effective way
     to handle concept drift is by selecting a representative subsample of the population
     and labeling them using human experts and retraining the model on them.'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**在代表性子样本上定期重新训练：** 处理概念漂移的一个更有效的方法是选择一个具有代表性的子样本，并使用人工专家标注它们，然后在这些样本上重新训练模型。'
 - en: '**Feature Dropping:** This is a simple but effective method that can be used
     to handle concept drift. Using this method we will train multiple models each
     using one feature and for each model, the AUC-ROC response is then monitored,
     and if the value of the AUC-ROC went beyond a certain threshold using a particular
     feature then we can drop it as this might participate in drifting.'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**特征丢弃：** 这是一种简单但有效的方法，用于处理概念漂移。使用此方法，我们将训练多个模型，每个模型使用一个特征，并监控每个模型的 AUC-ROC
+    响应，如果 AUC-ROC 值超出特定阈值，则可以丢弃该特征，因为它可能参与了漂移。'
 - en: References
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[Best Practices for Dealing With Concept Drift](https://neptune.ai/blog/concept-drift-best-practices)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理概念漂移的最佳实践](https://neptune.ai/blog/concept-drift-best-practices)'
 - en: '[Understanding Data Drift and Model Drift: Drift Detection in Python](https://www.datacamp.com/tutorial/understanding-data-drift-model-drift)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解数据漂移和模型漂移：Python 中的漂移检测](https://www.datacamp.com/tutorial/understanding-data-drift-model-drift)'
 - en: '[Machine Learning Concept Drift?—?What is it and Five Steps to Deal With it](https://www.seldon.io/machine-learning-concept-drift)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习概念漂移？—?它是什么以及五个处理步骤](https://www.seldon.io/machine-learning-concept-drift)'
 - en: In this article, we discussed model drift, which is the phenomenon in machine
     learning where the performance of a model deteriorates over time due to changes
     in underlying data. Businesses are turning to MLOps, a set of practices and tools
     that manage the lifecycle of machine learning models in production, to overcome
     these challenges.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们讨论了模型漂移，这是指机器学习中由于基础数据的变化导致模型性能随着时间恶化的现象。为了克服这些挑战，企业正在转向 MLOps，一套管理生产中机器学习模型生命周期的实践和工具。
 - en: We outlined the different types of drift that can occur, including concept drift,
     data drift, and upstream data changes, and how to detect model drift using methods
     such as the Kolmogorov-Smirnov test, Population Stability Index, and Page-Hinkley
     method. Finally, we discussed the popular techniques to handle model drift in
     production including online learning, periodic model re-train, periodically re-train
     on a representative subsample, and feature dropping.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们概述了可能发生的不同类型的漂移，包括概念漂移、数据漂移和上游数据变化，以及如何使用 Kolmogorov-Smirnov 检验、人口稳定性指数和 Page-Hinkley
+    方法检测模型漂移。最后，我们讨论了处理生产中模型漂移的流行技术，包括在线学习、定期模型重新训练、在代表性子样本上定期重新训练和特征丢弃。
 - en: '**[Youssef Rafaat](https://www.linkedin.com/in/youssef-hosni-b2960b135)** is
     a computer vision researcher & data scientist. His research focuses on developing
     real-time computer vision algorithms for healthcare applications. He also worked
     as a data scientist for more than 3 years in the marketing, finance, and healthcare
     domain.'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Youssef Rafaat](https://www.linkedin.com/in/youssef-hosni-b2960b135)** 是一名计算机视觉研究员和数据科学家。他的研究集中在为医疗保健应用开发实时计算机视觉算法。他还在市场营销、金融和医疗保健领域担任数据科学家超过
+    3 年。'
 - en: More On This Topic
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
 - en: '[An MLOps Mindset: Always Production-Ready](https://www.kdnuggets.com/2023/07/mlops-mindset-always-productionready.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MLOps 心态：始终保持生产就绪](https://www.kdnuggets.com/2023/07/mlops-mindset-always-productionready.html)'
 - en: '[Deploying Your Machine Learning Model to Production in the Cloud](https://www.kdnuggets.com/deploying-your-ml-model-to-production-in-the-cloud)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将机器学习模型部署到云端生产环境](https://www.kdnuggets.com/deploying-your-ml-model-to-production-in-the-cloud)'
 - en: '[Managing Your Reusable Python Code as a Data Scientist](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[作为数据科学家的可重用 Python 代码管理](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)'
 - en: '[A New Way of Managing Deep Learning Datasets](https://www.kdnuggets.com/2022/03/new-way-managing-deep-learning-datasets.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[管理深度学习数据集的新方法](https://www.kdnuggets.com/2022/03/new-way-managing-deep-learning-datasets.html)'
 - en: '[4 Steps for Managing a Data Science Project](https://www.kdnuggets.com/2022/05/4-steps-managing-data-science-project.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[管理数据科学项目的 4 个步骤](https://www.kdnuggets.com/2022/05/4-steps-managing-data-science-project.html)'
