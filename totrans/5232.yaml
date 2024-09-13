@@ -1,117 +1,186 @@
 - en: 'OLAP queries in SQL: A Refresher'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SQL中的OLAP查询：回顾
 - en: 原文：[https://www.kdnuggets.com/2018/09/olap-queries-sql-refresher.html](https://www.kdnuggets.com/2018/09/olap-queries-sql-refresher.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/09/olap-queries-sql-refresher.html](https://www.kdnuggets.com/2018/09/olap-queries-sql-refresher.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Wilfried Lemahieu](https://www.linkedin.com/in/wilfried-lemahieu-458397/),
     [Seppe vanden Broucke](https://www.linkedin.com/in/seppevandenbroucke/), [Bart
     Baesens](https://www.linkedin.com/in/bart-baesens-403bb83/)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Wilfried Lemahieu](https://www.linkedin.com/in/wilfried-lemahieu-458397/)，[Seppe
+    vanden Broucke](https://www.linkedin.com/in/seppevandenbroucke/)，[Bart Baesens](https://www.linkedin.com/in/bart-baesens-403bb83/)**'
 - en: '![Principles of database management](../Images/947e7a2cdbcea1f2005cffb1cb010457.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![数据库管理原则](../Images/947e7a2cdbcea1f2005cffb1cb010457.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三推荐课程
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'The below article is based on our recent book: Principles of Database Management
     - The Practical Guide to Storing, Managing and Analyzing Big and Small Data (See
     [www.pdbmbook.com](http://www.pdbmbook.com)).'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下文章基于我们最近的书籍：《数据库管理原则 - 存储、管理和分析大数据与小数据的实用指南》（详见 [www.pdbmbook.com](http://www.pdbmbook.com)）。
 - en: 'In this article, we zoom in on how OLAP queries can be implemented in SQL.
     To facilitate the execution of OLAP queries and data aggregation, SQL-99 introduced
     three extensions to the GROUP BY statement: the CUBE, ROLLUP and GROUPING SETS
     operator.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们详细讲解了如何在SQL中实现OLAP查询。为了方便执行OLAP查询和数据聚合，SQL-99引入了对GROUP BY语句的三种扩展：CUBE、ROLLUP和GROUPING
+    SETS操作符。
 - en: The **CUBE** operator computes a union of GROUP BY’s on every subset of the
     specified attribute types.  Its result set represents a multidimensional cube
     based upon the source table.  Consider the following SALES TABLE.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**CUBE**操作符计算指定属性类型每个子集上的GROUP BY的并集。其结果集表示基于源表的多维立方体。考虑以下SALES TABLE。'
 - en: '| **PRODUCT** | **QUARTER** | **REGION** | **SALES** |'
+  id: totrans-14
   prefs: []
   type: TYPE_TB
+  zh: '| **产品** | **季度** | **地区** | **销售额** |'
 - en: '| A | Q1 | Europe | 10 |'
+  id: totrans-15
   prefs: []
   type: TYPE_TB
+  zh: '| A | Q1 | Europe | 10 |'
 - en: '| A | Q1 | America | 20 |'
+  id: totrans-16
   prefs: []
   type: TYPE_TB
+  zh: '| A | Q1 | America | 20 |'
 - en: '| A | Q2 | Europe | 20 |'
+  id: totrans-17
   prefs: []
   type: TYPE_TB
+  zh: '| A | Q2 | Europe | 20 |'
 - en: '| A | Q2 | America | 50 |'
+  id: totrans-18
   prefs: []
   type: TYPE_TB
+  zh: '| A | Q2 | America | 50 |'
 - en: '| A | Q3 | America | 20 |'
+  id: totrans-19
   prefs: []
   type: TYPE_TB
+  zh: '| A | Q3 | America | 20 |'
 - en: '| A | Q4 | Europe | 10 |'
+  id: totrans-20
   prefs: []
   type: TYPE_TB
+  zh: '| A | Q4 | Europe | 10 |'
 - en: '| A | Q4 | America | 30 |'
+  id: totrans-21
   prefs: []
   type: TYPE_TB
+  zh: '| A | Q4 | America | 30 |'
 - en: '| B | Q1 | Europe | 40 |'
+  id: totrans-22
   prefs: []
   type: TYPE_TB
+  zh: '| B | Q1 | Europe | 40 |'
 - en: '| B | Q1 | America | 60 |'
+  id: totrans-23
   prefs: []
   type: TYPE_TB
+  zh: '| B | Q1 | America | 60 |'
 - en: '| B | Q2 | Europe | 20 |'
+  id: totrans-24
   prefs: []
   type: TYPE_TB
+  zh: '| B | Q2 | Europe | 20 |'
 - en: '| B | Q2 | America | 10 |'
+  id: totrans-25
   prefs: []
   type: TYPE_TB
+  zh: '| B | Q2 | America | 10 |'
 - en: '| B | Q3 | America | 20 |'
+  id: totrans-26
   prefs: []
   type: TYPE_TB
+  zh: '| B | Q3 | America | 20 |'
 - en: '| B | Q4 | Europe | 10 |'
+  id: totrans-27
   prefs: []
   type: TYPE_TB
+  zh: '| B | Q4 | Europe | 10 |'
 - en: '| B | Q4 | America | 40 |'
+  id: totrans-28
   prefs: []
   type: TYPE_TB
+  zh: '| B | Q4 | America | 40 |'
 - en: '*Examples SALESTABLE.*'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '*示例 SALESTABLE。*'
 - en: 'We can now formulate the following SQL query:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以制定以下SQL查询：
 - en: '[PRE0]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Basically, this query computes the union of 2² = 4 groupings of the SALESTABLE
     being: {(quarter,region), (quarter), (region), ()}, where () denotes an empty
     group list representing the total aggregate across the entire SALESTABLE.  In
@@ -120,75 +189,120 @@
     values have been added in the dimension columns Quarter and Region to indicate
     the aggregation that took place.  They can be easily replaced by the more meaningful
     ‘ALL’ if desired.  More specifically, we can add 2 CASE clauses as follows:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 基本上，这个查询计算了SALESTABLE的2² = 4种分组的并集，分组为：{(quarter,region), (quarter), (region),
+    ()}，其中()表示一个空的分组列表，代表整个SALESTABLE的总聚合。换句话说，由于quarter有4个值，region有2个值，结果多重集将包含4*2+4*1+1*2+1或15个元组，如表1所示。维度列Quarter和Region中已添加了NULL值以指示发生的聚合。如果需要，可以用更有意义的‘ALL’替换这些NULL值。更具体地说，我们可以添加2个CASE子句，如下所示：
 - en: '[PRE1]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The **grouping()** function returns 1 in case a NULL value is generated during
     the aggregation and 0 otherwise.  This distinguishes the generated NULLs and the
     possible real NULLs stemming from the data.  We will not add this to the subsequent
     OLAP queries so as to not unnecessarily complicate them.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**grouping()** 函数在聚合过程中生成 NULL 值时返回 1，否则返回 0。这有助于区分生成的 NULL 和可能的真实 NULL。我们不会将其添加到后续的
+    OLAP 查询中，以避免不必要的复杂化。'
 - en: Also, observe the NULL value for Sales in the fifth row.  This represents an
     attribute combination which is not present in the original SALESTABLE since apparently
     no products were sold in Q3 in Europe.  Remark that besides SUM() also other SQL
     aggregator functions such as MIN(), MAX(), COUNT() and AVG() can be used in the
     SELECT statement.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，注意第五行销售额的 NULL 值。这代表了在原始 SALESTABLE 中不存在的属性组合，因为显然在欧洲的 Q3 没有销售产品。注意，除了 SUM()，SELECT
+    语句中还可以使用其他 SQL 聚合函数，如 MIN()、MAX()、COUNT() 和 AVG()。
 - en: '| **QUARTER** | **REGION** | **SALES** |'
+  id: totrans-36
   prefs: []
   type: TYPE_TB
+  zh: '| **季度** | **区域** | **销售额** |'
 - en: '| Q1 | Europe | 50 |'
+  id: totrans-37
   prefs: []
   type: TYPE_TB
+  zh: '| Q1 | Europe | 50 |'
 - en: '| Q1 | America | 80 |'
+  id: totrans-38
   prefs: []
   type: TYPE_TB
+  zh: '| Q1 | America | 80 |'
 - en: '| Q2 | Europe | 40 |'
+  id: totrans-39
   prefs: []
   type: TYPE_TB
+  zh: '| Q2 | Europe | 40 |'
 - en: '| Q2 | America | 60 |'
+  id: totrans-40
   prefs: []
   type: TYPE_TB
+  zh: '| Q2 | America | 60 |'
 - en: '| Q3 | Europe | NULL |'
+  id: totrans-41
   prefs: []
   type: TYPE_TB
+  zh: '| Q3 | Europe | NULL |'
 - en: '| Q3 | America | 40 |'
+  id: totrans-42
   prefs: []
   type: TYPE_TB
+  zh: '| Q3 | America | 40 |'
 - en: '| Q4 | Europe | 20 |'
+  id: totrans-43
   prefs: []
   type: TYPE_TB
+  zh: '| Q4 | Europe | 20 |'
 - en: '| Q4 | America | 80 |'
+  id: totrans-44
   prefs: []
   type: TYPE_TB
+  zh: '| Q4 | America | 80 |'
 - en: '| Q1 | NULL | 130 |'
+  id: totrans-45
   prefs: []
   type: TYPE_TB
+  zh: '| Q1 | NULL | 130 |'
 - en: '| Q2 | NULL | 100 |'
+  id: totrans-46
   prefs: []
   type: TYPE_TB
+  zh: '| Q2 | NULL | 100 |'
 - en: '| Q3 | NULL | 40 |'
+  id: totrans-47
   prefs: []
   type: TYPE_TB
+  zh: '| Q3 | NULL | 40 |'
 - en: '| Q4 | NULL | 90 |'
+  id: totrans-48
   prefs: []
   type: TYPE_TB
+  zh: '| Q4 | NULL | 90 |'
 - en: '| NULL | Europe | 110 |'
+  id: totrans-49
   prefs: []
   type: TYPE_TB
+  zh: '| NULL | Europe | 110 |'
 - en: '| NULL | America | 250 |'
+  id: totrans-50
   prefs: []
   type: TYPE_TB
+  zh: '| NULL | America | 250 |'
 - en: '| NULL | NULL | 360 |'
+  id: totrans-51
   prefs: []
   type: TYPE_TB
+  zh: '| NULL | NULL | 360 |'
 - en: '**Table 1: Result from SQL query with Cube operator.**'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**表 1：使用 Cube 运算符的 SQL 查询结果。**'
 - en: 'The **ROLLUP** operator computes the union on every prefix of the list of specified
     attribute types, from the most detailed up to the grand total.  It is especially
     useful to generate reports containing both subtotals and totals.  The key difference
@@ -198,64 +312,103 @@
     of values of the selected attribute types.  Hence, the order in which the attribute
     types are mentioned is important for the ROLLUP but not for the CUBE operator. 
     Consider the following query:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**ROLLUP** 运算符计算指定属性类型列表的每个前缀的并集，从最详细的到总计。它特别适用于生成包含小计和总计的报告。ROLLUP 与 CUBE
+    运算符的主要区别在于前者生成一个显示指定属性类型值层级的聚合结果集，而后者生成一个显示所有选定属性类型值组合的聚合结果集。因此，属性类型的提及顺序对于 ROLLUP
+    很重要，但对于 CUBE 运算符则不然。考虑以下查询：'
 - en: '[PRE2]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: This query generates the union of three groupings {(quarter,region), (quarter},
     ()} where () again represents the full aggregation.  The resulting multiset will
     thus have 4*2+4+1 or 13 rows and is displayed in Table 2.  You can see that the
     region dimension is first rolled up followed by the quarter dimension.  Note the
     two rows which have been left out when compared to the result of the CUBE operator
     in Table 1.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 此查询生成了三个分组的并集 {(季度, 区域), (季度}, ()}，其中 () 代表完全聚合。结果多重集将有 4*2+4+1 或 13 行，显示在表
+    2 中。可以看到，区域维度首先被汇总，然后是季度维度。注意与表 1 中 CUBE 运算符的结果相比，被省略的两行。
 - en: '| **QUARTER** | **REGION** | **SALES** |'
+  id: totrans-56
   prefs: []
   type: TYPE_TB
+  zh: '| **季度** | **区域** | **销售额** |'
 - en: '| Q1 | Europe | 50 |'
+  id: totrans-57
   prefs: []
   type: TYPE_TB
+  zh: '| Q1 | Europe | 50 |'
 - en: '| Q1 | America | 80 |'
+  id: totrans-58
   prefs: []
   type: TYPE_TB
+  zh: '| Q1 | America | 80 |'
 - en: '| Q2 | Europe | 40 |'
+  id: totrans-59
   prefs: []
   type: TYPE_TB
+  zh: '| Q2 | Europe | 40 |'
 - en: '| Q2 | America | 60 |'
+  id: totrans-60
   prefs: []
   type: TYPE_TB
+  zh: '| Q2 | America | 60 |'
 - en: '| Q3 | Europe | NULL |'
+  id: totrans-61
   prefs: []
   type: TYPE_TB
+  zh: '| Q3 | Europe | NULL |'
 - en: '| Q3 | America | 40 |'
+  id: totrans-62
   prefs: []
   type: TYPE_TB
+  zh: '| Q3 | America | 40 |'
 - en: '| Q4 | Europe | 20 |'
+  id: totrans-63
   prefs: []
   type: TYPE_TB
+  zh: '| Q4 | Europe | 20 |'
 - en: '| Q4 | America | 80 |'
+  id: totrans-64
   prefs: []
   type: TYPE_TB
+  zh: '| Q4 | America | 80 |'
 - en: '| Q1 | NULL | 130 |'
+  id: totrans-65
   prefs: []
   type: TYPE_TB
+  zh: '| Q1 | NULL | 130 |'
 - en: '| Q2 | NULL | 100 |'
+  id: totrans-66
   prefs: []
   type: TYPE_TB
+  zh: '| Q2 | NULL | 100 |'
 - en: '| Q3 | NULL | 40 |'
+  id: totrans-67
   prefs: []
   type: TYPE_TB
+  zh: '| Q3 | NULL | 40 |'
 - en: '| Q4 | NULL | 90 |'
+  id: totrans-68
   prefs: []
   type: TYPE_TB
+  zh: '| Q4 | NULL | 90 |'
 - en: '| NULL | NULL | 360 |'
+  id: totrans-69
   prefs: []
   type: TYPE_TB
+  zh: '| NULL | NULL | 360 |'
 - en: '**Table 2: Result from SQL query with ROLLUP operator.**'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '**表 2：使用 ROLLUP 运算符的 SQL 查询结果。**'
 - en: 'Whereas the previous example applied the GROUP BY ROLLUP construct to two completely
     independent dimensions, it can also be applied to attribute types that represent
     different aggregation levels (and hence different levels of detail) along the
@@ -264,84 +417,135 @@
     related columns: City, Country and Region.  We could then formulate the following
     ROLLUP query, yielding sales totals respectively per city, per country, per region
     and the grand total:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 前面的示例将 GROUP BY ROLLUP 构造应用于两个完全独立的维度，它也可以应用于表示同一维度上不同聚合级别（因此不同详细级别）的属性类型。例如，假设
+    SALESTABLE 元组表示了更详细的城市级别销售数据，并且表中包含三个与位置相关的列：City、Country 和 Region。我们可以制定以下 ROLLUP
+    查询，分别按城市、国家、地区和总计计算销售总额：
 - en: '[PRE3]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Note that in that case the SALESTABLE would include the attribute types City,
     Country and Region in a single table.  Since the three attribute types represent
     different levels of detail in the same dimension, they are transitively dependent
     on one another, illustrating the fact that these data warehouse data are indeed
     denormalized.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，在这种情况下，SALESTABLE 将包括 City、Country 和 Region 属性类型在一个表中。由于这三种属性类型表示同一维度中的不同详细级别，它们在传递上相互依赖，说明这些数据仓库数据确实是非规范化的。
 - en: 'The **GROUPING SETS** operator generates a result set equivalent to that generated
     by a UNION ALL of multiple simple GROUP BY clauses.  Consider the following example:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '**GROUPING SETS** 操作符生成的结果集等同于多个简单 GROUP BY 子句的 UNION ALL 结果。考虑以下示例：'
 - en: '[PRE4]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'This query is equivalent to:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 该查询等同于：
 - en: '[PRE5]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The result is given in Table 3.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果见表 3。
 - en: '| **QUARTER** | **REGION** | **SALES** |'
+  id: totrans-79
   prefs: []
   type: TYPE_TB
+  zh: '| **季度** | **地区** | **销售额** |'
 - en: '| Q1 | NULL | 130 |'
+  id: totrans-80
   prefs: []
   type: TYPE_TB
+  zh: '| Q1 | NULL | 130 |'
 - en: '| Q2 | NULL | 100 |'
+  id: totrans-81
   prefs: []
   type: TYPE_TB
+  zh: '| Q2 | NULL | 100 |'
 - en: '| Q3 | NULL | 40 |'
+  id: totrans-82
   prefs: []
   type: TYPE_TB
+  zh: '| Q3 | NULL | 40 |'
 - en: '| Q4 | NULL | 90 |'
+  id: totrans-83
   prefs: []
   type: TYPE_TB
+  zh: '| Q4 | NULL | 90 |'
 - en: '| NULL | Europe | 110 |'
+  id: totrans-84
   prefs: []
   type: TYPE_TB
+  zh: '| NULL | 欧洲 | 110 |'
 - en: '| NULL | America | 250 |'
+  id: totrans-85
   prefs: []
   type: TYPE_TB
+  zh: '| NULL | 美国 | 250 |'
 - en: '**Table 3: Result from SQL query with GROUPING SETS operator**'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '**表 3：使用 GROUPING SETS 操作符的 SQL 查询结果**'
 - en: 'Multiple CUBE, ROLLUP and GROUPING SETS statements can be used in a single
     SQL query.  Different combinations of CUBE, ROLLUP and GROUPING SETS can generate
     equivalent result sets.  Consider the following query:'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以在单个 SQL 查询中使用多个 CUBE、ROLLUP 和 GROUPING SETS 语句。不同组合的 CUBE、ROLLUP 和 GROUPING
+    SETS 可以生成等效的结果集。考虑以下查询：
 - en: '[PRE6]'
+  id: totrans-88
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'This query is equivalent to:'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 该查询等同于：
 - en: '[PRE7]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Likewise, the following query:'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样，以下查询：
 - en: '[PRE8]'
+  id: totrans-92
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'is identical to:'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 与以下内容相同：
 - en: '[PRE9]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Given the amount of data to be aggregated and retrieved, OLAP SQL queries may
     get very time consuming.  One way to speed up performance is by turning some of
     these OLAP queries into materialized views.  For example, an SQL query with a
@@ -351,19 +555,27 @@
     these materialized views, although it can be noted that usually companies are
     fine with a close to current version of the data such that the synchronization
     can be done overnight or at fixed time intervals.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 给定需要聚合和检索的数据量，OLAP SQL 查询可能会非常耗时。加快性能的一种方法是将这些 OLAP 查询转换为物化视图。例如，使用 CUBE 操作符的
+    SQL 查询可以用来预计算选定维度上的聚合，结果可以存储为物化视图。物化视图的一个缺点是需要额外的努力定期刷新这些物化视图，但通常公司对接近当前版本的数据是满意的，因此同步可以在夜间或固定时间间隔进行。
 - en: 'For more information, we are happy to refer to our recent book: [Principles
     of Database Management - The Practical Guide to Storing, Managing and Analyzing
     Big and Small Data](http://www.pdbmbook.com).'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 欲了解更多信息，我们很高兴推荐我们的最新书籍：[数据库管理原理 - 大数据与小数据存储、管理和分析的实用指南](http://www.pdbmbook.com)。
 - en: '**Bio**: **[Wilfried Lemahieu](https://www.linkedin.com/in/wilfried-lemahieu-458397/)**
     is a professor at KU Leuven (Belgium) who''s areas of research include Big data
     storage, integration and analytics, Data quality and Business process management
     and service orientation.'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介**：**[Wilfried Lemahieu](https://www.linkedin.com/in/wilfried-lemahieu-458397/)**
+    是 KU Leuven（比利时）的教授，研究领域包括大数据存储、集成与分析、数据质量以及业务流程管理和服务导向。'
 - en: '**[Seppe vanden Broucke](https://www.linkedin.com/in/seppevandenbroucke/)**
     received a PhD in Applied Economics at KU Leuven, Belgium in 2014\. Currently,
     Seppe is working as an assistant professor at the department of Decision Sciences
@@ -371,6 +583,7 @@
     data mining and analytics, machine learning, process management, process mining.
     His work has been published in well-known international journals and presented
     at top conferences.'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
 - en: '[**Bart Baesens**](https://www.linkedin.com/in/bart-baesens-403bb83/) is an
@@ -381,51 +594,63 @@
     Management Science, IEEE Transactions on Neural Networks, IEEE Transactions on
     Knowledge and Data Engineering, IEEE Transactions on Evolutionary Computation,
     Journal of Machine Learning Research, …) and presented at international top conferences.'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
 - en: '[YouTube videos on database management, SQL, Datawarehousing, Business Intelligence,
     OLAP, Big Data, NoSQL databases, data quality, data governance and Analytics –
     free](https://www.kdnuggets.com/2018/05/baesens-youtube-videos-database-management-sql-big-data-analytics-free.html)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Remote Data Science: How to Send R and Python Execution to SQL Server from
     Jupyter Notebooks](https://www.kdnuggets.com/2018/07/r-python-execution-sql-server-jupyter.html)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[SQL Cheat Sheet](https://www.kdnuggets.com/2018/07/sql-cheat-sheet.html)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-104
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Is OLAP Dead?](https://www.kdnuggets.com/2022/10/olap-dead.html)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[OLAP vs. OLTP: A Comparative Analysis of Data Processing Systems](https://www.kdnuggets.com/2023/08/olap-oltp-comparative-analysis-data-processing-systems.html)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[4 Useful Intermediate SQL Queries for Data Science](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[5 Tricky SQL Queries Solved](https://www.kdnuggets.com/2020/11/5-tricky-sql-queries-solved.html)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Solving 5 Complex SQL Problems: Tricky Queries Explained](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[KDnuggets News, December 7: Top 10 Data Science Myths Busted • 4…](https://www.kdnuggets.com/2022/n47.html)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
