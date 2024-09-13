@@ -1,71 +1,107 @@
 - en: Automated Text Classification with EvalML
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 EvalML 进行自动化文本分类
 - en: 原文：[https://www.kdnuggets.com/2021/04/automated-text-classification-evalml.html](https://www.kdnuggets.com/2021/04/automated-text-classification-evalml.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/04/automated-text-classification-evalml.html](https://www.kdnuggets.com/2021/04/automated-text-classification-evalml.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Angela Lin](https://www.linkedin.com/in/angela97lin/), EvalML Software
     Engineer**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Angela Lin](https://www.linkedin.com/in/angela97lin/) 提供，EvalML 软件工程师**'
 - en: '![Using Text Data in EvalML with Woodwork](../Images/e89a509092d49574c49cce4627da571e.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![在 EvalML 中使用文本数据与 Woodwork](../Images/e89a509092d49574c49cce4627da571e.png)'
 - en: Text can be a rich and informative type of data. It can be used in a variety
     of tasks, including sentiment analysis, topic extraction, and spam detection.
     However, raw text cannot be fed directly to machine learning algorithms, because
     most models can only understand numeric values. Thus, to utilize text as data
     in machine learning, it must first be processed and transformed to numeric values.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 文本可以是丰富且信息量大的数据类型。它可以用于多种任务，包括情感分析、主题提取和垃圾邮件检测。然而，原始文本不能直接输入到机器学习算法中，因为大多数模型只能理解数值。因此，为了在机器学习中使用文本作为数据，必须首先对其进行处理并转换为数值。
 - en: In this post, we will learn how we can use [EvalML](https://github.com/alteryx/evalml) to
     detect spam text messages by framing it as a binary classification problem using
     text data. EvalML is an AutoML library written in Python that uses [Woodwork](https://github.com/alteryx/woodwork) to
     detect and specify how data should be treated, and the [nlp-primitives library](https://github.com/alteryx/nlp_primitives) to
     create meaningful numeric features from raw text data.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将学习如何使用 [EvalML](https://github.com/alteryx/evalml) 通过将其构建为一个二分类问题来检测垃圾短信。EvalML
+    是一个用 Python 编写的 AutoML 库，它使用 [Woodwork](https://github.com/alteryx/woodwork) 来检测和指定数据的处理方式，并使用
+    [nlp-primitives 库](https://github.com/alteryx/nlp_primitives) 从原始文本数据中创建有意义的数值特征。
 - en: Spam Dataset
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 垃圾邮件数据集
 - en: The dataset we will be using in this demo consists of SMS text messages in English,
     some of which are tagged as legitimate (“ham”), and others which are tagged as
     spam. For this demo, we have modified the [original dataset from Kaggle ](https://www.kaggle.com/uciml/sms-spam-collection-dataset)by
     joining all of the input text columns and downsampling the majority class (“ham”)
     so that the “ham” to “spam” ratio is 3:1\. The following references to the data
     we will be inspecting will always refer to our modified and smaller dataset.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在这个演示中使用的数据集包含英语的 SMS 短信，其中一些标记为合法（“ham”），另一些标记为垃圾邮件。为了这个演示，我们修改了 [Kaggle
+    上的原始数据集](https://www.kaggle.com/uciml/sms-spam-collection-dataset)，将所有输入文本列合并，并对多数类别（“ham”）进行下采样，使“ham”与“spam”的比例为
+    3:1。以下对数据的引用将始终指代我们修改过且较小的数据集。
 - en: 'Let’s load in our data and display a few rows to understand what our text messages
     look like:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们加载数据并显示几行，以了解我们的短信内容是什么样的：
 - en: '[PRE0]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![image.png](../Images/29b8bef53c129cfbbd31f9ff9cfeec62.png)A sample of our
     input data'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '![image.png](../Images/29b8bef53c129cfbbd31f9ff9cfeec62.png) 我们输入数据的一个样本'
 - en: We can plot the frequency of our target values to verify that the ratio of “ham”
     to “spam” in our modified dataset is approximately 3:1.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以绘制目标值的频率，以验证我们修改过的数据集中“ham”与“spam”的比例是否约为 3:1。
 - en: '[PRE1]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![image.png](../Images/be802f439a9d168738f3bdf50987f7d5.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![image.png](../Images/be802f439a9d168738f3bdf50987f7d5.png)'
 - en: The ratio of "ham" to "spam" is approximately 3:1
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: “ham”与“spam”的比例约为 3:1
 - en: Because the ratio of “ham” to “spam” is 3:1, we can create a trivial model that
     always classifies a message as the majority “ham” class to obtain a model that
     has a 75% [accuracy](https://en.wikipedia.org/wiki/Accuracy_and_precision#In_binary_classification).
@@ -74,40 +110,61 @@
     correctly, and a balanced accuracy score of 50%. This means that a machine learning
     model should have an accuracy score greater than 75%, a recall score greater than
     0%, and a balanced accuracy score greater than 50% to be useful.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于“ham”与“spam”的比例为 3:1，我们可以创建一个简单的模型，该模型总是将消息分类为多数类“ham”，从而获得 75% 的 [准确率](https://en.wikipedia.org/wiki/Accuracy_and_precision#In_binary_classification)。这个模型的
+    [召回率](https://en.wikipedia.org/wiki/Precision_and_recall#Recall) 也会是 0%，因为它无法正确分类任何少数类“spam”样本，且平衡准确率为
+    50%。这意味着一个机器学习模型应具有大于 75% 的准确率、大于 0% 的召回率和大于 50% 的平衡准确率，才能算作有用。
 - en: '|  | Baseline model (always guesses majority class) |'
+  id: totrans-17
   prefs: []
   type: TYPE_TB
+  zh: '|  | 基线模型（总是猜测多数类） |'
 - en: '| Accuracy | 75% |'
+  id: totrans-18
   prefs: []
   type: TYPE_TB
+  zh: '| 准确率 | 75% |'
 - en: '| Balanced Accuracy | 50% |'
+  id: totrans-19
   prefs: []
   type: TYPE_TB
+  zh: '| 平衡准确率 | 50% |'
 - en: '| Recall | 0% |'
+  id: totrans-20
   prefs: []
   type: TYPE_TB
+  zh: '| 召回率 | 0% |'
 - en: Let’s generate a model using EvalML and see if we can do better than this trivial
     model!
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用 EvalML 生成一个模型，看看我们是否能比这个简单模型做得更好！
 - en: Introducing Woodwork
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍 Woodwork
 - en: 'Before feeding our data into EvalML, we have a more fundamental issue to address:
     How can we specify that our data should be treated as *text* data? Using `pandas` alone,
     we can''t distinguish between text data and non-text data (such as categorical
     data) because pandas uses the same `object` data type to store both. How we can
     make sure that our models correctly treat our text messages as text data, and
     not as hundreds of different unique categories?'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在将我们的数据输入到 EvalML 之前，我们有一个更基本的问题需要解决：我们如何指定我们的数据应该被视为*文本*数据？仅使用`pandas`，我们无法区分文本数据和非文本数据（例如分类数据），因为
+    pandas 使用相同的`object`数据类型来存储这两者。我们如何确保我们的模型正确地将我们的文本消息视为文本数据，而不是数百种不同的唯一类别？
 - en: '![image.png](../Images/61138c555915e5f58e40b326c4b34cd1.png)pandas treats “Message”
     as an “object” data type by default'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '![image.png](../Images/61138c555915e5f58e40b326c4b34cd1.png)pandas 默认将“Message”视为“object”数据类型'
 - en: EvalML utilizes the open-source [Woodwork](https://github.com/alteryx/woodwork) library
     to detect and specify how each feature should be treated, independent of its underlying
     physical data type. This means we can treat columns with the same physical data
@@ -117,113 +174,166 @@
     This differentiation allows us to clear up the ambiguity between features that
     may have the same underlying datatype in `pandas`, but ultimately represent different
     types of data.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: EvalML 利用开源的 [Woodwork](https://github.com/alteryx/woodwork) 库来检测和指定每个特征应该如何处理，而不考虑其底层的物理数据类型。这意味着我们可以对具有相同物理数据类型的列进行不同的处理。例如，我们可以指定希望将某些包含文本的列视为分类列，而将其他包含文本的列视为自然语言列，即使这些列具有相同的底层`object`数据类型。这种区分使我们能够澄清在`pandas`中可能具有相同底层数据类型但最终表示不同数据类型的特征之间的模糊性。
 - en: Here, we initialize a Woodwork `DataTable` with our feature. Our single `Message` feature
     is automatically detected as a natural language or text column.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们用我们的特征初始化一个 Woodwork `DataTable`。我们的单一`Message`特征被自动检测为自然语言或文本列。
 - en: '[PRE2]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![image.png](../Images/5c7233abeb5a9c4466ae536095a832ad.png)Our "Message" feature
     is automatically detected as a natural language (text) column'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '![image.png](../Images/5c7233abeb5a9c4466ae536095a832ad.png)我们的“Message”特征被自动检测为自然语言（文本）列'
 - en: We can also initialize a Woodwork `DataColumn` for our target.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以为我们的目标初始化一个 Woodwork `DataColumn`。
 - en: '[PRE3]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Our target is automatically detected as a categorical column. This makes sense,
     since we have a binary classification problem with two categories of text messages:
     spam and ham.'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的目标被自动检测为分类列。这是合理的，因为我们有一个二分类问题，涉及两类文本消息：垃圾邮件和正常邮件。
 - en: '![image.png](../Images/f6e775f22086b30e5978afb53c300658.png)Our target ("y")
     is automatically detected as a categorical column'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '![image.png](../Images/f6e775f22086b30e5978afb53c300658.png)我们的目标（“y”）被自动检测为分类列'
 - en: Running AutoMLSearch
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 运行 AutoMLSearch
 - en: Now, let’s feed our data to `[AutoMLSearch](https://evalml.alteryx.com/en/stable/user_guide/automl.html)` to
     see if we can produce a nontrivial machine learning model to detect spam. AutoML
     is the process of automating the construction, training, and evaluation of machine
     learning models. `AutoMLSearch` is EvalML’s interface for AutoML.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们将数据输入到 `[AutoMLSearch](https://evalml.alteryx.com/en/stable/user_guide/automl.html)`
+    中，看看我们是否能生成一个非平凡的机器学习模型来检测垃圾邮件。AutoML 是自动化构建、训练和评估机器学习模型的过程。`AutoMLSearch` 是 EvalML
+    的 AutoML 接口。
 - en: First, we will split our data into training and test data sets. We will use
     the training data set to train and find the best model, and then validate our
     model’s performance on the test data.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们将把数据分成训练集和测试集。我们将使用训练集来训练和寻找最佳模型，然后在测试集上验证模型的表现。
 - en: EvalML offers a utility method that makes this easy. All we need to do is specify
     that we have a binary classification problem, and that we want to reserve 20%
     of our data as test data.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: EvalML 提供了一个实用方法，使这变得简单。我们需要做的就是指定我们有一个二分类问题，并且我们希望将 20% 的数据保留为测试数据。
 - en: '[PRE4]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Next, we can set up `AutoMLSearch` by specifying the problem type and passing
     in our training data. Again, we have a binary classification problem because we
     are trying to classify our messages as one of two categories: ham or spam.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们可以通过指定问题类型并传入我们的训练数据来设置`AutoMLSearch`。我们有一个二分类问题，因为我们试图将消息分类为两个类别之一：ham或spam。
 - en: '[PRE5]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Calling the constructor initializes an `AutoMLSearch` object that is configured
     for our data. Now, we can call `automl.search()` to start the AutoML process.
     This will automatically generate pipelines for our data, and then train a collection
     of various models.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 调用构造函数会初始化一个为我们的数据配置的`AutoMLSearch`对象。现在，我们可以调用`automl.search()`来启动AutoML过程。这将自动生成数据的管道，并训练各种模型集合。
 - en: '[PRE6]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![](../Images/899148ef52aac57406cb1ac8e2206992.png)EvalML''s AutoML search
     has trained and evaluated nine different models.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/899148ef52aac57406cb1ac8e2206992.png)EvalML的AutoML搜索已经训练并评估了九种不同的模型。'
 - en: To understand the type of pipelines `AutoMLSearch` has built, we can grab the
     best performing pipeline and examine it in greater detail. We can call `automl.describe_pipeline(id)` to
     see detailed information about the pipeline’s components and performance, or `automl.graph(pipeline)` to
     see a visual representation of our pipeline as a flow of components.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 要了解`AutoMLSearch`构建了哪些类型的管道，我们可以抓取表现最好的管道并更详细地检查它。我们可以调用`automl.describe_pipeline(id)`来查看管道组件和性能的详细信息，或`automl.graph(pipeline)`来查看管道作为组件流的可视化表示。
 - en: '[PRE7]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![image.png](../Images/ad194eb3c16553e78aec6b682fe396b6.png)Description of
     our best pipeline'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '![image.png](../Images/ad194eb3c16553e78aec6b682fe396b6.png)我们最佳管道的描述'
 - en: '[PRE8]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![image.png](../Images/007fb6912a5ce713496ccd2acd828f3e.png)Graphical representation
     of our best pipeline'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '![image.png](../Images/007fb6912a5ce713496ccd2acd828f3e.png)我们最佳管道的图示表示'
 - en: 'By examining the best performing pipeline, we can better understand what `AutoMLSearch` is
     doing, and what pipelines it built with our text data. The best pipeline consists
     of an `Imputer`, a `Text Featurization Component` and a `Random Forest Classifier` component.
     Let’s break this down and understand how this pipeline was constructed:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过检查表现最好的管道，我们可以更好地理解`AutoMLSearch`在做什么，以及它用我们的文本数据构建了哪些管道。最佳管道由一个`Imputer`、一个`Text
+    Featurization Component`和一个`Random Forest Classifier`组件组成。让我们分解并了解这个管道是如何构建的：
 - en: '`AutoMLSearch` always adds an `Imputer` to each generated pipeline to handle
     missing values. By default, the `Imputer` will fill the missing values in numeric
     columns with the mean of each column, and fill the missing values in categorical
     columns with the most frequent category of each column. Because we don’t have
     any categorical or numeric columns in our input, the `Imputer` does not transform
     our data.'
+  id: totrans-49
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`AutoMLSearch`总是将一个`Imputer`添加到每个生成的管道中以处理缺失值。默认情况下，`Imputer`会用每列的均值填充数值列中的缺失值，用每列中最频繁的类别填充分类列中的缺失值。由于我们的输入中没有任何分类或数值列，`Imputer`不会转换我们的数据。'
 - en: Since `AutoMLSearch` identified a text column (our `Message` feature), it appended
     a `Text Featurization Component` to each pipeline. This component first cleans
     the text input by removing all non-alphanumerical characters (except spaces) and
@@ -235,102 +345,153 @@
     models are not able to handle text data natively. Thus, we need this component
     to help extract useful information from the raw text input and convert it to numeric
     values that the models can understand.
+  id: totrans-50
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 由于`AutoMLSearch`识别了一个文本列（我们的`Message`特征），它向每个管道中附加了一个`Text Featurization Component`。该组件首先通过去除所有非字母数字字符（空格除外）并将文本输入转换为小写来清理文本输入。然后，组件通过使用[LSA](https://en.wikipedia.org/wiki/Latent_semantic_analysis)和[nlp-primitives
+    package](https://github.com/alteryx/nlp_primitives)将清理后的文本特征替换为代表性的数值特征来处理这些文本特征。如果我们想在机器学习中处理文本特征，这个组件是必要的，因为大多数机器学习模型不能原生处理文本数据。因此，我们需要这个组件来帮助从原始文本输入中提取有用的信息，并将其转换为模型可以理解的数值。
 - en: Finally, each pipeline has an estimator (a model) which is fitted on our transformed
     training data and is used to make predictions. Our best pipeline has a [Random
     Forest classifier](https://en.wikipedia.org/wiki/Random_forest). If we took a
     look at some other pipelines, we would also see other pipelines constructed with
     a LightGBM classifier, Decision Tree classifier, XGBoost classifier, etc.
+  id: totrans-51
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 最后，每个管道都有一个估计器（模型），它在我们转换后的训练数据上进行拟合，并用于进行预测。我们的最佳管道有一个[随机森林分类器](https://en.wikipedia.org/wiki/Random_forest)。如果我们查看其他管道，我们还会看到构建了
+    LightGBM 分类器、决策树分类器、XGBoost 分类器等的管道。
 - en: Best Pipeline Performance
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最佳管道性能
 - en: Now, let’s see how well our best pipeline performed on various metrics and if
     we could beat the baseline trivial model by scoring the pipeline on test data.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们看看我们的最佳管道在各种指标上的表现如何，看看我们是否可以通过在测试数据上对管道进行评分来击败基准模型。
 - en: '[PRE9]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Our best pipeline performs much better than the baseline
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的最佳管道表现明显优于基准
 - en: '|  | Baseline model (always guesses majority class) | Pipeline with Text Featurization
     Component |'
+  id: totrans-56
   prefs: []
   type: TYPE_TB
+  zh: '|  | 基准模型（始终猜测多数类） | 带有文本特征化组件的管道 |'
 - en: '| Accuracy | 75% | 97.32% |'
+  id: totrans-57
   prefs: []
   type: TYPE_TB
+  zh: '| 准确率 | 75% | 97.32% |'
 - en: '| Balanced Accuracy | 50% | 95.53% |'
+  id: totrans-58
   prefs: []
   type: TYPE_TB
+  zh: '| 平衡准确率 | 50% | 95.53% |'
 - en: '| Recall | 0% | 91.95% |'
+  id: totrans-59
   prefs: []
   type: TYPE_TB
+  zh: '| 召回率 | 0% | 91.95% |'
 - en: We have significantly outperformed the baseline model in the three metrics (accuracy,
     balanced accuracy, and recall) we were focused on! With EvalML, we were able to
     build a model that is able to detect spam fairly well with just a few lines of
     code, and even before doing any tuning of the binary classification decision threshold.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们关注的三个指标（准确率、平衡准确率和召回率）上，我们显著超越了基准模型！借助EvalML，我们能够构建一个能够较好地检测垃圾邮件的模型，只需几行代码，甚至在调整二分类决策阈值之前。
 - en: The Importance of Text
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文本的重要性
 - en: We previously discussed that Woodwork had automatically detected that our `Messages` column
     was a natural language feature. We now understand that `AutoMLSearch` was able
     to create a `Text Featurization Component` because it identified this natural
     language column. To explain why this was useful, we can manually set our `Messages` feature
     as a categorical feature, run the same steps, and compare our scores.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们之前讨论过，Woodwork 已经自动检测到我们的`Messages`列是一个自然语言特征。我们现在明白了`AutoMLSearch`能够创建一个`Text
+    Featurization Component`，因为它识别了这个自然语言列。为了说明这为什么有用，我们可以手动将我们的`Messages`特征设置为分类特征，运行相同的步骤，并比较我们的分数。
 - en: '[PRE10]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: If we score the best pipeline found this time, we get an accuracy score of 75.2%,
     a balanced accuracy score of 50.3%, and a recall score of 0.6%. These scores are
     only marginally better than the scores for our baseline model!
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们对这次找到的最佳管道进行评分，我们会得到75.2%的准确率、50.3%的平衡准确率和0.6%的召回率。这些分数仅比我们基准模型的分数稍微好一点！
 - en: '[PRE11]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: The scores for our best pipeline here are not much better than our baseline
     scores
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的最佳管道的分数与基准分数相比没有显著提升
 - en: '|  | Baseline model (always guesses majority class) | Pipeline with Text Featurization
     Component | Pipeline without Text Featurization Component |'
+  id: totrans-67
   prefs: []
   type: TYPE_TB
+  zh: '|  | 基准模型（始终猜测多数类） | 带有文本特征化组件的管道 | 不带文本特征化组件的管道 |'
 - en: '| Accuracy | 75% | 97.32% | 75.25% |'
+  id: totrans-68
   prefs: []
   type: TYPE_TB
+  zh: '| 准确率 | 75% | 97.32% | 75.25% |'
 - en: '| Balanced Accuracy | 50% | 95.53% | 50.34% |'
+  id: totrans-69
   prefs: []
   type: TYPE_TB
+  zh: '| 平衡准确率 | 50% | 95.53% | 50.34% |'
 - en: '| Recall | 0% | 91.95% | 0.67% |'
+  id: totrans-70
   prefs: []
   type: TYPE_TB
+  zh: '| 召回率 | 0% | 91.95% | 0.67% |'
 - en: This means that unlike the previous best model found, this model is not much
     better than the trivial baseline model, and is no better than always guessing
     the majority “ham” class. By observing the components that make up this pipeline,
     we can better understand why.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着与之前找到的最佳模型不同，这个模型与简单的基准模型相比没有更大的提升，也不比总是猜测多数“正常”类别要好。通过观察构成这个管道的组件，我们可以更好地理解为什么。
 - en: '[PRE12]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '![image.png](../Images/fb140746c116973a873f4c69fa3f95a9.png)Graph of our best
     pipeline if we treat "Message" as a categorical feature'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '![image.png](../Images/fb140746c116973a873f4c69fa3f95a9.png)如果我们将“Message”视为分类特征，我们最佳管道的图表'
 - en: Because `AutoMLSearch` was told to treat “Message” as a categorical feature
     this time, each pipeline included a one-hot encoder (rather than a text featurization
     component). The one-hot encoder encoded the top 10 most frequent “categories”
@@ -338,118 +499,181 @@
     text messages were encoded while the rest of the messages were dropped. Doing
     this removed almost all of the information from our data, so our best pipeline
     could not do much better than our trivial baseline model.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为`AutoMLSearch`这次被告知将“消息”视为分类特征，所以每个管道都包含了一个独热编码器（而不是文本特征化组件）。该独热编码器对这些文本的前10个最常见的“类别”进行了编码；然而，由于每条文本都是独一无二的，这意味着仅对10条独特的文本消息进行了编码，而其余的消息则被丢弃了。这样做几乎移除了我们数据中的所有信息，因此我们最好的管道无法比我们的简单基线模型表现得更好。
 - en: What’s Next?
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 接下来是什么？
 - en: In this post, we covered how EvalML can be used to classify text messages as
     spam or ham (non-spam), and we learned how EvalML can detect and automatically
     handle text features with the help of Woodwork and the nlp-primitives library.
     You can learn more about Woodwork and nlp-primitives through their documentation,
     linked in the resources below. Finally, be sure to check out a [blog post](https://innovation.alteryx.com/natural-language-processing-featuretools/) our
     former intern Clara Duffy wrote to learn more about nlp-primitives.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们介绍了如何使用 EvalML 来将文本消息分类为垃圾邮件或非垃圾邮件（ham），并学习了 EvalML 如何在 Woodwork 和
+    nlp-primitives 库的帮助下检测并自动处理文本特征。你可以通过下方的资源链接进一步了解 Woodwork 和 nlp-primitives。最后，务必查看我们前实习生
+    Clara Duffy 写的[博客文章](https://innovation.alteryx.com/natural-language-processing-featuretools/)，以了解更多关于
+    nlp-primitives 的信息。
 - en: Special thanks to Becca McBrayer for writing [the demo](https://evalml.alteryx.com/en/stable/demos/text_input.html) which
     this blog post is based on!
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 特别感谢 Becca McBrayer 编写了[演示](https://evalml.alteryx.com/en/stable/demos/text_input.html)，这篇博客文章正是基于这个演示写的！
 - en: More Resources
+  id: totrans-78
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多资源
 - en: '[Using Text Data in EvalML demo](https://evalml.alteryx.com/en/stable/demos/text_input.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[EvalML 文本数据演示](https://evalml.alteryx.com/en/stable/demos/text_input.html)'
 - en: '[Blog post about nlp-primitives](https://innovation.alteryx.com/natural-language-processing-featuretools/)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于 nlp-primitives 的博客文章](https://innovation.alteryx.com/natural-language-processing-featuretools/)'
 - en: '[nlp-primitives GitHub repo](https://github.com/alteryx/nlp_primitives)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[nlp-primitives GitHub 仓库](https://github.com/alteryx/nlp_primitives)'
 - en: '[Woodwork documentation](https://woodwork.alteryx.com/en/stable/index.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Woodwork 文档](https://woodwork.alteryx.com/en/stable/index.html)'
 - en: '**Bio: [Angela Lin](https://www.linkedin.com/in/angela97lin/)** is a software
     engineer on the team building the open-source EvalML automated machine learning
     package in Python.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Angela Lin](https://www.linkedin.com/in/angela97lin/)** 是团队中的一名软件工程师，该团队负责构建开源的
+    EvalML 自动化机器学习 Python 包。'
 - en: '[Original](https://innovation.alteryx.com/using-text-data-in-evalml-with-woodwork/).
     Reposted with permission.'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://innovation.alteryx.com/using-text-data-in-evalml-with-woodwork/)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Getting Started with 5 Essential Natural Language Processing Libraries](/2021/02/getting-started-5-essential-nlp-libraries.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[入门 5 个重要的自然语言处理库](/2021/02/getting-started-5-essential-nlp-libraries.html)'
 - en: '[Natural Language Processing Pipelines, Explained](/2021/03/natural-language-processing-pipelines-explained.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理管道解析](/2021/03/natural-language-processing-pipelines-explained.html)'
 - en: '[How to Clean Text Data at the Command Line](/2020/12/clean-text-data-command-line.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在命令行清理文本数据](/2020/12/clean-text-data-command-line.html)'
 - en: '* * *'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-90
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT 工作'
 - en: '* * *'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-95
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Getting Started with Automated Text Summarization](https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[入门自动化文本摘要]((https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html))'
 - en: '[What is Text Classification?](https://www.kdnuggets.com/2022/07/text-classification.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是文本分类？](https://www.kdnuggets.com/2022/07/text-classification.html)'
 - en: '[Best Architecture for Your Text Classification Task: Benchmarking…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本分类任务的最佳架构：基准测试…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
 - en: '[DIY Automated Machine Learning with Streamlit](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Streamlit 的 DIY 自动化机器学习](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)'
 - en: '[Automated Machine Learning with Python: A Case Study](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 进行自动化机器学习：案例研究](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)'
 - en: '[Harnessing ChatGPT for Automated Data Cleaning and Preprocessing](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用 ChatGPT 进行自动化数据清理和预处理](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)'
