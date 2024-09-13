@@ -1,223 +1,331 @@
 - en: A Beginner’s Guide to Tweet Analytics with Pandas
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Pandas 的推文分析初学者指南
 - en: 原文：[https://www.kdnuggets.com/2017/03/beginners-guide-tweet-analytics-pandas.html](https://www.kdnuggets.com/2017/03/beginners-guide-tweet-analytics-pandas.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/03/beginners-guide-tweet-analytics-pandas.html](https://www.kdnuggets.com/2017/03/beginners-guide-tweet-analytics-pandas.html)
 - en: Twitter provides access to analytics for all of its users, but I am assuming
     relatively few vanilla tweeples pay much attention to its existence. There are
     a variety of other services which can help perform tweet and audience analytics,
     and further analysis such as that related to geographic and natural language processing,
     but when paired with some simple Python, the Twitter-supplied data can be incredibly
     useful.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: Twitter 为所有用户提供了分析访问权限，但我假设相对较少的普通用户会关注其存在。还有各种其他服务可以帮助进行推文和受众分析，以及与地理和自然语言处理相关的进一步分析，但与一些简单的
+    Python 配合使用时，Twitter 提供的数据可以非常有用。
 - en: This is a simple guide to getting your hands a bit dirty doing analysis on your
     own in Python. Unlike a lot of other tutorials which often pull from the real-time
     Twitter API, we will be using the downloadable Twitter Analytics data, and most
     of what we do will be done in Pandas.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个简单的指南，帮助你在 Python 中亲自进行一些分析。与许多其他教程通常从实时 Twitter API 中提取数据不同，我们将使用可下载的 Twitter
+    Analytics 数据，我们的大部分工作将在 Pandas 中完成。
 - en: Before we get started, let's get the obligatory imports out of the way.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们开始之前，先处理必要的导入部分。
 - en: Get and Inspect the Data
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 获取并检查数据
 - en: First we need the data. This part is easy enough; go to Twitter, click on the
     upper right menu (your profile pic), select **Analytics**, choose the **Tweets**
     tab along the top, use the date range pickers to select a time period, and choose
     **Export Data**. It doesn't matter how much data you use; our simple example will
     work with any amount. I chose the default, **Past 28 Days**.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先我们需要数据。这部分非常简单；前往 Twitter，点击右上角的菜单（你的头像），选择**分析**，在顶部选择**推文**选项卡，使用日期范围选择器选择时间段，然后选择**导出数据**。你使用的数据量无所谓；我们的简单示例适用于任何数量的数据。我选择了默认的**过去
+    28 天**。
 - en: '![](../Images/91d318b27d4114f353b60ee7749061af.png)'
+  id: totrans-7
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/91d318b27d4114f353b60ee7749061af.png)'
 - en: Get that Twitter analytics data.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 获取 Twitter 分析数据。
 - en: Once we have the CSV file, we will want to load it into a Pandas DataFrame for
     analysis.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们有了 CSV 文件，我们将需要将其加载到 Pandas DataFrame 中进行分析。
 - en: Don't mind all the dropped columns; while a lot of what is there is useful for
     our analysis -- tweet text, time, impressions, retweets, etc. -- many are not
     -- all the **promoted** things -- and so we will just omit them from the start.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 不用在意所有被丢弃的列；虽然其中很多数据对我们的分析很有用——推文文本、时间、印象、转发等——但许多数据并不有用——所有**推广**的内容——因此我们将从一开始就省略它们。
 - en: As we would with any data analysis project, next we have a look at the data.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们在任何数据分析项目中一样，接下来我们查看数据。
 - en: '![](../Images/8a31b05d700e5357f276a72da7cf708e.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8a31b05d700e5357f276a72da7cf708e.png)'
 - en: 'Running:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行：
 - en: tells us that I have tweeted a measly 95 times in the past 4 weeks. Not a very
     large dataset, and we probably would not want to make any inferences based on
     our findings, but a good enough toy set to start out with.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 告诉我们我在过去 4 周内发推了可怜的 95 次。数据集不是很大，我们可能不想根据我们的发现做出任何推断，但这是一个足够好的玩具数据集，可以作为起点。
 - en: Let's see what useful analytics we can pull out of this.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看我们可以从中提取出哪些有用的分析数据。
 - en: Basic Tweet Stats
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 基本推文统计
 - en: 'So, given what data is shown in the output of running `head()` on the dataset
     above, and having a rough intuition of what tweet metrics would be useful, we
     will grab the following stats:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，考虑到在上述数据集中运行`head()`的输出中显示的数据，并对哪些推文指标可能有用有一个大致的直觉，我们将获取以下统计数据：
 - en: '**Retweets** - Mean RTs per tweet & top 5 RTed tweets'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**转发** - 每条推文的平均转发数和前 5 条转发最多的推文'
 - en: '**Likes** - Mean likes per tweet & top 5 liked tweets'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**点赞** - 每条推文的平均点赞数和前 5 条最受欢迎的推文'
 - en: '**Impressions** - Mean impressions per tweet & top 5 tweets with most impressions'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**印象** - 每条推文的平均印象数和前 5 条印象最多的推文'
 - en: '[PRE0]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: I won't bother with any analysis of these metrics. Needless to say, I should
     step my social media game up.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我不会对这些指标进行任何分析。不用说，我应该提升我的社交媒体表现。
 - en: 'Top #Hashtags and @Mentions'
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '前 #标签 和 @提及'
 - en: It's no secret that hashtags play an important role in Twitter, and mentions
     can also help grow your network and influence. Together they help put the 'social'
     in social networking, transforming platforms like Twitter from passive experiences
     to very active ones. With that, getting a handle on the most social aspect of
     this social network can be a helpful endeavour.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 毫无疑问，标签在Twitter中扮演着重要角色，提及也有助于扩展你的网络和影响力。它们共同帮助将“社交”融入社交网络，将像Twitter这样的平台从被动体验转变为非常活跃的体验。了解这个社交网络最社交的方面将是一个有帮助的努力。
 - en: '[PRE1]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Putting aside some evident bumps like punctuation being removed from tweet text
     prior to checking Twitter handles (this could be a problem if you have tweeps
     named both Francesco_AI and FrancescoAI), this works and is at least relatively
     Pythonic (though I'm sure it could be more so).
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 把一些明显的问题，比如推文文本中的标点在检查Twitter句柄之前被移除（如果你有名为Francesco_AI和FrancescoAI的用户，这可能是个问题），这方法有效，至少相对Pythonic（虽然我相信可以做得更好）。
 - en: Time-series Analysis
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 时间序列分析
 - en: Finally, let's have a look at some very basic temporal data. We will check mean
     impressions for tweets based -- independently -- on both the hour of day and day
     of week that they are tweeted. I caution (once gain) that this is based on very
     little data, and so nothing useful will likely be gleaned. However, given much
     larger amounts of tweet data, entire social media campaigns are planned.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们来看看一些非常基础的时间数据。我们将检查基于推文的小时和星期几的平均印象。我再次警告，这基于很少的数据，因此可能得不到有用的信息。然而，考虑到大量的推文数据，可以计划整个社交媒体活动。
 - en: While this is based on impressions, it could just as reasonably (and easily
     changed to) be based on engagements, or RTs, or whatever else you pleased. Working
     in advertising, and promoting tweets? Maybe you are more interested in some of
     those **promotion*** metrics we hacked off the dataset at the start.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然这基于印象，但同样可以（并且容易地）基于互动、转发或其他你喜欢的内容。做广告和推广推文？也许你对我们最初从数据集中剥离的一些**推广**指标更感兴趣。
 - en: We have to convert the Twitter supplied date field to a legitimate Python datetime
     object, bin the data based on which hourly slot it falls into, identify days of
     week, and then capture this data in a couple of additional columns in the DataFrame,
     which we will pillage for stats afterward.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们必须将Twitter提供的日期字段转换为合法的Python datetime对象，根据其所属的小时段对数据进行分组，识别星期几，然后在DataFrame中捕捉这些数据的几个附加列，我们将在之后用来提取统计信息。
 - en: '[PRE2]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: It seems I tweet at rather consistent times of day. It also seems that my Wednesday
     tweets, 11 AM tweets, and 6 PM tweets are my bread and butter. Of course, this
     is based on 95 tweets, and so is meaningless and inconclusive. However, after
     performing these same steps on some considerably larger sets of data, some interesting
     trends have been observed which may help lead to business decisions. All from
     some simple Python.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 看起来我在一天中的时间比较一致地发推。我还发现我的星期三推文、上午11点推文和下午6点推文是我的主要推文。当然，这基于95条推文，因此意义不大且结论不确切。然而，在对一些相当大数据集执行这些相同步骤后，观察到了一些有趣的趋势，这可能有助于商业决策。都是从一些简单的Python开始的。
 - en: While not earth-shattering, our simple Pandas-based Twitter analytics code is
     enough to get us thinking about how we may better use social media. Applied to
     the right data, elementary scripts can be quite powerful.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然不是惊天动地，我们基于Pandas的简单Twitter分析代码足以让我们思考如何更好地利用社交媒体。应用于正确的数据，基础脚本可以相当强大。
 - en: '**Related:**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Mining Twitter Data with Python Part 1: Collecting Data](/2016/06/mining-twitter-data-python-part-1.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Python挖掘Twitter数据第一部分：收集数据](/2016/06/mining-twitter-data-python-part-1.html)'
 - en: '[Pandas Cheat Sheet: Data Science and Data Wrangling in Python](/2017/01/pandas-cheat-sheet.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Pandas备忘单：Python中的数据科学和数据清理](/2017/01/pandas-cheat-sheet.html)'
 - en: '[Tidying Data in Python](/2017/01/tidying-data-python.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在Python中清理数据](/2017/01/tidying-data-python.html)'
 - en: '* * *'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-39
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT'
 - en: '* * *'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多相关主题
 - en: '[A Beginner''s Guide to Pandas Melt Function](https://www.kdnuggets.com/2023/03/beginner-guide-pandas-melt-function.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[初学者的 Pandas Melt 函数指南](https://www.kdnuggets.com/2023/03/beginner-guide-pandas-melt-function.html)'
 - en: '[Data Ingestion with Pandas: A Beginner Tutorial](https://www.kdnuggets.com/2022/04/data-ingestion-pandas-beginner-tutorial.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Pandas 的数据摄取：初学者教程](https://www.kdnuggets.com/2022/04/data-ingestion-pandas-beginner-tutorial.html)'
 - en: '[A Beginner''s Guide to End to End Machine Learning](https://www.kdnuggets.com/2021/12/beginner-guide-end-end-machine-learning.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[初学者的端到端机器学习指南](https://www.kdnuggets.com/2021/12/beginner-guide-end-end-machine-learning.html)'
 - en: '[Essential Machine Learning Algorithms: A Beginner''s Guide](https://www.kdnuggets.com/2021/05/essential-machine-learning-algorithms-beginners.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基本机器学习算法：初学者指南](https://www.kdnuggets.com/2021/05/essential-machine-learning-algorithms-beginners.html)'
 - en: '[A Beginner''s Guide to Q Learning](https://www.kdnuggets.com/2022/06/beginner-guide-q-learning.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[初学者的 Q 学习指南](https://www.kdnuggets.com/2022/06/beginner-guide-q-learning.html)'
 - en: '[A Beginner’s Guide to Web Scraping Using Python](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 的网页抓取初学者指南](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'

@@ -1,71 +1,101 @@
 - en: Introduction to Anomaly Detection
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 异常检测简介
 - en: 原文：[https://www.kdnuggets.com/2017/04/datascience-introduction-anomaly-detection.html](https://www.kdnuggets.com/2017/04/datascience-introduction-anomaly-detection.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/04/datascience-introduction-anomaly-detection.html](https://www.kdnuggets.com/2017/04/datascience-introduction-anomaly-detection.html)
 - en: '**By [DataScience.com](https://www.datascience.com/blog/intro-to-anomaly-detection-learn-data-science-tutorials)**
     Sponsored Post.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [DataScience.com](https://www.datascience.com/blog/intro-to-anomaly-detection-learn-data-science-tutorials)
+    提供赞助。**'
 - en: This overview is intended for beginners in the fields of data science and machine
     learning. Almost no formal professional experience is needed to follow along,
     but the reader should have some basic knowledge of calculus (specifically integrals),
     the programming language Python, functional programming, and machine learning.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 本概述旨在为数据科学和机器学习领域的初学者提供指导。几乎不需要正式的专业经验，但读者应具备一些基本的微积分（特别是积分）、编程语言 Python、函数式编程和机器学习的知识。
 - en: 'Introduction: Anomaly Detection'
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 简介：异常检测
 - en: Anomaly detection is a technique used to identify unusual patterns that do not
     conform to expected behavior, called outliers. It has many applications in business,
     from intrusion detection (identifying strange patterns in network traffic that
     could signal a hack) to system health monitoring (spotting a malignant tumor in
     an MRI scan), and from fraud detection in credit card transactions to fault detection
     in operating environments.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 异常检测是一种用于识别不符合预期行为的异常模式的技术，这些模式被称为离群点。它在商业中有许多应用，从入侵检测（识别可能表示黑客攻击的网络流量中的异常模式）到系统健康监测（在
+    MRI 扫描中发现恶性肿瘤），以及信用卡交易中的欺诈检测到操作环境中的故障检测。
 - en: This overview will cover several methods of detecting anomalies, as well as
     how to build a detector in Python using simple moving average (SMA) or low-pass
     filter.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 本概述将涵盖几种检测异常的方法，以及如何使用简单移动平均（SMA）或低通滤波器在 Python 中构建检测器。
 - en: '[![](../Images/1ff5523f9fb1df59f1b2a666d68c0ee2.png)](https://www.datascience.com/blog/intro-to-anomaly-detection-learn-data-science-tutorials)'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/1ff5523f9fb1df59f1b2a666d68c0ee2.png)](https://www.datascience.com/blog/intro-to-anomaly-detection-learn-data-science-tutorials)'
 - en: Fig 1\. Anomalies in Sunspots
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 1\. 太阳黑子的异常
 - en: What Are Anomalies?
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是异常？
 - en: 'Before getting started, it is important to establish some boundaries on the
     definition of an anomaly. Anomalies can be broadly categorized as:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开始之前，重要的是建立异常的定义边界。异常可以广泛地分类为：
 - en: '**Point anomalies:** A single instance of data is anomalous if it''s too far
     off from the rest. *Business use case:* Detecting credit card fraud based on "amount
     spent."'
+  id: totrans-11
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**点异常：** 如果数据的单个实例与其他数据偏差过大，则该实例异常。 *业务用例：* 基于“消费金额”检测信用卡欺诈。'
 - en: '**Contextual anomalies:** The abnormality is context specific. This type of
     anomaly is common in time-series data. *Business use case:* Spending $100 on food
     every day during the holiday season is normal, but may be odd otherwise.'
+  id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**上下文异常：** 异常是特定于上下文的。这种类型的异常在时间序列数据中很常见。 *业务用例：* 在假期期间每天花费 100 美元用于食物是正常的，但其他时候可能会显得异常。'
 - en: '**Collective anomalies:** A set of data instances collectively helps in detecting
     anomalies. *Business use case:* Someone is trying to copy data form a remote machine
     to a local host unexpectedly, an anomaly that would be flagged as a potential
     cyber attack.'
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**集体异常：** 一组数据实例集体有助于检测异常。 *业务用例：* 某人意外地尝试从远程机器复制数据到本地主机，这种异常将被标记为潜在的网络攻击。'
 - en: Anomaly detection is similar to - but not entirely the same as - noise removal
     and novelty detection. **Novelty detection** is concerned with identifying an
     unobserved pattern in new observations not included in training data - like a
@@ -73,15 +103,23 @@
     removal** ([NR](http://datamining.rutgers.edu/publication/tkdehcleaner.pdf)) is
     the process of immunizing analysis from the occurrence of unwanted observations;
     in other words, removing noise from an otherwise meaningful signal.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 异常检测类似于 - 但不完全相同于 - 噪声去除和新颖性检测。 **新颖性检测** 关注于识别新观察中未包含在训练数据中的未观察到的模式 - 比如圣诞节期间对
+    YouTube 新频道的突然兴趣。 **噪声去除** ([NR](http://datamining.rutgers.edu/publication/tkdehcleaner.pdf))
+    是保护分析免受不必要观察发生的过程；换句话说，就是从原本有意义的信号中去除噪声。
 - en: Anomaly Detection Techniques
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 异常检测技术
 - en: '**Simple Statistical Methods**'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简单统计方法**'
 - en: The simplest approach to identifying irregularities in data is to flag the data
     points that deviate from common statistical properties of a distribution, including
     mean, median, mode, and quantiles. Let's say the definition of an anomalous data
@@ -93,85 +131,122 @@
     simple moving average can also be defined as a "low pass filter." (A Kalman filter
     is a more sophisticated version of this metric; you can find a very intuitive
     explanation of it [here](http://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/).)
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 识别数据异常的最简单方法是标记那些偏离分布的常见统计属性的数据点，包括均值、中位数、众数和分位数。假设异常数据点的定义是偏离均值一定标准差的数据点。遍历时间序列数据的均值并不完全简单，因为它不是静态的。你需要一个滚动窗口来计算数据点的平均值。从技术上讲，这叫做滚动平均或移动平均，旨在平滑短期波动并突出长期波动。从数学上讲，n期简单移动平均也可以定义为“低通滤波器”。（卡尔曼滤波器是这种度量的更复杂版本；你可以在[这里](http://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/)找到一个非常直观的解释。）
 - en: '**Challenges** The low pass filter allows you to identify anomalies in simple
     use cases, but there are certain situations where this technique won''t work.
     Here are a few:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**挑战** 低通滤波器可以帮助你在简单用例中识别异常，但在某些情况下，这种技术可能不起作用。以下是一些例子：'
 - en: The data contains noise which might be similar to abnormal behavior, because
     the boundary between normal and abnormal behavior is often not precise.
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据中包含的噪声可能类似于异常行为，因为正常行为和异常行为之间的边界通常并不精确。
 - en: The definition of abnormal or normal may frequently change, as malicious adversaries
     constantly adapt themselves. Therefore, the threshold based on moving average
     may not always apply.
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 异常或正常的定义可能会频繁变化，因为恶意对手会不断适应。因此，基于移动平均的阈值可能并不总是适用。
 - en: The pattern is based on seasonality. This involves more sophisticated methods,
     such as decomposing the data into multiple trends in order to identify the change
     in seasonality.
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这种模式基于季节性。这涉及到更复杂的方法，例如将数据分解为多个趋势，以识别季节性的变化。
 - en: Machine Learning-Based Approaches
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 基于机器学习的方法
 - en: Below is a brief overview of popular machine learning-based techniques for anomaly
     detection.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是流行的基于机器学习的异常检测技术的简要概述。
 - en: '**Density-Based Anomaly Detection**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**基于密度的异常检测**'
 - en: Density-based anomaly detection is based on the k-nearest neighbors algorithm.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于密度的异常检测基于k最近邻算法。
 - en: '*Assumption:* Normal data points occur around a dense neighborhood and abnormalities
     are far away.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '*假设：* 正常数据点通常位于密集的邻域中，而异常数据点则远离这些邻域。'
 - en: 'The nearest set of data points are evaluated using a score, which could be
     Eucledian distance or a similar measure dependent on the type of the data (categorical
     or numerical). They could be broadly classified into two algorithms:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用评分评估最近的数据点，这个评分可能是欧氏距离或依赖于数据类型（分类或数值）的类似度量。它们可以大致分为两种算法：
 - en: '[K-nearest neighbor](http://www.scholarpedia.org/article/K-nearest_neighbor):
     k-NN is a simple, non-parametric lazy learning technique used to classify data
     based on similarities in distance metrics such as Eucledian, Manhattan, Minkowski,
     or Hamming distance.'
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[k最近邻](http://www.scholarpedia.org/article/K-nearest_neighbor)：k-NN是一种简单的非参数懒惰学习技术，用于根据距离度量（如欧氏距离、曼哈顿距离、闵可夫斯基距离或汉明距离）的相似性来分类数据。'
 - en: 'Relative density of data: This is better known as [local outlier factor](http://link.springer.com/article/10.1007%2Fs10618-012-0300-z)
     (LOF). This concept is based on a distance metric called reachability distance.'
+  id: totrans-29
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 数据的相对密度：这通常被称为[局部离群因子](http://link.springer.com/article/10.1007%2Fs10618-012-0300-z)（LOF）。这个概念基于一种叫做可达距离的距离度量。
 - en: '**Clustering-Based Anomaly Detection**'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**基于聚类的异常检测**'
 - en: Clustering is one of the most popular concepts in the domain of unsupervised
     learning.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 聚类是无监督学习领域中最流行的概念之一。
 - en: '*Assumption:* Data points that are similar tend to belong to similar groups
     or clusters, as determined by their distance from local centroids.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '*假设：* 相似的数据点往往属于相似的组或簇，这取决于它们与局部中心的距离。'
 - en: '[K-means](https://www.datascience.com/blog/introduction-to-k-means-clustering-algorithm-learn-data-science-tutorials)
     is a widely used clustering algorithm. It creates ''k'' similar clusters of data
     points. Data instances that fall outside of these groups could potentially be
     marked as anomalies.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '[K-means](https://www.datascience.com/blog/introduction-to-k-means-clustering-algorithm-learn-data-science-tutorials)
+    是一种广泛使用的聚类算法。它创建了‘k’个相似的数据点簇。落在这些组之外的数据实例可能会被标记为异常。'
 - en: '**Support Vector Machine-Based Anomaly Detection**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**基于支持向量机的异常检测**'
 - en: A [support vector machine](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.675.575&rep=rep1&type=pdf)
     is another effective technique for detecting anomalies. A SVM is typically associated
     with supervised learning, but there are extensions ([OneClassCVM,](http://scikit-learn.org/stable/modules/generated/sklearn.svm.OneClassSVM.html)
@@ -180,86 +255,130 @@
     in order to cluster the normal data instances using the training set, and then,
     using the testing instance, it tunes itself to identify the abnormalities that
     fall outside the learned region.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '[支持向量机](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.675.575&rep=rep1&type=pdf)
+    是另一种有效的异常检测技术。SVM 通常与监督学习相关，但也有扩展（例如[OneClassCVM,](http://scikit-learn.org/stable/modules/generated/sklearn.svm.OneClassSVM.html)）可用于将异常检测作为无监督问题（即训练数据未标记）。该算法学习一个软边界，以便使用训练集对正常数据实例进行聚类，然后，通过测试实例调整自身，以识别落在学习区域之外的异常。'
 - en: Depending on the use case, the output of an anomaly detector could be numeric
     scalar values for filtering on domain-specific thresholds or textual labels (such
     as binary/multi labels).
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据用例，异常检测器的输出可能是用于过滤特定领域阈值的数值标量值或文本标签（例如二进制/多标签）。
 - en: Building a Simple Detection Solution Using a Low-Pass Filter
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用低通滤波器构建简单的检测解决方案
 - en: 'In this section, we will focus on building a simple anomaly-detection package
     using moving average to identify anomalies in the number of sunspots per month
     in a sample dataset, which can be [downloaded here](http://www-personal.umich.edu/~mejn/cp/data/sunspots.txt)
     using the following command:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本节中，我们将重点介绍如何使用移动平均构建一个简单的异常检测包，以识别样本数据集中每月太阳黑子数量的异常，该数据集可以通过以下命令在[这里下载](http://www-personal.umich.edu/~mejn/cp/data/sunspots.txt)：
 - en: '[PRE0]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The file has 3,143 rows, which contain information about sunspots collected
     between the years 1749-1984\. Sunspots are defined as dark spots on the surface
     of the sun. The study of sunspots helps scientists understand the sun's properties
     over a period of time; in particular, its magnetic properties.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 该文件包含3,143行数据，包含1749-1984年间收集的太阳黑子信息。太阳黑子定义为太阳表面上的黑点。研究太阳黑子有助于科学家理解太阳在一段时间内的性质，特别是其磁性特性。
 - en: Read the rest of this tutorial including the Python code on [**DataScience.com
     site**](https://www.datascience.com/blog/intro-to-anomaly-detection-learn-data-science-tutorials).
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 阅读本教程的其余部分，包括[**DataScience.com网站**](https://www.datascience.com/blog/intro-to-anomaly-detection-learn-data-science-tutorials)上的Python代码。
 - en: '* * *'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[A Beginner''s Guide to Anomaly Detection Techniques in Data Science](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中异常检测技术的初学者指南](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
 - en: '[Anomaly Detection in BigQuery: Uncover Hidden Insights and Drive Action](https://www.kdnuggets.com/anomaly-detection-in-bigquery-uncover-hidden-insights-and-drive-action)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[BigQuery 中的异常检测：揭示隐藏的洞察并推动行动](https://www.kdnuggets.com/anomaly-detection-in-bigquery-uncover-hidden-insights-and-drive-action)'
 - en: '[How to Perform Motion Detection Using Python](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Python 执行运动检测](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)'
 - en: '[Using Hugging Face Transformers for Emotion Detection in Text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Hugging Face Transformers 进行文本情感检测](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
 - en: '[KDnuggets News, August 17: How to Perform Motion Detection Using…](https://www.kdnuggets.com/2022/n33.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，8月17日：如何执行运动检测…](https://www.kdnuggets.com/2022/n33.html)'
 - en: '[Density Kernel Depth for Outlier Detection in Functional Data](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[功能数据中用于异常检测的密度核深度](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)'
