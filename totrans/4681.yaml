@@ -3,27 +3,33 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 SpaCy 自动提取命名实体的 Flask API
 - en: 原文：[https://www.kdnuggets.com/2019/04/building-flask-api-automatically-extract-named-entities-spacy.html](https://www.kdnuggets.com/2019/04/building-flask-api-automatically-extract-named-entities-spacy.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/04/building-flask-api-automatically-extract-named-entities-spacy.html](https://www.kdnuggets.com/2019/04/building-flask-api-automatically-extract-named-entities-spacy.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [注释](#comments)'
 - en: '**By [Susan Li](https://www.linkedin.com/in/susanli/), Sr. Data Scientist**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Susan Li](https://www.linkedin.com/in/susanli/)，高级数据科学家**'
 - en: '![Figure](../Images/06957073c64dec6ad611e5c88f73a537.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/06957073c64dec6ad611e5c88f73a537.png)'
 - en: 'Photo credit: Pixabay'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：Pixabay
 - en: The overwhelming amount of unstructured text data available today provides a
     rich source of information if the data can be structured. [Named-entity Recognition
     (NER](https://en.wikipedia.org/wiki/Named-entity_recognition))(also known as Named-entity
@@ -32,6 +38,7 @@
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前大量的非结构化文本数据提供了丰富的信息源，如果数据可以被结构化的话。[命名实体识别 (NER)](https://en.wikipedia.org/wiki/Named-entity_recognition)（也称为命名实体提取）是从半结构化和非结构化文本源中构建知识的第一步之一。
 - en: Only after NER, we will be able to reveal at a minimum, who, and what, the information
     contains. As a result, a data science team would be able to see a structured representation
     of all of the the names of people, companies, locations and so on in a corpus
@@ -39,6 +46,7 @@
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 只有在进行 NER 后，我们才能至少揭示信息中包含了谁和什么。因此，数据科学团队将能够看到一个结构化的表示，展示一个语料库中所有人名、公司名、地点等的名称，这可以作为进一步分析和研究的起点。
 - en: In the [previous post](https://towardsdatascience.com/named-entity-recognition-with-nltk-and-spacy-8c4a7d88e7da),
     we have learned and practiced [how to build named entity recognizer using NLTK
     and spaCy](https://towardsdatascience.com/named-entity-recognition-with-nltk-and-spacy-8c4a7d88e7da).
@@ -48,11 +56,15 @@
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 [上一篇文章](https://towardsdatascience.com/named-entity-recognition-with-nltk-and-spacy-8c4a7d88e7da)中，我们学习并实践了
+    [如何使用 NLTK 和 spaCy 构建命名实体识别器](https://towardsdatascience.com/named-entity-recognition-with-nltk-and-spacy-8c4a7d88e7da)。为了更进一步，创建有用的东西，本文将介绍如何使用
+    spaCy 开发和部署一个简单的命名实体提取器，并通过 Flask API 用 Python 服务它*。
 - en: A Flask API
   id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一个 Flask API
 - en: 'Our goal is to build an API that we provide text, for example, a New York Times
     article (or any article) as input, our named entity extractor will then identify
     and extract four types of entities: organization, person, location and money.
@@ -60,87 +72,106 @@
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的目标是构建一个 API，我们提供文本，例如《纽约时报》文章（或任何文章）作为输入，我们的命名实体提取器将识别并提取四种类型的实体：组织、人物、地点和金额。基本架构如下：
 - en: '![Figure](../Images/585cde79738ef16ac1a52385245ccd80.png)'
   id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/585cde79738ef16ac1a52385245ccd80.png)'
 - en: Figure 1
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 1
 - en: 'To build the API, we will need to create two files:'
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了构建 API，我们需要创建两个文件：
 - en: '`index.html` to handle the template of the API.'
   id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`index.html` 用于处理 API 的模板。'
 - en: '`app.py` to handle the requests and return the output file.'
   id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`app.py` 用于处理请求并返回输出文件。'
 - en: 'And the final product will look like this:'
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终产品将如下所示：
 - en: '![Figure](../Images/989fa6eb53ead63fcf32dca581c1051d.png)'
   id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/989fa6eb53ead63fcf32dca581c1051d.png)'
 - en: Figure 2
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 2
 - en: 'Let’s start building the API and create two files step-by-step. Our project
     folder structure is like below:'
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们从构建 API 开始，逐步创建两个文件。我们的项目文件夹结构如下：
 - en: Our project is located in ***Named-Entity-Extractor ***folder.
   id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们的项目位于 ***Named-Entity-Extractor ***文件夹中。
 - en: '![Figure](../Images/1895f7c9d56de5641d784aed7d26a6c4.png)'
   id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/1895f7c9d56de5641d784aed7d26a6c4.png)'
 - en: Figure 3
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 3
 - en: The `templates` directory is in the same folder as the app.py in which it is
     created.
   id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`templates` 目录与创建的 app.py 文件在同一文件夹中。'
 - en: '![Figure](../Images/c7f1e889a9f905b696473b42f2c7489a.png)'
   id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/c7f1e889a9f905b696473b42f2c7489a.png)'
 - en: Figure 4
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 4
 - en: The index.html is located in the templates folder.
   id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: index.html 位于 templates 文件夹中。
 - en: '**index.html**'
   id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**index.html**'
 - en: We name our App as “Named Entity Extractor”
   id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们将我们的应用命名为“命名实体提取器”
 - en: Use [BootstrapCDN](https://www.bootstrapcdn.com/), copy-paste the [stylesheet](https://getbootstrap.com/docs/4.1/getting-started/introduction/) `<link>` into
     our `<head>`before all other stylesheets to load our CSS.
   id: totrans-29
