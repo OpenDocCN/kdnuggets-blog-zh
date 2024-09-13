@@ -384,6 +384,7 @@
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用角谱方法来模拟光学传播。这是一种适用于近场条件的方法，在这种条件下，你的镜头或光束的孔径大小与传播距离相似。以下函数执行角谱方法传播，给定一个初始波前及其尺寸、光的波长和传播距离。
 - en: '[PRE3]'
   id: totrans-41
   prefs: []
@@ -402,12 +403,15 @@
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们不会将我们的光学神经网络限制在卷积或矩阵乘法操作上，而是通过一系列均匀间隔的相位物体图像来传播光束。从物理上讲，这类似于将相干光束通过一系列薄的波浪玻璃板，只不过在这种情况下，我们将使用
+    Autograd 进行反向传播，以设计这些板使其将光从输入波前引导到最终匹配给定目标图案的位置。通过相位元件后，我们将在图像传感器的等效位置收集光。这给我们提供了一个从复杂场到实值强度的有趣非线性，我们可以利用这种非线性通过堆叠多个这样的组件来构建一个更复杂的光学神经网络。
 - en: 'Each layer is defined by passing through a series of phase images separated
     by short distances. This is described computationally as  propagation over a short
     distance, followed by a thin phase plate (implemented as multiplication):'
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 每一层由通过一系列相隔较短距离的相位图像定义。计算上这描述为在短距离内传播，然后是一个薄相位板（实现为乘法）：
 - en: '[PRE4]'
   id: totrans-44
   prefs: []
@@ -421,6 +425,8 @@
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Autograd 中训练模型的关键在于定义一个返回标量损失的函数。然后可以将此损失函数包装在 Autograd 的 `grad` 函数中以计算梯度。你可以通过
+    `grad` 的 `argnum` 参数指定哪个参数包含要计算梯度的参数，并且要记住损失函数必须返回一个标量值，而不是数组。
 - en: '[PRE5]'
   id: totrans-46
   prefs: []
@@ -432,6 +438,7 @@
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们读取目标图像并设置输入波前。可以使用你选择的 64 x 64 图像，或者下载文章早期提到的灰度笑脸图像。
 - en: '[PRE6]'
   id: totrans-48
   prefs: []
@@ -441,6 +448,7 @@
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，定义学习率、传播距离和模型参数。
 - en: '[PRE7]'
   id: totrans-50
   prefs: []
@@ -457,6 +465,8 @@
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你熟悉用 PyTorch 或类似库训练神经网络，训练循环应该很熟悉。我们调用之前定义的梯度函数（这是我们编写的计算损失函数的函数转换），并将得到的梯度应用到模型的参数上。我发现通过仅用梯度的相位更新参数（phase_objects），而不是原始的复数梯度，可以得到更好的结果。梯度的实值相位分量通过使用
+    NumPy 的 `np.angle` 访问，并通过 `np.exp(1.j * value)` 转换回复数值。
 - en: '[PRE8]'
   id: totrans-52
   prefs: []
@@ -468,6 +478,7 @@
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果一切顺利，你应该会看到均方误差损失单调减少，代码会保存一系列图像，描绘光学网络的输出如何越来越接近目标图像。
 - en: '![Optimization of the optical system attempting to match the target image](../Images/18839ccfb209efdfa4bc4bc317ce4ab4.png)'
   id: totrans-54
   prefs: []
