@@ -1,16 +1,20 @@
 - en: Building a Content-Based Book Recommendation Engine
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2020/07/building-content-based-book-recommendation-engine.html](https://www.kdnuggets.com/2020/07/building-content-based-book-recommendation-engine.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '**By [Dhilip Subramanian](https://medium.com/@sdhilip), Data Scientist and
     AI Enthusiast**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: If we plan to buy any new product, we normally ask our friends, research the
@@ -18,39 +22,48 @@
     reviews on the internet and then we make our decision. How convenient if all this
     process was taken care of automatically and recommend the product efficiently?
     A recommendation engine or recommender system is the answer to this question.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: Content-based filtering and collaborative-based filtering are the two popular
     recommendation systems. In this blog, we will see how we can build a simple content-based
     recommender system using Goodreads.com data.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: Content-based recommendation system
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -59,271 +72,401 @@
     on their description or features. It identifies the similarity between the products
     based on their descriptions. It also considers the user's previous history in
     order to recommend a similar product.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: 'Example: If a user likes the novel “Tell Me Your Dreams” by Sidney Sheldon,
     then the recommender system recommends the user to read other Sidney Sheldon novels,
     or it recommends a novel with the genre “non-fiction”. (Sidney Sheldon novels
     belong to the non-fiction genre).'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: As I mentioned above, we are using goodreads.com data and don’t have user reading
     history. Hence, we have used a simple content-based recommendation system. We
     are going to build two recommendation systems by using a book title and book description.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: We need to find similar books to a given book and then recommend those similar
     books to the user. How do we find whether the given book is similar or dissimilar?
     A similarity measure was used to find this.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/d4ac434e81dfa10cdd22a92397dbebc9.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
 - en: Source: [dataaspirant](https://dataaspirant.com/2015/04/11/five-most-popular-similarity-measures-implementation-in-python/)
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: There are different similarity measures are available. Cosine Similarity was
     used in our recommender system to recommend the books. For more details on the
     similarity measure, please refer to this [article](https://dataaspirant.com/2015/04/11/five-most-popular-similarity-measures-implementation-in-python/).
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 有不同的相似度度量方法可用。我们的推荐系统使用了余弦相似度来推荐书籍。有关相似度度量的更多详细信息，请参阅此[文章](https://dataaspirant.com/2015/04/11/five-most-popular-similarity-measures-implementation-in-python/)。
 - en: Data
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据
 - en: I scraped book details from goodreads.com pertaining to business, non-fiction
     and cooking genres.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我从goodreads.com抓取了与商业、非小说和烹饪类别相关的书籍详细信息。
 - en: '[PRE0]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![Image for post](../Images/ddec50f7f1209f3f2c56cd61c7528b90.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/ddec50f7f1209f3f2c56cd61c7528b90.png)'
 - en: 'Total 3592 books details available in our dataset. It has six columns:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的数据集中总共有3592本书籍详细信息。它包含六列：
 - en: title -> Book Name
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: title -> 书名
 - en: Rating -> Book rating given by the user
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 评分 -> 用户给出的书籍评分
 - en: Genre -> Category(Type of book). I have taken only three genres like business,
     non-fiction and cooking for this problem
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 类别 -> 分类（书籍类型）。我只取了商业、非小说和烹饪这三种类别用于这个问题
 - en: Author -> Book Author
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 作者 -> 书籍作者
 - en: Desc -> Book description
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Desc -> 书籍描述
 - en: url -> Book cover image link
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: url -> 书封面图片链接
 - en: Exploratory Data Analysis
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 探索性数据分析
 - en: '**Genre distribution**'
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**类别分布**'
 - en: '[PRE1]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![Figure](../Images/08c3acb3df5d1becc63bfdadec90f35c.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/08c3acb3df5d1becc63bfdadec90f35c.png)'
 - en: Printing the book title and description randomly
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机打印书名和描述
 - en: '[PRE2]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![Image for post](../Images/58612e4d2583eefabf11c04387f32585.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/58612e4d2583eefabf11c04387f32585.png)'
 - en: '[PRE3]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![Image for post](../Images/aa860c0340825eded7f783c234f48e2a.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/aa860c0340825eded7f783c234f48e2a.png)'
 - en: Book description — Word count distribution
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 书籍描述 — 单词计数分布
 - en: '[PRE4]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![Image for post](../Images/e2cc22ec3681f7952a250011d6585dd8.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/e2cc22ec3681f7952a250011d6585dd8.png)'
 - en: We don’t have many lengthy book description. It is clear that goodreads.com
     provides short descriptions.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们没有很多长篇的书籍描述。很明显，goodreads.com 提供的是简短的描述。
 - en: The distribution of top part-of-speech tags in the book descriptions
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 书籍描述中常见词性标签的分布
 - en: '[PRE5]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![Image for post](../Images/508a944e4ddae3b0f0f81ab77cb46e0d.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/508a944e4ddae3b0f0f81ab77cb46e0d.png)'
 - en: Bigram distribution for the book description
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 书籍描述的双词分布
 - en: '[PRE6]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![Image for post](../Images/6f107e8b51b78f8976e6d828dfc77284.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/6f107e8b51b78f8976e6d828dfc77284.png)'
 - en: Trigram distribution for the book description
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 书籍描述的三词分布
 - en: '[PRE7]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![Image for post](../Images/7af1da3c6b7cd9e93b1a40f0b93dd450.png)'
+  id: totrans-52
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/7af1da3c6b7cd9e93b1a40f0b93dd450.png)'
 - en: Text Preprocessing
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文本预处理
 - en: Cleaning the book descriptions.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 清理书籍描述。
 - en: '[PRE8]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Recommendation engine
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 推荐引擎
 - en: We are going to build two recommendation engines using the book titles and descriptions.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将基于书名和书籍描述构建两个推荐引擎。
 - en: Convert each book title and description into vectors using TF-IDF and bigram.
     See here for more details on [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)
+  id: totrans-58
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用TF-IDF和双词组将每本书的标题和描述转换为向量。有关更多详细信息，请参见[TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)。
 - en: We are building two recommendation engines, one with a book title and another
     one with a book description. The model recommends a similar book based on title
     and description.
+  id: totrans-59
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 我们正在构建两个推荐引擎，一个基于书名，另一个基于书籍描述。模型基于标题和描述推荐相似书籍。
 - en: Calculate the similarity between all the books using cosine similarity.
+  id: totrans-60
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用余弦相似度计算所有书籍之间的相似性。
 - en: Define a function that takes the book title and genre as input and returns the
     top five similar recommended books based on the title and description.
+  id: totrans-61
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 定义一个函数，该函数以书名和类别作为输入，并返回基于标题和描述的前五本相似推荐书籍。
 - en: Recommendation based on book title
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 基于书名的推荐
 - en: '[PRE9]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'Let’s recommend based on the book title “Steve Jobs” and genre “Business”:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于书名“史蒂夫·乔布斯”和类别“商业”进行推荐：
 - en: '[PRE10]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '**Output**'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出**'
 - en: '![Image for post](../Images/fbf6bc20b35054daf268541a355d5697.png)'
+  id: totrans-67
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/fbf6bc20b35054daf268541a355d5697.png)'
 - en: '![Image for post](../Images/1117e577b04f0cb6191e344f925b288a.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/1117e577b04f0cb6191e344f925b288a.png)'
 - en: We have given the book "Steve Jobs" as input and the model recommends other
     Steve Jobs books based on the similarity existing in the book title.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们以《史蒂夫·乔布斯》这本书作为输入，模型基于书名的相似性推荐其他史蒂夫·乔布斯的书籍。
 - en: Recommendation based on book description
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 基于书籍描述的推荐
 - en: We are using the same above function by converting book description into vectors.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们通过将书籍描述转换为向量来使用上述相同的函数。
 - en: '[PRE11]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Let’s recommend based on the book “Harry Potter and the Prisoner of Azkaban”
     and the genre “Non-Fiction”:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE12]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '**Output**'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
 - en: '![Image for post](../Images/1011bbc0e3af2aa45e5bbab79a71fc31.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
 - en: '![Image for post](../Images/5bde603c84c068b15c3a8644c99c5fff.png)'
+  id: totrans-77
   prefs: []
   type: TYPE_IMG
 - en: We provided “Harry Potter and the Prisoner of Azkaban” and “Non-Fiction” as
     inputs, and the model recommends five other Harry Potter books which are similar
     to our input.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
 - en: 'Let’s get one more recommendation:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE13]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '![Image for post](../Images/c4c7f3d3a661f7c089ef762f5dca85d4.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
 - en: '![Image for post](../Images/d3e633a343be134fbaf63e5a95a7ad71.png)'
+  id: totrans-82
   prefs: []
   type: TYPE_IMG
 - en: The above model recommends five books similar to Norwegian Wood based on the
     description.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
 - en: This is just a simple basic level recommender system. Real-world recommendation
     systems are more robust and advanced. We can further improve the above by adding
     other metadata like author and genre.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
 - en: Also, we can do text-based semantic recommendation using Word2Vec. I have used
     Word2Vec and built a recommendation engine. Please check [here](https://medium.com/towards-artificial-intelligence/content-based-recommendation-system-using-word-embeddings-c1c15de1ef95).
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
 - en: Thanks for reading. If you have anything to add, please feel free to leave a
     comment!
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Dhilip Subramanian](https://medium.com/@sdhilip)** is a Mechanical
@@ -333,52 +476,65 @@
     He is a contributor to the [SAS community](https://communities.sas.com/t5/user/viewprofilepage/user-id/271305)
     and loves to write technical articles on various aspects of data science on the
     Medium platform.'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://towardsdatascience.com/building-a-content-based-book-recommendation-engine-9fd4d57a4da).
     Reposted with permission.'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
 - en: '[Exploring the Real World of Data Science](/2020/06/exploring-real-world-data-science.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Five Cool Python Libraries for Data Science](2020/04/five-cool-python-libraries-data-science.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Easy Speech-to-Text with Python](/2020/06/easy-speech-text-python.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-93
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[How to Build a Real-Time Recommendation Engine Using Graph Databases](https://www.kdnuggets.com/2023/08/build-realtime-recommendation-engine-graph-databases.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Building a Recommendation System with Hugging Face Transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Building a Geospatial Application in Python with Google Earth…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Ten Key Lessons of Implementing Recommendation Systems in Business](https://www.kdnuggets.com/2022/07/ten-key-lessons-implementing-recommendation-systems-business.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
