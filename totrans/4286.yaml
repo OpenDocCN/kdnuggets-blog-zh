@@ -1,348 +1,530 @@
 - en: Production-Ready Machine Learning NLP API with FastAPI and spaCy
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 生产就绪的机器学习 NLP API，使用 FastAPI 和 spaCy
 - en: 原文：[https://www.kdnuggets.com/2021/04/production-ready-machine-learning-nlp-api-fastapi-spacy.html](https://www.kdnuggets.com/2021/04/production-ready-machine-learning-nlp-api-fastapi-spacy.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/04/production-ready-machine-learning-nlp-api-fastapi-spacy.html](https://www.kdnuggets.com/2021/04/production-ready-machine-learning-nlp-api-fastapi-spacy.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Julien Salinas](https://www.linkedin.com/in/julien-salinas-673b3811/),
     Full Stack Developer, Founder and CTO of [NLPCloud.io](https://nlpcloud.io)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Julien Salinas](https://www.linkedin.com/in/julien-salinas-673b3811/)，全栈开发者，[NLPCloud.io](https://nlpcloud.io)
+    的创始人兼首席技术官**'
 - en: '![FastAPI and spaCy](../Images/da0fac2c080db8d7cb5d9d06d8f799b8.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![FastAPI 和 spaCy](../Images/da0fac2c080db8d7cb5d9d06d8f799b8.png)'
 - en: '[FastAPI](https://fastapi.tiangolo.com/) is a new Python API framework that
     is more and more used in production today. We are using FastAPI under the hood
     behind [NLP Cloud](https://nlpcloud.io/). NLP Cloud is an API based on spaCy and
     HuggingFace transformers in order to propose Named Entity Recognition (NER), sentiment
     analysis, text classification, summarization, and much more. FastAPI helped us
     quickly build a fast and robust machine learning API serving NLP models.'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '[FastAPI](https://fastapi.tiangolo.com/) 是一个新的 Python API 框架，今天越来越多地被用于生产环境中。我们在
+    [NLP Cloud](https://nlpcloud.io/) 的底层使用 FastAPI。NLP Cloud 是一个基于 spaCy 和 HuggingFace
+    transformers 的 API，提供命名实体识别（NER）、情感分析、文本分类、摘要等服务。FastAPI 帮助我们快速构建了一个快速且稳健的机器学习
+    API，服务于 NLP 模型。'
 - en: Let me tell you why we made such a choice, and show you how to implement an
     API based on FastAPI and spaCy for Named Entity Recognition (NER).
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我告诉你我们为什么做出这样的选择，并展示如何基于 FastAPI 和 spaCy 实现一个用于命名实体识别（NER）的 API。
 - en: Why FastAPI?
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么选择 FastAPI？
 - en: 'Until recently, I’ve always used Django Rest Framework for Python APIs. But
     FastAPI is proposing several interesting features:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 直到最近，我一直使用 Django Rest Framework 来构建 Python API。但 FastAPI 提供了几个有趣的功能：
 - en: It is very fast
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它非常快速
 - en: It is well documented
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它文档齐全
 - en: It is easy to use
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它易于使用
 - en: It automatically generates API schemas for you (like OpenAPI)
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它会自动为你生成 API 架构（如 OpenAPI）
 - en: It uses type validation with Pydantic under the hood. For a Go developer like
     myself who is used to static typing, it’s very cool to able to leverage type hints
     like this. It makes the code clearer, and less error-prone.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它在底层使用 Pydantic 进行类型验证。对于像我这样习惯静态类型的 Go 开发者来说，能够利用这样的类型提示非常酷。它使代码更清晰，减少了错误的可能性。
 - en: FastAPI’s performances are supposed to make it a great candidate for machine
     learning APIs. Given that we’re serving a lot of demanding NLP models based on
     spaCy and transformers at NLP Cloud, FastAPI is a great solution.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: FastAPI 的性能使其成为机器学习 API 的一个优秀候选者。考虑到我们在 NLP Cloud 中服务了许多基于 spaCy 和 transformers
+    的高要求 NLP 模型，FastAPI 是一个很好的解决方案。
 - en: Set Up FastAPI
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 设置 FastAPI
 - en: 'The first option you have is to install FastAPI and Uvicorn (the ASGI server
     in front of FastAPI) by yourself:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以选择自己安装 FastAPI 和 Uvicorn（FastAPI 前面的 ASGI 服务器）：
 - en: '[PRE0]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: As you can see, FastAPI is running behind an ASGI server, which means it can
     natively work with asynchronous Python requests with asyncio.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，FastAPI 在一个 ASGI 服务器后面运行，这意味着它可以原生处理使用 asyncio 的异步 Python 请求。
 - en: 'Then you can run your app with something like this:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后你可以用类似这样的方式运行你的应用：
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Another option is to use one the Docker images generously provided by Sebastián
     Ramírez, the creator of FastAPI. These images are maintained and work out of the
     box.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个选择是使用 Sebastián Ramírez（FastAPI 的创始人）慷慨提供的 Docker 镜像。这些镜像已维护，并且开箱即用。
 - en: For example the [Uvicorn + Gunicorn + FastAPI](https://github.com/tiangolo/uvicorn-gunicorn-fastapi-docker) image
     adds Gunicorn to the stack in order to handle parallel processes. Basically Uvicorn
     handles multiple parallel requests within one single Python process, and Gunicorn
     handles multiple parallel Python processes.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，[Uvicorn + Gunicorn + FastAPI](https://github.com/tiangolo/uvicorn-gunicorn-fastapi-docker)
+    镜像将 Gunicorn 添加到堆栈中，以处理并行进程。基本上，Uvicorn 处理单个 Python 进程中的多个并行请求，而 Gunicorn 处理多个并行
+    Python 进程。
 - en: The application is supposed to automatically start with `docker run` if you
     properly follow the image documentation.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你按照镜像文档正确操作，应用程序应该会自动通过 `docker run` 启动。
 - en: These images are customizable. For example, you can tweak the number of parallel
     processes created by Gunicorn. It’s important to play with such parameters depending
     on the resources demanded by your API. If your API is serving a machine learning
     model that takes several GBs of memory, you might want to decrease Gunicorn’s
     default concurrency, otherwise your application will quickly consume too much
     memory.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些图像是可定制的。例如，你可以调整Gunicorn创建的并行进程数量。根据你的API需求调整这些参数非常重要。如果你的API服务一个需要几个GB内存的机器学习模型，你可能想要减少Gunicorn的默认并发，否则你的应用程序将快速消耗过多内存。
 - en: Simple FastAPI + spaCy API for NER
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 简单的FastAPI + spaCy NER API
 - en: Let’s say you want to create an API endpoint that is doing Named Entity Recognition
     (NER) with [spaCy](https://spacy.io/). Basically, NER is about extracting entities
     like name, company, job title… from a sentence. [More details about NER here](https://nlpcloud.io/nlp-named-entity-recognition-ner-api.html) if
     needed.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你想创建一个使用[spaCy](https://spacy.io/)进行命名实体识别（NER）的API端点。基本上，NER是从句子中提取实体如名字、公司、职位等。[有关NER的更多细节](https://nlpcloud.io/nlp-named-entity-recognition-ner-api.html)，如果需要的话。
 - en: This endpoint will take a sentence as an input, and will return a list of entities.
     Each entity is made up of the position of the first character of the entity, the
     last position of the entity, the type of the entity, and the text of the entity
     itself.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个端点将接受一个句子作为输入，并返回一个实体列表。每个实体由实体第一个字符的位置、实体的最后位置、实体的类型以及实体文本本身组成。
 - en: 'The endpoint will be queried with POST requests this way:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 端点将以POST请求的方式进行查询：
 - en: '[PRE2]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'And it will return something like this:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 它将返回类似这样的内容：
 - en: '[PRE3]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Here is how we could do it:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是我们如何操作：
 - en: '[PRE4]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: The first important thing here is that we’re loading the spaCy model. For our
     example we’re using a large spaCy pre-trained model for the english language.
     Large models take more memory and more disk space, but give a better accuracy
     as they were trained on bigger datasets.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 首要的是我们正在加载spaCy模型。对于我们的示例，我们使用了一个大型的spaCy预训练英文模型。大型模型占用更多内存和磁盘空间，但由于在更大的数据集上进行训练，因此提供了更好的准确性。
 - en: '[PRE5]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Later, we are using this spaCy model for NER by doing the following:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 稍后，我们将通过以下方式使用这个spaCy模型进行NER：
 - en: '[PRE6]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'The second thing, which is an amazing feature of FastAPI, is the ability to
     force data validation with Pydantic. Basically, you need to declare in advance
     which will be the format of your user input, and the format of the API response.
     If you’re a Go developer, you’ll find it very similar to JSON unmarshalling with
     structs. For example, we are declaring the format of a returned entity this way:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二个令人惊叹的FastAPI特性是使用Pydantic强制数据验证的能力。基本上，你需要提前声明用户输入的格式和API响应的格式。如果你是Go开发者，你会发现这与使用结构体进行JSON解组非常相似。例如，我们这样声明返回实体的格式：
 - en: '[PRE7]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Note that `start` and `end` are positions in the sentence, so they are integers,
     and `type` and `text` are strings. If the API is trying to return an entity that
     does not implement this format (for example if `start` is not an integer), FastAPI
     will raise an error.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，`start`和`end`是句子中的位置，因此它们是整数，而`type`和`text`是字符串。如果API尝试返回一个未实现此格式的实体（例如，如果`start`不是整数），FastAPI将抛出错误。
 - en: 'As you can see, it is possible to embed a validation class into another one.
     Here we are returning a list of entities, so we need to declare the following:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，将一个验证类嵌套到另一个类中是可能的。这里我们返回的是一个实体列表，因此我们需要声明以下内容：
 - en: '[PRE8]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Some simple types like `int` and `str` are built-in, but more complex types
     like `List` need to be explicitly imported.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些简单类型如`int`和`str`是内置的，但更复杂的类型如`List`需要显式导入。
 - en: 'For brevity reasons, the response validation can be implemented within a decorator:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了简洁起见，响应验证可以在装饰器中实现：
 - en: '[PRE9]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: More Advanced Data Validation
+  id: totrans-46
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更高级的数据验证
 - en: 'You can do many more advanced validation things with FastAPI and Pydantic.
     For example, if you need the user input to have a minimum length of 10 characters,
     you can do the following:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用FastAPI和Pydantic可以做许多更高级的验证。例如，如果你需要用户输入的最小长度为10个字符，你可以这样做：
 - en: '[PRE10]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Now, what if Pydantic validation passes, but you later realize that there’s
     something wrong with the data so you want to return an HTTP 400 code?
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，如果Pydantic验证通过，但你后来发现数据有问题，因此想要返回HTTP 400代码，该怎么办？
 - en: 'Simply raise an `HTTPException`:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 只需引发一个`HTTPException`：
 - en: '[PRE11]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: It’s just a couple of examples, you can do much more! Just have a look at the
     FastAPI and Pydantic docs.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 这只是几个例子，你可以做更多！只需查看 FastAPI 和 Pydantic 文档即可。
 - en: Root Path
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 根路径
 - en: It’s very common to run such APIs behind a reverse proxy. For example we’re
     using the Traefik reverse proxy behind NLPCloud.io.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 在反向代理后运行这样的 API 是很常见的。例如，我们在 NLPCloud.io 背后使用的是 Traefik 反向代理。
 - en: A tricky thing when running behind a reverse proxy is that your sub-application
     (here the API) does not necessarily know about the whole URL path. And actually
     that’s great because it shows that your API is loosely coupled to the rest of
     your application.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 在反向代理后运行时，一个棘手的事情是你的子应用程序（这里是 API）并不一定知道整个 URL 路径。实际上，这很好，因为它表明你的 API 与应用程序的其余部分是松散耦合的。
 - en: 'For example here we want our API to believe that the endpoint URL is `/entities`,
     but actually the real URL might be something like `/api/v1/entities`. Here’s how
     to do it by setting a root path:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，我们希望 API 认为端点 URL 是 ` /entities`，但实际的 URL 可能是类似 ` /api/v1/entities` 的东西。这里是如何通过设置根路径来实现：
 - en: '[PRE12]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'You can also achieve it by passing an extra parameter to Uvicorn in case you’re
     starting Uvicorn manually:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你手动启动 Uvicorn，你也可以通过传递额外的参数来实现：
 - en: '[PRE13]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Conclusion
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: As you can see, creating an API with FastAPI is dead simple, and the validation
     with Pydantic makes the code very expressive (and then needs less documentation
     in return) and less error-prone.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，使用 FastAPI 创建 API 非常简单，而 Pydantic 的验证使得代码非常表达清晰（从而减少了对文档的需求）并且更不容易出错。
 - en: FastAPI comes with great performances and the possibility to use asynchronous
     requests out of the box with asyncio, which is great for demanding machine learning
     models. The example above about Named Entity Extraction with spaCy and FastAPI
     can almost be considered as production-ready (of course the API code is only a
     small part of a full clustered application). So far, FastAPI has never been the
     bottleneck in our NLPCloud.io infrastructure.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: FastAPI 提供了出色的性能，并且可以直接使用 asyncio 进行异步请求，这对于需求高的机器学习模型非常有利。上面的示例关于使用 spaCy 和
+    FastAPI 的命名实体提取几乎可以认为是生产就绪的（当然，API 代码只是完整集群应用程序的一小部分）。到目前为止，FastAPI 从未成为我们 NLPCloud.io
+    基础设施的瓶颈。
 - en: If you have any question, please don’t hesitate to ask!
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有任何问题，请随时提问！
 - en: '**[Existe aussi en français](https://juliensalinas.com/fr/api-machine-learning-nlp-production-fastapi-nlpcloud)**'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[也有法语版](https://juliensalinas.com/fr/api-machine-learning-nlp-production-fastapi-nlpcloud)**'
 - en: '**Bio: [Julien Salinas](https://www.linkedin.com/in/julien-salinas-673b3811/)**
     is a Full-Stack engineer, expert in Python/Django, Go, Vue.js, Linux and Docker.
     He is the founder and CTO of [NLPCloud.io](https://nlpcloud.io), an API that helps
     developers and data scientists use NLP easily in production. He likes the mountains,
     skiing, boxing... and he''s the father of 2 boys.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历： [Julien Salinas](https://www.linkedin.com/in/julien-salinas-673b3811/)**
+    是一位全栈工程师，精通 Python/Django、Go、Vue.js、Linux 和 Docker。他是 [NLPCloud.io](https://nlpcloud.io)
+    的创始人和首席技术官，该 API 帮助开发人员和数据科学家轻松地在生产环境中使用 NLP。他喜欢山脉、滑雪、拳击……同时也是两个男孩的父亲。'
 - en: '[Original](https://juliensalinas.com/en/machine-learning-nlp-api-production-fastapi-nlpcloud/).
     Reposted with permission.'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://juliensalinas.com/en/machine-learning-nlp-api-production-fastapi-nlpcloud/)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to Apply Transformers to Any Length of Text](/2021/04/apply-transformers-any-length-text.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何将 Transformers 应用于任何长度的文本](/2021/04/apply-transformers-any-length-text.html)'
 - en: '[How to Deploy a Flask API in Kubernetes and Connect it with Other Micro-services](/2021/02/deploy-flask-api-kubernetes-connect-micro-services.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在 Kubernetes 中部署 Flask API 并与其他微服务连接](/2021/02/deploy-flask-api-kubernetes-connect-micro-services.html)'
 - en: '[Why Do Machine Learning Projects Fail?](/2021/02/why-machine-learning-projects-fail.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习项目为何会失败？](/2021/02/why-machine-learning-projects-fail.html)'
 - en: '* * *'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-72
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织在 IT 方面'
 - en: '* * *'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-77
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 主题更多内容
 - en: '[Getting Started with spaCy for NLP](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[开始使用 spaCy 进行 NLP](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
 - en: '[Natural Language Processing with spaCy](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 spaCy 进行自然语言处理](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
 - en: '[FastAPI Tutorial: Build APIs with Python in Minutes](https://www.kdnuggets.com/fastapi-tutorial-build-apis-with-python-in-minutes)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[FastAPI 教程：用 Python 几分钟内构建 API](https://www.kdnuggets.com/fastapi-tutorial-build-apis-with-python-in-minutes)'
 - en: '[Meet Gorilla: UC Berkeley and Microsoft’s API-Augmented LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[认识 Gorilla：UC 伯克利与微软的 API 增强型 LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)'
 - en: '[OpenAI’s Whisper API for Transcription and Translation](https://www.kdnuggets.com/2023/06/openai-whisper-api-transcription-translation.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[OpenAI 的 Whisper API 用于转录和翻译](https://www.kdnuggets.com/2023/06/openai-whisper-api-transcription-translation.html)'
 - en: '[How to Access and Use Gemini API for Free](https://www.kdnuggets.com/how-to-access-and-use-gemini-api-for-free)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何免费访问和使用 Gemini API](https://www.kdnuggets.com/how-to-access-and-use-gemini-api-for-free)'
