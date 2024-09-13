@@ -1,56 +1,70 @@
 - en: Genetic Algorithm Implementation in Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2018/07/genetic-algorithm-implementation-python.html](https://www.kdnuggets.com/2018/07/genetic-algorithm-implementation-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
 - en: '![Image](../Images/ab1f8e899e0f7dc04c652ffc0278bfbc.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
 - en: This tutorial will implement the genetic algorithm optimization technique in
     Python based on a simple example in which we are trying to maximize the output
     of an equation. The tutorial uses the decimal representation for genes, one point
     crossover, and uniform mutation.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: Flowchart of the genetic algorithm (GA) is shown in figure 1\. Each step involved
     in the GA has some variations.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: '**Figure 1**'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/f7a61e594c8da119374bac0446628488.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
 - en: 'For example, there are different types of representations for genes such as
@@ -63,31 +77,40 @@
     The Reader should have an understanding of how GA works. If not, please read this
     article titled “Introduction to Optimization with Genetic Algorithm” found in
     these links:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: LinkedIn: [https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/](https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/)
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: KDnuggets: [https://www.kdnuggets.com/2018/03/introduction-optimization-with-genetic-algorithm.html](/2018/03/introduction-optimization-with-genetic-algorithm.html)
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: TowardsDataScience: [https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b](https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b)
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: SlideShare: [https://www.slideshare.net/AhmedGadFCIT/introduction-to-optimization-with-genetic-algorithm-ga](https://www.slideshare.net/AhmedGadFCIT/introduction-to-optimization-with-genetic-algorithm-ga)
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'The tutorial starts by presenting the equation that we are going to implement.
     The equation is shown below:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 教程开始时展示了我们将要实现的方程。方程如下所示：
 - en: '**Y = w1x1 + w2x2 + w3x3 + w4x4 + w5x5 + w6x6**'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Y = w1x1 + w2x2 + w3x3 + w4x4 + w5x5 + w6x6**'
 - en: The equation has 6 inputs (x1 to x6) and 6 weights (w1 to w6) as shown and inputs
     values are (x1,x2,x3,x4,x5,x6)=(4,-2,7,5,11,1). We are looking to find the parameters
     (weights) that maximize such equation. The idea of maximizing such equation seems
@@ -96,15 +119,21 @@
     number. But the idea we are looking to implement is how to make GA do that its
     own in order to know that it is better to use positive weight with positive inputs
     and negative weights with negative inputs. Let us start implementing GA.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 方程有6个输入（x1到x6）和6个权重（w1到w6），输入值为（x1,x2,x3,x4,x5,x6）=(4,-2,7,5,11,1)。我们希望找到最大化该方程的参数（权重）。最大化该方程的想法似乎很简单。正输入应乘以尽可能大的正数，负数应乘以尽可能小的负数。但我们要实现的想法是如何让GA自己做到这一点，以便知道正权重与正输入配合使用，负权重与负输入配合使用。让我们开始实现GA。
 - en: 'At first, let us create a list of the 6 inputs and a variable to hold the number
     of weights as follows:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们创建一个包含6个输入的列表和一个保存权重数量的变量，如下所示：
 - en: '[PRE0]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'The next step is to define the initial population. Based on the number of weights,
     each chromosome (solution or individual) in the population will definitely have
     6 genes, one gene for each weight. But the question is how many solutions per
@@ -113,140 +142,204 @@
     in the code. Next, we create a variable that holds the number of solutions per
     population, another to hold the size of the population, and finally, a variable
     that holds the actual initial population:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是定义初始种群。根据权重的数量，种群中的每个染色体（解决方案或个体）将必定具有6个基因，每个基因对应一个权重。但问题是每个种群中有多少个解决方案？这个值没有固定的，我们可以选择适合我们问题的值。为了通用，我们可以在代码中保持它是可变的。接下来，我们创建一个变量来保存每个种群的解决方案数量，另一个变量保存种群的大小，最后一个变量保存实际的初始种群：
 - en: '[PRE1]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'After importing the numpy library, we are able to create the initial population
     randomly using the numpy.random.uniform function. According to the selected parameters,
     it will be of shape (8, 6). That is 8 chromosomes and each one has 6 genes, one
     for each weight. After running this code, the population is as follows:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 在导入numpy库后，我们可以使用numpy.random.uniform函数随机创建初始种群。根据选择的参数，它将具有形状（8, 6）。即8个染色体，每个染色体有6个基因，每个基因对应一个权重。运行此代码后，种群如下：
 - en: '[PRE2]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Note that it is generated randomly and thus it will definitely change when get
     run again.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，它是随机生成的，因此每次运行时都会有所变化。
 - en: 'After preparing the population, next is to follow the flowchart in figure 1\.
     Based on the fitness function, we are going to select the best individuals within
     the current population as parents for mating. Next is to apply the GA variants
     (crossover and mutation) to produce the offspring of the next generation, creating
     the new population by appending both parents and offspring, and repeating such
     steps for a number of iterations/generations. The next code applies these steps:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在准备好种群后，接下来是遵循图1中的流程图。根据适应度函数，我们将选择当前种群中最优秀的个体作为配对的父母。接下来，应用GA变体（交叉和变异）来产生下一代的后代，通过附加父母和后代来创建新种群，并重复这些步骤若干次迭代/代。下一段代码应用了这些步骤：
 - en: '[PRE3]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The current number of generations is 5\. It is selected to be small for presenting
     results of all generations within the tutorial. There is a module named GA that
     holds the implementation of the algorithm.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 当前的代数是5。为了在教程中展示所有代的结果，选择了较小的代数。有一个名为GA的模块，其中包含算法的实现。
 - en: 'The first step is to find the fitness value of each solution within the population
     using the GA.cal_pop_fitness function. The implementation of such function inside
     the GA module is as follows:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一步是使用GA.cal_pop_fitness函数找到种群中每个解决方案的适应度值。GA模块中该函数的实现如下：
 - en: '[PRE4]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'The fitness function accepts both the equation inputs values (x1 to x6) in
     addition to the population. The fitness value is calculated as the sum of product
     (SOP) between each input and its corresponding gene (weight) according to our
     function. According to the number of solutions per population, there will be a
     number of SOPs. As we previously set the number of solutions to 8 in the variable
     named sol_per_pop, there will be 8 SOPs as shown below:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 适应度函数接受方程输入值（x1到x6）以及种群。适应度值计算为每个输入与其对应基因（权重）之间的乘积和（SOP）。根据每个种群中的解数量，将会有若干SOP。由于我们之前在名为sol_per_pop的变量中将解的数量设置为8，将会有8个SOP，如下所示：
 - en: '[PRE5]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Note that the higher the fitness value the better the solution.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，适应度值越高，解越好。
 - en: 'After calculating the fitness values for all solutions, next is to select the
     best of them as parents in the mating pool according to the next function GA.select_mating_pool.
     Such function accepts the population, the fitness values, and the number of parents
     needed. It returns the parents selected. Its implementation inside the GA module
     is as follows:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 在计算所有解的适应度值后，接下来是根据下一个函数`GA.select_mating_pool`选择最佳的解作为交配池中的父母。该函数接受种群、适应度值和所需父母的数量。它返回选择的父母。其在GA模块中的实现如下：
 - en: '[PRE6]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Based on the number of parents required as defined in the variable num_parents_mating,
     the function creates an empty array to hold them as in this line:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据变量num_parents_mating中定义的所需父母数量，该函数创建一个空数组来保存它们，如下行所示：
 - en: '[PRE7]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Looping through the current population, the function gets the index of the
     highest fitness value because it is the best solution to be selected according
     to this line:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 在当前种群中循环，函数获取最高适应度值的索引，因为这是根据这一行选择的最佳解：
 - en: '[PRE8]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'This index is used to retrieve the solution that corresponds to such fitness
     value using this line:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个索引用于使用这一行检索与该适应度值对应的解：
 - en: '[PRE9]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'To avoid selecting such solution again, its fitness value is set to a very
     small value that is likely to not be selected again which is **-99999999999**.
     The **parents** array is returned finally which will be as follows according to
     our example:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了避免再次选择这样的解，其适应度值被设置为一个非常小的值，**-99999999999**，以避免再次被选择。最终返回的是**parents**数组，根据我们的例子，它将如下所示：
 - en: '[PRE10]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Note that these three parents are the best individuals within the current population
     based on their fitness values which are 18.24112489, 17.0688537, 15.99527402,
     and 14.40299221, respectively.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，这三个父母是在当前种群中适应度值最高的个体，分别为18.24112489、17.0688537、15.99527402和14.40299221。
 - en: 'Next step is to use such selected parents for mating in order to generate the
     offspring. The mating starts with the crossover operation according to the GA.crossover
     function. This function accepts the parents and the offspring size. It uses the
     offspring size to know the number of offspring to produce from such parents. Such
     a function is implemented as follows inside the GA module:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是使用这些选定的父母进行交配，以生成后代。交配从交叉操作开始，根据`GA.crossover`函数进行。该函数接受父母和后代大小。它使用后代大小来确定从这些父母那里产生的后代数量。该函数在GA模块中的实现如下：
 - en: '[PRE11]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'The function starts by creating an empty array based on the offspring size
     as in this line:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个函数首先根据后代大小创建一个空数组，如下行所示：
 - en: '[PRE12]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'Because we are using single point crossover, we need to specify the point at
     which crossover takes place. The point is selected to divide the solution into
     two equal halves according to this line:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们使用单点交叉，我们需要指定交叉发生的点。该点被选定以将解分成两个相等的部分，根据这一行：
 - en: '[PRE13]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'Then we need to select the two parents to crossover. The indices of these parents
     are selected according to these two lines:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们需要选择两个父母进行交叉。这两个父母的索引根据这两行进行选择：
 - en: '[PRE14]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: The parents are selected in a way similar to a ring. The first with indices
     0 and 1 are selected at first to produce two offspring. If there still remaining
     offspring to produce, then we select the parent 1 with parent 2 to produce another
@@ -254,51 +347,69 @@
     parents with indices 2 and 3\. By index 3, we reached the last parent. If we need
     to produce more offspring, then we select parent with index 3 and go back to the
     parent with index 0, and so on.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: 'The solutions after applying the crossover operation to the parents are stored
     into the offspring variable and they are as follows:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE15]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'Next is to apply the second GA variant, mutation, to the results of the crossover
     stored in the offspring variable using the mutation function inside the GA module.
     Such function accepts the crossover offspring and returns them after applying
     uniform mutation. That function is implemented as follows:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE16]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: 'It loops through each offspring and adds a uniformly generated random number
     in the range from -1 to 1 according to this line:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE17]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: 'Such random number is then added to the gene with index 4 of the offspring
     according to this line:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE18]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: 'Note that the index could be changed to any other index. The offspring after
     applying mutation are as follows:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE19]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: Such results are added to the variable offspring_crossover and got returned
     by the function.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
 - en: At this point, we successfully produced 4 offspring from the 4 selected parents
     and we are ready to create the new population of the next generation.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
 - en: 'Note that GA is a random-based optimization technique. It tries to enhance
@@ -310,50 +421,69 @@
     will at least preserve the previous good results and will not go worse. The new
     population will have its first 4 solutions from the previous parents. The last
     4 solutions come from the offspring created after applying crossover and mutation:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE20]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: 'By calculating the fitness of all solutions (parents and offspring) of the
     first generation, their fitness is as follows:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE21]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: 'The highest fitness previously was **18.24112489** but now it is **31.7328971158**.
     That means that the random changes moved towards a better solution. This is GREAT.
     But such results could be enhanced by going through more generations. Below are
     the results of each step for another 4 generations:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE22]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: After the above 5 generations, the best result now has a fitness value equal
     to **44.8169235189** compared to the best result after the first generation which
     is **18.24112489**.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
 - en: 'The best solution has the following weights:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE23]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: 'The complete code that implements the GA is as follows:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE24]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: 'The GA module is as follows:'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE25]'
+  id: totrans-81
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: '**Bio: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** received his B.Sc.
     degree with excellent with honors in information technology from the Faculty of
     Computers and Information (FCI), Menoufia University, Egypt, in July 2015\. For
@@ -362,52 +492,79 @@
     assistant and a researcher in his faculty. His current research interests include
     deep learning, machine learning, artificial intelligence, digital signal processing,
     and computer vision.'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：[Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** 于 2015 年 7 月获得埃及梅努菲亚大学计算机与信息学院（FCI）信息技术学士学位，并以优异成绩获得荣誉。因在学院中排名第一，他在
+    2015 年被推荐到埃及的一所学院担任助教，随后于 2016 年在他所在的学院担任助教和研究员。他目前的研究兴趣包括深度学习、机器学习、人工智能、数字信号处理和计算机视觉。'
 - en: '[Original](https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/).
     Reposted with permission.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Derivation of Convolutional Neural Network from Fully Connected Network Step-By-Step](/2018/04/derivation-convolutional-neural-network-fully-connected-step-by-step.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从完全连接网络逐步推导卷积神经网络](/2018/04/derivation-convolutional-neural-network-fully-connected-step-by-step.html)'
 - en: '[Is Learning Rate Useful in Artificial Neural Networks?](/2018/01/learning-rate-useful-neural-network.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习率在人工神经网络中是否有用？](/2018/01/learning-rate-useful-neural-network.html)'
 - en: '[Avoid Overfitting with Regularization](/2018/02/avoid-overfitting-regularization.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过正则化避免过拟合](/2018/02/avoid-overfitting-regularization.html)'
 - en: More On This Topic
+  id: totrans-88
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么使 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并通过找到目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[90 亿美元的人工智能失败，逐一检查](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功的数据科学家的五个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'

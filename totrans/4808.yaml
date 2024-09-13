@@ -1,25 +1,37 @@
 - en: 'Remote Data Science: How to Send R and Python Execution to SQL Server from
     Jupyter Notebooks'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 远程数据科学：如何将 R 和 Python 执行发送到 SQL Server 从 Jupyter Notebooks
 - en: 原文：[https://www.kdnuggets.com/2018/07/r-python-execution-sql-server-jupyter.html](https://www.kdnuggets.com/2018/07/r-python-execution-sql-server-jupyter.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/07/r-python-execution-sql-server-jupyter.html](https://www.kdnuggets.com/2018/07/r-python-execution-sql-server-jupyter.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Kyle Weller](https://www.linkedin.com/in/ai-is-the-future/)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Kyle Weller](https://www.linkedin.com/in/ai-is-the-future/)**'
 - en: '![R and Python in SQL Server](../Images/cf5ff7d619b8bcc49c2e7183cf96d9b2.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![SQL Server 中的 R 和 Python](../Images/cf5ff7d619b8bcc49c2e7183cf96d9b2.png)'
 - en: '**Introduction**'
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**介绍**'
 - en: Did you know that you can execute R and Python code remotely in SQL Server from
     Jupyter Notebooks or any IDE? [Machine Learning Services](https://aka.ms/SQLMLOverview) in
     SQL Server eliminates the need to move data around. Instead of transferring large
@@ -28,135 +40,208 @@
     work in Jupyter Notebooks, RStudio, PyCharm, VSCode, Visual Studio, wherever you
     want, and then send function execution to SQL Server bringing intelligence to
     where your data lives.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 你知道吗？你可以在 SQL Server 中从 Jupyter Notebooks 或任何 IDE 远程执行 R 和 Python 代码？ [机器学习服务](https://aka.ms/SQLMLOverview)
+    在 SQL Server 中消除了数据迁移的需求。你可以在 Jupyter Notebooks、RStudio、PyCharm、VSCode、Visual
+    Studio 等环境中工作，然后将函数执行发送到 SQL Server，将智能带到数据所在的位置，而无需通过网络传输大型和敏感的数据或在 ML 训练中丢失准确性。
 - en: 'This tutorial will show you an example of how you can send your python code
     from Jupyter notebooks to execute within SQL Server. The same principles apply
     to R and any other IDE as well. If you prefer to learn through videos, this tutorial
     is also published on YouTube here:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程将向你展示如何将 Python 代码从 Jupyter notebooks 发送到 SQL Server 中执行的示例。相同的原则也适用于 R 和任何其他
+    IDE。如果你更喜欢通过视频学习，本教程也已在 YouTube 上发布：
 - en: '![Microsoft Cloud](../Images/60ebebfdb8a421779f5c0c9d33354ff3.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![微软云](../Images/60ebebfdb8a421779f5c0c9d33354ff3.png)'
 - en: '**Environment Setup Prerequisites**'
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**环境设置前提条件**'
 - en: '**Install ML Services on SQL Server**'
+  id: totrans-10
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**在 SQL Server 上安装 ML Services**'
 - en: In order for R or Python to execute within SQL, you first need the Machine Learning
     Services feature installed and configured. See this [how-to guide](https://aka.ms/SetupMLServices).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了让 R 或 Python 在 SQL 中执行，你首先需要安装和配置机器学习服务功能。请参见这个 [操作指南](https://aka.ms/SetupMLServices)。
 - en: '**Install RevoscalePy via Microsoft''s Python Client**'
+  id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**通过微软的 Python 客户端安装 RevoscalePy**'
 - en: In order to send Python execution to SQL from Jupyter Notebooks, you need to
     use Microsoft's RevoscalePy package. To get RevoscalePy, download and install
     Microsoft's ML Services Python Client. [Documentation Page](https://docs.microsoft.com/en-us/machine-learning-server/install/python-libraries-interpreter) or [Direct
     Download Link](https://aka.ms/mls93-py) (for Windows).
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 要将 Python 执行发送到 SQL，你需要使用微软的 RevoscalePy 包。要获取 RevoscalePy，请下载并安装微软的 ML Services
+    Python 客户端。 [文档页面](https://docs.microsoft.com/en-us/machine-learning-server/install/python-libraries-interpreter)
+    或 [直接下载链接](https://aka.ms/mls93-py) （适用于 Windows）。
 - en: 'After downloading, open powershell as an administrator and navigate to the
     download folder. Start the installation with this command (feel free to customize
     the install folder):'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 下载后，以管理员身份打开 powershell 并导航到下载文件夹。使用以下命令开始安装（可以自定义安装文件夹）：
 - en: '[PRE0]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Be patient while the installation can take a little while. Once installed navigate
     to the new path you installed in. Let''s make an empty folder and open Jupyter
     Notebooks:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 请耐心等待，因为安装可能需要一些时间。安装完成后，导航到你安装的新路径。我们创建一个空文件夹并打开 Jupyter Notebooks：
 - en: '[PRE1]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Create a new notebook with the Python 3 interpreter:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个使用 Python 3 解释器的新笔记本：
 - en: '![Python 3 Notebook](../Images/278231a10d909a743eff4e148e7ba193.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![Python 3 笔记本](../Images/278231a10d909a743eff4e148e7ba193.png)'
 - en: To test if everything is setup, import revoscalepy in the first cell and execute.
     If there are no error messages you are ready to move forward.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了测试一切是否设置正确，在第一个单元中导入 revoscalepy 并执行。如果没有错误消息，则可以继续进行下一步。
 - en: '![Import revoscalepy](../Images/ca6dd77d9b37907e0928e6ff275dce07.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![导入 revoscalepy](../Images/ca6dd77d9b37907e0928e6ff275dce07.png)'
 - en: '**Database Setup (Required for this tutorial only)**'
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**数据库设置（仅适用于本教程）**'
 - en: For the rest of the tutorial you can clone [this Jupyter Notebook from Github](https://aka.ms/RemoteExecJupyter) if
     you don't want to copy paste all of the code. This database setup is a one time
     step to ensure you have the same data as this tutorial. You don't need to perform
     any of these setup steps to use your own data.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于本教程的其余部分，如果你不想逐行复制代码，可以克隆 [这个来自 Github 的 Jupyter Notebook](https://aka.ms/RemoteExecJupyter)。这个数据库设置是一次性的步骤，以确保你拥有与本教程相同的数据。你不需要执行这些设置步骤来使用你自己的数据。
 - en: '**Create a database**'
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**创建一个数据库**'
 - en: Modify the connection string for your server and use pyodbc to create a new
     database.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 修改你的服务器连接字符串，并使用 pyodbc 创建一个新的数据库。
 - en: '[PRE2]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '**Import Iris sample from SkLearn**'
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**从 SkLearn 导入 Iris 样本**'
 - en: Iris is a popular dataset for beginner data science tutorials. It is included
     by default in sklearn package.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: Iris 是一个流行的初学者数据科学教程数据集。它默认包含在 sklearn 包中。
 - en: '[PRE3]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '**Use RecoscalePy APIs to create a table and load the Iris data**'
+  id: totrans-30
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**使用 RecoscalePy API 创建表格并加载 Iris 数据**'
 - en: '*(You can also do this with pyodbc, sqlalchemy or other packages)*'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '*(你也可以使用 pyodbc、sqlalchemy 或其他包来实现这个功能)*'
 - en: '[PRE4]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '**Define a Function to Send to SQL Server**'
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**定义一个函数以发送到 SQL Server**'
 - en: Write any python code you want to execute in SQL. In this example we are creating
     a scatter matrix on the iris dataset and only returning the bytestream of the
     .png back to Jupyter Notebooks to render on our client.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 编写你想要在 SQL 中执行的任何 Python 代码。在这个例子中，我们正在创建一个 iris 数据集的散点矩阵，并只将 .png 的字节流返回到 Jupyter
+    Notebooks 以便在客户端渲染。
 - en: '[PRE5]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '**Send execution to SQL**'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '**将执行发送到 SQL**'
 - en: Now that we are finally set up, check out how easy sending remote execution
     really is! First, import revoscalepy. Create a sql_compute_context, and then send
     the execution of any function seamlessly to SQL Server with RxExec. No raw data
     had to be transferred from SQL to the Jupyter Notebook. All computation happened
     within the database and only the image file was returned to be displayed.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经完成了设置，看看发送远程执行有多么简单！首先，导入 revoscalepy。创建一个 sql_compute_context，然后使用 RxExec
+    无缝地将任何函数的执行发送到 SQL Server。不需要从 SQL 转移原始数据到 Jupyter Notebook。所有计算都在数据库内完成，只有图像文件被返回以供显示。
 - en: '[PRE6]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: While this example is trivial with the Iris dataset, imagine the additional
     scale, performance, and security capabilities that you now unlocked. You can use
     any of the latest open source R/Python packages to build Deep Learning and AI
@@ -164,36 +249,59 @@
     high-performance algorithms in Microsoft's [RevoScaleR ](https://docs.microsoft.com/en-us/machine-learning-server/r-reference/revoscaler/revoscaler)and [RevoScalePy ](https://docs.microsoft.com/en-us/sql/advanced-analytics/python/what-is-revoscalepy?view=sql-server-2017)APIs.
     Using these with the latest innovations in the open source world allows you to
     bring unparalleled selection, performance, and scale to your applications.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管这个例子对于 Iris 数据集来说很简单，但可以想象你现在解锁了额外的规模、性能和安全功能。你可以使用任何最新的开源 R/Python 包在 SQL
+    Server 中处理大量数据来构建深度学习和 AI 应用程序。我们还提供了微软的 [前沿](https://cloudblogs.microsoft.com/sqlserver/2016/10/11/1000000-predictions-per-second/)、高性能算法，包含在
+    [RevoScaleR](https://docs.microsoft.com/en-us/machine-learning-server/r-reference/revoscaler/revoscaler)
+    和 [RevoScalePy](https://docs.microsoft.com/en-us/sql/advanced-analytics/python/what-is-revoscalepy?view=sql-server-2017)
+    API 中。将这些与开源世界的最新创新结合使用，可以为你的应用程序带来无与伦比的选择、性能和规模。
 - en: '**Learn More**'
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**了解更多**'
 - en: Check out [SQL Machine Learning Services Documentation](https://aka.ms/SQLMLDocs) to
     learn how you can easily deploy your R/Python code with SQL stored procedures
     making them accessible in your ETL processes or to any application. Train and
     store machine learning models in your database bringing intelligence to where
     your data lives.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看 [SQL 机器学习服务文档](https://aka.ms/SQLMLDocs) 以了解如何轻松部署你的 R/Python 代码，并通过 SQL
+    存储过程使其在 ETL 过程中或任何应用程序中可访问。训练并存储机器学习模型于数据库中，将智能带到数据所在的地方。
 - en: Basic R and Python Execution in SQL Server: [https://aka.ms/BasicMLServicesExecution](https://aka.ms/BasicMLServicesExecution)
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '基本的 R 和 Python 执行在 SQL Server 中: [https://aka.ms/BasicMLServicesExecution](https://aka.ms/BasicMLServicesExecution)'
 - en: Set up Machine Learning Services in SQL Server: [https://aka.ms/SetupMLServices](https://aka.ms/SetupMLServices)
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '在 SQL Server 中设置机器学习服务: [https://aka.ms/SetupMLServices](https://aka.ms/SetupMLServices)'
 - en: End-to-end tutorial solutions on Github: [https://microsoft.github.io/sql-ml-tutorials/](https://microsoft.github.io/sql-ml-tutorials/)
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 'GitHub 上的端到端教程解决方案: [https://microsoft.github.io/sql-ml-tutorials/](https://microsoft.github.io/sql-ml-tutorials/)'
 - en: 'Other YouTube Tutorials:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他 YouTube 教程：
 - en: How to Install SQL Server Machine Learning Services: [https://aka.ms/InstallMLServices](https://aka.ms/InstallMLServices) How
     to Enable SQL Server Machine Learning Services: [https://aka.ms/EnableMLServices](https://aka.ms/EnableMLServices) Basics
     of R and Python Execution in SQL: [https://aka.ms/ExecuteMLServices](https://aka.ms/ExecuteMLServices)
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '如何安装SQL Server机器学习服务: [https://aka.ms/InstallMLServices](https://aka.ms/InstallMLServices)
+    如何启用SQL Server机器学习服务: [https://aka.ms/EnableMLServices](https://aka.ms/EnableMLServices)
+    SQL中R和Python执行的基础: [https://aka.ms/ExecuteMLServices](https://aka.ms/ExecuteMLServices)'
 - en: '**Bio**: [Kyle Weller](https://www.linkedin.com/in/ai-is-the-future/) is a
     Program Manager on Microsoft’s Azure Machine Learning team. After working as a
     Software Developer at a few startups, he joined Microsoft and spent time in Office,
@@ -203,73 +311,113 @@
     for the product. He now works on Azure machine learning products focusing on bringing
     intelligence to where data lives. This includes SQL Server’s new Machine Learning
     Services that allow R + Python execution in SQL.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介**: [凯尔·韦勒](https://www.linkedin.com/in/ai-is-the-future/)是微软Azure机器学习团队的项目经理。在几家初创公司担任软件开发者后，他加入了微软，曾在Office和Bing工作，负责构建可扩展的数据仪表盘、平台和API解决方案。他曾在Cortana数据与分析团队工作，推动测量策略，研究用户行为模式，标准化KPI，并识别产品的增长机会。他现在专注于Azure机器学习产品，将智能带到数据所在的地方。这包括SQL
+    Server的新机器学习服务，允许在SQL中执行R + Python。'
 - en: '**Related:**'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关:**'
 - en: '[Jupyter Notebook for Beginners: A Tutorial](https://www.kdnuggets.com/2018/05/jupyter-notebook-beginners-tutorial.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Jupyter Notebook初学者教程](https://www.kdnuggets.com/2018/05/jupyter-notebook-beginners-tutorial.html)'
 - en: '[SQL Cheat Sheet](https://www.kdnuggets.com/2018/07/sql-cheat-sheet.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL备忘单](https://www.kdnuggets.com/2018/07/sql-cheat-sheet.html)'
 - en: '[Genetic Algorithm Implementation in Python](https://www.kdnuggets.com/2018/07/genetic-algorithm-implementation-python.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python中的遗传算法实现](https://www.kdnuggets.com/2018/07/genetic-algorithm-implementation-python.html)'
 - en: '* * *'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-53
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的IT'
 - en: '* * *'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[High Availability SQL Server Docker Containers in Kubernetes](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kubernetes中的高可用SQL Server Docker容器](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)'
 - en: '[The Essential Guide to SQL’s Execution Order](https://www.kdnuggets.com/the-essential-guide-to-sql-execution-order)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL执行顺序的基本指南](https://www.kdnuggets.com/the-essential-guide-to-sql-execution-order)'
 - en: '[KDnuggets™ News 22:n01, Jan 5: 3 Tools to Track and Visualize…](https://www.kdnuggets.com/2022/n01.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets™ 新闻 22:n01, 1月5日: 追踪和可视化的3种工具…](https://www.kdnuggets.com/2022/n01.html)'
 - en: '[3 Tools to Track and Visualize the Execution of Your Python Code](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[追踪和可视化Python代码执行的3种工具](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)'
 - en: '[Remote Work in Data Science: Pros and Cons](https://www.kdnuggets.com/remote-work-in-data-science-pros-and-cons)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中的远程工作: 利与弊](https://www.kdnuggets.com/remote-work-in-data-science-pros-and-cons)'
 - en: '[How To Find The Best Data Science Remote Jobs](https://www.kdnuggets.com/2022/12/find-best-data-science-remote-jobs.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何找到最佳的数据科学远程工作](https://www.kdnuggets.com/2022/12/find-best-data-science-remote-jobs.html)'
