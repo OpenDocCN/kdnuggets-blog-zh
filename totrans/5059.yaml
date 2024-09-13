@@ -3,15 +3,18 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 实现你自己的 k-最近邻算法使用 Python
 - en: 原文：[https://www.kdnuggets.com/2016/01/implementing-your-own-knn-using-python.html](https://www.kdnuggets.com/2016/01/implementing-your-own-knn-using-python.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/01/implementing-your-own-knn-using-python.html](https://www.kdnuggets.com/2016/01/implementing-your-own-knn-using-python.html)
 - en: '**By Natasha Latysheva**.'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Natasha Latysheva**。'
 - en: '*Editor''s note*: Natasha is active in the [Cambridge Coding Academy](https://cambridgecoding.com/),
     which is holding an upcoming [Data Science Bootcamp in Python](https://cambridgecoding.com/datascience-bootcamp)
     on 20-21 February 2016, where you can learn state-of-the-art machine learning
@@ -19,6 +22,8 @@
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*编辑注*：Natasha 活跃于 [剑桥编程学院](https://cambridgecoding.com/)，该学院将于 2016 年 2 月 20-21
+    日举办 [Python 数据科学训练营](https://cambridgecoding.com/datascience-bootcamp)，在这里你可以学习针对现实世界问题的最先进机器学习技术。'
 - en: 'In machine learning, you may often wish to build predictors that allows to
     classify things into categories based on some set of associated values. For example,
     it is possible to provide a diagnosis to a patient based on data from previous
@@ -27,10 +32,13 @@
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习中，你可能经常希望构建分类器，将事物分类到某些类别中，这些类别是基于一组相关值。例如，可以根据来自先前患者的数据为患者提供诊断。分类可能涉及在类别之间构造高度非线性的边界，如下图所示的红色、绿色和蓝色类别
+    [下面](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm)：
 - en: '![kNN boundaries](../Images/4322b5f9ae66be35375b65bec3b6c05f.png)'
   id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![kNN 边界](../Images/4322b5f9ae66be35375b65bec3b6c05f.png)'
 - en: 'Many algorithms have been developed for automated classification, and common
     ones include random forests, support vector machines, Naïve Bayes classifiers,
     and many types of neural networks. To get a feel for how classification works,
@@ -52,31 +60,43 @@
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多算法已经被开发用于自动分类，常见的算法包括随机森林、支持向量机、朴素贝叶斯分类器和多种类型的神经网络。为了了解分类的工作原理，我们以一个简单的分类算法——k-最近邻（kNN）为例，并在
+    Python 2 中从头开始构建它。如果你刚刚开始学习 Python，可以使用主要的 [命令式编程风格](http://latentflip.com/imperative-vs-declarative/)，而不是使用
+    [lambda 函数](http://www.secnetix.de/olli/Python/lambda_functions.hawk) 和 [列表推导式](http://www.secnetix.de/olli/Python/list_comprehensions.hawk)
+    的声明式/函数式风格，以保持简单。在这里，我们将介绍后一种方法。kNN 通过将新的实例与最相似的案例分组来进行分类。在这里，你将使用 kNN 处理流行的（尽管是理想化的）鸢尾花数据集，该数据集包括三种鸢尾花的花卉测量数据。我们的任务是根据花卉测量数据预测花卉的物种标签。由于你将基于一组已知的正确分类来构建预测器，因此
+    kNN 是一种监督式机器学习（虽然有些令人困惑的是，在 kNN 中没有显式的训练阶段；请参见 [懒惰学习](https://en.wikipedia.org/wiki/Lazy_learning)）。kNN
+    任务可以分解为编写 3 个主要功能：
 - en: 1\. Calculate the distance between any two points
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 1\. 计算任何两点之间的距离
 - en: 2\. Find the nearest neighbours based on these pairwise distances
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 2\. 基于这些成对距离找到最近邻
 - en: 3\. Majority vote on a class labels based on the nearest neighbour list
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 3\. 基于最近邻列表对类别标签进行多数投票
 - en: The steps in the following diagram provide a high-level overview of the tasks
     you'll need to accomplish in your code.
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下图中的步骤提供了你在代码中需要完成任务的高层次概述。
 - en: '[![kNN algorithm](../Images/39dbb98036b866c0b324bcb95cf9762c.png)](https://cambridgecoding.files.wordpress.com/2016/01/knn2.jpg)'
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![kNN 算法](../Images/39dbb98036b866c0b324bcb95cf9762c.png)](https://cambridgecoding.files.wordpress.com/2016/01/knn2.jpg)'
 - en: '**The algorithm**'
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '**算法**'
 - en: Briefly, you would like to build a script that, for each input that needs classification,
     searches through the entire training set for the k-most similar instances. The
     class labels of the most similar instances should then be summarised by majority
