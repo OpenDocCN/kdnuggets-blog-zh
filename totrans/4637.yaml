@@ -3,23 +3,28 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用Dask进行K-means聚类：猫咪图片的图像滤镜
 - en: 原文：[https://www.kdnuggets.com/2019/06/k-means-clustering-dask-image-filters.html](https://www.kdnuggets.com/2019/06/k-means-clustering-dask-image-filters.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/06/k-means-clustering-dask-image-filters.html](https://www.kdnuggets.com/2019/06/k-means-clustering-dask-image-filters.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Luciano Strika](http://www.datastuff.tech), MercadoLibre**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Luciano Strika](http://www.datastuff.tech)提供，MercadoLibre**'
 - en: '![Picture of a kitten. It will be compressed using K means clustering.](../Images/d0f4d993a98270043bb07a9e804b179d.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![一只小猫的图片。它将通过K-means聚类进行压缩。](../Images/d0f4d993a98270043bb07a9e804b179d.png)'
 - en: Applying filters to images is not a new concept to anyone. We take a picture,
     make a few changes to it, and now it looks cooler. But where does Artificial Intelligence
     come in? Let’s try out a fun use case of **Unsupervised Machine Learning** with
@@ -27,70 +32,83 @@
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 对图像应用滤镜对任何人来说都不是新概念。我们拍一张照片，对其进行一些更改，然后它看起来更酷。但是人工智能的作用在哪里？让我们尝试一下用K Means 聚类进行**无监督机器学习**的有趣用例。
 - en: I’ve written before about **K Means Clustering**, so I will assume that you’re **familiar** with
     the algorithm. If you’re not, this is the [in-depth introduction that I wrote](http://www.datastuff.tech/machine-learning/k-means-clustering-unsupervised-learning-for-recommender-systems/).
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我之前写过**K Means 聚类**，所以我会假设你对这个算法已经**熟悉**。如果你不熟悉，可以查看我写的[深入介绍](http://www.datastuff.tech/machine-learning/k-means-clustering-unsupervised-learning-for-recommender-systems/)。
 - en: Moreover, I also tried my hand at **image compression** (well, reconstruction)
     with [autoencoders](http://www.datastuff.tech/machine-learning/autoencoder-deep-learning-tensorflow-eager-api-keras/),
     to varying degrees of success.
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，我还尝试了用[自编码器](http://www.datastuff.tech/machine-learning/autoencoder-deep-learning-tensorflow-eager-api-keras/)进行**图像压缩**（好吧，是重建），效果有好有坏。
 - en: However, this time, my goal is **not to reconstruct** the best possible image,
     but just to see the effects of **recreating a picture** with the least possible
     colors.
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，这一次，我的目标是**不重建**最好的图像，而只是查看用最少颜色**重建图片**的效果。
 - en: Instead of making the picture look as similar to the original as possible, I
     just want us to look at it and say “neat!”.
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 与使图片尽可能接近原始图片不同，我只是希望我们看完之后能说“真棒！”。
 - en: So how do we do this? I’m glad you asked.
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 那我们该如何做呢？很高兴你问了。
 - en: How to do image filters with K-means Clustering
   id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何使用K-means聚类进行图像滤镜
 - en: First of all, it’s always good to remember an **image** is just a **vector of
     pixels**. Each pixel is a tuple of three integer values between 0 and 255 (an
     unsigned byte), which represent that pixel’s color’s RGB values.
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，永远记住**图像**只是**像素向量**。每个像素是三个介于0到255之间的整数值的元组（无符号字节），代表该像素颜色的RGB值。
 - en: We want to use K-means clustering to find the* k ***colors** that best **characterize
     an image**. That just means we could treat each **pixel** as a **single data point** (in
     3-dimensional space), and cluster them.
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们想要使用K-means聚类来找到最能**表征图像**的*k*个**颜色**。这意味着我们可以将每个**像素**视为**单个数据点**（在3维空间中），并进行聚类。
 - en: So first, we’ll want to turn an image into a** vector of pixels** in Python.
     Here’s how we do it.
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们需要在Python中将图像转换为**像素向量**。以下是实现方法。
 - en: As an aside, I don’t think the *vector_of_pixels* function needs to use a Python
     list. I’m sure there has to be some way to **flatten a numpy array**, I just couldn’t
     find any (at least not one that did it in the order I wanted).
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 顺便说一句，我认为*vector_of_pixels*函数不需要使用Python列表。我确信一定有办法**展平numpy数组**，只是我没找到（至少没有找到按照我想要的顺序进行展平的方法）。
 - en: If you can think of any way, let me know in the comments!
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你能想到任何方法，请在评论中告诉我！
 - en: The next step is **fitting** the model to the image, so that it **clusters the
     pixels** into *k *colors. Then, it’s just a matter of assigning the corresponding
     cluster color to each position in the image.
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是**拟合**模型到图像，以便它将像素**聚类**为*k*种颜色。然后，只需将相应的聚类颜色分配给图像中的每个位置即可。
 - en: 'For instance, maybe our pic has only three colors: two reddish ones and a greenish
     one. If we fit that to 2 clusters, all the reddish pixels would turn some different
     shade of red (getting clustered together), and the other ones would turn into
@@ -98,6 +116,7 @@
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，也许我们的图片只有三种颜色：两种红色和一种绿色。如果我们将其拟合到2个聚类，那么所有红色像素都会变成不同的红色阴影（被聚在一起），其他的则会变成绿色。
 - en: But enough with the explanations, let’s see the program in action!
   id: totrans-19
   prefs: []
