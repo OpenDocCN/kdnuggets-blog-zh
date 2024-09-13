@@ -3,21 +3,25 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 RNN 生成文本的 4 行代码
 - en: 原文：[https://www.kdnuggets.com/2018/06/generating-text-rnn-4-lines-code.html](https://www.kdnuggets.com/2018/06/generating-text-rnn-4-lines-code.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/06/generating-text-rnn-4-lines-code.html](https://www.kdnuggets.com/2018/06/generating-text-rnn-4-lines-code.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: Generating text is one of those projects that seems like a lot of fun to machine
     learning and NLP beginners, but one which is also pretty daunting. Or, at least
     it was for me.
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成文本是一个对机器学习和自然语言处理初学者来说似乎很有趣的项目，但它也相当令人畏惧。或者，至少对我来说是这样。
 - en: 'Thankfully, there are all sorts of great materials online for learning how
     RNNs can be used for generating text, ranging from the theoretical to the technically
     in-depth to those decidedly focused on the practical. There are also some very
@@ -28,6 +32,9 @@
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，在线有各种优秀的材料可以学习如何使用 RNN 生成文本，这些材料涵盖了从理论到技术深度的内容，也有专注于实际应用的内容。其中一些非常好的文章
+    [涵盖了所有内容](http://karpathy.github.io/2015/05/21/rnn-effectiveness/) ，现已被认为是这一领域的经典。所有这些材料有一个共同点：在某个阶段，你必须构建和调整一个
+    RNN 来完成工作。
 - en: While this is a obviously a worthwhile undertaking, especially for the sake
     of learning, what if you are OK with a much higher level of abstraction, whatever
     your reason may be? What if you are a data scientist that requires a building
@@ -37,6 +44,7 @@
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然这是一个显然值得做的任务，特别是为了学习，但如果你对更高层次的抽象感到满意呢，无论你出于什么原因？如果你是一个数据科学家，需要一个以 RNN 文本生成器形式存在的构建块来插入你的项目呢？或者，作为一个新手，你只是想稍微动手一下——但不要太深入——以测试水域或作为进一步挖掘的动机呢？
 - en: In that vein, let's take a look at [textgenrnn](https://github.com/minimaxir/textgenrnn),
     a project which allows you to "easily train your own text-generating neural network
     of any size and complexity on any text dataset with a few lines of code." textgenrnn
@@ -45,6 +53,8 @@
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个背景下，让我们看看 [textgenrnn](https://github.com/minimaxir/textgenrnn) 项目，它允许你“轻松训练自己生成文本的神经网络，无论大小和复杂度，使用几行代码即可。”
+    textgenrnn 的作者是 Max Woolf，他是 BuzzFeed 的副数据科学家，曾是 Apple 软件 QA 工程师。
 - en: textgenrnn is a built on top of Keras and TensorFlow, and can be used to generate
     both character and word level text (character level is the default). The network
     architecture uses attention-weighting and skip-embedding for accelerated training
@@ -55,10 +65,15 @@
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: textgenrnn 基于 Keras 和 TensorFlow，可以用于生成字符级和词级文本（字符级是默认的）。网络架构使用了注意力加权和跳跃嵌入来加速训练和提高质量，并允许调整多个超参数，如
+    RNN 大小、RNN 层数以及是否包含双向 RNN。你可以在其 [Github 仓库](https://github.com/minimaxir/textgenrnn)
+    或这篇 [介绍博客文章](http://minimaxir.com/2018/05/text-neural-networks/) 中阅读更多关于 textgenrnn
+    及其功能和架构的内容。
 - en: '![Image](../Images/17a900e37b077effb7be6c76c3d7527a.png)'
   id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/17a900e37b077effb7be6c76c3d7527a.png)'
 - en: Since the "Hello, World!" for text generation (at least, in my mind) seems to
     be generating Trump tweets, let's go with that. textgenrnn's default pretrained
     model can be trained on new texts easily -- though you can also use textgenrnn
@@ -68,11 +83,14 @@
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于文本生成的“Hello, World!”（至少在我看来）似乎是生成特朗普的推文，我们就用这个吧。textgenrnn 的默认预训练模型可以很容易地在新文本上进行训练——虽然你也可以使用
+    textgenrnn 训练一个新模型（只需将 new_model=True 添加到其任何训练函数中）——由于我们想要快速生成推文，我们就这样做吧。
 - en: Acquiring the Data
   id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 获取数据
 - en: I grabbed a selection of Donald Trump's tweets -- Jan 1, 2014 - Jun 11, 2018
     (yesterday, at time of writing), which clearly includes tweets from both before
     and after his inauguration as President of the United States -- from [Trump Twitter
@@ -83,15 +101,18 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我从[特朗普推特档案](http://www.trumptwitterarchive.com/archive)中获取了一些唐纳德·特朗普的推文——2014年1月1日至2018年6月11日（在撰写时的前一天），这明显包括了他作为美国总统就职前后的推文。这个网站可以轻松查询和下载总统的推文。我只提取了该日期范围内的推文文本，因为我不关心任何元数据，并将其保存到一个名为`trump-tweets.txt`的文本文件中。
 - en: '[![Image](../Images/05ded0f38c126d07de8ca31bff7f3f09.png)](https://image.ibb.co/mdzied/trump_tweets_archive.jpg)'
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![图片](../Images/05ded0f38c126d07de8ca31bff7f3f09.png)](https://image.ibb.co/mdzied/trump_tweets_archive.jpg)'
 - en: Training the Model
   id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 训练模型
 - en: Let's see how uncomplicated it is to generate text with textgenrnn. The following
     4 lines are all we need to import the library, create a text generation object,
     train the model on the `trump-tweets.txt` file for 10 epochs, and then generate
@@ -99,6 +120,7 @@
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看使用 textgenrnn 生成文本有多简单。以下4行代码是我们需要的所有内容，用于导入库、创建文本生成对象、在`trump-tweets.txt`文件上训练模型10个周期，然后生成一些示例推文。
 - en: '[PRE0]'
   id: totrans-15
   prefs: []
@@ -108,6 +130,7 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 大约30分钟后，以下是生成的内容（在第10个周期）：
 - en: '[PRE1]'
   id: totrans-17
   prefs: []
@@ -120,6 +143,8 @@
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 撇开政治不谈，鉴于我们只使用了约12K条推文进行仅10个周期的训练，这些生成的推文并不……糟糕。想试试[温度](https://www.quora.com/What-is-Temperature-in-LSTM)（textgenrnn
+    的默认值为0.5）来生成一些更具创意的推文吗？我们来试试吧：
 - en: '[PRE2]'
   id: totrans-19
   prefs: []
@@ -135,6 +160,7 @@
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 嗯，这说服力稍差。怎么样，我们试试一些更保守的，这样模型会更有信心的：
 - en: '[PRE4]'
   id: totrans-22
   prefs: []
@@ -149,6 +175,7 @@
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，其中一些看起来更易读了。
 - en: 'Of course, this isn''t perfect. There are all sorts of other things we could
     have tried, and the good news is that, if you don''t want to implement your own
     solution, textgenrnn can be used to perform many of these things (again, see the
@@ -156,71 +183,88 @@
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，这并不完美。我们可以尝试各种其他方法，幸运的是，如果你不想实现自己的解决方案，textgenrnn 可以用来执行许多这些操作（再次参见[Github
+    仓库](https://github.com/minimaxir/textgenrnn)）：
 - en: Train our own model from scratch
   id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从零开始训练我们自己的模型
 - en: Train with more sample data for a greater number of iterations
   id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用更多的样本数据进行更多次迭代训练
 - en: Tune other hyperparameters
   id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 调整其他超参数
 - en: Preprocess the data a bit (at the very least to eliminate the fake URLs)
   id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对数据进行一些预处理（至少要去除虚假的网址）
 - en: Kind of fun. I'm interested in seeing how a default textgenrnn model performs
     out-of-the-box against a custom, well-tuned model. Maybe something for next time.
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 有点有趣。我很想看看一个默认的 textgenrnn 模型在开箱即用时与一个定制的、经过良好调整的模型相比表现如何。也许下次可以尝试一下。
 - en: '**Related**:'
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[5 Machine Learning Projects You Should Not Overlook, June 2018](/2018/06/5-machine-learning-projects-overlook-jun-2018.html)'
   id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5个你不应该忽视的机器学习项目，2018年6月](/2018/06/5-machine-learning-projects-overlook-jun-2018.html)'
 - en: '[Getting Started with spaCy for Natural Language Processing](/2018/05/getting-started-spacy-natural-language-processing.html)'
   id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 spaCy 进行自然语言处理入门](/2018/05/getting-started-spacy-natural-language-processing.html)'
 - en: '[Find Out What Celebrities Tweet About the Most](/2017/10/what-celebrities-tweet-about-most.html)'
   id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[了解名人最常发布什么内容](/2017/10/what-celebrities-tweet-about-most.html)'
 - en: '* * *'
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 加快你在网络安全领域的职业发展。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
