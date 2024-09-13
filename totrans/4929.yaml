@@ -1,42 +1,60 @@
 - en: 'Python Data Preparation Case Files: Removing Instances & Basic Imputation'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python 数据准备案例文件：删除实例与基本插补
 - en: 原文：[https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-basic-imputation.html](https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-basic-imputation.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-basic-imputation.html](https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-basic-imputation.html)
 - en: '![Basic Imputation](../Images/136f58512f2655eb9fcfe8fe229e5386.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![基本插补](../Images/136f58512f2655eb9fcfe8fe229e5386.png)'
 - en: 'Data preparation covers a lot of potential ground: data integration, data transformation,
     feature selection, feature engineering, and much, much more. One of the most basic,
     and most important, aspects of data preparation is dealing with missing values.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据准备涵盖了许多潜在的内容：数据集成、数据转换、特征选择、特征工程等等。数据准备的一个最基本、也是最重要的方面是处理缺失值。
 - en: 'From a practical standpoint, there are 3 general approaches to dealing with
     data instances which include missing values:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 从实际的角度来看，处理包含缺失值的数据实例有3种一般方法：
 - en: Delete data instances with missing values
+  id: totrans-5
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 删除具有缺失值的数据实例
 - en: Fill in missing values with some derived value
+  id: totrans-6
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 用某些派生值填充缺失值
 - en: Leave missing values as is, if your algorithm can handle them
+  id: totrans-7
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果你的算法可以处理缺失值，就保留缺失值原样
 - en: Keep in mind that these approaches are only from a technical point of view.
     There do not in any way address which approach, or combination of approaches,
     are appropriate in a given scenario. Such decisions depend on an understanding
     of the data, the domain, and the desired outcome, and cannot be covered in a post
     such as this.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 请记住，这些方法仅从技术角度来看。它们并没有解决在特定情境下哪个方法或方法组合是合适的。这些决策取决于对数据、领域和期望结果的理解，不能在这样的文章中详细讨论。
 - en: 'There are, of course, varying implementations of the first approach, deleting
     data instances with missing values: delete all instances with any number of missing
     values; delete all instances with 2 or more missing values; delete all instances
@@ -45,26 +63,34 @@
     mean, median, mode, regression, or other strategies. The third approach alludes
     to the fact that some machine learning algorithms, such as Random Forests, can
     often sufficiently deal with missing values, while others cannot.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，删除具有缺失值的数据实例的第一种方法有多种实现方式：删除所有具有任何缺失值的实例；删除所有具有2个或更多缺失值的实例；删除所有仅缺少特定特征值的实例。同样，第二种方法，即填充缺失值——或称为插补——可以基于多种测量标准，包括均值、中位数、众数、回归或其他策略。第三种方法提到，一些机器学习算法，如随机森林，通常可以充分处理缺失值，而其他算法则无法处理。
 - en: 'As points #1 and #3 are quite straightforward (again, the **reasoning** behind
     their selections may be complex, but the actions taken after deciding to adopt
     them are quite simple), point #2, imputation, is what we will be mainly discussing
     in this series of posts. As you will see, imputation is varied enough to warrant
     extra consideration.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于第#1点和第#3点相对简单（尽管选择它们的**推理**可能复杂，但决定采纳后的操作相当简单），第#2点，即插补，是我们将在本系列文章中主要讨论的内容。如你所见，插补的变种足够多，需要额外的关注。
 - en: I just want to caution, again, that this is a brief outline of a few approaches
     to dealing with missing data values, and stress that there is no endorsement of
     any particular approach to any particular scenario, especially concerning domain-related
     holistic decisions to dealing with missing data. You should be warned that you
     need to look elsewhere for guidance in these matters.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我想再次提醒，这只是处理缺失数据值的几种方法的简要概述，并强调没有对任何特定情境下的某种方法表示认可，尤其是涉及到与领域相关的整体决策时。你应该注意在这些问题上需要寻求其他指导。
 - en: The Data
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据
 - en: For these exercises, we will use a mock banking information dataset built using
     [Mockaroo](https://www.mockaroo.com/). The small dataset includes 10 variables,
     or features (including the class, or target, variable) -- coinciding with columns
@@ -72,40 +98,59 @@
     1). The idea of our exercise is to emulate a process which uses bank customer
     data to decide (and predict) whether or not a special offer will be extended to
     the customer, with the assumption that "better" customers will receive an offer.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这些练习，我们将使用一个通过[Mockaroo](https://www.mockaroo.com/)构建的模拟银行信息数据集。该小数据集包括10个变量或特征（包括类别或目标变量）--
+    对应于表格的列 -- 和1000个实例 -- 对应于表格的行（见图1）。我们的练习目的是模拟一个使用银行客户数据来决定（并预测）是否向客户提供特别优惠的过程，假设“更好”的客户会收到优惠。
 - en: What exactly is a "better" customer? How will we be modeling our data? We don't
     really care right yet. We will partake in some amateur speculation during our
     data preparation exercise, but ultimately we are concerned with getting our dataset
     ready for this modeling and prediction process, as opposed to performing said
     process. In real life you don't want to fake it til you make it with domain knowledge,
     but we'll make some reasoned assumptions about our data usefulness as we proceed.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 什么才是“更好”的客户？我们将如何对数据建模？我们现在还不太关心这些。我们将在数据准备过程中进行一些业余猜测，但**终极目标**是为建模和预测过程准备好数据集，而不是执行该过程。在现实生活中，你不想凭空揣测领域知识，但在此过程中，我们会对数据的有用性做出一些合理的假设。
 - en: Our plan of attack includes some data inspection along with using some basic
     imputation methods to help fill in our dataset's missing values, as well as deciding
     as to whether we should drop some instances based on which variables they are
     missing.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的计划包括一些数据检查以及使用一些基本的填补方法来帮助填补数据集中的缺失值，并决定是否根据缺失的变量决定是否删除某些实例。
 - en: Let's start with importing the dataset and having a look at it. We will also
     summarize the missing values. First, [grab the dataset here](https://drive.google.com/file/d/0B6GhBwm5vaB2S3V6bXdBNE1jLUU/view?usp=sharing).
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始导入数据集并查看它。我们还将总结缺失值。首先，[在这里获取数据集](https://drive.google.com/file/d/0B6GhBwm5vaB2S3V6bXdBNE1jLUU/view?usp=sharing)。
 - en: '[PRE0] import pandas as pd  import numpy as np    # Importing the dataset  dataset_filename
     = ''mock_bank_data_original.csv''  df = pd.read_csv(dataset_filename)    # Summarize
     missing values  print ''Null values by variable:''  print ''------------------------''  df.isnull().sum()
     [PRE1]`  [PRE2] Null values by variable:  ------------------------  customer_id         18  name                 0  email              158  sex                111  age                113  state               40  cheq_balance        23  savings_balance     96  credit_score         0  special_offer        0  dtype:
     int64 [PRE3]` ![Bank data](../Images/b084dbd6d8e7cb9b84cc90d63eca151f.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE0] import pandas as pd  import numpy as np    # 导入数据集  dataset_filename
+    = ''mock_bank_data_original.csv''  df = pd.read_csv(dataset_filename)    # 总结缺失值  print
+    ''Null values by variable:''  print ''------------------------''  df.isnull().sum()
+    [PRE1]`  [PRE2] Null values by variable:  ------------------------  customer_id         18  name                 0  email              158  sex                111  age                113  state               40  cheq_balance        23  savings_balance     96  credit_score         0  special_offer        0  dtype:
+    int64 [PRE3]` ![银行数据](../Images/b084dbd6d8e7cb9b84cc90d63eca151f.png)'
 - en: '**Figure 1:** Mock bank dataset for our exercise.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 1：** 我们练习的模拟银行数据集。'
 - en: The Process
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理过程
 - en: This post will deal with the first set of data preprocessing tasks, specifically
     dropping some instances and preforming some basic imputation. A pair of follow
     up posts will demonstrate imputing a value based on the category membership of
@@ -114,19 +159,25 @@
     performing imputation by regression (such as using a combination of variables
     to perform linear regression, and basing missing values of a different variable
     on the resultant linear regression model).
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文将处理第一组数据预处理任务，具体包括删除某些实例和进行一些基本的填补。接下来的两篇文章将演示如何基于不同变量的类别成员身份进行填补（例如，使用华盛顿州所有人的平均薪资来确定华盛顿州居民的缺失薪资值）以及通过回归进行填补（例如，使用变量的组合进行线性回归，并基于结果线性回归模型填补不同变量的缺失值）。
 - en: '**Dropping Instances with Missing State Value**'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**删除缺失州值的实例**'
 - en: Our first half-educated assumption is that we will be basing much of our preparation
     around states in which our customers live, and so we will unfortunately be sacrificing
     any instance that lacks a value for this variable. The bad news is that we will
     be down to 960 instances; the good news is that (hopefully) we won't have to sacrifice
     any more.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: '**Imputing Missing Credit Scores**'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: Let's assume that those with domain knowledge have indicated that the median
@@ -134,14 +185,17 @@
     mean could be used, or the most frequent value, or could be devised by some other
     more complex scheme, but our experts assure us this is appropriate for filling
     in this particular variable's missing values.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: Note that something state-specific, such as replacing with the mean credit score
     of bank customers in the same state, could also have been used. We will save this
     approach for use in the next post's tasks, however.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: '**Discarding Unnecessary Variables**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: Since we don't need all of the variables to be able to make predictions about
@@ -150,24 +204,30 @@
     data. We might save this task for after all data preprocessing has been complete,
     but since this first post is a bit shy on steps, let's take advantage and work
     it out now.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: Specifically, we definitely won't be needing the 'customer_id', 'name', or 'email'
     variables.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: '**Saving the New Dataset**'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: Next, since we want to save the dataset in its new form to use in the next tutorial,
     we will create a new, up-to-date CSV.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: The Code
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: The full code with comments to accomplish the above is shown below.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: This was a slow start, and we didn't break much ground, but hopefully the trouble
@@ -176,78 +236,109 @@
     that we have demonstrated basic imputation based on all values of the same variable
     at this point as well, in order to have something to compare our more creative
     methods to.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: Hey, at least we've done the boring stuff already, at this point. The next post
     will be live sooner than later; in the meantime, check out the related posts below
     for some more data preparation-related reading material.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related**:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: '[7 Steps to Mastering Data Preparation with Python](/2017/06/7-steps-mastering-data-preparation-python.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Machine Learning Workflows in Python from Scratch Part 1: Data Preparation](/2017/05/machine-learning-workflows-python-scratch-part-1.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Data Preparation Tips, Tricks, and Tools: An Interview with the Insiders](/2016/10/data-preparation-tips-tricks-tools.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织在 IT 方面'
 - en: '* * *'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Removing Outliers Using Standard Deviation in Python](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 中的标准差去除离群值](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)'
 - en: '[3 Approaches to Data Imputation](https://www.kdnuggets.com/2022/12/3-approaches-data-imputation.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据填补的 3 种方法](https://www.kdnuggets.com/2022/12/3-approaches-data-imputation.html)'
 - en: '[Approaches to Data Imputation](https://www.kdnuggets.com/2023/01/approaches-data-imputation.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据填补的方法](https://www.kdnuggets.com/2023/01/approaches-data-imputation.html)'
 - en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Datawig，这是一种用于缺失值填补的 AWS 深度学习库](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
 - en: '[Data Preparation and Raw Data in Machine Learning](https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据准备和机器学习中的原始数据](https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html)'
 - en: '[Data Preparation with SQL Cheatsheet](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 数据准备备忘单](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'

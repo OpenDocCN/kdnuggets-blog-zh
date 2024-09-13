@@ -1,51 +1,77 @@
 - en: 'Keras Tutorial: Recognizing Tic-Tac-Toe Winners with Neural Networks'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Keras 教程：使用神经网络识别井字棋获胜者
 - en: 原文：[https://www.kdnuggets.com/2017/09/neural-networks-tic-tac-toe-keras.html](https://www.kdnuggets.com/2017/09/neural-networks-tic-tac-toe-keras.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/09/neural-networks-tic-tac-toe-keras.html](https://www.kdnuggets.com/2017/09/neural-networks-tic-tac-toe-keras.html)
 - en: '![](../Images/5e1ed30c3d61b549dfd96fbf8532b433.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5e1ed30c3d61b549dfd96fbf8532b433.png)'
 - en: '"[Tic-Tac-Toe Endgame](https://archive.ics.uci.edu/ml/datasets/Tic-Tac-Toe+Endgame)"
     was the very first dataset I used to build a neural network some years ago. I
     didn''t really know what I was doing at the time, and so things didn''t go so
     well. As I have been spending a lot of time with Keras recently, I thought I would
     take another stab at this dataset in order to demonstrate building a simple neural
     network with Keras.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '"[井字棋残局](https://archive.ics.uci.edu/ml/datasets/Tic-Tac-Toe+Endgame)" 是我几年前用来构建神经网络的第一个数据集。当时我并不真正知道自己在做什么，因此效果并不是很好。由于最近我花了很多时间在
+    Keras 上，我想再次尝试这个数据集，以演示如何使用 Keras 构建一个简单的神经网络。'
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: The Data
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据
 - en: The dataset, [available here](https://archive.ics.uci.edu/ml/datasets/Tic-Tac-Toe+Endgame),
     is a collection of 958 possible tac-tac-toe end-of-game board configurations,
     with 9 variables representing the 9 squares of a tic-tac-toe board, and a tenth
@@ -54,57 +80,88 @@
     a particular collection of Xs and Os on a board mean a win for X? Incidentally,
     [there are 255,168 possible ways](https://www.jesperjuul.net/ludologist/2003/12/28/255168-ways-of-playing-tic-tac-toe/)
     of playing a game of tic-tac-toe.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 该数据集，[可在此处获得](https://archive.ics.uci.edu/ml/datasets/Tic-Tac-Toe+Endgame)，是一个包含958种可能的井字棋残局板配置的集合，其中9个变量代表井字棋板上的9个方格，第十个类别变量指明描述的棋盘配置是否是玩家
+    X 的胜利（positive）或非胜利（negative）结局。简而言之，某个 X 和 O 的组合是否意味着 X 获胜？顺便提一下，[井字棋的可能玩法有 255,168
+    种](https://www.jesperjuul.net/ludologist/2003/12/28/255168-ways-of-playing-tic-tac-toe/)。
 - en: 'Here is a more formal description of the data:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是数据的更正式描述：
 - en: '[PRE0] 1\. top-left-square: {x,o,b}   2\. top-middle-square: {x,o,b}   3\.
     top-right-square: {x,o,b}   4\. middle-left-square: {x,o,b}   5\. middle-middle-square:
     {x,o,b}   6\. middle-right-square: {x,o,b}   7\. bottom-left-square: {x,o,b}   8\.
     bottom-middle-square: {x,o,b}   9\. bottom-right-square: {x,o,b}   10\. Class:
     {positive,negative} [PRE1]`'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE0] 1\. 左上方格：{x,o,b}  2\. 上中方格：{x,o,b}  3\. 右上方格：{x,o,b}  4\. 左中方格：{x,o,b}  5\.
+    中中方格：{x,o,b}  6\. 右中方格：{x,o,b}  7\. 左下方格：{x,o,b}  8\. 下中方格：{x,o,b}  9\. 右下方格：{x,o,b}  10\.
+    类别：{positive,negative} [PRE1]`'
 - en: As is visible, each square can be designated as marked with an X, an O, or left
     blank (b) at game's end. The mapping of variables to physical squares is shown
     in Figure 1\. Remember, the outcomes are positive or negative based on X winning.
     Figure 2 portrays a example board endgame layout, followed by its dataset representation.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 如图所示，每个方格可以被标记为 X、O 或在游戏结束时留空（b）。变量到实际方格的映射见图 1。记住，结果是基于 X 是否获胜来决定的。图 2 展示了一个示例棋盘残局布局，随后是其数据集表示。
 - en: '![Figure 1](../Images/eb04755fbb421e5ae6462b6610ca36df.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![图 1](../Images/eb04755fbb421e5ae6462b6610ca36df.png)'
 - en: '**Figure 1.** Mapping of variables to physical tic-tac-toe board locations.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 1.** 变量到实际井字棋板位置的映射。'
 - en: '![Figure 2](../Images/64f44c2162bea194789641b3244a3673.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![图 2](../Images/64f44c2162bea194789641b3244a3673.png)'
 - en: '**Figure 2.** Example board endgame layout.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 2.** 示例棋盘残局布局。'
 - en: '[PRE2]   b,x,o,x,x,b,o,x,o,positive [PRE3]`'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE2]   b,x,o,x,x,b,o,x,o,positive [PRE3]`'
 - en: The Preparation
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 准备工作
 - en: In order to use the dataset to construct a neural network, some data preparation
     and transformations will be necessary. These are outlined below, as well as further
     commented upon in the code further down.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了使用数据集构建神经网络，需要一些数据准备和转换。以下是这些步骤的概述，以及在代码中进一步的注释。
 - en: '**Encode categorical variables as numeric** - Each square is represented as
     a single variable in the original dataset. This is unacceptable for our purposes,
     however, as neural networks require variables with continuous values. We must
     first convert {x, o, b} to {0, 1, 2} for each variable. The [LabelEncoder class](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html)
     of Scikit-learn [preprocessing module](http://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing)
     will be used to accomplish this.'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**将分类变量编码为数字** - 每个方格在原始数据集中表示为单一变量。然而，这对于我们的目的来说不可接受，因为神经网络需要具有连续值的变量。我们必须首先将
+    {x, o, b} 转换为 {0, 1, 2}。这将使用 Scikit-learn 的 [LabelEncoder 类](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html)
+    和 [预处理模块](http://scikit-learn.org/stable/modules/classes.html#module-sklearn.preprocessing)
+    来完成。'
 - en: '**One-hot encode all independent categorical variables** - Once categorical
     variables are encoded to numeric, they required further processing. As the variables
     are unordered (X is not greater than O, for example), these variables must be
@@ -112,9 +169,13 @@
     encoding. As there are 3 possibilities for each square, 2 bits will be required
     for encoding. This will be accomplished with the [OneHotEncoder class](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html)
     from Scikit-learn.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**对所有独立的分类变量进行独热编码** - 一旦分类变量被编码为数字，就需要进一步处理。由于这些变量是无序的（例如，X 不大于 O），这些变量必须表示为一系列位等效值。这可以通过独热编码来实现。由于每个方格有
+    3 种可能性，因此编码需要 2 位。这将通过 Scikit-learn 的 [OneHotEncoder 类](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html)
+    来完成。'
 - en: '**Remove every third column to avoid dummy variable trap** - As the one-hot
     encoding process in Scikit-learn creates as many columns for each variables as
     there are possible options (as per the dataset), one column needs to be removed
@@ -123,35 +184,49 @@
     possible options (27 columns), which can be expressed with 2 ''bit'' columns (I
     leave this to you to confirm), and so we remove every third column from the newly
     formed dataset (leaving us with 18).'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**删除每第三列以避免虚拟变量陷阱** - 由于 Scikit-learn 的独热编码过程为每个变量创建了与可能选项数量相等的列（根据数据集），因此需要删除一列以避免所谓的虚拟变量陷阱。这是为了避免冗余数据可能导致的结果偏差。在我们的情况下，每个方格有
+    3 个可能选项（27 列），可以用 2 列“位”来表示（我留给你确认），因此我们从新形成的数据集中删除每第三列（剩下 18 列）。'
 - en: '**Encode target categorical variable** - Similarly to the independent variables,
     the target categorical variable must be changed from {positive, negative} to {0,
     1}.'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**编码目标分类变量** - 与独立变量类似，目标分类变量也必须从 {positive, negative} 更改为 {0, 1}。'
 - en: '**Train/test split** - This should be understandable to all. We set our test
     set to 20% of the dataset. We will use Scikit-learn''s [train/test split functionality](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
     to achieve this.'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**训练/测试集划分** - 这一点应该是可以理解的。我们将测试集设置为数据集的 20%。我们将使用 Scikit-learn 的 [训练/测试集划分功能](http://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
+    来实现。'
 - en: The Network
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 网络
 - en: Next, we need to construct the neural network, which we will do using [Keras](https://keras.io/).
     Let's keep in mind that our processed dataset has 18 variables to use as input,
     and that we are making binary class predictions as output.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们需要构建神经网络，这将使用 [Keras](https://keras.io/) 完成。请记住，我们处理后的数据集有 18 个变量用作输入，我们进行的是二元分类预测作为输出。
 - en: '**Input neurons** - We have 18 independent variables; therefore, we need 18
     input neurons.'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**输入神经元** - 我们有 18 个独立变量，因此我们需要 18 个输入神经元。'
 - en: '**Hidden layers** - A simple (perhaps overly so) -- and possibly totally nonsensical
     -- starting point to determining the number of neurons per hidden layer is the
     rule of thumb: add the number of independent variables and the number of output
@@ -159,112 +234,165 @@
     about the number of hidden layers? Best idea is to start with a low number (of
     hidden layers) and add them until network accuracy does not improve. We will create
     our network with 2 hidden layers.'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**隐藏层** - 确定每个隐藏层神经元数量的一个简单（或许过于简单）——也可能完全无意义——起点是经验法则：将独立变量的数量和输出变量的数量相加，然后除以2。如果我们决定向下取整，这将给我们9。那么隐藏层的数量呢？最好的办法是从少量（隐藏层）开始，逐渐增加，直到网络准确率不再提高。我们将创建一个包含2个隐藏层的网络。'
 - en: '**Activation functions** - Hidden and output layer neurons require activation
     functions. [General rules dictate](/2017/09/neural-network-foundations-explained-activation-function.html):
     hidden layer neurons get the ReLU function by default, while binary classification
     output layer neurons get the sigmoid function. We will follow convention.'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**激活函数** - 隐藏层和输出层神经元需要激活函数。[一般规则规定](/2017/09/neural-network-foundations-explained-activation-function.html)：隐藏层神经元默认使用
+    ReLU 函数，而二分类输出层神经元使用 sigmoid 函数。我们将遵循惯例。'
 - en: '**Optimizer** - We will use the [Adam optimizer](https://medium.com/@nishantnikhil/adam-optimizer-notes-ddac4fd7218)
     in our network'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**优化器** - 我们将在网络中使用[Adam 优化器](https://medium.com/@nishantnikhil/adam-optimizer-notes-ddac4fd7218)。'
 - en: '**Loss function** - We will use the [cross-entropy loss function](http://neuralnetworksanddeeplearning.com/chap3.html#the_cross-entropy_cost_function)
     in our network.'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**损失函数** - 我们将在网络中使用[交叉熵损失函数](http://neuralnetworksanddeeplearning.com/chap3.html#the_cross-entropy_cost_function)。'
 - en: '**Weight initialization** - We will randomly set the initial random weights
     of our network layer neurons.'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**权重初始化** - 我们将随机设置网络层神经元的初始随机权重。'
 - en: Below is what our network will ultimately look like.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是我们网络的*最终*外观。
 - en: '![Figure 3](../Images/c89f18b0a046cdbbb7e3c8aea3472051.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![图 3](../Images/c89f18b0a046cdbbb7e3c8aea3472051.png)'
 - en: '**Figure 3.** Visualization of network layers.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 3。** 网络层的可视化。'
 - en: The Code
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 代码
 - en: Here is the code which does everything outlined above.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是执行上述所有操作的代码。
 - en: The Results
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结果
 - en: The maximum accuracy of the trained network reached 98.69%. On the unseen test
     set, the neural network correctly predicted the class of 180 of the 186 instances.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练网络的最大准确率达到了98.69%。在未见过的测试集中，神经网络正确预测了186个实例中的180个类别。
 - en: By changing the random state of the train/test split (which changes which particular
     20% of dataset instances are used to test the resultant network with), we were
     able to increase this to 184 out of 186 instances. This is not necessarily a true
     metric improvement, however. An independent verification set could possibly shed
     light on this... if we had one.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过更改训练/测试划分的随机状态（这会改变用于测试最终网络的特定20%的数据集实例），我们能够将其提高到186个实例中的184个。然而，这不一定是一个真正的指标改进。一个独立的验证集可能会对此有所启示……如果我们有的话。
 - en: By using different optimizers (as opposed to Adam), a well as changing the number
     of hidden layers and the number of neurons per hidden layer, the resulting trained
     networks did not result in better loss, accuracy, or correctly classified test
     instances beyond what is reported above.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过使用不同的优化器（与 Adam 相对），以及更改隐藏层的数量和每个隐藏层的神经元数量，训练后的网络没有在损失、准确率或正确分类的测试实例方面超出上述报告的结果。
 - en: I hope this has been a useful introduction to constructing neural networks with
     Keras. The next such tutorial will attack convolutional neural network construction.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望这能为你构建 Keras 神经网络提供一个有用的介绍。下一个教程将介绍卷积神经网络的构建。
 - en: '**Related**:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[Deep Learning with R + Keras](/2017/06/deep-learning-r-keras.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 R 和 Keras 进行深度学习](/2017/06/deep-learning-r-keras.html)'
 - en: '[7 Steps to Understanding Deep Learning](/2016/01/seven-steps-deep-learning.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解深度学习的 7 个步骤](/2016/01/seven-steps-deep-learning.html)'
 - en: '[An Intuitive Guide to Deep Network Architectures](/2017/08/intuitive-guide-deep-network-architectures.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度网络架构的直观指南](/2017/08/intuitive-guide-deep-network-architectures.html)'
 - en: More On This Topic
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[How to Use Python and Machine Learning to Predict Football Match Winners](https://www.kdnuggets.com/2023/01/python-machine-learning-predict-football-match-winners.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用Python和机器学习预测足球比赛赢家](https://www.kdnuggets.com/2023/01/python-machine-learning-predict-football-match-winners.html)'
 - en: '[10 Simple Things to Try Before Neural Networks](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在神经网络之前可以尝试的10个简单方法](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
 - en: '[Interpretable Neural Networks with PyTorch](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用PyTorch的可解释神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
 - en: '[Deep Neural Networks Don''t Lead Us Towards AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度神经网络不会引领我们走向AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
 - en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[最先进的深度学习中的可解释预测和实时预测](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
