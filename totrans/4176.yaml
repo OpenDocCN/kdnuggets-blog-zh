@@ -1,648 +1,994 @@
 - en: Avoid These Mistakes with Time Series Forecasting
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 避免时间序列预测中的这些错误
 - en: 原文：[https://www.kdnuggets.com/2021/12/avoid-mistakes-time-series-forecasting.html](https://www.kdnuggets.com/2021/12/avoid-mistakes-time-series-forecasting.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/12/avoid-mistakes-time-series-forecasting.html](https://www.kdnuggets.com/2021/12/avoid-mistakes-time-series-forecasting.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Roman Orac](https://www.linkedin.com/in/romanorac/?originalSubdomain=si),
     Senior Data Scientist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Roman Orac](https://www.linkedin.com/in/romanorac/?originalSubdomain=si)，高级数据科学家**'
 - en: '![](../Images/9b567f3145f24d737b19d46ab7c9e0c8.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9b567f3145f24d737b19d46ab7c9e0c8.png)'
 - en: Photo by [Photoholgic](https://unsplash.com/@photoholgic?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：[Photoholgic](https://unsplash.com/@photoholgic?utm_source=medium&utm_medium=referral)
+    在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: Time series forecasting is a subfield of Data Science, which deals with forecasting
     the spread of COVID, forecasting the prices of stocks, forecasting the daily consumption
     of electricity… we could go on and on.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 时间序列预测是数据科学的一个子领域，涉及预测 COVID 的传播、股票价格、每日电力消费……我们可以继续列举下去。
 - en: Data Science is a wide field of study and there aren’t many “Jack of all trades”
+  id: totrans-7
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 数据科学是一个广泛的研究领域，几乎没有“全才”
 - en: The Data Science field is a wide field of study. Many Data Scientists work their
     whole careers with non-sequential data (classical classification and regression
     Machine Learning) and they never train a time series forecasting model in their
     professional career.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据科学领域是一个广泛的研究领域。许多数据科学家在整个职业生涯中处理的是非顺序数据（经典分类和回归机器学习），他们在职业生涯中从未训练过时间序列预测模型。
 - en: This is to be expected because of the rapid growth of the Data Science field.
     It’s harder and harder to keep up with all the subfields.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是可以预期的，因为数据科学领域的快速发展。跟上所有子领域变得越来越困难。
 - en: Data Scientists who plan to pivot into the world of time series can prepare
     for a fun ride because working with this kind of data requires different, specialized
     approaches.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 计划转入时间序列领域的数据科学家可以做好迎接有趣挑战的准备，因为处理这种数据需要不同的专业方法。
 - en: In this article, we’ll go through a few common Time Series forecasting pitfalls
     that are easy to fall into. I based the examples on financial stock data but the
     approaches can be used with any other time-series data.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们将深入探讨几个容易陷入的常见时间序列预测陷阱。我基于金融股票数据进行示例，但这些方法也可以应用于其他时间序列数据。
 - en: 'By reading this article, you’ll learn:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过阅读本文，你将学到：
 - en: How to download financial time series data with pandas
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如何使用 pandas 下载金融时间序列数据
 - en: How to find peaks and troughs in a time series signal
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如何在时间序列信号中找到峰值和谷值
 - en: What is (and how to use) autocorrelation plot
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 什么是（以及如何使用）自相关图
 - en: How to check if a time series has any statistically significant signal
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如何检查时间序列是否具有统计显著信号
 - en: Jack of all trades, master of none
+  id: totrans-17
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 全才，什么都懂，精通的却没有
 - en: We simply need to collect the data
+  id: totrans-18
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们只需要收集数据
 - en: '![](../Images/6d0b63aa58b06e886e1e2cb223f3b563.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6d0b63aa58b06e886e1e2cb223f3b563.png)'
 - en: Photo by [Hans Eiskonen](https://unsplash.com/@eiskonen?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：[Hans Eiskonen](https://unsplash.com/@eiskonen?utm_source=medium&utm_medium=referral)
+    在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: One fallacy (and a doomed project from the start) is when software engineers
     think that they can simply collect the stock market data and then put it in a
     Deep Neural Network to find profitable patterns.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个谬误（以及从一开始就是注定要失败的项目）是，当软件工程师认为他们可以简单地收集股票市场数据，然后将其放入深度神经网络中找到有利可图的模式时。
 - en: Deep Neural Net will find profitable patterns automatically, right?
+  id: totrans-22
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 深度神经网络会自动找到有利可图的模式，对吗？
 - en: Don’t get me wrong, having data is useful, but the hardest part comes with the
     modeling.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 别误会我，拥有数据是有用的，但最难的部分在于建模。
 - en: There are Data Service sites, like [EOD Historical Data](https://eodhistoricaldata.com/),
     which offer all kinds of financial data with a free plan. It makes more sense
     to try to identify profitable patterns first as you can download historical data
     with single pandas command.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 有数据服务网站，如 [EOD Historical Data](https://eodhistoricaldata.com/)，提供各种金融数据，并提供免费计划。首先识别有利可图的模式更有意义，因为你可以通过单个
+    pandas 命令下载历史数据。
 - en: '![](../Images/377f71388254c1c852a6d4a9d48ca1a5.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/377f71388254c1c852a6d4a9d48ca1a5.png)'
 - en: '[EOD Historical Data](https://eodhistoricaldata.com/) offers all kinds of financial
     data with a free plan (screenshot made by author)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[EOD Historical Data](https://eodhistoricaldata.com/) 提供各种金融数据，并有一个免费的计划（作者制作的截图）'
 - en: What’s that pandas command to download the data?
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 下载数据的pandas命令是什么？
 - en: 'Let’s look at the example below, in which I download daily Apple stock prices
     from 1st January 2018 and onward:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看下面的例子，我从2018年1月1日起下载了苹果股票的每日价格：
 - en: '[PRE0]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![](../Images/a391d7dcec47e70b49321693e6a5b35b.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a391d7dcec47e70b49321693e6a5b35b.png)'
 - en: Daily Apple stock prices from 1st January 2018 and onwards (image by author)
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 从2018年1月1日起的苹果股票每日价格（作者提供的图片）
 - en: 'We can then visualize the adjusted close prices of Apple stock and prices distribution
     with:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们可以通过以下方式可视化苹果股票的调整收盘价和价格分布：
 - en: '[PRE1]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![](../Images/7daab9a2f54ce739e3f1ee8376f78c6a.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7daab9a2f54ce739e3f1ee8376f78c6a.png)'
 - en: Adjusted close prices and distribution of Apple stock price (image by author)
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 苹果股票调整收盘价和价格分布（作者提供的图片）
 - en: Finding Peaks and Troughs
+  id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 寻找峰值和低谷
 - en: '![](../Images/11fdb15e417bd909850030ffdd8079e9.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/11fdb15e417bd909850030ffdd8079e9.png)'
 - en: Photo by [Claudel Rheault](https://unsplash.com/@claudelrheault?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由 [Claudel Rheault](https://unsplash.com/@claudelrheault?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: A common way a time series forecasting learning problem is then defined is to
     find peaks and troughs on the time-series signal, which serve as a target variable
     for the Machine Learning algorithm.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 时间序列预测学习问题的一个常见定义是，在时间序列信号上找到峰值和低谷，这些作为机器学习算法的目标变量。
 - en: 'Let’s first reduce the data size so that we can visualize it easier:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们首先减少数据规模，以便更容易可视化：
 - en: '[PRE2]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Then finds peaks:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后找到峰值：
 - en: '[PRE3]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![](../Images/ea5f1cfed40ef8deab30d5acef295679.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ea5f1cfed40ef8deab30d5acef295679.png)'
 - en: Array with indices of peaks (image by author)
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 包含峰值索引的数组（作者提供的图片）
 - en: 'Then find troughs:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后找到低谷：
 - en: '[PRE4]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Then we can visualize the
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们可以进行可视化
 - en: '[PRE5]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![](../Images/41903a452139864b09812d92bf48add4.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/41903a452139864b09812d92bf48add4.png)'
 - en: Apple stock time series with peaks and troughs (image by author)
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 苹果股票时间序列的峰值和低谷（作者提供的图片）
 - en: Now that the dataset is marked with entry and exit signals, we just take Neural
     Net out of the box and sit back and relax, right?
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在数据集已经标记了进出信号，我们只需将神经网络拿出来，坐下来放松一下，对吧？
 - en: Not exactly!
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 不完全正确！
 - en: Technical analysts might point out the lookahead bias in the example above.
+  id: totrans-54
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 技术分析师可能会指出上述例子中的前瞻性偏差。
 - en: ''
+  id: totrans-55
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Why?
+  id: totrans-56
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 为什么？
 - en: ''
+  id: totrans-57
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Because the find peaks function worked with the whole signal at once. If we
     would define decision logic based on lagging indicators on top of it, it would
     suffer from lookahead bias.
+  id: totrans-58
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 因为`find peaks`函数一次性处理整个信号。如果我们基于滞后指标在其基础上定义决策逻辑，它将遭受前瞻性偏差。
 - en: ''
+  id: totrans-59
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[From wikipedia](https://en.wikipedia.org/wiki/Technical_analysis):'
+  id: totrans-60
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '[来自维基百科](https://en.wikipedia.org/wiki/Technical_analysis)：'
 - en: In finance, technical analysis is an analysis methodology for forecasting the
     direction of prices through the study of past market data, primarily price and
     volume.
+  id: totrans-61
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 在金融领域，技术分析是一种通过研究过去市场数据，主要是价格和成交量，来预测价格方向的方法。
 - en: ''
+  id: totrans-62
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: But that’s a problem only if we would rely on technical analysis.
+  id: totrans-63
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 但这只是一个问题，如果我们依赖于技术分析的话。
 - en: ''
+  id: totrans-64
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Let’s go back to Machine Learning.
+  id: totrans-65
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 让我们回到机器学习。
 - en: 'From a Machine Learning point of view, the definition above is OK if we split
     the signal into 3 parts. Eg.:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 从机器学习的角度来看，上述定义是可以的，如果我们将信号分为3部分。例如：
 - en: the first part for training (first 60%)
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第一部分用于训练（前60%）
 - en: the second part for validation (second 10%)
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 第二部分用于验证（第二10%）
 - en: and last part for out of sample test (last 30%)
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最后一部分用于样本外测试（最后30%）
 - en: The output of the find peaks function is only used for the target and there
     is no data leak to features.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '`find peaks`函数的输出仅用于目标，并且不会泄露到特征中。'
 - en: So what’s wrong with this definition of learning problem?
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么这个学习问题定义有什么问题呢？
 - en: 'The one million dollar question we need to answer before applying a Machine
     Learning algorithm to the data:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在对数据应用机器学习算法之前需要回答的百万美元问题：
 - en: Is there any signal in the time series or is it all random noise?
+  id: totrans-73
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 时间序列中是否存在信号，还是只是随机噪声？
 - en: Is there any signal in the time series?
+  id: totrans-74
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 时间序列中是否存在信号？
 - en: '![](../Images/a215626c46d66ae476cb449a960e28fa.png)'
+  id: totrans-75
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a215626c46d66ae476cb449a960e28fa.png)'
 - en: Photo by [Clarisse Meyer](https://unsplash.com/@clarissemeyer?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 照片由 [Clarisse Meyer](https://unsplash.com/@clarissemeyer?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: Let’s compare randomly generated numbers drawn from the Gaussian distribution
     with the Apple stock time series.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们将从高斯分布中生成的随机数与苹果股票时间序列进行比较。
 - en: 'With the command below I generate 1000 random numbers from Gaussian distribution
     with zero mean and the standard deviation equal to 1 (aka. normal distribution):'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用下面的命令，我从均值为零、标准差为1的高斯分布（也称为正态分布）中生成了1000个随机数：
 - en: '[PRE6]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![](../Images/044a1622ea1680719ce87eed41569608.png)'
+  id: totrans-80
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/044a1622ea1680719ce87eed41569608.png)'
 - en: Random numbers were drawn from a normal distribution (image by author)
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 从正态分布中提取的随机数（图像由作者提供）
 - en: 'Now, let’s visualize generated numbers and compare them with Apple stock time
     series:'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们可视化生成的数字并将其与苹果股票时间序列进行比较：
 - en: '[PRE7]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![](../Images/fe3ad1927569582501432c232da24ae8.png)'
+  id: totrans-84
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fe3ad1927569582501432c232da24ae8.png)'
 - en: Comparing random samples from Gaussian distribution with Apple stock time series
     (image by author)
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 将高斯分布的随机样本与苹果股票时间序列进行比较（图像由作者提供）
 - en: You don’t need to be a scientist to notice that the Apple stock time series
     has an increasing pattern and Gaussian numbers just randomly jump up and down.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 你不需要是科学家就能注意到，苹果股票时间序列具有递增的模式，而高斯数值则只是随机上下波动。
 - en: Does the Apple stock time series really have a pattern from which a Machine
     Learning algorithm can learn a pattern?
+  id: totrans-87
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 苹果股票时间序列真的有一个机器学习算法可以学习的模式吗？
 - en: Let me take you for a (random) walk
+  id: totrans-88
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 让我带你去进行一次（随机的）游走
 - en: '![](../Images/33c84bd20da985a81f5e0c32b2c92c62.png)'
+  id: totrans-89
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/33c84bd20da985a81f5e0c32b2c92c62.png)'
 - en: Photo by [Jonas Weckschmied](https://unsplash.com/@jweckschmied?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 照片由 [Jonas Weckschmied](https://unsplash.com/@jweckschmied?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: A random walk is a statistical tool, which generates random numbers with -1
     and 1 and the next number is dependent on the previous state. This provides some
     consistency, unlike independent random numbers. The random walk can help us determine
     if our time series is predictable or not.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机游走是一种统计工具，它生成-1和1的随机数，下一个数字依赖于前一个状态。这提供了一些一致性，与独立的随机数字不同。随机游走可以帮助我们确定我们的时间序列是否可预测。
 - en: Let’s look at the example below.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看下面的例子。
 - en: In the first step, we generate a list of 1000 numbers with randomly selected
     -1 and 1.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第一步中，我们生成了一个包含1000个随机选择的-1和1的数字列表。
 - en: '[PRE8]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Then we cumulative summarize generated random values to add dependence on the
     previous state:'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们将生成的随机值累积总结，以增加对前一个状态的依赖：
 - en: '[PRE9]'
+  id: totrans-96
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'The initial adjusted close of the Apple stock was 34.55\. Let’s add this number
     to the random_walk so that we work with the same scale:'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 苹果股票的初始调整后收盘价为34.55。让我们将这个数字添加到random_walk中，以便我们使用相同的尺度：
 - en: '[PRE10]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'The end result is a pandas Dataframe with a generated random walk:'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终结果是一个包含生成的随机游走的pandas Dataframe：
 - en: '![](../Images/96e8de1a2dbff3bbd8aedcb893019266.png)'
+  id: totrans-100
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/96e8de1a2dbff3bbd8aedcb893019266.png)'
 - en: Dataframe with a generated random walk (image by author)
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成的随机游走的Dataframe（图像由作者提供）
 - en: 'Now, let’s compare randomly generated walk with the actual Apple stock time
     series:'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们将随机生成的游走与实际的苹果股票时间序列进行比较：
 - en: '[PRE11]'
+  id: totrans-103
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '![](../Images/afe120a35c191abec1787a72ec51bbeb.png)'
+  id: totrans-104
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/afe120a35c191abec1787a72ec51bbeb.png)'
 - en: Apple stock time series and random walk (image by author)
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 苹果股票时间序列和随机游走（图像由作者提供）
 - en: I intentionally didn’t include the title on the plots above. Could you tell
     which is random and which is the actual Apple stock time series?
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 我故意没有在上述图表中包含标题。你能告诉我哪个是随机的，哪个是实际的苹果股票时间序列吗？
 - en: Is our time series predictable or is it random?
+  id: totrans-107
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的时间序列是可以预测的吗，还是随机的？
 - en: '![](../Images/581d9f7eff608ed344e475301638003c.png)'
+  id: totrans-108
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/581d9f7eff608ed344e475301638003c.png)'
 - en: Photo by [Universal Eye](https://unsplash.com/@universaleye?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 照片由 [Universal Eye](https://unsplash.com/@universaleye?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: To answer this question, we need to compare the properties of the randomly generated
     sequence with the properties of the Apple stock time series.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了回答这个问题，我们需要将随机生成的序列的属性与苹果股票时间序列的属性进行比较。
 - en: One useful tool is the autocorrelation plot, which shows how correlated is each
     observation with observations from the previous time steps.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个有用的工具是自相关图，它展示了每个观察值与前几个时间步的观察值的相关性。
 - en: '[From Wikipedia](https://en.wikipedia.org/wiki/Autocorrelation):'
+  id: totrans-112
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '[来自维基百科](https://en.wikipedia.org/wiki/Autocorrelation)：'
 - en: ''
+  id: totrans-113
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Autocorrelation is the correlation of a signal with a delayed copy of itself
     as a function of delay. Informally, it is the similarity between observations
     as a function of the time lag between them.
+  id: totrans-114
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 自相关是信号与其延迟副本的相关性，作为延迟的函数。非正式地说，它是观察值之间的相似性，作为它们之间时间滞后的函数。
 - en: The way random walk is constructed (the current state is calculated as +1 or
     -1 from the previous state — high dependency on the previous state), we would
     expect that there would be a high autocorrelation in the first few time steps,
     which would linearly fall by increasing the lag.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机游走的构造方式（当前状态是从前一个状态计算得出的+1或-1——对前一个状态的高度依赖），我们可以预期在最初的几个时间步中会有很高的自相关性，随着滞后的增加而线性下降。
 - en: Pandas has an [autocorrelation_plot](https://pandas.pydata.org/docs/reference/api/pandas.plotting.autocorrelation_plot.html) function,
     which calculates autocorrelation and visualizes it on an autocorrelation plot.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 有一个 [autocorrelation_plot](https://pandas.pydata.org/docs/reference/api/pandas.plotting.autocorrelation_plot.html) 函数，它计算自相关并在自相关图上进行可视化。
 - en: Let’s visualize autocorrelation plots for the random walk and the Apple stock
     time series.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们可视化随机游走和苹果股票时间序列的自相关图。
 - en: '[PRE12]'
+  id: totrans-118
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '![](../Images/bb6bc1d74686fdc57c1547f4e925dd1e.png)'
+  id: totrans-119
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bb6bc1d74686fdc57c1547f4e925dd1e.png)'
 - en: Autocorrelation plots for the random walk and the Apple stock time series (image
     by author)
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机游走和苹果股票时间序列的自相关图（图像由作者提供）
 - en: The plot shows autocorrelation on the x-axis and lag on the y-axis. The horizontal
     lines in the plot correspond to 95% and 99% confidence bands. The dashed line
     is 99%, confidence band. Values above these lines are statistically significant.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 图中的x轴显示自相关，y轴显示滞后。图中的水平线对应于95%和99%置信区间。虚线是99%置信区间。高于这些线的值在统计上是显著的。
 - en: As we expected for the random walk sequence, there is a high autocorrelation
     in the first 100 time steps, which linearly falls with increasing lag.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们对随机游走序列的预期一样，前100个时间步中有很高的自相关性，随着滞后的增加而线性下降。
 - en: Surprisingly (or not surprisingly to some), the autocorrelation on the Apple
     stock time series is similar to the random walk autocorrelation plot.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 令人惊讶的是（或者对一些人来说不惊讶），苹果股票时间序列的自相关性类似于随机游走自相关图。
 - en: Put Deep Neural Nets back to sleep…
+  id: totrans-124
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 让深度神经网络回到休眠状态……
 - en: '![](../Images/3cebb99e2c29e467653d374f3869472f.png)'
+  id: totrans-125
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3cebb99e2c29e467653d374f3869472f.png)'
 - en: Photo by [Pierre Bamin](https://unsplash.com/@bamin?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/noise?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由 [Pierre Bamin](https://unsplash.com/@bamin?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/noise?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 - en: Let’s make both time series stationary by removing the value of the previous
     observation from the current observation — differencing. By applying differencing
     operation we remove the function of time.
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们通过从当前观察值中移除前一个观察值的值来使两个时间序列平稳——差分。通过应用差分操作，我们去除了时间的函数。
 - en: 'Commands below apply differencing operating to Apple stock and random walk
     time series:'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下命令对苹果股票和随机游走时间序列应用差分操作：
 - en: '[PRE13]'
+  id: totrans-129
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '![](../Images/6ba26507ed89ab0e9893ee84b8df1208.png)'
+  id: totrans-130
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6ba26507ed89ab0e9893ee84b8df1208.png)'
 - en: Differenced Apple stock time series (image by author)
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 差分的苹果股票时间序列（图像由作者提供）
 - en: 'Now, let’s visualize differenced time series:'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们可视化差分时间序列：
 - en: '[PRE14]'
+  id: totrans-133
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '![](../Images/c2fd5308494123484dee6b82650ecefb.png)'
+  id: totrans-134
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c2fd5308494123484dee6b82650ecefb.png)'
 - en: Differenced time series of Apple stock and random walk (image by author)
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 苹果股票和随机游走的差分时间序列（图像由作者提供）
 - en: Differenced random walk time series has only -1 and +1 as expected. Differenced
     Apple stock time series has more spikes, but are they significant?
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 差分的随机游走时间序列只有-1和+1，正如预期的那样。差分的苹果股票时间序列有更多的波动，但这些波动是否显著？
 - en: 'We can check this with an autocorrelation plot on a differenced time series:'
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过差分时间序列上的自相关图来检查这一点：
 - en: '[PRE15]'
+  id: totrans-138
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '![](../Images/5096aa0d7a18f588157fdaaaa9b5f6fd.png)'
+  id: totrans-139
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5096aa0d7a18f588157fdaaaa9b5f6fd.png)'
 - en: Autocorrelation plots for the differenced random walk and the Apple stock time
     series (image by author)
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 差分的随机游走和苹果股票时间序列的自相关图（图像由作者提供）
 - en: Remember, autocorrelation values above horizontal lines are statistically significant.
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 请记住，超出水平线的自相关值具有统计显著性。
 - en: Differenced Apple stock time series has a few autocorrelation values that are
     over the 99% confidence band, but also differenced random walk time series has
     a few values over the 95% confidence band and we know that the signal is random
     so we can attribute these to statistical mistakes.
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 差分后的苹果股票时间序列有几个自相关值超出99%的置信区间，但差分后的随机游走时间序列也有几个值超出95%的置信区间，我们知道信号是随机的，因此我们可以将这些归因于统计错误。
 - en: Conclusion
+  id: totrans-143
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: '![](../Images/ab538fe37138397dce95f99c7f9c6f70.png)'
+  id: totrans-144
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ab538fe37138397dce95f99c7f9c6f70.png)'
 - en: Photo by [Ferdinand Stöhr](https://unsplash.com/@fellowferdi?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于 [Ferdinand Stöhr](https://unsplash.com/@fellowferdi?utm_source=medium&utm_medium=referral)
+    在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: In the article, we applied a few statistical checks on real-world time series
     data and we determined that the signal from it is random.
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: 在文章中，我们对真实世界的时间序列数据进行了几个统计检查，我们确定其信号是随机的。
 - en: '**What are my two cents on this?**'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: '**我对此的看法是什么？**'
 - en: You were probably surprised (as I was) that we didn’t find any statistically
     significant signal in the Apply stock time series.
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能会感到惊讶（就像我一样），我们在苹果股票时间序列中没有发现任何统计显著的信号。
 - en: How is that possible when we constantly hear stories on how Machine Learning
     algorithms are used to make automated decisions on the stock market?
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们不断听到关于机器学习算法如何在股市上做出自动决策的故事时，这怎么可能呢？
 - en: Well, while I’m sure Machine Learning algorithms are used to make such decisions
     — Marcos López de Prado wrote a whole book on this topic — I’m also sure that
     they use more data. And I don’t mean more price data, but a different kind of
     data, which influenced the stock price movements.
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 好吧，虽然我确信机器学习算法被用于做出这样的决策——Marcos López de Prado为此写了一整本书——但我也确信它们使用了更多的数据。我指的不是更多的价格数据，而是一种不同类型的数据，这种数据影响了股票价格的变动。
 - en: You can read the [Random walk hypothesis on Wikipedia](https://en.wikipedia.org/wiki/Random_walk_hypothesis),
     which states that stock market prices evolve according to a random walk (so price
     changes are random) and thus cannot be predicted.
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以阅读[维基百科上的随机游走假设](https://en.wikipedia.org/wiki/Random_walk_hypothesis)，该假设认为股市价格按照随机游走演变（即价格变化是随机的），因此无法预测。
 - en: What are your thoughts about this? Let me know in the comments below.
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: 对此你有什么想法？请在下方评论中告诉我。
 - en: '**Bio: [Roman Orac](https://www.linkedin.com/in/romanorac/?originalSubdomain=si)**
     is a Machine Learning engineer with notable successes in improving systems for
     document classification and item recommendation. Roman has experience with managing
     teams, mentoring beginners and explaining complex concepts to non-engineers.'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [Roman Orac](https://www.linkedin.com/in/romanorac/?originalSubdomain=si)**
+    是一名机器学习工程师，在改进文档分类和项目推荐系统方面取得了显著成功。Roman拥有管理团队、指导初学者和向非工程师解释复杂概念的经验。'
 - en: '[Original](https://python.plainenglish.io/avoid-these-mistakes-with-time-series-forecasting-7ee84b80ed65).
     Reposted with permission.'
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://python.plainenglish.io/avoid-these-mistakes-with-time-series-forecasting-7ee84b80ed65)。经允许转载。'
 - en: '**Related:**'
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Top 5 Time Series Methods](/2021/11/top-5-time-series-methods.html)'
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[前5名时间序列方法](/2021/11/top-5-time-series-methods.html)'
 - en: '[Advice to aspiring Data Scientists – your most common questions answered](/2021/01/advice-aspiring-data-scientists.html)'
+  id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[对有志成为数据科学家的建议——你最常见的问题解答](/2021/01/advice-aspiring-data-scientists.html)'
 - en: '[Multivariate Time Series Analysis with an LSTM based RNN](/2021/10/multivariate-time-series-analysis-lstm-based-rnn.html)'
+  id: totrans-158
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基于LSTM的RNN的多变量时间序列分析](/2021/10/multivariate-time-series-analysis-lstm-based-rnn.html)'
 - en: '* * *'
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-160
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 加入网络安全职业的快速通道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-162
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织IT'
 - en: '* * *'
+  id: totrans-164
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-165
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Avoid These 5 Common Mistakes Every Novice in AI Makes](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)'
+  id: totrans-166
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[避免这些每个AI新手都会犯的5个常见错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)'
 - en: '[Time Series Forecasting with Ploomber, Arima, Python, and Slurm](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)'
+  id: totrans-167
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Ploomber、Arima、Python和Slurm进行时间序列预测](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)'
 - en: '[Time Series Forecasting with statsmodels and Prophet](https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html)'
+  id: totrans-168
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用statsmodels和Prophet进行时间序列预测](https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html)'
 - en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  id: totrans-169
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用XGBoost进行时间序列预测](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
 - en: '[Mistakes That Newbie Data Scientists Should Avoid](https://www.kdnuggets.com/2022/06/mistakes-newbie-data-scientists-avoid.html)'
+  id: totrans-170
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[新手数据科学家应避免的错误](https://www.kdnuggets.com/2022/06/mistakes-newbie-data-scientists-avoid.html)'
 - en: '[5 Common Data Science Mistakes and How to Avoid Them](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)'
+  id: totrans-171
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5个常见的数据科学错误及其避免方法](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)'
