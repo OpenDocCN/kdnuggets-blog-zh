@@ -1,239 +1,365 @@
 - en: Data Science in the Cloud with Dask
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在云端使用 Dask 进行数据科学
 - en: 原文：[https://www.kdnuggets.com/2020/10/data-science-cloud-dask.html](https://www.kdnuggets.com/2020/10/data-science-cloud-dask.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/10/data-science-cloud-dask.html](https://www.kdnuggets.com/2020/10/data-science-cloud-dask.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Hugo Bowne-Anderson](https://hugobowne.github.io/), Head of Data Science
     Evangelism and VP of Marketing at [Coiled](https://coiled.io/)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Hugo Bowne-Anderson](https://hugobowne.github.io/)，[Coiled](https://coiled.io/)
+    数据科学推广负责人和市场营销副总裁**'
 - en: The capability to scale large data analyses is growing in importance when it
     comes to data science and machine learning, and at a rapid rate. Fortunately,
     tools like Dask and [Coiled](https://coiled.io/) are making it easy and fast for
     folks to do just that.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在数据科学和机器学习中，扩展大数据分析的能力变得越来越重要，并且增长迅速。幸运的是，像 Dask 和 [Coiled](https://coiled.io/)
+    这样的工具使得人们可以轻松而迅速地做到这一点。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织
+    IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Dask is a popular solution for scaling up analyses when working in the PyData
     Ecosystem and Python. This is the case because Dask is designed to parallelize
     any PyData library, and hence seamlessly works with the host of PyData tools.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask 是在 PyData 生态系统和 Python 中扩展分析的热门解决方案。这是因为 Dask 设计用于并行化任何 PyData 库，因此可以无缝地与
+    PyData 工具配合使用。
 - en: '*Scaling up* your analysis to utilize all the cores of a sole workstation is
     the first step when starting to work with a large dataset.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '*扩展* 分析以利用单个工作站的所有核心是开始处理大数据集时的第一步。'
 - en: Next, to leverage a cluster on the cloud (Azure, Google Cloud Platform, AWS,
     and so on) you might need to *scale out* your computation.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，为了利用云上的集群（如 Azure、Google Cloud Platform、AWS 等），你可能需要 *扩展* 计算。
 - en: 'Read on and we will:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 继续阅读，我们将：
 - en: Use pandas to showcase a common pattern in data science workflows,
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 pandas 展示数据科学工作流中的常见模式，
 - en: Utilize Dask to scale up workflows, harnessing the cores of a sole workstation,
     and
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 利用 Dask 扩展工作流，利用单个工作站的核心，并且
 - en: Demonstrate scaling out our workflow to the cloud with [Coiled Cloud](https://cloud.coiled.io/).
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 演示如何将我们的工作流扩展到云端，使用 [Coiled Cloud](https://cloud.coiled.io/)。
 - en: Find all the code [here on github](https://github.com/coiled/data-science-at-scale/blob/master/01b-data-analysis-at-scale-extended.ipynb).
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有代码 [在这里查看 github](https://github.com/coiled/data-science-at-scale/blob/master/01b-data-analysis-at-scale-extended.ipynb)。
 - en: 'Note: Before you get started, it’s important to think about if scaling your
     computation is actually necessary. Consider making your pandas code more efficient
     before you jump in. With machine learning, you can measure if more data will result
     in model improvement by plotting learning curves before you begin.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：在开始之前，考虑一下是否真的需要扩展你的计算。在开始之前考虑让 pandas 代码更高效。通过绘制学习曲线来衡量更多数据是否会提升模型表现。
 - en: 'PANDAS AND ETL: A COMMON PATTERN IN DATA SCIENCE'
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: PANDAS 和 ETL：数据科学中的常见模式
 - en: First, we’ll use pandas on an in-memory dataset to introduce a common data science
     pattern. This is a 700 MB subset of the NYC taxi dataset, which is about 10 GB
     in total.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们将使用 pandas 在内存数据集上介绍一个常见的数据科学模式。这是 NYC 出租车数据集的 700 MB 子集，总体约为 10 GB。
 - en: We want to see the scaling shine bright, so we picked a relatively boring workflow.
     Now we read in the data, massage it, create a feature, and save it to Parquet
     (not human-readable but vastly more efficient than CSV).
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们希望看到扩展的光芒四射，因此我们选择了一个相对乏味的工作流。现在我们读取数据，处理数据，创建特征，并将其保存为 Parquet（不可读但比 CSV
+    高效得多）。
 - en: '[PRE0]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: This took roughly 1 minute on my laptop, a wait time for analysis we can tolerate
     (maybe).
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 这在我的笔记本电脑上大约花了 1 分钟，这是我们可以容忍的分析等待时间（也许）。
 - en: Now we want to perform the same analysis on the dataset at large.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们想对整个数据集执行相同的分析。
 - en: 'DASK: SCALING UP YOUR DATA SCIENCE'
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 'DASK: 扩展你的数据科学'
 - en: The 10GB size of the data set is more than the RAM on my laptop, so we can’t
     store it in memory.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集的 10GB 大小超过了我的笔记本电脑的 RAM，因此我们不能将其存储在内存中。
 - en: 'Instead we could write a for loop:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 相反，我们可以编写一个 for 循环：
 - en: '[PRE1]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: However, the multiple cores on my laptop aren’t taken advantage of through this
     method, nor is this a graceful solution. Here comes Dask for single machine parallelism.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，我的笔记本电脑上的多个核心通过这种方法没有得到充分利用，这也不是一种优雅的解决方案。这里就需要 Dask 来实现单机并行处理。
 - en: 'Importing several aspects of Dask, we’ll spin up a local cluster and launch
     a Dask client:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 导入 Dask 的几个方面，我们将启动一个本地集群并启动一个 Dask 客户端：
 - en: '[PRE2]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Then we import Dask DataFrame, lazily read in the data, and perform the ETL
     pipeline just as we did with pandas before.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们导入 Dask DataFrame，懒惰地读取数据，并执行 ETL 管道，就像之前用 pandas 做的那样。
 - en: '[PRE3]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Taking about 5 minutes on my laptop, we’ll call this tolerable (I guess). But,
     if we wanted to do something marginally more complex (which we commonly do!),
     this time would quickly increase.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我的笔记本电脑上大约需要 5 分钟，我们可以称其为可接受的（我想）。但是，如果我们想做一些稍微复杂的事情（这是我们常做的！），这段时间将迅速增加。
 - en: If I had access to a cluster on the cloud, now would be the time to utilize
     it!
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我可以访问云上的集群，现在就是利用它的时候！
 - en: 'But first, let’s reflect on what we’ve just worked out:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 但首先，让我们反思一下我们刚刚解决了什么：
 - en: We used a Dask DataFrame - a large, virtual dataframe divided along the index
     into various Pandas DataFrames
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们使用了一个 Dask DataFrame——一个大型虚拟数据框，按索引划分为多个 Pandas DataFrame
 - en: 'We’re working on a local cluster, made of:'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们正在使用一个本地集群，包含：
 - en: A *scheduler* (which organizes and send the work / tasks to workers) and,
+  id: totrans-40
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个 *调度器*（负责组织和分配工作/任务给工作者），以及，
 - en: '*Workers,* which compute those tasks'
+  id: totrans-41
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*工作者*，用于计算这些任务'
 - en: We’ve launched a Dask client, which is “the user-facing entry point for cluster
     users.”
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们已经启动了一个 Dask 客户端，它是“集群用户的用户界面入口”。
 - en: In short - the client lives wherever you are writing your Python code and the
     client talks to the scheduler, passing it the tasks.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 总之——客户端存在于你编写 Python 代码的地方，客户端与调度器进行通信，传递任务。
 - en: '![Dask](../Images/ca8caa73a57c3f6319bea6abe0e8f212.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![Dask](../Images/ca8caa73a57c3f6319bea6abe0e8f212.png)'
 - en: 'COILED: SCALING OUT YOUR DATA SCIENCE'
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 'COILED: 扩展你的数据科学'
 - en: And now what we’ve been waiting for - it’s time to burst to the cloud. If you
     had access to cloud resources (like AWS) and knew how to configure Docker and
     Kubernetes containers, you could get a Dask cluster launched in the cloud. This
     would be time consuming, however.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们所期待的时刻到了——是时候跃入云端了。如果你可以访问云资源（如 AWS）并知道如何配置 Docker 和 Kubernetes 容器，你可以在云中启动一个
+    Dask 集群。然而，这将是耗时的。
 - en: 'Enter a handy alternative: Coiled, which we’ll use here. To do so, I''ve signed
     into [Coiled Cloud](http://beta.coiled.io/) (the Beta is currently free compute!),
     pip installed coiled, and authenticated. Feel free to follow along and do this
     yourself.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 进入一个方便的替代方案：Coiled，我们将在这里使用它。为此，我登录了 [Coiled Cloud](http://beta.coiled.io/)（目前
+    Beta 是免费的计算！），安装了 coiled，并进行了身份验证。请随意跟随并自己操作。
 - en: '[PRE4]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'We then perform our necessary imports, spin up a cluster (takes roughly a minute),
     and instantiate our client:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们进行必要的导入，启动一个集群（大约需要一分钟），并实例化我们的客户端：
 - en: '[PRE5]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Next we import our data (this time from s3), and perform our analysis:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来我们导入我们的数据（这次来自 s3），并执行我们的分析：
 - en: '[PRE6]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: How long did this take on Coiled Cloud? *30 seconds.* This is an order of magnitude
     less time than it took on my laptop, even for this relatively straightforward
     analysis.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Coiled Cloud 上这花了多久？*30 秒。* 即使对于这个相对简单的分析，这也比我的笔记本电脑上所需的时间少了一个数量级。
 - en: It’s easy to see the power of being able to do this set of analyses in a single
     workflow. We didn’t need to switch contexts or environments. Plus, it is straightforward
     to go back to using Dask from Coiled on my local workstation or pandas when we’re
     done. Cloud computing is great when needed, but can be a burden when it’s not.
     We just had an experience that was a lot less burdensome.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 很容易看出在单一工作流中进行这组分析的强大之处。我们不需要切换上下文或环境。而且，当我们完成后，可以简单地从 Coiled 切换回本地工作站的 Dask
+    或 pandas。云计算在需要时非常棒，但在不需要时可能会带来负担。我们刚刚经历了一个负担要少得多的体验。
 - en: DO YOU NEED FASTER DATA SCIENCE?
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 你需要更快的数据科学吗？
 - en: You can get started on a Coiled cluster for free right now. Coiled also handles
     security, conda/docker environments, and team management, so you can get back
     to doing data science and focus on your job. Get started today on [Coiled Cloud](http://beta.coiled.io/).
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 你现在可以免费开始使用Coiled集群。Coiled还处理安全、conda/docker环境和团队管理，因此你可以专注于数据科学和工作。立即开始使用 [Coiled
+    Cloud](http://beta.coiled.io/)。
 - en: '**Bio: [Hugo Bowne-Anderson](https://hugobowne.github.io/)** Hugo Bowne-Anderson
     is Head of Data Science Evangelism and VP of Marketing at **[Coiled](https://coiled.io/)**
     ([**@CoiledHQ,**](https://twitter.com/CoiledHQ) **[LinkedIn](https://www.linkedin.com/company/coiled-computing)**).
@@ -244,48 +370,74 @@
     with organizations such as Data Carpentry. He is committed to spreading data skills,
     access to data science tooling, and open source software, both for individuals
     and the enterprise.'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [Hugo Bowne-Anderson](https://hugobowne.github.io/)** Hugo Bowne-Anderson是**[Coiled](https://coiled.io/)**的首席数据科学传播官和市场营销副总裁（[**@CoiledHQ,**](https://twitter.com/CoiledHQ)
+    **[LinkedIn](https://www.linkedin.com/company/coiled-computing)**）。他在数据科学家、教育者、传播者、内容营销员和数据战略顾问方面具有丰富经验，涉及工业界和基础研究。他还在耶鲁大学和冷泉港实验室等机构、SciPy、PyCon和ODSC等会议以及Data
+    Carpentry等组织中教授数据科学。他致力于传播数据技能、数据科学工具的使用以及开源软件，无论是个人还是企业。'
 - en: '**Related:**'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Machine Learning in Dask](/2020/06/machine-learning-dask.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Dask中的机器学习](/2020/06/machine-learning-dask.html)'
 - en: '[Why and How to Use Dask with Big Data](/2020/04/dask-big-data.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么以及如何在大数据中使用Dask](/2020/04/dask-big-data.html)'
 - en: '[K-means Clustering with Dask: Image Filters for Cat Pictures](/2019/06/k-means-clustering-dask-image-filters.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Dask中的K-means聚类：猫咪图片的图像滤镜](/2019/06/k-means-clustering-dask-image-filters.html)'
 - en: More On This Topic
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[11 Best Practices of Cloud and Data Migration to AWS Cloud](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[云和数据迁移到AWS云的11个最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)'
 - en: '[New From Anaconda! Data Science Training and Cloud Hosted Notebooks](https://www.kdnuggets.com/2022/11/anaconda-new-anaconda-data-science-training-cloud-hosted-notebooks.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[来自Anaconda的新动态！数据科学培训和云托管笔记本](https://www.kdnuggets.com/2022/11/anaconda-new-anaconda-data-science-training-cloud-hosted-notebooks.html)'
 - en: '[How to Efficiently Scale Data Science Projects with Cloud Computing](https://www.kdnuggets.com/2023/05/efficiently-scale-data-science-projects-cloud-computing.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何利用云计算高效扩展数据科学项目](https://www.kdnuggets.com/2023/05/efficiently-scale-data-science-projects-cloud-computing.html)'
 - en: '[How Cloud Computing Enhances Data Science Workflows](https://www.kdnuggets.com/2023/08/cloud-computing-enhances-data-science-workflows.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[云计算如何增强数据科学工作流程](https://www.kdnuggets.com/2023/08/cloud-computing-enhances-data-science-workflows.html)'
 - en: '[Introduction to Cloud Computing for Data Science](https://www.kdnuggets.com/introduction-to-cloud-computing-for-data-science)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学的云计算简介](https://www.kdnuggets.com/introduction-to-cloud-computing-for-data-science)'
 - en: '[Top 7 Free Cloud Notebooks for Data Science](https://www.kdnuggets.com/top-7-free-cloud-notebooks-for-data-science)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学的前7个免费云笔记本](https://www.kdnuggets.com/top-7-free-cloud-notebooks-for-data-science)'

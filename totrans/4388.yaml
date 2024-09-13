@@ -1,42 +1,62 @@
 - en: Deploying Streamlit Apps Using Streamlit Sharing
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Streamlit 分享部署 Streamlit 应用
 - en: 原文：[https://www.kdnuggets.com/2020/10/deploying-streamlit-apps-streamlit-sharing.html](https://www.kdnuggets.com/2020/10/deploying-streamlit-apps-streamlit-sharing.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/10/deploying-streamlit-apps-streamlit-sharing.html](https://www.kdnuggets.com/2020/10/deploying-streamlit-apps-streamlit-sharing.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Tyler Richards](https://tylerjrichards.medium.com/), Data Scientist @
     Facebook**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Tyler Richards](https://tylerjrichards.medium.com/)撰写，Facebook 数据科学家**'
 - en: '![Figure](../Images/da899ce93e8e3a76f002562b9758b333.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/da899ce93e8e3a76f002562b9758b333.png)'
 - en: Image by author
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Over the past couple of weeks, I’ve been playing around with a new Streamlit
     feature called Streamlit sharing, which makes it super easy to deploy your custom
     apps. I’m going to go through a bit of background first, so if you want to see
     the docs for Streamlit sharing to get started you can find them [here](http://docs.streamlit.io/sharing).
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在过去的几周里，我一直在尝试一个新的 Streamlit 功能，叫做 Streamlit 分享，这使得部署自定义应用变得非常简单。我将首先介绍一些背景知识，如果你想开始使用
+    Streamlit 分享，你可以在[这里](http://docs.streamlit.io/sharing)找到相关文档。
 - en: Streamlit background
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Streamlit 背景
 - en: For a bit of background, Streamlit is a framework that lets you quickly and
     confidently turn a python script into a web app and is an incredible tool for
     data scientists working on teams where they need to quickly share a model or an
     interactive analysis, or for data scientists working on personal projects they
     want to show the world. Here’s a [Streamlit beginner tutorial](https://docs.streamlit.io/en/stable/) if
     you want to try it out!
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单来说，Streamlit 是一个框架，允许你快速而自信地将 Python 脚本转换为 web 应用，对于需要快速分享模型或互动分析的团队数据科学家，或者想向世界展示个人项目的数据科学家来说，它是一个不可思议的工具。如果你想试试，可以查看这个[Streamlit
+    入门教程](https://docs.streamlit.io/en/stable/)！
 - en: I’ve been using Streamlit for the past ~6 months, and it’s been **so** useful.
     Previously, if I knew I wanted to make a web app at the end of a project, I would
     always opt to switch to R for the wonderful R shiny framework, even though I am
@@ -44,12 +64,18 @@
     just so much development friction to take on that it’s rarely worth it for a personal
     project and always takes too long for anything at work. But after using Streamlit,
     I now not only had options but found myself preferring python+Streamlit to R+shiny.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在过去的约6个月里一直在使用 Streamlit，它真的非常**有用**。之前，如果我知道在项目结束时需要制作一个 web 应用，我总是选择切换到 R，以便使用出色的
+    R shiny 框架，尽管我在 Python 编程方面比 R 要好得多。使用 Django 或 Flask 开发总是会有很多摩擦，使得个人项目很少值得这样做，而在工作中也总是花费太多时间。但在使用了
+    Streamlit 后，我现在不仅有了选择，而且发现自己更喜欢 Python+Streamlit 而不是 R+shiny。
 - en: Streamlit sharing
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Streamlit 分享
 - en: This brings me to a couple of months ago. I started a [DS project](http://www.tylerjrichards.com/books_reco.html) focused
     on analyzing reading habits using data from the [Goodreads](http://www.tylerjrichards.com/books_reco.html) app.
     I decided to try Streamlit out, and it turned a multi-day long process of getting
@@ -57,186 +83,285 @@
     for local Streamlit use. It really is as easy as throwing your analysis into a
     script, and calling Streamlit functions whenever you want to put a graph, widget,
     or text explainer on the app.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 这让我想起几个月前的事。我开始了一个[数据科学项目](http://www.tylerjrichards.com/books_reco.html)，专注于使用来自[Goodreads](http://www.tylerjrichards.com/books_reco.html)应用的数据分析阅读习惯。我决定尝试
+    Streamlit，它将一个多天的 Django/Flask 应用在本地运行的过程缩短到了大约半小时的本地 Streamlit 使用。它确实像将你的分析放入脚本中，并在你想在应用中放置图表、小部件或文本解释时调用
+    Streamlit 函数一样简单。
 - en: However, the most annoying process on Streamlit was the deployment and management
     process. The [tutorial I followed](https://towardsdatascience.com/how-to-deploy-a-streamlit-app-using-an-amazon-free-ec2-instance-416a41f69dc3) was
     straightforward, and didn’t take that much time, but was fairly extensive. It
     required launching an ec2 instance, configuring SSH, using tmux, and going back
     to this terminal every time you wanted to change anything about your web app. **It
     was doable but annoying.**
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，Streamlit 上最烦人的过程是部署和管理过程。[我跟随的教程](https://towardsdatascience.com/how-to-deploy-a-streamlit-app-using-an-amazon-free-ec2-instance-416a41f69dc3)很简单，而且不会花太多时间，但还是相当繁琐。它需要启动一个
+    ec2 实例，配置 SSH，使用 tmux，并在每次想要更改 web 应用时都回到终端。**虽然可以完成，但很烦人。**
 - en: '![Figure](../Images/482aa157e9f35eb689684f3edd6299db.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/482aa157e9f35eb689684f3edd6299db.png)'
 - en: Image by author
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: A few weeks ago, Streamlit saw my Goodreads app and asked if I wanted to test
     out their Streamlit sharing beta, which was supposed to remove the friction explained
     above. I, obviously, gave it a shot.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 几周前，Streamlit 看到我的 Goodreads 应用，并问我是否想测试他们的 Streamlit 分享测试版，该版旨在消除上述提到的摩擦。我显然答应了。
 - en: '**All I had to do was:**'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**我只需做的是：**'
 - en: Push my app to a Github repo
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将我的应用推送到 Github 仓库
 - en: Add a requirements.txt file that listed all the python libraries I used
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 添加一个列出我使用的所有 Python 库的 requirements.txt 文件
 - en: Point Streamlit to my app via the link to the repository
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通过仓库链接将 Streamlit 指向我的应用
 - en: Click Deploy
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 点击部署
 - en: It genuinely was **that easy** to figure out. I had sectioned off a couple of
     hours to figure it out, as I expected various bugs to pop up (it is in beta!),
     but it took me fewer than 10 minutes to get it up and running.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 真的**如此简单**就能搞定。我预留了几个小时来解决这个问题，因为我预计会出现各种错误（毕竟还在测试版！），但我只花了不到10分钟就使其运行起来了。
 - en: I currently have three apps running, one is a test app, the second is the [Goodreads
     book recommendation app](https://share.streamlit.io/tylerjrichards/book_reco/master/books.py/+/) I
     mentioned earlier, and the third is an [interactive analysis](http://www.tylerjrichards.com/survey.html) of
     a tech survey that I spun up (from idea to functioning and deployed web app) in
     around an hour and a half.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我目前有三个应用在运行，一个是测试应用，第二个是前面提到的 [Goodreads 图书推荐应用](https://share.streamlit.io/tylerjrichards/book_reco/master/books.py/+/)，第三个是我创建的
+    [互动分析](http://www.tylerjrichards.com/survey.html)，从构思到功能齐全并部署的网页应用大约用了一个半小时。
 - en: Switching to Streamlit sharing has also saved me the ~$5 a month AWS bill, which
     I would gladly pay for this feature just for the savings in time spent on deployment
     alone.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 转向 Streamlit 分享还为我节省了每月约 $5 的 AWS 账单，我很乐意为这项功能支付这个费用，仅仅是为了节省部署时间。
 - en: '![Figure](../Images/02602e759d6c3d33c5ae17ecaad5e4b1.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/02602e759d6c3d33c5ae17ecaad5e4b1.png)'
 - en: Image by author
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: If I wanted to try out a new app, I could just click the new app button, point
     it to my repo, and they would handle literally everything else.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我想尝试一个新的应用程序，我只需点击新的应用程序按钮，将其指向我的仓库，它们会处理所有其他事情。
 - en: '![Figure](../Images/a598a9fb324268a376264fc793a6f7a0.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/a598a9fb324268a376264fc793a6f7a0.png)'
 - en: Image by author
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: If your Streamlit app uses any other packages, make sure to include a requirements.txt
     file in your repo — otherwise you’ll immediately get an error when deploying.
     You can use something like pip freeze to get requirements but that will give you
     all of the packages in the environment including those that you don’t use in your
     current project. And that will slow down your app deployment! So I’d suggest using
     something like pipreqs to keep it to just the core requirements for your app.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你的 Streamlit 应用使用了其他包，请确保在你的仓库中包含一个 requirements.txt 文件——否则在部署时会立即出现错误。你可以使用类似
+    pip freeze 的工具来获取要求，但这会列出环境中的所有包，包括你当前项目中未使用的包。这会减慢你的应用部署速度！所以我建议使用类似 pipreqs
+    的工具来只保留你的应用核心要求。
 - en: '[PRE0]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: If you have requirements for apt-get, add them to `packages.txt -`, one package
     per line.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有 apt-get 需求，请将它们添加到 `packages.txt -` 中，每行一个包。
 - en: Conclusion
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: So as a wrap-up, Streamlit sharing has saved me $ on both a development time
     saved and hosting cost basis (shoutout to the VC funds that make this all possible),
     has made my personal projects more interactive and prettier, and has taken away
     the headaches of deploying quick models or analyses. No wonder I’m a Streamlit
     fan.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结一下，Streamlit 分享为我节省了开发时间和托管费用（感谢让这一切成为可能的风险投资基金），使我的个人项目更加互动和美观，并消除了快速部署模型或分析的头痛问题。难怪我成为了
+    Streamlit 的粉丝。
 - en: Want to see more of this content? You can find me on [Twitter](https://twitter.com/tylerjrichards), [Substack](https://insignificantdatascience.substack.com/p/starting-a-data-science-newsletter),
     or on [my portfolio site](http://www.tylerjrichards.com/).
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 想查看更多内容吗？你可以在 [Twitter](https://twitter.com/tylerjrichards)、[Substack](https://insignificantdatascience.substack.com/p/starting-a-data-science-newsletter)
+    或 [我的作品集网站](http://www.tylerjrichards.com/) 找到我。
 - en: '**Happy Stream(lit)ing!**'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**快乐的 Streamlit!**'
 - en: '**Bio: [Tyler Richards](https://tylerjrichards.medium.com/)** is a Data Scientist
     at Facebook.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：[Tyler Richards](https://tylerjrichards.medium.com/)** 是 Facebook 的数据科学家。'
 - en: '[Original](https://towardsdatascience.com/deploying-streamlit-apps-using-streamlit-sharing-16105d257852).
     Reposted with permission.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/deploying-streamlit-apps-using-streamlit-sharing-16105d257852)。转载时已获许可。'
 - en: '**Related:**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[12-Hour Machine Learning Challenge: Build & deploy an app with Streamlit and
     DevOps tools](/2020/02/machine-learning-challenge-build-deploy-app-streamlit-devops.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[12小时机器学习挑战：使用Streamlit和DevOps工具构建并部署应用程序](/2020/02/machine-learning-challenge-build-deploy-app-streamlit-devops.html)'
 - en: '[Build an app to generate photorealistic faces using TensorFlow and Streamlit](/2020/04/app-generate-photorealistic-faces-tensorflow-streamlit.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建一个使用TensorFlow和Streamlit生成逼真面孔的应用程序](/2020/04/app-generate-photorealistic-faces-tensorflow-streamlit.html)'
 - en: '[Machine Learning Model Deployment](/2020/09/machine-learning-model-deployment.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习模型部署](/2020/09/machine-learning-model-deployment.html)'
 - en: '* * *'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行IT管理'
 - en: '* * *'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Deploying a Streamlit WebApp to Heroku using DAGsHub](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用DAGsHub将Streamlit WebApp部署到Heroku](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)'
 - en: '[New Ways of Sharing Code Blocks for Data Scientists](https://www.kdnuggets.com/2022/03/new-ways-sharing-code-blocks.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家共享代码块的新方法](https://www.kdnuggets.com/2022/03/new-ways-sharing-code-blocks.html)'
 - en: '[5 Key Components of a Data Sharing Platform](https://www.kdnuggets.com/2022/05/5-key-components-data-sharing-platform.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据共享平台的5个关键组件](https://www.kdnuggets.com/2022/05/5-key-components-data-sharing-platform.html)'
 - en: '[Tips & Tricks of Deploying Deep Learning Webapp on Heroku Cloud](https://www.kdnuggets.com/2021/12/tips-tricks-deploying-dl-webapps-heroku.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在Heroku云上部署深度学习Web应用程序的技巧与窍门](https://www.kdnuggets.com/2021/12/tips-tricks-deploying-dl-webapps-heroku.html)'
 - en: '[Feature Store Summit 2023: Practical Strategies for Deploying ML…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2023年特征存储峰会：部署机器学习的实用策略…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
 - en: '[Deploying Your First Machine Learning Model](https://www.kdnuggets.com/deploying-your-first-machine-learning-model)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[部署你的第一个机器学习模型](https://www.kdnuggets.com/deploying-your-first-machine-learning-model)'
