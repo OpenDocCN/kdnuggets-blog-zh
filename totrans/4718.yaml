@@ -1,47 +1,59 @@
 - en: 'From Good to Great Data Science, Part 1: Correlations and Confidence'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2019/02/good-great-data-science-correlations-confidence.html](https://www.kdnuggets.com/2019/02/good-great-data-science-correlations-confidence.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
 - en: '**By [Brian Joseph](https://www.linkedin.com/in/brian-joseph-429028118/), Data
     Scientist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: '![Header image](../Images/499c86aa8800fc0cddc175a2f6b79053.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: Introduction
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -49,26 +61,32 @@
     I currently work as a data scientist in the healthcare industry, providing metrics
     and building models for hospitals and healthcare related organizations. In my
     practice most of my time is spent doing two things:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: Translating qualitative business questions into rigorous solutions that can
     be generated with data
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Implementing these solutions programmatically
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'I''m going to walk you through two questions that I''ve actually been asked
     on the job:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: Should my hospital focus more on improving its mortality rate?
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Which pharmacists are handing out too many opioids?
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
@@ -76,454 +94,672 @@
     do them. Further, it's very easy to answer these questions the wrong way and have
     your mistakes go unnoticed. As you'll see, the difference between great and average
     answers to these questions is a having a little bit of a mathematical background.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: '**Jupyter notebook and data for this article** [**on GitHub**](https://github.com/LearnDataSci/article-resources/tree/master/From%20Good%20to%20Great%20Data%20Science%2C%20Part%201%20Correlations%20and%20Confidence)'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: Problem Statement 1
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: The Centers for Medicare & Medicaid Services (CMS) is responsible for rating
     hospitals based off of quality and performance metrics.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: They provide various metrics to estimate hospital performance and one overarching
     metric known as the `quality_rating`. Another less important rating is the `mortality_rate`.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: 'Suppose you''re tasked with investigating the relationship between a hospital''s `quality_rating` and
     its `mortality_rate` to answer the first question I mentioned above. How much
     does a hospital''s mortality rate affect its overall `quality_rating`? Assume
     the following about your data:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: '`quality_rating`: A numerical value in the range (1, 2, 3, 4, 5)'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`mortality_rate`: One of the following values:'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '*above_average*'
+  id: totrans-26
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*高于平均水平*'
 - en: '*average*'
+  id: totrans-27
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*平均水平*'
 - en: '*below_average*'
+  id: totrans-28
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*低于平均水平*'
 - en: 'And assume you''re given the data below:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你有如下数据：
 - en: '[PRE0]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![Table](../Images/1cbc408406e449ea462fded949ca076b.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![表格](../Images/1cbc408406e449ea462fded949ca076b.png)'
 - en: As you can see, each row represents a hospital. Each hospital has a mortality
     rate and quality score. The premise is to *compare* `mortality_rate` and `quality_rating` so
     a key statistical tool should be jumping to your head. **Correlation**.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，每一行代表一个医院。每个医院都有一个死亡率和一个质量评分。前提是*比较*`mortality_rate`和`quality_rating`，所以一个关键的统计工具应该跃然于你的脑海中。**相关性**。
 - en: 'This is the first step of reducing our *qualitative* question into *quantitative* terms.
     I urge you to take a stab at the problem at this point — or at least flesh out
     a complete plan to answering the question:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是将我们的*定性*问题转化为*定量*术语的第一步。我鼓励你此时尝试解决这个问题——或者至少制定一个完整的计划来回答这个问题：
 - en: '***What''s the correlation between these two metrics?***'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '***这两个指标之间的相关性是什么？***'
 - en: Did you arrive at a solution? Lets walk through this together.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 你找到了答案吗？我们一起走一遍。
 - en: '****Encoding mortality rate****'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '****编码死亡率****'
 - en: There are arguably two steps remaining in this problem. First, we should note
     that our `mortality_rate`column contains ordinal data. We can only perform correlation
     on numerical data so we'll have to do something about this.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个问题可能还剩两个步骤。首先，我们应该注意到我们的`mortality_rate`列包含顺序数据。我们只能对数值数据进行相关性分析，所以我们需要对这点进行处理。
 - en: Let's encode our data in some way that preserves its ordinal relationship. In
     other words, we want to our encoding for ***below average*** `mortality_rate` to
     be numerically superior to our encoding for ***above average*** `mortality_rate` (Note
     that a hospital having a **lower** mortality rate is better).
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们以某种方式编码数据，以保留其顺序关系。换句话说，我们希望将***低于平均水平***的`mortality_rate`的编码在数值上优于***高于平均水平***的`mortality_rate`的编码（注意，医院的**较低**死亡率更好）。
 - en: 'How did you tackle encoding your data? There''s an infinite amount of options:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 你是如何处理数据编码的？选项无穷无尽：
 - en: 'For instance:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 比如：
 - en: '[PRE2]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'or:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者：
 - en: '[PRE3]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'or maybe:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者：
 - en: '[PRE4]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: If you made the decision to encode your data, what option did you settle on?
     Which one is correct? The correct answer is *none* of them — or *all* of them
     I guess...
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你决定对数据进行编码，你选择了哪个选项？哪个是正确的？正确的答案是*没有* — 或者*全部*吧……
 - en: 'I''ll explain why in a bit. But for now, let’s just continue with mapping to
     last option: mapping to the set: (-1, 0, 1).'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 我稍后会解释原因。但现在，我们继续映射到最后一个选项：映射到集合：(-1, 0, 1)。
 - en: '[PRE5]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![Table](../Images/900abd06c00dd8bccd36b05eddbe24cf.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![表格](../Images/900abd06c00dd8bccd36b05eddbe24cf.png)'
 - en: The last step to this problem is (deceptively) the simplest. Now we just need
     to correlate our two columns right?
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个问题的最后一步是（看似）最简单的。现在我们只需要相关性分析我们的两列数据，对吧？
 - en: '[PRE6]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![Table](../Images/f9de80477ad35170ee45b8272d11a545.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![表格](../Images/f9de80477ad35170ee45b8272d11a545.png)'
 - en: Not quite. We've made a huge assumption about our data. We've assumed that our
     data was anything *more* than ordinal.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '不完全正确。我们对数据做出了一个巨大的假设。我们假设我们的数据是*更*高于顺序的。 '
 - en: '****Non-parametric correlation****'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '****非参数相关性****'
 - en: As a data scientist, you should be familiar with the concept of [parametric](https://en.wikipedia.org/wiki/Parametric_statistics) and [non-parametric](https://en.wikipedia.org/wiki/Nonparametric_statistics)statistics.
     Most statistical correlations will default to a parametric correlation method
     known as `pearson`. In our case, we need to use a non-parametric correlation known
     as `spearman`.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为数据科学家，你应该对[parametric](https://en.wikipedia.org/wiki/Parametric_statistics)和[non-parametric](https://en.wikipedia.org/wiki/Nonparametric_statistics)统计学的概念很熟悉。大多数统计相关性将默认使用称为`pearson`的参数相关性方法。在我们的例子中，我们需要使用一种称为`spearman`的非参数相关性。
 - en: This non-parametric method assumes that our data is nothing more than ordinal.
     In other words, no matter what mapping we make, the spearman correlation will
     return the same result — so long as the order is preserved after mapping.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种非参数方法假设我们的数据仅仅是顺序的。换句话说，无论我们做什么映射，只要映射后的顺序保持不变，斯皮尔曼相关性将返回相同的结果。
 - en: 'If we specify that we need to use the spearman correlation method, then we
     notice a drastic change in results:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们指定需要使用斯皮尔曼相关性方法，那么我们会发现结果有显著变化：
 - en: '[PRE7]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![Table](../Images/7ebe3e458e6464dd573547d47cc01e8e.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![表格](../Images/7ebe3e458e6464dd573547d47cc01e8e.png)'
 - en: We've just dropped the correlation by about **10%**. That's a drastic difference!
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们刚刚将相关性降低了约**10%**。这是一个巨大的差异！
 - en: Had you reported this correlation using pearson as opposed to spearman, you
     might have seriously mislead a customer or coworker.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你使用皮尔逊相关系数而不是斯皮尔曼相关系数来报告这个相关性，你可能会严重误导客户或同事。
 - en: This goes to show that having a **strong statistical background is essential
     for the data science role**. Such a deceptively simple problem had a key mathematical
     step that's often overlooked.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 这表明**强大的统计背景对数据科学角色至关重要**。这样一个看似简单的问题实际上有一个关键的数学步骤，这个步骤常常被忽视。
 - en: Problem Statement 2
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题陈述2
 - en: You have millions of pharmaceutical records for the past 5 years in Massachusetts,
     a state well known for its opioid abuse problem. For this reason, it would be
     very useful if you could identify pharmacists who are prescribing too many opioids.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 你拥有过去5年在马萨诸塞州的数百万条药品记录，该州以阿片类药物滥用问题而闻名。因此，如果你能识别出那些开处方过多阿片类药物的药剂师，那将非常有用。
 - en: '![Rate of opioid related overdose deaths in MA](../Images/e138fba1d4644e7da839c6d7f77e0cf4.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![MA与阿片类药物相关的过量死亡率](../Images/e138fba1d4644e7da839c6d7f77e0cf4.png)'
 - en: Source: [National Institute on Drug Abuse](https://www.drugabuse.gov/drugs-abuse/opioids/opioid-summaries-by-state/massachusetts-opioid-summary)
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：[国家毒品滥用研究所](https://www.drugabuse.gov/drugs-abuse/opioids/opioid-summaries-by-state/massachusetts-opioid-summary)
 - en: 'You''re tasked with the following:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的任务是：
 - en: '***Generate a list of pharmacists who are overprescribing opioids*****.**'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '***生成一份开处方过多阿片类药物的药剂师名单。***'
 - en: 'Seems simple enough. Suppose you have the following dataset:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 看起来相当简单。假设你有以下数据集：
 - en: '[PRE8]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![Table](../Images/ea70c7ff48d81a3f86985e98882c09ca.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![Table](../Images/ea70c7ff48d81a3f86985e98882c09ca.png)'
 - en: Each row represents a days worth of prescriptions
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 每一行代表一天的处方
 - en: 'And we have the following columns:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们有以下几个列：
 - en: '`prescriber_id`: A random code that identifies pharmacists'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`prescriber_id`：一个标识药剂师的随机代码'
 - en: '`num_opioid_prescriptions`: The number of opioid prescriptions prescribed on
     a given day'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`num_opioid_prescriptions`：某一天开出的阿片类药物处方数量'
 - en: '`num_prescriptions`: The number of *total* prescriptions prescribed on a given
     day'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`num_prescriptions`：某一天开出的*总*处方数量'
 - en: '**Grouping prescribers**'
+  id: totrans-78
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**开处方医生分组**'
 - en: The first thing we should note is that `prescriber_id` does not contain unique
     values as prescribers may have prescribed drugs over multiple days. Since this
     metric is on a prescriber level — not a daily level — we should fix that with
     a pandas `groupby`.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们应该首先注意到的是，`prescriber_id`不包含唯一值，因为药剂师可能在多个日子里开过药。由于这个指标是按药剂师级别计算的——而不是按日计算的——我们应该使用pandas的`groupby`来修正这个问题。
 - en: '[PRE9]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![Table](../Images/6585b77ff3707d13c96d545983c5f681.png)'
+  id: totrans-81
   prefs: []
   type: TYPE_IMG
+  zh: '![Table](../Images/6585b77ff3707d13c96d545983c5f681.png)'
 - en: Much better. Now the task at hand is to rank prescribers on the basis of how
     many opioids they prescribe. But prescribers prescribe different amounts of drugs.
     This hints that we should now take each prescriber's opioid prescription ratio.
     Let's do just that.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 好得多。现在的任务是根据药剂师开出的阿片类药物数量对他们进行排名。但药剂师开处方的数量不同。这表明我们现在应该考虑每个药剂师的阿片类药物处方比例。让我们就这样做。
 - en: '**Opioid prescription ratio**'
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**阿片类药物处方比例**'
 - en: '[PRE10]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Pandas made that extremely easy. So we're done right? Just sort the prescribers
     by `opioid_ratio` and tie this task off?
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 使得这一切变得非常简单。那么我们完成了，对吗？只需根据`opioid_ratio`对开处方医生进行排序，并完成这项任务？
 - en: '[PRE11]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '![Table](../Images/1044e8e1654f3acc9e2e749bed888c13.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![Table](../Images/1044e8e1654f3acc9e2e749bed888c13.png)'
 - en: Not quite. This data should raise some red flags for you.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 不完全正确。这些数据应该引起你的警觉。
 - en: 'Does it really make sense to rank a pharmacist as an abuser for prescribing
     1 opioid out of 1 of their total prescriptions? Try to put into words exactly
     what''s wrong with this situation. Why do we not want to report these prescribers
     as the worst offenders? Hopefully the answer you arrive at is something along
     the lines of:'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 将一位药剂师因为在他们所有处方中开出1份阿片类药物就被排名为滥用者，这真的有意义吗？尝试用文字准确描述一下这个情况的问题所在。为什么我们不想将这些药剂师报告为最严重的违规者？希望你得出的答案类似于：
 - en: '***Because we don''t have enough information to judge them.***'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '***因为我们没有足够的信息来评判他们。***'
 - en: Imagine you were sitting in a pharmacy watching a pharmacist (let's call them
     "Bill") perform their job. Suppose you want to report Bill if he prescribes too
     many opioids.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象一下你坐在药店里看着一位药剂师（我们称他为“比尔”）进行工作。假设你想要报告比尔，因为他开处方的阿片类药物过多。
 - en: A customer walks in and Bill prescribes them *hydrocodone* (a common opioid).
     It'd be silly to report Bill immediately for this. You'd want to wait and see
     more of Bill's actions before you judged him because you're not confident in your
     findings yet.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 一位顾客走进来，Bill给他们开了*氢可酮*（一种常见的鸦片药物）。立即报告Bill是没有意义的。你会希望等更多地观察Bill的行为后再做判断，因为你还不确定你的发现。
 - en: '**Confidence** is a key word here as we''ll soon find out.'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '**置信度**是这里的关键词，我们很快就会发现。'
 - en: '**Building confidence**'
+  id: totrans-94
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**建立置信度**'
 - en: So how do we fix this issue?
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么我们如何解决这个问题呢？
 - en: Statistically speaking, prescribing an opioid or not can be though of as a [Bernouli
     parameter](https://en.wikipedia.org/wiki/Bernoulli_distribution) (a fancy term
     for something that's binary in value — either true or false). And given the number
     of observations of a bernoulli parameter, we want to predict this parameter's
     true value.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 从统计学角度来看，开处方鸦片药物或不开处方可以视作一个[Bernouli参数](https://en.wikipedia.org/wiki/Bernoulli_distribution)（这是一个值为二元的术语——要么为真，要么为假）。考虑到Bernouli参数的观察次数，我们想要预测这个参数的真实值。
 - en: By "true value" I mean the actual value that prescriber's `opioid_prescription_ratio` would
     converge to if we had enough observations. The "true value" in our example with
     Bill would be equivalent to Bill's `opioid_prescription_ratio` if we were able
     to watch and record his actions for a very long time — like a year.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 所谓的“真实值”是指如果我们有足够的观察数据，开药医生的`opioid_prescription_ratio`将会收敛到的实际值。以Bill为例，“真实值”将等同于Bill的`opioid_prescription_ratio`，如果我们能观察和记录他的行为很长时间——比如一年。
 - en: If you've taken a statistics or [good data science course](https://www.learndatasci.com/best-data-science-online-courses-2018/) you're
     probably familiar with the concept of confidence intervals. If not, in simplest
     terms, a confidence interval is just a measure of mathematical confidence attached
     to a range that you believe an unknown value exists within.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你上过统计学或[优秀的数据科学课程](https://www.learndatasci.com/best-data-science-online-courses-2018/)，你可能对置信区间的概念有所了解。如果没有，简单来说，置信区间只是对你相信未知值存在于其中的范围的数学置信度度量。
 - en: '![95 percent confidence interval.jpeg](../Images/57f67c957f13e1c0839c038799f4f755.png)'
+  id: totrans-99
   prefs: []
   type: TYPE_IMG
+  zh: '![95 percent confidence interval.jpeg](../Images/57f67c957f13e1c0839c038799f4f755.png)'
 - en: Source: [Who needs backup dancers when you can have confidence intervals?](https://medium.com/design-ibm/who-needs-backup-dancers-when-you-can-have-confidence-intervals-485f9464c06f)
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源： [当你可以拥有置信区间时，谁需要伴舞者？](https://medium.com/design-ibm/who-needs-backup-dancers-when-you-can-have-confidence-intervals-485f9464c06f)
 - en: For example, I could be 95% confident that tomorrow's temperature will fall
     between 40 Fahrenheit and 70 Fahrenheit.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，我可以有95%的把握明天的温度将在40华氏度和70华氏度之间。
 - en: In 1927 mathematician Edwin Wilson applied the concept of confidence intervals
     to Bernoulli parameters. This means we can guess the *true* value of a pharmacists `opioid_prescription_ratio` given
     the amount of data we have on them!
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 在1927年，数学家Edwin Wilson将置信区间的概念应用于Bernoulli参数。这意味着，基于我们对药剂师的数据，我们可以猜测其`opioid_prescription_ratio`的*真实*值！
 - en: 'Here''s the formula:'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是公式：
 - en: 'Wilson Confidence Interval Lower Bound:'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: Wilson置信区间下界：
 - en: '![Formula](../Images/00d83421f12adf17726a45493055cf80.png)'
+  id: totrans-105
   prefs: []
   type: TYPE_IMG
+  zh: '![Formula](../Images/00d83421f12adf17726a45493055cf80.png)'
 - en: The formula looks intimidating but it's intuitive if you take the time to walk
     through it. Explaining the mathematics behind why this formula works is worth
     an entire discussion itself and is thus out of scope. So we'll just focus on applying
     it below.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 公式看起来很吓人，但如果花时间去理解它，其实很直观。解释这个公式为什么有效的数学原理本身值得一个完整的讨论，因此不在此范围之内。我们将专注于应用它。
 - en: '[PRE12]'
+  id: totrans-107
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Let's apply this formula to our dataframe with 95% confidence, creating a new
     column
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们以95%的置信度将此公式应用于我们的数据框，创建一个新列。
 - en: '[PRE13]'
+  id: totrans-109
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '![Table](../Images/8df13327a847e5edcb5d8baf2eeaa6ed.png)'
+  id: totrans-110
   prefs: []
   type: TYPE_IMG
+  zh: '![Table](../Images/8df13327a847e5edcb5d8baf2eeaa6ed.png)'
 - en: Amazing! Now these are the results we would want to report.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 太棒了！现在这些是我们想要报告的结果。
 - en: While there are plenty of prescribers with 1/1 or 2/2 opioid prescriptions,
     they now appear at the bottom of our rankings – which is intuitive. While our
     highest ranking prescribers have a lower `opioid_prescription_ratio` than some
     other prescribers, the rankings now take into account a notion of mathematical
     confidence.
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然有许多开具1/1或2/2鸦片药物处方的医生，但他们现在出现在我们的排名底部——这很直观。虽然我们排名最高的开药医生的`opioid_prescription_ratio`低于一些其他开药医生，但排名现在考虑了数学置信度的概念。
 - en: Both approaches to this problem — with or without using confidence intervals
     — are *technically* acceptable. However, it's easy to see that approaching the
     problem with a mathematical background yielded much more valuable results.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两种方法——使用置信区间或不使用置信区间——在*技术上*都是可以接受的。然而，很容易看出，具有数学背景的方法产生了更有价值的结果。
 - en: In Conclusion...
+  id: totrans-114
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结……
 - en: A large part of the data science job is translating open and interpretable questions
     into quantitative, rigorous terms.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据科学工作的一大部分是将开放且可解释的问题转化为定量、严格的术语。
 - en: As both of these examples have demonstrated, sometimes it’s not such an easy
     task and many data scientists often fall short in this regard. It’s very easy
     to fall into the trap of using parametric correlation in a non-parametric scenario.
     And it’s very easy to naively sort a list of Bernoulli trials without taking into
     account the number of observations for each trial. In fact, it happens more often
     than you’d think in practice.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如这两个例子所展示的，有时这并不是一件容易的事，许多数据科学家在这方面往往表现不佳。很容易陷入在非参数情境中使用参数相关性的陷阱。很容易天真地对伯努利试验列表进行排序，而不考虑每次试验的观测数量。事实上，这种情况在实践中比你想象的更常见。
 - en: Part of what separates a good data scientist from a great data scientist is
     having the mathematical background and intuition to identify and act upon situations
     like this. Often times what can make the difference between a solution and a great
     solution in data science is leveraging the right mathematical tools in the right
     context.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 区分优秀数据科学家和伟大数据科学家的一部分因素是具备数学背景和直觉，以识别并应对这样的情况。通常，数据科学中区分解决方案和优秀解决方案的关键在于在正确的背景下运用正确的数学工具。
 - en: '**Bio: [Brian Joseph](https://www.linkedin.com/in/brian-joseph-429028118/)**
     studied mathematics at Northeastern University, with a research focus in combinatorics
     and linear algebra. Currently working as a data scientist for a start-up in the
     greater Boston area with a passion for mathematics, data science, formal verification,
     and algorithm design.'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[布赖恩·约瑟夫](https://www.linkedin.com/in/brian-joseph-429028118/)** 在东北大学学习数学，研究方向集中于组合数学和线性代数。目前在大波士顿地区的一家初创公司担任数据科学家，对数学、数据科学、形式验证和算法设计充满热情。'
 - en: '[Original](https://www.learndatasci.com/tutorials/good-great-data-science-correlations-and-confidence/).
     Reposted with permission.'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.learndatasci.com/tutorials/good-great-data-science-correlations-and-confidence/)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Introduction to Statistics for Data Science](/2018/12/introduction-statistics-data-science.html)'
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学统计学入门](/2018/12/introduction-statistics-data-science.html)'
 - en: '[7 Steps to Mastering Basic Machine Learning with Python — 2019 Edition](/2019/01/7-steps-mastering-basic-machine-learning-python.html)'
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握基础机器学习的7个步骤 — 2019版](/2019/01/7-steps-mastering-basic-machine-learning-python.html)'
 - en: '[Exploring Python Basics](/2019/01/exploring-python-basics.html)'
+  id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[探索Python基础](/2019/01/exploring-python-basics.html)'
 - en: More On This Topic
+  id: totrans-124
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Working with Confidence Intervals](https://www.kdnuggets.com/2023/04/working-confidence-intervals.html)'
+  id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理置信区间](https://www.kdnuggets.com/2023/04/working-confidence-intervals.html)'
 - en: '[The Quest for Model Confidence: Can You Trust a Black Box?](https://www.kdnuggets.com/the-quest-for-model-confidence-can-you-trust-a-black-box)'
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模型信心的探索：你能信任一个黑箱吗？](https://www.kdnuggets.com/the-quest-for-model-confidence-can-you-trust-a-black-box)'
 - en: '[Machine Learning is Not Like Your Brain Part Seven: What Neurons…](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-seven-neurons-good.html)'
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习不像你的大脑第七部分：神经元……](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-seven-neurons-good.html)'
 - en: '[Data Quality Dimensions: Assuring Your Data Quality with Great Expectations](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据质量维度：用伟大期望确保数据质量](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)'
 - en: '[Data Quality: The Good, The Bad, and The Ugly](https://www.kdnuggets.com/2022/01/data-quality-good-bad-ugly.html)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据质量：好、坏与丑](https://www.kdnuggets.com/2022/01/data-quality-good-bad-ugly.html)'
 - en: '[The 5 Rules For Good Data Science Project Documentation](https://www.kdnuggets.com/2022/12/5-rules-good-data-science-project-documentation.html)'
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[良好的数据科学项目文档的5条规则](https://www.kdnuggets.com/2022/12/5-rules-good-data-science-project-documentation.html)'
