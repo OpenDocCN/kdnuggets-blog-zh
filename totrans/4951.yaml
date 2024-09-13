@@ -1,97 +1,136 @@
 - en: How Feature Engineering Can Help You Do Well in a Kaggle Competition – Part
     I
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 特征工程如何帮助你在 Kaggle 竞赛中表现出色 – 第一部分
 - en: 原文：[https://www.kdnuggets.com/2017/06/feature-engineering-help-kaggle-competition-1.html](https://www.kdnuggets.com/2017/06/feature-engineering-help-kaggle-competition-1.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/06/feature-engineering-help-kaggle-competition-1.html](https://www.kdnuggets.com/2017/06/feature-engineering-help-kaggle-competition-1.html)
 - en: '**By Gabriel Moreira, CI&T.**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Gabriel Moreira, CI&T.**'
 - en: '![Header](../Images/958dca69141a213fb3f1a688fa29066b.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![标题](../Images/958dca69141a213fb3f1a688fa29066b.png)'
 - en: It is midnight on January 18, 2017, and the [Outbrain Click Prediction machine
     learning competition](https://www.kaggle.com/c/outbrain-click-prediction) has
     just finished. It has been three and a half months of working late. As I scroll
     through the leaderboard page, I found my name in the 19th position, which was
     the top 2% from nearly 1,000 competitors. Not bad for the first Kaggle competition
     I had decided to put a real effort in!
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是 2017 年 1 月 18 日午夜，[Outbrain 点击预测机器学习竞赛](https://www.kaggle.com/c/outbrain-click-prediction)刚刚结束。这是三个月半的加班工作。当我滚动浏览排行榜页面时，我发现我的名字排在第
+    19 位，这在近 1000 名参赛者中位于前 2%。对于我决定认真投入的第一场 Kaggle 竞赛来说，这已经很不错了！
 - en: '![](../Images/889ea6594cecd18b937a52bf46ccf7f0.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/889ea6594cecd18b937a52bf46ccf7f0.png)'
 - en: One of the reasons why I managed to score well was the fact that Google Cloud
     Platform (GCP) made my life easier and I could focus on the data. Now I will take
     you through my journey!
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我能够取得好成绩的原因之一是因为 Google Cloud Platform (GCP) 让我的工作变得更轻松，让我可以专注于数据。现在，我将带你走过我的旅程！
 - en: The challenge
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 挑战
 - en: The Kaggle competition was sponsored by [Outbrain](http://www.outbrain.com/),
     which pairs relevant content and readers with 250 billion personalized recommendations
     every month across several thousand sites. In that competition, ‘Kagglers’ were
     challenged to predict on which ads and other forms of sponsored content its global
     base of users would click.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: Kaggle 竞赛由 [Outbrain](http://www.outbrain.com/) 赞助，Outbrain 每月在数千个网站上提供 2500
+    亿条个性化推荐，将相关内容与读者匹配。在这场竞赛中，“Kagglers” 被挑战预测用户点击的广告和其他形式的赞助内容。
 - en: Outbrain maintains a network of publishers and advertisers. In the image below,
     for example, paid content (ads) are presented to a user in a CNN (publisher) news
     page.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: Outbrain 维护着一个出版商和广告商的网络。例如，在下图中，付费内容（广告）展示在 CNN（出版商）的新闻页面上。
 - en: '![](../Images/2017d974e38726964e37718f82b41e7a.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2017d974e38726964e37718f82b41e7a.png)'
 - en: From [Outbrain Click Prediction competition](https://www.kaggle.com/c/outbrain-click-prediction/data).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 来自 [Outbrain 点击预测竞赛](https://www.kaggle.com/c/outbrain-click-prediction/data)。
 - en: In this competition, competitors were asked to accurately rank recommendations
     by predicted likelihood of being clicked. CTR (Click-Through Rate) prediction
     is very relevant for industries like e-commerce and advertisement, as tiny improvements
     in user conversion may lead to significant increases in profits, while providing
     a better user experience.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这场竞赛中，参赛者被要求根据预测的点击可能性准确排名推荐内容。CTR（点击率）预测对于电子商务和广告等行业非常相关，因为用户转化的微小改进可能会带来显著的利润增长，同时提供更好的用户体验。
 - en: Dataset and infrastructure
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据集和基础设施
 - en: 'One of the competition challenges was to handle the massive dataset: 2 billion
     page views and roughly 17 million click records from 700 million unique users,
     across 560 sites. It contained a sample of users’ pageviews and clicks, as observed
     on multiple publishing sites in the United States between June 14, 2016, and June
     28, 2016.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中一个竞赛挑战是处理庞大的数据集：20 亿页面浏览量和大约 1700 万条点击记录，来自 7 亿唯一用户，涉及 560 个网站。数据集中包含了从 2016
+    年 6 月 14 日到 2016 年 6 月 28 日期间，在多个出版网站上观察到的用户页面浏览量和点击量样本。
 - en: Considering it was a large relational database, with some tables not fitting
     ‘in memory’, [Apache Spark](http://spark.apache.org/) was very suitable for data
     exploration and fast distributed pre-processing. [Google Cloud Platform (GCP)](https://cloud.google.com/)
     provided the main components I needed for storage and distributed processing.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑到这是一个大型关系数据库，有些表格无法“在内存中”加载，[Apache Spark](http://spark.apache.org/) 非常适合数据探索和快速分布式预处理。[Google
+    Cloud Platform (GCP)](https://cloud.google.com/) 提供了我所需的主要存储和分布式处理组件。
 - en: It was easy to deploy a Spark cluster using [Google Cloud Dataproc](https://cloud.google.com/dataproc/)
     managed service. I found out that a cluster with 1 master and 8 worker nodes of
     “n1-highmem-4” instance type (~4 CPU cores and 16 GB RAM) was able to process
     all competition data in about one hour, including joining large tables, transforming
     features and storing vectors.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: My main development environment was Jupyter notebooks, a very productive Python
     interface. [This GCP tutorial](https://cloud.google.com/dataproc/docs/tutorials/jupyter-notebook)
     describes how to easily set up Jupyter in Dataproc master node, making PySpark
     libraries available for usage.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: Dataproc Spark clusters use [Google Cloud Storage](https://cloud.google.com/storage/)
     (GCS) as distributed file system instead of default HDFS. As a managed storage,
     it makes it easy to transfer and store large files between instances. Spark jobs
     are able to use data directly from GCS for distributed processing.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: I also employed some machine learning frameworks (FTRL, FFM, GBM, etc.), which
@@ -100,13 +139,16 @@
     RAM) deployed on [Google Compute Engine (GCE)](https://cloud.google.com/compute/)
     made it possible to run jobs in less than one hour. As their processing was very
     I/O intensive, I attached a SSD disk to the instance to avoid bottlenecks.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: In the [second part](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)
     of this post series, I will talk more about those machine learning models.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: First approach
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -114,36 +156,43 @@
     was MAP@12 (Mean Average Precision at 12), which measures the quality of ad ranking.
     In other words, this metric assesses whether the actual clicked ad was well ranked
     by the model.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: 'It’s common sense that the ads’ average popularity may be a good predictor
     of new clicks. The main idea was then to rank ads displayed for users by their
     decreasing CTR (*#clicks / #views*).'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: In the following Python snippets, I show how to compute ads CTR based on train
     set (click_trains.csv) using PySpark. This CSV file has more than 87 million rows
     and was stored on GCS. The full script runs in less than 30 seconds in a Dataproc
     Spark cluster with 8 worker nodes.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: Loads training data (click_train.csv) into a Spark DataFrame and get rows count.Get
     count of distinct ads.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: 'In the next snippet, I define a new DataFrame grouping rows by ad_id and aggregating
     the sum of clicks and count of views. The processing of the CTR is made by a UDF
     (User Defined Function) named *ctr_udf*. The snippet output is a table with a
     sample of 10 ad_ids and their respective #clicks, #views e CTR.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: Calculating average CTR for ads.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: To increase the CTR confidence, we can consider only ads with more than five
     views. With the *collectAsMap()* action, the distributed collection is converted
     to an in-memory lookup dictionary, whose key is the ad_id and the value is the
     corresponding average CTR.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: This was the submitted baseline by most of the competitors and, even without
@@ -151,9 +200,11 @@
     the official baseline competition was based on ads ranking by their ids (random-like
     approach), for which MAP@12 was **0.485**. Thus, this initial approach actually
     does a nice job for click prediction.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: Data Analysis
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -161,6 +212,7 @@
     to analyze the data and to formulate hypotheses about which features and algorithms
     would be useful to tackle the problem. I implemented an EDA (Exploratory Data
     Analysis) to unveil the largest dataset (page_views.csv ~ 100 GB) using PySpark.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: My [EDA Kernel](https://www.kaggle.com/gspmoreira/outbrain-click-prediction/unveiling-page-views-csv-with-pyspark),
@@ -170,47 +222,58 @@
     [comments](https://www.kaggle.com/gspmoreira/outbrain-click-prediction/unveiling-page-views-csv-with-pyspark),
     it appears that many Kagglers are considering trying Google Dataproc and Spark
     for machine learning competitions.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: My analysis helped me to figure out how to extract value from the dataset, by
     joining it with training and test data (events.csv). For example, in the cumulative
     chart shown below, we can see that 65% of the users have only one page view, 77%,
     have at most two views and 89% of the users have at most five views.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/b821f026d86c4d98ddde68f3b835a9dd.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
 - en: Cumulative percentage of users with at most N page views.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: This is a typical ‘cold-start’ scenario where we know almost nothing about most
     users and need to predict which recommended content they will click on.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: In general, traditional recommender system techniques like Collaborative Filtering
     and Content-Based Filtering will fail in this scenario. My strategy was then to
     employ machine learning algorithms that are able to leverage contextual information
     about the users’ events and recommended sponsored content.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: Feature Engineering
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Feature engineering refers to the essential step of selecting or creating the
     right features to be used in a machine learning model. Usually, it may consume
     up to 80% of the total effort, depending on the data complexity.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: In the following picture, I show the competition original data model, with features
     colored by their data type.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e54a298f669725bc5b88d1209febaeab.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
 - en: Outbrain Click Prediction large relational database.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: All categorical fields were originally represented as integer numbers. Depending
@@ -222,6 +285,7 @@
     where each categorical field is transformed into a sparse vector. In the sparse
     vector all positions have zero values, except the one corresponding to the id
     value.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: Another popular technique for categorical features with large number of unique
@@ -232,6 +296,7 @@
     may cause some collisions when mapping more than one feature to the same vector
     position, but machine learning algorithms are usually robust enough to deal with
     these conflicts. I used both techniques in my approach.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: I also used ‘B[inning’](https://en.wikipedia.org/wiki/Data_binning) for the
@@ -240,6 +305,7 @@
     For example, I ‘binned’ the event ‘hour’ in periods like morning, midday, afternoon,
     evening, etc., because my hypotheses is that user behavior wouldn’t be too different
     if observed at 10am or 11am, for instance.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: 'For long-tail distributed variables, like *user_views_count*, most users had
@@ -247,34 +313,41 @@
     Applying transformations like log(1 + #views) was useful to smooth out the distribution.
     A user that has 1,000 page views might not be very different from a user with
     500 views, they both are equally outliers in this context.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: '[Standardization and normalization](http://sebastianraschka.com/Articles/2014_about_feature_scaling.html)
     are also important for most machine learning algorithms using optimization techniques
     like gradient descent. In general, only Decision Trees based models are robust
     to deal with raw numeric features in different scales and variances.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: A more detailed presentation of the main Feature Engineering techniques I have
     used can be found in this [slides](https://www.slideshare.net/gabrielspmoreira/feature-engineering-getting-most-out-of-data-for-predictive-models).
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: Based on insights and hypotheses I gleaned from my EDA, I managed to create
     and transform features for my machine learning models, besides the original features
     provided in the [competition data](https://www.kaggle.com/c/outbrain-click-prediction/data).
     Here it follows some of those features.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '***User profiles***'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: '**user_has_already_viewed_doc -** For each content recommended to the user,
     verify whether the user had previously visited that pages.'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**user_views_count -** Do eager readers behave differently from other users?
     Let’s add this feature and let machine learning models guess that.'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -282,34 +355,41 @@
     vectors based on categories, topics and entities of documents that users have
     previously viewed (weighted by confidence and TF-IDF), to model users preferences
     in a Content-Based Filtering approach.'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**user_avg_views_of_distinct_docs -** Ratio between*(#user_distinct_docs_views
     / #user_views)*, indicating how often users read previously visited pages again.'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '***Ads and Documents***'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: '**doc_ad_days_since_published, doc_event_days_since_published -** Days elapsed
     since the ad document was published in a given user visit. The general assumption
     is that new content is more relevant to users. But if you are reading an old post,
     you might be interested in other old posts.'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**doc_avg_views_by_distinct_users_cf -** Average page views of the ad document
     by distinct users. Is this a webpage people usually return to?'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**ad_views_count, doc_views_count -** How popular is a document or ad?'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '***Events***'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '**event_local_hour (binned), event_weekend** — Event timestamps were in UTC-4,
@@ -317,31 +397,37 @@
     time. They were binned in periods like morning, afternoon, midday, evening, night.
     A flag indicating whether it was a weekend was also included. The assumption here
     is that time influences the kind of content users will read.'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**event_country, event_country_state -** The field *event_geolocation* was
     parsed to extract the user’s country and state in a page visit.'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**ad_id, doc_event_id, doc_ad_id, ad_advertiser, …** — All of the original
     categorical fields were One-Hot Encoded to be used by the models, generating about
     126,000 features.'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '***Average CTR***'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
 - en: '**avg_ctr_ad_id, avg_ctr_publisher_id, avg_ctr_advertiser_id, avg_ctr_campain_id,
     avg_ctr_entity_id_country … -** Average CTR *(#clicks / #views)* given some categorical
     combinations and CTR confidence (details on [Part II](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)
     post). Eg. P(click | category01, category02).'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '***Content-Based Similarities***'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: These features used [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) technique
@@ -350,114 +436,167 @@
     using [Cosine Similarity](https://en.wikipedia.org/wiki/Cosine_similarity), which
     is a very popular Information Retrieval based on the angle between of two vectors,
     ignoring their magnitude.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
 - en: '**user_doc_ad_sim_categories, user_doc_ad_sim_topics, user_doc_ad_sim_entities
     -** Cosine similarity between user profile and ad document profile vectors (TF-IDF).'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**doc_event_doc_ad_sim_categories, doc_event_doc_ad_sim_topics, doc_event_doc_ad_sim_entities
     -** Cosine similarity between event document (landing page context) and ad document
     profile vectors (TF-IDF).'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**doc_event_doc_ad_sim_categories, doc_event_doc_ad_sim_topics, doc_event_doc_ad_sim_entities
+    -** 事件文档（着陆页上下文）与广告文档概况向量（TF-IDF）之间的余弦相似度。'
 - en: We have generated features based on some of our hypotheses about aspects that
     might influence users’ decisions on which sponsored content to click on. And the
     data is now ready for some machine learning models!
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们基于一些关于影响用户点击赞助内容决策的假设生成了特征。现在数据已准备好用于一些机器学习模型！
 - en: Next up…
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 下一步…
 - en: In the [Part II](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)
     of this post series, I will present the cross-validation strategy, the machine
     learning models implemented and the ‘Ensemble’ techniques employed to climb up
     to the Top 2% of the competition leaderboard.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[第二部分](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)的系列文章中，我将介绍交叉验证策略、实施的机器学习模型以及‘集成’技术，帮助你在比赛排行榜中冲刺到前
+    2%。
 - en: Stay tuned!
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 请继续关注！
 - en: '**Bio: [Gabriel Moreira](https://about.me/gspmoreira)** is a scientist passionate
     about solving problems with data. He is a Doctoral student at Instituto Tecnológico
     de Aeronáutica - ITA, researching on Recommender Systems and Deep Learning. Currently,
     he is [Lead Data Scientist at CI&T](https://medium.com/unstructured), leading
     the team in the solution of customer''s challenging problems using machine learning
     on big and unstructured data.'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[加布里埃尔·莫雷拉](https://about.me/gspmoreira)** 是一位热衷于用数据解决问题的科学家。他是 Instituto
+    Tecnológico de Aeronáutica - ITA 的博士生，研究推荐系统和深度学习。目前，他是 [CI&T 的首席数据科学家](https://medium.com/unstructured)，领导团队利用机器学习解决客户在大规模和非结构化数据中的挑战性问题。'
 - en: '[Original](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-i-9cc9a883514d).
     Reposted with permission.'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-i-9cc9a883514d)。已获授权转载。'
 - en: '**Related:**'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to Rank 10% in Your First Kaggle Competition](/2016/11/rank-ten-precent-first-kaggle-competition.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在你的第一次 Kaggle 比赛中排名前 10%](/2016/11/rank-ten-precent-first-kaggle-competition.html)'
 - en: '[In Deep Learning, Architecture Engineering is the New Feature Engineering](/2016/07/deep-learning-architecture-engineering-feature-engineering.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在深度学习中，架构工程是新的特征工程](/2016/07/deep-learning-architecture-engineering-feature-engineering.html)'
 - en: '[Machine Learning Crash Course: Part 1](/2017/05/machine-learning-crash-course-part-1.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习速成课程：第一部分](/2017/05/machine-learning-crash-course-part-1.html)'
 - en: '* * *'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-80
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT'
 - en: '* * *'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-85
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征存储峰会 2022：关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
 - en: '[Data Science Projects That Can Help You Solve Real World Problems](https://www.kdnuggets.com/2022/11/data-science-projects-help-solve-real-world-problems.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学项目，帮助你解决实际问题](https://www.kdnuggets.com/2022/11/data-science-projects-help-solve-real-world-problems.html)'
 - en: '[5 Rare Data Science Skills That Can Help You Get Employed](https://www.kdnuggets.com/5-rare-data-science-skills-that-can-help-you-get-employed)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5 种稀有的数据科学技能，帮助你获得就业机会](https://www.kdnuggets.com/5-rare-data-science-skills-that-can-help-you-get-employed)'
 - en: '[How Generative AI Can Help You Improve Your Data Visualization Charts](https://www.kdnuggets.com/how-generative-ai-can-help-you-improve-your-data-visualization-charts)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Free Python Resources That Can Help You Become a Pro](https://www.kdnuggets.com/free-python-resources-that-can-help-you-become-a-pro)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[How a Level System can Help Forecast AI Costs](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
