@@ -1,315 +1,461 @@
 - en: Machine Learning Translation and the Google Translate Algorithm
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 机器学习翻译与谷歌翻译算法
 - en: 原文：[https://www.kdnuggets.com/2017/09/machine-learning-translation-google-translate-algorithm.html](https://www.kdnuggets.com/2017/09/machine-learning-translation-google-translate-algorithm.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/09/machine-learning-translation-google-translate-algorithm.html](https://www.kdnuggets.com/2017/09/machine-learning-translation-google-translate-algorithm.html)
 - en: '**By Daniil Korbut, [Statsbot](https://statsbot.co/).**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：达尼尔·科尔布特，[Statsbot](https://statsbot.co/)。**'
 - en: '![](../Images/ad62fc7c2ba75d845ae4835dea932f43.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ad62fc7c2ba75d845ae4835dea932f43.png)'
 - en: '[Google Machine Translation](https://research.googleblog.com/2016/11/zero-shot-translation-with-googles.html)'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '[谷歌机器翻译](https://research.googleblog.com/2016/11/zero-shot-translation-with-googles.html)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Every day we use different technologies without even knowing how exactly they
     work. In fact, it’s not very easy to understand engines powered by machine learning.
     The [Statsbot](http://statsbot.co/?utm_source=kdnuggets) team wants to make machine
     learning clear by telling data stories in this blog. Today, we’ve decided to explore
     machine translators and explain how the Google Translate algorithm works.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 每天我们使用不同的技术，却不知道它们具体是如何工作的。事实上，了解由机器学习驱动的引擎并不容易。 [Statsbot](http://statsbot.co/?utm_source=kdnuggets)团队希望通过在这篇博客中讲述数据故事来使机器学习变得清晰。今天，我们决定探讨机器翻译器，并解释谷歌翻译算法的工作原理。
 - en: 'Years ago, it was very time consuming to translate the text from an unknown
     language. Using simple vocabularies with word-for-word translation was hard for
     two reasons: 1) the reader had to know the grammar rules and 2) needed to keep
     in mind all language versions while translating the whole sentence.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 多年前，将文本从未知语言翻译过来非常耗时。使用简单的词汇逐字翻译存在两个困难：1) 读者必须了解语法规则；2) 翻译整个句子时需要记住所有语言版本。
 - en: Now, we don’t need to struggle so much– we can translate phrases, sentences,
     and even large texts just by putting them in Google Translate. But most people
     don’t actually care how the engine of machine learning translation works. This
     post is for those who do care.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们不需要再费那么多劲了——我们可以通过将短语、句子甚至大型文本放入谷歌翻译来进行翻译。但大多数人实际上并不关心机器学习翻译引擎是如何工作的。这篇文章是给那些关心的人准备的。
 - en: '**Deep learning translation problems**'
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**深度学习翻译问题**'
 - en: If the Google Translate engine tried to kept the translations for even short
     sentences, it wouldn’t work because of the huge number of possible variations.
     The best idea can be to teach the computer sets of grammar rules and translate
     the sentences according to them. If only it were as easy as it sounds.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果谷歌翻译引擎试图保持对即使是短句的翻译，这将不起作用，因为可能的变体数量巨大。最好的办法可能是教计算机一组语法规则，并根据这些规则翻译句子。只可惜这并不像听起来那么简单。
 - en: If you have ever tried learning a foreign language, you know that there are
     always a lot of exceptions to rules. When we try to capture all these rules, exceptions
     and exceptions to the exceptions in the program, the quality of translation breaks
     down.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你曾经尝试学习一门外语，你就会知道总是有很多规则的例外。当我们试图在程序中捕捉所有这些规则、例外以及例外的例外时，翻译的质量会下降。
 - en: '*Modern machine translation systems use a different approach: they allocate
     the rules from text by analyzing a huge set of documents.*'
+  id: totrans-17
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*现代机器翻译系统使用不同的方法：通过分析大量文档来从文本中提取规则。*'
 - en: Creating your own simple machine translator would be [**a great project for
     any data science resume**](https://blog.statsbot.co/data-scientist-resume-projects-806a74388ae6?utm_source=kdnuggets).
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建你自己的简单机器翻译器将是[**任何数据科学简历中的一个伟大项目**](https://blog.statsbot.co/data-scientist-resume-projects-806a74388ae6?utm_source=kdnuggets)。
 - en: Let’s try to investigate what hides in the “black boxes” that we call machine
     translators. Deep neural networks can achieve excellent results in very complicated
     tasks (speech/visual object recognition), but despite their flexibility, they
     can be applied only for tasks where the input and target have fixed dimensionality.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们试着深入探究我们称之为机器翻译器的“黑箱”中隐藏的内容。深度神经网络能够在非常复杂的任务（语音/视觉对象识别）中取得优异的结果，但尽管它们具有灵活性，它们只能应用于输入和目标具有固定维度的任务。
 - en: '**Recurrent Neural Networks**'
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**递归神经网络**'
 - en: Here is where Long Short-Term Memory networks (LSTMs) come into play, helping
     us to work with sequences whose length we can’t know a priori.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这时，长短期记忆网络（LSTMs）发挥作用，帮助我们处理长度无法先验确定的序列。
 - en: LSTMs are a special kind of recurrent neural network (RNN), capable of learning
     long-term dependencies. All RNNs look like a chain of repeating modules.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: LSTMs是一种特殊的递归神经网络（RNN），能够学习长期依赖关系。所有RNN看起来像是一个重复模块的链条。
 - en: '![](../Images/6de3d1247fc0c6dd19b6126f28c69ff1.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6de3d1247fc0c6dd19b6126f28c69ff1.png)'
 - en: '[Unrolled recurrent neural network](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '[展开的递归神经网络](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)'
 - en: So the LSTM transmits data from module to module and, for example, for generating
     Ht we use not only Xt, but all previous input values X. To learn more about structure
     and mathematical models of LSTM, you can read the great article “[Understanding
     LSTM Networks](http://colah.github.io/posts/2015-08-Understanding-LSTMs/).”
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，LSTM将数据从一个模块传递到另一个模块，例如，为了生成Ht，我们不仅使用Xt，还使用所有之前的输入值X。要了解有关LSTM结构和数学模型的更多信息，可以阅读这篇精彩的文章“[理解LSTM网络](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)”。
 - en: '**Bidirectional RNNs**'
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**双向RNNs**'
 - en: Our next step is bidirectional recurrent neural networks (BRNNs). What a BRNN
     does, is split the neurons of a regular RNN into two directions. One direction
     is for positive time, or forward states. The other direction is for negative time,
     or backward states. The output of these two states are not connected to inputs
     of the opposite direction states.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的下一步是双向递归神经网络（BRNNs）。BRNN的作用是将常规RNN的神经元分为两个方向。一个方向用于正时间，或前向状态。另一个方向用于负时间，或后向状态。这两个状态的输出与相反方向状态的输入不相连。
 - en: '![](../Images/c632cea579cb40f348be6066dbe1e821.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c632cea579cb40f348be6066dbe1e821.png)'
 - en: '[Bidirectional recurrent neural networks](https://www.semanticscholar.org/paper/Hybrid-speech-recognition-with-Deep-Bidirectional-Graves-Jaitly/5807664af8e63d5207f59fb263c9e7bd3673be79)'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[双向递归神经网络](https://www.semanticscholar.org/paper/Hybrid-speech-recognition-with-Deep-Bidirectional-Graves-Jaitly/5807664af8e63d5207f59fb263c9e7bd3673be79)'
 - en: To understand why BRNNs can work better than a simple RNN, imagine that we have
     a sentence of 9 words and we want to predict the 5th word. We can make it know
     either only the first 4 words, or the first 4 words and last 4 words. Of course,
     the quality in the second case would be better.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了理解为什么BRNNs比简单RNN效果更好，想象一下我们有一个9个单词的句子，我们想预测第5个单词。我们可以让它知道前4个单词，或者前4个单词和最后4个单词。当然，第二种情况的质量会更好。
 - en: '**Sequence to sequence**'
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**序列到序列**'
 - en: 'Now we’re ready to move to sequence to sequence models (also called seq2seq).
     The basic seq2seq model consist of two RNNs: an encoder network that processes
     the input and a decoder network that generates the output.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们准备转向序列到序列模型（也称为seq2seq）。基本的seq2seq模型由两个RNN组成：一个编码器网络处理输入，一个解码器网络生成输出。
 - en: '![](../Images/4a829f9839b0211cdd633e5c69373cec.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4a829f9839b0211cdd633e5c69373cec.png)'
 - en: '[Sequence to sequence model](https://research.googleblog.com/2016/09/a-neural-network-for-machine.html)'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '[序列到序列模型](https://research.googleblog.com/2016/09/a-neural-network-for-machine.html)'
 - en: Finally, we can make our first machine translator!
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终，我们可以制作我们的第一个机器翻译器！
 - en: However, let’s think about one trick. Google Translate [currently supports 103
     languages](https://www.newscientist.com/article/2114748-google-translate-ai-invents-its-own-language-to-translate-with/),
     so we should have 103x102 different models for each pair of languages. Of course,
     the quality of these models varies according to the popularity of languages and
     the amount of documents needed for training this network. The best that we can
     do is to make one NN to take any language as input and translate into any language.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 不过，让我们考虑一个技巧。Google翻译[目前支持103种语言](https://www.newscientist.com/article/2114748-google-translate-ai-invents-its-own-language-to-translate-with/)，因此我们应该有103x102个不同的模型来处理每对语言。显然，这些模型的质量会根据语言的流行程度和训练网络所需的文档量而有所不同。我们能做的最好的是制作一个神经网络，接受任何语言作为输入并翻译成任何语言。
 - en: '**Google Translate**'
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**Google 翻译**'
 - en: That very idea was [realized by Google engineers at the end of 2016](https://research.googleblog.com/2016/09/a-neural-network-for-machine.html).
     Architecture of NN was build on the seq2seq model, which we have already studied.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个想法在 2016 年底由 Google 工程师 [实现](https://research.googleblog.com/2016/09/a-neural-network-for-machine.html)。NN
+    的架构基于 seq2seq 模型，这是我们已经研究过的。
 - en: The only exception is that between the encoder and decoder there are 8 layers
     of LSTM-RNN that have residual connections between layers with some tweaks for
     accuracy and speed. If you want to go deeper with that, take a look at the article [Google’s
     Neural Machine Translation System](https://arxiv.org/abs/1609.08144).
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 唯一的例外是，在编码器和解码器之间有 8 层 LSTM-RNN，这些层之间有残差连接，并进行了一些调整以提高准确性和速度。如果你想深入了解，可以查看文章 [Google
+    的神经机器翻译系统](https://arxiv.org/abs/1609.08144)。
 - en: The main thing about this approach is that now the Google Translate algorithm
     uses only one system instead of a huge set for every pair of languages.
+  id: totrans-40
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这个方法的主要优点是，现在 Google 翻译算法只使用一个系统，而不是每对语言使用一整套系统。
 - en: The system requires a “token” at the beginning of the input sentence which specifies
     the language you’re trying to translate the phrase into.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 系统需要在输入句子的开头指定一个“标记”，以说明你尝试将短语翻译成的语言。
 - en: This improves translation quality and enables translations even between two
     languages which the system hasn’t seen yet, a method termed “Zero-Shot Translation.”
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 这提高了翻译质量，并使得即使在系统尚未见过的两种语言之间进行翻译也成为可能，这种方法被称为“零样本翻译”。
 - en: '**What means better translation?**'
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**什么是更好的翻译？**'
 - en: When we’re talking about improvements and better results from Google Translate
     algorithms, how can we correctly evaluate that the first candidate for translation
     is better than the second?
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们谈论 Google 翻译算法的改进和更好的结果时，我们如何正确评估第一个候选翻译是否优于第二个？
 - en: It’s not a trivial problem, because for some commonly used sentences we have
     the sets of reference translations from the professional translators, that have,
     of course, some differences.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这不是一个简单的问题，因为对于一些常用的句子，我们拥有来自专业翻译人员的参考翻译集，这些翻译集之间自然会有一些差异。
 - en: 'There are a lot of approaches that partly solve this problem, but the most
     popular and effective metric is [BLEU](https://en.wikipedia.org/wiki/BLEU) (bilingual
     evaluation understudy). Imagine, we have two candidates from machine translators:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 有很多方法部分解决了这个问题，但最流行和有效的指标是 [BLEU](https://en.wikipedia.org/wiki/BLEU) （双语评价理解）。想象一下，我们有两个来自机器翻译的候选翻译：
 - en: 'Candidate 1: Statsbot makes it easy for companies to closely monitor data from
     various analytical platforms via natural language.'
+  id: totrans-47
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 候选 1：Statsbot 使公司可以通过自然语言轻松地紧密监控来自各种分析平台的数据。
 - en: ''
+  id: totrans-48
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: 'Candidate 2: Statsbot uses natural language to accurately analyze businesses’
     metrics from different analytical platforms.'
+  id: totrans-49
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 候选 2：Statsbot 使用自然语言准确分析来自不同分析平台的业务指标。
 - en: '![](../Images/a812122e97cb432b115267962b8ead35.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a812122e97cb432b115267962b8ead35.png)'
 - en: Although they have the same meaning they differ in quality and have different
     structure.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管它们具有相同的含义，但在质量和结构上存在差异。
 - en: 'Let’s look at two human translations:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看两个人工翻译：
 - en: 'Reference 1: Statsbot helps companies closely monitor their data from different
     analytical platforms via natural language.'
+  id: totrans-53
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 参考文献 1：Statsbot 帮助公司通过自然语言紧密监控来自不同分析平台的数据。
 - en: ''
+  id: totrans-54
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: 'Reference 2: Statsbot allows companies to carefully monitor data from various
     analytics platforms by using natural language.'
+  id: totrans-55
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 参考文献 2：Statsbot 允许公司通过自然语言仔细监控来自各种分析平台的数据。
 - en: Obviously, Candidate 1 is better, sharing more words and phrases compared to
     Candidate 2\. This is a key idea of the simple BLEU approach. We can compare [n-grams](https://en.wikipedia.org/wiki/N-gram) of
     the candidate with n-grams of the reference translation and count the number of
     matches (independent from their position). We use only n-gram precisions, because
     calculating recall is difficult with multiple refs and the result is the geometric
     average of n-gram scores.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，候选 1 更好，相比候选 2 分享了更多的单词和短语。这是简单 BLEU 方法的关键思想。我们可以比较候选翻译与参考翻译的[n-grams](https://en.wikipedia.org/wiki/N-gram)，并计算匹配的数量（与它们的位置无关）。我们只使用
+    n-gram 精确度，因为计算召回率在有多个参考的情况下很困难，结果是 n-gram 分数的几何平均值。
 - en: Now you can evaluate the complex engine of machine learning translation. Next
     time when you translate something with Google Translate, imagine how many millions
     of documents it analyzed before giving you the best language version.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你可以评估复杂的机器学习翻译引擎。下次当你用Google翻译翻译某些内容时，想象一下它分析了多少百万份文档才为你提供了最佳的语言版本。
 - en: '**Bio: [Daniil Korbut](https://medium.com/@daniilkorbut)** is a Junior Data
     Scientist at [Statsbot](https://statsbot.co/).'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[丹尼尔·科尔布特](https://medium.com/@daniilkorbut)** 是[Statsbot](https://statsbot.co/)的初级数据科学家。'
 - en: '[Original](https://blog.statsbot.co/machine-learning-translation-96f0ed8f19e4).
     Reposted with permission.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://blog.statsbot.co/machine-learning-translation-96f0ed8f19e4)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Attention and Memory in Deep Learning and NLP](/2016/01/attention-memory-deep-learning-nlp.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习和NLP中的注意力与记忆](/2016/01/attention-memory-deep-learning-nlp.html)'
 - en: '[Top /r/MachineLearning Posts, May: Deep Image Analogy; Stylized Facial Animations;
     Google Open Sources Sketch-RNN](/2017/06/top-reddit-machine-learning-posts-may.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Top /r/MachineLearning帖子，5月：深度图像类比；风格化面部动画；Google开源Sketch-RNN](/2017/06/top-reddit-machine-learning-posts-may.html)'
 - en: '[5 Free Resources for Getting Started with Deep Learning for Natural Language
     Processing](/2017/07/5-free-resources-getting-started-deep-learning-nlp.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5个免费的自然语言处理深度学习入门资源](/2017/07/5-free-resources-getting-started-deep-learning-nlp.html)'
 - en: More On This Topic
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[OpenAI’s Whisper API for Transcription and Translation](https://www.kdnuggets.com/2023/06/openai-whisper-api-transcription-translation.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[OpenAI的Whisper API用于转录和翻译](https://www.kdnuggets.com/2023/06/openai-whisper-api-transcription-translation.html)'
 - en: '[How to Translate Languages with MarianMT and Hugging Face Transformers](https://www.kdnuggets.com/how-to-translate-languages-with-marianmt-and-hugging-face-transformers)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用MarianMT和Hugging Face Transformers翻译语言](https://www.kdnuggets.com/how-to-translate-languages-with-marianmt-and-hugging-face-transformers)'
 - en: '[Reading Minds with AI: Researchers Translate Brain Waves to Images](https://www.kdnuggets.com/2023/03/reading-minds-ai-researchers-translate-brain-waves-images.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用AI阅读思想：研究人员将脑电波转换为图像](https://www.kdnuggets.com/2023/03/reading-minds-ai-researchers-translate-brain-waves-images.html)'
 - en: '[A Full End-to-End Deployment of a Machine Learning Algorithm into a…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将机器学习算法完整部署到…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
 - en: '[Unlock the Secrets to Choosing the Perfect Machine Learning Algorithm!](https://www.kdnuggets.com/2023/07/ml-algorithm-choose.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[揭开选择完美机器学习算法的秘密！](https://www.kdnuggets.com/2023/07/ml-algorithm-choose.html)'
 - en: '[DBSCAN Clustering Algorithm in Machine Learning](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的DBSCAN聚类算法](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
