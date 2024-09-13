@@ -1,334 +1,484 @@
 - en: 'In-Database Analytics: Leveraging SQL’s Analytic Functions'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据库内分析：利用 SQL 的分析功能
 - en: 原文：[https://www.kdnuggets.com/2023/07/indatabase-analytics-leveraging-sql-analytic-functions.html](https://www.kdnuggets.com/2023/07/indatabase-analytics-leveraging-sql-analytic-functions.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/07/indatabase-analytics-leveraging-sql-analytic-functions.html](https://www.kdnuggets.com/2023/07/indatabase-analytics-leveraging-sql-analytic-functions.html)
 - en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/bac87ca5cda06af5bde65dd09ed02edb.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![数据库内分析：利用 SQL 的分析功能](../Images/bac87ca5cda06af5bde65dd09ed02edb.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: We all know the importance of data analysis in today’s data-driven world and
     how it offers us valuable insights from the available data. But sometimes, data
     analysis becomes very challenging and time-consuming for the data analyst. The
     main reason it has become hectic nowadays is the exploded volume of generated
     data and the need for external tools to perform complex analysis techniques on
     it.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们都知道数据分析在当今数据驱动的世界中的重要性，以及它如何从现有数据中为我们提供宝贵的见解。但有时，数据分析对于数据分析师来说非常具有挑战性和耗时。它变得繁琐的主要原因是生成的数据量激增以及需要外部工具来执行复杂的分析技术。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的
+    IT 需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: But what if we analyse data within the database itself and with significantly
     simplified queries? This can be made possible using SQL Analytic functions. This
     article will discuss various SQL analytic functions that can be executed within
     the SQL Server and obtain us valuable results.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 但如果我们在数据库内部分析数据，并使用显著简化的查询呢？这可以通过 SQL 分析功能实现。本文将讨论可以在 SQL 服务器中执行的各种 SQL 分析功能，并为我们提供有价值的结果。
 - en: These functions calculate the aggregate value based on a group of rows and go
     beyond basic row operations. They provide us with tools for ranking, time series
     calculations, windowing and trend analysis. So without wasting any further time,
     let’s start discussing these functions one by one with some details and practical
     examples. The pre-requisite of this tutorial is the basic practical knowledge
     of SQL queries.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些功能基于一组行计算汇总值，并超越了基本的行操作。它们为我们提供了排名、时间序列计算、窗口处理和趋势分析的工具。所以在不浪费更多时间的情况下，我们开始逐一讨论这些功能，并附上详细的说明和实际示例。本教程的前提是对
+    SQL 查询的基本实践知识。
 - en: Creating a Demo Table
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 创建演示表
 - en: We will create a demo table and apply all the analytic functions on this table
     so that you easily follow along with the tutorial.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将创建一个演示表，并在该表上应用所有分析功能，以便你能轻松跟随教程。
 - en: '**Note:** Some functions discussed in this tutorial are not present in SQLite.
     So it is preferable to use MySQL or PostgreSQL Server.'
+  id: totrans-15
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**注意：** 本教程中讨论的一些功能在 SQLite 中不存在。因此，最好使用 MySQL 或 PostgreSQL 服务器。'
 - en: This table contains the data of several university students, containing four
     columns Student ID, Student Name, Subject and Final Marks out of 100.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个表格包含了几位大学生的数据，包括学生ID、学生姓名、科目和满分 100 的最终分数四列。
 - en: 'Creating a Students Table containing 4 columns:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个包含 4 列的学生表：
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Now, we will insert some dummy data into that table.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们将向该表中插入一些虚拟数据。
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Now we will visualize our table.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将可视化我们的表格。
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Output:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/3d0c9081c0486f45d134196c06789bb9.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![数据库内分析：利用 SQL 的分析功能](../Images/3d0c9081c0486f45d134196c06789bb9.png)'
 - en: We are ready to execute the analytic functions.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们准备执行分析功能。
 - en: RANK() & DENSE_RANK()
+  id: totrans-26
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: RANK() 和 DENSE_RANK()
 - en: '`RANK()` function will assign a particular rank to each row within a partition
     based on the specified order. If the rows have identical values within the same
     partition, it assigns them the same rank.'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: Let’s understand it more clearly with the below example.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Output:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/cdf3a4bd5d633ebc9a99aa7b97a914c7.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
 - en: You can observe that the final marks are arranged in descending order, and a
     particular rank is associated with each row. You can also observe that the students
     with the same marks get the same rank, and the following rank after the duplicate
     row is skipped.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: We can also find toppers of each subject, i.e. we can partition the rank based
     on the subjects. Let’s see how to do it.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Output:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/03f0c92fadd781802a6d4d3571dd2e20.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
 - en: In this example, we have partitioned the ranking based on subjects and the ranks
     are allocated separately for each subject.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: '**Note:** Please observe that two students got the same marks in the Chemistry
     subject, ranked as 1, and the rank for the next row directly starts from 3\. It
     skips the rank of 2.'
+  id: totrans-38
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: This is the feature of the `RANK()` function that it is not always necessary
     to produce ranks consecutively. The next rank will be the sum of the previous
     rank and the duplicate numbers.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: 'To overcome this problem, `DENSE_RANK()` is introduced to work similarly to
     the `RANK()` function, but it always assigns rank consecutively. Follow the below
     example:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Output:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/1f8ae03b64bcb357568fb94dc9f96bd9.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
 - en: The above figure shows that all the ranks are consecutive, even if duplicate
     marks are in the same partition.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: NTILE()
+  id: totrans-45
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: '`NTILE()` function is used to divide the rows into a specified number (N) of
     roughly equal-sized buckets. Each row is assigned a bucket number starting from
     1 to N (Total number of buckets).'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: We can also apply `NTILE()` function on a specific partition or order, which
     are specified in the PARTITION BY and ORDER BY clauses.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: Suppose N is not perfectly divisible by the number of rows. Then the function
     will create buckets of different sizes with the difference of one.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: 'Syntax:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The `NTILE()` function takes one required parameter N, i.e. the number of buckets
     and some optional parameters like PARTITION BY and ORDER BY clause. `NTILE()`
     will divide the rows based on the order specified by these clauses.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: Let’s take an example considering our “Students” table. Suppose we want to divide
     the students into groups based on their final marks. We will create three groups.
     Group 1 will contain the students with the highest marks. Group 2 will have all
     the mediocre students, and Group 3 will include the students with low marks.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE7]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Output:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/46fd16d152cf0f8885394512de82bce4.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
 - en: The above example shows that all the rows are ordered by `final_marks` and divided
     into three groups containing five rows per group.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述示例显示所有行按 `final_marks` 排序，并分成三组，每组包含五行。
 - en: '`NTILE()` is useful when we want to divide some data into equal groups according
     to some specified criteria. It can be used in the applications like customer segmentation
     based on items purchased or categorizing employee performance, etc.'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '`NTILE()` 在我们想要根据某些指定的标准将数据分成相等的组时非常有用。它可以用于如根据购买的商品进行客户分割或对员工表现进行分类等应用。'
 - en: CUME_DIST()
+  id: totrans-58
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: CUME_DIST()
 - en: The `CUME_DIST()` function finds the cumulative distribution of a particular
     value in each row within a partition or order specified. Cumulative Distribution
     Function (CDF) denotes the probability that the random variable X is less than
     or equal to x. It is denoted by F(x), and its mathematical formula is represented
     as,
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '`CUME_DIST()` 函数计算每行在指定分区或排序中的特定值的累积分布。累积分布函数（CDF）表示随机变量 X 小于或等于 x 的概率。它用 F(x)
+    表示，其数学公式如下：'
 - en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/17036c11ae11d9ecac9ce6684b3e2949.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![数据库分析：利用 SQL 的分析函数](../Images/17036c11ae11d9ecac9ce6684b3e2949.png)'
 - en: P(x) is the Probability Distribution Function.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: P(x) 是概率分布函数。
 - en: In simple language, `CUME_DIST()` function returns the percentage of rows whose
     value is less than equal to the current row value. It will help to analyze the
     distribution of data and also the relative position of a value with the set.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单来说，`CUME_DIST()` 函数返回值小于或等于当前行值的行的百分比。这将有助于分析数据的分布及其在数据集中的相对位置。
 - en: '[PRE8]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '**Output:**'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出：**'
 - en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/558a725f23ad5dab291d060b534deb8d.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![数据库分析：利用 SQL 的分析函数](../Images/558a725f23ad5dab291d060b534deb8d.png)'
 - en: The above code will order all the rows based on `final_marks` and find the Cumulative
     Distribution, but if you want to partition the data based on the subjects, you
     can use the PARTITION BY clause. Below is an example of how to do it.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述代码将根据 `final_marks` 对所有行进行排序并计算累积分布，但如果你想根据科目对数据进行分区，你可以使用 PARTITION BY 子句。以下是如何操作的示例。
 - en: '[PRE9]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '**Output:**'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出：**'
 - en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/2997e0696d94e9394e5c221929737457.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![数据库分析：利用 SQL 的分析函数](../Images/2997e0696d94e9394e5c221929737457.png)'
 - en: In the above output, we have seen the cumulative distribution of `final_marks`
     partitioned by the subject name.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述输出中，我们已经看到 `final_marks` 按科目名称分区的累积分布。
 - en: STDDEV() and VARIANCE()
+  id: totrans-71
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: STDDEV() 和 VARIANCE()
 - en: The`VARIANCE()` function is used to find the variance of a given value within
     the partition. In statistics, Variance represents how a number is far from its
     mean value, or it represents the degree of spread between numbers. It is represented
     by ?^2.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '`VARIANCE()` 函数用于计算分区内给定值的方差。在统计学中，方差表示一个数值距离其均值的远近，或表示数字之间的离散程度。它的符号是 ?^2。'
 - en: The `STDDEV()` function is used to find the standard deviation of a given value
     within the partition. Standard Deviation also measures the variation in the data,
     and it equals the square root of the variance. It is represented by ?.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '`STDDEV()` 函数用于计算分区内给定值的标准偏差。标准偏差还衡量数据的变异程度，它等于方差的平方根。它的符号是 ?。'
 - en: These parameters can help us to find dispersion and variability in the data.
     Let’s see how can we do it practically.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些参数可以帮助我们找出数据的离散性和变异性。让我们看看如何实际操作。
 - en: '[PRE10]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'Output:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '![In-Database Analytics: Leveraging SQL''s Analytic Functions](../Images/3d65caf7f43247b4361270860c25851f.png)'
+  id: totrans-77
   prefs: []
   type: TYPE_IMG
+  zh: '![数据库分析：利用 SQL 的分析函数](../Images/3d65caf7f43247b4361270860c25851f.png)'
 - en: The above output shows the Standard Variation and the Variance of the final
     marks for each subject.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述输出显示了每个科目的最终成绩的标准差和方差。
 - en: FIRST_VALUE() and LAST_VALUE()
+  id: totrans-79
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: FIRST_VALUE() 和 LAST_VALUE()
 - en: The `FIRST_VALUE()` function will output the first value of a partition based
     on a specific ordering. Similarly, the `LAST_VALUE()` function will output the
     last value of that partition. These functions can be used when we want to identify
     the first and last occurrence of a specified partition.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '`FIRST_VALUE()` 函数将根据特定排序输出分区中的第一个值。类似地，`LAST_VALUE()` 函数将输出该分区中的最后一个值。当我们想要识别指定分区的第一个和最后一个出现的值时，可以使用这些函数。'
 - en: 'Syntax:'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 语法：
 - en: '[PRE11]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Conclusion
+  id: totrans-83
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: SQL Analytic Functions provide us with the functions to perform data analysis
     within the SQL server. Using these functions, we can unlock the true potential
     of the data and get valuable insights from it to increase our business. Other
@@ -336,39 +486,57 @@
     may solve your complex problems very quickly. You can read more about these Analytical
     Functions from [this](https://learn.microsoft.com/en-us/sql/t-sql/functions/analytic-functions-transact-sql?view=sql-server-ver16)
     article by Microsoft.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: SQL分析函数为我们提供了在SQL服务器中执行数据分析的功能。使用这些函数，我们可以释放数据的真正潜力，从中获取有价值的洞察以提升我们的业务。除了上述讨论的函数，还有许多其他优秀的函数可以非常快速地解决复杂问题。你可以从[这篇](https://learn.microsoft.com/en-us/sql/t-sql/functions/analytic-functions-transact-sql?view=sql-server-ver16)微软的文章中深入了解这些分析函数。
 - en: '**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)** is a B.Tech.
     Electrical Engineering student, currently in the final year of his undergrad.
     His interest lies in the field of Web Development and Machine Learning. He have
     pursued this interest and am eager to work more in these directions.'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)** 是一名电气工程本科生，目前处于最后一年。他对网页开发和机器学习领域充满兴趣。他已追求这一兴趣，并渴望在这些方向上继续发展。'
 - en: More On This Topic
+  id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[SQL For Data Science: Understanding and Leveraging Joins](https://www.kdnuggets.com/2023/08/sql-data-science-understanding-leveraging-joins.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL数据科学：理解和利用联接](https://www.kdnuggets.com/2023/08/sql-data-science-understanding-leveraging-joins.html)'
 - en: '[Leveraging GPT Models to Transform Natural Language to SQL Queries](https://www.kdnuggets.com/leveraging-gpt-models-to-transform-natural-language-to-sql-queries)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用GPT模型将自然语言转换为SQL查询](https://www.kdnuggets.com/leveraging-gpt-models-to-transform-natural-language-to-sql-queries)'
 - en: '[Free SQL and Database Course](https://www.kdnuggets.com/2022/09/free-sql-database-course.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[免费SQL和数据库课程](https://www.kdnuggets.com/2022/09/free-sql-database-course.html)'
 - en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据库优化：探索SQL中的索引](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
 - en: '[KDnuggets News, September 21: 7 Machine Learning Portfolio Projects…](https://www.kdnuggets.com/2022/n37.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets新闻，9月21日：7个机器学习作品集项目……](https://www.kdnuggets.com/2022/n37.html)'
 - en: '[Back to Basics Week 2: Database, SQL, Data Management and…](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基础回顾第2周：数据库、SQL、数据管理及……](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)'

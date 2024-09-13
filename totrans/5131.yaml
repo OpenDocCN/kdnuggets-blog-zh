@@ -1,337 +1,518 @@
 - en: 'Database Optimization: Exploring Indexes in SQL'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据库优化：探索SQL中的索引
 - en: 原文：[https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)
 - en: '![Database Optimization: Exploring Indexes in SQL](../Images/8f24e8e8ded8676df58f2a7ab39f3311.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![数据库优化：探索SQL中的索引](../Images/8f24e8e8ded8676df58f2a7ab39f3311.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: While searching for a particular topic in a book, we will first visit the index
     page (which is present at the start of that book) and find which page number contains
     our topic of interest. Now, imagine how inconvenient it is to find a particular
     topic in a book without the index page. For this, we have to search every page
     in the book, which is very time-consuming and frustrating.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在书中寻找特定主题时，我们会先查看索引页（位于书的开头），找出包含我们感兴趣主题的页码。现在，想象一下没有索引页的情况下查找书中的特定主题是多么不便。为此，我们不得不逐页搜索，这既耗时又令人沮丧。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析能力。'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织IT工作。'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: A similar issue also occurs in SQL Server when it retrieves data from the database.
     To overcome this, SQL server also uses indexing which speeds up the data retrieval
     process, and in this article, we will cover that part. We will cover why indexing
     is needed and how we can effectively create and delete indexes. The prerequisite
     of this tutorial is the basic knowledge of SQL commands.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在SQL Server检索数据时，也会出现类似的问题。为了解决这个问题，SQL Server也使用索引来加快数据检索过程，在这篇文章中我们将讨论这一部分。我们将讨论为什么需要索引以及如何有效地创建和删除索引。本教程的前提是对SQL命令的基本了解。
 - en: What is Indexing?
+  id: totrans-12
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是索引？
 - en: Indexing is a schema object that uses a pointer to retrieve data from the rows,
     which reduces the I/O(Input/Output) time to locate the data. Indexing can be applied
     to one or more columns we want to search. They store the column in a separate
     data structure called [**B-Tree**](https://en.wikipedia.org/wiki/B-tree#:~:text=A%20B%2Dtree%20index%20creates,pages%20at%20the%20lowest%20level.).
     One of the main advantages of B-Tree is that it stores the data in sorted order.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 索引是一种模式对象，使用指针从行中检索数据，从而减少定位数据的I/O（输入/输出）时间。索引可以应用于一个或多个我们希望搜索的列。它们将列存储在一个称为[**B-Tree**](https://en.wikipedia.org/wiki/B-tree#:~:text=A%20B%2Dtree%20index%20creates,pages%20at%20the%20lowest%20level.)的单独数据结构中。B-Tree的主要优点之一是它将数据按排序顺序存储。
 - en: If you are wondering why the data can be retrieved faster if it is sorted, then
     you must read about [Linear Search vs Binary Search](https://www.javatpoint.com/ds-linear-search-vs-binary-search).
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想知道为什么排序后的数据可以更快地检索，你必须阅读[线性搜索与二分搜索](https://www.javatpoint.com/ds-linear-search-vs-binary-search)。
 - en: Indexing is one of the most famous methods to improve the performance of SQL
     queries. They are small, fast and remarkably optimized for relational tables.
     When we want to search a row without indexing, the SQL performs a full-table scan
     linearly. In other words, SQL has to scan every row to find the matching conditions,
     which is very time-consuming. On the other hand, indexing keeps the data sorted,
     as discussed above.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 索引是提升SQL查询性能的最著名方法之一。它们小巧、快速，并且针对关系表进行了显著优化。当我们希望在没有索引的情况下搜索一行时，SQL会执行全表扫描，逐行扫描每一行以找到匹配条件，这非常耗时。另一方面，如前所述，索引保持数据排序。
 - en: But we should also be careful, indexing creates a separate data structure which
     requires extra space, and that can become problematic when the database is large.
     For good practice, indexing is effective only on frequently used columns and can
     be avoided on rarely used columns. Below are some scenarios in which indexing
     might be helpful,
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是我们也应该小心，索引创建了一个单独的数据结构，这需要额外的空间，当数据库很大时，这可能会成为一个问题。为了良好的实践，索引仅对经常使用的列有效，而对于很少使用的列可以避免使用。以下是一些索引可能有用的场景，
 - en: Number of rows must be (>10000).
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 行数必须大于（>10000）。
 - en: The required column contains a large number of values.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 所需的列包含大量值。
 - en: The required column must not contain a large number of NULL values.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 所需的列不能包含大量的NULL值。
 - en: It is helpful if we frequently sort or group data based on particular columns.
     Indexing quickly retrieves the sorted data rather than performing a full scan.
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果我们经常基于特定列对数据进行排序或分组，索引可以快速检索排序后的数据，而不是进行全表扫描。
 - en: And indexing can be avoided when,
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 并且在以下情况下可以避免使用索引，
 - en: The table is small.
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 表很小。
 - en: Or when the values of the column are rarely used.
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 或者当列的值很少使用时。
 - en: Or when the values of the columns are frequently changing.
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 或者当列的值经常变化时。
 - en: There may also be a chance when the optimizer detects that a full-table scan
     takes less time than the indexed table, then the indexing may not be used, even
     if it exists. This can happen when the table is small, or the column is frequently
     updated.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 也可能有一种情况，当优化器检测到全表扫描比索引表花费的时间更少时，即使存在索引，索引也可能不会被使用。这种情况可能发生在表很小或者列经常更新时。
 - en: Creating Sample Database
+  id: totrans-26
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 创建示例数据库
 - en: Before starting, you must set up MySQL Workbench on your PC to easily follow
     the tutorial. You can refer to [this](https://www.youtube.com/watch?v=GwHpIl0vqY4&ab_channel=AmitThinks)
     youtube video for setting up your workbench.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开始之前，你必须在PC上设置MySQL Workbench，以便轻松跟随教程。你可以参考[这个](https://www.youtube.com/watch?v=GwHpIl0vqY4&ab_channel=AmitThinks)
+    YouTube视频来设置你的工作台。
 - en: After setting up your workbench, we will create some random data from which
     we can execute our queries.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 设置好工作台后，我们将创建一些随机数据，从中执行查询。
 - en: '**Creating Table:**'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**创建表：**'
 - en: '[PRE0]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '**Inserting Data:**'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**插入数据：**'
 - en: '[PRE1]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: It will create a table named `employee_info` having attributes like name, age
     and email.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 它将创建一个名为`employee_info`的表，具有名称、年龄和电子邮件等属性。
 - en: '**Show the Data:**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**显示数据：**'
 - en: '[PRE2]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Output:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '![Database Optimization: Exploring Indexes in SQL](../Images/23f9cc00fa11f0261497c54e161cf30b.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![数据库优化：探索SQL中的索引](../Images/23f9cc00fa11f0261497c54e161cf30b.png)'
 - en: Fig. 1 Sample Database | Image by Author
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 1 示例数据库 | 图片来源：作者
 - en: Creating and Deleting an Index
+  id: totrans-39
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 创建和删除索引
 - en: For creating an index, we can use the CREATE command like that,
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了创建索引，我们可以使用如下的CREATE命令，
 - en: 'Syntax:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 语法：
 - en: '[PRE3]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: In the above query, `index_name` is the name of the index, `table_name` is the
     name of the table and the `column_name` is the name of the column on which we
     want to apply indexing.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述查询中，`index_name`是索引的名称，`table_name`是表的名称，`column_name`是我们要应用索引的列名称。
 - en: Ex-
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如
 - en: '[PRE4]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: We can also create indexes for multiple columns in the same table,
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以为同一表中的多个列创建索引，
 - en: '[PRE5]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '**Unique Index:** We can also create a unique index for a particular column
     that doesn’t allow duplicate values to be stored in that column. This maintains
     the integrity of the data and also further improves the performance.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**唯一索引：** 我们还可以为特定列创建唯一索引，这不允许在该列中存储重复值。这可以维护数据的完整性，并进一步提高性能。'
 - en: '[PRE6]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '**Note:** Indexes can be automatically created for PRIMARY_KEY and UNIQUE columns.
     We don''t have to create them manually.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：** 索引可以自动为PRIMARY_KEY和UNIQUE列创建。我们不需要手动创建它们。'
 - en: '**Deleting an Index:**'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**删除索引：**'
 - en: We can use the DROP command to delete a particular index from the table.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用DROP命令从表中删除特定的索引。
 - en: '[PRE7]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: We need to specify the index and table names to delete the index.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要指定索引和表的名称以删除索引。
 - en: '**Show Indexes:**'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '**显示索引：**'
 - en: You can also see all the indexes present in your table.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以查看表中存在的所有索引。
 - en: 'Syntax:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 语法：
 - en: '[PRE8]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Ex-
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如
 - en: '[PRE9]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'Output:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '![Database Optimization: Exploring Indexes in SQL](../Images/cf61de5a41b2b6660af55c2f95f35b27.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![数据库优化：探索SQL中的索引](../Images/cf61de5a41b2b6660af55c2f95f35b27.png)'
 - en: Updating an Index
+  id: totrans-63
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 更新索引
 - en: The below command creates a new index in the existing table.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下命令在现有表中创建一个新索引。
 - en: 'Syntax:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 语法：
 - en: '[PRE10]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '**Note:** The ALTER is not a standard command of ANSI SQL. So it may vary among
     other databases.'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：** ALTER 不是ANSI SQL的标准命令。因此，它可能在其他数据库中有所不同。'
 - en: For ex-
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如
 - en: '[PRE11]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Output:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '![Database Optimization: Exploring Indexes in SQL](../Images/c82b61b7132d7ee034165739dbaaa2d4.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![数据库优化：探索 SQL 索引](../Images/c82b61b7132d7ee034165739dbaaa2d4.png)'
 - en: In the above example, we have created a new index in the existing table. But
     we cannot modify an existing index. For this, we must first drop the old index
     and then create a new modified one.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上面的示例中，我们在现有表中创建了一个新索引。但我们无法修改现有索引。为此，我们必须首先删除旧索引，然后创建一个新的修改版索引。
 - en: For ex-
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如：
 - en: '[PRE12]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'Output:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出：
 - en: '![Database Optimization: Exploring Indexes in SQL](../Images/3686af726168caf139980d8578c871dc.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![数据库优化：探索 SQL 索引](../Images/3686af726168caf139980d8578c871dc.png)'
 - en: Wrapping it Up
+  id: totrans-77
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 总结一下
 - en: In this article, we have covered a basic understanding of SQL Indexing. It is
     also advised to keep indexing narrow, i.e., limited to a few columns, because
     more indexing can negatively impact performance. Indexing speeds us the SELECT
     queries and WHERE clause but slows down the insert and update statements. Therefore,
     applying indexing only on the frequently used columns is a good practice.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们涵盖了 SQL 索引的基本理解。还建议将索引保持狭窄，即仅限于少数几列，因为过多的索引可能会对性能产生负面影响。索引可以加快`SELECT`查询和`WHERE`子句，但会减慢插入和更新语句。因此，只对经常使用的列应用索引是一个好的做法。
 - en: Until then, keep reading and keep learning.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 在此之前，请继续阅读和学习。
 - en: '**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)** is a B.Tech.
     Electrical Engineering student, currently in the final year of his undergrad.
     His interest lies in the field of Web Development and Machine Learning. He have
     pursued this interest and am eager to work more in these directions.'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)** 是一名 B.Tech
+    电气工程专业的学生，目前在本科最后一年。他的兴趣领域包括网页开发和机器学习。他一直在追求这些兴趣，并渴望在这些方向上进一步发展。'
 - en: More On This Topic
+  id: totrans-81
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[How To Speed Up SQL Queries Using Indexes [Python Edition]](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用索引加速 SQL 查询 [Python 版]](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)'
 - en: '[Python Vector Databases and Vector Indexes: Architecting LLM Apps](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 向量数据库和向量索引：架构 LLM 应用](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)'
 - en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 查询优化技术](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
 - en: '[Free SQL and Database Course](https://www.kdnuggets.com/2022/09/free-sql-database-course.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[免费 SQL 和数据库课程](https://www.kdnuggets.com/2022/09/free-sql-database-course.html)'
 - en: '[In-Database Analytics: Leveraging SQL''s Analytic Functions](https://www.kdnuggets.com/2023/07/indatabase-analytics-leveraging-sql-analytic-functions.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据库内分析：利用 SQL 的分析功能](https://www.kdnuggets.com/2023/07/indatabase-analytics-leveraging-sql-analytic-functions.html)'
 - en: '[KDnuggets News, September 21: 7 Machine Learning Portfolio Projects…](https://www.kdnuggets.com/2022/n37.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，9月21日：7个机器学习项目集…](https://www.kdnuggets.com/2022/n37.html)'
