@@ -1,191 +1,293 @@
 - en: How To Trace Memory Allocation in Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何跟踪 Python 中的内存分配
 - en: 原文：[https://www.kdnuggets.com/how-to-trace-memory-allocation-in-python](https://www.kdnuggets.com/how-to-trace-memory-allocation-in-python)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/how-to-trace-memory-allocation-in-python](https://www.kdnuggets.com/how-to-trace-memory-allocation-in-python)
 - en: '![How To Trace Memory Allocation in Python](../Images/481bb88f07de623188f862389f04cc66.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![如何跟踪 Python 中的内存分配](../Images/481bb88f07de623188f862389f04cc66.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: When coding in Python, you don’t usually have to wrap your head around the details
     of memory allocation. But tracing memory allocation can be helpful, especially
     if you’re working with memory-intensive operations and large datasets.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Python 编码时，通常无需过多考虑内存分配的细节。但跟踪内存分配可能很有帮助，特别是当您处理内存密集型操作和大型数据集时。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Python’s [built-in tracemalloc module](https://docs.python.org/3/library/tracemalloc.html)
     comes with functions that’ll help you understand memory usage and debug applications.
     With tracemalloc, you can get where and how many blocks of memory have been allocated,
     take snapshots, compare differences between snapshots, and more.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 的 [内置 tracemalloc 模块](https://docs.python.org/3/library/tracemalloc.html)
+    提供了一些功能，帮助您理解内存使用情况并调试应用程序。使用 tracemalloc，您可以获取内存分配的位置和数量，拍摄快照，比较快照之间的差异等。
 - en: We’ll look at some of these in this tutorial. Let’s get started.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将在本教程中查看一些这些内容。让我们开始吧。
 - en: Before You Begin
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 开始之前
 - en: We’ll use a simple Python script for data processing. For this, we’ll create
     a sample dataset and process it. Besides a recent version of Python, you also
     need pandas and NumPy in your working environment.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用一个简单的 Python 脚本进行数据处理。为此，我们将创建一个示例数据集并进行处理。除了最新版本的 Python，您还需要在工作环境中安装
+    pandas 和 NumPy。
 - en: 'Create a virtual environment and activate it:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个虚拟环境并激活它：
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'And install the required libraries:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 并安装所需的库：
 - en: '[PRE1]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: You can find the code for this tutorial [on GitHub](https://github.com/balapriyac/python-basics/tree/main/tracemalloc-tutorial).
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 您可以在[GitHub](https://github.com/balapriyac/python-basics/tree/main/tracemalloc-tutorial)找到本教程的代码。
 - en: Create a Sample Dataset with Order Details
+  id: totrans-20
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 创建一个包含订单详情的示例数据集
 - en: 'We''ll generate a sample CSV file with order details. You can run the following
     script to create a CSV file with 100K order records:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将生成一个包含订单详情的示例 CSV 文件。您可以运行以下脚本来创建一个包含 100K 订单记录的 CSV 文件：
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'This script populates a pandas dataframe with 100K records with the following
     four features, and exports the dataframe to a CSV file:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 此脚本将 100K 条记录填充到 pandas 数据框中，具有以下四个特征，并将数据框导出为 CSV 文件：
 - en: '**OrderID**: Unique identifier for each order'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**OrderID**: 每个订单的唯一标识符'
 - en: '**CustomerID**: ID for the customer'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**CustomerID**: 客户的 ID'
 - en: '**OrderAmount**: The amount of each order'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**OrderAmount**: 每个订单的金额'
 - en: '**OrderDate**: The date and time of the order'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**OrderDate**: 订单的日期和时间'
 - en: Trace Memory Allocation with tracemalloc
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用 tracemalloc 跟踪内存分配
 - en: Now we’ll create a Python script to load and process the dataset. We’ll also
     trace memory allocations.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将创建一个 Python 脚本来加载和处理数据集。我们还将跟踪内存分配。
 - en: 'First, we define functions `load_data` and `process_data` to load and process
     records from the CSV file:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们定义 `load_data` 和 `process_data` 函数来加载和处理来自 CSV 文件的记录：
 - en: '[PRE3]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'We can then go ahead with tracing memory allocation by doing the following:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们可以通过以下步骤继续进行内存分配跟踪：
 - en: Initialize the memory tracing with `tracemalloc.start()`.
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`tracemalloc.start()`初始化内存跟踪。
 - en: The `load_data()` function reads the CSV file into a dataframe. We take a snapshot
     of memory usage after this step.
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`load_data()` 函数将 CSV 文件读入数据框。我们在此步骤之后拍摄内存使用快照。'
 - en: 'The `process_data()` function adds two new columns to the dataframe: ''DiscountedAmount''
     and ''OrderYear''. We take another snapshot after processing.'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`process_data()` 函数向数据框添加了两个新列：''DiscountedAmount'' 和 ''OrderYear''。处理后我们再拍摄一个快照。'
 - en: We compare the two snapshots to find memory usage differences and print out
     the top memory-consuming lines.
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们比较这两个快照以找出内存使用差异，并打印出最耗内存的行。
 - en: And then print the current and peak memory usage to understand the overall impact.
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 然后打印当前和峰值内存使用情况，以了解整体影响。
 - en: 'Here''s the corresponding code:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是对应的代码：
 - en: '[PRE4]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Now run the Python script:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在运行 Python 脚本：
 - en: '[PRE5]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'This outputs the top memory-consuming lines as well as the current and peak
     memory usage:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将输出最耗内存的行以及当前和峰值内存使用情况：
 - en: '[PRE6]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Wrapping Up
+  id: totrans-44
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 总结
 - en: Using tracemalloc to trace memory allocation helps identify memory-intensive
     operations and potentially optimize performance using the memory trace and statistics
     returned.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 tracemalloc 跟踪内存分配有助于识别内存密集型操作，并通过内存跟踪和返回的统计信息潜在地优化性能。
 - en: You should be able to see if you can use more efficient data structures and
     processing methods to minimize memory usage. For long-running applications, you
     can use tracemalloc periodically to track memory usage. That said, you can always
     use tracemalloc in conjunction with other profiling tools to get a comprehensive
     view of memory usage.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 你应该能看到是否可以使用更高效的数据结构和处理方法来减少内存使用。对于长时间运行的应用程序，你可以定期使用 tracemalloc 来跟踪内存使用情况。也就是说，你可以将
+    tracemalloc 与其他分析工具结合使用，以全面了解内存使用情况。
 - en: If you’re interested in learning memory profiling with memory-profiler, read
     [Introduction to Memory Profiling in Python](https://www.kdnuggets.com/introduction-to-memory-profiling-in-python).
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有兴趣学习使用 memory-profiler 进行内存分析，请阅读 [Python 中的内存分析简介](https://www.kdnuggets.com/introduction-to-memory-profiling-in-python)。
 - en: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
     is a developer and technical writer from India. She likes working at the intersection
     of math, programming, data science, and content creation. Her areas of interest
@@ -194,33 +296,51 @@
     and sharing her knowledge with the developer community by authoring tutorials,
     how-to guides, opinion pieces, and more. Bala also creates engaging resource overviews
     and coding tutorials.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
+    是来自印度的开发人员和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和咖啡！目前，她正在通过编写教程、操作指南、观点文章等与开发者社区分享她的知识。Bala
+    还创建了引人入胜的资源概述和编码教程。'
 - en: More On This Topic
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Introduction to Memory Profiling in Python](https://www.kdnuggets.com/introduction-to-memory-profiling-in-python)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的内存分析简介](https://www.kdnuggets.com/introduction-to-memory-profiling-in-python)'
 - en: '[How to Perform Memory-Efficient Operations on Large Datasets with Pandas](https://www.kdnuggets.com/how-to-perform-memory-efficient-operations-on-large-datasets-with-pandas)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在 Pandas 中对大型数据集执行内存高效操作](https://www.kdnuggets.com/how-to-perform-memory-efficient-operations-on-large-datasets-with-pandas)'
 - en: '[Memory Complexity with Transformers](https://www.kdnuggets.com/2022/12/memory-complexity-transformers.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[变压器的内存复杂性](https://www.kdnuggets.com/2022/12/memory-complexity-transformers.html)'
 - en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化 Python 代码性能：深入探讨 Python 性能分析器](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
 - en: '[Python Enum: How To Build Enumerations in Python](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python Enum：如何在 Python 中构建枚举](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)'
 - en: '[Step up your Python game with Fast Python for Data Science!](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过快速 Python 提升你的 Python 技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
