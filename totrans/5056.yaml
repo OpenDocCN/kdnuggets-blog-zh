@@ -1,228 +1,353 @@
 - en: 'Python Data Science with Pandas vs Spark DataFrame: Key Differences'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python数据科学中的Pandas与Spark DataFrame：关键区别
 - en: 原文：[https://www.kdnuggets.com/2016/01/python-data-science-pandas-spark-dataframe-differences.html](https://www.kdnuggets.com/2016/01/python-data-science-pandas-spark-dataframe-differences.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/01/python-data-science-pandas-spark-dataframe-differences.html](https://www.kdnuggets.com/2016/01/python-data-science-pandas-spark-dataframe-differences.html)
 - en: '**By Christophe Bourguignat**.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Christophe Bourguignat**。'
 - en: '*Editor''s note: click images of code to enlarge.*'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '*编辑者注：点击代码图片以放大。*'
 - en: With 1.4 version improvements, [Spark DataFrames](https://databricks.com/blog/2015/02/17/introducing-dataframes-in-spark-for-large-scale-data-science.html)
     could become the new Pandas, making *ancestral* [RDDs look like Bytecode](https://ogirardot.wordpress.com/2015/05/29/rdds-are-the-new-bytecode-of-apache-spark/).
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着1.4版本的改进，[Spark DataFrames](https://databricks.com/blog/2015/02/17/introducing-dataframes-in-spark-for-large-scale-data-science.html)可能会成为新的Pandas，使*祖先*
+    [RDDs看起来像字节码](https://ogirardot.wordpress.com/2015/05/29/rdds-are-the-new-bytecode-of-apache-spark/)。
 - en: 'I use heavily Pandas (and Scikit-learn) for Kaggle competitions. **Nobody won
     a Kaggle challenge with Spark yet**, but I’m convinced it will happen. That’s
     why it’s time to prepare the future, and start using it. Spark DataFrames are
     available in the [pyspark.sql](http://spark.apache.org/docs/latest/api/python/pyspark.sql.html)
     package (strange, and historical name: it’s no more only about SQL!).'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在Kaggle竞赛中大量使用Pandas（和Scikit-learn）。**迄今为止没有人用Spark赢得Kaggle挑战**，但我相信这会发生。因此，现在是准备未来并开始使用它的时候了。Spark
+    DataFrames可以在[pyspark.sql](http://spark.apache.org/docs/latest/api/python/pyspark.sql.html)包中找到（名字奇怪且历史悠久：现在不仅仅是关于SQL！）。
 - en: I’m not a Spark specialist at all, but here are a few things I noticed when
     I had a first try. On my GitHub, you can find the [IPython Notebook companion](https://github.com/christophebourguignat/notebooks/blob/master/Spark-Pandas-Differences.ipynb)
     of this post.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我并不是一个Spark专家，但这是我初次尝试时注意到的一些事项。在我的GitHub上，你可以找到这篇文章的[IPython Notebook 伴侣](https://github.com/christophebourguignat/notebooks/blob/master/Spark-Pandas-Differences.ipynb)。
 - en: '**Reading**'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '**读取**'
 - en: With Pandas, you easily read CSV files with *read_csv()*.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用Pandas，你可以轻松读取CSV文件，使用*read_csv()*。
 - en: Out of the box, Spark DataFrame supports reading data from popular *professional*
     formats, like JSON files, Parquet files, Hive table — be it from local file systems,
     distributed file systems (HDFS), cloud storage (S3), or external relational database
     systems.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下，Spark DataFrame支持从流行的*专业*格式中读取数据，如JSON文件、Parquet文件、Hive表——无论是从本地文件系统、分布式文件系统（HDFS）、云存储（S3）还是外部关系数据库系统。
 - en: '![Formats supported by Spark DataFrames](../Images/6c9e9ab0c93a7312d3ef5c50a3713940.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![Spark DataFrames支持的格式](../Images/6c9e9ab0c93a7312d3ef5c50a3713940.png)'
 - en: 'But **CSV is not supported natively by Spark**. You have to use a separate
     library: [spark-csv](https://github.com/databricks/spark-csv).'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 但**CSV在Spark中不被原生支持**。你需要使用一个单独的库：[spark-csv](https://github.com/databricks/spark-csv)。
 - en: '[PRE0]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '**Counting**'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**计数**'
 - en: '*sparkDF.count()* and *pandasDF.count()* are not the exactly the same.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '*sparkDF.count()* 和 *pandasDF.count()* 并不完全相同。'
 - en: The first one returns the **number of rows**, and the second one returns the
     **number of non NA/null** observations for each column.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个返回**行数**，第二个返回每列的**非NA/null**观测值数量。
 - en: Not that Spark doesn’t support *.shape* yet — very often used in Pandas.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 并不是说Spark还不支持*.shape*——在Pandas中经常使用。
 - en: '[![Spark and Pandas dataframe count() in action](../Images/e395afc8765755f63b48ded44e65a0ae.png)](https://cdn-images-1.medium.com/max/1200/1*WP-g74PW3FLVYBMBtIaB6g.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![Spark和Pandas dataframe count()的效果](../Images/e395afc8765755f63b48ded44e65a0ae.png)](https://cdn-images-1.medium.com/max/1200/1*WP-g74PW3FLVYBMBtIaB6g.png)'
 - en: '**Viewing**'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**查看**'
 - en: In Pandas, to have a tabular view of the content of a DataFrame, you typically
     use *pandasDF.head(5)*, or *pandasDF.tail(5)*. In IPython Notebooks, it displays
     a nice array with continuous borders.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Pandas中，要查看DataFrame的表格内容，通常使用*pandasDF.head(5)*或*pandasDF.tail(5)*。在IPython
+    Notebooks中，它会显示一个带有连续边框的漂亮数组。
 - en: In Spark, you have *sparkDF.head(5)*, but it has an **ugly output**. You should
     prefer *sparkDF.show(5)*. Note that you cannot view the last lines (*.tail()*
     does no exist yet, because long to do in distributed environment).
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Spark中，你可以使用*sparkDF.head(5)*，但它有**难看的输出**。你应该更倾向于使用*sparkDF.show(5)*。注意你不能查看最后几行（*.tail()*
+    尚不存在，因为在分布式环境中难以实现）。
 - en: '[![Spark and Pandas dataframe head() in action](../Images/e1513d3549808d9d2c44b18718d49ab5.png)](https://cdn-images-1.medium.com/max/1200/1*12a6Jv_11QXHA2F96KkE2A.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![Spark和Pandas dataframe head()的效果](../Images/e1513d3549808d9d2c44b18718d49ab5.png)](https://cdn-images-1.medium.com/max/1200/1*12a6Jv_11QXHA2F96KkE2A.png)'
 - en: '**Inferring Types**'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**推断类型**'
 - en: 'With Pandas, you rarely have to bother with types: they are **inferred for
     you**.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Pandas 中，你很少需要处理类型：**类型会被推断出来**。
 - en: With Spark DataFrames loaded from CSV files, **default types are assumed to
     be “strings”**.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用从 CSV 文件加载的 Spark DataFrames 时，**默认假设类型为“字符串”**。
 - en: 'EDIT: in spark-csv, there is a ‘inferSchema’ option (disabled by default),
     but I didn’t manage to make it work. [It doesn’t seem to be functional](https://github.com/databricks/spark-csv/issues/110)
     in the 1.1.0 version.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 编辑：在 spark-csv 中，有一个 'inferSchema' 选项（默认禁用），但我没有设法让它工作。[它似乎在 1.1.0 版本中不起作用](https://github.com/databricks/spark-csv/issues/110)。
 - en: '[![Spark and Pandas dataframe schema and dtypes comparison](../Images/6bc0a19ca0e12158c40509f70d5018ab.png)](https://cdn-images-1.medium.com/max/1200/1*PPjnVL7LfKI_afvJ8T-kJQ.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![Spark and Pandas dataframe schema and dtypes comparison](../Images/6bc0a19ca0e12158c40509f70d5018ab.png)](https://cdn-images-1.medium.com/max/1200/1*PPjnVL7LfKI_afvJ8T-kJQ.png)'
 - en: To change types with Spark, you can use the *.cast()* method, or equivalently
     *.astype()*, which is [an alias gently created for those like me](https://issues.apache.org/jira/browse/SPARK-7394)
     coming from the Pandas world ;). Note that you must **create a new column, and
     drop the old one** ([some improvements exist to allow “in place”-like changes](https://issues.apache.org/jira/browse/SPARK-6635),
     but it is not yet available with the Python API).
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在 Spark 中更改类型，你可以使用 *.cast()* 方法，或等效的 *.astype()* 方法，这[是为像我这样](https://issues.apache.org/jira/browse/SPARK-7394)来自
+    Pandas 世界的人创建的别名 ;)。注意，你必须**创建一个新列，并删除旧列**（[一些改进存在以允许类似“就地”更改](https://issues.apache.org/jira/browse/SPARK-6635)，但在
+    Python API 中尚不可用）。
 - en: '[![Spark dataframe types](../Images/57c2c0df13aa50204958b910903fd0ff.png)](https://cdn-images-1.medium.com/max/1200/1*YZpC9yRc3_56iJF5aIdcSg.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![Spark dataframe types](../Images/57c2c0df13aa50204958b910903fd0ff.png)](https://cdn-images-1.medium.com/max/1200/1*YZpC9yRc3_56iJF5aIdcSg.png)'
 - en: '**Describing**'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**描述**'
 - en: 'In Pandas and Spark, *.describe()* generate various summary statistics. They
     give slightly different results for two reasons:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Pandas 和 Spark 中，*.describe()* 生成各种摘要统计信息。由于两个原因，它们给出的结果略有不同：
 - en: In Pandas, NaN values are excluded. In Spark, NaN values make that computation
     of mean and standard deviation fail
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 Pandas 中，NaN 值会被排除。在 Spark 中，NaN 值会导致均值和标准差的计算失败。
 - en: standard deviation is not computed in the same way. **Unbiased (or corrected)
     standard deviation** by default in Pandas, and **uncorrected standard** deviation
     in Spark. The difference is the [use of N-1 instead of N](https://en.wikipedia.org/wiki/Standard_deviation)
     on the denominator
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 标准差的计算方式不同。Pandas 默认使用**无偏（或修正）标准差**，而 Spark 使用**未经修正的标准差**。区别在于分母上[使用 N-1 而不是
+    N](https://en.wikipedia.org/wiki/Standard_deviation)。
 - en: '[![Dataframe describe() and show() in action](../Images/b0d1d6d67f33a8469787a9db4b253b91.png)](https://cdn-images-1.medium.com/max/1200/1*9zY5V2IiTQSvHEH2tkammw.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![Dataframe describe() and show() in action](../Images/b0d1d6d67f33a8469787a9db4b253b91.png)](https://cdn-images-1.medium.com/max/1200/1*9zY5V2IiTQSvHEH2tkammw.png)'
 - en: '**Wrangling**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**整理**'
 - en: In Machine Learning, it is usual to create new columns resulting from a calculus
     on already existing columns (features engineering).
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习中，通常会创建新的列，这些列是基于已存在的列（特征工程）的计算结果。
 - en: In Pandas, you can use the ‘[ ]’ operator. In Spark you can’t — DataFrames are
     immutable. You should use *.withColumn()*.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Pandas 中，你可以使用‘[ ]’运算符。在 Spark 中则不行——DataFrames 是不可变的。你应该使用 *.withColumn()*。
 - en: '[![Dataframe new columns](../Images/bee41a012ab249fa30a143e8a852af67.png)](https://cdn-images-1.medium.com/max/1200/1*sF5vRhyvFi0jGjDWqoyYRg.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![Dataframe new columns](../Images/bee41a012ab249fa30a143e8a852af67.png)](https://cdn-images-1.medium.com/max/1200/1*sF5vRhyvFi0jGjDWqoyYRg.png)'
 - en: '**Concluding**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**总结**'
 - en: Spark and Pandas DataFrames are very similar. Still, **Pandas API remains more
     convenient and powerful**  -  but the gap is **shrinking quickly**.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: Spark 和 Pandas DataFrames 非常相似。不过，**Pandas API 仍然更方便和强大**——但差距在**迅速缩小**。
 - en: Despite its intrinsic design constraints (immutability, distributed computation,
     lazy evaluation, ...), **Spark wants to mimic Pandas** as much as possible (up
     to the method names). My guess is that this goal will be achieved soon.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管 Spark 有其固有的设计限制（不可变性、分布式计算、惰性求值等），**Spark 仍然希望尽可能模仿 Pandas**（甚至方法名也不例外）。我猜这个目标很快就会实现。
 - en: And with [Spark.ml](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html),
     mimicking scikit-learn, Spark may become **the perfect one-stop-shop tool for
     industrialized Data Science**.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 并且使用[ Spark.ml](https://spark.apache.org/docs/latest/api/python/pyspark.ml.html)，模仿
+    scikit-learn，Spark 可能成为**工业化数据科学的完美一站式工具**。
 - en: Thanks to [Olivier Girardot](https://ogirardot.wordpress.com/) for helping to
     improve this post.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢[Olivier Girardot](https://ogirardot.wordpress.com/)帮助改进这篇文章。
 - en: 'EDIT 1: Olivier just released a new post giving more insights: [From Pandas
     To Apache Spark Dataframes](https://ogirardot.wordpress.com/2015/07/31/from-pandas-to-apache-sparks-dataframe/)'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 编辑 1：Olivier 刚发布了一篇新文章，提供了更多见解：[从 Pandas 到 Apache Spark DataFrames](https://ogirardot.wordpress.com/2015/07/31/from-pandas-to-apache-sparks-dataframe/)
 - en: 'EDIT 2: Here is another post on the same topic: [Pandarize Your Spark Dataframes](https://lab.getbase.com/pandarize-spark-dataframes/)'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 编辑 2：这是另一篇相关主题的文章：[Pandarize Your Spark Dataframes](https://lab.getbase.com/pandarize-spark-dataframes/)
 - en: '**Bio: [Christophe Bourguignat](https://twitter.com/chris_bour)** is a data
     fan, Kaggle master, blogger, and AXA Data Innovation Lab alumni.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Christophe Bourguignat](https://twitter.com/chris_bour)** 是数据爱好者、Kaggle
+    大师、博主以及 AXA 数据创新实验室的校友。'
 - en: '[Original](https://medium.com/@chris_bour/6-differences-between-pandas-and-spark-dataframes-1380cec394d2).
     Reposted with permission.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/@chris_bour/6-differences-between-pandas-and-spark-dataframes-1380cec394d2)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Spark 2015 Year In Review](/2016/01/spark-2015-year-in-review.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Spark 2015 年度回顾](/2016/01/spark-2015-year-in-review.html)'
 - en: '[Beginners Guide: Apache Spark Machine Learning with Large Data](/2015/11/petrov-apache-spark-machine-learning-large-data.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[初学者指南：使用 Apache Spark 进行大数据机器学习](/2015/11/petrov-apache-spark-machine-learning-large-data.html)'
 - en: '[7 Steps to Mastering Machine Learning With Python](/2015/11/seven-steps-machine-learning-python.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握 Python 机器学习的 7 个步骤](/2015/11/seven-steps-machine-learning-python.html)'
 - en: More On This Topic
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Random Forest vs Decision Tree: Key Differences](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[随机森林与决策树：关键区别](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
 - en: '[ChatGPT vs Google Bard: A Comparison of the Technical Differences](https://www.kdnuggets.com/2023/03/chatgpt-google-bard-comparison-technical-differences.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ChatGPT 与 Google Bard：技术差异对比](https://www.kdnuggets.com/2023/03/chatgpt-google-bard-comparison-technical-differences.html)'
 - en: '[Pandas vs. Polars: A Comparative Analysis of Python''s Dataframe Libraries](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Pandas 与 Polars：Python DataFrame 库的比较分析](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)'
 - en: '[How to Convert JSON Data into a DataFrame with Pandas](https://www.kdnuggets.com/how-to-convert-json-data-into-a-dataframe-with-pandas)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Pandas 将 JSON 数据转换为 DataFrame](https://www.kdnuggets.com/how-to-convert-json-data-into-a-dataframe-with-pandas)'
 - en: '[How to Process a DataFrame with Millions of Rows in Seconds](https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在几秒钟内处理包含百万行的 DataFrame](https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html)'
 - en: '[Unlocking Data Insights: Key Pandas Functions for Effective Analysis](https://www.kdnuggets.com/unlocking-data-insights-key-pandas-functions-for-effective-analysis)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[解锁数据洞察：有效分析的关键 Pandas 函数](https://www.kdnuggets.com/unlocking-data-insights-key-pandas-functions-for-effective-analysis)'
