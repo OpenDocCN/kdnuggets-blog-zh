@@ -1,651 +1,1036 @@
 - en: 'SQL Group By and Partition By Scenarios: When and How to Combine Data in Data
     Science'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SQL Group By 和 Partition By 场景：何时以及如何在数据科学中组合数据
 - en: 原文：[https://www.kdnuggets.com/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science](https://www.kdnuggets.com/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science](https://www.kdnuggets.com/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science)
 - en: '![SQL Group By and Partition By Scenarios: When and How to Combine Data in
     Data Science](../Images/b5b2d952dee44687f4b69129f0697533.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![SQL Group By 和 Partition By 场景：何时以及如何在数据科学中组合数据](../Images/b5b2d952dee44687f4b69129f0697533.png)'
 - en: Image by [Freepik](https://www.freepik.com/free-vector/abstract-technology-sql-illustration_21743443.htm#query=sql&position=14&from_view=search&track=sph&uuid=27f89b21-e929-4fca-80ed-4c8c1cefdaa0)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源 [Freepik](https://www.freepik.com/free-vector/abstract-technology-sql-illustration_21743443.htm#query=sql&position=14&from_view=search&track=sph&uuid=27f89b21-e929-4fca-80ed-4c8c1cefdaa0)
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织在IT领域'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: SQL (Structured Query Language) is a programming language used for managing
     and manipulating data. That is why SQL queries are very essential for interacting
     with databases in a structured and efficient manner.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: SQL（结构化查询语言）是一种用于管理和操作数据的编程语言。这就是为什么SQL查询对于以结构化和高效的方式与数据库交互非常重要。
 - en: Grouping in SQL serves as a powerful tool for organizing and analyzing data.
     It helps in extraction of meaningful insights and summaries from complex datasets.
     The best use case of grouping is to summarize and understand data characteristics,
     thus helping businesses in analytical and reporting tasks.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: SQL中的分组作为组织和分析数据的强大工具。它有助于从复杂的数据集中提取有意义的见解和摘要。分组的最佳使用案例是总结和理解数据特征，从而帮助企业进行分析和报告任务。
 - en: We generally have a lot of requirements where we need to combine the dataset
     records by common data to calculate statistics in the group. Most of these instances
     can be generalized into common scenarios. These scenarios can then be applied
     whenever a requirement of similar kind comes up.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们通常有很多需求，需要通过共同的数据组合数据集记录，以计算组中的统计信息。这些实例大多数可以归纳为常见的场景。这些场景可以在类似需求出现时应用。
 - en: 'SQL Clause: Group By'
+  id: totrans-14
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SQL子句：Group By
 - en: The GROUP BY clause in SQL is used for
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: SQL中的GROUP BY子句用于
 - en: grouping data on some columns
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 按某些列对数据进行分组
 - en: reducing the group to a single row
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将组缩减为一行
 - en: performing aggregation operations on other columns of the groups.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对其他列进行聚合操作。
 - en: Grouping Column = The value in the Grouping column should be same for all rows
     in the group
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 分组列 = 分组列中的值在组中的所有行应相同
 - en: Aggregation Column = Values in the Aggregation column are generally different
     over which a function is applied like sum, max etc.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 聚合列 = 聚合列中的值通常是对应用了函数（如sum、max等）的不同值。
 - en: The Aggregation column should not be the Grouping Column.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 聚合列不应为分组列。
 - en: 'Scenario 1: Grouping to find the sum of Total'
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 场景1：分组以查找总和
 - en: Let's say we want to calculate the total sales of every category in the sales
     table.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们想要计算销售表中每个类别的总销售额。
 - en: So, we will group by category and aggregate individual sales in every category.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，我们将按类别分组，并汇总每个类别的个体销售额。
 - en: '[PRE0]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Grouping column = category
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 分组列 = 类别
 - en: Aggregation column = amount
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 聚合列 = 数量
 - en: Aggregation function = sum()
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 聚合函数 = sum()
 - en: '| **category** | **sales** |'
+  id: totrans-29
   prefs: []
   type: TYPE_TB
+  zh: '| **类别** | **销售额** |'
 - en: '| toys | 10,700 |'
+  id: totrans-30
   prefs: []
   type: TYPE_TB
+  zh: '| 玩具 | 10,700 |'
 - en: '| books | 4,200 |'
+  id: totrans-31
   prefs: []
   type: TYPE_TB
+  zh: '| 书籍 | 4,200 |'
 - en: '| gym equipment | 2,000 |'
+  id: totrans-32
   prefs: []
   type: TYPE_TB
+  zh: '| 健身器材 | 2,000 |'
 - en: '| stationary | 1,400 |'
+  id: totrans-33
   prefs: []
   type: TYPE_TB
+  zh: '| 文具 | 1,400 |'
 - en: 'Scenario 2: Grouping to find Count'
+  id: totrans-34
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 场景2：分组以查找计数
 - en: Let’s say we want to calculate the count of employees in each department.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们想计算每个部门的员工数量。
 - en: In this case, we will group by the department and calculate the count of employees
     in every department.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，我们将按部门分组，并计算每个部门的员工数量。
 - en: '[PRE1]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Grouping column = department
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 分组列 = department
 - en: Aggregation column = empid
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 聚合列 = empid
 - en: Aggregation function = count
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 聚合函数 = count
 - en: '| **department** | **emp_count** |'
+  id: totrans-41
   prefs: []
   type: TYPE_TB
+  zh: '| **部门** | **员工数量** |'
 - en: '| finance | 7 |'
+  id: totrans-42
   prefs: []
   type: TYPE_TB
+  zh: '| finance | 7 |'
 - en: '| marketing | 12 |'
+  id: totrans-43
   prefs: []
   type: TYPE_TB
+  zh: '| marketing | 12 |'
 - en: '| technology | 20 |'
+  id: totrans-44
   prefs: []
   type: TYPE_TB
+  zh: '| technology | 20 |'
 - en: 'Scenario 3: Grouping to find the Average'
+  id: totrans-45
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '场景 3: 分组查找平均值'
 - en: Let’s say we want to calculate the average salary of employees in each department
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们想计算每个部门员工的平均工资
 - en: Similarly, we will again group them by department and calculate the average
     salaries of employees in every department separately.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 类似地，我们将再次按部门分组，并分别计算每个部门员工的平均工资。
 - en: '[PRE2]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Grouping column = department
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 分组列 = department
 - en: Aggregation column = salary
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 聚合列 = salary
 - en: Aggregation function = avg
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 聚合函数 = avg
 - en: '| **department** | **avg_salary** |'
+  id: totrans-52
   prefs: []
   type: TYPE_TB
+  zh: '| **部门** | **平均工资** |'
 - en: '| finance | 2,500 |'
+  id: totrans-53
   prefs: []
   type: TYPE_TB
+  zh: '| finance | 2,500 |'
 - en: '| marketing | 4,700 |'
+  id: totrans-54
   prefs: []
   type: TYPE_TB
+  zh: '| marketing | 4,700 |'
 - en: '| technology | 10,200 |'
+  id: totrans-55
   prefs: []
   type: TYPE_TB
+  zh: '| technology | 10,200 |'
 - en: 'Scenario 4: Grouping to find Maximum / Minimum'
+  id: totrans-56
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '场景 4: 分组查找最大值 / 最小值'
 - en: Let’s say we want to calculate the highest salary of employees in each department.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们想计算每个部门员工的最高工资。
 - en: We will group the departments and calculate the maximum salary in every department.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将按部门分组，并计算每个部门的最高工资。
 - en: '[PRE3]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Grouping column = department
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 分组列 = department
 - en: Aggregation column = salary
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 聚合列 = salary
 - en: Aggregation function = max
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 聚合函数 = max
 - en: '| **department** | **max_salary** |'
+  id: totrans-63
   prefs: []
   type: TYPE_TB
+  zh: '| **部门** | **最高工资** |'
 - en: '| finance | 4,000 |'
+  id: totrans-64
   prefs: []
   type: TYPE_TB
+  zh: '| finance | 4,000 |'
 - en: '| marketing | 9,000 |'
+  id: totrans-65
   prefs: []
   type: TYPE_TB
+  zh: '| marketing | 9,000 |'
 - en: '| technology | 12,000 |'
+  id: totrans-66
   prefs: []
   type: TYPE_TB
+  zh: '| technology | 12,000 |'
 - en: 'Scenario 5: Grouping to Find Duplicates'
+  id: totrans-67
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '场景 5: 分组查找重复项'
 - en: Let’s say we want to find duplicate or same customer names in our database.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们想找出数据库中重复或相同的客户姓名。
 - en: We will group by the customer name and use count as an aggregation function.
     Further we will use having a clause over the aggregation function to filter only
     those counts that are greater than one.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将按客户姓名分组，并使用 count 作为聚合函数。此外，我们将使用 having 子句对聚合函数进行筛选，只保留计数大于一的记录。
 - en: '[PRE4]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Grouping column = name
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 分组列 = name
 - en: Aggregation column = *
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 聚合列 = *
 - en: Aggregation function = count
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 聚合函数 = count
 - en: Having = filter condition to be applied over aggregation function
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: Having = 应用于聚合函数的筛选条件
 - en: '| **name** | **duplicate_count** |'
+  id: totrans-75
   prefs: []
   type: TYPE_TB
+  zh: '| **姓名** | **重复计数** |'
 - en: '| Jake Junning | 2 |'
+  id: totrans-76
   prefs: []
   type: TYPE_TB
+  zh: '| Jake Junning | 2 |'
 - en: '| Mary Moone | 3 |'
+  id: totrans-77
   prefs: []
   type: TYPE_TB
+  zh: '| Mary Moone | 3 |'
 - en: '| Peter Parker | 5 |'
+  id: totrans-78
   prefs: []
   type: TYPE_TB
+  zh: '| Peter Parker | 5 |'
 - en: '| Oliver Queen | 2 |'
+  id: totrans-79
   prefs: []
   type: TYPE_TB
+  zh: '| Oliver Queen | 2 |'
 - en: 'SQL Clause: Partition By'
+  id: totrans-80
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 'SQL 子句: Partition By'
 - en: The PARTITION BY clause in SQL is used for
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: SQL 中的 PARTITION BY 子句用于
 - en: grouping/partitioning data on some columns
+  id: totrans-82
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对某些列进行分组/分区数据
 - en: Individual rows are retained and **not** combined into one
+  id: totrans-83
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 单独的行被保留并**不**合并为一行
 - en: performing ranking and aggregation operations on other columns of the group/partition.
+  id: totrans-84
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在其他列上执行排名和聚合操作。
 - en: Partitioning column = we select a column on which we group the data. The data
     in the partition column must be the same for each group. If not specified, the
     complete table is considered as a single partition.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 分区列 = 我们选择一个列来对数据进行分组。每个分组中的分区列的数据必须相同。如果未指定，则整个表被视为一个单一的分区。
 - en: Ordering column = With each group created based on the Partitioning Column,
     we will order/sort the rows in the group
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 排序列 = 对于基于分区列创建的每个组，我们将对组中的行进行排序/排序
 - en: Ranking function = A ranking function or an aggregation function will be applied
     to the rows in the partition
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 排名函数 = 排名函数或聚合函数将应用于分区中的行
 - en: 'Scenario 6: Partitioning to find the Highest record in a Group'
+  id: totrans-88
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '场景 6: 分区查找组中最高记录'
 - en: Let’s say we want to calculate which book in every category has the highest
     sales - along with the amount that the top seller book has made.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们想计算每个类别中销售最高的书籍 - 以及这本畅销书所带来的金额。
 - en: In this case, we cannot use a group by clause - because grouping will reduce
     the records in every category to a single row.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，我们不能使用分组子句 - 因为分组会将每个类别中的记录减少为一行。
 - en: However, we need the record details such as book name, amount, etc., along with
     category to see which book has made the highest sales in each category.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，我们需要记录详细信息，如书名、金额等，以及类别，以查看每个类别中销售最高的书籍。
 - en: '[PRE5]'
+  id: totrans-92
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Partitioning column = category
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 分区列 = category
 - en: Ordering column = amount
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 排序列 = amount
 - en: Ranking function = row_number()
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 排名函数 = row_number()
 - en: This query gives us all the rows in the book_sales table, and the rows are ordered
     in every book category, with the highest-selling book as row number 1.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 此查询返回 book_sales 表中的所有行，并按每个书籍类别中的销售量排序，最高销售书籍排在第 1 行。
 - en: Now we need to filter only row number 1 rows to get the top-selling books in
     each category
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们需要筛选出只有行号 1 的行，以获取每个类别的畅销书
 - en: '[PRE6]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The above filter will give us only the top seller books in each category along
     with the sale amount each top-seller book has made.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述筛选将仅给出每个类别中的畅销书及其销售额。
 - en: '| **category** | **book_name** | **amount** |'
+  id: totrans-100
   prefs: []
   type: TYPE_TB
+  zh: '| **category** | **book_name** | **amount** |'
 - en: '| science | The hidden messages in water | 20,700 |'
+  id: totrans-101
   prefs: []
   type: TYPE_TB
+  zh: '| science | The hidden messages in water | 20,700 |'
 - en: '| fiction | Harry Potter | 50,600 |'
+  id: totrans-102
   prefs: []
   type: TYPE_TB
+  zh: '| fiction | Harry Potter | 50,600 |'
 - en: '| spirituality | Autobiography of a Yogi | 30,800 |'
+  id: totrans-103
   prefs: []
   type: TYPE_TB
+  zh: '| spirituality | Autobiography of a Yogi | 30,800 |'
 - en: '| self-help | The 5 Love Languages | 12,700 |'
+  id: totrans-104
   prefs: []
   type: TYPE_TB
+  zh: '| self-help | The 5 Love Languages | 12,700 |'
 - en: 'Scenario 7: Partitioning to Find Cumulative Totals in a Group'
+  id: totrans-105
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 场景 7：分区以查找组内累积总数
 - en: Let’s say we want to calculate the running total (cumulative total) of the sale
     as they are sold. We need a separate cumulative total for every product.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们想计算销售的运行总数（累积总数）。我们需要为每个产品单独计算累积总数。
 - en: We will partition by product_id and sort the partition by date
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将按照 product_id 进行分区，并按日期对分区进行排序
 - en: '[PRE7]'
+  id: totrans-108
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Partitioning column = product_id
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 分区列 = product_id
 - en: Ordering column = date
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 排序列 = date
 - en: Ranking function = sum()
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 排名函数 = sum()
 - en: '| **product_id** | **date** | **amount** | **running_total** |'
+  id: totrans-112
   prefs: []
   type: TYPE_TB
+  zh: '| **product_id** | **date** | **amount** | **running_total** |'
 - en: '| 1 | 2023-12-25 | 3,900 | 3,900 |'
+  id: totrans-113
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 2023-12-25 | 3,900 | 3,900 |'
 - en: '| 1 | 2023-12-24 | 3,000 | 6,900 |'
+  id: totrans-114
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 2023-12-24 | 3,000 | 6,900 |'
 - en: '| 1 | 2023-12-23 | 2,700 | 9,600 |'
+  id: totrans-115
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 2023-12-23 | 2,700 | 9,600 |'
 - en: '| 1 | 2023-12-22 | 1,800 | 11,400 |'
+  id: totrans-116
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 2023-12-22 | 1,800 | 11,400 |'
 - en: '| 2 | 2023-12-25 | 2,000 | 2,000 |'
+  id: totrans-117
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 2023-12-25 | 2,000 | 2,000 |'
 - en: '| 2 | 2023-12-24 | 1,000 | 3,000 |'
+  id: totrans-118
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 2023-12-24 | 1,000 | 3,000 |'
 - en: '| 2 | 2023-12-23 | 7,00 | 3,700 |'
+  id: totrans-119
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 2023-12-23 | 7,00 | 3,700 |'
 - en: '| 3 | 2023-12-25 | 1,500 | 1,500 |'
+  id: totrans-120
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 2023-12-25 | 1,500 | 1,500 |'
 - en: '| 3 | 2023-12-24 | 4,00 | 1,900 |'
+  id: totrans-121
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 2023-12-24 | 4,00 | 1,900 |'
 - en: 'Scenario 8: Partitioning to Compare Values within a Group'
+  id: totrans-122
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 场景 8：对比组内值的分区
 - en: Let’s say we want to compare the salary of every employee with the average salary
     of his department.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们想将每个员工的工资与其部门的平均工资进行比较。
 - en: So we will partition the employees based on department and find the average
     salary of each department.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将根据部门对员工进行分区，并计算每个部门的平均工资。
 - en: The average can be further easily subtracted from the employee's individual
     salary to calculate if employee's salary is higher or below the average.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 平均值还可以通过从员工个人工资中轻松减去来计算员工的工资是否高于或低于平均水平。
 - en: '[PRE8]'
+  id: totrans-126
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Partitioning column = department
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 分区列 = department
 - en: Ordering column = no order
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 排序列 = 无排序
 - en: Ranking function = avg()
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: 排名函数 = avg()
 - en: '| **employee_id** | **salary** | **department** | **avg_dept_sal** |'
+  id: totrans-130
   prefs: []
   type: TYPE_TB
+  zh: '| **employee_id** | **salary** | **department** | **avg_dept_sal** |'
 - en: '| 1 | 7,200 | finance | 6,400 |'
+  id: totrans-131
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 7,200 | finance | 6,400 |'
 - en: '| 2 | 8,000 | finance | 6,400 |'
+  id: totrans-132
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 8,000 | finance | 6,400 |'
 - en: '| 3 | 4,000 | finance | 6,400 |'
+  id: totrans-133
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 4,000 | finance | 6,400 |'
 - en: '| 4 | 12,000 | technology | 11,300 |'
+  id: totrans-134
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 12,000 | technology | 11,300 |'
 - en: '| 5 | 15,000 | technology | 11,300 |'
+  id: totrans-135
   prefs: []
   type: TYPE_TB
+  zh: '| 5 | 15,000 | technology | 11,300 |'
 - en: '| 6 | 7,000 | technology | 11,300 |'
+  id: totrans-136
   prefs: []
   type: TYPE_TB
+  zh: '| 6 | 7,000 | technology | 11,300 |'
 - en: '| 7 | 4,000 | marketing | 5,000 |'
+  id: totrans-137
   prefs: []
   type: TYPE_TB
+  zh: '| 7 | 4,000 | marketing | 5,000 |'
 - en: '| 8 | 6,000 | marketing | 5,000 |'
+  id: totrans-138
   prefs: []
   type: TYPE_TB
+  zh: '| 8 | 6,000 | marketing | 5,000 |'
 - en: 'Scenario 9: Partitioning to divide results into equal groups'
+  id: totrans-139
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 场景 9：分区以将结果分成相等的组
 - en: Let’s say we want to divide the employees into 4 equal (or nearly equal) groups
     based on their salary.
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们想根据工资将员工分成 4 个相等（或近似相等）的组。
 - en: So we will derive another logical column tile_id, which will have the numeric
     id of each group of employees.
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，我们将导出另一个逻辑列 tile_id，该列将包含每组员工的数字 ID。
 - en: The groups will be created based on salary - the first tile group will have
     the highest salary, and so on.
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 组将根据工资创建——第一个 tile 组将拥有最高工资，以此类推。
 - en: '[PRE9]'
+  id: totrans-143
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Partitioning column = no partition - complete table is in the same partition
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 分区列 = 无分区 - 完整表格在同一分区中
 - en: Ordering column = salary
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 排序列 = salary
 - en: Ranking function = ntile()
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: 排名函数 = ntile()
 - en: '| **employee_id** | **salary** | **tile_id** |'
+  id: totrans-147
   prefs: []
   type: TYPE_TB
+  zh: '| **employee_id** | **salary** | **tile_id** |'
 - en: '| 4 | 12,500 | 1 |'
+  id: totrans-148
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 12,500 | 1 |'
 - en: '| 11 | 11,000 | 1 |'
+  id: totrans-149
   prefs: []
   type: TYPE_TB
+  zh: '| 11 | 11,000 | 1 |'
 - en: '| 3 | 10,500 | 1 |'
+  id: totrans-150
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 10,500 | 1 |'
 - en: '| 1 | 9,000 | 2 |'
+  id: totrans-151
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 9,000 | 2 |'
 - en: '| 8 | 8,500 | 2 |'
+  id: totrans-152
   prefs: []
   type: TYPE_TB
+  zh: '| 8 | 8,500 | 2 |'
 - en: '| 6 | 8,000 | 2 |'
+  id: totrans-153
   prefs: []
   type: TYPE_TB
+  zh: '| 6 | 8,000 | 2 |'
 - en: '| 12 | 7,000 | 3 |'
+  id: totrans-154
   prefs: []
   type: TYPE_TB
+  zh: '| 12 | 7,000 | 3 |'
 - en: '| 5 | 7,000 | 3 |'
+  id: totrans-155
   prefs: []
   type: TYPE_TB
+  zh: '| 5 | 7,000 | 3 |'
 - en: '| 9 | 6,500 | 3 |'
+  id: totrans-156
   prefs: []
   type: TYPE_TB
+  zh: '| 9 | 6,500 | 3 |'
 - en: '| 10 | 6,000 | 4 |'
+  id: totrans-157
   prefs: []
   type: TYPE_TB
+  zh: '| 10 | 6,000 | 4 |'
 - en: '| 2 | 5,000 | 4 |'
+  id: totrans-158
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 5,000 | 4 |'
 - en: '| 7 | 4,000 | 4 |'
+  id: totrans-159
   prefs: []
   type: TYPE_TB
+  zh: '| 7 | 4,000 | 4 |'
 - en: 'Scenario 10: Partitioning to identify islands or gaps in data'
+  id: totrans-160
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 场景 10：分区以识别数据中的岛屿或间隙
 - en: Let’s say we have a sequential product_id column, and we want to identify gaps
     in this.
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们有一个顺序的 product_id 列，我们想要识别其中的间隙。
 - en: So we will derive another logical column island_id, which will have the same
     number if product_id is sequential. When a break is identified in product_id,
     then the island_id is incremented.
+  id: totrans-162
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以我们将衍生出另一个逻辑列 island_id，如果 product_id 是顺序的，则具有相同的编号。当识别到 product_id 中的中断时，
+    island_id 会递增。
 - en: '[PRE10]'
+  id: totrans-163
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Partitioning column = no partition - complete table is in the same partition
+  id: totrans-164
   prefs: []
   type: TYPE_NORMAL
+  zh: 分区列 = 无分区 - 整个表在同一分区
 - en: Ordering column = product_id
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: 排序列 = product_id
 - en: Ranking function = row_number()
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: 排序函数 = row_number()
 - en: '| **product_id** | **row_num** | **island_id** |'
+  id: totrans-167
   prefs: []
   type: TYPE_TB
+  zh: '| **product_id** | **row_num** | **island_id** |'
 - en: '| 1 | 1 | 0 |'
+  id: totrans-168
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 1 | 0 |'
 - en: '| 2 | 2 | 0 |'
+  id: totrans-169
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 2 | 0 |'
 - en: '| 4 | 3 | 1 |'
+  id: totrans-170
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 3 | 1 |'
 - en: '| 5 | 4 | 1 |'
+  id: totrans-171
   prefs: []
   type: TYPE_TB
+  zh: '| 5 | 4 | 1 |'
 - en: '| 6 | 5 | 1 |'
+  id: totrans-172
   prefs: []
   type: TYPE_TB
+  zh: '| 6 | 5 | 1 |'
 - en: '| 8 | 6 | 2 |'
+  id: totrans-173
   prefs: []
   type: TYPE_TB
+  zh: '| 8 | 6 | 2 |'
 - en: '| 9 | 7 | 2 |'
+  id: totrans-174
   prefs: []
   type: TYPE_TB
+  zh: '| 9 | 7 | 2 |'
 - en: Conclusion
+  id: totrans-175
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: 'Group By and Partition By are used to solve many problems like:'
+  id: totrans-176
   prefs: []
   type: TYPE_NORMAL
+  zh: Group By 和 Partition By 用于解决许多问题，例如：
 - en: '**Summarizing Information:** Grouping allows you to aggregate data and summarize
     information in every group.'
+  id: totrans-177
   prefs: []
   type: TYPE_NORMAL
+  zh: '**信息总结：** 分组允许你在每个组中汇总数据并总结信息。'
 - en: '**Analyzing Patterns:** It helps in identifying patterns or trends within data
     subsets, providing insights into various aspects of the dataset.'
+  id: totrans-178
   prefs: []
   type: TYPE_NORMAL
+  zh: '**分析模式：** 有助于识别数据子集中的模式或趋势，为数据集的各个方面提供见解。'
 - en: '**Statistical Analysis:** Enables the calculation of statistical measures such
     as averages, counts, maximums, minimums, and other aggregate functions within
     the groups.'
+  id: totrans-179
   prefs: []
   type: TYPE_NORMAL
+  zh: '**统计分析：** 能够计算统计量，如平均值、计数、最大值、最小值和其他聚合函数在组内。'
 - en: '**Data Cleansing:** Helps identify duplicates, inconsistencies, or anomalies
     within groups, making data cleansing and quality improvement more manageable.'
+  id: totrans-180
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据清洗：** 有助于识别组内的重复项、不一致性或异常，使数据清洗和质量改进变得更加可控。'
 - en: '**Cohort Analysis:** Useful in cohort-based analysis, tracking and comparing
     groups of entities over time etc.'
+  id: totrans-181
   prefs: []
   type: TYPE_NORMAL
+  zh: '**队列分析：** 在基于队列的分析中非常有用，跟踪和比较随时间变化的实体组等。'
 - en: '**[Hanu](https://helpercodes.com/)** runs the [HelperCodes Blog](https://helpercodes.com/) which
     mainly deals with [SQL Cheat Sheets](https://helpercodes.com/sql-query-cheatsheet-tutorial/).
     I am a full stack developer and interested in creating reusable assets.'
+  id: totrans-182
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Hanu](https://helpercodes.com/)** 运营着 [HelperCodes 博客](https://helpercodes.com/)，主要涉及
+    [SQL 备忘单](https://helpercodes.com/sql-query-cheatsheet-tutorial/)。我是一名全栈开发者，兴趣在于创建可重用的资产。'
 - en: More On This Topic
+  id: totrans-183
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题
 - en: '[Overcoming Imbalanced Data Challenges in Real-World Scenarios](https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html)'
+  id: totrans-184
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[克服现实场景中数据不平衡的挑战](https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html)'
 - en: '[Exploring the Potential of Transfer Learning in Small Data Scenarios](https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios)'
+  id: totrans-185
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[探索转移学习在小数据场景中的潜力](https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios)'
 - en: '[Visual ChatGPT: Microsoft Combine ChatGPT and VFMs](https://www.kdnuggets.com/2023/03/visual-chatgpt-microsoft-combine-chatgpt-vfms.html)'
+  id: totrans-186
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[视觉 ChatGPT：微软结合 ChatGPT 和 VFM](https://www.kdnuggets.com/2023/03/visual-chatgpt-microsoft-combine-chatgpt-vfms.html)'
 - en: '[KDnuggets News, June 8: 21 Cheat Sheets for Data Science…](https://www.kdnuggets.com/2022/n23.html)'
+  id: totrans-187
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，6月8日：21个数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)'
 - en: '[KDnuggets News, December 7: Top 10 Data Science Myths Busted • 4…](https://www.kdnuggets.com/2022/n47.html)'
+  id: totrans-188
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，12月7日：破解十大数据科学神话 • 4…](https://www.kdnuggets.com/2022/n47.html)'
 - en: '[KDnuggets™ News 22:n03, Jan 19: A Deep Look Into 13 Data…](https://www.kdnuggets.com/2022/n03.html)'
+  id: totrans-189
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets™ 新闻 22:n03，1月19日：深入了解13个数据…](https://www.kdnuggets.com/2022/n03.html)'
