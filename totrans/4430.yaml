@@ -1,62 +1,97 @@
 - en: Fuzzy Joins in Python with d6tjoin
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 d6tjoin 在 Python 中进行模糊连接
 - en: 原文：[https://www.kdnuggets.com/2020/07/fuzzy-joins-python-d6tjoin.html](https://www.kdnuggets.com/2020/07/fuzzy-joins-python-d6tjoin.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/07/fuzzy-joins-python-d6tjoin.html](https://www.kdnuggets.com/2020/07/fuzzy-joins-python-d6tjoin.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Norman Niemer](https://www.linkedin.com/in/normanniemer/), Chief Data
     Scientist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Norman Niemer](https://www.linkedin.com/in/normanniemer/)，首席数据科学家**'
 - en: Combining different data sources is a time suck!
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 合并不同的数据源是一项时间消耗大！
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的
+    IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Combining data from different sources can be a big time suck for data scientists. [d6tjoin](https://github.com/d6t/d6tjoin) is
     a python library that lets you join pandas dataframes quickly and efficiently.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 从不同来源合并数据对数据科学家来说是一个巨大的时间消耗。 [d6tjoin](https://github.com/d6t/d6tjoin) 是一个 Python
+    库，让你可以快速高效地合并 pandas 数据框。
 - en: Coauthored with [Haijing Li](https://www.linkedin.com/in/haijing-li-7b50a11b2/),
     Data Analyst in Financial Services, MS Business Analytics@Columbia University.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 与 [Haijing Li](https://www.linkedin.com/in/haijing-li-7b50a11b2/) 合著，金融服务数据分析师，哥伦比亚大学商业分析硕士。
 - en: Example
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 示例
 - en: I have made up this example to illustrate what d6tjoin is capable of.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我编造了这个例子来说明 d6tjoin 的能力。
 - en: 'Suppose several companies'' stocks have gained my attention for a while and
     I have came up with a strategy to score those companies'' performances in a 1-5
     point scale. Backtesting on history data will help me evaluate if stock price
@@ -64,79 +99,119 @@
     scores. Information I need for backtesting is contained in the following two datasets:
     df_price contains historical stock prices of year 2019 and df_score contains scores
     updated regularly by myself.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我关注了几家公司的股票一段时间，并且制定了一个策略来对这些公司的表现进行 1-5 分的评分。对历史数据进行回测将帮助我评估股价是否真的反映了这些分数，并找出如何根据这些分数进行交易。我需要的回测信息包含在以下两个数据集中：df_price
+    包含 2019 年的历史股价，df_score 包含我定期更新的分数。
 - en: '[![df_price](../Images/67e246648d2e09dbd95e8b4c319ac548.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/df_price.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![df_price](../Images/67e246648d2e09dbd95e8b4c319ac548.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/df_price.png)'
 - en: '[![df_score](../Images/4d4bcc44740f8afc61d10b767d583622.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/df_score.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![df_score](../Images/4d4bcc44740f8afc61d10b767d583622.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/df_score.png)'
 - en: 'To prepare for backtesting, I need to merge "score" column to df_price. Obviously,
     ticker name and date should be the merge keys. But there are two problems: 1.Values
     in "ticker" of df_price and of df_valuation are not identical; 2.Scores were recorded
     on a monthly basis and I want each row in df_price to be assigned with the most
     recent assuming next score would not be available until next update date.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了准备回测，我需要将“score”列合并到 df_price 中。显然，股票代码和日期应该是合并键。但存在两个问题：1. df_price 和 df_valuation
+    的“ticker”值不一致；2. 分数是按月记录的，我希望 df_price 中的每一行都分配上最近的分数，假设下一个分数在下一个更新日期之前不会出现。
 - en: Prejoin Analysis
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 预连接分析
 - en: One thing best about d6tjoin is that it provides easy pre join diagnostic. This
     is particularly useful for detecting potential data problems even if you did't
     intend to do fuzzy join.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: d6tjoin 最好的地方之一是它提供了简单的预连接诊断。这对于检测潜在的数据问题特别有用，即使你并没有打算进行模糊连接。
 - en: '[PRE0]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: After this, we know that the two tables are not all matched on merge keys. This
     would be more useful when you have larger size datasets and messier string identifier
     that you cannot tell by a glance if the two datasets have different key values.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在此之后，我们知道两个表在合并键上并非完全匹配。当你处理较大的数据集或混乱的字符串标识符时，这将更加有用，因为你无法一眼看出两个数据集是否具有不同的键值。
 - en: For our case, a more useful method is `Prejoin.match_quality()`.It summarizes
     the number of matched/unmatched records for each join key. In our case, no ticker
     name are exactly matched and few dates are matched. This is why we need d6tjoin
     to help with fuzzy join.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于我们的情况，更有用的方法是 `Prejoin.match_quality()`。它总结了每个连接键的匹配/未匹配记录的数量。在我们的案例中，没有ticker名称完全匹配，且匹配的日期很少。这就是我们需要
+    d6tjoin 帮助进行模糊连接的原因。
 - en: '[PRE1]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '[![match_quality()](../Images/005abbd14b3072355351643592ddf80a.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/match_quality.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![match_quality()](../Images/005abbd14b3072355351643592ddf80a.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/match_quality.png)'
 - en: Join with Misaligned Ids(names) and Dates
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 连接具有不对齐的 ID（名称）和日期
 - en: 'd6tjoin does best match joins on strings, dates and numbers. Its `MergeTop1()`
     object in `d6tjoin.top1` module is very versatile that gives you flexibility to
     define how you want to merge: exact or fuzzy on multiple keys using default or
     costumed difference functions. By default, distance of strings are calculated
     using Levenshtein distance.'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: d6tjoin 最适合对字符串、日期和数字进行最佳匹配连接。其 `MergeTop1()` 对象在 `d6tjoin.top1` 模块中非常灵活，可以让你定义如何合并：使用默认或自定义的差异函数，对多个键进行精确或模糊匹配。默认情况下，字符串的距离使用
+    Levenshtein 距离计算。
 - en: In our example, both 'ticker' and 'date' are misaligned in the two datasets,
     so we need to do fuzzy join on both.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的示例中，'ticker' 和 'date' 在两个数据集中都不对齐，因此我们需要对这两个字段进行模糊连接。
 - en: '[PRE2]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Result is stored in dictionary structure which contains two keys: `{''merged'':
     a pandas dataframe of the merged result; ''top1'': performance statistics and
     summary for each join key}`'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '结果以字典结构存储，包含两个键： `{''merged'': 合并结果的 pandas dataframe; ''top1'': 每个连接键的性能统计和总结}`'
 - en: 'Let''s take a look at the result:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看一下结果：
 - en: '[PRE3]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The first line gives back performance summary on key 'ticker'. It shows not
     only matched key values on right and left but also the calculated difference scores
     in `_top1diff_` column. By default, each key value in the left table should be
@@ -144,168 +219,256 @@
     are not recorded in df_score, they still get matched to some values. We can solve
     this problem by setting `top_limit=3`, which will make any matching that differs
     larger than 3 ignored. [![top1](../Images/80503f8e9a5a21da51fbf0e5219ee8a0.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/1attempt_ticker_match_quality.png)
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一行返回关于 'ticker' 键的性能总结。它不仅显示了左右两边匹配的键值，还显示了在 `_top1diff_` 列中计算的差异分数。默认情况下，左表中的每个键值应该与右表中的一个键值匹配。因此，即使
+    "SRPT-US" 和 "VRTX-US" 没有记录在 df_score 中，它们仍会与某些值匹配。我们可以通过设置 `top_limit=3` 来解决这个问题，这将使任何差异大于
+    3 的匹配被忽略。[![top1](../Images/80503f8e9a5a21da51fbf0e5219ee8a0.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/1attempt_ticker_match_quality.png)
 - en: The second line gives back the merged dataset. [![merged](../Images/39162354e5fc14a7d475ebf3f64428b4.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/1attempt_result.png)
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二行返回合并后的数据集。[![merged](../Images/39162354e5fc14a7d475ebf3f64428b4.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/1attempt_result.png)
 - en: The original df_price dataset contains only 1536 rows but why after merged it
     becomes 5209 rows? Well, that's because in the original datasets we parse "date"
     as strings. d6tjoin use Levenshtein distance to calculate difference for strings
     by default and so one date from left would be matched with several dates from
     right. That tells you everytime dealing with date you should check its datatype
     first.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 原始的 df_price 数据集仅包含 1536 行，但为什么合并后变成了 5209 行？这是因为在原始数据集中，我们将 "date" 解析为字符串。d6tjoin
+    默认使用 Levenshtein 距离计算字符串的差异，因此左边的一个日期可能会与右边的多个日期匹配。这告诉你每次处理日期时应首先检查其数据类型。
 - en: Change "date" datatype from string to datetime object and set `top_limit=3` for
     "ticker". Let's check the result again.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 将 "date" 数据类型从字符串更改为 datetime 对象，并为 "ticker" 设置 `top_limit=3`。让我们再次检查结果。
 - en: '[PRE4]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '[PRE5]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '[PRE6]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '[![top1](../Images/085c379b8c12262cd5da1d06e70350dd.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/2attempt_ticker_match_qualtiy.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![top1](../Images/085c379b8c12262cd5da1d06e70350dd.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/2attempt_ticker_match_qualtiy.png)'
 - en: '[![result](../Images/87d063e99c19987461e639b9776b03c3.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/2attempt_result.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![result](../Images/87d063e99c19987461e639b9776b03c3.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/2attempt_result.png)'
 - en: Looks good! All the tickers in left are perfectly matched and dates from left
     are matched to the closest from the right.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 看起来不错！左侧的所有股票代码都匹配得很好，左侧的日期与右侧的最接近日期匹配。
 - en: 'Advanced Usage Option: Passing a Custom Difference Function'
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 高级使用选项：传递自定义差异函数
 - en: Now we have one last problem left. Remember that we want to assume scores would
     not be available until it was assigned. That means we want each row from df_price
     to be matched to a previously most recent score. But by default d6tjoin doesn't
     consider the order of dates but only match with the closest date either before
     or behind.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们还有一个最后的问题。记住，我们希望假设分数在分配之前不会被提供。这意味着我们希望 df_price 中的每一行都与最近的分数进行匹配。但默认情况下，d6tjoin
+    不考虑日期的顺序，只是与前面或后面的最近日期进行匹配。
 - en: 'To tackle this problem, we need to write a custom difference function: if date
     from left is previous to that from right, the calculated difference should be
     made large enough to let the match ignored.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了解决这个问题，我们需要编写一个自定义差异函数：如果左侧的日期早于右侧的日期，则计算出的差异应足够大，以便忽略匹配。
 - en: '[PRE7]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Now let’s parse the custom difference function in and see result.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们解析自定义差异函数并查看结果。
 - en: '[PRE8]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '[PRE9]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '[![top1](../Images/7cf175a76b611f90b08070cdb51b7afe.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/3attempt_date_match_quality.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![top1](../Images/7cf175a76b611f90b08070cdb51b7afe.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/3attempt_date_match_quality.png)'
 - en: '[![result](../Images/f96676afd13554d4a4de1cbb5c5cf557.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/3attempt_result.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![result](../Images/f96676afd13554d4a4de1cbb5c5cf557.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/3attempt_result.png)'
 - en: 'Now we have our final merged dataset: price data without a previously assigned
     score are ignored and the others are each assigned with a previously most recent
     score.'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了最终合并的数据集：未分配过分数的价格数据会被忽略，其它数据则各自分配了最近的分数。
 - en: Conclusion
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: 'd6tjoin provides features including:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: d6tjoin 提供的功能包括：
 - en: Pre join diagnostics to identify mismatched join keys
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 预连接诊断以识别不匹配的连接键
 - en: Best match joins that finds most similar value of misaligned ids, names and
     dates
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最佳匹配连接，找到最相似的错位id、名称和日期
 - en: Ability to customize difference functions, set max difference and other advanced
     features
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 能够自定义差异函数、设置最大差异及其他高级功能
 - en: 'Check out [d6t library](https://github.com/d6t/d6t-python). It provides solutions
     to common data science problems including:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 了解更多 [d6t 库](https://github.com/d6t/d6t-python)。它提供了包括以下内容在内的常见数据科学问题的解决方案：
 - en: '[d6tflow](https://github.com/d6t/d6tflow): build data science workflow'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[d6tflow](https://github.com/d6t/d6tflow)：构建数据科学工作流'
 - en: '[d6tjoin](https://github.com/d6t/d6tjoin): quickly fuzzy joins'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[d6tjoin](https://github.com/d6t/d6tjoin)：快速模糊连接'
 - en: '[d6tpipe](https://github.com/d6t/d6tpipe): quickly share and distribute data'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[d6tpipe](https://github.com/d6t/d6tpipe)：快速分享和分发数据'
 - en: '**Bio: [Norman Niemer](https://www.linkedin.com/in/normanniemer/)** is the
     Chief Data Scientist at a large asset manager where he delivers data-driven investment
     insights. He holds a MS Financial Engineering from Columbia University and a BS
     in Banking and Finance from Cass Business School (London).'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [Norman Niemer](https://www.linkedin.com/in/normanniemer/)** 是一家大型资产管理公司的首席数据科学家，他提供数据驱动的投资见解。他拥有哥伦比亚大学的金融工程硕士学位和卡斯商学院（伦敦）的银行与金融学士学位。'
 - en: '[Original](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/Fuzzy%20joins%20in%20python%20with%20d6tjoin.md).
     Reposted with permission.'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/Fuzzy%20joins%20in%20python%20with%20d6tjoin.md)。转载已获许可。'
 - en: '**Related:**'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Explaining “Blackbox” Machine Learning Models: Practical Application of SHAP](/2020/05/explaining-blackbox-machine-learning-models-practical-application-shap.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[解释“黑箱”机器学习模型：SHAP的实际应用](/2020/05/explaining-blackbox-machine-learning-models-practical-application-shap.html)'
 - en: '[Top 10 Coding Mistakes Made by Data Scientists](/2019/04/top-10-coding-mistakes-data-scientists.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家常犯的前10个编码错误](/2019/04/top-10-coding-mistakes-data-scientists.html)'
 - en: '[Top 10 Statistics Mistakes Made by Data Scientists](/2019/06/statistics-mistakes-data-scientists.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家常犯的前10个统计错误](/2019/06/statistics-mistakes-data-scientists.html)'
 - en: More On This Topic
+  id: totrans-68
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[SQL For Data Science: Understanding and Leveraging Joins](https://www.kdnuggets.com/2023/08/sql-data-science-understanding-leveraging-joins.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中的 SQL：理解和利用连接](https://www.kdnuggets.com/2023/08/sql-data-science-understanding-leveraging-joins.html)'
 - en: '[Step up your Python game with Fast Python for Data Science!](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过《快速 Python 数据科学》提升你的 Python 技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
 - en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化 Python 代码性能：深入了解 Python 性能分析器](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
 - en: '[Python Enum: How To Build Enumerations in Python](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 枚举：如何在 Python 中构建枚举](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)'
 - en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 和 Scikit-learn 简化决策树的可解释性](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
 - en: '[Sparse Matrix Representation in Python](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的稀疏矩阵表示](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)'
