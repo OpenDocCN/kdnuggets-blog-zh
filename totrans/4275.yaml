@@ -339,11 +339,14 @@
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是事情开始变得有趣的地方。得益于 cuDF 库，它允许我们在 GPU 上运行函数。cuDF 库，“提供了一个类似 pandas 的 API，对数据工程师和数据科学家来说非常熟悉，因此他们可以轻松加速他们的工作流程，而无需深入了解
+    CUDA 编程。”
 - en: 'To use the cuDF library, though, we have to change the format of our function
     slightly:'
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 不过，要使用 cuDF 库，我们必须稍微改变一下函数的格式：
 - en: '[PRE5]'
   id: totrans-57
   prefs: []
@@ -356,10 +359,13 @@
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们的函数接受 *total_amount*、*trip_distance* 和 *out*。*Out* 是我们将存储结果的数组。我们的函数随后会遍历数据框中的所有
+    *total_amount* 和 *trip_distance* 的值，计算 *total_per_mile*，并将结果存储在 *out* 中。
 - en: 'We also have to change how we apply this function to our data frame:'
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还必须改变将此函数应用于数据框的方式：
 - en: '[PRE6]'
   id: totrans-60
   prefs: []
@@ -371,12 +377,14 @@
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在指定数据框中的输入列是什么，以及它们如何映射到函数参数。我们还指定哪个参数是输出 (*outcols*) 和它的值类型 (*np.float64*)。
 - en: 'Note: reading in the data remains the same except you use cudf.read_csv() instead
     of pd.read_csv().'
   id: totrans-62
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 注意：读取数据的方式保持不变，只是使用 cudf.read_csv() 代替 pd.read_csv()。
 - en: Using the cuDF library and leveraging our GPU takes the processing time down
     to **43 ms! **That means raw pandas was 3,702 times slower! That is insane! At
     this point, the processing time doesn’t feel like a delay at all. You run the
@@ -385,26 +393,33 @@
   id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 cuDF 库并利用 GPU 将处理时间降至 **43 ms**！这意味着原始 Pandas 慢了 3,702 倍！太疯狂了！此时，处理时间感觉不到任何延迟。你运行函数，结果很快就会出来。老实说，我对在
+    GPU 上运行我们的处理速度如此之快感到惊讶。
 - en: But! We have 1 more experiment to run to see if we can make it even faster.
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是！我们还有一个实验要做，看看是否可以让速度更快。
 - en: 'Experiment #4— Pandas on a Multiple GPUs'
   id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '实验 #4— 多 GPU 上的 Pandas'
 - en: Dask_cuDF is a library that we can use in order to leverage our dask cluster
     which has 3 workers, each with a GPU. Essentially, we will be running our function
     on 3 GPUs distributed across our dask cluster.
   id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask_cuDF 是一个我们可以使用的库，以利用我们拥有的 3 个工作节点的 dask 集群，每个工作节点都配备了 GPU。实质上，我们将在分布于 dask
+    集群的 3 个 GPU 上运行我们的函数。
 - en: 'This might sound complicated, but Saturn makes it really easy. With the following
     code, you can connect to your dask cluster:'
   id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可能听起来很复杂，但 Saturn 让它变得非常简单。使用以下代码，你可以连接到你的 dask 集群：
 - en: '[PRE7]'
   id: totrans-68
   prefs: []
@@ -414,6 +429,7 @@
   id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦连接，你可以这样读取数据：
 - en: '[PRE8]'
   id: totrans-70
   prefs: []
@@ -425,40 +441,49 @@
   id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，你可以以与 cuDF 完全相同的方式运行函数。唯一的区别是我们现在运行的是通过 dask_cudf 库读取的数据框，因此我们将利用我们的 dask
+    集群。
 - en: How long did it take?
   id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 花了多长时间？
 - en: '**12 ms**'
   id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '**12 ms**'
 - en: That is 13,267 times faster than raw Pandas or you could also say that Pandas
     is 1,326,650% slower than running on a cluster of 3 GPUs.
   id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 这比原始 Pandas 快了 13,267 倍，或者你也可以说 Pandas 比在 3 个 GPU 集群上运行要慢 1,326,650%。
 - en: Wow. That is fast. You could get a much larger dataset and still run this function
     fast enough to not notice much of a delay at all.
   id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 哇。那真是太快了。你可以处理更大的数据集，函数的运行速度仍然足够快，不会感到明显的延迟。
 - en: 'Note: This is still over 4 times faster than the Pandas vectorized version
     of our function!'
   id: totrans-76
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 注意：这比我们函数的 Pandas 矢量化版本快了 4 倍以上！
 - en: Speed Matters
   id: totrans-77
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 速度很重要
 - en: Hopefully, I’ve convinced you to drop everything right now and go try out Pandas
     on a GPU using Saturn Cloud.
   id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望我已经说服你现在就放下手头的一切，尝试在 Saturn Cloud 上使用 GPU 运行 Pandas。
 - en: You could argue that almost 3 minutes to wait for a function to run really isn’t
     that long, but when you’re focused on programming and in the flow, 3 minutes really
     feels like forever. It is enough time that you start to get distracted and could
@@ -466,6 +491,7 @@
   id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以争辩说，等待一个函数运行近 3 分钟其实不算太长，但当你专注于编程并进入状态时，3 分钟真的感觉像是永恒。这段时间足够让你开始分心，可能会浪费更多时间。
 - en: And if you have even larger data, those wait times will only get longer.
   id: totrans-80
   prefs: []
