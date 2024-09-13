@@ -1,29 +1,44 @@
 - en: How to Train a Joint Entities and Relation Extraction Classifier using BERT
     Transformer with spaCy 3
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用 BERT Transformer 和 spaCy 3 训练联合实体和关系提取分类器
 - en: 原文：[https://www.kdnuggets.com/2021/06/train-joint-entities-relation-extraction-classifier-bert-spacy.html](https://www.kdnuggets.com/2021/06/train-joint-entities-relation-extraction-classifier-bert-spacy.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/06/train-joint-entities-relation-extraction-classifier-bert-spacy.html](https://www.kdnuggets.com/2021/06/train-joint-entities-relation-extraction-classifier-bert-spacy.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/), Founder
     of UBIAI**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)，UBIAI
+    创始人**'
 - en: '![](../Images/5514c4925ce52d6bb871c2a536d60f5b.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5514c4925ce52d6bb871c2a536d60f5b.png)'
 - en: Photo by [JJ Ying](https://unsplash.com/@jjying?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/science?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由[JJ Ying](https://unsplash.com/@jjying?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)提供，来自[Unsplash](https://unsplash.com/s/photos/science?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 - en: '**Introduction**'
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**介绍**'
 - en: One of the most useful applications of NLP technology is information extraction
     from unstructured texts — contracts, financial documents, healthcare records,
     etc. — that enables automatic data query to derive new insights. Traditionally,
@@ -34,8 +49,11 @@
     and relation extraction will open up a whole new way of information retrieval
     through knowledge graphs where you can navigate across different nodes to discover
     hidden relationships. Therefore, performing these tasks jointly will be beneficial.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 自然语言处理技术最有用的应用之一是从非结构化文本中提取信息——合同、财务文件、医疗记录等——这使得自动数据查询成为可能，以得出新的见解。传统上，命名实体识别被广泛用于识别文本中的实体，并存储数据以进行高级查询和过滤。然而，如果我们想从语义上理解非结构化文本，**仅仅依靠
+    NER 是不够的，因为我们不知道实体之间的关系**。进行联合 NER 和关系提取将开启通过知识图谱进行信息检索的全新方式，你可以在不同节点之间导航，发现隐藏的关系。因此，联合执行这些任务将是有益的。
 - en: Building on my [previous article](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647) where
     we fine-tuned a BERT model for NER using spaCy3, we will now add relation extraction
     to the pipeline using the new Thinc library from spaCy. We train the relation
@@ -43,24 +61,35 @@
     We will compare the performance of the relation classifier using transformers
     and tok2vec algorithms. Finally, we will test the model on a job description found
     online.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于我之前的[文章](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647)，我们微调了一个
+    BERT 模型用于 NER，现在我们将使用 spaCy 的新 Thinc 库在管道中添加关系提取。我们按照[spaCy 的文档](https://spacy.io/usage/layers-architectures#component-rel)中概述的步骤训练关系提取模型。我们将比较使用
+    transformers 和 tok2vec 算法的关系分类器的性能。最后，我们将在网上找到的职位描述上测试模型。
 - en: '**Relation Classification:**'
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**关系分类：**'
 - en: At its core, the relation extraction model is a classifier that predicts a relation **r** for
     a given pair of entity **{e1, e2}**. In case of transformers, this classifier
     is added on top of the output hidden states. For more information about relation
     extraction, please read this excellent [article](https://towardsdatascience.com/bert-s-for-relation-extraction-in-nlp-2c7c3ab487c4) outlining
     the theory of fine tuning transformer model for relation classification.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 从本质上讲，关系提取模型是一个分类器，用于预测给定实体对**{e1, e2}**的关系**r**。在 transformers 的情况下，这个分类器被添加到输出的隐藏状态之上。有关关系提取的更多信息，请阅读这篇出色的[文章](https://towardsdatascience.com/bert-s-for-relation-extraction-in-nlp-2c7c3ab487c4)，概述了微调
+    transformer 模型进行关系分类的理论。
 - en: The pre-trained model that we are going to fine-tune is the roberta-base model
     but you can use any pre-trained model available in huggingface library by simply
     inputting the name in the config file (see below).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将微调的预训练模型是 roberta-base 模型，但你可以使用 huggingface 库中任何可用的预训练模型，只需在配置文件中输入模型名称即可（见下文）。
 - en: In this tutorial we are going to extract the relationship between the two entities
     {Experience, Skills} as **Experience_in** and between {Diploma, Diploma_major}
     as **Degree_in**. The goal is to extract the years of experience required in a
@@ -68,339 +97,513 @@
     can of course, train your own relation classifier for your own use case such as
     finding the cause/effect of symptoms in health records or company acquisitions
     in financial documents. The possibilities are limitless…
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将提取两个实体{Experience, Skills}之间的关系作为**Experience_in**，以及{Diploma, Diploma_major}之间的关系作为**Degree_in**。目标是提取特定技能所需的经验年限和与所需文凭相关的文凭专业。你当然可以训练自己的关系分类器以适应自己的用例，例如在健康记录中查找症状的因果关系或在财务文档中查找公司收购。可能性是无限的……
 - en: In this tutorial, we will only cover the entity relation extraction part. For
     fine-tuning BERT NER using spaCy 3, please refer to my [previous article](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647).
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将仅涵盖实体关系抽取部分。有关使用spaCy 3对BERT NER进行微调的详细信息，请参考我的[上一篇文章](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647)。
 - en: '**Data Annotation:**'
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**数据标注：**'
 - en: 'As in my [previous article](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647),
     we use [UBIAI](https://ubiai.tools/) text annotation tool to perform the joint
     entity and relation annotation because of its versatile interface that allows
     us to switch between entity and relation annotation easily (see below):'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 如在我的[上一篇文章](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647)中所述，我们使用[UBIAI](https://ubiai.tools/)文本标注工具进行联合实体和关系标注，因为它的多功能接口允许我们轻松切换实体和关系标注（见下图）：
 - en: '![](../Images/58a68157e72e3adf0c422d9d92851a0a.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/58a68157e72e3adf0c422d9d92851a0a.png)'
 - en: UBIAI’s joint entity and relation annotation interface
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: UBIAI的联合实体和关系标注接口
 - en: For this tutorial, I have only annotated around 100 documents containing entities
     and relations. For production, we will certainly need more annotated data.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于本教程，我仅标注了大约100个包含实体和关系的文档。对于生产环境，我们肯定需要更多的标注数据。
 - en: '**Data Preparation:**'
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**数据准备：**'
 - en: Before we train the model, we need to convert our annotated data to a binary
     spacy file. We first split the annotation generated from UBIAI into training/dev/test
     and save them separately. We modify the [code](https://github.com/explosion/projects/blob/v3/tutorials/rel_component/scripts/parse_data.py/) that
     is provided in spaCy’s tutorial repo to create the binary file for our own annotation
     ([conversion code](https://github.com/walidamamou/relation_extraction_transformer)).
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在训练模型之前，我们需要将标注数据转换为二进制spacy文件。我们首先将UBIAI生成的标注拆分为训练/开发/测试，并分别保存。我们修改了[代码](https://github.com/explosion/projects/blob/v3/tutorials/rel_component/scripts/parse_data.py/)来创建适用于我们标注的二进制文件（[转换代码](https://github.com/walidamamou/relation_extraction_transformer)）。
 - en: We repeat this step for the training, dev and test dataset to generate three
     binary spacy files ([files available in github](https://github.com/walidamamou/relation_extraction_transformer)).
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们对训练、开发和测试数据集重复此步骤，以生成三个二进制的spacy文件（[文件可在GitHub上获取](https://github.com/walidamamou/relation_extraction_transformer)）。
 - en: '**Relation Extraction Model Training:**'
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**关系抽取模型训练：**'
 - en: For training, we will provide the entities from our golden corpus and train
     the classifier on these entities.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于训练，我们将提供来自黄金语料库的实体，并在这些实体上训练分类器。
 - en: 'Open a new Google Colab project and make sure to select GPU as hardware accelerator
     in the notebook settings. Make sure GPU is enabled by running: !nvidia-smi'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 打开一个新的Google Colab项目，并确保在笔记本设置中选择GPU作为硬件加速器。通过运行：!nvidia-smi来确保启用GPU。
 - en: 'Install spacy-nightly:'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 安装spacy-nightly：
 - en: '[PRE0]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Install the wheel package and clone spacy’s relation extraction repo:'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 安装wheel包并克隆spacy的关系抽取仓库：
 - en: '[PRE1]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Install transformer pipeline and spacy transformers library:'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 安装transformer管道和spacy transformers库：
 - en: '[PRE2]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Change directory to rel_component folder: cd rel_component'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 切换到rel_component文件夹：cd rel_component
 - en: 'Create a folder with the name “data” inside rel_component and upload the training,
     dev and test binary files into it:'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在rel_component中创建一个名为“data”的文件夹，并将训练、开发和测试的二进制文件上传到其中：
 - en: '![](../Images/45fe4a3e6a399e71eb538d052347a94a.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/45fe4a3e6a399e71eb538d052347a94a.png)'
 - en: Training folder
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练文件夹
 - en: 'Open project.yml file and update the training, dev and test path:'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 打开project.yml文件并更新训练、开发和测试路径：
 - en: '[PRE3]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'You can change the pre-trained transformer model (if you want to use a different
     language, for example), by going to the configs/rel_trf.cfg and entering the name
     of the model:'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你想使用不同的语言，可以通过进入 configs/rel_trf.cfg 并输入模型名称来更改预训练的 Transformer 模型：
 - en: '[PRE4]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Before we start the training, we will decrease the max_length in configs/rel_trf.cfg
     from the default 100 token to 20 to increase the efficiency of our model. The
     max_length corresponds to the **maximum distance** between two entities above
     which they will not be considered for relation classification. As a result, two
     entities from the same document will be classified, as long as they are within
     a maximum distance (in number of tokens) of each other.
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在开始训练之前，我们将 configs/rel_trf.cfg 中的 max_length 从默认的 100 个标记减少到 20，以提高模型的效率。max_length
+    对应于 **最大距离**，超出此距离的两个实体将不会被考虑进行关系分类。因此，同一文档中的两个实体将被分类，只要它们之间的最大距离（以标记数量计）在范围内。
 - en: '[PRE5]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'We are finally ready to train and evaluate the relation extraction model; just
     run the commands below:'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们终于准备好训练和评估关系提取模型；只需运行以下命令：
 - en: '[PRE6]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'You should start seeing the P, R and F score start getting updated:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 你应该开始看到 P、R 和 F 分数开始更新：
 - en: '![](../Images/7e8e1d34450b135201caee1bbbb64bae.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7e8e1d34450b135201caee1bbbb64bae.png)'
 - en: Model training in progress
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型训练进行中
 - en: After the model is done training, the evaluation on the test data set will immediately
     start and display the predicted versus golden labels. The model will be saved
     in a folder named “training” along with the scores of our model.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型训练完成后，测试数据集的评估将立即开始，并显示预测标签与实际标签的对比。模型将保存在名为“training”的文件夹中，并附带模型的评分。
 - en: 'To train the non-transformer model tok2vec, run the following command instead:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 要训练非 Transformer 模型 tok2vec，请运行以下命令：
 - en: '[PRE7]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'We can compare the performance of the two models:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以比较这两种模型的性能：
 - en: '[PRE8]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: The transformer based model’s precision and recall scores are significantly
     better than tok2vec and demonstrate the usefulness of transformers when dealing
     with low amount of annotated data.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于 Transformer 的模型在精度和召回率方面显著优于 tok2vec，展示了在处理少量标注数据时 Transformer 的有效性。
 - en: '**Joint Entity and Relation Extraction Pipeline:**'
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**联合实体和关系提取管道：**'
 - en: Assuming that we have already trained a transformer NER model as in my [previous
     post](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647),
     we will extract entities from a job description found online (that was not part
     of the training nor the dev set) and feed them to the relation extraction model
     to classify the relationship.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们已经训练了一个 Transformer NER 模型，如我的 [上一篇文章](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647)
+    中所述，我们将从在线找到的工作描述中提取实体（这些数据既不属于训练集也不属于开发集），并将其输入到关系提取模型中进行分类。
 - en: Install spacy transformers and transformer pipeline
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 安装 spacy transformers 和 transformer pipeline
 - en: 'Load the NER model and extract entities:'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加载 NER 模型并提取实体：
 - en: '[PRE9]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'We print the extracted entities:'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们打印提取的实体：
 - en: '[PRE10]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: We have successfully extracted all the skills, number of years of experience,
     diploma and diploma major from the text! Next we load the relation extraction
     model and classify the relationship between the entities.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们成功提取了所有的技能、工作经验年限、文凭和文凭专业！接下来我们加载关系提取模型，并分类实体之间的关系。
 - en: 'Note: Make sure to copy rel_pipe and rel_model from the scripts folder into
     your main folder:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：确保从脚本文件夹中复制 `rel_pipe` 和 `rel_model` 到你的主文件夹：
 - en: '![](../Images/9bc4d88f2070b0ed394af5dae32b8732.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9bc4d88f2070b0ed394af5dae32b8732.png)'
 - en: Scripts folder
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 脚本文件夹
 - en: '[PRE11]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Here we display all the entities having a relationship **Experience_in** with
     confidence score higher than 90%:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们显示所有具有关系 **Experience_in** 且置信度高于 90% 的实体：
 - en: '[PRE12]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Remarkably, we were able to extract almost all the years of experience along
     with their respective skills correctly with with no false positives or negatives!
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 值得注意的是，我们几乎能够正确提取所有的经验年限及其相应的技能，没有假阳性或假阴性！
 - en: Let’s look at the entities having relationship **Degree_in:**
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们查看具有关系 **Degree_in** 的实体：
 - en: '[PRE13]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Again, we successfully extracted all the relationships between diploma and diploma
     major!
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次，我们成功提取了所有文凭和文凭专业之间的关系！
 - en: This again demonstrates how easy it is to fine tune transformer models to your
     own domain specific case with low amount of annotated data, whether it is for
     NER or relation extraction.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 这再次展示了如何利用少量标注数据将 Transformer 模型微调到你特定的领域，无论是用于 NER 还是关系提取。
 - en: With only a hundred of annotated documents, we were able to train a relation
     classifier with good performance. Furthermore, we can use this initial model to
     auto-annotate hundreds more of unlabeled data with minimal correction. This can
     significantly speed up the annotation process and improve model performance.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅用一百份注释文档，我们就能够训练出表现良好的关系分类器。此外，我们可以利用这个初始模型自动注释更多的未标记数据，并进行最小的修正。这可以显著加快注释过程并提升模型表现。
 - en: '**Conclusion:**'
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**结论：**'
 - en: Transformers have truly transformed the domain of NLP and I am particularly
     excited about their application in information extraction. I would like to give
     a shoutout to explosion AI(spaCy developers) and huggingface for providing open
     source solutions that facilitates the adoption of transformers.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: Transformer确实改变了NLP领域，我特别期待它们在信息提取中的应用。我要感谢explosion AI（spaCy开发者）和huggingface提供的开源解决方案，促进了Transformer的采用。
 - en: If you need data annotation for your project, don’t hesitate to try out [UBIAI](https://ubiai.tools/) annotation
     tool. We provide numerous programmable labeling solutions (such as ML auto-annotation,
     regular expressions, dictionaries, etc…) to minimize hand annotation.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你需要为项目进行数据注释，不要犹豫尝试 [UBIAI](https://ubiai.tools/) 注释工具。我们提供多种可编程标签解决方案（如ML自动注释、正则表达式、字典等），以减少人工注释。
 - en: Lastly, checkout [this article](https://walidamamou.medium.com/building-a-knowledge-graph-for-job-search-using-bert-transformer-8677c8b3a2e7) to
     learn how to leverage the NER and relation extraction models to build knowledge
     graphs and extract new insights.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，查看 [这篇文章](https://walidamamou.medium.com/building-a-knowledge-graph-for-job-search-using-bert-transformer-8677c8b3a2e7) 以学习如何利用NER和关系提取模型构建知识图谱并提取新见解。
 - en: If you have any comment, please leave a note below or email at admin@ubiai.tools!
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有任何评论，请在下方留言或发送邮件至 admin@ubiai.tools！
 - en: '**Bio: [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)**
     is the Founder of UBIAI, an annotation tool for NLP applications, and holds a
     PhD in Physics.'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历： [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)**
+    是UBIAI的创始人，该工具用于NLP应用注释，并拥有物理学博士学位。'
 - en: '[Original](https://towardsdatascience.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c).
     Reposted with permission.'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始文章](https://towardsdatascience.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c)。转载许可。'
 - en: '**Related:**'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to Fine-Tune BERT Transformer with spaCy 3](/2021/06/fine-tune-bert-transformer-spacy.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用spaCy 3微调BERT Transformer](/2021/06/fine-tune-bert-transformer-spacy.html)'
 - en: '[Building a Knowledge Graph for Job Search Using BERT](/2021/06/knowledge-graph-job-search-bert.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用BERT构建求职知识图谱](/2021/06/knowledge-graph-job-search-bert.html)'
 - en: '[Fine-Tuning Transformer Model for Invoice Recognition](/2021/06/fine-tuning-transformer-model-invoice-recognition.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[微调Transformer模型以识别发票](/2021/06/fine-tuning-transformer-model-invoice-recognition.html)'
 - en: '* * *'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-84
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织在IT方面'
 - en: '* * *'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-89
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何从头开始构建和训练Transformer模型…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
 - en: '[Getting Started with spaCy for NLP](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用spaCy进行NLP入门](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
 - en: '[Natural Language Processing with spaCy](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用spaCy进行自然语言处理](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
 - en: '[From Theory to Practice: Building a k-Nearest Neighbors Classifier](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从理论到实践：构建 k-最近邻分类器](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)'
 - en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 BERT 对长文本进行分类](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
 - en: '[Extractive Summarization with LLM using BERT](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 BERT 的提取式摘要生成](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
