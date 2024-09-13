@@ -1,708 +1,1075 @@
 - en: 'Spam Filter in Python: Naive Bayes from Scratch'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python 中的垃圾邮件过滤器：从零开始的朴素贝叶斯
 - en: 原文：[https://www.kdnuggets.com/2020/07/spam-filter-python-naive-bayes-scratch.html](https://www.kdnuggets.com/2020/07/spam-filter-python-naive-bayes-scratch.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/07/spam-filter-python-naive-bayes-scratch.html](https://www.kdnuggets.com/2020/07/spam-filter-python-naive-bayes-scratch.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Alex Olteanu](https://www.linkedin.com/in/alex-olteanu-92b174116/), Data
     Scientist at [Dataquest](https://www.dataquest.io/)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Alex Olteanu](https://www.linkedin.com/in/alex-olteanu-92b174116/)，[Dataquest](https://www.dataquest.io/)
+    数据科学家**'
 - en: In this blog post, we're going to build a spam filter using Python and the multinomial
     [Naive Bayes](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)
     algorithm. Our goal is to code a spam filter from scratch that classifies messages
     with an accuracy greater than 80%.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇博客文章中，我们将使用 Python 和多项式 [朴素贝叶斯](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)
+    算法构建一个垃圾邮件过滤器。我们的目标是从头开始编写一个垃圾邮件过滤器，使其对消息的分类准确率超过 80%。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: To build our spam filter, we'll use a dataset of 5,572 SMS messages. Tiago A.
     Almeida and José María Gómez Hidalgo put together the dataset, you can download
     it from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/datasets/sms+spam+collection).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了构建我们的垃圾邮件过滤器，我们将使用一个包含 5,572 条短信的数据集。数据集由 Tiago A. Almeida 和 José María Gómez
+    Hidalgo 编制，你可以从 [UCI 机器学习库](https://archive.ics.uci.edu/ml/datasets/sms+spam+collection)
+    下载。
 - en: We're going to focus on the Python implementation throughout the post, so we'll
     assume that you are already familiar with multinomial Naive Bayes and conditional
     proability.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在整个文章中，我们将专注于 Python 实现，因此我们假设你已经对多项式朴素贝叶斯和条件概率有所了解。
 - en: If you need to fill in any gaps before moving forward, Dataquest has a course
     that covers both [conditional probability and multinomial Naive Bayes](https://www.dataquest.io/course/conditional-probability/),
     as well as a broad variety of other course you could use to fill in gaps in your
     knowledge and earn a [data science certificate](https://www.dataquest.io/blog/data-science-certificate/).
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你需要在继续之前填补任何知识空白，Dataquest 提供了一个涵盖 [条件概率和多项式朴素贝叶斯](https://www.dataquest.io/course/conditional-probability/)
+    的课程，此外还有许多其他课程可以帮助你填补知识空白，并获得 [数据科学证书](https://www.dataquest.io/blog/data-science-certificate/)。
 - en: Exploring the Dataset
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 探索数据集
 - en: 'Let''s start by opening the `SMSSpamCollection` file with the `read_csv()` function
     from the `pandas` package. We''re going to use:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们通过 `pandas` 包中的 `read_csv()` 函数打开 `SMSSpamCollection` 文件。我们将使用：
 - en: '`sep=''\t''` because the data points are tab separated'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`sep=''\t''` 因为数据点是以制表符分隔的'
 - en: '`header=None` because the dataset doesn''t have a header row'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`header=None` 因为数据集没有标题行'
 - en: '`names=[''Label'', ''SMS'']` to name the columns'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`names=[''Label'', ''SMS'']` 用于命名列'
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '`(5572, 2)`'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '`(5572, 2)`'
 - en: '![Figure](../Images/265504bcc608cf71d6887f351635d352.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/265504bcc608cf71d6887f351635d352.png)'
 - en: Below, we see that about 87% of the messages are ham (non-spam), and the remaining
     13% are spam. This sample looks representative, since in practice most messages
     that people receive are ham.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 下图显示，大约 87% 的消息是正常邮件（非垃圾邮件），其余 13% 是垃圾邮件。这个样本看起来具有代表性，因为在实际情况中，大多数人收到的消息都是正常邮件。
 - en: '[PRE1]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '`ham 0.865937 spam 0.134063 Name: Label, dtype: float64`'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ham 0.865937 spam 0.134063 Name: Label, dtype: float64`'
 - en: Training and Test Set
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 训练集和测试集
 - en: We're now going to split our dataset into a training set and a test set. We'll
     use 80% of the data for training and the remaining 20% for testing.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将把数据集拆分为训练集和测试集。我们将使用 80% 的数据用于训练，剩余的 20% 用于测试。
 - en: We'll randomize the entire dataset before splitting to ensure that spam and
     ham messages are spread properly throughout the dataset.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将在拆分数据集之前随机化整个数据集，以确保垃圾邮件和正常邮件在数据集中均匀分布。
 - en: '[PRE2]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '`(4458, 2) (1114, 2)`'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '`(4458, 2) (1114, 2)`'
 - en: We'll now analyze the percentage of spam and ham messages in the training and
     test sets. We expect the percentages to be close to what we have in the full dataset,
     where about 87% of the messages are ham, and the remaining 13% are spam.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在将分析训练集和测试集中垃圾邮件和正常邮件的百分比。我们期望这些百分比接近于我们在完整数据集中看到的情况，其中大约87%的消息是正常邮件，剩余的13%是垃圾邮件。
 - en: '[PRE3]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '`ham 0.86541 spam 0.13459 Name: Label, dtype: float64`'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ham 0.86541 spam 0.13459 Name: Label, dtype: float64`'
 - en: '[PRE4]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '`ham 0.868043 spam 0.131957 Name: Label, dtype: float64`'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '`ham 0.868043 spam 0.131957 Name: Label, dtype: float64`'
 - en: The results look great! We'll now move on to cleaning the dataset.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果看起来很棒！我们现在将继续清理数据集。
 - en: Data Cleaning
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据清理
 - en: 'When a new message comes in, our multinomial Naive Bayes algorithm will make
     the classification based on the results it gets to these two equations below,
     where "w[1]" is the first word, and w[1],w[2], ..., w[n] is the entire message:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 当有新消息到达时，我们的多项式朴素贝叶斯算法将根据其对以下两个方程的结果进行分类，其中“w[1]”是第一个单词，w[1],w[2], ..., w[n]是整个消息：
 - en: '![Equation](../Images/f1e9827fbae3494998643a8431efc05b.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/f1e9827fbae3494998643a8431efc05b.png)'
 - en: '![Equation](../Images/17a9e66d3702a62babe9fb63a985ec59.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/17a9e66d3702a62babe9fb63a985ec59.png)'
 - en: If P(Spam | w[1],w[2], ..., w[n]) is greater than P(Ham | w[1],w[2], ..., w[n]),
     then the message is spam.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 P(Spam | w[1],w[2], ..., w[n]) 大于 P(Ham | w[1],w[2], ..., w[n])，则该消息是垃圾邮件。
 - en: 'To calculate P(w[i]|Spam) and P(w[i]|Ham), we need to use separate equations:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 要计算 P(w[i]|Spam) 和 P(w[i]|Ham)，我们需要使用单独的方程：
 - en: '![Equation](../Images/b05463d443bba797ea7fa001401c07cd.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/b05463d443bba797ea7fa001401c07cd.png)'
 - en: '![Equation](../Images/5429c2fc55cf1708455741c1ff29934f.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/5429c2fc55cf1708455741c1ff29934f.png)'
 - en: 'Let''s clarify some of the terms in these equations:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们澄清这些方程中的一些术语：
 - en: '![Equation](../Images/29c67324c5a672f11833f2fbc6200ab4.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/29c67324c5a672f11833f2fbc6200ab4.png)'
 - en: '![Equation](../Images/7dc722bce7c206cc698010e5b4db3407.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/7dc722bce7c206cc698010e5b4db3407.png)'
 - en: '![Equation](../Images/515c66e8edb41425717b34df1143ea53.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/515c66e8edb41425717b34df1143ea53.png)'
 - en: '![Equation](../Images/3a44382d98df6f625f2677df3849cab5.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/3a44382d98df6f625f2677df3849cab5.png)'
 - en: '![Equation](../Images/de4d6dcb2277aec1e921deb5a004ce88.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/de4d6dcb2277aec1e921deb5a004ce88.png)'
 - en: '![Equation](../Images/2fadcfbd0c5858609020e66b5b7132ce.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/2fadcfbd0c5858609020e66b5b7132ce.png)'
 - en: 'To calculate all these probabilities, we''ll first need to perform a bit of
     data cleaning to bring the data into a format that allows us to easily extract
     all the information we need. Right now, our training and test sets have this format
     (the messages below are fictitious to make the example easier to understand):'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了计算所有这些概率，我们首先需要进行一些数据清理，将数据转换为一种格式，以便我们可以轻松提取所需的所有信息。目前，我们的训练集和测试集具有以下格式（下面的消息是虚构的，以便示例更易于理解）：
 - en: '![img](../Images/c9833ab5ce3d6c76ae567b4a3100b0c6.png)To make the calculations
     easier, we want bring the data to this format (the table below is a transformation
     of the table you see above):![img](../Images/2704688e1ce498ab335df58469957288.png)Notice
     in the transformation above:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '![图片](../Images/c9833ab5ce3d6c76ae567b4a3100b0c6.png)为了简化计算，我们希望将数据转换为这种格式（下表是您上面看到的表格的转换）：![图片](../Images/2704688e1ce498ab335df58469957288.png)在上述转换中注意到：'
 - en: The `SMS` column is replaced by a series of new columns that represent unique
     words from the vocabulary — the vocabulary is the set of unique words from all
     of our sentences.
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`SMS`列被一系列表示词汇表中唯一单词的新列替代——词汇表是我们所有句子中唯一单词的集合。'
 - en: 'Each row describes a single message. The first row has the values `spam, 2,
     2, 1, 1, 0, 0, 0, 0, 0`, which tell us that:'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每一行描述了一个单独的消息。第一行的值是`spam, 2, 2, 1, 1, 0, 0, 0, 0, 0`，这告诉我们：
 - en: The message is spam.
+  id: totrans-55
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 该消息是垃圾邮件。
 - en: The word "secret" occurs two times inside the message.
+  id: totrans-56
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 单词“secret”在消息中出现了两次。
 - en: The word "prize" occurs two times inside the message.
+  id: totrans-57
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 单词“prize”在消息中出现了两次。
 - en: The word "claim" occurs one time inside the message.
+  id: totrans-58
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 单词“claim”在消息中出现了一次。
 - en: The word "now" occurs one time inside the message.
+  id: totrans-59
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 单词“now”在消息中出现了一次。
 - en: The words "coming," "to," "my," "party," and "winner" occur zero times inside
     the message.
+  id: totrans-60
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 单词“coming”，“to”，“my”，“party”和“winner”在消息中出现了零次。
 - en: All words in the vocabulary are in lowercase, so "SECRET" and "secret" are considered
     the same word.
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 词汇表中的所有单词都是小写的，因此“SECRET”和“secret”被视为同一个单词。
 - en: The order of words in the original sentences is lost.
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 原始句子中的单词顺序丢失了。
 - en: Punctuation is no longer taken into account (for instance, we can't look at
     the table and conclude that the first message initially had two exclamation marks).
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 标点符号不再被考虑（例如，我们不能通过查看表格得出第一条消息最初有两个感叹号）。
 - en: Letter Case and Punctuation
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 字母大小写和标点符号
 - en: Let's begin the data cleaning process by removing the punctuation and making
     all the words lowercase.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们通过去除标点符号并将所有单词转换为小写来开始数据清理过程。
 - en: '[PRE5]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![Figure](../Images/562a84e7285cd77e18428d9a3e94080f.png)'
+  id: totrans-67
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/562a84e7285cd77e18428d9a3e94080f.png)'
 - en: '[PRE6]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![Figure](../Images/b47074671f9ef0ab7bd26ac95a3fae62.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/b47074671f9ef0ab7bd26ac95a3fae62.png)'
 - en: Creating the Vocabulary
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 创建词汇表
 - en: 'Let''s now create the vocabulary, which in this context means a list with all
     the unique words in our training set. In the code below:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们创建词汇表，在这个上下文中，词汇表是指包含训练集中所有唯一单词的列表。在下面的代码中：
 - en: We transform each message in the`SMS` column into a list by splitting the string
     at the space character — we're using the [`Series.str.split()` method](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.split.html).
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们通过在空格字符处拆分字符串，将`SMS`列中的每条消息转换为列表 — 我们使用[`Series.str.split()` 方法](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.Series.str.split.html)。
 - en: We initiate an empty list named `vocabulary`.
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们初始化一个名为`vocabulary`的空列表。
 - en: We iterate over the transformed `SMS` column.
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们遍历转换后的`SMS`列。
 - en: Using a nested loop, we iterate over each message in the `SMS` column and append
     each string (word) to the `vocabulary` list.
+  id: totrans-75
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用嵌套循环，我们遍历`SMS`列中的每条消息，并将每个字符串（单词）追加到`vocabulary`列表中。
 - en: We transform the `vocabulary` list into a set using the [`set()` function](https://docs.python.org/3/library/functions.html#func-set).
     This will remove the duplicates from the `vocabulary` list.
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们使用[`set()` 函数](https://docs.python.org/3/library/functions.html#func-set)将`vocabulary`列表转换为集合。这将从`vocabulary`列表中去除重复项。
 - en: We transform the `vocabulary` set back into a list using the [`list()` function](https://docs.python.org/3/library/functions.html#func-list).
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们使用[`list()` 函数](https://docs.python.org/3/library/functions.html#func-list)将`vocabulary`集合转换回列表。
 - en: '[PRE7]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: It looks like there are 7,783 unique words in all the messages of our training
     set.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 看起来我们的训练集中的所有消息共有7,783个唯一的单词。
 - en: '[PRE8]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '`7783`'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '`7783`'
 - en: The Final Training Set
+  id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最终的训练集
 - en: We're now going to use the vocabulary we just created to make the data transformation
     we want.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将使用刚刚创建的词汇表进行我们想要的数据转换。
 - en: '![img](../Images/0b66cc95e81e151004b29a6816b5fe57.png)Eventually, we''re going
     to create a new DataFrame. We''ll first build a dictionary that we''ll then convert
     to the DataFrame we need.'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '![img](../Images/0b66cc95e81e151004b29a6816b5fe57.png)最终，我们将创建一个新的 DataFrame。我们首先构建一个字典，然后将其转换为所需的
+    DataFrame。'
 - en: 'For instance, to create the table we see above, we can use this dictionary:'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，要创建我们上面看到的表格，我们可以使用这个字典：
 - en: '[PRE9]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![Figure](../Images/e573e195fcd92e1668cda41655532212.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/e573e195fcd92e1668cda41655532212.png)'
 - en: 'To create the dictionary we need for our training set, we can use the code
     below:'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 要为我们的训练集创建所需的字典，我们可以使用以下代码：
 - en: We start by initializing a dictionary named `word_counts_per_sms`, where each
     key is a unique word (a string) from the vocabulary, and each value is a list
     of the length of the training set, where each element in that list is a `0`.
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们首先初始化一个名为`word_counts_per_sms`的字典，其中每个键是词汇表中的唯一单词（字符串），每个值是一个长度与训练集相同的列表，其中列表中的每个元素都是`0`。
 - en: The code `[0] * 5` outputs `[0, 0, 0, 0, 0]`. So the code `[0] * len(training_set['SMS'])` outputs
     a list of the length of `training_set['SMS']`.
+  id: totrans-90
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 代码`[0] * 5`输出`[0, 0, 0, 0, 0]`。因此，代码`[0] * len(training_set['SMS'])`输出一个长度为`training_set['SMS']`的列表。
 - en: We loop over `training_set['SMS']` using the [`enumerate()` function](https://docs.python.org/3/library/functions.html#enumerate) to
     get both the index and the SMS message (`index` and `sms`).
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们使用[`enumerate()` 函数](https://docs.python.org/3/library/functions.html#enumerate)遍历`training_set['SMS']`，以获取索引和短信消息（`index`和`sms`）。
 - en: Using a nested loop, we loop over `sms` (where `sms` is a list of strings, where
     each string represents a word in a message).
+  id: totrans-92
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用嵌套循环，我们遍历`sms`（其中`sms`是一个字符串列表，每个字符串代表消息中的一个单词）。
 - en: We increment `word_counts_per_sms[word][index]` by `1`.
+  id: totrans-93
   prefs:
   - PREF_IND
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们将`word_counts_per_sms[word][index]`的值增加`1`。
 - en: '[PRE10]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Now that we have the dictionary we need, let's do the final transformations
     to our training set.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了所需的字典，让我们对训练集进行最终的转换。
 - en: '[PRE11]'
+  id: totrans-96
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '![Figure](../Images/bf4b842ef1b6274cd9a35b80c629f812.png)'
+  id: totrans-97
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/bf4b842ef1b6274cd9a35b80c629f812.png)'
 - en: The `Label` column is missing, so we'll use the [`pd.concat()` function](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.concat.html) to
     concatenate the DataFrame we just built with the DataFrame containing the training
     set. This way, we'll also have the `Label` and the `SMS` columns.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '`Label` 列缺失，因此我们将使用 [`pd.concat()` 函数](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.concat.html)
+    将刚构建的DataFrame与包含训练集的DataFrame连接起来。这样，我们也将拥有 `Label` 和 `SMS` 列。'
 - en: '[PRE12]'
+  id: totrans-99
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '![Figure](../Images/7f797b923991a3a7eaad114b44298b68.png)'
+  id: totrans-100
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/7f797b923991a3a7eaad114b44298b68.png)'
 - en: Calculating Constants First
+  id: totrans-101
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 首先计算常数
 - en: 'Now that we''re done with cleaning the training set, we can begin coding the
     spam filter. The multinomial Naive Bayes algorithm will need to answer these two
     probability questions to be able to classify new messages:'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经完成了训练集的清理，我们可以开始编码垃圾邮件过滤器。多项式朴素贝叶斯算法需要回答这两个概率问题，以便能够对新消息进行分类：
 - en: '![Equation](../Images/f1e9827fbae3494998643a8431efc05b.png)'
+  id: totrans-103
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/f1e9827fbae3494998643a8431efc05b.png)'
 - en: '![Equation](../Images/17a9e66d3702a62babe9fb63a985ec59.png)'
+  id: totrans-104
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/17a9e66d3702a62babe9fb63a985ec59.png)'
 - en: 'Also, to calculate P(w[i]|Spam) and P(w[i]|Ham) inside the formulas above,
     we''ll need to use these equations:'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样，要在上述公式中计算 P(w[i]|Spam) 和 P(w[i]|Ham)，我们需要使用以下方程：
 - en: '![Equation](../Images/b05463d443bba797ea7fa001401c07cd.png)'
+  id: totrans-106
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/b05463d443bba797ea7fa001401c07cd.png)'
 - en: '![Equation](../Images/5429c2fc55cf1708455741c1ff29934f.png)'
+  id: totrans-107
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/5429c2fc55cf1708455741c1ff29934f.png)'
 - en: 'Some of the terms in the four equations above will have the same value for
     every new message. We can calculate the value of these terms once and avoid doing
     the computations again when a new messages comes in. As a start, let''s first
     calculate:'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述四个方程中的一些项在每个新消息中将具有相同的值。我们可以一次性计算这些项的值，并避免在新消息到来时重新计算。作为开始，我们首先计算：
 - en: P(Spam) and P(Ham)
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: P(Spam) 和 P(Ham)
 - en: N[Spam], N[Ham], N[Vocabulary]
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: N[Spam]，N[Ham]，N[Vocabulary]
 - en: 'It''s important to note that:'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 需要注意的是：
 - en: N[Spam] is equal to the number of words in all the spam messages — it's *not* equal
     to the number of spam messages, and it's not equal to the total number of *unique* words
     in spam messages.
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: N[Spam] 等于所有垃圾邮件中的单词总数 —— 它 *不是* 等于垃圾邮件的数量，也 *不是* 等于垃圾邮件中的 *唯一* 单词的总数。
 - en: N[Ham] is equal to the number of words in all the non-spam messages — it's *not* equal
     to the number of non-spam messages, and it's not equal to the total number of *unique* words
     in non-spam messages.
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: N[Ham] 等于所有非垃圾邮件中的单词总数 —— 它 *不是* 等于非垃圾邮件的数量，也 *不是* 等于非垃圾邮件中的 *唯一* 单词的总数。
 - en: We'll also use Laplace smoothing and set ![Equation](../Images/fa6e5d31b57abbc4612155e378c2b80f.png).
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还将使用拉普拉斯平滑，并设置 ![方程](../Images/fa6e5d31b57abbc4612155e378c2b80f.png)。
 - en: '[PRE13]'
+  id: totrans-115
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Calculating Parameters
+  id: totrans-116
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 计算参数
 - en: Now that we have the constant terms calculated above, we can move on with calculating
     the parameters P(w[i]|Spam) and P(w[i]|Ham).
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经计算了常数项，我们可以继续计算参数P(w[i]|Spam)和P(w[i]|Ham)。
 - en: P(w[i]|Spam) and P(w[i]|Ham) will vary depending on the individual words. For
     instance, P("secret"|Spam) will have a certain probability value, while P("cousin"|Spam)
     or P("lovely"|Spam) will most likely have other values.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: P(w[i]|Spam) 和 P(w[i]|Ham) 会根据具体的单词而变化。例如，P("secret"|Spam) 会有一个特定的概率值，而 P("cousin"|Spam)
+    或 P("lovely"|Spam) 可能会有其他值。
 - en: Therefore, each parameter will be a conditional probability value associated
     with each word in the vocabulary.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，每个参数将是与词汇表中每个单词相关的条件概率值。
 - en: 'The parameters are calculated using these two equations:'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 参数是使用以下两个方程计算的：
 - en: '![Equation](../Images/b05463d443bba797ea7fa001401c07cd.png)'
+  id: totrans-121
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/b05463d443bba797ea7fa001401c07cd.png)'
 - en: '![Equation](../Images/5429c2fc55cf1708455741c1ff29934f.png)'
+  id: totrans-122
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/5429c2fc55cf1708455741c1ff29934f.png)'
 - en: '[PRE14]'
+  id: totrans-123
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: Classifying A New Message
+  id: totrans-124
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 分类新消息
 - en: 'Now that we have all our parameters calculated, we can start creating the spam
     filter. The spam filter is understood as a function that:'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经计算了所有参数，可以开始创建垃圾邮件过滤器。垃圾邮件过滤器被理解为一个函数，它：
 - en: Takes in as input a new message (w[1], w[2], ..., w[n]).
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 输入一个新消息 (w[1], w[2], ..., w[n])。
 - en: Calculates P(Spam|w[1], w[2], ..., w[n]) and P(Ham|w[1], w[2], ..., w[n]).
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 计算 P(Spam|w[1], w[2], ..., w[n]) 和 P(Ham|w[1], w[2], ..., w[n])。
 - en: 'Compares the values of P(Spam|w[1], w[2], ..., w[n]) and P(Ham|w[1], w[2],
     ..., w[n]), and:'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 比较 P(Spam|w[1], w[2], ..., w[n]) 和 P(Ham|w[1], w[2], ..., w[n]) 的值，并且：
 - en: If P(Ham|w[1], w[2], ..., w[n]) > P(Spam|w[1], w[2], ..., w[n]), then the message
     is classified as ham.
+  id: totrans-129
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果 P(Ham|w[1], w[2], ..., w[n]) > P(Spam|w[1], w[2], ..., w[n])，则该消息被分类为ham。
 - en: If P(Ham|w[1], w[2], ..., w[n]) < P(Spam|w[1], w[2], ..., w[n]), then the message
     is classified as spam.
+  id: totrans-130
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果 P(Ham|w[1], w[2], ..., w[n]) < P(Spam|w[1], w[2], ..., w[n])，则将消息分类为垃圾邮件。
 - en: If P(Ham|w[1], w[2], ..., w[n]) = P(Spam|w[1], w[2], ..., w[n]), then the algorithm
     may request human help.
+  id: totrans-131
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果 P(Ham|w[1], w[2], ..., w[n]) = P(Spam|w[1], w[2], ..., w[n])，则算法可能会请求人工帮助。
 - en: Note that some new messages will contain words that are not part of the vocabulary.
     We will simply ignore these words when we're calculating the probabilities.
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，一些新消息将包含不在词汇表中的词汇。我们在计算概率时将简单地忽略这些词汇。
 - en: 'Let''s start by writing a first version of this function. For the `classify()` function
     below, notice that:'
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始编写该函数的第一个版本。对于下面的`classify()`函数，请注意：
 - en: The input variable `message` needs to be a string.
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 输入变量`message`需要是一个字符串。
 - en: 'We perform a bit of data cleaning on the string `message`:'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们对字符串`message`进行一些数据清理：
 - en: We remove the punctuation using the [`re.sub()` function](https://docs.python.org/3/library/re.html#re.sub).
+  id: totrans-136
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们使用[`re.sub()`函数](https://docs.python.org/3/library/re.html#re.sub)去除标点符号。
 - en: We bring all letters to lower case using the [`str.lower()` method](https://docs.python.org/3/library/stdtypes.html#str.lower).
+  id: totrans-137
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们使用[`str.lower()`方法](https://docs.python.org/3/library/stdtypes.html#str.lower)将所有字母转换为小写。
 - en: We split the string at the space character and transform it into a Python list
     using the [`str.split()` method](https://docs.python.org/3/library/stdtypes.html#str.split).
+  id: totrans-138
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们在空格字符处分割字符串，并使用[`str.split()`方法](https://docs.python.org/3/library/stdtypes.html#str.split)将其转换为
+    Python 列表。
 - en: We calculate `p_spam_given_message` and `p_ham_given_message`.
+  id: totrans-139
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们计算`p_spam_given_message`和`p_ham_given_message`。
 - en: We compare `p_spam_given_message` with `p_ham_given_message` and then print
     a classification label.
+  id: totrans-140
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们将`p_spam_given_message`与`p_ham_given_message`进行比较，然后打印分类标签。
 - en: '[PRE15]'
+  id: totrans-141
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: We'll now test the spam filter on two new messages. One message is obviously
     spam, and the other is obviously ham.
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在将测试垃圾邮件过滤器在两个新消息上的效果。一个消息显然是垃圾邮件，另一个则显然是正常邮件。
 - en: '[PRE16]'
+  id: totrans-143
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: '`P(Spam|message): 1.3481290211300841e-25 P(Ham|message): 1.9368049028589875e-27
     Label: Spam`'
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: '`P(Spam|message): 1.3481290211300841e-25 P(Ham|message): 1.9368049028589875e-27
+    Label: Spam`'
 - en: '[PRE17]'
+  id: totrans-145
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: '`P(Spam|message): 2.4372375665888117e-25 P(Ham|message): 3.687530435009238e-21
     Label: Ham`'
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: '`P(Spam|message): 2.4372375665888117e-25 P(Ham|message): 3.687530435009238e-21
+    Label: Ham`'
 - en: Measuring the Spam Filter's Accuracy
+  id: totrans-147
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 测量垃圾邮件过滤器的准确性
 - en: The two results look promising, but let's see how well the filter does on our
     test set, which has 1,114 messages.
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两个结果看起来很有前景，但让我们看看过滤器在我们的测试集上的表现如何，该测试集包含1,114条消息。
 - en: We'll start by writing a function that returns classification labels instead
     of printing them.
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将从编写一个返回分类标签而不是打印它们的函数开始。
 - en: '[PRE18]'
+  id: totrans-150
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: Now that we have a function that returns labels instead of printing them, we
     can use it to create a new column in our test set.
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有一个返回标签的函数而不是打印它们，我们可以用它来在测试集上创建一个新列。
 - en: '[PRE19]'
+  id: totrans-152
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: '![Figure](../Images/84541adc5e9b95ca33c7a6bc27415ac7.png)'
+  id: totrans-153
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/84541adc5e9b95ca33c7a6bc27415ac7.png)'
 - en: 'We can compare the predicted values with the actual values to measure how good
     our spam filter is with classifying new messages. To make the measurement, we''ll
     use **accuracy** as a metric:'
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以将预测值与实际值进行比较，以测量我们的垃圾邮件过滤器对新消息的分类效果。为了进行测量，我们将使用**准确率**作为指标：
 - en: '![Equation](../Images/1185d75031e99251338213769eee62f2.png)'
+  id: totrans-155
   prefs: []
   type: TYPE_IMG
+  zh: '![公式](../Images/1185d75031e99251338213769eee62f2.png)'
 - en: '[PRE20]'
+  id: totrans-156
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: '`Correct: 1100 Incorrect: 14 Accuracy: 0.9874326750448833`'
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: '`Correct: 1100 Incorrect: 14 Accuracy: 0.9874326750448833`'
 - en: The accuracy is close to 98.74%, which is really good. Our spam filter looked
     at 1,114 messages that it hasn't seen in training, and classified 1,100 correctly.
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: 准确率接近98.74%，这非常好。我们的垃圾邮件过滤器对1,114条在训练中未见过的消息进行了分类，其中1,100条分类正确。
 - en: Next Steps
+  id: totrans-159
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 下一步
 - en: In this blog post, we managed to code a spam filter for SMS messages using the
     multinomial Naive Bayes algorithm. The filter had an accuracy of 98.74% on the
     test set we used, which is a promising result. Our initial goal was an accuracy
     of over 80%, and we managed to accomplish that.
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇博客文章中，我们成功地用多项式朴素贝叶斯算法编写了一个短信垃圾邮件过滤器。该过滤器在我们使用的测试集上的准确率为98.74%，这是一个很有前景的结果。我们的初步目标是超过80%的准确率，并且我们成功实现了这一点。
 - en: 'Some of the next steps you can take include:'
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来的步骤包括：
 - en: Analyzing the 14 messages that were classified incorrectly and trying to figure
     out why the algorithm classified them incorrectly
+  id: totrans-162
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 分析14条被错误分类的消息，并尝试找出算法为何将其错误分类的原因
 - en: Making the filtering process more complex by making the algorithm sensitive
     to letter case
+  id: totrans-163
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过使算法对字母大小写敏感来使过滤过程更复杂
 - en: '**Bio: [Alex Olteanu](https://www.linkedin.com/in/alex-olteanu-92b174116/)**
     is a Data Scientist at Dataquest.'
+  id: totrans-164
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介: [亚历克斯·奥尔特亚努](https://www.linkedin.com/in/alex-olteanu-92b174116/)**
+    是 Dataquest 的数据科学家。'
 - en: '**Related:**'
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容:**'
 - en: '[Probability Learning: Bayes’ Theorem](/2019/10/probability-learning-bayes-theorem.html)'
+  id: totrans-166
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[概率学习：贝叶斯定理](/2019/10/probability-learning-bayes-theorem.html)'
 - en: '[Naïve Bayes Algorithm: Everything you need to know](/2020/06/naive-bayes-algorithm-everything.html)'
+  id: totrans-167
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[朴素贝叶斯算法：你需要知道的一切](/2020/06/naive-bayes-algorithm-everything.html)'
 - en: '[Probability Learning: Naive Bayes](/2019/11/probability-learning-naive-bayes.html)'
+  id: totrans-168
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[概率学习：朴素贝叶斯](/2019/11/probability-learning-naive-bayes.html)'
 - en: More On This Topic
+  id: totrans-169
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[KDnuggets News, April 13: Python Libraries Data Scientists Should…](https://www.kdnuggets.com/2022/n15.html)'
+  id: totrans-170
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，4月13日：数据科学家应该了解的Python库…](https://www.kdnuggets.com/2022/n15.html)'
 - en: '[Gaussian Naive Bayes, Explained](https://www.kdnuggets.com/2023/03/gaussian-naive-bayes-explained.html)'
+  id: totrans-171
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[高斯朴素贝叶斯，解析](https://www.kdnuggets.com/2023/03/gaussian-naive-bayes-explained.html)'
 - en: '[Naïve Bayes Algorithm: Everything You Need to Know](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)'
+  id: totrans-172
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[朴素贝叶斯算法：你需要知道的一切](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)'
 - en: '[How to Filter Data with Python](https://www.kdnuggets.com/2022/02/filter-data-python.html)'
+  id: totrans-173
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用Python筛选数据](https://www.kdnuggets.com/2022/02/filter-data-python.html)'
 - en: '[4 Python Itertools Filter Functions You Probably Didn''t Know](https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html)'
+  id: totrans-174
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你可能不知道的4个Python Itertools筛选函数](https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html)'
 - en: '[3 Ways Understanding Bayes Theorem Will Improve Your Data Science](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)'
+  id: totrans-175
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解贝叶斯定理的3种方法将提升你的数据科学技能](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)'
