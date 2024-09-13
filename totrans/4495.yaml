@@ -1,57 +1,87 @@
 - en: Build an app to generate photorealistic faces using TensorFlow and Streamlit
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 TensorFlow 和 Streamlit 构建一个生成逼真面孔的应用
 - en: 原文：[https://www.kdnuggets.com/2020/04/app-generate-photorealistic-faces-tensorflow-streamlit.html](https://www.kdnuggets.com/2020/04/app-generate-photorealistic-faces-tensorflow-streamlit.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/04/app-generate-photorealistic-faces-tensorflow-streamlit.html](https://www.kdnuggets.com/2020/04/app-generate-photorealistic-faces-tensorflow-streamlit.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Adrien Treuille](https://www.linkedin.com/in/adrien-treuille-52215718/),
     Co-founder at Streamlit**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Adrien Treuille](https://www.linkedin.com/in/adrien-treuille-52215718/)，Streamlit
+    联合创始人**'
 - en: '![Figure](../Images/d3f4b90ea22b7679cfeed5720254753b.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/d3f4b90ea22b7679cfeed5720254753b.png)'
 - en: '[GAN-synthesized face]'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '[GAN 合成面孔]'
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 工作'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Machine learning models are black boxes. Yes, you can run them on test sets
     and plot fancy performance curves, but it’s *still* often hard to answer basic
     questions about how they perform. A surprisingly powerful source of insight is
     simply to **play with your models**! Tweak inputs. Watch outputs. Let your coworkers
     and managers play with them too. This interactive approach is not only a powerful
     way to gain intuition, but also a great way to get people excited about your work.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习模型是黑箱。是的，你可以在测试集上运行它们并绘制华丽的性能曲线，但*仍然*常常很难回答关于它们性能的基本问题。一个出乎意料的强大洞察来源就是**玩弄你的模型**！调整输入。观察输出。让你的同事和经理也来试试。这种互动方式不仅是获得直觉的强大方法，也是让人们对你的工作感到兴奋的绝佳方式。
 - en: 'Making interactive models is one of the use-cases that inspired [Streamlit](http://streamlit.io/),
     a Python framework that makes [writing apps as easy as writing Python scripts](https://towardsdatascience.com/coding-ml-tools-like-you-code-ml-models-ddba3357eace?source=friends_link&sk=f7774c54571148b33cde3ba6c6310086).
     This overview will walk you through creating a Streamlit app to play with one
@@ -65,29 +95,50 @@
     parametric model of humans! (Note we didn’t create the attributes. They came from
     the [CelebA dataset](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) [3], and
     some of them can get a bit weird…)'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 制作互动模型是启发 [Streamlit](http://streamlit.io/) 的用例之一，这是一个 Python 框架，使得 [编写应用像编写
+    Python 脚本一样简单](https://towardsdatascience.com/coding-ml-tools-like-you-code-ml-models-ddba3357eace?source=friends_link&sk=f7774c54571148b33cde3ba6c6310086)。本概述将指导你创建一个
+    Streamlit 应用来玩弄一个最复杂、最黑箱的模型之一：深度*生成对抗网络*（GAN）。在本例中，我们将使用 TensorFlow 可视化 Nvidia
+    的 [PG-GAN](https://research.nvidia.com/publication/2017-10_Progressive-Growing-of)
+    [1] 来从无中生有合成逼真的人脸。然后，使用 Shaobo Guan 的惊人 [TL-GAN](https://blog.insightdatascience.com/generating-custom-photo-realistic-faces-using-ai-d170b1b59255)
+    [2] 模型，我们将创建一个 [应用](https://github.com/streamlit/demo-face-gan) 使我们能够通过年龄、微笑度、男性相似度和发色等属性来调整
+    GAN 合成的名人面孔。在教程结束时，你将拥有一个完全参数化的人类模型！（注意我们没有创建这些属性。它们来自于 [CelebA 数据集](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html)
+    [3]，有些属性可能会有点奇怪……）
 - en: Getting started with Streamlit
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 开始使用 Streamlit
 - en: 'If you haven’t installed Streamlit yet, you can do so by running:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你还没有安装 Streamlit，可以通过运行以下命令来进行安装：
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: And if you’re a seasoned Streamlit-er, you’ll need to be on 0.57.1 or later,
     so make sure to upgrade!
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你是经验丰富的Streamlit用户，你需要使用0.57.1或更高版本，确保进行升级！
 - en: '[PRE1]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Setting up your environment
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 设置你的环境
 - en: Before we begin, use the commands below to check out the project’s GitHub repo
     and running the [Face GAN demo](https://github.com/streamlit/demo-face-gan) for
     yourself. This demo depends on Tensorflow 1, which does not support Python 3.7
@@ -96,66 +147,98 @@
     environment using venv or virtualenv. On Windows, the [Anaconda Navigator](https://docs.anaconda.com/anaconda/navigator/) allows
     you to [pick your Python version](https://docs.anaconda.com/anaconda/navigator/tutorials/use-multiple-python-versions/) with
     a point-and-click interface.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们开始之前，使用下面的命令查看项目的GitHub仓库，并亲自运行[Face GAN demo](https://github.com/streamlit/demo-face-gan)。这个演示依赖于Tensorflow
+    1，它不支持Python 3.7或3.8，所以你需要使用Python 3.6。在Mac和Linux上，我们推荐使用[pyenv](https://github.com/pyenv/pyenv)来安装Python
+    3.6并与当前版本共存，然后使用venv或virtualenv设置新的虚拟环境。在Windows上，[Anaconda Navigator](https://docs.anaconda.com/anaconda/navigator/)允许你通过点击界面来[选择你的Python版本](https://docs.anaconda.com/anaconda/navigator/tutorials/use-multiple-python-versions/)。
 - en: 'When you’re all set, open a terminal window and type:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你准备好后，打开终端窗口并输入：
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Give it a minute to finish downloading the trained GAN and then try playing
     with the sliders to explore the different faces the GAN can synthesize. Pretty
     cool, right?
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 等待一会儿，让训练好的GAN下载完成，然后尝试调整滑块，探索GAN可以合成的不同面孔。很酷，对吧？
 - en: '![](../Images/2ba8cf06358eeb8bacc34606a0900451.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2ba8cf06358eeb8bacc34606a0900451.png)'
 - en: The full app code is a file that has ~190 lines of code, out of which only 13
     are Streamlit calls. **That’s right, the entire UI above is drawn from just those
     13 lines!**
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 完整的应用代码是一个大约包含190行代码的文件，其中仅有13行是Streamlit调用的。**没错，以上所有UI都仅仅由这13行代码绘制而成！**
 - en: 'Let’s take a look at how the app is structured:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们来看看应用的结构：
 - en: Now that you have a sense of how it is structured, let’s dive into each of the
     5 steps above to see how they work.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你对结构有了大致了解，我们来详细探讨一下以上5个步骤，看看它们是如何工作的。
 - en: Step 1\. Download models and data files
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第一步：下载模型和数据文件
 - en: 'This step downloads the files we need: a pre-trained PG-GAN model and a TL-GAN
     model pre-fitted to it (we’ll dive into these a little bit later!).'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一步会下载我们需要的文件：一个预训练的PG-GAN模型和一个适配它的TL-GAN模型（稍后我们将深入探讨这些！）。
 - en: 'The `download_file` utility function is a little smarter than a pure downloader:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '`download_file`工具函数比单纯的下载器更聪明：'
 - en: It checks if the file is already present in the local directory, so it only
     downloads it if needed. It also checks if the downloaded file’s size is what we
     expected it to be, so it’s able to fix interrupted downloads. This is a great
     pattern to follow!
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它会检查文件是否已经存在于本地目录中，因此只在必要时才进行下载。它还会检查下载文件的大小是否符合预期，因此能够修复中断的下载。这是一个很好的模式！
 - en: It uses `st.progress()` and `st.warning()` to show a nice UI to the user while
     the file downloads. Then it calls `.empty()` on those UI elements to hide them
     when done.
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它使用`st.progress()`和`st.warning()`来向用户展示一个漂亮的UI，同时文件正在下载。然后在完成后，它调用`.empty()`来隐藏这些UI元素。
 - en: Step 2\. Load the models into memory
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第二步：将模型加载到内存中
 - en: 'The next step is to load these models into memory. Here is the code for loading
     the PG-GAN model:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是将这些模型加载到内存中。以下是加载PG-GAN模型的代码：
 - en: Notice the `@st.cache` decorator at the start of `load_pg_gan_model()`. Normally
     in Python, you could just run `load_pg_gan_model()` and reuse that variable over
     and over. Streamlit’s [execution model](https://docs.streamlit.io/main_concepts.html?highlight=execution%20model#data-flow) is
@@ -169,14 +252,25 @@
     and by the same token, our TensorFlow session will be created exactly once, as
     well. (See our [launch article](https://towardsdatascience.com/coding-ml-tools-like-you-code-ml-models-ddba3357eace?source=friends_link&sk=f7774c54571148b33cde3ba6c6310086) for
     a refresher on Streamlit’s execution model.)
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意 `@st.cache` 装饰器在 `load_pg_gan_model()` 的开头。通常在 Python 中，你可以直接运行 `load_pg_gan_model()`
+    并反复重用那个变量。然而，Streamlit 的 [执行模型](https://docs.streamlit.io/main_concepts.html?highlight=execution%20model#data-flow)
+    是独特的，因为每次用户与 UI 小部件交互时，你的脚本会再次从头到尾完全执行。通过将 `@st.cache` 添加到耗时的模型加载函数中，我们告诉 Streamlit
+    仅在脚本首次执行时运行这些函数 —— 并且在之后的每次执行中仅重用缓存输出。这是 Streamlit 最基本的功能之一，因为它通过缓存函数调用的结果来高效地运行脚本。这样，大型的
+    GAN 模型将仅加载到内存中一次；同样，我们的 TensorFlow 会话也将仅创建一次。（参见我们的 [启动文章](https://towardsdatascience.com/coding-ml-tools-like-you-code-ml-models-ddba3357eace?source=friends_link&sk=f7774c54571148b33cde3ba6c6310086)
+    以了解更多有关 Streamlit 执行模型的内容。）
 - en: '![Figure](../Images/434b4264564c81114912b94710a16064.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/434b4264564c81114912b94710a16064.png)'
 - en: '[Figure 1\. How caching works in Streamlit’s execution model]'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '[图 1\. 缓存如何在 Streamlit 执行模型中工作]'
 - en: 'There’s one wrinkle, though: the TensorFlow session object can mutate internally
     as we use it to run different computations. Ordinarily, [we don’t want cached
     objects to mutate](https://docs.streamlit.io/caching.html#example-6-mutating-cached-values),
@@ -184,66 +278,98 @@
     it issues a warning to the user. However, in this case we happen to know that
     it’s OK if the TensorFlow session object mutates, so [we bypass the warning](https://docs.streamlit.io/troubleshooting/caching_issues.html#how-to-fix-the-cached-object-mutated-warning) by
     setting `allow_output_mutation=True`.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 不过，有一个问题：TensorFlow 会话对象在我们用它进行不同计算时可能会在内部发生变化。通常，[我们不希望缓存对象发生变化](https://docs.streamlit.io/caching.html#example-6-mutating-cached-values)，因为这可能导致意外的结果。所以当
+    Streamlit 检测到这样的变化时，会向用户发出警告。然而，在这种情况下我们知道 TensorFlow 会话对象发生变化是可以接受的，因此 [我们绕过警告](https://docs.streamlit.io/troubleshooting/caching_issues.html#how-to-fix-the-cached-object-mutated-warning)
+    通过设置 `allow_output_mutation=True`。
 - en: Step 3\. Draw the sidebar UI
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 步骤 3\. 绘制侧边栏 UI
 - en: 'If this is the first time you’re seeing Streamlit’s API for drawing widgets,
     here’s the 30-second crash course:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果这是你第一次看到 Streamlit 的小部件绘制 API，以下是 30 秒速成课程：
 - en: You add widgets by calling API methods like `st.slider()` and `st.checkbox()`.
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你可以通过调用 API 方法如 `st.slider()` 和 `st.checkbox()` 来添加小部件。
 - en: The return value of those methods is the value shown in the UI. For example,
     when the user moves a slider to position 42, your script will be re-executed and
     in that execution the return value of that `st.slider()` will be 42.
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这些方法的返回值是 UI 中显示的值。例如，当用户将滑块移动到位置 42 时，你的脚本将重新执行，在那次执行中 `st.slider()` 的返回值将是
+    42。
 - en: You can put anything in a sidebar by prepending it with `st.sidebar`. For example, `st.sidebar.checkbox()`.
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你可以通过在前面加上 `st.sidebar` 将任何东西放在侧边栏中。例如，`st.sidebar.checkbox()`。
 - en: 'So to add a slider in the sidebar, for example — a slider to allow the user
     to tune the `brown_hair` parameter, you would just add:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，要在侧边栏中添加一个滑块，例如 — 一个允许用户调整 `brown_hair` 参数的滑块，你只需添加：
 - en: 'In our app we want to get a little fancy to show off just how easy it is to
     make the UI itself modifiable in Streamlit! We want to allows users to first use
     a multiselect widget to pick a set of features they want to control in the generated
     image, which means our UI needs to be drawn programmatically:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的应用中，我们希望展示如何轻松地在 Streamlit 中使 UI 本身可修改！我们希望允许用户首先使用多选小部件选择他们想在生成图像中控制的一组特征，这意味着我们的
+    UI 需要通过编程方式绘制：
 - en: '![](../Images/a36716267772f577d0c823d074729999.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a36716267772f577d0c823d074729999.png)'
 - en: 'With Streamlit, the code for that is actually quite simple:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用Streamlit，相关代码其实非常简单：
 - en: Step 4\. Synthesize the image
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第4步：合成图像
 - en: Now that we have a set of features telling us what kind of face to synthesize,
     we need to do the heavy lifting of synthesizing the face. The way we’ll do that
     is by passing the features into the TL-GAN to generate a vector in the PG-GAN’s
     latent space, then feed that vector to PG-GAN. If that sentence made no sense
     to you, let’s take a detour and talk about how our two neural nets work.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了一组特征，告诉我们要合成什么样的面孔，我们需要进行繁重的面孔合成工作。我们将通过将这些特征传递给TL-GAN来生成PG-GAN潜在空间中的一个向量，然后将该向量输入到PG-GAN中。如果这句话对你来说没有意义，让我们绕个弯子，谈谈我们的两个神经网络是如何工作的。
 - en: '**A detour into GANs**'
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**深入了解GAN**'
 - en: To understand how the above app generates faces from slider values, you first
     have to understand something about how PG-GAN and TL-GAN work — but don’t worry, **you
     can skip this section and still understand how the app works at a higher level!**
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 要理解上述应用程序如何根据滑块值生成面孔，你首先需要了解PG-GAN和TL-GAN的工作原理——但不用担心，**你可以跳过这一部分，仍然能在更高层次上理解应用程序的工作原理！**
 - en: PG-GAN, like any GAN, is fundamentally* a pair* of neural networks, one generative
     and one discriminative, which are trained against each other, forever locked in
     mortal combat. The generative network is in charge of synthesizing images it believes
@@ -256,28 +382,39 @@
     was trained on celebrity faces by Karras *et al* using their [Progressive Growing
     of GANs](https://github.com/tkarras/progressive_growing_of_gans) algorithm (PG-GAN),
     which trains GANs using progressively higher-resolution images. [1]
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: PG-GAN，像任何GAN一样，根本上是*一对*神经网络，一个生成网络和一个判别网络，它们彼此对抗，永远锁定在生死搏斗中。生成网络负责合成它认为像面孔的图像，而判别网络负责决定这些图像是否确实是面孔。这两个网络迭代地对抗对方的输出，所以每个网络都尽力学会欺骗另一个网络。最终结果是，最终的生成网络能够合成看起来逼真的面孔，即使在训练开始时，它只能合成随机噪声。这真的很惊人！在这种情况下，我们使用的面孔生成GAN是由Karras
+    *等人* 使用他们的[渐进式生成对抗网络](https://github.com/tkarras/progressive_growing_of_gans)（PG-GAN）算法在名人面孔上进行训练的，该算法通过逐渐提高分辨率的图像来训练GAN。[1]
 - en: The input to PG-GAN is a high-dimensional vector belonging to its so-called *latent-space*.
     The latent-space is basically the space of all possible faces the network can
     generate, so each random vector in that space corresponds to a unique face (or
     at least it should! Sometimes you get weird results…) The way you typically use
     a GAN is to give it a random vector and then check out what face gets synthesized
     (Figure 2.a).
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: PG-GAN的输入是一个高维向量，属于其所谓的*潜在空间*。潜在空间基本上是网络可以生成的所有可能面孔的空间，因此该空间中的每个随机向量对应一个独特的面孔（或者至少应该是！有时你会得到奇怪的结果……）你通常使用GAN的方式是给它一个随机向量，然后查看合成出什么样的面孔（见图2.a）。
 - en: '![Figure](../Images/c71c1eb6611e2080ce5ce1eb3f020a9f.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/c71c1eb6611e2080ce5ce1eb3f020a9f.png)'
 - en: '[Figure 2.a]'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '[图2.a]'
 - en: However, that sounds a bit dull and we’d rather have some more control over
     the output. We’d like to tell PG-GAN “generate an image of a man with a beard”,
     or “generate an image of a brown-haired woman”. That’s where the TL-GAN comes
     in.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，这听起来有点单调，我们希望对输出有更多的控制。我们希望告诉PG-GAN“生成一个有胡子的男人的图像”，或者“生成一个棕色头发的女人的图像”。这就是TL-GAN发挥作用的地方。
 - en: The TL-GAN is yet another neural network, this one trained by entering random
     vectors into PG-GAN, taking the generated faces, and running them through classifiers
     for attributes like “is young-looking”, “is bearded”, “is brown-haired”, etc.
@@ -287,170 +424,259 @@
     (i.e. “young-looking”, “bearded”, “brown-haired”) into the appropriate random-looking
     vector that should be input into PG-GAN to generate a face with those characteristics
     (Figure 2.b).
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: TL-GAN 是另一个神经网络，这个网络通过将随机向量输入 PG-GAN、获取生成的面孔，然后通过分类器检查诸如“看起来年轻”、“有胡须”、“棕色头发”等属性来进行训练。在训练阶段，TL-GAN
+    使用这些分类器标记 PG-GAN 生成的数千个面孔，并识别与我们关心的标签变化相对应的潜在空间中的方向。因此，TL-GAN 学会了如何将这些类别（即“看起来年轻”、“有胡须”、“棕色头发”）映射到适当的随机向量中，该向量应该输入到
+    PG-GAN 中以生成具有这些特征的面孔（图 2.b）。
 - en: '![Figure](../Images/444c4f6eebf36d5528508f27adccf7f8.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/444c4f6eebf36d5528508f27adccf7f8.png)'
 - en: '[Figure 2.b]'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '[图 2.b]'
 - en: 'Going back to our app, at this point we’ve already downloaded the pre-trained
     GAN models and loaded them into memory, and we’ve also grabbed a feature vector
     from the UI. So now we just have to feed those features into TL-GAN and then PG-GAN
     to get an image out:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 回到我们的应用程序，此时我们已经下载了预训练的 GAN 模型并将其加载到内存中，同时还从 UI 中获取了特征向量。所以现在我们只需将这些特征输入到 TL-GAN
+    然后是 PG-GAN 以获得图像：
 - en: Optimize performance
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 优化性能
 - en: The `generate_image()` function above can take some time to execute, especially
     when running on a CPU. To improve our app’s performance it would be great if we
     could cache the output of that function, so we don’t have to re-synthesize faces
     we’ve already seen as we move the slider back and forth.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的`generate_image()`函数可能需要一些时间来执行，特别是在 CPU 上运行时。为了提高应用程序的性能，如果我们能够缓存该函数的输出，将会很好，这样我们在滑动条来回移动时，就不需要重新合成已经看到的面孔。
 - en: Well, as you may have noticed in the snippet above already, the solution here
     is to once again use the `@st.cache` decorator.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 嗯，如你在上面的代码片段中已经注意到的，解决方案是再次使用 `@st.cache` 装饰器。
 - en: 'But notice the two arguments we passed to `@st.cache` in this case: `show_spinner=False`
     and `hash_funcs={tf.Session: id}`. What are those there for?'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '但请注意我们在这种情况下传递给 `@st.cache` 的两个参数：`show_spinner=False` 和 `hash_funcs={tf.Session:
+    id}`。这些是用来做什么的？'
 - en: 'The first one is easy to explain: by default, `@st.cache` shows a status box
     in the UI letting you know that a slow-running function is currently executing.
     We call that a “spinner”. However, in this case, we’d like to avoid showing it,
     so the UI doesn’t jump around unexpectedly. So we set `show_spinner` to False.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个问题容易解释：默认情况下，`@st.cache` 在 UI 中显示一个状态框，让你知道一个运行缓慢的函数正在执行。我们称之为“加载指示器”。但在这种情况下，我们希望避免显示它，以免
+    UI 意外跳动。因此，我们将`show_spinner`设置为 False。
 - en: 'The next one solves a more involved problem: the TensorFlow session object,
     which is passed as an argument to `generate_image()`, is usually mutated by TensorFlow’s
     internals in between runs of this cached function. This means the input arguments
     to `generate_image()` will always be different and we’ll never actually get a
     cache hit. In other words, the `@st.cache` decorator won’t actually do anything!
     How can we solve this?'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一个问题解决了一个更复杂的问题：TensorFlow 会话对象作为参数传递给 `generate_image()`，通常在这个缓存函数运行之间会被 TensorFlow
+    的内部机制修改。这意味着`generate_image()`的输入参数将始终不同，我们将永远不会真正获得缓存命中。换句话说，`@st.cache` 装饰器实际上不会起作用！我们如何解决这个问题？
 - en: Hash_funcs to the rescue
+  id: totrans-67
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: hash_funcs 的救援
 - en: 'The hash_funcs option allows us to specify custom hash functions that tell `@st.cache` how
     it should interpret different objects when checking whether this is a cache hit
     or a cache miss. In this case, we’re going to use that option to tell Streamlit
     to hash a TensorFlow session by calling Python’s `id()` function rather than by
     examining its contents:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: hash_funcs 选项允许我们指定自定义哈希函数，告诉`@st.cache` 在检查是否为缓存命中或缓存未命中时，应该如何解释不同的对象。在这种情况下，我们将使用该选项告诉
+    Streamlit 通过调用 Python 的 `id()` 函数来对 TensorFlow 会话进行哈希，而不是通过检查其内容：
 - en: This works for us because the session object in our case is actually a singleton
     across all executions of the underlying code since it comes from the @st.cache’d `load_pg_gan_model()` function.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 这对我们有效，因为在我们的情况下，会话对象实际上是所有底层代码执行中的单例，因为它来自 @st.cache 的 `load_pg_gan_model()`
+    函数。
 - en: For more information about `hash_funcs`, check out our documentation about [advanced
     caching techniques](https://docs.streamlit.io/api.html?highlight=cache#streamlit.cache).
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 欲了解有关`hash_funcs`的更多信息，请查看我们关于[高级缓存技术](https://docs.streamlit.io/api.html?highlight=cache#streamlit.cache)的文档。
 - en: Step 5\. Draw the synthesized image
+  id: totrans-71
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第5步：绘制合成图像
 - en: 'Now that we have the output image, drawing it is a piece of cake! Just call
     Streamlit’s `st.image` function:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经有了输出图像，绘制它就轻而易举了！只需调用Streamlit的`st.image`函数：
 - en: '[PRE3]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: And we’re done!
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们完成了！
 - en: Wrapping up
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结
 - en: 'So there you have it: interactive face synthesis with TensorFlow in a 190-line
     Streamlit app and only 13 Streamlit function calls! Have fun exploring the space
     of faces these two GANs can draw, and many thanks to [Nvidia](https://github.com/tkarras/progressive_growing_of_gans) and [Shaobo
     Guan](https://github.com/SummitKwan/transparent_latent_gan) for letting us build
     off their super cool demos. We hope that you have as much fun building apps and
     playing with models as we do. ????'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样：在一个190行的Streamlit应用中使用TensorFlow进行互动面孔合成，仅需13个Streamlit函数调用！祝你在探索这两个GAN能绘制的面孔领域时玩得开心，非常感谢[Nvidia](https://github.com/tkarras/progressive_growing_of_gans)和[Shaobo
+    Guan](https://github.com/SummitKwan/transparent_latent_gan)让我们能在他们超级酷的演示基础上进行构建。我们希望你像我们一样享受构建应用和玩弄模型的乐趣。????
 - en: For more Streamlit app examples, you can check out our gallery at[ https://www.streamlit.io/gallery](https://www.streamlit.io/gallery).
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 欲了解更多Streamlit应用示例，请查看我们的画廊[https://www.streamlit.io/gallery](https://www.streamlit.io/gallery)。
 - en: '*Thanks to Ash Blum, TC Ricks, Amanda Kelly, Thiago Teixeira, Jonathan Rhone
     and Tim Conkling for their helpful input on this article.*'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '*感谢Ash Blum、TC Ricks、Amanda Kelly、Thiago Teixeira、Jonathan Rhone和Tim Conkling对本文的宝贵意见。*'
 - en: '**References:**'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '**参考文献：**'
 - en: '[1] T. Karras, T. Aila, S. Laine, J. Lehtinen. *Progressive Growing of GANs
     for Improved Quality, Stability, and Variation*. International Conference on Learning
     Representations (ICLR 2018)'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] T. Karras, T. Aila, S. Laine, J. Lehtinen. *改进质量、稳定性和变化的渐进式生成对抗网络*。国际学习表征会议（ICLR
+    2018）'
 - en: '[2] S. Guan. *Controlled image synthesis and editing using a novel TL-GAN model*.
     Insight Data Science Blog (2018)'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2] S. Guan. *使用新颖的TL-GAN模型进行受控图像合成和编辑*。Insight Data Science博客（2018）'
 - en: '[3] Z. Liu, P. Luo, X. Wang, X. Tang. *Deep Learning Face Attributes in the
     Wild. *International Conference on Computer Vision (ICCV 2015)'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '[3] Z. Liu, P. Luo, X. Wang, X. Tang. *深度学习人脸属性*。国际计算机视觉会议（ICCV 2015）'
 - en: '**Bio: [Adrien Treuille](https://www.linkedin.com/in/adrien-treuille-52215718/)**
     is co-founder of Streamlit, the ML tooling framework. Adrien was a computer science
     prof at Carnegie Mellon, lead a Google X project, and was VP at Zoox.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Adrien Treuille](https://www.linkedin.com/in/adrien-treuille-52215718/)**
+    是Streamlit的联合创始人，该框架专注于机器学习工具。Adrien曾是卡内基梅隆大学的计算机科学教授，领导了Google X项目，并曾担任Zoox的副总裁。'
 - en: '[Original](https://towardsdatascience.com/build-an-app-to-synthesize-photorealistic-faces-using-tensorflow-and-streamlit-dd2545828021).
     Reposted with permission.'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/build-an-app-to-synthesize-photorealistic-faces-using-tensorflow-and-streamlit-dd2545828021)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Generate Realistic Human Face using GAN](/2020/03/generate-realistic-human-face-using-gan.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用GAN生成逼真的人脸](/2020/03/generate-realistic-human-face-using-gan.html)'
 - en: '[12-Hour Machine Learning Challenge: Build & deploy an app with Streamlit and
     DevOps tools](/2020/02/machine-learning-challenge-build-deploy-app-streamlit-devops.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[12小时机器学习挑战：使用Streamlit和DevOps工具构建和部署应用](/2020/02/machine-learning-challenge-build-deploy-app-streamlit-devops.html)'
 - en: '[The Forgotten Algorithm](/2020/02/forgotten-algorithm-monte-carlo-simulation.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[被遗忘的算法](/2020/02/forgotten-algorithm-monte-carlo-simulation.html)'
 - en: More On This Topic
+  id: totrans-89
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[3 Ways to Generate Hyper-Realistic Faces Using Stable Diffusion](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用稳定扩散生成超逼真的面孔的3种方法](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)'
 - en: '[Build a Machine Learning Web App in 5 Minutes](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5分钟内构建机器学习网页应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)'
 - en: '[KDnuggets News March 9, 2022: Build a Machine Learning Web App in 5…](https://www.kdnuggets.com/2022/n10.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets新闻2022年3月9日：在5分钟内构建机器学习网页应用…](https://www.kdnuggets.com/2022/n10.html)'
 - en: '[Build a Command-Line App with Python in 7 Easy Steps](https://www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用Python在7个简单步骤中构建命令行应用](https://www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps)'
 - en: '[4 Ways to Generate Passive Income Using ChatGPT](https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 ChatGPT 生成被动收入的 4 种方法](https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html)'
 - en: '[Generate Music From Text Using Google MusicLM](https://www.kdnuggets.com/2023/06/generate-music-text-google-musiclm.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Google MusicLM 从文本生成音乐](https://www.kdnuggets.com/2023/06/generate-music-text-google-musiclm.html)'
