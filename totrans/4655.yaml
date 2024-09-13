@@ -1,322 +1,481 @@
 - en: 'Who is your Golden Goose?: Cohort Analysis'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 谁是你的金鹅？： cohort分析
 - en: 原文：[https://www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html/2](https://www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html/2)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html/2](https://www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html/2)
 - en: K-Means Clustering
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: K均值聚类
 - en: '[**K-Means clustering**](https://en.wikipedia.org/wiki/K-means_clustering)is
     one type of unsupervised learning algorithms, which makes groups based on the
     distance between the points. How? There are two concepts of distance in K-Means
     clustering. **Within Cluster Sums of Squares**(WSS) and **Between Cluster Sums
     of Squares **(BSS).'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**K均值聚类**](https://en.wikipedia.org/wiki/K-means_clustering) 是一种无监督学习算法，根据点之间的距离进行分组。怎么做？K均值聚类中有两个距离概念。**簇内平方和**（WSS）和**簇间平方和**（BSS）。'
 - en: '![Cluster sum of squares](../Images/f07e5d2dd5697a3e33e5548bab01835b.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![簇内平方和](../Images/f07e5d2dd5697a3e33e5548bab01835b.png)'
 - en: WSS means the sum of distances between the points and the corresponding centroids
     for each cluster and BSS means the sum of distances between the centroids and
     the total sample mean multiplied by the number of points within each cluster.
     So you can consider WSS as the measure of compactness and BSS as the measure of
     separation. For clustering to be successful, we need to get the lower WSS and
     the higher BSS.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: WSS指每个簇内点与相应质心之间的距离总和，而BSS指质心与总体样本均值之间的距离总和乘以每个簇内点的数量。因此，你可以将WSS视为紧凑度的度量，将BSS视为分离度的度量。为了使聚类成功，我们需要获得较低的WSS和较高的BSS。
 - en: By iterating and moving the cluster centroids, K-Means algorithm tries to get
     the optimized points of the centroid, which minimize the value of WSS and maximize
     the value of BSS. I won’t go more in-depth with the basic concept, but you can
     find a further explanation from [video](https://www.youtube.com/watch?v=_aWzGGNrcic).
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过迭代和移动簇质心，K均值算法试图获得质心的优化点，以最小化WSS值并最大化BSS值。我不会深入讲解基本概念，但你可以从[视频](https://www.youtube.com/watch?v=_aWzGGNrcic)中找到进一步的解释。
 - en: '![How K-means algorithm works](../Images/a23f666f8b4c08edcb9c51565a201632.png)'
+  id: totrans-7
   prefs: []
   type: TYPE_IMG
+  zh: '![K均值算法如何工作](../Images/a23f666f8b4c08edcb9c51565a201632.png)'
 - en: Photo from Wikipedia
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于维基百科
 - en: Because K-means clustering uses the distance as the similarity factor, we need
     to scale the data. Suppose we have two different scales of features, say height
     and weight. Height is over 150cm and weight is below 100kg on average. So If we
     plot this data, the distance between the points will be highly dominated by height
     resulting in a biased analysis.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于K均值聚类使用距离作为相似度因素，因此我们需要对数据进行缩放。假设我们有两个不同尺度的特征，例如身高和体重。身高超过150cm，而体重平均低于100kg。如果我们绘制这些数据，点之间的距离将高度受身高的主导，导致分析偏倚。
 - en: Therefore when it comes to K-means clustering, scaling and normalizing data
     is a critical step for preprocessing. If we check the distribution of RFM values,
     you can notice that they are right-skewed. It’s not a good state to use without
     standardization. Let’s transform the RFM values into log scaled first and then
     normalize them.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，在K均值聚类中，缩放和归一化数据是预处理的关键步骤。如果我们检查RFM值的分布，可以发现它们是右偏的。没有标准化的状态下使用它并不好。我们先将RFM值转换为对数尺度，然后再进行归一化。
 - en: '[PRE0]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: define function for the values below 0
+  id: totrans-12
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 为小于0的值定义函数
 - en: 'def neg_to_zero(x):'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 定义函数以将负值变为零
 - en: 'if x <= 0:'
+  id: totrans-14
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如果 x <= 0：
 - en: return 1
+  id: totrans-15
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 返回 1
 - en: 'else:'
+  id: totrans-16
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 否则：
 - en: return x
+  id: totrans-17
   prefs:
   - PREF_IND
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 返回 x
 - en: apply the function to Recency and MonetaryValue column
+  id: totrans-18
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 将函数应用于 Recency 和 MonetaryValue 列
 - en: rfm['Recency'] = [neg_to_zero(x) for x in rfm.Recency]
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: rfm['Recency'] = [neg_to_zero(x) for x in rfm.Recency]
 - en: rfm['Monetary'] = [neg_to_zero(x) for x in rfm.Monetary]
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: rfm['Monetary'] = [neg_to_zero(x) for x in rfm.Monetary]
 - en: unskew the data
+  id: totrans-21
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 去偏数据
 - en: rfm_log = rfm[['Recency', 'Frequency', 'Monetary']].apply(np.log, axis = 1).round(3)
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: rfm_log = rfm[['Recency', 'Frequency', 'Monetary']].apply(np.log, axis = 1).round(3)
 - en: '[PRE1]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: scale the data
+  id: totrans-24
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 缩放数据
 - en: scaler = StandardScaler()
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: scaler = StandardScaler()
 - en: rfm_scaled = scaler.fit_transform(rfm_log)
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: rfm_scaled = scaler.fit_transform(rfm_log)
 - en: transform into a dataframe
+  id: totrans-27
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 转换为数据框
 - en: rfm_scaled = pd.DataFrame(rfm_scaled, index = rfm.index, columns = rfm_log.columns)
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: rfm_scaled = pd.DataFrame(rfm_scaled, index = rfm.index, columns = rfm_log.columns)
 - en: '[PRE2]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[PRE3]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Using for loop, I built the models for every number of clusters from 1 to 10\.
     And then collect the WSS values for each model. Look at the plot below. As the
     number of clusters increases, the value of WSS decreases. There is no surprise
     cause the more clusters we make, the size of each cluster will decrease so the
     sum of the distances within each cluster will decrease. Then what is the optimal
     number?
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用for循环，我为从1到10的每个聚类数量建立了模型。然后收集每个模型的WSS值。看看下面的图。随着聚类数量的增加，WSS值减少。这并不奇怪，因为我们创建的聚类越多，每个聚类的大小就会减小，因此每个聚类内的距离总和会减少。那么最佳数量是多少呢？
 - en: '![Elbow method in Kmeans](../Images/99080f4deadcffcee1c97cff37387121.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![K均值中的肘部法则](../Images/99080f4deadcffcee1c97cff37387121.png)'
 - en: The answer is at the ‘Elbow’ of this line. Somewhere WSS dramatically decrease
     but not too much K. My choice here is three. What do you say? Doesn’t it really
     look like an elbow of the line?
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 答案在这条线的“肘部”位置。某个地方WSS显著减少，但K值不太高。我的选择是三。你怎么看？这难道不真的像是这条线的肘部吗？
 - en: Now we chose the number of clusters, we can build a model and make actual clusters
     like below. We can also check the distance between each point and the centroids
     or the labels of the clusters. Let’s make a new column and assign the labels to
     each customer.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们选择了聚类数量，可以建立模型并生成实际的聚类，如下所示。我们还可以检查每个点与质心或聚类标签之间的距离。让我们创建一个新列，并为每个客户分配标签。
 - en: '[PRE4]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![ RFM quantile groups](../Images/2dae5957861ab24a67ccd13ace500cea.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![RFM分位组](../Images/2dae5957861ab24a67ccd13ace500cea.png)'
 - en: Now we made two kinds of segmentation, RFM quantile groups and K-Means groups.
     Let’s make visualization and compare the two methods.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们制作了两种类型的分段，RFM分位组和K-均值组。让我们进行可视化并比较这两种方法。
 - en: Snake plot and heatmap
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 蛇形图和热力图
 - en: I’m going to make two kinds of plot, a line plot and a heat map. We can easily
     compare the differences of RFM values with these two plots. Firstly, I’ll make
     columns to assign the two clustering labels. And then reshape the data frame by
     melting the RFM values into one column.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将制作两种图，一种是折线图，另一种是热力图。通过这两种图，我们可以轻松比较RFM值的差异。首先，我会创建列以分配两个聚类标签。然后通过将RFM值融入一列来重塑数据框。
 - en: '[PRE5]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![Elbow method in Kmeans](../Images/b85d1164af1d1b2f58a22bbcb67f5ed9.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![K均值中的肘部法则](../Images/b85d1164af1d1b2f58a22bbcb67f5ed9.png)'
 - en: This will make recency, frequency and monetary categories as observations, which
     allows us to plot the values in one plot. Put `Metrics` at x-axis and `Value` at
     y-axis and group the values by `RFM_Level.` Repeat the same code which groups
     the values by `K_Cluster` this time. The outcome would be like below.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将使得最近性、频率和货币价值类别作为观察对象，这允许我们将值绘制在一个图中。将`Metrics`放在x轴，将`Value`放在y轴，并按`RFM_Level`对值进行分组。这次重复相同的代码，将值按`K_Cluster`分组。结果如下所示。
 - en: '[PRE6]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![Snake plot of RFM](../Images/ed077f5713a4379c9ff7a3be96b0c058.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![RFM的蛇形图](../Images/ed077f5713a4379c9ff7a3be96b0c058.png)'
 - en: This kind of plots is called ‘Snake plot’ especially in marketing analysis.
     It seems **Gold **and **Green **groups on the left plot are similar with **1 **and **2**clusters
     on the right plot. And the **Bronze **and **Silver **groups seem to be merged
     into group **0**.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种图被称为“蛇形图”，尤其在市场分析中使用。看起来**金色**和**绿色**组在左侧图上类似于右侧图上的**1**和**2**簇。而**铜色**和**银色**组似乎被合并为**0**组。
 - en: Let’s try again with a heat map. [Heat maps](https://en.wikipedia.org/wiki/Heat_map) are
     a graphical representation of data where larger values were colored in darker
     scales and smaller values in lighter scales. We can compare the variance between
     the groups quite intuitively by colors.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们再试一次热力图。[热力图](https://en.wikipedia.org/wiki/Heat_map)是数据的图形表示，其中较大的值以较深的色调显示，较小的值以较浅的色调显示。我们可以通过颜色直观地比较组之间的方差。
 - en: '[PRE7]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: And then repeat the same code for K-clusters as we did before.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后重复之前做的K-聚类的相同代码。
 - en: '[PRE8]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![Heat map of RFM and K-Means](../Images/23b61b84fb6390961e07e98ce4dee968.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![RFM和K均值的热力图](../Images/23b61b84fb6390961e07e98ce4dee968.png)'
 - en: It could be seen unmatching, especially at the top of the plots. But It’s just
     because of the different order. The **Green **group on the left will correspond
     to group **2**. If you see the values inside each box, you can see the difference
     between the groups become significant for **Gold **and **1 **group. And it could
     be easily recognized by the darkness of the color.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 可能会看到不匹配，特别是在图的顶部。但这只是因为顺序不同。左侧的**绿色**组将对应于**2**组。如果你查看每个框内的值，可以看到**金色**和**1**组之间的差异变得显著。而这可以通过颜色的深浅轻易识别出来。
 - en: Conclusion
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 结论
 - en: We talked about how to get RFM values from customer purchase data, and we made
     two kinds of segmentation with RFM quantiles and K-Means clustering methods. With
     this result, we can now figure out who are our ‘golden’ customers, the most profitable
     groups. This also tells us on which customer to focus on and to whom give special
     offers or promotions for fostering loyalty among customers. We can select the
     best communication channel for each segment and improve new marketing strategies.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们讨论了如何从客户购买数据中获取 RFM 值，并使用 RFM 分位数和 K-Means 聚类方法进行了两种分段。通过这些结果，我们现在可以确定谁是我们的‘黄金’客户，即最盈利的群体。这也告诉我们应关注哪些客户，并向他们提供特别优惠或促销，以培养客户忠诚度。我们可以为每个细分选择最佳的沟通渠道，并改进新的营销策略。
 - en: Resources
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 资源
 - en: A nice article about RFM analysis: [https://clevertap.com/blog/rfm-analysis/](https://clevertap.com/blog/rfm-analysis/)
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一篇关于 RFM 分析的精彩文章：[https://clevertap.com/blog/rfm-analysis/](https://clevertap.com/blog/rfm-analysis/)
 - en: Another useful explanation for RFM analysis: [https://www.optimove.com/learning-center/rfm-segmentation](https://www.optimove.com/learning-center/rfm-segmentation)
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 另一个有用的 RFM 分析解释：[https://www.optimove.com/learning-center/rfm-segmentation](https://www.optimove.com/learning-center/rfm-segmentation)
 - en: Intuitive explanation on K-means clustering: [https://www.youtube.com/watch?v=_aWzGGNrcic](https://www.youtube.com/watch?v=_aWzGGNrcic)
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: K-means 聚类的直观解释：[https://www.youtube.com/watch?v=_aWzGGNrcic](https://www.youtube.com/watch?v=_aWzGGNrcic)
 - en: '**Bio: **[Jiwon Jeong](https://www.linkedin.com/in/jiwon-jeong/) is a Graduate
     Research Assistant at Yonsei University.'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：**[Jiwon Jeong](https://www.linkedin.com/in/jiwon-jeong/) 是延世大学的研究生助理。'
 - en: '[Original](https://towardsdatascience.com/who-is-your-golden-goose-cohort-analysis-50c9de5dbd31).
     Reposted with permission.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/who-is-your-golden-goose-cohort-analysis-50c9de5dbd31)。已获授权转载。'
 - en: '**Related:**'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Clustering Using K-means Algorithm](/2018/07/clustering-using-k-means-algorithm.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 K-means 算法进行聚类](/2018/07/clustering-using-k-means-algorithm.html)'
 - en: '[K-Means & Other Clustering Algorithms: A Quick Intro with Python](/2017/03/k-means-clustering-algorithms-intro-python.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[K-Means 和其他聚类算法：Python 快速入门](/2017/03/k-means-clustering-algorithms-intro-python.html)'
 - en: '[Beginner’s Guide to Customer Segmentation](/2017/03/yhat-beginner-guide-customer-segmentation.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[客户细分初学者指南](/2017/03/yhat-beginner-guide-customer-segmentation.html)'
 - en: '* * *'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-65
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的信息技术'
 - en: '* * *'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Last call: Stefan Krawcyzk’s ''Mastering MLOps'' Live Cohort](https://www.kdnuggets.com/2022/08/sphere-last-call-stefan-krawcyzk-mastering-mlops.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[最后呼叫：Stefan Krawcyzk 的《掌握 MLOps》现场课程](https://www.kdnuggets.com/2022/08/sphere-last-call-stefan-krawcyzk-mastering-mlops.html)'
 - en: '[Using Cluster Analysis to Segment Your Data](https://www.kdnuggets.com/using-cluster-analysis-to-segment-your-data)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用聚类分析进行数据分段](https://www.kdnuggets.com/using-cluster-analysis-to-segment-your-data)'
 - en: '[Best Architecture for Your Text Classification Task: Benchmarking…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本分类任务的最佳架构：基准测试…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
 - en: '[Market Data and News: A Time Series Analysis](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[市场数据和新闻：时间序列分析](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)'
 - en: '[The Best Python Courses: An Analysis Summary](https://www.kdnuggets.com/2022/01/best-python-courses-analysis-summary.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[最佳 Python 课程：分析总结](https://www.kdnuggets.com/2022/01/best-python-courses-analysis-summary.html)'
 - en: '[Machine Learning’s Sweet Spot: Pure Approaches in NLP and Document Analysis](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习的甜蜜点：NLP 和文档分析中的纯方法](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)'
 - en: '[PRE9]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
