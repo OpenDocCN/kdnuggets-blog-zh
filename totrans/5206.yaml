@@ -1,18 +1,23 @@
 - en: 'Feature Engineering in SQL and Python: A Hybrid Approach'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2020/07/feature-engineering-sql-python-hybrid-approach.html](https://www.kdnuggets.com/2020/07/feature-engineering-sql-python-hybrid-approach.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '**By [Shaw Lu](https://www.linkedin.com/in/shawlu95/), Data Scientist at Coupang**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/387c7c1fb43091b8548d223324b19571.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
 - en: 'I knew SQL long before learning about Pandas, and I was intrigued by the way
@@ -21,56 +26,69 @@
     data to build (and overfit) models. Although they are almost functionally equivalent,
     I’d argue both tools are essential for a data scientist to work efficiently. From
     my experience with Pandas, I’ve noticed the following:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: I end up with many CSV files when exploring different features.
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: When I aggregate over a big dataframe, the Jupyter kernel simply dies.
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: I have multiple dataframes with confusing (and long) names in my kernel.
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: My feature engineering codes look ugly and are scattered over many cells.
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: Those problems are naturally solved when I began [feature engineering](https://www.kdnuggets.com/2018/12/feature-engineering-explained.html)
     directly in SQL. So in this post, I’ll share some of my favorite tricks by working
     through a take-home challenge dataset. If you know a little bit of SQL, it’s time
     to put it into good use.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: Installing MySQL
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -78,79 +96,112 @@
     get MySQL server by installing one of the local desktop servers such as MAMP,
     WAMP or XAMPP. There are many tutorials online, and it’s worth going through the
     trouble.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: 'After setting up your server, make sure you have three items ready: username,
     password, port number. Login through Terminal by entering the following command
     (here we have username “root”, password 1234567).'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![](../Images/93c6c27ef213b648d77301786b19395a.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
 - en: Then create a database called “Shutterfly” in the MySQL console (you can name
     it whatever you want). The two tables will be loaded into this database.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Install sqlalchemy
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'You’ll need Pandas and sqlalchemy to work with SQL in Python. I bet you already
     have Pandas. Then install sqlalchemy by activating your desired environment to
     launch Jupyter notebook, and enter:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The sqlalchemy module also requires *MySQLdb* and *mysqlclient* modules. Depending
     on your OS, this can be installed using different [commands](https://stackoverflow.com/questions/454854/no-module-named-mysqldb).
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: sqlalchemy 模块还需要*MySQLdb*和*mysqlclient*模块。根据你的操作系统，这些可以使用不同的[命令](https://stackoverflow.com/questions/454854/no-module-named-mysqldb)进行安装。
 - en: Load Dataset into MySQL Server
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 将数据集加载到 MySQL 服务器
 - en: In this example, we’ll load data from two [CSV files](https://github.com/shawlu95/Data-Science-Toolbox/tree/master/case_study/shutterfly/data),
     and engineer features directly in MySQL. To load datasets, we need to instantiate
     an **engine** object using username, password, port number, and database name.
     Two tables will be created: *Online* and *Order*. A natural index will be created
     on each table.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个示例中，我们将从两个[CSV 文件](https://github.com/shawlu95/Data-Science-Toolbox/tree/master/case_study/shutterfly/data)中加载数据，并直接在
+    MySQL 中进行特征工程。为了加载数据集，我们需要使用用户名、密码、端口号和数据库名称实例化一个**engine**对象。将创建两个表：*Online*
+    和 *Order*。每个表上都会创建一个自然索引。
 - en: In MySQL console, you can verify that the tables have been created.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 MySQL 控制台中，你可以验证表是否已创建。
 - en: Split Dataset
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 拆分数据集
 - en: This may seem counter-intuitive since we haven’t built any feature yet. But
     it’s actually very neat because all we need to do is to split **dataset by index**.
     By design, I also included the label (event 2) which we try to predict. When loading
     features, we will simply join the index with feature tables.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可能看起来有些违背直觉，因为我们还没有构建任何特征。但实际上这是非常简洁的，因为我们需要做的就是按**索引拆分数据集**。根据设计，我还包含了我们尝试预测的标签（事件
+    2）。在加载特征时，我们只需将索引与特征表连接起来即可。
 - en: In MySQL console, you can verify that the training and test set are created.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 MySQL 控制台中，你可以验证训练集和测试集是否已创建。
 - en: Feature Engineering
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 特征工程
 - en: This is the heavy lifting part. I write SQL code directly in Sublime Text, and
     debug my code by pasting them into MySQL console. Because this dataset is an event
     log, we must avoid leaking future information into each data point. As you can
     imagine, every feature needs to be aggregated over the history!
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个繁重的工作。我直接在 Sublime Text 中编写 SQL 代码，并通过将代码粘贴到 MySQL 控制台中来调试。由于该数据集是事件日志，我们必须避免将未来的信息泄漏到每个数据点中。你可以想象，每个特征都需要在历史数据中进行聚合！
 - en: 'Joining table is the slowest operation, and so we want to get as many features
     as possible from each join. In this dataset, I implemented four types of join,
     resulting in four groups of features. The details are not important, but you can
@@ -158,62 +209,87 @@
     Each snippet creates a table. **The index is preserved and must match correctly
     to the response variable in the training set and test set. **Each snippet is structured
     like this:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 连接表是最慢的操作，因此我们希望从每次连接中获得尽可能多的特征。在这个数据集中，我实现了四种类型的连接，生成了四组特征。具体细节并不重要，但你可以在[这里](https://github.com/shawlu95/Shutterfly-Take-Home-Challenge/tree/master/features)找到我所有的
+    SQL 片段。每个片段创建一个表。**索引被保留，并且必须与训练集和测试集中的响应变量正确匹配。**每个片段的结构如下：
 - en: To generate the feature tables, open a new Terminal, navigate to the folder
     containing the sql files, and enter the following commands and passwords. The
     first snippet creates some necessary indices that speed up the join operation.
     The next four snippets create four feature tables. Without the indices, the joining
     takes forever. With the indices, it takes about 20 minutes (not bad on a local
     machine).
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 要生成特征表，打开一个新的终端，导航到包含 SQL 文件的文件夹，并输入以下命令和密码。第一个片段创建了一些必要的索引，以加速连接操作。接下来的四个片段创建了四个特征表。没有索引，连接操作将花费很长时间。有了索引，连接操作大约需要
+    20 分钟（在本地机器上还不错）。
 - en: '[PRE3]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Now you should have the following tables in the database. Note that the derived
     features are stored separately from the original event logs, which help prevent
     confusion and disaster.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你应该在数据库中拥有以下表。请注意，衍生特征与原始事件日志分开存储，这有助于防止混淆和灾难。
 - en: Load Features
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 加载特征
 - en: Here I wrote a utility function that pulls data from the MySQL server.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我写了一个从 MySQL 服务器提取数据的实用程序函数。
 - en: The function takes table name “trn_set” (training set) or “tst_set” (test set)
     as input, and an optional *limit *clause, if you only want a subset of the data.
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 该函数以表名“trn_set”（训练集）或“tst_set”（测试集）作为输入，如果你只想获取数据的子集，还可以选择*limit*子句。
 - en: Unique columns, and columns with mostly missing values, are dropped.
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 唯一列以及大部分缺失值的列被删除。
 - en: Date column is mapped to month, to help capture seasonality effect.
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 日期列被映射为月份，以帮助捕捉季节性效应。
 - en: Notice how the feature tables are joined in succession. This is actually efficient
     because we are always joining index on one-to-one mapping.
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Finally, let’s take a look at 5 training examples, and their features.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: Now you have a well-defined dataset and feature set. You can tweak the scale
     of each feature and missing values to suit your model’s requirement.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: For tree-based methods, which are invariant to feature scaling, we can directly
     apply the model, and simply focus on tuning parameters! See an example of a plain-vanilla
     gradient boosting machine [here](https://github.com/shawlu95/Data-Science-Toolbox/blob/master/case_study/shutterfly/gbm_benchmark_2.ipynb).
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/fa5fb7efe28cb82131c6f0edf7276e40.png)'
+  id: totrans-49
   prefs: []
   type: TYPE_IMG
 - en: It is nice to see that the useful features are all engineered, except for the *category* feature.
@@ -221,9 +297,11 @@
     nulls value were observed in event2\. This is an illustrative case **where we
     cannot replace null values by median or average**, because the fact that they
     are missing is correlated with the response variable!
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: Summary
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -231,81 +309,107 @@
     our notebook, and our feature engineering codes are reduced to a few straightforward
     SQL statements. There are two situations in which the SQL approach is even more
     efficient:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
 - en: If your dataset is deployed on the cloud, you may be able to run distributed
     query. Most SQL server supports distirbuted query today. In Pandas, you need some
     extension called *Dask DataFrame.*
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If you can afford to pull data real-time, you can create SQL **views** instead
     of tables. In this way, every time you pull data in Python, **your data will always
     be up-to-date**.
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: One fundamental restriction of this approach is that you must be able to directly
     connect to your SQL server in Python. If this is not possible, you may have to
     download the query result as a CSV file and load it in Python.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: I hope you find this post helpful. Though I’m not advocating method over another,
     it is necessary to understand the advantage and limitation of each method, and
     have both methods ready in our toolkit. So we can apply whichever method that
     works best under the constraints.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Shaw Lu](https://www.linkedin.com/in/shawlu95/)** is a Data Scientist
     at Coupang. He is an engineering graduate seeking to leverage data science to
     inform business management, supply chain optimization, growth marketing and operation
     research. Official author in Toward Data Science.'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://towardsdatascience.com/feature-engineering-in-sql-and-python-a-hybrid-approach-b52347cd2de4).
     Reposted with permission.'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '[4 Tips for Advanced Feature Engineering and Preprocessing](/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Learning SQL the Hard Way](/2020/01/learning-sql-hard-way.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[7 Steps to Mastering Intermediate Machine Learning with Python — 2019 Edition](/2019/06/7-steps-mastering-intermediate-machine-learning-python.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握中级机器学习的7个步骤——2019版](/2019/06/7-steps-mastering-intermediate-machine-learning-python.html)'
 - en: More On This Topic
+  id: totrans-63
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应了解的三大R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让 Python 成为初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目的，寻找目的以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一项90亿美元的人工智能失败，经过审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功的数据科学家具备的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
