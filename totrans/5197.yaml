@@ -318,11 +318,13 @@
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你可以通过终端将秘密添加到集群中：`kubectl apply -f secrets.yml`。然后通过`kubectl get secrets`检查是否成功。
 - en: '**Persistent volume**'
   id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**持久卷**'
 - en: A persistent volume is a storage resource with a lifecycle independent of a *Pod*.
     This means that the storage will persist if a *pod* goes down. As Kubernetes has
     the permission to restart *pods* at any time, it is a good practice to set your
@@ -337,21 +339,27 @@
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 持久卷是一个生命周期独立于*Pod*的存储资源。这意味着如果*pod*崩溃，存储将继续存在。由于Kubernetes可以在任何时候重新启动*pods*，因此将数据库存储设置为*persistent
+    volume*是一种良好的实践。*persistent volume*可以是本地文件系统上的目录，也可以是云提供商的存储服务（例如AWS Elastic Block
+    Storage或Azure Disk）。创建*persistent volume*时可以指定其类型。在本教程中，你将使用*hostPath*类型，这将在你的*minikube*节点上创建一个卷。然而，在生产环境中，确保使用其他类型（[参见文档](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#types-of-persistent-volumes)），因为使用*hostPath*类型时，如果删除minikube节点，数据将会丢失。
 - en: 'Making your application use a *persistent volume* exists of two parts:'
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 使应用程序使用*persistent volume*包括两个部分：
 - en: Specifying the actual storage type, location, size and properties of the *volume*.
   id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 指定*卷*的实际存储类型、位置、大小和属性。
 - en: Specify a *persistent volume claim* that requests a specific size and access
     modes of the persistent volume for your deployments.
   id: totrans-49
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 指定一个*persistent volume claim*，请求部署所需的特定大小和访问模式的持久卷。
 - en: Create a *persistent-volume.yml* file and specify the size (in this example
     2GB), access modes and the path the files will be stored. The `spec.persistentVolumeReclaimPolicy` specifies
     what should be done if the *persistent volume claim*is deleted. In the case of
@@ -362,6 +370,9 @@
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个*persistent-volume.yml*文件，并指定大小（在本例中为2GB）、访问模式以及文件存储的路径。`spec.persistentVolumeReclaimPolicy`指定了如果*persistent
+    volume claim*被删除时应该执行的操作。对于像*MySQL*数据库这样的有状态应用程序，你希望在删除声明时保留数据，以便手动检索或备份数据。默认的回收策略是继承自*persistent
+    volume*的类型，因此在yml文件中始终指定它是一种良好的实践。
 - en: Again you can add the storage via `kubectl apply -f persistent-volume.yml` .
     And see if the details of your created resources via `kubectl describe pv mysql-pv-volume` and `kubectl
     describe pvc mysql-pv-claim`. As you made a hostPath type *persistent volume*,
@@ -370,11 +381,15 @@
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过`kubectl apply -f persistent-volume.yml`再次添加存储。然后通过`kubectl describe pv
+    mysql-pv-volume`和`kubectl describe pvc mysql-pv-claim`查看你创建的资源的详细信息。由于你创建了一个主机路径类型的*persistent
+    volume*，你可以通过登录到minikube节点`minikube ssh`并导航到指定路径（`/mnt/data`）来查找数据。
 - en: '**Deploy the MySQL server**'
   id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**部署MySQL服务器**'
 - en: 'With our secrets and persistent volume (claim) in place, we can start building
     our application. First we will deploy a *MySQL* server. Pull the latest *mysql *image`docker
     pull mysql` and create the *mysql-deployment.yml* file. There are several things

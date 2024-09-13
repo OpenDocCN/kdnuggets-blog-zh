@@ -1,54 +1,81 @@
 - en: Data Cleaning and Wrangling in SQL
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SQL中的数据清理和整理
 - en: 原文：[https://www.kdnuggets.com/2021/01/data-cleaning-wrangling-sql.html](https://www.kdnuggets.com/2021/01/data-cleaning-wrangling-sql.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/01/data-cleaning-wrangling-sql.html](https://www.kdnuggets.com/2021/01/data-cleaning-wrangling-sql.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Antonio Emilio Badia](https://engineering.louisville.edu/faculty/antonio-e-badia/),
     Assoc. Professor, CSE department, U. of Louisville.**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Antonio Emilio Badia](https://engineering.louisville.edu/faculty/antonio-e-badia/)，路易斯维尔大学CSE系副教授。**'
 - en: '![](../Images/7b90faf67d8c5a9b93c5838add6004a0.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7b90faf67d8c5a9b93c5838add6004a0.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速通道进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Knowing SQL is considered one of the basic skills of a data scientist because
     a large amount of data exists (and continues to be collected) in relational databases.
     A typical approach to data analysis is to extract the data from such repositories
     and carry out the analysis in R or Python, using the powerful packages/libraries
     available in both environments. In such an approach, SQL is only used for the
     sub-setting and extraction of data; basic *querying *suffices for this.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 了解SQL被认为是数据科学家的基本技能之一，因为大量数据存在于（并持续被收集到）关系数据库中。数据分析的典型方法是从这些存储库中提取数据，并使用R或Python中的强大包/库进行分析。在这种方法中，SQL仅用于数据的子集化和提取；基本的*查询*即可满足需求。
 - en: 'However, practitioners know that there is a ([long path](https://hdsr.mitpress.mit.edu/pub/577rq08d/release/3) from
     raw data to analysis: data must be carefully prepared, a complex task involving
     several processes usually including labeled *data cleaning*, *data wrangling*,
@@ -65,63 +92,86 @@
     in SQL can be beneficial. As we show here, many common tasks can be accomplished
     without too much extra burden in SQL. To illustrate this, we provide an example
     that focuses on the identification and substitution of missing values.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，实践者知道从原始数据到分析之间存在一个([漫长的过程](https://hdsr.mitpress.mit.edu/pub/577rq08d/release/3)：数据必须经过仔细准备，这是一项复杂的任务，通常包括标记的*数据清理*、*数据整理*或*数据预处理*等多个过程。一个问题是在哪个环境中进行这个过程。一些分析师更喜欢在R或Python中完成整个过程，因为它们都提供了[丰富的支持](https://r4ds.had.co.nz/)，并且它们（尤其是R）高度互动，而SQL缺乏丰富的包/库，使得在R或Python中许多操作变成了简单的一行代码，其语法也可能相当受限。另一方面，这种方法也有一些缺点：在处理非常大的数据集时，R和Python可能会变得缓慢或遇到问题，而且包/库的多样性（许多功能重叠）在这些环境中增加了额外的复杂性。因此，在某些情况下，至少在SQL中进行部分数据清理和整理可能是有益的。正如我们所展示的，许多常见任务可以在SQL中完成而不会增加太多额外负担。为了说明这一点，我们提供了一个示例，重点介绍了缺失值的识别和替换。
 - en: 'Missing values are represented by the NULL marker in SQL, but data may not
     always be clearly marked. Imagine a dataset containing table *Patients *with information
     about patients in a medical study. One of the attributes is i*d*, an identifier,
     and two others are *Height *and *Weight*, representing respectively the height
     and weight of each patient at the beginning of a study. We note that some weight
     values are missing, indicated by a -1\. We then ''clean'' the table as follows:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Once this is done, we can use the predicate *IS NULL* to deal with all missing
     values uniformly: the query'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: will tell us exactly how many values are missing. If only a few values are missing,
     we may want to drop incomplete data. The SQL command
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: would eliminate rows (observations) where the weight is missing. If the attribute
     is deemed not important for subsequent analysis, the command
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'would eliminate the attribute from the whole table--that is, from all rows
     (observations). If we prefer to *impute* the missing values, the command:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'would substitute all missing values by the mean of the existing values. A more
     sophisticated approach would be to impute the value of the missing attribute from
     a related one. We may wonder if *Height *is related to weight; the query:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'will compute the [correlation coefficient](https://en.wikipedia.org/wiki/Correlation_and_dependence) between
     the two attributes in a system where a built-in correlation function cor exists.
     Even in systems where it doesn''t, SQL allows us to simply write our own:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'because the mean (*avg*) and standard deviation (*std*) functions are universally
     present. If we consider the correlation high enough, we can use the [kNN algorithm](https://link.springer.com/book/10.1007/978-3-319-14142-8) to
     infer appropriate values. In a general case, SQL allows us to compute *distances* between
@@ -131,11 +181,14 @@
     the computation is very simple: we use the absolute value of the difference of
     heights as our distance, and the average weight of the closest 5 neighbors for
     our new, imputed weight:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE7]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'In this query, the subquery in the *FROM *clause computes distances between
     two *distinct* data points (patients), with one of them having a missing weight;
     orders the result by this distance (*ORDER BY*) and keeps only the 5 closest results
@@ -144,6 +197,7 @@
     data point with a missing weight, so we provide the *id* of such a point. This
     result can be used in a second query, similar to the second UPDATE above, to change
     the data values in *Patient*.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: SQL has the added advantage of being a well-established standard for operating
@@ -152,8 +206,10 @@
     can execute the SQL command, given current data and resources). Being able to
     carry out some data cleaning, wrangling, and filtering before extracting the data
     from the database may make a data pipeline simpler and more efficient.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: SQL 的一个额外优势是作为一个成熟的标准，能非常高效地处理非常大的数据集（回想一下，一个单独的*查询优化器*分析所有上述语句，并确定系统在当前数据和资源条件下执行SQL命令的最有效方式）。在从数据库中提取数据之前，能够进行一些数据清洗、整理和筛选，可能会使数据管道更简单、更高效。
 - en: '**Bio:** [Antonio Badia](https://engineering.louisville.edu/faculty/antonio-e-badia)
     is an Associate Professor in the Computer Science and Engineering department,
     University of Louisville. His research in databases has been supported by the
@@ -162,48 +218,72 @@
     majors. He is the author of [SQL for Data Science: Data Cleaning, Wrangling and
     Analytics with Relational Databases, Springer](https://www.springer.com/gp/book/9783030575915),
     from which this post is extracted.'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：** [安东尼奥·巴迪亚](https://engineering.louisville.edu/faculty/antonio-e-badia)是路易斯维尔大学计算机科学与工程系的副教授。他在数据库领域的研究得到了NSF（包括CAREER奖）的支持，并发表了50多篇论文。他教授数据库课程以及面向非计算机科学专业学生的数据管理和分析入门课程。他是[《数据科学中的SQL：使用关系数据库进行数据清洗、整理和分析，Springer》](https://www.springer.com/gp/book/9783030575915)一书的作者，该帖子摘录自此书。'
 - en: '**Related:**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[5 Tricky SQL Queries Solved](https://www.kdnuggets.com/2020/11/5-tricky-sql-queries-solved.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5个棘手的SQL查询解决方案](https://www.kdnuggets.com/2020/11/5-tricky-sql-queries-solved.html)'
 - en: '[Learning SQL the Hard Way](https://www.kdnuggets.com/2020/01/learning-sql-hard-way.html)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[艰难的SQL学习之路](https://www.kdnuggets.com/2020/01/learning-sql-hard-way.html)'
 - en: '[The Last SQL Guide for Data Analysis You’ll Ever Need](https://www.kdnuggets.com/2019/10/last-sql-guide-data-analysis-ever-need.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你所需要的最后一本SQL数据分析指南](https://www.kdnuggets.com/2019/10/last-sql-guide-data-analysis-ever-need.html)'
 - en: More On This Topic
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Collection of Guides on Mastering SQL, Python, Data Cleaning, Data…](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握SQL、Python、数据清洗、数据整理和探索性数据分析的指南汇总](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)'
 - en: '[7 Steps to Mastering Data Wrangling with Pandas and Python](https://www.kdnuggets.com/7-steps-to-mastering-data-wrangling-with-pandas-and-python)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握使用Pandas和Python进行数据整理的7个步骤](https://www.kdnuggets.com/7-steps-to-mastering-data-wrangling-with-pandas-and-python)'
 - en: '[Data Cleaning in SQL: How To Prepare Messy Data for Analysis](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL中的数据清洗：如何为分析准备混乱的数据](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)'
 - en: '[Learn Data Cleaning and Preprocessing for Data Science with This Free eBook](https://www.kdnuggets.com/2023/08/learn-data-cleaning-preprocessing-data-science-free-ebook.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过这本免费电子书学习数据清洗和预处理数据科学](https://www.kdnuggets.com/2023/08/learn-data-cleaning-preprocessing-data-science-free-ebook.html)'
 - en: '[7 Steps to Mastering Data Cleaning and Preprocessing Techniques](https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握数据清洗和预处理技术的7个步骤](https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html)'
 - en: '[Harnessing ChatGPT for Automated Data Cleaning and Preprocessing](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用ChatGPT进行自动化数据清洗和预处理](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)'
