@@ -1,278 +1,424 @@
 - en: Deploying Trained Models to Production with TensorFlow Serving
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 TensorFlow Serving 部署训练好的模型到生产环境
 - en: 原文：[https://www.kdnuggets.com/2020/11/serving-tensorflow-models.html](https://www.kdnuggets.com/2020/11/serving-tensorflow-models.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/11/serving-tensorflow-models.html](https://www.kdnuggets.com/2020/11/serving-tensorflow-models.html)
 - en: '[comments](#comments)![Figure](../Images/cc3390e60f5b0669e9916ac5a0a8c044.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)![图示](../Images/cc3390e60f5b0669e9916ac5a0a8c044.png)'
 - en: Photo by [Kate Townsend](https://unsplash.com/@k8townsend?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
     on [Unsplash](https://unsplash.com/s/photos/serve?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 照片由 [Kate Townsend](https://unsplash.com/@k8townsend?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    提供，来源于 [Unsplash](https://unsplash.com/s/photos/serve?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 - en: Once you’ve trained a TensorFlow model and it’s ready to be deployed, you’d
     probably like to move it to a production environment. Luckily, TensorFlow provides
     a way to do this with minimal effort. In this article, we’ll use a pre-trained
     model, save it, and serve it using TensorFlow Serving. Let’s get moving!
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦你训练了一个 TensorFlow 模型，并且它准备好部署，你可能会想将其移动到生产环境中。幸运的是，TensorFlow 提供了一种方法来以最小的努力完成这项工作。在本文中，我们将使用一个预训练模型，保存它，并使用
+    TensorFlow Serving 提供服务。让我们开始吧！
 - en: TensorFlow ModelServer
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: TensorFlow ModelServer
 - en: '[TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving) is a system
     built with the sole purpose of bringing machine learning models to production.
     TensorFlow’s ModelServer provides support for RESTful APIs. However, we’ll need
     to install it before we can use it. First, let’s add it as a package source.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '[TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving) 是一个专门用于将机器学习模型投入生产的系统。TensorFlow
+    的 ModelServer 提供对 RESTful API 的支持。不过，在使用之前，我们需要先安装它。首先，让我们将其添加为软件包源。'
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Installing TensorFlow ModelServer can now be done by updating the system and
     using `apt-get` to install it.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在可以通过更新系统并使用 `apt-get` 安装 TensorFlow ModelServer。
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Developing the Model
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 开发模型
 - en: 'Next, let’s use a pre-trained model to create the model we’d like to serve.
     In this case, we’ll use a version of [VGG16](https://arxiv.org/abs/1409.1556) with
     weights pre-trained on [ImageNet](http://www.image-net.org/). To make it work,
     we have to get a couple of imports out of the way:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，让我们使用一个预训练模型来创建我们希望提供的模型。在这种情况下，我们将使用一个版本的 [VGG16](https://arxiv.org/abs/1409.1556)，其权重在
+    [ImageNet](http://www.image-net.org/) 上进行了预训练。为了使其正常工作，我们必须先完成几个导入：
 - en: '`VGG16` the architecture'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`VGG16` 架构'
 - en: '`image` for working with image files'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`image` 用于处理图像文件'
 - en: '`preprocess_input` for pre-processing image inputs'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`preprocess_input` 用于预处理图像输入'
 - en: '`decode_predictions` for showing us the probability and class names'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`decode_predictions` 用于显示概率和类别名称'
 - en: '[PRE2]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Next, we define the model with the ImageNet weights.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们使用 ImageNet 权重定义模型。
 - en: '[PRE3]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: With the model in place, we can try out a sample prediction. We start by defining
     the path to an image file (a lion) and using `image`to load it.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型准备好后，我们可以尝试一个示例预测。我们首先定义图像文件（一个狮子）的路径，并使用 `image` 加载它。
 - en: '[PRE4]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After pre-processing it, we can make predictions using it. We can see that it
     was able to predict that the image is a lion with 99% accuracy.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 在预处理后，我们可以使用它进行预测。我们可以看到它能够以 99% 的准确率预测图像是狮子。
 - en: '[PRE5]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Now that we have our model, we can save it to prepare it for serving with TensorFlow.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了模型，我们可以将其保存，以便为 TensorFlow 提供服务做好准备。
 - en: Saving the Model
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 保存模型
 - en: Let’s now save that model. Notice that we’re saving it to a`/1`folder to indicate
     the model version. This is **critical**, especially when you want to serve new
     model versions automatically. More on that in a few.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们保存这个模型。请注意，我们将其保存到一个`/1`文件夹中以指示模型版本。这是**关键的**，特别是当你希望自动提供新的模型版本时。稍后会详细介绍。
 - en: '[PRE6]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Running the Server with TensorFlow ModelServer
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 TensorFlow ModelServer 运行服务器
 - en: 'Let’s start by defining the configuration we’ll use for serving:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们首先定义用于服务的配置：
 - en: '`name` is the name of our model—in this case, we’ll call it `vgg16`.'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`name` 是我们模型的名称——在这种情况下，我们将其命名为 `vgg16`。'
 - en: '`base_path` is the absolute path to the location of our saved model. Be sure
     to change this to your own path.'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`base_path` 是我们保存模型的位置的绝对路径。请确保将其更改为您自己的路径。'
 - en: The `model_platform` is obviously TensorFlow.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`model_platform` 显然是 TensorFlow。'
 - en: '`model_version_policy` enables us to specify model versioning information.'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`model_version_policy` 使我们能够指定模型版本信息。'
 - en: 'Now we can run the command that will serve the model from the command line:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以运行命令来从命令行提供模型：
 - en: '`rest_api_port=8000` means that our REST API will be served at port 8000.'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`rest_api_port=8000` 意味着我们的 REST API 将在 8000 端口提供服务。'
 - en: '`model_config_file` defines the config file that we’d defined above.'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`model_config_file` 定义了我们之前定义的配置文件。'
 - en: '`model_config_file_poll_wait_seconds` indicates how long to wait before checking
     for changes in the config file. For example, changing the version to 2 in the
     config file would lead to version 2 of the model being served automatically. This
     is because changes in the config file are being checked every 300 seconds, in
     this case.'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`model_config_file_poll_wait_seconds` 表示检查配置文件更改之前的等待时间。例如，将配置文件中的版本更改为 2 会自动服务模型的版本
+    2。这是因为在这种情况下配置文件的更改每 300 秒检查一次。'
 - en: '[PRE7]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Making Predictions using the REST API
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 REST API 进行预测
 - en: At this point, the [REST API](https://www.tensorflow.org/tfx/serving/api_rest) for
     our model can be found here: [http://localhost:8000/v1/models/vgg16/versions/1:predict](http://localhost:8000/v1/models/vgg16/versions/1:predict).
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '此时，我们的模型的 [REST API](https://www.tensorflow.org/tfx/serving/api_rest) 可以在这里找到:
+    [http://localhost:8000/v1/models/vgg16/versions/1:predict](http://localhost:8000/v1/models/vgg16/versions/1:predict)。'
 - en: We can use this endpoint to make predictions. In order to do that, we’ll need
     to pass [JSON](https://www.json.org/json-en.html)-formatted data to the endpoint.
     To that end — no pun intended — we’ll use the `*json*` module in Python. In order
     to make requests to the endpoint, we’ll use the `requests` Python package.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用这个端点进行预测。为此，我们需要将 [JSON](https://www.json.org/json-en.html) 格式的数据传递给端点。为了达到这一目的
+    — 并非双关 — 我们将使用 Python 中的 `*json*` 模块。为了向端点发出请求，我们将使用 `requests` Python 包。
 - en: Let’s start by importing those two.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始导入这两个模块。
 - en: '[PRE8]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Remember that the *x* variable contained the pre-processed image. We’ll create
     JSON data containing that. Like any other RESTFUL request, we set the content
     type to`application/json`. Afterward, we make a request to our endpoint as we
     pass in the headers and the data. After getting the predictions, we decode them
     just like we did at the beginning of this article.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 记住，*x* 变量包含了预处理的图像。我们将创建包含该图像的 JSON 数据。像其他 RESTFUL 请求一样，我们将内容类型设置为 `application/json`。然后，我们向端点发出请求，同时传递头信息和数据。获得预测结果后，我们将其解码，就像在本文开头一样。
 - en: '![Image for post](../Images/20bf95dec0e473ec61b0efb359e74d48.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/20bf95dec0e473ec61b0efb359e74d48.png)'
 - en: Serving with Docker
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 Docker 服务模型
 - en: There is an even quicker and shorter way for you to serve TensorFlow models—using [Docker](https://hub.docker.com/r/tensorflow/serving).
     This is actually the recommended way, but knowing the previous method is important,
     just in case you need it for a specific use case. Serving your model with Docker
     is as easy as pulling the [TensorFlow Serving image](https://www.tensorflow.org/tfx/serving/docker) and
     mounting your model.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有一种更快更简短的方式来服务 TensorFlow 模型——使用 [Docker](https://hub.docker.com/r/tensorflow/serving)。这实际上是推荐的方法，但了解之前的方法很重要，以防你在特定用例中需要它。使用
+    Docker 服务模型就像拉取 [TensorFlow Serving 镜像](https://www.tensorflow.org/tfx/serving/docker)
+    并挂载你的模型一样简单。
 - en: With [Docker installed](https://docs.docker.com/engine/install/), run this code
     to pull the TensorFlow Serving image.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 [Docker 安装](https://docs.docker.com/engine/install/) 后，运行此代码来拉取 TensorFlow
+    Serving 镜像。
 - en: '[PRE9]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'Let’s now use that image to serve the model. This is done using `docker run`and
     passing a couple of arguments:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们使用那个图像来服务模型。这可以通过 `docker run` 和传递一些参数来完成：
 - en: '`-p 8501:8501` means that the container’s port 8501 will be accessible on our
     localhost at port 8501.'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`-p 8501:8501` 表示容器的 8501 端口将在本地主机的 8501 端口上可访问。'
 - en: '`— name`for naming our container—choose the name your prefer.I’ve chosen `tf_vgg_server` in
     this case.'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`— name` 用于为我们的容器命名——选择你喜欢的名称。我在这个例子中选择了 `tf_vgg_server`。'
 - en: '`— mount type=bind,source=/media/derrick/5EAD61BA2C09C31B/Notebooks/Python/serving/saved_tf_model,target=/models/vgg16`means
     that the model will be mounted to `/models/vgg16`on the Docker container.'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`— mount type=bind,source=/media/derrick/5EAD61BA2C09C31B/Notebooks/Python/serving/saved_tf_model,target=/models/vgg16`
+    表示模型将被挂载到 Docker 容器中的 `/models/vgg16`。'
 - en: '`-e MODEL_NAME=vgg16` indicates that TensorFlow serving should load the model
     called `vgg16`.'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`-e MODEL_NAME=vgg16` 表明 TensorFlow Serving 应该加载名为 `vgg16` 的模型。'
 - en: '`-t tensorflow/serving` indicates that we’re using the `tensorflow/serving`image
     that we pulled earlier.'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`-t tensorflow/serving` 表示我们正在使用之前拉取的 `tensorflow/serving` 镜像。'
 - en: '`&` running the command in the background.'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`&` 表示在后台运行命令。'
 - en: Run the code below on your terminal.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 在你的终端中运行下面的代码。
 - en: '[PRE10]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Now we can use the REST API endpoint to make predictions, just like we did previously.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以使用 REST API 端点进行预测，就像之前一样。
 - en: '![Image for post](../Images/2efc691497994698fa72ade40bf44f76.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/2efc691497994698fa72ade40bf44f76.png)'
 - en: Clearly, we obtained the same results. With that, we’ve seen how we can serve
     a TensorFlow model with and without Docker.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 很明显，我们得到了相同的结果。通过这一点，我们已经看到如何在有无Docker的情况下服务TensorFlow模型。
 - en: Final Thoughts
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最后的想法
 - en: '[This article ](https://www.tensorflow.org/tfx/serving/architecture)from TensorFlow
     will give you more information on the TensorFlow Serving architecture. If you’d
     like to dive deeper into that, this [resource](https://www.tensorflow.org/tfx/serving/serving_config) will
     get you there.'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '[这篇文章](https://www.tensorflow.org/tfx/serving/architecture)来自TensorFlow，将为你提供更多关于TensorFlow
+    Serving架构的信息。如果你想深入了解，可以参考这个[资源](https://www.tensorflow.org/tfx/serving/serving_config)。'
 - en: You can also explore alternative ways of building using the standard [TensorFlow
     ModelServer.](https://www.tensorflow.org/tfx/serving/serving_advanced) In this
     article, we focused on serving using a CPU, but you can explore how to [serve
     on GPUs](https://www.tensorflow.org/tfx/serving/docker), as well.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以探索使用标准的[TensorFlow ModelServer](https://www.tensorflow.org/tfx/serving/serving_advanced)来进行构建。在这篇文章中，我们专注于使用CPU进行服务，但你也可以探索如何[在GPU上服务](https://www.tensorflow.org/tfx/serving/docker)。
 - en: This [repo contains links ](https://github.com/tensorflow/serving)to more tutorials
     on TensorFlow Serving. Hopefully, this piece was of service to you!
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个[仓库包含链接](https://github.com/tensorflow/serving)到更多关于TensorFlow Serving的教程。希望这篇文章对你有所帮助！
 - en: '[**mwitiderrick/TensorFlow-Serving**](https://github.com/mwitiderrick/TensorFlow-Serving)'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**mwitiderrick/TensorFlow-Serving**](https://github.com/mwitiderrick/TensorFlow-Serving)'
 - en: Serving TensorFlow Models. Contribute to mwitiderrick/TensorFlow-Serving development
     by creating an account on GitHub.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 提供TensorFlow模型服务。通过在GitHub上创建账户，参与mwitiderrick/TensorFlow-Serving的开发。
 - en: '**Bio: Derrick Mwiti** is a data scientist who has a great passion for sharing
     knowledge. He is an avid contributor to the data science community via blogs such
     as Heartbeat, Towards Data Science, Datacamp, Neptune AI, KDnuggets just to mention
@@ -284,77 +430,119 @@
     the world of Data Science, Machine Learning, and Deep Learning interest you, you
     might want to check his [Complete Data Science & Machine Learning Bootcamp in
     Python course](https://www.udemy.com/course/data-science-bootcamp-in-python/?referralCode=9F6DFBC3F92C44E8C7F4).'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：Derrick Mwiti** 是一名数据科学家，对分享知识充满热情。他通过Heartbeat、Towards Data Science、Datacamp、Neptune
+    AI、KDnuggets等博客积极贡献于数据科学社区。他的内容在互联网上的浏览量已超过一百万次。Derrick还是一名作者和在线讲师。他还与各种机构合作实施数据科学解决方案，并提升其员工技能。Derrick在多媒体大学学习数学和计算机科学，同时也是Meltwater创业技术学院的校友。如果你对数据科学、机器学习和深度学习感兴趣，你可以查看他的[完整数据科学与机器学习Python训练营课程](https://www.udemy.com/course/data-science-bootcamp-in-python/?referralCode=9F6DFBC3F92C44E8C7F4)。'
 - en: '[Original](https://heartbeat.fritz.ai/serving-tensorflow-models-3989df5d7d53).
     Reposted with permission.'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://heartbeat.fritz.ai/serving-tensorflow-models-3989df5d7d53)。转载已获许可。'
 - en: '**Related:**'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Dealing with Imbalanced Data in Machine Learning](/2020/10/imbalanced-data-machine-learning.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理机器学习中的数据不平衡](/2020/10/imbalanced-data-machine-learning.html)'
 - en: '[How to deploy PyTorch Lightning models to production](/2020/11/deploy-pytorch-lightning-models-production.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何将PyTorch Lightning模型部署到生产环境](/2020/11/deploy-pytorch-lightning-models-production.html)'
 - en: '[AI Is More Than a Model: Four Steps to Complete Workflow Success](/2020/11/mathworks-ai-four-steps-workflow.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AI不仅仅是一个模型：完成工作流程成功的四个步骤](/2020/11/mathworks-ai-four-steps-workflow.html)'
 - en: '* * *'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-74
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织在 IT 方面'
 - en: '* * *'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Feature Store Summit 2023: Practical Strategies for Deploying ML…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2023 年 Feature Store 峰会：部署 ML 模型的实用策略](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
 - en: '[Deploying Your Machine Learning Model to Production in the Cloud](https://www.kdnuggets.com/deploying-your-ml-model-to-production-in-the-cloud)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将机器学习模型部署到云端生产环境](https://www.kdnuggets.com/deploying-your-ml-model-to-production-in-the-cloud)'
 - en: '[Top 7 Model Deployment and Serving Tools](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[排名前 7 的模型部署和服务工具](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)'
 - en: '[Deploying Machine Learning Models: A Step-by-Step Tutorial](https://www.kdnuggets.com/deploying-machine-learning-models-a-step-by-step-tutorial)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习模型部署：逐步教程](https://www.kdnuggets.com/deploying-machine-learning-models-a-step-by-step-tutorial)'
 - en: '[Prioritizing Data Science Models for Production](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优先考虑生产中的数据科学模型](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)'
 - en: '[Tips & Tricks of Deploying Deep Learning Webapp on Heroku Cloud](https://www.kdnuggets.com/2021/12/tips-tricks-deploying-dl-webapps-heroku.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Heroku 云上部署深度学习 Web 应用的提示与技巧](https://www.kdnuggets.com/2021/12/tips-tricks-deploying-dl-webapps-heroku.html)'
