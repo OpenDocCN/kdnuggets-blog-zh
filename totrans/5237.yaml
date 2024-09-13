@@ -1,275 +1,416 @@
 - en: Simple Tips for PostgreSQL Query Optimization
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: PostgreSQL 查询优化的简单技巧
 - en: 原文：[https://www.kdnuggets.com/2018/06/simple-tips-postgresql-query-optimization.html](https://www.kdnuggets.com/2018/06/simple-tips-postgresql-query-optimization.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/06/simple-tips-postgresql-query-optimization.html](https://www.kdnuggets.com/2018/06/simple-tips-postgresql-query-optimization.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By Pavel Tiunov, [Statsbot](https://statsbot.co/)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 Pavel Tiunov 撰写，[Statsbot](https://statsbot.co/)**'
 - en: '![Image](../Images/96ce8e920837a63f0a217c54b00279dd.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/96ce8e920837a63f0a217c54b00279dd.png)'
 - en: A single query optimization tip can boost your database performance by 100x.
     At one point, we advised one of our customers that had a 10TB database to use
     a date-based multi-column index. As a result, their date range query sped up by
     112x. In this post, we share five simple but still powerful tips for PostgreSQL
     query optimization.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 单个查询优化技巧可以将你的数据库性能提升 100 倍。曾经我们建议一位拥有 10TB 数据库的客户使用基于日期的多列索引。结果，他们的日期范围查询速度提升了
+    112 倍。在这篇文章中，我们分享了五个简单但仍然强大的 PostgreSQL 查询优化技巧。
 - en: Although we usually advise our customers to use these tips to optimize analytic
     queries (such as aggregation ones), this post is still very helpful for any other
     type of query.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然我们通常建议客户使用这些技巧来优化分析查询（例如聚合查询），但本文对于任何其他类型的查询仍然非常有帮助。
 - en: To keep it easy, we ran examples for this article on a test dataset. Although
     it doesn’t show the actual performance improvement, you will see that our tips
     solve the significant set of optimization problems and work well in real-world
     case scenarios.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了简化起见，我们在测试数据集上运行了本文的示例。虽然这不会显示实际的性能改进，但你会发现我们的建议能解决大量的优化问题，并在实际情况中表现良好。
 - en: Explain analyze
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Explain analyze
 - en: Postgres has a cool extension to the well-known `EXPLAIN` command, which is
     called [`EXPLAIN ANALYZE`](https://www.postgresql.org/docs/9.3/static/using-explain.html#USING-EXPLAIN-ANALYZE).
     The difference is that `EXPLAIN` shows you query cost based on collected statistics
     about your database, and `EXPLAIN ANALYZE` actually runs it to show the processed
     time for every stage.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: Postgres 有一个很酷的扩展功能，称为[`EXPLAIN ANALYZE`](https://www.postgresql.org/docs/9.3/static/using-explain.html#USING-EXPLAIN-ANALYZE)，扩展了著名的`EXPLAIN`命令。不同之处在于，`EXPLAIN`
+    根据收集的数据库统计信息显示查询成本，而`EXPLAIN ANALYZE` 实际运行它以显示每个阶段处理的时间。
 - en: We highly recommend you use `EXPLAIN ANALYZE` because there are a lot of cases
     when `EXPLAIN` shows a higher query cost, while the time to execute is actually
     less and vice versa. The most important thing is that the EXPLAIN command will
     help you to understand if a specific index is used and how.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们强烈建议使用`EXPLAIN ANALYZE`，因为有很多情况下`EXPLAIN`显示的查询成本较高，而实际执行时间则较短，反之亦然。最重要的是，EXPLAIN
+    命令将帮助你了解是否使用了特定的索引以及如何使用。
 - en: The ability to see indexes is the first step to learning PostgreSQL query optimization.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看索引的能力是学习 PostgreSQL 查询优化的第一步。
 - en: One index per query
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 每个查询一个索引
 - en: Indexes are materialized copies of your table. They contain only specific columns
     of the table, so you can quickly find data based on the values in these columns.
     Indexes in Postgres also store row identifiers or row addresses used to speed
     up the original table scans.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 索引是你表的物化副本。它们仅包含表的特定列，因此你可以快速根据这些列中的值查找数据。Postgres 中的索引还存储行标识符或行地址，以加速原始表扫描。
 - en: It’s always a trade-off between storage space and query time, and a lot of indexes
     can introduce overhead for DML operations. However, when read query performance
     is a priority, as is the case with business analytics, it’s usually a well-working
     approach.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 这总是存储空间和查询时间之间的权衡，许多索引可能会引入 DML 操作的开销。然而，当读取查询性能是优先考虑的（如商业分析中的情况），这种方法通常是有效的。
 - en: We advise to create one index per unique query for better performance. Look
     further in this post to learn how to create indexes for specific queries.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们建议为每个独特的查询创建一个索引以获得更好的性能。请继续阅读本文，了解如何为特定查询创建索引。
 - en: Using multiple columns in index
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用多个列的索引
 - en: 'Let’s review the explain analyze plan of the following simple query without
     indexes:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们查看以下简单查询的 explain analyze 计划，未使用索引：
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'An explain analyze returns:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: Explain analyze 返回：
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: This query scans all of the line items to find a product with an id that is
     greater than 80, and then sums up all the values grouped by that product id.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个查询扫描所有行项，找到 id 大于 80 的产品，然后按该产品 id 对所有值进行求和。
 - en: 'Now we’ll add the index to this table:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将为这个表添加索引：
 - en: '[PRE2]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: We created a [B-tree index](https://en.wikipedia.org/wiki/B-tree), which contains
     only one column: `product_id`. After reading lots of articles about the benefits
     of using index, one can expect a query boost from such an operation. Sorry, bad
     news.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们创建了一个[B-树索引](https://en.wikipedia.org/wiki/B-tree)，该索引只包含一个列：`product_id`。在阅读了大量关于使用索引的好处的文章后，人们可能会期待这样的操作能提升查询性能。抱歉，坏消息。
 - en: As we need to sum up the price column in the query above, we still need to scan
     the original table. Depending on the table statistics, Postgres will choose to
     scan the original table instead of the index. The thing is, index lacks a `price` column.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们需要在上述查询中对价格列进行求和，我们仍然需要扫描原始表。根据表的统计信息，Postgres 将选择扫描原始表而不是索引。问题在于，索引缺少`price`列。
 - en: 'We can tweak this index by adding a price column as follows:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过添加价格列来调整此索引，如下所示：
 - en: '[PRE3]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'If we rerun the explain plan, we’ll see our index is the forth line:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们重新运行解释计划，我们会看到我们的索引在第四行：
 - en: '[PRE4]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: But how would putting the price column first affect the PostgreSQL query optimization?
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，将价格列放在首位会如何影响 PostgreSQL 查询优化呢？
 - en: Column order in a multicolumn index
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 多列索引中的列顺序
 - en: 'Well, we figured out that a multicolumn index is used in the previous query
     because we included both columns. The interesting thing is that we can use another
     order for these columns while defining the index:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 好吧，我们发现前一个查询中使用了多列索引，因为我们包含了这两列。有趣的是，我们在定义索引时可以使用这些列的另一种顺序：
 - en: '[PRE5]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: If we rerun explain analyze, we’ll see that `items_product_id_price_reversed` is
     not used. That’s because this index is sorted firstly on `price` and then on `product_id`.
     Using this index will lead to a full index scan, **which is nearly equivalent
     to scanning the whole table**. That’s why Postgres opts to use scan for an original
     table.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们重新运行解释分析，我们将看到`items_product_id_price_reversed`没有被使用。这是因为该索引首先按`price`排序，然后按`product_id`排序。使用这个索引将导致全索引扫描，**这几乎等同于扫描整个表**。这就是为什么
+    Postgres 选择对原始表进行扫描的原因。
 - en: It’s a good practice to put in the first place columns, which you use in filters
     with the biggest number of unique values.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 将用于过滤器中具有最大唯一值数量的列放在第一位是一种良好的实践。
 - en: Filters + joins
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 过滤器 + 连接
 - en: It’s time to figure out what the best set of indexes is for a specific join
     query, which also has some filter conditions. Usually, you can achieve optimal
     results by trial and error.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是时候找出特定连接查询的最佳索引集合了，该查询还有一些过滤条件。通常，你可以通过反复试验来获得最佳结果。
 - en: As in the case of simple filtering, choose the most restrictive filtering condition
     and add an index for it.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 就像在简单过滤的情况下，选择最具限制性的过滤条件并为其添加索引。
 - en: 'Let’s consider an example:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们考虑一个示例：
 - en: '[PRE6]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Here we have join on `order_id` and filter on `created_at`. This way, we can
     create a multicolumn index that will contain `created_at` in the first place, `order_id` in
     the second and `price` in the third:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们基于`order_id`进行连接，并在`created_at`上进行过滤。这样，我们可以创建一个多列索引，其中`created_at`排在第一位，`order_id`排在第二位，`price`排在第三位：
 - en: '[PRE7]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'We’ll get the following explain plan:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将得到以下解释计划：
 - en: '[PRE8]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: As you can see, `line_items_created_at_order_id_price` is used to reduce scan
     by date condition. After that, it’s joined with orders using the `orders_pkey` index
     scan.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，`line_items_created_at_order_id_price`用于通过日期条件减少扫描。之后，它使用`orders_pkey`索引扫描与订单连接。
 - en: Date columns are usually one of the best candidates for the first column in
     a multicolumn index as it reduces scanning throughput in a predictable manner.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 日期列通常是多列索引中最适合作为第一列的候选者，因为它以可预测的方式减少了扫描吞吐量。
 - en: Conclusion
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: Our tips for PostgreSQL query optimization will help you to speed up queries
     10-100x for multi-GB databases. They can solve most of your performance bottlenecks
     in an 80/20 manner. It doesn’t mean you shouldn’t double check your queries with `EXPLAIN` for
     real-world case scenarios.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的 PostgreSQL 查询优化技巧将帮助你将查询速度提高 10-100 倍，适用于多 GB 数据库。它们可以以 80/20 的方式解决大多数性能瓶颈。这并不意味着你不应该使用`EXPLAIN`来双重检查你的查询，以适应实际的场景。
 - en: '[Original](https://statsbot.co/blog/postgresql-query-optimization/?utm_source=kdnuggets&utm_medium=post&utm_campaign=postgres-sql).
     Reposted with permission.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://statsbot.co/blog/postgresql-query-optimization/?utm_source=kdnuggets&utm_medium=post&utm_campaign=postgres-sql)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Scalable Select of Random Rows in SQL](/2018/04/scalable-select-random-rows-sql.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 中的随机行可扩展选择](/2018/04/scalable-select-random-rows-sql.html)'
 - en: '[SQL Window Functions Tutorial for Business Analysis](/2017/12/sql-window-functions-tutorial-business-analytics.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 窗口函数商业分析教程](/2017/12/sql-window-functions-tutorial-business-analytics.html)'
 - en: '[Calculating Customer Lifetime Value: SQL Example](/2018/02/calculating-customer-lifetime-value-sql-example.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[计算客户生命周期价值：SQL 示例](/2018/02/calculating-customer-lifetime-value-sql-example.html)'
 - en: '* * *'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-55
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能。'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 需求。'
 - en: '* * *'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关话题
 - en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 查询优化技巧](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
 - en: '[5 Tips for Improving SQL Query Performance](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提高 SQL 查询性能的 5 个技巧](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)'
 - en: '[Query Your Pandas DataFrames with SQL](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 SQL 查询你的 Pandas 数据框](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
 - en: '[Can We Query a Table with T5?](https://www.kdnuggets.com/2022/05/query-table-t5.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我们能用 T5 查询表格吗？](https://www.kdnuggets.com/2022/05/query-table-t5.html)'
 - en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TPOT 进行机器学习管道优化](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
 - en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 AIMET 进行神经网络优化](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
