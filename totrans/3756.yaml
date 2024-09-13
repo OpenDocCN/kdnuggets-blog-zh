@@ -1,40 +1,56 @@
 - en: 'Text Mining 101: Mining Information From A Resume'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 文本挖掘 101：从简历中挖掘信息
 - en: 原文：[https://www.kdnuggets.com/2017/05/text-mining-information-resume.html](https://www.kdnuggets.com/2017/05/text-mining-information-resume.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/05/text-mining-information-resume.html](https://www.kdnuggets.com/2017/05/text-mining-information-resume.html)
 - en: '**By Yogesh H. Kulkarni**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Yogesh H. Kulkarni**'
 - en: '![](../Images/1e46e710e41a4018807625084a80b8e8.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1e46e710e41a4018807625084a80b8e8.png)'
 - en: Summary
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 摘要
 - en: This article demonstrates a framework for mining relevant entities from a text
     resume. It shows how separation of parsing logic from entity specification can
     be achieved. Although only one resume sample is considered here, the framework
     can be enhanced further to be used not only for different resume formats, but
     also for documents such as judgments, contracts, patents, medical papers, etc.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文展示了一个从文本简历中挖掘相关实体的框架。它展示了如何实现解析逻辑与实体规范的分离。虽然这里只考虑了一个简历样本，但该框架可以进一步增强，用于不同的简历格式，以及判决书、合同、专利、医学论文等文档。
 - en: Introduction
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: Majority of world’s unstructured data is in the textual form. To make sense
     of it, one must, either go through it painstakingly or employ certain automated
     techniques to extract relevant information. Looking at the volume, variety and
     velocity of such textual data, it is imperative to employ Text Mining techniques
     to extract the relevant information, transforming unstructured data into structured
     form, so that further insights, processing, analysis, visualizations are possible.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 世界上大多数非结构化数据以文本形式存在。为了理解这些数据，必须要么细致地逐一阅读，要么使用某些自动化技术来提取相关信息。考虑到这些文本数据的体量、种类和速度，必须采用文本挖掘技术来提取相关信息，将非结构化数据转化为结构化形式，从而使进一步的洞察、处理、分析和可视化成为可能。
 - en: This article deals with a specific domain, of applicant profiles or resumes.
     They, as we know, come not only in different file formats (txt, doc, pdf, etc.)
     but also with different contents and layouts. Such heterogeneity makes extraction
@@ -42,19 +58,25 @@
     to fully extract all the relevant information from all the types of formats, one
     can get started with simple steps and at least extract whatever is possible from
     some of the known formats.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文处理的是特定领域，即申请人简历。众所周知，简历不仅有不同的文件格式（txt、doc、pdf 等），还具有不同的内容和布局。这种异质性使得提取相关信息成为一项挑战。尽管可能无法从所有类型的格式中完全提取所有相关信息，但可以从一些已知格式中开始简单的步骤，至少提取可能的信息。
 - en: 'Broadly there are two approaches: linguistics based and Machine Learning based.
     In “linguistic” based approaches pattern searches are made to find key information,
     whereas in “machine learning” approaches supervised-unsupervised methods are used
     to extract the information. “Regular expression” (RegEx), used here, is one of
     the “linguistic” based pattern-matching method.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 大体上有两种方法：基于语言的方法和基于机器学习的方法。在“语言”方法中，通过模式搜索来找到关键信息，而在“机器学习”方法中，则使用监督和非监督方法来提取信息。这里使用的“正则表达式”（RegEx）是“语言”基础的模式匹配方法之一。
 - en: Framework
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 框架
 - en: A primitive way of implementing entity extraction in a resume could be to write
     the pattern-matching logic for each entity, in a code-program, monolithically.
     In case of any change in the patterns, or if there is an introduction of new entities/patterns,
@@ -66,12 +88,17 @@
     Parser uses these patterns to extract entities by the specified method. Advantages
     of such separation is not just maintainability but also its potential use in other
     domains such as legal/contracts, medical, etc.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在简历中实现实体提取的一种原始方法是为每个实体在代码程序中编写模式匹配逻辑。如果模式发生任何变化，或者引入新的实体/模式，则需要更改代码程序。这使得维护变得繁琐，因为复杂性增加。为了解决这个问题，提出了一种框架，将解析逻辑与实体规范分开，如下所示。实体及其
+    RegEx 模式在配置文件中指定。该文件还指定了用于每种实体类型的提取方法。解析器使用这些模式按指定方法提取实体。这种分离的优点不仅是可维护性，还包括其在法律/合同、医学等其他领域的潜在使用。
 - en: Entities Specification
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实体规范
 - en: The configuration file specifies entities to be extracted along with their patterns
     and extraction-method. It also specifies the section within which the given entities
     are to be looked for. Specification shown in the textbox below, describes meta
@@ -80,124 +107,180 @@
     section, like the initial few lines of the resume. Entities like Email or Phone
     can have multiple regular-expressions patterns. If first fails then the second
     one is tried and so on. Here is a brief description of the patterns used:![](../Images/937d2cfcc0a91f8d5f04f640d9c95e1b.png)
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 配置文件指定了要提取的实体及其模式和提取方法。它还指定了在其中查找给定实体的部分。下方文本框中显示的规范描述了元数据实体，如 Name、Phone、Email
+    等。提取它们的方法是“univalue_extractor”。这些实体要搜索的部分被命名为“”，这是一个非标记的部分，如简历的前几行。像 Email 或 Phone
+    这样的实体可以有多个正则表达式模式。如果第一个失败，则尝试第二个，依此类推。这里是所用模式的简要描述：![](../Images/937d2cfcc0a91f8d5f04f640d9c95e1b.png)
 - en: 'Name: Resume’s first line is assumed to have the Name, with an optional “Name:”
     prefix.'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 姓名：假定简历的第一行包含姓名，前面可有“Name:”前缀。
 - en: 'Email: Is a word (with optional dot in the middle) then “@”, then a word, dot
     and then a word.'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 邮箱：是一个单词（中间可有点），然后是“@”，接着是一个单词、点，再一个单词。
 - en: 'Phone: Optional International code in bracket, then digit pattern of 3-3-4,
     with optional bracket to the first 3 digits. For India number, it can be hard
     coded to “+91” as shown in the next entry.'
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 电话：括号中的国际代码（可选），然后是3-3-4的数字模式，前3位数字可选用括号包围。对于印度号码，它可以硬编码为“+91”，如下一条所示。
 - en: Python’s ‘etree’ ElementTree library is used to parse the config xml into internal
     dictionary.
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Python 的‘etree’ ElementTree 库用于将配置 xml 解析为内部字典。
 - en: Parser reads this specifications’ dictionary and uses it to find entities from
     the text resume.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 解析器读取这些规范的字典，并使用它从文本简历中查找实体。
 - en: Once an entity is matched it is stored as the node-tag, like Email, Phone, etc.
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一旦匹配到实体，它会作为节点标签存储，如 Email、Phone 等。
 - en: '![](../Images/bc7b59b8a7aa1e02cce29b29f2e87b89.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bc7b59b8a7aa1e02cce29b29f2e87b89.png)'
 - en: 'Like Metadata described above, Educational qualifications can be searched with
     a config below:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 像上面描述的 Metadata，教育资格可以用下面的配置进行搜索：
 - en: Method “section_value_extractor” of the parser is to be used and within section
     “EducationSection”. It finds value within a section just by matching given words.
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 解析器的方法“section_value_extractor”应当在“EducationSection”部分中使用。它通过匹配给定单词来找到部分中的值。
 - en: If parser finds any of the words, say “10^(th)“ or “X” or “SSC”, then those
     are the values extracted for the entity “Secondary”, describing Secondary School
     level education.
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果解析器发现任何单词，如“10^(th)”或“X”或“SSC”，那么这些就是提取的“Secondary”实体值，描述了中学教育水平。
 - en: If parser finds any of the words, say “12^(th)” or “XII” or “HSC”, then those
     are the values extracted for the entity “HigherSecondary”, describing Higher Secondary
     School level education.
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果解析器发现任何单词，如“12^(th)”或“XII”或“HSC”，那么这些就是提取的“HigherSecondary”实体值，描述了高级中学教育水平。
 - en: Segmentation
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 分段
 - en: The sections mentioned in the above code snippets are blocks of text, labelled
     such as SummarySection, EducationSection, etc. These are specified at the top
     of the config file.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述代码片段中提到的部分是文本块，标记为 SummarySection、EducationSection 等。这些在配置文件的顶部进行指定。
 - en: Method “section_extractor” parses the document line-wise and looks for section
     headings.
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 方法“section_extractor”逐行解析文档并查找节标题。
 - en: Sections are recognised by keywords used for its headings. Say, for SummarySection,
     keywords are “Summary”, “Aim”, “Objective”, etc.
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过用于标题的关键字来识别部分。例如，对于 SummarySection，关键字包括“Summary”、“Aim”、“Objective”等。
 - en: Once the match is found, state of “SummarySection” is set and further lines
     are clubbed under it, till the next section is found.
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一旦找到匹配，设置“SummarySection”的状态，并将进一步的行合并到其中，直到找到下一个部分。
 - en: Once the new heading matches, the new state of the next section starts, so on.
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一旦新的标题匹配，下一节的新状态开始，如此继续。
 - en: '![](../Images/13d7c4500c3acdddd9d67d91bd747c0d.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/13d7c4500c3acdddd9d67d91bd747c0d.png)'
 - en: '**Results**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**结果**'
 - en: 'A sample resume is shown below:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是一个样本简历：
 - en: '![](../Images/dee8d6e8b16ef536e15589413a0e257f.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/dee8d6e8b16ef536e15589413a0e257f.png)'
 - en: '![](../Images/13c4cc7f89cc34b302f3c39ffbb8a36c.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/13c4cc7f89cc34b302f3c39ffbb8a36c.png)'
 - en: 'Entities extracted are shown below:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 提取的实体如下所示：
 - en: Implementation of the parser, along its config file and sample resume can be
     found at [github](https://github.com/yogeshhk/MiningResume).
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 解析器的实现、配置文件及样本简历可以在[github](https://github.com/yogeshhk/MiningResume)找到。
 - en: End note
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结束语
 - en: This article demonstrates unearthing of structured information from unstructured
     data such as a resume. As the implementation is shown only for one sample, it
     may not work for other formats. One would need to enhance, customize it to cater
     to the other resume types. Apart from resumes, the parsing-specifications separation
     framework can be leveraged for the other types of documents from different domains
     as well, by specifying domain specific configuration files.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文展示了如何从非结构化数据（如简历）中挖掘结构化信息。由于实施示例仅适用于一个样本，它可能不适用于其他格式。需要进行增强和定制，以适应其他类型的简历。除了简历，解析规范分离框架还可以用于不同领域的其他类型文档，通过指定特定领域的配置文件来实现。
 - en: '**![](../Images/9f10d69469cf984ba9ce95b6a4ab4ec7.png)Bio:** [**Yogesh H. Kulkarni**](https://www.linkedin.com/in/yogeshkulkarni/),
     after working in the field of Geometric Modelling for more than 16 years, has
     recently finished a PhD in it. He got into Data Sciences while doing the doctoral
@@ -205,73 +288,112 @@
     in Text Mining, Machine/Deep Learning and primarily uses Python stack for implementations.
     He would love to hear from you about this article as well as on any such topics,
     projects, assignments, opportunities, etc.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**![](../Images/9f10d69469cf984ba9ce95b6a4ab4ec7.png)简介：** [**Yogesh H. Kulkarni**](https://www.linkedin.com/in/yogeshkulkarni/)，在几何建模领域工作超过16年后，最近完成了博士学位。在进行博士研究期间，他进入了数据科学领域，并希望进一步从事这一领域的职业。他对文本挖掘、机器学习/深度学习充满兴趣，主要使用Python技术栈进行实现。他很乐意听到您对本文以及相关话题、项目、任务、机会等的看法。'
 - en: '**Related:**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Using Deep Learning To Extract Knowledge From Job Descriptions](/2017/05/deep-learning-extract-knowledge-job-descriptions.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用深度学习从职位描述中提取知识](/2017/05/deep-learning-extract-knowledge-job-descriptions.html)'
 - en: '[Making sense of text analytics](/2017/02/sas-text-analytics-nyc.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解文本分析](/2017/02/sas-text-analytics-nyc.html)'
 - en: '[Text Mining Amazon Mobile Phone Reviews: Interesting Insights](/2017/01/data-mining-amazon-mobile-phone-reviews-interesting-insights.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本挖掘亚马逊手机评论：有趣的见解](/2017/01/data-mining-amazon-mobile-phone-reviews-interesting-insights.html)'
 - en: '* * *'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您组织的IT'
 - en: '* * *'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学，寻找目的，再找到目的……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为优秀数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
 - en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[建立稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
 - en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
