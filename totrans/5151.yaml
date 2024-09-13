@@ -1,157 +1,240 @@
 - en: Handling Missing Values in Time-series with SQL
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 SQL 处理时间序列中的缺失值
 - en: 原文：[https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html](https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html](https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html)
 - en: This morning I read [Madison Schott](https://medium.com/u/3ed0ce2dcf93?source=post_page-----a910b5f481fe--------------------------------)’s [article](https://medium.com/towards-data-science/optimize-your-sql-code-with-this-window-function-409d3341cb20) about
     the `LAST_VALUE` function, where she highlights the usefulness of this lesser-known
     SQL function.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天早上我阅读了[Madison Schott](https://medium.com/u/3ed0ce2dcf93?source=post_page-----a910b5f481fe--------------------------------)的[文章](https://medium.com/towards-data-science/optimize-your-sql-code-with-this-window-function-409d3341cb20)，她在其中强调了这个鲜为人知的
+    SQL 函数`LAST_VALUE`的实用性。
 - en: It inspired me to write a follow-up article about a specific use-case that comes
     up often when dealing with time-series data.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 这激励我写了一篇关于处理时间序列数据时经常遇到的特定用例的后续文章。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: An Example
+  id: totrans-10
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 示例
 - en: Let’s pretend you’re building a predictive maintenance model using sensor data.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们假设你正在使用传感器数据构建一个预测性维护模型。
 - en: 'After some wrangling, you end up with hourly data that looks like this:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 经过一些整理，你最终得到的每小时数据如下所示：
 - en: Example of some preprocessed sensor data
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些预处理的传感器数据示例
 - en: At this point, we’ve already done some pretty significant data engineering in
     order to create these evenly spaced observations at every hour. *How* to do this
     is a subject for another article. However, take notice that there are some gaps
     in the temperature measurements. This is where `LAST_VALUE` comes to the rescue.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，我们已经进行了一些相当重要的数据工程，以在每小时创建这些均匀间隔的观测数据。*如何*做到这一点是另一个文章的主题。然而，请注意，温度测量中存在一些间隙。这时`LAST_VALUE`就派上用场了。
 - en: The reason for the missing values is usually because sensors only report when
     the value changes. This reduces the amount of data that the machine needs to transmit,
     but it creates a data problem for us to solve.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 缺失值的原因通常是传感器只在值发生变化时报告。这减少了机器需要传输的数据量，但这为我们创建了一个数据问题需要解决。
 - en: The Reason Why
+  id: totrans-16
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 原因
 - en: 'If we build a model with this data directly, the accuracy is going to suffer
     when a particular value is missing, because there is no historical context *written
     into the row itself*. For the most accurate model possible, we should add features
     such as:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们直接使用这些数据构建模型，当特定值缺失时，模型的准确性会受到影响，因为没有历史上下文*写入到行本身*。为了获得尽可能准确的模型，我们应该添加如下一些特征：
 - en: Last temperature reading
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最后一次温度读取
 - en: Avg temperature over past 6 hours
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 过去 6 小时的平均温度
 - en: Hours since temperature reading increased/decreased
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 自上次温度读取以来的小时数（温度上升/下降）
 - en: Rate of change of temperature over past 12 hours
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 过去 12 小时的温度变化率
 - en: '![Handling Missing Values in Time-series with SQL](../Images/c11c4e344b4169f71568aab552a5e120.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 SQL 处理时间序列中的缺失值](../Images/c11c4e344b4169f71568aab552a5e120.png)'
 - en: An illustration of the types of features that will be useful for a predictive
     model
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 将对预测模型有用的特征类型的说明
 - en: Our very first step should be to replace the missing values with the last known
     value. The reason we choose to do this *first*, is because the other features
     will become much easier to create.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的第一步应该是用最后一个已知的值替换缺失值。我们选择*首先*这样做的原因是其他特征会变得更容易创建。
 - en: For example, if we leave them missing and try to calculate a rolling average,
     the average will be calculated incorrectly (it will ignore the missing values
     and only average the non-missing).
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，如果我们将其留作缺失并尝试计算滚动平均值，那么平均值将被错误计算（它会忽略缺失值，仅计算非缺失值的平均值）。
 - en: '**Avg Temp Prior 4 hours (with missing)**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**过去 4 小时的平均温度（有缺失值）**'
 - en: (null + 85 + null + null) / 1 = **85**
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: (null + 85 + null + null) / 1 = **85**
 - en: '**Avg Temp Prior 4 hours (replaced)**'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**过去 4 小时的平均温度（替换后）**'
 - en: (84 + 85 + 85 + 85) / 4 = **84.75**
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: (84 + 85 + 85 + 85) / 4 = **84.75**
 - en: How to Fix It
+  id: totrans-30
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何修复
 - en: In python, we would start with [forwardfill](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.ffill.html).
     However, doing this in SQL means that we can take advantage of the power of our
     data warehouse.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Python 中，我们会从 [前向填充](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.ffill.html)
+    开始。然而，在 SQL 中这样做意味着我们可以利用我们数据仓库的强大功能。
 - en: In SQL, we use `LAST_VALUE`. See [this article](https://towardsdatascience.com/optimize-your-sql-code-with-this-window-function-409d3341cb20) for
     a more in depth explanation.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 SQL 中，我们使用 `LAST_VALUE`。有关更多深入解释，请参阅 [这篇文章](https://towardsdatascience.com/optimize-your-sql-code-with-this-window-function-409d3341cb20)。
 - en: 'Here is the syntax:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是语法：
 - en: '[PRE0]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Result with the missing replaced with LAST_VALUE
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 用 LAST_VALUE 替换缺失值后的结果
 - en: There we have it!
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样！
 - en: Conclusion
+  id: totrans-37
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: Hopefully I’ve been able to shine a light on `LAST_VALUE` and it’s cousin, `FIRST_VALUE` ,
     which are lesser known SQL Window functions.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望我能为 `LAST_VALUE` 及其表亲 `FIRST_VALUE` 提供一些启示，它们是较不为人知的 SQL 窗口函数。
 - en: '**[Josh Berry](https://www.linkedin.com/in/joshberry022/)** ([**@Twitter**](https://mobile.twitter.com/itsamejoshabee))
     leads Customer Facing Data Science at Rasgo and has been in the data and analytics
     profession since 2008\. Josh spent 10 years at Comcast where he built the data
@@ -160,37 +243,58 @@
     a critical leader in building out Customer Facing Data Science at DataRobot. In
     his spare time Josh performs complex analysis on interesting topics such as baseball,
     F1 racing, housing market predictions, and more.'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Josh Berry](https://www.linkedin.com/in/joshberry022/)** ([**@Twitter**](https://mobile.twitter.com/itsamejoshabee))
+    领导了 Rasgo 的客户数据科学团队，并自 2008 年以来一直从事数据和分析行业。Josh 在 Comcast 工作了 10 年，期间他建立了数据科学团队，并且是内部开发的
+    Comcast 特征库的关键负责人——这是市场上第一个特征库之一。在 Comcast 之后，Josh 在 DataRobot 构建客户数据科学团队中发挥了关键作用。在业余时间，Josh
+    对棒球、F1 赛车、住房市场预测等有趣的主题进行复杂分析。'
 - en: '[Original](https://medium.com/@jberry_33001/handling-missing-values-in-time-series-with-sql-a910b5f481fe).
     Reposted with permission.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/@jberry_33001/handling-missing-values-in-time-series-with-sql-a910b5f481fe)。已获许可转载。'
 - en: More On This Topic
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Machine Learning Is Not Like Your Brain Part 4: The Neuron’s…](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-4-neuron-limited-ability-represent-precise-values.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习并不像你的大脑 第四部分：神经元的……](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-4-neuron-limited-ability-represent-precise-values.html)'
 - en: '[Using SHAP Values for Model Interpretability in Machine Learning](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 SHAP 值进行机器学习模型可解释性分析](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
 - en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Datawig，一个用于缺失值插补的 AWS 深度学习库](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
 - en: '[The Optimal Way to Input Missing Data with Pandas fillna()](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Pandas fillna() 输入缺失数据的最佳方法](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)'
 - en: '[How to Identify Missing Data in Time-Series Datasets](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何识别时间序列数据集中的缺失数据](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)'
 - en: '[Semantic Layers are the Missing Piece for AI-Enabled Analytics](https://www.kdnuggets.com/2024/02/cube-semantic-layers-missing-piece-ai-enabled-analytics)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[语义层是 AI 驱动分析的缺失环节](https://www.kdnuggets.com/2024/02/cube-semantic-layers-missing-piece-ai-enabled-analytics)'
