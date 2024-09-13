@@ -1,368 +1,572 @@
 - en: Here’s how you can accelerate your Data Science on GPU
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 这里是如何在 GPU 上加速你的数据科学
 - en: 原文：[https://www.kdnuggets.com/2019/07/accelerate-data-science-on-gpu.html](https://www.kdnuggets.com/2019/07/accelerate-data-science-on-gpu.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/07/accelerate-data-science-on-gpu.html](https://www.kdnuggets.com/2019/07/accelerate-data-science-on-gpu.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: Data Scientists need computing power. Whether you’re processing a big dataset
     with Pandas or running some computation on a massive matrix with Numpy, you’ll
     need a powerful machine to get the job done in a reasonable amount of time.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据科学家需要计算能力。无论你是在用 Pandas 处理大型数据集，还是用 Numpy 在大规模矩阵上进行计算，你都需要一台强大的机器，以便在合理的时间内完成工作。
 - en: Over the past several years, Python libraries commonly used by Data Scientists
     have gotten pretty good at leveraging CPU power.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 近年来，数据科学家常用的 Python 库在利用 CPU 性能方面已经相当出色。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的 IT 需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Pandas, with its underlying base code written in C, does a fine job of being
     able to handle datasets that go over even 100GB in size. And if you don’t have
     enough RAM to fit such a dataset, you can always use the convenient chunking functions
     that can process the data one piece at a time.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 使用 C 语言编写的底层基础代码，能够很好地处理超过 100GB 大小的数据集。如果你的内存不足以容纳这样的数据集，你可以使用方便的分块函数，一次处理一块数据。
 - en: 'GPUs vs CPUs: Parallel Processing'
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: GPU 与 CPU：并行处理
 - en: With massive data, a CPU just isn’t going to cut it.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 面对大规模数据，CPU 真的不够用。
 - en: A dataset that goes over 100GB in size is going to have many many data points,
     within the *millions* or even *billions* ballpark range. With that many points
     to process, it doesn’t matter how fast your CPU is, it simply doesn’t have enough
     cores to do efficient parallel processing. If your CPU has 20 cores (which would
     be fairly expensive CPU), you can only process 20 data points at a time!
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 超过 100GB 大小的数据集将拥有很多数据点，在*百万*甚至*十亿*的范围内。处理这么多点时，不管你的 CPU 多快，它的核心数也不足以进行高效的并行处理。如果你的
+    CPU 有 20 个核心（这将是相当昂贵的 CPU），你一次只能处理 20 个数据点！
 - en: CPUs are going to be better in tasks where clock-speed is more important — or
     you simply don’t have a GPU implementation. If there is a GPU implementation for
     the process you are trying to perform, then a GPU will be far more effective if
     that task can benefit from parallel processing.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在时钟速度更为重要的任务中，CPU 更具优势——或者你根本没有 GPU 实现。如果你要执行的过程有 GPU 实现，那么如果任务可以从并行处理中受益，GPU
+    将会更加有效。
 - en: '![figure-name](../Images/45f79f5c92359a10ccb30f2b8fbbef83.png)How a Multi-core
     system can process data faster. For a single core system (left), all 10 tasks
     go to a single node. For the dual-core system (right), each node takes on 5 tasks,
     thereby doubling the processing speed'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/45f79f5c92359a10ccb30f2b8fbbef83.png)多核系统如何更快处理数据。对于单核系统（左），所有
+    10 个任务都分配给一个节点。对于双核系统（右），每个节点处理 5 个任务，从而加倍处理速度'
 - en: Deep Learning has already seen its fair share of leveraging GPUs. Many of the
     convolution operations done in Deep Learning are repetitive and as such can be
     greatly accelerated on GPUs, even up to 100s of times.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 深度学习已经充分利用了 GPU。深度学习中的许多卷积操作是重复性的，因此可以在 GPU 上大大加速，甚至达到 100 倍。
 - en: Data Science today is no different as many repetitive operations are performed
     on large datasets with libraries like Pandas, Numpy, and Scikit-Learn. These operations
     aren’t too complex to implement on the GPU either.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在的数据科学也没有不同，因为许多重复的操作在大数据集上执行，使用库如 Pandas、Numpy 和 Scikit-Learn。这些操作在 GPU 上实现也并不复杂。
 - en: Finally, there’s a solution.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，解决方案来了。
 - en: GPU Acceleration with Rapids
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 Rapids 进行 GPU 加速
 - en: '[Rapids](https://rapids.ai/?source=post_page---------------------------) is
     a suite of software libraries designed for accelerating Data Science by leveraging
     GPUs. It uses low-level CUDA code for fast, GPU-optimized implementations of algorithms
     while still having an easy to use Python layer on top.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Rapids](https://rapids.ai/?source=post_page---------------------------) 是一套加速数据科学的软件库，通过利用
+    GPU 提供加速。它使用低级 CUDA 代码实现快速、GPU 优化的算法，同时在其上有一个易于使用的 Python 层。'
 - en: The beauty of Rapids is that it’s integrated smoothly with Data Science libraries
     — things like Pandas dataframes are easily passed through to Rapids for GPU acceleration.
     The diagram below illustrates how Rapids achieves low-level acceleration while
     maintaining an easy to use top-layer.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: Rapids 的美妙之处在于它与数据科学库的无缝集成——像 Pandas 数据框这样的数据可以轻松地传递给 Rapids 以进行 GPU 加速。下面的图示说明了
+    Rapids 如何实现低级加速，同时保持易于使用的顶层。
 - en: '![figure-name](../Images/f511cd54476f8f41e8586d8a442db6e8.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/f511cd54476f8f41e8586d8a442db6e8.png)'
 - en: 'Rapids leverages several Python libraries:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: Rapids 利用多个 Python 库：
 - en: '[**cuDF**](https://github.com/rapidsai/cudf?source=post_page---------------------------) —Python
     GPU DataFrames. It can do almost everything Pandas can in terms of data handling
     and manipulation.'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**cuDF**](https://github.com/rapidsai/cudf?source=post_page---------------------------)
+    — Python GPU 数据框。它可以在数据处理和操作方面做几乎所有 Pandas 能做的事情。'
 - en: '[**cuML**](https://github.com/rapidsai/cuml?source=post_page---------------------------) —
     Python GPU Machine Learning. It contains many of the ML algorithms that Scikit-Learn
     has, all in a very similar format.'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**cuML**](https://github.com/rapidsai/cuml?source=post_page---------------------------)
+    — Python GPU 机器学习。它包含了 Scikit-Learn 具有的许多 ML 算法，格式非常相似。'
 - en: '[**cuGraph**](https://github.com/rapidsai/cuml?source=post_page---------------------------) —
     Python GPU graph processing. It contains many common graph analytics algorithms
     including PageRank and various similarity metrics.'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**cuGraph**](https://github.com/rapidsai/cuml?source=post_page---------------------------)
+    — Python GPU 图处理。它包含许多常见的图分析算法，包括 PageRank 和各种相似度度量。'
 - en: A Tutorial for how to use Rapids
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何使用 Rapids 的教程
 - en: '**Installation**'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**安装**'
 - en: Now you’ll see how to use Rapids!
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你将了解如何使用 Rapids！
 - en: To install it, head on over to the [website](https://rapids.ai/start.html?source=post_page---------------------------) where
     you’ll see how to install Rapids. You can install it directly on your machine
     through [Conda](https://anaconda.org/anaconda/conda?source=post_page---------------------------) or
     simply pull the Docker container.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 要安装它，请访问[网站](https://rapids.ai/start.html?source=post_page---------------------------)，在那里你会看到如何安装
+    Rapids。你可以通过[Conda](https://anaconda.org/anaconda/conda?source=post_page---------------------------)直接在你的机器上安装，或者直接拉取
+    Docker 容器。
 - en: 'When installing, you can set your system specs such as CUDA version and which
     libraries you would like to install. For example, I have CUDA 10.0 and wanted
     to install all the libraries, so my install command was:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在安装时，你可以设置系统规格，如 CUDA 版本以及你希望安装哪些库。例如，我有 CUDA 10.0，并且想要安装所有库，所以我的安装命令是：
 - en: '[PRE0]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Once that command finishing running, you’re ready to start doing GPU-accelerated
     Data Science.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦命令运行完成，你就可以开始进行 GPU 加速的数据科学了。
 - en: '**Setting up our data**'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**设置我们的数据**'
 - en: For this tutorial, we’re going to go through a modified version of the [DBSCAN
     demo](https://github.com/rapidsai/notebooks/blob/branch-0.8/tutorials/DBSCAN_Demo_Full.ipynb?source=post_page---------------------------).
     I’ll be using the [Nvidia Data Science Work Station](https://towardsdatascience.com/nvidias-new-data-science-workstation-a-review-and-benchmark-e451db600551?source=post_page---------------------------) to
     run the testing which came with 2 GPUs.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将通过修改版的[DBSCAN 演示](https://github.com/rapidsai/notebooks/blob/branch-0.8/tutorials/DBSCAN_Demo_Full.ipynb?source=post_page---------------------------)进行操作。我将使用[Nvidia
+    Data Science Work Station](https://towardsdatascience.com/nvidias-new-data-science-workstation-a-review-and-benchmark-e451db600551?source=post_page---------------------------)进行测试，该设备配备了
+    2 个 GPU。
 - en: DBSCAN is a density-based [clustering algorithm](https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68?source=post_page---------------------------) that
     can automatically classify groups of data, without the user having to specify
     how many groups there are. There’s an implementation of it in [Scikit-Learn](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html?source=post_page---------------------------).
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: DBSCAN 是一种基于密度的 [聚类算法](https://towardsdatascience.com/the-5-clustering-algorithms-data-scientists-need-to-know-a36d136ef68?source=post_page---------------------------)，可以自动对数据进行分类，而无需用户指定有多少组。它在
+    [Scikit-Learn](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html?source=post_page---------------------------)
+    中有一个实现。
 - en: We’ll start by getting all of our imports setup. Libraries for loading data,
     visualising data, and applying ML models.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将从设置所有导入项开始，包括加载数据、可视化数据和应用 ML 模型的库。
 - en: '[PRE1]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The *make_circles* functions will automatically create a complex distribution
     of data resembling two circles that we’ll apply DBSCAN on.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '*make_circles* 函数将自动创建一个类似于两个圆的复杂数据分布，我们将对其应用 DBSCAN。'
 - en: 'Let’s start by creating our dataset of 100,000 points and visualising it in
     a plot:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从创建 100,000 个点的数据集并在图中可视化它开始：
 - en: '[PRE2]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![figure-name](../Images/12a054c98c39b6df2d4aecb2381e666c.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/12a054c98c39b6df2d4aecb2381e666c.png)'
 - en: '**DBSCAN on CPU**'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在 CPU 上运行 DBSCAN**'
 - en: Running DBSCAN on CPU is easy with Scikit-Learn. We’ll import our algorithm
     and setup some parameters.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Scikit-Learn 在 CPU 上运行 DBSCAN 很简单。我们将导入我们的算法并设置一些参数。
 - en: '[PRE3]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: We can now apply DBSCAN on our circle data with a single function call from
     Scikit-Learn. Putting a `%%time` before our function tells Jupyter Notebook to
     measure its run time.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以通过 Scikit-Learn 的一个函数调用来应用 DBSCAN 于我们的圆形数据。在我们的函数前加上`%%time`可以告诉 Jupyter
+    Notebook 测量其运行时间。
 - en: '[PRE4]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: For those 100, 000 points, the run time was 8.31 seconds. The resulting plot
     is shown below.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这 100,000 个点，运行时间为 8.31 秒。结果图如下所示。
 - en: '![figure-name](../Images/d3b76a1e32d8538015ea451df118ecf2.png)Result of running
     DBSCAN on the CPU using Scikit-Learn'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/d3b76a1e32d8538015ea451df118ecf2.png)使用 Scikit-Learn
+    在 CPU 上运行 DBSCAN 的结果'
 - en: '**DBSCAN with Rapids on GPU**'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**使用 Rapids 在 GPU 上运行 DBSCAN**'
 - en: Now let’s make things faster with Rapids!
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们用 Rapids 提速吧！
 - en: First, we’ll convert our data to a `pandas.DataFrame` and use that to create
     a `cudf.DataFrame`. Pandas dataframes are converted seamlessly to cuDF dataframes
     without any change in the data format.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们将把数据转换为 `pandas.DataFrame`，然后使用它创建 `cudf.DataFrame`。Pandas 数据框可以无缝地转换为
+    cuDF 数据框，而数据格式不会发生变化。
 - en: '[PRE5]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: We’ll then import and initialise a *special* version of DBSCAN from cuML, one
     that is GPU accelerated. The function format of the cuML version of DBSCAN is
     the exact same as that of Scikit-Learn — same parameters, same style, same functions.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们将从 cuML 中导入并初始化一个 *特殊* 版本的 DBSCAN，它是 GPU 加速的。cuML 版本的 DBSCAN 函数格式与 Scikit-Learn
+    完全相同 —— 参数、风格、函数均相同。
 - en: '[PRE6]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Finally, we can run our prediction function for the GPU DBSCAN while measuring
     the run time.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们可以在测量运行时间的同时运行 GPU DBSCAN 的预测函数。
 - en: '[PRE7]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: The GPU version has a run time of 4.22 seconds — almost a 2X speedup. The resulting
     plot is the exact same as the CPU version too, since we are using the same algorithm.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: GPU 版本的运行时间为 4.22 秒，几乎是 2 倍的加速。结果图与 CPU 版本完全相同，因为我们使用的是相同的算法。
 - en: '![figure-name](../Images/d3b76a1e32d8538015ea451df118ecf2.png)Result of running
     DBSCAN on the GPU using cuML'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '![figure-name](../Images/d3b76a1e32d8538015ea451df118ecf2.png)使用 cuML 在 GPU
+    上运行 DBSCAN 的结果'
 - en: Getting super speed with Rapids GPU
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 Rapids GPU 获得超高速
 - en: The amount of speedup we get from Rapids depends on how much data we are processing.
     A good rule of thumb is that larger datasets will benefit from GPU acceleration.
     There is some overhead time associated with transferring data between the CPU
     and GPU — that overhead time becomes more “worth it” with larger datasets.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 从 Rapids 获得的加速量取决于我们处理的数据量。一个好的经验法则是，较大的数据集将受益于 GPU 加速。将数据在 CPU 和 GPU 之间传输时会有一些开销
+    —— 随着数据集的增大，这种开销变得更“值得”。
 - en: We can illustrate this with a simple example.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以用一个简单的例子来说明这一点。
 - en: We’re going to create a Numpy array of random numbers and apply DBSCAN on it.
     We’ll compare the speed of our regular CPU DBSCAN and the GPU version from cuML,
     while increasing and decreasing the number of data points to see how it effects
     our run time.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将创建一个随机数的 Numpy 数组，并对其应用 DBSCAN。我们将比较常规 CPU DBSCAN 和来自 cuML 的 GPU 版本的速度，同时增加和减少数据点的数量，以观察这如何影响运行时间。
 - en: 'The code below illustrates this test:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的代码演示了这个测试：
 - en: '[PRE8]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Check out the plot of the results from Matplotlib down below:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看下方 Matplotlib 结果的图示：
 - en: '![figure-name](../Images/6ec9f65915ba982f6379a5af54f22934.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/6ec9f65915ba982f6379a5af54f22934.png)'
 - en: The amount of rises quite drastically when using the GPU instead of CPU. Even
     at 10,000 points (far left) we still get a speedup of 4.54X. On the higher end
     of things, with 10,000,000 points we get a speedup of 88.04X when switching to
     GPU!
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 GPU 代替 CPU 时，性能提升幅度非常显著。即使在 10,000 点（最左边）时，我们仍然能获得 4.54 倍的加速。在高端情况下，使用 10,000,000
+    点时，切换到 GPU 可以获得 88.04 倍的加速！
 - en: Like to learn?
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 喜欢学习吗？
 - en: Follow me on[ twitter](https://twitter.com/GeorgeSeif94?source=post_page---------------------------) where
     I post all about the latest and greatest AI, Technology, and Science! Connect
     with me on [LinkedIn](https://www.linkedin.com/in/georgeseif/?source=post_page---------------------------) too!
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 [twitter](https://twitter.com/GeorgeSeif94?source=post_page---------------------------)
+    上关注我，了解最新的 AI、技术和科学动态！也可以在 [LinkedIn](https://www.linkedin.com/in/georgeseif/?source=post_page---------------------------)
+    上与我联系！
 - en: Recommended Reading
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 推荐阅读
 - en: Want to learn more about Data Science? The [***Python Data Science Handbook***](https://amzn.to/2GZN4Xv?source=post_page---------------------------) book
     is the best resource out there for learning how to do *real* Data Science with
     Python!
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 想了解更多关于数据科学的内容吗？[***Python 数据科学手册***](https://amzn.to/2GZN4Xv?source=post_page---------------------------)
+    是学习如何用 Python 进行*真实*数据科学的最佳资源！
 - en: And just a heads up, I support this blog with Amazon affiliate links to great
     books, because sharing great books helps everyone! As an Amazon Associate I earn
     from qualifying purchases.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 另外，提醒一下，我通过 Amazon 关联链接支持这个博客，因为分享好书对大家都有帮助！作为 Amazon 联盟会员，我从合格的购买中获得收益。
 - en: '**Bio: [George Seif](https://towardsdatascience.com/@george.seif94)** is a
     Certified Nerd and AI / Machine Learning Engineer.'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[George Seif](https://towardsdatascience.com/@george.seif94)** 是一位认证极客和
+    AI / 机器学习工程师。'
 - en: '[Original](https://towardsdatascience.com/heres-how-you-can-accelerate-your-data-science-on-gpu-4ecf99db3430).
     Reposted with permission.'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/heres-how-you-can-accelerate-your-data-science-on-gpu-4ecf99db3430)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Nvidia’s New Data Science Workstation — a Review and Benchmark](/2019/07/nvidia-new-data-science-workstation.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Nvidia 的新数据科学工作站——评论与基准测试](/2019/07/nvidia-new-data-science-workstation.html)'
 - en: '[Examining the Transformer Architecture – Part 2: A Brief Description of How
     Transformers Work](/2019/07/transformer-architecture-part-2.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[探索 Transformer 架构——第 2 部分：Transformer 的工作原理简述](/2019/07/transformer-architecture-part-2.html)'
 - en: '[XGBoost on GPUs: Unlocking Machine Learning Performance and Productivity](/2018/12/nvidia-xgboost-gpu-machine-learning-performance-productivity.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[XGBoost 在 GPUs 上：解锁机器学习的性能和生产力](/2018/12/nvidia-xgboost-gpu-machine-learning-performance-productivity.html)'
 - en: More On This Topic
+  id: totrans-81
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Building a GPU Machine vs. Using the GPU Cloud](https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建 GPU 机器与使用 GPU 云](https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud)'
 - en: '[Accelerate Your Machine Learning Journey with Uplimit''s Metaflow…](https://www.kdnuggets.com/2023/10/uplimit-accelerate-your-machine-learning-journey-metaflow-mastery-course)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过 Uplimit 的 Metaflow 加速你的机器学习之旅…](https://www.kdnuggets.com/2023/10/uplimit-accelerate-your-machine-learning-journey-metaflow-mastery-course)'
 - en: '[How to Use Analytics to Accelerate Business Growth?](https://www.kdnuggets.com/2022/12/analytics-accelerate-business-growth.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用分析来加速业务增长？](https://www.kdnuggets.com/2022/12/analytics-accelerate-business-growth.html)'
 - en: '[Want to Use Your Data Skills to Solve Global Problems? Here’s What…](https://www.kdnuggets.com/2022/04/jhu-want-data-skills-solve-global-problems.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[想利用你的数据技能解决全球问题？这里有一些建议…](https://www.kdnuggets.com/2022/04/jhu-want-data-skills-solve-global-problems.html)'
 - en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 RAPIDS cuDF 在特征工程中利用 GPU](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
 - en: '[Mastering GPUs: A Beginner''s Guide to GPU-Accelerated DataFrames in Python](https://www.kdnuggets.com/2023/07/mastering-gpus-beginners-guide-gpu-accelerated-dataframes-python.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握 GPUs：Python 中 GPU 加速数据帧的初学者指南](https://www.kdnuggets.com/2023/07/mastering-gpus-beginners-guide-gpu-accelerated-dataframes-python.html)'

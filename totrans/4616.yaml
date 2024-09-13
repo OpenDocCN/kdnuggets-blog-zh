@@ -1,572 +1,866 @@
 - en: 'Convolutional Neural Networks: A Python Tutorial Using TensorFlow and Keras'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 卷积神经网络：使用 TensorFlow 和 Keras 的 Python 教程
 - en: 原文：[https://www.kdnuggets.com/2019/07/convolutional-neural-networks-python-tutorial-tensorflow-keras.html](https://www.kdnuggets.com/2019/07/convolutional-neural-networks-python-tutorial-tensorflow-keras.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/07/convolutional-neural-networks-python-tutorial-tensorflow-keras.html](https://www.kdnuggets.com/2019/07/convolutional-neural-networks-python-tutorial-tensorflow-keras.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: Convolutional Neural Networks are a part of what made Deep Learning reach the
     headlines so often in the last decade. Today we’ll train an **image classifier** to
     tell us whether an image contains a dog or a cat, using TensorFlow’s eager API.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 卷积神经网络是深度学习在过去十年频繁上头条的原因之一。今天我们将训练一个**图像分类器**，利用 TensorFlow 的 eager API 来判断图像中是否包含狗或猫。
 - en: 'Artificial Neural Networks have disrupted several industries lately, due to
     their unprecedented capabilities in many areas. However, different **Deep Learning
     architectures** excel on each one:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 人工神经网络最近对多个行业产生了影响，因为它们在许多领域展现出了前所未有的能力。然而，不同的**深度学习架构**在每个领域都有所擅长：
 - en: Image Classification (Convolutional Neural Networks).
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 图像分类（卷积神经网络）。
 - en: Image, audio and text generation (GANs, RNNs).
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 图像、音频和文本生成（GANs, RNNs）。
 - en: Time Series Forecasting (RNNs, LSTM).
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 时间序列预测（RNNs, LSTM）。
 - en: Recommendations Systems (Boltzmann Machines).
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 推荐系统（玻尔兹曼机）。
 - en: A huge et cetera (e.g., regression).
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 大量其他内容（例如，回归分析）。
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三推荐课程
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 工作'
 - en: '* * *'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Today we’ll focus on the first item of the list, though each of those deserves
     an article of its own.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天我们将重点关注列表中的第一个项目，虽然每一个都值得单独写一篇文章。
 - en: What are Convolutional Neural Networks?
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是卷积神经网络？
 - en: In MultiLayer Perceptrons (MLP), the *vanilla* Neural Networks, each layer’s
     neurons connect to **all** the neurons in the next layer. We call this type of
     layers **fully connected**.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在多层感知器（MLP），也就是*普通*神经网络中，每一层的神经元都连接到下一层的**所有**神经元。这种层被称为**全连接层**。
 - en: '![Fully connected neural network](../Images/7217b688dccd14aeb4eaa64a43a95669.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![全连接神经网络](../Images/7217b688dccd14aeb4eaa64a43a95669.png)'
 - en: '*A MLP. Source: [astroml](http://www.astroml.org/book_figures/appendix/fig_neural_network.html)*'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '*一个多层感知器。来源：[astroml](http://www.astroml.org/book_figures/appendix/fig_neural_network.html)*'
 - en: 'A Convolutional Neural Network is different: they have Convolutional Layers.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 卷积神经网络是不同的：它们具有卷积层。
 - en: On a fully connected layer, each neuron’s output will be a linear transformation
     of the previous layer, composed with a non-linear [activation function](http://www.datastuff.tech/machine-learning/why-do-neural-networks-need-an-activation-function/) (e.g., *ReLu* or *Sigmoid*).
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在全连接层上，每个神经元的输出将是对上一层的线性变换，并与一个非线性[激活函数](http://www.datastuff.tech/machine-learning/why-do-neural-networks-need-an-activation-function/)（例如，*ReLu*
+    或 *Sigmoid*）组合。
 - en: Conversely, the output of each neuron in a **Convolutional Layer** is only a
     function of a (typically small) **subset** of the previous layer’s neurons.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 相反，**卷积层**中每个神经元的输出仅是上一层**子集**的一个函数。
 - en: '![](../Images/91595c3b86cf4b582b747851d6c72bcb.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/91595c3b86cf4b582b747851d6c72bcb.png)'
 - en: '*Source: [Brilliant](https://brilliant.org/wiki/convolutional-neural-network/)*'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '*来源：[Brilliant](https://brilliant.org/wiki/convolutional-neural-network/)*'
 - en: Outputs on a Convolutional Layer will be the result of applying a **convolution** to
     a subset of the previous layer’s neurons, and then an activation function.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 卷积层上的输出将是对上一层的一个**子集**应用**卷积**的结果，然后是一个激活函数。
 - en: What is a convolution?
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是卷积？
 - en: The convolution operation, given an input matrix *A* (usually the previous layer’s
     values) and a (typically much smaller) weight matrix called a **kernel** or **filter** *K*,
     will output a new matrix *B*.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 卷积操作，给定一个输入矩阵*A*（通常是前一层的值）和一个（通常小得多的）权重矩阵，称为**卷积核**或**滤波器** *K*，将输出一个新的矩阵*B*。
 - en: '![](../Images/cb31402ba56929809d073152b6eff087.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cb31402ba56929809d073152b6eff087.png)'
 - en: '*by @[RaghavPrabhu](https://medium.com/@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148)*'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '*来源于@[RaghavPrabhu](https://medium.com/@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148)*'
 - en: 'If *K* is a *CxC* matrix, the first element in *B* will be the result of:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果*K*是一个*CXC*矩阵，*B*中的第一个元素将是：
 - en: Taking the first *CxC* submatrix of *A*.
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 取*A*的第一个*CXC*子矩阵。
 - en: Multiplying each of its elements by its corresponding weight in *K*.
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将每个元素乘以其在*K*中的相应权重。
 - en: Adding all the products.
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将所有的乘积相加。
 - en: These two last steps are equivalent to flattening both *A*’s submatrix and *K*,
     and computing the dot product of the resulting vectors.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 这最后两个步骤等同于将*A*的子矩阵和*K*展平，并计算结果向量的点积。
 - en: We then slide K to the right to get the next element, and so on, repeating this
     process for each of *A*‘s rows.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们将*K*向右滑动以获取下一个元素，依此类推，重复这个过程直到*A*的每一行。
 - en: '![](../Images/07d573c4b79deab51d5e0ed20f39d65b.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/07d573c4b79deab51d5e0ed20f39d65b.png)'
 - en: '*Convolution visualization by @[RaghavPrabhu](https://medium.com/@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148)*'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '*卷积可视化，来源于@[RaghavPrabhu](https://medium.com/@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148)*'
 - en: Depending on what we want, we could only start with our kernel centered at the *Cth*row
     and column, to avoid “going out of bounds”, or assume all elements “outside A”
     have a certain default value (typically 0) –This will define whether *B*‘s size
     is smaller than *A*‘s or the same.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据我们的需求，我们可以选择仅从卷积核居中于*Cth*行和列的位置开始，以避免“越界”，或者假设“A之外”的所有元素具有某种默认值（通常是0）——这将决定*B*的大小是否小于*A*的大小或相同。
 - en: As you can see, if *A* was an *NxM* matrix, now each neuron’s value in* B* won’t
     depend on *N*M* weights, but only on *C*C* (much less) of them.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，如果*A*是一个*NxM*矩阵，那么现在*B*中的每个神经元的值将不再依赖于*N*M*权重，而仅依赖于*C*C*（少得多）个权重。
 - en: This makes a convolutional layer much lighter than a fully connected one, helping
     convolutional models learn a lot faster.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这使得卷积层比全连接层轻得多，帮助卷积模型学习得更快。
 - en: Granted, we will end up using many kernels on each layer (getting a stack of
     matrices as each layer’s output). However, that will still require a lot less
     weights than our good old MLP.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，我们在每一层会使用许多卷积核（每一层的输出是一个矩阵的堆叠）。然而，这仍然需要比我们老旧的多层感知机（MLP）少得多的权重。
 - en: Why does this work?
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么这样做有效？
 - en: Why can we **ignore** how each neuron affects most of the others? Well, this
     whole system holds up on the premise that each neuron is **strongly affected by
     its “neighbors”**. Faraway neurons, however, have only a small bearing on it.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 为什么我们可以**忽略**每个神经元对大多数其他神经元的影响？因为整个系统的前提是每个神经元**受其“邻居”强烈影响**。然而，远处的神经元对它只有很小的影响。
 - en: This assumption is **intuitively true in images**–if we think of the input layer,
     each neuron will be a pixel or a pixel’s RGB value. And that’s part of the reason
     why this approach works so well for image classification.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个假设在图像中是**直观正确的**——如果我们考虑输入层，每个神经元将是一个像素或像素的RGB值。这也是为什么这种方法在图像分类中效果如此之好的部分原因。
 - en: For example, if I take a region of a picture where there’s a blue sky, it’s
     likely that nearby regions will show the sky as well, using similar tones.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，如果我选择一张有蓝天的图片区域，附近的区域很可能也会显示蓝天，使用类似的色调。
 - en: A pixel’s neighbors will usually have similar RGB values to it. If they don’t,
     then that probably means we are on the edge of a figure or object.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 像素的邻居通常会有类似的RGB值。如果没有，那么这可能意味着我们在图形或物体的边缘。
 - en: If you do some convolutions with pen and paper (or a calculator), you’ll realize
     certain kernels will increase an input’s intensity if it’s on a certain kind of
     edge. In other edges, they could decrease it.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你用笔和纸（或计算器）进行一些卷积操作，你会发现某些卷积核会在某种边缘上增加输入的强度，而在其他边缘上则可能会减少它。
 - en: 'As an example, let’s consider the following kernels *V* and *H*:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，考虑以下卷积核 *V* 和 *H*：
 - en: '![](../Images/c2caebb00259f30ea88adc9f43177ed9.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c2caebb00259f30ea88adc9f43177ed9.png)'
 - en: '*Filters for vertical and horizontal edges*'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '*用于垂直和水平边缘的滤波器*'
 - en: '*V* filters vertical edges (where colors above are very different from colors
     below), whereas *H* filters horizontal edges. Notice how one is the transposed
     version of the other.'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '*V* 过滤器处理垂直边缘（即上方和下方颜色差异很大的地方），而 *H* 过滤器处理水平边缘。注意其中一个是另一个的转置版本。'
 - en: Convolutions by example
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 通过示例了解卷积
 - en: 'Here’s an unfiltered picture of a litter of kittens:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是未经过滤的小猫图片：
 - en: '![A cute kitten litter for image preprocessing.](../Images/35c396010e9743ccb6df9a84481c5b06.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![用于图像预处理的可爱小猫图片。](../Images/35c396010e9743ccb6df9a84481c5b06.png)'
 - en: 'Here’s what happens if we apply the horizontal and vertical edge filters, respectively:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们分别应用水平和垂直边缘滤镜，会发生以下情况：
 - en: '![kittens after horizontal and vertical convolutional edge filters](../Images/e902ebda2262e2623748ddc1a6daddeb.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![经过水平和垂直卷积边缘滤镜的小猫图片](../Images/e902ebda2262e2623748ddc1a6daddeb.png)'
 - en: We can see how some features become a lot more noticeable, whereas others fade
     away. Interestingly, each filter showcases different features.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到一些特征变得更加明显，而其他特征则逐渐消失。有趣的是，每个滤镜展示了不同的特征。
 - en: This is how Convolutional Neural Networks learn to identify features in an image.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是卷积神经网络如何学习识别图像中的特征。
 - en: Letting them fit their own kernel weights is a lot easier than any manual approach.
     Imagine trying to figure out how you should express the relationship between pixels…
     by hand!
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 让它们自行调整内核权重要比任何手动方法都简单。想象一下尝试手动表达像素之间的关系！
 - en: To really grasp what each convolution does to a picture, I strongly recommend
     you play around on [this website](http://setosa.io/ev/image-kernels/). It helped
     me more than any book or tutorial could. Go ahead, bookmark it. It’s fun.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了真正理解每个卷积对图像的作用，我强烈建议你在 [这个网站](http://setosa.io/ev/image-kernels/) 上玩一玩。它比任何书籍或教程都对我帮助更大。去吧，收藏它。这很有趣。
 - en: Alright, you’ve learned some theory already. Now let’s move on to the practical
     part.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 好了，你已经学了一些理论知识。现在让我们进入实际操作部分。
 - en: How do you train a Convolutional Neural Network in TensorFlow?
+  id: totrans-63
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如何在 TensorFlow 中训练卷积神经网络？
 - en: TensorFlow is Python’s most popular Deep Learning framework.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: TensorFlow 是 Python 最受欢迎的深度学习框架。
 - en: I’ve heard good things about PyTorch too, though I’ve never had the chance to
     try it.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 我也听说过 PyTorch 很不错，尽管我从未有机会尝试。
 - en: I’ve already written one tutorial on [how to train a Neural Network with TensorFlow’s
     Keras API](http://www.datastuff.tech/machine-learning/autoencoder-deep-learning-tensorflow-eager-api-keras/),
     focusing on AutoEncoders.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 我已经写过一个关于 [如何使用 TensorFlow 的 Keras API 训练神经网络](http://www.datastuff.tech/machine-learning/autoencoder-deep-learning-tensorflow-eager-api-keras/)，重点讲解了
+    AutoEncoders。
 - en: 'Today will be different: we will try three different architectures, and see
     which one does better.'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天会有所不同：我们将尝试三种不同的架构，看看哪一种效果更好。
 - en: As usual, all the code is available on [GitHub](https://github.com/StrikingLoo/Cats-and-dogs-classifier-tensorflow-CNN),
     so you can try everything out for yourself or follow along. Of course I’ll also
     be showing you Python snippets.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 和往常一样，所有代码都可以在 [GitHub](https://github.com/StrikingLoo/Cats-and-dogs-classifier-tensorflow-CNN)
+    上找到，你可以自己尝试或跟随操作。当然，我也会展示 Python 代码片段。
 - en: The Dataset
+  id: totrans-69
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据集
 - en: We will be training a neural network to predict whether an image contains a
     dog or a cat. To do this we’ll use Kaggle’s [cats and dogs Dataset](https://www.kaggle.com/c/dogs-vs-cats).
     It contains 12500 pictures of cats and 12500 of dogs, with different resolutions.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将训练一个神经网络来预测图像中是否包含狗或猫。为此，我们将使用 Kaggle 的 [cats and dogs Dataset](https://www.kaggle.com/c/dogs-vs-cats)。它包含
+    12500 张猫的图片和 12500 张狗的图片，分辨率各异。
 - en: Loading and Preprocessing our Image Data with NumPy
+  id: totrans-71
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 NumPy 加载和预处理我们的图像数据
 - en: A neural network receives a features vector or matrix as an input, typically
     with **fixed dimensions**. How do we generate that from our pictures?
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 神经网络接收一个特征向量或矩阵作为输入，通常具有 **固定尺寸**。我们如何从图片中生成这个特征向量或矩阵？
 - en: Lucky for us, Python’s Image library provides us an easy way to load an image
     as a NumPy array. A HeightxWidth matrix of RGB values.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，Python 的图像库为我们提供了一种简单的方法，将图像加载为 NumPy 数组。即一个 HeightxWidth 的 RGB 值矩阵。
 - en: We already did that on when we did [image filters in Python](http://www.datastuff.tech/machine-learning/k-means-clustering-with-dask-editing-pictures-of-kittens/),
     so I’ll just reuse that code.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经在 [Python 中的图像滤镜](http://www.datastuff.tech/machine-learning/k-means-clustering-with-dask-editing-pictures-of-kittens/)
+    中做过这个，所以我将重用那段代码。
 - en: 'However we still have to fix the fixed dimensions part: which **dimensions** do
     we choose for our **input layer**?'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 不过我们仍然需要解决固定尺寸的问题：我们为 **输入层** 选择什么 **尺寸**？
 - en: This is important, since we will have to **resize every picture** to the chosen
     resolution. We do not want to distort **aspect ratios** too much in case it brings
     too much **noise for the network**.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 这很重要，因为我们需要**调整每张图片的大小**到所选择的分辨率。我们不希望扭曲**长宽比**过多，以免带来过多**噪声给网络**。
 - en: Here’s how we can see what the most common shape is in our dataset.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我们可以查看数据集中最常见的形状的方式。
 - en: I sampled the first 1000 pictures for this, though the result did not change
     when I looked at 5000.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 我对前1000张图片进行了抽样，尽管当我查看5000张时结果没有变化。
 - en: The most common shape was 375×500, though I decided to divide that by 4 for
     our network’s input.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 最常见的形状是375×500，不过我决定将其缩小到网络输入的1/4。
 - en: This is what our image loading code looks like now.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是我们现在的图像加载代码的样子。
 - en: Finally, you can load the data with this snippet. I chose to use a sample of
     4096 pictures for the training set and 1024 for validation. However, that’s just
     because my PC couldn’t handle much more due to RAM size.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，你可以使用这段代码加载数据。我选择使用4096张图片作为训练集，1024张作为验证集。然而，这只是因为我的PC由于RAM大小无法处理更多数据。
 - en: Feel free to increase these numbers to the max (like 10K for training and 2500
     for validation) if you try this at home!
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你在家尝试，可以将这些数字增加到最大值（例如训练集10K和验证集2500）！
 - en: Training our Neural Networks
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 训练我们的神经网络
 - en: First of all, as a sort of baseline, let’s see how good a normal **MLP** does
     on this task. If Convolutional Neural Networks are so revolutionary, I’d expect
     the results to be **terrible** for this experiment.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，作为一个基准，让我们看看普通**MLP**在这个任务上的表现。如果卷积神经网络如此革命性，我期望这次实验的结果会非常**糟糕**。
 - en: So here’s a single hidden layer fully connected neural network.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个单隐层全连接神经网络。
 - en: All the trainings for this article were made using AdamOptimizer, since it’s
     the fastest one. I only tuned the learning rate per model (here it was 1e-5).
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文的所有训练都使用了AdamOptimizer，因为它是最快的。我仅为每个模型调整了学习率（这里是1e-5）。
 - en: I trained this model for 10 epochs, and it basically converged to **random guessing**.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 我训练了这个模型10个轮次，它基本上收敛到**随机猜测**。
 - en: I made sure to **shuffle the training data**, since I loaded it in order and
     that could’ve biased the model.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 我确保**打乱训练数据**，因为我按顺序加载它可能会导致模型偏差。
 - en: I used **MSE** as loss function, since it’s usually **more intuitive to interpret**.
     If your MSE is 0.5 in binary classification, you’re as good as **always predicting
     0**. However, MLPs with more layers, or different loss functions **did not perform
     better**.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 我使用了**MSE**作为损失函数，因为它通常**更直观**。如果你的MSE在二分类中是0.5，你就相当于**总是预测为0**。然而，具有更多层的MLP或不同损失函数**表现没有更好**。
 - en: Historically, other well established Supervised Learning algorithms, like [Boosted
     Trees (using XGBoost)](http://www.datastuff.tech/machine-learning/xgboost-predicting-life-expectancy-with-supervised-learning/) have
     performed even worse on image classification.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 从历史上看，其他成熟的监督学习算法，如[Boosted Trees (使用XGBoost)](http://www.datastuff.tech/machine-learning/xgboost-predicting-life-expectancy-with-supervised-learning/)，在图像分类上的表现甚至更差。
 - en: Training a Convolutional Neural Network
+  id: totrans-91
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 训练卷积神经网络
 - en: How much good can a single convolutional layer do? Let’s add one to our model
     and see.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个卷积层能带来多大好处？我们来给模型添加一个卷积层看看。
 - en: For this network, I decided to add a single convolutional layer (with 24 kernels),
     followed by 2 fully connected layers.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这个网络，我决定添加一个卷积层（24个卷积核），然后是2个全连接层。
 - en: All Max Pooling does is reduce every four neurons to a single one, with the
     highest value between the four.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 最大池化仅仅是将每四个神经元减少为一个神经元，取四者中的最高值。
 - en: After only 5 epochs, it was already **performing much better** than the previous
     networks.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅经过5个训练轮次，它的表现已经**好得多**，比之前的网络要好。
 - en: With a validation MSE of 0.36, it was a lot better than random guessing already.
     Notice however that I had to use a **much smaller learning rate**.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过0.36的验证MSE，它已经比随机猜测好很多。然而，请注意，我不得不使用**小得多的学习率**。
 - en: Also, even though it learned in less epochs, **each epoch** took **much longer**.
     The model is also quite a lot heavier (200+ MB).
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，尽管它在更少的训练轮次中学到了更多，但**每个训练轮次**花费的时间**要长得多**。模型也变得相当沉重（200+ MB）。
 - en: I decided to also start measuring the Pearson correlation between predictions
     and validation labels. This model scored a 15.2%.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 我决定开始测量预测与验证标签之间的Pearson相关性。这个模型得分为15.2%。
 - en: Neural Network with two Convolutional Layers
+  id: totrans-99
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 具有两个卷积层的神经网络
 - en: Since that model had done so much better, I decided I would try out a bigger
     one. I added **another convolutional layer**, and made both a lot bigger (48 kernels
     each).
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于那个模型表现更好，我决定尝试一个更大的模型。我添加了**另一个卷积层**，并将两个层都做得更大（每个48个卷积核）。
 - en: This means the model gets to learn **more complex features** from the images.
     However it also predictably meant my RAM almost exploded. Also, training took **a
     lot longer** (half an hour for 15 epochs).
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着模型可以从图像中学习**更复杂的特征**。但这也意味着我的RAM几乎要爆炸了。此外，训练时间也**长得多**（15个周期需要半小时）。
 - en: Results were superb. The Pearson correlation coefficient between predictions
     and labels reached 0.21, with validation MSE reaching as low as 0.33.
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果非常出色。预测和标签之间的皮尔逊相关系数达到了0.21，验证MSE低至0.33。
 - en: Let’s measure the network’s accuracy. Since 1 is a cat and 0 is a dog, I could
     say “If the model predicts a value higher than some threshold t, then predict *cat*.
     Else predict *dog*.”
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们测量一下网络的准确率。由于1表示猫，0表示狗，我可以说“如果模型预测的值高于某个阈值t，那么预测为*猫*。否则预测为*狗*。”
 - en: After trying 10 straightforward thresholds, this network had a **maximum accuracy
     of 61%**.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试了10个直接阈值后，这个网络的**最高准确率为61%**。
 - en: Even bigger Convolutional Neural Network
+  id: totrans-105
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更大的卷积神经网络
 - en: Since clearly **increasing the size of the model** made it learn better, I tried
     making both convolutional layers **a lot bigger**, with **128 filters** each.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 既然**增加模型的大小**明显使模型学得更好，我尝试将两个卷积层都**做得更大**，每个**128个滤波器**。
 - en: I left the rest of the model untouched, and didn’t change the learning rate.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 我保持了模型的其他部分不变，也没有改变学习率。
 - en: This model finally reached a correlation of 30%! Its best **accuracy was 67%**,
     which means it was right two thirds of the time.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个模型最终达到了30%的相关性！它的最佳**准确率为67%**，这意味着它在三分之二的情况下是正确的。
 - en: I still thought an even bigger model could fit the data even better.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 我仍然认为一个更大的模型可能会更好地拟合数据。
 - en: Because of this, for the next training I decided to **double the fully connected
     layers’ size** to 512 neurons.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，对于下一次训练，我决定将**全连接层的大小**增加**一倍**，达到512个神经元。
 - en: However, I did **reduce the first Convolutional Layer’s size** **by half**,
     to just 64 filters.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 不过，我确实将**第一个卷积层的大小**减少了**一半**，只保留了64个滤波器。
 - en: Usually, I’ve found I get better model performance if I make the first Convolutional
     Layers smaller, and increase their size as they go deeper.
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，我发现如果我把第一个卷积层做得更小，并在它们更深时增加其大小，我会得到更好的模型性能。
 - en: Luckily, my predictions were correct!
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，我的预测是正确的！
 - en: The model with fully connected layers with twice the size reached a **validation
     loss of 0.75**, and a **correlation of 42%**.
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 拥有两倍大小的全连接层的模型达到了**0.75的验证损失**和**42%的相关性**。
 - en: Its **accuracy was 75%,** which means it predicted the right label 3 out of
     4 times!
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 它的**准确率为75%**，这意味着它在4次中正确预测了3次！
 - en: That clearly shows it learned, even if it’s not a state-of-the-art score (let
     alone human-defeating).
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 这清楚地表明它学到了东西，即使这不是最先进的分数（更不用说打败人类了）。
 - en: This proves that, at least in this case, **increasing the fully connected layers’
     size worked better than increasing the quantity of convolutional filters**.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 这证明了，至少在这种情况下，**增加全连接层的大小比增加卷积滤波器的数量效果更好**。
 - en: I could’ve kept on trying bigger and bigger models, but convergence was already
     taking about an hour.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 我本可以继续尝试越来越大的模型，但收敛已经花了大约一个小时。
 - en: Usually, there’s a **tradeoff** to be made between a model’s **size**, and **time
     constraints**.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，模型的**大小**和**时间限制**之间存在**权衡**。
 - en: Size limits how well the network can fit the data (a **small model** will **underfit**),
     but I won’t wait 3 days for my model to learn.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型的大小限制了网络对数据的拟合程度（**小模型**会**欠拟合**），但我不想等3天让我的模型学习。
 - en: The same concerns usually apply if you have a business deadline.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有业务截止日期，通常也会面临相同的问题。
 - en: Conclusions
+  id: totrans-122
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: We’ve seen Convolutional Neural Networks are **significantly better** than vanilla
     architectures at **image classification** tasks. We also tried different **metrics**
     to measure **model performance** (correlation, accuracy).
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经看到卷积神经网络在**图像分类**任务上比普通架构**明显更好**。我们还尝试了不同的**度量标准**来衡量**模型性能**（相关性、准确率）。
 - en: We learned about the **tradeoff** between a **model’s size** (which prevents
     underfitting) and its **convergence speed**.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们了解了**模型大小**（防止欠拟合）和**收敛速度**之间的**权衡**。
 - en: Lastly, we used TensorFlow’s eager API to easily train a Deep Neural Network,
     and numpy for (albeit simple) image preprocessing.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们使用了TensorFlow的eager API来轻松训练深度神经网络，并使用numpy进行（尽管简单的）图像预处理。
 - en: For future articles, I believe we could experiment a lot more with different
     pooling layers, filter sizes, striding and a different preprocessing for this
     same task.
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于未来的文章，我相信我们可以在不同的池化层、滤波器大小、步幅以及不同的预处理上进行更多实验。
 - en: Did you find this article useful? Would you have preferred to learn more about
     anything else? Is anything not clear enough? Let me know in the comments!
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 你觉得这篇文章有用吗？你是否希望了解更多其他内容？是否有任何不够清楚的地方？请在评论中告诉我！
 - en: '*Find me on [Twitter](https://www.twitter.com/strikingloo), [Medium](https://www.medium.com/@strikingloo) or [Dev.to](http://www.dev.to/strikingloo) if
     you have any questions, or want to contact me for anything.*'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: '*如果你有任何问题，或者想要联系我，请在[Twitter](https://www.twitter.com/strikingloo)、[Medium](https://www.medium.com/@strikingloo)或[Dev.to](http://www.dev.to/strikingloo)找到我。*'
 - en: '*If you want to become a Data Scientist, here’s my [recommended Machine Learning
     reading list](http://www.datastuff.tech/data-science/3-machine-learning-books-that-helped-me-level-up-as-a-data-scientist/).*'
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: '*如果你想成为数据科学家，这里是我推荐的[机器学习阅读清单](http://www.datastuff.tech/data-science/3-machine-learning-books-that-helped-me-level-up-as-a-data-scientist/)。*'
 - en: '**Bio: [Luciano Strika](http://www.datastuff.tech)** is a computer science
     student at Buenos Aires University, and a data scientist at MercadoLibre. He also
     writes about machine learning and data on [**www.datastuff.tech**](http://www.datastuff.tech).'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[卢西亚诺·斯特里卡](http://www.datastuff.tech)** 是布宜诺斯艾利斯大学的计算机科学学生，同时也是MercadoLibre的数据科学家。他还在[**www.datastuff.tech**](http://www.datastuff.tech)上撰写关于机器学习和数据的文章。'
 - en: '[Original](http://www.datastuff.tech/machine-learning/convolutional-neural-networks-an-introduction-tensorflow-eager).
     Reposted with permission.'
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](http://www.datastuff.tech/machine-learning/convolutional-neural-networks-an-introduction-tensorflow-eager)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[3 Machine Learning Books that Helped me Level Up as a Data Scientist](/2019/05/3-machine-learning-books-helped-level-up-data-scientist.html)'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[3本帮助我成为数据科学家的机器学习书籍](/2019/05/3-machine-learning-books-helped-level-up-data-scientist.html)'
 - en: '[Training a Neural Network to Write Like Lovecraft](/2019/07/training-neural-network-write-like-lovecraft.html)'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[训练神经网络以模仿洛夫克拉夫特的写作风格](/2019/07/training-neural-network-write-like-lovecraft.html)'
 - en: '[5 Probability Distributions Every Data Scientist Should Know](/2019/07/5-probability-distributions-every-data-scientist-should-know.html)'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该了解的5种概率分布](/2019/07/5-probability-distributions-every-data-scientist-should-know.html)'
 - en: More On This Topic
+  id: totrans-136
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-137
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-138
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-139
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并寻找目标以……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-140
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个90亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-141
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学统计学的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-142
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
