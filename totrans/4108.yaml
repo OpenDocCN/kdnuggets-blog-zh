@@ -1,346 +1,541 @@
 - en: 'Geocoding in Python: A Complete Guide'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python中的地理编码：完整指南
 - en: 原文：[https://www.kdnuggets.com/2022/11/geocoding-python-complete-guide.html](https://www.kdnuggets.com/2022/11/geocoding-python-complete-guide.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/11/geocoding-python-complete-guide.html](https://www.kdnuggets.com/2022/11/geocoding-python-complete-guide.html)
 - en: '![Geocoding in Python: A Complete Guide](../Images/a8f230f39f95766be24eca94bc96ee99.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![Python中的地理编码：完整指南](../Images/a8f230f39f95766be24eca94bc96ee99.png)'
 - en: Photo by [Andrew Stutesman](https://unsplash.com/@drewmark?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/map?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 照片由[Andrew Stutesman](https://unsplash.com/@drewmark?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)在[Unsplash](https://unsplash.com/s/photos/map?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)上提供
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍
 - en: When dealing with large datasets for machine learning, have you ever come across
     an address column that looks like this?
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在处理大数据集进行机器学习时，你是否遇到过看起来像这样的地址列？
 - en: '![Geocoding in Python: A Complete Guide](../Images/6318cb0b25a530d5683bbb65e57515ca.png)'
+  id: totrans-6
   prefs: []
   type: TYPE_IMG
+  zh: '![Python中的地理编码：完整指南](../Images/6318cb0b25a530d5683bbb65e57515ca.png)'
 - en: Image by Author
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Location data can be very messy and difficult to process.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 位置数据可能非常混乱且难以处理。
 - en: It is difficult to encode addresses, since they are of very high cardinality.
     If you try to encode a column like this with a technique like one-hot encoding,
     it will lead to high dimensionality, and your machine learning model might not
     perform well.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 编码地址很困难，因为它们的基数非常高。如果你尝试使用像独热编码这样的技术对这样的列进行编码，会导致高维度，并且你的机器学习模型可能表现不佳。
 - en: The easiest way to overcome this problem is to **geocode** these columns.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 克服这个问题的最简单方法是**地理编码**这些列。
 - en: What is Geocoding?
+  id: totrans-11
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 什么是地理编码？
 - en: Geocoding is the process of converting addresses into geographical coordinates.
     This means that you’ll be transforming raw addresses into latitude/longitude pairs.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 地理编码是将地址转换为地理坐标的过程。这意味着你将把原始地址转换为纬度/经度对。
 - en: Geocoding in Python
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python中的地理编码
 - en: There are many different libraries available that can help you do this with
     Python. The fastest is the **Google Maps API, **which I recommend if you have
     more than 1000 addresses you need to convert in a short period of time.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 有许多不同的库可以帮助你用Python完成这项工作。最快的是**Google Maps API**，如果你需要在短时间内转换超过1000个地址，我推荐使用它。
 - en: However, the Google Maps API isn’t free. You will need to pay around $5 per
     1000 request.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，Google Maps API并不是免费的。你需要为每1000个请求支付约$5。
 - en: A free alternative to the Google Maps API is the OpenStreetMap API. However,
     the OpenStreetMap API is a lot slower, and also slightly less accurate.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: Google Maps API的一个免费替代方案是OpenStreetMap API。然而，OpenStreetMap API的速度较慢，且准确性稍差。
 - en: In this article, I will walk you through the geocoding process with these two
     APIs.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我将带你通过这两个API的地理编码过程。
 - en: 'Method 1: Google Maps API'
+  id: totrans-18
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 方法1：Google Maps API
 - en: Let's first use the Google Maps API to convert addresses into lat/long pairs.
     You will first need to create a Google Cloud account to do this and enter your
     credit card information.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先使用Google Maps API将地址转换为纬度/经度对。你需要首先创建一个Google Cloud账户，并输入你的信用卡信息。
 - en: Although this is a paid service, Google gives you $200 in free credit when you
     first create a Google Cloud account. This means that you can make around 40,000
     calls with their geocoding API before you get charged for it. As long as you don’t
     hit this limit, your account will not be charged.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管这是一个付费服务，但Google在你第一次创建Google Cloud账户时会提供$200的免费信用。这意味着在收费之前，你可以使用他们的地理编码API大约40,000次。只要你没有达到这个限制，你的账户将不会被收费。
 - en: First, [set up a free account](https://cloud.google.com/gcp/getting-started) with
     Google Cloud. Then, once you’ve set up an account, you can follow [this](https://www.youtube.com/watch?v=OGTG1l7yin4) tutorial
     to get your Google Maps API key.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，[设置一个免费的账户](https://cloud.google.com/gcp/getting-started)在Google Cloud上。然后，一旦你设置了账户，你可以跟随[这个](https://www.youtube.com/watch?v=OGTG1l7yin4)教程获取你的Google
+    Maps API密钥。
 - en: Once you’ve received your API key, you can start coding!
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦你获得了API密钥，就可以开始编码了！
 - en: Pre-requisites
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 前提条件
 - en: 'We are going to use the [Zomato Restaurants Kaggle](https://www.kaggle.com/shrutimehta/zomato-restaurants-data) dataset
     for this tutorial. Make sure to have the dataset installed in your path. Then,
     install the googlemaps API package with this command:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用[Zomato餐馆Kaggle](https://www.kaggle.com/shrutimehta/zomato-restaurants-data)数据集进行本教程。确保将数据集安装在你的路径中。然后，使用以下命令安装googlemaps
+    API包：
 - en: '[PRE0]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Imports
+  id: totrans-26
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 导入
 - en: 'Run the following lines of code to import the libraries you need to get started:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行以下代码行来导入你需要开始的库：
 - en: '[PRE1]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Reading the dataset
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 读取数据集
 - en: 'Now, lets read the dataset and check the head of the dataframe:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们读取数据集并检查数据框的前几行：
 - en: '[PRE2]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![Geocoding in Python: A Complete Guide](../Images/e1b79a68ffe95d0cecb702963c56f7de.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![Geocoding in Python: A Complete Guide](../Images/e1b79a68ffe95d0cecb702963c56f7de.png)'
 - en: Image by Author
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片作者提供
 - en: This dataframe has 21 columns and 9551 rows.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个数据框有21列和9551行。
 - en: 'We only need the address column for geocoding, so I’m going to drop all the
     other columns. Then, I am going to drop duplicates so we only get unique addresses:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们只需要*address*列进行地理编码，所以我将删除所有其他列。然后，我将删除重复项，以便只保留唯一的地址：
 - en: '[PRE3]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Taking a look at the head of the dataframe again, we can see only the address
     column:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次查看数据框的前几行，我们只能看到*address*列：
 - en: '![Geocoding in Python: A Complete Guide](../Images/ee9199fd5796fd53ca08a9493e25cbc2.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![Geocoding in Python: A Complete Guide](../Images/ee9199fd5796fd53ca08a9493e25cbc2.png)'
 - en: Image by Author
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片作者提供
 - en: Great! We can start geocoding now.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 很好！我们现在可以开始地理编码了。
 - en: Geocoding
+  id: totrans-41
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 地理编码
 - en: 'First, we need to access our API key with Python. Run the following lines of
     code to do this:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们需要用Python访问我们的API密钥。运行以下代码行来完成此操作：
 - en: '[PRE4]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Now, lets try geocoding one address first, and take a look at the output.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们尝试首先进行一个地址的地理编码，并查看输出结果。
 - en: '[PRE5]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'The output of the above code looks like this:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述代码的输出如下所示：
 - en: '![Geocoding in Python: A Complete Guide](../Images/d312aa8edf8c0b0b987705c0356fadba.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![Geocoding in Python: A Complete Guide](../Images/d312aa8edf8c0b0b987705c0356fadba.png)'
 - en: Image by Author
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片作者提供
 - en: If you get the above output, great! Everything works.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你得到了上述输出，太好了！一切正常。
 - en: 'We can now replicate this process for the entire dataframe:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以对整个数据框重复这个过程：
 - en: '[PRE6]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Lets check the head of the dataframe again to see if this worked:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们再次查看数据框的前几行，看看这是否有效：
 - en: '[PRE7]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![Geocoding in Python: A Complete Guide](../Images/4bd8b23bd238c16246a789a5a5fe0fcf.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![Geocoding in Python: A Complete Guide](../Images/4bd8b23bd238c16246a789a5a5fe0fcf.png)'
 - en: If your output looks like the screenshot above, congratulations! You have successfully
     geocoded addresses in an entire dataframe.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你的输出与上面的截图类似，恭喜你！你已经成功对整个数据框进行了地址地理编码。
 - en: 'Method 2: OpenStreetMap API'
+  id: totrans-56
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 方法2：OpenStreetMap API
 - en: The OpenStreetMap API is completely free, but is slower and less accurate than
     the Google maps API.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: OpenStreetMap API完全免费，但比Google地图API更慢且准确度较低。
 - en: This API was unable to locate many of the addresses in the dataset, so we will
     be using the *locality* column this time instead.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个API无法找到数据集中的许多地址，因此这次我们将使用*locality*列。
 - en: 'Before we start with the tutorial, lets look at the difference between the *address* and *locality* column.
     Run the following lines of code to do this:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们开始教程之前，让我们看看*address*列和*locality*列之间的区别。运行以下代码行来完成此操作：
 - en: '[PRE8]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Your output will look like this:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的输出将如下所示：
 - en: '![Geocoding in Python: A Complete Guide](../Images/09756fc883050be5cc34decca0a16b64.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![Geocoding in Python: A Complete Guide](../Images/09756fc883050be5cc34decca0a16b64.png)'
 - en: Image by Author
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片作者提供
 - en: The *address* column is a lot more granular than the *locality *column, and
     it provides the exact location of the restaurant, including the floor number.
     This might be the reason the address isn’t recognized by the OpenStreetMap API,
     but the locality is.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '*address*列比*locality*列更详细，它提供了餐厅的确切位置，包括楼层号。这可能是地址未被OpenStreetMap API识别的原因，但*locality*却被识别了。'
 - en: Lets geocode the first locality and take a look at the output.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们对第一个*locality*进行地理编码，并查看输出结果。
 - en: Geocode
+  id: totrans-66
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 地理编码
 - en: 'Run the following lines of code:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行以下代码行：
 - en: '[PRE9]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'The output of the above codes is very similar to the result generated by the
     Google Maps API:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述代码的输出与Google Maps API生成的结果非常相似：
 - en: '![Geocoding in Python: A Complete Guide](../Images/48e35458c0ec81e3387fb6831a5a871d.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![Geocoding in Python: A Complete Guide](../Images/48e35458c0ec81e3387fb6831a5a871d.png)'
 - en: Image by Author
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片作者提供
 - en: 'Now, lets create a function to find the coordinates of the entire dataframe:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们创建一个函数来查找整个数据框的坐标：
 - en: '[PRE10]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'Great! Now, lets take a look at the head of the dataframe:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 很好！现在，让我们查看数据框的前几行：
 - en: '[PRE11]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Notice that this API was unable to come up with coordinates for many of the
     localities in the dataframe.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，这个API无法为数据框中的许多地点生成坐标。
 - en: Although its a great free alternative to the Google Maps API, you risk losing
     a lot of data if you geocode with OpenStreetMap.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管这是Google Maps API的一个很好的免费替代品，但如果使用OpenStreetMap进行地理编码，你可能会丢失很多数据。
 - en: That’s all for this tutorial! I hope you learnt something new from here, and
     have a better understanding on dealing with geospatial data.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程就到这里！希望你能从中学到一些新知识，对处理地理空间数据有更好的理解。
 - en: Good luck with your data science journey, and thanks for reading!
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 祝你在数据科学之旅中好运，感谢你的阅读！
 - en: '**[Natassha Selvaraj](https://www.natasshaselvaraj.com/)** is a self-taught
     data scientist with a passion for writing. You can connect with her on [LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/).'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Natassha Selvaraj](https://www.natasshaselvaraj.com/)** 是一位自学成才的数据科学家，热衷于写作。你可以通过[LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/)与她联系。'
 - en: '[Original](https://www.natasshaselvaraj.com/a-step-by-step-guide-on-geocoding-in-python/).
     Reposted with permission.'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.natasshaselvaraj.com/a-step-by-step-guide-on-geocoding-in-python/)。转载已获许可。'
 - en: '* * *'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-83
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速入门网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 支持'
 - en: '* * *'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-88
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Geocoding for Data Scientists](https://www.kdnuggets.com/2023/06/geocoding-data-scientists.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家的地理编码](https://www.kdnuggets.com/2023/06/geocoding-data-scientists.html)'
 - en: '[A Complete Guide To Decision Tree Software](https://www.kdnuggets.com/2022/08/complete-guide-decision-tree-software.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[决策树软件完全指南](https://www.kdnuggets.com/2022/08/complete-guide-decision-tree-software.html)'
 - en: '[How to Build a Data Science Enablement Team: A Complete Guide](https://www.kdnuggets.com/2022/10/build-data-science-enablement-team-complete-guide.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何建立数据科学赋能团队：完全指南](https://www.kdnuggets.com/2022/10/build-data-science-enablement-team-complete-guide.html)'
 - en: '[KDnuggets News, May 25: The 6 Python Machine Learning Tools Every…](https://www.kdnuggets.com/2022/n21.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻, 5月 25: 每个…都应该知道的 6 种 Python 机器学习工具](https://www.kdnuggets.com/2022/n21.html)'
 - en: '[KDnuggets News, August 17: How to Perform Motion Detection Using…](https://www.kdnuggets.com/2022/n33.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻, 8月 17: 如何使用…进行运动检测](https://www.kdnuggets.com/2022/n33.html)'
 - en: '[KDnuggets™ News 22:n06, Feb 9: Data Science Programming…](https://www.kdnuggets.com/2022/n06.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets™ 新闻 22:n06, 2月 9: 数据科学编程…](https://www.kdnuggets.com/2022/n06.html)'
