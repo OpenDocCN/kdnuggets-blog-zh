@@ -1,17 +1,25 @@
 - en: Detecting In-App Purchase Fraud with Machine Learning
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用机器学习检测应用内购买欺诈
 - en: 原文：[https://www.kdnuggets.com/2015/11/detecting-app-purchase-fraud-machine-learning.html](https://www.kdnuggets.com/2015/11/detecting-app-purchase-fraud-machine-learning.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2015/11/detecting-app-purchase-fraud-machine-learning.html](https://www.kdnuggets.com/2015/11/detecting-app-purchase-fraud-machine-learning.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2015/11/detecting-app-purchase-fraud-machine-learning.html/2#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2015/11/detecting-app-purchase-fraud-machine-learning.html/2#comments)'
 - en: '**By Ella Gati, [Soomla](http://soom.la/)**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Ella Gati，[Soomla](http://soom.la/)**。'
 - en: '![detecting-fraud](../Images/ab29ff4938f17b9d142fb4fed194168d.png)Hacking applications
     such as [Freedom](http://onhax.net/freedom-iap-apk), [iAP Cracker](http://www.cydiainsider.com/iap-cracker),
     [iAPFree](http://www.cydiainsider.com/iapfree), etc. allow users to make in-app
@@ -22,223 +30,331 @@
     are recorded as real purchases in his system. As a result, the reported revenue
     may differ greatly from the real revenue (especially in popular games with lots
     of fraud).'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '![检测欺诈](../Images/ab29ff4938f17b9d142fb4fed194168d.png)黑客应用程序如 [Freedom](http://onhax.net/freedom-iap-apk)、[iAP
+    Cracker](http://www.cydiainsider.com/iap-cracker)、[iAPFree](http://www.cydiainsider.com/iapfree)
+    等允许用户免费进行应用内购买。通过这些黑客手段，玩家可以在没有支付任何费用的情况下获得他们购买的金币、宝石、关卡或生命。如果游戏开发者没有在应用内购买上实施任何验证过程，例如
+    [SOOMLA 的欺诈保护](http://know.soom.la/unity/grow/grow_fraudprotection)，这些购买将被记录为系统中的真实购买。因此，报告的收入可能与实际收入大相径庭（尤其是在存在大量欺诈的热门游戏中）。'
 - en: We would like to make reports as accurate as possible, and to be able to communicate
     to the game developers the real state of their game. We use machine learning and
     statistical modeling techniques for our solution.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们希望使报告尽可能准确，并能够向游戏开发者传达他们游戏的真实状态。我们使用机器学习和统计建模技术来解决这个问题。
 - en: With help from a few big games in the GROW data network we were able to build
     a model that classifies each purchase as real or fraud, with a very high level
     of accuracy.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 GROW 数据网络中借助几款大型游戏的帮助，我们成功构建了一个模型，能够以非常高的准确率将每次购买分类为真实或欺诈。
 - en: In-app purchase model features
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 应用内购买模型特征
 - en: 'The model uses a variety of purchase, user and item features.  The following
     table details a partial list of the features we computed:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 该模型使用了各种购买、用户和物品特征。下表详细列出了我们计算的一部分特征：
 - en: '| **Purchase** | **User** | **Item** |'
+  id: totrans-9
   prefs: []
   type: TYPE_TB
+  zh: '| **购买** | **用户** | **物品** |'
 - en: '| Date of purchase | Total number of purchases | Total number of purchases
     |'
+  id: totrans-10
   prefs: []
   type: TYPE_TB
+  zh: '| 购买日期 | 总购买次数 | 总购买次数 |'
 - en: '| Time of purchase | Total revenue | Total revenue |'
+  id: totrans-11
   prefs: []
   type: TYPE_TB
+  zh: '| 购买时间 | 总收入 | 总收入 |'
 - en: '| Country from which the purchase was made | Average revenue per day | Average
     number of purchases per day |'
+  id: totrans-12
   prefs: []
   type: TYPE_TB
+  zh: '| 购买来源的国家 | 平均每日收入 | 平均每日购买次数 |'
 - en: '| Currency in which the purchase was made | Number of games the user played
     | Average revenue per day |'
+  id: totrans-13
   prefs: []
   type: TYPE_TB
+  zh: '| 购买所用的货币 | 用户玩过的游戏数量 | 平均每日收入 |'
 - en: '| Whether the phone locale matches the country | Number of games in which the
     user purchased | Maximum number of purchases per day |'
+  id: totrans-14
   prefs: []
   type: TYPE_TB
+  zh: '| 手机地区设置是否与国家匹配 | 用户购买的游戏数量 | 最大每日购买次数 |'
 - en: '| Whether the currency of the purchase matches the currency in the country
     | Whether the user was ever blocked by receipt verification | Maximum revenue
     per day |'
+  id: totrans-15
   prefs: []
   type: TYPE_TB
+  zh: '| 购买货币是否与国家的货币匹配 | 用户是否曾被收据验证阻止 | 最大每日收入 |'
 - en: '| … | … | … |'
+  id: totrans-16
   prefs: []
   type: TYPE_TB
+  zh: '| … | … | … |'
 - en: Decision trees to the rescue
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 决策树的救援
 - en: Decision trees, as their name suggests, are trees that help decision making.
     Each internal node of the tree tests the value of one feature, and leaf nodes
     are target classes. Given a new observation, the tree can be used to decide what
     class should be assigned to it.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 决策树，顾名思义，是帮助决策的树。树的每个内部节点测试一个特征的值，叶节点则是目标类别。给定一个新的观察值，可以用树来决定将其分配到哪个类别。
 - en: 'In our case the tree can have two kinds of leaf nodes (classes): fraud or no-fraud,
     and the features are the ones detailed above. Examples for internal nodes can
     be “Total number of purchases > 100” or “currency matches country = true”.  To
     avoid overfitting the training data, tree-based techniques combine multiple trees
     to get a final output that is more accurate than each individual tree output.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的案例中，树可以有两种叶子节点（类别）：欺诈或非欺诈，特征是上述详细说明的内容。内部节点的例子可以是“总购买次数 > 100”或“货币与国家匹配
+    = 真”。为了避免过拟合训练数据，基于树的技术结合了多个树，以获得比每个单独树输出更准确的最终结果。
 - en: 'Tree based classification algorithms have many advantages, to name a few:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于树的分类算法有许多优点，列举几项：
 - en: Nonlinear relationships between parameters do not affect tree performance.
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 参数之间的非线性关系不会影响树的性能。
 - en: Decision trees implicitly perform variable screening or feature selection.
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 决策树隐式地执行变量筛选或特征选择。
 - en: Decision trees require relatively little data preparation and are easy to interpret
     and understand.
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 决策树需要相对较少的数据准备，并且易于解释和理解。
 - en: We experimented with two tree-based classifiers. A random forest classifier
     is an ensemble of decision trees trained on subsets of the data, that outputs
     the class that is the mode of the classes output of the individual trees. Boosted
     trees combine multiple decision trees using the gradient boosting technique, fitting
     a weighted additive expansion of simple trees.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们尝试了两种基于树的分类器。随机森林分类器是一个决策树的集合，训练在数据的子集上，它输出的是单个树输出的类别的众数。提升树使用梯度提升技术结合多个决策树，拟合简单树的加权加性扩展。
 - en: Another model parameter is the class weights, that have two forms, uniform in
     which all class get a weight of 1, and by-class that uses the relative size of
     the class out of the full population as the class weight.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个模型参数是类别权重，它有两种形式：均匀的，即所有类别的权重都是 1，以及按类别的，即使用类别在整体人口中的相对大小作为类别权重。
 - en: Fraud classification performance
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 欺诈分类性能
 - en: 'We measure the performance of our model by four measures:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们通过四个指标来衡量模型的性能：
 - en: 'Accuracy: ratio of correct classifications out of all test data.'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 准确率：所有测试数据中正确分类的比例。
 - en: 'False Positive rate (FPR): ratio of valid purchases wrongly classified as fraud
     out of all valid purchases.'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 假阳性率 (FPR)：所有有效购买中被错误分类为欺诈的比例。
 - en: 'False Negative rate (FNR): ratio of fraud purchases wrongly classified as non-fraud
     out of all fraud purchases.'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 假阴性率 (FNR)：所有欺诈购买中被错误分类为非欺诈的比例。
 - en: 'F1 score: harmonic mean of [precision and recall](https://en.wikipedia.org/wiki/Precision_and_recall),
     a measure that comes from the information retrieval world, and conveys the balance
     between the other two measures.'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: F1 分数：**[精确度和召回率](https://en.wikipedia.org/wiki/Precision_and_recall)** 的调和平均值，这是一个来自信息检索领域的度量，反映了其他两个指标之间的平衡。
 - en: Classifying valid purchases and users as fraud is a much worse mistake than
     missing a fraud purchase, thus we aim at reducing FPR to minimum, even at a cost
     of having a slightly higher FNR.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 将有效购买和用户分类为欺诈的错误比错过一个欺诈购买要严重得多，因此我们旨在将假阳性率降低到最低，即使这会导致假阴性率略高。
 - en: Our ground truth data includes purchases from 4 games. For the largest of them
     we have labels for 145K purchases. For both algorithms parameters were tuned using
     cross-validation.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的真实数据包括来自 4 个游戏的购买数据。在其中最大的一个游戏中，我们有 145K 购买的标签。对于这两种算法，参数是通过交叉验证进行调整的。
 - en: Per game model
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 每游戏模型
 - en: For the first experiment we built a different model for each game. The following
     table details the performance for different games and model parameters.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于第一次实验，我们为每个游戏构建了不同的模型。下表详细说明了不同游戏和模型参数的性能。
 - en: '| **Game** | **Classifier** | **Class weights** | **FPR** | **FNR** | **F1
     score** | **Accuracy** |'
+  id: totrans-36
   prefs: []
   type: TYPE_TB
+  zh: '| **游戏** | **分类器** | **类别权重** | **FPR** | **FNR** | **F1 分数** | **准确率** |'
 - en: '| 1 | Random forest | uniform | 0.22 | 0.03 | 0.95 | 0.93 |'
+  id: totrans-37
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 随机森林 | 均匀 | 0.22 | 0.03 | 0.95 | 0.93 |'
 - en: '| 1 | Random forest | by class | 0.10 | 0.08 | 0.95 | 0.92 |'
+  id: totrans-38
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 随机森林 | 按类别 | 0.10 | 0.08 | 0.95 | 0.92 |'
 - en: '| 1 | Boosted trees | uniform | 0.09 | 0.03 | **0.97** | 0.96 |'
+  id: totrans-39
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 提升树 | 均匀 | 0.09 | 0.03 | **0.97** | 0.96 |'
 - en: '| 1 | Boosted trees | by class | **0.05** | 0.05 | 0.96 | 0.95 |'
+  id: totrans-40
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 提升树 | 按类别 | **0.05** | 0.05 | 0.96 | 0.95 |'
 - en: '| 2 | Random forest | uniform | 0.02 | 0.16 | 0.89 | 0.85 |'
+  id: totrans-41
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 随机森林 | 均匀 | 0.02 | 0.16 | 0.89 | 0.85 |'
 - en: '| 2 | Random forest | by class | 0.01 | 0.16 | 0.91 | 0.82 |'
+  id: totrans-42
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 随机森林 | 按类别 | 0.01 | 0.16 | 0.91 | 0.82 |'
 - en: '| 2 | Boosted trees | uniform | **0.01** | 0.11 | **0.94** | 0.84 |'
+  id: totrans-43
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 提升树 | 均匀 | **0.01** | 0.11 | **0.94** | 0.84 |'
 - en: '| 2 | Boosted trees | by class | 0.05 | 0.05 | 0.90 | 0.85 |'
+  id: totrans-44
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 增强树 | 按类别 | 0.05 | 0.05 | 0.90 | 0.85 |'
 - en: These results are very impressive! Per game model works very well with as much
     as 97% F1 score.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些结果非常令人印象深刻！每个游戏模型的F1分数高达97%。
 - en: The second game has less ground truth data (it is a game with 100 times less
     purchases per month on average, and we got one month of purchases data from them),
     which explains the lower performance.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二个游戏的真实数据较少（这是一个每月平均购买次数少100倍的游戏，我们获得了一个月的购买数据），这解释了其较低的性能。
 - en: Boosted trees outperform the random forest algorithm, which is not surprising,
     since it is an optimization that normally gives you better accuracy with less
     trees.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 增强树算法优于随机森林算法，这并不令人惊讶，因为它是一种优化，通常可以在较少的树木中提供更好的准确性。
 - en: Using weights tuned by the class size usually results in a lower FPR and higher
     FNR, with a slightly lower F1 score. As stated before, we care more about our
     false positive rate, so for following experiments we use boosted trees algorithm
     with non-uniform weights.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用按类别大小调整的权重通常会导致更低的假阳性率（FPR）和更高的假阴性率（FNR），F1分数略低。如前所述，我们更关心假阳性率，因此在后续实验中我们使用了具有非均匀权重的增强树算法。
 - en: Cross-games classification
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 跨游戏分类
 - en: We have seen that we can get very good results when we build a model for a specific
     game. But we have ground truth data only for four games. What about the rest of
     the games?
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经看到，当为特定游戏构建模型时，可以获得非常好的结果。但我们只有四个游戏的真实数据。那么其他游戏怎么办？
 - en: To test that, the second experiment was conducted with a train set that contains
     data from one game and test set from a different game.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了测试这一点，第二个实验在一个包含来自一个游戏的数据的训练集和来自另一个游戏的数据的测试集上进行。
 - en: '![AccuracyHeatMap](../Images/14ce57eb9cb840125ddfdfea237073bb.png)'
+  id: totrans-52
   prefs: []
   type: TYPE_IMG
+  zh: '![准确性热力图](../Images/14ce57eb9cb840125ddfdfea237073bb.png)'
 - en: The above table shows the accuracy for the cross-game experiments. All scores
     are 79% accurate or higher! This is great news for all of the other games.  As
     expected, the highest scores are achieved when the train and the test set come
     from the same game data (70%-30% random split). The lowest scores are when testing
     on the 4th game, which is the smallest of them (200 purchases).
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 上表展示了跨游戏实验的准确性。所有分数都为79%或更高！这对其他所有游戏来说都是好消息。正如预期的，当训练集和测试集来自相同的游戏数据（70%-30%的随机拆分）时，获得了最高的分数。最低的分数是在测试第4个游戏时获得的，它是最小的游戏（200次购买）。
 - en: Another interesting result is the FPR scores in this experiment.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个有趣的结果是本实验中的FPR分数。
 - en: '[![FPRHeatMap](../Images/2088015e8df1c497a1723c68cb429a58.png)](http://blog.soom.la/wp-content/uploads/2015/11/FPRHeatMap1.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![FPR热力图](../Images/2088015e8df1c497a1723c68cb429a58.png)](http://blog.soom.la/wp-content/uploads/2015/11/FPRHeatMap1.png)'
 - en: It also stands out that the model trained on game 4 is generating poor FPR scores.
     This is due to the small number of purchases, and the relatively low amount of
     fraud (54% compared to 77%-85% in other games). As game 1 has the largest ground
@@ -246,152 +362,227 @@
     positive rate, up to 30% of the valid purchases are classified as fraud. When
     training on other games we get much better results with 1-2% wrongly classified
     valid purchases.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 同时值得注意的是，训练于游戏4的模型生成了较差的假阳性率（FPR）分数。这是由于购买数量少，以及欺诈行为相对较低（54%对比于其他游戏的77%-85%）。由于游戏1具有最大的真实数据，训练于其他（较小的）游戏的模型假阳性率非常高，最多有30%的有效购买被分类为欺诈。当训练于其他游戏时，我们得到的结果要好得多，错误分类的有效购买率为1-2%。
 - en: This experiment has proved that data transfer between games works well in most
     cases, but can be problematic if your game has a very unique user behavior.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一实验证明了游戏之间的数据传输在大多数情况下效果良好，但如果你的游戏具有非常独特的用户行为，可能会出现问题。
 - en: Results
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结果
 - en: Finally, we trained a model on all of our ground truth data and used it to classify
     all purchases in our data base. According to the results of of the classifier,
     55.7% of purchases are fraud, and these purchases constitute 72.9% of the total
     revenue.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终，我们在所有的真实数据上训练了一个模型，并用它对我们数据库中的所有购买进行分类。根据分类器的结果，55.7%的购买是欺诈行为，这些购买占总收入的72.9%。
 - en: '[![Fraud percentage by game size - SOOMLA](../Images/f489742d584de7c49173e9dfb75c3c7c.png)](http://blog.soom.la/wp-content/uploads/2015/11/fraud-percentage-by-game-size.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![按游戏大小的欺诈百分比 - SOOMLA](../Images/f489742d584de7c49173e9dfb75c3c7c.png)](http://blog.soom.la/wp-content/uploads/2015/11/fraud-percentage-by-game-size.png)'
 - en: These numbers vary between different games. We can see a general trend of highest
     fraud percentage with bigger games (games with more users), even though we also
     see relatively small games with up to 89% fraud. The differences can be explained
     by different economy models, or popularity of the game in different countries.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些数字在不同游戏之间有所不同。我们可以看到一个普遍趋势：较大的游戏（用户更多的游戏）的欺诈百分比最高，即使我们也看到一些相对较小的游戏有高达89%的欺诈。这些差异可以通过不同的经济模型或游戏在不同国家的受欢迎程度来解释。
 - en: According to our model results, fraud is most widespread in Slavic countries.
     Russia, Ukraine and Belarus are on the top of the list, with over 90% of purchases
     being made fraudulently.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据我们的模型结果，欺诈在斯拉夫国家最为普遍。俄罗斯、乌克兰和白俄罗斯排名前列，超过90%的购买都是欺诈行为。
 - en: '[![Fraud rate per country - SOOMLA](../Images/6663ecfe3bd727cf726651dcb4c2ed86.png)](http://blog.soom.la/wp-content/uploads/2015/11/fraud-rate-per-country.png)'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![每个国家的欺诈率 - SOOMLA](../Images/6663ecfe3bd727cf726651dcb4c2ed86.png)](http://blog.soom.la/wp-content/uploads/2015/11/fraud-rate-per-country.png)'
 - en: The model predicts that only 2% of the users have some valid purchases and some
     fraud. The other 98% of users are either fraudsters (always commit fraud) or not
     (all purchases are valid). Out of the 98%, over half are fraudsters.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型预测仅有2%的用户有一些有效购买和一些欺诈。其余98%的用户要么是欺诈者（总是进行欺诈），要么不是（所有购买都有效）。在这98%中，超过一半是欺诈者。
 - en: Implications for game developers
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 对游戏开发者的影响
 - en: 'Knowing which users are fraudsters enables game developers to adapt game play
     and take restrictive action to ensure minimum lost revenue.  Some options are:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 知道哪些用户是欺诈者可以帮助游戏开发者调整游戏玩法并采取限制措施以确保最小的收入损失。一些选项包括：
 - en: Blocking in-app purchases altogether for a specific user.
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 完全阻止特定用户的应用内购买。
 - en: Increasing game difficulty as a means of stalling the user’s non-legitimate
     progression made with hacked in-game coins.
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加游戏难度以阻止用户使用黑客获取的游戏币进行非正常进度。
 - en: Increasing ad frequency to maximize revenue from abusive users who will never
     pay.
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 增加广告频率以最大化从永远不会付费的滥用用户那里获得的收入。
 - en: Bricking the game e.g. disabling all gameplay with a prominent warning message
     to the user requesting an immediate in-app purchase deposit to unlock the game.
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使游戏无法进行，例如，通过突出警告信息来禁用所有游戏玩法，要求用户立即进行应用内购买存款以解锁游戏。
 - en: How can we improve?
+  id: totrans-71
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我们如何改进？
 - en: The more ground truth we have, the better our classification results will be.
     Game developers and studios can get better reports and help us improve by giving
     your feedback or sharing your sales reports with us.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们掌握的真实数据越多，我们的分类结果就会越好。游戏开发者和工作室可以通过提供反馈或与我们分享销售报告来获得更好的报告并帮助我们改进。
 - en: Questions? Contact [ella@soom.la](mailto:ella@soom.la).
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 有问题？请联系 [ella@soom.la](mailto:ella@soom.la)。
 - en: '[This article first appeared on Soomla blog](http://blog.soom.la/2015/11/detecting-app-purchase-fraud-machine-learning.html
     ).'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '[本文首次出现在Soomla博客上](http://blog.soom.la/2015/11/detecting-app-purchase-fraud-machine-learning.html)。'
 - en: '**Related:**'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Data Mining Medicare Data – What Can We Find?](/2014/04/data-mining-medicare-data.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据挖掘医疗数据 – 我们能发现什么？](/2014/04/data-mining-medicare-data.html)'
 - en: '[How to discover stolen data using Hadoop and Big data?](/2015/11/discover-stolen-data-hadoop-big-data.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用Hadoop和大数据发现被盗数据？](/2015/11/discover-stolen-data-hadoop-big-data.html)'
 - en: '[Fraud Detection Solutions](/solutions/fraud-detection.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[欺诈检测解决方案](/solutions/fraud-detection.html)'
 - en: '* * *'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-80
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 加速你的网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的IT'
 - en: '* * *'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-85
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Eurybia检测数据漂移以确保生产ML模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
 - en: '[5 Free Tools For Detecting ChatGPT, GPT3, and GPT2](https://www.kdnuggets.com/2023/02/5-free-tools-detecting-chatgpt-gpt3-gpt2.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5 款免费工具用于检测 ChatGPT、GPT3 和 GPT2](https://www.kdnuggets.com/2023/02/5-free-tools-detecting-chatgpt-gpt3-gpt2.html)'
 - en: '[Top 10 Tools for Detecting ChatGPT, GPT-4, Bard, and Claude](https://www.kdnuggets.com/2023/05/top-10-tools-detecting-chatgpt-gpt4-bard-llms.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[检测 ChatGPT、GPT-4、Bard 和 Claude 的十大工具](https://www.kdnuggets.com/2023/05/top-10-tools-detecting-chatgpt-gpt4-bard-llms.html)'
 - en: '[Build a Machine Learning Web App in 5 Minutes](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 5 分钟内构建机器学习 Web 应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)'
 - en: '[KDnuggets News March 9, 2022: Build a Machine Learning Web App in 5…](https://www.kdnuggets.com/2022/n10.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻 2022年3月9日：在 5 分钟内构建机器学习 Web 应用…](https://www.kdnuggets.com/2022/n10.html)'
 - en: '[Deploy a Machine Learning Web App with Heroku](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Heroku 部署机器学习 Web 应用](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
