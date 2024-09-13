@@ -1,138 +1,206 @@
 - en: Why physical storage of your database tables might matter
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 为什么数据库表的物理存储可能很重要
 - en: 原文：[https://www.kdnuggets.com/2019/05/physical-storage-database-tables-might-matter.html](https://www.kdnuggets.com/2019/05/physical-storage-database-tables-might-matter.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/05/physical-storage-database-tables-might-matter.html](https://www.kdnuggets.com/2019/05/physical-storage-database-tables-might-matter.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
 - en: '**By [Apoorva Aggarwal](https://www.linkedin.com/in/apoorvaaggarwal/), Machine
     Learning and Data Engineer at Grofers**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Apoorva Aggarwal](https://www.linkedin.com/in/apoorvaaggarwal/) 提供，Grofers
+    的机器学习和数据工程师**'
 - en: '![Header image](../Images/3f45e8b7a780a3d4ea36631f77ad2b47.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![Header image](../Images/3f45e8b7a780a3d4ea36631f77ad2b47.png)'
 - en: In our quest to simplify and enrich online grocery shopping for our users, we
     experimented with serving personalized item recommendations to each one of them.
     For this we operated in batch mode and pre computed relevant top 200 item recommendations
     for each user and dumped the results in a table of our OLTP PostgreSQL database
     to enable us to serve these recommendations in real time. Queries on this table
     were taking too long which resulted in bad user experience.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在简化和丰富我们用户的在线购物体验的过程中，我们尝试为每位用户提供个性化的商品推荐。为此，我们以批处理模式操作，预计算了每个用户的相关前200项推荐，并将结果存储在我们的OLTP
+    PostgreSQL数据库中的一张表里，以便实时提供这些推荐。对此表的查询时间过长，导致用户体验不佳。
 - en: '**Narrowing down into problem space**'
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**缩小问题范围**'
 - en: Recommendations were pre computed for all users who have ever transacted on
     our platform, the size of this table was close to 12 GB. A simple SELECT query
     was used to retrieve recommendations from this table.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 为所有曾经在我们平台上交易的用户预计算了推荐，表的大小接近 12 GB。使用简单的 SELECT 查询从这张表中检索推荐。
 - en: '[PRE0]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: A BTree index on column `customer_id` was created to enable faster lookups.
     But even then, sometimes query times were as large as **~1 s**.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 `customer_id` 列上创建了 BTree 索引以实现更快的查找。但即便如此，有时查询时间仍然大约为 **~1 s**。
 - en: 'Looking at the query plan :'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看查询计划：
 - en: '[PRE2]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '**Isolating the cause**'
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**隔离原因**'
 - en: Even though the query planner was using the created index, query times were
     still huge.This required us to dig deeper into what does having an “index” really
     mean? How does having an index help in faster fetching of query results? Lets
     revisit the basic anatomy of an index.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管查询规划器使用了创建的索引，查询时间仍然非常长。这迫使我们深入探讨“索引”究竟意味着什么？索引如何帮助更快地获取查询结果？让我们重新审视索引的基本构造。
 - en: Default index in postgres is of type BTree which constitutes a BTree or a balanced
     tree of index entries and index leaf nodes which store physical address of an
     index entry.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: PostgreSQL 默认索引类型是 BTree，它由索引条目的 BTree 或平衡树和存储索引条目物理地址的索引叶节点组成。
 - en: 'An index lookup requires three steps:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 索引查找需要三个步骤：
 - en: Tree traversal
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 树遍历
 - en: Following the leaf node chain
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 跟随叶子节点链
 - en: Fetching the table data
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 获取表数据
 - en: The above steps are explained in detail [here](https://use-the-index-luke.com/sql/anatomy/the-tree).
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述步骤详细解释 [这里](https://use-the-index-luke.com/sql/anatomy/the-tree)。
 - en: Tree traversal is the only step that has an upper bound for the number of accessed
     blocks — the index depth. The other two steps might need to access many blocks — their
     upper bound can be as large as the full table scan.¹
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 树遍历是访问块数量有上限的唯一步骤——即索引深度。其他两个步骤可能需要访问许多块——它们的上限可以大到完全表扫描的程度。¹
 - en: An Index Scan performs a B-tree traversal, walks through the leaf nodes to find
     all matching entries, and fetches the corresponding table data. It is like an* INDEX
     RANGE SCAN *followed by a *TABLE ACCESS BY INDEX ROWID*operation.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 索引扫描执行 B-tree 遍历，遍历叶子节点以查找所有匹配的条目，并提取对应的表数据。这类似于 *INDEX RANGE SCAN* 随后进行 *TABLE
+    ACCESS BY INDEX ROWID* 操作。
 - en: 'Following the leaf node chain requires getting *ROWID*’s that fulfill the `customer_id` condition:
     in our case, it has max limit of 200 row ID’s. Since these index leaf nodes are
     stored in a sorted manner, their access is upper bounded by the length of this
     chain or total rows in the table.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 跟随叶子节点链需要获取符合 `customer_id` 条件的 *ROWID*：在我们的案例中，它的最大限制是 200 个行 ID。由于这些索引叶节点以排序方式存储，它们的访问上限由这条链的长度或表中的总行数决定。
 - en: The next step is the *TABLE ACCESS BY INDEX ROWID* operation. It uses the *ROWID* from
     previous step to fetch the rows — all columns — from the table. Here the db engine
     must fetch the rows individually hitting each record in page and bringing them
     in memory for retrieval. It involves random access IO’s apart from read operations.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是*TABLE ACCESS BY INDEX ROWID*操作。它使用*ROWID*从前一步获取所有列的行。从表中检索行时，数据库引擎必须逐个获取行，访问页面中的每条记录，并将其加载到内存中进行检索。除了读取操作外，还涉及随机访问
+    IO。
 - en: 'We decided it might be worthwhile to look at how these query result rows were
     distributed on physical memory. In postgres, location of a row is given by `ctid`which
     is a tuple. `ctid` is of type `tid` (tuple identifier), called `ItemPointer` in
     the C code. [Per documentation](http://www.postgresql.org/docs/current/interactive/datatype-oid.html):'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们决定可能值得查看这些查询结果行在物理内存中的分布。在 postgres 中，行的位置由`ctid`给出，它是一个元组。`ctid`的类型是`tid`（元组标识符），在
+    C 代码中称为`ItemPointer`。 [根据文档](http://www.postgresql.org/docs/current/interactive/datatype-oid.html)：
 - en: '*This is the data type of the system column *`*ctid*`*. A tuple ID is a pair
     (****block number****, ****tuple index within block****) that identifies the physical
     location of the row within its table.*'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '*这是系统列*`*ctid*`*的数据类型。一个元组 ID 是一个（****块编号****，****块内元组索引****）对，标识了表中行的物理位置。*'
 - en: 'The distribution was like this:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 分布情况如下：
 - en: '[PRE3]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Clearly, rows for a particular customer id were far from each other on disk.
     This seemed to explain the high execution times of queries having `customer_id` in
     WHERE clause. The db engine was hitting pages on disk for retrieving each row.
     There was high random access IO. What if we could bring all rows of a particular
     customer together? If done, the engine might be able to retrieve all rows in result
     set in one go.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，特定客户 ID 的行在磁盘上相距很远。这似乎解释了包含`customer_id`的 WHERE 子句查询的高执行时间。数据库引擎正在访问磁盘上的页面以检索每一行。随机访问
+    IO 很高。如果我们能将特定客户的所有行放在一起会怎样？如果做到这一点，数据库引擎可能能够一次性检索结果集中的所有行。
 - en: '**Possible solutions to root cause and exploring feasibility**'
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**可能的根本原因及可行性探索**'
 - en: Postgres provides a `[CLUSTER](https://www.postgresql.org/docs/9.1/static/sql-cluster.html)` command
     which physically rearranges the rows on disk based on a given column. But given
     constraints like acquiring a READ WRITE lock on table and requiring 2.5x the table
@@ -140,121 +208,184 @@
     customer id rows sorted manner. The application which was writing these rows was
     a Spark application using collaborative filtering algorithm to derive recommended
     products.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: Postgres 提供了一个`[CLUSTER](https://www.postgresql.org/docs/9.1/static/sql-cluster.html)`命令，它根据给定的列在磁盘上物理地重新排列行。但是，由于需要在表上获取
+    READ WRITE 锁并且需要 2.5 倍的表大小，这使得使用起来很棘手。我们开始探索是否可以按客户 ID 行的排序方式写入表。写入这些行的应用程序是一个使用协同过滤算法来推导推荐产品的
+    Spark 应用程序。
 - en: An attempt to fix the problem right from the source
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 试图从*源头*解决问题
 - en: '**Understanding how Spark writes data to table**'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**了解 Spark 如何写入表**'
 - en: The problem required us to dig deeper into how Spark writes to Postgres. It
     writes data `[partition](https://jaceklaskowski.gitbooks.io/mastering-apache-spark/spark-rdd-partitions.html)` wise.
     Now, what is this partition?
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个问题要求我们深入探讨 Spark 如何写入 Postgres。它是按`[partition](https://jaceklaskowski.gitbooks.io/mastering-apache-spark/spark-rdd-partitions.html)`分区的。那么，这个分区是什么呢？
 - en: Spark being a distributed computing frame work distributes a particular data
     frame into partitions amongst its workers. It allows you to explicitly partition
     a dataframe based on a partition key to ensure minimal shuffling (bring partitions
     from one worker to another for reading/writing operations). Looking at the code
     we found that we had partitioned on `product_id` for a particular transformation
     operation.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: Spark 作为一个分布式计算框架，将特定的数据框分配到其工作节点的分区中。它允许你根据分区键显式地对数据框进行分区，以确保最小化数据的重新分布（将分区从一个工作节点转移到另一个节点进行读取/写入操作）。通过代码我们发现，我们在特定的转换操作中对`product_id`进行了分区。
 - en: '![Figure](../Images/976d6ac4550cd709f9e6312e234bcb80.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/976d6ac4550cd709f9e6312e234bcb80.png)'
 - en: Partitions of spark dataframe. Note how rows containing a particular product
     ID are in one partition
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: Spark 数据框的分区。注意包含特定产品 ID 的行位于一个分区中
 - en: 'This meant that the data written to our postgres table should be `product_id`wise,
     i.e. rows of all customer ID’s whose recommendations were a particular product
     ID should be clubbed together. We tested our hypothesis by looking at results
     of :'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着写入我们Postgres表的数据应该按`product_id`分类，即所有推荐为特定产品ID的客户ID的行应该被聚集在一起。我们通过查看以下结果来测试我们的假设：
 - en: '[PRE4]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Yes indeed, all rows of a particular product ID were together on the table.
     So if we instead partitioned on `customer_id`, our objective of bringing all result
     rows of a customer_id would be met. This could be achieved by re partitioning
     the dataframe. [This](https://deepsense.ai/optimize-spark-with-distribute-by-and-cluster-by/) post
     here talks about repartition in detail.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 确实，表中所有特定产品ID的行都在一起。所以如果我们改为按`customer_id`分区，我们的目标就是将所有属于一个`customer_id`的结果行集中在一起。这可以通过重新分区数据框来实现。
+    [这个](https://deepsense.ai/optimize-spark-with-distribute-by-and-cluster-by/)帖子详细讨论了重新分区。
 - en: '**Attempting to align the data**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**尝试对齐数据**'
 - en: 'We repartitioned the dataframe by :'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们按以下方式重新分区了数据框：
 - en: '[PRE5]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: And wrote the final dataframe to postgres. Now we checked for distribution of
     rows.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后将最终的数据框写入Postgres。现在我们检查了行的分布情况。
 - en: '[PRE6]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Alas, the table is still not pivoted on `customer_id`. What did we do wrong?
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 可惜的是，表仍然没有以`customer_id`为中心进行透视。我们做错了什么？
 - en: Apparently, the default number of partitions on which data is rearranged is
     200\. But since the number of distinct customer ID’s were greater than 200 (~10
     million), this meant that a single partition will contain recommended products
     of more that 1 customer as seen in the figure below. In this case, close to (~10
     million/200=50,000) customers.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，数据重新排列的默认分区数量是200。但由于不同的客户ID数量超过了200（约1000万），这意味着单个分区将包含超过1个客户的推荐产品，如下图所示。在这种情况下，接近（~1000万/200=50,000）个客户。
 - en: '![Figure](../Images/53f3b4ae9d27e7ec5dd63a8a08bb00ca.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/53f3b4ae9d27e7ec5dd63a8a08bb00ca.png)'
 - en: Repartioned dataframe. Notice how all rows of a product ID are in one partition
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 重新分区的数据框。注意一个产品ID的所有行都在一个分区中
 - en: 'When this particular partition will be written to the db, this will still not
     ensure that all rows belonging to a customer_id be written together. We then sorted
     rows within a partition by `customer_id`:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 当这个特定的分区写入数据库时，这仍然不能确保所有属于一个`customer_id`的行被一起写入。于是我们在分区内按`customer_id`对行进行了排序：
 - en: '[PRE7]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![Figure](../Images/1bf72e28d7420e0b9cff23423d8bdf17.png)'
+  id: totrans-52
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/1bf72e28d7420e0b9cff23423d8bdf17.png)'
 - en: Dataframe after partitioning and sorting on customer_id key
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 分区后按`customer_id`键排序的数据框
 - en: It is an expensive operation for spark to perform but nevertheless necessary
     for us. We did this and wrote again to the database. Next we checked for distribution.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 对Spark来说，这是一项昂贵的操作，但对我们来说却是必要的。我们进行了这项操作，并再次写入数据库。接下来，我们检查了分布情况。
 - en: '[PRE8]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Voila! Its now pivoted on customer_id (tears of joy :,-) ).
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 看！现在它以`customer_id`为中心（喜极而泣：,-)）。
 - en: '**Testing the solution**'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '**测试解决方案**'
 - en: The final test still remains. Will the query execution now be faster. Lets see
     what the query planner says.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终的测试仍然存在。查询执行现在是否会更快？让我们看看查询规划器怎么说。
 - en: '[PRE9]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '**Execution time came down from ~100 ms to ~3ms.**'
+  id: totrans-60
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**执行时间从~100毫秒降至~3毫秒。**'
 - en: This optimization really helped us use personalized recommendations to serve
     a variety of use cases like generating targeted advertising pushes for a growing
     consumer base of more than 200 thousand users in bulk etc. When this was first
@@ -263,93 +394,145 @@
     latencies to minimal. Although now, the time taken for Spark application to generate
     these recommendations, arranging the dataframe and writing to database has increased
     manifold. But since that happens in batch mode, it is still acceptable.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种优化确实帮助我们使用个性化推荐服务各种用例，如为超过20万用户的不断增长的消费群体生成定向广告推送等。首次启动时，数据的大小约为12 GB。现在过去一年，它增长到了约22GB，但重新排列表中的记录有助于将数据库检索延迟保持到最低。虽然现在生成这些推荐、排列数据框和写入数据库所需的时间增加了很多倍，但由于这些操作是在批处理模式下进行的，因此仍然可以接受。
 - en: With growing scale of users on the platform, data too is growing daily and so
     are the challenges to process it and make it useful for data driven decision making.
     If you like to solve similar problems at scale, we are always looking for new
     talent. Check for open positions [here](https://grofers.recruiterbox.com/?team=Technology+-+Engineering%2C+Product+and+Design#content).
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着平台用户规模的增长，数据也在每天增长，处理这些数据并使其对数据驱动的决策有用的挑战也在增加。如果你喜欢在大规模下解决类似问题，我们始终在寻找新的人才。可以在
+    [这里](https://grofers.recruiterbox.com/?team=Technology+-+Engineering%2C+Product+and+Design#content)
+    查看空缺职位。
 - en: '**Footnotes:**'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '**脚注：**'
 - en: '[1]. [https://use-the-index-luke.com/sql/anatomy/slow-indexes](https://use-the-index-luke.com/sql/anatomy/slow-indexes)'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1]. [https://use-the-index-luke.com/sql/anatomy/slow-indexes](https://use-the-index-luke.com/sql/anatomy/slow-indexes)'
 - en: '**Bio: [Apoorva Aggarwal](https://www.linkedin.com/in/apoorvaaggarwal/)** is
     a Machine Learning and Data Engineer at Grofers.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介： [Apoorva Aggarwal](https://www.linkedin.com/in/apoorvaaggarwal/)**
+    是 Grofers 的机器学习和数据工程师。'
 - en: '[Originally posted on Grofers Engineering Blog](https://lambda.grofers.com/why-physical-storage-of-your-database-tables-might-matter-74b563d664d9).
     Reposted with permission.'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '[最初发布于 Grofers 工程博客](https://lambda.grofers.com/why-physical-storage-of-your-database-tables-might-matter-74b563d664d9)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[7 Steps to Mastering SQL for Data Science — 2019 Edition](/2019/05/7-steps-mastering-sql-data-science-2019-edition.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握 SQL 的 7 个步骤 — 2019 版](/2019/05/7-steps-mastering-sql-data-science-2019-edition.html)'
 - en: '[Simple Tips for PostgreSQL Query Optimization](/2018/06/simple-tips-postgresql-query-optimization.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PostgreSQL 查询优化的简单技巧](/2018/06/simple-tips-postgresql-query-optimization.html)'
 - en: '[Loading Terabytes of Data from Postgres into BigQuery](/2018/04/loading-terabytes-data-postgres-into-bigquery.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将 PB 级数据从 Postgres 加载到 BigQuery](/2018/04/loading-terabytes-data-postgres-into-bigquery.html)'
 - en: '* * *'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-72
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织进行 IT'
 - en: '* * *'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-77
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[24 SQL Questions You Might See on Your Next Interview](https://www.kdnuggets.com/2022/06/24-sql-questions-might-see-next-interview.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[24 个 SQL 问题，你可能会在下一次面试中遇到](https://www.kdnuggets.com/2022/06/24-sql-questions-might-see-next-interview.html)'
 - en: '[Novice to Ninja: Why Your Python Skills Matter in Data Science](https://www.kdnuggets.com/novice-to-ninja-why-your-python-skills-matter-in-data-science)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从初学者到专家：为什么您的 Python 技能在数据科学中很重要](https://www.kdnuggets.com/novice-to-ninja-why-your-python-skills-matter-in-data-science)'
 - en: '[5 Pandas Plotting Functions You Might Not Know](https://www.kdnuggets.com/2023/02/5-pandas-plotting-functions-might-know.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你可能不知道的 5 个 Pandas 绘图函数](https://www.kdnuggets.com/2023/02/5-pandas-plotting-functions-might-know.html)'
 - en: '[What Is Data Lineage, And Why Does It Matter?](https://www.kdnuggets.com/what-is-data-lineage-and-why-does-it-matter)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是数据血缘关系，为什么它很重要？](https://www.kdnuggets.com/what-is-data-lineage-and-why-does-it-matter)'
 - en: '[From Oracle to Databases for AI: The Evolution of Data Storage](https://www.kdnuggets.com/2022/02/oracle-databases-ai-evolution-data-storage.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从 Oracle 到 AI 数据库：数据存储的演变](https://www.kdnuggets.com/2022/02/oracle-databases-ai-evolution-data-storage.html)'
 - en: '[Cloud Storage Adoption is the Need of the Hour for Business](https://www.kdnuggets.com/2022/02/cloud-storage-adoption-need-hour-business.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[云存储的采用是商业的迫切需求](https://www.kdnuggets.com/2022/02/cloud-storage-adoption-need-hour-business.html)'
