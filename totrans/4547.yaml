@@ -1,21 +1,31 @@
 - en: Automated Machine Learning Project Implementation Complexities
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 自动化机器学习项目实施复杂性
 - en: 原文：[https://www.kdnuggets.com/2019/11/automl-implementation-complexities.html](https://www.kdnuggets.com/2019/11/automl-implementation-complexities.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/11/automl-implementation-complexities.html](https://www.kdnuggets.com/2019/11/automl-implementation-complexities.html)
 - en: '[comments](#comments)![Figure](../Images/09edc90152540fcb82614f36d080450d.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments) ![图](../Images/09edc90152540fcb82614f36d080450d.png)'
 - en: Photo by Soroush Zargar on Unsplash
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由 Soroush Zargar 提供，来源于 Unsplash
 - en: Automated machine learning (AutoML) spans the fairly wide chasm of tasks which
     could reasonably be thought of as being included within a machine learning pipeline.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 自动化机器学习（AutoML）涵盖了一个相当广泛的任务范围，这些任务可以合理地被认为是机器学习流程的一部分。
 - en: An AutoML "solution" could include the tasks of data preprocessing, feature
     engineering, algorithm selection, algorithm architecture search, and hyperparameter
     tuning, or some subset or variation of these distinct tasks. Thus, automated machine
@@ -23,136 +33,194 @@
     such as automated feature engineering, all the way through to a fully-automated
     pipeline, from data preprocessing, to feature engineering, to algorithm selection,
     and so on.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个 AutoML “解决方案”可能包括数据预处理、特征工程、算法选择、算法架构搜索和超参数调整等任务，或者这些任务的某些子集或变体。因此，自动化机器学习现在可以被视为从仅执行单一任务（如自动化特征工程），到完全自动化的流程（从数据预处理、特征工程到算法选择等）的任何事物。
 - en: However, another important dimension of practical AutoML is its implementation
     complexity. This is the dimension governing the amount of configuration and engineering
     elbow grease needed to implement and configure an AutoML project. There are solutions
     which integrate easily into existing software APIs; those which are wrappers around
     existing APIs; and those which telescope out even further from existing APIs,
     being invoked by a command line or a single line of code.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，实际的 AutoML 还有一个重要维度，即其实施复杂性。这一维度决定了实现和配置 AutoML 项目所需的配置和工程努力。有些解决方案可以轻松集成到现有的软件
+    API 中；有些是现有 API 的封装；还有些则进一步远离现有 API，通过命令行或单行代码调用。
 - en: To demonstrate the implementation complexity differences along the AutoML highway,
     let's have a look at how 3 specific software projects approach the implementation
     of just such an AutoML "solution," namely Keras Tuner, AutoKeras, and automl-gs.
     We will see how these projects are philosophically quite different from one another,
     and will get an idea of the different roles and levels of machine learning learning
     knowledge may be necessary or appropriate to implement each of these approaches.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了展示 AutoML 之路上实施复杂性的差异，让我们看看 3 个具体的软件项目如何处理这样的 AutoML “解决方案”，即 Keras Tuner、AutoKeras
+    和 automl-gs。我们将看到这些项目在哲学上彼此间的差异，并了解实现这些方法所需或适合的不同级别的机器学习知识。
 - en: Note that the first 2 of these projects are directly tied to Keras and TensorFlow,
     and so are specific to neural networks. However, there is no reason why other
     AutoML software at these same relative implementation complexities need be specific
     to neural networks; these two tools simply provide an easy method of comparison
     between the implementation complexities.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，这些项目中的前两个直接与 Keras 和 TensorFlow 相关，因此它们特定于神经网络。然而，其他 AutoML 软件在这些相对实施复杂性下并不一定特定于神经网络；这两个工具仅提供了一种在实施复杂性之间进行比较的简便方法。
 - en: Also note that the complexity being assessed is that of the practical code implementation
     of a solution. There are many other complexities of an AutoML undertaking which
     would contribute to its overall complexity, including the dataset size, dimensionality,
     and much more.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 还需要注意的是，所评估的复杂性是解决方案的实际代码实现复杂性。还有许多其他的 AutoML 相关复杂性会影响其整体复杂性，包括数据集的大小、维度等。
 - en: Keras Tuner
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Keras Tuner
 - en: Let's start with [Keras Tuner](https://keras-team.github.io/keras-tuner/), what
     I will refer to as a "some assembly required" automated machine learning project.
     In order to successfully implement a solution using the project, you would need
     a working understanding of neural networks, their architecture, and writing code
     using the Keras library. As such, this is much more "in the weeds" than the other
     libraries treated herein.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从[Keras Tuner](https://keras-team.github.io/keras-tuner/)开始，我将其称为“需要一些组装”的自动化机器学习项目。为了成功实施该项目的解决方案，您需要对神经网络、其架构和使用
+    Keras 库编写代码有一定了解。因此，这比本文讨论的其他库更为“深入”。
 - en: Essentially, Keras Tuner provides automated hyperparameter tuning for Keras.
     You define a Keras model and note which hyperparameters you want to have included
     in the automated tuning, along with a search space, and Keras Tuner performs the
     heavy lifting. These hyperparameters can include conditional parameters, and the
     search space can be as restricted as you like, but essentially this is a hyperparameter
     tuning application.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 本质上，Keras Tuner 为 Keras 提供自动化的超参数调优。您定义一个 Keras 模型，并注明希望包含在自动化调优中的超参数以及搜索空间，然后
+    Keras Tuner 执行繁重的工作。这些超参数可以包括条件参数，搜索空间可以限制到您喜欢的程度，但本质上这是一个超参数调优应用程序。
 - en: Recall that the complexity we are referring to in this article is not the number
     of AutoML tasks that a particular project performs, but that of the code which
     implements these tasks. In this regard, given that what we can call lower-level
     base library code must be written and integrated with our AutoML library, Keras
     Tuner represents the more complex end of the AutoML implementation complexity
     spectrum.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 回想一下，本文提到的复杂性不是指特定项目执行的 AutoML 任务数量，而是实现这些任务的代码的复杂性。在这方面，鉴于我们可以称之为底层基础库代码的部分必须编写并与我们的
+    AutoML 库集成，Keras Tuner 代表了 AutoML 实现复杂性谱系中更复杂的一端。
 - en: The most likely user of Keras Tuner would be a machine learning engineer or
     data scientist. You are not likely to find experts of a particular domain with
     little to no coding or machine learning expertise jumping straight to Keras Tuner,
     as opposed to one of the other projects below. To see why, here's a quick overview
     of how to implement some very basic Keras Tuner code (example from the [Keras
     Tuner documentation website](https://github.com/keras-team/keras-tuner)).
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: Keras Tuner 最可能的用户是机器学习工程师或数据科学家。您不太可能发现具有少量或没有编码或机器学习专业知识的特定领域专家直接跳转到 Keras
+    Tuner，而不是下面的其他项目之一。要了解原因，这里是如何实现一些非常基础的 Keras Tuner 代码的快速概述（示例来自[Keras Tuner 文档网站](https://github.com/keras-team/keras-tuner)）。
 - en: 'First you need a function to return a complied Keras model. It takes an argument
     from which hyperparameters are sampled:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，您需要一个函数来返回一个编译好的 Keras 模型。它接受一个参数，从中采样超参数：
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Then you need a tuner, which specifies, among other things, the model building
     function, the objective to optimize, number of trials, and more.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，您需要一个调优器，它指定了模型构建函数、优化目标、试验次数等内容。
 - en: '[PRE1]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Then start the search for the best hyperparameter configuration:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后开始搜索最佳超参数配置：
 - en: '[PRE2]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Finally, either check for the best model or print results summary:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，要么检查最佳模型，要么打印结果总结：
 - en: '[PRE3]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: You may hesitate to refer to this implementation's code as terribly complex,
     but when you compare it to the following projects I hope you change your mind.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 您可能会犹豫是否将此实现的代码称为极其复杂，但当您与以下项目进行比较时，我希望您改变主意。
 - en: To see more details about the above code, the Keras Tuner process more generally,
     and what more you can do with the project, see [its website](https://keras-team.github.io/keras-tuner/).
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 要查看上述代码的更多细节、Keras Tuner 的一般过程以及您可以对该项目做的更多工作，请参见[其网站](https://keras-team.github.io/keras-tuner/)。
 - en: AutoKeras
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: AutoKeras
 - en: 'Next up is [AutoKeras](https://github.com/keras-team/autokeras), which I will
     refer to as an "off the shelf" solution, one which is prepackaged and more or
     less ready to go, using a more restrictive code template. AutoKeras describes
     itself as:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来是[AutoKeras](https://github.com/keras-team/autokeras)，我将其称为“现成的”解决方案，这是一种预打包的、或多或少已经准备好的解决方案，使用更为限制性的代码模板。AutoKeras
+    自我描述为：
 - en: The ultimate goal of AutoML is to provide easily accessible deep learning tools
     to domain experts with limited data science or machine learning background.
+  id: totrans-27
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: AutoML 的**终极目标**是为具有有限数据科学或机器学习背景的领域专家提供易于访问的深度学习工具。
 - en: To accomplish this, AutoKeras performs both architecture search and hyperparameter
     tuning for Keras neural network models.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: 'Here''s a basic code footprint for using AutoKeras:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: If you've used Scikit-learn, this should be familiar syntax. The above code
     uses the `task` API; there are others, however, which are of higher complexity.
     You can find further information on these additional APIs, and more fleshed-out
     tutorials, on the [project's documentation website](https://autokeras.com/tutorial/).
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: It should be obvious that the above AutoKeras code is of substantially reduced
@@ -160,9 +228,11 @@
     degree of precision when you reduce this complexity, the obvious trade-off. For
     domain experts with limited machine learning expertise, however, this might be
     a good balance.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: automl-gs
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -170,6 +240,7 @@
     which takes a 30,000 foot view of AutoML implementations. This goes beyond the
     "off the shelf" implementation complexity, and offers an approach somewhat akin
     to the Staples easy button.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: automl-gs offers a "zero code/model definition interface." You simply point
@@ -178,32 +249,42 @@
     similar to what [popular AutoML tool TPOT does](https://github.com/EpistasisLab/tpot).
     automl-gs also boasts that it is no black box, in that you can see how data is
     processed and models are constructed, allowing for tweaks to be made after-the-fact.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: automl-gs performs data preprocessing, and currently builds models using neural
     networks (via Keras) and XGBoost, while plans to implement CatBoost and LightGBM
     have been announced.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: Here is a comparison of the 2 ways to call automl-gs, via command line and via
     a single line of code. Note that you can find further information on configuration
     options, as well as inspecting output, on the [project's website](https://github.com/minimaxir/automl-gs).
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: 'Command line:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Python code:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: It should now be easy to compare the code complexities of these 3 levels of
     AutoML project undertakings.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: automl-gs can be executed via single command line command or single line Python
@@ -215,14 +296,18 @@
     decisions being made based on the predictions may be problematic (not a very likely
     prospect, IMHO), opening up machine learning and AutoML to anyone looking to learn
     more about it certainly has value.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/e4120f25b929cc5ab0068e5b77466212.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
 - en: Sample automl-gs output code ([source](https://github.com/minimaxir/automl-gs))
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: automl-gs 输出代码示例 ([来源](https://github.com/minimaxir/automl-gs))
 - en: Similar to TPOT, I see the value here being the potential low-bar entry into
     creating project baselines. It could be useful to point automl-gs at a CSV and
     tell it to do its thing in parallel to hand-crafting competing solutions, and
@@ -232,12 +317,18 @@
     quickly. Being able to review models afterwards and make edits is also appealing,
     and could be added as another layer to this parallel AutoML/manual model building
     process.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 类似于 TPOT，我认为这里的价值在于创建项目基准的潜在低门槛。可以将 automl-gs 指向一个 CSV，让它并行地进行操作，同时手动制作竞争解决方案，并比较结果。这也可以通过其他
+    AutoML 工具完成，但这种低复杂度工具的绝对简单性依赖于几乎无需设置和考虑的特性，使得它能够非常快速地启动。能够在之后审查模型并进行编辑也很有吸引力，可以作为这种并行
+    AutoML/手动模型构建过程的另一层添加。
 - en: Takeaways
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 重点内容
 - en: Machine learning presents an array of tasks which can be automated to varying
     degrees to help simplify pipelines and increase success. Automated machine learning
     projects take different approaches to which tasks they automate, as well as to
@@ -245,73 +336,113 @@
     of these tasks. Hopefully the 3 projects spotlighted herein provide some concrete
     example as to the practical code complexity differences between AutoML tools,
     and how and who they are useful for.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习呈现出一系列可以以不同程度自动化的任务，以帮助简化流程并提高成功率。自动化机器学习项目在自动化任务的方式以及对这些任务的配置、执行和后续操作的控制精度上采取不同的方法。希望这里突出介绍的
+    3 个项目能提供一些关于 AutoML 工具的实际代码复杂度差异的具体示例，以及它们如何以及对谁有用。
 - en: '**Related**:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[GitHub Repo Raider and the Automation of Machine Learning](/2019/11/github-repo-raider-automated-machine-learning.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[GitHub 仓库劫掠者与机器学习的自动化](/2019/11/github-repo-raider-automated-machine-learning.html)'
 - en: '[Automate Hyperparameter Tuning for Your Models](/2019/09/automate-hyperparameter-tuning-models.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动化超参数调整您的模型](/2019/09/automate-hyperparameter-tuning-models.html)'
 - en: '[Automated Machine Learning: Just How Much?](/2019/09/automated-machine-learning-just-how-much.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动化机器学习：究竟多少？](/2019/09/automated-machine-learning-just-how-much.html)'
 - en: '* * *'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-54
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织 IT'
 - en: '* * *'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个 90 亿美元的 AI 失败，探讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
