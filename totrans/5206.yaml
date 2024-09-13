@@ -3,23 +3,28 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SQL 和 Python 中的特征工程：一种混合方法
 - en: 原文：[https://www.kdnuggets.com/2020/07/feature-engineering-sql-python-hybrid-approach.html](https://www.kdnuggets.com/2020/07/feature-engineering-sql-python-hybrid-approach.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/07/feature-engineering-sql-python-hybrid-approach.html](https://www.kdnuggets.com/2020/07/feature-engineering-sql-python-hybrid-approach.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Shaw Lu](https://www.linkedin.com/in/shawlu95/), Data Scientist at Coupang**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Shaw Lu](https://www.linkedin.com/in/shawlu95/)，Coupang 的数据科学家**'
 - en: '![](../Images/387c7c1fb43091b8548d223324b19571.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/387c7c1fb43091b8548d223324b19571.png)'
 - en: 'I knew SQL long before learning about Pandas, and I was intrigued by the way
     Pandas faithfully emulates SQL. Stereotypically, SQL is for analysts, who crunch
     data into informative reports, whereas Python is for data scientists, who use
@@ -29,57 +34,72 @@
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 我很早就学会了 SQL，对 Pandas 真实模拟 SQL 的方式感到非常好奇。传统上，SQL 主要用于分析师，他们将数据处理成有信息的报告，而 Python
+    则用于数据科学家，他们利用数据构建（并过拟合）模型。虽然这两者在功能上几乎等价，但我认为两者都是数据科学家高效工作的关键。从我使用 Pandas 的经验来看，我注意到以下几点：
 - en: I end up with many CSV files when exploring different features.
   id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在探索不同特征时，我最终会得到许多 CSV 文件。
 - en: When I aggregate over a big dataframe, the Jupyter kernel simply dies.
   id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当我在一个大型数据框上进行汇总时，Jupyter 内核会直接崩溃。
 - en: I have multiple dataframes with confusing (and long) names in my kernel.
   id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我在内核中有多个名称混乱（且很长）的数据框。
 - en: My feature engineering codes look ugly and are scattered over many cells.
   id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我的特征工程代码看起来很丑，而且分散在许多单元格中。
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Those problems are naturally solved when I began [feature engineering](https://www.kdnuggets.com/2018/12/feature-engineering-explained.html)
     directly in SQL. So in this post, I’ll share some of my favorite tricks by working
     through a take-home challenge dataset. If you know a little bit of SQL, it’s time
@@ -87,11 +107,14 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我开始直接在 SQL 中进行 [特征工程](https://www.kdnuggets.com/2018/12/feature-engineering-explained.html)
+    时，这些问题自然得到了解决。因此，在这篇文章中，我将通过处理家庭作业挑战数据集分享一些我最喜欢的技巧。如果你对 SQL 有一点了解，现在是时候好好利用它了。
 - en: Installing MySQL
   id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 安装 MySQL
 - en: To start with, you need a SQL server. I’m using MySQL in this post. You can
     get MySQL server by installing one of the local desktop servers such as MAMP,
     WAMP or XAMPP. There are many tutorials online, and it’s worth going through the
@@ -99,12 +122,15 @@
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，你需要一个 SQL 服务器。我在这篇文章中使用的是 MySQL。你可以通过安装本地桌面服务器，如 MAMP、WAMP 或 XAMPP 来获取 MySQL
+    服务器。网上有许多教程，值得一试。
 - en: 'After setting up your server, make sure you have three items ready: username,
     password, port number. Login through Terminal by entering the following command
     (here we have username “root”, password 1234567).'
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在设置服务器后，请确保准备好三个项目：用户名、密码、端口号。通过终端输入以下命令进行登录（这里我们使用用户名“root”，密码 1234567）。
 - en: '[PRE0]'
   id: totrans-20
   prefs: []
@@ -114,11 +140,13 @@
   id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/93c6c27ef213b648d77301786b19395a.png)'
 - en: Then create a database called “Shutterfly” in the MySQL console (you can name
     it whatever you want). The two tables will be loaded into this database.
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后在 MySQL 控制台中创建一个名为“Shutterfly”的数据库（你可以根据需要命名）。这两个表将被加载到这个数据库中。
 - en: '[PRE1]'
   id: totrans-23
   prefs: []
@@ -129,12 +157,15 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 安装 sqlalchemy
 - en: 'You’ll need Pandas and sqlalchemy to work with SQL in Python. I bet you already
     have Pandas. Then install sqlalchemy by activating your desired environment to
     launch Jupyter notebook, and enter:'
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 你需要 Pandas 和 sqlalchemy 来在 Python 中使用 SQL。我敢打赌你已经有 Pandas 了。然后通过激活你想要的环境来启动
+    Jupyter notebook，并输入：
 - en: '[PRE2]'
   id: totrans-26
   prefs: []
@@ -273,25 +304,30 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 注意特征表如何依次连接。这实际上是高效的，因为我们总是按一对一的映射连接索引。
 - en: Finally, let’s take a look at 5 training examples, and their features.
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，让我们看看5个训练示例及其特征。
 - en: Now you have a well-defined dataset and feature set. You can tweak the scale
     of each feature and missing values to suit your model’s requirement.
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你有了一个定义良好的数据集和特征集。你可以调整每个特征的规模和缺失值，以适应你模型的需求。
 - en: For tree-based methods, which are invariant to feature scaling, we can directly
     apply the model, and simply focus on tuning parameters! See an example of a plain-vanilla
     gradient boosting machine [here](https://github.com/shawlu95/Data-Science-Toolbox/blob/master/case_study/shutterfly/gbm_benchmark_2.ipynb).
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于基于树的方法，这些方法对特征缩放不变，我们可以直接应用模型，简单地专注于调整参数！查看一个普通的梯度提升机示例[这里](https://github.com/shawlu95/Data-Science-Toolbox/blob/master/case_study/shutterfly/gbm_benchmark_2.ipynb)。
 - en: '![](../Images/fa5fb7efe28cb82131c6f0edf7276e40.png)'
   id: totrans-49
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fa5fb7efe28cb82131c6f0edf7276e40.png)'
 - en: It is nice to see that the useful features are all engineered, except for the *category* feature.
     Our efforts paid off! Also, the most predictive feature of event2 is how many
     nulls value were observed in event2\. This is an illustrative case **where we
@@ -300,11 +336,13 @@
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 很高兴看到所有有用的特性都已被工程化，除了*类别*特性。我们的努力得到了回报！另外，event2中最具预测性的特征是观察到的null值数量。这是一个说明性的案例**我们不能用中位数或平均值替换null值**，因为它们的缺失与响应变量相关联！
 - en: Summary
   id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结
 - en: 'As you can see, we have no intermediate CSV files, a very clean namespace in
     our notebook, and our feature engineering codes are reduced to a few straightforward
     SQL statements. There are two situations in which the SQL approach is even more
@@ -312,6 +350,7 @@
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如你所见，我们没有中间的CSV文件，我们的笔记本中的命名空间非常干净，而且我们的特征工程代码减少到了几个简单的SQL语句。在以下两种情况下，SQL方法的效率更高：
 - en: If your dataset is deployed on the cloud, you may be able to run distributed
     query. Most SQL server supports distirbuted query today. In Pandas, you need some
     extension called *Dask DataFrame.*
@@ -319,6 +358,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你的数据集部署在云端，你可能可以运行分布式查询。大多数SQL服务器今天支持分布式查询。在Pandas中，你需要一个叫做*Dask DataFrame*的扩展。
 - en: If you can afford to pull data real-time, you can create SQL **views** instead
     of tables. In this way, every time you pull data in Python, **your data will always
     be up-to-date**.
@@ -326,12 +366,14 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你能实时获取数据，你可以创建SQL **视图**而不是表格。这样，每次在Python中提取数据时，**你的数据将始终是最新的**。
 - en: One fundamental restriction of this approach is that you must be able to directly
     connect to your SQL server in Python. If this is not possible, you may have to
     download the query result as a CSV file and load it in Python.
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种方法的一个基本限制是你必须能够在Python中直接连接到你的SQL服务器。如果这不可能，你可能需要将查询结果下载为CSV文件并在Python中加载它。
 - en: I hope you find this post helpful. Though I’m not advocating method over another,
     it is necessary to understand the advantage and limitation of each method, and
     have both methods ready in our toolkit. So we can apply whichever method that
@@ -339,6 +381,7 @@
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望你觉得这篇文章有帮助。尽管我没有提倡某种方法优于另一种，但了解每种方法的优点和限制是必要的，并且在我们的工具箱中准备好这两种方法。这样我们就可以在约束条件下应用最有效的方法。
 - en: '**Bio: [Shaw Lu](https://www.linkedin.com/in/shawlu95/)** is a Data Scientist
     at Coupang. He is an engineering graduate seeking to leverage data science to
     inform business management, supply chain optimization, growth marketing and operation
@@ -346,25 +389,31 @@
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Shaw Lu](https://www.linkedin.com/in/shawlu95/)** 是Coupang的数据科学家。他是一位工程学毕业生，寻求利用数据科学来指导业务管理、供应链优化、增长营销和运营研究。Toward
+    Data Science的官方作者。'
 - en: '[Original](https://towardsdatascience.com/feature-engineering-in-sql-and-python-a-hybrid-approach-b52347cd2de4).
     Reposted with permission.'
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/feature-engineering-in-sql-and-python-a-hybrid-approach-b52347cd2de4)。经允许转载。'
 - en: '**Related:**'
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[4 Tips for Advanced Feature Engineering and Preprocessing](/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)'
   id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[4个高级特征工程和预处理技巧](/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)'
 - en: '[Learning SQL the Hard Way](/2020/01/learning-sql-hard-way.html)'
   id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[以艰难的方式学习SQL](/2020/01/learning-sql-hard-way.html)'
 - en: '[7 Steps to Mastering Intermediate Machine Learning with Python — 2019 Edition](/2019/06/7-steps-mastering-intermediate-machine-learning-python.html)'
   id: totrans-62
   prefs:
