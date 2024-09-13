@@ -1,145 +1,214 @@
 - en: XGBoost and Random Forest® with Bayesian Optimisation
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: XGBoost和随机森林®与贝叶斯优化
 - en: 原文：[https://www.kdnuggets.com/2019/07/xgboost-random-forest-bayesian-optimisation.html](https://www.kdnuggets.com/2019/07/xgboost-random-forest-bayesian-optimisation.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/07/xgboost-random-forest-bayesian-optimisation.html](https://www.kdnuggets.com/2019/07/xgboost-random-forest-bayesian-optimisation.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Edwin Lisowski](https://addepto.com), CTO at Addepto**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Edwin Lisowski](https://addepto.com)，Addepto首席技术官**'
 - en: Instead of only comparing XGBoost and Random Forest in this post we will try
     to explain how to use those two very popular approaches with Bayesian Optimisation
     and that are those models main pros and cons. XGBoost (XGB) and Random Forest
     (RF) both are ensemble learning methods and predict (classification or regression)
     by combining the outputs from individual decision trees (we assume tree-based
     XGB or RF).
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文不仅比较了XGBoost和随机森林，还尝试解释如何将这两种非常流行的方法与贝叶斯优化结合使用，并讨论这些模型的主要优缺点。XGBoost（XGB）和随机森林（RF）都是集成学习方法，通过结合个别决策树的输出进行预测（分类或回归）（我们假设是基于树的XGB或RF）。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的IT需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '**Let’s dive deeper into comparison – XGBoost vs Random Forest**'
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**深入比较 – XGBoost vs 随机森林**'
 - en: '**XGBoost or Gradient Boosting**'
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**XGBoost或梯度提升**'
 - en: XGBoost build decision tree one each time. Each new tree corrects errors which
     were made by previously trained decision tree.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: XGBoost每次构建一棵决策树。每棵新树都会修正之前训练的决策树所犯的错误。
 - en: '**Example of XGBoost application**'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**XGBoost应用示例**'
 - en: At Addepto we use XGBoost models to solve anomaly detection problems e.g. in
     supervised learning approach. In this case XGB is very helpful because data sets
     are often highly imbalanced. Examples of such data sets are user/consumer transactions,
     energy consumption or user behaviour in mobile app.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Addepto，我们使用XGBoost模型解决异常检测问题，例如在监督学习方法中。在这种情况下，XGB非常有用，因为数据集通常高度不平衡。这些数据集的示例包括用户/消费者交易、能源消耗或移动应用中的用户行为。
 - en: '**Pros**'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**优点**'
 - en: Since boosted trees are derived by optimizing an objective function, basically
     XGB can be used to solve almost all objective function that we can write gradient
     out. This including things like ranking and poisson regression, which RF is harder
     to achieve.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于提升树是通过优化目标函数得出的，基本上XGB可以用来解决几乎所有我们可以写出梯度的目标函数。这包括排名和泊松回归等问题，而RF较难实现。
 - en: '**Cons**'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**缺点**'
 - en: 'XGB model is more sensitive to overfitting if the data is noisy. Training generally
     takes longer because of the fact that trees are built sequentially. GBMs are harder
     to tune than RF. There are typically three parameters: number of trees, depth
     of trees and learning rate, and the each tree built is generally shallow.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果数据有噪声，XGB模型更容易过拟合。训练通常需要更长时间，因为树是顺序构建的。GBM比RF更难调整。通常有三个参数：树的数量、树的深度和学习率，每棵树通常较浅。
 - en: '**Random Forest**'
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**随机森林**'
 - en: Random Forest (RF) trains each tree independently, using a random sample of
     the data. This randomness helps to make the model more robust than a single decision
     tree. Thanks to that RF is less likely to overfit on the training data.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林（RF）独立训练每棵树，使用数据的随机样本。这种随机性有助于使模型比单棵决策树更稳健。因此，RF更不容易在训练数据上过拟合。
 - en: '**Example of Random Forest application**'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**随机森林应用示例**'
 - en: 'The random forest dissimilarity has been used in a variety of applications,
     e.g. to find clusters of patients based on tissue marker data.[1] Random Forest
     model is very attractive for this kind of applications in the following two cases:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林差异性已被应用于各种应用中，例如，根据组织标记数据寻找患者的聚类。[1] 随机森林模型在以下两种情况下对于这类应用非常有吸引力：
 - en: Our goal is to have high predictive accuracy for a high-dimensional problem
     with strongly correlated features.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的目标是对具有强相关特征的高维问题具有高预测准确性。
 - en: Our data set is very noisy and contains a lot of missing values e.g., some of
     the attributes are categorical or semi-continuous.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的数据集非常嘈杂，并包含大量缺失值，例如，某些属性是类别型或半连续型的。
 - en: '**Pros**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**优点**'
 - en: 'The model tuning in Random Forest is much easier than in case of XGBoost. In
     RF we have two main parameters: number of features to be selected at each node
     and number of decision trees. RF are harder to overfit than XGB.'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林中的模型调整比XGBoost的要容易。在RF中，我们有两个主要参数：每个节点选择的特征数量和决策树的数量。RF比XGB更难以过拟合。
 - en: '**Cons**'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**缺点**'
 - en: The main limitation of the Random Forest algorithm is that a large number of
     trees can make the algorithm slow for real-time prediction. For data including
     categorical variables with different number of levels, random forests are biased
     in favor of those attributes with more levels.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林算法的主要限制在于大量树木可能会使算法在实时预测中变得缓慢。对于包含具有不同级别数量的类别变量的数据，随机森林对那些具有更多级别的属性存在偏见。
 - en: 'Bayesian optimization is a technique to optimise function that is expensive
     to evaluate.[2] It builds posterior distribution for the objective function and
     calculate the uncertainty in that distribution using Gaussian process regression,
     and then uses an acquisition function to decide where to sample. Bayesian optimization
     focuses on solving the problem:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 贝叶斯优化是一种优化评估代价高昂的函数的技术。[2] 它为目标函数构建后验分布，并使用高斯过程回归计算该分布中的不确定性，然后使用采集函数来决定采样位置。贝叶斯优化专注于解决以下问题：
 - en: '*max[x∈A] f(x)*'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '*max[x∈A] f(x)*'
 - en: The dimension of hyperparameters (*x∈R^d*) is often d < 20 in most successful
     applications.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在大多数成功的应用中，超参数的维度（*x∈R^d*）通常是d < 20。
 - en: 'Typically set A i a hyper-rectangle (*x∈R^d:a[i] ≤ x[i] ≤ b[i]*). The objective
     function is continuous which is required to model using Gaussian process regression.
     It also lacks special structure like concavity or linearity which make futile
@@ -147,266 +216,413 @@
     optimization consists of two main components: a Bayesian statistical model for
     modeling the objective function and an acquisition function for deciding where
     to sample next.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常设置A i为超矩形（*x∈R^d:a[i] ≤ x[i] ≤ b[i]*）。目标函数是连续的，这对于使用高斯过程回归建模是必要的。它还缺乏像凹性或线性这样的特殊结构，这使得利用这种结构来提高效率的技术变得无效。贝叶斯优化包含两个主要组件：用于建模目标函数的贝叶斯统计模型和用于决定下一个采样点的采集函数。
 - en: 'After evaluating the objective according to an initial space-filling experimental
     design they are used iteratively to allocate the remainder of a budget of N evaluations,
     as shown below:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 在根据初始空间填充实验设计评估目标后，它们被迭代地用于分配N评估的剩余预算，如下所示：
 - en: Observe at initial points
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 观察初始点
 - en: While *n ≤ N* do
+  id: totrans-36
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 当*n ≤ N* 时
 - en: Update the posterior probability distribution using all available data
+  id: totrans-37
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 使用所有可用数据更新后验概率分布
 - en: Let *x[n]* be a maximizer of the acquisition function
+  id: totrans-38
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 让*x[n]*成为采集函数的最大值
 - en: Observe *y[n] = f(x[n])*
+  id: totrans-39
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 观察*y[n] = f(x[n])*
 - en: Increment *n*
+  id: totrans-40
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 增量*n*
 - en: end while
+  id: totrans-41
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 结束循环
 - en: 'Return a solution: the point evaluated with the largest'
+  id: totrans-42
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 返回一个解决方案：评估点中最大的
 - en: We can summarize this problem by saying that Bayesian optimization is designed
     for black-box derivative-free global optimization. It has become extremely popular
     for tuning hyperparameters in machine learning.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以总结这个问题，说贝叶斯优化是为了黑箱无导数全局优化而设计的。它在机器学习中调整超参数时变得极其流行。
 - en: 'Below is a graphical summary of the whole optimization: Gaussian Process with
     posterior distribution along with observations and confidence interval, and Utility
     Function where the maximum value indicates the next sample point.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是整个优化的图形总结：带有观察值和置信区间的高斯过程与后验分布，以及效用函数，其中最大值表示下一个采样点。
 - en: '![Header image](../Images/64f78d024a06df3028dee165a9ce09ba.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![Header image](../Images/64f78d024a06df3028dee165a9ce09ba.png)'
 - en: Thanks to utility function bayesian optimization is much more efficient in tuning
     parameters of machine learning algorithms than grid or random search techniques.
     It can effectively balance “exploration” and “exploitation” in finding global
     optimum.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 借助实用函数，贝叶斯优化在调优机器学习算法的参数时，比网格搜索或随机搜索技术更高效。它能够有效平衡“探索”和“开发”，以寻找全局最优解。
 - en: 'To present Bayesian optimization in action we use [BayesianOptimization](https://github.com/fmfn/BayesianOptimization)
     [3] library written in Python to tune hyperparameters of Random Forest and XGBoost
     classification algorithms. We need to install it via pip:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了展示贝叶斯优化的实际效果，我们使用了 [BayesianOptimization](https://github.com/fmfn/BayesianOptimization)
+    [3] 这个用 Python 编写的库来调优随机森林和 XGBoost 分类算法的超参数。我们需要通过 pip 安装它：
 - en: '`pip install bayesian-optimization`'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pip install bayesian-optimization`'
 - en: 'Now let’s train our model. First we import required libraries:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们训练我们的模型。首先，我们导入所需的库：
 - en: '[PRE0]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'We define a function to run Bayesian optimization given data, function to optimize
     and its hyperparameters:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们定义了一个函数来运行贝叶斯优化，给定数据、要优化的函数及其超参数：
 - en: '[PRE1]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'We define function to optimize which is Random Forest Classifier and its hyperparameters
     n_estimators, max_depth and min_samples_split. Additionally we use the mean of
     cross validation score on given dataset:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们定义了优化函数，即随机森林分类器及其超参数 n_estimators、max_depth 和 min_samples_split。此外，我们使用了给定数据集上的交叉验证得分的平均值：
 - en: '[PRE2]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Analogically we define a function and hyperparameters for XGBoost classifier:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 类似地，我们定义了 XGBoost 分类器的函数和超参数：
 - en: '[PRE3]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Now based on chosen classifier we can optimize it and train the model:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在根据选择的分类器，我们可以优化它并训练模型：
 - en: '[PRE4]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'As an example data we use a view [dbo].[vTargetMail] from AdventureWorksDW2017
     SQL Server database where based on personal data we need to predict whether person
     buy a bike. As a result of Bayesian optimization we present consecutive function
     sampling:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为示例数据，我们使用了来自 AdventureWorksDW2017 SQL Server 数据库的视图 [dbo].[vTargetMail]，根据个人数据，我们需要预测一个人是否会购买自行车。通过贝叶斯优化的结果，我们展示了连续函数采样：
 - en: '| **iter** | **AUC** | **max_depth** | **min_samples_split** | **n_estimators**
     |'
+  id: totrans-60
   prefs: []
   type: TYPE_TB
+  zh: '| **iter** | **AUC** | **max_depth** | **min_samples_split** | **n_estimators**
+    |'
 - en: '| 1 | 0.8549 | 45.88 | 6.099 | 34.82 |'
+  id: totrans-61
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 0.8549 | 45.88 | 6.099 | 34.82 |'
 - en: '| 2 | 0.8606 | 15.85 | 2.217 | 114.3 |'
+  id: totrans-62
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 0.8606 | 15.85 | 2.217 | 114.3 |'
 - en: '| 3 | 0.8612 | 47.42 | 8.694 | 306.0 |'
+  id: totrans-63
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 0.8612 | 47.42 | 8.694 | 306.0 |'
 - en: '| 4 | 0.8416 | 10.09 | 5.987 | 563.0 |'
+  id: totrans-64
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 0.8416 | 10.09 | 5.987 | 563.0 |'
 - en: '| 5 | 0.7188 | 4.538 | 7.332 | 766.7 |'
+  id: totrans-65
   prefs: []
   type: TYPE_TB
+  zh: '| 5 | 0.7188 | 4.538 | 7.332 | 766.7 |'
 - en: '| 6 | 0.8436 | 100.0 | 2.0 | 448.6 |'
+  id: totrans-66
   prefs: []
   type: TYPE_TB
+  zh: '| 6 | 0.8436 | 100.0 | 2.0 | 448.6 |'
 - en: '| 7 | 0.6529 | 1.012 | 2.213 | 315.6 |'
+  id: totrans-67
   prefs: []
   type: TYPE_TB
+  zh: '| 7 | 0.6529 | 1.012 | 2.213 | 315.6 |'
 - en: '| 8 | 0.8621 | 100.0 | 10.0 | 1e+03 |'
+  id: totrans-68
   prefs: []
   type: TYPE_TB
+  zh: '| 8 | 0.8621 | 100.0 | 10.0 | 1e+03 |'
 - en: '| 9 | 0.8431 | 100.0 | 2.0 | 154.1 |'
+  id: totrans-69
   prefs: []
   type: TYPE_TB
+  zh: '| 9 | 0.8431 | 100.0 | 2.0 | 154.1 |'
 - en: '| 10 | 0.653 | 1.0 | 2.0 | 1e+03 |'
+  id: totrans-70
   prefs: []
   type: TYPE_TB
+  zh: '| 10 | 0.653 | 1.0 | 2.0 | 1e+03 |'
 - en: '| 11 | 0.8621 | 100.0 | 10.0 | 668.3 |'
+  id: totrans-71
   prefs: []
   type: TYPE_TB
+  zh: '| 11 | 0.8621 | 100.0 | 10.0 | 668.3 |'
 - en: '| 12 | 0.8437 | 100.0 | 2.0 | 867.3 |'
+  id: totrans-72
   prefs: []
   type: TYPE_TB
+  zh: '| 12 | 0.8437 | 100.0 | 2.0 | 867.3 |'
 - en: '| 13 | 0.637 | 1.0 | 10.0 | 10.0 |'
+  id: totrans-73
   prefs: []
   type: TYPE_TB
+  zh: '| 13 | 0.637 | 1.0 | 10.0 | 10.0 |'
 - en: '| 14 | 0.8518 | 100.0 | 10.0 | 10.0 |'
+  id: totrans-74
   prefs: []
   type: TYPE_TB
+  zh: '| 14 | 0.8518 | 100.0 | 10.0 | 10.0 |'
 - en: '| 15 | 0.8435 | 100.0 | 2.0 | 317.6 |'
+  id: totrans-75
   prefs: []
   type: TYPE_TB
+  zh: '| 15 | 0.8435 | 100.0 | 2.0 | 317.6 |'
 - en: '| 16 | 0.8621 | 100.0 | 10.0 | 559.7 |'
+  id: totrans-76
   prefs: []
   type: TYPE_TB
+  zh: '| 16 | 0.8621 | 100.0 | 10.0 | 559.7 |'
 - en: '| 17 | 0.8612 | 89.86 | 10.0 | 82.96 |'
+  id: totrans-77
   prefs: []
   type: TYPE_TB
+  zh: '| 17 | 0.8612 | 89.86 | 10.0 | 82.96 |'
 - en: '| 18 | 0.8616 | 49.89 | 10.0 | 212.0 |'
+  id: totrans-78
   prefs: []
   type: TYPE_TB
+  zh: '| 18 | 0.8616 | 49.89 | 10.0 | 212.0 |'
 - en: '| 19 | 0.8622 | 100.0 | 10.0 | 771.7 |'
+  id: totrans-79
   prefs: []
   type: TYPE_TB
+  zh: '| 19 | 0.8622 | 100.0 | 10.0 | 771.7 |'
 - en: '| 20 | 0.8622 | 38.33 | 10.0 | 469.2 |'
+  id: totrans-80
   prefs: []
   type: TYPE_TB
+  zh: '| 20 | 0.8622 | 38.33 | 10.0 | 469.2 |'
 - en: '| 21 | 0.8621 | 39.43 | 10.0 | 638.6 |'
+  id: totrans-81
   prefs: []
   type: TYPE_TB
+  zh: '| 21 | 0.8621 | 39.43 | 10.0 | 638.6 |'
 - en: '| 22 | 0.8622 | 83.73 | 10.0 | 384.9 |'
+  id: totrans-82
   prefs: []
   type: TYPE_TB
+  zh: '| 22 | 0.8622 | 83.73 | 10.0 | 384.9 |'
 - en: '| 23 | 0.8621 | 100.0 | 10.0 | 936.1 |'
+  id: totrans-83
   prefs: []
   type: TYPE_TB
+  zh: '| 23 | 0.8621 | 100.0 | 10.0 | 936.1 |'
 - en: '| 24 | 0.8428 | 54.2 | 2.259 | 122.4 |'
+  id: totrans-84
   prefs: []
   type: TYPE_TB
+  zh: '| 24 | 0.8428 | 54.2 | 2.259 | 122.4 |'
 - en: '| 25 | 0.8617 | 99.62 | 9.856 | 254.8 |'
+  id: totrans-85
   prefs: []
   type: TYPE_TB
+  zh: '| 25 | 0.8617 | 99.62 | 9.856 | 254.8 |'
 - en: 'As we can see Bayesian optimization found the best parameters in 23rd step
     which gives 0.8622 AUC score on test dataset. Probably this result can be higher
     if given more samples to check. Our optimized Random Forest model has ROC AUC
     curve presented below:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 如我们所见，贝叶斯优化在第23步找到了最佳参数，这在测试数据集上得到了0.8622的AUC分数。如果给更多样本进行检查，结果可能会更高。我们优化后的随机森林模型的ROC
+    AUC曲线如下所示：
 - en: '![Header image](../Images/b1f879df44071f5727ccb0964725db6a.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![Header image](../Images/b1f879df44071f5727ccb0964725db6a.png)'
 - en: We presented a simple way of tuning hyperparameters in machine learning [4]
     using Bayesian optimization which is a faster method in finding optimal values
     and more sophisticated one than Grid or Random Search methods.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们提出了一种简单的超参数调优方法，使用贝叶斯优化[4]，这是一种比网格搜索或随机搜索方法更快的寻找最优值的方法。
 - en: '[https://www.researchgate.net/publication/225175169](https://www.researchgate.net/publication/225175169_Random_Multiclass_Classification_Generalizing_Random_Forests_to_Random_MNL_and_Random_NB)'
+  id: totrans-89
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://www.researchgate.net/publication/225175169](https://www.researchgate.net/publication/225175169_Random_Multiclass_Classification_Generalizing_Random_Forests_to_Random_MNL_and_Random_NB)'
 - en: '[https://en.wikipedia.org/wiki/Bayesian_optimization](https://en.wikipedia.org/wiki/Bayesian_optimization)'
+  id: totrans-90
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://en.wikipedia.org/wiki/Bayesian_optimization](https://en.wikipedia.org/wiki/Bayesian_optimization)'
 - en: '[https://github.com/fmfn/BayesianOptimization](https://github.com/fmfn/BayesianOptimization)'
+  id: totrans-91
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://github.com/fmfn/BayesianOptimization](https://github.com/fmfn/BayesianOptimization)'
 - en: '[https://addepto.com/automated-machine-learning-tasks-can-be-improved/](https://addepto.com/automated-machine-learning-tasks-can-be-improved/)'
+  id: totrans-92
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://addepto.com/automated-machine-learning-tasks-can-be-improved/](https://addepto.com/automated-machine-learning-tasks-can-be-improved/)'
 - en: '**Bio: [Edwin Lisowski](https://addepto.com)** is CTO at Addepto. He is an
     experienced advanced analytics consultant with a demonstrated history of working
     in the information technology and services industry. He is skilled in Predictive
     Modeling, Big Data, Cloud Computing and Advanced Analytics.'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：** [Edwin Lisowski](https://addepto.com) 是Addepto的首席技术官。他是经验丰富的高级分析顾问，具有在信息技术和服务行业工作的丰富历史。他在预测建模、大数据、云计算和高级分析方面具有丰富的技能。'
 - en: '**Related:**'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[How to Automate Hyperparameter Optimization](/2019/06/automate-hyperparameter-optimization.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何自动化超参数优化](/2019/06/automate-hyperparameter-optimization.html)'
 - en: '[Intro to XGBoost: Predicting Life Expectancy with Supervised Learning](/2019/05/intro-xgboost-predicting-life-expectancy-supervised-learning.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[XGBoost简介：使用监督学习预测寿命期望](/2019/05/intro-xgboost-predicting-life-expectancy-supervised-learning.html)'
 - en: '[Random Forests vs Neural Networks: Which is Better, and When?](/2019/06/random-forest-vs-neural-network.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[随机森林与神经网络：哪个更好，何时使用？](/2019/06/random-forest-vs-neural-network.html)'
 - en: More On This Topic
+  id: totrans-98
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Random Forest vs Decision Tree: Key Differences](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[随机森林与决策树：关键区别](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
 - en: '[Does the Random Forest Algorithm Need Normalization?](https://www.kdnuggets.com/2022/07/random-forest-algorithm-need-normalization.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[随机森林算法需要归一化吗？](https://www.kdnuggets.com/2022/07/random-forest-algorithm-need-normalization.html)'
 - en: '[Tuning Random Forest Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[调整随机森林超参数](https://www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html)'
 - en: '[WTF is the Difference Between GBM and XGBoost?](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[GBM和XGBoost之间的区别是什么？](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
 - en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何加速XGBoost模型训练](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
 - en: '[Tuning XGBoost Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[调整XGBoost超参数](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
