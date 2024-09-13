@@ -1,173 +1,269 @@
 - en: Encoding Categorical Features with MultiLabelBinarizer
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 MultiLabelBinarizer 编码分类特征
 - en: 原文：[https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html](https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html](https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html)
 - en: '![Encoding Categorical Features with MultiLabelBinarizer](../Images/ff76ecffd6003a5f628ad0bb8468f58f.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 MultiLabelBinarizer 编码分类特征](../Images/ff76ecffd6003a5f628ad0bb8468f58f.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: In the past, you might have converted categorical features into numerical ones
     using One Hot, Label, and Ordinal encoder. You were working with data that have
     only one label per sample. But how do you deal with samples with multiple labels?
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 过去，你可能通过 One Hot、Label 和 Ordinal 编码器将分类特征转换为数值特征。你处理的数据每个样本只有一个标签。但是，如何处理具有多个标签的样本呢？
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速入门网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 在 IT 领域支持你的组织'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In this mini tutorial, you will learn the difference between multi-class and
     multi-label. Furthermore, we will apply Scikit-Learn’s MultiLabelBinarizer function
     to convert iterable of iterables and multilabel targets.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本迷你教程中，你将学习多分类和多标签的区别。此外，我们将应用 Scikit-Learn 的 MultiLabelBinarizer 函数，将可迭代的可迭代对象和多标签目标进行转换。
 - en: Multi-Class vs. Multi-Label
+  id: totrans-12
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 多分类与多标签
 - en: In machine learning, multi-class classification data consists of more than two
     classes, and each sample is assigned one label. Whereas in multi-label classification,
     each sample is assigned multiple labels.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习中，多分类数据包含两个以上的类别，每个样本只分配一个标签。而在多标签分类中，每个样本会分配多个标签。
 - en: '![Encoding Categorical Features with MultiLabelBinarizer](../Images/79c39300fa5daef44935a79c037a8443.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 MultiLabelBinarizer 编码分类特征](../Images/79c39300fa5daef44935a79c037a8443.png)'
 - en: Image from [Thamme Gowda](https://stats.stackexchange.com/a/133205)
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于 [Thamme Gowda](https://stats.stackexchange.com/a/133205)
 - en: We will review the examples to understand both types of classification tasks.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将通过示例来理解这两种分类任务。
 - en: Multi-Class
+  id: totrans-17
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 多分类
 - en: In Multi-Class, every record of the student has only one label (Major), and
     there are more than 2 classes. The students can only have either Math, Science,
     or English as a major.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在多分类中，每个学生的记录只有一个标签（主修），并且有超过两个类别。学生只能选择数学、科学或英语作为主修。
 - en: '![Encoding Categorical Features with MultiLabelBinarizer](../Images/3cfa480e1d6d113b7a465ebbb969a16a.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 MultiLabelBinarizer 编码分类特征](../Images/3cfa480e1d6d113b7a465ebbb969a16a.png)'
 - en: Image by Author
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Multi-Label
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 多标签
 - en: In the multi-label, a student can have more than one Major. For example, Nisaha
     has selected English, Law, and History as her majors.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在多标签分类中，学生可以拥有多个主修。例如，Nisaha 选择了英语、法律和历史作为她的主修课程。
 - en: As we can also see, the length of the array varies, some of the students have
     two majors, and some of them have 3.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以看到，数组的长度有所不同，有些学生有两个主修课程，有些则有三个。
 - en: The students have 0 to N number of majors.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 学生有 0 到 N 个主修课程。
 - en: '![Encoding Categorical Features with MultiLabelBinarizer](../Images/61921238830dcccbb633c10da96d45cc.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 MultiLabelBinarizer 编码分类特征](../Images/61921238830dcccbb633c10da96d45cc.png)'
 - en: Image by Author
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: Scikit-Learn MultiLabelBinarizer Examples
+  id: totrans-27
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Scikit-Learn MultiLabelBinarizer 示例
 - en: We will now use the Scikit-learn MultiLabelBinarizer to convert iterable of
     iterables and multilabel targets into binary encoding.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在将使用 Scikit-learn 的 MultiLabelBinarizer 将可迭代的可迭代对象和多标签目标转换为二进制编码。
 - en: Example 1
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例 1
 - en: In the first example, we have transformed the List of Lists to binary encoding
     using the MultiLabelBinarizer function. The `fit_transform` understands the data
     and applies the transformation.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第一个示例中，我们使用 MultiLabelBinarizer 函数将 List of Lists 转换为二进制编码。`fit_transform`
+    理解数据并应用转换。
 - en: '[PRE0]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '**Output:**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出：**'
 - en: We got an array of 1s and 0s.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们得到了一个由 1 和 0 组成的数组。
 - en: '[PRE1]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Example 2
+  id: totrans-35
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例 2
 - en: We can also convert a list of dictionaries to a binary matrix indicating the
     presence of a class label.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以将字典列表转换为表示类标签存在的二进制矩阵。
 - en: After transformation, you can view the class labels by using `.classes_`
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 转换后，你可以使用 `.classes_` 查看类标签。
 - en: '[PRE2]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '**Output:**'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出：**'
 - en: '[PRE3]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: To understand binary matrices, we will convert the output into a Pandas DataFrame
     with column names as classes.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 要理解二进制矩阵，我们将把输出转换成带有类名的 Pandas DataFrame。
 - en: '[PRE4]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Just like one-hot encoding, it has represented labels as 1’s and 0s.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 就像独热编码一样，它将标签表示为 1 和 0。
 - en: '![Encoding Categorical Features with MultiLabelBinarizer](../Images/971e8777eb9250b91cd7616e4da7e201.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 MultiLabelBinarizer 编码分类特征](../Images/971e8777eb9250b91cd7616e4da7e201.png)'
 - en: The MultiLabelBinarizer is commonly used in Image and News classification. After
     the transformation, you can train the simple Random Forest or Neural Networks
     in no time.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: MultiLabelBinarizer 通常用于图像和新闻分类。转换后，你可以迅速训练简单的随机森林或神经网络。
 - en: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))
     is a certified data scientist professional who loves building machine learning
     models. Currently, he is focusing on content creation and writing technical blogs
@@ -175,33 +271,51 @@
     in Technology Management and a bachelor''s degree in Telecommunication Engineering.
     His vision is to build an AI product using a graph neural network for students
     struggling with mental illness.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))
+    是一位认证的数据科学专家，他热爱构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一个
+    AI 产品，帮助那些在心理健康方面挣扎的学生。'
 - en: More On This Topic
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How to Deal with Categorical Data for Machine Learning](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何处理机器学习中的分类数据](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)'
 - en: '[Working With Sparse Features In Machine Learning Models](https://www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在机器学习模型中处理稀疏特征](https://www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html)'
 - en: '[How to Engineer Date Features in Python](https://www.kdnuggets.com/2021/08/engineer-date-features-python.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在 Python 中构建日期特征](https://www.kdnuggets.com/2021/08/engineer-date-features-python.html)'
 - en: '[The Challenges of Creating Features for Machine Learning](https://www.kdnuggets.com/2022/02/challenges-creating-features-machine-learning.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[创建机器学习特征的挑战](https://www.kdnuggets.com/2022/02/challenges-creating-features-machine-learning.html)'
 - en: '[5 ChatGPT Features to Boost your Daily Work](https://www.kdnuggets.com/2023/05/5-chatgpt-features-boost-daily-work.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5 个 ChatGPT 功能提升你的日常工作](https://www.kdnuggets.com/2023/05/5-chatgpt-features-boost-daily-work.html)'
 - en: '[Your Features Are Important? It Doesn’t Mean They Are Good](https://www.kdnuggets.com/your-features-are-important-it-doesnt-mean-they-are-good)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你的特征重要吗？这并不意味着它们是好的](https://www.kdnuggets.com/your-features-are-important-it-doesnt-mean-they-are-good)'
