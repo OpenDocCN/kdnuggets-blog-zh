@@ -1,14 +1,20 @@
 - en: Fine-Tuning OpenAI Language Models with Noisily Labeled Data
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 微调 OpenAI 语言模型使用噪声标签数据
 - en: 原文：[https://www.kdnuggets.com/2023/04/finetuning-openai-language-models-noisily-labeled-data.html](https://www.kdnuggets.com/2023/04/finetuning-openai-language-models-noisily-labeled-data.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/04/finetuning-openai-language-models-noisily-labeled-data.html](https://www.kdnuggets.com/2023/04/finetuning-openai-language-models-noisily-labeled-data.html)
 - en: '**By Chris Mauck, Jonas Mueller**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Chris Mauck, Jonas Mueller**'
 - en: 'This article demonstrates how data-centric AI tools can improve a fine-tuned
     Large Language Model (LLM; a.k.a. *Foundation* Model). These tools optimize the
     dataset itself rather than altering the model architecture/hyperparameters — running
@@ -17,33 +23,52 @@
     gains via the same data-centric AI process across 3 state-of-the-art LLM models
     one can fine-tune via the OpenAI API: Davinci, Ada, and Curie. These are variants
     of the base LLM underpinning GPT-3/ChatGPT.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文展示了数据中心 AI 工具如何改进微调的大型语言模型（LLM；也称为 *基础* 模型）。这些工具优化数据集本身，而不是改变模型架构/超参数 — 在改进的数据集上运行完全相同的微调代码可以将测试集性能提升
+    37%，这是在此处研究的礼貌分类任务中实现的。我们通过相同的数据中心 AI 过程，在通过 OpenAI API 进行微调的三种最先进的 LLM 模型中获得了类似的准确度提升：Davinci、Ada
+    和 Curie。这些模型是支撑 GPT-3/ChatGPT 的基础 LLM 的变体。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'The above plot shows the test accuracy achieved for 3-class politeness classification
     of text by the same LLM fine-tuning code (fitting Davinci via OpenAI API) run
     on 3 different datasets: (1) the original dataset labeled by human annotators,
@@ -51,15 +76,21 @@
     estimated to be mislabeled via Confident Learning, (3) a cleaned version of the
     original data in which we manually fixed labels of examples estimated to be mislabeled
     (rather than filtering these examples).'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 上图展示了针对文本的三类礼貌分类测试准确度，这些测试是使用相同的 LLM 微调代码（通过 OpenAI API 适配 Davinci）在三种不同数据集上运行的结果：（1）由人工注释员标记的原始数据集，（2）该数据集的自动筛选版本，我们通过自信学习移除了自动估计为标记错误的样本，（3）原始数据的清理版本，我们手动修正了被估计为标记错误的样本（而不是过滤这些样本）。
 - en: Background
+  id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 背景
 - en: '![Fine-Tuning OpenAI Language Models with Noisily Labeled Data](../Images/c548289b39597699f59845ded1a7d55f.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![微调 OpenAI 语言模型使用噪声标签数据](../Images/c548289b39597699f59845ded1a7d55f.png)'
 - en: Labeled data powers AI/ML in the enterprise, but real-world datasets [have been
     found](https://go.cloudfactory.com/hubfs/02-Contents/3-Reports/Crowd-vs-Managed-Team-Hivemind-Study.pdf)
     to contain between 7-50% annotation errors. Imperfectly-labeled text data hampers
@@ -71,12 +102,16 @@
     changing any code related to model architecture, hyperparameters, or training.
     These data quality improvement techniques should thus remain applicable even for
     future advanced LLMs like GPT-10.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 标记数据推动了企业中的AI/ML，但现实世界的数据集[已被发现](https://go.cloudfactory.com/hubfs/02-Contents/3-Reports/Crowd-vs-Managed-Team-Hivemind-Study.pdf)含有7-50%的标注错误。标注不完美的文本数据阻碍了机器学习模型在意图识别、实体识别和序列生成等任务中的训练（和评估）。虽然预训练的LLM拥有大量的世界知识，但其性能受到噪声训练数据的负面影响（[正如OpenAI所指出的](https://arxiv.org/abs/2005.14165)）。在这里，我们展示了数据中心技术，以减轻标签噪声的影响，而无需更改与模型架构、超参数或训练相关的任何代码。因此，这些数据质量改进技术即使对于未来的高级LLM如GPT-10也应适用。
 - en: Why Fine-tuning?
+  id: totrans-14
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 为什么微调？
 - en: LLMs acquire powerful generative and discriminative capabilities after being
     pre-trained on most text across the internet. Nonetheless, ensuring the LLM produces
     reliable outputs for a particular business use-case often requires additional
@@ -86,22 +121,32 @@
     Imperfections in the data annotation process inevitably introduce label errors
     in this domain-specific training data, posing a challenge for proper fine-tuning
     and evaluation of the LLM.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: LLM在对互联网上的大部分文本进行预训练后，获得了强大的生成和区分能力。然而，确保LLM在特定业务用例中产生可靠输出通常需要在标记了所需输出的实际领域数据上进行额外训练。这种领域特定的训练被称为*微调*
+    LLM，可以通过[OpenAI提供的API](https://platform.openai.com/docs/guides/fine-tuning)进行。数据标注过程中的不完美不可避免地在这种领域特定的训练数据中引入标签错误，这对LLM的适当微调和评估构成了挑战。
 - en: Why Data-Centric AI?
+  id: totrans-16
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 为什么数据中心的人工智能？
 - en: 'Here are [quotes from OpenAI](https://openai.com/research/dall-e-2-pre-training-mitigations)
     on their strategy for training state-of-the-art AI systems:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是[OpenAI的引用](https://openai.com/research/dall-e-2-pre-training-mitigations)关于他们训练最先进AI系统策略的内容：
 - en: '"*Since training data shapes the capabilities of any learned model, data filtering
     is a powerful tool for limiting undesirable model capabilities.*”'
+  id: totrans-18
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '"*由于训练数据塑造了任何学习模型的能力，数据过滤是限制不良模型能力的强大工具。*"'
 - en: ''
+  id: totrans-19
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
@@ -109,79 +154,112 @@
     good data. This is because we can always fine-tune our model with more data later
     to teach it new things, but it’s much harder to make the model forget something
     that it has already learned.*”
+  id: totrans-20
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '"*我们优先过滤掉所有不良数据，而不是保留所有良好数据。这是因为我们可以在以后用更多的数据来微调我们的模型以教授它新知识，但让模型忘记它已经学到的东西要困难得多。*"'
 - en: Clearly dataset quality is a vital consideration. Some organizations like OpenAI
     manually handle issues in their data to produce the very best models, but this
     is tons of work! Data-centric AI is an emerging science of algorithms to detect
     data issues, so you can systematically improve your dataset more easily with automation.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，数据集质量是一个至关重要的考虑因素。一些组织如OpenAI手动处理数据中的问题，以生成最好的模型，但这需要大量的工作！数据中心人工智能是一门新兴的算法科学，旨在检测数据问题，因此你可以通过自动化更轻松地系统性改进你的数据集。
 - en: Our LLM in these experiments is the Davinci model from OpenAI, which is their
     most capable GPT-3 model, upon which ChatGPT is based.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这些实验中，我们的LLM是OpenAI的Davinci模型，这是他们最强大的GPT-3模型，ChatGPT基于此模型。
 - en: Overview
+  id: totrans-23
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 概述
 - en: 'Here we consider a 3-class variant of the [Stanford Politeness Dataset](https://convokit.cornell.edu/documentation/wiki_politeness.html),
     which has text phrases labeled as: *impolite*, *neutral*, or *polite*. Annotated
     by human raters, some of these labels are naturally low-quality.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们考虑了[斯坦福礼貌数据集](https://convokit.cornell.edu/documentation/wiki_politeness.html)的一个三类变体，其中的文本短语被标记为：*不礼貌*、*中性*或*礼貌*。这些标签由人工评分员标注，其中一些标签的质量自然较低。
 - en: '![Fine-Tuning OpenAI Language Models with Noisily Labeled Data](../Images/446f86a34353c833ed99a82e33629344.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![使用噪声标签数据微调OpenAI语言模型](../Images/446f86a34353c833ed99a82e33629344.png)'
 - en: 'This article walks through the following steps:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文介绍以下步骤：
 - en: 'Use the original data to fine-tune different state-of-the-art LLMs via the
     OpenAI API: Davinci, Ada, and Curie.'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用原始数据通过OpenAI API微调不同的最先进LLM：Davinci、Ada和Curie。
 - en: Establish the baseline accuracy of each fine-tuned model on a test set with
     high-quality labels (established via consensus and high-agreement amongst many
     human annotators who rated each test example).
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在具有高质量标签的测试集上建立每个微调模型的基线准确率（通过共识和多位人工标注者对每个测试样本的高一致性确定）。
 - en: Use Confident Learning algorithms to automatically identify hundreds of mislabeled
     examples.
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用Confident Learning算法自动识别数百个标签错误的样本。
 - en: Remove the data with automatically-flagged label issues from the dataset, and
     then fine-tune the exact same LLMs on the auto-filtered dataset. **This simple
     step reduces the error in Davinci model predictions by 8%!**
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从数据集中删除自动标记的标签问题数据，然后在自动筛选的数据集上微调完全相同的LLM。**这个简单的步骤将Davinci模型预测的错误减少8%!**
 - en: Introduce a **no-code** solution to efficiently fix the label errors in the
     dataset, and then fine-tune the exact same LLM on the fixed dataset. **This reduces
     the error in Davinci model predictions by 37%!**
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 引入一种**无代码**解决方案，以高效修正数据集中标签错误，然后在修正后的数据集上微调完全相同的LLM。**这将Davinci模型预测的错误减少37%!**
 - en: Similar gains are achieved via these same processes for the Ada and Curie models
     — in all cases, nothing was changed about the model nor the fine-tuning code!
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过这些相同的过程，Ada和Curie模型也取得了类似的改进——在所有情况下，模型和微调代码都没有改变！
 - en: Here’s a [notebook](https://colab.research.google.com/github/cmauck10/notebooks/blob/master/LLM_with_noisy_labels.ipynb)
     you can run to reproduce the results demonstrated in this article and understand
     the code to implement each step.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有一个[notebook](https://colab.research.google.com/github/cmauck10/notebooks/blob/master/LLM_with_noisy_labels.ipynb)，你可以运行它以重现本文中演示的结果，并理解实现每一步的代码。
 - en: Politeness Dataset
+  id: totrans-34
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 礼貌数据集
 - en: 'You can download the train and test sets here: [train](https://s.cleanlab.ai/stanford-politeness/fine-tuning/train.csv)
     [test](https://s.cleanlab.ai/stanford-politeness/fine-tuning/test.csv)'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在这里下载训练集和测试集：[train](https://s.cleanlab.ai/stanford-politeness/fine-tuning/train.csv)
+    [test](https://s.cleanlab.ai/stanford-politeness/fine-tuning/test.csv)
 - en: Our training dataset has 1916 examples each labeled by a single human annotator,
     and thus some may be unreliable.  The test dataset has 480 examples each labeled
     by five annotators, and we use their consensus label as a high-quality approximation
@@ -190,153 +268,227 @@
     (all label cleaning / dataset modification is only done in the training set).
     We reformat these CSV files into the jsonl file type required by OpenAI’s fine-tuning
     API.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的训练数据集有1916个样本，每个样本由一个人工标注者标记，因此其中一些可能不可靠。测试数据集有480个样本，每个样本由五位标注者标记，我们使用他们的共识标签作为对真实礼貌的高质量近似（将测试准确率与这些共识标签进行比较）。为了确保公平比较，该测试数据集在实验过程中保持不变（所有标签清理/数据集修改仅在训练集中进行）。我们将这些CSV文件重新格式化为OpenAI微调API所需的jsonl文件类型。
 - en: Fine-tune and Evaluate LLM
+  id: totrans-37
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 微调并评估LLM
 - en: 'Here’s how our code looks to fine-tune the Davinci LLM for 3-class classification
     and evaluate its test accuracy:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我们如何微调Davinci LLM以进行3类分类并评估其测试准确率的代码示例：
 - en: '[PRE0]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Once the job completes, we query a fine_tunes.results endpoint to see the test
     accuracy achieved when fine-tuning this LLM on the original training dataset.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦任务完成，我们查询fine_tunes.results端点，以查看在原始训练数据集上微调该LLM时所达到的测试准确率。
 - en: '[PRE1]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Our baseline Davinci LLM achieves a test accuracy of 63% when fine-tuned on
     the raw training data with possibly noisy labels. Even a state-of-the-art LLM
     like the Davinci model produces lackluster results for this classification task,
     is it because the data labels are noisy?
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的基线Davinci LLM在使用可能有噪声标签的原始训练数据进行微调时，测试准确率为63%。即使是最先进的LLM，如Davinci模型，对于这个分类任务的表现也平平，是因为数据标签存在噪声吗？
 - en: Automatically Find Label Issues
+  id: totrans-43
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 自动查找标签问题
 - en: '[Confident Learning](https://arxiv.org/abs/1911.00068) is a recently developed
     suite of algorithms to estimate which data are mislabeled in a classification
     dataset. These algorithms require **out-of-sample** predicted class probabilities
     for all of our training examples and apply a novel form of calibration to determine
     when to trust the model over the given label in the data.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Confident Learning](https://arxiv.org/abs/1911.00068) 是一种最近开发的算法套件，用于估计分类数据集中哪些数据被错误标记。这些算法需要**样本外**预测的类别概率，并应用一种新颖的校准形式，以确定何时信任模型而不是数据中的给定标签。'
 - en: 'To obtain these predicted probabilities we:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了获得这些预测概率，我们：
 - en: Use the OpenAI API to compute embeddings from the Davinci model for all of our
     training examples. You can download the embeddings [here](https://cleanlab-public.s3.amazonaws.com/Datasets/stanford-politeness/LLM-blog/train_embed_davinci.npy).
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 OpenAI API 从 Davinci 模型中计算所有训练样本的嵌入。你可以[在这里](https://cleanlab-public.s3.amazonaws.com/Datasets/stanford-politeness/LLM-blog/train_embed_davinci.npy)下载嵌入。
 - en: Fit a logistic regression model on the embeddings and labels in the original
     data. We use 10-fold cross-validation which allows us to produce out-of-sample
     predicted class probabilities for every example in the training dataset.
+  id: totrans-47
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在原始数据的嵌入和标签上拟合一个逻辑回归模型。我们使用 10 倍交叉验证，这使我们能够为训练数据集中的每个样本生成样本外预测的类别概率。
 - en: '[PRE2]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The [cleanlab](https://github.com/cleanlab/cleanlab) package offers an open-source
     Python implementation of Confident Learning. With one line of code, we can run
     Confident Learning using the model predicted probabilities to estimate which examples
     have label issues in our training dataset.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '[cleanlab](https://github.com/cleanlab/cleanlab) 包提供了 Confident Learning 的开源
+    Python 实现。只需一行代码，我们就可以使用模型预测概率运行 Confident Learning，以估计训练数据集中哪些样本存在标签问题。'
 - en: '[PRE3]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Let’s take a look at a few of the label issues automatically identified in
     our dataset. Here’s one example that is clearly mislabeled:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们查看一下数据集中自动识别的一些标签问题。这是一个明显错误标记的例子：
 - en: 'Phrase: *I''ll take a look at getLogEntries when I have time. Would you mind
     adding me as a committer?*'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 短语：*我有时间时会查看 getLogEntries。你介意把我加为提交者吗？*
 - en: 'Label: *impolite*'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 标签：*不礼貌*
 - en: Labeling errors like this are why we might be seeing poor model results.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 像这样的标签错误可能是我们看到模型结果不佳的原因。
 - en: '![Fine-Tuning OpenAI Language Models with Noisily Labeled Data](../Images/44471b8c60e405c79bafb621162cff2a.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![微调 OpenAI 语言模型与噪声标注数据](../Images/44471b8c60e405c79bafb621162cff2a.png)'
 - en: 'Caption: A few of the top errors that were automatically identified.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 说明：自动识别的一些主要错误。
 - en: '**Note:** **find_label_issues** **is able to determine which of the given**
     **labels** **are potentially incorrect given only the out-of-sample** **pred_probs****.**'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：** **find_label_issues** **能够仅根据样本外** **pred_probs** **确定哪些给定的** **标签**
+    **可能是错误的。**'
 - en: Filter Label Issues and Fine-tune a more Robust LLM
+  id: totrans-58
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 过滤标签问题并微调更强健的 LLM
 - en: Now that we have the indices of potentially mislabeled examples (identified
     via automated techniques), let’s remove these 471 examples from our training dataset.
     Fine-tuning the exact same Davinci LLM on the filtered dataset achieves a test
     accuracy of 66% (on the same test data where our original Davinci LLM achieved
     63% accuracy). We **reduced the error-rate of the model by 8%** using **less**
     but **better quality** training data!
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了潜在错误标记样本的索引（通过自动技术识别），让我们从训练数据集中移除这 471 个样本。在过滤后的数据集上微调完全相同的 Davinci LLM
+    实现了 66% 的测试准确率（在我们原始的 Davinci LLM 达到 63% 准确率的同一测试数据上）。我们**通过使用** **更少** **但**
+    **更高质量** **的训练数据将模型的错误率降低了 8%**！
 - en: '[PRE4]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Fixing the Label Errors
+  id: totrans-61
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 修正标签错误
 - en: Instead of fixing the auto-detected label issues automatically via filtering,
     the smarter (yet more complex) way to improve our dataset would be to correct
     the label issues by hand. This simultaneously removes a noisy data point and adds
     an accurate one, but making such corrections manually is cumbersome. We did this
     manually using [Cleanlab Studio](https://cleanlab.ai/studio/), an enterprise data
     correction interface.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 与其通过过滤自动修正自动检测到的标签问题，更聪明（但更复杂）的方法是手动修正标签问题。这同时移除一个噪声数据点并添加一个准确的数据点，但手动进行这些修正是繁琐的。我们使用
+    [Cleanlab Studio](https://cleanlab.ai/studio/) 这一企业数据修正界面来手动完成此操作。
 - en: After replacing the bad labels we spotted with more suitable ones, we fine-tune
     the exact same Davinci LLM on the manually-corrected dataset. The resulting model
     achieves **77%** accuracy (on the same test dataset as before), which is a  **37%
     reduction in error** from our original version of this model.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 在用更合适的标签替换了我们发现的坏标签后，我们在手动修正的数据集上对完全相同的 Davinci LLM 进行了微调。得到的模型在相同的测试数据集上达到了
+    **77%** 的准确率，这比我们原始版本的模型减少了 **37% 的错误**。
 - en: '[PRE5]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '**Note: throughout this entire process, we never changed any code related to
     model architecture/hyperparameters, training, or data preprocessing!** All improvement
     strictly comes from increasing the quality of our training data, which leaves
     room for additional optimizations on the modeling side.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意：在整个过程中，我们从未更改任何与模型架构/超参数、训练或数据预处理相关的代码！** 所有改进严格来源于提高训练数据的质量，这为模型方面的额外优化留下了空间。'
 - en: Evaluating other LLMs
+  id: totrans-66
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 评估其他 LLM
 - en: 'We repeated this same experiment with two other recent LLM models OpenAI offers
     for fine-tuning: Ada and Curie. The resulting improvements look similar to those
     achieved for the Davinci model.'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们对 OpenAI 提供的另外两个最近的 LLM 模型 Ada 和 Curie 进行了相同的实验。得到的改进结果看起来与 Davinci 模型取得的类似。
 - en: '![Fine-Tuning OpenAI Language Models with Noisily Labeled Data](../Images/ee4addf0df247b4768b324a15ee16925.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![使用噪声标签数据进行 OpenAI 语言模型微调](../Images/ee4addf0df247b4768b324a15ee16925.png)'
 - en: Conclusion
+  id: totrans-69
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: Data-centric AI is a powerful paradigm for handling noisy data via AI/automated
     techniques rather than tedious manual effort. There are now tools to help you
     efficiently find and fix data and label issues to improve any ML model (not just
@@ -345,42 +497,64 @@
     then improve the data *for* any other ML model. These tools will remain applicable
     with future advances in ML models like GPT-10, and will only become better at
     identifying issues when used with more accurate models!
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据中心的 AI 是处理噪声数据的强大范式，通过 AI/自动化技术而不是繁琐的手动工作。现在有工具可以帮助你高效地发现和修复数据及标签问题，从而改进任何机器学习模型（不仅仅是
+    LLM），适用于大多数类型的数据（不仅仅是文本，还有图像、音频、表格数据等）。这些工具*利用*任何机器学习模型来诊断/修复数据中的问题，然后改进数据*以*适用于其他机器学习模型。这些工具将随着未来机器学习模型如
+    GPT-10 的进步而持续适用，并且在与更准确的模型一起使用时，将更好地识别问题！
 - en: Practice data-centric AI to systematically engineer better data via AI/automation.
     This frees you to capitalize on your unique domain knowledge rather than fixing
     general data issues like label errors.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 实践数据中心 AI 以通过 AI/自动化系统地优化数据。这使你可以利用你独特的领域知识，而不是修复一般数据问题，如标签错误。
 - en: '**[Chris Mauck](https://www.linkedin.com/in/chris-mauck/)** is Data Scientist
     at Cleanlab.'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Chris Mauck](https://www.linkedin.com/in/chris-mauck/)** 是 Cleanlab 的数据科学家。'
 - en: More On This Topic
+  id: totrans-73
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[RAG vs Finetuning: Which Is the Best Tool to Boost Your LLM Application?](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[RAG 与微调：哪个是提升您的 LLM 应用程序的最佳工具？](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)'
 - en: '[Building AI Products with OpenAI: A Free Course from CoRise](https://www.kdnuggets.com/2023/07/corise-building-ai-products-openai-free-course-corise.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 OpenAI 构建 AI 产品：CoRise 的免费课程](https://www.kdnuggets.com/2023/07/corise-building-ai-products-openai-free-course-corise.html)'
 - en: '[Introducing Superalignment by OpenAI](https://www.kdnuggets.com/2023/08/introducing-superalignment-openai.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[OpenAI 介绍 Superalignment](https://www.kdnuggets.com/2023/08/introducing-superalignment-openai.html)'
 - en: '[Best Practices to Use OpenAI GPT Model](https://www.kdnuggets.com/2023/08/best-practices-openai-gpt-model.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 OpenAI GPT 模型的最佳实践](https://www.kdnuggets.com/2023/08/best-practices-openai-gpt-model.html)'
 - en: '[OpenAI API for Beginners: Your Easy-to-Follow Starter Guide](https://www.kdnuggets.com/openai-api-for-beginners-your-easy-to-follow-starter-guide)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[OpenAI API 初学者指南：您的易于遵循的入门指南](https://www.kdnuggets.com/openai-api-for-beginners-your-easy-to-follow-starter-guide)'
 - en: '[Exploring the OpenAI API with Python](https://www.kdnuggets.com/exploring-the-openai-api-with-python)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 探索 OpenAI API](https://www.kdnuggets.com/exploring-the-openai-api-with-python)'
