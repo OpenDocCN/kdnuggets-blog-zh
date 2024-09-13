@@ -1,293 +1,442 @@
 - en: How to Build a Football Dataset with Web Scraping
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何通过网络抓取构建足球数据集
 - en: 原文：[https://www.kdnuggets.com/2020/11/build-football-dataset-web-scraping.html](https://www.kdnuggets.com/2020/11/build-football-dataset-web-scraping.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/11/build-football-dataset-web-scraping.html](https://www.kdnuggets.com/2020/11/build-football-dataset-web-scraping.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Otávio Simões Silveira](https://www.linkedin.com/in/otavioss28/), Economist,
     Aspiring Data Scientist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Otávio Simões Silveira](https://www.linkedin.com/in/otavioss28/)，经济学家，志向成为数据科学家**'
 - en: '![Figure](../Images/be7c4298589981b19ff9ac0c107a06fe.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/be7c4298589981b19ff9ac0c107a06fe.png)'
 - en: Photo by [Bermix Studio](https://unsplash.com/@bermixstudio?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 由 [Bermix Studio](https://unsplash.com/@bermixstudio?utm_source=medium&utm_medium=referral)
+    在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral) 上提供的照片
 - en: When scraping a website with Python using libraries such as *BeautifulSoup*, *requests*,
     or *urllib *it’s common to have some trouble accessing some parts of the website.
     That's because these parts are generated on the client-side, using JavaScript,
     which these libraries can’t handle.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 当使用 Python 的库如 *BeautifulSoup*、*requests* 或 *urllib* 抓取网站时，常常会遇到无法访问网站某些部分的问题。这是因为这些部分是在客户端生成的，使用
+    JavaScript，而这些库无法处理。
 - en: To deal with this problem, using [Selenium](https://selenium-python.readthedocs.io/index.html) can
     be an interesting option. Selenium works by opening an automated browser and then
     it’s capable of accessing the entire content and of interacting with the page.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了解决这个问题，使用 [Selenium](https://selenium-python.readthedocs.io/index.html) 可以是一个有趣的选择。Selenium
+    通过打开一个自动化浏览器来工作，然后它能够访问整个内容并与页面交互。
 - en: This article will cover the scraping of JavaScript rendered content with Selenium
     using the Premier League website as an example and scraping the stats of every
     match in the 2019/20 season.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文将涵盖使用 Selenium 抓取 JavaScript 渲染内容的过程，以英超联赛网站为例，并抓取 2019/20 赛季每场比赛的统计数据。
 - en: Understanding the Website
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解网站
 - en: The Premier League website makes the scraping of multiples matches pretty simple
     with its very straight forward URLs. The URL for a match consists basically of
     “https://www.premierleague.com/match/” followed by a unique match ID.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 英超联赛网站通过其非常直接的 URL 使得抓取多个比赛变得非常简单。比赛的 URL 基本上由“https://www.premierleague.com/match/”后跟一个唯一的比赛
+    ID 组成。
 - en: Each ID consists of a number and the IDs for all matches of each season are
     sequenced. For instance, the entire 2019/20 season goes from 46605 to 46984\.
     All we need to do then is to loop through this interval and collect the data from
     each match.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个 ID 由一个数字组成，每个赛季的所有比赛 ID 都是按顺序排列的。例如，整个 2019/20 赛季的 ID 从 46605 到 46984。然后我们需要做的就是遍历这个区间并收集每场比赛的数据。
 - en: We’ll use Liverpool 5 to 3 win over Chelsea as an example in this article. This
     game ID is 46968\. You can type this ID after “premierleague.com/match/” to go
     to the page so you can follow along with the scraping process that will be described
     in the article. Refer back to the page always that necessary.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们将使用利物浦 5 比 3 战胜切尔西作为例子。这场比赛的 ID 是 46968。你可以在“premierleague.com/match/”后输入这个
+    ID 以访问页面，这样你可以跟随文章中描述的抓取过程。必要时请随时参考该页面。
 - en: Scraping…
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 正在抓取…
 - en: To begin with the code, we’ll make our imports and initialize two empty lists,
     one for dealing with errors, which will be explained later in the article, and
     the other to store the data of every match we scrape.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了开始编写代码，我们将进行导入并初始化两个空列表，一个用于处理错误，稍后将在文章中解释，另一个用于存储我们抓取的每场比赛的数据。
 - en: Within the loop, the URL will be created using the match ID, the *driver *object
     will be instantiated, and we’ll set up Selenium. No advanced configurations we’ll
     be used here. The `option.headless = True` line states that we don’t want to actually
     see the browser opening and going to the website to collect the data. With that
     done, we’ll use the *driver *object to get the page.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在循环中，将使用比赛 ID 创建 URL，将实例化 *driver* 对象，并设置 Selenium。这里不会使用高级配置。`option.headless
+    = True` 行表示我们不希望实际看到浏览器打开并访问网站以收集数据。完成这些操作后，我们将使用 *driver* 对象来获取页面。
 - en: And we’re now set to begin with the scraping. We’ll first collect the date of
     the and the teams involved in the match. We’ll also use Datetime to convert the
     date format from “Wed 22 Jul 2020” to 07/22/2020.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们准备开始抓取数据。我们将首先收集比赛的日期和涉及的团队。我们还将使用 Datetime 将日期格式从“Wed 22 Jul 2020”转换为 07/22/2020。
 - en: Each element is found through its Xpath, but it can also be found by name, class,
     tag, and more. Check all the selectors [here](https://selenium-python.readthedocs.io/locating-elements.html).
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个元素是通过其 Xpath 查找的，但也可以通过名称、类、标签等查找。请查看所有选择器[这里](https://selenium-python.readthedocs.io/locating-elements.html)。
 - en: Notice that we had to use the *WebDriverWait *and the `expected_conditions` when
     collecting the match date. That’s because this is one of the parts of the page
     generated using JavaScript, and so we need to wait for the element to be rendered
     in order to avoid raising an error.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，我们在收集比赛日期时不得不使用*WebDriverWait*和`expected_conditions`。这是因为这是页面中通过 JavaScript
+    生成的部分，因此我们需要等待元素渲染完毕，以避免引发错误。
 - en: If we tried to collect the match date using, let’s say, *requests *and *BeautifulSoup *only,
     we wouldn’t be able to access this information since *BeautifulSoup *can’t parse
     JavaScript rendered content.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们尝试仅使用*requests*和*BeautifulSoup*来收集比赛日期，我们将无法访问这些信息，因为*BeautifulSoup*无法解析
+    JavaScript 渲染的内容。
 - en: To scrape the final scores, we first need to get the text from inside what I
     call the score box, which returns the text “5–3”, and then to assign the home
     team score and the away team score.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了抓取最终比分，我们首先需要从我称之为比分框的区域中获取文本，该文本返回“5–3”，然后分配主队得分和客队得分。
 - en: The next step is to get the stats of the game. This data is a table under the
     stats tab on the page. We could simply read the page source using the Pandas `read_html`function,
     but this part of the page is only rendered after we click on the tab.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是获取比赛的统计数据。这些数据是页面上统计标签下的一个表格。我们可以简单地使用 Pandas 的`read_html`函数读取页面源代码，但页面的这一部分仅在我们点击选项卡后才会渲染。
 - en: The first thing to do then is to find the tab element and click on it with Selenium.
     After that, we can use the `read_html`function. This function returns a list with
     all tables on the page stored as DataFrames. We then select the last element in
     the list, which is the one we are after. The scraping is now done, we can just
     quit the driver.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，首先要做的是找到选项卡元素，并用 Selenium 单击它。之后，我们可以使用`read_html`函数。此函数返回一个包含页面上所有表格的列表，存储为
+    DataFrame。然后我们选择列表中的最后一个元素，即我们所需的元素。抓取完成后，我们可以退出驱动程序。
 - en: Error Handling
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 错误处理
 - en: Selenium can be a little unstable sometimes and take too long to load the page.
     This can raise a couple of errors since we’re scraping hundreds of pages.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时 Selenium 可能会不太稳定，加载页面所需的时间可能会很长。这可能会引发一些错误，因为我们在抓取数百个页面。
 - en: 'To deal with this, we’ll need the try and except clauses. If an error is raised
     while collecting the data, the code will append the match ID to the errors list
     and move on to the next match without crashing. When all the scraping is done,
     you can easily see this list to scrape only the matches that are missing. This
     is how the code for all this:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了处理这个问题，我们需要使用 try 和 except 子句。如果在收集数据时发生错误，代码将把比赛 ID 添加到错误列表中，并在不崩溃的情况下继续处理下一场比赛。当所有抓取完成后，你可以轻松查看这个列表，以便仅抓取缺失的比赛。这是所有这些的代码：
 - en: Manipulating the Stats
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 操作统计数据
 - en: 'This is how the stats DataFrame looks right now:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前统计数据的 DataFrame 看起来是这样的：
 - en: '[PRE0]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'As we need to store all this in a row of a DataFrame, this format is not good.
     To fix this, we’ll create two dictionaries, one for each team, in which every
     key will represent a stat. This is the entire process:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们需要将所有这些数据存储在 DataFrame 的一行中，这种格式并不好。为了解决这个问题，我们将创建两个字典，每个字典对应一个球队，其中每个键都代表一个统计数据。整个过程如下：
 - en: Making the Data Consistent
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使数据一致
 - en: Notice that we don’t have the red card stats in the stats DataFrame. That’s
     because there were no red cards in this game. When there are no occurrences of
     a stat, the website doesn't show that stat.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，我们在统计数据 DataFrame 中没有红牌统计数据。这是因为这场比赛中没有红牌。当没有统计数据出现时，网站不会显示这些统计数据。
 - en: If this isn’t fixed, some rows will be longer than others the data will be inconsistent.
     To fix this, we’ll use a list containing all the expected stats and if any of
     the values in this list is not a key of the stats dictionaries (we only need to
     check one of them) then this stat we’ll be added as a key to both dictionaries
     with the value zero.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果这没有修复，一些行将比其他行长，数据将不一致。为了解决这个问题，我们将使用一个包含所有预期统计数据的列表，如果该列表中的任何值不是统计数据字典的键（我们只需检查其中一个字典），那么该统计数据将作为键添加到两个字典中，值为零。
 - en: All that is left now is to create a new list with everything that was scraped
     for this match and append this list to the *season *list that contains all the
     matches.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在剩下的工作是创建一个新的列表，包含为这场比赛抓取的所有内容，并将这个列表附加到包含所有比赛的*赛季*列表中。
 - en: When we’re finishing scraping all matches in the season, we can just transform
     the season list of lists into a DataFrame and export the data as a *.csv* file.
     The *stats_check *list was used to create a list used to name the DataFrames columns.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们完成对赛季所有比赛的抓取后，我们可以将赛季的列表列表转换为 DataFrame，并将数据导出为 *.csv* 文件。*stats_check* 列表被用来创建一个列表，用于命名
+    DataFrames 的列。
 - en: You can see the complete code [here](https://github.com/otavio-s-s/data_science/tree/master/Premier%20League%20Scraping).
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在 [这里](https://github.com/otavio-s-s/data_science/tree/master/Premier%20League%20Scraping)
+    查看完整的代码。
 - en: Wrapping up
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结
 - en: 'Finally, this is the data scraped:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，这就是抓取的数据：
 - en: '![Figure](../Images/ef53bd9eafda232575c9ba59d8e9074c.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/ef53bd9eafda232575c9ba59d8e9074c.png)'
 - en: Image by Author
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: '380 matches. This is the entire Premier League 2019/20 season in a dataset!
     And you can do even more: if you use the ID 1 you’ll go back to the 1992/93 season.
     But the IDs aren’t linear from 1992 to today because at some point the IDs began
     to cover cup matches, youth matches, and women’s matches as well.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 380 场比赛。这是整个英超 2019/20 赛季的数据集！你还可以做更多的事情：如果使用 ID 1，你可以回到 1992/93 赛季。但 ID 从 1992
+    年到今天并不是线性的，因为在某个时点，ID 开始涵盖杯赛、青少年比赛和女子比赛等。
 - en: However, you can find the IDs for almost every Premier League match since the
     2011/12 season [here](https://github.com/otavio-s-s/data_science/blob/master/Premier%20League%20Scraping/PL_ids.csv) if
     you want to have a dataset with thousands and thousands of matches.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 不过，如果你想要一个包含数千场比赛的数据集，可以在 [这里](https://github.com/otavio-s-s/data_science/blob/master/Premier%20League%20Scraping/PL_ids.csv)
+    找到几乎所有自 2011/12 赛季以来的英超比赛 ID。
 - en: If you’re going for that, make sure to insert more pauses in your code, using
     the WebDriverWait or even the sleep function to avoid having your IP blocked for
     making too many requests to the website. Another possibility is to get in touch
     with a proxy provider, such as [Infatica](https://infatica.io/), as they’ll be
     able to provide you a better infrastructure of IP addresses to keep your code
     running.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你打算这样做，确保在代码中插入更多的暂停，使用 WebDriverWait 或甚至 sleep 函数，以避免因对网站发起过多请求而被封锁 IP。另一个可能的解决方案是联系代理服务提供商，如
+    [Infatica](https://infatica.io/)，他们能够提供更好的 IP 地址基础设施，以保持你的代码正常运行。
 - en: And to go one step further, you can always scrape more data about each game.
     With a few more lines of code, you can have in your dataset information such as
     the referee, the stadium and the city where each match took place, the attendance,
     the halftime score, the goal scorers, the lineups, and much more!
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果想更进一步，你总是可以抓取更多关于每场比赛的数据。只需再增加几行代码，你的数据集中就可以包含裁判、比赛场地和城市、观众人数、半场比分、进球者、首发阵容等信息，甚至更多！
 - en: Keep scraping!
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 继续抓取数据！
 - en: I hope you’ve enjoyed this and that it can maybe be useful somehow. If you have
     a question, a suggestion, or just want to be in touch, feel free to contact through [Twitter](https://twitter.com/_otavioss), [GitHub](https://github.com/otavio-s-s),
     or [Linkedin](https://www.linkedin.com/in/otavioss28/).
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望你喜欢这篇文章，并且它能在某种程度上对你有所帮助。如果你有任何问题、建议，或只是想保持联系，请随时通过 [Twitter](https://twitter.com/_otavioss)、[GitHub](https://github.com/otavio-s-s)
+    或 [Linkedin](https://www.linkedin.com/in/otavioss28/) 联系我。
 - en: '**Bio: [Otávio Simões Silveira](https://www.linkedin.com/in/otavioss28/)**
     is economist and aspiring data scientist.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介: [Otávio Simões Silveira](https://www.linkedin.com/in/otavioss28/)**
+    是一名经济学家和有抱负的数据科学家。'
 - en: '[Original](https://medium.com/evolve-you/how-to-build-a-football-dataset-with-web-scraping-d4deffcaa9ca).
     Reposted with permission.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/evolve-you/how-to-build-a-football-dataset-with-web-scraping-d4deffcaa9ca)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容:**'
 - en: '[Python, Selenium & Google for Geocoding Automation: Free and Paid](/2019/11/automate-geocoding-free-paid-python-selenium-google.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python, Selenium & Google 用于地理编码自动化: 免费与付费](/2019/11/automate-geocoding-free-paid-python-selenium-google.html)'
 - en: '[Automate your Python Scripts with Task Scheduler: Windows Task Scheduler to
     Scrape Alternative Data](/2019/09/automate-python-scripts-task-scheduler.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用任务调度程序自动化你的 Python 脚本: 使用 Windows 任务调度程序抓取替代数据](/2019/09/automate-python-scripts-task-scheduler.html)'
 - en: '[A step-by-step guide for creating an authentic data science portfolio project](/2020/10/guide-authentic-data-science-portfolio-project.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[创建真实数据科学项目组合的逐步指南](/2020/10/guide-authentic-data-science-portfolio-project.html)'
 - en: '* * *'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-53
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT 需求'
 - en: '* * *'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[A Beginner’s Guide to Web Scraping Using Python](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 网页抓取初学者指南](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
 - en: '[A Step-by-Step Guide to Web Scraping with Python and Beautiful Soup](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 和 Beautiful Soup 进行网页抓取的逐步指南](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
 - en: '[Mastering Web Scraping with BeautifulSoup](https://www.kdnuggets.com/mastering-web-scraping-with-beautifulsoup)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握使用 BeautifulSoup 进行网页抓取](https://www.kdnuggets.com/mastering-web-scraping-with-beautifulsoup)'
 - en: '[How to Use Python and Machine Learning to Predict Football Match Winners](https://www.kdnuggets.com/2023/01/python-machine-learning-predict-football-match-winners.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Python 和机器学习预测足球比赛赢家](https://www.kdnuggets.com/2023/01/python-machine-learning-predict-football-match-winners.html)'
 - en: '[Build a Machine Learning Web App in 5 Minutes](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 5 分钟内构建一个机器学习网页应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)'
 - en: '[Build a Web Scraper with Python in 5 Minutes](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 5 分钟内使用 Python 构建网页抓取器](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)'
