@@ -1,35 +1,52 @@
 - en: The Forgotten Algorithm
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 被遗忘的算法
 - en: 原文：[https://www.kdnuggets.com/2020/02/forgotten-algorithm-monte-carlo-simulation.html](https://www.kdnuggets.com/2020/02/forgotten-algorithm-monte-carlo-simulation.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/02/forgotten-algorithm-monte-carlo-simulation.html](https://www.kdnuggets.com/2020/02/forgotten-algorithm-monte-carlo-simulation.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Ian Xiao](https://www.linkedin.com/in/ianxiao/), Engagement Lead at Dessa**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Ian Xiao](https://www.linkedin.com/in/ianxiao/)，Dessa 的参与负责人**'
 - en: '**TL;DR** —When we talk about Machine Learning, we often think of supervised
     and unsupervised learning. In this article, I want to discuss an often forgotten
     but equally powerful algorithm: Monte Carlo Simulation. I will share a general
     design framework and a few techniques with an interactive tool. Finally, you can
     also find a list of good simulation tools at the end of the article.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '**TL;DR** — 当我们谈论机器学习时，我们通常会想到监督学习和无监督学习。在这篇文章中，我想讨论一个经常被遗忘但同样强大的算法：蒙特卡洛模拟。我将分享一个通用设计框架和一些技术，并提供一个互动工具。最后，你还可以在文章末尾找到一些好的模拟工具列表。'
 - en: '***Disclaimer:**** this is not sponsored by Streamlit, any of the tools I mention,
     nor any of the firms I work for. I use data science and machine learning interchangeably.*'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '***免责声明：*** 这不是由 Streamlit 赞助的，也不是我提到的任何工具或我工作的任何公司赞助的。我将数据科学和机器学习视为可互换的。*'
 - en: '***Like What You Read?**** Follow me on *[*Medium*](https://medium.com/@ianxiao)*, *[*LinkedIn*](https://www.linkedin.com/in/ianxiao/)*, *[*Twitter*](https://twitter.com/ian_xxiao)*.*'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '***喜欢你读到的内容？*** 关注我在 *[*Medium*](https://medium.com/@ianxiao)*、*[*LinkedIn*](https://www.linkedin.com/in/ianxiao/)*
+    和 *[*Twitter*](https://twitter.com/ian_xxiao)* 上。'
 - en: The Undeserving One
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 不应得的那个
 - en: Inthe recent Machine Learning (ML) uprising, supervised and unsupervised learning
     algorithms, such as classification with [Deep Learning](https://machinelearningmastery.com/what-is-deep-learning/) and
     clustering with KNN, got most of the spotlight. When these algorithms receive
@@ -37,63 +54,92 @@
     and elegant sits in the dark corner calmly and quietly. Its name is **Monte Carlo **—
     the forgotten and undeserving hero of atomic physics, modern finance, and gambling
     (or a villain depends on your opinions of these matters).
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在近期的机器学习（ML）崛起中，监督学习和无监督学习算法，如使用 [深度学习](https://machinelearningmastery.com/what-is-deep-learning/)
+    的分类和使用 KNN 的聚类，得到了大多数关注。当这些算法获得热情社区的高度赞扬时，一些同样强大而优雅的技术却在角落里静静地等待。它的名字是 **蒙特卡洛**
+    — 这个在原子物理学、现代金融和赌博中被遗忘而不应得的英雄（或者说是恶棍，这取决于你对这些问题的看法）。
 - en: '*Note: I will refer to supervise and unsupervised learning methods as “ML algorithm”
     and Monte Carlo methods as “Simulation” for brevity.*'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '*注意：为了简洁，我将监督学习和无监督学习方法称为“ML算法”，将蒙特卡洛方法称为“模拟”。*'
 - en: A Short History
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 简短历史
 - en: '[Stanislaw Ulam](https://en.wikipedia.org/wiki/Stanislaw_Ulam), [Enrico Fermi](https://en.wikipedia.org/wiki/Enrico_Fermi),
     and [John von Neumann](https://en.wikipedia.org/wiki/John_von_Neumann) — the geniuses
     at Los Alamos — invented, improved, and popularized the Monte Carlo method in
     the 1930s for a not-so-noble cause *(hint: it’s not for the bomb)*. Watch the
     video to find out more.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '[斯坦尼斯瓦夫·乌拉姆](https://en.wikipedia.org/wiki/Stanislaw_Ulam)、[恩里科·费米](https://en.wikipedia.org/wiki/Enrico_Fermi)
+    和 [约翰·冯·诺伊曼](https://en.wikipedia.org/wiki/John_von_Neumann) — 洛斯阿拉莫斯的天才们 — 在1930年代发明、改进并推广了蒙特卡洛方法，目的并不那么高尚
+    *(提示：不是为了原子弹)*。观看视频了解更多。'
 - en: A Short History of Monte Carlo Simulation (YouTube)
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 蒙特卡洛模拟简短历史（YouTube）
 - en: What is Monte Carlo Simulation?
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是蒙特卡洛模拟？
 - en: If I were to summarize what Monte Carlo simulation is in one sentence, here
     it is: **Fake it a billion times until we kind of know what the reality is.**
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我用一句话总结蒙特卡洛模拟，这里是：**假装做一亿次，直到我们大概知道现实是什么。**
 - en: '[via GIPHY](https://giphy.com/gifs/mrw-someone-aVytG2ds8e0tG)'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[通过 GIPHY](https://giphy.com/gifs/mrw-someone-aVytG2ds8e0tG)'
 - en: On a technical (and more serious) level, the goal of the Monte Carlo method
     is to **approximate the** **expectations** of outcomes given various inputs, uncertainty,
     and system dynamics. This video walks through some high-level mathematics for
     those who are interested.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在技术（和更严肃的）层面上，蒙特卡洛方法的目标是 **近似** **结果的期望**，以考虑各种输入、不确定性和系统动态。这个视频介绍了一些对有兴趣的人来说的高级数学。
 - en: Monte Carlo Approximation, [YouTube](https://youtu.be/7TybpwBlcMk)
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 蒙特卡洛近似，[YouTube](https://youtu.be/7TybpwBlcMk)
 - en: Why use Simulation?
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么使用模拟？
 - en: If I were to highlight one (oversimplified) advantage of Simulation over ML
     algorithms, it would be this: **Exploration. **We use Simulation to understand
     the inner working *of any systems at any scale* (e.g. the world, a community,
     a company, a team, a person, a fleet, a car, a wheel, an atom, etc.)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: By re-creating a system virtually with simulations, we can calculate and analyze
     hypothetical results without actually changing the world or waiting for real events
     to happen. In other words, Simulations allow us to **ask bold questions** and **develop
     tactics **to manage various future outcomes without much risk and investment.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: When to use Simulation, instead of ML?
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -102,304 +148,450 @@
     To produce good Simulation, we need to understand the process and underlying principles
     of a system. In contrast, we can create reasonably good predictions using ML by
     only using data from a data warehouse and some out-of-box algorithms.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: In other words, creating good simulation is often **more expensive **financially
     and cognitively. Why would we ever use Simulation?
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: 'Well, consider three simple questions:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: Do you have data in a data warehouse to represent the business problem?
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Do you have enough of these data — quantity- and quality-wise — to build a good
     ML model?
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Is prediction more important than exploration (e.g. ask what-if questions and
     develop tactics to support business decisions)?
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: If you answer “No” to any of these, then you should consider using Simulation
     instead of ML algorithms.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: How to Design a Monte Carlo Simulation?
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'To create a Monte Carlo Simulation, at the minimum, it follows a 3-step process:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/7cfa3ac902ecabf6ad63a7b51e6ec576.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
 - en: Simulation Process, Author’s Analysis
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: As you can see, creating a Monte Carlo simulation still requires data, and more
     importantly, some understanding of the system dynamics (e.g. the relationship
     between sales volume and price). To obtain such knowledge, it typically requires
     talking to experts, studying process flows, and observing real business operations.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: Yet Another Simulator
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: To see how the basic concepts come to live, you can go to [**Yet Another Simulator**](https://yet-another-sim.herokuapp.com/)—
     it’s an interactive tool I developed using [Streamlit](https://www.streamlit.io/).
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: On the **Welcome Page**, you can play with various input setup and observe how
     the outcome changes depending on the function you apply.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/d6aa3e2960ecb980663c0431c87d3809.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
 - en: Welcome Page of [Yet Another Simulator](https://yet-another-sim.herokuapp.com/),
     Author’s Work
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: In addition to the basic example, the tool includes 4 case studies that discuss
     various design techniques, such as Influence Diagram, Sensitivity Analysis, Optimization,
     and Combining ML with Simulation.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: For example, in the **CMO example**, I discuss how to use the Influence Diagram
     to help design a simulation to solve an advertisement budget allocation problem.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，在**CMO示例**中，我讨论了如何使用影响图来帮助设计一个模拟以解决广告预算分配问题。
 - en: '![Figure](../Images/170a8bada18519a92027c156df36e9da.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/170a8bada18519a92027c156df36e9da.png)'
 - en: Influence Diagram, Author’s Work
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 影响图，作者的工作
 - en: Finally, you will step into the shoes of a Data Scientist who advises the Chief
     Marketing Officer (CMO). Your goal is to help the CMO to decide how much to spend
     on advertising, explore various scenarios, and come up with tactics to maximize
     return under different uncertainties.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终，你将踏入数据科学家的角色，建议首席营销官（CMO）。你的目标是帮助CMO决定广告支出金额，探索各种情景，并提出在不同不确定性下最大化回报的策略。
 - en: '![Figure](../Images/97f89c1ef8e9b93adfbdfce136f81e8a.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/97f89c1ef8e9b93adfbdfce136f81e8a.png)'
 - en: Ad Budget Allocation, Author’s Work
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 广告预算分配，作者的工作
 - en: I hope the examples illustrate how Monte Carlo Simulation works, its strength
     in allowing us to explore compared to ML algorithms, and how you can design useful
     simulations with different design techniques.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望这些示例能说明蒙特卡罗模拟的工作原理，它相较于机器学习算法的优势，以及如何使用不同的设计技巧设计有用的模拟。
 - en: Some of the case studies are still under active development. Sign-up [**here**](https://docs.google.com/forms/d/e/1FAIpQLSfL57Eb6Kd7fK3OLfXNUENa3H0rLhmcgxnLQp6SwSWNZ_pLaQ/viewform?usp=sf_link) to
     get notified when they are ready.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些案例研究仍在积极开发中。请[**在此处**](https://docs.google.com/forms/d/e/1FAIpQLSfL57Eb6Kd7fK3OLfXNUENa3H0rLhmcgxnLQp6SwSWNZ_pLaQ/viewform?usp=sf_link)注册，以便在它们准备好时接到通知。
 - en: To Sum Up
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结
 - en: I hope this article offers another look at the Monte Carlo method; we often
     forget such a useful tool in today’s ML discussion. Simulation has many strengths
     that traditional ML algorithms can’t provide — for example, the ability to explore
     big questions under tremendous uncertainty.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望这篇文章提供了对蒙特卡罗方法的另一种视角；在今天的机器学习讨论中，我们常常忽视这样一个有用的工具。模拟具有许多传统机器学习算法无法提供的优势——例如，在巨大不确定性下探索重大问题的能力。
 - en: In **an upcoming article**, I will discuss **how to combine ML and Simulation** in
     a real business setting to get the best of both worlds and how to articulate the
     implications of the different simulated scenarios.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 在**即将发布的文章**中，我将讨论**如何在实际商业环境中结合机器学习和模拟**以获得两者的最佳效果，以及如何阐明不同模拟情景的含义。
 - en: Stay tuned by following me on[**Medium**](https://medium.com/@ianxiao)**, **[**LinkedIn**](https://www.linkedin.com/in/ianxiao/)**, **or[**Twitter**](https://twitter.com/ian_xxiao)**.**
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过关注我的[**Medium**](https://medium.com/@ianxiao)**、**[**LinkedIn**](https://www.linkedin.com/in/ianxiao/)**或[**Twitter**](https://twitter.com/ian_xxiao)**保持关注。**
 - en: Until next time,
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 下次见，
 - en: Ian
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 伊恩
 - en: '[via GIPHY](https://giphy.com/gifs/two-9-two-9-nine-l4FGsEzqS8Zz8aOWs)'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '[via GIPHY](https://giphy.com/gifs/two-9-two-9-nine-l4FGsEzqS8Zz8aOWs)'
 - en: 'If you like this article, you may also like these:'
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如果你喜欢这篇文章，你可能也会喜欢这些：
 - en: '[**12-Hour ML Challenge**](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51)'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**12小时机器学习挑战**](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51)'
 - en: How to build & deploy an ML app with Streamlit and DevOps tools
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 如何使用Streamlit和DevOps工具构建和部署机器学习应用
 - en: '[**A Doomed Marriage of ML and Agile**](https://towardsdatascience.com/a-doomed-marriage-of-ml-and-agile-b91b95b37e35)'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**机器学习与敏捷的注定失败的结合**](https://towardsdatascience.com/a-doomed-marriage-of-ml-and-agile-b91b95b37e35)'
 - en: How not to apply Agile on an ML project
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 如何不在机器学习项目中应用敏捷
 - en: '[**Data Science is Boring**](https://towardsdatascience.com/data-science-is-boring-1d43473e353e)'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**数据科学是无聊的**](https://towardsdatascience.com/data-science-is-boring-1d43473e353e)'
 - en: How I cope with the boring days of deploying Machine Learning
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 我如何应对部署机器学习的无聊日子
 - en: '[**The Last Defense against Another AI Winter**](https://towardsdatascience.com/the-last-defense-against-another-ai-winter-c589b48c561)'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**对抗另一场人工智能寒冬的最后防线**](https://towardsdatascience.com/the-last-defense-against-another-ai-winter-c589b48c561)'
 - en: The numbers, five tactical solutions, and a quick survey
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 数字、五种战术解决方案和快速调查
 - en: '[**The Last-Mile Problem of AI**](https://towardsdatascience.com/fixing-the-last-mile-problems-of-deploying-ai-systems-in-the-real-world-4f1aab0ea10)'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**人工智能的最后一公里问题**](https://towardsdatascience.com/fixing-the-last-mile-problems-of-deploying-ai-systems-in-the-real-world-4f1aab0ea10)'
 - en: One Thing Many Data Scientists Don’t Think Enough About
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 很多数据科学家没充分考虑的一件事
 - en: '[**We Created a Lazy AI**](https://towardsdatascience.com/we-created-a-lazy-ai-5cea59a2a749)'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**我们创造了一个懒惰的人工智能**](https://towardsdatascience.com/we-created-a-lazy-ai-5cea59a2a749)'
 - en: How to Design and Implement Reinforcement Learning for the Real World
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 如何为现实世界设计和实现强化学习
 - en: Popular Tools
+  id: totrans-68
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 流行工具
 - en: When I discuss Simulation, many people asked for suggestions on tools. Here
     is a list of tools I know, choose the ones that fit your purpose. Enjoy.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我讨论仿真时，很多人会询问工具建议。这里有一份我了解的工具列表，选择适合你需求的工具。请享用。
 - en: '[AnyLogic](https://www.anylogic.com/) (This is probably the go-to tool for
     simulation professionals; Freemium)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AnyLogic](https://www.anylogic.com/) (这可能是模拟专业人士的首选工具；免费增值)'
 - en: '[Simio](https://www.simio.com/index.php) (Freemium)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Simio](https://www.simio.com/index.php) (免费增值)'
 - en: '[Yasai](http://yasai.rutgers.edu/) (Excel Add-In, Free)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Yasai](http://yasai.rutgers.edu/) (Excel 插件，免费)'
 - en: '[Oracle Crystal Ball](https://www.crystalballservices.com/Store/Oracle-Crystal-Ball) (Freemium)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Oracle Crystal Ball](https://www.crystalballservices.com/Store/Oracle-Crystal-Ball)
+    (免费增值)'
 - en: '[SimPy](https://simpy.readthedocs.io/en/latest/index.html) (Python Package,
     Free)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SimPy](https://simpy.readthedocs.io/en/latest/index.html) (Python 包，免费)'
 - en: '[Hash](https://hash.ai/) (start-up in stealth mode as of the time of writing.
     Pretty solid founding team. Probably Freemium)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Hash](https://hash.ai/) (创企，当前处于隐秘模式。创始团队相当强大。可能是免费增值)'
 - en: Reference
+  id: totrans-76
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考资料
 - en: '**History of Decision Tree** — [http://pages.stat.wisc.edu/~loh/treeprogs/guide/LohISI14.pdf](http://pages.stat.wisc.edu/~loh/treeprogs/guide/LohISI14.pdf)'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**决策树的历史** — [http://pages.stat.wisc.edu/~loh/treeprogs/guide/LohISI14.pdf](http://pages.stat.wisc.edu/~loh/treeprogs/guide/LohISI14.pdf)'
 - en: '**History of Clustering **— [https://link.springer.com/chapter/10.1007/978-3-540-73560-1_15](https://link.springer.com/chapter/10.1007/978-3-540-73560-1_15)'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '**聚类的历史** — [https://link.springer.com/chapter/10.1007/978-3-540-73560-1_15](https://link.springer.com/chapter/10.1007/978-3-540-73560-1_15)'
 - en: '**Time to Marry Simulation and ML** — [https://www.benjamin-schumann.com/blog/2018/5/7/time-to-marry-simulation-models-and-machine-learning](https://www.benjamin-schumann.com/blog/2018/5/7/time-to-marry-simulation-models-and-machine-learning)'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '**将仿真与机器学习结合的时机** — [https://www.benjamin-schumann.com/blog/2018/5/7/time-to-marry-simulation-models-and-machine-learning](https://www.benjamin-schumann.com/blog/2018/5/7/time-to-marry-simulation-models-and-machine-learning)'
 - en: '**Taxonomy of Simulation **— [https://gamingthepast.net/theory-practice/simulation-design-guide/](https://gamingthepast.net/theory-practice/simulation-design-guide/)'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**仿真的分类** — [https://gamingthepast.net/theory-practice/simulation-design-guide/](https://gamingthepast.net/theory-practice/simulation-design-guide/)'
 - en: '**What is Monte Carlo and How it works** — [https://www.palisade.com/risk/monte_carlo_simulation.asp](https://www.palisade.com/risk/monte_carlo_simulation.asp)'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '**蒙特卡洛方法及其工作原理** — [https://www.palisade.com/risk/monte_carlo_simulation.asp](https://www.palisade.com/risk/monte_carlo_simulation.asp)'
 - en: '**Bio: [Ian Xiao](https://www.linkedin.com/in/ianxiao/)** is Engagement Lead
     at Dessa, deploying machine learning at enterprises. He leads business and technical
     teams to deploy Machine Learning solutions and improve Marketing & Sales for the
     F100 enterprises.'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Ian Xiao](https://www.linkedin.com/in/ianxiao/)** 是 Dessa 的参与负责人，负责在企业中部署机器学习。他领导业务和技术团队部署机器学习解决方案，并为
+    F100 企业改进市场营销和销售。'
 - en: '[Original](https://towardsdatascience.com/how-to-design-monte-carlo-simulation-138e9214910a).
     Reposted with permission.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/how-to-design-monte-carlo-simulation-138e9214910a).
+    经许可转载。'
 - en: '**Related:**'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Data Science is Boring (Part 1)](/2019/09/data-science-boring-part-1.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学很无聊（第1部分）](/2019/09/data-science-boring-part-1.html)'
 - en: '[We Created a Lazy AI](/2020/01/created-lazy-ai.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我们创建了一个懒惰的 AI](/2020/01/created-lazy-ai.html)'
 - en: '[12-Hour Machine Learning Challenge: Build & deploy an app with Streamlit and
     DevOps tools](/2020/02/machine-learning-challenge-build-deploy-app-streamlit-devops.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[12小时机器学习挑战：使用 Streamlit 和 DevOps 工具构建并部署应用](/2020/02/machine-learning-challenge-build-deploy-app-streamlit-devops.html)'
 - en: '* * *'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-89
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织 IT 工作'
 - en: '* * *'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-94
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Genetic Algorithm Key Terms, Explained](https://www.kdnuggets.com/2018/04/genetic-algorithm-key-terms-explained.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[遗传算法关键术语解释](https://www.kdnuggets.com/2018/04/genetic-algorithm-key-terms-explained.html)'
 - en: '[Decision Tree Algorithm, Explained](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[决策树算法解析](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)'
 - en: '[A Full End-to-End Deployment of a Machine Learning Algorithm into a…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习算法的完整端到端部署](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
 - en: '[Unlock the Secrets to Choosing the Perfect Machine Learning Algorithm!](https://www.kdnuggets.com/2023/07/ml-algorithm-choose.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[揭开选择完美机器学习算法的秘密！](https://www.kdnuggets.com/2023/07/ml-algorithm-choose.html)'
 - en: '[Choosing the Right Clustering Algorithm for Your Dataset](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为数据集选择正确的聚类算法](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)'
 - en: '[DBSCAN Clustering Algorithm in Machine Learning](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的DBSCAN聚类算法](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)'

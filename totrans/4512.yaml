@@ -1,36 +1,53 @@
 - en: Audio Data Analysis Using Deep Learning with Python (Part 2)
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用Python进行音频数据分析（第2部分）
 - en: 原文：[https://www.kdnuggets.com/2020/02/audio-data-analysis-deep-learning-python-part-2.html](https://www.kdnuggets.com/2020/02/audio-data-analysis-deep-learning-python-part-2.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/02/audio-data-analysis-deep-learning-python-part-2.html](https://www.kdnuggets.com/2020/02/audio-data-analysis-deep-learning-python-part-2.html)
 - en: '[comments](#comments)![Figure](../Images/986e76f575c13afa96e37e020da7adcd.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)![图示](../Images/986e76f575c13afa96e37e020da7adcd.png)'
 - en: Image [Credits](https://deepmind.com/blog/article/wavenet-generative-model-raw-audio)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图像 [来源](https://deepmind.com/blog/article/wavenet-generative-model-raw-audio)
 - en: In the [previous article](https://levelup.gitconnected.com/audio-data-analysis-using-deep-learning-part-1-7f6e08803f60),
     we started our discussion about audio signals; we saw how we can interpret and
     visualize them using Librosa python library. We also learned how to extract necessary
     features from a sound/audio file.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 [上一篇文章](https://levelup.gitconnected.com/audio-data-analysis-using-deep-learning-part-1-7f6e08803f60)中，我们开始讨论音频信号；我们看到如何使用Librosa
+    Python库对其进行解释和可视化。我们还学习了如何从声音/音频文件中提取必要的特征。
 - en: We concluded the previous article by building an Artificial Neural Network(ANN)
     for the music genre classification.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们通过构建一个人工神经网络（ANN）来进行音乐类型分类结束了上一篇文章。
 - en: In this article, we are going to build a Convolutional Neural Network for music
     genre classification.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们将构建一个卷积神经网络进行音乐类型分类。
 - en: 'Nowadays, deep learning is more and more used for Music Genre Classification:
     particularly Convolutional Neural Networks (CNN) taking as entry a spectrogram
     considered as an image on which are sought different types of structure.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，深度学习在音乐类型分类中越来越多地被使用：特别是卷积神经网络（CNN），它将谱图作为输入，视为图像，寻找不同类型的结构。
 - en: 'Convolutional Neural Networks (CNN) are very similar to ordinary Neural Networks:
     they are made up of neurons that have learnable weights and biases. Each neuron
     receives some inputs, performs a dot product and optionally follows it with a
@@ -39,402 +56,608 @@
     they still have a loss function (e.g. SVM/Softmax) on the last (fully-connected)
     layer and all the tips/tricks we developed for learning regular Neural Networks
     still apply.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 卷积神经网络（CNN）与普通神经网络非常相似：它们由具有可学习权重和偏差的神经元组成。每个神经元接收一些输入，执行点积，并可选地进行非线性处理。整个网络仍然表示一个单一的可微分分数函数：从原始图像像素到类别分数。它们仍然有一个损失函数（例如SVM/Softmax）在最后一个（全连接）层，并且我们为学习普通神经网络开发的所有技巧/方法仍然适用。
 - en: So what changes? ConvNet architectures make the explicit assumption that the
     inputs are images, which allows us to encode certain properties into the architecture.
     These then make the forward function more efficient to implement and vastly reduce
     the number of parameters in the network.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么有什么变化呢？ConvNet架构明确假设输入是图像，这使我们可以将某些特性编码到架构中。这些特性使得前向函数的实现更加高效，并大大减少了网络中的参数数量。
 - en: '![Figure](../Images/469d3f480dde1f3b636d300a10db0698.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/469d3f480dde1f3b636d300a10db0698.png)'
 - en: '[Source](https://gfycat.com/deadlydeafeningatlanticblackgoby-three-blue-one-brown-machines-learning)'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '[来源](https://gfycat.com/deadlydeafeningatlanticblackgoby-three-blue-one-brown-machines-learning)'
 - en: They are capable of detecting primary features, which are then combined by subsequent
     layers of the CNN architecture, resulting in the detection of higher-order complex
     and relevant novel features.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 它们能够检测主要特征，这些特征随后由CNN架构的后续层结合，从而检测出更高阶的复杂和相关的新特征。
 - en: The dataset consists of 1000 audio tracks each 30 seconds long. It contains
     10 genres, each represented by 100 tracks. The tracks are all 22050 Hz monophonic
     16-bit audio files in .wav format.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集包含1000个音频轨道，每个轨道30秒长。它包含10种类型，每种类型由100个轨道表示。这些轨道都是22050 Hz单声道16位音频文件，格式为.wav。
 - en: The dataset can be download from [marsyas website.](http://marsyas.info/downloads/datasets.html)
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集可以从 [marsyas网站](http://marsyas.info/downloads/datasets.html)下载
 - en: It consists of 10 genres i.e
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 包含10种音乐类型，即
 - en: Blues
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Blues
 - en: Classical
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Classical
 - en: Country
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Country
 - en: Disco
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Disco
 - en: Hiphop
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Hiphop
 - en: Jazz
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Jazz
 - en: Metal
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Metal
 - en: Pop
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Pop
 - en: Reggae
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Reggae
 - en: Rock
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Rock
 - en: 'Each genre contains 100 songs. Total dataset: 1000 songs.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 每种类型包含100首歌曲。数据集总量：1000首歌曲。
 - en: Before moving ahead, I would recommend using [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true) for
     doing everything related to Neural networks because it is **free** and provides
     GPUs and TPUs as runtime environments.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在继续之前，我建议使用[Google Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true)来处理与神经网络相关的所有工作，因为它是**免费的**，并提供GPU和TPU作为运行环境。
 - en: '**Convolutional Neural Network implementation**'
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**卷积神经网络实现**'
 - en: '![Figure](../Images/3288a4fdda639af1348713b356abb6f9.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/3288a4fdda639af1348713b356abb6f9.png)'
 - en: Steps involved in extracting features from an input spectrogram and loading
     it to a fully connected layer.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 从输入声谱图中提取特征并加载到全连接层的步骤。
 - en: So let us start building a CNN for genre classification.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以让我们开始构建一个用于类别分类的CNN。
 - en: To start with load all the required libraries.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先加载所有必要的库。
 - en: '[PRE0]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Now convert the audio data files into PNG format images or basically extracting
     the Spectrogram for every Audio. We will use librosa python library to extract
     Spectrogram for every audio file.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在将音频数据文件转换为PNG格式的图像，或者基本上是为每个音频提取声谱图。我们将使用librosa Python库为每个音频文件提取声谱图。
 - en: '[PRE1]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The above code will create a directory **img_data **containing all the images
     categorized in the genre.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的代码将创建一个**img_data**目录，其中包含按类别分类的所有图像。
 - en: '![Figure](../Images/f5994dc14ce093f4b2da8324acef7677.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/f5994dc14ce093f4b2da8324acef7677.png)'
 - en: Sample spectrograms of Disco, Classical, Blues and Country genre respectively.![](../Images/b481655be7047230b9827541acf2afca.png)   ![](../Images/3d019e569be7f807536726c4e6ca4efa.png)
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 各种类型的示例声谱图：迪斯科、古典、蓝调和乡村音乐。![](../Images/b481655be7047230b9827541acf2afca.png)   ![](../Images/3d019e569be7f807536726c4e6ca4efa.png)
 - en: Disco and Classical![](../Images/6457a5b7b1e379a7c7c737e1dfc4ad64.png)   ![](../Images/ff0ca088ae695abf50444b7d9676fd37.png)
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 迪斯科与古典音乐![](../Images/6457a5b7b1e379a7c7c737e1dfc4ad64.png)   ![](../Images/ff0ca088ae695abf50444b7d9676fd37.png)
 - en: Blues and Country
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 蓝调与乡村音乐
 - en: Our next step is to split the data into the train set and test set.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的下一步是将数据拆分为训练集和测试集。
 - en: Install split-folders.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 安装split-folders。
 - en: '[PRE2]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: We will split data by 80% in training and 20% in the test set.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将数据按80%用于训练，20%用于测试集进行拆分。
 - en: '[PRE3]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The above code returns 2 directories for train and test set inside a parent
     directory.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的代码返回父目录下的2个目录，分别用于训练集和测试集。
 - en: '![](../Images/77666619b51dc0d584efc2df4e18036d.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/77666619b51dc0d584efc2df4e18036d.png)'
 - en: '**Image Augmentation:**'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图像增强：**'
 - en: Image Augmentation artificially creates training images through different ways
     of processing or combination of multiple processing, such as random rotation,
     shifts, shear and flips, etc.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 图像增强通过不同的处理方式或多种处理组合来人工创建训练图像，例如随机旋转、平移、剪切和翻转等。
 - en: Perform Image Augmentation instead of training your model with lots of images
     we can train our model with fewer images and training the model with different
     angles and modifying the images.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行图像增强，与其用大量图像训练模型，我们可以用较少的图像训练模型，并通过不同的角度和修改图像来训练模型。
 - en: '![Figure](../Images/878b74e801a879d7a41d4bfeee18b927.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/878b74e801a879d7a41d4bfeee18b927.png)'
 - en: '[Image Augmentation](https://towardsdatascience.com/machinex-image-data-augmentation-using-keras-b459ef87cd22)'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '[图像增强](https://towardsdatascience.com/machinex-image-data-augmentation-using-keras-b459ef87cd22)'
 - en: Keras has this **ImageDataGenerator** class which allows the users to perform
     image augmentation on the fly in a very easy way. You can read about that in Keras’s
     official [documentation](https://keras.io/preprocessing/image/).
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: Keras有一个**ImageDataGenerator**类，允许用户以非常简单的方式实时执行图像增强。你可以在Keras的官方[文档](https://keras.io/preprocessing/image/)中阅读有关内容。
 - en: '[PRE4]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: The ImageDataGenerator class has three methods **flow(),** **flow_from_directory()
     and flow_from_dataframe() **to read the images from a big numpy array and folders
     containing images.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: ImageDataGenerator类有三个方法**flow()、flow_from_directory() 和 flow_from_dataframe()**，用于从大的numpy数组和包含图像的文件夹中读取图像。
 - en: We will discuss only flow_from_directory() in this blog post.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将在这篇博客中仅讨论flow_from_directory()。
 - en: '[PRE5]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: flow_from_directory() has the following arguments.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: flow_from_directory()具有以下参数。
 - en: '**directory: **path where there exists a folder, under which all the test images
     are present. For example, in this case, the training images are found in ./data/train'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**directory：**存在一个文件夹的路径，其中包含所有测试图像。例如，在这种情况下，训练图像位于./data/train中。'
 - en: '**batch_size: **Set this to some number that divides your total number of images
     in your test set exactly.'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**batch_size：**将其设置为能整除测试集中图像总数的某个数字。'
 - en: Why this only for test_generator?
+  id: totrans-61
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 为什么这只对test_generator适用？
 - en: Actually, you should set the “batch_size” in both train and valid generators
     to some number that divides your total number of images in your train set and
     valid respectively, but this doesn’t matter before because even if batch_size
     doesn’t match the number of samples in the train or valid sets and some images
     gets missed out every time we yield the images from generator, it would be sampled
     the very next epoch you train.
+  id: totrans-62
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 实际上，你应该在训练和验证生成器中将“batch_size”设置为一个能够整除你的训练集和验证集中图像总数的数字，但这之前并不重要，因为即使batch_size与训练或验证集中样本数不匹配，并且每次从生成器中获取图像时有些图像会被遗漏，也会在你训练的下一个epoch中进行采样。
 - en: But for the test set, you should sample the images exactly once, no less or
     no more. If Confusing, just set it to 1(but maybe a little bit slower).
+  id: totrans-63
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 但对于测试集，你应该正好采样一次图像，不多也不少。如果感到困惑，可以将其设置为1（但可能会稍微慢一点）。
 - en: '**class_mode:** Set “binary” if you have only two classes to predict, if not
     set to“categorical”, in case if you’re developing an Autoencoder system, both
     input and the output would probably be the same image, for this case set to “input”.'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**class_mode：**如果你只有两个类别要预测，则设置为“binary”，如果不是，则设置为“categorical”，如果你正在开发自动编码器系统，输入和输出可能是相同的图像，则设置为“input”。'
 - en: '**shuffle:** Set this to *False,* because you need to yield the images in “order”,
     to predict the outputs and match them with their unique ids or filenames.'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**shuffle：**将其设置为*False*，因为你需要按照“顺序”提供图像，以预测输出并将其与唯一的ID或文件名进行匹配。'
 - en: 'Create a Convolutional Neural Network:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个卷积神经网络：
 - en: '[PRE6]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Compile/train the network using [Stochastic Gradient Descent(SGD)](https://en.wikipedia.org/wiki/Stochastic_gradient_descent).
     Gradient Descent works fine when we have a convex curve. But if we don’t have
     a convex curve, Gradient Descent fails. Hence, in Stochastic Gradient Descent,
     few samples are selected randomly instead of the whole data set for each iteration.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用[随机梯度下降（SGD）](https://en.wikipedia.org/wiki/Stochastic_gradient_descent)编译/训练网络。梯度下降在我们有一个凸曲线时效果很好。但是如果我们没有凸曲线，梯度下降会失败。因此，在随机梯度下降中，每次迭代时会随机选择几个样本，而不是整个数据集。
 - en: '[PRE7]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Now fit the model with 50 epochs.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，用50个epochs来训练模型。
 - en: '[PRE8]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Now since the CNN model is trained, let us evaluate it. `evaluate_generator()` uses
     both your test input and output. It first predicts output using training input
     and then evaluates the performance by comparing it against your test output. So
     it gives out a measure of performance, i.e. accuracy in your case.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，既然CNN模型已经训练好了，我们来评估它。`evaluate_generator()`使用你的测试输入和输出。它首先使用训练输入进行预测，然后通过将其与测试输出进行比较来评估性能。因此，它给出的是一个性能测量，即在你的案例中是准确率。
 - en: '[PRE9]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: So the loss is 1.70 and Accuracy is 33.7%.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以损失为1.70，准确率为33.7%。
 - en: At last, let your model make some predictions on the test data set. You need
     to reset the test_set before whenever you call the **predict_generator**. This
     is important, if you forget to reset the **test_set** you will get outputs in
     a weird order.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，让你的模型在测试数据集上进行一些预测。在每次调用**predict_generator**之前，你需要重置test_set。这一点很重要，如果你忘记重置**test_set**，你将得到奇怪顺序的输出。
 - en: '[PRE10]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: As of now **predicted_class_indices** has the predicted labels, but you can’t
     simply tell what the predictions are, because all you can see is numbers like
     0,1,4,1,0,6… You need to map the predicted labels with their unique ids such as
     filenames to find out what you predicted for which image.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 到现在为止，**predicted_class_indices**已经包含了预测标签，但你不能直接知道预测的结果，因为你看到的只是像0、1、4、1、0、6这样的数字。你需要将预测标签与它们的唯一ID（如文件名）进行映射，以找出你为哪个图像做了预测。
 - en: '[PRE11]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Append ***filenames*** and ***predictions*** to a single pandas dataframe as
     two separate columns. But before doing that check the size of both, it should
     be the same.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 将***filenames***和***predictions***作为两个独立的列追加到一个pandas数据框中。但在此之前，请检查两者的大小，它们应该是相同的。
 - en: '[PRE12]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Finally, save the results to a CSV file.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，将结果保存到CSV文件中。
 - en: '[PRE13]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '![Figure](../Images/ec1e5d9256f6889fb24e740fa5805dfe.png)'
+  id: totrans-83
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/ec1e5d9256f6889fb24e740fa5805dfe.png)'
 - en: Output
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出
 - en: I have trained the model on 50 epochs(which itself took 1.5 hours to execute
     on Nvidia K80 GPU). If you wanna increase the accuracy, increase the number of
     epochs to 1000 or even more while training your CNN model.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 我已经在50个epochs上训练了模型（这本身在Nvidia K80 GPU上执行花费了1.5小时）。如果你想提高准确率，可以将训练CNN模型时的epochs数增加到1000或更多。
 - en: Conclusion
+  id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: So it shows that CNN is a viable alternative for automatic feature extraction.
     Such discovery lends support to our hypothesis that the intrinsic characteristics
     in the variation of musical data are similar to those of image data. Our CNN model
     is highly scalable but not robust enough to generalized the training result to
     unseen musical data. This can be overcome with an enlarged dataset and of course
     the amount of dataset that can be fed.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 这表明 CNN 是自动特征提取的可行替代方案。这一发现支持了我们的假设，即音乐数据的内在特征变化与图像数据类似。我们的 CNN 模型具有高度的可扩展性，但在将训练结果推广到未见过的音乐数据时不够稳健。这可以通过扩大数据集以及增加数据输入量来克服。
 - en: Well, this concludes the two-article series on Audio Data Analysis Using Deep
     Learning with Python. I hope you guys have enjoyed reading it, feel free to share
     your comments/thoughts/feedback in the comment section.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 好了，这篇关于使用深度学习和 Python 进行音频数据分析的两篇文章系列就此结束。希望大家喜欢阅读这篇文章，欢迎在评论区分享你的意见/想法/反馈。
 - en: Thanks for reading this article!!!
+  id: totrans-89
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 感谢阅读本文!!!
 - en: '**Bio: [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
     is a Big data developer at CirrusLabs. He has over 4 years of working experience
     in various sectors like Telecom, Analytics, Sales, Data Science having specialisation
     in various Big data components.'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)**
+    是 CirrusLabs 的大数据开发人员。他在电信、分析、销售、数据科学等多个领域拥有超过 4 年的工作经验，并在多个大数据组件方面具有专业知识。'
 - en: '[Original](https://levelup.gitconnected.com/audio-data-analysis-using-deep-learning-with-python-part-2-4a1f40d3708d).
     Reposted with permission.'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://levelup.gitconnected.com/audio-data-analysis-using-deep-learning-with-python-part-2-4a1f40d3708d)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Audio File Processing: ECG Audio Using Python](/2020/02/audio-file-processing-ecg-audio-python.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[音频文件处理：使用 Python 处理 ECG 音频](/2020/02/audio-file-processing-ecg-audio-python.html)'
 - en: '[Basics of Audio File Processing in R](/2020/02/basics-audio-file-processing-r.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[R 中的音频文件处理基础](/2020/02/basics-audio-file-processing-r.html)'
 - en: '[Artificial Intelligence Books to Read in 2020](/2020/01/artificial-intelligence-books-read-2020.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2020 年阅读的人工智能书籍](/2020/01/artificial-intelligence-books-read-2020.html)'
 - en: '* * *'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-97
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 需求'
 - en: '* * *'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-102
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[创建一个使用 Python 从音频中提取主题的 Web 应用程序](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
 - en: '[Bark: The Ultimate Audio Generation Model](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Bark：终极音频生成模型](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)'
 - en: '[WavJourney: A Journey into the World of Audio Storyline Generation](https://www.kdnuggets.com/wavjourney-a-journey-into-the-world-of-audio-storyline-generation)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[WavJourney：进入音频故事情节生成的世界](https://www.kdnuggets.com/wavjourney-a-journey-into-the-world-of-audio-storyline-generation)'
 - en: '[How to Implement Agentic RAG Using LangChain: Part 1](https://www.kdnuggets.com/how-to-implement-agentic-rag-using-langchain-part-1)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 LangChain 实现 Agentic RAG：第 1 部分](https://www.kdnuggets.com/how-to-implement-agentic-rag-using-langchain-part-1)'
 - en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Datawig，这是一个用于缺失值填补的 AWS 深度学习库](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
 - en: '[Hands-on Reinforcement Learning Course Part 3: SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动手强化学习课程第 3 部分：SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)'
