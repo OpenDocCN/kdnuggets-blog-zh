@@ -1,565 +1,852 @@
 - en: The Prefect Way to Automate & Orchestrate Data Pipelines
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Prefect 自动化与协调数据管道的方法
 - en: 原文：[https://www.kdnuggets.com/2021/09/prefect-way-automate-orchestrate-data-pipelines.html](https://www.kdnuggets.com/2021/09/prefect-way-automate-orchestrate-data-pipelines.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/09/prefect-way-automate-orchestrate-data-pipelines.html](https://www.kdnuggets.com/2021/09/prefect-way-automate-orchestrate-data-pipelines.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Murallie Thuwarakesh](https://www.linkedin.com/in/thuwarakesh/), Data
     Scientist at Stax, Inc.**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Murallie Thuwarakesh](https://www.linkedin.com/in/thuwarakesh/)，Stax,
+    Inc. 的数据科学家提供。**'
 - en: '![](../Images/69cc42fcb364c7c8c0cbc7f68d6d0684.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/69cc42fcb364c7c8c0cbc7f68d6d0684.png)'
 - en: Illustration from [Undraw](https://undraw.co/illustrations)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 插图来自 [Undraw](https://undraw.co/illustrations)。
 - en: I was a big fan of Apache Airflow. Even today, I don’t have many complaints
     about it. But the new technology Prefect amazed me in many ways, and I can’t help
     but migrating everything to it.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我曾经是 Apache Airflow 的大粉丝。即使今天，我对它也没有太多抱怨。但新技术 Prefect 让我惊叹不已，我忍不住将所有内容迁移到它上面。
 - en: Prefect (and Airflow) is a workflow automation tool. You can orchestrate individual
     tasks to do more complex work. You could manage task dependencies, retry tasks
     when they fail, schedule them, etc.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: Prefect（以及 Airflow）是一个工作流自动化工具。你可以协调各个任务以完成更复杂的工作。你可以管理任务依赖关系、在任务失败时重试任务、调度任务等。
 - en: I trust workflow management is the backbone of every data science project. Even
     small projects can have remarkable benefits with a tool like Prefect. It eliminates
     a significant part of repetitive tasks. Not to mention, it also removes the mental
     clutter in a complex project.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 我相信工作流管理是每个数据科学项目的支柱。即使是小项目，也可以通过像 Prefect 这样的工具获得显著的好处。它消除了大量重复任务的部分。不用说，它还消除了复杂项目中的心理负担。
 - en: This article covers some of the frequent questions about Prefect. It includes,
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文涵盖了关于 Prefect 的一些常见问题，包括：
 - en: a short intro to Prefect’s core concepts;
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Prefect 核心概念的简短介绍；
 - en: why I decided to migrate from Airflow;
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为什么我决定从 Airflow 迁移。
 - en: Prefect’s incredible features and integration with other technologies, and;
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Prefect 的令人惊叹的功能和与其他技术的集成，以及；
 - en: how to decide between its cloud vs. on-premise deployment options.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如何在其云部署与本地部署选项之间做出决定。
 - en: Quickstart Prefect.
+  id: totrans-14
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 快速启动 Prefect。
 - en: Prefect is both a minimal and complete workflow management tool. It’s unbelievably
     simple to set up. Yet it can do everything tools such as Airflow can and more.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: Prefect 是一个既简约又完整的工作流管理工具。它的设置极其简单。然而，它能够完成 Airflow 等工具能够做的所有任务，甚至更多。
 - en: You can use PyPI, Conda, or Pipenv to install it, and it’s ready to rock. More
     on this in comparison with the Airflow section.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用 PyPI、Conda 或 Pipenv 安装它，它就绪待用。更多关于此的内容在 Airflow 部分中有比较。
 - en: '[PRE0]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Before we dive into use Prefect, let’s first see an unmanaged workflow. It makes
     understanding the role of Prefect in workflow management easy.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们深入使用 Prefect 之前，先来看一个未管理的工作流。这有助于理解 Prefect 在工作流管理中的角色。
 - en: The below script queries an API (Extract — E), picks the relevant fields from
     it (Transform — T), and appends them to a file (Load — L). It contains three functions
     that perform each of the tasks mentioned. It’s a straightforward yet everyday
     use case of workflow management tools — ETL.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下脚本查询一个 API（提取 — E），从中选择相关字段（转换 — T），并将其追加到文件中（加载 — L）。它包含执行每个任务的三个函数。这是一个直接但日常使用的工作流管理工具用例
+    —— ETL。
 - en: Code by [the Author](https://thuwarakesh.medium.com/).
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码由 [作者](https://thuwarakesh.medium.com/) 提供。
 - en: This script downloads weather data from the OpenWeatherMap API and stores the
     windspeed value in a file. ETL applications in real life could be complex. But
     this example application covers the fundamental aspects very well.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 该脚本从 OpenWeatherMap API 下载天气数据，并将风速值存储在一个文件中。现实生活中的 ETL 应用可能很复杂。但这个示例应用很好地涵盖了基本方面。
 - en: 'Note: Please replace the API key with a real one. You can get one from [https://openweathermap.org/api](https://openweathermap.org/api).'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：请将 API 密钥替换为真实的密钥。你可以从 [https://openweathermap.org/api](https://openweathermap.org/api)
+    获取一个。
 - en: You can run this script with the command `python app.py`where app.py is the
     name of your script file. This will create a new file called windspeed.txt in
     the current directory with one value. It’s the windspeed at Boston, MA, at the
     time you reach the API. If you rerun the script, it’ll append another value to
     the same file.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用命令 `python app.py` 运行此脚本，其中 app.py 是你脚本文件的名称。这将创建一个名为 windspeed.txt 的新文件，包含一个值。这是你访问
+    API 时波士顿的风速。如果你重新运行脚本，它将向同一文件追加另一个值。
 - en: Your first Prefect ETL workflow.
+  id: totrans-24
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 你的第一个 Prefect ETL 工作流。
 - en: The above script works well. Yet, it lacks some critical features of a complete
     ETL, such as retrying and scheduling. Also, as mentioned earlier, a real-life
     ETL may have hundreds of tasks in a single workflow. Some of them can be run in
     parallel, whereas some depend on one or more other tasks.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的脚本运行良好。然而，它缺少完整ETL的一些关键特性，比如重试和调度。此外，如前所述，实际的ETL可能在一个工作流中有数百个任务。其中一些可以并行运行，而有些则依赖于一个或多个其他任务。
 - en: Imagine if there is a temporary network issue that prevents you from calling
     the API. The script would fail immediately with no further attempt. In live applications,
     such downtimes aren’t a miracle. They happen for several reasons — server downtime,
     network downtime, server query limit exceeds.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象一下，如果有一个临时网络问题阻止你调用API，脚本会立即失败而不会再做进一步尝试。在实时应用程序中，这种停机时间并不奇怪。它们发生的原因有很多——服务器停机、网络停机、服务器查询限制超出。
 - en: Also, you have to manually execute the above script every time to update your
     windspeed.txt file. Yet, scheduling the workflow to run at a specific time in
     a predefined interval is common in ETL workflows.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，你必须每次手动执行上述脚本以更新你的windspeed.txt文件。然而，将工作流调度在预定时间内运行在ETL工作流中是很常见的。
 - en: This is where tools such as Prefect and Airflow come to the rescue. Here’s how
     you could tweak the above code to make it a Prefect workflow.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 这时像Prefect和Airflow这样的工具就派上用场了。下面是你如何调整上面的代码使其成为Prefect工作流的方法。
 - en: Code by [the Author](https://thuwarakesh.medium.com/).
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码来自 [作者](https://thuwarakesh.medium.com/)。
 - en: The `@task` decorator converts a regular python function into a Prefect task.
     The optional arguments allow you to specify its retry behavior. We’ve configured
     the function to attempt three times before it fails in the above example. We’ve
     also configured it to delay each retry by three minutes.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '`@task` 装饰器将一个普通的Python函数转换为Prefect任务。可选参数允许你指定其重试行为。在上面的例子中，我们配置了该函数在失败之前尝试三次。我们还配置了每次重试之间延迟三分钟。'
 - en: With this new setup, our ETL is resilient to network issues we discussed earlier.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用这种新设置，我们的ETL对我们之前讨论的网络问题具有弹性。
 - en: To test its functioning, disconnect your computer from the network and run the
     script with `python app.py`. You’ll see a message that the first attempt failed,
     and the next one will begin in the next 3 minutes. Within three minutes, connect
     your computer back to the internet. The already running script will now finish
     without any errors.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 要测试其功能，请将计算机从网络断开连接，并用`python app.py`运行脚本。你会看到一条消息，说明第一次尝试失败，下一次将会在接下来的3分钟内开始。在三分钟内，将计算机重新连接到互联网。已经运行的脚本现在将无错误地完成。
 - en: Scheduling workflows with Prefect.
+  id: totrans-33
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用Prefect调度工作流。
 - en: Retrying is only part of the ETL story. Another challenge for many workflow
     applications is to run them in scheduled intervals. Prefect’s scheduling API is
     straightforward for any Python programmer. Here’s how it works.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 重试只是ETL故事的一部分。许多工作流应用程序的另一个挑战是按计划间隔运行它们。Prefect的调度API对任何Python程序员来说都是直接了当的。它是如何工作的，下面是说明。
 - en: Code by [the Author](https://thuwarakesh.medium.com/).
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码来自 [作者](https://thuwarakesh.medium.com/)。
 - en: We’ve created an IntervalSchedule object that starts five seconds from the execution
     of the script. We’ve also configured it to run in a one-minute interval.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们创建了一个IntervalSchedule对象，它在脚本执行后五秒启动。我们还将其配置为以一分钟为间隔运行。
 - en: If you run the script with `python app.py` and monitor the windspeed.txt file,
     you will see new values in it every minute.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你用`python app.py`运行脚本并监控windspeed.txt文件，你会看到每分钟都会有新值出现。
 - en: In addition to this simple scheduling, Prefect’s schedule API offers more control
     over it. You can schedule workflows in a cron-like method, use clock time with
     timezones, or do more fun stuff like executing workflow only on weekends. I haven’t
     covered them all here, but Prefect's official [docs](https://docs.prefect.io/core/concepts/schedules.html#clocks) about
     this are perfect.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了这种简单的调度外，Prefect的调度API提供了更多的控制。你可以用类似cron的方法调度工作流，使用带有时区的时钟时间，或者做一些更有趣的事情，比如仅在周末执行工作流。我在这里没有涵盖所有内容，但Prefect的官方 [文档](https://docs.prefect.io/core/concepts/schedules.html#clocks) 非常完美。
 - en: The Prefect UI.
+  id: totrans-39
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Prefect UI。
 - en: Like Airflow (and many others,) Prefect too ships with a server with a beautiful
     UI. It allows you to control and visualize your workflow executions.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 像Airflow（和许多其他工具）一样，Prefect也附带一个具有美观UI的服务器。它允许你控制和可视化你的工作流执行。
 - en: '![](../Images/ddd8676fce6a1b9429b402f51ac70153.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ddd8676fce6a1b9429b402f51ac70153.png)'
 - en: Illustration by [the Author](https://thuwarakesh.medium.com/).
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 插图来自 [作者](https://thuwarakesh.medium.com/)。
 - en: To run this, you need to have docker and docker-compose installed on your computer.
     But starting it is surprisingly a single command.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 要运行这个，你需要在计算机上安装 docker 和 docker-compose。不过，启动它只需一个命令，令人惊讶。
 - en: '[PRE1]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![](../Images/b5c02b84f51a3d5e2e98b33338181f95.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b5c02b84f51a3d5e2e98b33338181f95.png)'
 - en: Illustration by [the Author](https://thuwarakesh.medium.com/).
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 插图由 [作者](https://thuwarakesh.medium.com/) 提供。
 - en: This command will start the prefect server, and you can access it through your
     web browser: `[http://localhost:8080/](http://localhost:8080/)`[.](http://localhost:8080/)
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个命令将启动 prefect 服务器，你可以通过你的网页浏览器访问它：`[http://localhost:8080/](http://localhost:8080/)`。
 - en: However, the Prefect server alone could not execute your workflows. Its role
     is only enabling a control pannel to all your Prefect activities. Because this
     dashboard is decoupled from the rest of the application, you can use the Prefect
     cloud to do the same. We’ll discuss this in detail later.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，Prefect 服务器本身无法执行你的工作流。它的作用只是为所有 Prefect 活动提供一个控制面板。由于这个仪表板与应用程序的其余部分解耦，你可以使用
+    Prefect cloud 完成相同的任务。我们将在稍后详细讨论这个问题。
 - en: To execute tasks, we need a few more things. The good news is, they, too, aren’t
     complicated.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行任务时，我们还需要一些其他东西。好消息是，它们也不复杂。
 - en: Because servers are only a control panel, we need an agent to execute the workflow.
     The below command will start a local agent. Instead of a local agent, you can
     choose a docker agent or a Kubernetes one if your project needs them.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为服务器仅作为控制面板，我们需要一个代理来执行工作流。以下命令将启动一个本地代理。如果你的项目需要，你也可以选择 docker 代理或 Kubernetes
+    代理。
 - en: '[PRE2]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![](../Images/534ec6d177c19b7a01220df8515db045.png)'
+  id: totrans-52
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/534ec6d177c19b7a01220df8515db045.png)'
 - en: Illustration by [the Author](https://thuwarakesh.medium.com/).
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 插图由 [作者](https://thuwarakesh.medium.com/) 提供。
 - en: Once the server and the agent are running, you’ll have to create a project and
     register your workflow with that project. To do this, change the line that executes
     the flow to the following.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦服务器和代理运行，你将需要创建一个项目并将工作流注册到该项目中。为此，请将执行工作流的行更改为以下内容。
 - en: Code by [the Author](https://thuwarakesh.medium.com/).
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码由 [作者](https://thuwarakesh.medium.com/) 提供。
 - en: Now in the terminal, you can create a project with the `prefect create project
     <project name>` command. Then rerunning the script will register it to the project
     instead of running it immediately.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在在终端中，你可以使用 `prefect create project <project name>` 命令创建一个项目。然后重新运行脚本将其注册到项目中，而不是立即运行。
 - en: '[PRE3]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![](../Images/22763187f237d00dfafed1c5e4e7f193.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/22763187f237d00dfafed1c5e4e7f193.png)'
 - en: Illustration by [the Author](https://thuwarakesh.medium.com/).
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 插图由 [作者](https://thuwarakesh.medium.com/) 提供。
 - en: In the web UI, you can see the new Project ‘Tutorial’ is in the dropdown, and
     our windspeed tracker is in the list of flows. The flow is already scheduled and
     running. If you prefer, you can run them manually as well.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 在网页界面中，你可以看到新项目‘Tutorial’出现在下拉菜单中，我们的风速跟踪器在工作流列表中。该工作流已经计划并正在运行。如果你愿意，也可以手动运行它们。
 - en: '![](../Images/bf943e7a6d1a57976712d9c428b30771.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bf943e7a6d1a57976712d9c428b30771.png)'
 - en: Illustration by [the Author](https://thuwarakesh.medium.com/).
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 插图由 [作者](https://thuwarakesh.medium.com/) 提供。
 - en: Running workflows with parameters.
+  id: totrans-63
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 带参数的工作流运行。
 - en: The workflow we created in the previous exercise is rigid. It queries only for
     Boston, MA, and we can not change it. This is where we can use parameters. Here’s
     how we tweak our code to accept a parameter at the run time.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在前一个练习中创建的工作流是固定的。它只查询波士顿，马萨诸塞州，我们无法更改它。这时我们可以使用参数。下面是如何调整我们的代码以在运行时接受参数。
 - en: Code by [the Author](https://thuwarakesh.medium.com/).
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码由 [作者](https://thuwarakesh.medium.com/) 提供。
 - en: We’ve changed the function to accept the city argument and set it dynamically
     in the API query. Inside the Flow, we create a parameter object with the default
     value ‘Boston’ and pass it to the Extract task.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经将函数更改为接受城市参数，并在 API 查询中动态设置它。在 Flow 内部，我们创建一个默认值为‘Boston’的参数对象，并将其传递给 Extract
+    任务。
 - en: If you run the windspeed tracker workflow manually in the UI, you’ll see a section
     called input. Here you can set the value of the city for every execution.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你在 UI 中手动运行风速跟踪器工作流，你会看到一个名为 input 的部分。在这里，你可以为每次执行设置城市的值。
 - en: '![](../Images/c2ff3cfc4e99ae12ebde80a0a0006942.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c2ff3cfc4e99ae12ebde80a0a0006942.png)'
 - en: Illustration by [the Author](https://thuwarakesh.medium.com/).
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 插图由 [作者](https://thuwarakesh.medium.com/) 提供。
 - en: This is a convenient way to run workflows. In many cases, ETLs and any other
     workflow come with run-time parameters.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是运行工作流的一种方便方法。在许多情况下，ETL 和其他工作流都附带运行时参数。
 - en: Why did I decide to migrate from Airflow to Prefect?
+  id: totrans-71
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我为什么决定从 Airflow 迁移到 Prefect？
 - en: Airflow is a fantastic platform for workflow management. It saved me a ton of
     time on many projects. Yet, we need to appreciate new technologies taking over
     the old ones. That’s the case with Airflow and Prefect.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: Airflow 是一个出色的工作流管理平台。在许多项目中，它为我节省了大量时间。然而，我们需要欣赏那些取代旧技术的新技术。这就是 Airflow 和 Prefect
+    的情况。
 - en: Airflow got many things right, but its core assumptions never anticipated the
     rich variety of data applications that have emerged.
+  id: totrans-73
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: Airflow 很多地方做得很好，但其核心假设从未预见到数据应用的丰富多样性。
 - en: ''
+  id: totrans-74
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: — Prefect Documentation.
+  id: totrans-75
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: — Prefect 文档。
 - en: What I describe here aren’t dead-ends if you’re preferring Airflow. We have
     workarounds for most problems. Yet, it’s convenient in Prefect because the tool
     natively supports them.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在这里描述的内容并不是说如果你偏好 Airflow 就没有解决方案。我们有大多数问题的解决办法。然而，在 Prefect 中，这些问题的解决方案是工具原生支持的。
 - en: Prefect’s **installation** is exceptionally straightforward compared to Airflow.
     For trained eyes, it may not be a problem. Yet, for whoever wants to start on
     workflow orchestration and automation, it’s a hassle.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 相比于 Airflow，Prefect 的 **安装** 非常简单。对于训练有素的眼睛，这可能不是问题。然而，对于任何想要开始工作流编排和自动化的人来说，这是一种麻烦。
 - en: Airflow needs a **server** running in the backend to perform any task. Yet,
     in Prefect, a server is optional. This is a massive benefit of using Prefect.
     I have many pet projects running on my computer as services. Earlier, I had to
     have an Airflow server commencing at the startup. Because Prefect could run standalone,
     I don’t have to turn on this additional server anymore.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: Airflow 需要在后台运行一个 **服务器** 来执行任何任务。然而，在 Prefect 中，服务器是可选的。这是使用 Prefect 的一个巨大优势。我有许多在计算机上作为服务运行的小项目。以前，我必须在启动时启动
+    Airflow 服务器。因为 Prefect 可以独立运行，所以我不再需要启动这个额外的服务器。
 - en: Airflow doesn’t have the flexibility to run workflows (or DAGs) with **parameters**.
     The workaround I use to have is to let the application read them from a database.
     This isn’t an excellent programming technique for such a simple task. Prefect’s
     parameter concept is exceptional on this front.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: Airflow 不具备使用 **参数** 运行工作流（或 DAG）的灵活性。我使用的解决方法是让应用程序从数据库中读取这些参数。这对于如此简单的任务来说不是一个很好的编程技术。在这方面，Prefect
+    的参数概念非常出色。
 - en: Prefect allows having different **versions** of the same workflow. Every time
     you register a workflow to the project, it creates a new version. If you need
     to run a previous version, you can easily select it in a dropdown. This isn’t
     possible with Airflow.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: Prefect 允许拥有相同工作流的不同 **版本**。每次你将工作流注册到项目中时，它会创建一个新版本。如果你需要运行以前的版本，你可以轻松地在下拉菜单中选择它。这在
+    Airflow 中是不可能的。
 - en: Prefect also allows us to create teams and role-based access controls. Each
     team could manage its configuration. **Authorization** is a critical part of every
     modern application, and Prefect handles it in the best way possible.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: Prefect 还允许我们创建团队和基于角色的访问控制。每个团队可以管理自己的配置。**授权** 是每个现代应用程序的重要部分，Prefect 以最佳方式处理它。
 - en: Lastly, I find Prefect’s **UI** more intuitive and appealing. Airflow’s UI,
     especially its task execution visualization, was difficult at first to understand.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我发现 Prefect 的 **UI** 更加直观和吸引人。Airflow 的 UI，尤其是其任务执行可视化，刚开始时很难理解。
 - en: Prefect’s ecosystem and integration with other technologies.
+  id: totrans-83
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Prefect 的生态系统及其与其他技术的集成。
 - en: Prefect has inbuilt integration with many other technologies. It eliminates
     a ton of overhead and makes working with them super easy.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: Prefect 内置了与许多其他技术的集成。它消除了大量的开销，使得与这些技术的工作变得非常简单。
 - en: Live projects often have to deal with several technologies. For example, when
     your ETL fails, you may want to send an email or a Slack notification to the maintainer.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 现实项目经常需要处理多种技术。例如，当你的 ETL 失败时，你可能想要向维护者发送电子邮件或 Slack 通知。
 - en: In Prefect, sending such notifications is effortless. You can use the EmailTask
     from the Prefect’s task library, set the credentials, and start sending emails.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Prefect 中，发送这样的通知是非常简单的。你可以使用 Prefect 的任务库中的 EmailTask，设置凭据，然后开始发送电子邮件。
 - en: You can learn more about Prefect’s rich ecosystem in their [official documentation](https://docs.prefect.io/core/task_library/overview.html#task-library-in-action).
     In this article, we’ll see how to send email notifications.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在他们的 [官方文档](https://docs.prefect.io/core/task_library/overview.html#task-library-in-action)
+    中了解更多关于 Prefect 丰富生态系统的内容。在本文中，我们将看到如何发送电子邮件通知。
 - en: To send emails, we need to make the credentials accessible to the Prefect agent.
     You can do that by creating the below file in `$HOME/.prefect/config.toml`.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 要发送电子邮件，我们需要使凭证对 Prefect 代理可访问。你可以通过在`$HOME/.prefect/config.toml`中创建以下文件来实现。
 - en: Code by [the Author](https://thuwarakesh.medium.com/).
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码来自[作者](https://thuwarakesh.medium.com/)。
 - en: Your app is now ready to send emails. Here’s how we send a notification when
     we successfully captured a windspeed measure.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的应用程序现在已准备好发送电子邮件。以下是我们成功捕获风速测量时如何发送通知。
 - en: Code by [the Author](https://thuwarakesh.medium.com/).
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码来自[作者](https://thuwarakesh.medium.com/)。
 - en: In the above code, we’ve created an instance of the EmailTask class. We’ve used
     all the static elements of our email configurations during initiating. Then inside
     the Flow, we’ve used it with passing variable content.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述代码中，我们创建了 EmailTask 类的一个实例。在初始化期间，我们使用了电子邮件配置的所有静态元素。然后在 Flow 中，我们使用了带有变量内容的实例。
 - en: This configuration above will send an email with the captured windspeed measurement.
     But its subject will always remain ‘A new windspeed captured.’
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述配置将发送包含捕获的风速测量的电子邮件。但其主题将始终保持为‘捕获的新风速’。
 - en: Perfect Cloud vs. On-Premis Server Deployments.
+  id: totrans-94
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Prefect Cloud 与本地服务器部署。
 - en: We’ve already looked into how we can start an on-premise server. Because this
     server is only a control panel, you could easily use the cloud version instead.
     To do this, we have few additional steps to follow.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经了解了如何启动本地服务器。因为这个服务器只是一个控制面板，你可以轻松地使用云版本代替。要做到这一点，我们需要遵循一些额外的步骤。
 - en: Create a [Prefect cloud](https://cloud.prefect.io/) account.
+  id: totrans-96
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建一个[Prefect cloud](https://cloud.prefect.io/)账户。
 - en: Generate a key from the [API Key Page](https://cloud.prefect.io/user/keys).
+  id: totrans-97
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 从[API 密钥页面](https://cloud.prefect.io/user/keys)生成一个密钥。
 - en: In your terminal, set the backend to cloud: `prefect backend cloud`.
+  id: totrans-98
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在你的终端中，将后端设置为云：`prefect backend cloud`。
 - en: Also login with the generated key: `prefect auth login --key YOUR_API_KEY`.
+  id: totrans-99
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 还需要使用生成的密钥登录：`prefect auth login --key YOUR_API_KEY`。
 - en: Now, start the agent as usual. `prefect agent local start`.
+  id: totrans-100
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 现在，像往常一样启动代理：`prefect agent local start`。
 - en: In the cloud dashboard, you can manage everything you did on the local server
     before.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 在云仪表板中，你可以管理之前在本地服务器上完成的所有操作。
 - en: A big question when choosing between cloud and server versions is **security**.
     According to Prefect‘s docs, the server only stores workflow execution-related
     data and voluntary information provided by the user. Since the agent in your local
     computer executes the logic, you can control where you store your data.
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 在选择云版本和服务器版本时，一个重要问题是**安全性**。根据 Prefect 的文档，服务器仅存储与工作流执行相关的数据和用户提供的自愿信息。由于代理在你的本地计算机上执行逻辑，你可以控制数据存储的位置。
 - en: The cloud option is suitable for **performance** reasons too. With one cloud
     server, you can manage more than one agent. Thus, you can scale your app effortlessly.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 云选项在**性能**方面也很合适。使用一个云服务器，你可以管理多个代理。因此，你可以轻松地扩展你的应用程序。
 - en: Final Thoughts
+  id: totrans-104
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 最后的想法
 - en: Airflow was my ultimate choice for building ETLs and other workflow management
     applications. Yet, Prefect changed my mind, and now I’m migrating everything from
     Airflow to Prefect.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: Airflow 曾是我构建 ETL 和其他工作流管理应用程序的最终选择。然而，Prefect 让我改变了主意，现在我正在将所有内容从 Airflow 迁移到
+    Prefect。
 - en: Prefect is a straightforward tool that is flexible to extend beyond what Airflow
     can do. You can run it even inside a Jupyter notebook. Also, you can host it as
     a complete task management solution.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: Prefect 是一个简单的工具，具有超越 Airflow 的灵活扩展性。你甚至可以在 Jupyter notebook 中运行它。同时，你可以将其作为完整的任务管理解决方案进行托管。
 - en: In addition to the central problem of workflow management, Prefect solves several
     other issues you may frequently encounter in a live system. Managing teams with
     authorization controls, sending notifications are some of them.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了工作流管理的核心问题外，Prefect 还解决了你可能在实时系统中经常遇到的其他问题。管理带有授权控制的团队、发送通知等就是其中的一些。
 - en: In this article, we’ve discussed how to create an ETL that
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们讨论了如何创建一个 ETL，它
 - en: retries some tasks as configured;
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 根据配置重试一些任务；
 - en: run workflows in a schedule;
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 按计划运行工作流；
 - en: accepts run-time parameters, and;
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 接受运行时参数，并且；
 - en: sends an email notification when it’s done.
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当操作完成时，发送电子邮件通知。
 - en: We’ve only scratched the surface of Prefects capabilities. I recommend reading
     the official [documentation](https://docs.prefect.io/core/) for more information.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们只是触及了 Prefect 能力的表面。我建议阅读官方[文档](https://docs.prefect.io/core/)以获取更多信息。
 - en: Thanks for reading, friend! It seems you, and I have lots of common interests.
     I’d love to connect with you on [LinkedIn](https://www.linkedin.com/in/thuwarakesh/), [Twitter](https://twitter.com/Thuwarakesh),
     and [Medium](https://thuwarakesh.medium.com/).
+  id: totrans-114
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 谢谢阅读，朋友！看起来我们有很多共同的兴趣。我很想在 [LinkedIn](https://www.linkedin.com/in/thuwarakesh/)、[Twitter](https://twitter.com/Thuwarakesh)
+    和 [Medium](https://thuwarakesh.medium.com/) 上与你联系。
 - en: Not a Medium member yet? Please use this link to [**become a member**](https://thuwarakesh.medium.com/membership).
     You can enjoy thousands of insightful articles and support me as I earn a small
     commission for referring you.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 还不是 Medium 会员？请使用此链接 [**成为会员**](https://thuwarakesh.medium.com/membership)。你可以享受数千篇有见地的文章，并支持我，因为我通过推荐你获得少量佣金。
 - en: '**Bio: [Murallie Thuwarakesh](https://www.linkedin.com/in/thuwarakesh/)** (**[@Thuwarakesh](https://twitter.com/Thuwarakesh)**)
     is a Data Scientist at Stax, Inc., and a top writer on Medium for Analytics. Murallie
     shares what he explores in data science every day.'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Murallie Thuwarakesh](https://www.linkedin.com/in/thuwarakesh/)** (**[@Thuwarakesh](https://twitter.com/Thuwarakesh)**)
+    是 Stax, Inc. 的数据科学家，并且是 Medium 上的顶级分析写作者。Murallie 分享了他在数据科学中的每日探索。'
 - en: '[Original](https://towardsdatascience.com/the-prefect-way-to-automate-orchestrate-data-pipelines-d4465638bac2).
     Reposted with permission.'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/the-prefect-way-to-automate-orchestrate-data-pipelines-d4465638bac2)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Prefect: How to Write and Schedule Your First ETL Pipeline with Python](/2021/08/prefect-write-schedule-etl-pipeline-python.html)'
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Prefect：如何使用 Python 编写和安排你的第一个 ETL 管道](/2021/08/prefect-write-schedule-etl-pipeline-python.html)'
 - en: '[Build a synthetic data pipeline using Gretel and Apache Airflow](/2021/09/build-synthetic-data-pipeline-gretel-apache-airflow.html)'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Gretel 和 Apache Airflow 构建合成数据管道](/2021/09/build-synthetic-data-pipeline-gretel-apache-airflow.html)'
 - en: '[Development & Testing of ETL Pipelines for AWS Locally](/2021/08/development-testing-etl-pipelines-aws-locally.html)'
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[本地开发和测试 AWS 的 ETL 管道](/2021/08/development-testing-etl-pipelines-aws-locally.html)'
 - en: '* * *'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-123
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-128
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Orchestrate a Data Science Project in Python With Prefect](https://www.kdnuggets.com/2022/02/orchestrate-data-science-project-python-prefect.html)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Prefect 在 Python 中编排数据科学项目](https://www.kdnuggets.com/2022/02/orchestrate-data-science-project-python-prefect.html)'
 - en: '[Building Data Pipeline with Prefect](https://www.kdnuggets.com/building-data-pipeline-with-prefect)'
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Prefect 构建数据管道](https://www.kdnuggets.com/building-data-pipeline-with-prefect)'
 - en: '[5 Simple Steps to Automate Data Cleaning with Python](https://www.kdnuggets.com/5-simple-steps-to-automate-data-cleaning-with-python)'
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 自动化数据清洗的 5 个简单步骤](https://www.kdnuggets.com/5-simple-steps-to-automate-data-cleaning-with-python)'
 - en: '[5 Tasks To Automate With Python](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)'
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 自动化的 5 个任务](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)'
 - en: '[Automate Microsoft Excel and Word Using Python](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 自动化 Microsoft Excel 和 Word](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
 - en: '[Automate the Boring Stuff with GPT-4 and Python](https://www.kdnuggets.com/2023/03/automate-boring-stuff-chatgpt-python.html)'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 GPT-4 和 Python 自动化无聊的事情](https://www.kdnuggets.com/2023/03/automate-boring-stuff-chatgpt-python.html)'
