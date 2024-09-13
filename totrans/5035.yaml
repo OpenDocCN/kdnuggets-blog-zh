@@ -3,15 +3,18 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Python 进行 Twitter 数据挖掘 第7部分：地理位置和交互式地图
 - en: 原文：[https://www.kdnuggets.com/2016/07/mining-twitter-data-python-part-7.html](https://www.kdnuggets.com/2016/07/mining-twitter-data-python-part-7.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/07/mining-twitter-data-python-part-7.html](https://www.kdnuggets.com/2016/07/mining-twitter-data-python-part-7.html)
 - en: '**By Marco Bonzanini, Independent Data Science Consultant.**'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Marco Bonzanini，独立数据科学顾问。**'
 - en: '[Geolocation](https://en.wikipedia.org/wiki/Geolocation) is the process of
     identifying the geographic location of an object such as a mobile phone or a computer.
     Twitter allows its users to provide their location when they publish a tweet,
@@ -21,37 +24,48 @@
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[地理定位](https://en.wikipedia.org/wiki/Geolocation)是识别对象地理位置的过程，例如移动电话或计算机。Twitter
+    允许用户在发布推文时提供他们的位置，形式为纬度和经度坐标。有了这些信息，我们准备好为我们的数据创建一些不错的交互式地图可视化。'
 - en: '* * *'
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你在 IT 领域的组织'
 - en: '* * *'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: This article briefly introduces the [GeoJSON](http://geojson.org/) format and [Leaflet.js](http://leafletjs.com/),
     a nice Javascript library for interactive maps, and discusses its integration
     with the Twitter data we have collected in the previous parts of this tutorial
@@ -60,11 +74,14 @@
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文简要介绍了[GeoJSON](http://geojson.org/)格式和[Leaflet.js](http://leafletjs.com/)，这是一个用于交互式地图的优秀
+    Javascript 库，并讨论了它与我们在本教程前面部分收集的 Twitter 数据的集成（详细信息请参见[第4部分](https://marcobonzanini.com/2015/03/23/mining-twitter-data-with-python-part-4-rugby-and-term-co-occurrences/)）。
 - en: GeoJSON
   id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: GeoJSON
 - en: GeoJSON is a format for encoding geographic data structures. The format supports
     a variety of geometric types that can be used to visualise the desired shapes
     onto a map. For our examples, we just need the simplest structure, a `Point`.
@@ -72,21 +89,25 @@
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: GeoJSON 是一种用于编码地理数据结构的格式。该格式支持各种几何类型，这些类型可以用于将所需的形状可视化到地图上。对于我们的示例，我们只需要最简单的结构，即`Point`。点通过其坐标（纬度和经度）来识别。
 - en: In GeoJSON, we can also represent objects such as a `Feature` or a`FeatureCollection`.
     The first one is basically a geometry with additional properties, while the second
     one is a list of features.
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 GeoJSON 中，我们还可以表示如`Feature`或`FeatureCollection`这样的对象。第一个基本上是一个带有附加属性的几何体，而第二个是特征列表。
 - en: Our Twitter data set can be represented in GeoJSON as a`FeatureCollection`,
     where each tweet would be an individual `Feature`with its one geometry (the aforementioned `Point`).
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的 Twitter 数据集可以表示为 GeoJSON 中的一个`FeatureCollection`，其中每条推文将是一个包含单个几何体（即前面提到的`Point`）的独立`Feature`。
 - en: 'This is how the JSON structure looks like:'
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是 JSON 结构的样子：
 - en: '[PRE0]'
   id: totrans-16
   prefs: []
@@ -97,6 +118,7 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 从推文到 GeoJSON
 - en: Assuming the data are stored in a single file as described in the first chapter
     of this tutorial, we simply need to iterate all the tweets looking for the *coordinates* field,
     which may or may not be present. Keep in mind that you need to use *coordinates*,
@@ -104,12 +126,15 @@
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设数据存储在单个文件中，如本教程第一章所述，我们只需遍历所有推文，查找可能存在的*coordinates*字段。请记住，你需要使用*coordinates*，因为*geo*字段已被弃用（请参见[API](https://dev.twitter.com/overview/api/tweets)）。
 - en: 'This code will read the data set, looking for tweets where the coordinates
     are explicitely given. Once the GeoJSON data structure is created (in the form
     of a Python dictionary), then the data are dumped into a file called `geo_data.json`:'
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 这段代码将读取数据集，查找坐标明确给出的推文。一旦创建了 GeoJSON 数据结构（以 Python 字典形式），数据将被转储到名为 `geo_data.json`
+    的文件中：
 - en: '[PRE1]'
   id: totrans-20
   prefs: []
@@ -120,18 +145,22 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 Leaflet.js 的互动地图
 - en: '[Leaflet.js](http://leafletjs.com/) is an open-source Javascript library for
     interactive maps. You can create maps with tiles of your choice (e.g. from OpenStreetMap
     or MapBox), and overlap interactive components.'
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Leaflet.js](http://leafletjs.com/) 是一个开源的 Javascript 库，用于创建互动地图。你可以创建包含你选择的瓦片（例如来自
+    OpenStreetMap 或 MapBox）的地图，并叠加互动组件。'
 - en: 'In order to prepare a web page that will host a map, you simply need to include
     the library and its CSS, by putting in the head section of your document the following
     lines:'
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了准备一个可以托管地图的网页，你只需在文档的头部部分包含库及其 CSS，添加以下几行代码：
 - en: '[PRE2]'
   id: totrans-24
   prefs: []
@@ -144,6 +173,7 @@
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，我们将所有的 GeoJSON 数据放在一个单独的文件中，因此我们希望动态加载数据，而不是手动将所有点放在地图上。为此，我们可以轻松地使用[jQuery](https://jquery.com/)，这也是我们需要包括的：
 - en: '[PRE3]'
   id: totrans-26
   prefs: []
@@ -153,6 +183,7 @@
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 地图本身将放置在一个 `div` 元素中：
 - en: '[PRE4]'
   id: totrans-28
   prefs: []
@@ -162,6 +193,7 @@
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在准备使用 Leaflet 创建地图：
 - en: '[PRE5]'
   id: totrans-30
   prefs: []
@@ -171,39 +203,47 @@
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果的截图：
 - en: '[![rugby-map-osm](../Images/74995a7417291a318ded650623b26b71.png)](https://marcobonzanini.files.wordpress.com/2015/06/rugby-map-osm.png)'
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![rugby-map-osm](../Images/74995a7417291a318ded650623b26b71.png)](https://marcobonzanini.files.wordpress.com/2015/06/rugby-map-osm.png)'
 - en: The above example uses OpenStreetMap for the tile images, but Leaflet lets you
     choose other services. For example, in the following screenshot the tiles are
     coming from MapBox.
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的例子使用了 OpenStreetMap 的瓦片图像，但 Leaflet 允许你选择其他服务。例如，在下面的截图中，瓦片图像来自 MapBox。
 - en: '[![rugby-map-mapbox](../Images/320461a68e73c99fbde1fe78eb3e0d5b.png)](https://marcobonzanini.files.wordpress.com/2015/06/rugby-map-mapbox.png)'
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![rugby-map-mapbox](../Images/320461a68e73c99fbde1fe78eb3e0d5b.png)](https://marcobonzanini.files.wordpress.com/2015/06/rugby-map-mapbox.png)'
 - en: 'You can see the interactive maps in action here:'
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在这里看到互动地图的实际效果：
 - en: '[Tiles from OpenStreetMap](http://bonzanini.github.io/mining-twitter/rugby-osm.html)'
   id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[OpenStreetMap 的瓦片](http://bonzanini.github.io/mining-twitter/rugby-osm.html)'
 - en: '[Tiles from MapBox](http://bonzanini.github.io/mining-twitter/rugby-mapbox.html)'
   id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MapBox 的瓦片](http://bonzanini.github.io/mining-twitter/rugby-mapbox.html)'
 - en: Summary
   id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结
 - en: In general there are many options for data visualisation in Python, but in terms
     of browser-based interaction, Javascript is also an interesting option, and the
     two languages can play well together. This article has shown that building a simple
@@ -211,6 +251,7 @@
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 一般来说，Python 有许多数据可视化的选项，但在基于浏览器的交互方面，Javascript 也是一个有趣的选择，两种语言可以很好地配合使用。本文展示了构建简单互动地图是一个相当直接的过程。
 - en: With a few lines of Python, we’ve been able to transform our data into a common
     format (GeoJSON) that can be passed onto Javascript for visualisation. Leaflet.js
     is a nice Javascript library that, almost out of the box, lets us create some
@@ -218,6 +259,8 @@
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 几行 Python 代码就能将数据转换为可以传递给 Javascript 进行可视化的通用格式（GeoJSON）。Leaflet.js 是一个很棒的 Javascript
+    库，几乎开箱即用，让我们创建一些不错的互动地图。
 - en: '**Bio: [Marco Bonzanini](https://twitter.com/marcobonzanini)** is a Data Scientist
     based in London, UK. Active in the PyData community, he enjoys working in text
     analytics and data mining applications. He''s the author of "[Mastering Social
@@ -226,20 +269,26 @@
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Marco Bonzanini](https://twitter.com/marcobonzanini)** 是一位常驻伦敦的 数据科学家。他活跃于
+    PyData 社区，喜欢从事文本分析和数据挖掘应用。他是《[用 Python 掌握社交媒体挖掘](https://www.amazon.com/Mastering-Social-Media-Mining-Python-ebook/dp/B01BFD2Z2Q)》（Packt
+    Publishing，2016年7月）的作者。'
 - en: '[Original](https://marcobonzanini.com/2015/06/16/mining-twitter-data-with-python-and-js-part-7-geolocation-and-interactive-maps/).
     Reposted with permission.'
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://marcobonzanini.com/2015/06/16/mining-twitter-data-with-python-and-js-part-7-geolocation-and-interactive-maps/)。转载已获许可。'
 - en: '**Related**:'
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容**：'
 - en: '[Mining Twitter Data with Python Part 4: Rugby and Term Co-occurrences](/2016/06/mining-twitter-data-python-part-4.html)'
   id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 挖掘 Twitter 数据 第4部分：橄榄球和术语共现](/2016/06/mining-twitter-data-python-part-4.html)'
 - en: '[Mining Twitter Data with Python Part 5: Data Visualisation Basics](/2016/06/mining-twitter-data-python-part-5.html)'
   id: totrans-45
   prefs:

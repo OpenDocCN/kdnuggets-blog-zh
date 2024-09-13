@@ -1,59 +1,90 @@
 - en: 'Mining Twitter Data with Python Part 6: Sentiment Analysis Basics'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Python 矿掘 Twitter 数据 第 6 部分：情感分析基础
 - en: 原文：[https://www.kdnuggets.com/2016/07/mining-twitter-data-python-part-6.html](https://www.kdnuggets.com/2016/07/mining-twitter-data-python-part-6.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/07/mining-twitter-data-python-part-6.html](https://www.kdnuggets.com/2016/07/mining-twitter-data-python-part-6.html)
 - en: '**By Marco Bonzanini, Independent Data Science Consultant.**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Marco Bonzanini，独立数据科学顾问。**'
 - en: '[Sentiment Analysis](https://www.kdnuggets.com/2018/08/emotion-sentiment-analysis-practitioners-guide-nlp-5.html) is
     one of the interesting applications of text analytics. Although the term is often
     associated with [sentiment classification of documents](https://marcobonzanini.com/2015/01/19/sentiment-analysis-with-python-and-scikit-learn/),
     broadly speaking it refers to the use of text analytics approaches applied to
     the set of problems related to identifying and extracting subjective material
     in text sources.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[情感分析](https://www.kdnuggets.com/2018/08/emotion-sentiment-analysis-practitioners-guide-nlp-5.html)
+    是文本分析的一个有趣应用。虽然这个术语通常与 [文档情感分类](https://marcobonzanini.com/2015/01/19/sentiment-analysis-with-python-and-scikit-learn/)
+    相关联，但广义上讲，它指的是将文本分析方法应用于识别和提取文本源中主观材料的一系列问题。'
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT 需求'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: This article continues the series on mining Twitter data with Python, describing
     a simple approach for Sentiment Analysis and applying it to the rubgy data set
     (see [Part 4](/2016/06/mining-twitter-data-python-part-4.html)).
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文继续讲解使用 Python 矿掘 Twitter 数据的系列，描述了一种简单的情感分析方法，并将其应用于橄榄球数据集（见 [第 4 部分](/2016/06/mining-twitter-data-python-part-4.html)）。
 - en: '![Twitter](../Images/3da5b4dea824ea453ca3ae25f3548634.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![Twitter](../Images/3da5b4dea824ea453ca3ae25f3548634.png)'
 - en: A Simple Approach for Sentiment Analysis
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一种简单的情感分析方法
 - en: The technique we’re discussing in this post has been elaborated from the traditional
     approach proposed by Peter Turney in his paper [Thumbs Up or Thumbs Down? Semantic
     Orientation Applied to Unsupervised Classification of Reviews](http://arxiv.org/abs/cs/0212032).
@@ -61,40 +92,61 @@
     has still an interesting educational value. In particular, it is intuitive, simple
     to understand and to test, and most of all *unsupervised*, so it doesn’t require
     any labelled data for training.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在本文讨论的技术是从 Peter Turney 在其论文 [“赞成还是反对？语义取向应用于无监督的评论分类”](http://arxiv.org/abs/cs/0212032)
+    中提出的传统方法发展而来的。从那时起，情感分析领域做了大量工作，但这种方法仍然具有有趣的教育价值。特别是，它直观、易于理解和测试，而且最重要的是 *无监督*，因此不需要任何标注数据进行训练。
 - en: 'Firstly, we define the *Semantic Orientation* (SO) of a word as the difference
     between its associations with positive and negative words. In practice, we want
     to calculate “how close” a word is with terms like *good*and *bad*. The chosen
     measure of “closeness” is [Pointwise Mutual Information](https://en.wikipedia.org/wiki/Pointwise_mutual_information) (PMI),
     calculated as follows (t1 and t2 are terms):'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们将一个词的 *语义取向* (SO) 定义为其与积极和消极词汇关联的差异。实际上，我们想要计算一个词与 *好* 和 *坏* 等术语的“接近程度”。所选择的“接近度”度量是
+    [点互信息](https://en.wikipedia.org/wiki/Pointwise_mutual_information) (PMI)，计算方法如下（t1
+    和 t2 是术语）：
 - en: '![\mbox{PMI}(t_1, t_2) = \log\Bigl(\frac{P(t_1 \wedge t_2)}{P(t_1) \cdot P(t_2)}\Bigr)](../Images/4b5806b73498d21668aae5f9870f1753.png
     "\mbox{PMI}(t_1, t_2) = \log\Bigl(\frac{P(t_1 \wedge t_2)}{P(t_1) \cdot P(t_2)}\Bigr)")'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![\mbox{PMI}(t_1, t_2) = \log\Bigl(\frac{P(t_1 \wedge t_2)}{P(t_1) \cdot P(t_2)}\Bigr)](../Images/4b5806b73498d21668aae5f9870f1753.png
+    "\mbox{PMI}(t_1, t_2) = \log\Bigl(\frac{P(t_1 \wedge t_2)}{P(t_1) \cdot P(t_2)}\Bigr)")'
 - en: 'In Turney’s paper, the SO of a word was calculated against *excellent* and*poor*,
     but of course we can extend the vocabulary of positive and negative terms. Using ![V^{+}](../Images/5d73d28023648a59b0827977675a774b.png
     "V^{+}") and a vocabulary of positive terms and ![V^{-}](../Images/b1377e15ce49e6e88b8a5cdc726db776.png
     "V^{-}") for the negative ones, the Semantic Orientation of a term t is hence
     defined as:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Turney的论文中，词汇的SO是通过与*excellent*和*poor*进行比较计算的，但当然我们可以扩展正面和负面术语的词汇表。使用![V^{+}](../Images/5d73d28023648a59b0827977675a774b.png
+    "V^{+}")和正面词汇的词汇表以及![V^{-}](../Images/b1377e15ce49e6e88b8a5cdc726db776.png "V^{-}")用于负面词汇，术语t的语义取向定义如下：
 - en: '![\mbox{SO}(t) = \sum_{t'' \in V^{+}}\mbox{PMI}(t, t'') - \sum_{t'' \in V^{-}}\mbox{PMI}(t,
     t'')](../Images/55ff1a1560049e0cc9b5a92fb25cb747.png "\mbox{SO}(t) = \sum_{t''
     \in V^{+}}\mbox{PMI}(t, t'') - \sum_{t'' \in V^{-}}\mbox{PMI}(t, t'')")'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![\mbox{SO}(t) = \sum_{t'' \in V^{+}}\mbox{PMI}(t, t'') - \sum_{t'' \in V^{-}}\mbox{PMI}(t,
+    t'')](../Images/55ff1a1560049e0cc9b5a92fb25cb747.png "\mbox{SO}(t) = \sum_{t''
+    \in V^{+}}\mbox{PMI}(t, t'') - \sum_{t'' \in V^{-}}\mbox{PMI}(t, t'')")'
 - en: We can build our own list of positive and negative terms, or we can use one
     of the many resources available on-line, for example the [opinion lexicon](http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html#lexicon) by
     Bing Liu.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以建立自己的一组正面和负面术语，或者使用在线提供的众多资源之一，例如[Bing Liu的意见词典](http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html#lexicon)。
 - en: Computing Term Probabilities
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 计算术语概率
 - en: 'In order to compute ![P(t)](../Images/ef9b353a1581215b6822443259cf8940.png
     "P(t)") (the probability of observing the term *t*) and ![P(t_1 \wedge t_2)](../Images/40bb2f6634e787e1e47bc734e8ed60f0.png
     "P(t_1 \wedge t_2)") (the probability of observing the terms *t1* and *t2* occurring
@@ -103,84 +155,125 @@
     Given the set of documents (tweets) *D*, we define the Document Frequency (DF)
     of a term as the number of documents where the term occurs. The same definition
     can be applied to co-occurrent terms. Hence, we can define our probabilities as:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了计算![P(t)](../Images/ef9b353a1581215b6822443259cf8940.png "P(t)")（观察到术语*t*的概率）和![P(t_1
+    \wedge t_2)](../Images/40bb2f6634e787e1e47bc734e8ed60f0.png "P(t_1 \wedge t_2)")（观察到术语*t1*和*t2*同时出现的概率），我们可以重用一些之前的代码来计算[术语频率](https://marcobonzanini.com/2015/03/17/mining-twitter-data-with-python-part-3-term-frequencies/)和[术语共现](https://marcobonzanini.com/2015/03/23/mining-twitter-data-with-python-part-4-rugby-and-term-co-occurrences/)。给定文档集（推文）*D*，我们将术语的文档频率（DF）定义为术语出现的文档数量。相同的定义可以应用于共现术语。因此，我们可以定义我们的概率为：
 - en: '![P(t) = \frac{\mbox{DF}(t)}{|D|}\\ P(t_1 \wedge t_2) = \frac{\mbox{DF}(t_1
     \wedge t_2)}{|D|}](../Images/15d47c3e5ea6bc467548a7f0810267b1.png "P(t) = \frac{\mbox{DF}(t)}{|D|}\\
     P(t_1 \wedge t_2) = \frac{\mbox{DF}(t_1 \wedge t_2)}{|D|}")'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![P(t) = \frac{\mbox{DF}(t)}{|D|}\\ P(t_1 \wedge t_2) = \frac{\mbox{DF}(t_1
+    \wedge t_2)}{|D|}](../Images/15d47c3e5ea6bc467548a7f0810267b1.png "P(t) = \frac{\mbox{DF}(t)}{|D|}\\
+    P(t_1 \wedge t_2) = \frac{\mbox{DF}(t_1 \wedge t_2)}{|D|}")'
 - en: In the previous articles, the document frequency for single terms was stored
     in the dictionaries `count_single` and `count_stop_single` (the latter doesn’t
     store stop-words), while the document frequency for the co-occurrencies was stored
     in the co-occurrence matrix `com`
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在之前的文章中，单一术语的文档频率存储在字典`count_single`和`count_stop_single`中（后者不存储停用词），而共现的文档频率存储在共现矩阵`com`中。
 - en: 'This is how we can compute the probabilities:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是我们计算概率的方法：
 - en: '[PRE0]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Computing the Semantic Orientation
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 计算语义取向
 - en: 'Given two vocabularies for positive and negative terms:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 给定两个正面和负面术语的词汇表：
 - en: '[PRE1]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'We can compute the PMI of each pair of terms, and then compute the Semantic
     Orientation as described above:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以计算每对术语的PMI，然后计算如上所述的语义取向：
 - en: '[PRE2]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The Semantic Orientation of a term will have a positive (negative) value if
     the term is often associated with terms in the positive (negative) vocabulary.
     The value will be zero for neutral terms, e.g. the PMI’s for positive and negative
     balance out, or more likely a term is never observed together with other terms
     in the positive/negative vocabularies.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果术语经常与正面（负面）词汇中的术语相关联，则该术语的语义取向将为正（负）值。对于中性术语，值将为零，例如正面和负面PMI平衡，或更有可能的是，术语从未与正面/负面词汇中的其他术语一起出现。
 - en: 'We can print out the semantic orientation for some terms:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以打印出一些术语的语义取向：
 - en: '[PRE3]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Different vocabularies will produce different scores. Using the [opinion lexicon
     from Bing Liu](http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html#lexicon),
     this is what we can observed on the [Rugby data-set](/2016/06/mining-twitter-data-python-part-4.html):'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 不同的词汇表会产生不同的分数。使用[来自Bing Liu的意见词典](http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html#lexicon)，我们可以观察到在[Rugby数据集](/2016/06/mining-twitter-data-python-part-4.html)上的结果：
 - en: '[PRE4]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Some Limitations
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一些局限性
 - en: The PMI-based approach has been introduced as simple and intuitive, but of course
     it has some limitations. The semantic scores are calculated on terms, meaning
     that there is no notion of “entity” or “concept” or “event”. For example, it would
     be nice to aggregate and normalise all the references to the team names, e.g. *#ita*, *Italy* and *Italia* should
     all contribute to the semantic orientation of the same entity. Moreover, do the
     opinions on the individual teams also contribute to the overall opinion on a match?
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于PMI的方法被介绍为简单而直观，但当然也有一些局限性。语义分数是基于术语计算的，这意味着没有“实体”或“概念”或“事件”的概念。例如，将所有对球队名称的引用进行聚合和归一化，例如*#ita*、*Italy*和*Italia*，应该都对同一实体的语义倾向产生贡献。此外，单个球队的意见是否也会影响对一场比赛的整体意见？
 - en: 'Some aspects of natural language are also not captured by this approach, more
     notably modifiers and negation: how do we deal with phrases like*not bad* (this
     is the opposite of just *bad*) or *very good* (this is stronger than just *good*)?'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些自然语言的方面也未被此方法捕捉，尤其是修饰语和否定词：我们如何处理像*not bad*（这与*bad*正好相反）或*very good*（这比*good*更强烈）的短语？
 - en: Summary
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 摘要
 - en: This article has continued the tutorial on mining Twitter data with Python introducing
     a simple approach for Sentiment Analysis, based on the computation of a semantic
     orientation score which tells us whether a term is more closely related to a positive
@@ -188,59 +281,89 @@
     it can be implemented using Pointwise Mutual Information as a measure of association.
     The approach has of course some limitations, but it’s a good starting point to
     get familiar with Sentiment Analysis.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文继续介绍使用Python挖掘Twitter数据的教程，引入了一种简单的情感分析方法，基于计算语义倾向分数，该分数告诉我们一个术语更接近于正面还是负面词汇。这种方法的直觉非常简单，可以使用点对点互信息作为关联度量来实现。这种方法当然有一些局限性，但它是熟悉情感分析的良好起点。
 - en: '**Bio: [Marco Bonzanini](https://twitter.com/marcobonzanini)** is a Data Scientist
     based in London, UK. Active in the PyData community, he enjoys working in text
     analytics and data mining applications. He''s the author of "[Mastering Social
     Media Mining with Python](https://www.amazon.com/Mastering-Social-Media-Mining-Python-ebook/dp/B01BFD2Z2Q)"
     (Packt Publishing, July 2016).'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [Marco Bonzanini](https://twitter.com/marcobonzanini)** 是一名驻伦敦的数据科学家。他活跃于PyData社区，喜欢从事文本分析和数据挖掘应用。他是《[Mastering
+    Social Media Mining with Python](https://www.amazon.com/Mastering-Social-Media-Mining-Python-ebook/dp/B01BFD2Z2Q)》（Packt
+    Publishing, 2016年7月）的作者。'
 - en: '[Original](https://marcobonzanini.com/2015/05/17/mining-twitter-data-with-python-part-6-sentiment-analysis-basics/).
     Reposted with permission.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://marcobonzanini.com/2015/05/17/mining-twitter-data-with-python-part-6-sentiment-analysis-basics/)。经许可转载。'
 - en: '**Related**:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[Mining Twitter Data with Python Part 3: Term Frequencies](/2016/06/mining-twitter-data-python-part-3.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Python挖掘Twitter数据第3部分：术语频率](/2016/06/mining-twitter-data-python-part-3.html)'
 - en: '[Mining Twitter Data with Python Part 4: Rugby and Term Co-occurrences](/2016/06/mining-twitter-data-python-part-4.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Python挖掘Twitter数据第4部分：橄榄球和术语共现](/2016/06/mining-twitter-data-python-part-4.html)'
 - en: '[Mining Twitter Data with Python Part 5: Data Visualisation Basics](/2016/06/mining-twitter-data-python-part-5.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Python挖掘Twitter数据第5部分：数据可视化基础](/2016/06/mining-twitter-data-python-part-5.html)'
 - en: More On This Topic
+  id: totrans-46
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题
 - en: '[Back To Basics, Part Dos: Gradient Descent](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回归基础，第2部分：梯度下降](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)'
 - en: '[Sentiment Analysis in Python: Going Beyond Bag of Words](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python中的情感分析：超越词袋模型](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
 - en: '[How To Collect Data For Customer Sentiment Analysis](https://www.kdnuggets.com/2022/12/collect-data-customer-sentiment-analysis.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何收集客户情感分析的数据](https://www.kdnuggets.com/2022/12/collect-data-customer-sentiment-analysis.html)'
 - en: '[Sentiment Analysis on Encrypted Data with Homomorphic Encryption](https://www.kdnuggets.com/2022/12/zama-sentiment-analysis-encrypted-data-homomorphic-encryption.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用同态加密对加密数据进行情感分析](https://www.kdnuggets.com/2022/12/zama-sentiment-analysis-encrypted-data-homomorphic-encryption.html)'
 - en: '[How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Hugging Face Transformers 微调 BERT 进行情感分析](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
 - en: '[Python Basics: Syntax, Data Types, and Control Structures](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 基础：语法、数据类型和控制结构](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)'
