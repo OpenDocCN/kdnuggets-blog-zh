@@ -1,102 +1,158 @@
 - en: Using Tensorflow Object Detection to do Pixel Wise Classification
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Tensorflow Object Detection 进行逐像素分类
 - en: 原文：[https://www.kdnuggets.com/2018/03/tensorflow-object-detection-pixel-wise-classification.html](https://www.kdnuggets.com/2018/03/tensorflow-object-detection-pixel-wise-classification.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/03/tensorflow-object-detection-pixel-wise-classification.html](https://www.kdnuggets.com/2018/03/tensorflow-object-detection-pixel-wise-classification.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Priyanka Kochhar](https://github.com/priya-dwivedi), Deep Learning Consultant**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Priyanka Kochhar](https://github.com/priya-dwivedi)，深度学习顾问**'
 - en: 'In the past I have used Tensorflow Object Detection API to implement object
     detection with the output being bounding boxes around different objects of interest
     in the image. For more please look at my [article](https://towardsdatascience.com/is-google-tensorflow-object-detection-api-the-easiest-way-to-implement-image-recognition-a8bd1f500ea0).
     Tensorflow recently added new functionality and now we can extend the API to determine
     pixel by pixel location of objects of interest. See example below:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 过去我使用 Tensorflow Object Detection API 实现对象检测，输出为图像中不同感兴趣对象的边界框。更多内容请参阅我的 [文章](https://towardsdatascience.com/is-google-tensorflow-object-detection-api-the-easiest-way-to-implement-image-recognition-a8bd1f500ea0)。Tensorflow
+    最近添加了新功能，现在我们可以扩展 API 来确定感兴趣对象的逐像素位置。请见下面的示例：
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![](../Images/8ada5265389d313a808b67abc2756e52.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8ada5265389d313a808b67abc2756e52.png)'
 - en: Tensorflow Object Detection Mask RCNN
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: Tensorflow Object Detection Mask RCNN
 - en: The code is on my [Github](https://github.com/priya-dwivedi/Deep-Learning/blob/master/Mask_RCNN/Mask_RCNN_Videos.ipynb) .
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码在我的 [Github](https://github.com/priya-dwivedi/Deep-Learning/blob/master/Mask_RCNN/Mask_RCNN_Videos.ipynb)
+    上。
 - en: '**Instance Segmentation**'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**实例分割**'
 - en: Instance segmentation is an extension of object detection, where a binary mask
     (i.e. object vs. background) is associated with every bounding box. This allows
     for more fine-grained information about the extent of the object within the box.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 实例分割是对象检测的扩展，其中每个边界框都关联一个二进制掩码（即对象与背景）。这提供了有关框内对象范围的更精细的信息。
 - en: 'So when would we need this extra granularity? Some examples that come to mind
     are:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么我们何时需要这种额外的细粒度呢？一些想到的示例包括：
 - en: i) Self Driving Cars — May need to know exactly where another car is on the
     road or the location of a human crossing the road
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: i) 自动驾驶汽车——可能需要知道道路上另一辆车的确切位置或人行道上人类的位置
 - en: ii) Robotic systems — Robots that say join two parts together will perform better
     if they know the exact locations of the two parts
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: ii) 机器人系统——能够将两个部分连接在一起的机器人，如果知道两个部分的确切位置，将表现得更好
 - en: There are several algorithms that implement instance segmentation but the one
     used by Tensorflow Object Detection API is Mask RCNN.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 实现实例分割的算法有很多，但 Tensorflow Object Detection API 使用的是 Mask RCNN。
 - en: '**Mask RCNN**'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Mask RCNN**'
 - en: Lets start with a gentle introduction to Mask RCNN.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从对 Mask RCNN 的温和介绍开始。
 - en: '![](../Images/806d8ced7ec61ac42c409220b5910737.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/806d8ced7ec61ac42c409220b5910737.png)'
 - en: Mask RCNN Architecture
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: Mask RCNN 架构
 - en: Faster RCNN is a very good algorithm that is used for object detection. Faster
     R-CNN consists of two stages. The first stage, called a Region Proposal Network
     (RPN), proposes candidate object bounding boxes. The second stage, which is in
     essence Fast R-CNN, extracts features using RoIPool from each candidate box and
     performs classification and bounding-box regression. The features used by both
     stages can be shared for faster inference.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: Faster RCNN 是一种非常优秀的对象检测算法。Faster R-CNN 由两个阶段组成。第一个阶段称为区域提议网络（RPN），它提出候选对象边界框。第二个阶段，本质上是
+    Fast R-CNN，使用 RoIPool 从每个候选框中提取特征，并进行分类和边界框回归。两个阶段使用的特征可以共享，以加快推断速度。
 - en: 'Mask R-CNN is conceptually simple: Faster R-CNN has two outputs for each candidate
     object, a class label and a bounding-box offset; to this we add a third branch
     that outputs the object mask — which is a binary mask that indicates the pixels
@@ -104,179 +160,275 @@
     from the class and box outputs, requiring extraction of much finer spatial layout
     of an object. To do this Mask RCNN uses the [Fully Convolution Network](https://people.eecs.berkeley.edu/~jonlong/long_shelhamer_fcn.pdf)Mask
     RCNN Paper (FCN) described below.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: Mask R-CNN 从概念上讲是简单的：Faster R-CNN 为每个候选对象提供两个输出，一个是类别标签，一个是边界框偏移量；在此基础上，我们增加了第三个分支，该分支输出对象掩码 — 这是一个二值掩码，指示对象在边界框中的像素。但额外的掩码输出与类别和框的输出不同，需要提取对象的更精细的空间布局。为此，Mask
+    RCNN 使用了[Fully Convolution Network](https://people.eecs.berkeley.edu/~jonlong/long_shelhamer_fcn.pdf)Mask
+    RCNN 论文（FCN）所描述的网络。
 - en: '![](../Images/c695f8b73516faad893949d212fd42ed.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c695f8b73516faad893949d212fd42ed.png)'
 - en: Fully Convolutional Network Architecture
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 完全卷积网络架构
 - en: FCN is a popular algorithm for doing semantic segmentation. This model uses
     various blocks of convolution and max pool layers to first decompress an image
     to 1/32th of its original size. It then makes a class prediction at this level
     of granularity. Finally it uses up sampling and deconvolution layers to resize
     the image to its original dimensions.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: FCN 是一种用于语义分割的流行算法。该模型使用各种卷积块和最大池化层，首先将图像解压到其原始大小的 1/32。然后，它在这个粒度水平上进行类别预测。最后，它使用上采样和反卷积层将图像调整到其原始尺寸。
 - en: So in short we can say that Mask RCNN combines the two networks — Faster RCNN
     and FCN in one mega architecture. The loss function for the model is the total
     loss in doing classification, generating bounding box and generating the mask.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 简而言之，我们可以说 Mask RCNN 将两个网络 — Faster RCNN 和 FCN 结合成一个超级架构。模型的损失函数是分类、生成边界框和生成掩码的总损失。
 - en: Mask RCNN has a couple of additional improvements that make it much more accurate
     than FCN. You can read more about them in their [paper](https://arxiv.org/pdf/1703.06870.pdf).
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: Mask RCNN 有一些额外的改进，使其比 FCN 更准确。你可以在他们的[论文](https://arxiv.org/pdf/1703.06870.pdf)中阅读更多细节。
 - en: '****Implementation****'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '****实现****'
 - en: '*Testing on images*'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '*在图像上的测试*'
 - en: 'To test this model on images, you can leverage the [code](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb) shared
     on the tensorflow website. I tested their most lightweight model — [mask_rcnn_inception_v2_coco](http://download.tensorflow.org/models/object_detection/mask_rcnn_inception_v2_coco_2018_01_28.tar.gz).
     Just download the model and upgrade to tensorflow 1.5 (this is important!). See
     sample result below:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在图像上测试这个模型，你可以利用在 tensorflow 网站上共享的[代码](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb)。我测试了他们最轻量级的模型 — [mask_rcnn_inception_v2_coco](http://download.tensorflow.org/models/object_detection/mask_rcnn_inception_v2_coco_2018_01_28.tar.gz)。只需下载模型并升级到
+    tensorflow 1.5（这一点很重要！）。请参见下面的示例结果：
 - en: '![](../Images/5ee142c3cc54af6d658a858a20600741.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5ee142c3cc54af6d658a858a20600741.png)'
 - en: Mask RCNN on Kites Image
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: Mask RCNN 在风筝图像上的应用
 - en: '*Testing on videos*'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '*在视频上的测试*'
 - en: For me the more interesting exercise was to run the model on sample videos from
     you tube. I used keepvid to download a few videos from you tube. And I love the
     library moviepy for manipulating video files.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 对我来说，更有趣的实验是运行模型来处理来自 YouTube 的样本视频。我使用 keepvid 从 YouTube 下载了几个视频。我喜欢使用库 moviepy
+    来处理视频文件。
 - en: 'The main steps are:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 主要步骤是：
 - en: Use the VideoFileClip function to extract each frame from the video
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 VideoFileClip 函数从视频中提取每一帧
 - en: The fl_image function is an awesome function that can take an image and replace
     it with a modified image. I used this to run object detection on every image extracted
     from the video
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: fl_image 函数是一个很棒的函数，可以接收图像并用修改后的图像替换它。我用它来对从视频中提取的每一张图像进行对象检测
 - en: Finally all the modified clip images were combined into a new video
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最终，所有修改后的剪辑图像都被合并成一个新视频。
 - en: You can find the full code on my [Github](https://github.com/priya-dwivedi/Deep-Learning/blob/master/Mask_RCNN/Mask_RCNN_Videos.ipynb).
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在我的 [Github](https://github.com/priya-dwivedi/Deep-Learning/blob/master/Mask_RCNN/Mask_RCNN_Videos.ipynb)
+    上找到完整的代码。
 - en: '****Next Steps****'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '****下一步****'
 - en: 'Couple of additional ideas for further exploration of this API:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些进一步探索此 API 的额外想法：
 - en: Try the more accurate but high overhead models and see how much of a difference
     they make
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 尝试那些更准确但开销较大的模型，看看它们能带来多大的差异。
 - en: Use the API to train Mask RCNN on a custom dataset. This is next on my to do
     list.
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 API 在自定义数据集上训练 Mask RCNN。这是我接下来的任务。
 - en: Give me a ❤️ if you liked this post:) Hope you pull the code and try it yourself.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你喜欢这篇文章，请给我一个❤️:) 希望你能拉取代码并亲自尝试。
 - en: '**Other writings**:[ https://medium.com/@priya.dwivedi/](https://medium.com/@priya.dwivedi/)'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**其他写作**：[ https://medium.com/@priya.dwivedi/](https://medium.com/@priya.dwivedi/)'
 - en: 'PS: I have my own deep learning consultancy and love to build interesting deep
     learning models. I have helped several startups deploy innovative AI based solutions.
     If you have a project that we can collaborate on, then please contact me at priya.toronto3@gmail.com'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 'PS: 我有自己的深度学习咨询公司，喜欢构建有趣的深度学习模型。我帮助了多家初创公司部署创新的 AI 解决方案。如果你有一个可以合作的项目，请通过 priya.toronto3@gmail.com
+    联系我。'
 - en: '**References:**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**参考文献：**'
 - en: '[Mask RCNN Paper](https://arxiv.org/abs/1703.06870)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Mask RCNN 论文](https://arxiv.org/abs/1703.06870)'
 - en: '[Google Tensorflow Object Detection Github](https://github.com/tensorflow/models/tree/master/research/object_detection)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Google Tensorflow Object Detection Github](https://github.com/tensorflow/models/tree/master/research/object_detection)'
 - en: '[COCO dataset](http://mscoco.org/home/)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[COCO 数据集](http://mscoco.org/home/)'
 - en: '[Understand difference b/w instance segmentation and semantic segmentation](https://stackoverflow.com/questions/33947823/what-is-semantic-segmentation-compared-to-segmentation-and-scene-labeling)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[了解实例分割和语义分割之间的区别](https://stackoverflow.com/questions/33947823/what-is-semantic-segmentation-compared-to-segmentation-and-scene-labeling)'
 - en: Very good [explanation](https://www.youtube.com/watch?v=UdZnhZrM2vQ&t=111s) of
     Mask RCNN
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对 Mask RCNN 的非常好的 [解释](https://www.youtube.com/watch?v=UdZnhZrM2vQ&t=111s)
 - en: '**Bio: [Priyanka Kochhar](https://github.com/priya-dwivedi)** has been a data
     scientist for 10+ years. She now has her own deep learning consultancy and loves
     to work on interesting problems. She has helped several startups deploy innovative
     AI based solutions. If you have a project that she can collaborate on then please
     contact her at [priya.toronto3@gmail.com](mailto:priya.toronto3@gmail.com).'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Priyanka Kochhar](https://github.com/priya-dwivedi)** 拥有超过 10 年的数据科学经验。她现在拥有自己的深度学习咨询公司，喜欢解决有趣的问题。她帮助了多家初创公司部署创新的
+    AI 解决方案。如果你有一个可以合作的项目，请通过 [priya.toronto3@gmail.com](mailto:priya.toronto3@gmail.com)
+    联系她。'
 - en: '[Original](https://towardsdatascience.com/using-tensorflow-object-detection-to-do-pixel-wise-classification-702bf2605182).
     Reposted with permission.'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/using-tensorflow-object-detection-to-do-pixel-wise-classification-702bf2605182)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Is Google Tensorflow Object Detection API the Easiest Way to Implement Image
     Recognition?](/2018/03/google-tensorflow-object-detection-api-the-easiest-way-implement-image-recognition.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Google Tensorflow Object Detection API 是实现图像识别的最简单方式吗？](/2018/03/google-tensorflow-object-detection-api-the-easiest-way-implement-image-recognition.html)'
 - en: '[Building a Toy Detector with Tensorflow Object Detection API](/2018/02/building-toy-detector-tensorflow-object-detection-api.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow Object Detection API 构建一个玩具检测器](/2018/02/building-toy-detector-tensorflow-object-detection-api.html)'
 - en: '[Training and Visualising Word Vectors](/2018/01/training-visualising-word-vectors.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[训练和可视化词向量](/2018/01/training-visualising-word-vectors.html)'
 - en: More On This Topic
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow 训练图像分类模型的指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
 - en: '[KDnuggets™ News 22:n09, Mar 2: Telling a Great Data Story: A…](https://www.kdnuggets.com/2022/n09.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets™ 新闻 22:n09, 3 月 2 日: 讲述一个精彩的数据故事: A…](https://www.kdnuggets.com/2022/n09.html)'
 - en: '[What Is the Difference Between SQL and Object-Relational Mapping (ORM)?](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 和对象关系映射 (ORM) 之间有什么区别？](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)'
 - en: '[How to Perform Motion Detection Using Python](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Python 执行运动检测](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)'
 - en: '[Using Hugging Face Transformers for Emotion Detection in Text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Hugging Face Transformers 进行文本情感检测](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
 - en: '[KDnuggets News, August 17: How to Perform Motion Detection Using…](https://www.kdnuggets.com/2022/n33.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，8月17日：如何使用运动检测…](https://www.kdnuggets.com/2022/n33.html)'
