@@ -3,28 +3,35 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: XGBoost 详解：用少于 200 行 Python 代码实现 DIY XGBoost 库
 - en: 原文：[https://www.kdnuggets.com/2021/05/xgboost-explained-diy-xgboost-library-200-lines-python.html](https://www.kdnuggets.com/2021/05/xgboost-explained-diy-xgboost-library-200-lines-python.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/05/xgboost-explained-diy-xgboost-library-200-lines-python.html](https://www.kdnuggets.com/2021/05/xgboost-explained-diy-xgboost-library-200-lines-python.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[comments](#comments)'
 - en: '**By [Guillaume Saupin](https://www.linkedin.com/in/guillaume-saupin-5802aa31/),
     CTO at Verteego**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Guillaume Saupin](https://www.linkedin.com/in/guillaume-saupin-5802aa31/)，Verteego
+    的 CTO 提供**'
 - en: '![](../Images/2af80546d15b24dbb95b3e7f06ad2b1d.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2af80546d15b24dbb95b3e7f06ad2b1d.png)'
 - en: Photo by [Jens Lelie](https://unsplash.com/@madebyjens?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 照片由[Jens Lelie](https://unsplash.com/@madebyjens?utm_source=medium&utm_medium=referral)拍摄，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: XGBoost is probably one of the most widely used libraries in data science. Many
     data scientists around the world are using it. It’s a very versatile algorithm
     that can be use to perform classification, regression as well as confidence intervals
@@ -33,28 +40,33 @@
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: XGBoost 可能是数据科学中使用最广泛的库之一。全球许多数据科学家都在使用它。它是一个非常通用的算法，可用于执行分类、回归以及置信区间，如本文[文章](https://towardsdatascience.com/confidence-intervals-for-xgboost-cac2955a8fde)所示。但有多少人真正理解它的基本原理呢？
 - en: You might think that a Machine Learning algorithm that performs as well as XGBoost
     might be using very complex and advanced mathematics. You probably imagine that
     it’s a masterpiece of software engineering.
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能会认为，像 XGBoost 这样表现出色的机器学习算法可能使用了非常复杂和先进的数学方法。你可能会想象它是一个软件工程的杰作。
 - en: And you’re partly right. The XGBoost library is a pretty complex one, but if
     you consider only the mathematical formulation of gradient boosting applied to
     decision trees, it’s not that complicated.
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 你部分正确。XGBoost 库确实相当复杂，但如果仅考虑应用于决策树的梯度提升的数学公式，其实并没有那么复杂。
 - en: You will see below in detail how to train decision trees for **regression** using
     the gradient boosting method with less than 200 lines of code.
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面你将详细了解如何使用少于 200 行代码，通过梯度提升方法训练**回归**决策树。
 - en: Decision Tree
   id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 决策树
 - en: 'Before getting into the mathematical details, let’s refresh our memory regarding
     decision trees. The principle is fairly simple: associate a value to a given set
     of features traversing a binary tree. Each node of the binary tree is attached
@@ -62,54 +74,65 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在深入数学细节之前，让我们回顾一下决策树的基本概念。原理非常简单：将值关联到一组特征，通过遍历二叉树。二叉树的每个节点都附带一个条件；叶子节点包含值。
 - en: If the condition is true, we continue the traversal using the left node, if
     not, we use the right one. Once a leaf is reached, we have our prediction.
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果条件为真，我们继续使用左节点进行遍历；如果不成立，我们使用右节点。一旦到达叶子节点，我们就得到了预测结果。
 - en: 'As often, a picture is worth a thousand words:'
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如常常所说，一图胜千言：
 - en: '![](../Images/f681ccf5b863618aa3ba615f5f7ed042.png)'
   id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f681ccf5b863618aa3ba615f5f7ed042.png)'
 - en: A three-level decision tree. Image by the author.
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 三层决策树。图像由作者提供。
 - en: The condition attached to a node can be regarded as a decision, hence the name **Decision
     Tree**.
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 附加到节点的条件可以视为一个决策，因此得名**决策树**。
 - en: 'This kind of structure is pretty old in the history of computer science and
     has been used for decades with success. A basic implementation is given by the
     following lines:'
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种结构在计算机科学历史上相当古老，并且在几十年里成功使用过。基本实现如下：
 - en: Stacking multiple trees
   id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 堆叠多个树
 - en: Even though Decision Trees have been used with some success in a number of applications,
     like expert systems (before the AI winter) it remains a very basic model that
     cannot handle the complexity usually encountered in real-world data.
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管决策树在许多应用中取得了一些成功，例如专家系统（在 AI 冬季之前），但它仍然是一个非常基础的模型，无法处理现实世界数据中通常遇到的复杂性。
 - en: We usually refer to this kind of estimators as ***weak models***.
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们通常将这种类型的估算器称为***弱模型***。
 - en: To overcome this limitation, the idea emerged in the nineties to combine multiple *weak
     models* to create a *strong model: ****ensemble learning****.*
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了克服这一局限性，九十年代出现了将多个*弱模型*组合起来以创建一个*强模型：****集成学习****。* 的想法。
 - en: This method can be applied to any kind of model, but as Decision Trees are simple,
     fast, generic and easily interpretable models, they are commonly used.
   id: totrans-22
