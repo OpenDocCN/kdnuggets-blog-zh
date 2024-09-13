@@ -1,16 +1,20 @@
 - en: Introduction to Fraud Detection Systems
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2018/08/introduction-fraud-detection-systems.html](https://www.kdnuggets.com/2018/08/introduction-fraud-detection-systems.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
 - en: '**By [Miguel Gonzalez-Fierro]( https://www.linkedin.com/in/miguelgfierro/),
     Microsoft**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: Fraud detection is one of the top priorities for banks and financial institutions,
@@ -19,42 +23,51 @@
     in 2017 the worldwide losses in card fraud related cases reached 22.8 billion
     dollars. The problem is forecasted to get worse in the following years, by 2021,
     the card fraud bill is expected to be 32.96 billion dollars.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: In this tutorial, we will use the [credit card fraud detection dataset](https://www.kaggle.com/mlg-ulb/creditcardfraud) from
     Kaggle, to identify fraud cases. We will use a [gradient boosted tree](https://blogs.technet.microsoft.com/machinelearning/2017/07/25/lessons-learned-benchmarking-fast-machine-learning-algorithms/) as
     a machine learning algorithm. And finally, we will create a simple API to operationalize
     (o16n) the model.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: We will use the gradient boosting library [LightGBM](https://github.com/Microsoft/LightGBM),
     which has recently became one of the most popular libraries for top participants
     in [Kaggle competitions](https://github.com/Microsoft/LightGBM/tree/a39c848e6456d473d2043dff3f5159945a36b567/examples).
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: Fraud detection problems are known for being extremely imbalanced. [Boosting](https://en.wikipedia.org/wiki/Boosting_(machine_learning)) is
@@ -64,160 +77,257 @@
     on all the training data, those instances that have bad performance are weighted
     to appear more in the next data subset. Finally, all the classifiers are ensembled
     with a weighted average of their estimates.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: In LightGBM, there is a [parameter](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters.rst#objective-parameters) called `is_unbalanced` that
     automatically helps you to control this issue.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: LigtGBM can be used with or without [GPU](https://lightgbm.readthedocs.io/en/latest/GPU-Performance.html).
     For small datasets, like the one we are using here, it is faster to use CPU, due
     to IO overhead. However, I wanted to showcase the GPU alternative, which is trickier
     to install, in case anyone wants to experiment with bigger datasets.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: LightGBM 可以在有或没有 [GPU](https://lightgbm.readthedocs.io/en/latest/GPU-Performance.html)的情况下使用。对于像我们这里使用的小数据集，使用CPU更快，因为IO开销较大。然而，我想展示GPU的替代方案，虽然安装更复杂，以便有兴趣的人可以尝试更大的数据集。
 - en: 'To install the dependencies in Linux:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Linux中安装依赖项：
 - en: '[PRE0]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '[PRE2]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Dataset
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据集
 - en: The first step is to load the dataset and analyze it.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一步是加载数据集并分析它。
 - en: For it, before continuing, **you have to run the notebook [data_prep.ipynb](https://render.githubusercontent.com/view/data_prep.ipynb)**,
     which will generate the SQLite database.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在继续之前，**你必须运行笔记本 [data_prep.ipynb](https://render.githubusercontent.com/view/data_prep.ipynb)**，这将生成SQLite数据库。
 - en: '[PRE3]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '[PRE5]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '|  | Time | V1 | V2 | V3 | V4 | V5 | V6 | V7 | V8 | V9 | ... | V21 | V22 |
     V23 | V24 | V25 | V26 | V27 | V28 | Amount | Class |'
+  id: totrans-26
   prefs: []
   type: TYPE_TB
+  zh: '|  | 时间 | V1 | V2 | V3 | V4 | V5 | V6 | V7 | V8 | V9 | ... | V21 | V22 | V23
+    | V24 | V25 | V26 | V27 | V28 | 金额 | 类别 |'
 - en: '| 0 | 0.0 | -1.359807 | -0.072781 | 2.536347 | 1.378155 | -0.338321 | 0.462388
     | 0.239599 | 0.098698 | 0.363787 | ... | -0.018307 | 0.277838 | -0.110474 | 0.066928
     | 0.128539 | -0.189115 | 0.133558 | -0.021053 | 149.62 | 0 |'
+  id: totrans-27
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 0.0 | -1.359807 | -0.072781 | 2.536347 | 1.378155 | -0.338321 | 0.462388
+    | 0.239599 | 0.098698 | 0.363787 | ... | -0.018307 | 0.277838 | -0.110474 | 0.066928
+    | 0.128539 | -0.189115 | 0.133558 | -0.021053 | 149.62 | 0 |'
 - en: '| 1 | 0.0 | 1.191857 | 0.266151 | 0.166480 | 0.448154 | 0.060018 | -0.082361
     | -0.078803 | 0.085102 | -0.255425 | ... | -0.225775 | -0.638672 | 0.101288 |
     -0.339846 | 0.167170 | 0.125895 | -0.008983 | 0.014724 | 2.69 | 0 |'
+  id: totrans-28
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 0.0 | 1.191857 | 0.266151 | 0.166480 | 0.448154 | 0.060018 | -0.082361
+    | -0.078803 | 0.085102 | -0.255425 | ... | -0.225775 | -0.638672 | 0.101288 |
+    -0.339846 | 0.167170 | 0.125895 | -0.008983 | 0.014724 | 2.69 | 0 |'
 - en: '| 2 | 1.0 | -1.358354 | -1.340163 | 1.773209 | 0.379780 | -0.503198 | 1.800499
     | 0.791461 | 0.247676 | -1.514654 | ... | 0.247998 | 0.771679 | 0.909412 | -0.689281
     | -0.327642 | -0.139097 | -0.055353 | -0.059752 | 378.66 | 0 |'
+  id: totrans-29
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 1.0 | -1.358354 | -1.340163 | 1.773209 | 0.379780 | -0.503198 | 1.800499
+    | 0.791461 | 0.247676 | -1.514654 | ... | 0.247998 | 0.771679 | 0.909412 | -0.689281
+    | -0.327642 | -0.139097 | -0.055353 | -0.059752 | 378.66 | 0 |'
 - en: '| 3 | 1.0 | -0.966272 | -0.185226 | 1.792993 | -0.863291 | -0.010309 | 1.247203
     | 0.237609 | 0.377436 | -1.387024 | ... | -0.108300 | 0.005274 | -0.190321 | -1.175575
     | 0.647376 | -0.221929 | 0.062723 | 0.061458 | 123.50 | 0 |'
+  id: totrans-30
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 1.0 | -0.966272 | -0.185226 | 1.792993 | -0.863291 | -0.010309 | 1.247203
+    | 0.237609 | 0.377436 | -1.387024 | ... | -0.108300 | 0.005274 | -0.190321 | -1.175575
+    | 0.647376 | -0.221929 | 0.062723 | 0.061458 | 123.50 | 0 |'
 - en: '| 4 | 2.0 | -1.158233 | 0.877737 | 1.548718 | 0.403034 | -0.407193 | 0.095921
     | 0.592941 | -0.270533 | 0.817739 | ... | -0.009431 | 0.798278 | -0.137458 | 0.141267
     | -0.206010 | 0.502292 | 0.219422 | 0.215153 | 69.99 | 0 |'
+  id: totrans-31
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 2.0 | -1.158233 | 0.877737 | 1.548718 | 0.403034 | -0.407193 | 0.095921
+    | 0.592941 | -0.270533 | 0.817739 | ... | -0.009431 | 0.798278 | -0.137458 | 0.141267
+    | -0.206010 | 0.502292 | 0.219422 | 0.215153 | 69.99 | 0 |'
 - en: 5 rows × 31 columns
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 5行 × 31列
 - en: As we can see, the dataset is extremely imbalanced. The minority class counts
     for around 0.002% of the examples.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 如我们所见，数据集极为不平衡。少数类别约占0.002%的样本。
 - en: '[PRE6]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '[PRE7]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '[PRE8]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '[PRE9]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: The next step is to split the dataset into train and test.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是将数据集拆分为训练集和测试集。
 - en: '[PRE10]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '[PRE11]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '[PRE12]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '[PRE13]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Training with LightGBM - Baseline
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用LightGBM进行训练 - 基准
 - en: For this task we use a simple set of parameters to train the model. We just
     want to create a baseline model, so we are not performing here cross validation
     or parameter tunning.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这个任务，我们使用了一组简单的参数来训练模型。我们只想创建一个基准模型，因此这里没有进行交叉验证或参数调优。
 - en: The details of the different parameters of LightGBM can be found in the [documentation](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters.rst).
     Also, the authors provide [some advices](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters-Tuning.rst) on
     how to tune the parameters and prevent overfitting.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: LightGBM的不同参数细节可以在 [文档](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters.rst) 中找到。此外，作者提供了 [一些建议](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters-Tuning.rst) 来调整参数并防止过拟合。
 - en: '[PRE14]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '[PRE15]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '[PRE16]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: '[PRE17]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: Once we have the trained model, we can obtain some metrics.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们拥有了训练好的模型，我们可以获得一些指标。
 - en: '[PRE18]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: '[PRE19]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: '[PRE20]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: '[PRE21]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: '[PRE22]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: '![Confusion Matrix](../Images/9d43e51cb4429246863d109770aa14ee.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![混淆矩阵](../Images/9d43e51cb4429246863d109770aa14ee.png)'
 - en: In business terms, if the system classifies a fair transaction as fraud (false
     positive), the bank will investigate the issue probably using human intervention.
     According to a [2015 report from Javelin Strategy](https://www.javelinstrategy.com/press-release/false-positive-card-declines-push-consumers-abandon-issuers-and-merchants#),
@@ -225,24 +335,30 @@
     in the previous year, representing an annual decline amount of almost $118 billion.
     Nearly 4 in 10 declined cardholders report that they abandoned their card after
     being falsely declined.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: However, if a fraudulent transaction is not detected, effectively meaning that
     the classifier predicts that a transaction is fair when it is really fraudulent
     (false negative), then the bank is losing money and the bad guy is getting away
     with it.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: A common way to use business rules in these predictions is to control the threshold
     or operation point of the prediction. This can be controlled changing the threshold
     value in `binarize_prediction(y_prob, threshold=0.5)`. It is common to do a loop
     from 0.1 to 0.9 and evaluate the different business outcomes.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE23]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: O16N with Flask and Websockets
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -250,11 +366,13 @@
     we are going to use [Flask](http://flask.pocoo.org/) to create a RESTfull API.
     The input of the API is going to be a transaction (defined by its features), and
     the output, the model prediction.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: Aditionally, we designed a [websocket service](https://miguelgfierro.com/blog/2018/demystifying-websockets-for-real-time-web-communication/) to
     visualize fraudulent transactions on a map. The system works in real time using
     the library [flask-socketio](https://github.com/miguelgrinberg/Flask-SocketIO).
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
 - en: When a new transaction is sent to the API, the LightGBM model predicts whether
@@ -262,55 +380,76 @@
     sends a signal to the a web client, that renders a world map showing the location
     of the fraudulent transaction. The map is made with javascript using [amCharts](http://amcharts.com/) and
     the map locations are taken from the previously created SQLite database.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: To start the api execute `(fraud)$ python api.py` inside the conda environment.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE24]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: First, we make sure that the API is on
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE25]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: The fraud police is watching you
+  id: totrans-69
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '![](../Images/f39cf9728096f014c1e8b578120251fb.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
 - en: Now, we are going to select one value and predict the output.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE26]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE26]'
 - en: '[PRE27]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE27]'
 - en: '[PRE28]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE28]'
 - en: '[PRE29]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE29]'
 - en: Fraudulent transaction visualization
+  id: totrans-76
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Now that we know that the main end point of the API works, we will try the /predict_map
     end point. It creates a real time visualization system for fraudulent transactions
     using websockets.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
 - en: A websocket is a protocol intended for real-time communications developed for
     the HTML5 specification. It creates a persistent, low latency connection that
     can support transactions initiated by either the client or server. [In this post](https://miguelgfierro.com/blog/2018/demystifying-websockets-for-real-time-web-communication/)
     you can find a detailed explanation of websockets and other related technologies.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/aa05baa6de9f9f3c3b73020d78f30e87.png)For our case, whenever a
@@ -321,15 +460,19 @@
     simulated name and location of where the fraudulent transaction occurred. The
     signal is shown in `index.html`, which just renders some javascript code that
     is referenced via an `id="chartdiv"`.'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
 - en: 'The javascript code is defined in the file `frauddetection.js`. The websocket
     part is the following:'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE30]'
+  id: totrans-81
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE30]'
 - en: When a new signal is emited from the server in python, the javascript code receives
     it and processes it. It creates a new variable called `newLocation` containing
     the location information, that is going to be saved in a global array called `mapLocations`.
@@ -338,139 +481,183 @@
     new information in the map and finally the array is stored in `map.dataProvider.images`,
     which actually refresh the map with the new point. The variable `map` is set earlier
     in the code and it is the amCharts object responsible for defining the map.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
 - en: 'To make a query to the visualization end point:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE31]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE31]'
 - en: '[PRE32]'
+  id: totrans-85
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE32]'
 - en: 'Now you can go the map url (in local it would be http://localhost:5000/map)
     and see how the map is reshesed with a new fraudulent location every time you
     execute the previous cell. You should see a map like the following one:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e4766c0703951537c3484955db166ee2.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
 - en: Load test
+  id: totrans-88
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Once we have the API, we can test its scalability and response time.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
 - en: Here you can find a simple load test to evaluate the performance of your API.
     Please bear in mind that, in this case, there is no request overhead due to the
     different locations of client and server, since the client and server are the
     same computer.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
 - en: The response time of 10 requests is around 300ms, so one request would be 30ms.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE33]'
+  id: totrans-92
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE33]'
 - en: '[PRE34]'
+  id: totrans-93
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE34]'
 - en: '[PRE35]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE35]'
 - en: '[PRE36]'
+  id: totrans-95
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE36]'
 - en: '[PRE37]'
+  id: totrans-96
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE37]'
 - en: Enterprise grade reference architecture for fraud detection
+  id: totrans-97
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: In this tutorial we have seen how to create a baseline fraud detection model.
     However, for a big company this is not enough.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
 - en: In the next figure we can see a reference architecture for fraud detection,
     that should be adapted to the customer specifics. All services are based on Azure.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
 - en: '1) Two general data sources for the customer: real time data and static information.'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
 - en: 2) A general database piece to store the data. Since it is a reference architecture,
     and without more data, I put several options together ([SQL Database](https://azure.microsoft.com/en-gb/services/sql-database/), [CosmosDB](https://azure.microsoft.com/en-gb/services/cosmos-db/), [SQL
     Data Warehouse](https://azure.microsoft.com/en-gb/services/sql-data-warehouse/),
     etc) on cloud or on premise.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
 - en: 3) Model experimentation using [Azure ML](https://azure.microsoft.com/en-gb/overview/machine-learning/),
     again, using general computation targets such as [DSVM](https://azure.microsoft.com/en-gb/services/virtual-machines/data-science-virtual-machines/), [BatchAI](https://azure.microsoft.com/en-gb/services/batch-ai/), [Databricks](https://azure.microsoft.com/en-gb/services/databricks/) or [HDInsight](https://azure.microsoft.com/en-gb/services/hdinsight/).
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
 - en: 4) Model retraining using new data and a model obtained from the [Model Management](https://docs.microsoft.com/en-gb/azure/machine-learning/desktop-workbench/model-management-overview).
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
 - en: 5) Operationalization layer with a [Kubernetes cluster](https://azure.microsoft.com/en-gb/services/container-service/kubernetes/),
     which takes the best model and put it in production.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
 - en: 6) Reporting layer to show the results.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e9a4672215422ba64b766a7a91cb2cd4.png)'
+  id: totrans-106
   prefs: []
   type: TYPE_IMG
 - en: '[Original](https://github.com/miguelgfierro/sciblog_support/blob/master/Intro_to_Fraud_Detection/fraud_detection.ipynb).
     Reposted with permission.'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
 - en: '[Using GRAKN.AI to Detect Patterns in Credit Fraud Data](https://www.kdnuggets.com/2017/08/grakn-ai-detect-patterns-credit-fraud-data.html)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[AI for Fraud Detection – How does Mastercard do it? Learn how global leaders
     use AI](https://www.kdnuggets.com/2018/07/rework-ai-fraud-detection-mastercard-global-leaders.html)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Intuitive Ensemble Learning Guide with Gradient Boosting](https://www.kdnuggets.com/2018/07/intuitive-ensemble-learning-guide-gradient-boosting.html)'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-112
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[How Data Science Fuels Fraud Prevention](https://www.kdnuggets.com/2022/09/data-science-fuels-fraud-prevention.html)'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Fighting AI with AI Fraud Monitoring for Deepfake Applications](https://www.kdnuggets.com/2023/05/fighting-ai-ai-fraud-monitoring-deepfake-applications.html)'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Uncertainty Quantification in Artificial Intelligence-based Systems](https://www.kdnuggets.com/2022/04/uncertainty-quantification-artificial-intelligencebased-systems.html)'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Ten Key Lessons of Implementing Recommendation Systems in Business](https://www.kdnuggets.com/2022/07/ten-key-lessons-implementing-recommendation-systems-business.html)'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Chip Huyen shares frameworks and case studies for implementing ML systems](https://www.kdnuggets.com/2023/02/sphere-chip-huyen-shares-frameworks-case-studies-implementing-ml-systems.html)'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[OLAP vs. OLTP: A Comparative Analysis of Data Processing Systems](https://www.kdnuggets.com/2023/08/olap-oltp-comparative-analysis-data-processing-systems.html)'
+  id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
