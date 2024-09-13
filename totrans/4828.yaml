@@ -1,20 +1,28 @@
 - en: 'Step Forward Feature Selection: A Practical Example in Python'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 向前特征选择：Python中的实际示例
 - en: 原文：[https://www.kdnuggets.com/2018/06/step-forward-feature-selection-python.html](https://www.kdnuggets.com/2018/06/step-forward-feature-selection-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/06/step-forward-feature-selection-python.html](https://www.kdnuggets.com/2018/06/step-forward-feature-selection-python.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: Many methods for [feature selection](https://en.wikipedia.org/wiki/Feature_selection)
     exist, some of which treat the process strictly as an artform, others as a science,
     while, in reality, some form of domain knowledge along with a disciplined approach
     are likely your best bet.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 存在许多[特征选择](https://en.wikipedia.org/wiki/Feature_selection)的方法，其中一些将过程视为艺术形式，另一些视为科学，而实际上，一些领域知识结合严格的方法可能是你最好的选择。
 - en: When it comes to disciplined approaches to feature selection, [wrapper methods](https://en.wikipedia.org/wiki/Feature_selection#Wrapper_method)
     are those which marry the feature selection process to the type of model being
     built, evaluating feature subsets in order to detect the model performance between
@@ -22,65 +30,95 @@
     instead of existing as an independent process taking place *prior* to model building,
     wrapper methods attempt to optimize feature selection process for a given machine
     learning algorithm *in tandem* with this algorithm.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在特征选择的严格方法中，[包装方法](https://en.wikipedia.org/wiki/Feature_selection#Wrapper_method)是将特征选择过程与正在构建的模型类型相结合，评估特征子集以检测特征之间的模型表现，从而选择表现最佳的子集。换句话说，包装方法不是作为独立的过程在模型构建*之前*进行，而是试图*与*给定的机器学习算法一起优化特征选择过程。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 2 prominent wrapper methods for feature selection are step forward feature selection
     and step backward features selection.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征选择的两个显著包装方法是向前特征选择和向后特征选择。
 - en: '![Image](../Images/17075aa097f90c967aa0ef0730e1a2ba.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/17075aa097f90c967aa0ef0730e1a2ba.png)'
 - en: '[Image source](https://en.wikipedia.org/wiki/Feature_selection)'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '[图片来源](https://en.wikipedia.org/wiki/Feature_selection)'
 - en: Step forward feature selection starts with the evaluation of each individual
     feature, and selects that which results in the best performing selected algorithm
     model. What's the "best?" That depends entirely on the defined evaluation criteria
     (AUC, prediction accuracy, RMSE, etc.). Next, all possible combinations of the
     that selected feature and a subsequent feature are evaluated, and a second feature
     is selected, and so on, until the required predefined number of features is selected.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 向前特征选择从评估每个单独特征开始，选择那些能产生最佳表现的算法模型的特征。什么是“最佳”？这完全取决于定义的评估标准（AUC、预测准确率、RMSE等）。接下来，评估所有可能的选定特征与随后的特征的组合，选择第二个特征，依此类推，直到选择出所需的预定义数量的特征。
 - en: Step backward feature selection is closely related, and as you may have guessed
     starts with the entire set of features and works backward from there, removing
     features to find the optimal subset of a predefined size.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 向后特征选择密切相关，正如你可能已经猜到的那样，它从整个特征集开始，然后向后操作，从中去除特征，以找到预定义大小的最佳子集。
 - en: These are both potentially very computationally expensive. Do you have a large,
     multidimensional dataset? These methods may take too long to be at all useful,
     or may be totally infeasible. That said, with a dataset of accommodating size
     and dimensionality, such an approach may well be your best possible approach.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两种方法都可能非常耗费计算资源。你有一个大型的、多维的数据集吗？这些方法可能会花费过多时间，变得毫无用处，或者完全不可行。不过，考虑到数据集的规模和维度，这种方法可能是你最佳的选择。
 - en: To see how they work, let's take a look at step forward feature selection, specifically.
     Note that, as discussed, a machine learning algorithm must be defined prior to
     beginning our symbiotic feature selection process.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: Keep in mind that an optimized set of selected features using a given algorithm
@@ -88,9 +126,11 @@
     using logistic regression, for example, there is no guarantee that these same
     features will perform optimally if we then tried them out using K-nearest neighbors,
     or an SVM.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: Implementing Feature Selection and Building a Model
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -99,18 +139,22 @@
     ([Sequential Feature Selector](https://rasbt.github.io/mlxtend/user_guide/feature_selection/SequentialFeatureSelector/)),
     and so we will use it to demonstrate. It goes without saying that you should have
     mlxtend installed before moving forward (check the Github repo).
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: '![Image](../Images/d13fd31db64ac19a44c703d8cdc720ec.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
 - en: We will use a Random Forest classifier for feature selection and model building
     (which, again, are intimately related in the case of step forward feature selection).
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: We need data to use for demonstration, so let's use the [wine quality dataset](https://archive.ics.uci.edu/ml/datasets/wine+quality).
     Specifically, I have used the untouched `winequality-white.csv` file as input
     in the code below.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: Arbitrarily, we will set the desired number of features to 5 (there are 12 in
@@ -122,6 +166,7 @@
     a sub-optimal number and combination of features being decided upon (say, if some
     combination of 11 features in our case is better than the best combination of
     <= 10 features we find during the selection process).
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: Since we are more interested in demonstrating how to implement step forward
@@ -129,121 +174,174 @@
     we won't be overly concerned with the actual performance of our models, but we
     will compare the performances anyhow, as to show how it would be done in a meaningful
     project.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: First, we will make our imports, load the dataset, and split it into training
     and testing sets.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Next, we will define a classifier, as well as a step forward feature selector,
     and then perform our feature selection. The feature feature selector in mlxtend
     has some parameters we can define, so here''s how we will proceed:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: First, we pass our classifier, the Random Forest classifier defined above the
     feature selector
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Next, we define the subset of features we are looking to select (k_features=5)
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 接下来，我们定义了我们希望选择的特征子集（k_features=5）。
 - en: 'We then set floating to False; see the documentation for more info on floating:'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 然后我们将浮动设置为 False；有关浮动的更多信息，请参阅文档：
 - en: The floating algorithms have an additional exclusion or inclusion step to remove
     features once they were included (or excluded), so that a larger number of feature
     subset combinations can be sampled.
+  id: totrans-33
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 浮动算法有一个额外的排除或包含步骤，以便在特征被包含（或排除）后将其移除，从而可以采样更多的特征子集组合。
 - en: We set he desired level of verbosity for mlxtend to report
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们设置了 mlxtend 报告的期望详细程度。
 - en: Importantly, we set our scoring to accuracy; this is but one metric which could
     be used to score our resulting models built on the selected features
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 重要的是，我们将评分设置为准确率；这只是一个用于对基于所选特征构建的模型进行评分的指标。
 - en: mlxtend feature selector uses cross validation internally, and we set our desired
     folds to 5 for our demonstration
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: mlxtend 特征选择器内部使用交叉验证，我们将演示中的折数设置为 5。
 - en: The dataset we chose isn't very large, and so the following code should not
     take long to execute.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们选择的数据集不是很大，因此以下代码不应该花费很长时间执行。
 - en: '[PRE2]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[PRE3]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Our best performing model, given our scoring metric, is some subset of 5 features,
     with a score of 0.644 (remember that this is using cross validation, and so will
     be different than that which is reported on our full models below, using train
     and test sets). But which subset of 5 features were selected?
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据我们的评分指标，我们表现最佳的模型是某个包含 5 个特征的子集，得分为 0.644（记住这是使用交叉验证，因此与下面使用训练和测试集的完整模型的报告结果不同）。但是，选择了哪一组
+    5 个特征？
 - en: '[PRE4]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '[PRE5]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The columns at these indexes are those which were selected. Great! So what now...?
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些索引处的列是那些被选择的列。太好了！那么接下来做什么呢...？
 - en: We can now use those features to build a full model using our training and test
     sets. If we had a much larger set (i.e. many more instances as opposed to many
     more features), this would be especially beneficial as we could have used the
     feature selector above on a smaller subset of instances, determined our best performing
     subset of features, and then applied them to the full dataset for classification.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以使用这些特征在训练和测试集上构建一个完整的模型。如果我们有一个更大的数据集（即更多的实例而不是更多的特征），这将特别有利，因为我们可以在较小的实例子集上使用上述特征选择器，确定我们表现最佳的特征子集，然后将它们应用于完整的数据集进行分类。
 - en: The code below builds a classifier on **only** the subset of selected features.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码在**仅**所选特征的子集上构建了一个分类器。
 - en: '[PRE6]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '[PRE7]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Don't worry about the actual accuracies; we're concerned here with the process,
     not the end result.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 不用担心实际的准确率；我们在这里关注的是过程，而不是最终结果。
 - en: 'But what if we *were* concerned with the end result, and wanted to know if
     our feature selection troubles had been worth it? Well, we could compare the resultant
     accuracies of the full model built using the selected features (immediately above)
     with the resultant accuracies of another full model using **all** of the features,
     just as we do below:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 但如果我们*关心*最终结果，并想知道我们的特征选择是否值得？好吧，我们可以比较使用所选特征（见上文）构建的完整模型的结果准确率与使用**所有**特征的另一个完整模型的结果准确率，就像下面这样：
 - en: '[PRE8]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '[PRE9]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: And there you have them for comparison. They are both poor and comparable to
     our model built with the selected features (though I promise this is not always
     the case!). With very little work, you could see how these selected features perform
     with a different algorithm, to help scratch that itch as to wondering whether
     these features selected with one algorithm are equally well performing with another.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是它们的比较结果。它们都表现不佳，并且与我们使用所选特征构建的模型相当（虽然我保证这并非总是如此！）。通过非常少的工作，您可以查看这些选定特征在不同算法下的表现，以帮助解答这些特征是否在另一种算法下表现同样优秀。
 - en: Such a feature selection method can be an effective part of a disciplined machine
     learning pipeline. Keep in mind that step forward (or step backward) methods,
     specifically, can provide problems when dealing with especially large or highly-dimensional
@@ -253,48 +351,72 @@
     dataset. Of course, these are not the only disciplined approaches to feature selection
     either, and so checking out alternatives may be warranted when dealing with these
     larger datasets.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种特征选择方法可以是一个有力的、有纪律的机器学习流程中的组成部分。请记住，前向（或后向）方法，尤其是在处理特别大或高维数据集时，可能会带来问题。可以通过从数据中采样以找到最适合的特征子集，然后在完整数据集上使用这些特征进行建模的方式来绕过（或**尝试**绕过）这些难点。当然，这些也不是唯一的特征选择的有纪律的方法，因此在处理这些较大的数据集时，检查其他方法也是值得的。
 - en: '**Related**:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**:'
 - en: '[Quick Feature Engineering with Dates Using fast.ai](/2018/03/feature-engineering-dates-fastai.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 fast.ai 快速进行日期特征工程](https://www.kdnuggets.com/2018/03/feature-engineering-dates-fastai.html)'
 - en: '[Generating Text with RNNs in 4 Lines of Code](/2018/06/generating-text-rnn-4-lines-code.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 4 行代码生成文本的 RNN](https://www.kdnuggets.com/2018/06/generating-text-rnn-4-lines-code.html)'
 - en: '[Multi-objective Optimization for Feature Selection](/2017/12/rapidminer-multi-objective-optimization-feature-selection.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征选择的多目标优化](https://www.kdnuggets.com/2017/12/rapidminer-multi-objective-optimization-feature-selection.html)'
 - en: More On This Topic
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Unveiling Midjourney 5.2: A Leap Forward in AI Image Generation](https://www.kdnuggets.com/2023/06/unveiling-midjourney-52-leap-forward.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[揭开 Midjourney 5.2 的面纱：AI 图像生成的飞跃](https://www.kdnuggets.com/2023/06/unveiling-midjourney-52-leap-forward.html)'
 - en: '[Unveiling the Power of Meta''s Llama 2: A Leap Forward in Generative AI?](https://www.kdnuggets.com/2023/07/unveiling-power-metas-llama-2-leap-forward-generative-ai.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[揭开 Meta 的 Llama 2 的力量：生成 AI 的飞跃？](https://www.kdnuggets.com/2023/07/unveiling-power-metas-llama-2-leap-forward-generative-ai.html)'
 - en: '[Feature Selection: Where Science Meets Art](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征选择：科学与艺术的交汇点](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
 - en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的替代特征选择方法](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
 - en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习模型的高级特征选择技术](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
 - en: '[A Practical Approach To Feature Engineering In Machine Learning](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中特征工程的实用方法](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)'
