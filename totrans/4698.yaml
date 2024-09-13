@@ -1,404 +1,626 @@
 - en: Mastering Fast Gradient Boosting on Google Colaboratory with free GPU
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在 Google Colaboratory 上掌握快速梯度提升与免费 GPU
 - en: 原文：[https://www.kdnuggets.com/2019/03/mastering-fast-gradient-boosting-google-colaboratory-free-gpu.html](https://www.kdnuggets.com/2019/03/mastering-fast-gradient-boosting-google-colaboratory-free-gpu.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/03/mastering-fast-gradient-boosting-google-colaboratory-free-gpu.html](https://www.kdnuggets.com/2019/03/mastering-fast-gradient-boosting-google-colaboratory-free-gpu.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Anna Veronika Dorogush](https://www.linkedin.com/in/anna-veronika-dorogush-08739637/
     ), CatBoost Team Lead**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Anna Veronika Dorogush](https://www.linkedin.com/in/anna-veronika-dorogush-08739637/)，CatBoost
+    团队负责人**'
 - en: '![Mastering Gradient Boosting Figure 1](../Images/62dab8909af11b3717938905d64a8f7c.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![掌握梯度提升图 1](../Images/62dab8909af11b3717938905d64a8f7c.png)'
 - en: '**NVIDIA K80 GPU, [https://www.nvidia.com/ru-ru/data-center/tesla-k80/](https://www.nvidia.com/ru-ru/data-center/tesla-k80/)**'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '**NVIDIA K80 GPU，[https://www.nvidia.com/ru-ru/data-center/tesla-k80/](https://www.nvidia.com/ru-ru/data-center/tesla-k80/)**'
 - en: '**Gradient Boosting on Decision Trees** (GBDT) is a state-of-the-art Machine
     Learning tool for working with heterogeneous or structured data. When working
     with data, the ideal algorithm depends highly on the type of data. For homogeneous
     data, like images, sound or text, the best solution is neural networks. And for
     structured data, for example for credit scoring, recommendations or any other
     tabled data the best solution is GBDT.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '**决策树上的梯度提升**（GBDT）是一个最先进的机器学习工具，用于处理异构或结构化数据。在处理数据时，理想的算法高度依赖于数据的类型。对于同质数据，如图像、声音或文本，最佳解决方案是神经网络。而对于结构化数据，例如信用评分、推荐或其他表格数据，最佳解决方案是
+    GBDT。'
 - en: For this reason, a large number of winning solutions for [Kaggle](https://www.kaggle.com/)
     competitions are based on GBDT. GBDT is also heavily used in the production of
     different recommendation systems, in search engines, and in many financial structures.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，许多 [Kaggle](https://www.kaggle.com/) 竞赛的获胜解决方案都是基于 GBDT 的。GBDT 还被广泛用于各种推荐系统、搜索引擎和许多金融结构中。
 - en: Many people think that GBDT cannot be efficiently accelerated by a GPU, but
     this is actually not the case.  In this post, I explain how a GPU can be used
     to speed up GBDT.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多人认为 GBDT 不能通过 GPU 高效加速，但实际上并非如此。在这篇文章中，我将解释如何利用 GPU 加速 GBDT。
 - en: For the GBDT implementation, I’ll use **CatBoost**, a library well known for
     its categorical features support and efficient GPU implementation.  It not only
     works with categorical data, but with any data, and in many cases, it outperforms
     other GBDT libraries.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于 GBDT 实现，我将使用**CatBoost**，这是一个以支持分类特征和高效 GPU 实现而闻名的库。它不仅可以处理分类数据，还可以处理任何数据，在许多情况下，它的表现优于其他
+    GBDT 库。
 - en: The library was developed for production needs at the leading Russian tech company,
     [Yandex](https://yandex.com), and was later open sourced under the [Apache 2 license](https://en.wikipedia.org/wiki/Apache_License)
     about a year and a half ago.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 该库是在领先的俄罗斯科技公司 [Yandex](https://yandex.com) 的生产需求下开发的，约一年半前以 [Apache 2 许可证](https://en.wikipedia.org/wiki/Apache_License)
+    开源。
 - en: '![Mastering Gradient Boosting Figure 2](../Images/9bb20a26e6a3b27261e83e1bc0a2c29f.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![掌握梯度提升图 2](../Images/9bb20a26e6a3b27261e83e1bc0a2c29f.png)'
 - en: The test environment for my demonstration will be **Google Colaboratory**. This
     is a research tool for machine learning with free access to GPU runtime.  It’s
     a Jupyter notebook environment that requires no setup to use.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我演示的测试环境将是**Google Colaboratory**。这是一个用于机器学习的研究工具，提供免费的 GPU 运行时访问。它是一个不需要设置的
+    Jupyter notebook 环境。
 - en: Google Colaboratory offers pretty old GPUs for free - a Tesla K80 GPU with about
     11GB memory.  With newer GPUs, the speed increase will be much more significant. 
     But even with this old GPU, you will see an impressive speed difference. If we
     are talking about CPU, it’s 2x Intel Xeon E5-2600v3 per instance.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: Google Colaboratory 免费提供相当老旧的 GPU——一块大约 11GB 内存的 Tesla K80 GPU。使用更新的 GPU，速度提升会更加显著。但即使使用这块旧
+    GPU，你也会看到显著的速度差异。如果谈到 CPU，它是每个实例 2x Intel Xeon E5-2600v3。
 - en: Below you will find several simple steps to set up CatBoost inside Colab, download
     a dataset, train the model on a CPU and a GPU, and compare execution times.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面你将找到几个简单的步骤，以在 Colab 中设置 CatBoost，下载数据集，在 CPU 和 GPU 上训练模型，并比较执行时间。
 - en: Create notebook
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 创建 notebook
 - en: Navigate to [Colaboratory](https://colab.research.google.com) and create a new
     Python 3 notebook.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 前往 [Colaboratory](https://colab.research.google.com) 并创建一个新的 Python 3 notebook。
 - en: '![Mastering Gradient Boosting Figure 3](../Images/4be7e2cb46334ca9eb4ecd65f18c0d9a.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![掌握梯度提升 图 3](../Images/4be7e2cb46334ca9eb4ecd65f18c0d9a.png)'
 - en: Set GPU as hardware accelerator
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 设置 GPU 作为硬件加速器
 - en: 'There are two simple steps to select GPU as the hardware accelerator:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 选择 GPU 作为硬件加速器有两个简单步骤：
 - en: Step 1\. Navigate to the 'Runtime' menu and select 'Change runtime type'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 第 1 步。导航到 “Runtime” 菜单并选择 “Change runtime type”
 - en: '![Mastering Gradient Boosting Figure 4](../Images/691557beda28be1fc217785b2b258ccd.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![掌握梯度提升 图 4](../Images/691557beda28be1fc217785b2b258ccd.png)'
 - en: Step 2\. Select “GPU” as the hardware accelerator.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 第 2 步。选择 “GPU” 作为硬件加速器。
 - en: '![Mastering Gradient Boosting Figure 5](../Images/bcb8c4599e6ea3a34d6a2b89d152f19e.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![掌握梯度提升 图 5](../Images/bcb8c4599e6ea3a34d6a2b89d152f19e.png)'
 - en: Importing CatBoost
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导入 CatBoost
 - en: The next step is to import CatBoost inside the environment. Colaboratory has
     built in libraries installed and most libraries can be installed quickly with
     a simple *!pip install* command.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是将 CatBoost 导入环境中。 Colaboratory 内置了库，大多数库可以通过简单的 *!pip install* 命令快速安装。
 - en: Please ignore the warning message about already imported enum package. Furthermore
     take note that you need to re-import the library every time you start a new session
     of Colab.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 请忽略有关已导入 enum 包的警告信息。此外，请注意每次启动新的 Colab 会话时，你需要重新导入库。
 - en: '*!pip install catboost*'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '*!pip install catboost*'
 - en: '![Mastering Gradient Boosting Figure 6](../Images/3ec24905d856d4a3bede106e32662599.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![掌握梯度提升 图 6](../Images/3ec24905d856d4a3bede106e32662599.png)'
 - en: The CatBoost library that you install from pypi has GPU support, so you can
     use it straight away.  You only need to have a NVIDIA driver installed on your
     machine, and everything else will work out-of-the-box.  This is also true for
     Windows, making it easier for  Windows users who want to train their models on
     GPUs.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 从 pypi 安装的 CatBoost 库支持 GPU，因此你可以直接使用它。 你只需要在机器上安装 NVIDIA 驱动程序，其他一切都会开箱即用。 这对
+    Windows 也适用，使得希望在 GPU 上训练模型的 Windows 用户更加轻松。
 - en: Download and prepare dataset
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 下载并准备数据集
 - en: It’s time to code!  Once we’ve configured our environment, the next step is
     to download and prepare the dataset.  For GPU training, the bigger the dataset
     is, the bigger the speedup will be.  It doesn’t make a lot of sense to use GPU
     training for objects of one thousand or less, but starting from around 10,000
     you will get a good acceleration.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是编码的时候了！ 一旦我们配置好环境，下一步是下载和准备数据集。 对于 GPU 训练，数据集越大，提速效果越明显。 使用 GPU 训练对于一千个或更少的对象没有太大意义，但从大约
+    10,000 开始，你将获得很好的加速效果。
 - en: We require a large dataset to  demonstrate the power of GPUs for GBDT tasks.
     We will use Epsilon, which has 500,000 documents and 2,000 features, and is included
     in catboost.datasets.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要一个大型数据集来展示 GPU 在 GBDT 任务中的强大能力。我们将使用 Epsilon，它有 500,000 个文档和 2,000 个特征，并且包含在
+    catboost.datasets 中。
 - en: The code below does this task in approximately 10-15 minutes. Please be patient.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的代码大约需要 10-15 分钟来完成这个任务。 请耐心等待。
 - en: Training on CPU
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在 CPU 上训练
 - en: To   the myth about GBDT not showing large speed gains on GPU, I would like
     to compare GBDT training time on CPU and GPU.  Let’s start with CPU. The code
     below creates a model, trains it, and measures the execution time of the training. 
     It uses default parameters as they provide a fairly good baseline in many cases.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了打破 GBDT 在 GPU 上没有显著加速的迷思，我想比较 CPU 和 GPU 上的 GBDT 训练时间。 让我们从 CPU 开始。下面的代码创建了一个模型，训练它，并测量训练的执行时间。
+    它使用默认参数，因为在许多情况下，默认参数提供了相当好的基准。
 - en: We will first train all our models for 100 iterations (because it takes a really
     long time to train it on CPUs).
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将首先训练所有模型 100 次迭代（因为在 CPU 上训练需要很长时间）。
 - en: After you run this code, you can change it to a default of 1000 or more iterations
     to get better quality results.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 在运行此代码后，你可以将其更改为默认的 1000 次或更多迭代，以获得更好的质量结果。
 - en: CatBoost will require around 15 minutes to train on CPUs for 100 iterations.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: CatBoost 在 CPU 上训练 100 次迭代需要大约 15 分钟。
 - en: you want to show there can be feed speed ups, correct?
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 你想展示可以加速的效果，对吗？
 - en: if feed = training, yes.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 feed = training，是的。
 - en: 'Time to fit model on CPU: 862 sec'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 CPU 上拟合模型的时间：862 秒
 - en: Training on GPUs
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在 GPU 上训练
 - en: All previous code execution has been done on a CPU. It's time to use a GPU now!
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有之前的代码执行都在 CPU 上完成。 现在是使用 GPU 的时候了！
 - en: To enable the GPU training you need to use *task_type='GPU'* parameter.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 要启用 GPU 训练，你需要使用 *task_type='GPU'* 参数。
 - en: Let’s rerun the experiment on GPU and see what will be the resulting time.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们在 GPU 上重新运行实验，看看结果时间是多少。
 - en: If Colab will show you the warning “GPU memory usage is close to the limit”,
     just press “Ignore”.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果 Colab 显示警告“GPU 内存使用接近限制”，只需点击“忽略”。
 - en: '![Mastering Gradient Boosting Figure 7](../Images/2b65f3aa59ac6d9a48ce75e0fdbb633f.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![掌握梯度提升 图 7](../Images/2b65f3aa59ac6d9a48ce75e0fdbb633f.png)'
 - en: 'Time to fit model on GPU: 195 sec'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 GPU 上适配模型的时间：195 秒
 - en: 'GPU speedup over CPU: 4x'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: GPU 相比于 CPU 的加速：4 倍
 - en: As you can see, the GPU is **4x times** faster than the CPU. It takes just 3-4
     minutes vs 14-15 with a CPU to fit the model.  Moreover, the learning process
     is complete in just 30 seconds vs 12 minutes.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，GPU 的速度是 **CPU 的 4 倍**。在 GPU 上适配模型仅需 3-4 分钟，而在 CPU 上则需要 14-15 分钟。此外，学习过程在
+    GPU 上仅需 30 秒，而在 CPU 上则需要 12 分钟。
 - en: When we train 100 iterations, the bottleneck is preprocessing and not the training
     itself.  But for thousands of iterations that are necessary to get the best quality
     on huge datasets, this bottleneck will be invisible. You can try training for
     5,000 iterations on a CPU and a GPU and compare once again.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们训练 100 次迭代时，瓶颈在于预处理，而不是训练本身。但对于数千次迭代以获得大数据集上的最佳质量，这个瓶颈将不可见。你可以尝试在 CPU 和 GPU
+    上训练 5,000 次迭代，再次进行比较。
 - en: Code
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 代码
 - en: All the code above you can find as a [tutorial](https://colab.research.google.com/github/catboost/tutorials/blob/master/tools/google_colaboratory_cpu_vs_gpu_tutorial.ipynb)
     for Google Colaboratory at CatBoost repository.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在 CatBoost 仓库的 [教程](https://colab.research.google.com/github/catboost/tutorials/blob/master/tools/google_colaboratory_cpu_vs_gpu_tutorial.ipynb)
+    中找到上述所有代码。
 - en: Alternative GBDT libraries
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 替代 GBDT 库
 - en: 'To be fair there are at least two more popular open source GBDT libraries:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 公平地说，还有至少两个更受欢迎的开源 GBDT 库：
 - en: '[XGBoost](https://github.com/dmlc/xgboost/)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[XGBoost](https://github.com/dmlc/xgboost/)'
 - en: '[LightGBM](https://github.com/Microsoft/LightGBM)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LightGBM](https://github.com/Microsoft/LightGBM)'
 - en: 'Both are available as pre-installed libraries on Colaboratory. Let’s train
     both of them on CPU / GPU and compare times. Spoiler: We had no luck at receiving
     results from them. Details are below.'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 两者都作为预装库在 Colaboratory 上提供。我们在 CPU / GPU 上训练它们并比较时间。剧透：我们没有从中获得结果。详细信息如下。
 - en: XGBoost
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: XGBoost
 - en: For the start let’s try the CPU version of XGBoost. Need to stress that training
     parameters is the same as for CatBoost library.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 开始时我们尝试 XGBoost 的 CPU 版本。需要强调的是，训练参数与 CatBoost 库相同。
 - en: The code is quite simple, but once we’ve run it with Epsilon dataset Colaboratory
     session has crashed.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码相当简单，但一旦我们在 Epsilon 数据集上运行，Colaboratory 会话崩溃。
 - en: '![Mastering Gradient Boosting Figure 8](../Images/95585dac0f80bdc1a163fc298f4a43cc.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![掌握梯度提升 图 8](../Images/95585dac0f80bdc1a163fc298f4a43cc.png)'
 - en: Unfortunately the same error occurs with the GPU version. Kernel dies after
     you start the simple code above.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 不幸的是，GPU 版本也出现了相同的错误。启动上述简单代码后，内核会崩溃。
 - en: LightGBM
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: LightGBM
 - en: CPU version of LightGBM results in the same error message “Your session crashed
     after using all available RAM.” error.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: LightGBM 的 CPU 版本出现相同的错误消息“您的会话在使用完所有可用 RAM 后崩溃。”
 - en: Colaboratory pre-installed version of LightGBM doesn’t contain GPU out of the
     box. And the  [installation guide](https://github.com/Microsoft/LightGBM/tree/master/python-package)
     for GPU version unfortunately doesn’t work. See details below.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: Colaboratory 预装的 LightGBM 版本不支持 GPU。并且 [GPU 版本的安装指南](https://github.com/Microsoft/LightGBM/tree/master/python-package)
+    不幸地无法使用。详见下文。
 - en: '*!pip install -U lightgbm --install-option=--gpu*'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '*!pip install -U lightgbm --install-option=--gpu*'
 - en: '![Mastering Gradient Boosting Figure 9](../Images/57c772f59ed4bf65e1531d1f68b2d360.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![掌握梯度提升 图 9](../Images/57c772f59ed4bf65e1531d1f68b2d360.png)'
 - en: It’s a pity, but we couldn’t compare CPU vs GPU execution times for other libraries,
     except CatBoost’s. Possibly it’ll work with smaller dataset.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 很遗憾，我们无法比较其他库的 CPU 与 GPU 执行时间，除了 CatBoost。可能在较小的数据集上会有效。
 - en: Summary
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 摘要
 - en: GBDT algorithm works efficiently on a GPU.
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: GBDT 算法在 GPU 上运行效率高。
 - en: CatBoost is a fast implementation of GBDT with GPU support out-of-the-box.
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: CatBoost 是一个快速实现的 GBDT，开箱即用 GPU 支持。
 - en: XGBoost and LightGBM don’t always work on Colaboratory with large datasets.
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: XGBoost 和 LightGBM 在 Colaboratory 上处理大数据集时并不总是有效。
 - en: Google Colaboratory is useful tool with free GPU support.
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Google Colaboratory 是一个有用的工具，提供免费的 GPU 支持。
 - en: Further reading
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 进一步阅读
 - en: '[1] V. Ershov, [CatBoost Enables Fast Gradient Boosting on Decision Trees Using
     GPUs](https://devblogs.nvidia.com/catboost-fast-gradient-boosting-decision-trees/),
     NVIDIA blog post'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] V. Ershov，[CatBoost 通过 GPU 实现快速梯度提升](https://devblogs.nvidia.com/catboost-fast-gradient-boosting-decision-trees/)，NVIDIA
+    博客文章'
 - en: '[2] R. Mitchell, [Gradient Boosting, Decision Trees and XGBoost with CUDA](https://devblogs.nvidia.com/gradient-boosting-decision-trees-xgboost-cuda/),
     NVIDIA blog post'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2] R. Mitchell, [梯度提升、决策树与 CUDA 下的 XGBoost](https://devblogs.nvidia.com/gradient-boosting-decision-trees-xgboost-cuda/)，NVIDIA
+    博客文章'
 - en: '[3] [LightGBM GPU Tutorial](https://lightgbm.readthedocs.io/en/latest/GPU-Tutorial.html)'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '[3] [LightGBM GPU 教程](https://lightgbm.readthedocs.io/en/latest/GPU-Tutorial.html)'
 - en: '[4] [CatBoost GitHub](https://github.com/catboost)'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '[4] [CatBoost GitHub](https://github.com/catboost)'
 - en: '**Bio**: [Anna Veronika Dorogush](https://www.linkedin.com/in/anna-veronika-dorogush-08739637/
     ) is the Head of Machine Learning Systems at Yandex.'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介**： [安娜·维罗妮卡·多罗古什](https://www.linkedin.com/in/anna-veronika-dorogush-08739637/)
+    是 Yandex 的机器学习系统负责人。'
 - en: '**Resources:**'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '**资源：**'
 - en: '[On-line and web-based: Analytics, Data Mining, Data Science, Machine Learning
     education](https://www.kdnuggets.com/education/online.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在线和基于网页的：分析、数据挖掘、数据科学、机器学习教育](https://www.kdnuggets.com/education/online.html)'
 - en: '[Software for Analytics, Data Science, Data Mining, and Machine Learning](https://www.kdnuggets.com/software/index.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用于分析、数据科学、数据挖掘和机器学习的软件](https://www.kdnuggets.com/software/index.html)'
 - en: '**Related:**'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Understanding Gradient Boosting Machines](https://www.kdnuggets.com/2019/02/understanding-gradient-boosting-machines.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解梯度提升机](https://www.kdnuggets.com/2019/02/understanding-gradient-boosting-machines.html)'
 - en: '[3 More Google Colab Environment Management Tips](https://www.kdnuggets.com/2019/01/more-google-colab-environment-management-tips.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[3 个 Google Colab 环境管理小贴士](https://www.kdnuggets.com/2019/01/more-google-colab-environment-management-tips.html)'
 - en: '[Creating a simple text classifier using Google CoLaboratory](https://www.kdnuggets.com/2018/03/simple-text-classifier-google-colaboratory.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用谷歌 CoLaboratory 创建一个简单的文本分类器](https://www.kdnuggets.com/2018/03/simple-text-classifier-google-colaboratory.html)'
 - en: '* * *'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-89
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在的组织进行 IT 工作'
 - en: '* * *'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-94
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Building a GPU Machine vs. Using the GPU Cloud](https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建 GPU 机器与使用 GPU 云](https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud)'
 - en: '[The Ultimate Guide to Mastering Seasonality and Boosting Business Results](https://www.kdnuggets.com/2023/08/media-mix-modeling-ultimate-guide-mastering-seasonality-boosting-business-results.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[终极指南：掌握季节性并提升业务成果](https://www.kdnuggets.com/2023/08/media-mix-modeling-ultimate-guide-mastering-seasonality-boosting-business-results.html)'
 - en: '[Mastering GPUs: A Beginner''s Guide to GPU-Accelerated DataFrames in Python](https://www.kdnuggets.com/2023/07/mastering-gpus-beginners-guide-gpu-accelerated-dataframes-python.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握 GPU：Python 中 GPU 加速 DataFrames 的初学者指南](https://www.kdnuggets.com/2023/07/mastering-gpus-beginners-guide-gpu-accelerated-dataframes-python.html)'
 - en: '[Boosting Machine Learning Algorithms: An Overview](https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提升机器学习算法：概述](https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html)'
 - en: '[Announcing a Blog Writing Contest, Winner Gets an NVIDIA GPU!](https://www.kdnuggets.com/2022/11/blog-writing-contest-nvidia-gpu.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[宣布博客写作比赛，获胜者将获得 NVIDIA GPU！](https://www.kdnuggets.com/2022/11/blog-writing-contest-nvidia-gpu.html)'
 - en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 RAPIDS cuDF 利用 GPU 进行特征工程](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'

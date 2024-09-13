@@ -1,21 +1,31 @@
 - en: How to Train a Keras Model 20x Faster with a TPU for Free
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何利用TPU免费将Keras模型训练速度提高20倍
 - en: 原文：[https://www.kdnuggets.com/2019/03/train-keras-model-20x-faster-tpu-free.html](https://www.kdnuggets.com/2019/03/train-keras-model-20x-faster-tpu-free.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/03/train-keras-model-20x-faster-tpu-free.html](https://www.kdnuggets.com/2019/03/train-keras-model-20x-faster-tpu-free.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Chengwei Zhang](https://www.dlology.com/), Shanghai Industrial Technology
     Institute / Programmer / Maker**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Chengwei Zhang](https://www.dlology.com/)，上海工业技术研究院 / 程序员 / 创客**'
 - en: '![figure-name](../Images/3f9d6ae1d0a78e13f27b40eb06055fb5.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/3f9d6ae1d0a78e13f27b40eb06055fb5.png)'
 - en: For quite some while, I feel content training my model on a single GTX 1070
     graphics card which is rated around 8.18 TFlops single precision, then Google
     opens up their free Tesla K80 GPU on Colab which comes with 12GB RAM, and rated
@@ -23,252 +33,385 @@
     TFlops pops up in Colab’s runtime type selector. In this quick tutorial, you will
     learn how to take your existing Keras model, turn it into a TPU model and train
     on Colab x20 faster compared to training on my GTX1070 for free.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 有段时间，我一直很满足于在一张GTX 1070显卡上训练我的模型，该显卡单精度约为8.18 TFlops，然后谷歌在Colab上开放了他们的免费Tesla
+    K80 GPU，具有12GB RAM，速度略快，为8.73 TFlops。直到最近，Cloud TPU选项以180 TFlops出现在Colab的运行时类型选择器中。在这个快速教程中，你将学习如何将现有的Keras模型转换为TPU模型，并在Colab上以免费方式训练，速度比我的GTX1070快20倍。
 - en: We are going to build an easy to understand yet complex enough to train Keras
     model so we can warm up the Cloud TPU a little bit. Training an LSTM model on
     the IMDB sentiment classification task could be a great example because LSTM can
     be more computationally expensive to train than other layers like Dense and convolutional.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将构建一个易于理解但足够复杂的Keras模型，以便稍微热身Cloud TPU。在IMDB情感分类任务上训练LSTM模型是一个很好的例子，因为LSTM的训练计算开销可能比Dense和卷积等其他层更大。
 - en: An overview of the workflow,
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 工作流程概述，
 - en: Build a Keras model for training in functional API with static input `batch_size`.
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 构建一个用于训练的Keras模型，在功能性API中使用静态输入`batch_size`。
 - en: Convert Keras model to TPU model.
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将Keras模型转换为TPU模型。
 - en: Train the TPU model with static `batch_size * 8` and save the weights to file.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用静态`batch_size * 8`训练TPU模型，并将权重保存到文件中。
 - en: Build a Keras model for inference with the same structure but variable batch
     input size.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 构建一个用于推断的Keras模型，保持相同的结构，但批量输入大小可变。
 - en: Load the model weights.
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加载模型权重。
 - en: Predict with the inferencing model.
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用推断模型进行预测。
 - en: '**You can play with the Colab Jupyter notebook — [Keras_LSTM_TPU.ipynb](https://colab.research.google.com/drive/1QZf1WeX3EQqBLeFeT4utFKBqq-ogG1FN)
     while reading on.**'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**你可以在阅读的同时玩转Colab Jupyter笔记本——[Keras_LSTM_TPU.ipynb](https://colab.research.google.com/drive/1QZf1WeX3EQqBLeFeT4utFKBqq-ogG1FN)。**'
 - en: Firstly, Follow the instruction in the image below to activate the TPU in the
     Colab runtime.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，按照下图中的说明激活Colab运行时中的TPU。
 - en: '![activate-tpu](../Images/4637ff952b6b0dfeacd3d05378bd8036.png)Activate TPU'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '![activate-tpu](../Images/4637ff952b6b0dfeacd3d05378bd8036.png)激活TPU'
 - en: Static input Batch size
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 静态输入批量大小
 - en: Input pipelines running on CPU and GPU are mostly free from the static shape
     requirement, while in the XLA/TPU environment, static shapes and batch size is
     imposed.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在CPU和GPU上运行的输入管道大多不受静态形状要求的限制，而在XLA/TPU环境中，静态形状和批量大小是强制要求的。
 - en: The Could TPU contains 8 TPU cores, which operate as independent processing
     units. The TPU is not fully utilized unless all eight cores are used. To fully
     speed up the training with vectorization, we can choose a larger batch size compared
     to training the same model on a single GPU. A total batch size of 1024 (128 per
     core) is generally a good starting point.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: Cloud TPU包含8个TPU核心，这些核心作为独立的处理单元进行操作。除非使用所有八个核心，否则TPU不会被充分利用。为了通过矢量化完全加速训练，我们可以选择比在单个GPU上训练相同模型时更大的批量大小。总批量大小为1024（每核心128）通常是一个不错的起点。
 - en: In case you are going to train a larger model where the batch size is too large,
     try slowly reduce the batch size until it fits in TPU memory, just making sure
     that the total batch size is a multiple of 64 (the per-core batch size should
     be a multiple of 8).
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你打算训练一个较大的模型，批量大小过大时，尝试逐渐减少批量大小，直到它适合TPU内存，同时确保总批量大小是64的倍数（每核心的批量大小应为8的倍数）。
 - en: 'It is also worth to mention when training with larger batch size; it is generally
     safe to increase the learning rate of the optimizer to allow even faster convergence.
     You can find a reference in this paper — “[Accurate, Large Minibatch SGD: Training
     ImageNet in 1 Hour](https://arxiv.org/pdf/1706.02677.pdf)”.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '还值得提到的是，当使用更大的批次大小进行训练时，通常可以安全地增加优化器的学习率，以实现更快的收敛。你可以在这篇论文中找到参考——“[准确的大规模小批量
+    SGD: 1 小时内训练 ImageNet](https://arxiv.org/pdf/1706.02677.pdf)”。'
 - en: In Keras, to define a static batch size, we use its functional API and then
     specify the `batch_size` parameter for the Input layer. Notice that the model
     builds in a function which takes a `batch_size` parameter so we can come back
     later to make another model for inferencing runs on CPU or GPU which takes variable
     batch size inputs.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Keras 中，为了定义一个静态的批次大小，我们使用其函数式 API 然后为 Input 层指定`batch_size`参数。注意，模型在一个函数中构建，该函数接受一个`batch_size`参数，因此我们可以稍后返回以创建另一个模型，用于在
+    CPU 或 GPU 上运行的推理，这需要接受可变批次大小的输入。
 - en: '[PRE0]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Also, use `tf.train.Optimizer` instead of a standard Keras optimizer since Keras
     optimizer support is still experimental for TPU.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，使用 `tf.train.Optimizer` 而不是标准的 Keras 优化器，因为 Keras 优化器对 TPU 的支持仍在实验阶段。
 - en: Convert Keras model to TPU model
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 将 Keras 模型转换为 TPU 模型
 - en: The `tf.contrib.tpu.keras_to_tpu_model` function converts a `tf.keras` model
     to an equivalent TPU version.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '`tf.contrib.tpu.keras_to_tpu_model` 函数将 `tf.keras` 模型转换为等效的 TPU 版本。'
 - en: '[PRE1]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: We then use the standard Keras methods to train, save the weights and evaluate
     the model. Notice that the `batch_size` is set to eight times of the model input
     `batch_size` since the input samples are evenly distributed to run on 8 TPU cores.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们使用标准的 Keras 方法来训练、保存权重和评估模型。注意，由于输入样本均匀分布在 8 个 TPU 核心上，`batch_size` 设置为模型输入
+    `batch_size` 的八倍。
 - en: '[PRE2]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: I set up an experiment to compare the training speed between a single GTX1070
     running locally on my Windows PC and TPU on Colab, here is the result.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我设置了一个实验来比较在我的 Windows PC 上本地运行的单个 GTX1070 和 Colab 上的 TPU 之间的训练速度，结果如下。
 - en: Both GPU and TPU takes the input batch size of 128,
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: GPU 和 TPU 都接受 128 的输入批次大小，
 - en: 'GPU: **179 seconds per epoch**. 20 epochs reach 76.9% validation accuracy,
     total 3600 seconds.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 'GPU: **每个 epoch 179 秒**。20 个 epoch 达到 76.9% 的验证准确率，总共 3600 秒。'
 - en: 'TPU: **5 seconds per epoch** except for the very first epoch which takes 49
     seconds. 20 epochs reach 95.2% validation accuracy, total 150 seconds.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 'TPU: **每个 epoch 5 秒**，除了第一个 epoch 需要 49 秒。20 个 epoch 达到 95.2% 的验证准确率，总共 150
+    秒。'
 - en: The validation accuracy for TPU after 20 epochs are higher than GPU may be caused
     by training 8 batches of the mini-batch size of 128 samples at a time.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: TPU 在 20 个 epoch 后的验证准确率高于 GPU，这可能是由于一次训练 8 批次每批次 128 个样本所致。
 - en: Inferencing on CPU
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在 CPU 上进行推理
 - en: Once we have the model weights, we can load it as usual and make predictions
     on another device like CPU or GPU. We also want the inferencing model to accept
     flexible input batch size, that can be done with the previous `make_model()` function.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们有了模型权重，我们可以像往常一样加载它，并在另一个设备如 CPU 或 GPU 上进行预测。我们还希望推理模型能够接受灵活的输入批次大小，这可以通过之前的`make_model()`函数来实现。
 - en: '[PRE3]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: You can see the inferencing model now takes variable input samples,
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以看到推理模型现在接受可变的输入样本，
 - en: '[PRE4]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Then you can use the standard `fit()`, `evaluate()` functions with the inferencing
     model.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后你可以使用标准的 `fit()`、`evaluate()` 函数与推理模型一起使用。
 - en: Conclusion and further reading
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论和进一步阅读
 - en: This quick tutorial shows you how to train a Keras model faster leveraging the
     free Cloud TPU resource on Google Colab.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 本快速教程展示了如何利用 Google Colab 上免费的 Cloud TPU 资源更快地训练 Keras 模型。
 - en: '[Cloud TPU Documentation](https://cloud.google.com/tpu/docs/)'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Cloud TPU 文档](https://cloud.google.com/tpu/docs/)'
 - en: '[Cloud TPU Performance Guide](https://cloud.google.com/tpu/docs/performance-guide)'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Cloud TPU 性能指南](https://cloud.google.com/tpu/docs/performance-guide)'
 - en: '[Cloud TPU Troubleshooting guide](https://cloud.google.com/tpu/docs/troubleshooting)'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Cloud TPU 故障排除指南](https://cloud.google.com/tpu/docs/troubleshooting)'
 - en: '[XLA Overview](https://www.tensorflow.org/performance/xla/)'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '[XLA 概述](https://www.tensorflow.org/performance/xla/)'
 - en: '[Share on Twitter](https://twitter.com/intent/tweet?url=https%3A//www.dlology.com/blog/how-to-train-keras-model-x20-times-faster-with-tpu-for-free/&text=How%20to%20train%20Keras%20model%20x20%20times%20faster%20with%20TPU%20for%20free)
     [Share on Facebook](https://www.facebook.com/sharer/sharer.php?u=https://www.dlology.com/blog/how-to-train-keras-model-x20-times-faster-with-tpu-for-free/)'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '[在 Twitter 上分享](https://twitter.com/intent/tweet?url=https%3A//www.dlology.com/blog/how-to-train-keras-model-x20-times-faster-with-tpu-for-free/&text=How%20to%20train%20Keras%20model%20x20%20times%20faster%20with%20TPU%20for%20free)
+    [在 Facebook 上分享](https://www.facebook.com/sharer/sharer.php?u=https://www.dlology.com/blog/how-to-train-keras-model-x20-times-faster-with-tpu-for-free/)'
 - en: '**Bio: [Chengwei Zhang](https://www.dlology.com/)** is a programmer with interest
     in the field of deep learning and natural language processing.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Chengwei Zhang](https://www.dlology.com/)** 是一名对深度学习和自然语言处理领域感兴趣的程序员。'
 - en: '[Original](https://medium.com/swlh/how-to-train-keras-model-x20-times-faster-with-tpu-for-free-cac6cf5089cb).
     Reposted with permission.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/swlh/how-to-train-keras-model-x20-times-faster-with-tpu-for-free-cac6cf5089cb)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Keras Hyperparameter Tuning in Google Colab Using Hyperas](/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Google Colab 中使用 Hyperas 调整 Keras 超参数](/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)'
 - en: '[Using a Keras Long Short-Term Memory (LSTM) Model to Predict Stock Prices](/2018/11/keras-long-short-term-memory-lstm-model-predict-stock-prices.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Keras 长短期记忆（LSTM）模型预测股票价格](/2018/11/keras-long-short-term-memory-lstm-model-predict-stock-prices.html)'
 - en: '[3 Essential Google Colaboratory Tips & Tricks](/2018/02/essential-google-colaboratory-tips-tricks.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[3 个必备的 Google Colaboratory 提示和技巧](/2018/02/essential-google-colaboratory-tips-tricks.html)'
 - en: '* * *'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-55
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在的组织的 IT'
 - en: '* * *'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Introducing TPU v4: Googles Cutting Edge Supercomputer for Large…](https://www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[推出 TPU v4：谷歌领先的超级计算机，用于大规模…](https://www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html)'
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow 训练图像分类模型的指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
 - en: '[How to Build and Train a Transformer Model from Scratch with…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何从头开始构建和训练 Transformer 模型…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)'
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[Keras 3.0: Everything You Need To Know](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Keras 3.0：你需要知道的一切](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)'
 - en: '[Why we will always need humans to train AI — sometimes in real-time](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么我们总是需要人类来训练 AI —— 有时是实时的](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)'
