@@ -1,107 +1,154 @@
 - en: Continuous Training for Machine Learning – a Framework for a Successful Strategy
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 机器学习的持续训练 – 成功策略的框架
 - en: 原文：[https://www.kdnuggets.com/2021/04/continuous-training-machine-learning.html](https://www.kdnuggets.com/2021/04/continuous-training-machine-learning.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/04/continuous-training-machine-learning.html](https://www.kdnuggets.com/2021/04/continuous-training-machine-learning.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Or Itzary](https://www.linkedin.com/in/or-itzary/) and [Liran Nahum](https://www.linkedin.com/in/nahumliran/),
     Data Scientists at Superwise.ai**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Or Itzary](https://www.linkedin.com/in/or-itzary/) 和 [Liran Nahum](https://www.linkedin.com/in/nahumliran/)，Superwise.ai
+    数据科学家**。'
 - en: '![](../Images/6a313d3202e84b51844f14f80a2839ea.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6a313d3202e84b51844f14f80a2839ea.png)'
 - en: '*Photo by Monika Pejkovska on Unsplash.*'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '*照片由 Monika Pejkovska 提供，来源 Unsplash。*'
 - en: ‍ML models are built on the assumption that the data used in production will
     be similar to the data observed in the past, the one that we trained our models
     on. While this may be true for some specific use cases, most models work in dynamic
     data environments where data is constantly changing and where “concept drifts”
     are likely to happen and adversely impact the models’ accuracy and reliability.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: ‍机器学习模型的构建基于假设，即生产中使用的数据将与我们训练模型时观察到的数据相似。虽然对于某些特定用例这可能是正确的，但大多数模型在数据动态变化的环境中工作，在这种环境中“概念漂移”很可能发生并对模型的准确性和可靠性产生不利影响。
 - en: 'To deal with this, ML models need to be retrained regularly. Or, as stated
     in Google’s “[MLOps: Continuous delivery and automation pipelines in machine learning](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)”:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '为了解决这个问题，机器学习模型需要定期重新训练。正如谷歌在 “[MLOps: Continuous delivery and automation pipelines
+    in machine learning](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)”
+    中所述：'
 - en: '“*To address these challenges and to maintain your model''s accuracy in production,
     you need to do the following: Actively monitor the quality of your model in production
     [...] and frequently retrain your production models.*”'
+  id: totrans-8
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: “*为了应对这些挑战并保持模型在生产中的准确性，你需要执行以下操作：积极监控生产中模型的质量 [...] 并频繁重新训练你的生产模型。*”
 - en: This concept is called ‘**Continuous Training’** (CT) and is part of the MLOps
     practice. Continuous training seeks to automatically and continuously retrain
     the model to adapt to changes that might occur in the data.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个概念被称为‘**持续训练**’（CT），是 MLOps 实践的一部分。持续训练旨在自动和持续地重新训练模型，以适应数据中可能发生的变化。
 - en: There are different approaches/methodologies to perform continuous retraining,
     each with its pros, cons, and cost. Yet, and similar to the shoemaker who walks
     barefoot, we--data scientists--seem to overdo retraining, sometimes manually,
     and often use it as a “default” solution without enough production-driven insights.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 有不同的方法/方法论来执行持续再训练，每种方法都有其优缺点和成本。然而，与赤脚行走的鞋匠类似，我们--数据科学家--似乎过度使用再训练，有时是手动进行的，常常将其作为“默认”解决方案，而没有足够的生产驱动洞察。
 - en: 'Each ML use case has its own dynamic data environments that can cause concept
     drifts: from real-time trading to fraud detection with the adversary changing
     the data distribution, or recommendation engines with a wealth of new movies and
     new trends. Yet, and regardless of the use case, three main questions need to
     be addressed when designing a  continuous training strategy:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个机器学习用例都有其自身动态的数据环境，可能会导致概念漂移：从实时交易到欺诈检测，面对对手改变数据分布，或是推荐引擎面临大量新电影和新趋势。然而，无论用例如何，在设计持续训练策略时需要解决三个主要问题：
 - en: '**1 - When should the model be retrained?** As the goal is to keep running
     models that are highly relevant and that perform optimally at any point in time,
     how often should the model be retrained'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1 - 何时应重新训练模型？** 由于目标是保持运行的模型在任何时候都高度相关且表现最佳，模型应该多久重新训练一次？'
 - en: '**2 - What data should be used? **The common assumption for the selection of
     the adequate dataset is that the relevance of the data is correlated to how recent
     it is, which triggers a set of questions: should we just use new data or add to
     older data sets? What is a good balance between old and new data? How recent is
     considered as new data, or when is the cut between old and new data?'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**2 - 应使用什么数据？** 选择适当数据集的常见假设是数据的相关性与其时效性相关，这引发了一系列问题：我们应该仅使用新数据还是添加到旧数据集？旧数据和新数据之间的良好平衡是什么？多新的数据算作新数据，或者说旧数据和新数据的分界线在哪里？'
 - en: '**3 - What should be retrained?** Can we just replace data and retrain the
     same model with the same hyperparameters? Or should we take a more intrusive approach
     and run a full pipeline that simulates our research process?'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**3 - 应该重新训练什么？** 我们可以仅仅替换数据并用相同的超参数重新训练相同的模型吗？还是应该采取更具侵入性的方法，运行一个完整的流程来模拟我们的研究过程？'
 - en: ‍Each of the three questions above can be answered separately and can help determine
     the optimal strategy for each case. Yet, and while answering these questions,
     there is a list of considerations that need to be taken into account for which
     we investigate here. For each question, we describe different approaches corresponding
     to different levels of automation and maturity of the ML process.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述三个问题中的每一个都可以单独回答，并有助于确定每种情况的最佳策略。然而，在回答这些问题时，还有一些需要考虑的因素，我们在这里进行调查。对于每个问题，我们描述了对应不同自动化水平和机器学习过程成熟度的不同方法。
 - en: When to retrain?
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 何时重新训练？
 - en: The three most common strategies are periodic retraining, performance-based,
     or based on data changes.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 三种最常见的策略是周期性重新训练、基于性能的重新训练，或者基于数据变化的重新训练。
 - en: '**Periodic retraining**'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**周期性重新训练**'
 - en: Period retraining schedule is the most naïve and straightforward approach. Usually,
     it is time-based:  the model is retrained every 3 months -  but can also be volume-based,
     i.e., for every 100K new labels.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 周期性重新训练时间表是最简单直接的方法。通常，它是基于时间的：每三个月重新训练一次模型——但也可以基于数量，即每100K个新标签进行一次重新训练。
 - en: 'The advantages of periodic retraining are just as straightforward: this is
     a very intuitive and manageable approach as it is easy to know when the next retraining
     iteration will happen, and it is **easy to implement**.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 周期性重新训练的优势同样直截了当：这是一个非常直观且易于管理的方法，因为很容易知道下一个重新训练的迭代什么时候发生，并且**易于实施**。
 - en: '![](../Images/870a1d90ef8adfb74cba04510c4b9d09.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/870a1d90ef8adfb74cba04510c4b9d09.png)'
 - en: '**This method, though, often reveals itself to be ill-fitted or inefficient.** How
     often do you retrain the model? Every day? Every week?  Every three months? Once
     a year? While one wants frequent retraining to keep our models updated, retraining
@@ -112,76 +159,105 @@
     Yet, retraining with large intervals may miss the point of continuous retraining
     and fail to adapt to changes in the data, without mentioning the risks of retraining
     on noisy data.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**不过，这种方法通常被证明是不适合或效率低下的。** 你多久重新训练一次模型？每天？每周？每三个月？每年一次？虽然我们希望频繁重新训练以保持模型更新，但在没有实际原因（即没有概念漂移）的情况下过于频繁地重新训练模型是成本高昂的。此外，即使重新训练是自动化的，它仍然需要重要的资源——包括计算资源和数据科学团队的资源，这些团队需要监督重新训练过程以及部署后新模型在生产中的表现。然而，长时间间隔的重新训练可能会错过持续重新训练的关键，无法适应数据的变化，更不用说在噪声数据上重新训练的风险了。'
 - en: ‍*At the end of the day, a periodic retraining schedule makes sense if the frequency
     is aligned with the dynamism of your domain.  Otherwise, the selection of a random
     time/milestone may expose you to risks and leave you with models that have less
     relevance than their previous version.*
+  id: totrans-23
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*归根结底，如果周期性重新训练的频率与领域的动态性相一致，那是有意义的。否则，选择一个随机的时间/里程碑可能会让你面临风险，并使你拥有的模型的相关性低于其之前的版本。*'
 - en: '**Performance-based trigger **'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**基于性能的触发器**'
 - en: 'It’s almost a common-sense claim based on the good old engineering adage: “if
     it ain''t broken, don''t fix it.” The second most common approach to determine
     when to retrain is to leverage performance-based triggers and retrain the model
     once you detect performance degradation.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 这几乎是一个常识性的说法，基于古老的工程格言：“如果没有坏，就不要修理。” 第二种最常见的确定何时重新训练的方法是利用基于性能的触发器，一旦检测到性能下降，就重新训练模型。
 - en: '![](../Images/c214a01fc8e30b2b21ac3dc3a5f4ae5d.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c214a01fc8e30b2b21ac3dc3a5f4ae5d.png)'
 - en: This approach, more empirical than the first one, assumes that you have a continuous
     view of the performance of your models in production.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种方法，比第一个方法更具经验性，假设你对生产中模型的性能有持续的监控视角。
 - en: The main limitation when relaying on performance only is the time it takes for
     you to obtain your ground truth - if you obtain it at all. In user conversion
     prediction cases,  it can take 30 or 60 days until you will get a ground truth,
     or even 6 months or more in cases such as transaction fraud detection or LTV.
     If you need to wait so long to have full feedback, that means you’ll retrain the
     model too late after the business has already been impacted.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅依赖性能的主要限制是获取真实数据所需的时间——如果你能够获取的话。在用户转化预测的情况下，可能需要 30 或 60 天才能获得真实数据，或者在交易欺诈检测或
+    LTV 等情况中可能需要 6 个月或更长时间。如果你需要等待这么长时间才能获得全面反馈，这意味着你将会在业务已经受到影响之后才重新训练模型。
 - en: 'Another non-trivial question that needs to be answered is: what is considered
     as ‘performance degradation’? You may be dependent on the sensitivity of your
     thresholds and the accuracy of the calibration, which could lead you to retrain
     too frequently or not frequently enough.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个需要回答的非琐碎问题是：什么被视为‘性能退化’? 你可能依赖于阈值的敏感性和校准的准确性，这可能导致你过于频繁或不够频繁地重新训练。
 - en: ‍*Overall, using performance-based triggers is good for use-cases where there
     are fast feedback and a high volume of data, like real-time bidding, where you
     are able to measure the model’s performance as close as possible to the time of
     predictions, in short time intervals and with high confidence (high volume). *
+  id: totrans-30
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*总体来说，使用基于性能的触发器适用于反馈快速且数据量大的用例，如实时竞价，在这种情况下，你可以尽可能接近预测时间来测量模型的性能，时间间隔短且置信度高（数据量大）。*'
 - en: ‍**Driven by data changes**
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由数据变化驱动**'
 - en: This approach is the most dynamic and naturally triggers retraining from the
     dynamism of the domain. By measuring changes in the input data, i.e., changes
     in the distribution of features that are used by the model, you can detect data
     drifts that indicate your model may be outdated and needs to be retained on fresh
     data.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种方法是最具动态性的，它自然地从领域的动态中触发重新训练。通过测量输入数据的变化，即模型使用的特征分布的变化，你可以检测到数据漂移，这表明你的模型可能已经过时，需要在新数据上进行重新训练。
 - en: It is an alternative to the performance-based approach for cases where you don’t
     have fast feedback or cannot assess the performance of the model in production
     in real-time. Besides, it's also a good practice to combine and use this approach
     even when there is fast feedback, as it may indicate suboptimal performance, even
     without degradation. **Understanding data changes to start a retraining process
     is very valuable, especially in dynamic environments. **
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于没有快速反馈或无法实时评估模型在生产环境中性能的情况，这是一种替代基于性能的方法。此外，即使在有快速反馈的情况下，将这种方法结合使用也是一种良好的实践，因为它可能表明性能不佳，即使没有退化。**理解数据变化以启动重新训练过程是非常有价值的，尤其是在动态环境中。**
 - en: '![](../Images/bb17768d9ab6714cd1def0af950d2d2a.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bb17768d9ab6714cd1def0af950d2d2a.png)'
 - en: '*Screenshot from superwise.ai.*'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '*来自 superwise.ai 的截图。*'
 - en: ‍The graph above, generated by the monitoring service, shows a data drift metric
     (upper graph) and a performance KPI (lower graph) on a marketing use-case. The
     data drift graph is a timeline where the Y-axis shows the level of drift for each
@@ -192,62 +268,84 @@
     a more thorough view of the model in production, a retraining iteration could
     have been triggered well before a performance degradation would have been observed
     by the business.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 上图由监控服务生成，展示了一个营销用例的数据漂移指标（上图）和性能 KPI（下图）。数据漂移图是一个时间轴，Y 轴显示了每一天的漂移水平（即该日的数据）相对于训练集。在这个营销用例中，新活动非常频繁地引入，业务扩展到新国家。**显然，生产中的数据正在漂移，与模型训练时的数据变得越来越不相似。**通过对模型在生产中的全面了解，重新训练迭代可以在业务观察到性能退化之前触发。
 - en: ‍*So when to retrain? This depends on key factors such as the availability of
     your feedback, the volume of your data, and your visibility on the performance
     of your models. Overall, there is no one size fits all to the question of selecting
     the right time to retrain. Rather, and depending on your resources, the goal should
     be to be as production-driven as possible. *
+  id: totrans-37
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*那么什么时候重新训练？这取决于一些关键因素，如反馈的可用性、数据的量以及对模型性能的可见性。总体而言，选择合适的重新训练时间没有“一刀切”的答案。相反，根据你的资源，目标应该尽可能以生产驱动为主。*'
 - en: What data should be used?
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 应该使用什么数据？
 - en: 'While we have seen that timing is everything (i.e., when do I retrain my models?),
     now let’s look at the nerve of all MLOps: the data. When retraining, how do I
     select the right data to be used?'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然我们已经看到时机决定一切（即，什么时候重新训练我的模型？），现在让我们来看所有MLOps的核心：数据。在重新训练时，我如何选择要使用的正确数据？
 - en: '**Fix window size**'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**固定窗口大小**'
 - en: The most naïve approach is to use a fixed window size as a training set. For
     example, use data from the last X months. Clearly, the advantage of the method
     is in its simplicity as it is very straightforward.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 最简单的方法是使用固定窗口大小作为训练集。例如，使用过去X个月的数据。显然，该方法的优势在于其简单性，非常直接。
 - en: 'The disadvantages derive from the challenge of selecting the right window:
     if it is too wide, it may miss new trends, and if it is too narrow, it will be
     overfitted and noisy. The choice of the window size should also take into account
     the frequency of retraining:  it makes no sense to retrain every 3 months if you
     only use the last month of data as a training set.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 缺点来源于选择合适窗口的挑战：如果窗口过宽，可能会错过新的趋势；如果窗口过窄，则会出现过拟合和噪声。窗口大小的选择还应考虑重新训练的频率：如果你只使用最近一个月的数据作为训练集，那么每三个月重新训练一次是没有意义的。
 - en: Besides, the data selected can be very different from the data that is being
     streamed in production, as it may happen straight after a change point (in case
     of fast/sudden change), or it may contain irregular events (e.g., holidays or
     special days like election day), data issues and more.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，所选的数据可能与在生产中流入的数据差异很大，因为它可能发生在变化点之后（在快速/突发变化的情况下），或者可能包含不规则事件（例如假期或特殊日子如选举日）、数据问题等。
 - en: ‍*Overall, the fix window approach, like any other "static" method, is a simple
     heuristic that may work well in some cases but will fail to capture the hyper
     dynamism of your environment in cases where the change rate is versatile and irregular
     events are common like holidays or technical issues.*
+  id: totrans-44
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*总的来说，固定窗口方法，像其他所有“静态”方法一样，是一种简单的启发式方法，可能在某些情况下效果良好，但在变化率多样化且不规则事件（如假期或技术问题）常见的环境中，它将无法捕捉到环境的高度动态性。*'
 - en: ‍**Dynamic window size**
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**动态窗口大小**'
 - en: The dynamic window size approach tries to solve some of the limitations of the
     predefined window size by determining how much historical data should be included
     in a more data-driven way and by treating the window size as another hyperparameter
     that can be optimized as part of the retraining.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 动态窗口大小方法试图通过以更数据驱动的方式确定应包含多少历史数据，并将窗口大小视为可以优化的另一个超参数，从而解决一些预定义窗口大小的限制。
 - en: This approach is most suitable for cases in which there is fast feedback (i.e.,
     Real-time Bidding or food delivery ETA). The most relevant data can be used as
     a test set, and the window size can be optimized on it, just like another hyperparameter
@@ -255,34 +353,46 @@
     by taking the last 3 weeks, which is what should be selected for this iteration.
     For future ones, a different window may be selected, according to the comparison
     with the test set.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种方法最适合于快速反馈的情况（例如实时竞价或食品配送预估）。可以将最相关的数据用作测试集，并在其上优化窗口大小，就像模型的其他超参数一样。在下面的案例中，通过取最近3周的数据来获得最佳性能，这就是本次迭代应选择的窗口。对于未来的迭代，可以根据与测试集的比较选择不同的窗口。
 - en: '![](../Images/b9c8152fc1831cf62a498d6668e626d2.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b9c8152fc1831cf62a498d6668e626d2.png)'
 - en: The advantage of the dynamic window size approach is that it is more data-driven,
     based on the model performance, which is really the bottom-line, and hence it
     is more robust for highly temporal environments.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 动态窗口大小方法的优势在于它更具数据驱动性，基于模型性能，这是最终标准，因此在高度时间敏感的环境中更为稳健。
 - en: The disadvantage is that it requires a more complex training pipeline (see next
     question ‘What to train’) to test the different window sizes and select the optimal
     one, and it is much more computing-intensive. Additionally, like the fixed window
     size, it assumes that the most recent data is most relevant, which is not always
     true.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 缺点是它需要更复杂的训练流程（见下一个问题“训练什么”）来测试不同的窗口大小并选择最佳窗口，并且计算密集度更高。此外，像固定窗口大小一样，它假设最新的数据是最相关的，这并不总是正确的。
 - en: '**Dynamic data selection**'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**动态数据选择**'
 - en: 'The third approach of selecting the data to train the models seeks to achieve
     the basic objective of any retraining strategy, and which is the basic assumption
     of any ML model: using training data that is similar to the production data. Or
     in other words, models should be retrained on data that is as similar as possible
     to the data used in real life to issue predictions. This approach is complex and
     requires high visibility of the production data.'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 选择数据以训练模型的第三种方法旨在实现任何重新训练策略的基本目标，也就是任何 ML 模型的基本假设：使用与生产数据相似的训练数据。换句话说，模型应该在尽可能与实际预测数据相似的数据上进行重新训练。这种方法复杂且需要对生产数据有很高的可见性。
 - en: '**To do so, you need to perform a thorough analysis of the evolution of the
     data in production to understand if and how it changes over time.** One way to
     do this is to calculate the drift in input data between each pair of days, i.e.,
@@ -292,60 +402,82 @@
     where the axes (columns and rows) are dates, and each dot (cell in the matrix)
     is the level of drift between two days, where the higher the drift, the more red
     the cell is.'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**要做到这一点，你需要对生产数据的演变进行透彻分析，以了解它是否以及如何随时间变化。** 一种方法是计算每对日期之间的输入数据漂移，即某一天的数据与另一天天的数据有多不同，并生成一个热图，揭示数据随时间变化的模式，如下图所示。下面的热图是随时间变化的漂移评估的可视化，其中轴（列和行）是日期，每个点（矩阵中的单元格）表示两天之间的漂移水平，漂移越大，单元格越红。'
 - en: '![](../Images/3b7287de5d9bbe63a7bf0b11f5f5cdfa.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3b7287de5d9bbe63a7bf0b11f5f5cdfa.png)'
 - en: '*Superwise Data DNA view.*'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Superwise 数据 DNA 视图。*'
 - en: 'Above, you can see the result of such an analysis generated automatically by
     superwise.ai to help spot data that is as similar as possible to the one that
     is now streaming. There are different types of insights that can transpire easily
     from this view:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面，你可以看到由 superwise.ai 自动生成的这种分析结果，帮助发现与当前流数据尽可能相似的数据。从这个视图中可以轻松得出不同类型的见解：
 - en: 1 - The month of December is very different from the rest of the data (before
     and after). This insight enables us to avoid treating the whole period as a bulk
     and exclude these days when you want to retrain as this month’s data doesn’t represent
     the normal data you observe in production.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 1 - 十二月份的数据与其他时间的数据（前后）非常不同。这一见解使我们能够避免将整个时期视为一个整体，并在你想重新训练时排除这些天，因为这个月的数据不能代表你在生产中观察到的正常数据。
 - en: 2- The seasonality of the data can be visualized - and this can trigger a discussion
     around the necessity to use different models for weekdays and weekends.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据的季节性可以被可视化——这可能引发关于在工作日和周末使用不同模型的必要性的讨论。
 - en: '‍*One more thing that is very powerful here: you can actually have a picture
     that proves that the most recent data isn''t necessarily the most relevant.*'
+  id: totrans-59
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: ‍*还有一点非常强大的是：你实际上可以得到一个图像证明最新的数据不一定是最相关的。*
 - en: ‍In short, selecting the right data to retrain your models requires a thorough
     view of the behavior of the data in production. While using fix or dynamic window
     sizes may help you to “tick the box,” it usually remains a guesstimation that
     might be more costly than efficient.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: ‍简而言之，选择合适的数据来重新训练你的模型需要对生产数据行为有透彻的了解。虽然使用固定或动态窗口大小可能帮助你“勾选”选项，但这通常仍然是猜测，可能比高效更昂贵。
 - en: What should be retrained?
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 应该重新训练什么？
 - en: 'Now that we have analyzed when to retrain and what data should be used, let’s
     address the third question: what should be retrained? One could select only to
     retrain (refit) the model instance based on the new data, to include some or all
     of the data preparation steps, or take a more intrusive approach and run a full
     pipeline that simulates the research process.'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经分析了何时重新训练以及使用什么数据，接下来解决第三个问题：应该重新训练什么？可以选择仅基于新数据重新训练（重新拟合）模型实例，包含一些或所有的数据准备步骤，或者采取更具侵入性的方法，运行一个模拟研究过程的完整管道。
 - en: 'The basic assumption of retraining is that the model that was trained in the
     research phase will become outdated due to concept drift and hence need to be
     retrained.  However, in most cases, the model instance is just the last phase
     of a wider pipeline that was built in the research phase and includes data preparation
     steps. The question is: how severe is the drift and its impact? or in the context
     of retraining, what parts of the model pipeline should be challenged?'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 重新训练的基本假设是，研究阶段训练的模型由于概念漂移将变得过时，因此需要重新训练。然而，在大多数情况下，模型实例只是研究阶段构建的更广泛管道的最后阶段，包括数据准备步骤。问题是：漂移的严重程度及其影响如何？或者在重新训练的背景下，模型管道的哪些部分应受到挑战？
 - en: In the research phase, you experiment and evaluate many elements within the
     model pipeline steps in an effort to optimize your model. These elements can be
     grouped into two high-level parts, data preparation and model training. The data
@@ -355,55 +487,77 @@
     model and its hyperparameters. At the end of the process, you get a pipeline of
     sequential steps that take the data, prepare it to be used by the model and predict
     the target outcome using the model.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 在研究阶段，你会在模型管道步骤中尝试和评估许多元素，以优化模型。这些元素可以分为两个高层次的部分：数据准备和模型训练。数据准备部分负责准备数据（显然！）以供模型使用，包括特征工程、缩放、填补、降维等方法，模型训练部分负责选择最佳模型及其超参数。最后，你会得到一个顺序步骤的管道，这些步骤处理数据，准备数据以供模型使用，并使用模型预测目标结果。
 - en: 'Retraining only the model, i.e., the last step in the pipeline, with new relevant
     data is the most simple and naive approach and may suffice to avoid performance
     degradation. However, in some cases, this model-only approach may not be enough,
     and a more comprehensive approach should be taken regarding the scope of the retraining.
     Broadening the scope of retraining can be performed in two dimensions:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅用新相关数据对模型进行重新训练，即管道中的最后一步，是最简单和天真的方法，可能足以避免性能下降。然而，在某些情况下，这种仅模型的方法可能不够全面，应采取更全面的方法来进行重新训练的范围。扩展重新训练的范围可以从两个方面进行：
 - en: 1 - **What to retrain?** What parts of the pipeline should be retrained using
     the new data?
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 1 - **重新训练什么？** 管道中的哪些部分应该使用新数据进行重新训练？
 - en: 2 - **Level of retraining:** Are you just refitting the model (or other steps)
     with the new data? Do you do hyperparameters optimization? or do you challenge
     the selection of the model itself and test for other model types?
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 2 - **重新训练的层次：** 你只是用新数据重新拟合模型（或其他步骤）吗？你会进行超参数优化吗？还是挑战模型本身的选择并测试其他模型类型？
 - en: Another way to look at this is that in the retraining process, you basically
     try to automate and avoid the manual work of model optimization research that
     would be done by a data scientist if there was no automatic retraining process.
     Hence you need to decide to what extent you want to try and mimic the manual research
     process, as illustrated in the chart below.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种看法是，在重新训练过程中，你基本上是在尝试自动化并避免数据科学家在没有自动重新训练过程的情况下进行的模型优化研究的手动工作。因此，你需要决定你想在多大程度上模拟手动研究过程，如下图所示。
 - en: '![](../Images/48341e89d2110bc3f0b5196d3ebafe06.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/48341e89d2110bc3f0b5196d3ebafe06.png)'
 - en: '*Model Research Stages as described in MLOps: Continuous delivery and automation
     pipelines in machine learning.*'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '*如《MLOps: Continuous delivery and automation pipelines in machine learning》中所述的模型研究阶段。*'
 - en: ‍Note that automating the first steps of the flow is more complex, and as more
     automation is built around these experimentations, the process grows more robust
     and flexible to adapt to changes but it also adds complexity as more end cases
     and checks should be considered.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，自动化流程的第一步更加复杂，随着这些实验周围自动化的增加，过程变得更加强健和灵活，以适应变化，但也增加了复杂性，因为需要考虑更多的终端情况和检查。
 - en: Example & Conclusion
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 示例与结论
 - en: 'Let’s take, for example, a simple model pipeline which is a result of manual
     research done by our awesome data science team for some classification task:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 以一个简单的模型管道为例，这个管道是我们出色的数据科学团队为某些分类任务进行手动研究的结果：
 - en: '![](../Images/2b416c4fbc2bc4cf78a4196bc6ba215c.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2b416c4fbc2bc4cf78a4196bc6ba215c.png)'
 - en: You can take the simple approach and just retrain the model itself and let it
     learn a new tree, or you can include some (or all) data preparation steps (e.g.,
     relearn the mean in the imputer or the min/max values in the scaler). But besides
@@ -416,8 +570,11 @@
     logistic regression and. random forest). The data preparation steps can (and should)
     also be retrained to test for different scalers or different imputation methods
     or even test for different feature selection.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以采取简单的方法，仅仅重新训练模型本身，让它学习一个新的树，或者你可以包括一些（或全部）数据准备步骤（例如，重新学习填补器中的均值或缩放器中的最小/最大值）。但除了选择要重新训练的步骤之外，你还需要决定到什么程度。例如，即使你选择仅重新训练模型，也可以在多个层次上进行。你可以仅仅重新训练模型本身，让它学习一个新的树，即
+    *model.fit* (*new_X*, *new_y*)，或者你可以搜索和优化模型超参数（最大深度、最小叶子大小、最大叶子节点等），甚至挑战模型本身的选择，测试其他模型类型（例如，逻辑回归和随机森林）。数据准备步骤也可以（且应该）重新训练，以测试不同的缩放器或不同的填补方法，甚至测试不同的特征选择。
 - en: 'When choosing to take the more comprehensive approach and perform hyperparameter
     optimization/model search, you can also use Auto-ML frameworks that are designed
     to automate the process of building and optimizing the model pipeline, including
@@ -428,89 +585,135 @@
     AutoML is, it doesn''t exempt the user from having a robust process to track,
     measure, and monitor the models throughout their lifecycle, and especially before
     and after deploying them in production.'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 当选择更全面的方法并执行超参数优化/模型搜索时，你还可以使用旨在自动化构建和优化模型管道过程的 Auto-ML 框架，包括数据准备、模型搜索和超参数优化。它不必涉及复杂的元学习。它可以很简单：用户选择一系列模型和参数。有很多工具可用：[AutoKeras](https://autokeras.com/)，[Auto
+    SciKitLearn](https://github.com/automl/auto-sklearn)。然而，尽管 AutoML 非常吸引人，但它并不免除用户必须拥有一个强健的过程来跟踪、测量和监控模型在整个生命周期中的表现，特别是在生产环境中部署前后。
 - en: At the end of the day, “flipping the switch” and automating your processes must
     be accompanied with robust processes to assure that you remain in control of your
     data and your models.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 到头来，“翻转开关”和自动化你的流程必须伴随强健的流程，以确保你对数据和模型保持控制。
 - en: '***To achieve efficient Continuous Training, you should be able to lead with
     production-driven insights. For any and every use case, the creation of a robust
     ML infrastructure relies heavily on the ability to achieve visibility and control
     over the health of your models and the health of your data in production. That’s
     what it entails to be a data-driven data scientist.***'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '***为了实现高效的持续培训，你应该能够以生产驱动的见解为主导。对于任何和每个用例，创建一个强健的机器学习基础设施严重依赖于对模型健康状况和生产中的数据健康状况的可见性和控制能力。这就是成为数据驱动的数据科学家的要求。***'
 - en: '[Original](https://www.superwise.ai/resources/framework-for-a-successful-continuous-training-strategy).
     Reposted with permission.'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.superwise.ai/resources/framework-for-a-successful-continuous-training-strategy)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[A Machine Learning Model Monitoring Checklist: 7 Things to Track](https://www.kdnuggets.com/2021/03/machine-learning-model-monitoring-checklist.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习模型监控检查清单：7 个要跟踪的事项](https://www.kdnuggets.com/2021/03/machine-learning-model-monitoring-checklist.html)'
 - en: '[MLOps: Model Monitoring 101](https://www.kdnuggets.com/2021/01/mlops-model-monitoring-101.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MLOps：模型监控 101](https://www.kdnuggets.com/2021/01/mlops-model-monitoring-101.html)'
 - en: '[The Ultimate Guide to Model Retraining](https://www.kdnuggets.com/2019/12/ultimate-guide-model-retraining.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模型重新训练终极指南](https://www.kdnuggets.com/2019/12/ultimate-guide-model-retraining.html)'
 - en: '* * *'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-85
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-90
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[The Significance of Data Quality in Making a Successful Machine…](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据质量在成功机器学习中的重要性](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[How to Become a Successful Data Science Freelancer in 2022](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在 2022 年成为成功的数据科学自由职业者](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)'
 - en: '[KDnuggets News, June 22: Primary Supervised Learning Algorithms…](https://www.kdnuggets.com/2022/n25.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，6 月 22 日：主要的监督学习算法](https://www.kdnuggets.com/2022/n25.html)'
 - en: '[Social User Authentication in Django Framework](https://www.kdnuggets.com/2023/01/social-user-authentication-django-framework.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Django 框架中的社交用户认证](https://www.kdnuggets.com/2023/01/social-user-authentication-django-framework.html)'
 - en: '[Risk Management Framework for AI/ML Models](https://www.kdnuggets.com/2022/03/risk-management-framework-aiml-models.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AI/ML 模型风险管理框架](https://www.kdnuggets.com/2022/03/risk-management-framework-aiml-models.html)'
