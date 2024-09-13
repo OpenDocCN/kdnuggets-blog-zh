@@ -1,17 +1,25 @@
 - en: Modeling Price with Regularized Linear Model & XGBoost
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用正则化线性模型和 XGBoost 建模价格
 - en: 原文：[https://www.kdnuggets.com/2019/05/modeling-price-regularized-linear-model-xgboost.html](https://www.kdnuggets.com/2019/05/modeling-price-regularized-linear-model-xgboost.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/05/modeling-price-regularized-linear-model-xgboost.html](https://www.kdnuggets.com/2019/05/modeling-price-regularized-linear-model-xgboost.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Susan Li](https://www.linkedin.com/in/susanli/), Sr. Data Scientist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Susan Li](https://www.linkedin.com/in/susanli/)，高级数据科学家**'
 - en: We would like to model the price of a house, we know that the price depends
     on the location of the house, square footage of a house, year built, year renovated,
     number of bedrooms, number of garages, etc. So those factors contribute to the
@@ -20,384 +28,611 @@
     same price. The variation in price is the noise. Our goal in price modeling is
     to model the pattern and ignore the noise. The same concepts apply to modeling
     hotel room prices too.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们想要对房价进行建模，我们知道价格取决于房子的地点、房子的面积、建造年份、翻修年份、卧室数量、车库数量等。因此，这些因素会影响价格的模式——优质位置通常会导致更高的价格。然而，同一区域内具有相同面积的所有房子并不具有完全相同的价格。价格的变动是噪声。我们在价格建模中的目标是建模模式并忽略噪声。相同的概念也适用于酒店房间价格建模。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Therefore, to start, we are going to implement regularization techniques for
     linear regression of house pricing data.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，首先我们将对房价数据实施正则化技术。
 - en: The Data
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据
 - en: There is an excellent house prices data set can be found [here](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data).
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以在 [这里](https://www.kaggle.com/c/house-prices-advanced-regression-techniques/data)
+    找到一个优秀的房价数据集。
 - en: '[PRE0]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![Figure](../Images/400ca1990b116f3a2bfe48c0a7c8f3e1.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/400ca1990b116f3a2bfe48c0a7c8f3e1.png)'
 - en: Figure 1
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 1
 - en: '[PRE1]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![Figure](../Images/1830468153937fb58fc289aef89975cc.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/1830468153937fb58fc289aef89975cc.png)'
 - en: Figure 2
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 2
 - en: The good news is that we have many features to play with (81), the bad news
     is that 19 features have missing values, and 4 of them have over 80% missing values.
     For any feature, if it is missing 80% of values, it can’t be that important, therefore,
     I decided to remove these 4 features.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 好消息是我们有很多特征可以使用（81 个），坏消息是 19 个特征有缺失值，其中 4 个特征缺失值超过 80%。对于任何特征，如果缺失 80% 的值，那么它可能并不重要，因此，我决定移除这
+    4 个特征。
 - en: '[PRE2]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Explore Features
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 探索功能
 - en: '**Target feature distribution**'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**目标特征分布**'
 - en: '[PRE3]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![Figure](../Images/23a0ee26011f1de8cc74c911d430a5fa.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/23a0ee26011f1de8cc74c911d430a5fa.png)'
 - en: Figure 3
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 3
 - en: The target feature - SalePrice is right skewed. As linear models like normally
     distributed data , we will transform SalePrice and make it more normally distributed.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 目标特征 - SalePrice 是右偏的。由于线性模型喜欢正态分布的数据，我们将对 SalePrice 进行转换，使其更接近正态分布。
 - en: '[PRE4]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![Figure](../Images/2c04a4ee0f8aa68125e2988ac87e3145.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/2c04a4ee0f8aa68125e2988ac87e3145.png)'
 - en: Figure 4
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 4
 - en: '****Correlation between numeric features****'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '****数值特征之间的相关性****'
 - en: '[PRE5]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![Figure](../Images/adaa4910f1cd52b6cb2a19f917ff4874.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/adaa4910f1cd52b6cb2a19f917ff4874.png)'
 - en: Figure 5
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 5
 - en: There exists strong correlations between some of the features. For example,
     GarageYrBlt and YearBuilt, TotRmsAbvGrd and GrLivArea, GarageArea and GarageCars
     are strongly correlated. They actually express more or less the same thing. I
     will let [***ElasticNetCV***](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNetCV.html) to
     help reduce redundancy later.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些特征之间存在强相关性。例如，GarageYrBlt 和 YearBuilt，TotRmsAbvGrd 和 GrLivArea，GarageArea
+    和 GarageCars 之间存在强相关性。它们实际上表达的东西多多少少是一样的。我将让 [***ElasticNetCV***](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNetCV.html)
+    帮助减少冗余。
 - en: '****Correlation between SalePrice and the other numeric features****'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '****SalePrice 与其他数值特征之间的相关性****'
 - en: '[PRE6]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![Figure](../Images/9ccdde1368609efc06eebb128b05b154.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/9ccdde1368609efc06eebb128b05b154.png)'
 - en: Figure 6
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 6
 - en: The correlation of SalePrice with OverallQual is the greatest (around 0.8).
     Also GrLivArea presents a correlation of over 0.7, and GarageCars presents a correlation
     of over 0.6\. Let’s look at these 4 features in more detail.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: SalePrice 与 OverallQual 的相关性最大（约 0.8）。GrLivArea 的相关性超过 0.7，GarageCars 的相关性超过
+    0.6。让我们更详细地了解这 4 个特征。
 - en: '[PRE7]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![Figure](../Images/806f7fed1c21eae6cc20f99891cce867.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/806f7fed1c21eae6cc20f99891cce867.png)'
 - en: Figure 7
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 7
 - en: Feature Engineering
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 特征工程
 - en: Log transform features that have a highly skewed distribution (skew > 0.75)
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对分布高度偏斜（偏斜度 > 0.75）的特征进行对数变换
 - en: Dummy coding categorical features
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 哑编码分类特征
 - en: Fill NaN with the mean of the column.
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用列的均值填充 NaN。
 - en: Train and test sets split.
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 训练集和测试集分割。
 - en: feature_engineering_price.py
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: feature_engineering_price.py
 - en: '**ElasticNet**'
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**ElasticNet**'
 - en: '**Ridge** and **Lasso** regression are regularized linear regression models.'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**Ridge** 和 **Lasso** 回归是正则化线性回归模型。'
 - en: '**ElasticNe**t is essentially a **Lasso/Ridge** hybrid, that entails the minimization
     of an objective function that includes both **L1** (Lasso) and **L2**(Ridge) norms.'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ElasticNet** 本质上是 **Lasso/Ridge** 的混合体，涉及最小化一个包含 **L1**（Lasso）和 **L2**（Ridge）范数的目标函数。'
 - en: '**ElasticNet** is useful when there are multiple features which are correlated
     with one another.'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ElasticNet** 在多个特征彼此相关时很有用。'
 - en: The class **ElasticNetCV** can be used to set the parameters `alpha` (α) and `l1_ratio` (ρ)
     by cross-validation.
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 类 **ElasticNetCV** 可以通过交叉验证设置参数 `alpha` (α) 和 `l1_ratio` (ρ)。
 - en: '**ElasticNetCV**: **ElasticNet **model with best model selection by cross-validation.'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**ElasticNetCV**：通过交叉验证选择最佳模型的 **ElasticNet** 模型。'
 - en: Let’s see what **ElasticNetCV** is going to select for us.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看 **ElasticNetCV** 将为我们选择什么。
 - en: ElasticNetCV.py
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: ElasticNetCV.py
 - en: '![](../Images/369d93d5ff7928d74aa7423c9e017608.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/369d93d5ff7928d74aa7423c9e017608.png)'
 - en: Figure 8
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 8
 - en: 0< The optimal l1_ratio <1 , indicating the penalty is a combination of L1 and
     L2, that is, the combination of **Lasso** and **Ridge**.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 0 < 最优 l1_ratio < 1，表示惩罚是 L1 和 L2 的组合，即 **Lasso** 和 **Ridge** 的组合。
 - en: '**Model Evaluation**'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**模型评估**'
 - en: ElasticNetCV_evaluation.py
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: ElasticNetCV_evaluation.py
 - en: '![Figure](../Images/f455d4f7238efad312b8d52742416b95.png)'
+  id: totrans-63
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/f455d4f7238efad312b8d52742416b95.png)'
 - en: Figure 9
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 9
 - en: The **RMSE** here is actually **RMSLE** ( Root Mean Squared Logarithmic Error).
     Because we have taken the log of the actual values. Here is [a nice write up explaining
     the differences between RMSE and RMSLE](https://www.quora.com/What-is-the-difference-between-an-RMSE-and-RMSLE-logarithmic-error-and-does-a-high-RMSE-imply-low-RMSLE).
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里的 **RMSE** 实际上是 **RMSLE**（均方根对数误差）。因为我们对实际值进行了对数变换。这里有一个 [很好的文章解释 RMSE 和 RMSLE
+    之间的区别](https://www.quora.com/What-is-the-difference-between-an-RMSE-and-RMSLE-logarithmic-error-and-does-a-high-RMSE-imply-low-RMSLE)。
 - en: '**Feature Importance**'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**特征重要性**'
 - en: '[PRE8]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![Figure](../Images/80e32f97e3f1dc425d779972f73c45c8.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/80e32f97e3f1dc425d779972f73c45c8.png)'
 - en: Figure 10
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 10
 - en: A reduction of 58.91% features looks productive. The top 4 most important features
     selected by ElasticNetCV are **Condition2_PosN**, **MSZoning_C(all)**, **Exterior1st_BrkComm** & **GrLivArea**.
     We are going to see how these features compare with those selected by Xgboost.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 减少 58.91% 的特征看起来很有成效。ElasticNetCV 选择的前 4 个重要特征是 **Condition2_PosN**、**MSZoning_C(all)**、**Exterior1st_BrkComm**
+    和 **GrLivArea**。我们将看看这些特征与 Xgboost 选择的特征的比较。
 - en: Xgboost
+  id: totrans-71
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Xgboost
 - en: The first Xgboost model, we start from default parameters.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个 Xgboost 模型，我们从默认参数开始。
 - en: xgb_model1.py
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: xgb_model1.py
 - en: '![Figure](../Images/a0d49964d20588bfccfb278f5c327ac7.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/a0d49964d20588bfccfb278f5c327ac7.png)'
 - en: Figure 11
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 11
 - en: It is already way better an the model selected by ElasticNetCV!
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 它已经远远好于 ElasticNetCV 选择的模型！
 - en: The second Xgboost model, we gradually add a few parameters that suppose to
     add model’s accuracy.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二个 Xgboost 模型，我们逐渐添加一些参数，以期提高模型的准确性。
 - en: xgb_model2.py
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: xgb_model2.py
 - en: '![Figure](../Images/17d6fe7f32772f7c31d43d5e0f818578.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/17d6fe7f32772f7c31d43d5e0f818578.png)'
 - en: Figure 12
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 图12
 - en: There was again an improvement!
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 又有了改进！
 - en: The third Xgboost model, we add a learning rate, hopefully it will yield a more
     accurate model.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 第三个Xgboost模型中，我们加入了学习率，希望能得到更准确的模型。
 - en: xgb_model3.py
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: xgb_model3.py
 - en: '![Figure](../Images/fefc8fc0a347a500146fefb068ceb5ab.png)'
+  id: totrans-84
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/fefc8fc0a347a500146fefb068ceb5ab.png)'
 - en: Figure 13
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 图13
 - en: Unfortunately, there was no improvement. I concluded that xgb_model2 is the
     best model.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 不幸的是，没有改进。我得出结论xgb_model2是最佳模型。
 - en: '**Feature Importance**'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '**特征重要性**'
 - en: '[PRE9]'
+  id: totrans-88
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![Figure](../Images/b1ad2d60c6c9805201c37dd33e3985af.png)'
+  id: totrans-89
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/b1ad2d60c6c9805201c37dd33e3985af.png)'
 - en: Figure 14
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 图14
 - en: The top 4 most important features selected by Xgboost are **LotArea**, **GrLivArea**, **OverallQual** & **TotalBsmtSF**.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: Xgboost选出的前4个最重要特征是**LotArea**、**GrLivArea**、**OverallQual**和**TotalBsmtSF**。
 - en: There is only one feature **GrLivArea** was selected by both ElasticNetCV and
     Xgboost.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 只有一个特征**GrLivArea**被ElasticNetCV和Xgboost都选中了。
 - en: So now we are going to select some relevant features and fit the Xgboost again.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将选择一些相关特征，再次拟合Xgboost。
 - en: xgb_model5.py
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: xgb_model5.py
 - en: '![Figure](../Images/b8d35c6db82deef0ea04c51bc55b8ca8.png)'
+  id: totrans-95
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/b8d35c6db82deef0ea04c51bc55b8ca8.png)'
 - en: Figure 15
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 图15
 - en: Another small improvement!
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 又有了小改进！
 - en: '[Jupyter notebook](https://github.com/susanli2016/Machine-Learning-with-Python/blob/master/Modeling%20House%20Price%20with%20Regularized%20Linear%20Model%20%26%20Xgboost.ipynb) can
     be found on [Github](https://github.com/susanli2016/Machine-Learning-with-Python/blob/master/Modeling%20House%20Price%20with%20Regularized%20Linear%20Model%20%26%20Xgboost.ipynb).
     Enjoy the rest of the week!'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Jupyter notebook](https://github.com/susanli2016/Machine-Learning-with-Python/blob/master/Modeling%20House%20Price%20with%20Regularized%20Linear%20Model%20%26%20Xgboost.ipynb)
+    可以在[Github](https://github.com/susanli2016/Machine-Learning-with-Python/blob/master/Modeling%20House%20Price%20with%20Regularized%20Linear%20Model%20%26%20Xgboost.ipynb)上找到。祝你一周愉快！'
 - en: '**Bio: [Susan Li](https://www.linkedin.com/in/susanli/)** is changing the world,
     one article at a time. She is a Sr. Data Scientist, located in Toronto, Canada.'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Susan Li](https://www.linkedin.com/in/susanli/)** 正在通过一篇文章一次性改变世界。她是位于加拿大多伦多的高级数据科学家。'
 - en: '[Original](https://towardsdatascience.com/modeling-price-with-regularized-linear-model-xgboost-55e59eae4482).
     Reposted with permission.'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始文章](https://towardsdatascience.com/modeling-price-with-regularized-linear-model-xgboost-55e59eae4482)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关:**'
 - en: '[Unveiling Mathematics Behind XGBoost](/2018/08/unveiling-mathematics-behind-xgboost.html)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[揭开XGBoost背后的数学](https://www.kdnuggets.com/2018/08/unveiling-mathematics-behind-xgboost.html)'
 - en: '[Multi-Class Text Classification with Scikit-Learn](/2018/08/multi-class-text-classification-scikit-learn.html)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Scikit-Learn进行多分类文本分类](/2018/08/multi-class-text-classification-scikit-learn.html)'
 - en: '[An Introduction on Time Series Forecasting with Simple Neural Networks & LSTM](/2019/04/introduction-time-series-forecasting-simple-neural-networks-lstm.html)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[简单神经网络和LSTM的时间序列预测介绍](/2019/04/introduction-time-series-forecasting-simple-neural-networks-lstm.html)'
 - en: More On This Topic
+  id: totrans-105
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何加速XGBoost模型训练](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
 - en: '[What are the Assumptions of XGBoost?](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[XGBoost的假设是什么？](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
 - en: '[Tuning XGBoost Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[调整XGBoost超参数](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
 - en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用XGBoost进行时间序列预测](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
 - en: '[WTF is the Difference Between GBM and XGBoost?](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[GBM与XGBoost的区别是什么？](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)'
 - en: '[Linear Regression Model Selection: Balancing Simplicity and Complexity](https://www.kdnuggets.com/2023/02/linear-regression-model-selection-balancing-simplicity-complexity.html)'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[线性回归模型选择：平衡简洁性与复杂性](https://www.kdnuggets.com/2023/02/linear-regression-model-selection-balancing-simplicity-complexity.html)'
