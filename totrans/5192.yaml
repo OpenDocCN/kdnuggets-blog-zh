@@ -1,265 +1,408 @@
 - en: Working With Time Series Using SQL
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 SQL 处理时间序列
 - en: 原文：[https://www.kdnuggets.com/2021/04/time-series-using-sql.html](https://www.kdnuggets.com/2021/04/time-series-using-sql.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/04/time-series-using-sql.html](https://www.kdnuggets.com/2021/04/time-series-using-sql.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Michael Grogan](http://michael-grogan.com/), Data Science Consultant**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Michael Grogan](http://michael-grogan.com/)，数据科学顾问**'
 - en: '![](../Images/76d764c5f8e4cada72a9591a556d0b14.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/76d764c5f8e4cada72a9591a556d0b14.png)'
 - en: 'Source: Photo by [Tumisu](https://pixabay.com/users/tumisu-148124/) from [Pixabay](https://pixabay.com/illustrations/database-data-computer-network-1954920/)'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：[Tumisu](https://pixabay.com/users/tumisu-148124/) 提供的照片，来自 [Pixabay](https://pixabay.com/illustrations/database-data-computer-network-1954920/)
 - en: Tools such as Python or R are most often used to conduct deep time series analysis.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 或 R 等工具通常用于进行深入的时间序列分析。
 - en: However, knowledge of how to work with time series data using SQL is essential,
     particularly when working with very large datasets or data that is constantly
     being updated.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，了解如何使用 SQL 处理时间序列数据是必不可少的，特别是当处理非常大的数据集或不断更新的数据时。
 - en: Here are some useful commands that can be invoked in SQL to better work with
     time series data within the data table itself.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有一些可以在 SQL 中调用的有用命令，用于更好地处理数据表中的时间序列数据。
 - en: Background
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 背景
 - en: In this example, we are going to work with weather data collected across a range
     of different times and locations.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个例子中，我们将处理在不同时间和地点收集的天气数据。
 - en: 'The data types in the table of the PostgreSQL database are as below:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: PostgreSQL 数据库表中的数据类型如下：
 - en: '[PRE0]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: As you can see, *date* is defined as a timestamp data type without time zone
     (which we will also look at in this article).
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，*date* 被定义为没有时区的时间戳数据类型（我们在本文中也会讨论这一点）。
 - en: The variable of interest is temp (temperature) — we are going to look at ways
     to analyse this variable more intuitively using SQL.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们关注的变量是 temp（温度）——我们将探讨如何使用 SQL 更直观地分析这个变量。
 - en: Calculating Moving Averages
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 计算移动平均值
 - en: 'Here is a snippet of some of the columns in the data table:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是数据表中一些列的片段：
 - en: '[PRE1]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Suppose we wish to calculate a moving average of temperature across different
     time periods.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们希望计算不同时间段的温度移动平均值。
 - en: To do this, we firstly need to make sure that the data is ordered by date, and
     decide on how many periods should be included in the averaging window.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，我们首先需要确保数据按日期排序，并决定在平均窗口中包含多少期。
 - en: To start with, a 7-period moving average is used, with all temperature values
     ordered by date.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，使用 7 期移动平均值，并按日期排序所有温度值。
 - en: '[PRE2]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Now, let’s add a 30 and 60-period moving average. We will store these averages
     along with the 7-period moving average in the one table.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们添加 30 期和 60 期的移动平均值。我们将把这些平均值与 7 期移动平均值一起存储在一个表中。
 - en: '[PRE3]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![](../Images/5dda346183a359201c27afbbf9dc1896.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5dda346183a359201c27afbbf9dc1896.png)'
 - en: 'Source: Output Created by Author'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：作者创建的输出
 - en: More information on how to calculate moving averages within SQL can be found
     at the following resource by [sqltrainingonline.com](https://www.sqltrainingonline.com/sql-moving-average/).
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关如何在 SQL 中计算移动平均值的更多信息，请参见 [sqltrainingonline.com](https://www.sqltrainingonline.com/sql-moving-average/)
+    提供的资源。
 - en: Working with time zones
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 处理时区
 - en: You will notice that the timestamp contains a date and time. While this is fine
     when storing just one location in the table, things can get quite tricky when
     working with locations across multiple time zones.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 你会注意到时间戳包含日期和时间。虽然在表中仅存储一个地点时这样没问题，但处理跨多个时区的地点时情况会变得相当复杂。
 - en: Note that an integer variable named *timezone *was created within the table.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，表中创建了一个名为*timezone*的整数变量。
 - en: Suppose that we are analysing weather patterns across different places with
     a range of time zones ahead of the inputted time — in this case, all data points
     were inputted at GMT time.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们正在分析不同地点的天气模式，这些地点的时间范围在输入时间之前——在这种情况下，所有数据点都是以 GMT 时间输入的。
 - en: '[PRE4]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'The new times can be calculated as follows:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 新时间可以按如下方式计算：
 - en: '[PRE5]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: We can now store the new times as an updated variable, which we will name as *newdate.*
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们可以将新的时间存储为更新后的变量，我们将其命名为*newdate*。
 - en: '[PRE6]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: This clause allows us to generate the updated times (which would reflect the
     actual time in each specific place when variables such as temperature, barometric
     pressure, etc, were recorded.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 该子句允许我们生成更新的时间（这些时间将反映记录变量（如温度、气压等）时的实际时间）。
 - en: Inner Join and Having Clauses
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 内连接和 Having 子句
 - en: You will notice in the above table that temperature values are included across
     a range of places.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 你会在上述表格中注意到温度值包括了多个地方。
 - en: Suppose that wind speed is also calculated for each place in a separate table.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设风速也在一个单独的表中为每个地方计算。
 - en: In this case, we wish to calculate the average temperature across each listed
     place where the wind speed is higher than 20.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，我们希望计算每个列出的地方在风速高于 20 时的平均温度。
 - en: 'This can be accomplished using the **inner join** and **having** clauses as
     follows:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以通过以下方式使用**内连接**和**having**子句来实现：
 - en: '[PRE7]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Conclusion
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: In this article, you have been introduced to some introductory examples of using
     SQL to work with time series data.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，你已接触到一些使用 SQL 处理时间序列数据的入门示例。
 - en: 'In particular, you saw how to:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 具体来说，你学习了如何：
 - en: Calculate moving averages
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 计算移动平均值
 - en: Work with different time zones
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与不同的时区工作
 - en: Calculate averages across different subsets of data
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 计算不同数据子集的平均值
 - en: Many thanks for your time and any questions or feedback are greatly appreciated.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢你的时间，任何问题或反馈都非常欢迎。
 - en: '*Disclaimer: This article is written on an “as is” basis and without warranty.
     It was written with the intention of providing an overview of data science concepts,
     and should not be interpreted as professional advice. The findings and interpretations
     in this article are those of the author and are not endorsed by or affiliated
     with any third-party mentioned in this article.*'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '*免责声明：本文是基于“现状”写成的，不提供任何保证。本文旨在提供数据科学概念的概述，不应被解读为专业建议。本文中的发现和解释仅代表作者观点，与本文提到的任何第三方无关。*'
 - en: '**Bio: [Michael Grogan](http://michael-grogan.com/)** is a Data Science Consultant.
     He posesses expertise in time series analysis, statistics, Bayesian modeling,
     and machine learning with TensorFlow.'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：[Michael Grogan](http://michael-grogan.com/)** 是一名数据科学顾问。他在时间序列分析、统计学、贝叶斯建模和使用
+    TensorFlow 的机器学习方面拥有专业知识。'
 - en: '[Original](https://towardsdatascience.com/working-with-time-series-using-sql-34e70ce48025).
     Reposted with permission.'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/working-with-time-series-using-sql-34e70ce48025)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Multidimensional multi-sensor time-series data analysis framework](/2021/02/multidimensional-multi-sensor-time-series-data-analysis-framework.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[多维多传感器时间序列数据分析框架](/2021/02/multidimensional-multi-sensor-time-series-data-analysis-framework.html)'
 - en: '[Rejection Sampling with Python](/2021/03/rejection-sampling-python.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 进行拒绝采样](/2021/03/rejection-sampling-python.html)'
 - en: '[Deep Learning Is Becoming Overused](/2021/03/deep-learning-becoming-overused.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习正变得过度使用](/2021/03/deep-learning-becoming-overused.html)'
 - en: '* * *'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-58
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT 事务'
 - en: '* * *'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-63
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题更多内容
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目的，并找到目的以...](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[90 亿美元 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学学习统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的五个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
