@@ -1,155 +1,243 @@
 - en: Building a Recommender System, Part 2
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 构建推荐系统，第 2 部分
 - en: 原文：[https://www.kdnuggets.com/2019/07/building-recommender-system-part-2.html](https://www.kdnuggets.com/2019/07/building-recommender-system-part-2.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/07/building-recommender-system-part-2.html](https://www.kdnuggets.com/2019/07/building-recommender-system-part-2.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By Matthew Mahowald, [Open Data Group](https://www.opendatagroup.com/)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Matthew Mahowald，[开放数据集团](https://www.opendatagroup.com/)**'
 - en: In a previous post, we looked at neighborhood-based methods for building recommender
     systems. This post explores an alternative technique for collaborative filtering
     using latent factor models. The technique we’ll use naturally generalizes to deep
     learning approaches (such as autoencoders), so we’ll also implement our approach
     using Tensorflow and Keras.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上一篇文章中，我们探讨了基于邻域的方法来构建推荐系统。本文探讨了一种使用潜在因子模型的协同过滤替代技术。我们将使用的技术自然可以推广到深度学习方法（如自编码器），因此我们还将使用
+    Tensorflow 和 Keras 实现我们的方法。
 - en: '![Cinema doors](../Images/62ea85463bb6b53abb44cb4d031ff0c4.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![影院门](../Images/62ea85463bb6b53abb44cb4d031ff0c4.png)'
 - en: The Dataset
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据集
 - en: We’ll re-use the same MovieLens dataset for this post that we worked on last
     time for our collaborative filtering model. [GroupLens](https://grouplens.org)
     has [made the dataset available here](https://grouplens.org/datasets/movielens/).
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文将重用我们上次用于协同过滤模型的 MovieLens 数据集。[GroupLens](https://grouplens.org) [在这里提供了数据集](https://grouplens.org/datasets/movielens/)。
 - en: 'First, let’s load in this data:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们加载这些数据：
 - en: '[PRE0]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Let’s take a quick look at the top 20 most-viewed files:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们快速查看一下前 20 个最受欢迎的文件：
 - en: '|  | title | genre |'
+  id: totrans-11
   prefs: []
   type: TYPE_TB
+  zh: '|  | 标题 | 类型 |'
 - en: '| --- | --- | --- |'
+  id: totrans-12
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- |'
 - en: '| movieid |  |  |'
+  id: totrans-13
   prefs: []
   type: TYPE_TB
+  zh: '| movieid |  |  |'
 - en: '| --- | --- | --- |'
+  id: totrans-14
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- |'
 - en: '| 2858 | American Beauty (1999) | Comedy&#124;Drama |'
+  id: totrans-15
   prefs: []
   type: TYPE_TB
+  zh: '| 2858 | 美国丽人 (1999) | 喜剧&#124;剧情 |'
 - en: '| 260 | Star Wars: Episode IV - A New Hope (1977) | Action&#124;Adventure&#124;Fantasy&#124;Sci-Fi
     |'
+  id: totrans-16
   prefs: []
   type: TYPE_TB
+  zh: '| 260 | 星球大战：新希望 (1977) | 动作&#124;冒险&#124;奇幻&#124;科幻 |'
 - en: '| 1196 | Star Wars: Episode V - The Empire Strikes Back… | Action&#124;Adventure&#124;Drama&#124;Sci-Fi&#124;War
     |'
+  id: totrans-17
   prefs: []
   type: TYPE_TB
+  zh: '| 1196 | 星球大战：帝国反击战… | 动作&#124;冒险&#124;剧情&#124;科幻&#124;战争 |'
 - en: '| 1210 | Star Wars: Episode VI - Return of the Jedi (1983) | Action&#124;Adventure&#124;Romance&#124;Sci-Fi&#124;War
     |'
+  id: totrans-18
   prefs: []
   type: TYPE_TB
+  zh: '| 1210 | 星球大战：绝地归来 (1983) | 动作&#124;冒险&#124;浪漫&#124;科幻&#124;战争 |'
 - en: '| 480 | Jurassic Park (1993) | Action&#124;Adventure&#124;Sci-Fi |'
+  id: totrans-19
   prefs: []
   type: TYPE_TB
+  zh: '| 480 | 侏罗纪公园 (1993) | 动作&#124;冒险&#124;科幻 |'
 - en: '| 2028 | Saving Private Ryan (1998) | Action&#124;Drama&#124;War |'
+  id: totrans-20
   prefs: []
   type: TYPE_TB
+  zh: '| 2028 | 拯救大兵瑞恩 (1998) | 动作&#124;剧情&#124;战争 |'
 - en: '| 589 | Terminator 2: Judgment Day (1991) | Action&#124;Sci-Fi&#124;Thriller
     |'
+  id: totrans-21
   prefs: []
   type: TYPE_TB
+  zh: '| 589 | 终结者 2：审判日 (1991) | 动作&#124;科幻&#124;惊悚 |'
 - en: '| 2571 | Matrix, The (1999) | Action&#124;Sci-Fi&#124;Thriller |'
+  id: totrans-22
   prefs: []
   type: TYPE_TB
+  zh: '| 2571 | 黑客帝国 (1999) | 动作&#124;科幻&#124;惊悚 |'
 - en: '| 1270 | Back to the Future (1985) | Comedy&#124;Sci-Fi |'
+  id: totrans-23
   prefs: []
   type: TYPE_TB
+  zh: '| 1270 | 回到未来 (1985) | 喜剧&#124;科幻 |'
 - en: '| 593 | Silence of the Lambs, The (1991) | Drama&#124;Thriller |'
+  id: totrans-24
   prefs: []
   type: TYPE_TB
+  zh: '| 593 | 沉默的羔羊 (1991) | 剧情&#124;惊悚 |'
 - en: '| 1580 | Men in Black (1997) | Action&#124;Adventure&#124;Comedy&#124;Sci-Fi
     |'
+  id: totrans-25
   prefs: []
   type: TYPE_TB
+  zh: '| 1580 | 黑衣人 (1997) | 动作&#124;冒险&#124;喜剧&#124;科幻 |'
 - en: '| 1198 | Raiders of the Lost Ark (1981) | Action&#124;Adventure |'
+  id: totrans-26
   prefs: []
   type: TYPE_TB
+  zh: '| 1198 | 夺宝奇兵 (1981) | 动作&#124;冒险 |'
 - en: '| 608 | Fargo (1996) | Crime&#124;Drama&#124;Thriller |'
+  id: totrans-27
   prefs: []
   type: TYPE_TB
+  zh: '| 608 | 冰血暴 (1996) | 犯罪&#124;剧情&#124;惊悚 |'
 - en: '| 2762 | Sixth Sense, The (1999) | Thriller |'
+  id: totrans-28
   prefs: []
   type: TYPE_TB
+  zh: '| 2762 | 第六感 (1999) | 惊悚 |'
 - en: '| 110 | Braveheart (1995) | Action&#124;Drama&#124;War |'
+  id: totrans-29
   prefs: []
   type: TYPE_TB
+  zh: '| 110 | 布雷夫哈特 (1995) | 动作&#124;剧情&#124;战争 |'
 - en: '| 2396 | Shakespeare in Love (1998) | Comedy&#124;Romance |'
+  id: totrans-30
   prefs: []
   type: TYPE_TB
+  zh: '| 2396 | 罗密欧与朱丽叶 (1998) | 喜剧&#124;浪漫 |'
 - en: '| 1197 | Princess Bride, The (1987) | Action&#124;Adventure&#124;Comedy&#124;Romance
     |'
+  id: totrans-31
   prefs: []
   type: TYPE_TB
+  zh: '| 1197 | 公主新娘 (1987) | 动作&#124;冒险&#124;喜剧&#124;浪漫 |'
 - en: '| 527 | Schindler’s List (1993) | Drama&#124;War |'
+  id: totrans-32
   prefs: []
   type: TYPE_TB
+  zh: '| 527 | 辛德勒的名单 (1993) | 剧情&#124;战争 |'
 - en: '| 1617 | L.A. Confidential (1997) | Crime&#124;Film-Noir&#124;Mystery&#124;Thriller
     |'
+  id: totrans-33
   prefs: []
   type: TYPE_TB
+  zh: '| 1617 | 洛杉矶机密 (1997) | 犯罪&#124;黑色电影&#124;悬疑&#124;惊悚 |'
 - en: '| 1265 | Groundhog Day (1993) | Comedy&#124;Romance |'
+  id: totrans-34
   prefs: []
   type: TYPE_TB
+  zh: '| 1265 | 土拨鼠日 (1993) | 喜剧&#124;浪漫 |'
 - en: Preprocessing
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 预处理
 - en: 'Collaborative filtering models typically work best when each item has a decent
     number of ratings. Let’s restrict to only the 500 most popular films (as determined
     by number of ratings). We’ll also reindex by `movieid` and `userid`:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 协同过滤模型通常在每个项目有相当数量的评分时效果最佳。我们将限制为仅使用 500 部最受欢迎的电影（按评分数量确定）。我们还将按 `movieid` 和
+    `userid` 重新索引：
 - en: '[PRE1]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Next, [as mentioned in the previous post](/2019/04/building-recommender-system.html),
     we should normalize our rating data. We create an adjusted rating by subtracting
     off the overall mean rating, the mean rating for each item, and then the mean
     rating for each user.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，[如前一篇文章中提到的](/2019/04/building-recommender-system.html)，我们应该规范化我们的评分数据。我们通过减去总体均值评分、每个项目的均值评分，然后减去每个用户的均值评分来创建一个调整后的评分。
 - en: This produces a “preference rating” ![\tilde{r}_{u,i}](../Images/52a9c49297042d77a17cce1bba397ac4.png)
     defined by
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这产生了一个“偏好评分” ![\tilde{r}_{u,i}](../Images/52a9c49297042d77a17cce1bba397ac4.png)，定义如下
 - en: '!['
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '!['
 - en: \tilde{r}_{u,i} := r_{u,i} - \bar{r} - \bar{r}_{i} - \bar{r}_{u}
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: \tilde{r}_{u,i} := r_{u,i} - \bar{r} - \bar{r}_{i} - \bar{r}_{u}
 - en: '](../Images/7e596563eff0b2daefe4be7079d610a7.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '](../Images/7e596563eff0b2daefe4be7079d610a7.png)'
 - en: The intuition for ![\tilde{r}](../Images/15faa8d8c7bbf110f5cdc90f3df75b49.png)
     is that ![\tilde{r} = 0](../Images/b0fdf67af6503f0804a125e9413b19a8.png) means
     that user ![u](../Images/c1155b10039d460302206caf78e70b84.png)’s rating for item
@@ -160,14 +248,25 @@
     the raw rating ![r](../Images/dc16d9309e95f2dd60bba8a2d99d78b4.png), I’ll refer
     to the former as the user’s *preference* for item ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png)
     and the latter as the user’s *rating* of item ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png).
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于 ![\tilde{r}](../Images/15faa8d8c7bbf110f5cdc90f3df75b49.png) 的直觉是， ![\tilde{r}
+    = 0](../Images/b0fdf67af6503f0804a125e9413b19a8.png) 表示用户 ![u](../Images/c1155b10039d460302206caf78e70b84.png)
+    对项目 ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png) 的评分正是我们如果只知道平均总体评分、项目评分和用户评分时的预测。任何高于或低于0的值表示相对于这个基准的偏好偏差。为了区分
+    ![\tilde{r}](../Images/15faa8d8c7bbf110f5cdc90f3df75b49.png) 和原始评分 ![r](../Images/dc16d9309e95f2dd60bba8a2d99d78b4.png)，我将前者称为用户对项目
+    ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png) 的*偏好*，后者称为用户对项目 ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png)
+    的*评分*。
 - en: 'Let’s build the preference data using ratings for the 500 most popular films:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用对500部最受欢迎电影的评分来构建偏好数据：
 - en: '[PRE2]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'The output of this block of code is two objects: `prefs`, which is a dataframe
     of preferences indexed by `movieid` and `userid`; and `pref_matrix`, which is
     a matrix whose ![(i,j)](../Images/eb0b8c3c59dc87afe6d3a1ddaa4dd520.png)th entry
@@ -175,85 +274,131 @@
     gives movie ![j](../Images/4b5e5503442fdfa2029fcc9208d6ca1a.png) (i.e. the columns
     are movies and each row is a user). In cases where the user hasn’t rated the item,
     this matrix will have a `NaN`.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 这段代码的输出是两个对象：`prefs`，它是一个按`movieid`和`userid`索引的偏好数据框；以及`pref_matrix`，它是一个矩阵，其中的
+    ![(i,j)](../Images/eb0b8c3c59dc87afe6d3a1ddaa4dd520.png) 项对应于用户 ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png)
+    对电影 ![j](../Images/4b5e5503442fdfa2029fcc9208d6ca1a.png) 的评分（即列是电影，每行是用户）。如果用户没有对某个项目进行评分，这个矩阵将包含
+    `NaN`。
 - en: The maximum and minimum preferences in this data are 3.923 and -4.643, respectively.
     Next, we’ll build an actual model.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据中的最大和最小偏好分别是3.923和-4.643。接下来，我们将构建一个实际的模型。
 - en: Latent-factor collaborative filtering
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 潜在因子协同过滤
 - en: 'At this stage, we’ve constructed a matrix ![P](../Images/7a36f354985d6a6caf213c0934bdc243.png)
     (called `pref_matrix` in the Python code above). The idea behind latent-factor
     collaborative filtering models is that each user’s preferences can be predicted
     by a small number of latent factors (usually much smaller than the overall number
     of items available):'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这一阶段，我们已经构建了一个矩阵 ![P](../Images/7a36f354985d6a6caf213c0934bdc243.png)（在上面的Python代码中称为`pref_matrix`）。潜在因子协同过滤模型的思想是，每个用户的偏好可以通过少量的潜在因子来预测（通常远小于可用项目的总数）：
 - en: '!['
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '!['
 - en: \tilde{r}_{u,i} \approx f_{i}(\lambda_{1}(u), \lambda_{2}(u), \ldots, \lambda_{n}(u))
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: \tilde{r}_{u,i} \approx f_{i}(\lambda_{1}(u), \lambda_{2}(u), \ldots, \lambda_{n}(u))
 - en: '](../Images/95ea1e92b71a45cf8e1b2d3317fd764b.png)'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '](../Images/95ea1e92b71a45cf8e1b2d3317fd764b.png)'
 - en: 'Latent factor models thus require answering two related questions:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 潜在因子模型因此需要回答两个相关的问题：
 - en: For a given user ![u](../Images/c1155b10039d460302206caf78e70b84.png), what
     are the corresponding latent factors ![\lambda_{k}(u)](../Images/7182e3b55bb891245c408f09bac9c180.png)?
+  id: totrans-54
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于给定的用户 ![u](../Images/c1155b10039d460302206caf78e70b84.png)，相应的潜在因子是什么 ![\lambda_{k}(u)](../Images/7182e3b55bb891245c408f09bac9c180.png)？
 - en: For a given collection of latent factors, what is the function ![f_{i}](../Images/f105567a69855b0e0e3fc7a24547c4e4.png),
     i.e., what is the relationship between the latent factors and a user’s preferences
     for each item?
+  id: totrans-55
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于给定的潜在因子集合，函数 ![f_{i}](../Images/f105567a69855b0e0e3fc7a24547c4e4.png) 是什么？即，潜在因子与用户对每个项目的偏好之间的关系是什么？
 - en: 'One approach to this problem is to attempt to solve for both the ![f_{i}](../Images/f105567a69855b0e0e3fc7a24547c4e4.png)’s
     and ![\lambda_{k}](../Images/f5faabc2a6741e3731804ea32acf6217.png)’s by making
     the simplifying assumption that each of these functions is linear:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 解决这个问题的一种方法是尝试求解 ![f_{i}](../Images/f105567a69855b0e0e3fc7a24547c4e4.png) 和
+    ![\lambda_{k}](../Images/f5faabc2a6741e3731804ea32acf6217.png)，通过简化假设每个函数都是线性的：
 - en: '!['
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '!['
 - en: \lambda_{k}(u) = \sum_{i} a_{i} \tilde{r}_{u,i}
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: \lambda_{k}(u) = \sum_{i} a_{i} \tilde{r}_{u,i}
 - en: '](../Images/c1594024dae526ec375179d67d522f5d.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '](../Images/c1594024dae526ec375179d67d522f5d.png)'
 - en: '!['
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '!['
 - en: f_{i} = \sum_{k} b_{k} \lambda_{k}
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: f_{i} = \sum_{k} b_{k} \lambda_{k}
 - en: '](../Images/f8b09f43d5e1f4139f75aaacc54cd15b.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '](../Images/f8b09f43d5e1f4139f75aaacc54cd15b.png)'
 - en: 'Taken over all items and users, this can be re-written as a linear algebra
     problem problem: find matrices ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png)
     and ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) such that'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 在所有项目和用户中，这可以被重新写为线性代数问题：找出矩阵 ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png)
+    和 ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) 使得
 - en: '![ P \approx F  \Lambda  P, ](../Images/03898dea92e52495175d8b468b0cf8a4.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![ P \approx F  \Lambda  P, ](../Images/03898dea92e52495175d8b468b0cf8a4.png)'
 - en: where ![P](../Images/7a36f354985d6a6caf213c0934bdc243.png) is the matrix of
     preferences, ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) is the
     linear transformation that projects a user’s preferences onto latent variable
     space, and ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png) is the linear
     transformation that reconstructs the user’s ratings from that user’s representation
     in latent variable space.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中 ![P](../Images/7a36f354985d6a6caf213c0934bdc243.png) 是偏好矩阵，![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png)
+    是将用户的偏好投影到潜在变量空间的线性变换，而 ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png) 是从用户在潜在变量空间中的表示中重建用户评分的线性变换。
 - en: The product ![F \Lambda](../Images/57fc7a9b4718945cec840bfd8965af63.png) will
     be a square matrix. However, by choosing a number of latent variables strictly
     less than the number of items, this product will necessarily not be full rank.
@@ -264,66 +409,102 @@
     Our intuition (and hope) is that this will reconstruct accurate preferences for
     each user. (We will tune our loss function to ensure that this is in fact the
     case.)
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个产品 ![F \Lambda](../Images/57fc7a9b4718945cec840bfd8965af63.png) 将是一个方阵。然而，通过选择的潜在变量数量严格少于项目数量，这个产品必然不是满秩的。从本质上讲，我们是在求解
+    ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png) 和 ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png)，使得产品
+    ![F \Lambda](../Images/57fc7a9b4718945cec840bfd8965af63.png) 最好地逼近身份变换 *在偏好矩阵上*
+    ![P](../Images/7a36f354985d6a6caf213c0934bdc243.png)。我们的直觉（和希望）是，这将重建每个用户的准确偏好。（我们将调整我们的损失函数以确保确实如此。）
 - en: Model implementation
+  id: totrans-67
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型实现
 - en: 'As advertised, we’ll be building our model in Keras + Tensorflow so that we’re
     well-positioned for any future generalization to deep learning approaches. This
     is also a natural approach to the type of problem we’re solving: the expression'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 如广告所示，我们将使用 Keras + Tensorflow 构建我们的模型，以便我们为任何未来的深度学习方法的推广做好准备。这也是解决我们所处理问题的自然方法：表达式
 - en: '!['
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '!['
 - en: P \approx F \Lambda P
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: P \approx F \Lambda P
 - en: '](../Images/a7661198c171c6721f2751bc69e02d3c.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '](../Images/a7661198c171c6721f2751bc69e02d3c.png)'
 - en: can be thought of as describing a two-layer dense neural network whose layers
     are defined by ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png) and ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png)
     and whose activation function is just the identity map (i.e. the function ![\sigma(x)
     = x](../Images/80b0e6e0e12ab684d6e97147cadeac6b.png)).
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以被认为是描述一个两层密集神经网络的，其中层由 ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png)
+    和 ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) 定义，并且其激活函数就是身份映射（即函数
+    ![\sigma(x) = x](../Images/80b0e6e0e12ab684d6e97147cadeac6b.png)）。
 - en: First, let’s import the packages we’ll need and set the encoding dimension (the
     number of latent variables) we want for this model.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们导入我们需要的包，并设置我们为这个模型所需的编码维度（潜在变量的数量）。
 - en: '[PRE3]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Next, define the model itself as a composition of an “encoding” layer (projection
     onto latent variable space) and a “decoding” layer (recovery of preferences from
     latent variable representation). The recommender model itself is just a composition
     of these two layers.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，将模型本身定义为“编码”层（投影到潜在变量空间）和“解码”层（从潜在变量表示中恢复偏好）的组合。推荐模型本身只是这两层的组合。
 - en: '[PRE4]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Custom loss functions
+  id: totrans-77
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 自定义损失函数
 - en: At this point, we could train our model directly to just reproduce its inputs
     (this is essentially a very simple autoencoder). However, we’re actually interested
     in picking ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png) and ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png)
     that correctly fill in *missing* values. We can do this through a careful application
     of masking and a custom loss function.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 此时，我们可以直接训练我们的模型以仅重现其输入（这本质上是一个非常简单的自编码器）。然而，我们实际上感兴趣的是选择 ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png)
+    和 ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) 来正确填充 *缺失* 的值。我们可以通过仔细应用掩盖和自定义损失函数来做到这一点。
 - en: 'Recall that `prefs_matrix` currently consists largely of NaNs—in fact, there’s
     only one zero value in the whole dataset:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 记住，`prefs_matrix` 目前主要由 NaNs 组成——实际上，整个数据集中只有一个零值：
 - en: '[PRE5]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'In `prefs_matrix`, we can fill any missing values with zeros. This is a reasonable
     choice because we’ve already performed some normalization of the ratings, so 0
     represents our naive guess for a user’s preference for a given item. Then, to
@@ -332,63 +513,94 @@
     preference). We can then build a loss function which strongly penalizes incorrectly
     guessing the “forgotten” values, i.e., one which is trained to construct novel
     ratings from known ratings. Here’s our function:'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 `prefs_matrix` 中，我们可以用零填充任何缺失的值。这是一个合理的选择，因为我们已经对评分进行了某种归一化处理，因此 0 代表我们对用户对特定项目偏好的天真猜测。然后，为了创建训练数据，使用
+    `prefs_matrix` 作为目标，并有选择性地掩盖 `prefs_matrix` 中的非零元素来创建输入（“遗忘”特定用户-项目的偏好）。然后，我们可以构建一个损失函数，该函数会强烈惩罚错误猜测“遗忘”的值，即训练以从已知评分构建新评分的损失函数。以下是我们的函数：
 - en: '[PRE6]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: By default, the loss this returns is a 20%-80% weighted sum of the overall MSE
     and the MSE of just the missing ratings. This loss function requires the input
     (with missing preferences), the predicted preferences, and the true preferences.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下，返回的损失是整体 MSE 和仅缺失评分的 MSE 的 20%-80% 加权和。这个损失函数需要输入（带有缺失偏好）、预测的偏好和真实的偏好。
 - en: At least as of the date of this post, Keras and TensorFlow don’t currently support
     custom loss functions with three inputs (other frameworks, such as PyTorch, do).
     We can get around this fact by introducing a “dummy” loss function and a simple
     wrapper model. Loss functions in Keras require only two inputs, so this dummy
     function will ignore the “true” values.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 至少截至本文发布之日，Keras 和 TensorFlow 目前不支持具有三个输入的自定义损失函数（其他框架，如 PyTorch，支持）。我们可以通过引入“虚拟”损失函数和简单的包装模型来绕过这个事实。Keras
+    中的损失函数只需要两个输入，因此这个虚拟函数将忽略“真实”值。
 - en: '[PRE7]'
+  id: totrans-85
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Next, our wrapper model. The idea here is to use a lambda layer (‘`loss`’) to
     apply our custom loss function (`'lambda_mse'`), and then use our custom loss
     function for the actual optimization. Using Keras’s functional API makes it very
     easy to wrap the recommender we already defined with this simple wrapper model.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来是我们的包装模型。这里的想法是使用 lambda 层（‘`loss`’）来应用我们的自定义损失函数（`'lambda_mse'`），然后使用我们的自定义损失函数进行实际优化。使用
+    Keras 的功能 API 可以非常容易地将我们已经定义的推荐器用这个简单的包装模型进行包装。
 - en: '[PRE8]'
+  id: totrans-87
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Training
+  id: totrans-88
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 训练
 - en: 'To generate training data for our model, we’ll start with the preferences matrix
     `pref_matrix` and randomly mask (i.e. set to 0) a certain fraction of the known
     ratings for each user. Structuring this as a generator allows us to make an essentially
     unlimited collection of training data (though in each case, the output is constrained
     to be drawn from the same fixed set of known ratings). Here’s the generator function:'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了生成我们的模型训练数据，我们将从偏好矩阵 `pref_matrix` 开始，并随机掩盖（即设置为 0）每个用户已知评分的某个比例。将其结构化为生成器允许我们创建一个本质上无限的训练数据集合（尽管在每种情况下，输出受限于从相同固定已知评分集中提取）。以下是生成器函数：
 - en: '[PRE9]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'Let’s check that this generator’s masking functionality is working correctly:'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们检查一下这个生成器的掩盖功能是否正常工作：
 - en: '[PRE10]'
+  id: totrans-92
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'To complete the story, we’ll define a training function that calls this generator
     and allows us to set a few other parameters (number of epochs, early stopping,
     etc):'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了完成故事，我们将定义一个训练函数，调用此生成器并允许我们设置其他一些参数（训练轮数、早期停止等）：
 - en: '[PRE11]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Recall that ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) and ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png)
     are ![500 \times 25](../Images/d6a778a96473fa10c2db7ceb09d870b7.png) and ![25
     \times 500](../Images/580ce03d74e594872245387cc94bd042.png) dimensional matrices,
@@ -398,243 +610,380 @@
     during training. We don’t have nearly enough users for that, though, so for this
     tutorial, we’ll skimp by quite a bit—let’s settle for a maximum of 12,500 observations
     (stopping the model earlier if loss doesn’t improve).
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 记住 ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) 和 ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png)
+    是 ![500 \times 25](../Images/d6a778a96473fa10c2db7ceb09d870b7.png) 和 ![25 \times
+    500](../Images/580ce03d74e594872245387cc94bd042.png) 维矩阵，因此这个模型有 ![2 \times 25
+    \times 500 = 25000](../Images/6eef3c56cc0d237518afec6f983426c7.png) 个参数。对于线性模型，一个好的经验法则是每个参数至少要有10个观测值，这意味着我们希望在训练期间看到250,000个用户评分向量。然而，我们的用户数量远远不够，因此在本教程中，我们将大大减少数量——最多使用12,500个观测值（如果损失没有改善则提前停止模型）。
 - en: '[PRE12]'
+  id: totrans-96
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: The output of this training process (at least on my machine) gives a loss of
     0.6321, which means that on average we’re within about 0.7901 units of a user’s
     true preference when we haven’t seen it before (recall that this loss is 80% from
     unknown preferences, and 20% from the knowns). Preferences in our data range between
     -4.64 and 3.92, so this is not too shabby!
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个训练过程的输出（至少在我的机器上）给出了0.6321的损失，这意味着我们在没有见过的用户真正偏好上平均相差约0.7901单位（请记住，这个损失中80%来自未知偏好，20%来自已知偏好）。我们的数据中的偏好范围从-4.64到3.92，所以这也不算太差！
 - en: Predicting ratings
+  id: totrans-98
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 预测评分
 - en: To generate a prediction with our model, we have to call the `recommender` model
     we trained earlier after normalizing the ratings along the various dimensions.
     Let’s assume that the input to our predict function will be a dataframe indexed
     by (`movieid`, `userid`), and with a single column named `"rating"`.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 要使用我们的模型生成预测，我们必须在沿各个维度标准化评分后调用之前训练的`recommender`模型。假设我们预测函数的输入是一个以（`movieid`，`userid`）索引的
+    dataframe，并且有一个名为“rating”的列。
 - en: '[PRE13]'
+  id: totrans-100
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'Let’s test it out! Here’s some sample ratings for a single fake user, who really
     likes Star Wars and Jurassic Park and doesn’t like much else:'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们试试看！这里有一些单个虚拟用户的示例评分，他非常喜欢《星球大战》和《侏罗纪公园》，而对其他的电影不太感兴趣：
 - en: '[PRE14]'
+  id: totrans-102
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '| userid | 1 | title |'
+  id: totrans-103
   prefs: []
   type: TYPE_TB
+  zh: '| userid | 1 | title |'
 - en: '| --- | --- | --- |'
+  id: totrans-104
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- |'
 - en: '| movieid |  |  |'
+  id: totrans-105
   prefs: []
   type: TYPE_TB
+  zh: '| movieid |  |  |'
 - en: '| --- | --- | --- |'
+  id: totrans-106
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- |'
 - en: '| 260 | 4.008329 | Star Wars: Episode IV - A New Hope (1977) |'
+  id: totrans-107
   prefs: []
   type: TYPE_TB
+  zh: '| 260 | 4.008329 | 星球大战：新希望 (1977) |'
 - en: '| 1198 | 3.942005 | Raiders of the Lost Ark (1981) |'
+  id: totrans-108
   prefs: []
   type: TYPE_TB
+  zh: '| 1198 | 3.942005 | 夺宝奇兵 (1981) |'
 - en: '| 1196 | 3.860034 | Star Wars: Episode V - The Empire Strikes Back… |'
+  id: totrans-109
   prefs: []
   type: TYPE_TB
+  zh: '| 1196 | 3.860034 | 星球大战：帝国反击战… |'
 - en: '| 1148 | 3.716259 | Wrong Trousers, The (1993) |'
+  id: totrans-110
   prefs: []
   type: TYPE_TB
+  zh: '| 1148 | 3.716259 | 错误裤子 (1993) |'
 - en: '| 904 | 3.683811 | Rear Window (1954) |'
+  id: totrans-111
   prefs: []
   type: TYPE_TB
+  zh: '| 904 | 3.683811 | 后窗 (1954) |'
 - en: '| 2019 | 3.654374 | Seven Samurai (The Magnificent Seven) (Shichin… |'
+  id: totrans-112
   prefs: []
   type: TYPE_TB
+  zh: '| 2019 | 3.654374 | 七武士（七侠镇）(Shichin… |'
 - en: '| 913 | 3.639756 | Maltese Falcon, The (1941) |'
+  id: totrans-113
   prefs: []
   type: TYPE_TB
+  zh: '| 913 | 3.639756 | 马耳他之鹰 (1941) |'
 - en: '| 318 | 3.637150 | Shawshank Redemption, The (1994) |'
+  id: totrans-114
   prefs: []
   type: TYPE_TB
+  zh: '| 318 | 3.637150 | 肖申克的救赎 (1994) |'
 - en: '| 745 | 3.619762 | Close Shave, A (1995) |'
+  id: totrans-115
   prefs: []
   type: TYPE_TB
+  zh: '| 745 | 3.619762 | 接近剃刀 (1995) |'
 - en: '| 908 | 3.608473 | North by Northwest (1959) |'
+  id: totrans-116
   prefs: []
   type: TYPE_TB
+  zh: '| 908 | 3.608473 | 西北偏北 (1959) |'
 - en: Interestingly, even though the user gave *Star Wars* a 5 as input, the model
     only predicts a rating of 4.08 for *Star Wars*. But it does recommend *the Empire
     Strikes Back* and *Raiders of the Lost Ark*, which seem like reasonable recommendations
     for those preferences.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 有趣的是，即使用户给*星球大战*的评分为5，模型预测的*星球大战*的评分也只有4.08。不过它确实推荐了*帝国反击战*和*夺宝奇兵*，这些推荐似乎符合这些偏好。
 - en: 'Now let’s reverse this user’s ratings for Star Wars and Jurassic Park, and
     see how the ratings change:'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们逆转这个用户对《星球大战》和《侏罗纪公园》的评分，看看评分如何变化：
 - en: '[PRE15]'
+  id: totrans-119
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '| userid | 1 | title |'
+  id: totrans-120
   prefs: []
   type: TYPE_TB
+  zh: '| userid | 1 | title |'
 - en: '| --- | --- | --- |'
+  id: totrans-121
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- |'
 - en: '| movieid |  |  |'
+  id: totrans-122
   prefs: []
   type: TYPE_TB
+  zh: '| movieid |  |  |'
 - en: '| --- | --- | --- |'
+  id: totrans-123
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- |'
 - en: '| 2019 | 3.532214 | Seven Samurai (The Magnificent Seven) (Shichin… |'
+  id: totrans-124
   prefs: []
   type: TYPE_TB
+  zh: '| 2019 | 3.532214 | 七武士（七侠镇）(Shichin… |'
 - en: '| 50 | 3.489284 | Usual Suspects, The (1995) |'
+  id: totrans-125
   prefs: []
   type: TYPE_TB
+  zh: '| 50 | 3.489284 | 通常的嫌疑犯 (1995) |'
 - en: '| 2858 | 3.480124 | American Beauty (1999) |'
+  id: totrans-126
   prefs: []
   type: TYPE_TB
+  zh: '| 2858 | 3.480124 | *美国美人*(1999) |'
 - en: '| 745 | 3.466157 | Close Shave, A (1995) |'
+  id: totrans-127
   prefs: []
   type: TYPE_TB
+  zh: '| 745 | 3.466157 | 《理发师的故事》(1995) |'
 - en: '| 1148 | 3.415981 | Wrong Trousers, The (1993) |'
+  id: totrans-128
   prefs: []
   type: TYPE_TB
+  zh: '| 1148 | 3.415981 | 《错误的裤子》(1993) |'
 - en: '| 1197 | 3.415527 | Princess Bride, The (1987) |'
+  id: totrans-129
   prefs: []
   type: TYPE_TB
+  zh: '| 1197 | 3.415527 | 《公主新娘》(1987) |'
 - en: '| 527 | 3.386785 | Schindler’s List (1993) |'
+  id: totrans-130
   prefs: []
   type: TYPE_TB
+  zh: '| 527 | 3.386785 | 《辛德勒的名单》(1993) |'
 - en: '| 750 | 3.342154 | Dr. Strangelove or: How I Learned to Stop Worr… |'
+  id: totrans-131
   prefs: []
   type: TYPE_TB
+  zh: '| 750 | 3.342154 | 《奇爱博士》 |'
 - en: '| 1252 | 3.338330 | Chinatown (1974) |'
+  id: totrans-132
   prefs: []
   type: TYPE_TB
+  zh: '| 1252 | 3.338330 | 《唐人街探案》(1974) |'
 - en: '| 1207 | 3.335204 | To Kill a Mockingbird (1962) |'
+  id: totrans-133
   prefs: []
   type: TYPE_TB
+  zh: '| 1207 | 3.335204 | 《杀死一只知更鸟》(1962) |'
 - en: Note that *Seven Samurai* features prominently in both lists. In fact, *Seven
     Samurai* has the highest average rating of any film in this dataset (at 4.56),
     and looking at the top 20 or top 50 recommended films for both users has even
     more common films showing up that happen to be very highly rated overall.
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意到*七武士*在两个列表中都显著出现。事实上，*七武士*在这个数据集中具有最高的平均评分（为4.56），查看用户推荐的前20或前50部电影时，还会发现更多非常高评分的共同电影。
 - en: Conclusions and further reading
+  id: totrans-135
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论与进一步阅读
 - en: 'The latent factor representation we’ve built can also be thought of as defining
     an embedding of *items* into some lower-dimensional space, as opposed to an embedding
     of *users*. This lets us do some interesting things—for example, we can compare
     distances between each item’s vector representation to understand how similar
     or different two films are. Let’s compare *Star Wars* against *The Empire Strikes
     Back* and *American Beauty*:'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们构建的潜在因子表示也可以被视为将*项目*嵌入到某个低维空间中，而不是将*用户*嵌入。这让我们可以做一些有趣的事情，例如，我们可以比较每个项目向量表示之间的距离，以了解两部电影的相似或不同。让我们将*星球大战*与*帝国反击战*和*美国美人*进行比较：
 - en: '[PRE16]'
+  id: totrans-137
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: Note that 33 is the column index corresponding to *Star Wars* (different from
     its `movieid` of 260), 144 is the column index corresponding to *Empire Strikes
     Back*, and 401 is the column index of *American Beauty*.
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意到 33 是对应于*星球大战*的列索引（不同于其`movieid`为260），144 是对应于*帝国反击战*的列索引，401 是对应于*美国美人*的列索引。
 - en: '[PRE17]'
+  id: totrans-139
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: Comparing the distances, we see that with a distance of 0.209578, *Star Wars*
     and *Empire Strikes Back* are much closer in latent factor space than *Star Wars*
     and *American Beauty* are.
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 比较这些距离，我们看到*星球大战*和*帝国反击战*在潜在因子空间中的距离为0.209578，比*星球大战*和*美国美人*的距离要近得多。
 - en: With a little bit of further work, it’s also possible to answer other questions
     in latent factor space like “which film is least similar to *Star Wars*?”
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过进一步的工作，还可以在潜在因子空间中回答其他问题，例如“哪部电影与*星球大战*最不相似？”
 - en: Variations on this type of technique lead to autoencoder-based recommender systems.
     For futher reading, there’s also a family of related models known as matrix factorization
     models, which can incorporate both item and user features as well as the raw ratings.
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种类型的技术的变体导致了基于自编码器的推荐系统。有关进一步阅读，还有一类相关模型，称为矩阵分解模型，它可以同时包含项目和用户特征以及原始评分。
 - en: '**Related:**'
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Building a Recommender System](/2019/04/building-recommender-system.html)'
+  id: totrans-144
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建推荐系统](/2019/04/building-recommender-system.html)'
 - en: '[K-Means Clustering: Unsupervised Learning for Recommender Systems](/2019/04/k-means-clustering-unsupervised-learning-recommender-systems.html)'
+  id: totrans-145
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[K-Means 聚类：用于推荐系统的无监督学习](/2019/04/k-means-clustering-unsupervised-learning-recommender-systems.html)'
 - en: '[Building Recommender systems with Azure Machine Learning service](/2019/05/recommender-systems-azure-machine-learning.html)'
+  id: totrans-146
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Azure 机器学习服务构建推荐系统](/2019/05/recommender-systems-azure-machine-learning.html)'
 - en: '* * *'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-148
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT'
 - en: '* * *'
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-153
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Building a Recommender System for Amazon Products with Python](https://www.kdnuggets.com/2023/02/building-recommender-system-amazon-products-python.html)'
+  id: totrans-154
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 为亚马逊产品构建推荐系统](https://www.kdnuggets.com/2023/02/building-recommender-system-amazon-products-python.html)'
 - en: '[Building a Recommendation System with Hugging Face Transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
+  id: totrans-155
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Hugging Face Transformers 构建推荐系统](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)'
 - en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第 1 部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
 - en: '[Building a Visual Search Engine - Part 2: The Search Engine](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
+  id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第 2 部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)'
 - en: '[How a Level System can Help Forecast AI Costs](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'
+  id: totrans-158
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[等级系统如何帮助预测 AI 成本](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'
 - en: '[Learning System Design: Top 5 Essential Reads](https://www.kdnuggets.com/learning-system-design-top-5-essential-reads)'
+  id: totrans-159
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习系统设计：五大必读书单](https://www.kdnuggets.com/learning-system-design-top-5-essential-reads)'
