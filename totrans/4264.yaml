@@ -1,17 +1,25 @@
 - en: How to Create and Deploy a Simple Sentiment Analysis App via API
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何通过 API 创建和部署一个简单的情感分析应用
 - en: 原文：[https://www.kdnuggets.com/2021/06/create-deploy-sentiment-analysis-app-api.html](https://www.kdnuggets.com/2021/06/create-deploy-sentiment-analysis-app-api.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/06/create-deploy-sentiment-analysis-app-api.html](https://www.kdnuggets.com/2021/06/create-deploy-sentiment-analysis-app-api.html)
 - en: '[comments](#comments)![Figure](../Images/577cfe14fcb8f4b13d547bfba1b66c5c.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)![图](../Images/577cfe14fcb8f4b13d547bfba1b66c5c.png)'
 - en: 'Image source: [Reputation X](https://blog.reputationx.com/reputation-sentiment)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：[Reputation X](https://blog.reputationx.com/reputation-sentiment)
 - en: Let's say you've built an NLP model for some specific task, whether it be text
     classification, question answering, translation, or what have you. You've tested
     it out locally and it performs well. You've had others test it out as well, and
@@ -19,56 +27,83 @@
     be that audience a team of developers you work with, a specific group of end users,
     or even the general public. You have decided that you want to do so using a REST
     API, as you find this to be your best option. What now?
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你已经为某个特定任务构建了一个 NLP 模型，无论是文本分类、问题回答、翻译还是其他什么。你已经在本地测试过，表现良好。你也让其他人测试过，表现依旧良好。现在你想将其推广到更大的受众，不管是你合作的开发团队、特定的终端用户群体，还是普通公众。你决定使用
+    REST API，因为这是你认为的最佳选项。接下来怎么办？
 - en: FastAPI might be able to help. [FastAPI](https://fastapi.tiangolo.com/) is FastAPI
     is a web framework for building APIs with Python. We will use FastAPI in this
     article to build a REST API to service an NLP model which can be queried via GET
     request and can dole out responses to those queries.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: FastAPI 可能会有所帮助。[FastAPI](https://fastapi.tiangolo.com/) 是一个用于构建 Python API
+    的 Web 框架。我们将在本文中使用 FastAPI 构建一个 REST API，服务于一个 NLP 模型，该模型可以通过 GET 请求进行查询，并对这些查询作出响应。
 - en: 'For this example, we will skip the building of our own model, and instead leverage
     the [Pipeline class](https://huggingface.co/transformers/main_classes/pipelines.html)
     of the [HuggingFace](https://huggingface.co/transformers/) Transformers library.
     [Transformers](https://huggingface.co/transformers/) is full of SOTA NLP models
     which can be used out of the box as-is, as well as fine-tuned for specific uses
     and high performance. The library''s pipelines can be summed up as:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个例子中，我们将跳过构建自己的模型，而是利用 [HuggingFace](https://huggingface.co/transformers/)
+    Transformers 库的 [Pipeline 类](https://huggingface.co/transformers/main_classes/pipelines.html)。[Transformers](https://huggingface.co/transformers/)
+    中充满了可以直接使用的 SOTA NLP 模型，还可以根据特定用途和高性能进行微调。该库的管道可以总结为：
 - en: The pipelines are a great and easy way to use models for inference. These pipelines
     are objects that abstract most of the complex code from the library, offering
     a simple API dedicated to several tasks, including Named Entity Recognition, Masked
     Language Modeling, Sentiment Analysis, Feature Extraction and Question Answering.
+  id: totrans-7
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这些管道是使用模型进行推理的一个极好的简单方式。这些管道是抽象了库中大部分复杂代码的对象，提供了一个简单的 API，专门用于几个任务，包括命名实体识别、掩码语言建模、情感分析、特征提取和问题回答。
 - en: Using the Transformers library, FastAPI, and astonishingly little code, we are
     going to create and deploy a very simple [sentiment analysis](https://www.kdnuggets.com/2018/08/emotion-sentiment-analysis-practitioners-guide-nlp-5.html)
     app. We will also see how extending this same approach to a more complex app would
     be quite straightforward.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Transformers 库、FastAPI 和极少的代码，我们将创建并部署一个非常简单的 [情感分析](https://www.kdnuggets.com/2018/08/emotion-sentiment-analysis-practitioners-guide-nlp-5.html)
+    应用。我们还将看到将这种方法扩展到更复杂的应用程序是相当简单的。
 - en: Getting Started
+  id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 开始入门
 - en: 'As outlined above, we will be using Transformers and FastAPI to build this
     app, which means you will need these installed on your system. You will also require
     installation of [Uvicorn](https://www.uvicorn.org/), an [ASGI server](https://asgi.readthedocs.io/en/latest/)
     that FastAPI relies on as part of its backend. I easily installed them all on
     my *buntu system using pip:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所述，我们将使用 Transformers 和 FastAPI 来构建这个应用，这意味着你需要在系统上安装这些工具。你还需要安装 [Uvicorn](https://www.uvicorn.org/)，这是
+    FastAPI 作为后端所依赖的 [ASGI 服务器](https://asgi.readthedocs.io/en/latest/)。我在我的 *buntu
+    系统上通过 pip 轻松安装了它们。
 - en: '[PRE0]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: That's it. Moving on...
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这些，接下来…
 - en: Analyzing Sentiment
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 分析情感
 - en: Since we will be using Transformers for our NLP pipeline, let's first see how
     we would get this working standalone. Doing so is remarkably uncomplicated, and
     requires very few basic parameters be passed to the pipeline object in order to
@@ -77,226 +112,346 @@
     that's really all there is to it. We can optionally provide additional parameters
     or fine-tune the pipeline to our specific task and data, but for our purposes
     using a model out of the box should work just fine.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们将使用 Transformers 来构建我们的 NLP 流水线，我们先来看看如何使其单独工作。这非常简单，只需将很少的基本参数传递给流水线对象即可开始。具体而言，我们需要定义一个任务——我们想做什么——和一个模型——我们将用来执行任务的东西。其实就这些。我们可以选择提供额外的参数或将流水线微调到我们的特定任务和数据，但对于我们的目的来说，直接使用现成的模型应该就足够了。
 - en: For us, the task is `sentiment-analysis` and the model is `[nlptown/bert-base-multilingual-uncased-sentiment](https://huggingface.co/nlptown/bert-base-multilingual-uncased-sentiment)`.
     This is a BERT model trained for multilingual sentiment analysis, and which has
     been contributed to the HuggingFace model repository by [NLP Town](https://www.nlp.town/).
     Note that the first time you run this script the sizable model will be downloaded
     to your system, so ensure that you have the available free space to do so.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 对我们来说，任务是`sentiment-analysis`，模型是`[nlptown/bert-base-multilingual-uncased-sentiment](https://huggingface.co/nlptown/bert-base-multilingual-uncased-sentiment)`。这是一个用于多语言情感分析的
+    BERT 模型，由 [NLP Town](https://www.nlp.town/) 贡献到 HuggingFace 模型库。请注意，第一次运行该脚本时，会将大型模型下载到系统中，因此请确保有足够的空闲空间。
 - en: 'Here is the code to setup the standalone sentiment analysis app:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是设置独立情感分析应用的代码：
 - en: '[PRE1]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: What is returned by the call to the pipeline object is a predicted label and
     its corresponding probability. In our case, the combination of task and model
     that we are using results in labels between 1 (negative) and 5 (positive), along
     with the prediction probability. Let's give our script a run to see how it does.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 调用流水线对象返回的是预测标签及其相应的概率。在我们的案例中，任务和模型的组合会产生 1（负面）到 5（正面）之间的标签，以及预测概率。让我们运行一下脚本看看它的表现。
 - en: '[PRE2]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: And that's all there is to getting some functionally basic NLP task-specific
     out of the box model up and running using the Transformers library and its Pipeline
     class.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是使用 Transformers 库及其 Pipeline 类将一些功能基本的 NLP 任务特定的现成模型启动并运行所需要的全部内容。
 - en: 'If you want to test this out a bit more before we move on to deploying it via
     a REST API, give this modified script a shot, which allows us to pass text from
     the command line and responds with a more nicely formatted reply:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想在我们继续将其通过 REST API 部署之前再多测试一下，可以尝试这个修改过的脚本，它允许我们从命令行传递文本，并以更好格式化的回复响应：
 - en: '[PRE3]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Let''s run this a few times to see how it performs:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们运行几次，看看它的表现：
 - en: '[PRE4]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: This is better functionality, since we don't have to hard code the text we want
     analyzed into our program, and we have also made the results a bit more user-friendly.
     Let's extend this more useful version and deploy it as a REST API.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 这具有更好的功能，因为我们不必将要分析的文本硬编码到程序中，并且我们还使结果更具用户友好性。让我们扩展这个更有用的版本，并将其作为 REST API 部署。
 - en: Creating The API
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 创建 API
 - en: Time to deploy this ridiculously simple sentiment analysis app via REST API
     built using FastAPI. If you want to learn more about FastAPI and how to format
     your code using the framework, check out its documentation. What you absolutely
     need to know here is that we will create an instance of FastAPI (`app`), and then
     must define get requests, attach them to URLs, and assign responses for these
     requests via functions.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是通过 FastAPI 部署这个非常简单的情感分析应用的时候了。如果你想了解更多关于 FastAPI 的信息以及如何使用这个框架格式化你的代码，请查看其文档。你需要知道的是，我们将创建
+    FastAPI 的一个实例（`app`），然后必须定义获取请求，将其附加到 URL，并通过函数为这些请求分配响应。
 - en: Below, we will define 2 such get requests; one for the root URL (`'/'`), which
     displays a welcome message, and another for accepting strings for performing sentiment
     analysis on (`'/sentiment_analysis/'`). The code for both is quite simple; you
     should recognize much of what is contained in the `analyze_sentiment()` function
     that the `'/sentiment_analysis/'` request calls from our standalone app.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面，我们将定义两个这样的 GET 请求；一个用于根 URL (`'/'`)，显示欢迎信息，另一个用于接受字符串以进行情感分析 (`'/sentiment_analysis/'`)。这两个请求的代码都非常简单；你应该能识别出`'/sentiment_analysis/'`请求调用的`analyze_sentiment()`函数中的大部分内容。
 - en: '[PRE5]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'And now we have a REST API capable of accepting get requests and performing
     sentiment analysis. Before we try it out, we have to run the Uvicorn web server
     which will provide the necessary back end functionality. In order to do so, and
     assuming you saved the above code in a file called `main.py` and left the name
     of the FastAPI instance as `app`, run this:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了一个能够接受 GET 请求并进行情感分析的 REST API。在尝试之前，我们必须运行 Uvicorn 网络服务器，它将提供必要的后台功能。为此，假设你已将上述代码保存在名为
+    `main.py` 的文件中，并将 FastAPI 实例的名称保留为 `app`，运行以下命令：
 - en: '[PRE6]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'You should then see something like this:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 你应该会看到这样的结果：
 - en: '[PRE7]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Open your browser as indicated to http://127.0.0.1:8000 and you should see:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 按指示打开浏览器，访问 http://127.0.0.1:8000，你应该会看到：
 - en: '![API response](../Images/7fcd0ce954d7df772c423d60d1414df4.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![API response](../Images/7fcd0ce954d7df772c423d60d1414df4.png)'
 - en: 'If you see the welcome message, congrats, it works! We can try using the browser
     address bar to make some requests, pasting what is in the quotation marks below
     after the request URL and query string (`http://127.0.0.1:8000/sentiment_analysis/?text=`):'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你看到欢迎信息，恭喜，成功了！我们可以尝试使用浏览器地址栏进行一些请求，将下面引号中的内容粘贴到请求 URL 和查询字符串后面 (`http://127.0.0.1:8000/sentiment_analysis/?text=`)：
 - en: '**"welcome to my home!"**'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**“欢迎来到我的家！”**'
 - en: '![API response](../Images/d0d6c8735adcaceda7fa038bfce7dcad.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![API response](../Images/d0d6c8735adcaceda7fa038bfce7dcad.png)'
 - en: '**"i don''t like your cat"**'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**“我不喜欢你的猫”**'
 - en: '![API response](../Images/30aebef4b84ba3aab21496426d743fe8.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![API response](../Images/30aebef4b84ba3aab21496426d743fe8.png)'
 - en: '**"that movie was just okay"**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**“那部电影只是一般般”**'
 - en: '![API response](../Images/b82560d7baf0820f9857c290570c40e6.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![API response](../Images/b82560d7baf0820f9857c290570c40e6.png)'
 - en: 'Great, we get results! Now what if we want to treat this like an API and access
     it accordingly? In Python, we could use the requests library. Make sure it''s
     installed using:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 很好，我们得到了结果！那如果我们想把它当作 API 来访问呢？在 Python 中，我们可以使用 requests 库。确保它已经安装，可以使用以下命令：
 - en: '[PRE8]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Then give a script like this a try:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后试试这样的脚本：
 - en: '[PRE9]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'After saving, execute the script and you should get a result like this:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 保存后，执行脚本，你应该会得到如下结果：
 - en: '[PRE10]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: This worked as well. Excellent!
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 这也成功了。太好了！
 - en: You can read more about the requests library [here](https://docs.python-requests.org/en/master/).
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在 [这里](https://docs.python-requests.org/en/master/) 阅读更多关于 requests 库的信息。
 - en: Conclusions
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: There is obviously much more we could have done here. Preprocessing the data
     would have been useful. Performing error checking would have been advisable. As
     confirmation of this, try using some crazy characters or not wrapping a lengthy
     request with punctuation in quotes and see what happens.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，我们本可以做得更多。数据预处理会很有用。进行错误检查也是明智的。作为确认，尝试使用一些奇怪的字符或不将冗长的请求用标点符号括起来，看看会发生什么。
 - en: Next time I promise we will expand upon what we have done here today and will
     make something more robust and far more interesting. I'm already working on it.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 下次我保证我们将扩展今天所做的内容，制作一些更强大、更有趣的东西。我已经在着手准备了。
 - en: '**Related**:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容**：'
 - en: '[Getting Started with 5 Essential Natural Language Processing Libraries](/2021/02/getting-started-5-essential-nlp-libraries.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 5 个重要的自然语言处理库入门](/2021/02/getting-started-5-essential-nlp-libraries.html)'
 - en: '[Learn Neural Networks for Natural Language Processing Now](/2021/04/learn-neural-networks-natural-language-processing-now.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[立即学习自然语言处理的神经网络](/2021/04/learn-neural-networks-natural-language-processing-now.html)'
 - en: '[Machine Learning Pipeline Optimization with TPOT](/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TPOT 进行机器学习管道优化](/2021/05/machine-learning-pipeline-optimization-tpot.html)'
 - en: '* * *'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-59
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的捷径。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多相关主题
 - en: '[Deploy a Machine Learning Web App with Heroku](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Heroku 部署机器学习 Web 应用](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
 - en: '[How To Collect Data For Customer Sentiment Analysis](https://www.kdnuggets.com/2022/12/collect-data-customer-sentiment-analysis.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何收集客户情感分析的数据](https://www.kdnuggets.com/2022/12/collect-data-customer-sentiment-analysis.html)'
 - en: '[Sentiment Analysis on Encrypted Data with Homomorphic Encryption](https://www.kdnuggets.com/2022/12/zama-sentiment-analysis-encrypted-data-homomorphic-encryption.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用同态加密对加密数据进行情感分析](https://www.kdnuggets.com/2022/12/zama-sentiment-analysis-encrypted-data-homomorphic-encryption.html)'
 - en: '[Sentiment Analysis in Python: Going Beyond Bag of Words](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的情感分析：超越词袋模型](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
 - en: '[How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Hugging Face Transformers 微调 BERT 进行情感分析](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
 - en: '[How to Successfully Deploy Data Science Projects](https://www.kdnuggets.com/2022/01/successfully-deploy-data-science-projects.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何成功部署数据科学项目](https://www.kdnuggets.com/2022/01/successfully-deploy-data-science-projects.html)'
