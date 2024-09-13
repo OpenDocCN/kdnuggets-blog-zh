@@ -1,80 +1,117 @@
 - en: Get a 2–6x Speed-up on Your Data Pre-processing with Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Python 对你的数据预处理进行 2–6 倍的加速
 - en: 原文：[https://www.kdnuggets.com/2018/10/get-speed-up-data-pre-processing-python.html](https://www.kdnuggets.com/2018/10/get-speed-up-data-pre-processing-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/10/get-speed-up-data-pre-processing-python.html](https://www.kdnuggets.com/2018/10/get-speed-up-data-pre-processing-python.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: Python is the go-to programming language for all things machine learning. It’s
     easy to use and has many fantastic libraries that make crunching data a breeze!
     But things get a big trickier when we’re dealing with lots of data….
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 是进行所有机器学习任务的首选编程语言。它易于使用，并且拥有许多出色的库，使得数据处理变得轻而易举！但当我们处理大量数据时，情况就会变得有些复杂……
 - en: These days, the term “big data” usually refers to a dataset that’s on the order
     of at least hundreds of thousands if not *millions* of data points! At such a
     scale, every little computation adds up and we need to keep efficiency in mind
     when coding each step of the pipeline. One critical step that is often overlooked
     when thinking about our machine learning system’s efficiency is the *pre-processing* stage,
     where we must apply some kind of operation to all of our data points.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 如今，“大数据”一词通常指的是至少有数十万甚至 *数百万* 数据点的数据集！在如此规模下，每一个小计算都会累积起来，我们需要在编写每一步骤的代码时保持效率。考虑到机器学习系统效率时，一个常常被忽视的关键步骤是
+    *预处理* 阶段，我们必须对所有数据点应用某种操作。
 - en: By default, Python programs execute as a single process using a single CPU.
     Most modern machines made for machine learning have *at least *2 CPU cores. That
     means, for the example of 2 CPU cores, that 50% or more of your computer’s processing
     power won’t be doing anything by default when you run your pre-processing! The
     situation gets even worse when you get to 4 cores (modern Intel i5) or 6cores
     (modern Intel i7).
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认情况下，Python 程序作为一个单一进程使用单个 CPU 执行。大多数现代机器用于机器学习时，*至少* 有 2 个 CPU 核心。这意味着，对于
+    2 个 CPU 核心的例子来说，当你运行预处理时，50% 或更多的计算机处理能力默认不会被使用！当你达到 4 核心（现代 Intel i5）或 6 核心（现代
+    Intel i7）时，情况会更糟。
 - en: But thankfully, there is a somewhat hidden feature in a built-in Python library
     that lets us take advantage of all of our CPU cores! Thanks to Python’s `concurrent.futures` module,
     it only takes 3 lines of code to turn a normal program into one that can process
     data in parallel across the CPU cores.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 但幸运的是，Python 标准库中有一个稍微隐蔽的功能，可以让我们利用所有的 CPU 核心！得益于 Python 的 `concurrent.futures`
+    模块，只需 3 行代码即可将普通程序转换为可以在 CPU 核心间并行处理数据的程序。
 - en: The standard approach
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 标准方法
 - en: Let’s take a simple example where we have a dataset of images in a single folder;
     maybe we even have thousands or millions of those images! For the sake of processing
     time we’ll use 1000 here. We would like to resize all images to size 600x600 before
     passing it to our deep neural network. This is what it would look like in some
     pretty standard Python code you would often see on GitHub.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们以一个简单的例子来说明，我们有一个文件夹中的图像数据集；也许我们甚至有成千上万或数百万张图像！为了处理时间，我们这里用 1000 张。我们希望将所有图像调整为
+    600x600 的大小，然后再传递给我们的深度神经网络。这就是在 GitHub 上你经常会看到的一些标准 Python 代码的样子。
 - en: 'This program follows a simple pattern you’ll often see in data processing scripts:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个程序遵循了你在数据处理脚本中经常会看到的简单模式：
 - en: You start with a list of files (or other data) that you want to process.
+  id: totrans-10
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 你从一份你想要处理的文件列表（或其他数据）开始。
 - en: You process each piece of data, one at a time, using a `for` loop and then running
     the pre-processing on each loop iteration
+  id: totrans-11
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 你使用 `for` 循环逐个处理每一条数据，然后在每次循环迭代中运行预处理
 - en: 'Let’s test this program on a folder with 1000 jpeg files and see how long it
     takes to run:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们来在一个包含 1000 个 jpeg 文件的文件夹上测试这个程序，看看运行需要多长时间：
 - en: '[PRE0]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: On my i7–8700k with 6 CPU cores, that gave me a run time of **7.9864 seconds**!
     It seems a bit slow for such a high-end CPU. Let’s see what we can do to speed
     things up.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我的 i7–8700k 六核 CPU 上，这给我带来了 **7.9864 秒** 的运行时间！对于这样一个高端 CPU 来说，这似乎有点慢。我们来看看如何加快速度。
 - en: The fast way
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速方法
 - en: To understand how we would want Python to process things in parallel, it helps
     to think intuitively about parallel processing itself. Let’s say we have to perform
     the same single task of hitting nails into a piece of wood and that we have 1000
@@ -83,198 +120,302 @@
     we would divide the bucket into 4 equal piles and then each person on the team
     would work on their own pile of nails. With this method, we would finish in only
     250 seconds!
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 要理解我们如何希望 Python 并行处理事务，直观地思考并行处理本身是有帮助的。假设我们要完成同一个单一任务——将钉子钉入一块木头，我们有 1000
+    个钉子。如果每个钉子需要 1 秒，那么一个人完成这个工作需要 1000 秒。但如果我们有 4 个人在团队中，我们可以将桶分成 4 份，每个人处理自己的一份钉子。使用这种方法，我们只需
+    250 秒就能完成工作！
 - en: 'We can have Python do something similar for us in our example here with the
     1000 images:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的例子中，我们可以让 Python 对 1000 张图片做类似的处理：
 - en: Split the list of jpg files into 4 smaller groups.
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将 jpg 文件列表分成 4 个较小的组。
 - en: Run 4 separate instances of the Python interpreter.
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 运行 4 个独立的 Python 解释器实例。
 - en: Have each instance of Python process one of the 4 smaller groups of data.
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 让每个 Python 实例处理 4 个较小的数据组之一。
 - en: Combine the results from the 4 processes to get the final list of results
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将 4 个进程的结果合并以获得最终的结果列表
 - en: The great part about all this is that Python handles all the hard work for us.
     We just tell it which function we want to run and how many instances of Python
     to use and it does all the rest! We only have to change **3 lines of code**.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 最棒的是，Python 为我们处理了所有的繁重工作。我们只需告诉它要运行哪个函数以及使用多少个 Python 实例，它就会完成剩下的工作！我们只需更改**3
+    行代码**。
 - en: 'From the above code:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 从上述代码：
 - en: '[PRE1]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'boots up as many Python processes as you have CPU cores, in my case 6\. The
     actually processing line is this one:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 启动与 CPU 核心数量相同的 Python 进程，在我的情况下是 6 个。实际的处理行是这一行：
 - en: '[PRE2]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The **executor.map() **takes as input the function you would like to run and
     a list where each element of the list is a **single input to our function**. Since
     we have 6 cores, we will be processing 6 items from that list at the same time!
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**executor.map()** 接受你希望运行的函数和一个列表作为输入，其中列表的每个元素都是**函数的单个输入**。由于我们有 6 个核心，我们将同时处理列表中的
+    6 个项目！'
 - en: 'If we again run our program using:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们再次使用以下方法运行程序：
 - en: '[PRE3]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: We get a run time of **1.14265 seconds**, a nearly x6 speed-up!
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们获得了**1.14265 秒**的运行时间，几乎是 x6 的加速！
 - en: '*Note: There is some overhead in spawning more Python processes and shuffling
     data around between them, so you won’t always get this much of a speed improvement.
     But overall your speed-up will usually be quite significant*'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '*注意：启动更多 Python 进程并在它们之间传输数据会有一定的开销，因此你不会总是获得如此大的速度提升。但总体而言，你的加速通常会非常显著*'
 - en: Is it always super fast?
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 它总是超级快速的吗？
 - en: Using Python parallel pools is a great solution when you have a list of data
     to process and you are performing a similar computation on each data point. But,
     it’s not always going to be the perfect solution. The data processed by parallel
     pools won’t be processed in any predictable order. If you need the result from
     the processing to be in a specific order, then this method probably isn’t right
     for you.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Python 并行池是处理数据列表并对每个数据点执行类似计算的绝佳解决方案。但这并不总是完美的解决方案。通过并行池处理的数据不会以任何可预测的顺序处理。如果你需要处理结果按特定顺序排列，那么这个方法可能不适合你。
 - en: 'The data you are processing also needs to be a type that Python knows how to
     “pickle”. Luckily, these are quite common. From the official Python documentation:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 你处理的数据也需要是 Python 知道如何“序列化”的类型。幸运的是，这些类型是相当常见的。来自官方 Python 文档：
 - en: '`None`, `True`, and `False`'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`None`、`True` 和 `False`'
 - en: integers, floating point numbers, complex numbers
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 整数、浮点数、复数
 - en: strings, bytes, bytearrays
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 字符串、字节、字节数组
 - en: tuples, lists, sets, and dictionaries containing only picklable objects
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 包含仅可序列化对象的元组、列表、集合和字典
 - en: functions defined at the top level of a module (using `[def](https://docs.python.org/3/reference/compound_stmts.html#def)`,
     not `[lambda](https://docs.python.org/3/reference/expressions.html#lambda)`)
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在模块顶层定义的函数（使用`[def](https://docs.python.org/3/reference/compound_stmts.html#def)`，而不是`[lambda](https://docs.python.org/3/reference/expressions.html#lambda)`）
 - en: built-in functions defined at the top level of a module
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在模块顶层定义的内置函数
 - en: classes that are defined at the top level of a module
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 定义在模块顶层的类
 - en: instances of such classes whose `[__dict__](https://docs.python.org/3/library/stdtypes.html#object.__dict__)` or
     the result of calling `[__getstate__()](https://docs.python.org/3/library/pickle.html#object.__getstate__)` is
     picklable (see section [Pickling Class Instances](https://docs.python.org/3/library/pickle.html#pickle-inst) for
     details).
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 类的实例，其`[__dict__](https://docs.python.org/3/library/stdtypes.html#object.__dict__)`或调用`[__getstate__()](https://docs.python.org/3/library/pickle.html#object.__getstate__)`的结果是可序列化的（有关详细信息，请参见[序列化类实例](https://docs.python.org/3/library/pickle.html#pickle-inst)部分）。
 - en: Like to read about nerd stuff?
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 喜欢阅读关于技术的内容吗？
 - en: Follow me on [twitter](https://twitter.com/GeorgeSeif94) where I post all about
     the latest and greatest AI, Technology, and Science!
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[twitter](https://twitter.com/GeorgeSeif94)上关注我，了解最新最酷的AI、技术和科学！
 - en: '**Bio: [George Seif](https://towardsdatascience.com/@george.seif94)** is a
     Certified Nerd and AI / Machine Learning Engineer.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [George Seif](https://towardsdatascience.com/@george.seif94)** 是一名认证技术专家和AI/机器学习工程师。'
 - en: '[Original](https://towardsdatascience.com/heres-how-you-can-get-a-2-6x-speed-up-on-your-data-pre-processing-with-python-847887e63be5).
     Reposted with permission.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/heres-how-you-can-get-a-2-6x-speed-up-on-your-data-pre-processing-with-python-847887e63be5).
+    经授权转载。'
 - en: '**Related:**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[5 “Clean Code” Tips That Will Dramatically Improve Your Productivity](/2018/10/5-clean-code-tips-dramatically-improve-productivity.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5个“干净代码”技巧将显著提升你的生产力](/2018/10/5-clean-code-tips-dramatically-improve-productivity.html)'
 - en: '[The 5 Clustering Algorithms Data Scientists Need to Know](/2018/06/5-clustering-algorithms-data-scientists-need-know.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家需要了解的5种聚类算法](/2018/06/5-clustering-algorithms-data-scientists-need-know.html)'
 - en: '[Selecting the Best Machine Learning Algorithm for Your Regression Problem](/2018/08/selecting-best-machine-learning-algorithm-regression-problem.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为你的回归问题选择最佳机器学习算法](/2018/08/selecting-best-machine-learning-algorithm-regression-problem.html)'
 - en: '* * *'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-52
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Easy Guide To Data Preprocessing In Python](https://www.kdnuggets.com/2020/07/easy-guide-data-preprocessing-python.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python数据预处理简单指南](https://www.kdnuggets.com/2020/07/easy-guide-data-preprocessing-python.html)'
 - en: '[Learn Data Cleaning and Preprocessing for Data Science with This Free eBook](https://www.kdnuggets.com/2023/08/learn-data-cleaning-preprocessing-data-science-free-ebook.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过这本免费电子书学习数据清理和预处理以应用于数据科学](https://www.kdnuggets.com/2023/08/learn-data-cleaning-preprocessing-data-science-free-ebook.html)'
 - en: '[7 Steps to Mastering Data Cleaning and Preprocessing Techniques](https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握数据清理和预处理技术的7个步骤](https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html)'
 - en: '[Harnessing ChatGPT for Automated Data Cleaning and Preprocessing](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用ChatGPT进行自动化数据清理和预处理](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)'
 - en: '[Cleaning and Preprocessing Text Data in Pandas for NLP Tasks](https://www.kdnuggets.com/cleaning-and-preprocessing-text-data-in-pandas-for-nlp-tasks)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在Pandas中清理和预处理文本数据以进行NLP任务](https://www.kdnuggets.com/cleaning-and-preprocessing-text-data-in-pandas-for-nlp-tasks)'
 - en: '[How to Get Your First Job in Data Science without Any Work Experience](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在没有工作经验的情况下获得第一份数据科学工作](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
