@@ -1,18 +1,26 @@
 - en: Feature Reduction using Genetic Algorithm with Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用Python进行遗传算法的特征缩减
 - en: 原文：[https://www.kdnuggets.com/2019/03/feature-reduction-genetic-algorithm-python.html](https://www.kdnuggets.com/2019/03/feature-reduction-genetic-algorithm-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/03/feature-reduction-genetic-algorithm-python.html](https://www.kdnuggets.com/2019/03/feature-reduction-genetic-algorithm-python.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/03/feature-reduction-genetic-algorithm-python.html?page=2#comments)![practical-computer-vision-applications-deep-learning](../Images/1bf50c2f23d12814ce8634a5b1cee1e1.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/03/feature-reduction-genetic-algorithm-python.html?page=2#comments)![实际计算机视觉应用-深度学习](../Images/1bf50c2f23d12814ce8634a5b1cee1e1.png)'
 - en: Introduction
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: Using the raw data for training a machine learning algorithm might not be the
     suitable choice in some situations. The algorithm, when trained by raw data, has
     to do feature mining by itself for detecting the different groups from each other.
@@ -20,40 +28,59 @@
     For small datasets, it is preferred that the data scientist do the feature mining
     step on its own and just tell the machine learning algorithm which feature set
     to use.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在某些情况下，使用原始数据训练机器学习算法可能不是最合适的选择。算法在用原始数据训练时，必须自己进行特征挖掘以检测不同的群体。但这需要大量的数据来自动进行特征挖掘。对于小数据集，建议数据科学家自己进行特征挖掘，并告知机器学习算法使用哪个特征集。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: The used feature set has to be representative of the data samples and thus we
     have to take care of selecting the best features. The data scientist suggests
     using some types of features that seems helpful in representing the data samples
     based on the previous experience. Some features might prove their robustness in
     representing the samples and others not.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用的特征集必须能够代表数据样本，因此我们必须注意选择最佳特征。数据科学家建议使用一些在过去经验中看起来对表示数据样本有帮助的特征。一些特征可能会在表示样本时证明其稳健性，而其他特征则不然。
 - en: There might be some types of feature that might affect the results of the trained
     model wither by reducing the accuracy for classification problems or increasing
     the error for regression problems. For example, there might be some noise elements
@@ -62,8 +89,10 @@
     for the other. In order to remove such types of elements, there are 2 helpful
     steps which are **feature selection** and **reduction**. This tutorial focuses
     on **feature reduction**.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 某些类型的特征可能会影响训练模型的结果，可能会降低分类问题的准确性或增加回归问题的错误。例如，特征向量中可能存在一些噪声元素，因此应将其去除。特征向量中可能还包括两个或多个相关的元素。只使用一个元素将替代其他元素。为了去除这些类型的元素，有两个有用的步骤，即**特征选择**和**特征缩减**。本教程重点讲解**特征缩减**。
 - en: Assuming there are 3 features F1, F2, and F3 and each one has 3 feature elements.
     Thus, the feature vector length is 3x3=9\. Feature selection just selects specific
     types of features and excludes the others. For example, just select F1 and F3
@@ -72,35 +101,53 @@
     this step might remove the **first** and **third** elements from F3 while keeping
     the second element. Thus, the feature vector length is reduced from 9 to just
     7.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设有 3 个特征 F1、F2 和 F3，每个特征有 3 个元素。于是，特征向量的长度为 3x3=9。特征选择只选择特定类型的特征，并排除其他特征。例如，只选择
+    F1 和 F3 并移除 F2。特征向量长度现在为 6，而不是 9。在 **特征减少** 中，可能会排除每个特征的特定元素。例如，这一步可能会移除 F3 中的
+    **第一个** 和 **第三个** 元素，同时保留第二个元素。因此，特征向量的长度从 9 缩减到 7。
 - en: Before starting in this tutorial, it is worth mentioning that it is an extension
     to a previously published 2 tutorials in my LinkedIn profile.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开始本教程之前，值得提及的是，这是对我在 LinkedIn 个人资料中发布的 2 个教程的扩展。
 - en: 'The first tutorial is titled "**Artificial Neural Network Implementation using
     NumPy and Classification of the Fruits360 Image Dataset**". It starts by extracting
     a feature vector of length 360 from 4 classes of the Fruits360 dataset. Then,
     it builds an artificial neural network (ANN) using NumPy from scratch in order
     to classify the dataset. It is available here [https://www.linkedin.com/pulse/artificial-neural-network-implementation-using-numpy-fruits360-gad](https://www.linkedin.com/pulse/artificial-neural-network-implementation-using-numpy-fruits360-gad).
     Its GitHub project is available here: [https://github.com/ahmedfgad/NumPyANN](https://github.com/ahmedfgad/NumPyANN).'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个教程的标题是 "**使用 NumPy 实现人工神经网络并分类 Fruits360 图像数据集**"。它从 Fruits360 数据集中的 4 类提取一个长度为
+    360 的特征向量。然后，从头开始使用 NumPy 构建一个人工神经网络（ANN）以对数据集进行分类。可以在这里找到：[https://www.linkedin.com/pulse/artificial-neural-network-implementation-using-numpy-fruits360-gad](https://www.linkedin.com/pulse/artificial-neural-network-implementation-using-numpy-fruits360-gad)。其
+    GitHub 项目在这里：[https://github.com/ahmedfgad/NumPyANN](https://github.com/ahmedfgad/NumPyANN)。
 - en: 'The second tutorial is titled "**Artificial Neural Networks Optimization using
     Genetic Algorithm**". It builds and uses the GA for optimizing the ANN parameters
     in order to increase the classification accuracy. It is available here [https://www.linkedin.com/pulse/artificial-neural-networks-optimization-using-genetic-ahmed-gad](https://www.linkedin.com/pulse/artificial-neural-networks-optimization-using-genetic-ahmed-gad).
     Its GitHub project is also available here: [https://github.com/ahmedfgad/NeuralGenetic](https://github.com/ahmedfgad/NeuralGenetic).'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 第二个教程的标题是 "**使用遗传算法优化人工神经网络**"。它构建并使用 GA 来优化 ANN 参数，以提高分类准确性。可以在这里找到：[https://www.linkedin.com/pulse/artificial-neural-networks-optimization-using-genetic-ahmed-gad](https://www.linkedin.com/pulse/artificial-neural-networks-optimization-using-genetic-ahmed-gad)。其
+    GitHub 项目也可以在这里找到：[https://github.com/ahmedfgad/NeuralGenetic](https://github.com/ahmedfgad/NeuralGenetic)。
 - en: This tutorial discusses how to use the genetic algorithm (GA) for reducing the
     feature vector extracted from the Fruits360 dataset of length 360\. This tutorial
     starts by discussing the steps to be followed. After that, the steps are implemented
     in Python mainly using NumPy and Sklearn.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程讨论了如何使用遗传算法（GA）来减少从 Fruits360 数据集提取的特征向量，原始长度为 360。教程开始时讨论了需要遵循的步骤。之后，这些步骤主要通过
+    NumPy 和 Sklearn 在 Python 中实现。
 - en: 'The implementation of this tutorial is available in my GitHub page here: [https://github.com/ahmedfgad/FeatureReductionGenetic](https://github.com/ahmedfgad/FeatureReductionGenetic)'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程的实现可以在我的 GitHub 页面找到：[https://github.com/ahmedfgad/FeatureReductionGenetic](https://github.com/ahmedfgad/FeatureReductionGenetic)
 - en: GA starts from an initial population which consists of a number of chromosomes
     (i.e. solutions) where each chromosome has a sequence of genes. Using a fitness
     function, the GA selects the best solutions as parents for creating a new population.
@@ -109,63 +156,77 @@
     a given problem, we have to determine the representation of the gene, the suitable
     fitness function, and how the crossover and the mutation are applied. Let’s see
     how things work.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: More Information about GA
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'You can read more about GA from the following resources I prepared:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: Introduction to Optimization with Genetic Algorithm
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/](https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/)'
+  id: totrans-23
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[/2018/03/introduction-optimization-with-genetic-algorithm.html](/2018/03/introduction-optimization-with-genetic-algorithm.html)'
+  id: totrans-24
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b](https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b)'
+  id: totrans-25
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Genetic Algorithm (GA) Optimization - Step-by-Step Example
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[https://www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example](https://www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example)'
+  id: totrans-27
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: Genetic Algorithm Implementation in Python
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/](https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/)'
+  id: totrans-29
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[/2018/07/genetic-algorithm-implementation-python.html](/2018/07/genetic-algorithm-implementation-python.html)'
+  id: totrans-30
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[https://towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6](https://towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6)'
+  id: totrans-31
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[https://github.com/ahmedfgad/GeneticAlgorithmPython](https://github.com/ahmedfgad/GeneticAlgorithmPython)'
+  id: totrans-32
   prefs:
   - PREF_IND
   - PREF_UL
@@ -173,9 +234,11 @@
 - en: I also wrote a book in 2018 that covers GA in one of its chapters. The book
     is titled "**Practical Computer Vision Applications Using Deep Learning with CNNs**"
     which is available here at Springer [https://www.springer.com/us/book/9781484241660](https://www.springer.com/us/book/9781484241660).
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: Chromosome Representation
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -188,8 +251,10 @@
     (i.e. all feature elements). Because there are 360 feature elements, then there
     will be 360 genes. A good piece of information is now clear that the length of
     the chromosome is 360.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在GA中，基因是构成染色体的基本单元。首先，我们需要确定染色体中包含哪些基因。为此，要考虑所有可能影响结果的属性都应视为基因。因为我们问题的目标是选择最佳的特征元素集合，因此每个特征元素的选择与否都可能影响结果。因此，每个特征元素被视为一个基因。染色体将由所有基因（即所有特征元素）组成。由于有360个特征元素，所以将有360个基因。现在清楚的一点是，染色体的长度为360。
 - en: After determining what are the selected genes, next is to determine the gene
     representation. There are different representations such as decimal, binary, float,
     string, and others. Our target is to know whether the gene (i.e. feature element)
@@ -199,30 +264,40 @@
     that the gene is selected and another when it is not selected. Thus, the binary
     representation is the best choice. When the gene value is 1, then it will be selected
     in the reduced feature set. When 0, then it will be neglected.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 确定了哪些基因被选择后，接下来是确定基因的表示方式。有不同的表示方法，如十进制、二进制、浮点数、字符串等。我们的目标是知道基因（即特征元素）是否在简化特征集中被选择。因此，赋值给基因的值应能反映它是否被选择。根据这个描述，很明显每个基因有2种可能的值。一个值表示基因被选择，另一个值表示未被选择。因此，二进制表示是最佳选择。当基因值为1时，它将在简化特征集中被选择。当值为0时，则会被忽略。
 - en: As a summary, the chromosome will consist of 360 genes represented in binary.
     There is a one-to-one mapping between the feature vector and the chromosome according
     to the next figure. That is the first gene in the chromosome is linked to the
     first element in the feature vector. When the value for that gene is 1, this means
     the first element in the feature vector is selected.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结来说，染色体将由360个基因组成，基因以二进制表示。特征向量和染色体之间存在一对一的映射关系，如下图所示。也就是说，染色体中的第一个基因与特征向量中的第一个元素相关联。当该基因的值为1时，这意味着特征向量中的第一个元素被选择了。
 - en: '![chromosome-representation](../Images/db95ac7af78596be8d5db825557827dc.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![chromosome-representation](../Images/db95ac7af78596be8d5db825557827dc.png)'
 - en: Fitness Function
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 适应度函数
 - en: By getting how to create the chromosome, the initial population can be initialized
     randomly easily is NumPy. After being initialized, the parents are selected. GA
     is based on **Darwin**’s theory "**Survival of the Fittest**". That is the best
     solutions in the current population are selected for mating in order to produce
     better solutions. By keeping the good solutions and killing the bad solutions,
     we can reach an optimal or semi-optimal solution.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过了解如何创建染色体，初始种群可以通过NumPy随机初始化。初始化后，选择父代。GA基于**达尔文**的理论“**适者生存**”。即当前种群中的最佳解决方案被选中交配，以产生更好的解决方案。通过保留好的解决方案和淘汰不好的解决方案，我们可以达到最优或次优解。
 - en: The criterion used for selecting the parents is the fitness value associated
     with each solution (i.e. chromosome). The higher the fitness value the better
     the solution. The fitness value is calculated using a fitness function. So, what
@@ -232,29 +307,39 @@
     accuracy**. As a result, the fitness function will return a number that specifies
     the classification accuracy for each solution. The higher the accuracy the better
     the solution.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 选择父代的标准是每个解决方案（即染色体）相关联的适应度值。适应度值越高，解决方案越好。适应度值是通过适应度函数计算的。那么，什么是我们问题中最佳的函数？我们问题的目标是创建一个能提高分类准确率的简化特征向量。因此，判断解决方案好坏的标准是**分类准确率**。因此，适应度函数将返回一个数值，指定每个解决方案的分类准确率。准确率越高，解决方案越好。
 - en: In order to return a classification accuracy, there must be a machine learning
     model to get trained by the feature elements returned by each solution. We will
     use the support vector classifier (SVC) for this case.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了返回分类准确性，必须有一个机器学习模型，通过每个解返回的特征元素进行训练。我们将使用支持向量分类器（SVC）来完成这项工作。
 - en: The dataset is divided into train and test samples. Based on the train data,
     the SVC will be trained using the selected feature elements by each solution in
     the population. After being trained, it will be tested according to the test data.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集被分为训练样本和测试样本。基于训练数据，SVC将使用种群中每个解选择的特征元素进行训练。训练完成后，将根据测试数据进行测试。
 - en: Based on the fitness value of each solution, we can select the best of them
     as parents. These parents are placed together in the mating pool for generating
     offspring which will be the members of the new population of the next generation.
     Such offspring are created by applying the crossover and mutation operations over
     the selected parents. Let’s configure such operations as discussed next.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于每个解的适应度值，我们可以选择其中最好的解作为父代。这些父代将被放在交配池中，以生成下一代新种群的成员。这些后代是通过对选择的父代应用交叉和变异操作来生成的。让我们接下来配置这些操作。
 - en: Crossover and Mutation
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 交叉和变异
 - en: Based on the fitness function, we can filter the solutions in the current population
     for selecting the best of them which are called the parents. GA assumes that mating
     2 good solutions will produce a third better solution. Mating means exchanging
@@ -263,8 +348,10 @@
     uses the single-point crossover in which a point divides the chromosome. Genes
     before the point are taken from one solution and genes after the point are taken
     from the other solution.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据适应度函数，我们可以筛选当前种群中的解，选择其中最优的解作为父代。遗传算法假设将两个优秀的解交配会产生一个更好的解。交配意味着交换两个父代中的一些基因。这些基因通过交叉操作进行交换。交叉操作有不同的应用方式。本教程使用的是单点交叉，其中一个点将染色体分开。点之前的基因取自一个解，点之后的基因取自另一个解。
 - en: By just applying crossover, all genes are taken from the previous parents. There
     is no new gene introduced in the new offspring. If there is a bad gene in all
     parents, then this gene will be transferred to the offspring. For such a reason,
@@ -272,83 +359,117 @@
     In the binary representation of the genes, the mutation is applied by flipping
     the values of some randomly selected genes. If the gene value is 1, then it will
     be 0 and vice versa.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅通过应用交叉，所有基因都来自之前的父代。新后代中没有引入新的基因。如果所有父代中存在不良基因，那么这个基因会被转移到后代中。为了引入新基因，应用变异操作。在基因的二进制表示中，变异通过翻转一些随机选择的基因值来实现。如果基因值为1，则变为0，反之亦然。
 - en: After generating the offspring, we can create the new population of the next
     generation. This population consists of the previous parents in addition to the
     offspring.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 在生成后代之后，我们可以创建下一代的新种群。这个种群包括之前的父代以及后代。
 - en: At this point, all steps are discussed. Next is to implement them in Python.
     Note that I wrote a previous tutorial titled "**Genetic Algorithm Implementation
     in Python**" for implementing the GA in Python which I will just modify its code
     for working with our problem. It is better to read it.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前，所有步骤都已经讨论过。接下来是在Python中实现这些步骤。请注意，我之前写了一篇题为**《Python中的遗传算法实现》**的教程，介绍了如何在Python中实现遗传算法，我将只对其代码进行修改以适应我们的任务。建议阅读一下。
 - en: Python Implementation
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Python 实现
 - en: The project is organized into 2 files. One file is named "GA.py" which holds
     the implementation of the GA steps as functions. Another file, which is the main
     file, just imports this file and calls its function within a loop that iterates
     through the generations.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 项目组织成两个文件。一个文件名为“GA.py”，其中包含遗传算法步骤的实现函数。另一个文件是主文件，仅导入这个文件并在循环中调用其函数，循环遍历各代。
 - en: The main file starts by reading the features extracted from the Fruits360 dataset
     according to the code below. The features are returned into the **data_inputs**
     variable. Details about extracting these features are available in the 2 tutorials
     referred to at the beginning of the tutorial. The file also reads the class labels
     associated with the samples in the variable **data_outputs**.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 主文件开始时会读取从Fruits360数据集中提取的特征，代码如下。这些特征返回到**data_inputs**变量中。有关提取这些特征的详细信息，请参阅教程开始时提到的两个教程。该文件还读取与样本关联的类别标签，存储在**data_outputs**变量中。
 - en: Some samples are selected for training with their indices stored in the **train_indices**
     variable. Similarly, the test samples indices are stored in the **test_indices**
     variable.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些样本被选中进行训练，它们的索引存储在**train_indices**变量中。同样，测试样本的索引存储在**test_indices**变量中。
 - en: '[PRE0]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: It initializes all parameters of GA. This includes the number of solutions per
     population which is set to 8 according to the **sol_per_pop** variable, number
     of offspring which is set to 4 in the **num_parents_mating** variable, and number
     of mutations which is set to 3 in the **num_mutations** variable. After that,
     it creates the initial population randomly in a variable called **new_population**.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 它初始化了遗传算法的所有参数。这包括每代人口中的解决方案数量，根据**sol_per_pop**变量设置为8，后代数量，根据**num_parents_mating**变量设置为4，以及突变数量，根据**num_mutations**变量设置为3。之后，它在名为**new_population**的变量中随机创建初始种群。
 - en: There is an empty list named **best_outputs** which holds the best result after
     each generation. This helps to visualize the progress of the GA after finishing
     all generations. The number of generations is set to 100 in the **num_generations**
     variable. Note that you can change all of these parameters which might give better
     results.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 有一个名为**best_outputs**的空列表，用于保存每一代后的最佳结果。这有助于在完成所有代之后可视化遗传算法的进展。**num_generations**变量将代数设置为100。请注意，你可以更改这些参数，这可能会得到更好的结果。
 - en: More On This Topic
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Genetic Algorithm Key Terms, Explained](https://www.kdnuggets.com/2018/04/genetic-algorithm-key-terms-explained.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[遗传算法关键术语解析](https://www.kdnuggets.com/2018/04/genetic-algorithm-key-terms-explained.html)'
 - en: '[Optimizing Genes with a Genetic Algorithm](https://www.kdnuggets.com/2022/04/optimizing-genes-genetic-algorithm.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用遗传算法优化基因](https://www.kdnuggets.com/2022/04/optimizing-genes-genetic-algorithm.html)'
 - en: '[Dimensionality Reduction Techniques in Data Science](https://www.kdnuggets.com/2022/09/dimensionality-reduction-techniques-data-science.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中的降维技术](https://www.kdnuggets.com/2022/09/dimensionality-reduction-techniques-data-science.html)'
 - en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征存储峰会 2022：关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
 - en: '[Genetic Programming in Python: The Knapsack Problem](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python中的遗传编程：背包问题](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)'
 - en: '[Understanding and Implementing Genetic Algorithms in Python](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解和实现Python中的遗传算法](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)'
