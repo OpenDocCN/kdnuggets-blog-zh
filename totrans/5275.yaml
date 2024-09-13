@@ -1,73 +1,112 @@
 - en: Doing Statistics with SQL
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 SQL 进行统计分析
 - en: 原文：[https://www.kdnuggets.com/2016/08/doing-statistics-sql.html](https://www.kdnuggets.com/2016/08/doing-statistics-sql.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/08/doing-statistics-sql.html](https://www.kdnuggets.com/2016/08/doing-statistics-sql.html)
 - en: '**By Jean-Nicholas Hould, JeanNicholasHould.com**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Jean-Nicholas Hould，JeanNicholasHould.com**'
 - en: I recently wrote an article on why you should [learn SQL for data analysis](http://www.jeannicholashould.com/sql-for-data-analysis.html).
     I received lots of feedback from this post. People wanted to see some concrete
     examples of using SQL for data analysis. I decided to apply some of my own advice
     and load up one of these [awesome datasets](https://github.com/caesar0301/awesome-public-datasets) to
     do some basic data exploration queries on it.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 我最近写了一篇关于为什么你应该 [学习 SQL 进行数据分析](http://www.jeannicholashould.com/sql-for-data-analysis.html)
+    的文章。我收到了很多反馈，人们希望看到一些使用 SQL 进行数据分析的具体例子。我决定应用一些我自己的建议，加载其中一个 [超赞的数据集](https://github.com/caesar0301/awesome-public-datasets)
+    进行一些基本的数据探索查询。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![SQL](../Images/7b90faf67d8c5a9b93c5838add6004a0.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![SQL](../Images/7b90faf67d8c5a9b93c5838add6004a0.png)'
 - en: For this post, I am using an open data set. The million songs data sets is a
     *«freely-available collection of audio features and metadata for a million contemporary
     popular music tracks»*.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这篇文章，我使用了一个开放数据集。百万歌曲数据集是一个*“自由获取的现代流行音乐曲目音频特征和元数据的集合”*。
 - en: 'If you want to follow along, here are the steps:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想跟随，请按照以下步骤操作：
 - en: Download the Million Song Data Set. [I used the 10K songs subset](http://labrosa.ee.columbia.edu/millionsong/pages/getting-dataset#subset).
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 下载百万歌曲数据集。[我使用了 10K 歌曲子集](http://labrosa.ee.columbia.edu/millionsong/pages/getting-dataset#subset)。
 - en: Download a [SQLite Client](http://sqlitebrowser.org/)
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 下载一个 [SQLite 客户端](http://sqlitebrowser.org/)
 - en: Open `subset_track_metadata.db` file with SQLite and start exploring
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 SQLite 打开 `subset_track_metadata.db` 文件并开始探索
 - en: Why Descriptive Statistics?
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么使用描述性统计？
 - en: 'When I start the analysis of a new data set, I run some basic queries to get
     a sense of how the data is organized, how the values are distributed. I am trying
     to understand what I’m dealing with. For numerical data, I will often run some
@@ -75,131 +114,193 @@
     *median*, *mode*) and measure the level of variability of the data. Those measurements
     are generally a good start to data exploration. They will often lead to new questions
     that fuel my analysis.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我开始分析新的数据集时，我会运行一些基本查询以了解数据的组织方式和数值的分布情况。我试图理解我所处理的内容。对于数值数据，我通常会运行一些描述性统计：我会测量中心趋势（**均值**、**中位数**、**众数**）并测量数据的变异水平。这些测量通常是数据探索的良好起点，常常会引发新的问题，推动我的分析。
 - en: Central Tendency
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 中心趋势
 - en: '**Mean**'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**均值**'
 - en: The mean is the number you obtain when you sum up a given set of numbers and
     then divide this sum by the total number in the set. The mean is very sensible
     to outliers. It can be drastically affected by values that are much higher or
     lower compared to the rest of the data set.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 均值是将一组数字相加后除以该组总数得到的数字。均值对异常值非常敏感。它可能会被远高于或低于其余数据集的值严重影响。
 - en: '[PRE0]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '`CAST`: *Run-time data type conversion between compatible data types. In this
     case, I’m converting a float to an integer for rounding purpose.*'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`CAST`：*在兼容数据类型之间进行运行时数据类型转换。在这种情况下，我将浮点数转换为整数以进行四舍五入。*'
 - en: '`AVG`: *Aggregation function that returns the mean of the input expression
     value.*'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`AVG`：*聚合函数，返回输入表达式值的均值。*'
 - en: '`as avg_year`: *Temporarily renames a column heading - This is only for readbility
     purpose, to make the code more human-friendly. I will use this aliasing throughout
     the post.*'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`as avg_year`：*临时重命名列标题 - 仅用于提高可读性，使代码更具人性化。我将在整个帖子中使用这种别名。*'
 - en: '**Median**'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**中位数**'
 - en: The median is the number separating the higher half of a ordered data set from
     the lower half. The median is sometimes a better measure of a mid point because
     each data point is weighted equally.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 中位数是将有序数据集的上半部分与下半部分分开的数字。中位数有时是衡量中点的更好指标，因为每个数据点的权重相等。
 - en: '[PRE1]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '`ORDER BY`: *Sorts the resulting data set by one or more column. The ordering
     can be ascending `ASC` (default) or descending `DESC`.*'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`ORDER BY`：*按一列或多列对结果数据集进行排序。排序可以是升序`ASC`（默认）或降序`DESC`。*'
 - en: '`COUNT`: *Aggregation function that returns the # of rows that matches a criteria.*'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`COUNT`：*聚合函数，返回符合条件的行数。*'
 - en: '`LIMIT`: *Specifies the maximum number of rows that can be returned from the
     resulting data set.*'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`LIMIT`：*指定从结果数据集中返回的最大行数。*'
 - en: '`OFFSET`: *Skip X rows before beginning to return rows. In this specific example,
     we are skipping 5000 rows (which is equal to the total row count`COUNT(*)` divided
     by 2).*'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`OFFSET`：*在开始返回行之前跳过X行。在这个特定示例中，我们跳过了5000行（相当于总行数`COUNT(*)`除以2）。*'
 - en: '**Mode**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**众数**'
 - en: The mode is the value that appears most often in a set of data.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 众数是数据集中出现频率最高的值。
 - en: '[PRE2]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '`GROUP BY`: *Used with aggregation functions such as `COUNT`, `AVG`, etc. Groups
     the resulting data set by one or more column.*'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`GROUP BY`：*与聚合函数如`COUNT`、`AVG`等一起使用。按一列或多列对结果数据集进行分组。*'
 - en: Variability
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 变异性
 - en: '**Min/Max Values**'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**最小/最大值**'
 - en: Minimum/Maximum value in a data set.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集中的最小/最大值。
 - en: '[PRE3]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '`MIN`: *Aggregation function that returns the smallest value in a data set.*'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`MIN`：*聚合函数，返回数据集中最小的值。*'
 - en: '`MAX`: *Aggregation function that returns the largest value in a data set.*'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`MAX`：*聚合函数，返回数据集中最大的值。*'
 - en: '**Distribution of songs per year**'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**每年的歌曲分布**'
 - en: Count of songs released in each years
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 每年发行歌曲的数量
 - en: '[PRE4]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Next Steps
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 下一步
 - en: The SQL queries in this post are fairly simple. They are not the result of technical
     gymmstastics. They are just simple measurements helping us understand the data
     set and that’s what’s great about them.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇文章中的SQL查询相对简单。它们不是技术性技巧的结果。它们只是帮助我们理解数据集的简单度量，这正是它们的优点。
 - en: In this specific data set, we noticed that for more than half of the data set,
     the year of the song is equal to `0`. This means we are either looking at a data
     set of very old songs or that we are dealing with missing values. The latter is
     more realistic. If we filter out songs from year `0`, our data makes more sense.
     The songs are ranging from `1926` to `2010` and the median is the year `2001`.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个特定的数据集中，我们注意到超过一半的数据集中，歌曲的年份为`0`。这意味着我们要么在查看非常旧的歌曲数据集，要么在处理缺失值。后者更为现实。如果我们过滤掉年份为`0`的歌曲，我们的数据就更有意义了。歌曲的年份范围从`1926`到`2010`，中位数是`2001`年。
 - en: 'With the data partially cleaned up, we can start exploring other columns of
     our data set and asking ourselves more questions: How many unique artists composed
     songs per year? How has that evolved through time? Are songs shorter nowadays
@@ -207,56 +308,85 @@
     reused as our queries and filters get more and more complex. By applying the simple
     descriptive statistics measurements, we can have a good grasps of the data and
     we can keep exploring deeper and deeper.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据部分清理后，我们可以开始探索数据集中的其他列，并提出更多问题：每年有多少独特的艺术家创作歌曲？这种情况随时间的变化如何？现在的歌曲是否比以前短？这些简单的度量指标的优点在于，它们可以在查询和过滤器变得越来越复杂时重复使用。通过应用简单的描述性统计度量，我们可以很好地掌握数据，并不断深入探索。
 - en: '**Bio: Jean-Nicholas Hould** is a [Data Scientist from Montreal, Canada](http://jeannicholashould.com/?utm_source=kdnugget).
     Author at JeanNicholasHould.com.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：Jean-Nicholas Hould** 是来自 [加拿大蒙特利尔的数据科学家](http://jeannicholashould.com/?utm_source=kdnugget)。作者，见
+    JeanNicholasHould.com。'
 - en: '[Original](http://www.jeannicholashould.com/descriptive-statistics-in-sql.html).
     Reposted with permission.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](http://www.jeannicholashould.com/descriptive-statistics-in-sql.html)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[7 Steps to Mastering SQL for Data Science](/2016/06/seven-steps-mastering-sql-data-science.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握数据科学SQL的7个步骤](/2016/06/seven-steps-mastering-sql-data-science.html)'
 - en: '[Data Science Statistics 101](/2016/07/data-science-statistics-101.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学统计学101](/2016/07/data-science-statistics-101.html)'
 - en: '[Build vs Buy – Analytics Dashboards](/2016/07/build-buy-analytics-dashboards.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建与购买 – 分析仪表盘](/2016/07/build-buy-analytics-dashboards.html)'
 - en: More On This Topic
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Stop Doing this on ChatGPT and Get Ahead of the 99% of its Users](https://www.kdnuggets.com/2023/05/stop-chatgpt-get-ahead-99-users.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止在 ChatGPT 上做这些事情，超越 99% 的用户](https://www.kdnuggets.com/2023/05/stop-chatgpt-get-ahead-99-users.html)'
 - en: '[Data Science Minimum: 10 Essential Skills You Need to Know to Start…](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学基础：你需要掌握的 10 个必备技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)'
 - en: '[What Is ChatGPT Doing and Why Does It Work?](https://www.kdnuggets.com/2023/04/chatgpt-work.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ChatGPT 是如何工作的，为什么它有效？](https://www.kdnuggets.com/2023/04/chatgpt-work.html)'
 - en: '[Phi-2: Small LMs that are Doing Big Things](https://www.kdnuggets.com/phi-2-small-lms-that-are-doing-big-things)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Phi-2：正在做大事的小型语言模型](https://www.kdnuggets.com/phi-2-small-lms-that-are-doing-big-things)'
 - en: '[Descriptive Statistics Key Terms, Explained](https://www.kdnuggets.com/2017/05/descriptive-statistics-key-terms-explained.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[描述性统计关键术语解释](https://www.kdnuggets.com/2017/05/descriptive-statistics-key-terms-explained.html)'
 - en: '[The 8 Basic Statistics Concepts for Data Science](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学的 8 个基本统计概念](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)'
