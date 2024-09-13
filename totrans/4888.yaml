@@ -1,201 +1,298 @@
 - en: 'Web Scraping Tutorial with Python: Tips and Tricks'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用Python进行网页抓取教程：技巧和窍门
 - en: 原文：[https://www.kdnuggets.com/2018/02/web-scraping-tutorial-python.html](https://www.kdnuggets.com/2018/02/web-scraping-tutorial-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/02/web-scraping-tutorial-python.html](https://www.kdnuggets.com/2018/02/web-scraping-tutorial-python.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Jekaterina Kokatjuhha](https://hackernoon.com/@k.kokatjuhha)**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Jekaterina Kokatjuhha](https://hackernoon.com/@k.kokatjuhha)提供**'
 - en: I was searching for flight tickets and noticed that ticket prices fluctuate
     during the day. I tried to find out when the best time to buy tickets is, but
     there was nothing on the Web that helped. I built a small program to automatically
     collect the data from the web — a so-called scraper. It extracted information
     for my specific flight destination on predetermined dates and notified me when
     the price got lower.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在寻找机票时注意到票价在一天内会波动。我试图找出买票的最佳时间，但在网上找不到有用的信息。我编写了一个小程序来自动收集网页数据——一个所谓的抓取器。它提取了我指定日期和航班目的地的信息，并在价格降低时通知我。
 - en: Web scraping is a technique used to extract data from websites through an automated
     process.
+  id: totrans-5
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 网页抓取是一种通过自动化过程从网站提取数据的技术。
 - en: I learned a lot from this experience with Web scraping, and I want to share
     it.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我从这次网页抓取的经历中学到了很多东西，并且我想分享一下。
 - en: This post is intended for people who are interested to know about the common
     design patterns, pitfalls and rules related to the web scraping. The article presents
     several **use cases** and a collection of typical **problems**, such as how **not
     to be detected**, **dos** and **don’ts**, and how to **speed up (parallelization)**
     your scraper.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文旨在介绍与网页抓取相关的常见设计模式、陷阱和规则。文章呈现了几个**用例**和一系列典型的**问题**，例如如何**避免被检测**、**注意事项**和**禁忌事项**，以及如何**加速（并行化）**你的抓取器。
 - en: Everything will be accompanied by python snippets, so that you can start straight
     away. This document will also go through several useful python packages.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 一切都将配有Python代码片段，以便你可以立即开始。本文档还将介绍几个有用的Python包。
 - en: '**Use Cases**'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '**用例**'
 - en: 'There are many reasons and use cases why you would want to scrape data. Let
     me list some of them:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 有很多原因和用例说明为什么你可能想要抓取数据。让我列举一些：
 - en: scrape pages of a e-retailer to spot if some of the clothes you want to buy
     got discounted
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 抓取电子零售商的页面，以查看你想购买的某些衣物是否有折扣
 - en: compare prices of several clothes brands by scraping their pages
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过抓取页面比较多个服装品牌的价格
 - en: price of the flight tickets can vary during the day. One could crawl the travel
     website and get alarmed once the price was lowered
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 机票价格在一天内可能会有所变化。可以爬取旅行网站，并在价格降低时收到警报。
 - en: analyze the action websites to answer the question if starting bid should be
     low or high to attract more bidders or if the longer auction correlates with a
     higher end bid
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 分析拍卖网站以回答启动竞标价应该低还是高，以吸引更多竞标者，或更长的拍卖是否与更高的最终竞标价相关
 - en: '**Tutorial**'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '**教程**'
 - en: 'Structure of the tutorial:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 教程结构：
 - en: Available packages
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 可用的包
 - en: Basic code
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 基本代码
 - en: Pitfalls
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 陷阱
 - en: Dos and dont’s
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 注意事项
 - en: Speed up — parallelization
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 加速——并行化
 - en: 'Before we start: **Be NICE to the servers; you DON’T want to crash a website.**'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们开始之前：**对服务器要友好；你不想让网站崩溃。**
 - en: '**1\. Available packages and tools**'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1\. 可用的包和工具**'
 - en: There is no universal solution for web scraping because the way data is stored
     on each website is usually specific to that site. In fact, if you want to scrape
     the data, you need to understand the website’s structure and either build your
     own solution or use a highly customizable one.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为每个网站上的数据存储方式通常是特定于该站点的，所以没有一种通用的网页抓取解决方案。事实上，如果你想抓取数据，你需要了解网站的结构，并自行构建解决方案或使用高度可定制的解决方案。
 - en: 'However, you don’t need to reinvent the wheel: there are many packages that
     do the most work for you. Depending on your programming skills and your intended
     use case, you might find different packages more or less useful.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，你不需要重新发明轮子：有许多包可以为你完成大部分工作。根据你的编程技能和预期用途，你可能会发现不同的包有不同的适用性。
 - en: '**1.1 Inspect option**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1.1 检查选项**'
 - en: Most of the time you will finding yourself inspecting the [HTML](https://www.w3schools.com/html/html_intro.asp)
     the website. You can easily do it with an “inspect” [option](https://www.lifewire.com/get-inspect-element-tool-for-browser-756549)
     of your browser.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 大多数时候，你会发现自己在检查网站的 [HTML](https://www.w3schools.com/html/html_intro.asp)。你可以通过浏览器的“检查”
+    [选项](https://www.lifewire.com/get-inspect-element-tool-for-browser-756549) 来轻松做到这一点。
 - en: '![](../Images/19d6260b4014095739c9557a0b1e2e84.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/19d6260b4014095739c9557a0b1e2e84.png)'
 - en: The section of the website that holds my name, my avatar and my description
     is called `hero hero--profile u-flexTOP` (how interesting that Medium calls its
     writers ‘heroes’ :)). The <h1> class that holds my name is called`ui-h2 hero-title`
     and the description is contained within the <p> class `ui-body hero-description`.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 网站上包含我的名字、头像和描述的部分被称为 `hero hero--profile u-flexTOP`（有趣的是 Medium 称其作者为‘英雄’ :))。包含我名字的
+    <h1> 类被称为 `ui-h2 hero-title`，而描述则包含在 <p> 类 `ui-body hero-description` 中。
 - en: You can read more about [HTML tags](https://www.w3schools.com/tags/), and differences
     between [classes](https://www.w3schools.com/html/html_classes.asp) and [ids](https://www.w3schools.com/tags/att_global_id.asp)
     [here](https://www.quora.com/What-is-the-difference-between-class-and-id-in-HTML).
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在 [这里](https://www.w3schools.com/tags/) 阅读更多关于 [HTML 标签](https://www.w3schools.com/tags/)，以及
+    [类](https://www.w3schools.com/html/html_classes.asp) 和 [id](https://www.w3schools.com/tags/att_global_id.asp)
+    之间的区别。
 - en: '**1.2 Scrapy**'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1.2 Scrapy**'
 - en: 'There is a stand-alone ready-to-use data extracting framework called [**Scrapy**](https://scrapy.org/).
     Apart from extracting HTML the package offers lots of functionalities like exporting
     data in formats, logging etc. It is also highly customisable: run different spiders
     on different processes, disable cookies¹ and set download delays². It can also
     be used to extract data using API. However, the learning curve is not smooth for
     the new programmers: you need to read tutorials and examples to get started.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 有一个独立的即用型数据提取框架叫做 [**Scrapy**](https://scrapy.org/)。除了提取 HTML 外，该包还提供了许多功能，如数据导出格式、日志记录等。它也高度可定制：在不同进程上运行不同的蜘蛛，禁用
+    cookies¹ 和设置下载延迟²。它也可以用于通过 API 提取数据。然而，对新程序员来说，学习曲线并不平滑：你需要阅读教程和示例才能入门。
 - en: ¹ Some sites use cookies to identify bots.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: ¹ 一些网站使用 cookies 来识别机器人。
 - en: ² The website can get overloaded due to a huge amount of crawling requests.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: ² 网站可能因为大量的爬虫请求而过载。
 - en: '*For my use case it was too much ‘out of the box’: I just wanted to extract
     the links from all pages, access each link and extract information out of it.*'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '*对我来说，这“开箱即用”的程度太高了：我只想从所有页面提取链接，访问每个链接并提取信息。*'
 - en: '**1.3 BeautifulSoup with Requests**'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1.3 BeautifulSoup 与 Requests**'
 - en: '**BeautifulSoup** is a library that allows you to parse the HTML source code
     in a beautiful way. Along with it you need a **Request** library that will fetch
     the content of the URL. However, you should take care of everything else like
     error handling, how to export data, how to parallelize the web scraper, etc.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**BeautifulSoup** 是一个可以以优美的方式解析 HTML 源代码的库。你还需要一个 **Request** 库来获取 URL 的内容。然而，你需要处理其他所有事务，比如错误处理、数据导出、如何并行化网络爬虫等。'
 - en: '*I chose BeautifulSoup as it would force me to figure out a lot of stuff that
     Scrapy handles on its own, and hopefully help me learn faster from my mistakes.*'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '*我选择了 BeautifulSoup，因为它迫使我去弄清楚很多 Scrapy 自行处理的事情，并且希望通过错误学习得更快。*'
 - en: '**2\. Basic code**'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**2\. 基本代码**'
 - en: 'It’s very straightforward to start scraping a website. Most of the time you
     will find yourself inspecting [HTML](https://www.w3schools.com/html/html_intro.asp)
     of the website to access the classes and IDs you need. Lets say we have a following
     html structure and we want to extract the `main_price` elements. Note: `discounted_price`
     element is optional.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 开始抓取网站是非常直接的。大多数时候，你会发现自己在检查 [HTML](https://www.w3schools.com/html/html_intro.asp)
+    以访问所需的类和 ID。假设我们有以下 HTML 结构，我们想要提取 `main_price` 元素。注意：`discounted_price` 元素是可选的。
 - en: '![](../Images/6c1a80f169ffa3d5c17b025d14e354c7.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6c1a80f169ffa3d5c17b025d14e354c7.png)'
 - en: The basic code would be to import the libraries, do the request, parse the html
     and then to find the `class main_price`.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 基本代码是导入库，进行请求，解析 HTML，然后找到 `class main_price`。
 - en: '![](../Images/459bac4d01e6984cbc4c548222f663bd.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/459bac4d01e6984cbc4c548222f663bd.png)'
 - en: It can happen that the `class main_price` is present in another section of the
     website. To avoid extracting unnecessary `class main_price` from any other part
     of the webpage we could have first addressed the `id listings_prices`and only
     then find all elements with `class main_price`.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: '**3\. Pitfalls**'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: '**3.1 Check robots.txt**'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: The scraping rules of the websites can be found in the [robots.txt](https://www.robotstxt.org/robotstxt.html)
@@ -204,38 +301,48 @@
     extracted or how frequently a bot is allowed to request a page. Most people don’t
     care about it, but try to be respectful and at least look at the rules even if
     you don’t plan to follow them.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '**3.2 HTML can be evil**'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: HTML tags can contain id, class or both. HTML id specifies a *unique* id and
     HTML class is non-unique. Changes in the class name or element could either break
     your code or deliver wrong results.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: 'There are two ways to avoid it or at least to be alerted about it:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: Use specific `id` rather than `class` since it is less likely to be changed
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Check if the element returns `None`
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: However, because some fields can be optional (like `discounted_price` in our
     HTML example), corresponding elements would not appear on each listing. In this
     case you can count the percentage of how many times this specific element returned
     None to the number of listings. If it is 100%, you might want to check if the
     element name was changed.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: '**3.3 User agent spoofing**'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: Every time you visit a website, it gets your [browser information](https://www.whoishostingthis.com/tools/user-agent/)
@@ -245,119 +352,169 @@
     you would look suspicious if you send 200 requests/second with the same user agent.
     A way out might be either to generate (almost) random user agent or to set one
     yourself.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '**3.4 Timeout request**'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: '[By default, Request](https://docs.python-requests.org/en/master/user/quickstart/#timeouts)
     will keep waiting for a response indefinitely. Therefore, it is advised to set
     the timeout parameter.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '**3.5 Did I get blocked?**'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: Frequent appearance of the [status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)
     like 404 (Not Found), 403 (Forbidden), 408 (Request Timeout) might indicate that
     you got blocked. You may want to check for those error codes and proceed accordingly. Also,
     be ready to handle exceptions from the request.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '**3.6 IP Rotation**'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: Even if you randomize your user agent, all your requests will be from the same
     IP address. That doesn’t sound abnormal because libraries, universities, and also
     companies have only a few IP addresses. However, if there are uncommonly many
     requests coming from a single IP address, a server can detect it.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使你随机化了用户代理，你的所有请求仍将来自同一个 IP 地址。这并不显得异常，因为图书馆、大学以及公司只有少数几个 IP 地址。然而，如果单个 IP
+    地址有异常多的请求，服务器可能会检测到。
 - en: Using shared [proxies, VPNs or TOR](https://www.privateinternetaccess.com/pages/tor-vpn-proxy)
     can help you become a ghost ;).
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用共享[代理、VPN 或 TOR](https://www.privateinternetaccess.com/pages/tor-vpn-proxy)可以帮助你成为隐形人；)。
 - en: '[PRE4]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: By using a shared proxy, the website will see the IP address of the proxy server
     and not yours. A VPN connects you to another network and the IP address of the
     VPN provider will be sent to the website.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过使用共享代理，网站将看到代理服务器的 IP 地址，而不是你的 IP 地址。VPN 将你连接到另一个网络，VPN 提供商的 IP 地址将发送给网站。
 - en: '**3.7 Honeypots**'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '**3.7 蜜罐**'
 - en: Honeypots are means to detect crawlers or scrapers.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 蜜罐是用来检测爬虫或抓取器的手段。
 - en: These can be ‘hidden’ links that are not visible to the users but can be extracted
     by scrapers/spiders. Such links will have a CSS style set to display:none, they
     can be blended by having the color of the background, or even be moved off of
     the visible area of the page. Once your crawler visits such a link, your IP address
     can be flagged for further investigation, or even be instantly blocked.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些可能是“隐藏的”链接，用户无法看到，但可以被爬虫/蜘蛛提取。这些链接的 CSS 样式可能设置为 `display:none`，它们可能与背景颜色融合在一起，或者甚至被移到页面的不可见区域。一旦你的爬虫访问了这样的链接，你的
+    IP 地址可能会被标记以便进一步调查，甚至可能会立即被封锁。
 - en: Another way to spot crawlers is to add links with infinitely deep directory
     trees. Then one would need to limit the number of retrieved pages or limit the
     traversal depth.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种识别爬虫的方法是添加具有无限深度目录树的链接。这样需要限制检索的页面数量或限制遍历深度。
 - en: '**4\. Dos and Don''ts**'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '**4. 应做与不应做的事项**'
 - en: Before scraping, check if there is a public API available. Public APIs provide
     easier and faster (and legal) data retrieval than web scraping. Check out [Twitter
     API](https://developer.twitter.com/en/docs) that provides APIs for different purposes.
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在抓取之前，检查是否有公开 API 可用。公开 API 提供比网页抓取更简单、更快捷（且合法）的数据检索。查看[Twitter API](https://developer.twitter.com/en/docs)，它提供了用于不同目的的
+    API。
 - en: In case you scrape lots of data, you might want to consider using a database
     to be able to analyze or retrieve it fast. Follow [this tutorial](https://zetcode.com/db/sqlitepythontutorial/)
     on how to create a local database with python.
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你抓取了大量数据，你可能需要考虑使用数据库，以便能够快速分析或检索数据。查看[这个教程](https://zetcode.com/db/sqlitepythontutorial/)了解如何使用
+    Python 创建本地数据库。
 - en: Be polite. As [this answer](https://webmasters.stackexchange.com/questions/6205/what-user-agent-should-i-set)
     suggests, it is recommended to let people know that you are scraping their website
     so they can better respond to the problems your bot might cause.
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 要礼貌。如[这个答案](https://webmasters.stackexchange.com/questions/6205/what-user-agent-should-i-set)所建议，建议让人们知道你正在抓取他们的网站，以便他们可以更好地应对你的爬虫可能引发的问题。
 - en: Again, do not overload the website by sending hundreds of requests per second.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次提醒，不要通过每秒发送数百个请求来过载网站。
 - en: '**5\. Speed up — parallelization**'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '**5. 加速——并行化**'
 - en: If you decide to parallelize your program, be careful with your implementation
     so you don’t slam the server. And be sure you read the **Dos and Don’ts** section.
     Check out the the definitions of parallelization vs concurrency, processors and
     threads [here](https://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python)
     and [here](https://code.tutsplus.com/articles/introduction-to-parallel-and-concurrent-programming-in-python--cms-28612).
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你决定将程序并行化，要小心你的实现，以免对服务器造成冲击。并确保阅读**应做与不应做的事项**部分。查看[这里](https://stackoverflow.com/questions/3044580/multiprocessing-vs-threading-python)和[这里](https://code.tutsplus.com/articles/introduction-to-parallel-and-concurrent-programming-in-python--cms-28612)了解并行化与并发、处理器和线程的定义。
 - en: If you extract a huge amount of information from the page and do some preprocessing
     of the data while scraping, the number of requests per second you send to the
     page can be relatively low.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你从页面上提取了大量信息并在抓取时进行了数据预处理，你发送到页面的每秒请求数可能会相对较低。
 - en: '*For my other project where I scraped apartment rental prices, I did heavy
     preprocessing of the data while scraping, which resulted in 1 request/second.
     In order to scrape 4K ads, my program would run for about one hour.*'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
 - en: In order to send requests in parallel you might want to use a [multiprocessing](https://docs.python.org/2/library/multiprocessing.html)
     package.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
 - en: Let’s say we have 100 pages and we want to assign every processor equal amount
@@ -365,91 +522,115 @@
     pages into the `n` bins and assign each bin to a processor. Each process will
     have its own name, target function and the arguments to work with. The name of
     the process can be used afterwards to enable writing data to a specific file.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
 - en: '*I assigned 1K pages to each of my 4 CPUs which yielded 4 requests/second and
     reduced the scraping time to around 17 mins.*'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-85
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Happy scraping!
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: 'Bio: [Jekaterina Kokatjuhha](https://medium.com/@k.kokatjuhha) is a passionate
     Bioinformatician with interest in Machine Learning and Data Science.'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://medium.com/@k.kokatjuhha/web-scraping-tutorial-with-python-tips-and-tricks-db070e70e071).
     Reposted with permission.'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related**'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
 - en: '[**Using AutoML to Generate Machine Learning Pipelines with TPOT**](https://www.kdnuggets.com/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-4.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[**A Primer on Web Scraping in R**](https://www.kdnuggets.com/2018/01/primer-web-scraping-r.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[**Web Scraping for Data Science with Python**](https://www.kdnuggets.com/2017/12/baesens-web-scraping-data-science-python.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-94
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-99
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[A Step-by-Step Guide to Web Scraping with Python and Beautiful Soup](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[A Beginner’s Guide to Web Scraping Using Python](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
