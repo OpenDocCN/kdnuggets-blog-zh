@@ -1,52 +1,80 @@
 - en: Set Operations Applied to Pandas DataFrames
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 应用于 Pandas DataFrames 的集合操作
 - en: 原文：[https://www.kdnuggets.com/2019/11/set-operations-applied-pandas-dataframes.html](https://www.kdnuggets.com/2019/11/set-operations-applied-pandas-dataframes.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/11/set-operations-applied-pandas-dataframes.html](https://www.kdnuggets.com/2019/11/set-operations-applied-pandas-dataframes.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Eduardo Corrêa Gonçalves](https://www.researchgate.net/profile/Eduardo_Goncalves17),
     ENCE/IBGE**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Eduardo Corrêa Gonçalves](https://www.researchgate.net/profile/Eduardo_Goncalves17)，ENCE/IBGE**'
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: In certain practical situations, it might be interesting to treat a pandas DataFrame
     as a **mathematical set**. In this case, each row of the DataFrame can be considered
     as an **element** or **member** of the set.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在某些实际情况中，将 pandas DataFrame 视为一个 **数学集合** 可能是有趣的。在这种情况下，DataFrame 的每一行可以被视为集合的
+    **元素** 或 **成员**。
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'The question then becomes: Why would it be useful? Here’s the answer. As we
     know, data science problems typically require the analysis of data obtained from
     multiple sources. At some point in the analysis of data from a study, you may
@@ -54,218 +82,341 @@
     determine if they have elements (rows) in common. In this tutorial you will learn
     that set operations are one of the best and most natural techniques you can choose
     to perform such a task.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么问题变成了：为什么这会有用？答案是这样的。正如我们所知，数据科学问题通常需要分析来自多个来源的数据。在数据分析过程中，你可能会遇到需要比较两个或多个
+    DataFrames 的内容，以确定它们是否有共同的元素（行）的问题。在本教程中，你将学习集合操作是执行此类任务的最佳和最自然的技术之一。
 - en: A Practical Example
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实际示例
 - en: Suppose you have two DataFrames, named P and S, which respectively contain the
     names and emails from students enrolled in two different courses, SQL and Python.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你有两个 DataFrames，分别命名为 P 和 S，它们分别包含注册了 SQL 和 Python 两门不同课程的学生的姓名和电子邮件。
 - en: '![Figure](../Images/a6a3df6dea2d135e34c3bc8c517f24f0.png)![Figure](../Images/bbf6fee30f92261470e8da08ebd0f29b.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/a6a3df6dea2d135e34c3bc8c517f24f0.png)![图示](../Images/bbf6fee30f92261470e8da08ebd0f29b.png)'
 - en: 'Consider that you need answers to the following questions:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑你需要回答以下问题：
 - en: How many different students are in the two DataFrames?
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 这两个 DataFrames 中有多少不同的学生？
 - en: Are there students enrolled in both courses, Python and SQL?
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 是否有学生同时注册了 Python 和 SQL 课程？
 - en: Which students are taking the Python course, but not the SQL course (and vice
     versa)?
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 哪些学生在上 Python 课程，但没有上 SQL 课程（反之亦然）？
 - en: 'Answers can be obtained in a straightforward way if you treat the DataFrames
     as two distinct mathematical sets. Then, all you will have to do is to apply the
     basic **union**, **intersection**, and **difference** set operations:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果将 DataFrames 视为两个不同的数学集合，答案可以通过简单的方式获得。然后，你只需要应用基本的 **并集**、**交集** 和 **差集**
+    操作：
 - en: P ∪ S, the union of P and S, is the set of elements that are in P or S or both.
     Note that the element (student) Elizabeth appears only once in the result.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: P ∪ S，即 P 和 S 的并集，是在 P 或 S 或两者中都存在的元素的集合。注意元素（学生）Elizabeth 在结果中只出现一次。
 - en: '![Figure](../Images/f95c23f5e568a2505b219b35f75f905a.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/f95c23f5e568a2505b219b35f75f905a.png)'
 - en: P ∩ S, the intersection of P and S, is the set of elements that are in both
     P and S. Now, only Elizabeth appears, because she is the only in both sets.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: P ∩ S，即 P 和 S 的交集，是既在 P 中又在 S 中的元素的集合。现在，只有 Elizabeth 出现，因为她是两个集合中的唯一一个。
 - en: '![Figure](../Images/bf379304640b60f3bc5dfa4a1f7cba76.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/bf379304640b60f3bc5dfa4a1f7cba76.png)'
 - en: 'P − S, the difference of P and S, is the set that includes all elements that
     are in P but not in S:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: P − S，即 P 和 S 的差集，是包含所有在 P 中但不在 S 中的元素的集合：
 - en: '![Figure](../Images/842ac2a9f6a32fc97fdb3e8c2f868293.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/842ac2a9f6a32fc97fdb3e8c2f868293.png)'
 - en: 'Note that S − P is different from P − S:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，S − P 与 P − S 是不同的：
 - en: '![Figure](../Images/af2e6f3d74aed541a4d35629658c4c71.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/af2e6f3d74aed541a4d35629658c4c71.png)'
 - en: It is important to remark that the DataFrames on which any of these three operations
     are applied must have identical attributes (as shown in the example).
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 重要的是要指出，对这些操作应用的 DataFrames 必须具有相同的属性（如示例中所示）。
 - en: Set Operations in Pandas
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Pandas 中的集合操作
 - en: 'Although pandas does not offer specific methods for performing set operations,
     we can easily mimic them using the below methods:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管 pandas 没有提供专门的集合操作方法，但我们可以通过以下方法轻松模拟这些操作：
 - en: '**Union**: concat() + drop_duplicates()'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**并集**：concat() + drop_duplicates()'
 - en: '**Intersection**: merge()'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**交集**：merge()'
 - en: '**Difference**: isin() + Boolean indexing'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**差集**：isin() + 布尔索引'
 - en: In the following program, we demonstrate how to do it. A detailed explanation
     is given after the code listing.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下面的程序中，我们演示了如何做到这一点。代码列表后给出了详细的解释。
 - en: 'Results are shown below:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果如下所示：
 - en: '[PRE0]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Here's the complete explanation of the code. Initially, we created two DataFrames,
     P (Python students) and S (SQL students). Once created, they were submitted the
     three set operations in the second part of the program.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是对代码的完整解释。最初，我们创建了两个 DataFrame，P（Python 学生）和 S（SQL 学生）。创建完成后，它们被提交给程序的第二部分中的三种集合操作。
 - en: Union
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 并集
 - en: 'To perform the union operation, we applied two methods: **concat()** followed
     by **drop_duplicates()**. The first accomplishes the concatenation of data, which
     means to place the rows from one DataFrame below the rows of another DataFrame.
     Thus, the following statement:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了执行并集操作，我们应用了两个方法：**concat()** 然后是 **drop_duplicates()**。第一个方法实现数据的连接，即将一个
+    DataFrame 的行放在另一个 DataFrame 的行下方。因此，以下语句：
 - en: '[PRE1]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: generates a DataFrame composed of 4 rows (2 rows from P plus 2 from S).
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成一个由 4 行组成的 DataFrame（P 中 2 行加上 S 中 2 行）。
 - en: '[PRE2]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'However, note that there are two rows referring to Elizabeth, since she is
     the only student who is enrolled in both courses. To keep only one occurrence
     of this element it is enough to use the drop_duplicates() method:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，请注意，有两行指的是 Elizabeth，因为她是唯一一个同时注册了两个课程的学生。为了只保留一个该元素的出现，只需使用 drop_duplicates()
+    方法：
 - en: '[PRE3]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Intersection
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 交集
 - en: 'The versatile **merge()** method was employed to execute the intersection operation.
     This method can be used to combine or join DataFrames in different ways. However,
     when used without the specification of any parameter in an operation involving
     two compatible DataFrames, it yields their intersection:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 多功能的 **merge()** 方法被用来执行交集操作。该方法可以用来以不同的方式组合或连接 DataFrame。然而，当在涉及两个兼容 DataFrame
+    的操作中未指定任何参数时，它会生成它们的交集：
 - en: '[PRE5]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '[PRE6]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Difference
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 差集
 - en: 'The difference operation has a slightly more complicated code. As we know,
     the difference between two sets P and S is the operation that aims to determine
     the elements of P that are not part of S. In pandas, we can implement this operation
     using the **isin()** method in tandem with **boolean indexing**:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 差集操作的代码稍微复杂一些。如我们所知，两集合 P 和 S 之间的差集是一个旨在确定 P 中不属于 S 的元素的操作。在 pandas 中，我们可以使用**isin()**方法结合**布尔索引**来实现这一操作：
 - en: '[PRE7]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'To explain this statement, we will break it into two parts. The first is:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了说明这一点，我们将其分为两部分。第一部分是：
 - en: '[PRE8]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'The above command produces a boolean structure that points out which emails
     in the DataFrame P are contained in S:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述命令生成一个布尔结构，指出 DataFrame P 中哪些电子邮件存在于 S 中：
 - en: '[PRE9]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'This boolean structure is then used to filter rows from P:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个布尔结构随后用于过滤 P 中的行：
 - en: '[PRE10]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '[PRE11]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Obtaining the SQL students who are not taking Python is done analogously:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 获取未学习 Python 的 SQL 学生是类似的操作：
 - en: '[PRE12]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '[PRE13]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: References/Further Reading
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考文献/进一步阅读
 - en: '**Pandas documentation**'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Pandas 文档**'
 - en: '[https://pandas.pydata.org/pandas-docs/stable/](https://pandas.pydata.org/pandas-docs/stable/)'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://pandas.pydata.org/pandas-docs/stable/](https://pandas.pydata.org/pandas-docs/stable/)'
 - en: '**Stanford Encyclopedia of Philosophy - Basic Set Theory**'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '**斯坦福哲学百科全书 - 基本集合论**'
 - en: '[https://plato.stanford.edu/entries/set-theory/basic-set-theory.html](https://plato.stanford.edu/entries/set-theory/basic-set-theory.html)'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://plato.stanford.edu/entries/set-theory/basic-set-theory.html](https://plato.stanford.edu/entries/set-theory/basic-set-theory.html)'
 - en: '**Jenifer Widom - Relational algebra 2 part 1**'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '**詹妮弗·维多姆 - 关系代数 2 第 1 部分**'
 - en: '[https://www.youtube.com/watch?v=r_h9yBnNh0U](https://www.youtube.com/watch?v=r_h9yBnNh0U)'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://www.youtube.com/watch?v=r_h9yBnNh0U](https://www.youtube.com/watch?v=r_h9yBnNh0U)'
 - en: '**Bio: [Eduardo Corrêa Gonçalves](https://www.researchgate.net/profile/Eduardo_Goncalves17)**
     works as a Database administrator at Brazilian Institute of Geography and Statistics
     (IBGE) and as an assistant professor at National School of Statistical Sciences
@@ -274,48 +425,73 @@
     Register of Enterprises", "Municipal Livestock", and "Systematic Survey of Agricultural
     Production". His research, teaching, and professional activities focus on Algorithms,
     Artificial Intelligence and Databases.'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介： [Eduardo Corrêa Gonçalves](https://www.researchgate.net/profile/Eduardo_Goncalves17)**
+    在巴西地理与统计研究所（IBGE）担任数据库管理员，并在国家统计科学学院（ENCE/IBGE）担任助理教授。他参与了不同经济和农业调查的数据库建模和实施的各个阶段，例如：“企业中央登记统计”、“市级牲畜统计”和“农业生产系统调查”。他的研究、教学和专业活动集中在算法、人工智能和数据库领域。'
 - en: '**Related:**'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[5 Advanced Features of Pandas and How to Use Them](/2019/10/5-advanced-features-pandas.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5 个 Pandas 高级功能及其使用方法](/2019/10/5-advanced-features-pandas.html)'
 - en: '[Know Your Data: Part 1](/2019/09/know-data-part-1.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[了解你的数据：第 1 部分](/2019/09/know-data-part-1.html)'
 - en: '[25 Tricks for Pandas](/2019/08/25-tricks-pandas.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[25 个 Pandas 小技巧](/2019/08/25-tricks-pandas.html)'
 - en: More On This Topic
+  id: totrans-76
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关话题更多内容
 - en: '[Query Your Pandas DataFrames with SQL](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 SQL 查询 Pandas 数据框](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
 - en: '[Using the apply() Method with Pandas Dataframes](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Pandas 数据框的 apply() 方法](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)'
 - en: '[Combining Pandas DataFrames Made Simple](https://www.kdnuggets.com/2022/09/combining-pandas-dataframes-made-simple.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[简化合并 Pandas 数据框](https://www.kdnuggets.com/2022/09/combining-pandas-dataframes-made-simple.html)'
 - en: '[How to Merge Pandas DataFrames](https://www.kdnuggets.com/2023/01/merge-pandas-dataframes.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何合并 Pandas 数据框](https://www.kdnuggets.com/2023/01/merge-pandas-dataframes.html)'
 - en: '[3 Ways to Merge Pandas DataFrames](https://www.kdnuggets.com/2023/03/3-ways-merge-pandas-dataframes.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[合并 Pandas 数据框的 3 种方法](https://www.kdnuggets.com/2023/03/3-ways-merge-pandas-dataframes.html)'
 - en: '[Converting JSONs to Pandas DataFrames: Parsing Them the Right Way](https://www.kdnuggets.com/converting-jsons-to-pandas-dataframes-parsing-them-the-right-way)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将 JSON 转换为 Pandas 数据框：正确解析的方式](https://www.kdnuggets.com/converting-jsons-to-pandas-dataframes-parsing-them-the-right-way)'
