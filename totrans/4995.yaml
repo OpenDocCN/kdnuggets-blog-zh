@@ -3,15 +3,18 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在 Python 中整理数据
 - en: 原文：[https://www.kdnuggets.com/2017/01/tidying-data-python.html](https://www.kdnuggets.com/2017/01/tidying-data-python.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/01/tidying-data-python.html](https://www.kdnuggets.com/2017/01/tidying-data-python.html)
 - en: '**By Jean-Nicholas Hould, JeanNicholasHould.com.**'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 Jean-Nicholas Hould, JeanNicholasHould.com 提供。**'
 - en: 'I recently came across a paper named [Tidy Data](http://vita.had.co.nz/papers/tidy-data.pdf) by
     Hadley Wickham. Published back in 2014, the paper focuses on one aspect of cleaning
     up data, tidying data: structuring datasets to facilitate analysis. Through the
@@ -21,6 +24,8 @@
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 我最近遇到了一篇名为[Tidy Data](http://vita.had.co.nz/papers/tidy-data.pdf)的论文，作者是 Hadley
+    Wickham。该论文发表于2014年，重点讲述了数据清理的一个方面——整理数据：结构化数据集以便于分析。通过这篇论文，Wickham 展示了如何在分析之前将任何数据集结构化为标准化的方式。他详细介绍了不同类型的数据集以及如何将它们整理成标准格式。
 - en: As a data scientist, I think you should get very familiar with this standardized
     structure of a dataset. Data cleaning is one the most frequent task in data science.
     No matter what kind of data you are dealing with or what kind of analysis you
@@ -30,119 +35,146 @@
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为数据科学家，我认为你应该非常熟悉这种数据集的标准化结构。数据清理是数据科学中最常见的任务之一。无论你处理何种数据或进行何种分析，你最终都必须清理数据。将数据整理成标准格式可以简化后续工作。你可以在不同的分析中重用一套标准工具。
 - en: In this post, I will summarize some tidying examples Wickham uses in his paper
     and I will demonstrate how to do so using the Python [pandas](http://pandas.pydata.org/) library.
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我将总结一些 Wickham 在论文中使用的整理示例，并演示如何使用 Python 的[pandas](http://pandas.pydata.org/)库进行整理。
 - en: Defining tidy data
   id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 定义整洁数据
 - en: 'The structure Wickham defines as tidy has the following attributes:'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: Wickham 定义的整洁结构具有以下属性：
 - en: Each *variable* forms a column and contains *values*
   id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每个*变量*形成一列，并包含*值*
 - en: Each *observation* forms a row
   id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每个*观察*形成一行
 - en: Each type of *observational unit* forms a table
   id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每种*观察单元*形成一个表格
 - en: 'A few definitions:'
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些定义：
 - en: 'Variable: A measurement or an attribute. *Height, weight, sex, etc.*'
   id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 变量：一种测量或属性。*身高, 体重, 性别, 等等*
 - en: 'Value: The actual measurement or attribute. *152 cm, 80 kg, female, etc.*'
   id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 值：实际的测量或属性。*152 cm, 80 kg, female, etc.*
 - en: 'Observation: All values measure on the same unit. *Each person.*'
   id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 观察：所有的值都是在相同的单元上测量的。*每个人。*
 - en: 'An example of a *messy dataset*:'
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个*混乱数据集*的例子：
 - en: '|  | Treatment A | Treatment B |'
   id: totrans-16
   prefs: []
   type: TYPE_TB
+  zh: '|  | 处理 A | 处理 B |'
 - en: '| --- | --- | --- |'
   id: totrans-17
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- |'
 - en: '| John Smith | - | 2 |'
   id: totrans-18
   prefs: []
   type: TYPE_TB
+  zh: '| 约翰·史密斯 | - | 2 |'
 - en: '| Jane Doe | 16 | 11 |'
   id: totrans-19
   prefs: []
   type: TYPE_TB
+  zh: '| 简·多 | 16 | 11 |'
 - en: '| Mary Johnson | 3 | 1 |'
   id: totrans-20
   prefs: []
   type: TYPE_TB
+  zh: '| 玛丽·约翰逊 | 3 | 1 |'
 - en: 'An example of a *tidy dataset*:'
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个*整洁数据集*的例子：
 - en: '| Name | Treatment | Result |'
   id: totrans-22
   prefs: []
   type: TYPE_TB
+  zh: '| 姓名 | 处理 | 结果 |'
 - en: '| --- | --- | --- |'
   id: totrans-23
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- |'
 - en: '| John Smith | a | - |'
   id: totrans-24
   prefs: []
   type: TYPE_TB
+  zh: '| 约翰·史密斯 | a | - |'
 - en: '| Jane Doe | a | 16 |'
   id: totrans-25
   prefs: []
   type: TYPE_TB
+  zh: '| 简·多 | a | 16 |'
 - en: '| Mary Johnson | a | 3 |'
   id: totrans-26
   prefs: []
   type: TYPE_TB
+  zh: '| 玛丽·约翰逊 | a | 3 |'
 - en: '| John Smith | b | 2 |'
   id: totrans-27
   prefs: []
   type: TYPE_TB
+  zh: '| 约翰·史密斯 | b | 2 |'
 - en: '| Jane Doe | b | 11 |'
   id: totrans-28
   prefs: []
   type: TYPE_TB
+  zh: '| 简·多 | b | 11 |'
 - en: '| Mary Johnson | b | 1 |'
   id: totrans-29
   prefs: []
   type: TYPE_TB
+  zh: '| 玛丽·约翰逊 | b | 1 |'
 - en: Tidying messy datasets
   id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 整理混乱的数据集
 - en: 'Through the following examples extracted from Wickham’s paper, we’ll wrangle
     messy datasets into the tidy format. The goal here is not to analyze the datasets
     but rather prepare them in a standardized way prior to the analysis. These are
@@ -150,48 +182,58 @@
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过以下从 Wickham 的论文中提取的示例，我们将把混乱的数据集整理成整洁的格式。这里的目标不是分析数据集，而是将它们以标准化的方式准备好以便进行分析。这是我们将处理的五种类型的混乱数据集：
 - en: Column headers are values, not variable names.
   id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 列标题是值，而不是变量名称。
 - en: Multiple variables are stored in one column.
   id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多个变量被存储在一列中。
 - en: Variables are stored in both rows and columns.
   id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 变量存储在行和列中。
 - en: Multiple types of observational units are stored in the same table.
   id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多种类型的观察单元存储在同一个表格中。
 - en: A single observational unit is stored in multiple tables.
   id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 单一的观察单元被存储在多个表格中。
 - en: '*Note: All of the code presented in this post is available on [Github](https://github.com/nickhould/tidy-data-python).*'
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '*注意：本文中呈现的所有代码都可以在[Github](https://github.com/nickhould/tidy-data-python)上找到。*'
 - en: Column headers are values, not variable names
   id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 列标题是值，而不是变量名称
 - en: '**Pew Research Center Dataset**'
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**皮尤研究中心数据集**'
 - en: This dataset explores the relationship between income and religion.
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个数据集探讨了收入与宗教之间的关系。
 - en: 'Problem: The columns headers are composed of the possible income values.'
   id: totrans-41
   prefs: []
@@ -453,6 +495,8 @@
   id: totrans-87
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | Lonestar | Amazed | 4:25 | Country | 1999-06-05 | 2000-03-04 | 81
+    | 54.0 | ... |'
 - en: A tidy version of this dataset is one without the week’s numbers as columns
     but rather as values of a single column. In order to do so, we’ll *melt* the weeks
     columns into a single `date` column. We will create one row per week for each
@@ -460,6 +504,7 @@
   id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个数据集的整洁版本是没有周数作为列的，而是作为单一列的值。为了做到这一点，我们将把周数列“*融化*”成一个`date`列。我们将为每条记录创建一行每周。如果给定周没有数据，我们将不会创建行。
 - en: '[PRE3]'
   id: totrans-89
   prefs: []
@@ -472,87 +517,115 @@
   id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集的更整洁版本如下所示。仍然有很多歌曲详细信息的重复：曲目名称、时间和类型。由于这个原因，这个数据集仍然不完全符合Wickham的定义。我们将在下一个示例中解决这个问题。
 - en: '| year | artist.inverted | track | time | genre | week | rank | date |'
   id: totrans-91
   prefs: []
   type: TYPE_TB
+  zh: '| year | artist.inverted | track | time | genre | week | rank | date |'
 - en: '| --- | --- | --- | --- | --- | --- | --- | --- |'
   id: totrans-92
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- | --- | --- | --- | --- |'
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 1 | 87
     | 2000-02-26 |'
   id: totrans-93
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 1 | 87
+    | 2000-02-26 |'
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 2 | 82
     | 2000-03-04 |'
   id: totrans-94
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 2 | 82
+    | 2000-03-04 |'
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 3 | 72
     | 2000-03-11 |'
   id: totrans-95
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 3 | 72
+    | 2000-03-11 |'
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 4 | 77
     | 2000-03-18 |'
   id: totrans-96
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 4 | 77
+    | 2000-03-18 |'
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 5 | 87
     | 2000-03-25 |'
   id: totrans-97
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 5 | 87
+    | 2000-03-25 |'
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 6 | 94
     | 2000-04-01 |'
   id: totrans-98
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 6 | 94
+    | 2000-04-01 |'
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 7 | 99
     | 2000-04-08 |'
   id: totrans-99
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 7 | 99
+    | 2000-04-08 |'
 - en: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
     | R&B | 1 | 91 | 2000-09-02 |'
   id: totrans-100
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
+    | R&B | 1 | 91 | 2000-09-02 |'
 - en: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
     | R&B | 2 | 87 | 2000-09-09 |'
   id: totrans-101
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
+    | R&B | 2 | 87 | 2000-09-09 |'
 - en: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
     | R&B | 3 | 92 | 2000-09-16 |'
   id: totrans-102
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
+    | R&B | 3 | 92 | 2000-09-16 |'
 - en: Multiple types in one table
   id: totrans-103
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一个表中包含多种类型
 - en: Following up on the Billboard dataset, we’ll now address the repetition problem
     of the previous table.
   id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 继Billboard数据集之后，我们现在将解决前一个表的重复问题。
 - en: 'Problems:'
   id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 问题：
 - en: Multiple observational units (the `song` and its `rank`) in a single table.
   id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 多个观察单位（`song`和它的`rank`）在一个表中。
 - en: 'We’ll first create a `songs` table which contains the details of each song:'
   id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将首先创建一个包含每首歌详细信息的`songs`表：
 - en: '[PRE4]'
   id: totrans-108
   prefs: []
@@ -562,56 +635,70 @@
   id: totrans-109
   prefs: []
   type: TYPE_TB
+  zh: '| year | artist.inverted | track | time | genre | song_id |'
 - en: '| --- | --- | --- | --- | --- | --- |'
   id: totrans-110
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- | --- | --- |'
 - en: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 0 |'
   id: totrans-111
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 2 Pac | Baby Don''t Cry (Keep Ya Head Up II) | 4:22 | Rap | 0 |'
 - en: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
     | R&B | 1 |'
   id: totrans-112
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 2Ge+her | The Hardest Part Of Breaking Up (Is Getting Ba... | 3:15
+    | R&B | 1 |'
 - en: '| 2000 | 3 Doors Down | Kryptonite | 3:53 | Rock | 2 |'
   id: totrans-113
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 3 Doors Down | Kryptonite | 3:53 | Rock | 2 |'
 - en: '| 2000 | 3 Doors Down | Loser | 4:24 | Rock | 3 |'
   id: totrans-114
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 3 Doors Down | Loser | 4:24 | Rock | 3 |'
 - en: '| 2000 | 504 Boyz | Wobble Wobble | 3:35 | Rap | 4 |'
   id: totrans-115
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 504 Boyz | Wobble Wobble | 3:35 | Rap | 4 |'
 - en: '| 2000 | 98° | Give Me Just One Night (Una Noche) | 3:24 | Rock | 5 |'
   id: totrans-116
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | 98° | Give Me Just One Night (Una Noche) | 3:24 | Rock | 5 |'
 - en: '| 2000 | A*Teens | Dancing Queen | 3:44 | Pop | 6 |'
   id: totrans-117
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | A*Teens | Dancing Queen | 3:44 | Pop | 6 |'
 - en: '| 2000 | Aaliyah | I Don''t Wanna | 4:15 | Rock | 7 |'
   id: totrans-118
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | Aaliyah | I Don''t Wanna | 4:15 | Rock | 7 |'
 - en: '| 2000 | Aaliyah | Try Again | 4:03 | Rock | 8 |'
   id: totrans-119
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | Aaliyah | Try Again | 4:03 | Rock | 8 |'
 - en: '| 2000 | Adams, Yolanda | Open My Heart | 5:30 | Gospel | 9 |'
   id: totrans-120
   prefs: []
   type: TYPE_TB
+  zh: '| 2000 | Adams, Yolanda | Open My Heart | 5:30 | Gospel | 9 |'
 - en: We’ll then create a `ranks` table which only contains the `song_id`, `date` and
     the `rank`.
   id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们将创建一个只包含`song_id`、`date`和`rank`的`ranks`表。
 - en: '[PRE5]'
   id: totrans-122
   prefs: []
@@ -621,30 +708,37 @@
   id: totrans-123
   prefs: []
   type: TYPE_TB
+  zh: '| song_id | date | rank |'
 - en: '| --- | --- | --- |'
   id: totrans-124
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- |'
 - en: '| 0 | 2000-02-26 | 87 |'
   id: totrans-125
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 2000-02-26 | 87 |'
 - en: '| 0 | 2000-03-04 | 82 |'
   id: totrans-126
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 2000-03-04 | 82 |'
 - en: '| 0 | 2000-03-11 | 72 |'
   id: totrans-127
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 2000-03-11 | 72 |'
 - en: '| 0 | 2000-03-18 | 77 |'
   id: totrans-128
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 2000-03-18 | 77 |'
 - en: '| 0 | 2000-03-25 | 87 |'
   id: totrans-129
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 2000-03-25 | 87 |'
 - en: '| 0 | 2000-04-01 | 94 |'
   id: totrans-130
   prefs: []
@@ -941,26 +1035,35 @@
   id: totrans-183
   prefs: []
   type: TYPE_TB
+  zh: '| MX17004 | 2010 | 4 | tmax | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
+    |'
 - en: '| MX17004 | 2010 | 4 | tmin | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
     |'
   id: totrans-184
   prefs: []
   type: TYPE_TB
+  zh: '| MX17004 | 2010 | 4 | tmin | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
+    |'
 - en: '| MX17004 | 2010 | 5 | tmax | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
     |'
   id: totrans-185
   prefs: []
   type: TYPE_TB
+  zh: '| MX17004 | 2010 | 5 | tmax | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
+    |'
 - en: '| MX17004 | 2010 | 5 | tmin | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
     |'
   id: totrans-186
   prefs: []
   type: TYPE_TB
+  zh: '| MX17004 | 2010 | 5 | tmin | NaN | NaN | NaN | NaN | NaN | NaN | NaN | NaN
+    |'
 - en: In order to make this dataset tidy, we want to move the three misplaced variables
     (`tmin`, `tmax` and `days`) as three individual columns: `tmin`. `tmax` and `date`.
   id: totrans-187
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了使数据集整洁，我们希望将三个错误放置的变量（`tmin`、`tmax`和`days`）作为三个独立的列：`tmin`、`tmax`和`date`。
 - en: '[PRE9]'
   id: totrans-188
   prefs: []
@@ -970,51 +1073,62 @@
   id: totrans-189
   prefs: []
   type: TYPE_TB
+  zh: '| id | date | tmax | tmin |'
 - en: '| --- | --- | --- | --- |'
   id: totrans-190
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- |'
 - en: '| MX17004 | 2010-02-02 | 27.3 | 14.4 |'
   id: totrans-191
   prefs: []
   type: TYPE_TB
+  zh: '| MX17004 | 2010-02-02 | 27.3 | 14.4 |'
 - en: '| MX17004 | 2010-02-03 | 24.1 | 14.4 |'
   id: totrans-192
   prefs: []
   type: TYPE_TB
+  zh: '| MX17004 | 2010-02-03 | 24.1 | 14.4 |'
 - en: '| MX17004 | 2010-03-05 | 32.1 | 14.2 |'
   id: totrans-193
   prefs: []
   type: TYPE_TB
+  zh: '| MX17004 | 2010-03-05 | 32.1 | 14.2 |'
 - en: One type in multiple tables
   id: totrans-194
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一个类型在多个表中
 - en: 'Dataset: Illinois Male Baby Names for the year 2014/2015.'
   id: totrans-195
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集：2014/2015 年伊利诺伊州男性婴儿名字。
 - en: 'Problems:'
   id: totrans-196
   prefs: []
   type: TYPE_NORMAL
+  zh: 问题：
 - en: The data is spread across multiple tables/files.
   id: totrans-197
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据分布在多个表/文件中。
 - en: The “Year” variable is present in the file name.
   id: totrans-198
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: “Year” 变量存在于文件名中。
 - en: In order to load those different files into a single DataFrame, we can run a
     custom script that will append the files together. Furthermore, we’ll need to
     extract the “Year” variable from the file name.
   id: totrans-199
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了将这些不同的文件加载到一个 DataFrame 中，我们可以运行一个自定义脚本，将文件合并在一起。此外，我们还需要从文件名中提取“Year”变量。
 - en: '[PRE10]'
   id: totrans-200
   prefs: []
@@ -1024,35 +1138,43 @@
   id: totrans-201
   prefs: []
   type: TYPE_TB
+  zh: '| rank | name | frequency | sex | year |'
 - en: '| --- | --- | --- | --- | --- |'
   id: totrans-202
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- | --- |'
 - en: '| 1 | Noah | 837 | Male | 2014 |'
   id: totrans-203
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | Noah | 837 | Male | 2014 |'
 - en: '| 2 | Alexander | 747 | Male | 2014 |'
   id: totrans-204
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | Alexander | 747 | Male | 2014 |'
 - en: '| 3 | William | 687 | Male | 2014 |'
   id: totrans-205
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | William | 687 | Male | 2014 |'
 - en: '| 4 | Michael | 680 | Male | 2014 |'
   id: totrans-206
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | Michael | 680 | Male | 2014 |'
 - en: '| 5 | Liam | 670 | Male | 2014 |'
   id: totrans-207
   prefs: []
   type: TYPE_TB
+  zh: '| 5 | Liam | 670 | Male | 2014 |'
 - en: Final Thoughts
   id: totrans-208
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 终极想法
 - en: In this post, I focused on one aspect of Wickham’s paper, the data manipulation
     part. My main goal was to demonstrate the data manipulations in Python. It’s important
     to mention that there is a significant section of his paper that covers the tools
@@ -1061,6 +1183,7 @@
   id: totrans-209
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我专注于 Wickham 论文中的一个方面，即数据处理部分。我的主要目标是演示如何在 Python 中进行数据操作。值得提到的是，他的论文中有一个重要部分涵盖了工具和可视化，您可以通过整理数据集受益。我在这篇文章中没有涵盖这些内容。
 - en: Overall, I enjoyed preparing this post and wrangling the datasets into a streamlined
     format. The defined format makes it easier to query and filter the data. This
     approach makes it easier to reuse libraries and code across analysis. It also
@@ -1068,56 +1191,70 @@
   id: totrans-210
   prefs: []
   type: TYPE_NORMAL
+  zh: 总体而言，我很喜欢准备这篇文章并将数据集整理成流畅的格式。定义的格式使得查询和筛选数据变得更加容易。这种方法使得在分析中重用库和代码变得更加简便。它也使得与其他数据分析师共享数据集变得更简单。
 - en: '**Bio: Jean-Nicholas Hould** is a [Data Scientist from Montreal, Canada](http://jeannicholashould.com/?utm_source=kdnugget).
     Author at JeanNicholasHould.com.'
   id: totrans-211
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历: Jean-Nicholas Hould** 是来自 [加拿大蒙特利尔的数据科学家](http://jeannicholashould.com/?utm_source=kdnugget)。JeanNicholasHould.com
+    的作者。'
 - en: '[Original](http://www.jeannicholashould.com/tidy-data-in-python.html). Reposted
     with permission.'
   id: totrans-212
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](http://www.jeannicholashould.com/tidy-data-in-python.html)。经许可转载。'
 - en: '**Related:**'
   id: totrans-213
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关:**'
 - en: '[Data Science Statistics 101](/2016/07/data-science-statistics-101.html)'
   id: totrans-214
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学统计学 101](/2016/07/data-science-statistics-101.html)'
 - en: '[Central Limit Theorem for Data Science](/2016/08/central-limit-theorem-data-science.html)'
   id: totrans-215
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中的中心极限定理](/2016/08/central-limit-theorem-data-science.html)'
 - en: '[Doing Statistics with SQL](/2016/08/doing-statistics-sql.html)'
   id: totrans-216
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 SQL 做统计](/2016/08/doing-statistics-sql.html)'
 - en: '* * *'
   id: totrans-217
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-218
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-219
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-220
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
