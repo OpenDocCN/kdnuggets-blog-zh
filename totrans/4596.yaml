@@ -1,191 +1,290 @@
 - en: 'Nothing but NumPy: Understanding & Creating Neural Networks with Computational
     Graphs from Scratch'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 只有 NumPy：从头理解和创建计算图神经网络
 - en: 原文：[https://www.kdnuggets.com/2019/08/numpy-neural-networks-computational-graphs.html](https://www.kdnuggets.com/2019/08/numpy-neural-networks-computational-graphs.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/08/numpy-neural-networks-computational-graphs.html](https://www.kdnuggets.com/2019/08/numpy-neural-networks-computational-graphs.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Rafay Khan](https://medium.com/@rafayak)**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Rafay Khan](https://medium.com/@rafayak)**。'
 - en: Understanding new concepts can be hard, especially these days when there is
     an avalanche of resources with only cursory explanations for complex concepts.
     This blog is the result of a dearth of detailed walkthroughs on how to create
     neural networks in the form of computational graphs.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 理解新概念可能很困难，尤其是当现在有大量资源但仅提供了对复杂概念的粗略解释时。这篇博客是为了填补有关如何创建计算图形式的神经网络的详细讲解的空缺。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的快车道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In this blog posts, I consolidate all that I have learned as a way to give back
     to the community and help new entrants. I will be creating common forms of neural
     networks all with the help of nothing but [NumPy](https://www.numpy.org/).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇博客文章中，我总结了我所学到的内容，以便回馈社区并帮助新手。我将创建常见形式的神经网络，完全依靠[NumPy](https://www.numpy.org/)。
 - en: '*This blog post is divided into two parts, the first part will be understanding
     the basics of a neural network and the second part will comprise the code for
     implementing everything learned from the first part.*'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '*这篇博客文章分为两个部分，第一部分将理解神经网络的基础知识，第二部分将包含实现第一部分所学内容的代码。*'
 - en: '* * *'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'Part Ⅰ: Understanding a Neural Network'
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第Ⅰ部分：理解神经网络
 - en: Let’s dig in
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 让我们深入探讨
 - en: Neural networks are a model inspired by how the brain works. Similar to neurons
     in the brain, our ‘mathematical neurons’ are also, intuitively, connected to each
     other; they take inputs(dendrites), do some simple computation on them and produce
     outputs(axons).
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 神经网络是一种受到大脑工作方式启发的模型。类似于大脑中的神经元，我们的‘数学神经元’也直观地彼此连接；它们接收输入（树突），对其进行一些简单的计算，然后产生输出（轴突）。
 - en: The best way to learn something is to build it. Let’s start with a simple neural
     network and hand-solve it. This will give us an idea of how the computations flow
     through a neural network.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 学习某样东西的最佳方式是亲自构建它。让我们从一个简单的神经网络开始，并手动解决它。这将让我们了解计算是如何在神经网络中流动的。
 - en: '![](../Images/38d47b6a2b5326a19ecc47497a93cc63.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/38d47b6a2b5326a19ecc47497a93cc63.png)'
 - en: Fig 1\. Simple input-output only neural network.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 1\. 简单的输入输出神经网络。
 - en: As in the figure above, most of the time you will see a neural network depicted
     in a similar way. But this succinct and simple looking picture hides a bit of
     the complexity. Let’s expand it out.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上图所示，大多数时候你会看到神经网络以类似的方式描绘。但这张简洁的图片隐藏了一些复杂性。让我们展开它。
 - en: '![](../Images/4afeb3863fb437416d94ef2a87e66b6b.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4afeb3863fb437416d94ef2a87e66b6b.png)'
 - en: Fig 2\. Expanded neural network
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 2\. 扩展的神经网络
 - en: Now, let’s go over each node in our graph and see what it represents.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们逐一查看图中的每个节点，了解它所代表的内容。
 - en: '![](../Images/023769593ccc84ae6e7517d53f365ecb.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/023769593ccc84ae6e7517d53f365ecb.png)'
 - en: Fig 3\. Inputs nodes ***x₁*** and ***x₂***
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 3\. 输入节点 ***x₁*** 和 ***x₂***
 - en: These nodes represent our inputs for our first and second features, ***x₁*** and ***x₂, ***that
     define a single example we feed to the neural network*, *thus called ***“Input
     Layer”***
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些节点代表了我们用于第一个和第二个特征的输入，***x₁*** 和 ***x₂***，定义了我们提供给神经网络的单个示例，*因此被称为***“输入层”***
 - en: '![](../Images/029034be43e0b85ee3dab729317e95fc.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/029034be43e0b85ee3dab729317e95fc.png)'
 - en: Fig 4\. Weights
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 4\. 权重
 - en: '***w₁*** and ***w₂*** represent our weight vectors (in some neural network
     literature it is denoted with the *theta* symbol,** *θ***). Intuitively, these
     dictate how much influence each of the input features should have in computing
     the next node. If you are new to this, think of them as playing a similar role
     to the ‘slope’ or ‘gradient’ constant in a linear equation.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '***w₁*** 和 ***w₂*** 表示我们的权重向量（在一些神经网络文献中，它用*theta*符号表示，即** *θ* **）。直观地说，这些决定了每个输入特征在计算下一个节点时应有多大影响。如果你对此不熟悉，可以将它们视为类似于线性方程中的‘斜率’或‘梯度’常数。'
 - en: '*Weights are the main values our neural network has to “learn”*. So initially,
     we will set them to ***random values* **and let the “*learning algorithm”* of
     our neural network decide the best weights that result in the correct outputs.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '*权重是我们神经网络需要“学习”的主要值*。所以最初，我们将它们设置为 ***随机值*** 并让我们的“*学习算法*”决定最佳权重，以产生正确的输出。'
 - en: Why random initialization? More on this later.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 为什么随机初始化？稍后会详细说明。
 - en: '![](../Images/e7548706766137f30f4cf5f3cf7cc364.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e7548706766137f30f4cf5f3cf7cc364.png)'
 - en: Fig 5\. Linear operation
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 5. 线性操作
 - en: This node represents a linear function. Simply, *it takes all the inputs coming
     to it and creates a linear equation/combination out of them*. ( *By convention,
     it is understood that a linear combination of weights and inputs is part of each
     node, except for the input nodes in the input layer, thus this node is often omitted
     in figures, like in Fig.1. *In this example, I’ll leave it in)
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个节点表示一个线性函数。简单地说，*它接收所有传入的输入，并将它们创建成一个线性方程/组合*。（*根据惯例，理解为每个节点的线性组合包含权重和输入，除了输入层中的输入节点，因此这个节点在图中经常被省略，如图
+    1 所示。在这个示例中，我将它保留*）
 - en: '![](../Images/68cddc88577301e08686f2628a05c51b.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/68cddc88577301e08686f2628a05c51b.png)'
 - en: Fig 6\. output node
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 6. 输出节点
 - en: 'This ***σ*** node takes the input and passes it through the following function,
     called the **sigmoid function**(because of its S-shaped curve), also known as
     the **logistic function**:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个 ***σ*** 节点将输入传递给以下函数，称为 **sigmoid 函数**（因其 S 形曲线而得名），也称为 **logistic 函数**：
 - en: '![](../Images/bed80c69422c9e4f61a41364a8a65f7a.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bed80c69422c9e4f61a41364a8a65f7a.png)'
 - en: Fig 7\. Sigmoid(Logistic) function
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 7. Sigmoid（Logistic）函数
 - en: Sigmoid is one of the many “activations functions” used in neural networks.
     The job of an activation function is to change the input to a different range.
     For example, if *z > 2* then, *σ(z) ≈ 1* and similarly, if *z < -2 then, σ(z)
     ≈ 0\. S*o, the sigmoid function squashes the output range to (0, 1)* (this ‘()’
     notation implies exclusive boundaries; never completely outputs 0 or 1 as the
     function asymptotes, but reaches very close to boundary values)*
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: Sigmoid 是神经网络中众多“激活函数”之一。激活函数的作用是将输入转换到不同的范围。例如，如果 *z > 2*，那么 *σ(z) ≈ 1*，类似地，如果
+    *z < -2*，则 *σ(z) ≈ 0*。所以，sigmoid 函数将输出范围压缩到 (0, 1)（此‘()’符号表示排他性边界；函数渐近线但不会完全输出
+    0 或 1，而是接近边界值）。
 - en: '**In our above neural network since it is the last node, it performs the function
     of output**. The predicted output is denoted by ***ŷ. ***(*Note: in some neural
     network literature this is denoted by ‘****h(θ)’****, where ‘h’ is called the
     hypothesis i.e. this is the hypothesis of the neural network, a.k.a the output
     prediction, given parameter θ; where θ are weights of the neural networks)*'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在我们上面的神经网络中，由于它是最后一个节点，因此它执行输出的功能**。预测输出用 ***ŷ*** 表示。（*注意：在一些神经网络文献中，这用‘****h(θ)’****
+    表示，其中‘h’称为假设，即这是神经网络的假设，也就是输出预测，给定参数 θ；其中 θ 是神经网络的权重*）。'
 - en: '* * *'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Now that we know what each and everything represents let’s flex our muscles
     by computing each node by hand on some dummy data.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们知道每个元素代表什么了，让我们通过手动计算一些虚拟数据中的每个节点来展现我们的实力吧。
 - en: '![](../Images/2ed4a064215733af4f22ae297cfbe5be.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2ed4a064215733af4f22ae297cfbe5be.png)'
 - en: Fig 8\. OR gate
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 8. 或门
 - en: The data above represents an **OR** gate(output 1 if any input is 1). Each row
     of the table represents an *‘example’* we want our neural network to learn from.
     After learning from the given examples we want our neural network to perform the
@@ -194,408 +293,628 @@
     the points on a 2-D plane so that it is easy to visualize(green crosses represent
     points where the output(***y)*** is ***1*** and the red dot represents the point
     where the output is ***0***).
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的数据代表一个**OR**门（如果任何输入为1则输出1）。表格的每一行代表一个*‘示例’*，我们希望神经网络从中学习。通过学习这些示例，我们希望神经网络能够执行
+    OR 门的功能；给定输入特征，***x₁*** 和 ***x₂***，尝试输出相应的***y（也称为‘标签’）***。*我还将这些点绘制在二维平面上，以便于可视化（绿色交叉点表示输出（***y***）为***1***的点，而红色点表示输出为***0***的点）。*
 - en: This OR-gate data is particularly interesting, as it is ***linearly separable*** i.e.
     we can draw a straight line to separate the green cross from the red dot.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个 OR 门数据特别有趣，因为它是***线性可分的***，即我们可以画一条直线来将绿色交叉点与红色点分开。
 - en: '![](../Images/7f867752ccff54507e611dedba287184.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7f867752ccff54507e611dedba287184.png)'
 - en: Fig 9\. Showing that the OR gate data is linearly separable
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 图9\. 显示 OR 门数据是线性可分的
 - en: We’ll shortly see how our simple neural network performs this task.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将很快看到我们的简单神经网络如何执行这一任务。
 - en: Data flows from left-to-right in our neural network. In technical terms, this
     process is called** ‘forward propagation’**; the computations from each node are
     forwarded to the next node, it is connected to.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据在我们的神经网络中从左到右流动。在技术术语中，这个过程叫做**‘前向传播’**；每个节点的计算结果被传递到它所连接的下一个节点。
 - en: Let’s go through all the computations our neural network will perform on given
     the first example, ***x₁=0***, and*** x₂=0***. Also, we’ll initialize weights** *w₁***and ***w₂*** to ***w₁=0.1*** and ***w₂=0.6 ****(recall,
     these weights a have been randomly selected)*
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们详细了解一下神经网络在给定第一个示例***x₁=0*** 和 ***x₂=0*** 时将执行的所有计算。同时，我们将初始化权重** *w₁***和***w₂***
+    为***w₁=0.1*** 和 ***w₂=0.6****（回顾一下，这些权重是随机选择的）*
 - en: '![](../Images/43bd23a4aa27407e55a73fa12979bc68.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/43bd23a4aa27407e55a73fa12979bc68.png)'
 - en: Fig 10\. Forward propagation of the first example from OR table data
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 图10\. 从 OR 表数据中进行的第一个示例的前向传播
 - en: With our current weights, ***w₁= 0.1*** and ***w₂ = 0.6***,ournetwork’s output
     is a bit far from where we’d like it to be. The predicted output, ***ŷ,*** should
     be*** ŷ≈0***for*** x₁=0 ***and ***x₂=0***, right now its ***ŷ=0.5***.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 以我们当前的权重，***w₁= 0.1*** 和 ***w₂ = 0.6***，我们的网络输出距离我们期望的位置还有点距离。预测的输出，***ŷ***，应该是***ŷ≈0***对于***x₁=0***
+    和 ***x₂=0***，现在它的***ŷ=0.5***。
 - en: So, how does one tell a neural network how far it is from our desired output?
     In comes the ***Loss Function*** to the rescue.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，如何告诉神经网络它距离我们期望的输出有多远呢？这时，***损失函数***来救援。
 - en: '* * *'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Loss Function
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 损失函数
 - en: '*The ****Loss Function ****is a simple equation that tells us how far our neural
     network’s predicted output(****ŷ****) is from our desired output(****y****), ****for
     ONE example, only.***'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '*损失函数是一个简单的方程，告诉我们神经网络预测的输出（***ŷ***）与期望输出（***y***）之间的距离，只针对一个示例。*'
 - en: '*The**** derivative ****of the loss function dictates whether to increase or
     decrease weights. A positive derivative would mean decrease the weights and negative
     would mean increase the weights. ****The steeper the slope the more incorrect
     the prediction was.***'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '*损失函数的****导数****决定了是增加还是减少权重。正的导数意味着减少权重，而负的导数则意味着增加权重。****斜率越陡峭，预测错误越大。*'
 - en: '![](../Images/efff273455748309f30a97bb3e5a2a62.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/efff273455748309f30a97bb3e5a2a62.png)'
 - en: Fig 11\. Loss function visualized
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 图11\. 损失函数的可视化
 - en: '*The Loss function curve depicted in Figure 11 is an ideal version. In real-world
     cases, the Loss function may not be so smooth, with some bumps and saddles points
     along the way to the minimum.*'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图11中描绘的损失函数曲线是一个理想化的版本。在实际情况下，损失函数可能不会如此平滑，而是沿着到达最小值的路径上有一些起伏和鞍点。*'
 - en: 'There are many different kinds of loss functions***each essentially calculating
     the error between predicted output and desired output***. Here we’ll use one of
     the simplest loss functions, the ***squared-error Loss function. ***Defined as
     follows:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 有许多不同种类的损失函数***每种都计算预测输出与期望输出之间的误差***。在这里，我们将使用其中一种最简单的损失函数，即***平方误差损失函数***。定义如下：
 - en: '![](../Images/2793060333d3b5ab830c6a93baa0832f.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2793060333d3b5ab830c6a93baa0832f.png)'
 - en: Fig 12\. Loss Function. Calculating error for a single example
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 图12\. 损失函数。计算单个示例的误差
 - en: Taking the **square keeps everything nice and positive** and the **fraction
     (1/2) is there so that it cancels out when taking the derivative of the squared** **term** *(it
     is common among some machine learning practitioners to leave the fraction out)*.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 采用**平方保持一切都为正**，以及**分数 (1/2) 是为了在对平方** **项求导时可以相互抵消** *(在一些机器学习从业者中，常常会省略这个分数)*。
 - en: Intuitively, the Squared Error Loss function helps us in minimizing the vertical
     distance between our predictor line(blue line) and actual data(green dot). Behind
     the scenes, this predictor line is our ***z***(linear function)node.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 从直观上讲，平方误差损失函数帮助我们最小化预测线（蓝线）与实际数据（绿色点）之间的垂直距离。在后台，这条预测线是我们的***z***（线性函数）节点。
 - en: '![](../Images/ce732454b37cd559449ffcd308da0a7e.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ce732454b37cd559449ffcd308da0a7e.png)'
 - en: Fig 13\. Visualization of the effect of the Loss function
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 13\. 损失函数效应的可视化
 - en: '* * *'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Now that we know the purpose of a Loss function let’s calculate the error in
     our current prediction ***ŷ=0.5, ***given*** y=0***
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们知道了损失函数的目的，让我们计算当前预测的误差***ŷ=0.5***，已知***y=0***
 - en: '![](../Images/c3f6de91a81e4ccdeaac590db88d93a6.png)'
+  id: totrans-73
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c3f6de91a81e4ccdeaac590db88d93a6.png)'
 - en: Fig 14\. Loss calculated for 1ˢᵗ example
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 14\. 第一个示例计算的损失
 - en: As we can see the Loss is ***0.125***. Given this, *we can now use the derivative
     of the Loss function to check whether we need to increase or decrease our weights.*
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 如我们所见，损失是***0.125***。基于此，*我们现在可以使用损失函数的导数来检查是否需要增加或减少权重*。
 - en: This process is called ***backpropagation, ***as we’ll be doing the opposite
     of the *forward* phase. Instead of going from input to output we’ll track backward
     from output to input. Simply, backpropagation allows us to figure out how much
     of the Loss each part of the neural network was responsible for.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个过程被称为***反向传播***，因为我们将执行与*前向*阶段相反的操作。我们将从输出向输入追踪，而不是从输入到输出。简单来说，反向传播使我们能够找出神经网络的每一部分对损失的责任程度。
 - en: '* * *'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: To perform backpropagation we’ll employ the following technique: *at each node,
     we only have our local gradient computed(partial derivatives of that node), then
     during backpropagation, as we are receiving numerical values of gradients from
     upstream, we take these and multiply with local gradients to pass them on to their
     respective connected nodes.*
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了执行反向传播，我们将采用以下技术：*在每个节点，我们只计算局部梯度（该节点的偏导数），然后在反向传播过程中，当我们从上游接收到梯度的数值时，将这些数值与局部梯度相乘，传递给各自连接的节点。*
 - en: '![](../Images/97edd425f04f3ee5d639a7e8944eeaed.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/97edd425f04f3ee5d639a7e8944eeaed.png)'
 - en: Fig 15\. Gradient Flow
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 15\. 梯度流
 - en: '*This is a generalization of the ****chain rule**** from calculus.*'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '*这是一种从微积分中**链式法则**的推广。*'
 - en: '* * *'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Since ***ŷ***(predicted label) dictates our*** Loss ***and*** y***(actual label)is
     constant, for a single example, *we will take the partial derivative of Loss with
     respect to ****ŷ***
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于***ŷ***（预测标签）决定了我们的***损失***，而***y***（实际标签）是常数，对于单个示例，*我们将对损失关于****ŷ****进行偏导数计算*
 - en: '![](../Images/93c77d3279ab1144e161a82ea3ba66c4.png)'
+  id: totrans-84
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/93c77d3279ab1144e161a82ea3ba66c4.png)'
 - en: Fig 16\. The partial derivative of Loss w.r.t *ŷ*
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 16\. 损失对*ŷ*的偏导数
 - en: 'Since the backpropagation steps can seem a bit complicated I’ll go over them
     step by step:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于反向传播步骤可能看起来有些复杂，我将逐步讲解：
 - en: '![](../Images/717944c968df7e55dca1ebfcadce6002.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/717944c968df7e55dca1ebfcadce6002.png)'
 - en: Fig 17.a. Backpropagation
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 17.a. 反向传播
 - en: '* * *'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: For the next calculation, we’ll need the derivative of the sigmoid function,
     since it forms the local gradient of the red node. Let’s derive that.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于下一个计算，我们需要 sigmoid 函数的导数，因为它形成了红色节点的局部梯度。让我们推导一下。
 - en: '![](../Images/403208547ced862d639a5c26249ef199.png)'
+  id: totrans-91
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/403208547ced862d639a5c26249ef199.png)'
 - en: '![](../Images/382027c4b501f3bd8aa2f0794ade600e.png)'
+  id: totrans-92
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/382027c4b501f3bd8aa2f0794ade600e.png)'
 - en: '![](../Images/79d315fd88c9b1a19b60f2a13581c435.png)'
+  id: totrans-93
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/79d315fd88c9b1a19b60f2a13581c435.png)'
 - en: Fig18\. The derivative of the Sigmoid function.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 18\. Sigmoid 函数的导数。
 - en: Let’s use this in the next backward calculation
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们在下一步的反向计算中使用这一点
 - en: '* * *'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![](../Images/1018c6b9fced743b807c08e992675308.png)'
+  id: totrans-97
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1018c6b9fced743b807c08e992675308.png)'
 - en: Fig 17.b. Backpropagation
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 17.b. 反向传播
 - en: The backward computations should not propagate all the way to inputs as we don’t
     want to change our input data(i.e. red arrows should not go to green nodes). We
     only want to change the weights associated with inputs.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 反向计算不应传播到输入，因为我们不希望更改输入数据（即红色箭头不应指向绿色节点）。我们只想更改与输入相关的权重。
 - en: '![](../Images/23e4187fc6e49256c8005f32d0279946.png)'
+  id: totrans-100
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/23e4187fc6e49256c8005f32d0279946.png)'
 - en: Fig 17.c. Backpropagation
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 图17.c. 反向传播
 - en: Notice something weird? *The derivatives to the Loss with respect to the weights,w₁
     & w₂, are ZERO*! We can’t increase or decrease the weights if their derivatives
     are zero. So then, how do we get our desired output in this instance if we can’t
     figure out how to adjust the weights? *The key thing to note here is that the
     local gradients (***∂z/∂w₁*** and ***∂z/∂w₂***) are ****x₁**** and ****x₂, ***both
     of which, in this example, happens to be zero (i.e. provide no information)
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 发现了什么奇怪的东西吗？*权重w₁和w₂对损失的导数是零*！如果导数为零，我们不能增加或减少权重。那么，如果我们不能调整权重，如何在这种情况下获得期望的输出呢？*这里的关键点是局部梯度（***∂z/∂w₁***和***∂z/∂w₂***）是****x₁****和****x₂***，在这个例子中，都是零（即没有提供信息）。
 - en: This brings us to the concept of ***bias.***
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 这让我们引出了***偏置***的概念。
 - en: '* * *'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Bias
+  id: totrans-105
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 偏置
 - en: Recall equation of a line from your high school days.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 回想一下你高中时的直线方程。
 - en: '![](../Images/5ac67f0badcdaab47b419ffc80816bf0.png)'
+  id: totrans-107
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5ac67f0badcdaab47b419ffc80816bf0.png)'
 - en: Fig 19\. Equation of a Line
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 图19. 直线方程
 - en: Here ***b ***is the bias term. Intuitively, the bias tells us that all outputs
     computed with ***x****(independent variable) *should have an additive bias of ***b.***So,
     when*** x=0***(no information coming from the *independent variable) the output
     should be biased to just ****b.***
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里 ***b***是偏置项。从直观上讲，偏置告诉我们所有用 ***x****（自变量）计算的输出*应该有一个加性偏置为 ***b***。所以，当***x=0***（没有来自*自变量*的信息）时，输出应该偏向于仅仅是****b***。
 - en: '*Note that without the bias term a line can only pass through the origin(0,
     0) and the only differentiating factor between lines would then be the gradient ****m.***'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '*请注意，没有偏置项的直线只能通过原点（0, 0），线与线之间唯一的区别就是梯度****m***。*'
 - en: '![](../Images/cfc5b09e3addf09b814a92dc3f4320fa.png)'
+  id: totrans-111
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cfc5b09e3addf09b814a92dc3f4320fa.png)'
 - en: Fig 20\. Lines from origin
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 图20. 从原点出发的直线
 - en: '* * *'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: So, using this new information let’s add another node to a neural network; the
     bias node. (*In neural network literature, every layer, except the input layer,
     is assumed to have a bias node, just like the linear node, so this node is also
     often omitted in figures.*)
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，利用这些新信息，让我们在神经网络中添加一个节点：偏置节点。(*在神经网络文献中，除了输入层之外，每一层都假设有一个偏置节点，就像线性节点一样，因此这个节点在图中也常常被省略。*)
 - en: '![](../Images/c4dc4ff39a753b93f82c714606b25683.png)'
+  id: totrans-115
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c4dc4ff39a753b93f82c714606b25683.png)'
 - en: Fig 21\. Expanded neural network with a bias node
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 图21. 带偏置节点的扩展神经网络
 - en: Now let’s do a forward propagation with the same example, ***x₁=0, x₂=0, y=0 ***and
     let’s set bias, ***b=0**** (initial bias is always set to zero, rather than a
     random number)*, and let the backpropagation of Loss figure out the bias.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们用相同的例子进行前向传播，***x₁=0, x₂=0, y=0***，并设置偏置***b=0***（初始偏置总是设置为零，而不是随机数），让反向传播的损失来调整偏置。
 - en: '![](../Images/16e04c8a5382ca0d7b8a2868d8f3b1c2.png)'
+  id: totrans-118
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/16e04c8a5382ca0d7b8a2868d8f3b1c2.png)'
 - en: Fig 22\. Forward propagation of the first example from OR table data with a
     bias unit
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 图22. 带偏置单元的OR表数据的前向传播第一个例子
 - en: Well, the forward propagation with a bias of “***b=0***” didn’t change our output
     at all, but let’s do the backward propagation before we make our final judgment.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 好吧，偏置为“***b=0***”的前向传播没有改变我们的输出，但在做出最终判断之前，让我们进行反向传播。
 - en: As before let’s go through backpropagation in a step by step manner.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 如前所述，让我们一步步地进行反向传播。
 - en: '![](../Images/7515f10dd654c6210465773d54941712.png)'
+  id: totrans-122
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7515f10dd654c6210465773d54941712.png)'
 - en: Fig 23.a. Backpropagation with bias
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 图23.a. 带偏置的反向传播
 - en: '![](../Images/45a8ade6b9000b2927727bdaca34554c.png)'
+  id: totrans-124
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/45a8ade6b9000b2927727bdaca34554c.png)'
 - en: Fig 23.b. Backpropagation with bias
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 图23.b. 带偏置的反向传播
 - en: '![](../Images/e0e060d94e0e1c45d10d2b07f729aea2.png)'
+  id: totrans-126
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e0e060d94e0e1c45d10d2b07f729aea2.png)'
 - en: Fig 23.c. Backpropagation with bias
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 图23.c. 带偏置的反向传播
 - en: Hurrah! we just figured out how much to adjust the bias. Since the derivative
     of bias(**∂L/∂b**) is positive 0.125, we will need to adjust the bias by moving
     in the negative direction of the gradient(recall the curve of the Loss function
     from before). This is technically called ***gradient descent***, as we are “descending”
     away from the sloping region to a flat region using the direction of the gradient.
     Let’s do that.
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 太好了！我们刚刚找到了调整偏置的量。由于偏置的导数（**∂L/∂b**）为正0.125，我们需要沿着梯度的负方向调整偏置（回忆之前的损失函数曲线）。这在技术上称为***梯度下降***，因为我们使用梯度的方向“下降”从斜坡区域到平坦区域。让我们开始吧。
 - en: '![](../Images/c8a67c5a5ed306eb876dc50be31c278d.png)'
+  id: totrans-129
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c8a67c5a5ed306eb876dc50be31c278d.png)'
 - en: Fig 24\. Calculated new bias using gradient descent
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 24\. 使用梯度下降计算的新偏差
 - en: Now, that we’ve slightly adjusted the bias to ***b=-0.125, ***let’s test if
     we’ve done the right thing by doing a **forward propagation **and** checking the
     new Loss*.***
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们已经将偏差略微调整为 ***b=-0.125，***让我们通过进行 **前向传播**和** 检查新的损失**来测试我们是否做对了。
 - en: '![](../Images/78ffcea1a6a45702ab2ed34f709d6ee3.png)'
+  id: totrans-132
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/78ffcea1a6a45702ab2ed34f709d6ee3.png)'
 - en: Fig 25\. Forward propagation with newly calculated bias
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 25\. 使用新计算的偏差进行前向传播
 - en: '![](../Images/177d386128f5a51220ae6b4a640d08ca.png)'
+  id: totrans-134
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/177d386128f5a51220ae6b4a640d08ca.png)'
 - en: Fig 26\. Loss after newly calculated bias
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 26\. 新计算的偏差后的损失
 - en: Now our predicted outputis*** ŷ≈0.469****(rounded to 3 decimal places)****, ***that’s
     a slight improvement from the previous 0.5 and Loss is down from 0.125 to around ***0.109***.
     This slight correction is something that the neural network has ‘learned’ just
     by comparing its predicted output with the desired output, ***y***, and then moving
     in the direction opposite of the gradient***. ***Pretty cool, right?
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们的预测输出是*** ŷ≈0.469****（四舍五入到小数点后 3 位）****， ***比之前的 0.5 有了轻微的改进，损失从 0.125
+    降到大约 ***0.109***。这种轻微的修正是神经网络通过将预测输出与期望输出 ***y*** 进行比较后‘学习’到的，然后朝梯度的相反方向移动***。 ***相当酷，对吧？
 - en: Now you may be wondering, this is only a small improvement from the previous
     result and how do we get to the minimum Loss. Two things come into play: ***a)* how
     many iterations of ‘training’ we perform** (each training cycle is forward propagation
     followed by backward propagation and updating the weights through gradient descent). ***b)* the
     learning rate.**
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你可能会想，这只是比之前的结果略有改进，我们如何才能达到最小损失。两个因素发挥作用： ***a)* 我们执行了多少次‘训练’**（每个训练周期包括前向传播、反向传播和通过梯度下降更新权重）。 ***b)* 学习率。**
 - en: Learning rate??? What’s that? Let’s talk about it.
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 学习率？？？那是什么？让我们来谈谈它。
 - en: '* * *'
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Learning Rate
+  id: totrans-140
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 学习率
 - en: Recall, how we calculated the new bias, above, by moving in the direction opposite
     of the gradient(i.e. ***gradient descent***).
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 回顾一下，我们如何通过在梯度的相反方向上移动来计算新的偏差（即***梯度下降***）。
 - en: '![](../Images/0c6d22ebf234d7114a08eaf5f0c4cbf3.png)'
+  id: totrans-142
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0c6d22ebf234d7114a08eaf5f0c4cbf3.png)'
 - en: Fig 27\. The equation for updating bias
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 27\. 更新偏差的方程
 - en: Notice that when we updated the bias we moved ***1 step in the opposite direction
     of the gradient.***
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意到当我们更新偏差时，我们在梯度的相反方向上移动了 ***1 步。***
 - en: '![](../Images/6a556088c35b09bcaeb4660c99ebdbaf.png)'
+  id: totrans-145
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6a556088c35b09bcaeb4660c99ebdbaf.png)'
 - en: Fig 28\. The equation for updating bias showing “step”
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 28\. 更新偏差的方程，显示“步数”
 - en: We could have moved 0.5, 0.9, 2, 3 or whatever fraction of steps we desired
     in the opposite direction of the gradient. This ‘*number of steps’ is what we
     define as the ****learning rate***, often denoted with*** α***(alpha)***.***
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以在梯度的相反方向上移动 0.5、0.9、2、3 或任何我们想要的步数。这种‘*步数*’就是我们定义的****学习率***，通常用*** α***(alpha)***表示。***
 - en: '![](../Images/d08027c5693ca75a43e04fae80925afb.png)'
+  id: totrans-148
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d08027c5693ca75a43e04fae80925afb.png)'
 - en: Fig 29\. The general equation for gradient descent
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 29\. 梯度下降的一般方程
 - en: 'Learning rate defines how quickly we reach the minimum loss. Let’s visualize
     below what the learning rate is doing:'
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 学习率定义了我们达到最小损失的速度。让我们在下面可视化学习率的作用：
 - en: '![](../Images/9978262f5b2b35ab7e5b5145bea544bc.png)'
+  id: totrans-151
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9978262f5b2b35ab7e5b5145bea544bc.png)'
 - en: Fig 30\. Visualizing the effect of learning rate.
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 30\. 可视化学习率的效果
 - en: As you can see with a lower learning rate(α=0.5) our descent along the curve
     is slower and we take many steps to reach the minimum point. On the other hand,
     with a higher learning rate(α=5) we take much bigger steps and reach the minimum
     point much faster.
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，使用较低的学习率（α=0.5）时，我们沿曲线的下降较慢，需要很多步才能到达最小点。另一方面，使用较高的学习率（α=5），我们步伐更大，更快到达最小点。
 - en: '*The keen-eyed may have noticed that gradient descent steps(green arrows) keep
     getting smaller as we get closer and closer to the minimum, why is that? Recall,
     that the learning rate is being multiplied by the gradient at that point along
@@ -605,26 +924,36 @@
     training is not necessary(some variations of gradient descent start with a high
     learning rate to descend quickly down the slope and then reduce it gradually,
     this is called “annealing the learning rate”)*'
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: '*眼尖的读者可能注意到，梯度下降步骤（绿色箭头）在接近最小点时越来越小，这是为什么呢？回忆一下，学习率在曲线上的那个点与梯度相乘；当我们从倾斜区域下降到u形曲线的平坦区域时，接近最小点，梯度不断变小，因此步伐也变小。因此，在训练过程中改变学习率是不必要的（一些梯度下降的变体开始时使用较高的学习率以快速下坡，然后逐渐降低，这被称为“退火学习率”）*'
 - en: So what’s the takeaway? Just set the learning rate as high possible and reach
     the optimum loss quickly. NO. Learning rate can be a double-edged sword. Too high
     a learning rate and the parameters(weights/biases) don’t reach the optimum instead
     start to diverge away from the optimum. To small a learning rate and the parameters
     take too long to converge to the optimum.
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，结论是什么呢？只需将学习率设置得尽可能高，以便快速达到最佳损失吗？不是的。学习率可能是把双刃剑。学习率过高，参数（权重/偏置）不会达到最佳值，而是开始远离最佳值。学习率过小，参数收敛到最佳值的时间过长。
 - en: '![](../Images/702552bdc0f0bceec920fbc5d1125490.png)'
+  id: totrans-156
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/702552bdc0f0bceec920fbc5d1125490.png)'
 - en: Fig 31\. Visualizing the effect of very low vs. very high learning rate.
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: 图31. 可视化非常低与非常高学习率的效果。
 - en: Small learning rate(α=5*10⁻¹⁰) resulting is numerous steps to reach the minimum
     point is self-explanatory; multiply gradient with a small number(α) results in
     a proportionally small step.
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: 小学习率（α=5*10⁻¹⁰）导致需要很多步骤才能达到最小点，这很容易理解；将梯度乘以一个小数（α）会导致步伐成比例地变小。
 - en: Large learning rate(α=50) causing gradient descent to diverge may be confounding,
     but the answer is quite simple; note that at each step gradient descent approximates
     its path downward by moving in straight lines(green arrows in the figures), in
@@ -635,23 +964,31 @@
     past the minimum due to the large learning rate. This cycle of continuous overestimates
     eventually cause the results to diverge(Loss after each training cycle increase,
     instead of decrease).
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: 大学习率（α=50）导致梯度下降发散可能令人困惑，但答案很简单；注意到在每一步，梯度下降通过沿直线（图中的绿色箭头）移动来逼近其下行路径，简而言之，它估计其向下的路径。当学习率过高时，我们迫使梯度下降采取更大的步伐。更大的步伐往往过高估计了向下的路径并越过了最小点，然后为了纠正错误的估计，梯度下降试图朝着最小点移动，但由于学习率过高，再次越过最小点。这个不断过高估计的循环最终导致结果发散（每次训练周期后的损失增加，而不是减少）。
 - en: Learning rate is what’s called a ***hyper-parameter***. Hyper-parameters are
     parameters that the neural network can’t essentially learn through backpropagation
     of gradients, they have to be hand-tuned according to the problem and its dataset,
     by the creator of the neural network model. *(The choice of the Loss function,
     above, is also hyper-parameter)*
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: 学习率被称为***超参数***。超参数是神经网络不能通过梯度反向传播实质上学习的参数，它们必须由神经网络模型的创建者根据问题及其数据集手动调整。*（上面选择的损失函数也是超参数）*
 - en: In short, the goal is not the find the “perfect learning rate ” but instead
     a learning rate large enough so that the neural network trains successfully and
     efficiently without diverging.
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: 总而言之，目标不是找到“完美的学习率”，而是找到一个足够大的学习率，使神经网络能够成功有效地训练而不发散。
 - en: '* * *'
+  id: totrans-162
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: So, far we’ve only used one example(***x₁=0 ***and ***x₂=0***) to adjust our
     weights and bias(*actually, only our bias up till now*????) and that reduced the
     loss on one example from our entire dataset(OR gate table). But we have more than
@@ -663,132 +1000,201 @@
     where we use a subset of the data set in each iteration and ****stochastic gradient
     descent****, where we only use one example per training iteration as we’ve done
     so far).*
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，我们仅使用一个示例（***x₁=0***和***x₂=0***）来调整我们的权重和偏差（*实际上，到目前为止仅调整了偏差*????），这将整个数据集（或门表）中的一个示例的损失降低了。但我们有多个示例需要学习，我们希望减少所有示例的损失。**理想情况下，在一次训练迭代中，我们希望减少所有训练示例的损失**。这称为**批量梯度下降**（或完整批量梯度下降），因为我们在每次训练迭代中使用整个训练示例批量来改善我们的权重和偏差。*（其他形式包括****迷你批量梯度下降****，我们在每次迭代中使用数据集的一个子集，以及****随机梯度下降****，我们在每次训练迭代中仅使用一个示例，就像我们到目前为止所做的那样。）*
 - en: '*A training iteration where the neural network goes through all the training
     examples is called an ****Epoch***. *If using mini-batches than an epoch would
     be complete after the neural network goes through all the mini-batches, similarly
     for stochastic gradient descent where a batch is just one example.*'
+  id: totrans-164
   prefs: []
   type: TYPE_NORMAL
+  zh: '*神经网络经过所有训练示例的训练迭代称为****Epoch****。*如果使用迷你批量，则在神经网络遍历所有迷你批量后，epoch就完成了，这对于随机梯度下降也是类似的，其中一个批量仅是一个示例。*'
 - en: Before we proceed further we need to define something called a ***Cost Function***.
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: 在进一步讨论之前，我们需要定义一个叫做***成本函数***的概念。
 - en: '* * *'
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Cost Function
+  id: totrans-167
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 成本函数
 - en: When we perform “*batch gradient descent”* we need to slightly change our Loss
     function to accommodate not just one example but all the examples in the batch.
     This adjusted Loss function is called the** Cost Function**.
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们执行“*批量梯度下降*”时，我们需要稍微修改我们的损失函数，以适应不仅仅是一个示例，而是批量中的所有示例。这种调整后的损失函数称为**成本函数**。
 - en: '*Also, note that the curve of the Cost Function is similar to the curve of
     the Loss function(same U-Shape).*'
+  id: totrans-169
   prefs: []
   type: TYPE_NORMAL
+  zh: '*另外，请注意，成本函数的曲线类似于损失函数的曲线（相同的U形）。*'
 - en: '***Instead of calculating the Loss on one example the cost function calculates
     average Loss across ALL the examples.***'
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: '***与在一个示例上计算损失不同，成本函数计算所有示例的平均损失。***'
 - en: '![](../Images/a63cf35d9719b84702bce97dc51f9783.png)'
+  id: totrans-171
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a63cf35d9719b84702bce97dc51f9783.png)'
 - en: Fig 32\. Cost function
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 32\. 成本函数
 - en: Intuitively, the Cost function is expanding out the capability of the Loss function.
     Recall, how the Loss function was helping to minimize the vertical distance between
     a *single* data point and the predictor line(***z***). **The Cost function is
     helping to minimize the vertical distance(Squared Error Loss) between multiple
     data points, concurrently.**
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: 直观地说，成本函数是在扩展损失函数的能力。回想一下，损失函数是如何帮助最小化*单个*数据点和预测线（***z***）之间的垂直距离的。**成本函数有助于同时最小化多个数据点之间的垂直距离（平方误差损失）。**
 - en: '![](../Images/9b4944591e0a5470a81aceddbfbe1b79.png)'
+  id: totrans-174
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9b4944591e0a5470a81aceddbfbe1b79.png)'
 - en: Fig 33\. Visualization of the effect of the Cost function
+  id: totrans-175
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 33\. 成本函数效果的可视化
 - en: '**During batch gradient descent we’ll use the derivative of the Cost function**,
     instead of the Loss function, to guide our path to minimum cost across all examples. *(In
     some neural network literature, the Cost Function is at times also represented
     with the letter ****‘J’****.)*'
+  id: totrans-176
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在批量梯度下降中，我们将使用成本函数的导数**，而不是损失函数，来指导我们在所有示例中的最低成本路径。*（在某些神经网络文献中，成本函数有时也用字母****‘J’****表示。）*'
 - en: Let’s take a look at how the derivative equation of the Cost function differs
     from the plain derivative of the Loss function.
+  id: totrans-177
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看成本函数的导数方程如何与损失函数的普通导数不同。
 - en: The derivative of Cost Function
+  id: totrans-178
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 成本函数的导数
 - en: '![](../Images/69a4e27a045a3ac65e0a5082d5575600.png)'
+  id: totrans-179
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/69a4e27a045a3ac65e0a5082d5575600.png)'
 - en: Fig 34\. Cost function showing it takes input vectors
+  id: totrans-180
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 34\. 成本函数显示它接受输入向量
 - en: Taking the derivative of this Cost function, which takes vectors as inputs and
     sums them, can be a bit dicey. So, let’s start out on a simple example before
     we generalize the derivative.
+  id: totrans-181
   prefs: []
   type: TYPE_NORMAL
+  zh: 对这个成本函数取导数，它以向量为输入并对其进行求和，可能有些棘手。因此，让我们从一个简单的示例开始，然后再推广导数。
 - en: '![](../Images/6a306e0e6fc713cf705a11ea6e765fa4.png)'
+  id: totrans-182
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6a306e0e6fc713cf705a11ea6e765fa4.png)'
 - en: Fig 35\. Calculation of Cost on a simple vectorized example
+  id: totrans-183
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 35\. 简单向量化示例中的成本计算
 - en: Nothing new here in the calculation of the Cost. Just as expected the Cost,
     in the end, is the average of the Loss, but the implementation is now vectorized*(we
     performed vectorized subtraction followed by element-wise exponentiation, called
     Hadamard exponentiation)*. Let’s derive the partial derivatives.
+  id: totrans-184
   prefs: []
   type: TYPE_NORMAL
+  zh: 在成本的计算中没有新内容。正如预期的那样，成本最终是损失的平均值，但实现现在是向量化的*（我们进行了向量化减法，接着是逐元素的指数运算，称为 Hadamard
+    指数运算）*。让我们推导偏导数。
 - en: '![](../Images/c790a78b2ecfa56eeebbbe35cfe60a66.png)'
+  id: totrans-185
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c790a78b2ecfa56eeebbbe35cfe60a66.png)'
 - en: Fig 36\. Calculation of Jacobian on the simple example
+  id: totrans-186
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 36\. 简单示例中雅可比矩阵的计算
 - en: From this, we can generalize the partial derivative equation.
+  id: totrans-187
   prefs: []
   type: TYPE_NORMAL
+  zh: 从中，我们可以将偏导数方程进行概括。
 - en: '![](../Images/14f124e6a048dbaedb1fd6b6c7621eca.png)'
+  id: totrans-188
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/14f124e6a048dbaedb1fd6b6c7621eca.png)'
 - en: Fig 37\. Generalized partial derivative equation
+  id: totrans-189
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 37\. 广义偏导数方程
 - en: Right now we should take a moment to note how the derivative of the Loss is
     different for the derivative of the Cost.
+  id: totrans-190
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们应该花点时间注意一下损失的导数与成本的导数之间的区别。
 - en: '![](../Images/01ac009233539fc95582270413eb2394.png)'
+  id: totrans-191
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/01ac009233539fc95582270413eb2394.png)'
 - en: Fig 38\. Comparison between the partial derivative of Loss and Cost with respect
     to(w.r.t)** ŷ⁽ⁱ⁾**
+  id: totrans-192
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 38\. 损失和成本相对于（w.r.t）** ŷ⁽ⁱ⁾**的偏导数比较
 - en: We’ll later see how this small change manifests itself in the calculation of
     the gradient.
+  id: totrans-193
   prefs: []
   type: TYPE_NORMAL
+  zh: 稍后我们将看到这个小变化如何体现在梯度计算中。
 - en: '* * *'
+  id: totrans-194
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Back to batch gradient descent.
+  id: totrans-195
   prefs: []
   type: TYPE_NORMAL
+  zh: 回到批量梯度下降。
 - en: 'There are two ways to perform batch gradient descent:'
+  id: totrans-196
   prefs: []
   type: TYPE_NORMAL
+  zh: 批量梯度下降有两种方法：
 - en: '**1.** For each training iteration create separate temporary variables(capital
     deltas, Δ) that will accumulate the gradients(small deltas, δ) for the weights
     and biases from each of the **“*m”*** examples in our training set, then at the
@@ -796,175 +1202,272 @@
     This is a slow method. *(for those familiar time complexity analysis you may notice
     that as the training data set grows this becomes a polynomial-time algorithm,
     O(n²))*'
+  id: totrans-197
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1.** 对于每次训练迭代，创建单独的临时变量（大写的 Δ），这些变量将累积来自训练集中每个**“*m”*** 示例的权重和偏置的梯度（小写的 δ），然后在迭代结束时使用累积梯度的平均值更新权重。这是一种慢方法。*（对于那些熟悉时间复杂度分析的人，你可能会注意到，随着训练数据集的增长，这将成为一个多项式时间算法
+    O(n²)）*'
 - en: '![](../Images/bc1b1d8d36765092165165673e16983a.png)'
+  id: totrans-198
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bc1b1d8d36765092165165673e16983a.png)'
 - en: Fig 39\. Batch Gradient Descent slow method
+  id: totrans-199
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 39\. 批量梯度下降慢方法
 - en: '**2.** The quicker method is similar to above but instead uses vectorized computations
     to calculate all the gradients for all the training examples in one go, so the
     inner loop is removed. Vectorized computations run much quicker on computers.
     This is the method employed by all the popular neural network frameworks and the
     one we’ll follow for the rest of this blog.'
+  id: totrans-200
   prefs: []
   type: TYPE_NORMAL
+  zh: '**2.** 更快的方法与上述类似，但使用向量化计算来一次性计算所有训练样本的所有梯度，因此移除了内部循环。向量化计算在计算机上运行速度更快。这是所有流行神经网络框架使用的方法，也是我们在本博客剩下部分将遵循的方法。'
 - en: For vectorized computations, we’ll make an adjustment to the “Z” node of the
     neural network computation graph and use the Cost function instead of the Loss
     function.
+  id: totrans-201
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于向量化计算，我们将对神经网络计算图的“Z”节点进行调整，并使用成本函数而不是损失函数。
 - en: '![](../Images/9f3f404b2d73fbec45e13317d1af019d.png)'
+  id: totrans-202
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9f3f404b2d73fbec45e13317d1af019d.png)'
 - en: Fig 40\. Vectorized implementation of Z node
+  id: totrans-203
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 40\. Z 节点的向量化实现
 - en: Note that in the figure above we take** dot-product **between ***W*** and ***X*** which
     can be either an appropriate size matrix or vector. The bias, ***b***, is still
     a single number*(a scalar quantity) *here and will be added to the output of the
     dot product in an element-wise fashion. The predicted output will not be just
     a number, but instead a vector, ***Ŷ***, where each element is the predicted
     output of their respective example.
+  id: totrans-204
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，在上图中，我们对** dot-product** 进行了计算，这里的***W***和***X***可以是适当大小的矩阵或向量。偏置***b***在这里仍然是一个单一的数字*(一个标量量)*，将以逐元素的方式添加到点积的输出中。预测的输出不仅是一个数字，而是一个向量***Ŷ***，其中每个元素是各自示例的预测输出。
 - en: Let’s set up out data(***X, W, b & Y***) before doing forward and backward propagation.
+  id: totrans-205
   prefs: []
   type: TYPE_NORMAL
+  zh: 在进行前向传播和反向传播之前，让我们设置数据（***X, W, b & Y***）。
 - en: '![](../Images/2698ecc7113248159932ca490724a885.png)'
+  id: totrans-206
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2698ecc7113248159932ca490724a885.png)'
 - en: Fig 41\. Setup data for vectorized computations.
+  id: totrans-207
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 41\. 设置向量化计算的数据。
 - en: We are now finally ready to perform forward and backward propagation using **Xₜᵣₐᵢₙ**, **Yₜᵣₐᵢₙ**, **W, **and **b**.
+  id: totrans-208
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在终于准备好使用**Xₜᵣₐᵢₙ**、**Yₜᵣₐᵢₙ**、**W**和**b**进行前向传播和反向传播。
 - en: '*(NOTE: All the results below are rounded to 3 decimal points, just for brevity)*'
+  id: totrans-209
   prefs: []
   type: TYPE_NORMAL
+  zh: '*(注意：下列所有结果都四舍五入到小数点后三位，仅为简洁起见)*'
 - en: '![](../Images/f3f0e2fba102a97c7a69e3b6a3220353.png)'
+  id: totrans-210
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f3f0e2fba102a97c7a69e3b6a3220353.png)'
 - en: '![](../Images/cab5b9ab80aff5ae8267b23b1d54aa5b.png)'
+  id: totrans-211
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cab5b9ab80aff5ae8267b23b1d54aa5b.png)'
 - en: Fig 42\. Vectorized Forward Propagation on OR gate dataset
+  id: totrans-212
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 42\. 对 OR 门数据集的向量化前向传播
 - en: How cool is that we calculated all the forward propagation steps for all the
     examples in our data set in one go, just by vectorizing our computations.
+  id: totrans-213
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过向量化我们的计算，我们在一次操作中计算了数据集中所有示例的前向传播步骤，这真是太棒了。
 - en: We can now calculate the **Cost** on these output predictions. *(We’ll go over
     the calculation in detail, to make sure there is no confusion)*
+  id: totrans-214
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以计算这些输出预测的**成本**。*(我们将详细讲解计算过程，以确保没有混淆)*
 - en: '![](../Images/f31fd4809131a60cffac6142821f3ae7.png)'
+  id: totrans-215
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f31fd4809131a60cffac6142821f3ae7.png)'
 - en: Fig 43\. Calculation of Cost on the OR gate data
+  id: totrans-216
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 43\. 对 OR 门数据的成本计算
 - en: Our **Cost** with our current weights, **W**, turns out to be **0.089**. Our
     Goal now is to reduce this cost using backpropagation and gradient descent. As
     before we’ll go through backpropagation in a step by step manner
+  id: totrans-217
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们当前权重**W**下的**成本**为**0.089**。我们的目标是使用反向传播和梯度下降来减少这一成本。和以前一样，我们将逐步进行反向传播。
 - en: '![](../Images/46ab62def1554b11bdae1cba38936c65.png)'
+  id: totrans-218
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/46ab62def1554b11bdae1cba38936c65.png)'
 - en: '![](../Images/fb4ded4c8ce55315bc03d78d50355f21.png)'
+  id: totrans-219
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fb4ded4c8ce55315bc03d78d50355f21.png)'
 - en: Fig 44.a. Vectorized Backward on OR gate data
+  id: totrans-220
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 44.a. 对 OR 门数据的向量化反向传播
 - en: '![](../Images/33106e9650262758d95994d0dd2c1956.png)'
+  id: totrans-221
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/33106e9650262758d95994d0dd2c1956.png)'
 - en: '![](../Images/190f1d46ed4e3ede41133aac1267a916.png)'
+  id: totrans-222
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/190f1d46ed4e3ede41133aac1267a916.png)'
 - en: Fig 44.b. Vectorized Backward on OR gate data
+  id: totrans-223
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 44.b. 对 OR 门数据的向量化反向传播
 - en: '![](../Images/aad459efad7adcd029ab0e86be507ab0.png)'
+  id: totrans-224
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/aad459efad7adcd029ab0e86be507ab0.png)'
 - en: '![](../Images/56021e5b24647574d7187f87d9ef715f.png)'
+  id: totrans-225
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/56021e5b24647574d7187f87d9ef715f.png)'
 - en: Fig 44.c. Vectorized Backward on OR gate data
+  id: totrans-226
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 44.c. 对 OR 门数据的向量化反向传播
 - en: Voila, we used a vectorized implementation of *batch gradient descent* to calculate
     all the gradients in one go.
+  id: totrans-227
   prefs: []
   type: TYPE_NORMAL
+  zh: 哇，我们使用了*批量梯度下降*的向量化实现来一次性计算所有梯度。
 - en: '*(Those with a keen eye may be wondering how are the local gradients and the
     final gradients are being calculated in this last step. Don’t worry, I’ll explain
     the derivation of the gradients in this last step, shortly. For now, its suffice
     to say that the gradients defined in this last step are an optimization over the
     naive way of calculating ∂Cost/∂W and ∂Cost/∂b)*'
+  id: totrans-228
   prefs: []
   type: TYPE_NORMAL
+  zh: '*(细心的人可能会好奇在最后一步中如何计算局部梯度和最终梯度。别担心，我会在最后一步解释梯度的推导过程。现在只需知道最后一步中定义的梯度是对计算 ∂Cost/∂W
+    和 ∂Cost/∂b 的简单方法的一种优化即可)*'
 - en: Let’s update the weights and bias, keeping learning rate same as the non-vectorized
     implementation from before i.e.*** α=1.***
+  id: totrans-229
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们更新权重和偏置，保持学习率与之前的非向量化实现相同，即***α=1***。
 - en: '![](../Images/5903701887957891f4058d2391c88c23.png)'
+  id: totrans-230
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5903701887957891f4058d2391c88c23.png)'
 - en: Fig 45\. Calculated new Weights and Bias
+  id: totrans-231
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 45\. 计算的新权重和偏置
 - en: Now that we have updated the weights and bias lets do a **forward propagation** and **calculate
     the new Cost **to check if we’ve done the right thing.
+  id: totrans-232
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经更新了权重和偏置，进行**前向传播**并**计算新成本**以检查我们是否做对了。
 - en: '![](../Images/2bee1b78390d1acd7c08a05747df7eb6.png)'
+  id: totrans-233
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2bee1b78390d1acd7c08a05747df7eb6.png)'
 - en: '![](../Images/fe4a61bdccc85e9820c2d58535801909.png)'
+  id: totrans-234
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fe4a61bdccc85e9820c2d58535801909.png)'
 - en: Fig 46\. Vectorized Forward Propagation with updated weights and bias
+  id: totrans-235
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 46\. 使用更新后的权重和偏置的向量化前向传播
 - en: '![](../Images/ee999ac41dff78361b8bff2aaf0f42d7.png)'
+  id: totrans-236
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ee999ac41dff78361b8bff2aaf0f42d7.png)'
 - en: Fig 47\. New Cost after updated parameters
+  id: totrans-237
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 47\. 更新参数后的新成本
 - en: So, we *reduced our Cost(Average Loss across all examples) *from an initial
     Cost of around ***0.089*** to **0.084**. We will need to do multiple training
     iterations before we can converge to a lowCost.
+  id: totrans-238
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，我们*将成本（所有示例的平均损失）*从最初的成本***0.089***减少到**0.084**。在我们收敛到较低成本之前，还需要进行多次训练迭代。
 - en: At this point, I would recommend that you perform backpropagation step yourself.
     The result of that should be (rounded to 3 decimal places): ***∂Cost/∂W = [-0.044,
     -0.035] ***and*** ∂Cost/∂b = [-0.031].***
+  id: totrans-239
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这一点上，我建议你自己执行反向传播步骤。结果应该是（四舍五入到小数点后三位）：***∂Cost/∂W = [-0.044, -0.035]*** 和
+    ***∂Cost/∂b = [-0.031]***。
 - en: Recall, before we trained the neural network, how we predicted the neural network
     can separate the two classes in Figure 9, well after about 5000 Epochs(full batch
     training iterations) Cost steadily decreases to about ***0.0005 ***and we get
     the following decision boundary ***:***
+  id: totrans-240
   prefs: []
   type: TYPE_NORMAL
+  zh: 回想一下，在我们训练神经网络之前，我们如何预测神经网络可以分离图9中的两个类别，而在大约5000个Epochs（全批量训练迭代）后，成本稳步下降到大约***0.0005***，我们得到了以下决策边界***：***
 - en: '![](../Images/c0c6aa0aaba78c35222aa192d5ba770e.png)'
+  id: totrans-241
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c0c6aa0aaba78c35222aa192d5ba770e.png)'
 - en: '![](../Images/f954a6afbccf2c035b477196d8c52b40.png)'
+  id: totrans-242
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f954a6afbccf2c035b477196d8c52b40.png)'
 - en: Fig 48\. Cost curve and Decision boundary after 5000 epochs
+  id: totrans-243
   prefs: []
   type: TYPE_NORMAL
+  zh: 图48。5000个Epochs后的成本曲线和决策边界
 - en: The **Cost curve** is basically the value of Cost plotted after a certain number
     of iterations(epochs). Notice that the Cost curve flattens after about 3000 epochs
     this means that the weights and bias of the neural network have converged, so
@@ -972,19 +1475,27 @@
     the u-shaped Loss curve, as we descend closer and closer the minimum point(flat
     region) the gradients become smaller and smaller thus the steps gradient descent
     takes are very small.
+  id: totrans-244
   prefs: []
   type: TYPE_NORMAL
+  zh: '**成本曲线**基本上是经过一定次数迭代（epochs）后绘制的成本值。注意，成本曲线在大约3000个epochs后趋于平坦，这意味着神经网络的权重和偏置已收敛，因此进一步训练只会稍微改善我们的权重和偏置。为什么？回想一下u形损失曲线，当我们越来越接近最小点（平坦区域）时，梯度变得越来越小，因此梯度下降的步长非常小。'
 - en: The **Decision Boundary** shows at the line along which the decision of the
     neural network changes from one output to the other. We can better visualize this
     by coloring the area below and above the decision boundary.
+  id: totrans-245
   prefs: []
   type: TYPE_NORMAL
+  zh: '**决策边界**显示了神经网络输出从一种变为另一种的线。我们可以通过为决策边界上下区域着色来更好地可视化这一点。'
 - en: '![](../Images/f526b1f2f789d1b35b11cd80ef80ae3b.png)'
+  id: totrans-246
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f526b1f2f789d1b35b11cd80ef80ae3b.png)'
 - en: Fig 49\. Decision boundary visualized after 5000 epochs
+  id: totrans-247
   prefs: []
   type: TYPE_NORMAL
+  zh: 图49。5000个Epochs后的决策边界可视化
 - en: This makes it much clearer. The red shaded area is the area below the decision
     boundary and everything below the decision boundary has an output( **ŷ**) of **0**.
     Similarly, everything above the decision boundary, shaded green, has an output
@@ -992,338 +1503,513 @@
     by looking at the training data and figuring out how to separate its two output
     classes(**y=1** and **y=0**)????. Now the output neuron fires up????(produces
     1) whenever*** x₁*** or***x₂*** or both are 1.
+  id: totrans-248
   prefs: []
   type: TYPE_NORMAL
+  zh: 这使得情况更加清晰。红色阴影区域是决策边界下方的区域，决策边界下的所有区域输出（**ŷ**）为**0**。同样，决策边界上方的所有区域，阴影为绿色，输出为**1**。总之，我们的简单神经网络通过查看训练数据并找出如何分离两个输出类别（**y=1**和**y=0**）学会了决策边界。现在当***x₁***或***x₂***或两者都是1时，输出神经元就会激活（产生1）。
 - en: Now would be a good time to see how the “**1/m**” (“**m**” is the total number
     of examples in the training dataset) in the Cost function manifested in the final
     calculation of the gradients.
+  id: totrans-249
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是查看“**1/m**”（“**m**”是训练数据集中样本总数）在成本函数中如何体现在梯度的最终计算中的好时机。
 - en: '![](../Images/8727ddab6c2df2ca60a066c1dd9de775.png)'
+  id: totrans-250
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8727ddab6c2df2ca60a066c1dd9de775.png)'
 - en: Fig 50\. Comparing the effect of derivative w.r.t Cost and Loss on parameters
     of the neural network
+  id: totrans-251
   prefs: []
   type: TYPE_NORMAL
+  zh: 图50。比较相对于成本和损失的导数对神经网络参数的影响
 - en: '**From this, the most important point to know is that the gradient that is
     used to update our weights, using the Cost function, is the average of all the
     gradients calculated during a training iteration;** **same applies to bias**.
     You may want to confirm this yourself by checking the vectorized calculations
     yourself.'
+  id: totrans-252
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由此，最重要的一点是，通过成本函数更新权重所使用的梯度是训练迭代过程中计算的所有梯度的平均值；** **偏置也是如此**。你可以通过自己检查向量化计算来确认这一点。'
 - en: Taking the average of all the gradients has some benefits. Firstly, it gives
     us a less noisy estimate of the gradient. Second, the resultant learning curve
     is smooth helping us easily determine if the neural network is learning or not.
     Both of these features come in very handy when training neural networks on much
     trickier datasets, such as those with wrongly labeled examples.
+  id: totrans-253
   prefs: []
   type: TYPE_NORMAL
+  zh: 取所有梯度的平均值有一些好处。首先，它给我们一个较少噪声的梯度估计。其次，结果学习曲线平滑，帮助我们轻松判断神经网络是否在学习。这两个特性在训练神经网络时非常有用，尤其是在处理标记错误的数据集时。
 - en: '* * *'
+  id: totrans-254
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: This is great and all but how did you calculate the gradients ∂Cost/∂W and ∂Cost/∂b
     ?
+  id: totrans-255
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 这很好，但你是怎么计算梯度 ∂Cost/∂W 和 ∂Cost/∂b 的呢？
 - en: Neural network guides and blog posts I learned from often omitted complex details
     or gave very vague explanations for them. Not in this blog we’ll go over everything
     leaving no stone unturned.
+  id: totrans-256
   prefs: []
   type: TYPE_NORMAL
+  zh: 我经常从中学习的神经网络指南和博客文章往往省略了复杂的细节，或者对这些细节给出了非常模糊的解释。在这篇博客中，我们将逐一讨论所有内容，绝不遗漏任何细节。
 - en: First, we’ll tackle ∂Cost/∂b. Why did we sum the gradients?
+  id: totrans-257
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 首先，我们来处理∂Cost/∂b。我们为什么要对梯度进行求和？
 - en: To explain this I employ our computational graph technique on three very simple
     equations.
+  id: totrans-258
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了说明这一点，我在三个非常简单的方程上应用我们的计算图技术。
 - en: '![](../Images/ba93a16a525267c8eb05ff55d85e204c.png)'
+  id: totrans-259
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ba93a16a525267c8eb05ff55d85e204c.png)'
 - en: Fig 51\. Computational graph of simple equations
+  id: totrans-260
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 51\. 简单方程的计算图
 - en: I am particularly interested in the ***b*** node, so let’s do backpropagation
     on this.
+  id: totrans-261
   prefs: []
   type: TYPE_NORMAL
+  zh: 我特别关注***b***节点，所以我们来对它进行反向传播。
 - en: '![](../Images/310412ccb897e75ac75ba19d109fb45a.png)'
+  id: totrans-262
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/310412ccb897e75ac75ba19d109fb45a.png)'
 - en: Fig 52\. Backpropagation on the computational graph of simple equations
+  id: totrans-263
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 52\. 简单方程的计算图上的反向传播
 - en: Note that the** *b*** node is receiving gradients from** two** other nodes.
     So the total of the gradients flowing into node ***b ***is the *sum* of the two
     gradients flowing in.
+  id: totrans-264
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意到** *b*** 节点正在从** 两个** 其他节点接收梯度。因此，流入节点***b ***的梯度总和是两个流入梯度的*总和*。
 - en: '![](../Images/fcafc547ff8e5a1baec35827e100a3ad.png)'
+  id: totrans-265
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fcafc547ff8e5a1baec35827e100a3ad.png)'
 - en: Fig 53\. Sum of gradients flowing into node **b**
+  id: totrans-266
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 53\. 流入节点**b**的梯度总和
 - en: From this example, we can generalize the following rule: ***Sum all the incoming
     gradients to a node, from all the possible paths.***
+  id: totrans-267
   prefs: []
   type: TYPE_NORMAL
+  zh: 从这个例子中，我们可以概括出以下规则：***对一个节点，求和所有可能路径上的所有流入梯度。***
 - en: Let’s visualize how this rule is used in the calculation of the **bias**. *Our
     neural network can be seen as doing ****independent ****calculations for each
     of our examples* but using shared parameters for weights and bias, during a training
     iteration. Below bias(***b***) is visualized as a shared parameter for all individual
     calculations our neural network performs.
+  id: totrans-268
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们可视化一下这个规则在计算**偏差**时是如何应用的。*我们的神经网络可以被看作是对每个示例进行****独立****的计算*，但在训练迭代中使用共享的权重和偏差参数。下图中，偏差(***b***)
+    被可视化为我们神经网络执行的所有单独计算的共享参数。
 - en: '![](../Images/938f2f0a65faa58e28ddfa94baf65860.png)'
+  id: totrans-269
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/938f2f0a65faa58e28ddfa94baf65860.png)'
 - en: Fig 54\. Visualizing bias parameter being shared across a training epoch.
+  id: totrans-270
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 54\. 可视化偏差参数在训练周期中的共享情况。
 - en: Following the general rule defined above, we will sum all the incoming gradients
     from all the possible paths to the bias node, **b**.
+  id: totrans-271
   prefs: []
   type: TYPE_NORMAL
+  zh: 按照上面定义的一般规则，我们将对所有可能路径上的所有流入梯度进行求和，得到偏差节点**b**的总梯度。
 - en: '![](../Images/de35a0603dfe77880a95dac4a40deb9d.png)'
+  id: totrans-272
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/de35a0603dfe77880a95dac4a40deb9d.png)'
 - en: Fig 55\. Visualizing all possible backpropagation paths to shared bias parameter
+  id: totrans-273
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 55\. 可视化所有可能的反向传播路径到共享偏差参数
 - en: Since the ∂Z/∂b (local gradient at the Z node) is equal to **1**, the total
     gradient at ***b ***is the sum of gradients from each example with respect to
     the Cost.
+  id: totrans-274
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于∂Z/∂b（Z节点的局部梯度）等于**1**，所以在***b ***处的总梯度是每个示例相对于成本的梯度总和。
 - en: '![](../Images/654d7510b7a998344d5f2421fee571c8.png)'
+  id: totrans-275
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/654d7510b7a998344d5f2421fee571c8.png)'
 - en: Fig 56\. Proof that ∂Cost/∂b is the sum of upstream gradients
+  id: totrans-276
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 56\. 证明∂Cost/∂b是上游梯度的总和
 - en: Now that we’ve got derivative of the bias figured out let’s move on to derivative
     of weights, and more importantly the local gradient with respect to weights.
+  id: totrans-277
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经搞清楚了偏差的导数，接下来我们要讨论权重的导数，更重要的是权重的局部梯度。
 - en: How is the local gradient(∂Z/∂W) equal to transpose of the input training data(X_train)?
+  id: totrans-278
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为什么局部梯度（∂Z/∂W）等于输入训练数据（X_train）的转置？
 - en: This can be answered in a similar way to the above calculation for bias, but
     the main complication here is the calculating the derivative of the dot product
     between the weight matrix(***W***) and the data matrix(***Xₜᵣₐᵢₙ***), which forms
     our local gradient.
+  id: totrans-279
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可以用与上述偏差计算类似的方法来回答，但主要的复杂性在于计算权重矩阵(***W***)和数据矩阵(***Xₜᵣₐᵢₙ***)之间的点积的导数，这形成了我们的局部梯度。
 - en: '![](../Images/bfe8446f97b19fcd2602045e3aa79dbe.png)'
+  id: totrans-280
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bfe8446f97b19fcd2602045e3aa79dbe.png)'
 - en: Fig 57.a. Figuring out the derivative of the dot product.
+  id: totrans-281
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 57.a. 计算点积的导数。
 - en: This derivative of the dot product is a bit complicated as** we are no longer
     working with scalar quantities,** instead, both ***W*** and ***X*** are matrices
     and the result of ***W⋅ X*** is also a matrix. Let’s dive a bit deeper using a
     simple example first and then generalizing from it.
+  id: totrans-282
   prefs: []
   type: TYPE_NORMAL
+  zh: 点积的这个导数有点复杂，因为**我们不再处理标量量**，而是**W**和**X**都是矩阵，**W⋅X**的结果也是矩阵。让我们先通过一个简单的例子深入探讨，然后从中进行概括。
 - en: '![](../Images/c00981a2928b6f68525909f7bb5e0fae.png)'
+  id: totrans-283
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c00981a2928b6f68525909f7bb5e0fae.png)'
 - en: Fig 57.b. Figuring out the derivative of the dot product.
+  id: totrans-284
   prefs: []
   type: TYPE_NORMAL
+  zh: 图57.b. 点积导数的计算。
 - en: Let’s calculate the derivative of the ***A*** with respect to ***W***.
+  id: totrans-285
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们计算***A***相对于***W***的导数。
 - en: '![](../Images/94ce04a47d424911277686871094d999.png)'
+  id: totrans-286
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/94ce04a47d424911277686871094d999.png)'
 - en: Fig 57.c. Figuring out the derivative of the dot product.
+  id: totrans-287
   prefs: []
   type: TYPE_NORMAL
+  zh: 图57.c. 点积导数的计算。
 - en: Let us visualize this in case of a training iteration where multiple examples
     are being processed at the same time. *(Note that input examples are column vectors.)*
+  id: totrans-288
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们在一个处理多个示例的训练迭代中可视化这一点。*(注意输入示例是列向量。)*
 - en: '![](../Images/a9647ad2b684893d618f12d0e06914c9.png)'
+  id: totrans-289
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a9647ad2b684893d618f12d0e06914c9.png)'
 - en: Fig 58\. Visualizing weights being shared across a training epoch
+  id: totrans-290
   prefs: []
   type: TYPE_NORMAL
+  zh: 图58. 训练周期中共享权重的可视化
 - en: 'Just as the bias (**b**) was being shared across each calculation in a training
     iteration, weights (***W***) are also being shared. We can also visualize the
     gradient flowing back to the weights, as follows*(note that the local derivative
     of each example w.r.t to ****W ****results in a row vector of the input example
     i.e. transpose of input)*:'
+  id: totrans-291
   prefs: []
   type: TYPE_NORMAL
+  zh: 就像偏置(**b**)在训练迭代中的每次计算中都被共享一样，权重(***W***)也在被共享。我们也可以可视化梯度回流到权重，如下所示*(注意每个示例相对于***W***的局部导数结果是输入示例的行向量，即输入的转置)*：
 - en: '![](../Images/e1518b3b7f4e309d19aeb2ba39d8bd6a.png)'
+  id: totrans-292
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e1518b3b7f4e309d19aeb2ba39d8bd6a.png)'
 - en: Fig 59\. Visualizing all possible backpropagation paths to shared weights parameter
+  id: totrans-293
   prefs: []
   type: TYPE_NORMAL
+  zh: 图59. 可视化所有可能的反向传播路径到共享权重参数
 - en: Again, following the general rule defined above, we will sum all the incoming
     gradients from all the possible paths to the weights node, **W**.
+  id: totrans-294
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次遵循上述的一般规则，我们将汇总来自所有可能路径的梯度到权重节点**W**。
 - en: '![](../Images/ff71e199e45fe47013bf1fe5686ec166.png)'
+  id: totrans-295
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ff71e199e45fe47013bf1fe5686ec166.png)'
 - en: Fig 60\. Derivation of ∂Cost/∂W after visualization.
+  id: totrans-296
   prefs: []
   type: TYPE_NORMAL
+  zh: 图60. 在可视化之后∂Cost/∂W的推导。
 - en: Up till now what we’ve done to calculate, ***∂Cost/∂W***, though is correct
     and serves as a good explanation however, it is not an optimized calculation.
     We can vectorize this calculation, too. Let’s do that next
+  id: totrans-297
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，我们计算***∂Cost/∂W***的方法虽然正确且解释得很好，但它并不是最优的计算方法。我们也可以对这个计算进行向量化。接下来我们来做这个。
 - en: '![](../Images/0e59bf051638419d8cbc920212d006a5.png)'
+  id: totrans-298
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0e59bf051638419d8cbc920212d006a5.png)'
 - en: Fig 61\. Proof that ∂Cost/∂W is the dot product between the Upstream gradient
     and the transpose of ***Xₜᵣₐᵢₙ***
+  id: totrans-299
   prefs: []
   type: TYPE_NORMAL
+  zh: 图61. 证明∂Cost/∂W是上游梯度与***Xₜᵣₐᵢₙ***的转置之间的点积
 - en: Is there an easier way of figuring this out, without the math?
+  id: totrans-300
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 有没有更简单的方法来找出这一点，而不需要数学计算？
 - en: Yes! Use ***dimension analysis***.
+  id: totrans-301
   prefs: []
   type: TYPE_NORMAL
+  zh: 是的！使用***维度分析***。
 - en: In our OR gate example we know that the gradient flowing into node ***Z ***isa
     (1 × 4) matrix, Xₜᵣₐᵢₙ is a (2 × 4) matrix and the derivative of Cost with respect
     to the ***W*** needs to be of the same size as ***W***, which is (1 × 2). So,
     the only way to generate a (1 × 2) matrix would be to take the dot product of
     between ***Z*** and transpose of ***Xₜᵣₐᵢₙ***.
+  id: totrans-302
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的OR门示例中，我们知道流入节点***Z***的梯度是(1 × 4)矩阵，Xₜᵣₐᵢₙ是(2 × 4)矩阵，且相对于***W***的Cost的导数需要与***W***大小相同，即(1
+    × 2)。因此，生成(1 × 2)矩阵的唯一方法是计算***Z***与***Xₜᵣₐᵢₙ***的转置的点积。
 - en: '![](../Images/96ed900bf6311dbf4c3bfee86385e9f7.png)'
+  id: totrans-303
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/96ed900bf6311dbf4c3bfee86385e9f7.png)'
 - en: Similarly, knowing that bias, ***b***, is a simple (1 × 1) matrix and the gradient
     flowing into node Z is (1 × 4), using dimension analysis we can be sure that the
     gradient of Cost w.r.t ***b***, also needs to be a (1 × 1) matrix. The only way
     we can achieve this, given the local gradient(***∂Z/∂b***) is just equal to ***1***,
     is by summing up the upstream gradient.
+  id: totrans-304
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样，知道偏置***b***是一个简单的(1 × 1)矩阵，流入节点Z的梯度是(1 × 4)，通过维度分析我们可以确定相对于***b***的Cost的梯度也需要是(1
+    × 1)矩阵。鉴于局部梯度(***∂Z/∂b***)仅等于***1***，我们可以通过汇总上游梯度来实现这一点。
 - en: '*On a final note when deriving derivative expressions work on small examples
     and then generalize from there. For example here, while calculating the derivative
     of the dot product w.r.t to ****W, ****we used a single column vector as a test
     case and generalized from there, if we would have used the entire data matrix
     then the derivative would have resulted in a (4 × 1 × 2) tensor (multidimensional
     matrix), calculation on which can get a bit hairy.*'
+  id: totrans-305
   prefs: []
   type: TYPE_NORMAL
+  zh: '*最后，当推导导数表达式时，先在小示例上进行工作，然后再从那里推广。例如，在这里，当计算相对于 ****W 的点积的导数时，我们使用了一个单列向量作为测试案例，并从那里推广。如果我们使用整个数据矩阵，那么导数将导致一个
+    (4 × 1 × 2) 张量（多维矩阵），其计算可能会变得有些复杂。*'
 - en: '* * *'
+  id: totrans-306
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Before concluding this section lets go over a slightly more complicated example.
+  id: totrans-307
   prefs: []
   type: TYPE_NORMAL
+  zh: 在结束这一部分之前，让我们看一个稍微复杂的例子。
 - en: '![](../Images/64065f8540feb91ff554f42e2e7939e9.png)'
+  id: totrans-308
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/64065f8540feb91ff554f42e2e7939e9.png)'
 - en: Fig 62\. XOR gate data
+  id: totrans-309
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 62\. XOR 门数据
 - en: Figure 62, above, represents an XOR gate data. Looking at it note that the label, ***y***,
     is equal to ***1*** only when one of the values ***x₁*** or ***x₂*** is equal
     to ***1***, *not both*. This makes it a particularly challenging dataset as the
     data is not linearly separable, i.e. there is no single straight line decision
     boundary that can successfully separate the two classes(***y=1*** and ***y=0***)
     in the data. XOR used to be the bane of earlier forms of artificial neural networks.
+  id: totrans-310
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的图 62 表示 XOR 门数据。注意到，标签 ***y*** 仅在 ***x₁*** 或 ***x₂*** 中的一个值等于 ***1*** 时才等于
+    ***1***，*而不是两个值都等于 1*。这使得这个数据集特别具有挑战性，因为数据不是线性可分的，即没有单一的直线决策边界能够成功地分隔数据中的两个类别（***y=1***
+    和 ***y=0***）。XOR 曾经是早期形式的人工神经网络的祸根。
 - en: '![](../Images/a06444048f1fde781bc3ebc3fa4bc71c.png)'
+  id: totrans-311
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a06444048f1fde781bc3ebc3fa4bc71c.png)'
 - en: Fig 63\. Some linear decision boundaries that are wrong
+  id: totrans-312
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 63\. 一些错误的线性决策边界
 - en: Recall that our current neural network was successful only because it could
     figure out the straight line decision boundary that could successfully separate
     the two classes of the OR gate dataset. A straight line won’t cut it here. So,
     how do we get a neural network to figure this one out?
+  id: totrans-313
   prefs: []
   type: TYPE_NORMAL
+  zh: 记住，我们当前的神经网络之所以成功，是因为它能够找出能够成功分隔 OR 门数据集两个类别的直线决策边界。这里，直线无法解决问题。那么，我们如何让神经网络解决这个问题呢？
 - en: 'Well, we can do two things:'
+  id: totrans-314
   prefs: []
   type: TYPE_NORMAL
+  zh: 嗯，我们可以做两件事：
 - en: Amend the data itself, so that in addition to features*** x₁*** and*** x₂*** a
     third feature provides some additional information to help the neural network
     decide on a good decision boundary. This process is called ***feature engineering***.
+  id: totrans-315
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 修改数据本身，使得除了特征 ***x₁*** 和 ***x₂*** 外，第三个特征提供一些额外的信息，帮助神经网络确定一个好的决策边界。这一过程称为 ***特征工程***。
 - en: Change the architecture of the neural network, making it deeper.
+  id: totrans-316
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 改变神经网络的架构，使其更深。
 - en: Let’s go over both and see which one is better.
+  id: totrans-317
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们比较一下两者，看看哪一个更好。
 - en: Feature Engineering
+  id: totrans-318
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 特征工程
 - en: Let’s look at a dataset similar looking to the XOR data that will help us in
     making an important realization.
+  id: totrans-319
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看一个类似 XOR 数据的数据集，这将帮助我们做出一个重要的认识。
 - en: '![](../Images/635edfae8a2c7de2cc6292f2ceb40b9c.png)'
+  id: totrans-320
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/635edfae8a2c7de2cc6292f2ceb40b9c.png)'
 - en: Fig 64\. XOR-like data in different quadrants
+  id: totrans-321
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 64\. 不同象限中的 XOR 类数据
 - en: The data in Figure 64 is exactly like the XOR data except each data point is
     spread out in different quadrants. Notice that in the **1ˢᵗ and 3ʳᵈ quadrant all
     the values are positive** and in the **2ⁿᵈ and 4ᵗʰ all the values are negative.**
+  id: totrans-322
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 64 中的数据与 XOR 数据完全相同，只是每个数据点分布在不同的象限中。注意到在 **第 1 象限和第 3 象限中的所有值都是正的**，而在 **第
+    2 象限和第 4 象限中的所有值都是负的**。
 - en: '![](../Images/d27d06a875988f132609e8298e0e4886.png)'
+  id: totrans-323
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d27d06a875988f132609e8298e0e4886.png)'
 - en: Fig 65\. Positive and negative quadrants
+  id: totrans-324
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 65\. 正负象限
 - en: Why is that? In the **1ˢᵗ** and **3ʳᵈ** quadrants** the signs of values are
     being squared, **while in the **2ⁿᵈ** and **4ᵗʰ **quadrants **the values are a
     simple product between a negative and positive number resulting in a negative
     number.**
+  id: totrans-325
   prefs: []
   type: TYPE_NORMAL
+  zh: 为什么呢？在 **第 1** 和 **第 3** 象限中，值的符号被平方，而在 **第 2** 和 **第 4** 象限中，值是负数和正数之间的简单乘积，结果是负数。
 - en: '![](../Images/5540a678601712a408f4b8e4edc99b98.png)'
+  id: totrans-326
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5540a678601712a408f4b8e4edc99b98.png)'
 - en: Fig 66\. Result of the product of features
+  id: totrans-327
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 66\. 特征乘积的结果
 - en: So this gives us a pattern to work with using the product of two features. We
     can even see a similar pattern in the XOR data, where each quadrant can be identified
     in a similar way.
+  id: totrans-328
   prefs: []
   type: TYPE_NORMAL
+  zh: 这为我们提供了一个使用两个特征的乘积来工作的模式。我们甚至可以在 XOR 数据中看到类似的模式，每个象限都可以以类似的方式进行识别。
 - en: '![](../Images/f277c2b7259d9348c8acd4d52b6ca340.png)'
+  id: totrans-329
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f277c2b7259d9348c8acd4d52b6ca340.png)'
 - en: Fig 67\. Quadrant-pattern in XOR data plot
+  id: totrans-330
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 67\. XOR 数据图中的象限模式
 - en: '***Therefore, a good third feature, x₃, would be the product of features x₁
     and x₂(i.e. x₁*x₂).***'
+  id: totrans-331
   prefs: []
   type: TYPE_NORMAL
+  zh: '***因此，一个好的第三个特征 x₃ 将是特征 x₁ 和 x₂ 的乘积（即 x₁*x₂）。***'
 - en: Product of features is called a ***feature cross*** and results in a new ***synthetic
     feature***. *Feature crosses can be either the feature itself(eg. ****x₁², x₁³,…****),
     a product of two or more features(eg. ****x₁*x₂, x₁*x₂*x₃, …****) or even a combination
@@ -1332,122 +2018,192 @@
     of the house on the map, a better predictor for this location could be the feature
     cross between width and length of houses, giving us a new feature of “size of
     house in square yards”.*
+  id: totrans-332
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征的乘积称为 ***特征交叉***，结果是一个新的 ***合成特征***。*特征交叉可以是特征本身（例如 ****x₁², x₁³,…****），两个或更多特征的乘积（例如 ****x₁*x₂,
+    x₁*x₂*x₃, …****），甚至是两者的组合（例如 ****x₁²*x₂****）。例如，在一个房屋数据集中，其中输入特征是房屋的宽度和长度（以码为单位），标签是房屋在地图上的位置，房屋的宽度和长度之间的特征交叉可能是这个位置的更好预测器，从而给我们一个新的特征“房屋大小（平方码）”。*
 - en: Let’s add the new synthetic feature to our training data, Xₜᵣₐᵢₙ.
+  id: totrans-333
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们将新的合成特征添加到我们的训练数据 Xₜᵣₐᵢₙ 中。
 - en: '![](../Images/50cf66e2d7b3e29d6af0847c359a5290.png)'
+  id: totrans-334
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/50cf66e2d7b3e29d6af0847c359a5290.png)'
 - en: Fig 68\. New training data
+  id: totrans-335
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 68\. 新的训练数据
 - en: Using this feature cross we can now successfully learn a decision boundary without
     changing the architecture of the neural network significantly. We only need to
     add an input node for ***x₃*** and a corresponding weight(*randomly set to 0.2*)
     to the input layer.
+  id: totrans-336
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用此特性交叉，我们现在可以成功地学习决策边界，而无需显著改变神经网络的架构。我们只需要在输入层添加一个用于 ***x₃*** 的输入节点以及一个相应的权重（*随机设置为
+    0.2*）。
 - en: '![](../Images/98b3a17563b92bb6de9767e8e20a0e88.png)'
+  id: totrans-337
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/98b3a17563b92bb6de9767e8e20a0e88.png)'
 - en: Fig 69\. Neural Network with feature cross(x₃) as input
+  id: totrans-338
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 69\. 以特征交叉（x₃）为输入的神经网络
 - en: '![](../Images/0a259b679bc4c0d0e90625d4b317bdf0.png)'
+  id: totrans-339
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0a259b679bc4c0d0e90625d4b317bdf0.png)'
 - en: Fig 70\. Expanded neural network with feature cross(x₃) as input
+  id: totrans-340
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 70\. 扩展的神经网络，以特征交叉（x₃）为输入
 - en: Given below is the *first* training iteration of the neural network, you may
     go through the computations yourself and confirm them as they make for a good
     exercise. Since we are already familiar with this neural network architecture,
     I will not go through all the computations in a step-by-step by step manner, as
     before.
+  id: totrans-341
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是神经网络的*第一次*训练迭代，您可以自行进行计算并确认这些计算，因为它们是很好的练习。由于我们已经熟悉了这种神经网络架构，我将不会像以前一样逐步讲解所有计算步骤。
 - en: '*(All calculations below are rounded to 3 decimal places)*'
+  id: totrans-342
   prefs: []
   type: TYPE_NORMAL
+  zh: '*(下面的所有计算均四舍五入到小数点后三位)*'
 - en: '![](../Images/69bfbcc8807a7466c64cb30fd8627efc.png)'
+  id: totrans-343
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/69bfbcc8807a7466c64cb30fd8627efc.png)'
 - en: Fig 71\. Forward Propagation in the first training iteration
+  id: totrans-344
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 71\. 第一次训练迭代中的前向传播
 - en: '![](../Images/8839fec0ae0526cd5d58823ae821f5e2.png)'
+  id: totrans-345
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8839fec0ae0526cd5d58823ae821f5e2.png)'
 - en: Fig 72\. Backpropagation in the first training iteration
+  id: totrans-346
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 72\. 第一次训练迭代中的反向传播
 - en: '![](../Images/e16ee6904c1afe318c1240e70ee0ee7f.png)'
+  id: totrans-347
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e16ee6904c1afe318c1240e70ee0ee7f.png)'
 - en: Fig 73\. Gradient descent update for new weights and bias, in the first training
     iteration
+  id: totrans-348
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 73\. 第一次训练迭代中新权重和偏置的梯度下降更新
 - en: 'After 5000 epochs, the learning curve, and the decision boundary look as follows:'
+  id: totrans-349
   prefs: []
   type: TYPE_NORMAL
+  zh: 经过 5000 次迭代后，学习曲线和决策边界如下：
 - en: '![](../Images/e275274508dde46fefef9936d1cbf64c.png)'
+  id: totrans-350
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e275274508dde46fefef9936d1cbf64c.png)'
 - en: '![](../Images/b5bd0cccf0e11d9445be51a153042e74.png)'
+  id: totrans-351
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b5bd0cccf0e11d9445be51a153042e74.png)'
 - en: Fig 74\. Learning Curve and Decision Boundary of the neural net with a feature
     cross
+  id: totrans-352
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 74\. 具有特征交叉的神经网络的学习曲线和决策边界
 - en: As before, to visualize better we can shade the regions where the decision of
     the neural network changes from one to the other.
+  id: totrans-353
   prefs: []
   type: TYPE_NORMAL
+  zh: 如前所述，为了更好地可视化，我们可以对神经网络决策从一种到另一种的区域进行阴影处理。
 - en: '![](../Images/279295d074f3bfcf257c014d501e3be0.png)'
+  id: totrans-354
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/279295d074f3bfcf257c014d501e3be0.png)'
 - en: Fig 75\. Shaded Decision Boundary for better visualization
+  id: totrans-355
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 75\. 为了更好的可视化而阴影处理的决策边界
 - en: '***Note that feature engineering allowed us to create a decision boundary that
     is nonlinear. ***How did it do that? We just need to take a look at what function
     the ***Z*** node is computing.'
+  id: totrans-356
   prefs: []
   type: TYPE_NORMAL
+  zh: '***注意，特征工程使我们能够创建一个非线性的决策边界。*** 它是如何做到的？我们只需查看 ***Z*** 节点正在计算的函数。'
 - en: '![](../Images/ca46fd040be1ec5896b8b44504a51752.png)'
+  id: totrans-357
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ca46fd040be1ec5896b8b44504a51752.png)'
 - en: Fig 76\. Node **Z** is computing a polynomial after adding a feature cross
+  id: totrans-358
   prefs: []
   type: TYPE_NORMAL
+  zh: 图76\. 节点**Z**在添加特征交叉后计算多项式
 - en: Thus, feature cross helped us to create complex non-linear decision boundary.
+  id: totrans-359
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，特征交叉帮助我们创建了复杂的非线性决策边界。
 - en: '***This is a very powerful idea!***'
+  id: totrans-360
   prefs: []
   type: TYPE_NORMAL
+  zh: '***这是一个非常强大的想法！***'
 - en: Changing Neural Network Architecture
+  id: totrans-361
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更改神经网络架构
 - en: This is the more interesting approach as it allows us to bypass the feature
     engineering ourselves and ***lets the neural network figure out the feature crosses
     itself!***
+  id: totrans-362
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是更有趣的方法，因为它让我们绕过特征工程，***让神经网络自行找出特征交叉！***
 - en: 'Let’s take a look at the following neural network:'
+  id: totrans-363
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看以下神经网络：
 - en: '![](../Images/1fcc7c30e7ea9947f8b4dc2c6dfa853c.png)'
+  id: totrans-364
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1fcc7c30e7ea9947f8b4dc2c6dfa853c.png)'
 - en: Fig 77\. Neural network with one hidden layer.
+  id: totrans-365
   prefs: []
   type: TYPE_NORMAL
+  zh: 图77\. 具有一个隐藏层的神经网络。
 - en: So we’ve added a bunch of new nodes in the middle of our neural network architecture
     from the OR gate example, keeping the input layer and the output layer the same.
     This column of new nodes in the middle is called a ***hidden layer. ****Why hidden
@@ -1456,8 +2212,10 @@
     can change by changing the data; also since the hidden layers neither constitute
     as the output or the input of the neural network they are in essence hidden from
     the user.*
+  id: totrans-366
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，我们在神经网络架构中添加了一些新的节点，保持输入层和输出层不变。这些新增的节点列称为***隐藏层。*** 为什么叫隐藏层？因为在定义后，我们无法直接控制隐藏层中的神经元如何学习，不像输入层和输出层，我们可以通过更改数据来改变它们；同时，由于隐藏层既不是神经网络的输出也不是输入，它们本质上对用户来说是隐藏的。
 - en: '***We can have an arbitrary number of hidden layers with an arbitrary number
     of neurons in each layer***. This structure needs to be defined by the creator
     of the neural network. *Thus, the ****number of hidden layers and the number of
@@ -1465,194 +2223,304 @@
     we add the deeper our neural network architecture becomes and the more neurons
     we add in the hidden layers the wider the network architecture becomes. The depth
     of a neural net model is where the term “Deep learning” comes from.***'
+  id: totrans-367
   prefs: []
   type: TYPE_NORMAL
+  zh: '***我们可以有任意数量的隐藏层，每层可以有任意数量的神经元***。这个结构需要由神经网络的创建者定义。*因此，****隐藏层的数量和每层神经元的数量也是超参数。我们添加的隐藏层越多，神经网络架构越深；我们在隐藏层中添加的神经元越多，网络架构越宽。神经网络模型的深度就是“深度学习”这一术语的来源。***'
 - en: '*The architecture in Figure 77 with one hidden layer of three sigmoid neurons,
     was selected after some experimentation.*'
+  id: totrans-368
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图77中的架构具有一个隐藏层，包含三个 sigmoid 神经元，是经过一些实验后选择的。*'
 - en: Since this is a new architecture I’ll go over the computations step-by-step.
+  id: totrans-369
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于这是一个新的架构，我将逐步讲解计算过程。
 - en: First, let’s expand out the neural network.
+  id: totrans-370
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们扩展神经网络。
 - en: '![](../Images/63d21782d0b1f535f231e7782b27246b.png)'
+  id: totrans-371
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/63d21782d0b1f535f231e7782b27246b.png)'
 - en: Fig 78\. Expanded neural network with one hidden layer
+  id: totrans-372
   prefs: []
   type: TYPE_NORMAL
+  zh: 图78\. 扩展的神经网络，具有一个隐藏层
 - en: Now let’s perform a ***forward propagation:***
+  id: totrans-373
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们进行***前向传播：***
 - en: '![](../Images/ad65ad088abcf8cc140f502ded6dfa11.png)'
+  id: totrans-374
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ad65ad088abcf8cc140f502ded6dfa11.png)'
 - en: '![](../Images/3568ac2e69c6c5ec7c7528b23974dfa1.png)'
+  id: totrans-375
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3568ac2e69c6c5ec7c7528b23974dfa1.png)'
 - en: Fig 79.a. Forward propagation on the neural net with a hidden layer
+  id: totrans-376
   prefs: []
   type: TYPE_NORMAL
+  zh: 图79.a. 在具有隐藏层的神经网络上进行前向传播
 - en: '![](../Images/90ac6bc3e0d426af6d92312c6bc90ab8.png)'
+  id: totrans-377
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/90ac6bc3e0d426af6d92312c6bc90ab8.png)'
 - en: '![](../Images/c27bcd6cf3fb99591f209d6b9817c729.png)'
+  id: totrans-378
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c27bcd6cf3fb99591f209d6b9817c729.png)'
 - en: Fig 79.b. Forward propagation on the neural net with a hidden layer
+  id: totrans-379
   prefs: []
   type: TYPE_NORMAL
+  zh: 图79.b. 在具有隐藏层的神经网络上进行前向传播
 - en: 'We can now calculate the Cost:'
+  id: totrans-380
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以计算成本：
 - en: '![](../Images/859dfdcb41bfadc4a8d5aaff151010b1.png)'
+  id: totrans-381
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/859dfdcb41bfadc4a8d5aaff151010b1.png)'
 - en: Fig 80\. Cost of the neural net with one hidden layer after **first** forward
     propagation
+  id: totrans-382
   prefs: []
   type: TYPE_NORMAL
+  zh: 图80\. 在**第一次**前向传播后，具有一个隐藏层的神经网络的成本
 - en: After the calculation of Cost, we can now do our backpropagation and improve
     the weights and biases.
+  id: totrans-383
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算成本后，我们可以进行反向传播并改进权重和偏置。
 - en: '![](../Images/b610343527aa353738cb68ee8db1c82c.png)'
+  id: totrans-384
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b610343527aa353738cb68ee8db1c82c.png)'
 - en: '![](../Images/d93f76748b6d69b135d49bfcf559d499.png)'
+  id: totrans-385
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d93f76748b6d69b135d49bfcf559d499.png)'
 - en: Fig 81.a. Backpropagation on the neural net with a hidden layer
+  id: totrans-386
   prefs: []
   type: TYPE_NORMAL
+  zh: 图81.a. 在具有隐藏层的神经网络上进行反向传播
 - en: '![](../Images/147cf4c01da456b7bc593d1da42b2c63.png)'
+  id: totrans-387
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/147cf4c01da456b7bc593d1da42b2c63.png)'
 - en: '![](../Images/9ba31b68f1c846bfead99ce764460c03.png)'
+  id: totrans-388
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9ba31b68f1c846bfead99ce764460c03.png)'
 - en: Fig 81.b. Backpropagation on the neural net with a hidden layer
+  id: totrans-389
   prefs: []
   type: TYPE_NORMAL
+  zh: 图81.b. 带有隐藏层的神经网络的反向传播
 - en: '![](../Images/8bb0cbdac9fc2d7482c6557da289bf4b.png)'
+  id: totrans-390
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8bb0cbdac9fc2d7482c6557da289bf4b.png)'
 - en: '![](../Images/b16141db80d5e3c8819b4e9819f6ab1e.png)'
+  id: totrans-391
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b16141db80d5e3c8819b4e9819f6ab1e.png)'
 - en: Fig 81.c. Backpropagation on the neural net with a hidden layer
+  id: totrans-392
   prefs: []
   type: TYPE_NORMAL
+  zh: 图81.c. 带有隐藏层的神经网络的反向传播
 - en: '![](../Images/f574b72ef79225256780a10a8eb17596.png)'
+  id: totrans-393
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f574b72ef79225256780a10a8eb17596.png)'
 - en: '![](../Images/75befb7db0b4d3191cbc2f0deb5a0802.png)'
+  id: totrans-394
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/75befb7db0b4d3191cbc2f0deb5a0802.png)'
 - en: Fig 81.d. Backpropagation on the neural net with a hidden layer
+  id: totrans-395
   prefs: []
   type: TYPE_NORMAL
+  zh: 图81.d. 带有隐藏层的神经网络的反向传播
 - en: '![](../Images/05d6a8575f65c1fb540401e3aacbd0a2.png)'
+  id: totrans-396
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/05d6a8575f65c1fb540401e3aacbd0a2.png)'
 - en: '![](../Images/ae28aad3dded0fb41f8bc2d56b54ead0.png)'
+  id: totrans-397
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ae28aad3dded0fb41f8bc2d56b54ead0.png)'
 - en: Fig 81.e. Backpropagation on the neural net with a hidden layer
+  id: totrans-398
   prefs: []
   type: TYPE_NORMAL
+  zh: 图81.e. 带有隐藏层的神经网络的反向传播
 - en: 'Whew! That was a lot, but it did a great deal to improve our understanding.
     Let’s perform the gradient descent update:'
+  id: totrans-399
   prefs: []
   type: TYPE_NORMAL
+  zh: 呼！这真是很多内容，但它大大提高了我们的理解。让我们进行梯度下降更新：
 - en: '![](../Images/eddfbe78b66025d677353096a9e7f1c5.png)'
+  id: totrans-400
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/eddfbe78b66025d677353096a9e7f1c5.png)'
 - en: Fig 82\. Gradient descent update for the neural net with a hidden layer
+  id: totrans-401
   prefs: []
   type: TYPE_NORMAL
+  zh: 图82. 带有隐藏层的神经网络的梯度下降更新
 - en: 'At this point, I would encourage all readers to perform one training iteration
     themselves. The resultant gradients should be approximately(rounded to 3 decimal
     places):'
+  id: totrans-402
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这一点上，我鼓励所有读者自己进行一次训练迭代。得到的梯度应大致为（四舍五入到3位小数）：
 - en: '![](../Images/8b5a11e2cac0f26b40e913840e629a2b.png)'
+  id: totrans-403
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8b5a11e2cac0f26b40e913840e629a2b.png)'
 - en: Fig 83\. Derivatives computed during 2ⁿᵈ training iteration
+  id: totrans-404
   prefs: []
   type: TYPE_NORMAL
+  zh: 图83. 第二次训练迭代期间计算的导数
 - en: 'After 5000 epochs the Cost steadily decreases to about ***0.0009*** and we
     get the following Learning Curve and Decision Boundary:'
+  id: totrans-405
   prefs: []
   type: TYPE_NORMAL
+  zh: 经过5000次迭代后，成本稳定下降至约***0.0009***，我们得到如下的学习曲线和决策边界：
 - en: '![](../Images/30711eac7c5a27a733d7c04903d6bf71.png)'
+  id: totrans-406
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/30711eac7c5a27a733d7c04903d6bf71.png)'
 - en: '![](../Images/9a839008edaa1803b2156de5041342ef.png)'
+  id: totrans-407
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9a839008edaa1803b2156de5041342ef.png)'
 - en: Fig 84\. Learning Curve and Decision boundary of the neural net with one hidden
     layer
+  id: totrans-408
   prefs: []
   type: TYPE_NORMAL
+  zh: 图84. 带有一个隐藏层的神经网络的学习曲线和决策边界
 - en: 'Let’s also visualize where the decision of the neural network changes from
     0(red) to 1(green):'
+  id: totrans-409
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们还可视化神经网络从0（红色）到1（绿色）的决策变化：
 - en: '![](../Images/1dba431b0fe2e533c2806161756ffbd5.png)'
+  id: totrans-410
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1dba431b0fe2e533c2806161756ffbd5.png)'
 - en: Fig 85\. Shaded decision boundary of the neural net with one hidden layer
+  id: totrans-411
   prefs: []
   type: TYPE_NORMAL
+  zh: 图85. 带有一个隐藏层的神经网络的阴影决策边界
 - en: This shows that the neural network has in fact learned where to fire-up(output
     1) and where to lay dormant(output 0).
+  id: totrans-412
   prefs: []
   type: TYPE_NORMAL
+  zh: 这表明神经网络实际上已经学会了在哪里激活（输出1）和在哪里保持静默（输出0）。
 - en: If we add another hidden layer with maybe 2 or 3 sigmoid neurons we can get
     an even more complex decision boundary that may fit our data even more tightly,
     but let’s leave that for the coding section.
+  id: totrans-413
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们再添加另一个隐藏层，可能有2或3个sigmoid神经元，我们可以得到一个更复杂的决策边界，可能会更紧密地拟合我们的数据，但我们将把这个留到编码部分。
 - en: 'Before we conclude this section I want to answer some remaining questions:'
+  id: totrans-414
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们结束这一部分之前，我想回答一些剩下的问题：
 - en: 1- So, which one is better Feature Engineering or a Deep Neural Network?
+  id: totrans-415
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1- 那么，特征工程和深度神经网络哪个更好？
 - en: Well, the answer depends on many factors. Generally, if we have a lot of training
     data we can just use a deep neural net to achieve acceptable accuracy, but if
     data is limited we may need to perform some feature engineering to extract more
     performance out of our neural network. As you saw in the feature engineering example
     above, to make good feature crosses one needs to have intimate knowledge of the
     dataset they are working with.
+  id: totrans-416
   prefs: []
   type: TYPE_NORMAL
+  zh: 好吧，答案取决于许多因素。一般来说，如果我们有大量的训练数据，我们可以直接使用深度神经网络来获得令人满意的准确度，但如果数据有限，我们可能需要进行一些特征工程，以从神经网络中提取更多性能。正如你在上面的特征工程示例中看到的，为了创建良好的特征交叉，我们需要对所使用的数据集有深入的了解。
 - en: '*Feature engineering along with a deep neural network is a powerful combination.*'
+  id: totrans-417
   prefs: []
   type: TYPE_NORMAL
+  zh: '*特征工程与深度神经网络的结合是一个强大的组合。*'
 - en: 2- How to count the number of layers in a Neural Network?
+  id: totrans-418
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2- 如何计算神经网络中的层数？
 - en: By convention, we don’t count layers without tunable weights and bias. Therefore,
     though the input layer is a separate “layer” we don’t count it when specifying
     the depth of a neural network.
+  id: totrans-419
   prefs: []
   type: TYPE_NORMAL
+  zh: 按惯例，我们不计算没有可调权重和偏置的层。因此，虽然输入层是一个单独的“层”，但在指定神经网络的深度时我们不计算它。
 - en: So, our last example was a “*2 layer neural network*” (one hidden + output layer)
     and all the examples before it just a “*1 layer neural network*” (output layer,
     only).
+  id: totrans-420
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，我们最后一个例子是“*2层神经网络*”（一个隐藏层+输出层），而之前的所有例子只是“*1层神经网络*”（仅输出层）。
 - en: 3- Why use Activation Functions?
+  id: totrans-421
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3- 为什么使用激活函数？
 - en: '***Activation functions are nonlinear functions and add nonlinearity to the
     neurons. The feature crosses are a result of stacking the activation functions
     in hidden layers***. The combination of a bunch of activation functions thus results
@@ -1661,36 +2529,52 @@
     being a popular choice for hidden layers*) each providing a certain benefit. ***The
     choice of the activation function is also a hyper-parameter when creating neural
     networks.***'
+  id: totrans-422
   prefs: []
   type: TYPE_NORMAL
+  zh: '***激活函数是非线性函数，给神经元添加非线性。特征交叉是隐藏层中堆叠激活函数的结果***。因此，一系列激活函数的组合产生了复杂的非线性决策边界。在本博客中，我们使用了sigmoid/logistic激活函数，但还有许多其他类型的激活函数（*ReLU
+    是隐藏层的热门选择*），每种都有一定的好处。 ***激活函数的选择也是创建神经网络时的一个超参数。***'
 - en: '***Without activations functions to add nonlinearity, no matter how many linear
     functions we stack up the result of them will still be linear.***Consider the
     following:'
+  id: totrans-423
   prefs: []
   type: TYPE_NORMAL
+  zh: '***没有激活函数来添加非线性，无论我们堆叠多少线性函数，它们的结果仍然是线性的。*** 请考虑以下几点：'
 - en: '![](../Images/d1af6e9dc3063f1684fc29b5cf51c2b1.png)'
+  id: totrans-424
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d1af6e9dc3063f1684fc29b5cf51c2b1.png)'
 - en: Fig 86\. Showing that stacking linear layers/functions results in a linear layer/function
+  id: totrans-425
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 86\. 显示堆叠线性层/函数结果为线性层/函数
 - en: You may use any nonlinear function as an activation function. Some researchers
     have used even*** cos ***and**sin **functions. Preferably the activation function
     should be a continuous i.e. no breaks in the domain of the function.
+  id: totrans-426
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用任何非线性函数作为激活函数。一些研究人员甚至使用了 ***cos*** 和 **sin** 函数。激活函数最好是连续的，即函数的定义域中没有断点。
 - en: 4- Why Random Initialization of Weights?
+  id: totrans-427
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 4- 为什么随机初始化权重？
 - en: This question is much easier to answer now. Note that if we had set all the
     weights in a layer to the same value than the gradient that passes through each
     node would be the same. In short, all the nodes in the layer would learn the same
     feature about the data. Setting the weights to ***random values helps in breaking
     the symmetry of weights*** so that each node in a layer has the opportunity to
     learn a unique aspect of the training data
+  id: totrans-428
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在这个问题更容易回答了。注意，如果我们将层中的所有权重设置为相同的值，那么通过每个节点的梯度将是相同的。简而言之，层中的所有节点将学习关于数据的相同特征。将权重设置为
+    ***随机值有助于打破权重的对称性***，以便层中的每个节点都有机会学习训练数据的独特方面。
 - en: There are many ways to set weights randomly in neural networks. For small neural
     networks, it is ok to set the weights to small random values. For larger networks,
     we tend to use “Xavier” or “He” initialization methods(*will be in the coding
@@ -1700,260 +2584,407 @@
     the “plain” method of setting weights to small random values.* Weight initialization
     is an active research area and will be a topic for a future “Nothing but Numpy”
     blog.
+  id: totrans-429
   prefs: []
   type: TYPE_NORMAL
+  zh: 神经网络中设置权重的方法有很多。对于小型神经网络，设置权重为小的随机值是可以的。对于较大的网络，我们倾向于使用“Xavier”或“He”初始化方法（*将在编码部分介绍*）。这两种方法都将权重设置为随机值，但控制其方差。
+    *目前，可以说当网络似乎无法收敛且使用“纯粹”的小随机值设置权重时，成本变得静态或减小得很慢时，使用这些方法就足够了。* 权重初始化是一个活跃的研究领域，将成为未来“Nothing
+    but Numpy”博客的主题。
 - en: Biases can be randomly initialized, too. But in practice, it does not seem to
     have much of an effect on the performance of a neural network. Perhaps this is
     because the number of bias terms in a neural network is much fewer than the weights.
+  id: totrans-430
   prefs: []
   type: TYPE_NORMAL
+  zh: 偏置也可以随机初始化。但是在实践中，它似乎对神经网络的性能没有太大影响。也许这是因为神经网络中的偏置项数量远少于权重。
 - en: The type of neural network we created here is called a “***fully-connected feedforward
     network***” or simply a “***feedforward network***”.
+  id: totrans-431
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在这里创建的神经网络类型称为“***全连接前馈网络***”或简单地称为“***前馈网络***”。
 - en: This concludes Part Ⅰ.
+  id: totrans-432
   prefs: []
   type: TYPE_NORMAL
+  zh: 这部分内容结束了。
 - en: '* * *'
+  id: totrans-433
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'Part Ⅱ: Coding a Modular Neural Network'
+  id: totrans-434
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第二部分：编写模块化神经网络
 - en: The implementation in this part follows OOP principals.
+  id: totrans-435
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一部分的实现遵循面向对象编程原则。
 - en: 'Let’s first see the **Linear Layer** class. The constructor takes as arguments:
     the shape of the data coming in(`input_shape`), the number of neurons the layer
     outputs(`n_out`) and what type of random weight initialization need to be performed(`ini_type=”plain”`,
     default is “plain” which is just small random gaussian numbers).'
+  id: totrans-436
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们首先查看**线性层**类。构造函数接受以下参数：传入数据的形状（`input_shape`），层输出的神经元数量（`n_out`），以及需要执行的随机权重初始化类型（`ini_type=”plain”`，默认为“plain”，即仅小随机高斯数）。
 - en: The `initialize_parameters` is a helper function used to define weights and
     bias. We’ll look at it separately, later.
+  id: totrans-437
   prefs: []
   type: TYPE_NORMAL
+  zh: '`initialize_parameters` 是一个用于定义权重和偏差的辅助函数。我们稍后会单独查看它。'
 - en: 'Linear Layer implements the following functions:'
+  id: totrans-438
   prefs: []
   type: TYPE_NORMAL
+  zh: 线性层实现以下函数：
 - en: '`forward(A_prev)` : This function allows the linear layer to take in activations
     from the previous layer(the input data can be seen as activations from the input
     layer) and performs the linear operation on them.'
+  id: totrans-439
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`forward(A_prev)`：此函数允许线性层接受来自前一层的激活值（输入数据可以看作是来自输入层的激活值），并对其执行线性操作。'
 - en: '`backward(upstream_grad)`: This function computes the derivative of Cost w.r.t
     weights, bias, and activations from the previous layer(`dW`, `db`&`dA_prev`, respectively)'
+  id: totrans-440
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`backward(upstream_grad)`：此函数计算成本对权重、偏差和来自前一层的激活值的导数（`dW`、`db` 和 `dA_prev`）。'
 - en: '`update_params(learning_rate=0.1)` : This function performs the gradient descent
     update on weights and bias using the derivatives computed in the `backward` function.
     The default learning rate(α) is 0.1'
+  id: totrans-441
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`update_params(learning_rate=0.1)`：此函数使用在`backward`函数中计算的导数，对权重和偏差执行梯度下降更新。默认学习率（α）为
+    0.1。'
 - en: '[PRE0]'
+  id: totrans-442
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Fig 87\. Linear Layer Class
+  id: totrans-443
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 87\. 线性层类
 - en: Now let’s see the** Sigmoid Layer** class, its constructor takes in as an argument
     the shape of data coming in(`input_shape`) from a Linear Layer preceding it.
+  id: totrans-444
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们看看**Sigmoid 层**类，它的构造函数接受作为参数的前一个线性层传入的数据形状（`input_shape`）。
 - en: 'Sigmoid Layer implements the following functions:'
+  id: totrans-445
   prefs: []
   type: TYPE_NORMAL
+  zh: Sigmoid 层实现以下函数：
 - en: '`forward(Z)` : This function allows the sigmoid layer to take in the linear
     computations(`Z`) from the previous layer and perform the sigmoid activation on
     them.'
+  id: totrans-446
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`forward(Z)`：此函数允许 Sigmoid 层接受来自前一层的线性计算值（`Z`），并对其执行 Sigmoid 激活。'
 - en: '`backward(upstream_grad)`: This function computes the derivative of Cost w.r.t ***Z***(`dZ`).'
+  id: totrans-447
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`backward(upstream_grad)`：此函数计算成本对***Z***（`dZ`）的导数。'
 - en: '[PRE1]'
+  id: totrans-448
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Fig 88\. Sigmoid Activation Layer class
+  id: totrans-449
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 88\. Sigmoid 激活层类
 - en: The `initialize_parameters` function is used only in the Linear Layer to set
     weights and biases. Using the size of input(`n_in`) and output(`n_out`) it defines
     the shape the weight matrix and bias vector need to be in. This helper function
     then returns both the weight(W) and bias(b) in a python dictionary to the respective
     Linear Layer.
+  id: totrans-450
   prefs: []
   type: TYPE_NORMAL
+  zh: '`initialize_parameters`函数仅在线性层中使用，用于设置权重和偏差。它根据输入（`n_in`）和输出（`n_out`）的大小定义权重矩阵和偏差向量的形状。然后，这个辅助函数将权重（W）和偏差（b）以
+    Python 字典的形式返回给相应的线性层。'
 - en: '[PRE2]'
+  id: totrans-451
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Fig 89\. Helper function to set weights and bias
+  id: totrans-452
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 89\. 设置权重和偏差的辅助函数
 - en: Finally, the Cost function` compute_cost(Y, Y_hat)` takes as argument the activations
     from the last layer(`Y_hat`) and the true labels(`Y`) and computes and returns
     the Squared Error Cost(`cost`) and its derivative(`dY_hat`).
+  id: totrans-453
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，成本函数`compute_cost(Y, Y_hat)`以最后一层的激活值（`Y_hat`）和真实标签（`Y`）作为参数，计算并返回平方误差成本（`cost`）及其导数（`dY_hat`）。
 - en: '[PRE3]'
+  id: totrans-454
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Fig 90\. Function to compute Squared Error Cost and derivative.
+  id: totrans-455
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 90\. 计算平方误差成本和导数的函数。
 - en: '*At this point, you should open the*[*** 2_layer_toy_network_XOR***](https://github.com/RafayAK/NothingButNumPy/blob/master/2_layer_toy_network_XOR.ipynb)* Jupyter
     notebook from this*[***repository***](https://github.com/RafayAK/NothingButNumPy)* in
     a separate window and go over this blog and the notebook side-by-side.*'
+  id: totrans-456
   prefs: []
   type: TYPE_NORMAL
+  zh: '*此时，你应该在另一个窗口中打开*[***2_layer_toy_network_XOR***](https://github.com/RafayAK/NothingButNumPy/blob/master/2_layer_toy_network_XOR.ipynb)*
+    Jupyter 笔记本，并对照本博客和笔记本进行查看。*'
 - en: Now we are ready to create our neural network. Let’s use the architecture defined
     in *Figure 77* for XOR data.
+  id: totrans-457
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们准备好创建我们的神经网络了。让我们使用*图 77*中定义的架构来处理 XOR 数据。
 - en: '[PRE4]'
+  id: totrans-458
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Fig 91\. Defining the layers and training parameters
+  id: totrans-459
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 91\. 定义层和训练参数
 - en: 'Now we can start the main training loop:'
+  id: totrans-460
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以开始主要的训练循环：
 - en: '[PRE5]'
+  id: totrans-461
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Fig 92\. The training loop
+  id: totrans-462
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 92\. 训练循环
 - en: Running the loop in the notebook we see that the Cost decreases to about 0.0009
     after 4900 epochs
+  id: totrans-463
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行笔记本中的循环，我们看到成本在 4900 次迭代后下降到大约 0.0009。
 - en: '[PRE6]'
+  id: totrans-464
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'The Learning curve and Decision Boundaries look as follows:'
+  id: totrans-465
   prefs: []
   type: TYPE_NORMAL
+  zh: 学习曲线和决策边界如下所示：
 - en: '![](../Images/b4c1d9e602d4b505c87ac9c5c37c862f.png)'
+  id: totrans-466
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b4c1d9e602d4b505c87ac9c5c37c862f.png)'
 - en: '![](../Images/5a10d5e180d873aabf0595227a700465.png)'
+  id: totrans-467
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5a10d5e180d873aabf0595227a700465.png)'
 - en: '![](../Images/c8a68ecafe69da5b5e82123483ecd10f.png)'
+  id: totrans-468
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c8a68ecafe69da5b5e82123483ecd10f.png)'
 - en: Fig 93\. The Learning Curve, Decision Boundary, and Shaded Decision Boundary.
+  id: totrans-469
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 93. 学习曲线、决策边界及阴影决策边界。
 - en: The predictions our trained neural network produces are accurate.
+  id: totrans-470
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们训练的神经网络生成的预测是准确的。
 - en: '[PRE7]'
+  id: totrans-471
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Make sure to check out the other notebooks in the [***repository***](https://github.com/RafayAK/NothingButNumPy).
     We’ll be building upon the things we learned in this blog in future Nothing but
     NumPy blogs, therefore, it would behoove you to create the layer classes from
     memory as an exercise and try recreating the OR gate example from ***Part******Ⅰ****.*
+  id: totrans-472
   prefs: []
   type: TYPE_NORMAL
+  zh: 确保查看 [***代码库***](https://github.com/RafayAK/NothingButNumPy) 中的其他笔记本。我们将在未来的“Nothing
+    but NumPy”博客中基于在本博客中学到的内容进行构建，因此，建议你记忆层类并尝试重建 OR 门示例，以作为练习，***Part******Ⅰ****。
 - en: This concludes the blog. I hope you enjoyed.
+  id: totrans-473
   prefs: []
   type: TYPE_NORMAL
+  zh: 本博客到此结束。希望你喜欢。
 - en: For any questions feel free to reach out to me on [twitter](https://twitter.com/RafayAK) [**@**RafayAK](https://twitter.com/RafayAK)
+  id: totrans-474
   prefs: []
   type: TYPE_NORMAL
+  zh: 如有任何问题，请随时通过 [twitter](https://twitter.com/RafayAK) [**@**RafayAK](https://twitter.com/RafayAK)
+    联系我。
 - en: '* * *'
+  id: totrans-475
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '**This blog would not have been possible without following resources and people:**'
+  id: totrans-476
   prefs: []
   type: TYPE_NORMAL
+  zh: '**本博客的完成离不开以下资源和人士的帮助：**'
 - en: Andrej Karpathy’s ([**@**karpathy](https://twitter.com/karpathy)) Stanford [course](http://cs231n.stanford.edu/)
+  id: totrans-477
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Andrej Karpathy’s ([**@**karpathy](https://twitter.com/karpathy)) 斯坦福 [课程](http://cs231n.stanford.edu/)
 - en: Christopher Olah’s ([**@**ch402](https://twitter.com/ch402)) [blog](https://colah.github.io/)s
+  id: totrans-478
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Christopher Olah’s ([**@**ch402](https://twitter.com/ch402)) [博客](https://colah.github.io/)s
 - en: Andrew Trask’s ([**@**iamtrask](https://twitter.com/iamtrask)) [blogs](https://iamtrask.github.io/)
+  id: totrans-479
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Andrew Trask’s ([**@**iamtrask](https://twitter.com/iamtrask)) [博客](https://iamtrask.github.io/)
 - en: Andrew Ng ([@AndrewYNg](https://twitter.com/AndrewYNg)) and his Coursera courses
     on [deep learning](https://www.coursera.org/specializations/deep-learning)and [machine
     learning](https://www.coursera.org/learn/machine-learning)
+  id: totrans-480
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Andrew Ng ([**@**AndrewYNg](https://twitter.com/AndrewYNg)) 和他在 Coursera 上的
+    [深度学习](https://www.coursera.org/specializations/deep-learning) 和 [机器学习](https://www.coursera.org/learn/machine-learning)
+    课程
 - en: '[Terence Parr](http://parrt.cs.usfca.edu/) ([**@**the_antlr_guy](https://twitter.com/the_antlr_guy))
     and [Jeremy Howard](http://www.fast.ai/about/#jeremy) ([**@**jeremyphoward](https://twitter.com/jeremyphoward))([https://explained.ai/matrix-calculus/index.html](https://explained.ai/matrix-calculus/index.html))'
+  id: totrans-481
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特伦斯·帕尔](http://parrt.cs.usfca.edu/) ([**@**the_antlr_guy](https://twitter.com/the_antlr_guy))
+    和 [杰里米·霍华德](http://www.fast.ai/about/#jeremy) ([**@**jeremyphoward](https://twitter.com/jeremyphoward))
+    ([https://explained.ai/matrix-calculus/index.html](https://explained.ai/matrix-calculus/index.html))'
 - en: Ian Goodfellow ([**@**goodfellow_ian](https://twitter.com/goodfellow_ian)) and
     his amazing [book](https://www.deeplearningbook.org/)
+  id: totrans-482
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Ian Goodfellow ([**@**goodfellow_ian](https://twitter.com/goodfellow_ian)) 和他精彩的
+    [书籍](https://www.deeplearningbook.org/)
 - en: Finally, Hassan-uz-Zaman ([**@**OKidAmnesiac](https://twitter.com/OKidAmnesiac))
     and Hassan Tauqeer for invaluable feedback.
+  id: totrans-483
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最后，感谢 Hassan-uz-Zaman ([**@**OKidAmnesiac](https://twitter.com/OKidAmnesiac))
+    和 Hassan Tauqeer 的宝贵反馈。
 - en: '[Original](https://medium.com/towards-artificial-intelligence/nothing-but-numpy-understanding-creating-neural-networks-with-computational-graphs-from-scratch-6299901091b0).
     Reposted with permission.'
+  id: totrans-484
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/towards-artificial-intelligence/nothing-but-numpy-understanding-creating-neural-networks-with-computational-graphs-from-scratch-6299901091b0)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-485
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Neural Networks with Numpy for Absolute Beginners: Introduction](https://www.kdnuggets.com/2019/03/neural-networks-numpy-absolute-beginners-introduction.html)'
+  id: totrans-486
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[绝对初学者的神经网络与 Numpy: 介绍](https://www.kdnuggets.com/2019/03/neural-networks-numpy-absolute-beginners-introduction.html)'
 - en: '[Building Convolutional Neural Network using NumPy from Scratch](https://www.kdnuggets.com/2018/04/building-convolutional-neural-network-numpy-scratch.html)'
+  id: totrans-487
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 NumPy 从零开始构建卷积神经网络](https://www.kdnuggets.com/2018/04/building-convolutional-neural-network-numpy-scratch.html)'
 - en: '[Artificial Neural Network Implementation using NumPy and Image Classification](https://www.kdnuggets.com/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html)'
+  id: totrans-488
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 NumPy 实现人工神经网络和图像分类](https://www.kdnuggets.com/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html)'
 - en: More On This Topic
+  id: totrans-489
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  id: totrans-490
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为伟大数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
 - en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  id: totrans-491
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个初学者数据科学家都应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
 - en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  id: totrans-492
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-493
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，找到目标后…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-494
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一项90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  id: totrans-495
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[建立一个强大的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
