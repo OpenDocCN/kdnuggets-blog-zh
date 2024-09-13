@@ -3,29 +3,35 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Docker 容器将机器学习管道部署到云端
 - en: 原文：[https://www.kdnuggets.com/2020/06/deploy-machine-learning-pipeline-cloud-docker.html](https://www.kdnuggets.com/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/06/deploy-machine-learning-pipeline-cloud-docker.html](https://www.kdnuggets.com/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Moez Ali](https://www.linkedin.com/in/profile-moez/), Founder & Author
     of PyCaret**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Moez Ali](https://www.linkedin.com/in/profile-moez/)，PyCaret 的创始人和作者**'
 - en: '![](../Images/5349163e540ab0ae4854ac1f9ff52edd.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5349163e540ab0ae4854ac1f9ff52edd.png)'
 - en: '**RECAP**'
   id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**回顾**'
 - en: In our [last post](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99),
     we demonstrated how to develop a machine learning pipeline and deploy it as a
     web app using PyCaret and Flask framework in Python. If you haven’t heard about
@@ -34,81 +40,99 @@
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们 [上一篇文章](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99)中，我们展示了如何使用
+    PyCaret 和 Flask 框架在 Python 中开发机器学习管道并将其作为 web 应用进行部署。如果你以前没有听说过 PyCaret，请阅读此 [公告](https://towardsdatascience.com/announcing-pycaret-an-open-source-low-code-machine-learning-library-in-python-4a1f1aad8d46) 以了解更多。
 - en: In this tutorial, we will use the same machine learning pipeline and Flask app
     that we built and deployed previously. This time we will demonstrate how to deploy
     a machine learning pipeline as a web app using the [Microsoft Azure Web App Service](https://azure.microsoft.com/en-us/services/app-service/web/).
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将使用之前构建和部署的相同机器学习管道和 Flask 应用。这次我们将演示如何使用 [微软 Azure Web 应用服务](https://azure.microsoft.com/en-us/services/app-service/web/)将机器学习管道作为
+    web 应用进行部署。
 - en: In order to deploy a machine learning pipeline on Microsoft Azure, we will have
     to containerize our pipeline in a software called **“Docker”**. If you don’t know
     what does containerize means, *no problem* — this tutorial is all about that.
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了在 Microsoft Azure 上部署机器学习管道，我们需要在一个叫做**“Docker”**的软件中将我们的管道容器化。如果你不知道什么是容器化，*没关系*—本教程正是关于这个内容的。
 - en: ???? Learning Goals of this Tutorial
   id: totrans-9
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 本教程的学习目标
 - en: What is a container? What is Docker? and why do we need it?
   id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 什么是容器？什么是 Docker？我们为什么需要它？
 - en: Build a Docker file on your local computer and publish it into [Azure Container
     Registry (ACR)](https://azure.microsoft.com/en-us/services/container-registry/).
   id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在你的本地计算机上构建 Docker 文件并将其发布到 [Azure 容器注册表 (ACR)](https://azure.microsoft.com/en-us/services/container-registry/)。
 - en: Deploy a web service on Azure using the container we uploaded into ACR.
   id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用我们上传到 ACR 的容器在 Azure 上部署一个 web 服务。
 - en: See a web app in action that uses a trained machine learning pipeline to predict
     on new data points in real-time.
   id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 查看一个实际操作中的网络应用，使用训练好的机器学习管道对新的数据点进行实时预测。
 - en: In our last post, we covered the basics of model deployment and why it is needed.
     If you would like to learn more about model deployment, [click here](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99) to
     read our last article.
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们上一篇文章中，我们介绍了模型部署的基础知识及其必要性。如果你想了解更多关于模型部署的内容， [点击这里](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99) 阅读我们的上一篇文章。
 - en: This tutorial will cover the entire workflow of building a container locally
     to pushing it onto Azure Container Registry and then deploying our pre-trained
     machine learning pipeline and Flask app onto Azure Web Services.
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程将涵盖从本地构建容器到将其推送到 Azure 容器注册表，再到将我们预训练的机器学习管道和 Flask 应用部署到 Azure Web 服务的整个工作流程。
 - en: '![Figure](../Images/d36fc51994d651c09f77854c9f90fa8f.png)'
   id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/d36fc51994d651c09f77854c9f90fa8f.png)'
 - en: 'WORKFLOW: Create an image → Build container locally → Push to ACR → Deploy
     app on cloud'
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 工作流程：创建图像 → 本地构建容器 → 推送到 ACR → 在云端部署应用
 - en: ???? Toolbox for this tutorial
   id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 本教程的工具箱
 - en: '**PyCaret**'
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**PyCaret**'
 - en: '[PyCaret](https://www.pycaret.org/) is an open source, low-code machine learning
     library in Python that is used to train and deploy machine learning pipelines
     and models into production. PyCaret can be installed easily using pip.'
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PyCaret](https://www.pycaret.org/) 是一个开源、低代码的 Python 机器学习库，用于训练和部署机器学习管道和模型到生产环境中。PyCaret
+    可以通过 pip 轻松安装。'
 - en: '[PRE0]'
   id: totrans-21
   prefs: []
@@ -118,6 +142,7 @@
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Flask**'
 - en: '[Flask](https://flask.palletsprojects.com/en/1.1.x/) is a framework that allows
     you to build web applications. A web application can be a commercial website,
     blog, e-commerce system, or an application that generates predictions from data
@@ -342,73 +367,88 @@
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种看待 docker 文件的方法是，它们就像你在自己厨房里发明的食谱。当你与其他人分享这些食谱，并且他们按照完全相同的步骤操作时，他们也能制作出相同的菜肴。同样，你可以将你的
+    docker 文件分享给其他人，他们可以基于这个 docker 文件创建镜像并运行容器。
 - en: Now that you understand containers, docker and why we should use them, let’s
     quickly set the business context.
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你已经了解了容器、docker 以及为什么我们应该使用它们，让我们快速设定业务背景。
 - en: Setting the Business Context
   id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 设定业务背景
 - en: An insurance company wants to improve its cash flow forecasting by better predicting
     patient charges using demographic and basic patient health risk metrics at the
     time of hospitalization.
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 一家保险公司希望通过更好地预测患者费用来改善现金流预测，方法是使用在住院时的基本人口统计和患者健康风险指标。
 - en: '![Figure](../Images/3638fa2bffed356be35c42d85a72bc00.png)'
   id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/3638fa2bffed356be35c42d85a72bc00.png)'
 - en: '*(*[*data source*](https://www.kaggle.com/mirichoi0218/insurance#insurance.csv)*)*'
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '*(*[*数据来源*](https://www.kaggle.com/mirichoi0218/insurance#insurance.csv)*)*'
 - en: Objective
   id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 目标
 - en: To build and deploy a web application where the demographic and health information
     of a patient is entered into a web-based form which then outputs a predicted charge
     amount.
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 构建和部署一个 Web 应用程序，在其中输入患者的基本信息和健康信息，然后输出预测的费用金额。
 - en: Tasks
   id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 任务
 - en: Train and develop a machine learning pipeline for deployment.
   id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 训练并开发用于部署的机器学习管道。
 - en: Build a web app using Flask framework. It will use the trained ML pipeline to
     generate predictions on new data points in real-time.
   id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 Flask 框架构建一个 Web 应用程序。它将使用训练好的 ML 管道实时生成新数据点的预测。
 - en: Create a docker image and container.
   id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个 docker 镜像和容器。
 - en: Publish the container onto Azure Container Registry (ACR).
   id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将容器发布到 Azure 容器注册表（ACR）。
 - en: Deploy the web app in the container by publishing onto ACR. Once deployed, it
     will become publicly available and can be accessed via a Web URL.
   id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过发布到 ACR，将 Web 应用程序部署到容器中。一旦部署，它将公开可用，并可以通过 Web URL 访问。
 - en: Since we have already covered the first two tasks in our last tutorial, we will
     quickly recap them and focus on the remaining tasks in the list above. If you
     are interested in learning more about developing machine learning pipeline in
@@ -417,11 +457,14 @@
   id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们在上一个教程中已经涵盖了前两个任务，我们将快速回顾这些任务，并重点关注上述列表中的剩余任务。如果你对使用 PyCaret 开发机器学习管道和使用
+    Flask 框架构建 Web 应用程序感兴趣，你可以阅读我们的 [最后一个教程](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99)。
 - en: ???? Develop Machine Learning Pipeline
   id: totrans-69
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 开发机器学习管道
 - en: 'We are using PyCaret in Python for training and developing a machine learning
     pipeline which will be used as part of our web app. The Machine Learning Pipeline
     can be developed in an Integrated Development Environment (IDE) or Notebook. We
@@ -429,6 +472,7 @@
   id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在 Python 中使用 PyCaret 进行机器学习管道的训练和开发，这将作为我们 Web 应用程序的一部分。机器学习管道可以在集成开发环境（IDE）或笔记本中开发。我们使用笔记本运行以下代码：
 - en: 'When you save a model in PyCaret, the entire transformation pipeline based
     on the configuration defined in the **setup() **function is created . All inter-dependencies
     are orchestrated automatically. See the pipeline and model stored in the ‘deployment_28042020’
@@ -436,19 +480,23 @@
   id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你在 PyCaret 中保存模型时，基于在**setup()**函数中定义的配置会创建整个转换管道。所有的相互依赖关系会自动协调。查看存储在‘deployment_28042020’变量中的管道和模型：
 - en: '![Figure](../Images/e083836af4d5fa14164ce9cc5be82f4a.png)'
   id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/e083836af4d5fa14164ce9cc5be82f4a.png)'
 - en: Machine Learning Pipeline created using PyCaret
   id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 PyCaret 创建的机器学习管道
 - en: ???? Build Web Application
   id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ???? 构建 Web 应用程序
 - en: 'This tutorial is not focused on building a Flask application. It is only discussed
     here for completeness. Now that our machine learning pipeline is ready we need
     a web application that can connect to our trained pipeline to generate predictions
@@ -973,179 +1021,218 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 想了解某个特定模块吗？
 - en: As of the first release 1.0.0, PyCaret has the following modules available for
     use. Click on the links below to see the documentation and working examples in
     Python.
   id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: 从1.0.0版本开始，PyCaret提供了以下模块可供使用。点击下面的链接查看Python中的文档和工作示例。
 - en: '[Classification](https://www.pycaret.org/classification)'
   id: totrans-169
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分类](https://www.pycaret.org/classification)'
 - en: '[Regression](https://www.pycaret.org/regression)'
   id: totrans-170
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回归](https://www.pycaret.org/regression)'
 - en: '[Clustering](https://www.pycaret.org/clustering)'
   id: totrans-171
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[聚类](https://www.pycaret.org/clustering)'
 - en: '[Anomaly Detection](https://www.pycaret.org/anomaly-detection)'
   id: totrans-172
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[异常检测](https://www.pycaret.org/anomaly-detection)'
 - en: '[Natural Language Processing](https://www.pycaret.org/nlp)'
   id: totrans-173
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理](https://www.pycaret.org/nlp)'
 - en: '[Association Rule Mining](https://www.pycaret.org/association-rules)'
   id: totrans-174
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关联规则挖掘](https://www.pycaret.org/association-rules)'
 - en: 'Also see:'
   id: totrans-175
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 另见：
 - en: 'PyCaret getting started tutorials in Notebook:'
   id: totrans-176
   prefs: []
   type: TYPE_NORMAL
+  zh: PyCaret入门教程在Notebook中：
 - en: '[Clustering](https://www.pycaret.org/clu101)'
   id: totrans-177
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[聚类](https://www.pycaret.org/clu101)'
 - en: '[Anomaly Detection](https://www.pycaret.org/anom101)'
   id: totrans-178
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[异常检测](https://www.pycaret.org/anom101)'
 - en: '[Natural Language Processing](https://www.pycaret.org/nlp101)'
   id: totrans-179
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理](https://www.pycaret.org/nlp101)'
 - en: '[Association Rule Mining](https://www.pycaret.org/arul101)'
   id: totrans-180
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关联规则挖掘](https://www.pycaret.org/arul101)'
 - en: '[Regression](https://www.pycaret.org/reg101)'
   id: totrans-181
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[回归](https://www.pycaret.org/reg101)'
 - en: '[Classification](https://www.pycaret.org/clf101)'
   id: totrans-182
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分类](https://www.pycaret.org/clf101)'
 - en: Would you like to contribute?
   id: totrans-183
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 你想要参与吗？
 - en: PyCaret is an open source project. Everybody is welcome to contribute. If you
     would like contribute, please feel free to work on [open issues](https://github.com/pycaret/pycaret/issues).
     Pull requests are accepted with unit tests on dev-1.0.1 branch.
   id: totrans-184
   prefs: []
   type: TYPE_NORMAL
+  zh: PyCaret是一个开源项目，欢迎大家参与。如果你想参与，请随时处理[开放问题](https://github.com/pycaret/pycaret/issues)。拉取请求必须包含dev-1.0.1分支上的单元测试。
 - en: Please give us ⭐️ on our [GitHub repo](https://www.github.com/pycaret/pycaret) if
     you like PyCaret.
   id: totrans-185
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你喜欢PyCaret，请在我们的[GitHub仓库](https://www.github.com/pycaret/pycaret)上给我们⭐️。
 - en: Medium : [https://medium.com/@moez_62905/](https://medium.com/@moez_62905/machine-learning-in-power-bi-using-pycaret-34307f09394a)
   id: totrans-186
   prefs: []
   type: TYPE_NORMAL
+  zh: 'Medium : [https://medium.com/@moez_62905/](https://medium.com/@moez_62905/machine-learning-in-power-bi-using-pycaret-34307f09394a)'
 - en: LinkedIn : [https://www.linkedin.com/in/profile-moez/](https://www.linkedin.com/in/profile-moez/)
   id: totrans-187
   prefs: []
   type: TYPE_NORMAL
+  zh: 'LinkedIn : [https://www.linkedin.com/in/profile-moez/](https://www.linkedin.com/in/profile-moez/)'
 - en: Twitter : [https://twitter.com/moezpycaretorg1](https://twitter.com/moezpycaretorg1)
   id: totrans-188
   prefs: []
   type: TYPE_NORMAL
+  zh: 'Twitter : [https://twitter.com/moezpycaretorg1](https://twitter.com/moezpycaretorg1)'
 - en: '**Bio: [Moez Ali](https://www.linkedin.com/in/profile-moez/)** is a Data Scientist,
     and is Founder & Author of PyCaret.'
   id: totrans-189
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Moez Ali](https://www.linkedin.com/in/profile-moez/)** 是一名数据科学家，同时也是PyCaret的创始人和作者。'
 - en: '[Original](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-cloud-using-docker-container-bec64458dc01).
     Reposted with permission.'
   id: totrans-190
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-cloud-using-docker-container-bec64458dc01)。经许可转载。'
 - en: '**Related:**'
   id: totrans-191
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Announcing PyCaret 1.0.0](/2020/04/announcing-pycaret.html)'
   id: totrans-192
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[宣布PyCaret 1.0.0](/2020/04/announcing-pycaret.html)'
 - en: '[Build and deploy your first machine learning web app](/2020/05/build-deploy-machine-learning-web-app.html)'
   id: totrans-193
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建并部署你的第一个机器学习Web应用](/2020/05/build-deploy-machine-learning-web-app.html)'
 - en: '[Machine Learning in Power BI using PyCaret](/2020/05/machine-learning-power-bi-pycaret.html)'
   id: totrans-194
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用PyCaret在Power BI中进行机器学习](/2020/05/machine-learning-power-bi-pycaret.html)'
 - en: '* * *'
   id: totrans-195
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-196
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-197
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-198
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-199
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT需求'
 - en: '* * *'
   id: totrans-200
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
   id: totrans-201
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[The Top 8 Cloud Container Management Solutions of 2024](https://www.kdnuggets.com/the-top-8-cloud-container-management-solutions-of-2024)'
   id: totrans-202
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2024年顶级8大云容器管理解决方案](https://www.kdnuggets.com/the-top-8-cloud-container-management-solutions-of-2024)'
 - en: '[Survey: Machine Learning Projects Still Routinely Fail to Deploy](https://www.kdnuggets.com/survey-machine-learning-projects-still-routinely-fail-to-deploy)'
   id: totrans-203
   prefs:
