@@ -1,22 +1,28 @@
 - en: 'From Scratch: Permutation Feature Importance for ML Interpretability'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2021/06/from-scratch-permutation-feature-importance-ml-interpretability.html](https://www.kdnuggets.com/2021/06/from-scratch-permutation-feature-importance-ml-interpretability.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '**By [Seth Billiau](https://www.linkedin.com/in/seth-billiau-b4b062136/), Data
     Scientist and Statistician**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/b22185d12db44de4fd434cebf30c3851.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
 - en: Photo by [Arno Senoner](https://unsplash.com/@arnosenoner) on [Unsplash](https://unsplash.com/photos/ZxA9vV0phGI)
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: Introduction
+  id: totrans-5
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -29,12 +35,15 @@
     examples of black box models that yield remarkably accurate predictions in a variety
     of domains from [urban planning](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6567884/) to [computer
     vision](https://medium.com/swlh/computer-vision-with-convolutional-neural-networks-22f06360cac9).
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/8975079b777cc8ef90ea8076241d93cc.png)'
+  id: totrans-7
   prefs: []
   type: TYPE_IMG
 - en: Diagram of a Black Box Model
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: However, one drawback to using these black box models is that it’s often difficult
@@ -43,6 +52,7 @@
     black box models called permutation feature importance. Permutation feature importance
     is a powerful tool that allows us to detect which features in our dataset have
     predictive power regardless of what model we’re using.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: We will begin by discussing the differences between traditional statistical
@@ -52,9 +62,11 @@
     in Blotchville. We’ll conclude by discussing some drawbacks to this approach and
     introducing some packages that can help us with permutation feature importance
     in the future.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: Statistical Inference vs. Feature Importance
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -64,12 +76,15 @@
     our predictor corresponds to a *linear* change in our output. The magnitude of
     that change is estimated during model fitting and we can provide uncertainty measures
     for these estimates using probability theory.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/9eb6adf2cc2ec36a05fd68bede54b580.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
 - en: Photo by [Javier Allegue Barros](https://unsplash.com/@soymeraki) on [Upsplash](https://unsplash.com/photos/0nOP5iHVaZ8)
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: Unfortunately, it’s often impossible for us to make these kinds of statements
@@ -79,20 +94,24 @@
     (ResNet-50 has over 23 million trainable parameters) along with several non-linear
     activation functions. When dealing with a model this complex, it becomes extremely
     challenging to map out the relationship between predictor and prediction analytically.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: Feature importance techniques were developed to help assuage this interpretability
     crisis. Feature importance techniques assign a score to each predictor based on
     its ability to improve predictions. This allows us to rank the predictors in our
     model based on their relative predictive power.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: One method for generating these feature importance scores is by leveraging the
     power of random permutations. The next section explains how to perform permutation
     feature importance using python.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: Permutation Feature Importance
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -103,39 +122,47 @@
     impactful in determining your predictions — your model is still pretty good without
     it. Furthermore, if the decrease is large, then the information in the original
     predictor had a large impact on your predictions.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: 'This idea is implemented in three simple steps. Say that you’ve trained an
     ML model and recorded some measure of quality for the predictions (ex. MSE, log-loss,
     etc). For each predictor in the dataset:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: Randomly shuffle the data in the predictor while keeping the values of other
     predictors constant
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Generate new predictions based on the shuffled values and evaluate the quality
     of your new predictions
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Compute the feature importance score by calculating the decrease in the quality
     of your new predictions relative to your original predictions
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Once you’ve computed feature importance scores for all of your features, you
     can rank them in terms of predictive usefulness. To help explain permutation feature
     importance more concretely, consider the following synthetic case study.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: 'Case Study: Predicting House Prices'
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '*Note: Code is included when most instructive. Follow along with the full code
     for this guide *[*here*](https://github.com/sethbilliau/FeatureImportance)*.*'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: 'Suppose that the prices of 10,000 houses in [Blotchville](http://www.hcs.harvard.edu/cs50-probability/hw0705.php) are
@@ -145,58 +172,74 @@
     scores are standardized and approximately normally distributed. The price of house *i
     c*an be determined from these factors according to the following data-generating
     equation:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/2b8a74c54d0e62acac1872934d2494dc.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
 - en: Data Generating Equation
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: The dataset also contains five other predictors that are uncorrelated with the
     price of houses and have no predictive power. Here’s a snapshot of the first five
     rows of the dataset, `df`.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/d80fb79133017e0625f51e15d8f20f41.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
 - en: Snapshot of the Dataset
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: Say that we want to train a model to predict price from the other nine predictors.
     We could use any black box model, but for the sake of this example, let’s train
     a random forest regressor. To do this, we split our data into a train and test
     dataset. Then, we use sklearn to fit a simple random forest model.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: At this point, feel free to take some time to tune the hyperparameters of your
     random forest regressor. But, since this isn’t a guide on [hyperparameter tuning](https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74),
     I am going to continue with this naive random forest model — it’ll be fine for
     illustrating the usefulness of permutation feature importance.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: One commonly-used metric to assess the quality of regression predictions is [root
     mean squared error (RMSE)](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html) evaluated
     onthe test set. Let’s calculate the RMSE of our model predictions and store it
     as `rmse_full_mod`.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Now, we can implement permutation feature importance by shuffling each predictor
     and recording the increase in RMSE. This will allow us to assess which predictors
     are useful for making predictions. Here’s the code to do this from scratch. See
     if you can match up the comments of this code to our algorithm from earlier.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The resulting dataframe contains permutation feature importance scores. Large
     scores correspond to large increases in RMSE — evidence of worse model performance
     when a predictor was shuffled. Upon inspection of the table, we see that the four
@@ -204,22 +247,28 @@
     large values, meaning that they have predictive power in our model. On the other
     hand, the five dummy predictors have relatively small values, meaning that they
     are not as useful for making predictions.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/ee79363356fd5e28bdbdfb7a808183f2.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
 - en: Results of Permutation Dataframe
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: We can graph our permutation feature importance scores as well for easier comparison
     using matplotlib.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/8ef8103386aea8ad2e72be9f404ee06c.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
 - en: Permutation Feature Importance Plot
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: From this analysis, we gain valuable insights into how our model makes predictions.
@@ -229,27 +278,33 @@
     dummy predictors do not have very much predictive power. In fact, since dropping
     dummy predictor 3 actually led to a decrease in RMSE, we might consider performing
     feature selection and removing these unimportant predictors in future analysis.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: Drawbacks to Permutation Feature Importance
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '![](../Images/176fcc49ddc9f174be73b548a949f6a7.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
 - en: Photo by [Martin Esteve](https://unsplash.com/@tme18) on [Upsplash](https://unsplash.com/photos/4y8A6Ve-3GE)
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: 'While we’ve seen the many benefits of permutation feature importance, it’s
     equally important to acknowledge its drawbacks (no pun intended). Here are a few
     disadvantages of using permutation feature importance:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: '**Computational Time: **This process can be computationally expensive since
     it requires you to iterate through each of your predictors and make predictions.
     If it’s not cheap to make predictions or if you have many, many predictors, this
     could be costly.'
+  id: totrans-51
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
@@ -257,6 +312,7 @@
     importance can perform poorly if your dataset has correlated features. If the
     information in one predictor is also stored in a correlated predictor, then the
     model may still perform well when one of those predictors is shuffled.'
+  id: totrans-52
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
@@ -264,6 +320,7 @@
     power of features in a model. However, these scores don’t really have any meaningful
     value out of context — any score could be really good or really bad depending
     on the other scores.'
+  id: totrans-53
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
@@ -273,10 +330,12 @@
     of the predictor’s effect. Permutation feature importance is not a replacement
     for statistical inference, but rather an alternative solution for when it’s impossible
     to perform traditional inference.'
+  id: totrans-54
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Conclusion
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -284,6 +343,7 @@
     analyzing black box models and providing ML interpretability. With these tools,
     we can better understand the relationships between our predictors and our predictions
     and even perform more principled feature selection.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: Though we implemented permutation feature importance from scratch, there are
@@ -291,92 +351,115 @@
     importance along with other model-agnostic methods. Python users should look into
     the `eli5`, `alibi`, `scikit-learn`, `LIME`, and `rfpimp` packages while R users
     turn to `iml`, `DALEX`, and `vip`.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: Happy permuting! If you have any questions, feel free to leave a comment, and
     I’ll do my best to provide an answer.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: '*Acknowledgments: A big thank you to the wonderful Claire Hoffman for proofreading
     and editing this article and putting up with my neglect of the Oxford comma. I’m
     also grateful to Leo Saenger for reading the article and providing his suggestions.*'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Seth Billiau](https://www.linkedin.com/in/seth-billiau-b4b062136/)**
     is a Data Scientist and Statistician, A.B. in Statistics at Harvard University,
     Former Vice President of the Harvard College Open Data Project. Email: sethbilliau
     [at] college.harvard.edu'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://towardsdatascience.com/from-scratch-permutation-feature-importance-for-ml-interpretability-b60f7d5d1fe9).
     Reposted with permission.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: '[This Data Visualization is the First Step for Effective Feature Selection](/2021/06/data-visualization-feature-selection.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Feature Selection – All You Ever Wanted To Know](/2021/06/feature-selection-overview.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Dashboards for Interpreting & Comparing Machine Learning Models](/2021/06/dashboards-interpreting-comparing-machine-learning-models.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-67
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[The Importance of Permutation in Neural Network Predictions](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Using SHAP Values for Model Interpretability in Machine Learning](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Celebrating Awareness of the Importance of Data Privacy](https://www.kdnuggets.com/2022/01/celebrating-awareness-importance-data-privacy.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[The Importance of Experiment Design in Data Science](https://www.kdnuggets.com/2022/08/importance-experiment-design-data-science.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中实验设计的重要性](https://www.kdnuggets.com/2022/08/importance-experiment-design-data-science.html)'

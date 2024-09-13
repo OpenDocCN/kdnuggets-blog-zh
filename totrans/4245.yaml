@@ -1,157 +1,241 @@
 - en: Pandas not enough? Here are a few good alternatives to processing larger and
     faster data in Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Pandas 不够用？这里有几个处理更大、更快数据的 Python 替代方案。
 - en: 原文：[https://www.kdnuggets.com/2021/07/pandas-alternatives-processing-larger-faster-data-python.html](https://www.kdnuggets.com/2021/07/pandas-alternatives-processing-larger-faster-data-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/07/pandas-alternatives-processing-larger-faster-data-python.html](https://www.kdnuggets.com/2021/07/pandas-alternatives-processing-larger-faster-data-python.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [DaurEd](https://daureducation.medium.com/), providing quality and affordable
     education**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [DaurEd](https://daureducation.medium.com/) 提供优质且负担得起的教育**。'
 - en: '![](../Images/d24ce366a64c6254e5b2a7776109a476.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d24ce366a64c6254e5b2a7776109a476.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能。'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 工作。'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Data is found everywhere in various formats of CSVs, flat files, JSON, etc.
     When the data size is large, it’s difficult to read into memory and time-consuming
     for EDA (exploratory data analysis). This blog revolves around handling tabular
     data in *CSV format* and processing it with *Pandas and some alternatives like
     cuDF, dask, modin, and datatable.*
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据以各种格式存在于各处，如 CSV、平面文件、JSON 等。当数据量较大时，很难读取到内存中，并且进行探索性数据分析（EDA）耗时较长。此博客围绕以
+    *CSV 格式* 处理表格数据，并使用 *Pandas 以及 cuDF、dask、modin 和 datatable 等一些替代方案*。
 - en: '**Problem:** Importing (reading) a large CSV file leads to an *Out of Memory* error.
     Not enough RAM to read the entire CSV at once crashes the computer often. And
     processing it is slower at times with a single CPU core.'
+  id: totrans-12
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**问题：** 导入（读取）大型 CSV 文件会导致 *内存不足* 错误。RAM 不足以一次读取整个 CSV 文件，经常导致计算机崩溃。而且，使用单个
+    CPU 核心处理时速度较慢。'
 - en: 'About the data used in this exploration: A sales data record of 5 million rows
     and 14 columns as shown below. This dataset is in zip format can be found at:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于本次探索中使用的数据：一个包含 500 万行和 14 列的销售数据记录，如下所示。此数据集以 zip 格式提供，下载地址为：
 - en: '[Large randomly-generated sales data sets in CSV format](http://eforexcel.com/wp/downloads-18-sample-csv-files-data-sets-for-testing-sales/)'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[大型随机生成的 CSV 格式销售数据集](http://eforexcel.com/wp/downloads-18-sample-csv-files-data-sets-for-testing-sales/)'
 - en: 'First 5 rows of the data:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据的前 5 行：
 - en: '![](../Images/4f2b4bb786e1b0ded727a4008a1fd6be.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4f2b4bb786e1b0ded727a4008a1fd6be.png)'
 - en: Pandasis designed to work *only on a single core*, so cannot utilize the multi-cores
     available on your system.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 设计为 *仅在单个核心上运行*，因此无法利用系统上可用的多核。
 - en: However, the [**cuDF**](https://docs.rapids.ai/api/cudf/stable/) library aims
     to implement the Pandas API on GPUs*.* [**Modin**](https://modin.readthedocs.io/en/latest/) and
     the [**Dask Dataframe**](https://docs.dask.org/en/latest/dataframe.html) library provide *parallel
     algorithms* around the Pandas API.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，[**cuDF**](https://docs.rapids.ai/api/cudf/stable/) 库旨在在 GPU 上实现 Pandas API。*[**Modin**](https://modin.readthedocs.io/en/latest/)*
+    和 [**Dask Dataframe**](https://docs.dask.org/en/latest/dataframe.html) 库提供了围绕
+    Pandas API 的 *并行算法*。
 - en: Modin is targeted toward parallelizing the entire pandas API, without exception.
     This implies all pandas functions can be used on Modin, which happens just by
     changing one line in code: *import modin.pandas as pd* (Check the code in git
     link below to learn about the implementation)
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: Modin 旨在对整个 pandas API 进行并行化，没有例外。这意味着所有 pandas 函数都可以在 Modin 上使用，只需更改一行代码：*import
+    modin.pandas as pd*（查看下面的 Git 链接了解实现细节）。
 - en: Dask is currently missing multiple APIs from pandas that Modin has implemented.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask 目前缺少 Modin 已实现的多个 pandas API。
 - en: 'To learn how to control the number of processors that Modin uses by parameter *num_cpus*,
     check out:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 要了解如何通过参数 *num_cpus* 控制 Modin 使用的处理器数量，请查看：
 - en: '[https://github.com/Piyush-Kulkarni/ByeByePandas.git](https://github.com/Piyush-Kulkarni/ByeByePandas.git)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://github.com/Piyush-Kulkarni/ByeByePandas.git](https://github.com/Piyush-Kulkarni/ByeByePandas.git)'
 - en: On the Windows platform, you can check the number of cores on your system in
     Task Manager > Performance.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Windows 平台上，您可以在任务管理器 > 性能中检查系统的核心数。
 - en: '![](../Images/246f50035976fc036dc9310ea87cb0fa.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/246f50035976fc036dc9310ea87cb0fa.png)'
 - en: Using *num_cpu* higher than the cores available on your system wouldn’t improve
     the performance. Rather, it might end up lowering it. In my case, beyond the 6
     cores available on my system, the performance degrades slightly, as shown in the
     above plot.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用*num_cpu*超出系统可用核心数不会提升性能。实际上，它可能会降低性能。在我的案例中，超出系统提供的6个核心后，性能略有下降，如上述图表所示。
 - en: '[Original](https://daureducation.medium.com/bye-bye-pandas-3808348c48f1). Reposted
     with permission.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://daureducation.medium.com/bye-bye-pandas-3808348c48f1)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Pandas vs SQL: When Data Scientists Should Use Each Tool](https://www.kdnuggets.com/2021/06/pandas-vs-sql.html)'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Pandas 与 SQL：数据科学家应如何选择工具](https://www.kdnuggets.com/2021/06/pandas-vs-sql.html)'
 - en: '[Make Pandas 3 Times Faster with PyPolars](https://www.kdnuggets.com/2021/05/pandas-faster-pypolars.html)'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 PyPolars 使 Pandas 快速 3 倍](https://www.kdnuggets.com/2021/05/pandas-faster-pypolars.html)'
 - en: '[Vaex: Pandas but 1000x faster](https://www.kdnuggets.com/2021/05/vaex-pandas-1000x-faster.html)'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Vaex：Pandas 的 1000 倍速度](https://www.kdnuggets.com/2021/05/vaex-pandas-1000x-faster.html)'
 - en: More On This Topic
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
 - en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
 - en: '[Breaking the Data Barrier: How Zero-Shot, One-Shot, and Few-Shot…](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[打破数据障碍：零样本、一样本和少样本…](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)'
 - en: '[Learn How to Run Alpaca-LoRA on Your Device in Just a Few Steps](https://www.kdnuggets.com/2023/05/learn-run-alpacalora-device-steps.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[了解如何在您的设备上仅需几步运行 Alpaca-LoRA](https://www.kdnuggets.com/2023/05/learn-run-alpacalora-device-steps.html)'
 - en: '[Ensuring Reliable Few-Shot Prompt Selection for LLMs](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[确保 LLMs 的可靠少样本提示选择](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)'
 - en: '[AI is Not Here to Replace Us](https://www.kdnuggets.com/2023/02/ai-replace-us.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[人工智能并非来取代我们](https://www.kdnuggets.com/2023/02/ai-replace-us.html)'
