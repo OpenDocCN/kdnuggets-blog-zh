@@ -1,191 +1,291 @@
 - en: Using Machine Learning to Detect Malicious URLs
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用机器学习检测恶意 URL
 - en: 原文：[https://www.kdnuggets.com/2016/10/machine-learning-detect-malicious-urls.html](https://www.kdnuggets.com/2016/10/machine-learning-detect-malicious-urls.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/10/machine-learning-detect-malicious-urls.html](https://www.kdnuggets.com/2016/10/machine-learning-detect-malicious-urls.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By Faizan Ahmad, CEO Fsecurify**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Faizan Ahmad，Fsecurify CEO**。'
 - en: '![Header](../Images/cd0f8aa5892b3c56ece07f70ea6880e8.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![Header](../Images/cd0f8aa5892b3c56ece07f70ea6880e8.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: With the growth of Machine Learning in the past few years, many tasks are being
     done with the help of **machine learning** algorithms. Unfortunately or fortunately,
     there has been little work done on security with machine learning algorithms.
     So I thought of presenting some at [**Fsecurify**](http://fsecurify.com/using-machine-learning-detect-malicious-urls/).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着过去几年机器学习的增长，许多任务都借助**机器学习**算法来完成。不幸或幸运的是，关于机器学习算法在安全方面的工作很少。因此，我想在[**Fsecurify**](http://fsecurify.com/using-machine-learning-detect-malicious-urls/)上展示一些内容。
 - en: A few days ago, I had this idea about what if we could detect a malicious URL
     from a non-malicious URL using some machine learning algorithm. There has been
     some research done on the topic so I thought that I should give it a go and implement
     something from scratch. So let's start.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 几天前，我有了一个想法：如果我们可以使用某种机器学习算法从非恶意 URL 中检测恶意 URL 会怎样。对此主题已经有一些研究，所以我认为应该尝试一下，从零开始实现一些东西。让我们开始吧。
 - en: '**Gathering Data**'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据收集**'
 - en: The first task was gathering data. I did some surfing and found some websites
     offering malicious links. I set up a little crawler and crawled a lot of malicious
     links from various websites. The next task was finding clear URLs. Fortunately,
     I did not have to crawl any. There was a data set available. Don’t worry if I
     am not mentioning the sources of the data. You’ll get the data at the end of this
     post.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个任务是收集数据。我做了一些搜索，发现了一些提供恶意链接的网站。我设置了一个小爬虫，爬取了许多来自不同网站的恶意链接。接下来的任务是寻找清晰的 URL。幸运的是，我不需要爬取任何数据。已经有一个数据集可用。如果我没有提及数据来源，请不要担心。你将在本文末尾获得数据。
 - en: So, I gathered around 400,000 URLs out of which around 80,000 were malicious
     and others were clean. There we have it, our data set. Let's move next.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，我收集了大约 400,000 个 URL，其中大约 80,000 个是恶意的，其他的是干净的。这就是我们的数据集。接下来我们继续。
 - en: '**Analysis**'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**分析**'
 - en: We’ll be using **Logistic Regression** since it is fast. The first part was
     tokenizing the URLs. I wrote my own tokenizer function for this since URLs are
     not like some other document text.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用**逻辑回归**，因为它速度很快。第一步是对 URL 进行标记化。我为此编写了自己的标记化函数，因为 URL 与其他文档文本有所不同。
 - en: '![](../Images/b135c873cc912a9e67d1f47ab1ef5933.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b135c873cc912a9e67d1f47ab1ef5933.png)'
 - en: The next step is to load the data and store it into a list.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是加载数据并将其存储到列表中。
 - en: '![](../Images/3665cea6de0ac3f99fe7a10adb4756cc.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3665cea6de0ac3f99fe7a10adb4756cc.png)'
 - en: Now that we have the data in our list, we have to vectorize our URLs. I used
     **tf-idf** scores instead of using bag of words classification since there are
     words in urls that are more important than other words e.g *‘virus’, ‘.exe’ ,’.dat’*
     etc. Lets convert the URLs into a vector form.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 既然我们已经将数据放入列表中，我们需要对 URL 进行向量化。我使用了**tf-idf** 分数，而不是使用词袋分类，因为 URL 中的某些词比其他词更重要，例如
+    *‘virus’, ‘.exe’, ‘.dat’* 等。让我们将 URL 转换为向量形式。
 - en: '![](../Images/f23c14315a9184249d32aea98f46a722.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f23c14315a9184249d32aea98f46a722.png)'
 - en: We have the vectors. Let's now convert it into test and training data and go
     right about performing logistic regression on it.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们有了向量。现在让我们将其转换为测试和训练数据，并进行逻辑回归分析。
 - en: '![](../Images/03275d8ba40e4c9ba4b99e9f91593803.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/03275d8ba40e4c9ba4b99e9f91593803.png)'
 - en: That’s it. See, it's that simple yet so effective. **We get an accuracy of 98%.**
     That’s a very high value for a machine to be able to detect a malicious URL with.
     Want to test some links to see if the model gives good predictions? Sure. Let's
     do it.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 就是这样。看，它简单却有效。**我们获得了98%的准确率**。这是一个非常高的值，能让机器有效检测恶意网址。想测试一些链接看看模型的预测是否准确吗？当然。我们来试试。
 - en: '![](../Images/1990f5237d5f3272d6e1375bc5d176e8.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1990f5237d5f3272d6e1375bc5d176e8.png)'
 - en: The results come out to be amazing.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果非常惊人。
 - en: wikipedia.com **(Good Url)**
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: wikipedia.com **（好网址）**
 - en: google.com/search=faizanahmad **(Good Url)**
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: google.com/search=faizanahmad **（好网址）**
 - en: pakistanifacebookforever.com/getpassword.php/ **(Bad Url)**
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: pakistanifacebookforever.com/getpassword.php/ **（坏网址）**
 - en: www.radsport-voggel.de/wp-admin/includes/log.exe **(Bad Url)**
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: www.radsport-voggel.de/wp-admin/includes/log.exe **（坏网址）**
 - en: ahrenhei.without-transfer.ru/nethost.exe **(Bad Url)**
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: ahrenhei.without-transfer.ru/nethost.exe **（坏网址）**
 - en: www.itidea.it/centroesteticosothys/img/_notes/gum.exe **(Bad Url)**
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: www.itidea.it/centroesteticosothys/img/_notes/gum.exe **（坏网址）**
 - en: This is what a human would have predicted. No?
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 这正是一个人类可能预测的结果。不是吗？
 - en: The data and code is available at [**Github**](https://github.com/faizann24/Using-machine-learning-to-detect-malicious-URLs).
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据和代码可在[**Github**](https://github.com/faizann24/Using-machine-learning-to-detect-malicious-URLs)获取。
 - en: '**Bio: [Faizan Ahmad](http://www.fsecurify.com/)** is a Fulbright computer
     science undergrad and CEO of Fsecurify.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历： [Faizan Ahmad](http://www.fsecurify.com/)** 是一名富布赖特计算机科学本科生，同时也是Fsecurify的首席执行官。'
 - en: '**Related:**'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[5 Best Practices for Big Data Security](/2016/06/5-best-practices-big-data-security.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[大数据安全的5个最佳实践](/2016/06/5-best-practices-big-data-security.html)'
 - en: '[How Can Data Scientists Mitigate Sensitive Data Exposure Vulnerability?](/2016/08/data-scientists-mitigate-sensitive-data-exposure-vulnerability.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家如何缓解敏感数据暴露的漏洞？](/2016/08/data-scientists-mitigate-sensitive-data-exposure-vulnerability.html)'
 - en: '[Big Data and Data Science for Security and Fraud Detection](/2015/12/big-data-science-security-fraud-detection.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[大数据与数据科学在安全和欺诈检测中的应用](/2015/12/big-data-science-security-fraud-detection.html)'
 - en: More On This Topic
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[20 Questions (with Answers) to Detect Fake Data Scientists: ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[识别虚假数据科学家：20个问题（附答案）ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)'
 - en: '[20 Questions (with Answers) to Detect Fake Data Scientists: ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[识别虚假数据科学家：20个问题（附答案）ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)'
 - en: '[Why are More Developers Using Python for Their Machine Learning Projects?](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么越来越多的开发者选择Python进行机器学习项目？](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)'
 - en: '[Using SHAP Values for Model Interpretability in Machine Learning](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用SHAP值提升机器学习模型的可解释性](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
 - en: '[Tackle computer science problems using both fundamental and modern…](https://www.kdnuggets.com/2023/11/packt-tackle-computer-science-problems-fundamental-modern-algorithms-machine-learning)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用基础和现代算法解决计算机科学问题](https://www.kdnuggets.com/2023/11/packt-tackle-computer-science-problems-fundamental-modern-algorithms-machine-learning)'
 - en: '[Building a GPU Machine vs. Using the GPU Cloud](https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建GPU机器与使用GPU云服务](https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud)'
