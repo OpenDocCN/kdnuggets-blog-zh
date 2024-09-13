@@ -1,81 +1,119 @@
 - en: 'Breaking Down DENSE_RANK(): A Step-by-Step Guide for SQL Enthusiasts'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 逐步解析 DENSE_RANK()：SQL 爱好者的指南
 - en: 原文：[https://www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts](https://www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts](https://www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts)
 - en: '![Breaking Down DENSE_RANK(): A Step-by-Step Guide for SQL Enthusiasts](../Images/2c67fa689690681dbae6745c0c6bb474.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![逐步解析 DENSE_RANK()：SQL 爱好者的指南](../Images/2c67fa689690681dbae6745c0c6bb474.png)'
 - en: Image by Editor
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由编辑提供
 - en: In today's data-driven world, SQL (Structured Query Language) stands as a cornerstone
     for managing and manipulating database systems. A core component of SQL's power
     and flexibility lies in its [window functions](/2017/12/sql-window-functions-tutorial-business-analytics.html/2),
     a category of functions that perform calculations across sets of rows related
     to the current row.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在当今数据驱动的世界中，SQL（结构化查询语言）是管理和操作数据库系统的基石。SQL的强大和灵活性的核心组成部分之一是其[窗口函数](/2017/12/sql-window-functions-tutorial-business-analytics.html/2)，这是一类在与当前行相关的行集上执行计算的函数。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Imagine you're looking at your data through a sliding window, and based on the
     position and size of this window, you perform calculations or transformations
     on your data. That's essentially what SQL window functions do. They handle tasks
     like computation of running totals, averages, or rankings, which are challenging
     to perform using standard SQL commands.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象一下你通过一个滑动窗口查看数据，并根据这个窗口的位置和大小，对数据进行计算或转换。这本质上就是 SQL 窗口函数的功能。它们处理如计算运行总计、平均值或排名等任务，这些任务使用标准
+    SQL 命令很难完成。
 - en: One of the most robust tools in the window functions toolbox is the ranking
     function, specifically the `DENSE_RANK()` function. This function is a godsend
     for data analysts, allowing us to rank different rows of data without any gaps.
     Whether you're diving into sales figures, website traffic data, or even a simple
     list of student test scores, `DENSE_RANK()` is indispensable.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在窗口函数工具箱中，最强大的工具之一是排名函数，特别是 `DENSE_RANK()` 函数。这个函数对数据分析师来说是一个福音，它允许我们对不同的行进行排名而不产生任何间隙。无论你是在分析销售数据、网站流量数据，还是一个简单的学生考试分数列表，`DENSE_RANK()`
+    都是不可或缺的。
 - en: In this article, we'll delve into the inner workings of `DENSE_RANK()`, juxtaposing
     it with its close siblings `RANK()` and `ROW_NUMBER()`, and showcasing how to
     avoid common pitfalls that might trip you up in your SQL journey. Ready to level
     up your data analysis skills? Let's dive in.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将深入探讨 `DENSE_RANK()` 的内部工作原理，将其与紧密相关的 `RANK()` 和 `ROW_NUMBER()` 进行对比，并展示如何避免在
+    SQL 旅程中可能遇到的常见陷阱。准备好提升你的数据分析技能了吗？那就开始吧。
 - en: Understanding the Role of Ranking Functions in SQL
+  id: totrans-14
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 理解 SQL 中排名函数的作用
 - en: Ranking functions in SQL are a subset of window functions that assign a unique
     rank to each row within a result set. These rank values correspond to a specific
     order, determined by the ORDER BY clause within the function. Ranking functions
     are a mainstay of SQL, used extensively in data analysis for diverse tasks, such
     as finding the top salesperson, identifying the best-performing web page, or determining
     the highest grossing film for a particular year.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: SQL中的排名函数是窗口函数的一个子集，为结果集中的每一行分配一个唯一的排名。这些排名值对应于通过函数中的 ORDER BY 子句确定的特定顺序。排名函数是SQL的主要组成部分，在数据分析中被广泛使用，用于各种任务，如查找最佳销售员、识别表现最好的网页，或确定特定年份的最高票房电影。
 - en: There are three principal ranking functions in SQL, namely `RANK()`, `ROW_NUMBER()`,
     and `DENSE_RANK()`. Each of these functions operates slightly differently, but
     they all serve the common purpose of ranking data based on specified conditions.
@@ -83,53 +121,76 @@
     the same rank to rows with identical values. The crucial difference lies in how
     they handle the subsequent rank. `RANK()` skips the next rank whereas `DENSE_RANK()`
     does not.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: SQL 中有三种主要的排名函数，即 `RANK()`、`ROW_NUMBER()` 和 `DENSE_RANK()`。这些函数的操作方式略有不同，但它们的共同目的都是根据指定的条件对数据进行排名。`RANK()`
+    和 `DENSE_RANK()` 函数的行为类似，即对相同值的行分配相同的排名。关键的区别在于它们处理随后的排名方式。`RANK()` 跳过下一个排名，而
+    `DENSE_RANK()` 不会。
 - en: On the other hand, the [`ROW_NUMBER()`](/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science)
     function assigns a unique row number to each row disregarding whether the order
     by column values are identical. While `RANK()`, `DENSE_RANK()`, and `ROW_NUMBER()`
     might seem interchangeable at a glance, understanding their nuances is pivotal
     to effective data analysis in SQL. The choice between these functions can significantly
     impact your results and the insights derived from your data.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一方面，[`ROW_NUMBER()`](/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science)
+    函数为每一行分配唯一的行号，无论排序列的值是否相同。虽然 `RANK()`、`DENSE_RANK()` 和 `ROW_NUMBER()` 从表面上看可能似乎可以互换使用，但理解它们的细微差别对
+    SQL 中的数据分析至关重要。这些函数之间的选择可以显著影响结果和从数据中获得的洞察。
 - en: What is DENSE_RANK() in SQL?
+  id: totrans-18
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SQL 中的 DENSE_RANK() 是什么？
 - en: '`DENSE_RANK()` is a potent ranking function in SQL that assigns a unique rank
     value within a specified partition. In crux, `DENSE_RANK()` gives non-gap rankings
     for your data, meaning each unique value is given a distinct rank, and identical
     values receive the same rank. Unlike its counterpart `RANK()`, `DENSE_RANK()`
     does not skip any ranks if there is a tie between the values.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '`DENSE_RANK()` 是 SQL 中一种强大的排名函数，它在指定的分区内分配唯一的排名值。简而言之，`DENSE_RANK()` 为数据提供无间隔的排名，这意味着每个唯一的值都会获得一个独特的排名，相同的值会获得相同的排名。与其对等函数
+    `RANK()` 不同，`DENSE_RANK()` 在值出现相同的情况下不会跳过任何排名。'
 - en: To break it down, let's visualize a scenario where you have a dataset of student
     scores, and three students have secured the same score, say, 85 marks. Using `RANK()`,
     all three students will receive a rank of 1, but the next best score will be ranked
     4, skipping ranks 2 and 3\. However, `DENSE_RANK()` handles this differently.
     It will assign a rank of 1 to all three students, and the next best score will
     receive a rank of 2, ensuring there is no gap in the ranking.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 举个例子，假设你有一个学生成绩的数据集，其中三名学生获得了相同的分数，比如 85 分。使用 `RANK()` 时，所有三名学生都将获得 1 的排名，但下一个最佳分数将被排名为
+    4，跳过了排名 2 和 3。然而，`DENSE_RANK()` 处理方式不同。它会将所有三名学生的排名都定为 1，接下来的最佳分数将获得 2 的排名，确保排名中没有间隔。
 - en: So, when should one use `DENSE_RANK()`? It's particularly handy in scenarios
     where you require continuous ranking without any gaps. Consider a use case where
     you need to award the top three performers. If you have ties in your data, using
     `RANK()` might lead you to miss out on awarding a deserving candidate. That's
     when `DENSE_RANK()` comes to the rescue, ensuring all top scorers get their due
     recognition, and the ranks are not skipped.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，什么时候应该使用 `DENSE_RANK()` 呢？它特别适用于需要连续排名且没有任何间隔的场景。考虑一个需要奖励前三名表现者的用例。如果你的数据中存在并列情况，使用
+    `RANK()` 可能会导致遗漏应得的候选人。这时 `DENSE_RANK()` 就会派上用场，确保所有的顶尖得分者都得到应有的认可，并且排名不会被跳过。
 - en: DENSE_RANK() vs RANK() vs ROW_NUMBER() in SQL
+  id: totrans-22
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SQL 中的 DENSE_RANK() 与 RANK() 和 ROW_NUMBER() 对比
 - en: Understanding the differences between `DENSE_RANK()`, `RANK()`, and `ROW_NUMBER()`
     is essential for efficient data analysis in SQL. All three functions are powerful
     in their right, but their subtle differences can significantly impact the outcome
     of your data analysis.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 理解 `DENSE_RANK()`、`RANK()` 和 `ROW_NUMBER()` 之间的差异对于高效的数据分析非常重要。这三种函数各有强大之处，但它们的细微差别可能会显著影响数据分析的结果。
 - en: Let's start with `RANK()`. This function assigns a unique rank to each distinct
     value within a data set, with the same rank assigned to identical values. However,
     when `RANK()` encounters a tie (identical values), it skips the next rank(s) in
@@ -138,25 +199,33 @@
     the next rank. This means that if these three products are the best-selling products,
     they will all be assigned rank 1, but the next best-selling product will be assigned
     rank 4, not rank 2.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从`RANK()`开始。这个函数会给数据集中的每个不同值分配一个唯一的排名，对于相同的值分配相同的排名。然而，当`RANK()`遇到相同的值时，它会跳过序列中的下一个排名。例如，如果你有三种产品的销售数据相同，`RANK()`会为这些产品分配相同的排名，但随后会跳过下一个排名。这意味着如果这三种产品是最畅销的，它们都会被分配排名1，但下一个最畅销的产品将被分配排名4，而不是排名2。
 - en: Next, let's consider `DENSE_RANK()`. Similar to `RANK()`, `DENSE_RANK()` assigns
     the same rank to identical values, but it does not skip any ranks. Using the previous
     example, with `DENSE_RANK()`, the three best-selling products would still be assigned
     rank 1, but the next best-selling product would be assigned rank 2, not rank 4.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，让我们考虑`DENSE_RANK()`。与`RANK()`类似，`DENSE_RANK()`会给相同的值分配相同的排名，但不会跳过任何排名。使用之前的例子，使用`DENSE_RANK()`时，这三种最畅销的产品仍会被分配排名1，但下一个最畅销的产品会被分配排名2，而不是排名4。
 - en: Finally, `ROW_NUMBER()` takes a different approach. It assigns a unique rank
     to every row, regardless of whether the values are identical. This means even
     if three products have the same sales figures, `ROW_NUMBER()` will assign a unique
     number to each, making it perfect for situations where you need to assign a distinct
     identifier to each row.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，`ROW_NUMBER()`采取了不同的方法。它会给每一行分配一个唯一的排名，不论这些值是否相同。这意味着即使三种产品的销售数据相同，`ROW_NUMBER()`也会为每种产品分配一个唯一的编号，这使得它非常适合需要为每一行分配唯一标识符的情况。
 - en: Unraveling the Syntax and Usage of SQL's DENSE_RANK()
+  id: totrans-27
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 解密 SQL 中 DENSE_RANK() 的语法和使用方法
 - en: 'The syntax of `DENSE_RANK()` is straightforward. It''s used in conjunction
     with the `OVER()` clause, partitioning the data before assigning ranks. The syntax
     is as follows: `DENSE_RANK() OVER (ORDER BY column)`. Here, `column` refers to
@@ -165,205 +234,309 @@
     rank the salespeople by their sales figures, we would use the `DENSE_RANK()` function
     as follows: `DENSE_RANK() OVER (ORDER BY SalesFigures DESC)`. This SQL query will
     rank the salespeople from highest to lowest based on their sales figures.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '`DENSE_RANK()`的语法很简单。它与`OVER()`子句一起使用，在分配排名之前对数据进行分区。语法如下：`DENSE_RANK() OVER
+    (ORDER BY column)`。这里的`column`指的是你希望用来排名的数据列。假设我们有一个名为`Sales`的表，包含`SalesPerson`和`SalesFigures`列。为了根据销售数据对销售人员进行排名，我们可以使用`DENSE_RANK()`函数，如下所示：`DENSE_RANK()
+    OVER (ORDER BY SalesFigures DESC)`。这个SQL查询会根据销售数据从高到低对销售人员进行排名。'
 - en: Using `DENSE_RANK()` in conjunction with `PARTITION BY` can be particularly
     insightful. For instance, if you want to rank salespeople within each region,
     you can partition your data by `Region` and then rank within each partition. The
     syntax for this would be `DENSE_RANK() OVER (PARTITION BY Region ORDER BY SalesFigures
     DESC)`. This way, you are not just getting a comprehensive ranking but also a
     nuanced understanding of performance within each region.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 将`DENSE_RANK()`与`PARTITION BY`结合使用可以特别有洞察力。例如，如果你想在每个地区内对销售人员进行排名，你可以通过`Region`对数据进行分区，然后在每个分区内进行排名。语法如下：`DENSE_RANK()
+    OVER (PARTITION BY Region ORDER BY SalesFigures DESC)`。通过这种方式，你不仅能获得全面的排名，还能对每个地区的表现有更细致的了解。
 - en: Practical Examples of SQL DENSE_RANK() Function
+  id: totrans-30
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: SQL DENSE_RANK() 函数的实际示例
 - en: 'Apple SQL Question: Find the Top Sales Performers for Each Sales Date'
+  id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Apple SQL 问题：找出每个销售日期的最佳销售表现者
 - en: '**Table: sales_data**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**表格：sales_data**'
 - en: '[PRE0]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '**Output**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出**'
 - en: '[PRE1]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Apple Top Sales Performer Solution
+  id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Apple 顶级销售表现者解决方案
 - en: '**Step 1: Understand the Data**'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第1步：了解数据**'
 - en: 'First, let''s understand the data in the sales_data table. It has three columns:
     employee_id, sales_date, and total_sales. This table represents sales data with
     information about the employee, the date of the sale, and the total sales amount.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们了解`sales_data`表中的数据。该表有三列：employee_id、sales_date和total_sales。这个表代表了销售数据，包含有关员工、销售日期和总销售额的信息。
 - en: '**Step 2: Analyze the DENSE_RANK() Function**'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第2步：分析 DENSE_RANK() 函数**'
 - en: The query uses the DENSE_RANK() window function to rank employees based on their
     total sales within each sales date partition. DENSE_RANK() is used to assign a
     rank to each row within the partition of sales_date, with the ordering based on
     total_sales in descending order.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 该查询使用 DENSE_RANK() 窗口函数根据每个销售日期分区内的 total_sales 对员工进行排名。DENSE_RANK() 用于在 sales_date
+    的分区内为每行分配一个排名，排序基于 total_sales 降序排列。
 - en: '**Step 3: Break Down the Query Structure**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第 3 步：分析查询结构**'
 - en: 'Now, let''s break down the structure of the query:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们来分析查询的结构：
 - en: '[PRE2]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'SELECT Clause: This specifies the columns that will be included in the final
     result. In this case, it''s employee_id, sales_date, and total_sales.'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: SELECT 子句：这指定了将在最终结果中包含的列。在这种情况下，它是 employee_id、sales_date 和 total_sales。
 - en: 'FROM Clause: This is where the actual data comes from. It includes a subquery
     (enclosed in parentheses) that selects columns from the sales_data table and adds
     a calculated column using DENSE_RANK().'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: FROM 子句：这是实际数据来源的地方。它包括一个子查询（用括号括起来），该子查询从 sales_data 表中选择列，并使用 DENSE_RANK()
+    添加一个计算列。
 - en: 'DENSE_RANK() Function: This function is used within the subquery to assign
     a rank to each row based on the total_sales column, and it is partitioned by sales_date.
     This means that the ranking is done separately for each sales date.'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: DENSE_RANK() 函数：此函数在子查询中用于根据 total_sales 列为每行分配一个排名，并按 sales_date 进行分区。这意味着排名是针对每个销售日期单独进行的。
 - en: 'WHERE Clause: This filters the results to include only rows where the sales_rank
     is equal to 1\. This ensures that only the top sales performer for each sales
     date is included in the final result.'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: WHERE 子句：此子句筛选结果，只包括 sales_rank 等于 1 的行。这确保了每个销售日期的 top sales performer 只被包含在最终结果中。
 - en: '**Step 4: Execute the Query**'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第 4 步：执行查询**'
 - en: When you execute this query, it will produce a result set that includes the
     employee_id, sales_date, and total_sales for the top sales performer on each sales
     date.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你执行此查询时，它将生成一个结果集，其中包括每个销售日期的 top sales performer 的 employee_id、sales_date
+    和 total_sales。
 - en: '**Step 5: Review the Output**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第 5 步：查看输出**'
 - en: 'The final output table, named top_performers, will contain the desired information:
     the top sales performer for each sales date, based on the DENSE_RANK() calculation'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终输出表格，名为 top_performers，将包含所需的信息：根据 DENSE_RANK() 计算的每个销售日期的 top sales performer。
 - en: 'Google SQL Question: Find, for Each Product, the Customer Who Provided the
     Highest Review Score'
+  id: totrans-52
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Google SQL 问题：找出每个产品中提供最高评分的客户
 - en: '**Table: product_reviews**'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**表格：product_reviews**'
 - en: '[PRE3]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '**Output**'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出**'
 - en: '[PRE4]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Google Highest Review Score Solution
+  id: totrans-57
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Google 最高评分解决方案
 - en: '**Step 1: Understand the Data**'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第 1 步：了解数据**'
 - en: The product_reviews table contains information about customer reviews for various
     products. It includes columns such as customer_id, product_id, review_date, review_score,
     and helpful_votes. This table represents data related to customer reviews, with
     details about the customer, the product being reviewed, the date of the review,
     the review score, and the number of helpful votes received.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: product_reviews 表格包含有关各种产品的客户评价信息。它包括 customer_id、product_id、review_date、review_score
+    和 helpful_votes 等列。此表格表示与客户评价相关的数据，包含有关客户、被评价的产品、评价日期、评价分数以及获得的 helpful votes
+    数量。
 - en: '**Step 2: Analyze the DENSE_RANK() Function**'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第 2 步：分析 DENSE_RANK() 函数**'
 - en: 'In this query, the DENSE_RANK() window function is utilized to rank rows within
     each partition defined by product_id and review_date. The ranking is determined
     based on two criteria: review_score in descending order and helpful_votes in descending
     order. This means that rows with higher review scores and a greater number of
     helpful votes will be assigned lower ranks.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 在此查询中，DENSE_RANK() 窗口函数用于在 product_id 和 review_date 定义的每个分区内对行进行排名。排名是基于两个标准：review_score
+    降序排列和 helpful_votes 降序排列。这意味着评分较高且有更多 helpful votes 的行将被分配更低的排名。
 - en: '**Step 3: Break Down the Query Structure**'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第 3 步：分析查询结构**'
 - en: 'Now, let''s break down the structure of the query:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们来分析查询的结构：
 - en: '[PRE5]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'SELECT Clause: Specifies the columns that will be included in the final result.
     It includes customer_id, product_id, review_date, review_score, and helpful_votes.'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: SELECT 子句：指定将在最终结果中包含的列。它包括 customer_id、product_id、review_date、review_score
+    和 helpful_votes。
 - en: 'FROM Clause: This part includes a subquery (enclosed in parentheses) that selects
     columns from the product_reviews table and adds a calculated column using DENSE_RANK().
     The calculation is performed over a partition defined by product_id and review_date,
     and the ranking is based on both review_score and helpful_votes in descending
     order.'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: FROM子句：这一部分包括一个子查询（括号内）选择product_reviews表中的列，并使用`DENSE_RANK()`添加一个计算列。计算是在由product_id和review_date定义的分区上进行的，排名基于review_score和helpful_votes的降序。
 - en: 'DENSE_RANK() Function: This function is applied within the subquery to assign
     a rank to each row based on the specified criteria. The ranking is done separately
     for each combination of product_id and review_date.'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`DENSE_RANK()`函数：此函数在子查询中应用，根据指定的标准为每一行分配一个排名。排名是根据每个product_id和review_date的组合单独进行的。'
 - en: 'WHERE Clause: Filters the results to include only rows where the rank_within_product
     is equal to 1\. This ensures that only the top-ranked row for each product on
     each review date is included in the final result.'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: WHERE子句：筛选结果以仅包括rank_within_product等于1的行。这确保了最终结果中只包含每个产品在每个评论日期的排名最高的行。
 - en: '**Step 4: Execute the Query**'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 4：执行查询**'
 - en: 'Executing this query will produce a result set containing the desired information:
     customer_id, product_id, review_date, review_score, and helpful_votes for the
     top-ranked review based on both review score and helpful votes within each product
     and review date combination.'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行此查询将生成包含所需信息的结果集：每个产品和评论日期组合中基于评论分数和有用票数的排名最高评论的customer_id、product_id、review_date、review_score和helpful_votes。
 - en: '**Step 5: Review the Output**'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 5：检查输出**'
 - en: The final output table, named top_reviewers, will display the top-ranked reviews
     for each product on each review date, considering both the review score and the
     number of helpful votes.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终输出表，名为top_reviewers，将显示每个产品在每个评论日期的排名最高的评论，同时考虑评论分数和有用票数。
 - en: Avoiding Common Mistakes with DENSE_RANK() in SQL
+  id: totrans-73
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 避免SQL中使用`DENSE_RANK()`的常见错误
 - en: While `DENSE_RANK()` is a highly useful function in SQL, it’s not uncommon for
     analysts, especially those new to SQL, to make mistakes when using it. Let’s take
     a closer look at some of these common errors and how to avoid them.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然`DENSE_RANK()`是一个非常有用的SQL函数，但分析师，特别是那些刚接触SQL的人，使用时出错并不少见。让我们更详细地探讨一些常见的错误及其避免方法。
 - en: One common mistake is misunderstanding how `DENSE_RANK()` handles null values.
     Unlike some SQL functions, `DENSE_RANK()` treats all NULLs as identical. This
     means that if you are ranking data where some values are NULL, `DENSE_RANK()`
@@ -371,150 +544,217 @@
     with datasets that contain NULL values, and consider replacing NULLs with a value
     that represents their meaning in your context, or excluding them depending on
     your specific requirements.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个常见的错误是误解`DENSE_RANK()`如何处理NULL值。与某些SQL函数不同，`DENSE_RANK()`将所有NULL视为相同。这意味着，如果你在排名数据中有NULL值，`DENSE_RANK()`会将所有NULL值赋予相同的排名。在处理包含NULL值的数据集时，请注意这一点，并考虑用在你的上下文中代表其含义的值替代NULL，或根据具体要求将其排除。
 - en: Another frequent error is overlooking the importance of partitioning when using
     `DENSE_RANK()`. The `PARTITION BY` clause allows you to divide your data into
     distinct segments and perform the ranking within these partitions. Neglecting
     to use `PARTITION BY` can lead to erroneous results, particularly when you want
     ranks to restart for different categories or groups.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个常见的错误是忽视在使用`DENSE_RANK()`时分区的重要性。`PARTITION BY`子句允许你将数据分为不同的段，并在这些分区内进行排名。不使用`PARTITION
+    BY`可能会导致错误的结果，特别是当你希望对不同的类别或组重新开始排名时。
 - en: Related to this is the improper use of the `ORDER BY` clause with `DENSE_RANK()`.
     `DENSE_RANK()` assigns ranks in ascending order by default, meaning the smallest
     value gets the rank of 1\. If you need the ranking to be in descending order,
     you must include the `DESC` keyword in your `ORDER BY` clause. Failure to do so
     will produce rankings that might not align with your expectations.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 与此相关的是`ORDER BY`子句在`DENSE_RANK()`中的不当使用。`DENSE_RANK()`默认按升序分配排名，意味着最小值获得排名1。如果你需要排名按降序进行，你必须在`ORDER
+    BY`子句中包含`DESC`关键字。不这样做将产生可能与你的期望不符的排名。
 - en: Lastly, some analysts mistakenly use `DENSE_RANK()` where `ROW_NUMBER()` or
     `RANK()` might be more appropriate, and vice versa. As we have discussed, all
     three of these functions have unique behaviors. Understanding these nuances and
     selecting the correct function for your specific use-case is critical to conducting
     accurate and effective data analysis.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，一些分析师错误地使用 `DENSE_RANK()` 而应使用 `ROW_NUMBER()` 或 `RANK()`，反之亦然。正如我们讨论的，这三种函数都有独特的行为。理解这些细微差别并根据你的特定用例选择正确的函数，对于进行准确和有效的数据分析至关重要。
 - en: '**How Mastering DENSE_RANK() Enhances Efficient Data Analysis in SQL**'
+  id: totrans-79
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '**掌握 DENSE_RANK() 如何提升 SQL 数据分析的效率**'
 - en: Mastering the use of `DENSE_RANK()` can significantly enhance the efficiency
     of data analysis in SQL, particularly where rankings and comparisons are involved.
     This function offers a nuanced approach to ranking, one that maintains a continuity
     in the ranking scale by assigning the same rank to identical values without skipping
     any rank numbers.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 掌握 `DENSE_RANK()` 的使用可以显著提升 SQL 数据分析的效率，特别是在涉及排名和比较的情况下。这个函数提供了一种细致的排名方法，通过对相同的值分配相同的排名而不跳过任何排名数字，保持了排名尺度的连续性。
 - en: This is particularly helpful in analyzing large datasets, where data points
     can often share identical values. For instance, in a sales dataset, multiple salespeople
     may have achieved the same sales figures. `DENSE_RANK()` enables a fair ranking,
     where each of these salespeople are assigned the same rank. Additionally, the
     use of `DENSE_RANK()` in conjunction with `PARTITION BY` allows for focused, category-specific
     analysis.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 这在分析大型数据集时特别有用，因为数据点经常可能有相同的值。例如，在一个销售数据集中，多个销售人员可能达到了相同的销售额。`DENSE_RANK()`
+    使得排名公平，每个销售人员都分配相同的排名。此外，`DENSE_RANK()` 与 `PARTITION BY` 结合使用时，可以进行针对特定类别的分析。
 - en: This function's application becomes even more potent when dealing with null
     values. Instead of excluding these from the ranking process, `DENSE_RANK()` treats
     all nulls as identical and assigns them the same ranking. This ensures that even
     though the exact values might be missing, the data points are not ignored, thereby
     providing a more comprehensive analysis.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个函数的应用在处理空值时变得更加有效。`DENSE_RANK()` 不会将这些空值排除在排名过程之外，而是将所有空值视为相同并分配相同的排名。这确保了即使确切的值可能缺失，数据点也不会被忽略，从而提供了更全面的分析。
 - en: Frequently Asked Questions
+  id: totrans-83
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 常见问题
 - en: Where can I practice [SQL interview questions](https://bigtechinterviews.com/sql-interview-questions/),
     including DENSE_RANK()?
+  id: totrans-84
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我可以在哪里练习[SQL 面试题](https://bigtechinterviews.com/sql-interview-questions/)，包括
+    `DENSE_RANK()`？
 - en: To enhance your SQL skills, we recommend practicing online on platforms such
     as BigTechInterviews, Leetcode, or similar sites.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了提升你的 SQL 技能，我们推荐在 BigTechInterviews、Leetcode 或类似的平台上进行在线练习。
 - en: What does DENSE_RANK() do in SQL?
+  id: totrans-86
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '`DENSE_RANK()` 在 SQL 中的作用是什么？'
 - en: DENSE_RANK() is a SQL window function that assigns ranks to rows of data based
     on a specified column. It handles ties by giving them the same rank without leaving
     any gaps in the ranking sequence.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '`DENSE_RANK()` 是一个 SQL 窗口函数，根据指定的列给数据行分配排名。它通过给相同的排名来处理并列情况，而不会在排名序列中留下任何空隙。'
 - en: What is the difference between RANK(), ROW_NUMBER(), and DENSE_RANK() in SQL?
+  id: totrans-88
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: RANK()、ROW_NUMBER() 和 DENSE_RANK() 在 SQL 中有什么区别？
 - en: RANK() and ROW_NUMBER() assign ranks to data, but they handle ties differently.
     RANK() leaves gaps in ranking for tied data, while ROW_NUMBER() assigns a unique
     number to each row without considering ties. On the other hand, DENSE_RANK() assigns
     identical ranks to tied data points without any gaps.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: RANK() 和 ROW_NUMBER() 为数据分配排名，但处理并列情况的方式不同。RANK() 对于并列数据留有排名空隙，而 ROW_NUMBER()
+    为每一行分配一个唯一的编号，不考虑并列情况。另一方面，`DENSE_RANK()` 给并列数据点分配相同的排名，没有任何空隙。
 - en: How to use DENSE_RANK() in the WHERE clause in SQL?
+  id: totrans-90
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 如何在 SQL 中的 WHERE 子句中使用 `DENSE_RANK()`？
 - en: DENSE_RANK() is a window function and cannot be directly used in the WHERE clause.
     Instead, it can be used in combination with other functions like ROW_NUMBER()
     or RANK(), which can then be used in the WHERE clause to filter data based on
     rank.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '`DENSE_RANK()` 是一个窗口函数，不能直接在 WHERE 子句中使用。相反，它可以与其他函数如 `ROW_NUMBER()` 或 `RANK()`
+    结合使用，这些函数可以在 WHERE 子句中用来根据排名过滤数据。'
 - en: Can DENSE_RANK() be used without PARTITION BY?
+  id: totrans-92
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '`DENSE_RANK()` 可以在没有 PARTITION BY 的情况下使用吗？'
 - en: No, specifying PARTITION BY is crucial for the proper functioning of DENSE_RANK().
     Without it, all data would be treated as one group, leading to inaccurate and
     meaningless ranking. Mastering the use of DENSE_RANK() in SQL can significantly
     enhance your data analysis skills.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 不，指定 PARTITION BY 对于 DENSE_RANK() 的正常运行至关重要。如果没有它，所有数据将被视为一个组，从而导致不准确和无意义的排名。掌握
+    DENSE_RANK() 在 SQL 中的使用可以显著提升你的数据分析技能。
 - en: What is the difference between RANK() and DENSE_RANK()?
+  id: totrans-94
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '`RANK()` 和 `DENSE_RANK()` 之间的区别是什么？'
 - en: The main distinction between RANK() and DENSE_RANK() lies in how they handle
     ties. While RANK() leaves gaps in ranking for tied data, DENSE_RANK() assigns
     identical ranks to tied data points without any gaps. Additionally, RANK() always
     increments the rank number by 1 for each new row, whereas DENSE_RANK() maintains
     a continuous ranking.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '`RANK()` 和 `DENSE_RANK()` 主要的区别在于它们处理平局的方式。`RANK()` 会在排名中留下空缺，而 `DENSE_RANK()`
+    会为平局的数据点分配相同的排名，没有空缺。此外，`RANK()` 总是为每一行的新数据递增排名，而 `DENSE_RANK()` 维持连续的排名。'
 - en: '**[](https://www.linkedin.com/in/john-h-24005524a/)**[John Hughes](https://www.linkedin.com/in/john-h-24005524a/)****
     was a previous Data Analyst at Uber turned founder of SQL learning platform called
     BigTechInterviews (BTI). He is passionate about learning new programming languages
     and helping candidates gain the confidence and skills to pass their technical
     interviews. He calls Denver, CO home.'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[](https://www.linkedin.com/in/john-h-24005524a/)**[约翰·休斯](https://www.linkedin.com/in/john-h-24005524a/)****
+    曾是 Uber 的数据分析师，后来创办了名为 BigTechInterviews (BTI) 的 SQL 学习平台。他对学习新编程语言充满热情，并帮助候选人获得通过技术面试的信心和技能。他的家在科罗拉多州丹佛市。'
 - en: More On This Topic
+  id: totrans-97
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Breaking Down AutoGPT](https://www.kdnuggets.com/2023/05/breaking-autogpt.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深入解析 AutoGPT](https://www.kdnuggets.com/2023/05/breaking-autogpt.html)'
 - en: '[Breaking Down Quantum Computing: Implications for Data Science and AI](https://www.kdnuggets.com/breaking-down-quantum-computing-implications-for-data-science-and-ai)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[量子计算解析：对数据科学和 AI 的影响](https://www.kdnuggets.com/breaking-down-quantum-computing-implications-for-data-science-and-ai)'
 - en: '[A Step by Step Guide to Reading and Understanding SQL Queries](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[逐步指南：阅读和理解 SQL 查询](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
 - en: '[Cutting Down Implementation Time by Integrating Jupyter and KNIME](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过集成 Jupyter 和 KNIME 减少实施时间](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)'
 - en: '[A Guide On How To Become A Data Scientist (Step By Step Approach)](https://www.kdnuggets.com/2021/05/guide-become-data-scientist.html)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为数据科学家的指南（逐步方法）](https://www.kdnuggets.com/2021/05/guide-become-data-scientist.html)'
 - en: '[How To Structure a Data Science Project: A Step-by-Step Guide](https://www.kdnuggets.com/2022/05/structure-data-science-project-stepbystep-guide.html)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何构建数据科学项目：逐步指南](https://www.kdnuggets.com/2022/05/structure-data-science-project-stepbystep-guide.html)'
