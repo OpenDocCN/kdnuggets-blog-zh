@@ -3,11 +3,13 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用 Python 在 5 分钟内构建网络爬虫
 - en: 原文：[https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)
 - en: Data scientists are often expected to collect large amounts of data to derive
     business value in organizations. Unfortunately, this is a skill that is often
     overlooked, as most data science courses don’t teach you to collect external data.
@@ -15,41 +17,52 @@
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据科学家通常需要收集大量数据，以便在组织中提取业务价值。不幸的是，这是一项经常被忽视的技能，因为大多数数据科学课程并不教授如何收集外部数据。相反，大多注重于模型构建和训练。
 - en: In this article, I will show you how to create a web scraper from scratch.
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我将向你展示如何从头开始创建一个网络爬虫。
 - en: '* * *'
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: If you aren’t already familiar with the term, a web scraper is an automated
     tool that can extract large amounts of data from sites. You can collect up to
     hundreds of thousands of data points in just a few minutes with the help of web
@@ -57,65 +70,78 @@
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你还不熟悉这个术语，网络爬虫是一个自动化工具，可以从网站中提取大量数据。借助网络抓取，你可以在几分钟内收集多达数十万条数据点。
 - en: We will scrape a site called “[Quotes to Scrape](https://quotes.toscrape.com/)”
     in this tutorial. This is a site that was specifically built to practice web scraping.
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将抓取一个名为 “[Quotes to Scrape](https://quotes.toscrape.com/)” 的网站。这个网站是专门为练习网络抓取而建立的。
 - en: 'By the end of this article, you will be familiar with:'
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文结束时，你将熟悉以下内容：
 - en: Extracting raw HTML from a website
   id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从网站提取原始 HTML
 - en: Using the BeautifulSoup library to parse this HTML and extract useful pieces
     of information from the site
   id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 BeautifulSoup 库来解析这些 HTML 并从网站中提取有用的信息
 - en: Collecting data from multiple webpages at once
   id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 同时从多个网页收集数据
 - en: Storing this data into a Pandas dataframe
   id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将这些数据存储到 Pandas 数据框中
 - en: Before we start building the scraper, make sure you have the following libraries
     installed — [Pandas](https://pandas.pydata.org/docs/), [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/), [requests](https://docs.python-requests.org/en/latest/).
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们开始构建爬虫之前，请确保已安装以下库 — [Pandas](https://pandas.pydata.org/docs/)，[BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)，[requests](https://docs.python-requests.org/en/latest/)。
 - en: Once that’s done, let’s take a look at the site we want to scrape, and decide
     on the data points to extract from it.
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 完成后，让我们查看一下我们想要抓取的网站，并决定要从中提取的数据点。
 - en: '![Build a Web Scraper with Python in 5 Minutes](../Images/36c24272426adc420668875de0036904.png)'
   id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![用 Python 在 5 分钟内构建网络爬虫](../Images/36c24272426adc420668875de0036904.png)'
 - en: This site consists of a list of quotes by prominent figures. There are three
     main bits of information displayed on the page — the quote, it’s author, and a
     few tags associated with it.
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个网站包含了名人名言的列表。页面上显示了三项主要信息——名言、作者及其相关的几个标签。
 - en: The site has ten pages, and we will scrape all the information available on
     it.
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 该网站有十页，我们将抓取其中的所有信息。
 - en: 'Let’s start by importing the following libraries:'
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们首先导入以下库：
 - en: '[PRE0]'
   id: totrans-23
   prefs: []
@@ -126,6 +152,7 @@
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，使用 *requests* 库，我们将获取我们想抓取的页面并提取其 HTML：
 - en: '[PRE1]'
   id: totrans-25
   prefs: []
@@ -136,6 +163,7 @@
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将把网站的 HTML 文本传递给 BeautifulSoup，它将解析这些原始数据，以便轻松进行抓取：
 - en: '[PRE2]'
   id: totrans-27
   prefs: []
