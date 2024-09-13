@@ -1,789 +1,1224 @@
 - en: The Hitchhiker’s Guide to Feature Extraction
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 特征提取的《搭便车指南》
 - en: 原文：[https://www.kdnuggets.com/2019/06/hitchhikers-guide-feature-extraction.html](https://www.kdnuggets.com/2019/06/hitchhikers-guide-feature-extraction.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/06/hitchhikers-guide-feature-extraction.html](https://www.kdnuggets.com/2019/06/hitchhikers-guide-feature-extraction.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '![Header image](../Images/5f86cc6fb889e4686a0a72c2c4c793f9.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![头图](../Images/5f86cc6fb889e4686a0a72c2c4c793f9.png)'
 - en: Good Features are the backbone of any machine learning model.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 优质特征是任何机器学习模型的核心。
 - en: And good feature creation often needs domain knowledge, creativity, and lots
     of time.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 优质特征创建通常需要领域知识、创造力和大量时间。
 - en: 'In this post, I am going to talk about:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我将讨论：
 - en: Various methods of feature creation- Both Automated and manual
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 特征创建的各种方法 - 自动化和手动
 - en: Different Ways to handle categorical features
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 处理分类特征的不同方法
 - en: Longitude and Latitude features
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 经度和纬度特征
 - en: Some Kaggle tricks
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一些 Kaggle 技巧
 - en: And some other ideas to think about feature creation.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 以及一些关于特征创建的其他想法。
 - en: '***TLDR; this post is about useful feature engineering methods and tricks that
     I have learned and end up using often.***'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '***TLDR; 本文介绍了我学习并经常使用的有用特征工程方法和技巧。***'
 - en: '1\. Automatic Feature Creation using featuretools:'
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1\. 使用 featuretools 自动创建特征：
 - en: '![Figure](../Images/051bc46ba1fb390831ff59508a9aba88.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/051bc46ba1fb390831ff59508a9aba88.png)'
 - en: Automation is the future
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 自动化是未来
 - en: Have you read about featuretools yet? If not, then you are going to be delighted.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 你读过 featuretools 吗？如果没有，你将会感到惊喜。
 - en: '**Featuretools** is a framework to perform automated feature engineering. It
     excels at transforming temporal and relational datasets into feature matrices
     for machine learning.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Featuretools** 是一个执行自动特征工程的框架。它擅长将时间和关系数据集转换为机器学习的特征矩阵。'
 - en: How? Let us work with a toy example to show you the power of featuretools.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 怎么做？让我们通过一个玩具示例来展示 featuretools 的强大功能。
 - en: Let us say that we have three tables in our database: **Customers, Sessions,
     and Transactions.**
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们在数据库中有三个表：**Customers、Sessions 和 Transactions。**
 - en: '![Figure](../Images/87c9b50ea1c26bb769730ab4fb383404.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/87c9b50ea1c26bb769730ab4fb383404.png)'
 - en: Datasets and relationships
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集和关系
 - en: '![](../Images/e20dc7cbaa02de204e692c8a2e7b9e98.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e20dc7cbaa02de204e692c8a2e7b9e98.png)'
 - en: '![](../Images/6c8c5cc1acb015cd75f2ecc7f1bbdc5b.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6c8c5cc1acb015cd75f2ecc7f1bbdc5b.png)'
 - en: '![](../Images/1a8e2e18274c92478c43dedc8176ff00.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1a8e2e18274c92478c43dedc8176ff00.png)'
 - en: This is a reasonably good toy dataset to work on since it has time-based columns
     as well as categorical and numerical columns.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个相当好的玩具数据集，因为它包含了基于时间的列以及分类和数值列。
 - en: If we were to create features on this data, we would need to do a lot of merging
     and aggregations using Pandas.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们要在这些数据上创建特征，我们需要使用 Pandas 进行大量的合并和聚合。
 - en: Featuretools makes it so easy for us. Though there are a few things, we will
     need to learn before our life gets easier.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: Featuretools 使我们的工作变得如此简单。虽然有一些东西我们需要学习，才能让生活变得更轻松。
 - en: Featuretools works with entitysets.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: Featuretools 与实体集一起工作。
 - en: '***You can understand an entityset as a bucket for dataframes as well as relationships
     between them.***'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '***你可以理解实体集为数据框以及它们之间关系的容器。***'
 - en: '![Figure](../Images/e4c224d30d8ecd909868d9666be07551.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/e4c224d30d8ecd909868d9666be07551.png)'
 - en: Entityset = Bucket of dataframes and relationships
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 实体集 = 数据框和关系的集合
 - en: So without further ado, let us create an empty entityset. I just gave the name
     as customers. You can use any name here. It is just an empty bucket right now.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，事不宜迟，让我们创建一个空的实体集。我只是将名称设为 customers。你可以在这里使用任何名称。目前它只是一个空桶。
 - en: '[PRE0]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Let us add our dataframes to it. The order of adding dataframes is not important.
     To add a dataframe to an existing entityset, we do the below operation.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们将数据框添加到其中。添加数据框的顺序不重要。要将数据框添加到现有的实体集，我们执行以下操作。
 - en: '[PRE1]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: So here are a few things we did here to add our dataframe to the empty entityset
     bucket.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以这里是我们在将数据框添加到空实体集桶时所做的一些事情。
 - en: 'Provided a `entity_id`: This is just a name. Put it as customers.'
+  id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 提供了 `entity_id`：这只是一个名称。设置为 customers。
 - en: '`dataframe` name set as customers_df'
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`dataframe` 名称设置为 customers_df'
 - en: '`index` : This argument takes as input the primary key in the table'
+  id: totrans-39
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`index`：该参数作为输入主键'
 - en: '`time_index` : The **time index** is defined as the first time that any information
     from a row can be used. For customers, it is the joining date. For transactions,
     it will be the transaction time.'
+  id: totrans-40
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`time_index`：**时间索引**被定义为可以使用行中任何信息的第一次时间。对于客户，它是加入日期。对于交易，它将是交易时间。'
 - en: '`variable_types`: This is used to specify if a particular variable must be
     handled differently. In our Dataframe, we have the `zip_code` variable, and we
     want to treat it differently, so we use this. These are the different variable
     types we could use:'
+  id: totrans-41
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`variable_types`：用于指定特定变量是否需要不同的处理。在我们的数据框中，我们有一个`zip_code`变量，我们希望对其进行不同的处理，所以我们使用这个。以下是我们可以使用的不同变量类型：'
 - en: '[PRE2]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: This is how our entityset bucket looks right now. It has just got one dataframe
     in it. And no relationships
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是我们当前的实体集桶的样子。它里边只有一个数据框，并且没有任何关系。
 - en: '![](../Images/cd74bee9bf6fa51a9d17cae1312d10fc.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cd74bee9bf6fa51a9d17cae1312d10fc.png)'
 - en: 'Let us add all our dataframes:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们添加所有的数据框：
 - en: '[PRE3]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: This is how our entityset buckets look now.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是我们当前的实体集桶的样子。
 - en: '![](../Images/910ec22c3a18981f103dbe64c0bc4b51.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/910ec22c3a18981f103dbe64c0bc4b51.png)'
 - en: All three dataframes but no relationships. By relationships, I mean that my
     bucket doesn’t know that customer_id in customers_df and session_df are the same
     columns.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有三个数据框，但没有关系。这里所说的关系是指我的桶并不知道`customers_df`和`session_df`中的`customer_id`是相同的列。
 - en: 'We can provide this information to our entityset as:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以将这些信息提供给我们的实体集：
 - en: '[PRE4]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'After this our entityset looks like:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 在此之后，我们的实体集看起来像这样：
 - en: '![](../Images/d2eb7db8a7c43e1dd430b175051fb739.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d2eb7db8a7c43e1dd430b175051fb739.png)'
 - en: We can see the datasets as well as the relationships. Most of our work here
     is done. We are ready to cook features.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到数据集以及它们之间的关系。我们在这里的大部分工作已经完成。我们准备好生成特征了。
 - en: '![Figure](../Images/f1bcb0e1b85a7e800ac2454ad79b3534.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/f1bcb0e1b85a7e800ac2454ad79b3534.png)'
 - en: Cooking is no different from feature engineering. Think of features as ingredients.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征工程和烹饪没有什么不同。把特征当作配料来看待。
 - en: 'Creating features is as simple as:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建特征很简单，如下所示：
 - en: '[PRE5]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![](../Images/a4436f8d39f831bea87377cd0603d9d8.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a4436f8d39f831bea87377cd0603d9d8.png)'
 - en: And we end up with ***73 new features.**** You can see the feature names from *`*feature_defs.*`* Some
     of the features that we end up creating are:*
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们最终得到***73个新特征。**** 你可以从*`*feature_defs.*`*中看到特征名称。一些我们最终创建的特征包括：
 - en: '[PRE6]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: You can get features like the ***Sum of std of amount(***`SUM(sessions.STD(transactions.amount))`***) ****or**** std
     of the sum of amount(***`STD(sessions.SUM(transactions.amount))`***) ***. This
     is what `max_depth`parameter means in the function call. Here we specify it as
     2 to get two level aggregations.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以得到像***金额标准差的总和(***`SUM(sessions.STD(transactions.amount))`***)****或****金额总和的标准差(***`STD(sessions.SUM(transactions.amount))`***)***这样的特征。这就是函数调用中`max_depth`参数的含义。我们在这里将其指定为2，以获取两个层次的汇总。
 - en: '***If we change ***`*max_depth*`*to 3 we can get features like:* `MAX(sessions.NUM_UNIQUE(transactions.YEAR(transaction_time)))`'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '***如果我们将`*max_depth*`*改为3，我们可以得到像:* `MAX(sessions.NUM_UNIQUE(transactions.YEAR(transaction_time)))`'
 - en: Just think of how much time you would have to spend if you had to write code
     to get such features. Also, a caveat is that increasing the `max_depth` might
     take longer times.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象一下，如果你需要编写代码来获得这样的特征，你需要花费多少时间。此外，增加`max_depth`可能需要更长的时间。
 - en: '2\. Handling Categorical Features: Label/Binary/Hashing and Target/Mean Encoding'
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2. 处理类别特征：标签/二进制/哈希和目标/均值编码
 - en: Creating automated features has its perks. But why would we data scientists
     be required if a simple library could do all our work?
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建自动化特征有其好处。但是，如果一个简单的库可以完成我们的所有工作，那我们数据科学家还需要做什么呢？
 - en: This is the section where I will talk about handling categorical features.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我将讨论处理类别特征的部分。
 - en: '**One hot encoding**'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '**独热编码**'
 - en: '![Figure](../Images/44dd804d1a86ab98f8e287671c731e46.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/44dd804d1a86ab98f8e287671c731e46.png)'
 - en: One Hot Coffee
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 独热咖啡
 - en: We can use*** One hot encoding ***to encode our categorical features. So if
     we have n levels in a category, we will get n-1 features.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用***独热编码***来编码我们的类别特征。因此，如果我们在一个类别中有n个级别，我们将得到n-1个特征。
 - en: 'In our sessions_df table, we have a column named `device,` which contains three
     levels — desktop, mobile, or tablet. We can get two columns from such a column
     using:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的`session_df`表中，有一个名为`device`的列，其中包含三个级别——桌面、移动或平板。我们可以使用以下方法从这样的列中提取两个列：
 - en: '[PRE7]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![](../Images/9c1108188b124037f8fb325559321b06.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9c1108188b124037f8fb325559321b06.png)'
 - en: This is the most natural thing that comes to mind when talking about categorical
     features and works well in many cases.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是谈论分类特征时最自然的想法，并且在许多情况下效果良好。
 - en: '**OrdinalEncoding**'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '**OrdinalEncoding**'
 - en: Sometimes there is an order associated with categories. In such a case, I usually
     use a simple map/apply function in pandas to create a new ordinal column.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时类别之间是有顺序的。在这种情况下，我通常使用 pandas 中的简单 map/apply 函数来创建一个新的序数列。
 - en: 'For example, if I had a dataframe containing temperature as three levels: high
     medium and low, I would encode that as:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，如果我有一个数据框包含温度的三个级别：高、中、低，我会将其编码为：
 - en: '[PRE8]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![](../Images/e425f5e288245e881d47397618b38e64.png)'
+  id: totrans-80
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e425f5e288245e881d47397618b38e64.png)'
 - en: Using this I preserve the information that low<medium<high
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用这种方法，我保留了信息：低<中<高。
 - en: '**LabelEncoder**'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '**LabelEncoder**'
 - en: 'We could also have used ***LabelEncoder*** to encode our variable to numbers.
     What a label encoder essentially does is that it sees the first value in the column
     and converts it to 0, next value to 1 and so on. This approach works reasonably
     well with tree models, and ***I end up using it when I have a lot of levels in
     the categorical variable. ***We can use this as:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们也可以使用 ***LabelEncoder*** 将变量编码为数字。标签编码器的基本功能是将列中的第一个值转换为 0，接下来的值转换为 1，以此类推。这种方法在树模型中效果相当好，***当我在分类变量中有很多级别时，我最终会使用它。***
+    我们可以这样使用：
 - en: '[PRE9]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![](../Images/f28727d5151cda32553d90d8c9fd8a72.png)'
+  id: totrans-85
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f28727d5151cda32553d90d8c9fd8a72.png)'
 - en: '**BinaryEncoder**'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '**BinaryEncoder**'
 - en: BinaryEncoder is another method that one can use to encode categorical variables.
     It is an excellent method to use if you have many levels in a column. While we
     can encode a column with 1024 levels using 1023 columns using One Hot Encoding,
     using Binary encoding we can do it by just using ten columns.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: BinaryEncoder 是另一种可以用来编码分类变量的方法。如果你有很多级别的列，它是一个很好的方法。虽然我们可以使用 One Hot Encoding
+    用 1023 列来编码一个有 1024 个级别的列，但使用 Binary 编码，我们只需使用十列即可完成。
 - en: Let us say we have a column in our FIFA 19 player data that contains all club
     names. This column has 652 unique values. One Hot encoding means creating 651
     columns that would mean a lot of memory usage and a lot of sparse columns.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们在 FIFA 19 球员数据中有一个包含所有俱乐部名称的列。这个列有 652 个唯一值。One Hot 编码意味着创建 651 列，这将导致大量内存使用和很多稀疏列。
 - en: If we use Binary encoder, we will only need ten columns as 2⁹<652 <2¹⁰.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们使用二进制编码，我们只需要十列，因为 2⁹ < 652 < 2¹⁰。
 - en: 'We can binaryEncode this variable easily by using BinaryEncoder object from
     category_encoders:'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过使用 category_encoders 中的 BinaryEncoder 对象来轻松地对这个变量进行二进制编码。
 - en: '[PRE10]'
+  id: totrans-91
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '![](../Images/8a4dbd75b2491befdac3f1a4681b51ca.png)'
+  id: totrans-92
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8a4dbd75b2491befdac3f1a4681b51ca.png)'
 - en: '**HashingEncoder**'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '**HashingEncoder**'
 - en: '![](../Images/83eb3d841b017b622c2b74cb6aed4f7b.png)'
+  id: totrans-94
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/83eb3d841b017b622c2b74cb6aed4f7b.png)'
 - en: '***One can think of Hashing Encoder as a black box function that converts a
     string to a number between 0 to some prespecified value.***'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '***可以将 Hashing Encoder 视为一个黑箱函数，它将字符串转换为 0 到某个预定值之间的数字。***'
 - en: It differs from binary encoding as in binary encoding two or more of the club
     parameters could have been 1 while in hashing only one value is 1.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 它与二进制编码不同，因为在二进制编码中，两个或更多的俱乐部参数可能都为 1，而在哈希编码中只有一个值为 1。
 - en: 'We can use hashing as:'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以这样使用哈希编码：
 - en: '[PRE11]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '![](../Images/64299f4b5fd80cad547a13277bfd332f.png)'
+  id: totrans-99
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/64299f4b5fd80cad547a13277bfd332f.png)'
 - en: There are bound to be collisions(two clubs having the same encoding. For example,
     Juventus and PSG have the same encoding) but sometimes this technique works well.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 可能会出现碰撞（例如，尤文图斯和 PSG 具有相同的编码），但有时这种技术效果不错。
 - en: '**Target/Mean Encoding**'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Target/Mean Encoding**'
 - en: '![](../Images/7576d94e734662c5ec8be7e04a3dc31d.png)'
+  id: totrans-102
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7576d94e734662c5ec8be7e04a3dc31d.png)'
 - en: This is a technique that I found works pretty well in Kaggle competitions. If
     both training/test comes from the same dataset from the same time period(cross-sectional),
     we can get crafty with features.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我在 Kaggle 比赛中发现效果不错的一种技术。如果训练/测试数据来自同一数据集的同一时间段（横截面），我们可以巧妙地使用特征。
 - en: 'For example: In the Titanic knowledge challenge, the test data is randomly
     sampled from the train data. In this case, we can use the target variable averaged
     over different categorical variable as a feature.'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如：在 Titanic 知识挑战中，测试数据是从训练数据中随机抽样的。在这种情况下，我们可以使用在不同分类变量上的目标变量平均值作为特征。
 - en: In Titanic, we can create a target encoded feature over the PassengerClass variable.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Titanic 中，我们可以在 PassengerClass 变量上创建一个目标编码特征。
 - en: '***We have to be careful when using Target encoding as it might induce overfitting
     in our models.*** Thus we use k-fold target encoding when we use it.'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: '***我们在使用目标编码时必须小心，因为它可能会导致模型过拟合。*** 因此，当我们使用目标编码时，我们会使用 k 折目标编码。'
 - en: 'We can then create a mean encoded feature as:'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以创建一个均值编码特征，如下所示：
 - en: '[PRE12]'
+  id: totrans-108
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '![](../Images/6947f886fc1b7a8e3354f6e0edc284f0.png)'
+  id: totrans-109
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6947f886fc1b7a8e3354f6e0edc284f0.png)'
 - en: You can see how the passenger class 3 gets encoded as 0.261538 and 0.230570
     based on which fold the average is taken from.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以看到乘客类别 3 是如何被编码为 0.261538 和 0.230570，具体取决于平均值是从哪个折叠中得出的。
 - en: This feature is pretty helpful as it encodes the value of the target for the
     category. Just looking at this feature, we can say that the Passenger in class
     1 has a high propensity of surviving compared with Class 3.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个特征非常有用，因为它编码了目标类别的值。仅通过这个特征，我们可以说，类别 1 的乘客比类别 3 的乘客有更高的生存倾向。
 - en: '3\. Some Kaggle Tricks:'
+  id: totrans-112
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3\. 一些 Kaggle 小技巧：
 - en: While not necessarily feature creation techniques, some postprocessing techniques
     that you may find useful.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然这些不一定是特征创建技术，但有一些后处理技术你可能会觉得有用。
 - en: '**log loss clipping Technique:**'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '**对数损失裁剪技术：**'
 - en: Something that I learned in the Neural Network course by Jeremy Howard. It is
     based on an elementary Idea.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我在 Jeremy Howard 的神经网络课程中学到的。它基于一个基本的理念。
 - en: Log loss penalizes us a lot if we are very confident and wrong.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 对数损失在我们非常自信却犯错时会惩罚我们。
 - en: So in the case of Classification problems where we have to predict probabilities
     in Kaggle, it would be much better to clip our probabilities between 0.05–0.95
     so that we are never very sure about our prediction. And in turn, get penalized
     less. Can be done by a simple `np.clip`
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以在 Kaggle 上的分类问题中，我们需要预测概率时，将概率裁剪在 0.05–0.95 之间会更好，这样我们就不会对预测过于自信。这样可以减少惩罚。可以通过简单的
+    `np.clip` 实现。
 - en: '**Kaggle submission in gzip format:**'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Kaggle 提交的 gzip 格式：**'
 - en: A small piece of code that will help you save countless hours of uploading.
     Enjoy.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 一小段代码可以帮助你节省无数小时的上传时间。请享用。
 - en: '[PRE13]'
+  id: totrans-120
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '4\. Using Latitude and Longitude features:'
+  id: totrans-121
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 4\. 使用纬度和经度特征：
 - en: This part will tread upon how to use Latitude and Longitude features well.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一部分将讲述如何很好地使用纬度和经度特征。
 - en: For this task, I will be using Data from the Playground competition: [New York
     City Taxi Trip Duration](https://www.kaggle.com/c/nyc-taxi-trip-duration/data)
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这项任务，我将使用来自 Playground 比赛的数据：[纽约市出租车旅行时长](https://www.kaggle.com/c/nyc-taxi-trip-duration/data)
 - en: 'The train data looks like:'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练数据如下：
 - en: '![](../Images/1be75e88586a7632bfcb636262619813.png)'
+  id: totrans-125
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1be75e88586a7632bfcb636262619813.png)'
 - en: Most of the functions I am going to write here are inspired by a [Kernel](https://www.kaggle.com/gaborfodor/from-eda-to-the-top-lb-0-368) on
     Kaggle written by Beluga.
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将在这里编写的大部分函数都受到 [Kernel](https://www.kaggle.com/gaborfodor/from-eda-to-the-top-lb-0-368)
+    的启发，该 Kernel 是由 Beluga 编写的。
 - en: 'In this competition, we had to predict the trip duration. We were given many
     features in which Latitude and Longitude of pickup and Dropoff were also there.
     We created features like:'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这次比赛中，我们需要预测旅行时长。我们提供了许多特征，其中包括接送地点的纬度和经度。我们创建了如下特征：
 - en: '**A. Haversine Distance Between the Two Lat/Lons:**'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: '**A. 两个经纬度之间的哈弗辛距离：**'
 - en: The **haversine** formula determines the great-circle **distance **between two
     points on a sphere given their longitudes and latitudes
+  id: totrans-129
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**哈弗辛** 公式用于计算球面上两点之间的大圆 **距离**，给定它们的经纬度。'
 - en: '[PRE14]'
+  id: totrans-130
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'We could then use the function as:'
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以这样使用这个函数：
 - en: '[PRE15]'
+  id: totrans-132
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '**B. Manhattan Distance Between the two Lat/Lons:**'
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: '**B. 两个经纬度之间的曼哈顿距离：**'
 - en: '![Figure](../Images/54c342a45edd211eddb44fa42659f95a.png)'
+  id: totrans-134
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/54c342a45edd211eddb44fa42659f95a.png)'
 - en: Manhattan Skyline
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 曼哈顿天际线
 - en: The distance between two points measured along axes at right angles
+  id: totrans-136
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 沿着直角轴测量的两点之间的距离
 - en: '[PRE16]'
+  id: totrans-137
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: 'We could then use the function as:'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以这样使用这个函数：
 - en: '[PRE17]'
+  id: totrans-139
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: '**C. Bearing Between the two Lat/Lons:**'
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: '**C. 两个经纬度之间的方位角：**'
 - en: A **bearing** is used to represent the direction of **one point** relative to
     another**point**.
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: '**方位角** 用于表示 **一个点** 相对于另一个 **点** 的方向。'
 - en: '[PRE18]'
+  id: totrans-142
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: 'We could then use the function as:'
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以这样使用这个函数：
 - en: '[PRE19]'
+  id: totrans-144
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: '**D. Center Latitude and Longitude between Pickup and Dropoff:**'
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: '**D. 接送之间的中心纬度和经度：**'
 - en: '[PRE20]'
+  id: totrans-146
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: 'These are the new columns that we create:'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些是我们创建的新列：
 - en: '![](../Images/d73b9558220f2e7edecc60635a1bf5b9.png)'
+  id: totrans-148
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d73b9558220f2e7edecc60635a1bf5b9.png)'
 - en: '5\. AutoEncoders:'
+  id: totrans-149
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 5\. 自编码器：
 - en: Sometimes people use Autoencoders too for creating automatic features.
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时人们也使用自编码器来创建自动特征。
 - en: '***What are Autoencoders?***'
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: '***什么是自编码器？***'
 - en: Encoders are deep learning functions which approximate a mapping from X to X,
     i.e. input=output. They first compress the input features into a lower-dimensional *representation *and
     then reconstruct the output from this representation.
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: 编码器是深度学习函数，近似于从X到X的映射，即输入=输出。它们首先将输入特征压缩到较低维度的*表示*中，然后从这种表示中重建输出。
 - en: '![](../Images/21236b659aff70e01c030c3db0993e03.png)'
+  id: totrans-153
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/21236b659aff70e01c030c3db0993e03.png)'
 - en: We can use this *representation* vector as a feature for our models.
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用这种*表示*向量作为我们模型的特征。
 - en: '6\. Some Normal Things you can do with your features:'
+  id: totrans-155
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 6. 你可以对特征做的一些常见操作：
 - en: '***Scaling by Max-Min:*** This is good and often required preprocessing for
     Linear models, Neural Networks'
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***最大最小缩放：*** 这是对线性模型、神经网络等常见且通常必需的预处理方法。'
 - en: '***Normalization using Standard Deviation: ***This is good and often required
     preprocessing for Linear models, Neural Networks'
+  id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***标准差归一化：*** 这是对线性模型、神经网络等常见且通常必需的预处理方法。'
 - en: '***Log-based feature/Target: ***Use log based features or log-based target
     function. If one is using a Linear model which assumes that the features are normally
     distributed, a log transformation could make the feature normal. It is also handy
     in case of skewed variables like income.'
+  id: totrans-158
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***基于对数的特征/目标：*** 使用基于对数的特征或对数目标函数。如果使用的是假设特征呈正态分布的线性模型，对数转换可能使特征变为正态分布。在处理如收入等偏态变量时也很有用。'
 - en: Or in our case trip duration. Below is the graph of trip duration without log
     transformation.
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者在我们的情况下，就是旅行时长。下面是没有对数转换的旅行时长图。
 - en: '![](../Images/ae26ed2e140adfb89b68cb4eadbbdb0f.png)'
+  id: totrans-160
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ae26ed2e140adfb89b68cb4eadbbdb0f.png)'
 - en: 'And with log transformation:'
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: 进行对数转换后：
 - en: '[PRE21]'
+  id: totrans-162
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: '![](../Images/e67f237b5eb7a9bccf500982fec5cec7.png)'
+  id: totrans-163
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e67f237b5eb7a9bccf500982fec5cec7.png)'
 - en: A log transformation on trip duration is much less skewed and thus much more
     helpful for a model.
+  id: totrans-164
   prefs: []
   type: TYPE_NORMAL
+  zh: 对旅行时长进行对数转换后，数据的偏态性大大减小，因此对模型的帮助更大。
 - en: '7\. Some Additional Features based on Intuition:'
+  id: totrans-165
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 7. 基于直觉的一些附加特征：
 - en: '**Date time Features:**'
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: '**日期时间特征：**'
 - en: One could create additional Date time features based on domain knowledge and
     intuition. For example, Time-based Features like “Evening,” “Noon,” “Night,” “Purchases_last_month,”
     “Purchases_last_week,” etc. could work for a particular application.
+  id: totrans-167
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以基于领域知识和直觉创建额外的日期时间特征。例如，像“晚上”、“中午”、“夜晚”、“上月购买”、“上周购买”等时间特征可能适用于特定应用。
 - en: '**Domain Specific Features:**'
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: '**领域特定特征：**'
 - en: '![Figure](../Images/0993d316761b5b05acdec1d5ce5e1ae4.png)'
+  id: totrans-169
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/0993d316761b5b05acdec1d5ce5e1ae4.png)'
 - en: Style matters
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: 风格很重要
 - en: 'Suppose you have got some shopping cart data and you want to categorize the
     TripType. It was the exact problem in Walmart Recruiting: Trip Type Classification
     on [Kaggle](https://www.kaggle.com/c/walmart-recruiting-trip-type-classification/).'
+  id: totrans-171
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你有一些购物车数据，并且你想要对TripType进行分类。这正是Walmart招聘中的问题：在 [Kaggle](https://www.kaggle.com/c/walmart-recruiting-trip-type-classification/)上的Trip
+    Type分类。
 - en: 'Some examples of trip types: a customer may make a small daily dinner trip,
     a weekly large grocery trip, a trip to buy gifts for an upcoming holiday, or a
     seasonal trip to buy clothes.'
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: 旅行类型的一些示例：顾客可能会进行一次小型的每日晚餐旅行，一次每周的大型购物旅行，一次购买节日礼物的旅行，或一次季节性购物旅行。
 - en: To solve this problem, you could think of creating a feature like “Stylish”
     where you create this variable by adding together the number of items that belong
     to category Men’s Fashion, Women’s Fashion, Teens Fashion.
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了解决这个问题，你可以考虑创建一个像“时尚”的特征，通过将属于“男士时尚”、“女士时尚”、“青少年时尚”类别的商品数量相加来创建这个变量。
 - en: '***Or you could create a feature like “Rare”*** which is created by tagging
     some items as rare, based on the data we have and then counting the number of
     those rare items in the shopping cart.'
+  id: totrans-174
   prefs: []
   type: TYPE_NORMAL
+  zh: '***或者你可以创建一个像“稀有”的特征***，通过标记一些项目为稀有，基于我们拥有的数据，然后计算购物车中这些稀有项目的数量来创建。'
 - en: Such features might work or might not work. From what I have observed, they
     usually provide a lot of value.
+  id: totrans-175
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些特征可能有效，也可能无效。从我的观察来看，它们通常提供了很大的价值。
 - en: '***I feel this is the way that Target’s “Pregnant Teen model” was made.*** They
     would have had a variable in which they kept all the items that a pregnant teen
     could buy and put them into a classification algorithm.'
+  id: totrans-176
   prefs: []
   type: TYPE_NORMAL
+  zh: '***我觉得这就是Target的“怀孕青少年模型”是如何制作的。*** 他们可能会有一个变量，其中包含所有怀孕青少年可能购买的商品，并将其放入分类算法中。'
 - en: '**Interaction Features:**'
+  id: totrans-177
   prefs: []
   type: TYPE_NORMAL
+  zh: '**交互特征：**'
 - en: If you have features A and B, you can create features A*B, A+B, A/B, A-B, etc.
+  id: totrans-178
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有特征A和B，可以创建特征A*B、A+B、A/B、A-B等。
 - en: For example, to predict the price of a house, if we have two features length
     and breadth, a better idea would be to create an area(length x breadth) feature.
+  id: totrans-179
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，为了预测房价，如果我们有两个特征：长度和宽度，更好的方法是创建一个面积（长度 x 宽度）特征。
 - en: 'Or in some case, a ratio might be more valuable than having two features alone.
     Example: Credit Card utilization ratio is more valuable than having the Credit
     limit and limit utilized variables.'
+  id: totrans-180
   prefs: []
   type: TYPE_NORMAL
+  zh: 在某些情况下，比起单独拥有两个特征，一个比率可能更有价值。例如：信用卡使用率比拥有信用额度和已使用额度的变量更有价值。
 - en: Conclusion
+  id: totrans-181
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: '![Figure](../Images/3713c2084537b71228e7c1cd4fdcdf27.png)'
+  id: totrans-182
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/3713c2084537b71228e7c1cd4fdcdf27.png)'
 - en: Creativity is vital!!!
+  id: totrans-183
   prefs: []
   type: TYPE_NORMAL
+  zh: 创造力是 ***至关重要的！！！***
 - en: These were just some of the methods I use for creating features.
+  id: totrans-184
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些只是我用来创建特征的一些方法。
 - en: '***But there is surely no limit when it comes to feature engineering, and it
     is only your imagination that limits you.***'
+  id: totrans-185
   prefs: []
   type: TYPE_NORMAL
+  zh: '***但在特征工程方面确实没有限制，唯一限制你的只有你的想象力。***'
 - en: On that note, I always think about feature engineering while keeping what model
     I am going to use in mind. Features that work in a random forest may not work
     well with Logistic Regression.
+  id: totrans-186
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这方面，我总是会考虑特征工程，同时记住我将使用的模型。随机森林中的特征可能在逻辑回归中效果不好。
 - en: Feature creation is the territory of trial and error. You won’t be able to know
     what transformation works or what encoding works best before trying it. It is
     always a trade-off between time and utility.
+  id: totrans-187
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征创建是一个试错的领域。你在尝试之前无法知道什么变换或编码效果最好。这始终是时间和效用之间的权衡。
 - en: Sometimes the feature creation process might take a lot of time. In such cases,
     you might want to [parallelize your Pandas function](https://medium.com/me/stats/post/1c04f41944a1).
+  id: totrans-188
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时候，特征创建过程可能会耗费大量时间。在这种情况下，你可能需要 [并行化你的 Pandas 函数](https://medium.com/me/stats/post/1c04f41944a1)。
 - en: While I have tried to keep this post as exhaustive as possible(This might very
     well be my biggest post on medium yet), I might have missed some of the useful
     methods. Let me know about them in the comments.
+  id: totrans-189
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管我尽力使这篇文章尽可能详尽（这可能是我在 Medium 上写的最大的一篇文章），我可能还是遗漏了一些有用的方法。请在评论中告诉我。
 - en: You can find all the code for this post and run it yourself in this [Kaggle
     Kernel](https://www.kaggle.com/mlwhiz/feature-creation/)
+  id: totrans-190
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在这个 [Kaggle Kernel](https://www.kaggle.com/mlwhiz/feature-creation/)找到所有相关代码并自行运行。
 - en: 'Take a look at the [How to Win a Data Science Competition: Learn from Top Kagglers](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-AqkGMb7JzoCMW0Np1uLfCA&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0) course
     in the [Advanced machine learning specialization](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-AqkGMb7JzoCMW0Np1uLfCA&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0) by
     Kazanova. This course talks about a lot of intuitive ways to improve your model.
     Definitely recommended.'
+  id: totrans-191
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看 [如何赢得数据科学比赛：向顶级 Kagglers 学习](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-AqkGMb7JzoCMW0Np1uLfCA&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0) 课程，该课程是由
+    Kazanova 提供的 [高级机器学习专业](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-AqkGMb7JzoCMW0Np1uLfCA&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0)中的一部分。该课程讨论了许多改进模型的直观方法，强烈推荐。
 - en: I am going to be writing more beginner friendly posts in the future too. Let
     me know what you think about the series. Follow me up at [**Medium**](https://medium.com/@rahul_agarwal) or
     Subscribe to my [**blog**](http://eepurl.com/dbQnuX) to be informed about them.
     As always, I welcome feedback and constructive criticism and can be reached on
     Twitter [@mlwhiz](https://twitter.com/MLWhiz).
+  id: totrans-192
   prefs: []
   type: TYPE_NORMAL
+  zh: 我未来也会写更多适合初学者的文章。请告诉我你对这个系列的看法。关注我在 [**Medium**](https://medium.com/@rahul_agarwal) 或订阅我的 [**博客**](http://eepurl.com/dbQnuX)以获取更新。欢迎反馈和建设性批评，可以通过
+    Twitter [@mlwhiz](https://twitter.com/MLWhiz)与我联系。
 - en: '**Bio: [Rahul Agarwal](https://www.linkedin.com/in/rahulagwl/)** is Senior
     Statistical Analyst at WalmartLabs. Follow him on Twitter [@mlwhiz](https://twitter.com/MLWhiz).'
+  id: totrans-193
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Rahul Agarwal](https://www.linkedin.com/in/rahulagwl/)** 是 WalmartLabs
+    的高级统计分析师。关注他的 Twitter [@mlwhiz](https://twitter.com/MLWhiz)。'
 - en: '[Original](https://towardsdatascience.com/the-hitchhikers-guide-to-feature-extraction-b4c157e96631).
     Reposted with permission.'
+  id: totrans-194
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/the-hitchhikers-guide-to-feature-extraction-b4c157e96631)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-195
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Modeling Price with Regularized Linear Model & XGBoost](/2019/05/modeling-price-regularized-linear-model-xgboost.html)'
+  id: totrans-196
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用正则化线性模型与 XGBoost 进行价格建模](/2019/05/modeling-price-regularized-linear-model-xgboost.html)'
 - en: '[Doing Data Science: A Kaggle Walkthrough Part 4 – Data Transformation and
     Feature Extraction](/2016/06/doing-data-science-kaggle-walkthrough-data-transformation-feature-extraction.html)'
+  id: totrans-197
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学实战：Kaggle实战教程第4部分 – 数据转换与特征提取](/2016/06/doing-data-science-kaggle-walkthrough-data-transformation-feature-extraction.html)'
 - en: '[scikit-feature: Open-Source Feature Selection Repository in Python](/2016/03/scikit-feature-open-source-feature-selection-python.html)'
+  id: totrans-198
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[scikit-feature：Python中的开源特征选择库](/2016/03/scikit-feature-open-source-feature-selection-python.html)'
 - en: '* * *'
+  id: totrans-199
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-200
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-201
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-202
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-203
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 为你的组织提供IT支持'
 - en: '* * *'
+  id: totrans-204
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-205
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  id: totrans-206
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征存储峰会2022：关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
 - en: '[Feature Selection: Where Science Meets Art](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
+  id: totrans-207
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征选择：科学与艺术的交汇](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
 - en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  id: totrans-208
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的替代特征选择方法](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
 - en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  id: totrans-209
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为多变量时间序列构建可操作的特征工程管道](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
 - en: '[Feature Stores for Real-time AI & Machine Learning](https://www.kdnuggets.com/2022/03/feature-stores-realtime-ai-machine-learning.html)'
+  id: totrans-210
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[实时AI与机器学习的特征存储](https://www.kdnuggets.com/2022/03/feature-stores-realtime-ai-machine-learning.html)'
 - en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  id: totrans-211
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习模型的高级特征选择技术](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
