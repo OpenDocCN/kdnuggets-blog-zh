@@ -1,113 +1,173 @@
 - en: Machine Learning in Dask
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Dask 中的机器学习
 - en: 原文：[https://www.kdnuggets.com/2020/06/machine-learning-dask.html](https://www.kdnuggets.com/2020/06/machine-learning-dask.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/06/machine-learning-dask.html](https://www.kdnuggets.com/2020/06/machine-learning-dask.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: Processing a couple of gigabytes of data on one's laptop is usually an uphill
     task, unless the laptop has high RAM and a whole lot of compute power.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在个人电脑上处理几GB的数据通常是一个艰巨的任务，除非该电脑具有高 RAM 和大量计算能力。
 - en: That notwithstanding, data scientists still have to look for alternative solutions
     to deal with this problem. Some of the hacks involve tweaking Pandas to enable
     it to process huge datasets, buying a GPU machine, or purchasing compute power
     on the cloud. In this piece, we’ll see how we can use [Dask](https://dask.org/) to
     work with large datasets on our local machines.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管如此，数据科学家仍然需要寻找替代方案来处理这个问题。一些解决方法包括调整 Pandas 以使其能够处理大型数据集，购买 GPU 机器或在云端购买计算资源。在本文中，我们将看到如何使用[Dask](https://dask.org/)在本地机器上处理大数据集。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的
+    IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Dask and Python
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Dask 和 Python
 - en: Dask is a flexible library for parallel computing in Python. It’s built to integrate
     nicely with other open-source projects such as NumPy, Pandas, and scikit-learn.
     In Dask, [Dask arrays](https://docs.dask.org/en/latest/array.html) are the equivalent
     of NumPy Arrays, [Dask DataFrames](https://docs.dask.org/en/latest/dataframe.html) the
     equivalent of Pandas DataFrames, and [Dask-ML](https://ml.dask.org/) the equivalent
     of scikit-learn.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask 是一个用于 Python 的灵活并行计算库。它被构建为能够很好地与其他开源项目（如 NumPy、Pandas 和 scikit-learn）集成。在
+    Dask 中，[Dask 数组](https://docs.dask.org/en/latest/array.html) 相当于 NumPy 数组，[Dask
+    DataFrames](https://docs.dask.org/en/latest/dataframe.html) 相当于 Pandas DataFrames，而
+    [Dask-ML](https://ml.dask.org/) 相当于 scikit-learn。
 - en: These similarities make it very easy to adopt Dask into your workflow. The advantage
     of using Dask is that you can scale computations to multiple cores on your computer.
     This enables you to work on large datasets that don’t fit into memory. It also
     aids in speeding up computations that would ordinarily take a long time.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些相似性使得将 Dask 轻松地融入您的工作流程。使用 Dask 的优势在于您可以将计算扩展到计算机上的多个核心。这使得您能够处理内存无法容纳的大型数据集。它还帮助加快通常需要很长时间的计算。
 - en: '![Figure](../Images/e812ece84005237a2818fcfe66918ac8.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/e812ece84005237a2818fcfe66918ac8.png)'
 - en: '[source](https://dask.org/)'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[来源](https://dask.org/)'
 - en: Dask DataFrames
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Dask DataFrames
 - en: When loading in huge data, Dask will usually read in a sample of the data in
     order to infer the data types. This will mostly lead to issues if a given column
     has different data types. In order to avoid type errors, it’s usually good practice
     to declare the data types beforehand. Dask is able to load huge files by cutting
     it up into chunks, as defined by the `blocksize` parameter.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 当加载大量数据时，Dask 通常会读取数据的一个样本以推断数据类型。如果某一列的数据类型不同，这通常会导致问题。为了避免类型错误，通常的好做法是事先声明数据类型。Dask
+    通过将数据切分成块（由 `blocksize` 参数定义）来加载大型文件。
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![Figure](../Images/5742054bfc128a1492d8afc31c6a87ec.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/5742054bfc128a1492d8afc31c6a87ec.png)'
 - en: '[source](https://dask.org/)'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[来源](https://dask.org/)'
 - en: 'Commands in a Dask DataFrame are mostly similar to the ones in Pandas. For
     example, getting the `head` and `tail` is similar:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask DataFrame 中的命令与 Pandas 中的命令大致相同。例如，获取 `head` 和 `tail` 是类似的：
 - en: '[PRE1]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Functions on the DataFrame are run lazily. This means that they aren’t computed
     until the `compute` function is called.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: DataFrame 上的函数是懒惰执行的。这意味着它们不会被计算，直到调用 `compute` 函数。
 - en: '[PRE2]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Since the data is loaded in partitions, some Pandas functions such as `sort_values()` will
     fail. The workaround is to use the `nlargest()` function.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: Dask Clusters
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -115,30 +175,38 @@
     multiple cores. Dask provides a machine scheduler that works on a single machine.
     It does not scale. It also offers a distributed scheduler that can scale to multiple
     machines.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: Using `dask.distributed` requires that you set up a `Client`. This should be
     the first thing you do if you intend to use `dask.distributed` in your analysis.
     It offers low latency, data locality, data sharing between the workers, and is
     easy to set up.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![](../Images/5c70485c72f6d940cbc7583df741811a.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
 - en: Using `dask.distributed` is advantageous even on a single machine, because it
     offers some diagnostic features via a dashboard.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: Failure to declare a `Client` will leave you using the single machine scheduler
     by default. It provides parallelism on a single computer by using processes or
     threads.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: Dask ML
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -149,43 +217,59 @@
     this compute in a cluster. This is done with the help of [joblib](https://joblib.readthedocs.io/en/latest/),
     a package that allows for parallelism and pipelining in Python. Using Dask ML,
     you can implement scikit-learn models as well as other libraries such as XGboost.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: This is what a simple implementation would look like.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: First import `train_test_split` as usual for splitting your data into training
     and testing sets.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Next, import the model you’d like to use and instantiate it.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: You then have to import `joblib` to enable parallel computation.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Next, run your training and prediction using the parallel backend.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE7]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Machine learning is rapidly moving closer to where data is collected — edge
     devices. [Subscribe to the Fritz AI Newsletter to learn more about this transition
     and how it can help scale your business.](https://www.fritz.ai/newsletter?utm_campaign=fritzai-newsletter-scale6&utm_source=heartbeat)
+  id: totrans-44
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Limitations and Memory Usage
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -193,6 +277,7 @@
     that inherit all the advantages and disadvantages of Python computations. Care
     should also be taken when working in a distributed environment to ensure data
     security and privacy.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: Dask has a central scheduler that tracks data on worker nodes and on the cluster.
@@ -200,100 +285,149 @@
     is completed it clears it from the memory in order to free up memory for other
     tasks. If something is needed by a certain `client`, or if it’s important for
     ongoing computations, it’s held in memory.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: Another Dask limitation is that it doesn’t implement all functions in Pandas.
     The Pandas interface is large, so Dask doesn’t implement it in its entirety. This
     means that trying some of these operations on Dask can be an uphill climb. Also,
     the operations that are slow on Pandas are also slow on Dask.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个 Dask 的限制是它没有实现 Pandas 中的所有函数。Pandas 接口很庞大，因此 Dask 并未完全实现它。这意味着在 Dask 上尝试一些操作可能会比较困难。此外，Pandas
+    上慢的操作在 Dask 上也同样慢。
 - en: When you wouldn’t need a Dask DataFrame
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 当你不需要 Dask DataFrame 时
 - en: 'In the following situations, you may not need Dask:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '在以下情况下，你可能不需要 Dask:'
 - en: When there are Pandas functions you need that haven’t been implemented in Dask.
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当有一些 Pandas 函数尚未在 Dask 中实现时。
 - en: When your data fits perfectly into your computer’s memory.
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当你的数据完全适合计算机的内存时。
 - en: When your data isn’t in tabular form. In this case, try [dask.bag](https://docs.dask.org/en/latest/bag.html) or [dask.array](https://docs.dask.org/en/latest/array.html).
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当你的数据不是表格形式时。在这种情况下，可以尝试 [dask.bag](https://docs.dask.org/en/latest/bag.html) 或 [dask.array](https://docs.dask.org/en/latest/array.html)。
 - en: Final Thoughts
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最后的思考
 - en: In this article, we have seen how we can use Dask to work with a huge dataset
     on our local machine or in a distributed manner. We’ve seen that we can use Dask
     because of its familiar syntax and ability to scale. It has the ability to scale
     to thousands of cores.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们看到我们如何使用 Dask 在本地机器或以分布式方式处理巨大数据集。我们了解到，由于 Dask 的熟悉语法和扩展能力，我们可以使用 Dask。它能够扩展到数千个核心。
 - en: 'We’ve also seen that we can use it in machine learning for training and running
     predictions. You can learn more by checking out these presentations in the official
     documentation:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还看到我们可以在机器学习中使用它来训练和运行预测。你可以通过查看这些官方文档中的演示文稿来了解更多信息：
 - en: '[**Presentations On Dask - Dask 2.15.0 documentation**](https://docs.dask.org/en/latest/presentations.html)'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**Dask 的演示文稿 - Dask 2.15.0 文档**](https://docs.dask.org/en/latest/presentations.html)'
 - en: '**Bio: [Derrick Mwiti](https://derrickmwiti.com/)** is a data analyst, a writer,
     and a mentor. He is driven by delivering great results in every task, and is a
     mentor at Lapid Leaders Africa.'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历: [德里克·穆伊提](https://derrickmwiti.com/)** 是一位数据分析师、作家和导师。他致力于在每项任务中取得卓越成果，并且是
+    Lapid Leaders Africa 的导师。'
 - en: '[Original](https://heartbeat.fritz.ai/machine-learning-in-dask-e234c98ef07).
     Reposted with permission.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://heartbeat.fritz.ai/machine-learning-in-dask-e234c98ef07)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关:**'
 - en: '[Why and How to Use Dask with Big Data](/2020/04/dask-big-data.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么以及如何在大数据中使用 Dask](/2020/04/dask-big-data.html)'
 - en: '[Five Interesting Data Engineering Projects](/2020/03/data-engineering-projects.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[五个有趣的数据工程项目](/2020/03/data-engineering-projects.html)'
 - en: '[Automated Machine Learning in Python](/2019/01/automated-machine-learning-python.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的自动化机器学习](/2019/01/automated-machine-learning-python.html)'
 - en: More On This Topic
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关阅读
 - en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，12月14日: 3 门免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)'
 - en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每位机器学习工程师都应该掌握的 5 项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
 - en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学、机器学习和深度学习的稳固计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
 - en: '[AI, Analytics, Machine Learning, Data Science, Deep Learning…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[人工智能、分析、机器学习、数据科学、深度学习…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
 - en: '[Breaking the Data Barrier: How Zero-Shot, One-Shot, and Few-Shot…](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[打破数据障碍: 如何通过零样本、单样本和少样本…](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)'
 - en: '[Federated Learning: Collaborative Machine Learning with a Tutorial…](https://www.kdnuggets.com/2021/12/federated-learning-collaborative-machine-learning-tutorial-get-started.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[联邦学习: 与教程一起的协作机器学习…](https://www.kdnuggets.com/2021/12/federated-learning-collaborative-machine-learning-tutorial-get-started.html)'
