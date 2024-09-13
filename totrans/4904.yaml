@@ -1,232 +1,350 @@
 - en: 'Managing Machine Learning Workflows with Scikit-learn Pipelines Part 1: A Gentle
     Introduction'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Scikit-learn Pipelines 管理机器学习工作流 第 1 部分：温和的介绍
 - en: 原文：[https://www.kdnuggets.com/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html](https://www.kdnuggets.com/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html](https://www.kdnuggets.com/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '![Pipelines](../Images/b8b9b0bbf09b0e456ffbdb9febbe3581.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![Pipelines](../Images/b8b9b0bbf09b0e456ffbdb9febbe3581.png)'
 - en: Are you familiar with Scikit-learn Pipelines?
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 你熟悉 Scikit-learn Pipelines 吗？
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: They are an extremely simple yet very useful tool for managing machine learning
     workflows.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 它们是管理机器学习工作流的极其简单但非常有用的工具。
 - en: A typical machine learning task generally involves data preparation to varying
     degrees. We won't get into the wide array of activities which make up data preparation
     here, [but there are many](/2017/06/7-steps-mastering-data-preparation-python.html).
     Such tasks are known for taking up a large proportion of time spent on any given
     machine learning task.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个典型的机器学习任务通常涉及不同程度的数据准备。我们不会在这里深入探讨数据准备的各种活动，[但有很多](https://2017/06/7-steps-mastering-data-preparation-python.html)。这些任务以占用大量机器学习任务时间而闻名。
 - en: After a dataset is cleaned up from a potential initial state of massive disarray,
     however, there are still several less-intensive yet no less-important transformative
     data preprocessing steps such as [feature extraction](https://en.wikipedia.org/wiki/Feature_extraction),
     [feature scaling](https://en.wikipedia.org/wiki/Feature_scaling), and [dimensionality
     reduction](https://en.wikipedia.org/wiki/Dimensionality_reduction), to name just
     a few.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在数据集从潜在的初始大混乱状态中清理干净之后，仍然有几个较不密集但同样重要的变换数据预处理步骤，如 [特征提取](https://en.wikipedia.org/wiki/Feature_extraction)、[特征缩放](https://en.wikipedia.org/wiki/Feature_scaling)
+    和 [降维](https://en.wikipedia.org/wiki/Dimensionality_reduction)，仅举几例。
 - en: Maybe your preprocessing requires only one of these tansformations, such as
     some form of scaling. But maybe you need to string a number of transformations
     together, and ultimately finish off with an estimator of some sort. This is where
     Scikit-learn Pipelines can be helpful.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 也许你的预处理只需要其中一种转换，比如某种形式的缩放。但也许你需要将多个转换串联起来，并*最终*用某种估算器完成。这就是 Scikit-learn Pipelines
+    可以提供帮助的地方。
 - en: 'Scikit-learn''s [Pipeline class](http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html)
     is designed as a manageable way to apply a series of [data transformations](http://scikit-learn.org/stable/data_transforms.html)
     followed by the application of an [estimator](http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html).
     In fact, that''s really all it is:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: Scikit-learn 的 [Pipeline 类](http://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html)
+    旨在以可管理的方式应用一系列 [数据转换](http://scikit-learn.org/stable/data_transforms.html)，然后应用
+    [估算器](http://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)。事实上，这就是它的全部功能：
 - en: Pipeline of transforms with a final estimator.
+  id: totrans-16
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 转换管道与最终估算器。
 - en: 'That''s it. Ultimately, this simple tool is useful for:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 就是这样。*最终*，这个简单的工具对以下内容非常有用：
 - en: Convenience in creating a coherent and easy-to-understand workflow
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建连贯且易于理解的工作流的便利性
 - en: Enforcing workflow implementation and the desired order of step applications
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 强制执行工作流实施和步骤应用的期望顺序
 - en: Reproducibility
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可重复性
 - en: Value in persistence of entire pipeline objects (goes to reproducibility and
     convenience)
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 持久化整个管道对象的价值（涉及到可重复性和便利性）
 - en: So let's have a quick look at Pipelines. Specifically, here is what we will
     do.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么让我们快速了解管道。具体来说，我们将做以下事情。
 - en: '**Build 3 pipelines**, each with a different estimator (classification algorithm),
     using default hyperparameters:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**构建 3 个管道**，每个使用不同的估计器（分类算法），采用默认超参数：'
 - en: '[Logisitic Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[逻辑回归](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)'
 - en: '[Support Vector Machine](http://scikit-learn.org/stable/modules/svm.html)'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[支持向量机](http://scikit-learn.org/stable/modules/svm.html)'
 - en: '[Decision Tree](http://scikit-learn.org/stable/modules/tree.html)'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[决策树](http://scikit-learn.org/stable/modules/tree.html)'
 - en: 'To demonstrate pipeline **transforms**, will perform:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了演示管道**转换**，将进行：
 - en: feature scaling
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 特征缩放
 - en: dimensionality reduction, using PCA to project data onto 2 dimensional space
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 降维，使用 PCA 将数据投影到二维空间
 - en: We will then end with fitting to our final **estimators**.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们将以拟合我们的最终**估计器**来结束。
 - en: 'Afterward, and almost completely unrelated, in order to make this a little
     more like a full-fledged workflow (it still isn''t, but closer), we will:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后，几乎完全不相关，为了让它更像一个完整的工作流（虽然还不是，但更接近），我们将：
 - en: Followup with scoring test data
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 跟进评分测试数据
 - en: Compare pipeline model accuracies
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 比较管道模型的准确性
 - en: Identify the "best" model, meaning that which has the highest accuracy on our
     test data
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 确定“最佳”模型，即在我们的测试数据上准确度最高的模型
 - en: '[Persist](http://scikit-learn.org/stable/modules/model_persistence.html) (save
     to file) the entire pipeline of the "best" model'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[持久化](http://scikit-learn.org/stable/modules/model_persistence.html)（保存到文件）“最佳”模型的整个管道'
 - en: Granted, given that we will use default hyperparameters, this likely won't result
     in the most accurate possible models, but it will provide a sense of how to use
     simple pipelines. We will come back to the question of more complex modeling,
     hyperparameter tuning, and model evaluation afterward.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，由于我们将使用默认超参数，这可能不会产生最准确的模型，但它会提供如何使用简单管道的感觉。我们将在之后回到更复杂的建模、超参数调整和模型评估的问题上。
 - en: Oh, and for additional simplicity, we are using the iris dataset. The code is
     well-commented, and should be easy to follow.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 哦，为了额外的简便，我们使用了鸢尾花数据集。代码注释完善，应该很容易跟随。
 - en: Let's run our script and see what happens.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们运行我们的脚本，看看会发生什么。
 - en: '[PRE0]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: So there you have it; a simple implementation of Scikit-learn pipelines. In
     this particular case, our logistic regression-based pipeline with default parameters
     scored the highest accuracy.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，这就是它；一个简单的 Scikit-learn 管道实现。在这个特定的案例中，我们基于逻辑回归的管道使用默认参数取得了最高准确率。
 - en: As mentioned above, however, these results likely don't represent our best efforts.
     What if we did want to test out a series of different hyperparameters? Can we
     use grid search? Can we incorporate automated methods for tuning these hyperparameters?
     Can AutoML fit in to this picture somewhere? What about using cross-validation?
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所述，这些结果可能并不代表我们的最佳努力。如果我们想测试一系列不同的超参数怎么办？我们可以使用网格搜索吗？我们可以引入自动化方法来调整这些超参数吗？AutoML
+    可以融入这个过程吗？使用交叉验证怎么样？
 - en: Over the next couple of posts we will take a look at these additional issues,
     and see how these simple pieces fit together to make pipelines much more powerful
     than they may first appear to be given our initial example.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 在接下来的几篇文章中，我们将关注这些额外的问题，并看看这些简单的部分如何组合在一起，使管道比初始示例看起来更强大。
 - en: '**Related:**'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[7 Steps to Mastering Data Preparation with Python](/2017/06/7-steps-mastering-data-preparation-python.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握 Python 数据准备的 7 个步骤](/2017/06/7-steps-mastering-data-preparation-python.html)'
 - en: '[Machine Learning Workflows in Python from Scratch Part 1: Data Preparation](/2017/05/machine-learning-workflows-python-scratch-part-1.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从零开始的 Python 机器学习工作流第 1 部分：数据准备](/2017/05/machine-learning-workflows-python-scratch-part-1.html)'
 - en: '[Machine Learning Workflows in Python from Scratch Part 2: k-means Clustering](/2017/06/machine-learning-workflows-python-scratch-part-2.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从零开始的 Python 机器学习工作流第 2 部分：k-means 聚类](/2017/06/machine-learning-workflows-python-scratch-part-2.html)'
 - en: More On This Topic
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 主题更多
 - en: '[A Gentle Introduction to Natural Language Processing](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理的温和介绍](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
 - en: '[A Gentle Introduction to Support Vector Machines](https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[支持向量机的温和介绍](https://www.kdnuggets.com/2023/07/gentle-introduction-support-vector-machines.html)'
 - en: '[A New Way of Managing Deep Learning Datasets](https://www.kdnuggets.com/2022/03/new-way-managing-deep-learning-datasets.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[管理深度学习数据集的新方法](https://www.kdnuggets.com/2022/03/new-way-managing-deep-learning-datasets.html)'
 - en: '[Managing Your Reusable Python Code as a Data Scientist](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[作为数据科学家管理可重用的Python代码](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)'
 - en: '[4 Steps for Managing a Data Science Project](https://www.kdnuggets.com/2022/05/4-steps-managing-data-science-project.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[管理数据科学项目的4个步骤](https://www.kdnuggets.com/2022/05/4-steps-managing-data-science-project.html)'
 - en: '[Managing Model Drift in Production with MLOps](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用MLOps管理生产中的模型漂移](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)'
