@@ -1,322 +1,512 @@
 - en: Machine Learning for Text Classification Using SpaCy in Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用Python中的SpaCy进行文本分类的机器学习
 - en: 原文：[https://www.kdnuggets.com/2018/09/machine-learning-text-classification-using-spacy-python.html](https://www.kdnuggets.com/2018/09/machine-learning-text-classification-using-spacy-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/09/machine-learning-text-classification-using-spacy-python.html](https://www.kdnuggets.com/2018/09/machine-learning-text-classification-using-spacy-python.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Susan Li](https://www.linkedin.com/in/susanli/), Sr. Data Scientist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[苏珊·李](https://www.linkedin.com/in/susanli/)，高级数据科学家**'
 - en: '![](../Images/3a2a3fd1fc3eb06d222d6d97d671af34.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3a2a3fd1fc3eb06d222d6d97d671af34.png)'
 - en: Photo Credit: Pixabay
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '图片来源: Pixabay'
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '[**spaCy**](https://spacy.io/) is a popular and easy-to-use natural language
     processing library in Python. It provides current state-of-the-art accuracy and
     speed levels, and has an active open source community. However, since SpaCy is
     a relative new NLP library, and it’s not as widely adopted as [NLTK](https://www.nltk.org/).
     There is not yet sufficient tutorials available.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**spaCy**](https://spacy.io/) 是一个流行且易于使用的Python自然语言处理库。它提供了当前最先进的准确性和速度水平，并且拥有一个活跃的开源社区。然而，由于SpaCy是一个相对较新的NLP库，它的采用程度还不及[NLTK](https://www.nltk.org/)，目前还没有足够的教程可用。'
 - en: In this post, we will demonstrate how text classification can be implemented
     using **spaCy** without having any deep learning experience.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将演示如何使用**spaCy**实现文本分类，而无需具备深度学习经验。
 - en: The Data
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据
 - en: It s often time consuming and frustrating experience for a young researcher
     to find and select a suitable academic conference to submit his (or her) academic
     papers. We define “suitable conference”, meaning the conference is aligned with
     the researcher’s work and have a good academic ranking.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于年轻研究者来说，寻找和选择合适的学术会议以提交学术论文通常是耗时且令人沮丧的经历。我们定义的“合适会议”是指会议与研究者的工作相一致，并且具有良好的学术排名。
 - en: Using the conference proceeding data set, we are going to categorize research
     papers by conferences. Let’s get started. The data set can be found [here](https://raw.githubusercontent.com/susanli2016/Machine-Learning-with-Python/master/research_paper.csv).
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用会议论文集数据集，我们将按会议对研究论文进行分类。让我们开始吧。数据集可以在[这里](https://raw.githubusercontent.com/susanli2016/Machine-Learning-with-Python/master/research_paper.csv)找到。
 - en: Explore
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 探索
 - en: 'Take a quick peek:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 快速浏览一下：
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![](../Images/7cb37c05ce0f5fd380d2409869cf075d.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7cb37c05ce0f5fd380d2409869cf075d.png)'
 - en: Figure 1
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 图1
 - en: There is no missing values.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 没有缺失值。
 - en: '[PRE1]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '***Title 0'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '***标题 0'
 - en: Conference 0
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 会议 0
 - en: 'dtype: int64***'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 'dtype: int64***'
 - en: 'Split the data to train and test sets:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 将数据分割为训练集和测试集：
 - en: '[PRE2]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '***Research title sample: Cooperating with Smartness: Using Heterogeneous Smart
     Antennas in Ad-Hoc Networks.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '***研究标题示例：与智能合作：在自组织网络中使用异构智能天线。'
 - en: 'Conference of this paper: INFOCOM'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '这篇论文的会议: INFOCOM'
 - en: 'Training Data Shape: (1679, 2)'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '训练数据形状: (1679, 2)'
 - en: 'Testing Data Shape: (828, 2)***'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '测试数据形状: (828, 2)***'
 - en: The dataset consists of 2507 short research paper titles, which have been classified
     into 5 categories (by conferences). The following figure summarizes the distribution
     of research papers by different conferences.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集包含2507个短篇研究论文标题，这些标题被分类为5个类别（按会议）。下图总结了不同会议的研究论文分布。
 - en: '[PRE3]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![](../Images/0fa7a75a8554ccf261e93194b240b830.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0fa7a75a8554ccf261e93194b240b830.png)'
 - en: Figure 2
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 图2
 - en: The following is one way to do text preprocessing in SpaCy. After that, we are
     trying to find out the top words used in the papers that submit to the first and
     second categories (conferences) — INFOCOM & ISCAS
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是使用 SpaCy 进行文本预处理的一种方法。之后，我们尝试找出提交至第一类和第二类（会议）INFOCOM 和 ISCAS 的论文中使用的最常见词汇。
 - en: '[PRE4]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![](../Images/6d498603d0b0758a634d9ceb97feab17.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6d498603d0b0758a634d9ceb97feab17.png)'
 - en: Figure 3
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 3
 - en: '[PRE5]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![](../Images/e75d42312b46612d80c687bfbbdd0ba6.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e75d42312b46612d80c687bfbbdd0ba6.png)'
 - en: Figure 4
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 4
 - en: The top words in INFOCOM are “networks” and “network”. It is obvious that INFOCOM
     is a conference in the field of networking and closely related areas.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: INFOCOM 中的最常见词是“networks”和“network”。显然，INFOCOM 是一个网络及相关领域的会议。
 - en: The top words in ISCAS are “base” and “design”. It indicates that ISCAS is a
     conference about database, system design and related topics.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: ISCAS 中的最常见词是“base”和“design”。这表明 ISCAS 是一个关于数据库、系统设计及相关主题的会议。
 - en: Machine Learning with spaCy
+  id: totrans-46
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 spaCy 的机器学习
 - en: '[PRE6]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Below is another way to clean text using spaCy:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是使用 spaCy 清理文本的另一种方法：
 - en: '[PRE7]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Define a function to print out the most important features, the features that
     have the highest coefficients:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 定义一个函数来打印出最重要的特征，即具有最高系数的特征：
 - en: '[PRE8]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '***accuracy: 0.7463768115942029'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '***准确率：0.7463768115942029'
 - en: 'Top 10 features used to predict:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于预测的前 10 个特征：
 - en: 'Class 1 best:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 第 1 类最佳：
 - en: (-0.9286024231429632, ‘database’)
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: (-0.9286024231429632, ‘database’)
 - en: (-0.8479561292796286, ‘chip’)
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: (-0.8479561292796286, ‘chip’)
 - en: (-0.7675978546440636, ‘wimax’)
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: (-0.7675978546440636, ‘wimax’)
 - en: (-0.6933516302055982, ‘object’)
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: (-0.6933516302055982, ‘object’)
 - en: (-0.6728543084136545, ‘functional’)
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: (-0.6728543084136545, ‘functional’)
 - en: (-0.6625144315722268, ‘multihop’)
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: (-0.6625144315722268, ‘multihop’)
 - en: (-0.6410217867606485, ‘amplifier’)
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: (-0.6410217867606485, ‘amplifier’)
 - en: (-0.6396374843938725, ‘chaotic’)
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: (-0.6396374843938725, ‘chaotic’)
 - en: (-0.6175855765947755, ‘receiver’)
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: (-0.6175855765947755, ‘receiver’)
 - en: (-0.6016682542232492, ‘web’)
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: (-0.6016682542232492, ‘web’)
 - en: 'Class 2 best:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 第 2 类最佳：
 - en: (1.1835964521070819, ‘speccast’)
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: (1.1835964521070819, ‘speccast’)
 - en: (1.0752051052570133, ‘manets’)
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: (1.0752051052570133, ‘manets’)
 - en: (0.9490176624004726, ‘gossip’)
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: (0.9490176624004726, ‘gossip’)
 - en: (0.8468395015456092, ‘node’)
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: (0.8468395015456092, ‘node’)
 - en: (0.8433107444740003, ‘packet’)
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: (0.8433107444740003, ‘packet’)
 - en: (0.8370516260734557, ‘schedule’)
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: (0.8370516260734557, ‘schedule’)
 - en: (0.8344139814680707, ‘multicast’)
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: (0.8344139814680707, ‘multicast’)
 - en: (0.8332232077559836, ‘queue’)
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: (0.8332232077559836, ‘queue’)
 - en: (0.8255429594734555, ‘qos’)
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: (0.8255429594734555, ‘qos’)
 - en: (0.8182435133796081, ‘location’)***
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: (0.8182435133796081, ‘location’)***
 - en: '[PRE9]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Here you have it. We now have done machine learning for text classification
     with the help of SpaCy.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是了。我们现在已经在 SpaCy 的帮助下完成了文本分类的机器学习。
 - en: Source code can be found on [Github](https://github.com/susanli2016/Machine-Learning-with-Python/blob/master/machine%20learning%20spaCy.ipynb).
     Have a learning weekend!
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 源代码可以在 [Github](https://github.com/susanli2016/Machine-Learning-with-Python/blob/master/machine%20learning%20spaCy.ipynb)
+    上找到。祝你学习愉快！
 - en: Reference: [Kaggle](https://www.kaggle.com/)
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 参考资料：[Kaggle](https://www.kaggle.com/)
 - en: '**Bio: [Susan Li](https://www.linkedin.com/in/susanli/)** is changing the world,
     one article at a time. She is a Sr. Data Scientist, located in Toronto, Canada.'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Susan Li](https://www.linkedin.com/in/susanli/)** 正在通过一篇文章改变世界。她是一位资深数据科学家，位于加拿大多伦多。'
 - en: '[Original](https://towardsdatascience.com/machine-learning-for-text-classification-using-spacy-in-python-b276b4051a49).
     Reposted with permission.'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/machine-learning-for-text-classification-using-spacy-in-python-b276b4051a49)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Multi-Class Text Classification with Scikit-Learn](/2018/08/multi-class-text-classification-scikit-learn.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Scikit-Learn 的多分类文本分类](/2018/08/multi-class-text-classification-scikit-learn.html)'
 - en: '[Topic Modeling with LSA, PLSA, LDA & lda2Vec](/2018/08/topic-modeling-lsa-plsa-lda-lda2vec.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LSA、PLSA、LDA 和 lda2Vec 的主题建模](/2018/08/topic-modeling-lsa-plsa-lda-lda2vec.html)'
 - en: '[Natural Language Processing Nuggets: Getting Started with NLP](/2018/06/getting-started-natural-language-processing.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理技巧：开始使用 NLP](/2018/06/getting-started-natural-language-processing.html)'
 - en: More On This Topic
+  id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Getting Started with spaCy for NLP](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 spaCy 进行 NLP 入门](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
 - en: '[Natural Language Processing with spaCy](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 spaCy 进行自然语言处理](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
 - en: '[What is Text Classification?](https://www.kdnuggets.com/2022/07/text-classification.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是文本分类？](https://www.kdnuggets.com/2022/07/text-classification.html)'
 - en: '[Best Architecture for Your Text Classification Task: Benchmarking…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本分类任务的最佳架构：基准测试…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
 - en: '[A Guide to Train an Image Classification Model Using Tensorflow](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow 训练图像分类模型的指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)'
 - en: '[Machine Learning Algorithms for Classification](https://www.kdnuggets.com/2022/03/machine-learning-algorithms-classification.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分类的机器学习算法](https://www.kdnuggets.com/2022/03/machine-learning-algorithms-classification.html)'

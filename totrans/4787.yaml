@@ -1,19 +1,27 @@
 - en: Iterative Initial Centroid Search via Sampling for k-Means Clustering
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 通过采样进行的迭代初始质心搜索
 - en: 原文：[https://www.kdnuggets.com/2018/09/iterative-initial-centroid-search-sampling-k-means-clustering.html](https://www.kdnuggets.com/2018/09/iterative-initial-centroid-search-sampling-k-means-clustering.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/09/iterative-initial-centroid-search-sampling-k-means-clustering.html](https://www.kdnuggets.com/2018/09/iterative-initial-centroid-search-sampling-k-means-clustering.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: In this post, we will look at using an iterative approach to searching for a
     **better** set of initial centroids for k-means clustering, and will do so by
     performing this process on a sample of our full dataset.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将探讨通过迭代方法搜索k均值聚类的**更好**初始质心集合，并通过对我们的完整数据集样本执行此过程来实现。
 - en: What do we mean by "better?" Since k-means clustering aims to converge on an
     optimal set of cluster centers (centroids) and cluster membership based on distance
     from these centroids via successive iterations, it is intuitive that the more
@@ -21,33 +29,50 @@
     k-means clustering algorithms will be required for convergence. Therefore, thinking
     about ways to find a **better** set of initial centroid positions is a valid approach
     to optimizing the k-means clustering process.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们所说的“更好”是什么意思？由于k均值聚类旨在通过连续的迭代收敛到最优的簇中心（质心）和基于这些质心的簇成员，因此初始质心的定位越优化，k均值聚类算法所需的迭代次数就会越少。因此，考虑找到一个**更好**的初始质心位置集合是一种优化k均值聚类过程的有效方法。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: What we will do differently, specifically, is to draw a sample of data from
     our full dataset, and run short runs of of the k-means clustering algorithm on
     it (not to convergence), short runs which will include, out of necessity, the
@@ -58,114 +83,164 @@
     centroids associated with the random centroid initialization iteration process
     which provide the lowest inertia is the set of centroids which we will carry forward
     to our full dataset clustering process.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将采取不同的方法，具体来说，就是从我们的完整数据集中抽取一个样本，然后对其进行短时间的k均值聚类算法运行（而不是收敛），这些短时间运行必然包括质心初始化过程。我们将使用若干个随机初始化的质心重复这些短时间运行，并跟踪测量指标的改善——簇内平方和——以确定聚类成员的优度（或者至少是评估此项的有效指标之一）。与随机质心初始化迭代过程相关的最终质心提供最低的惯性值的质心集合将被带入我们的完整数据集聚类过程中。
 - en: The hope is that this up-front work will lead to a better set of initial centroids
     for our full clustering process, and, hence, a lesser number of k-means clustering
     iterations and, ultimately, less time required to fully cluster a dataset.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望这项前期工作能导致我们完整聚类过程中获得更好的初始质心集合，从而减少k均值聚类的迭代次数，最终缩短完全聚类数据集所需的时间。
 - en: This would obviously not be the only method of optimizing centroid initialization.
     In the past we have discussed the [naive sharding centroid initialization method](/2017/03/naive-sharding-centroid-initialization-method.html),
     a deterministic method for optimal centroid initialization. Other forms of modifications
     to the k-means clustering algorithm take different approaches to this problem
     as well (see [k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B) for comparison).
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，这并不是优化质心初始化的唯一方法。过去我们讨论过[朴素分片质心初始化方法](/2017/03/naive-sharding-centroid-initialization-method.html)，这是一种用于最佳质心初始化的确定性方法。其他形式的k均值聚类算法的修改也采用了不同的方法来解决这个问题（请参见[k-means++](https://en.wikipedia.org/wiki/K-means%2B%2B)以作比较）。
 - en: 'This post will approach our task as follows:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文将以如下方式进行我们的任务：
 - en: prepare the data
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 准备数据
 - en: prepare our sample
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 准备我们的样本
 - en: perform centroid initialization search iterations to determine our "best" collection
     of initial centroids
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 执行质心初始化搜索迭代，以确定我们“最佳”的初始质心集合
 - en: use results to perform clustering on full dataset
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用结果对完整数据集进行聚类
 - en: A future post will perform and report comparisons of results between various
     approaches to centroid initialization, for a more comprehensive understanding
     of the practicalities of implementation. For now, however, let's introduce and
     explore this particular approach to centroid initialization.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 未来的帖子将对不同方法的质心初始化结果进行比较，以便更全面地理解实施的实际情况。现在，让我们介绍并探讨这种特定的质心初始化方法。
 - en: Preparing the data
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据准备
 - en: For this overview, we will use the [3D road network dataset](https://archive.ics.uci.edu/ml/machine-learning-databases/00246/).
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这个概述，我们将使用[3D道路网络数据集](https://archive.ics.uci.edu/ml/machine-learning-databases/00246/)。
 - en: '![Image](../Images/cc415cd127859d36ec700e056464955c.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/cc415cd127859d36ec700e056464955c.png)'
 - en: Since this particular dataset has no missing values, and no class labels, our
     data preparation will primarily constitute normalization, along with dropping
     a column which identifies a geographical location from where the additional 3
     columns worth of measurements come from, which is not useful for our task. See
     the [dataset description for additional details](https://archive.ics.uci.edu/ml/datasets/3D+Road+Network+(North+Jutland,+Denmark)).
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于这个特定的数据集没有缺失值，也没有类别标签，我们的数据准备主要包括归一化，并删除一列，该列标识地理位置，这些额外的3列测量数据来源于此，对于我们的任务没有用处。有关更多详细信息，请参见[数据集描述](https://archive.ics.uci.edu/ml/datasets/3D+Road+Network+(North+Jutland,+Denmark))。
 - en: '[PRE0]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Let''s check out a sampling of our data:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们查看一下我们的数据样本：
 - en: '[PRE1]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![dataset sample](../Images/11a1d744521afd259993b79de39b450d.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![数据集样本](../Images/11a1d744521afd259993b79de39b450d.png)'
 - en: Preparing the sample
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 准备样本
 - en: 'Next, we will pull our sample that will be used to find our "best" initial
     centroids. Let''s be clear about exactly what we are doing:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将提取用于找到“最佳”初始质心的样本。让我们明确我们正在做什么：
 - en: we are pulling a single set of samples from our dataset
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们正在从数据集中提取一组样本
 - en: 'we will then perform successive rounds k-means clustering on this sample data,
     each iteration of which will:'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 然后，我们将对这些样本数据进行连续的k均值聚类，每次迭代将：
 - en: randomly initialize k centroids and perform n iterations of the k-means clustering
     algorithm
+  id: totrans-32
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 随机初始化k个质心，并进行n次迭代的k均值聚类算法
 - en: the initial inertia (within-cluster sum-of-squares) of each centroid will be
     noted, as will its final inertia, and the initial centroids which provide the
     greatest increase in inertia over n iterations will be chosen as our initial centroids
     for the full dataset clustering
+  id: totrans-33
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每个质心的初始惯性（簇内平方和）将被记录下来，同时也会记录其最终惯性，提供最大惯性增量的初始质心将被选为我们对完整数据集进行聚类的初始质心
 - en: we will then perform full k-means clustering on the full dataset, using the
     initial clusters found in the previous step
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 然后，我们将对完整数据集进行全面的k均值聚类，使用在上一步找到的初始簇
 - en: '2 important points:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 2个重要点：
 - en: Why not use greatest decrease in inertia? (The hope being that the initial momentum
     in this area will continue.) Doing so would also be a valid choice to explore
     (and changing a single line of code would allow for this). An arbitrary initial
@@ -174,205 +249,299 @@
     the lowest inertia and greatest decrease in inertia coincide a great majority
     of the time, and so the decision *may*, in fact, be arbitrary, but also inconsequential
     in practice.
+  id: totrans-36
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 为什么不使用惯性最大的减少量？（希望这个区域的初始动量会持续下去。）这样做也是一个有效的选择（并且只需更改一行代码即可实现）。这是一个任意的初步实验选择，可能需要更多调查。然而，在多个样本上的重复执行和比较最初显示，最低惯性和惯性最大减少量大多数时间是重合的，因此这个决定*可能*实际上是任意的，但在实践中也可能没有影响。
 - en: Of particular clarification, we are not sampling multiple times from our dataset
     (e.g. once from our dataset for each iteration of centroid initialization). We
     are sampling once for all iterations of a single centroid initialization **search**.
     One sample, from which we will randomly derive initial centroids many times. Contrast
     this with the idea of repetitive sampling, once for each centroid initialization
     iteration.
+  id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 特别说明的是，我们并不是从数据集中多次抽样（例如，每次质心初始化的迭代都从数据集中抽样一次）。我们为一个质心初始化**搜索**的所有迭代抽样一次。从中我们将随机推导出多个初始质心。这与每次质心初始化迭代的重复抽样的概念形成对比。
 - en: 'Below, we set:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面，我们设置：
 - en: sample size as a ratio of our full dataset
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 样本大小作为我们完整数据集的比例
 - en: random state for reproducibility
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为了可重复性设置的随机状态
 - en: number of clusters (k) for our dataset
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们数据集的聚类数（k）
 - en: number of iterations (n) for our k-means algorithm
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们的k均值算法的迭代次数（n）
 - en: number of attempts at finding our best chance initial centroids while clustering
     on our sample dataset
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在我们的样本数据集上进行聚类时，尝试找到最佳初始质心的次数
 - en: We then set our sample data
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们设置我们的样本数据
 - en: '[PRE2]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Now that we have our data sample (`data_sample`) we are ready to perform iterations
     of centroid initialization for comparison and selection.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了数据样本（`data_sample`），我们准备进行质心初始化的迭代以进行比较和选择。
 - en: Clustering the sample data
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 对样本数据进行聚类
 - en: Since Scikit-learn's k-means clustering implementation does not allow for easily
     obtaining centroids between clustering iterations, we have to hack the workflow
     a bit. While the `verbose` option does output some useful information in this
     regard directly to screen, and redirecting this output and then post-parsing it
     would be one approach to getting what we need, what we will do is write our own
     outer iteration loop to control for our *n* variable ourselves.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于Scikit-learn的k均值聚类实现不允许轻松获取聚类迭代之间的质心，我们不得不稍微修改工作流程。虽然`verbose`选项确实直接在屏幕上输出一些有用的信息，并且重定向此输出然后后期解析是获取所需内容的一种方法，但我们将编写自己的外部迭代循环来自己控制*n*变量。
 - en: This means that we need to count iterations and capture what we need between
     these iterations, after each clustering step has run. We will then wrap that clustering
     iteration loop in a centroid initialization loop, which will initialize *k* centroids
     from our sample data m times. This is the hyperparameter specific to our particular
     instantiation of the k-means centroid initialization process, beyond "regular"
     k-means.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 这意味着我们需要计算迭代次数，并在每次聚类步骤运行后捕获我们需要的内容。然后我们将把那个聚类迭代循环封装在一个质心初始化循环中，该循环将从我们的样本数据中初始化*k*个质心，共*m*次。这是我们特定k均值质心初始化过程中的超参数，超出了“常规”k均值。
 - en: Given our above parameters, we will be clustering our dataset into 10 clusters
     (NUM_CLUSTERS, or *k*), we will run our centroid search for 3 iterations (NUM_ITER,
     or *n*), and we will attempt this with 5 random initial centroids (NUM_ATTEMPTS,
     or *m*), after which we will determine our "best" set of centroids to initialize
     with for full clustering (in our case, the metric is the lowest within-cluster
     sum-of-squares, or inertia).
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据上述参数，我们将把数据集聚类为10个簇（NUM_CLUSTERS，或*k*），我们将运行3次迭代的质心搜索（NUM_ITER，或*n*），我们将尝试5个随机初始质心（NUM_ATTEMPTS，或*m*），然后确定“最佳”质心集合，以便进行完整的聚类（在我们的案例中，度量是最低的簇内平方和，或惯性）。
 - en: Prior to any clustering, however, let's see what a sample of what a single initialization
     of our k-means looks like, prior to any clustering iterations.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，在任何聚类之前，让我们看看在任何聚类迭代之前单次初始化k均值的样本。
 - en: '[PRE3]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: In the code below, note that we have to manually track our centroids at the
     start of each iteration and at the end of each iteration, given that we are managing
     these successive iterations ourselves. We then feed these end centroids into our
     next loop iteration as the initial centroids, and run for one iteration. A bit
     tedious, and aggravating that we can't get this out of Scikit-learn's implementation
     directly, but not difficult.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下面的代码中，请注意，由于我们自己管理这些连续迭代，我们必须手动跟踪每次迭代开始和结束时的质心。然后，我们将这些结束质心输入到下一个循环迭代中作为初始质心，并运行一次迭代。这有点繁琐，令人烦恼的是我们不能直接从Scikit-learn的实现中获得这一点，但并不困难。
 - en: '[PRE5]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '[PRE6]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: After this is done, let's see how we did in our centroid search. First we check
     a list of our final inertias (or within-cluster sum-of-squares), looking for the
     lowest value. We then set the associated centroids as the initial centroids for
     our next step.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 完成后，让我们看看质心搜索的结果。首先检查我们最终惯性的列表（或簇内平方和），寻找最低值。然后，我们将相关的质心设置为下一步的初始质心。
 - en: '[PRE7]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'And here''s what those centroids look like:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是这些质心的样子：
 - en: '[PRE8]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Running full k-means clustering
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 运行完整的k-means聚类
 - en: And now, with our best initial centroids in hand, we can run k-means clustering
     on our full dataset. As Scikit-learn allows us to pass in a set of initial centroids,
     we can exploit this by the comparatively straightforward lines below.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们可以用最佳的初始质心在完整数据集上运行k-means聚类。由于Scikit-learn允许我们传入一组初始质心，我们可以通过以下相对简单的代码来利用这一点。
 - en: '[PRE9]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'This particular run of k-means converged in 13 iterations:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 这次k-means运行在13次迭代中收敛：
 - en: '[PRE10]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'For comparison, here''s a full k-means clustering run using only randomly-initialized
     centroids ("regular" k-means):'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了对比，这里是使用随机初始化质心（“常规”k-means）的完整k-means聚类运行：
 - en: '[PRE11]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'This run took 39 iterations, with a nearly-identical inertia:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 此次运行耗时39次迭代，惯性几乎相同：
 - en: '[PRE12]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: I leave finding the difference of execution times between the 13 iterations
     and 39 iterations (or similar) to the reader. Needless to say, eating up a few
     cycles ahead of time on a sample of data (in our case, 10% of the full dataset)
     saved considerable cycles in the long run, without sacrifice to our overall clustering
     metric.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将13次迭代与39次迭代（或类似情况）的执行时间差异留给读者自行探索。不用说，提前在样本数据（在我们的案例中，是完整数据集的10%）上花费几次周期，长期来看节省了大量周期，同时没有牺牲我们的整体聚类指标。
 - en: Of course, additional testing before drawing any generalizations is warranted,
     and in a future post I will run some experiments on a number of centroid initializiation
     methods on a variety of datasets and compare with some additional metrics, hopefully
     to get a clearer picture of ways to go about optimizing unsupervised learning
     workflows.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，在做出任何一般性结论之前，需要额外的测试，在未来的文章中，我将对多种数据集上的若干质心初始化方法进行实验，并使用一些附加指标进行比较，希望能够更清晰地了解优化无监督学习工作流程的方法。
 - en: '**Related**:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[Toward Increased k-means Clustering Efficiency with the Naive Sharding Centroid
     Initialization Method](/2017/03/naive-sharding-centroid-initialization-method.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过朴素分片质心初始化方法提高k-means聚类效率](/2017/03/naive-sharding-centroid-initialization-method.html)'
 - en: '[Comparing Distance Measurements with Python and SciPy](/2017/08/comparing-distance-measurements-python-scipy.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Python和SciPy比较距离测量](/2017/08/comparing-distance-measurements-python-scipy.html)'
 - en: '[Machine Learning Workflows in Python from Scratch Part 2: k-means Clustering](/2017/06/machine-learning-workflows-python-scratch-part-2.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从头开始的Python机器学习工作流程 第二部分：k-means聚类](/2017/06/machine-learning-workflows-python-scratch-part-2.html)'
 - en: More On This Topic
+  id: totrans-76
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[k-means 聚类的质心初始化方法](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
 - en: '[Clustering Unleashed: Understanding K-Means Clustering](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[解放聚类：理解K-Means聚类](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
 - en: '[What is K-Means Clustering and How Does its Algorithm Work?](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是K-Means聚类以及其算法如何工作？](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
 - en: '[Hands-On with Unsupervised Learning: K-Means Clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动手实践无监督学习：k-means聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
 - en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用网格搜索和随机搜索进行超参数调优](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
 - en: '[Elevate Your Search Engine Skills with Uplimit''s Search with ML Course!](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过Uplimit的搜索与机器学习课程提升你的搜索引擎技能！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)'

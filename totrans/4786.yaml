@@ -1,293 +1,442 @@
 - en: 'Data Augmentation For Bounding Boxes: Rethinking image transforms for object
     detection'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 边界框的数据增强：重新思考物体检测的图像变换
 - en: 原文：[https://www.kdnuggets.com/2018/09/data-augmentation-bounding-boxes-image-transforms.html/2](https://www.kdnuggets.com/2018/09/data-augmentation-bounding-boxes-image-transforms.html/2)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/09/data-augmentation-bounding-boxes-image-transforms.html/2](https://www.kdnuggets.com/2018/09/data-augmentation-bounding-boxes-image-transforms.html/2)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/09/data-augmentation-object-detection-rethinking-image-transforms-bounding-boxes.html?page=2#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2018/09/data-augmentation-object-detection-rethinking-image-transforms-bounding-boxes.html?page=2#comments)'
 - en: Random Horizontal Flip
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 随机水平翻转
 - en: First, we import all the necessary stuff and make sure the path is added even
     if we call the functions from outside the folder containing the files.  The following
     code goes in the file `data_aug.py`
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们导入所有必要的内容，并确保即使我们从包含文件的文件夹外部调用函数，也能添加路径。以下代码放在`data_aug.py`文件中。
 - en: '[PRE0]'
+  id: totrans-5
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The data augmentation will be implementing is `RandomHorizontalFlip` which flips
     an image horizontally with a probability *p.*
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据增强将实现的是`RandomHorizontalFlip`，它以概率*p*水平翻转图像。
 - en: We first start by defining the class, and it's `__init__` method. The init method
     contains the parameters of the augmentation. For this augmentation it is the probability
     with each image is flipped. For another augmentation like rotation, it may contain
     the  angle by which the object is to be rotated.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们首先定义类，并定义它的`__init__`方法。初始化方法包含增广的参数。对于这个增广，参数是每张图像被翻转的概率。对于其他增广操作，如旋转，它可能包含对象要旋转的角度。
 - en: '[PRE1]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The docstring of the function has been written in *Numpy *docstring format.
     This will be useful to generate documentation using Sphinx.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 函数的文档字符串是用*Numpy*文档格式编写的。这将有助于使用Sphinx生成文档。
 - en: The `__init__` method of each function is used to define all the parameters
     of the augmentation. However, the actually logic of the augmentation is defined
     in the   `__call__` function.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个函数的`__init__`方法用于定义增广的所有参数。然而，实际的增广逻辑在`__call__`函数中定义。
 - en: The call function, when invoked from a class instance takes two arguments, `img` and `bboxes`where `img` is
     the OpenCV numpy array containing the pixel values and `bboxes` is the numpy array
     containing the bounding box annotations.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 调用函数时，从类实例调用需要两个参数，`img`和`bboxes`，其中`img`是包含像素值的OpenCV numpy数组，`bboxes`是包含边界框注释的numpy数组。
 - en: The `__call__` function also returns the same arguments, and this helps us chain
     together a bunch of augmentations to be applied in a Sequence.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '`__call__`函数也返回相同的参数，这帮助我们将一系列增广操作链在一起，按顺序应用。'
 - en: '[PRE2]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Let us break by bit by bit what's going on in here.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们逐步解析这里发生了什么。
 - en: In a horizontal flip, we rotate the image about a verticle line passing through
     its center.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在水平翻转中，我们围绕通过图像中心的垂直线旋转图像。
 - en: The new coordinates of each corner can be then described as the **mirror image
     of the corner in the vertical line passing through the center of the image**.
     For the mathematically inclined, the **vertical line passing through the center
     would be the perpendicular bisector of the line joining the original corner and
     the new, transformed corner.**
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个角的新的坐标可以描述为**在通过图像中心的垂直线上的角的镜像**。对于数学上感兴趣的人来说，**通过中心的垂直线将是连接原始角和新的变换角的线的垂直平分线**。
 - en: To have a better understanding of what is going on, consider the following image.
     The pixels in the right half of the transformed image and the left half of the
     original image are mirror images of each other about the central line.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了更好地理解发生了什么，请考虑下面的图像。变换图像的右半部分和原始图像的左半部分是关于中央线的镜像。
 - en: '![](../Images/9746142705fcd6fba513a5ca22f10ae8.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9746142705fcd6fba513a5ca22f10ae8.png)'
 - en: The above is accomplished by the following piece of code.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述操作由以下代码实现。
 - en: '[PRE3]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Note that the line `img = img[:,::-1,:]` basically takes the array containing
     the image and reverses it's elements in the 1st dimension, or the dimensional
     which stores the x-coordinates of the pixel values.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，`img = img[:,::-1,:]`这一行基本上是对包含图像的数组进行操作，并反转其在第一个维度中的元素，即存储像素值的x坐标的维度。
 - en: However, one must notice that the mirror image of the top left corner is the
     top right corner of the resultant box. Infact, the resultant coordinates are the
     top-right as well as bottom-left coordinates of the bounding box. However, we
     need them in the top-left and bottom right format.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，需要注意的是，左上角的镜像图像是结果框的右上角。实际上，结果坐标是边界框的右上角和左下角坐标。然而，我们需要它们以左上角和右下角格式表示。
 - en: '![](../Images/ab97c08274eef2d4efac9d3e0a19fd1a.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ab97c08274eef2d4efac9d3e0a19fd1a.png)'
 - en: The side-effect of our code
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们代码的副作用
 - en: The following piece of code takes care of the conversion.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码处理转换。
 - en: '[PRE4]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: We end up by returning the image and the array containing the bounding boxes.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们最终返回图像和包含边界框的数组。
 - en: Deterministic Version of* HorizontalFlip*
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '*HorizontalFlip* 的确定性版本'
 - en: The above code applies the transformation stochastically with the probability *p*.
     However, if we want to build a deterministic version we can simply pass the argument *p *as
     1\. Or we could write another class, where we do not have the parameter *p* at
     all, and implement the `__call__`function like this.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述代码以概率*p* 随机应用变换。然而，如果我们想构建一个确定性版本，可以简单地将参数*p* 设置为 1。或者我们可以编写另一个类，在其中完全没有参数*p*，并像这样实现`__call__`函数。
 - en: '[PRE5]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Seeing it in action
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 观察实际效果
 - en: Now, let's suppose you have to use the *HorizontalFlip *augmentation with your
     images. We will use it on one image, but you can use it on any number you like.
     First, we create a file `test.py`. We begin by importing all the good stuff.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，假设你需要在图像上使用*HorizontalFlip*增强。我们将其应用于一张图像，但你可以在任意数量的图像上使用。首先，我们创建一个文件`test.py`。我们开始导入所有需要的内容。
 - en: '[PRE6]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Then, we import the image and load the annotation.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们导入图像并加载注释。
 - en: '[PRE7]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: In order to see whether our augmentation really worked or not, we define a helper
     function `draw_rect` which takes in `img` and `bboxes` and returns a numpy image
     array, with the bounding boxes drawn on that image.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了检查我们的增强是否真的有效，我们定义了一个辅助函数`draw_rect`，它接受`img`和`bboxes`并返回一个 numpy 图像数组，上面绘制了边界框。
 - en: Let us create a file `bbox_utils.py` and import the neccasary stuff.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们创建一个文件`bbox_utils.py`并导入所需的内容。
 - en: '[PRE8]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Now, we define the function `draw_rect`
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们定义函数`draw_rect`
 - en: '[PRE9]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Once, this is done, let us go back to our `test.py` file, and plot the original
     bounding boxes.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 完成这些后，让我们回到`test.py`文件中，绘制原始的边界框。
 - en: '[PRE10]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: This produces something like this.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将生成如下图所示的结果。
 - en: '![](../Images/8c6ead560f1bdbb932f6849e28fcaffb.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8c6ead560f1bdbb932f6849e28fcaffb.png)'
 - en: Let us see the effect of our transformation.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看我们的变换效果。
 - en: '[PRE11]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'You should get something like this:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 你应该得到如下结果：
 - en: '![](../Images/af813c433a38d666473552b2842c5e70.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/af813c433a38d666473552b2842c5e70.png)'
 - en: Takeaway Lessons
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收获的经验
 - en: The bounding box annotation should be stored in a numpy array of size N x 5,
     where N is the number of objects, and each box is represented by a row having
     5 attributes; **the coordinates of the top-left corner, the coordinates of the
     bottom right corner and the class of the object.**
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 边界框注释应该存储在一个大小为 N x 5 的 numpy 数组中，其中 N 是对象的数量，每个框由具有 5 个属性的行表示；**即左上角坐标、右下角坐标以及对象的类别。**
 - en: Each data augmentation is defined as a class, where the `__init__` method is
     used to define the parameters of the augmentation whereas the `__call__` method
     describes the actual logic of the augmentation. It takes two arguments, the image `img` and
     the bounding box annotations `bboxes` and returns the transformed values.
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每种数据增强被定义为一个类，其中`__init__`方法用于定义增强的参数，而`__call__`方法描述增强的实际逻辑。它接受两个参数，图像`img`和边界框注释`bboxes`，并返回转换后的值。
 - en: This is it for this article. In the next article we will be dealing with `Scale`
     and `Translate`augmentations. Not only they are more complex transformations,
     given there are more parameters (the scaling and translation factors), but also
     bring some challenges that we didn't have to deal with in the `HorizontalFlip` transformation.
     An example is to decide whether to retain a box if a portion of it is outside
     the image after the augmentation.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是本文的内容。在下一篇文章中，我们将处理`Scale`和`Translate`增强。这些不仅是更复杂的变换，因为涉及更多的参数（缩放和翻译因子），而且还带来了一些我们在`HorizontalFlip`变换中未曾遇到的挑战。例如，要决定在增强后如果部分框在图像之外时是否保留该框。
 - en: '**Bio: [Ayoosh Kathuria](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/)**
     currently an intern at the Defense Research and Development Organization, India,
     where he is working on improving object detection in grainy videos. When he''s
     not working, he''s either sleeping or playing pink floyd on his guitar. You can
     connect with him on [LinkedIn](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/) or
     look at more of what he does at [GitHub](https://github.com/ayooshkathuria).'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：[Ayoosh Kathuria](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/)**
+    目前在印度国防研究与发展组织实习，致力于提高颗粒视频中的目标检测精度。当他不在工作时，他要么在睡觉，要么在弹吉他演奏 Pink Floyd。你可以在 [LinkedIn](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/)
+    上与他联系，或在 [GitHub](https://github.com/ayooshkathuria) 上查看他的更多工作。'
 - en: '[Original](https://blog.paperspace.com/data-augmentation-for-bounding-boxes/).
     Reposted with permission.'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://blog.paperspace.com/data-augmentation-for-bounding-boxes/)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to Implement a YOLO (v3) Object Detector from Scratch in PyTorch: Part
     1](/2018/05/implement-yolo-v3-object-detector-pytorch-part-1.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何从零开始在 PyTorch 中实现 YOLO (v3) 目标检测器：第 1 部分](/2018/05/implement-yolo-v3-object-detector-pytorch-part-1.html)'
 - en: '[Building a Toy Detector with Tensorflow Object Detection API](/2018/02/building-toy-detector-tensorflow-object-detection-api.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow 对象检测 API 构建玩具检测器](/2018/02/building-toy-detector-tensorflow-object-detection-api.html)'
 - en: '[Getting Started with PyTorch Part 1: Understanding How Automatic Differentiation
     Works](/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[开始使用 PyTorch 第 1 部分：理解自动微分的工作原理](/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html)'
 - en: '* * *'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-60
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT'
 - en: '* * *'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Bounding Box Deep Learning: The Future of Video Annotation](https://www.kdnuggets.com/2022/07/bounding-box-deep-learning-future-video-annotation.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[边界框深度学习：视频标注的未来](https://www.kdnuggets.com/2022/07/bounding-box-deep-learning-future-video-annotation.html)'
 - en: '[IT Staff Augmentation: How AI Is Changing the Software Development Industry](https://www.kdnuggets.com/2023/05/staff-augmentation-ai-changing-software-development-industry.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[IT 人员增补：人工智能如何改变软件开发行业](https://www.kdnuggets.com/2023/05/staff-augmentation-ai-changing-software-development-industry.html)'
 - en: '[How Semantic Vector Search Transforms Customer Support Interactions](https://www.kdnuggets.com/how-semantic-vector-search-transforms-customer-support-interactions)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[语义向量搜索如何改变客户支持互动](https://www.kdnuggets.com/how-semantic-vector-search-transforms-customer-support-interactions)'
 - en: '[KDnuggets™ News 22:n09, Mar 2: Telling a Great Data Story: A…](https://www.kdnuggets.com/2022/n09.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets™ 新闻 22:n09, 3月2日：讲述一个伟大的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)'
 - en: '[What Is the Difference Between SQL and Object-Relational Mapping (ORM)?](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 和对象关系映射（ORM）之间有什么区别？](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)'
 - en: '[A Beginner''s Guide to Anomaly Detection Techniques in Data Science](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中的异常检测技术初学者指南](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
