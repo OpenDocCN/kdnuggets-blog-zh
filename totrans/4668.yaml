@@ -1,149 +1,209 @@
 - en: Linear Programming and Discrete Optimization with Python using PuLP
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 PuLP 进行线性规划和离散优化
 - en: 原文：[https://www.kdnuggets.com/2019/05/linear-programming-discrete-optimization-python-pulp.html/2](https://www.kdnuggets.com/2019/05/linear-programming-discrete-optimization-python-pulp.html/2)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/05/linear-programming-discrete-optimization-python-pulp.html/2](https://www.kdnuggets.com/2019/05/linear-programming-discrete-optimization-python-pulp.html/2)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/05/linear-programming-discrete-optimization-python-pulp.html?page=2#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/05/linear-programming-discrete-optimization-python-pulp.html?page=2#comments)'
 - en: Solving the problem and printing the solution
+  id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 解决问题并打印解决方案
 - en: PuLP has [quite a few choices of solver algorithms](https://pythonhosted.org/PuLP/solvers.html)
     (e.g. COIN_MP, Gurobi, CPLEX, etc.). For this problem, we do not specify any choice
     and let the program default to its own choice depending on the problem structure.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: PuLP 提供了[多种求解器算法](https://pythonhosted.org/PuLP/solvers.html)（例如 COIN_MP、Gurobi、CPLEX
+    等）。对于这个问题，我们不指定任何选择，而是让程序根据问题结构默认选择。
 - en: '[PRE0]'
+  id: totrans-5
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: We can print the **status** of the solution. Note, although the status is *optimal*
     in this case, it does not need to be so. In case the problem is ill-formulated
     or there is not sufficient information, the solution may be *infeasible* or *unbounded*.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以打印**解决方案状态**。注意，虽然在这种情况下状态是*最优*的，但不一定如此。如果问题表述不清或信息不足，解决方案可能是*不可行*或*无界*的。
 - en: '[PRE1]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The full solution contains all the variables including the ones with zero weights.
     But to us, **only those variables are interesting which have non-zero coefficients**
     i.e. which should be included in the optimal diet plan. So, we can scan through
     the problem variables and print out only if the variable quantity is positive.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 完整的解决方案包含所有变量，包括权重为零的变量。但对我们来说，**只有那些具有非零系数**的变量才是有趣的，即应该包含在最优饮食计划中的变量。因此，我们可以扫描问题变量，并仅在变量数量为正时打印出来。
 - en: '[PRE2]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: So, the optimal solution is to eat 6.923 servings of frozen broccoli, 6.06 servings
     of scrambled eggs and 1.08 servings of a baked potato!
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，最优解决方案是吃 6.923 份冷冻西兰花、6.06 份炒鸡蛋和 1.08 份烤土豆！
 - en: '![figure-name](../Images/8c51d2b4285256094b43f79f0c1255ab.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/8c51d2b4285256094b43f79f0c1255ab.png)'
 - en: You are welcome to download the whole notebook, the data file, and experiment
     with various constraints to change your diet plan. [The code is here in my Github
     repository](https://github.com/tirthajyoti/Optimization-Python).
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 欢迎下载整个笔记本、数据文件，并尝试各种约束来更改您的饮食计划。[代码在我的 GitHub 仓库中](https://github.com/tirthajyoti/Optimization-Python)。
 - en: Finally, we can print the **objective function i.e. cost of the diet** in this
     case,
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们可以打印**目标函数即饮食成本**，
 - en: '[PRE3]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: What if we want a solution with whole numbers?
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如果我们希望得到一个整数解怎么办？
 - en: As we can see that the optimal result came back with a set of fractional numbers
     of servings for the food items. This may not be practical and we may want the
     solution to be forced to have only integer quantities as servings.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们所看到的，最优结果返回了一组食物项的分数。这个结果可能不够实际，我们可能希望解决方案强制只有整数份量。
 - en: This brings to us the technique of [**integer programming**](https://en.wikipedia.org/wiki/Integer_programming).
     The algorithm used for the previous optimization is simple linear programming
     where the variables were allowed to assume any real number value. **Integer programming
     forces some or all of the variables to assume only integer values.**
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 这引出了[**整数规划**](https://en.wikipedia.org/wiki/Integer_programming)技术。之前优化中使用的算法是简单的线性规划，其中变量可以取任何实数值。**整数规划强制某些或所有变量只能取整数值。**
 - en: In fact, integer programming is a [harder computational problem](https://stackoverflow.com/questions/51084738/what-is-the-run-time-complexity-of-integer-linear-programming-ilp)
     than linear programming. Integer variables make an optimization problem [non-convex](https://www.solver.com/convex-optimization),
     and therefore far more difficult to solve. Memory and solution time may rise exponentially
     as you add more integer variables.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，整数规划是一个比线性规划更[难解的计算问题](https://stackoverflow.com/questions/51084738/what-is-the-run-time-complexity-of-integer-linear-programming-ilp)。整数变量使优化问题变得[非凸](https://www.solver.com/convex-optimization)，因此更难以解决。随着整数变量的增加，内存和解决时间可能会呈指数级增长。
 - en: Fortunately, PuLP can solve an optimization problem with this kind of restrictions
     too.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，PuLP 也可以解决具有这种限制的优化问题。
 - en: The code is almost identical as before, so it is not repeated here. The only
     difference is that the variables are defined as belonging to `**Integer**` category
     as opposed to `**Continuous**`.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: For this problem, it changes the optimal solution slightly, adding iceberg lettuce
     to the diet and increasing the cost by $0.06\. You will also notice a **perceptible
     increase in the computation time** for the solution process.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: A cool application of integer programming is solving a [**driver-scheduling
     problem**](https://en.wikipedia.org/wiki/Driver_scheduling_problem) which can
     be an [NP-hard](https://en.wikipedia.org/wiki/NP-hardness) problem. See this article
     (also note in the article, how they compute the costs of various actions and use
     them in the optimization problem),
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: '[**An Intro to Integer Programming for Engineers: Simplified Bus Scheduling**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: '*This article is part of Remix’s series on the software engineering problems
     we face. In this installment, Remix…*blog.remix.com](https://blog.remix.com/an-intro-to-integer-programming-for-engineers-simplified-bus-scheduling-bd3d64895e92)'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: How to incorporate binary decisions in a linear programming problem?
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Often, we want to include some kind of *‘If-then-else*” kind of decision logic
     in the optimization problem.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: What if we don’t want both broccoli and iceberg lettuce to be included in the
     diet (but only one of them is fine)?
+  id: totrans-30
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: How do we represent such decision logic in this framework?
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: '![figure-name](../Images/0ff0686336587e9951a2deb8ee9d14e4.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
 - en: Turns out, for this kind of logic, you need to introduce another type of variables
     called **indicator variables**. They are binary in nature and can indicate the
     presence or absence of a variable in the optimal solution.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: '[**Involving indicator function as a constraint in a LP problem**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: '*Thanks for contributing an answer to Mathematics Stack Exchange! Please be
     sure to answer the question. Provide details…*math.stackexchange.com](https://math.stackexchange.com/questions/2220355/involving-indicator-function-as-a-constraint-in-a-lp-problem)'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: But for this particular problem, there is an apparent problem with using indicator
@@ -155,63 +215,81 @@
     falls under the domain of [**quadratic programming**](https://en.wikipedia.org/wiki/Quadratic_programming)
     (QP) in that case (*quadratic* because the terms are now the product of two linear
     terms).
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: The popular machine learning technique Support Vector Machine essentially solves
     a quadratic programming problem.
+  id: totrans-37
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[**What is an intuitive explanation of quadratic programming, and how is it
     defined in SVM?**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: '*Answer: Quadratic programming involves minimizing a form that is quadratic
     in the components of the unknown vector…*www.quora.com](https://www.quora.com/What-is-an-intuitive-explanation-of-quadratic-programming-and-how-is-it-defined-in-SVM)'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: However, this general concept of using an indicator variable for expressing
     binary logic in a linear programming problem is also extremely useful. We have
     given a link to a problem of solving Sudoku puzzle by LP in the next section where
     this trick is used.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: It turns out that there is a clever trick to incorporate such binary logic in
     this LP without making it a QP problem.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: We can denote the binary variables as `food_chosen` and instantiate them as
     `Integer` with lower and upper bounds of 0 and 1.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE7]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Then we write a special code to link the usual `food_vars` and the binary `food_chosen`
     and add this constraint to the problem.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE8]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: If you stare at the code long enough, you will realize this effectively means
     that we are giving `food_vars` importance only if the corresponding `food_chosen`indicator
     variable is 1\. But this way we avoid the direct multiplication and keep the problem
     structure linear.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: To incorporate the either/or condition of broccoli and iceberg lettuce, we just
     put a simple code,
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE9]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: This ensures the sum of these two binary variables is at most 1, which means
     only one of them can be included in the optimal solution but not both.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: More applications of linear/integer programming
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -220,37 +298,46 @@
     find countless examples of engineering and business problems which can be transformed
     into some form of LP and then solved using efficient solvers. Following are some
     of the canonical examples to get you started thinking,
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '[Solving Sudoku as an LP problem](https://pythonhosted.org/PuLP/CaseStudies/a_sudoku_problem.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Maximizing return on the long-term investment as an LP problem](https://www.mathworks.com/help/optim/ug/maximize-long-term-investments-using-linear-programming.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[LP applied to production planning](http://www.me.utexas.edu/~jensen/or_site/models/unit/lp_model/prod/prod.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Solving warehouse location problem using ILP](https://www.ibm.com/support/knowledgecenter/SSSA5P_12.8.0/ilog.odms.ide.help/OPL_Studio/opllanguser/topics/opl_languser_app_areas_IP_warehse.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Many machine learning algorithms also use the general class of optimization
     of which linear programming is a subset — [**convex optimization**](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf).
     See the following article for more information about it,
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: '[**What lies beneath? Optimization at the heart of Machine Learning**'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: '*We show the core optimization frameworks behind the most popular machine learning/statistical
     modeling techniques.*towardsdatascience.com](https://towardsdatascience.com/a-quick-overview-of-optimization-models-for-machine-learning-and-statistics-38e3a7d13138)'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: Summary and conclusion
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -259,98 +346,152 @@
     that even the widely-used [SciPy has a linear optimization method built-in](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html#scipy.optimize.linprog).
     Readers are encouraged to try various other Python libraries and choose a good
     method for themselves.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们展示了使用 Python 包 PuLP 解决简单的饮食优化问题的线性和整数编程技术。值得注意的是，即使是广泛使用的 [SciPy 也内置了线性优化方法](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html#scipy.optimize.linprog)。鼓励读者尝试各种
+    Python 库，选择适合自己的方法。
 - en: If you have any questions or ideas to share, please contact the author at [**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com).
     Also, you can check the author’s [**GitHub**](https://github.com/tirthajyoti?tab=repositories)
     **repositories** for other fun code snippets in Python, R, or MATLAB and machine
     learning resources. If you are, like me, passionate about machine learning/data
     science, please feel free to [add me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)
     or [follow me on Twitter.](https://twitter.com/tirthajyotiS)
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有任何问题或想法，请通过 [**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com)
+    联系作者。你还可以查看作者的 [**GitHub**](https://github.com/tirthajyoti?tab=repositories) **代码库**，寻找其他有趣的
+    Python、R 或 MATLAB 代码片段和机器学习资源。如果你和我一样，对机器学习/数据科学充满热情，欢迎 [在 LinkedIn 上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)
+    或 [在 Twitter 上关注我](https://twitter.com/tirthajyotiS)。
 - en: '[**Tirthajyoti Sarkar - Sr. Principal Engineer - Semiconductor, AI, Machine
     Learning - ON…**'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**Tirthajyoti Sarkar - 高级首席工程师 - 半导体、人工智能、机器学习 - ON…**](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)'
 - en: '*Georgia Institute of Technology Master of Science - MS, Analytics This MS
     program imparts theoretical and practical…*www.linkedin.com](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '*乔治亚理工学院科学硕士 - MS，分析学 该 MS 课程传授理论和实践…* [www.linkedin.com](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)'
 - en: '**Bio: [Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)**
     is the Senior Principal Engineer at ON Semiconductor working on Deep Learning/Machine
     Learning based design automation projects.'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)**
+    是 ON Semiconductor 的高级首席工程师，专注于基于深度学习/机器学习的设计自动化项目。'
 - en: '[Original](https://towardsdatascience.com/linear-programming-and-discrete-optimization-with-python-using-pulp-449f3c5f6e99?sk=881261aaf3fcbc3c45bd7c47e6a41ef0).
     Reposted with permission.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/linear-programming-and-discrete-optimization-with-python-using-pulp-449f3c5f6e99?sk=881261aaf3fcbc3c45bd7c47e6a41ef0)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How Optimization Works](/2019/04/how-optimization-works.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化如何运作](/2019/04/how-optimization-works.html)'
 - en: '[Optimization Using R](/2018/05/optimization-using-r.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 R 进行优化](/2018/05/optimization-using-r.html)'
 - en: '[Optimization in Machine Learning: Robust or global minimum?](/2017/06/robust-global-minimum.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的优化：鲁棒性还是全局最小值？](/2017/06/robust-global-minimum.html)'
 - en: '* * *'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-71
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 维护'
 - en: '* * *'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-76
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Linear Programming 101 for Data Scientists](https://www.kdnuggets.com/2023/02/linear-programming-101-data-scientists.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家的线性规划 101](https://www.kdnuggets.com/2023/02/linear-programming-101-data-scientists.html)'
 - en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超参数优化：10 个顶级 Python 库](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
 - en: '[3 Research-Driven Advanced Prompting Techniques for LLM Efficiency…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基于研究的高级提示技术提升LLM效率](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)'
 - en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用TPOT进行机器学习管道优化](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
 - en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL查询优化技术](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
 - en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据库优化：探索SQL中的索引](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
