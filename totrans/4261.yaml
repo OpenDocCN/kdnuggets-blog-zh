@@ -1,31 +1,45 @@
 - en: How to Fine-Tune BERT Transformer with spaCy 3
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用spaCy 3微调BERT Transformer
 - en: 原文：[https://www.kdnuggets.com/2021/06/fine-tune-bert-transformer-spacy.html](https://www.kdnuggets.com/2021/06/fine-tune-bert-transformer-spacy.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/06/fine-tune-bert-transformer-spacy.html](https://www.kdnuggets.com/2021/06/fine-tune-bert-transformer-spacy.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/), Founder
     of UBIAI**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)，UBIAI创始人**'
 - en: '![](../Images/b94c536c815124975b86c678b96e4590.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b94c536c815124975b86c678b96e4590.png)'
 - en: Photo by[ ](https://unsplash.com/@jasonrosewell)[Alina Grubnyak](https://unsplash.com/@alinnnaaaa) on [Unsplash](https://unsplash.com/photos/ASKeuOZqhYU)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由[Alina Grubnyak](https://unsplash.com/@alinnnaaaa)提供，拍摄于[Unsplash](https://unsplash.com/photos/ASKeuOZqhYU)
 - en: Since the seminal paper “[Attention is all you need](https://arxiv.org/abs/1706.03762)”
     of Vaswani et al, Transformer models have become by far the state of the art in
     NLP technology. With applications ranging from NER, Text Classification, Question
     Answering or text generation, the applications of this amazing technology are
     limitless.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 自从Vaswani等人发表了开创性论文“[Attention is all you need](https://arxiv.org/abs/1706.03762)”之后，Transformer模型已成为目前NLP技术中的领先技术。其应用范围从命名实体识别（NER）、文本分类、问答系统到文本生成，这项惊人的技术的应用几乎是无限的。
 - en: More specifically, BERT — which stands for Bidirectional Encoder Representations
     from Transformers— leverages the transformer architecture in a novel way. For
     example, BERT analyses both sides of the sentence with a randomly masked word
@@ -33,326 +47,499 @@
     the sequence of the sentences by adding a classification token [CLS] at the beginning
     of the first sentence and tries to predict if the second sentence follows the
     first one by adding a separation token[SEP] between the two sentences.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 更具体来说，BERT（Bidirectional Encoder Representations from Transformers）以一种新颖的方式利用了transformer架构。例如，BERT通过随机掩蔽的词分析句子的两侧来进行预测。除了预测掩蔽的词外，BERT通过在第一个句子开头添加分类标记[CLS]来预测句子序列，并尝试通过在两个句子之间添加分隔标记[SEP]来预测第二个句子是否跟随第一个句子。
 - en: '![](../Images/cecc0d84e605d6d0448b80f784f925c2.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cecc0d84e605d6d0448b80f784f925c2.png)'
 - en: BERT Architecture
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: BERT架构
 - en: In this tutorial, I will show you how to fine-tune a BERT model to predict entities
     such as skills, diploma, diploma major and experience in software job descriptions.
     If you are interested to go a step further and extract relations between entities,
     please read our [article](https://walidamamou.medium.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c) on
     how to perform joint entities and relation extraction using transformers.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我将向你展示如何微调BERT模型以预测软件职位描述中的技能、学历、学历专业和经验等实体。如果你有兴趣进一步提取实体之间的关系，请阅读我们的[文章](https://walidamamou.medium.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c)了解如何使用transformers进行联合实体和关系提取。
 - en: Fine tuning transformers requires a powerful GPU with parallel processing. For
     this we use Google Colab since it provides freely available servers with GPUs.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 微调transformers需要强大的GPU和并行处理能力。为此我们使用Google Colab，因为它提供了免费的带GPU的服务器。
 - en: For this tutorial, we will use the newly released [spaCy 3 library](https://spacy.io/usage/v3) to
     fine tune our transformer. Below is a step-by-step guide on how to fine-tune the
     BERT model on spaCy 3.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将使用新发布的[spaCy 3库](https://spacy.io/usage/v3)来微调我们的transformer。以下是如何在spaCy
+    3上微调BERT模型的逐步指南。
 - en: 'Data Labeling:'
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据标注：
 - en: To fine-tune BERT using spaCy 3, we need to provide training and dev data in
     the spaCy 3 JSON format ([see here](https://spacy.io/api/data-formats)) which
     will be then converted to a .spacy binary file. We will provide the data in IOB
     format contained in a TSV file then convert to spaCy JSON format.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 要使用spaCy 3微调BERT，我们需要提供符合spaCy 3 JSON格式的训练和开发数据（[请见这里](https://spacy.io/api/data-formats)），这些数据将被转换为.spacy二进制文件。我们将提供以IOB格式保存的TSV文件中的数据，然后转换为spaCy
+    JSON格式。
 - en: I have only labeled 120 job descriptions with entities such as *skills*, *diploma*, *diploma
     major,* and *experience* for the training dataset and about 70 job descriptions
     for the dev dataset.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我仅为训练数据集标注了120份职位描述，标注了如*技能*、*学历*、*学历专业*和*经验*等实体，开发数据集则标注了约70份职位描述。
 - en: 'In this tutorial, I used the [UBIAI](https://ubiai.tools/) annotation tool
     because it comes with extensive features such as:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我使用了[UBIAI](https://ubiai.tools/)注释工具，因为它具备诸如以下的广泛功能：
 - en: ML auto-annotation
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: ML自动注释
 - en: Dictionary, regex, and rule-based auto-annotation
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 字典、正则表达式和规则基础的自动注释
 - en: Team collaboration to share annotation tasks
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 团队协作以共享注释任务
 - en: '**Direct annotation export to IOB format**'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**直接注释导出为 IOB 格式**'
 - en: Using the regular expression feature in UBIAI, I have pre-annotated all the
     experience mentions that follows the pattern “\d.*\+.*” such as “5 + years of
     experience in C++”. I then uploaded a csv dictionary containing all the software
     languages and assigned the entity skills. The pre-annotation saves a lot of time
     and will help you minimize manual annotation.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 UBIAI 中的正则表达式功能，我已经预注释了所有符合模式“\d.*\+.*”的经验提及，例如“5 + years of experience in
+    C++”。然后我上传了一个包含所有软件语言的 csv 字典并分配了实体技能。预注释节省了大量时间，并将帮助你减少手动注释。
 - en: '![](../Images/51ecdfeb05d752adb7430e36c06b3f02.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/51ecdfeb05d752adb7430e36c06b3f02.png)'
 - en: UBIAI Annotation Interface
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: UBIAI 注释界面
 - en: 'For more information about [UBIAI](https://ubiai.tools/) annotation tool, please
     visit the [documentation](https://ubiai.tools/Docs) page and my previous post
     “[Introducing UBIAI: Easy-to-Use Text Annotation for NLP Applications](https://chatbotslife.com/introducing-ubiai-easy-to-use-text-annotation-for-nlp-applications-74a2401fa725)”.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关 [UBIAI](https://ubiai.tools/) 注释工具的更多信息，请访问 [文档](https://ubiai.tools/Docs) 页面以及我之前的文章“[介绍
+    UBIAI：用于 NLP 应用的易用文本注释](https://chatbotslife.com/introducing-ubiai-easy-to-use-text-annotation-for-nlp-applications-74a2401fa725)”。
 - en: 'The exported annotation will look like this:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 导出的注释将如下所示：
 - en: '[PRE0]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'In order to convert from IOB to JSON (see documentation [here](https://spacy.io/api/cli#convert)),
     we use spaCy 3 command:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了从 IOB 转换为 JSON（请参见文档 [这里](https://spacy.io/api/cli#convert)），我们使用 spaCy 3
+    命令：
 - en: '[PRE1]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'After conversion to spaCy 3 JSON, we need to convert both the training and
     dev JSON files to .spacy binary file using this command (update the file path
     with your own):'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 转换为 spaCy 3 JSON 后，我们需要使用此命令将训练和开发 JSON 文件转换为 .spacy 二进制文件（请更新文件路径为自己的路径）：
 - en: '[PRE2]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Model Training:'
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型训练：
 - en: Open a new Google Colab project and make sure to select GPU as hardware accelerator
     in the notebook settings.
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 打开一个新的 Google Colab 项目，并确保在笔记本设置中选择 GPU 作为硬件加速器。
 - en: 'In order to accelerate the training process, we need to run parallel processing
     on our GPU. To this end we install the NVIDIA 9.2 cuda library:'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为了加快训练过程，我们需要在 GPU 上运行并行处理。为此，我们安装 NVIDIA 9.2 cuda 库：
 - en: '[PRE3]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'To check the correct cuda compiler is installed, run: !nvcc --version'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 要检查是否安装了正确的 cuda 编译器，请运行：`!nvcc --version`
 - en: 'Install the spacy library and spacy transformer pipeline:'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 安装 spacy 库和 spacy transformer 流水线：
 - en: '[PRE4]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Next, we install the pytorch machine learning library that is configured for
     cuda 9.2:'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 接下来，我们安装为 cuda 9.2 配置的 pytorch 机器学习库：
 - en: '[PRE5]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'After pytorch install, we need to install spacy transformers tuned for cuda
     9.2 and change the CUDA_PATH and LD_LIBRARY_PATH as below. Finally, install the
     cupy library which is the equivalent of numpy library but for GPU:'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 安装 pytorch 后，我们需要安装为 cuda 9.2 调整的 spacy transformers，并按如下更改 CUDA_PATH 和 LD_LIBRARY_PATH。最后，安装
+    cupy 库，它是 GPU 上的 numpy 库：
 - en: '[PRE6]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: SpaCy 3 uses a config file config.cfg that contains all the model training components
     to train the model. In [spaCy training page](https://spacy.io/usage/training),
     you can select the language of the model (English in this tutorial), the component
     (NER) and hardware (GPU) to use and download the config file template.
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: SpaCy 3 使用一个包含所有模型训练组件的配置文件 config.cfg 来训练模型。在 [spaCy 训练页面](https://spacy.io/usage/training)上，你可以选择模型的语言（本教程中的英语）、组件（NER）和硬件（GPU），并下载配置文件模板。
 - en: '![](../Images/9fb53accb51c2ad8c13a1350ec3f8b62.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9fb53accb51c2ad8c13a1350ec3f8b62.png)'
 - en: Spacy 3 config file for training. [Source](https://spacy.io/usage/training)
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于训练的 Spacy 3 配置文件。 [来源](https://spacy.io/usage/training)
 - en: The only thing we need to do is to fill out the path for the train and dev .spacy
     files. Once done, we upload the file to Google Colab.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要做的唯一事情是填写训练和开发 .spacy 文件的路径。完成后，我们将文件上传到 Google Colab。
 - en: 'Now we need to auto-fill the config file with the rest of the parameters that
     the BERT model will need; all you have to do is run this command:'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 现在我们需要用 BERT 模型所需的其余参数自动填充配置文件；你只需运行此命令：
 - en: '[PRE7]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'I suggest to debug your config file in case there is an error:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 我建议调试你的配置文件，以防出现错误：
 - en: '[PRE8]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'We are finally ready to train the BERT model! Just run this command and the
     training should start:'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们终于准备好训练 BERT 模型了！只需运行此命令，训练应该会开始：
 - en: '[PRE9]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'P.S: if you get the error cupy_backends.cuda.api.driver.CUDADriverError: CUDA_ERROR_INVALID_PTX:
     a PTX JIT compilation failed, just uninstall cupy and install it again and it
     should fix the issue.'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '附注：如果遇到错误 cupy_backends.cuda.api.driver.CUDADriverError: CUDA_ERROR_INVALID_PTX:
+    PTX JIT编译失败，只需卸载cupy并重新安装即可解决问题。'
 - en: 'If everything went correctly, you should start seeing the model scores and
     losses being updated:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果一切正常，你应该开始看到模型的评分和损失正在更新：
 - en: '![](../Images/dcdd504db38bb7cecb9372d09b82e76c.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/dcdd504db38bb7cecb9372d09b82e76c.png)'
 - en: BERT training on google colab
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 在google colab上进行BERT训练
 - en: 'At the end of the training, the model will be saved under folder model-best.
     The model scores are located in meta.json file inside the model-best folder:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 在训练结束时，模型将保存在model-best文件夹下。模型评分位于model-best文件夹内的meta.json文件中：
 - en: '[PRE10]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: The scores are certainly well below a production model level because of the
     limited training dataset, but it’s worth checking its performance on a sample
     job description.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于训练数据集有限，评分远低于生产模型水平，但值得检查其在示例职位描述上的表现。
 - en: Entity Extraction with Transformers
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用变换器进行实体提取
 - en: 'To test the model on a sample text, we need to load the model and run it on
     our text:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在示例文本上测试模型，我们需要加载模型并在文本上运行：
 - en: '[PRE11]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Below are the entities extracted from our sample job description:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是从我们的示例职位描述中提取的实体：
 - en: '[PRE12]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Pretty impressive for only using 120 training documents! We were able to extract
     most of the skills, diploma, diploma major, and experience correctly.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅使用120个训练文档就已经非常令人印象深刻！我们能够正确提取大部分技能、文凭、文凭专业和经验。
 - en: With more training data, the model would certainly improve further and yield
     higher scores.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过更多的训练数据，模型肯定会进一步提高并产生更高的评分。
 - en: 'Conclusion:'
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论：
 - en: With only a few lines of code, we have successfully trained a functional NER
     transformer model thanks to the amazing spaCy 3 library. Go ahead and try it out
     on your use case and please share your results. Note, you can use [UBIAI](https://ubiai.tools/) annotation
     tool to label your data, we offer free 14 days trial.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 只需几行代码，我们就成功地训练了一个功能齐全的NER变换器模型，感谢出色的spaCy 3库。请尝试在你的用例中使用，并分享你的结果。注意，你可以使用 [UBIAI](https://ubiai.tools/)
+    注释工具来标记数据，我们提供免费14天试用。
 - en: As always, if you have any comment, please leave a note below or email at admin@ubiai.tools!
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 一如既往，如果你有任何意见，请在下面留言或发送邮件至 admin@ubiai.tools！
 - en: '**Bio: [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)**
     is the Founder of UBIAI, an annotation tool for NLP applications, and holds a
     PhD in Physics.'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：[Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)** 是UBIAI的创始人，UBIAI是一个用于NLP应用的注释工具，他拥有物理学博士学位。'
 - en: '[Original](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647).
     Reposted with permission.'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to Create and Deploy a Simple Sentiment Analysis App via API](/2021/06/create-deploy-sentiment-analysis-app-api.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何通过API创建和部署简单的情感分析应用](/2021/06/create-deploy-sentiment-analysis-app-api.html)'
 - en: '[How to Apply Transformers to Any Length of Text](/2021/04/apply-transformers-any-length-text.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何将变换器应用于任何长度的文本](/2021/04/apply-transformers-any-length-text.html)'
 - en: '[Great New Resource for Natural Language Processing Research and Applications](/2021/05/great-new-resource-natural-language-processing-research-applications.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理研究和应用的新资源](/2021/05/great-new-resource-natural-language-processing-research-applications.html)'
 - en: '* * *'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-76
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前3个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-81
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[How to Finetune Mistral AI 7B LLM with Hugging Face AutoTrain](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)'
 - en: '[Getting Started with spaCy for NLP](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[开始使用 spaCy 进行 NLP](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
 - en: '[Natural Language Processing with spaCy](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 spaCy 进行自然语言处理](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
 - en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 HuggingFace 微调 BERT 以进行推文分类](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
 - en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 BERT 分类长文本文档](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
 - en: '[How Fast Can BERT Go With Sparsity?](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[BERT 在稀疏性下的速度有多快？](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
