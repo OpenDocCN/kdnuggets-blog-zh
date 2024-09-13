@@ -1,124 +1,184 @@
 - en: Introduction to Geographical Time Series Prediction with Crime Data in R, SQL,
     and Tableau
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用 R、SQL 和 Tableau 进行犯罪数据的地理时间序列预测简介
 - en: 原文：[https://www.kdnuggets.com/2020/02/introduction-geographical-time-series-crime-r-sql-tableau.html](https://www.kdnuggets.com/2020/02/introduction-geographical-time-series-crime-r-sql-tableau.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/02/introduction-geographical-time-series-crime-r-sql-tableau.html](https://www.kdnuggets.com/2020/02/introduction-geographical-time-series-crime-r-sql-tableau.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Jason Wittenauer](https://www.linkedin.com/in/jason-wittenauer-28026110/),
     Lead Data Scientist at Huron Consulting Group**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Jason Wittenauer](https://www.linkedin.com/in/jason-wittenauer-28026110/)，Huron
+    Consulting Group 首席数据科学家**'
 - en: '![Figure](../Images/bc2c323f6a4f8e743055941894d91e80.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/bc2c323f6a4f8e743055941894d91e80.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织在 IT 方面'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In this tutorial you will learn how to prepare geographical data for time series
     predictions.
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在本教程中，你将学习如何为时间序列预测准备地理数据。
 - en: When reviewing geographical data, it can be difficult to prepare the data for
     an analysis. There are specific algorithms that can be used, but they can be limited
     in what they do. If we spend some time splitting up the data into grids and then
     adding a time point for each grid point, it opens up more possibilities for modeling
     algorithms and other features that can be added. However, it does create an issue
     with the size of the data set.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在审查地理数据时，准备数据进行分析可能会很困难。虽然可以使用特定的算法，但它们的功能可能有限。如果我们花一些时间将数据分割成网格，然后为每个网格点添加一个时间点，这将为建模算法和其他可添加的功能打开更多可能性。然而，这也会造成数据集大小的问题。
 - en: 'A five year crime data set can easily consist of 250,000 records. Once that
     is extrapolated into a time series grid of an entire city, it can easily hit 75
     million data points. When dealing with data of this size, it is helpful to use
     a database to cleanse the data before sending it to a modeling script. The steps
     we will follow are listed below:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 五年的犯罪数据集可能包含 250,000 条记录。一旦将其外推到整个城市的时间序列网格中，它可能轻松达到 7500 万个数据点。处理如此规模的数据时，使用数据库来清理数据在将其发送到建模脚本之前是很有帮助的。我们将遵循的步骤如下：
 - en: Importing data into a SQL Server database.
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将数据导入 SQL Server 数据库。
 - en: Cleansing and grouping data into a map grid.
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 清理和分组数据到地图网格中。
 - en: Adding time data points to the set of grid data and filling in the gaps where
     no crimes occurred.
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为网格数据集添加时间数据点，并填补没有发生犯罪的空白。
 - en: Importing the data into R
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将数据导入 R
 - en: Running an XGBoost model to determine where crimes will occur on a specific
     day
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 运行 XGBoost 模型来确定特定日期犯罪的发生地点
 - en: At the end, we will discuss the next steps for making the predictions more usable
     to end users in BI tools like Tableau.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们将讨论如何在 Tableau 等 BI 工具中使预测结果对最终用户更具可用性。
 - en: Prerequisites
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 前提条件
 - en: 'Before beginning this tutorial, you will need:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开始本教程之前，你需要：
 - en: SQL Server Express installed
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 安装 SQL Server Express
 - en: SQL Management Studio or similar IDE to interface with SQL Server
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 SQL Management Studio 或类似 IDE 来与 SQL Server 接口
 - en: R installed
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 已安装 R
 - en: R Studio, Jupyter notebook, or other IDE to interface with R
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: R Studio、Jupyter notebook 或其他 IDE 来与 R 接口
 - en: A general working knowledge of SQL and R
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: SQL 和 R 的一般工作知识
 - en: Data Flow Overview
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据流概览
 - en: We will be keeping the database and data flow in a simple structure for now.
     The database itself will be very flat and the final data handoff into the Tableau
     dashboard will be executed via a text file. In a more production ready version,
@@ -126,281 +186,439 @@
     database into the reporting dashboard. For this example, we are not triyng to
     architect everything perfectly, but just understand the basics of doing geographical
     time series predictions.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前我们将保持数据库和数据流的简单结构。数据库本身将非常扁平，最终的数据交接将通过文本文件在 Tableau 仪表板中执行。在更具生产力的版本中，我们会将预测结果保存回数据库，并从数据库中提取数据到报告仪表板中。对于这个示例，我们并不试图完美架构一切，而是了解地理时间序列预测的基本概念。
 - en: 'Our data flow is below:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的数据流如下：
 - en: '![](../Images/bfe4230ca0e6a8e92a27fc5e1955cff9.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bfe4230ca0e6a8e92a27fc5e1955cff9.png)'
 - en: Setup the Database
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 设置数据库
 - en: 'Our prediction model will be using crime data for the Baltimore area from 2012
     to 2017\. This is located in the "Data" folder within this repo and the filename
     is "Baltimore Incident Data.zip". Before importing this data you will need to
     follow one of the options below to setup the database:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的预测模型将使用 2012 年至 2017 年巴尔的摩地区的犯罪数据。这些数据位于此仓库中的“Data”文件夹中，文件名为“Baltimore Incident
+    Data.zip”。在导入这些数据之前，您需要按照以下选项之一来设置数据库：
 - en: '**Option 1**'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**选项 1**'
 - en: Restore a SQL database using the backup file located in the "Database Objects\Clean
     Backup\" folder.
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用位于“Database Objects\Clean Backup\”文件夹中的备份文件恢复 SQL 数据库。
 - en: '**Option 2**'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**选项 2**'
 - en: Use the scripts located in the "Database Objects" folder under "Tables" and
     "Procedures" to manually create all of the objects.
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用“Database Objects”文件夹中的“Tables”和“Procedures”下的脚本手动创建所有对象。
 - en: Import the Data
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导入数据
 - en: 'Once the database has been successfully created, you can now import the data.
     This will require you to do the following:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据库成功创建后，您现在可以导入数据。这需要您执行以下操作：
 - en: Unzip the "Baltimore Incident Data.zip" file found in the "Data" folder.
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 解压缩“Data”文件夹中的“Baltimore Incident Data.zip”文件。
 - en: Run the "Insert_StagingCrime" procedure and make sure it is pointed to the correct
     import file and to the correct format file (found in the "Data" folder named "FormatFile.fmt").
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 运行“Insert_StagingCrime”过程，并确保它指向正确的导入文件和正确的格式文件（位于“Data”文件夹中的“FormatFile.fmt”）。
 - en: '[PRE0]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: This procedure will be truncating the Staging_Crime and inserting data from
     the file directly into it using a BULK INSERT. The staging table itself has all
     VARCHAR(MAX) data types which we will convert into better data types in the next
     phase of the import process. A code snippet of the procedure is below.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 该过程将截断 Staging_Crime 表并通过 BULK INSERT 将文件中的数据直接插入其中。临时表本身具有所有 VARCHAR(MAX) 数据类型，我们将在导入过程的下一阶段将其转换为更好的数据类型。下面是过程的代码片段。
 - en: '[PRE1]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Review the Data.
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 复审数据。
 - en: 'Now that the data has been imported into the staging table, you can view it
     by running the below code in SQL Management Studio:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据已导入到临时表中后，您可以在 SQL Management Studio 中运行以下代码查看它：
 - en: '[PRE2]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Giving you the following results.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 给你以下结果。
 - en: '| CrimeDate | CrimeTime | CrimeCode | Address | Description | InsideOutside
     | Weapon | Post | District | Neighborhood | Location | Premise | TotalIncidents
     |'
+  id: totrans-48
   prefs: []
   type: TYPE_TB
+  zh: '| CrimeDate | CrimeTime | CrimeCode | Address | Description | InsideOutside
+    | Weapon | Post | District | Neighborhood | Location | Premise | TotalIncidents
+    |'
 - en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
     |'
+  id: totrans-49
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+    |'
 - en: '| 02/28/2017 | 23:50:00 | 6D | 2400 KEYWORTH AVE | LARCENY FROM AUTO | O |
     NULL | 533 | NORTHERN | Greenspring | (39.3348700000, -76.6590200000) | STREET
     | 1 |'
+  id: totrans-50
   prefs: []
   type: TYPE_TB
+  zh: '| 02/28/2017 | 23:50:00 | 6D | 2400 KEYWORTH AVE | LARCENY FROM AUTO | O |
+    NULL | 533 | NORTHERN | Greenspring | (39.3348700000, -76.6590200000) | STREET
+    | 1 |'
 - en: '| 02/28/2017 | 23:36:00 | 4D | 200 DIENER PL | AGG. ASSAULT | I | HANDS | 843
     | SOUTHWESTERN | Irvington | (39.2830300000, -76.6878200000) | APT/CONDO | 1 |'
+  id: totrans-51
   prefs: []
   type: TYPE_TB
+  zh: '| 02/28/2017 | 23:36:00 | 4D | 200 DIENER PL | AGG. ASSAULT | I | HANDS | 843
+    | SOUTHWESTERN | Irvington | (39.2830300000, -76.6878200000) | APT/CONDO | 1 |'
 - en: '| 02/28/2017 | 23:02:00 | 4E | 1800 N MOUNT ST | COMMON ASSAULT | I | HANDS
     | 742 | WESTERN | Sandtown-Winchester | (39.3092400000, -76.6449800000) | ROW/TOWNHO
     | 1 |'
+  id: totrans-52
   prefs: []
   type: TYPE_TB
+  zh: '| 02/28/2017 | 23:02:00 | 4E | 1800 N MOUNT ST | COMMON ASSAULT | I | HANDS
+    | 742 | WESTERN | Sandtown-Winchester | (39.3092400000, -76.6449800000) | ROW/TOWNHO
+    | 1 |'
 - en: '| 02/28/2017 | 23:00:00 | 6D | 200 S CLINTON ST | LARCENY FROM AUTO | O | NULL
     | 231 | SOUTHEASTERN | Highlandtown | (39.2894600000, -76.5701900000) | STREET
     | 1 |'
+  id: totrans-53
   prefs: []
   type: TYPE_TB
+  zh: '| 02/28/2017 | 23:00:00 | 6D | 200 S CLINTON ST | LARCENY FROM AUTO | O | NULL
+    | 231 | SOUTHEASTERN | Highlandtown | (39.2894600000, -76.5701900000) | STREET
+    | 1 |'
 - en: '| 02/28/2017 | 22:00:00 | 6E | 1300 TOWSON ST | LARCENY | O | NULL | 943 |
     SOUTHERN | Locust Point | (39.2707100000, -76.5911800000) | STREET | 1 |'
+  id: totrans-54
   prefs: []
   type: TYPE_TB
+  zh: '| 02/28/2017 | 22:00:00 | 6E | 1300 TOWSON ST | 偷窃 | O | NULL | 943 | SOUTHERN
+    | Locust Point | (39.2707100000, -76.5911800000) | 街道 | 1 |'
 - en: '| 02/28/2017 | 21:40:00 | 6J | 1000 WILMOT CT | LARCENY | O | NULL | 312 |
     EASTERN | Oldtown | (39.2993600000, -76.6034100000) | STREET | 1 |'
+  id: totrans-55
   prefs: []
   type: TYPE_TB
+  zh: '| 02/28/2017 | 21:40:00 | 6J | 1000 WILMOT CT | 偷窃 | O | NULL | 312 | EASTERN
+    | Oldtown | (39.2993600000, -76.6034100000) | 街道 | 1 |'
 - en: '| 02/28/2017 | 21:40:00 | 6J | 2400 PENNSYLVANIA AVE | LARCENY | O | NULL |
     733 | WESTERN | Penn North | (39.3094200000, -76.6417700000) | STREET | 1 |'
+  id: totrans-56
   prefs: []
   type: TYPE_TB
+  zh: '| 02/28/2017 | 21:40:00 | 6J | 2400 PENNSYLVANIA AVE | 偷窃 | O | NULL | 733
+    | WESTERN | Penn North | (39.3094200000, -76.6417700000) | 街道 | 1 |'
 - en: '| 02/28/2017 | 21:30:00 | 5D | 1500 STACK ST | BURGLARY | I | NULL | 943 |
     SOUTHERN | Riverside | (39.2721500000, -76.6033600000) | OTHER/RESI | 1 |'
+  id: totrans-57
   prefs: []
   type: TYPE_TB
+  zh: '| 02/28/2017 | 21:30:00 | 5D | 1500 STACK ST | 入室盗窃 | I | NULL | 943 | SOUTHERN
+    | Riverside | (39.2721500000, -76.6033600000) | 其他/住宅 | 1 |'
 - en: '| 02/28/2017 | 21:30:00 | 6D | 2100 KOKO LN | LARCENY FROM AUTO | O | NULL
     | 731 | WESTERN | Panway/Braddish Avenue | (39.3117800000, -76.6633200000) | STREET
     | 1 |'
+  id: totrans-58
   prefs: []
   type: TYPE_TB
+  zh: '| 02/28/2017 | 21:30:00 | 6D | 2100 KOKO LN | 汽车盗窃 | O | NULL | 731 | WESTERN
+    | Panway/Braddish Avenue | (39.3117800000, -76.6633200000) | 街道 | 1 |'
 - en: '| 02/28/2017 | 21:10:00 | 3CF | 800 W LEXINGTON ST | ROBBERY - COMMERCIAL |
     O | FIREARM | 712 | WESTERN | Poppleton | (39.2910500000, -76.6310600000) | STREET
     | 1 |'
+  id: totrans-59
   prefs: []
   type: TYPE_TB
+  zh: '| 02/28/2017 | 21:10:00 | 3CF | 800 W LEXINGTON ST | 商业抢劫 | O | 火器 | 712 |
+    WESTERN | Poppleton | (39.2910500000, -76.6310600000) | 街道 | 1 |'
 - en: Notice how this data has the point in time the crime occurred, the latitude/longitude,
     and even crime categories. Those categories can be very useful for more advanced
     modeling techniques and analytics.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意到这些数据包括了犯罪发生的时间点、经纬度，甚至还有犯罪类别。这些类别对更高级的建模技术和分析非常有用。
 - en: Cleanse the Data and Create Grids of the Map
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 清洗数据并创建地图网格
 - en: 'Next we can move our data into a "Crime" table that has the correct data types
     associated with it. During this step we will also split out the location field
     into longitude and latitude fields. All of the logic to complete these steps can
     be done by running the below execution statement:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们可以将数据转移到一个具有正确数据类型的“犯罪”表中。在此步骤中，我们还将位置字段拆分为经度和纬度字段。完成这些步骤的所有逻辑可以通过运行以下执行语句来完成：
 - en: '[PRE3]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: And now we will have data populating the "Crime" table. This will allow us to
     complete the next step to create a grid on the city and assign each crime to one
     of the grid squares. You will notice that we create two grids (small and large).
     This allows us to create features that are at the crime location and a little
     bit further away from the crime location. Essentially giving us hotspots of crime
     throughout the city.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们将数据填充到“犯罪”表中。这将允许我们完成下一步，即在城市中创建一个网格并将每个犯罪分配到一个网格方块中。你会注意到我们创建了两个网格（小的和大的）。这使我们能够创建在犯罪地点及其周围区域的特征，从而基本上给出城市中的犯罪热点。
 - en: '![](../Images/8d08d7dfe8dbdc5e32007faf6a1c3b15.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8d08d7dfe8dbdc5e32007faf6a1c3b15.png)'
 - en: 'Run the below code to create the grids and assign a SmallGridID and LargeGridID
     to the "Crimes" table:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行以下代码以创建网格并为“犯罪”表分配 SmallGridID 和 LargeGridID：
 - en: '[PRE4]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'This procedure is doing three separate tasks:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个过程分为三个独立的任务：
 - en: 'Creating a small grid of squares on the map within the GridSmall table (Procedure:
     Insert_GridSmall).'
+  id: totrans-69
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在 GridSmall 表中创建地图上的小网格（过程：Insert_GridSmall）。
 - en: 'Creating a large grid of squares on the map within the GridLarge table (Procedure:
     Insert_GridLarge).'
+  id: totrans-70
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在 GridLarge 表中创建地图上的大网格（过程：Insert_GridLarge）。
 - en: Assigning all the crime records to a small and large square on the map.
+  id: totrans-71
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将所有犯罪记录分配到地图上的小方块和大方块中。
 - en: The two procedures that create the grid squares are taking in variables to determine
     the corners of the map and how many squares we want to have on our map. This is
     defaulting to a small grid that is 200 by 200 and a large grid that has squares
     twice as big at 100 by 100.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建网格方块的两个过程需要变量来确定地图的角落以及我们希望在地图上有多少个方块。这默认为200x200的小网格和100x100的大网格。
 - en: 'You can view some of the grid data by running the following:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过运行以下命令查看一些网格数据：
 - en: '[PRE5]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '| CrimeId | GridSmallId | BotLeftLatitude | TopRightLatitude | BotLeftLongitude
     | TopRightLongitude |'
+  id: totrans-75
   prefs: []
   type: TYPE_TB
+  zh: '| CrimeId | GridSmallId | BotLeftLatitude | TopRightLatitude | BotLeftLongitude
+    | TopRightLongitude |'
 - en: '| --- | --- | --- | --- | --- | --- |'
+  id: totrans-76
   prefs: []
   type: TYPE_TB
+  zh: '| --- | --- | --- | --- | --- | --- |'
 - en: '| 1 | 31012 | 39.3341282000001 | 39.3349965000001 | -76.6594308000001 | -76.6585152000001
     |'
+  id: totrans-77
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 31012 | 39.3341282000001 | 39.3349965000001 | -76.6594308000001 | -76.6585152000001
+    |'
 - en: '| 2 | 19121 | 39.2828985 | 39.2837668 | -76.68873 | -76.6878144 |'
+  id: totrans-78
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 19121 | 39.2828985 | 39.2837668 | -76.68873 | -76.6878144 |'
 - en: '| 3 | 25198 | 39.3089475000001 | 39.3098158000001 | -76.6456968000001 | -76.6447812000001
     |'
+  id: totrans-79
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 25198 | 39.3089475000001 | 39.3098158000001 | -76.6456968000001 | -76.6447812000001
+    |'
 - en: '| 4 | 20657 | 39.2889766 | 39.2898449 | -76.5706176000001 | -76.5697020000001
     |'
+  id: totrans-80
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 20657 | 39.2889766 | 39.2898449 | -76.5706176000001 | -76.5697020000001
+    |'
 - en: '| 5 | 16212 | 39.269874 | 39.2707423 | -76.5916764000001 | -76.5907608000001
     |'
+  id: totrans-81
   prefs: []
   type: TYPE_TB
+  zh: '| 5 | 16212 | 39.269874 | 39.2707423 | -76.5916764000001 | -76.5907608000001
+    |'
 - en: '| 6 | 22832 | 39.2985279000001 | 39.2993962000001 | -76.6035792000001 | -76.6026636000001
     |'
+  id: totrans-82
   prefs: []
   type: TYPE_TB
+  zh: '| 6 | 22832 | 39.2985279000001 | 39.2993962000001 | -76.6035792000001 | -76.6026636000001
+    |'
 - en: '| 7 | 25202 | 39.3089475000001 | 39.3098158000001 | -76.6420344000001 | -76.6411188000001
     |'
+  id: totrans-83
   prefs: []
   type: TYPE_TB
+  zh: '| 7 | 25202 | 39.3089475000001 | 39.3098158000001 | -76.6420344000001 | -76.6411188000001
+    |'
 - en: '| 8 | 16601 | 39.2716106 | 39.2724789 | -76.6035792000001 | -76.6026636000001
     |'
+  id: totrans-84
   prefs: []
   type: TYPE_TB
+  zh: '| 8 | 16601 | 39.2716106 | 39.2724789 | -76.6035792000001 | -76.6026636000001
+    |'
 - en: '| 9 | 25781 | 39.3115524000001 | 39.3124207000001 | -76.6640088 | -76.6630932
     |'
+  id: totrans-85
   prefs: []
   type: TYPE_TB
+  zh: '| 9 | 25781 | 39.3115524000001 | 39.3124207000001 | -76.6640088 | -76.6630932
+    |'
 - en: '| 10 | 20992 | 39.2907132 | 39.2915815 | -76.6319628000001 | -76.6310472000001
     |'
+  id: totrans-86
   prefs: []
   type: TYPE_TB
+  zh: '| 10 | 20992 | 39.2907132 | 39.2915815 | -76.6319628000001 | -76.6310472000001
+    |'
 - en: Notice how there are two points being calculated for a square, the top right
     and bottom left points. We don't have to calculate all four points on the square
     even though there is technically some curve to a real map when draw longitude
     and latitude lines. When the scale gets small enough, we can just assume that
     the squares are mostly straight lines
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意到一个方格中计算了两个点，即右上角和左下角的点。尽管在绘制经纬线时真实地图上确实有一些曲线，我们不必计算方格中的所有四个点。当比例缩小到足够小的时候，我们可以假设这些方格大多是直线的。
 - en: Create Crime Grid and Lag Features
+  id: totrans-88
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 创建犯罪网格和滞后特征
 - en: 'The last step we need to complete is creating the entire grid of the map for
     all time periods we want to evaulate. In our case, that is one grid point per
     day to determine if a crime is going to occur. To complete this step, the below
     procedure needs to be executed:'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要完成的最后一步是为我们想要评估的所有时间段创建整个地图网格。在我们的案例中，这意味着每天一个网格点，以确定犯罪是否会发生。要完成这一步，需要执行以下过程：
 - en: '[PRE6]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: During this step each crime will be grouped together on the map squares so we
     can determine when and how many crimes occurred on each date in our data set.
     We will also need to calculate all the filler dates for each square when no crime
     occurred to make a complete data set.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这一步中，每个犯罪事件将被分组到地图方格中，以便我们可以确定在数据集中每个日期发生了多少犯罪事件。我们还需要计算每个方格中没有发生犯罪的所有填充日期，以完成数据集。
 - en: The procedure take quite awhile to run. On my laptop, it ran for about 1 hour
     and the subsequent table ("CrimeGrid") contains about 75 million records. The
     nice part is that the output is now saved into a table, so we will not have to
     run it in our R script where large data operations might not run as efficiently
     as inside a database.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个过程运行的时间比较长。在我的笔记本电脑上，它运行了大约 1 小时，随后生成的表格（“CrimeGrid”）包含了大约 7500 万条记录。好的一点是，输出现在已保存到表格中，因此我们不必在
+    R 脚本中运行它，那里的大型数据操作可能无法像在数据库中那样高效运行。
 - en: Also during this step we will be creating "lag features". These will be columns
     that tell us how many times within the last day, two days, week, month, etc. that
     a crime occured on the grid square. This is essentially helping us do a "hotspot"
@@ -408,110 +626,147 @@
     see if the crime is localized to our single square or if it is clustered to all
     nearby squares, similar to aftershocks in an earthquake. These features may or
     may not be necessary depending on the type of modeling you do.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个步骤中，我们还将创建“滞后特征”。这些将是告诉我们在过去的一天、两天、一周、一月等时间段内，网格方格中发生了多少次犯罪的列。这实际上是帮助我们进行数据的“热点”分析，这可以用来查看附近的其他网格方格，以判断犯罪是否局限于我们的单个方格或是集中在所有附近方格中，类似于地震后的余震。这些特征可能会根据你所做的建模类型而有所不同。
 - en: '![](../Images/17d4f4d7c22d60ce58296c4584453326.png)'
+  id: totrans-94
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/17d4f4d7c22d60ce58296c4584453326.png)'
 - en: Prediction Setup
+  id: totrans-95
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 预测设置
 - en: With all of the data cleansing and feature engineering being done on the database
     side, the code for doing predictions is quite simple. In our example we will be
     using XGBoost in R to analyze five years of training data to predict future crimes.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着所有数据清理和特征工程在数据库端完成，进行预测的代码相当简单。在我们的示例中，我们将使用 R 中的 XGBoost 分析五年的训练数据来预测未来的犯罪事件。
 - en: To start, we load our libraries.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们加载我们的库。
 - en: '[PRE7]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '[PRE8]'
+  id: totrans-99
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Then import the data into R directly from the database. You could also export
     the data to text files and read in CSV data if that is your preferred method.
     The queries to pull the data are just written as SQL statements with some date
     limiters. These could be re-written to pull directly from reporting stored procedures
     with date parameters for a more productionized version of the code.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE9]'
+  id: totrans-101
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '| target | GridSmallId | GridLargeId | DayOfWeek | MonthOfYear | DayOfYear
     | Year | PriorIncident1Day | PriorIncident2Days | PriorIncident3Days | PriorIncident7Days
     | PriorIncident14Days | PriorIncident30Days | PriorIncident1Day_Large | PriorIncident2Days_Large
     | PriorIncident3Days_Large | PriorIncident7Days_Large | PriorIncident14Days_Large
     | PriorIncident30Days_Large |'
+  id: totrans-102
   prefs: []
   type: TYPE_TB
 - en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
     | --- | --- | --- | --- | --- | --- |'
+  id: totrans-103
   prefs: []
   type: TYPE_TB
 - en: '| 0 | 3780 | 990 | 5 | 9 | 262 | 2013 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
     0 | 0 | 0 |'
+  id: totrans-104
   prefs: []
   type: TYPE_TB
 - en: '| 0 | 3781 | 991 | 5 | 9 | 262 | 2013 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
     0 | 0 | 0 |'
+  id: totrans-105
   prefs: []
   type: TYPE_TB
 - en: '| 0 | 3782 | 991 | 5 | 9 | 262 | 2013 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
     0 | 0 | 0 |'
+  id: totrans-106
   prefs: []
   type: TYPE_TB
 - en: '| 0 | 3783 | 992 | 5 | 9 | 262 | 2013 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
     0 | 0 | 0 |'
+  id: totrans-107
   prefs: []
   type: TYPE_TB
 - en: '| 0 | 3784 | 992 | 5 | 9 | 262 | 2013 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
     0 | 0 | 0 |'
+  id: totrans-108
   prefs: []
   type: TYPE_TB
 - en: '| 0 | 3785 | 993 | 5 | 9 | 262 | 2013 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
     0 | 0 | 0 |'
+  id: totrans-109
   prefs: []
   type: TYPE_TB
 - en: Notice in the test data set we are pull 7 days worth of data to test at once,
     but still keeping the features coming in as if we knew what happened the prior
     day. This is just so we can test 7 days at once and see how multiple days worth
     of predictions look in our reporting at the very end.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
 - en: Another item to note is that the features labeled "_Large" are for the larger
     grid vs. the smaller grid.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
 - en: Create Feature Set and Model Parameters
+  id: totrans-112
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: We are defining the features as all of the columns that come after the first
     "target" column in the SQL query. These are passed in as part of the labeling
     on the train and test data sets.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE10]'
+  id: totrans-114
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '[PRE11]'
+  id: totrans-115
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Next, setup the parameters for model training. We are keeping them pretty basic
     for now. Make sure that the evaluation metric is AUC so we can try to maximize
     our True Positive Rate. This will prevent police officers from patrolling areas
     unnecessarily. There could be additional work to cover all predicted areas with
     clever patrolling, but we are not going to get into it during this tutorial.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE12]'
+  id: totrans-117
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Run the Model
+  id: totrans-118
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -520,23 +775,31 @@
     one way to deal with geographic time series data. While the data sets can get
     quite large, they are easy to understand and can run fairly quickly when using
     cloud based services like AWS.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
 - en: This particular training data set had 70 million rows and took about 30 minutes
     to complete 67 rounds of evaluation on my laptop.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE13]'
+  id: totrans-121
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '[PRE14]'
+  id: totrans-122
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: The model found the patterns quickly and didn't get too much improvement over
     each round. This could be enhanced with better model parameters and more features.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
 - en: Review Importance Matrix
+  id: totrans-124
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -544,21 +807,27 @@
     by looking at the importance matrix. This can help us determine whether the new
     features that we add are really worth it on a large data set (larger data set
     = extra processing time per feature added).
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE15]'
+  id: totrans-126
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '![](../Images/b1cbdda4a2704fd96dfb44254024086d.png)'
+  id: totrans-127
   prefs: []
   type: TYPE_IMG
 - en: It looks like the model it using a combination of small and large grid features
     to determine if an incident will occur on the current day. It is interesting that
     the longer term features seem to be more important, indicating a history of criminal
     activity in the area and/or surrounding areas.
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
 - en: Predict on Test and Check ROC Curve
+  id: totrans-129
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -567,15 +836,20 @@
     and really quick, but that is not always the case. In our example, we have a decent
     score with only basic features included in the model. This definitely shows us
     that we can do the predictions and more time should be invested to make them better.
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE16]'
+  id: totrans-131
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: '![](../Images/8aed21f0ee9d475c63d428d2786b4f2a.png)'
+  id: totrans-132
   prefs: []
   type: TYPE_IMG
 - en: Review the Confusion Matrix
+  id: totrans-133
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -583,14 +857,19 @@
     we predicted vs. what actually happened. The easiest way to do this is to review
     the confusion matrix. We want the top left and bottom right boxes (good predictions)
     to be big and the others (bad predictions) to be small.
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE17]'
+  id: totrans-135
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: '[PRE18]'
+  id: totrans-136
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: Over the course of 7 days, it looks like there were 821 incidents and our model
     correctly predicted 367 of them. The other key point is that we incorrectly predicted
     62 incidents, essentially sending police officers to areas where we thought a
@@ -599,64 +878,80 @@
     the current response times are at right now. The idea being that police officers
     are in areas close enough to a crime that they can either prevent it with their
     presence or respond to it very quickly to prevent as much harm as possible.
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
 - en: Prepare Data for Reporting
+  id: totrans-138
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Next we can add in the longitude and latitude coordinates for the test data
     set and export it to a CSV file. This will allow us to take a look at the actual
     predictions on a map in a BI tool like Tableau.
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE19]'
+  id: totrans-140
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: '| GridSmallId | target | GridLargeId.x | DayOfWeek | MonthOfYear | DayOfYear
     | Year | PriorIncident1Day | PriorIncident2Days | PriorIncident3Days | ... | PriorIncident3Days_Large
     | PriorIncident7Days_Large | PriorIncident14Days_Large | PriorIncident30Days_Large
     | preds | BotLeftLatitude | TopRightLatitude | BotLeftLongitude | TopRightLongitude
     | GridLargeId.y |'
+  id: totrans-141
   prefs: []
   type: TYPE_TB
 - en: '| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
     | --- | --- | --- | --- | --- | --- | --- | --- |'
+  id: totrans-142
   prefs: []
   type: TYPE_TB
 - en: '| 1 | 0 | 1 | 3 | 2 | 52 | 2017 | 0 | 0 | 0 | ... | 0 | 0 | 0 | 0 | 0.2822689
     | 39.20041 | 39.20128 | -76.71162 | -76.7107 | 1 |'
+  id: totrans-143
   prefs: []
   type: TYPE_TB
 - en: '| 1 | 0 | 1 | 5 | 2 | 54 | 2017 | 0 | 0 | 0 | ... | 0 | 0 | 0 | 0 | 0.2822689
     | 39.20041 | 39.20128 | -76.71162 | -76.7107 | 1 |'
+  id: totrans-144
   prefs: []
   type: TYPE_TB
 - en: '| 1 | 0 | 1 | 7 | 2 | 56 | 2017 | 0 | 0 | 0 | ... | 0 | 0 | 0 | 0 | 0.2822689
     | 39.20041 | 39.20128 | -76.71162 | -76.7107 | 1 |'
+  id: totrans-145
   prefs: []
   type: TYPE_TB
 - en: '| 1 | 0 | 1 | 4 | 2 | 53 | 2017 | 0 | 0 | 0 | ... | 0 | 0 | 0 | 0 | 0.2822689
     | 39.20041 | 39.20128 | -76.71162 | -76.7107 | 1 |'
+  id: totrans-146
   prefs: []
   type: TYPE_TB
 - en: '| 1 | 0 | 1 | 2 | 2 | 58 | 2017 | 0 | 0 | 0 | ... | 0 | 0 | 0 | 0 | 0.2822689
     | 39.20041 | 39.20128 | -76.71162 | -76.7107 | 1 |'
+  id: totrans-147
   prefs: []
   type: TYPE_TB
 - en: '| 1 | 0 | 1 | 1 | 2 | 57 | 2017 | 0 | 0 | 0 | ... | 0 | 0 | 0 | 0 | 0.2822689
     | 39.20041 | 39.20128 | -76.71162 | -76.7107 | 1 |'
+  id: totrans-148
   prefs: []
   type: TYPE_TB
 - en: Visualizing the Predictions
+  id: totrans-149
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'It is time to see what these predictions actually look like over the course
     of 7 days. The Tableau dashboard itself can be found here:'
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
 - en: '[Crime Prediction Dashboard](https://public.tableau.com/profile/jason.wittenauer#!/vizhome/CrimePrediction_15793180506290/CrimeMap)'
+  id: totrans-151
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -666,27 +961,34 @@
     predictions are not affecting the overall results very much at all. Example screenshots
     are shown below with the correct predictions (blue) and incorrect predictions
     (red).
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
 - en: '**Incorrect Predictions**'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/216313171b15f9150960b9cb675e7d6d.png)'
+  id: totrans-154
   prefs: []
   type: TYPE_IMG
 - en: '**Incorrect and Correct Predictions**'
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/189e5980bb99f292bce1fae6eaed223e.png)'
+  id: totrans-156
   prefs: []
   type: TYPE_IMG
 - en: Overall it does not seem too bad, but we will need more features and/or more
     data to capture all those missing predictions. Also, there is probably a lot more
     we can do to focus on specific types of crimes that are occuring and key in on
     specific prediction modeling to handle each type.
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
 - en: What Next?
+  id: totrans-158
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -699,25 +1001,31 @@
     as you are putting a police officer in the general vicinity of a crime and it
     is better than current patrol methodologies, then they can respond much faster
     or even prevent the crime from occurring in the first place with just their presence.
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
 - en: 'Other ideas to think about:'
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
 - en: Remove crime data in the vicinity of police stations, fire stations, hospitals,
     etc. since those could be biased against people submitting reports.
+  id: totrans-161
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Add in demographic features related to census information.
+  id: totrans-162
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Map crimes to neighborhoods instead of a square grid to predict against.
+  id: totrans-163
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Hope you enjoyed the tutorial!
+  id: totrans-164
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Jason Wittenauer](https://www.linkedin.com/in/jason-wittenauer-28026110/)**
@@ -725,53 +1033,80 @@
     R, Python, Microsoft SQL Server, Tableau, TIBCO Spotfire, and .NET web programming.
     His areas of focus in healthcare are business operations, revenue improvement,
     and expense reduction.'
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [Jason Wittenauer](https://www.linkedin.com/in/jason-wittenauer-28026110/)**
+    是一位数据科学家，专注于通过 R、Python、Microsoft SQL Server、Tableau、TIBCO Spotfire 和 .NET 网页编程提升医院收入。他在医疗保健领域的关注点包括业务运营、收入改善和费用减少。'
 - en: '[Original](https://github.com/jasonwi1202/Crime-Prediction/blob/master/Crime%20Prediction.ipynb).
     Reposted with permission.'
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://github.com/jasonwi1202/Crime-Prediction/blob/master/Crime%20Prediction.ipynb)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-167
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Stock Market Forecasting Using Time Series Analysis](/2020/01/stock-market-forecasting-time-series-analysis.html)'
+  id: totrans-168
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用时间序列分析进行股票市场预测](/2020/01/stock-market-forecasting-time-series-analysis.html)'
 - en: '[What you need to know: The Modern Open-Source Data Science/Machine Learning
     Ecosystem](/2019/06/top-data-science-machine-learning-tools.html)'
+  id: totrans-169
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你需要知道的：现代开源数据科学/机器学习生态系统](/2019/06/top-data-science-machine-learning-tools.html)'
 - en: '[Justice Can’t Be Colorblind: How to Fight Bias with Predictive Policing](/2018/02/fight-bias-predictive-policing.html)'
+  id: totrans-170
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[正义不能盲目：如何通过预测警务对抗偏见](/2018/02/fight-bias-predictive-policing.html)'
 - en: More On This Topic
+  id: totrans-171
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Multivariate Time-Series Prediction with BQML](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)'
+  id: totrans-172
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 BQML 进行多变量时间序列预测](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)'
 - en: '[Handling Missing Values in Time-series with SQL](https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html)'
+  id: totrans-173
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 SQL 处理时间序列中的缺失值](https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html)'
 - en: '[Create Efficient Combined Data Sources with Tableau](https://www.kdnuggets.com/2022/05/create-efficient-combined-data-sources-tableau.html)'
+  id: totrans-174
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tableau 创建高效的联合数据源](https://www.kdnuggets.com/2022/05/create-efficient-combined-data-sources-tableau.html)'
 - en: '[Prepare Your Data for Effective Tableau & Power BI Dashboards](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)'
+  id: totrans-175
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为有效的 Tableau 和 Power BI 仪表板准备数据](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)'
 - en: '[10 Most Used Tableau Functions](https://www.kdnuggets.com/2022/08/10-used-tableau-functions.html)'
+  id: totrans-176
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[最常用的 10 个 Tableau 函数](https://www.kdnuggets.com/2022/08/10-used-tableau-functions.html)'
 - en: '[KDnuggets News, August 3: 10 Most Used Tableau Functions • Is…](https://www.kdnuggets.com/2022/n31.html)'
+  id: totrans-177
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，8月3日：最常用的 10 个 Tableau 函数 • 是…](https://www.kdnuggets.com/2022/n31.html)'

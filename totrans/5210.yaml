@@ -1,30 +1,45 @@
 - en: Python for data analysis… is it really that simple?!?
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python 用于数据分析……真的那么简单吗？！
 - en: 原文：[https://www.kdnuggets.com/2020/04/python-data-analysis-really-that-simple.html](https://www.kdnuggets.com/2020/04/python-data-analysis-really-that-simple.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/04/python-data-analysis-really-that-simple.html](https://www.kdnuggets.com/2020/04/python-data-analysis-really-that-simple.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Ferenc Bodon Ph.D.](https://www.linkedin.com/in/ferencbodon/), Data Engineer,
     Cloud Solutions Architect at Kx**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Ferenc Bodon 博士](https://www.linkedin.com/in/ferencbodon/)，数据工程师，Kx 云解决方案架构师**'
 - en: '![Figure](../Images/b8a0052d9e1d377c6bae71923bcd8ad5.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/b8a0052d9e1d377c6bae71923bcd8ad5.png)'
 - en: Graphic designed and made by CineArt
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 图形设计及制作由 CineArt 完成
 - en: '[Python](https://www.python.org/) is a popular programming language that is
     easy to learn, efficient and enjoys the support of a large and active community.
     It is a general-purpose language with libraries specialized for various areas,
     including web development, scripting, data science, and DevOps.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Python](https://www.python.org/) 是一种流行的编程语言，易于学习，效率高，并且得到了一个大型活跃社区的支持。它是一个通用语言，具有专门针对各种领域的库，包括网页开发、脚本编写、数据科学和
+    DevOps。'
 - en: Its primary data analysis library, [Pandas](https://pandas.pydata.org/), gained
     popularity among data scientists and data engineers. It follows Python’s principles,
     so it seems to be easy to learn, read and allows rapid development… at least based
@@ -32,22 +47,32 @@
     world of the textbook examples? Is Pandas still an easy-to-use data analysis tool
     to query **tabular data**? How does it perform compared to other professional
     tools like [R](https://www.r-project.org/) and [kdb+](https://code.kx.com/q/learn/)?
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 它的主要数据分析库 [Pandas](https://pandas.pydata.org/) 在数据科学家和数据工程师中获得了很大人气。它遵循 Python
+    的原则，因此似乎易于学习、阅读并允许快速开发……至少基于教科书的示例。但如果我们离开教科书示例的安全和便利世界会发生什么？Pandas 是否仍然是一个易于使用的**表格数据**分析工具？它与其他专业工具如
+    [R](https://www.r-project.org/) 和 [kdb+](https://code.kx.com/q/learn/) 相比表现如何？
 - en: In this article, I will take an example that goes just one step beyond the simplest
     use cases by performing some **aggregation based on multiple columns**. The complexity
     of my use case is around level 2 out of 5 levels. Anybody who analyzes data tables
     will bump into the problem, probably in the second week. For comparison, I will
     also cover other popular tools that aim for data analysis.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我将通过执行一些**基于多个列的聚合**的示例，探讨超出最简单用例的情况。我的用例复杂度大约在5级中的第2级。任何分析数据表的人都会遇到这个问题，可能在第二周。为了比较，我还将介绍其他旨在数据分析的流行工具。
 - en: First of all, the problem can be solved by [ANSI SQL](https://en.wikipedia.org/wiki/SQL) so
     all traditional RDBM systems like [PostegreSQL](https://www.postgresql.org/), [MySQL](https://www.linkedin.com/redir/general-malware-page?url=https%3A%2F%2Fwww%2emysql%2ecom%2F),
     etc can enter the game. In the experiments, I will use [BigQuery](https://cloud.google.com/bigquery/),
     a serverless, highly-scalable data warehouse solution by Google.
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 首先，这个问题可以通过 [ANSI SQL](https://en.wikipedia.org/wiki/SQL) 解决，因此所有传统的 RDBM 系统如
+    [PostegreSQL](https://www.postgresql.org/)、[MySQL](https://www.linkedin.com/redir/general-malware-page?url=https%3A%2F%2Fwww%2emysql%2ecom%2F)
+    等都可以参与。在实验中，我将使用 [BigQuery](https://cloud.google.com/bigquery/)，这是 Google 提供的一种无服务器、高度可扩展的数据仓库解决方案。
 - en: The [R](https://www.r-project.org/) programming language is designed for statistical
     analysis. It natively supports tables via its class [data.frame](https://www.google.com/search?q=r+data.frame&oq=r+data.fr&aqs=chrome.0.0j69i57j0l4j69i60j69i61.6225j1j7&sourceid=chrome&ie=UTF-8).
     Using multiple aggregations is quite inconvenient due to the limitation of the
@@ -63,9 +88,12 @@
     an alternative of [dplyr](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8) and
     it is famous for its speed and concise syntax. A data.table can also be queried
     by the dplyr syntax.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[R](https://www.r-project.org/)编程语言专为统计分析设计。它通过其类[data.frame](https://www.google.com/search?q=r+data.frame&oq=r+data.fr&aqs=chrome.0.0j69i57j0l4j69i60j69i61.6225j1j7&sourceid=chrome&ie=UTF-8)本地支持表格。由于核心函数[aggregate](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/aggregate)的限制，使用多重聚合非常不方便。R社区开发了库[plyr](https://cran.r-project.org/web/packages/plyr/index.html)以简化data.frame的使用。库[plyr](https://cran.r-project.org/web/packages/plyr/index.html)已经停用，库[dplyr](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8)被引入，承诺提供改进的API和更快的执行速度。库[dplyr](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8)是[tidyverse](https://www.tidyverse.org/)集合的一部分，旨在用于专业数据科学工作。它提供了一个抽象查询层，并将查询与数据存储解耦，无论数据是data.frame还是支持ANSI
+    SQL的外部数据库。库[data.table](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.html)是[dplyr](https://www.rdocumentation.org/packages/dplyr/versions/0.7.8)的一个替代方案，以其速度和简洁的语法而闻名。data.table也可以通过dplyr语法进行查询。'
 - en: In the [Q/Kdb+](https://code.kx.com/v2/learn/q-for-all/) programming language,
     tables are also first-class citizens and the speed was a primary design concept
     of the language. Kdb+ made use of multicore processors and [employs map-reduce](https://code.kx.com/q4m3/14_Introduction_to_Kdb+/#1437-map-reduce) from
@@ -75,214 +103,326 @@
     in memory. Productivity was the other design consideration - any redundant programming
     element that does not contribute to the understanding (even a parenthesis) is
     regarded as visual noise. Kdb+ is a good contender for any data analysis tool.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在[Q/Kdb+](https://code.kx.com/v2/learn/q-for-all/)编程语言中，表格也是一等公民，并且速度是语言的主要设计概念。Kdb+
+    利用多核处理器，并从2004年诞生之初就[使用了map-reduce](https://code.kx.com/q4m3/14_Introduction_to_Kdb+/#1437-map-reduce)（如果数据在磁盘上是[分区的](https://code.kx.com/q4m3/14_Introduction_to_Kdb+/#143-partitioned-tables)）。从4.0版本（2020年3月发布）开始，大多数原语（如sum、avg、dev）使用从属线程并行执行，即使表格在内存中。生产力是另一个设计考量——任何不有助于理解的冗余编程元素（即使是一个括号）都被视为视觉噪音。Kdb+
+    是任何数据分析工具的良好候选者。
 - en: I will consider the elegance, simplicity and the speed of the various solutions.
     Also, I investigate how to **tune the performance** and leverage multicore processors
     or cluster of computers by employing **parallel computation**.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将考虑各种解决方案的优雅性、简洁性和速度。同时，我会调查如何**调优性能**，并通过**并行计算**利用多核处理器或计算机集群。
 - en: The Problem
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 问题
 - en: '![An example input table](../Images/90809ed59bbfbe9914c3071e0b9e2e8d.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![一个示例输入表格](../Images/90809ed59bbfbe9914c3071e0b9e2e8d.png)'
 - en: We are given a simple table with four columns, one nominal, called **bucket **and
     three numerical, **qty**, **risk**, and **weight**. For simplicity let us assume
     that the numerical columns contain integers.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们得到一个简单的表格，包含四列，其中一列是名义列，称为**bucket**，另外三列是数值列，分别是**qty**、**risk**和**weight**。为了简化起见，我们假设数值列包含整数。
 - en: We would like to see for each **bucket**
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们希望查看每个**bucket**的情况。
 - en: the number of elements, as column NR
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 元素的数量，作为列NR
 - en: the sum and the average of **qty**and **risk**, as columns TOTAL_QTY/TOTAL_RISK and AVG_QTY/AVG_RISK
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**qty** 和 **risk** 的总和和平均值，作为列 TOTAL_QTY/TOTAL_RISK 和 AVG_QTY/AVG_RISK'
 - en: the weighted average of **qty**and **risk**, as columnsW_AVG_QTY and W_AVG_RISK.
     Weights are provided in column **weight**.
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**qty** 和 **risk** 的加权平均值，作为列 W_AVG_QTY 和 W_AVG_RISK。权重在列 **weight** 中提供。'
 - en: To get the solution, I will not use any deprecated approach e.g [renaming aggregation
     by a nested dictionary](https://github.com/pandas-dev/pandas/issues/18366). Let
     us solve each task separately.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了得到解决方案，我不会使用任何已弃用的方法，例如 [通过嵌套字典重命名聚合](https://github.com/pandas-dev/pandas/issues/18366)。让我们分别解决每个任务。
 - en: Number of elements in each bucket
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 每个桶中的元素数量
 - en: Getting the number of elements in each bucket does not look enticing and requires
     intense typing
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 获取每个桶中的元素数量看起来不太吸引人，需要大量输入
 - en: '![No alt text provided for this image](../Images/09dbc34b1ce0a1f854605837fbbecd46.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供图像的替代文本](../Images/09dbc34b1ce0a1f854605837fbbecd46.png)'
 - en: The literal **bucket **is required three times and you need to use 5 brackets/parentheses [????](https://en.wikipedia.org/wiki/%F0%9F%98%90).
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 字面上的 **bucket** 被要求三次，并且你需要使用 5 个括号/圆括号 [????](https://en.wikipedia.org/wiki/%F0%9F%98%90)。
 - en: The solutions in R look more tempting.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: R 中的解决方案看起来更具吸引力。
 - en: '![No alt text provided for this image](../Images/d8dd9c42ea18835850c82d7ec1698196.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供图像的替代文本](../Images/d8dd9c42ea18835850c82d7ec1698196.png)'
 - en: Developers of libraries dplyr and data.table also have aversion to word repetition.
     They introduced special built-in variables **n()** and **.N** respectively that
     hold the number of observations in the current group. This simplifies the expressions
     and we can get rid of a pair of parentheses.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: dplyr 和 data.table 库的开发人员也厌恶字词重复。他们分别引入了特殊的内置变量 **n()** 和 **.N**，用于表示当前组中的观察数量。这简化了表达式，我们可以省略一对括号。
 - en: '![No alt text provided for this image](../Images/d0a435e726edac8b2dfa565a41abb199.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供图像的替代文本](../Images/d0a435e726edac8b2dfa565a41abb199.png)'
 - en: The ANSI SQL expression is simple and easy to understand.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: ANSI SQL 表达式简单易懂。
 - en: '![No alt text provided for this image](../Images/cf1334e8735319fcab68085a13ebf857.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供图像的替代文本](../Images/cf1334e8735319fcab68085a13ebf857.png)'
 - en: You can avoid the repetition of the literal bucket by employing column indices
     in the GROUP BY clause. IMHO this is not a recommended design because the expression
     is not self-documenting and less robust. In fact, [Apache deprecated usage of
     numbers](https://issues.apache.org/jira/browse/DRILL-942) in GROUP BY clauses.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过在 GROUP BY 子句中使用列索引来避免字面上的重复。依我看，这不是一个推荐的设计，因为表达式不具自我文档性且不够稳健。实际上，[Apache
+    已弃用数字的使用](https://issues.apache.org/jira/browse/DRILL-942) 在 GROUP BY 子句中。
 - en: The kdb+ expression is more elegant. It requires no brackets, quote marks or
     any word repetition.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: kdb+ 表达式更优雅。它不需要括号、引号或任何字词重复。
 - en: '![No alt text provided for this image](../Images/18dd6a40ac5e9e05bc79f239bb8bdf60.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供图像的替代文本](../Images/18dd6a40ac5e9e05bc79f239bb8bdf60.png)'
 - en: SQL forms the basis of data analysis so probably everybody understands the ANSI
     SQL and kdb+ solutions. R and kdb+ developers agree that "GROUP BY" is too verbose,
     a simple "by" literal is expressive enough.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: SQL 是数据分析的基础，因此每个人可能都理解 ANSI SQL 和 kdb+ 解决方案。R 和 kdb+ 开发人员同意“GROUP BY”过于冗长，简单的“by”字面量就足够表达。
 - en: Note that apart from Pandas, no languages use any quotation marks in this simple
     expression. The query in Pandas requires four pairs of them [????](https://en.wikipedia.org/wiki/%F0%9F%98%90) to
     wrap column names. In R, SQL, and kdb+ you can refer to columns as if they were
     variables. The notation .() in R - which is an alias for list() - allows this
     convenience feature.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，除了 Pandas 之外，没有语言在这个简单表达式中使用任何引号。在 Pandas 中，查询需要四对引号 [????](https://en.wikipedia.org/wiki/%F0%9F%98%90)
+    来包裹列名。在 R、SQL 和 kdb+ 中，你可以像引用变量一样引用列。R 中的 .() 表示 list()，允许这种方便的特性。
 - en: Aggregation of multiple columns
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 多列的聚合
 - en: Calculating sum and average of a single column and calculating the sums of multiple
     columns are quite simple with Pandas
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Pandas 计算单列的总和和平均值以及多个列的总和都非常简单
 - en: '![No alt text provided for this image](../Images/6ec1c299d8ec3781122391df1160c25f.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供图像的替代文本](../Images/6ec1c299d8ec3781122391df1160c25f.png)'
 - en: '![No alt text provided for this image](../Images/bdb598a90547d3cec86cc0947080d21e.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供图像的替代文本](../Images/bdb598a90547d3cec86cc0947080d21e.png)'
 - en: '![No alt text provided for this image](../Images/a236c220eb5a01618c1178fc6015d892.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供图像的替代文本](../Images/a236c220eb5a01618c1178fc6015d892.png)'
 - en: '![No alt text provided for this image](../Images/abc52c2336cdd49ae81ecc4a7f89f146.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/abc52c2336cdd49ae81ecc4a7f89f146.png)'
 - en: Code gets nasty if you try to combine the two approaches as it results in a
     column name conflict. [Multi-level columns](https://pandas.pydata.org/pandas-docs/stable/advanced.html) and
     function [map](https://docs.python.org/3/library/functions.html#map) need to be
     introduced.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你尝试将这两种方法结合起来，代码会变得很麻烦，因为这会导致列名冲突。需要引入 [多级列](https://pandas.pydata.org/pandas-docs/stable/advanced.html)和函数 [map](https://docs.python.org/3/library/functions.html#map)。
 - en: '![No alt text provided for this image](../Images/1152478e711c7acec5ae6ff74ebb8b27.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/1152478e711c7acec5ae6ff74ebb8b27.png)'
 - en: '![No alt text provided for this image](../Images/b579576cf182169ab5bfa0e1bd7b5bf3.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/b579576cf182169ab5bfa0e1bd7b5bf3.png)'
 - en: The SQL, R, and kdb+ equivalents do not require introducing any new concept.
     The new aggregations are simply separated by commas. You can use keyword [sum](https://code.kx.com/q/ref/arith-integer/#sum)and [avg](https://code.kx.com/v2/ref/stats-aggregates/#avg-average)/[mean](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean)to
     get sum and average respectively.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: SQL、R 和 kdb+ 的等效方式不需要引入任何新概念。新的聚合操作只需用逗号分隔即可。你可以使用关键字 [sum](https://code.kx.com/q/ref/arith-integer/#sum)和 [avg](https://code.kx.com/v2/ref/stats-aggregates/#avg-average)/[mean](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/mean)来分别获取总和和平均值。
 - en: '![No alt text provided for this image](../Images/2f244c5f53b988918700736159dfec04.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/2f244c5f53b988918700736159dfec04.png)'
 - en: Observe the lightness of the kdb+ expression; it does not require parentheses
     or brackets.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 观察 kdb+ 表达式的简洁性；它不需要括号或方括号。
 - en: '![No alt text provided for this image](../Images/a229bab4db85c16e330ea10bcdd452b3.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/a229bab4db85c16e330ea10bcdd452b3.png)'
 - en: Weighted average
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 加权平均
 - en: The weighted average is supported by [Numpy](http://www.numpy.org/) library
     that Pandas relies on. Unfortunately, it cannot be used in the same way such as
     np.sum. You need to wrap it in a [lambda expression](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions),
     introduce a local variable, use [apply ](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.apply.html)instead
     of [agg](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.agg.html) and
     create a data frame from a series.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 加权平均由 [Numpy](http://www.numpy.org/) 库支持，而 Pandas 依赖于该库。不幸的是，它不能像 np.sum 一样使用。你需要将其包装在 [lambda
+    表达式](https://docs.python.org/3/tutorial/controlflow.html#lambda-expressions)中，引入一个局部变量，使用 [apply](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.apply.html)而不是 [agg](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.agg.html)，并从系列创建数据框。
 - en: '![No alt text provided for this image](../Images/ddb0578e6a3329675ac8fec347b94763.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/ddb0578e6a3329675ac8fec347b94763.png)'
 - en: '![No alt text provided for this image](../Images/31ddf49336f61983417332e95ee3c09a.png)'
+  id: totrans-52
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/31ddf49336f61983417332e95ee3c09a.png)'
 - en: Neither standard SQL nor its Google extension, BigQuery, provides a built-in
     function to get a weighted average. You need to recall the definition and implement
     it by hand.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 标准 SQL 以及其 Google 扩展 BigQuery 都没有提供内置的加权平均函数。你需要记住定义并手动实现它。
 - en: '![No alt text provided for this image](../Images/9451c257a36f1647822fc087988a3722.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/9451c257a36f1647822fc087988a3722.png)'
 - en: Again the R and Q/Kdb+ solutions do not require introducing any new concept.
     The function weighted average is supported natively and accepts two column names
     as parameters.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样，R 和 Q/Kdb+ 的解决方案也不需要引入任何新概念。加权平均函数是原生支持的，接受两个列名作为参数。
 - en: '![No alt text provided for this image](../Images/4d22bb3a4180e3b8d37f45f5225f8945.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/4d22bb3a4180e3b8d37f45f5225f8945.png)'
 - en: In kdb+ you can use infix notation to get a more natural syntax - just pronounce
     this "**w** weighted average **x**".
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 kdb+ 中，你可以使用中缀表示法来获得更自然的语法——只需说“**w** 加权平均 **x**”。
 - en: '![No alt text provided for this image](../Images/44af1a3b6d157860e89282b6d5e55796.png)'
+  id: totrans-58
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/44af1a3b6d157860e89282b6d5e55796.png)'
 - en: All in one statement
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一语双关
 - en: Let us put all the parts together. We created multiple data frames, so we need
     to join them
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们将所有部分放在一起。我们创建了多个数据框，因此我们需要将它们合并。
 - en: '![No alt text provided for this image](../Images/385ca65b6d18111fbafd145f8b680d10.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/385ca65b6d18111fbafd145f8b680d10.png)'
 - en: '![No alt text provided for this image](../Images/adb4ef52dba992faf73efce55d01ae7f.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/adb4ef52dba992faf73efce55d01ae7f.png)'
 - en: Note that the first [join](https://docs.python.org/3/library/stdtypes.html#str.join) expression
     has nothing to do with the others. It creates a string from a list of strings
     as opposed to the others which perform [left joins](https://en.wikipedia.org/wiki/Join_(SQL)).
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，第一个 [join](https://docs.python.org/3/library/stdtypes.html#str.join) 表达式与其他表达式无关。它从一个字符串列表中创建一个字符串，而其他表达式则执行 [left
+    joins](https://en.wikipedia.org/wiki/Join_(SQL))。
 - en: To get the final result, we need three expressions and a temporary variable **res**.
     If we spend more time searching forums then we can find out that this complexity
     is partially attributed to deprecating nested dictionaries in function [agg](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.agg.html).
@@ -290,17 +430,25 @@
     function [apply](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.apply.html),
     with no join. Unfortunately, this solution returns all numeric columns of type
     float so you need to explicitly cast integer columns.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了获得最终结果，我们需要三个表达式和一个临时变量**res**。如果我们花更多时间去搜索论坛，我们会发现这个复杂性部分是由于函数 [agg](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.agg.html)
+    中嵌套字典的弃用造成的。同时，我们可能会发现使用仅函数 [apply](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.apply.html)
+    的另一种不太被记录的方法，无需连接。不幸的是，这种解决方案返回所有类型为 float 的数值列，因此需要显式地转换整数列。
 - en: '![No alt text provided for this image](../Images/43c61ad539c87048ef81ac96b602cc49.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供图片的替代文本](../Images/43c61ad539c87048ef81ac96b602cc49.png)'
 - en: This solution requires creating a temporary function that will probably never
     be used again in your source code. We can squeeze all the statements into a single,
     stateless solution but that results in a hard-to-read and hard-to-maintain, nested
     code. Also, this second approach is slower on mid-size tables.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个解决方案需要创建一个可能在源代码中永远不会再使用的临时函数。我们可以将所有语句压缩到一个无状态的解决方案中，但这样会导致代码难以阅读和维护，且会变得嵌套。而且，这第二种方法在中型表格上会更慢。
 - en: The Pandas [release of the 18th of July, 2019](https://pandas.pydata.org/pandas-docs/stable/whatsnew/v0.25.0.html) supported
     group-by aggregation by [named aggregator](http://pandas-docs.github.io/pandas-docs-travis/user_guide/groupby.html#aggregation).
     It provides a more elegant syntax than the aforementioned apply-based solution
@@ -310,38 +458,60 @@
     the aggregation. For completeness, we provide the new proper syntax, ignoring
     the weighted average calculation. It is great to see that the output column names
     no longer require quotation marks.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 在 [2019年7月18日的发布](https://pandas.pydata.org/pandas-docs/stable/whatsnew/v0.25.0.html) 中支持了通过 [named
+    aggregator](http://pandas-docs.github.io/pandas-docs-travis/user_guide/groupby.html#aggregation)
+    的分组聚合。它提供了一种比前面提到的基于 apply 的解决方案更优雅的语法，并且不需要类型转换。同时，开发人员可能也认识到过多使用引号带来的痛苦。不幸的是，加权平均数不受支持，因为在聚合中只能使用单列。为了完整性，我们提供了新的正确语法，忽略了加权平均数的计算。很高兴看到输出列名称不再需要引号。
 - en: '![No alt text provided for this image](../Images/629c97d73d3196e3a291e0f8889848d6.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供图片的替代文本](../Images/629c97d73d3196e3a291e0f8889848d6.png)'
 - en: In contrast, SQL could already provide an elegant solution 30 years ago.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 相比之下，SQL 早在 30 年前就已经能够提供优雅的解决方案。
 - en: '![No alt text provided for this image](../Images/9b1f4d0545f1bb90da296f0b3f167ab9.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供图片的替代文本](../Images/9b1f4d0545f1bb90da296f0b3f167ab9.png)'
 - en: Let us see how R solves the task with a data.table
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看 R 是如何使用 `data.table` 来解决这个任务的
 - en: '![No alt text provided for this image](../Images/97325ee6d91274a11ecbbea83638169c.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供图片的替代文本](../Images/97325ee6d91274a11ecbbea83638169c.png)'
 - en: and how the solution in kdb+ appears
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及 kdb+ 中的解决方案是如何呈现的
 - en: '![No alt text provided for this image](../Images/50880fb4fe953406cda883a5245f61e9.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供图片的替代文本](../Images/50880fb4fe953406cda883a5245f61e9.png)'
 - en: It seems that kdb+ has the **most intuitive, simplest and most readable** solution.
     It is stateless, requires no parenthesis/bracket and creation of temporary variables
     (or functions).
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 看起来 kdb+ 具有**最直观、最简单和最可读**的解决方案。它是无状态的，不需要括号/方括号和临时变量（或函数）的创建。
 - en: What about the performance?
+  id: totrans-76
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 那性能怎么样呢？
 - en: The experiments were conducted on both Windows and Linux using the stable latest
     binaries and libraries. Queries were executed a hundred times, test Jupyter notebooks
     are available on [Github.](https://github.com/BodonFerenc/PythonIsThisReallySimple) The
@@ -351,155 +521,234 @@
     milliseconds. The axes are log scaled. The two Python solutions of version 3.6.8
     with Pandas 0.25.3 are compared to the three R libraries (version 3.6.0) and to
     the two kdb+ versions.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 实验在 Windows 和 Linux 上使用稳定的最新二进制文件和库进行。查询执行了一百次，测试 Jupyter 笔记本可在 [Github.](https://github.com/BodonFerenc/PythonIsThisReallySimple) 找到。数据是随机生成的。桶字段是大小为二的字符串，字段**qty**和**risk**由
+    64 位整数表示。R 中使用库 [bit64](https://cran.r-project.org/web/packages/bit64/index.html) 来获取
+    64 位整数。下表总结了以毫秒为单位的执行时间。坐标轴为对数刻度。将两个 Python 3.6.8 版本与 Pandas 0.25.3 比较了三个 R 库（版本
+    3.6.0）和两个 kdb+ 版本。
 - en: '![No alt text provided for this image](../Images/50507e7d70a7e844b6ebc76ee774bdac.png)'
+  id: totrans-78
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供此图像的替代文本](../Images/50507e7d70a7e844b6ebc76ee774bdac.png)'
 - en: The kdb+ solution is not only more elegant than Pandas but it is also faster
     by more than an order of magnitude. R's data.table of version 1.12.6 is three
     times slower than kdb+ 3.6 for this particular query. Kdb+ 4.0 is five times faster
     than kdb+ 3.6 for tables of billion rows. Package dplyr of version 0.8.3 was two
     orders of magnitude slower than plyr of version 1.8.5 ????.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: kdb+ 解决方案不仅比 Pandas 更优雅，而且速度快了一个数量级。R 的 data.table 1.12.6 版本在这个特定查询上比 kdb+ 3.6
+    慢三倍。kdb+ 4.0 在处理亿级行的表时比 kdb+ 3.6 快五倍。dplyr 0.8.3 版本比 plyr 1.8.5 慢两个数量级。
 - en: Pandas hit memory limit with an input table of 1 billion rows. All other solutions
     could handle that volume without running out of memory.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 在处理 10 亿行的输入表时达到了内存限制。所有其他解决方案都能处理这个数据量而不会耗尽内存。
 - en: Let see how can we decrease execution times.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看如何减少执行时间。
 - en: Performance optimizations
+  id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 性能优化
 - en: The column bucket contains strings. If the domain size is small and there are
     many repetitions then it is suggested to use **categorical** values instead of
     strings. Categories are like enums and represented by integers, hence they consume
     less memory and comparison is faster. You can convert string to categorical in
     Pandas by
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 列的桶包含字符串。如果领域大小很小且有很多重复，则建议使用**分类**值而不是字符串。类别类似于枚举，由整数表示，因此它们消耗的内存较少且比较速度更快。你可以通过以下方式在
+    Pandas 中将字符串转换为分类。
 - en: '![No alt text provided for this image](../Images/73accb51f6d0fb3b5bc5ef29919a4f3a.png)'
+  id: totrans-84
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供此图像的替代文本](../Images/73accb51f6d0fb3b5bc5ef29919a4f3a.png)'
 - en: but it is more memory efficient to create the category column during the table
     construct. We use function [product](https://docs.python.org/2/library/itertools.html#itertools.product) to
     generate the universe of strings of length two by employing the [cartesian product](https://en.wikipedia.org/wiki/Cartesian_product).
     In the code snippet below we omit the syntax for creating other columns. *N* stores
     the number of rows to be inserted.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 但在构建表格时创建分类列更节省内存。我们使用函数 [product](https://docs.python.org/2/library/itertools.html#itertools.product) 通过运用 [笛卡尔积](https://en.wikipedia.org/wiki/Cartesian_product)生成长度为二的字符串全集。在下面的代码片段中，我们省略了创建其他列的语法。*N* 存储要插入的行数。
 - en: '![No alt text provided for this image](../Images/c5b89afd5ab91b225ef844c1d90ffb9b.png)'
+  id: totrans-86
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供此图像的替代文本](../Images/c5b89afd5ab91b225ef844c1d90ffb9b.png)'
 - en: Categories are called **factors** in R. Class data.frame converts strings to
     factors automatically (use "stringAsFactors = FALSE" to avoid this) but in data.table
     strings are left intact for good reasons.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 R 中，类别称为**因素**。类 data.frame 会自动将字符串转换为因素（使用 "stringAsFactors = FALSE" 以避免这种情况），但在
+    data.table 中，字符串被保留原样，原因很充分。
 - en: '![No alt text provided for this image](../Images/5b272ddf500676bc805aa50daf5d8217.png)'
+  id: totrans-88
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供此图像的替代文本](../Images/5b272ddf500676bc805aa50daf5d8217.png)'
 - en: BigQuery has no concept of category or factor. Instead, it applies various [encoding
     and compression techniques](http://db.csail.mit.edu/projects/cstore/abadisigmod06.pdf) to
     achieve the best performance. To generate random strings you can use Unicode [code
     points](https://en.wikipedia.org/wiki/Code_point), functions RAND and [CODE_POINTS_TO_STRING](https://cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#code_points_to_string) and
     some casting. Lowercase letter "a" has code points 97 - you can figure this out
     by using function [TO_CODE_POINTS](https://cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#to_code_points).
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: BigQuery 没有类别或因子的概念。相反，它应用了各种[编码和压缩技术](http://db.csail.mit.edu/projects/cstore/abadisigmod06.pdf)以实现最佳性能。要生成随机字符串，你可以使用
+    Unicode [码点](https://en.wikipedia.org/wiki/Code_point)、RAND 函数和[CODE_POINTS_TO_STRING](https://cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#code_points_to_string)以及一些类型转换。小写字母
+    "a" 的码点是 97，你可以通过使用函数[TO_CODE_POINTS](https://cloud.google.com/bigquery/docs/reference/standard-sql/string_functions#to_code_points)来确定这一点。
 - en: '![No alt text provided for this image](../Images/ea82a723615b346ff150438ac487e9e7.png)'
+  id: totrans-90
   prefs: []
   type: TYPE_IMG
+  zh: '![此图像未提供替代文本](../Images/ea82a723615b346ff150438ac487e9e7.png)'
 - en: You can employ a [user-defined function](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions) to
     avoid code duplication.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用[用户定义函数](https://cloud.google.com/bigquery/docs/reference/standard-sql/user-defined-functions)来避免代码重复。
 - en: '![No alt text provided for this image](../Images/871bafeb6392a6867c6ebdd44de59c04.png)'
+  id: totrans-92
   prefs: []
   type: TYPE_IMG
+  zh: '![此图像未提供替代文本](../Images/871bafeb6392a6867c6ebdd44de59c04.png)'
 - en: For comparison, the same operation in kdb+ looks like this
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 相比之下，在 kdb+ 中，操作看起来是这样的：
 - en: '![No alt text provided for this image](../Images/59f019d6bf657f2bec2628a52651a4ab.png)'
+  id: totrans-94
   prefs: []
   type: TYPE_IMG
+  zh: '![此图像未提供替代文本](../Images/59f019d6bf657f2bec2628a52651a4ab.png)'
 - en: The construct [N?M](https://code.kx.com/q/ref/deal/) generates N random values
     depending on the type of M. If M is an integer, float, date or boolean then a
     random integer, float, date or boolean vector is returned. If M is a list then
     random list elements are picked. If N is a negative integer then the result will
     not contain any duplicates. In kdb+ many operators are overloaded in a similar
     way.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 构造[N?M](https://code.kx.com/q/ref/deal/)会根据 M 的类型生成 N 个随机值。如果 M 是整数、浮点数、日期或布尔值，则返回随机的整数、浮点数、日期或布尔值向量。如果
+    M 是列表，则会随机选择列表元素。如果 N 是负整数，则结果将不包含重复项。在 kdb+ 中，许多运算符以类似的方式被重载。
 - en: Enums are called **symbols** in kdb+ parlance and are heavily used by developers.
     The language strongly supports symbols. You can use them without defining possible
     values upfront, kdb+ maintains the mapping for you.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 kdb+ 术语中，枚举被称为**符号**，并被开发者广泛使用。该语言强烈支持符号。你可以在不预定义可能值的情况下使用它们，kdb+ 会为你维护映射。
 - en: Based on my measurement, optimization by categories/symbols reduces run times
     by a **factor of two** in Pandas and kdb+. R's data.table shows different characteristics.
     Using factors instead of strings has no impact on the performance. This is due
     to the built-in string optimization via the **global string pool**. Although,
     factors are stored as 32-bit integers and strings require 64-bit pointers to the
     pool elements, the difference has a marginal impact on the execution times.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据我的测量，通过类别/符号的优化在 Pandas 和 kdb+ 中将运行时间减少了**两倍**。R 的 data.table 显示了不同的特性。使用因子而不是字符串对性能没有影响。这是由于通过**全局字符串池**的内置字符串优化。尽管因子以
+    32 位整数存储，而字符串需要 64 位指针指向池元素，但这种差异对执行时间的影响微乎其微。
 - en: We can further improve performance if we use types that require less space.
     For example, if column **qty** fits into 2 bytes then we can use [int16](https://numpy.org/devdocs/user/basics.types.html) in
     Pandas and [short](https://code.kx.com/q4m3/2_Basic_Data_Types_Atoms/#212-short-and-int) in
     kdb+. This results in less memory operation which is often the bottleneck in data
     analysis. R does not support 2-bytes integers so we used its default integer type
     which occupies 4 bytes.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们使用需要更少空间的类型，可以进一步提高性能。例如，如果列**qty**可以放入 2 字节，那么我们可以在 Pandas 中使用[int16](https://numpy.org/devdocs/user/basics.types.html)以及在
+    kdb+ 中使用[short](https://code.kx.com/q4m3/2_Basic_Data_Types_Atoms/#212-short-and-int)。这会导致较少的内存操作，而内存操作通常是数据分析中的瓶颈。R
+    不支持 2 字节整数，因此我们使用了其默认的占用 4 字节的整数类型。
 - en: Integers of size 32, which is the default in R, results in a 5-6 fold execution
     time improvements. Use 64-bit integers only if you really need the large cardinality.
     This is especially true for package dplyr.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 默认的 32 位整数（在 R 中）会导致 5-6 倍的执行时间改进。仅在真正需要大基数时使用 64 位整数。特别是对于 dplyr 包尤其如此。
 - en: When calculating the aggregation we need to keep track of the bucket due to
     the grouping. If the table is sorted by the group column then aggregation is faster
     as groups are already gathered contiguously in RAM. The execution times drop to
     circa one third in Pandas, half in R and fifth in kdb+. The execution times with
     the type optimizations on a sorted table of size 1 billion is shown below.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 在计算聚合时，我们需要跟踪由于分组而产生的桶。如果表按组列排序，则聚合会更快，因为组已经在 RAM 中连续存储。执行时间在 Pandas 中降到约三分之一，在
+    R 中降到一半，在 kdb+ 中降到五分之一。下面展示了在排序表上进行类型优化后的执行时间，表大小为 10 亿。
 - en: '![No alt text provided for this image](../Images/f76b3f1c536fe46463888ba67835d7b9.png)'
+  id: totrans-101
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/f76b3f1c536fe46463888ba67835d7b9.png)'
 - en: Parallelization
+  id: totrans-102
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 并行化
 - en: All modern computers have multiple CPU cores. Pandas by default operate on a
     single core. What do we need to do to make the computation parallel and exploit
     multiple cores?
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有现代计算机都有多个 CPU 核心。Pandas 默认在单个核心上运行。我们需要做些什么才能使计算并行化并利用多个核心？
 - en: Python libraries [Dask](https://dask.org/) and [Ray](https://github.com/ray-project/ray) are
     the two most famous libraries for running parallel computations. Library [Modin](https://modin.readthedocs.io/en/latest/) is
     a wrapper above these engines for Pandas data frames. The "media" is loud from
     the claim that you gain significant query performance improvements, even on an
     average laptop, by replacing a single line from
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 库 [Dask](https://dask.org/) 和 [Ray](https://github.com/ray-project/ray) 是用于执行并行计算的两个最著名的库。库 [Modin](https://modin.readthedocs.io/en/latest/) 是这些引擎之上的
+    Pandas 数据框的包装器。媒体广泛报道，通过将一行代码替换为
 - en: '![No alt text provided for this image](../Images/cbd9819fe215b1dfa1a2eebe966e7882.png)'
+  id: totrans-105
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/cbd9819fe215b1dfa1a2eebe966e7882.png)'
 - en: to
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 到
 - en: '![No alt text provided for this image](../Images/3ca36daed1406cf034705e2564d9f129.png)'
+  id: totrans-107
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/3ca36daed1406cf034705e2564d9f129.png)'
 - en: This is probably true for a small number of textbook examples but does not apply
     in real life. With my simple exercise, I run into several issues both with Ray
     and with Dask. Let me describe the problem one-by-one starting with Ray.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 这对于少量教科书示例可能是正确的，但在实际生活中并不适用。在我的简单练习中，我遇到了 Ray 和 Dask 的多个问题。让我逐一描述这些问题，从 Ray
+    开始。
 - en: First, the category type is not supported. Second, function [apply](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply) and [agg](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html#pandas.DataFrame.agg) behaves
     differently than the corresponding Pandas functions. Using multiple aggregates
     with a group-by in function [agg](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html#pandas.DataFrame.agg) is
@@ -508,15 +757,24 @@
     solution. Furthermore, apply returns a Modin data frame instead of a series. You
     need to transpose the result and rename the column index (0) to a meaningful column
     name, e.g.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，类别类型不受支持。其次，函数 [apply](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply) 和 [agg](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html#pandas.DataFrame.agg) 的行为与相应的
+    Pandas 函数不同。使用多个聚合与 [agg](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.agg.html#pandas.DataFrame.agg) 中的
+    group-by 不受支持，因此操作回退到 Pandas 操作。函数 [applies](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html#pandas.DataFrame.apply) 仅处理返回标量的
+    lambda 函数。这禁用了第二种更优雅的 Pandas 解决方案。此外，apply 返回一个 Modin 数据框，而不是一个系列。你需要转置结果并将列索引（0）重命名为有意义的列名，例如
 - en: '![No alt text provided for this image](../Images/2921d63f8270367cfdd8f64cebfde02c.png)'
+  id: totrans-110
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/2921d63f8270367cfdd8f64cebfde02c.png)'
 - en: Finally, the code ran significantly slower than the Pandas equivalent and broke
     with 100M rows. Pandas and the others handle 1B rows easily.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终，代码运行速度明显慢于 Pandas 等效版本，并且在处理 1 亿行数据时出现了故障。Pandas 和其他工具可以轻松处理 10 亿行数据。
 - en: Moving to the library Dask also has some nuisances. First, it does not handle
     the weighted average if the bucket’s type is categorical. We lose an important
     performance improvement technique. Second, you need to provide type hinting to
@@ -525,11 +783,17 @@
     four times ☹️. So it seems moving to Dask is not as simple as extending the code
     with a simple [compute](https://docs.dask.org/en/latest/dataframe.html) statement
     to trigger the computation.
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 转到 Dask 库也有一些麻烦。首先，如果桶的类型是分类的，它不处理加权平均数。我们失去了一个重要的性能提升技巧。其次，你需要提供类型提示以抑制警告。这意味着又一次列名重复。在更优雅的基于
+    apply 的解决方案中，你需要四次输入输出列名（如 TOTAL_QTY）☹️。因此，转到 Dask 并不像通过简单的 [compute](https://docs.dask.org/en/latest/dataframe.html)
+    语句扩展代码那样简单。
 - en: '![No alt text provided for this image](../Images/c43adaa24c846a34ec6614a449924c16.png)'
+  id: totrans-113
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供图像的替代文本](../Images/c43adaa24c846a34ec6614a449924c16.png)'
 - en: '**Parallelization in kdb+ is automatic** for on-disk, partitioned tables and
     for in-memory tables in version 4.0\. You won''t observe any type problem - everything
     works smoothly. All you need is to start kdb+ in multiprocess mode via [command
@@ -539,156 +803,239 @@
     etc. You can also get performance gain by partitioning the table manually and
     use function [peach](https://code.kx.com/v2/ref/each/) that executes functions
     in parallel. All we need is to change from'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '**kdb+ 的并行化是自动的**，对于版本 4.0 的磁盘上分区表和内存表都适用。你不会观察到任何类型问题 - 一切运行顺畅。你只需要通过 [命令行参数
+    -s](https://code.kx.com/q/basics/syscmds/#s-number-of-slaves) 启动 kdb+ 的多进程模式。
+    [内置的 map-reduce](https://code.kx.com/q4m3/14_Introduction_to_Kdb+/#1437-map-reduce)
+    分解将计算扩展到多个核心，涵盖大多数操作，包括 [sum](https://code.kx.com/q/ref/sum/)、[avg](https://code.kx.com/q/ref/avg/)、[count](https://code.kx.com/q/ref/count/)、[wavg](https://code.kx.com/q/ref/avg/)、[cor](https://code.kx.com/q/ref/cor/)，等等。你还可以通过手动分区表来获得性能提升，并使用函数
+    [peach](https://code.kx.com/v2/ref/each/) 并行执行函数。我们需要做的只是从'
 - en: '![No alt text provided for this image](../Images/b008380e3dddeb72d3431f2b32531649.png)'
+  id: totrans-115
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供图像的替代文本](../Images/b008380e3dddeb72d3431f2b32531649.png)'
 - en: to
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 到
 - en: '![No alt text provided for this image](../Images/9644443ab45161925cc211f122377808.png)'
+  id: totrans-117
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供图像的替代文本](../Images/9644443ab45161925cc211f122377808.png)'
 - en: This simple code modification resulted in almost an order of magnitude faster
     execution on a 16-core box with kdb+ version 3.6\. Since version 4.0 already employs
     parallel computing, manual parallelization adds no value. If you are aiming for
     the best performance then code will be simpler with kdb+ 4.0 than with 3.6.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种简单的代码修改使得在 16 核心的 kdb+ 版本 3.6 机器上执行速度提高了近一个数量级。由于版本 4.0 已经使用了并行计算，手动并行化没有价值。如果你追求最佳性能，那么代码在
+    kdb+ 4.0 中将比在 3.6 中更简单。
 - en: '**R data.table also uses multiple threads by default** and executes queries
     in parallel behind the scene. You can check and set the number of threads that
     the data.table uses via function [setDTthreads](https://www.rdocumentation.org/packages/data.table/versions/1.12.8/topics/setDTthreads).'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '**R data.table 默认也使用多个线程**，并在后台并行执行查询。你可以通过函数 [setDTthreads](https://www.rdocumentation.org/packages/data.table/versions/1.12.8/topics/setDTthreads)
+    检查和设置 data.table 使用的线程数量。'
 - en: Let us compare the execution times of the most performant versions of all languages.
     For SQL we evaluated BigQuery which is considered to be the fastest SQL implementation
     for huge datasets due to its massive parallelization.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们比较所有语言中最有效版本的执行时间。对于 SQL，我们评估了 BigQuery，因为它由于大规模并行化被认为是处理大型数据集的最快 SQL 实现。
 - en: '![No alt text provided for this image](../Images/ae75206d32368a5a479ea33b41000b14.png)'
+  id: totrans-121
   prefs: []
   type: TYPE_IMG
+  zh: '![没有提供图像的替代文本](../Images/ae75206d32368a5a479ea33b41000b14.png)'
 - en: kdb+ is again the winner in this category, BigQuery being the runner-up. R data.table
     is two times faster than Pandas.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: kdb+ 再次在这一类别中获胜，BigQuery 排名第二。R data.table 比 Pandas 快两倍。
 - en: Above 1 billion rows
+  id: totrans-123
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 超过 10 亿行
 - en: The largest tables in our experience contained one billion rows. Above this
     number the table does not fit into the memory, hence Pandas is out of the league.
     Dask and Ray which is designed for parallel processing and cluster of computers
     performed poorly compared to the other contenders. **For BigQuery the size of
     the table almost does not matter.** The execution time will hardly increase if
     we move from 1 billion rows to 10 or 100 billion rows.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的经验中最大的数据表包含十亿行。超过这个数量，表格无法完全加载到内存中，因此 Pandas 不再适用。与其他竞争者相比，专为并行处理和计算机集群设计的
+    Dask 和 Ray 性能表现较差。**对于 BigQuery，表的大小几乎无关紧要。** 如果我们将行数从十亿增加到十亿或一百亿行，执行时间几乎不会增加。
 - en: In kdb+, the data can be persisted to disk so it can cope with terabytes of
     data. The query will be the same and kdb+ automatically applies map-reduce and
     leverage multicore processors. Furthermore, if the data is segmented and segments
     are located on different storages with separate IO channels then IO operation
     will be executed in parallel. These low-level optimizations allow the kdb+-based
     solution to scale gracefully.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 kdb+ 中，数据可以持久化到磁盘，因此可以处理 TB 级别的数据。查询将保持不变，kdb+ 自动应用 map-reduce 并利用多核处理器。此外，如果数据被分段且分段位于具有独立
+    IO 通道的不同存储上，则 IO 操作将并行执行。这些低级优化使基于 kdb+ 的解决方案能够优雅地扩展。
 - en: Distributed computing with kdb+
+  id: totrans-126
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 kdb+ 的分布式计算
 - en: As a final simple exercise let us investigate how can we spread the computation
     across many kdb+ processes, leverage our cluster of machines and horizontally
     partition our sample table. How difficult it is to achieve a Ray/Dask/Spark-like
     distributed computation with kdb+?
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为一个最终的简单练习，我们来探讨如何将计算分布到多个 kdb+ 进程中，利用我们的机器集群，并水平分区我们的示例表。要实现类似 Ray/Dask/Spark
+    的分布式计算，kdb+ 有多困难？
 - en: Function peach uses external, slave kdb+ processes as opposed to slave threads
     if variable [.z.pd](https://code.kx.com/v2/ref/dotz/#zpd-peach-handles) stores
     connection handles to slave kdb+ processes.
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 函数 peach 使用外部的、从属的 kdb+ 进程，而不是从属线程，如果变量 [.z.pd](https://code.kx.com/v2/ref/dotz/#zpd-peach-handles)
+    存储连接到从属 kdb+ 进程的连接句柄。
 - en: '![No alt text provided for this image](../Images/7076b41e633ca03c787d89834e9c2625.png)'
+  id: totrans-129
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/7076b41e633ca03c787d89834e9c2625.png)'
 - en: We can split table **t** by bucket values
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过桶值拆分表**t**
 - en: '![No alt text provided for this image](../Images/9e2947cfcc84890d63991af6544b3986.png)'
+  id: totrans-131
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/9e2947cfcc84890d63991af6544b3986.png)'
 - en: Finally, we can distribute the select statement and merge the result. Function [raze](https://code.kx.com/q/ref/raze/) is
     similar to Pandas' [concat](https://pandas.pydata.org/pandas-docs/stable/user_guide/merging.html) function.
     From a list of tables, it produces a large table via concatenation.
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们可以分布式执行 select 语句并合并结果。函数 [raze](https://code.kx.com/q/ref/raze/) 类似于 Pandas
+    的 [concat](https://pandas.pydata.org/pandas-docs/stable/user_guide/merging.html)
+    函数。从一个表格列表中，它通过连接生成一个大表。
 - en: '![No alt text provided for this image](../Images/db8042fb22f14074923e27a320a5be16.png)'
+  id: totrans-133
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/db8042fb22f14074923e27a320a5be16.png)'
 - en: Well done! We implemented "kdb-spark" with four lines of code.
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 做得好！我们用四行代码实现了 "kdb-spark"。
 - en: Code simplicity
+  id: totrans-135
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 代码简洁性
 - en: I collected a few statistics about the code themselves. Although short code
     does not necessarily mean clean code, for this particular example these metrics
     well correlate with simplicity.
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 我收集了一些关于代码本身的统计数据。虽然短代码不一定意味着干净的代码，但对于这个特定的例子，这些指标与简洁性有很好的相关性。
 - en: '![No alt text provided for this image](../Images/68d2942f4fa51ce053a89dab058e893c.png)'
+  id: totrans-137
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/68d2942f4fa51ce053a89dab058e893c.png)'
 - en: Conclusion
+  id: totrans-138
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: My observations are collected in the table below. Emoji ????stands for excellent,
     ✔️for good and ☹️for a disappointing performance.
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 我的观察结果汇总在下表中。表情符号 ???? 代表优秀，✔️ 代表良好，☹️ 代表令人失望的表现。
 - en: '![No alt text provided for this image](../Images/2b59ea9e74f33cc6be88ae78a1e435b8.png)'
+  id: totrans-140
   prefs: []
   type: TYPE_IMG
+  zh: '![未提供此图像的替代文本](../Images/2b59ea9e74f33cc6be88ae78a1e435b8.png)'
 - en: Python is often the first programming language a student learns. It is simple,
     performant and has a slight learning curve. Its library Pandas is a natural step
     to introduce new-joiners to the world of data analyses. Pandas is also often used
     in a professional environment and more complex data analysis. Pandas looks tempting
     in simple, textbook exercises but is inconvenient to use in our simple real-world
     use-case.
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 通常是学生学习的第一个编程语言。它简单、性能优越，学习曲线平缓。它的库 Pandas 是将新手引入数据分析世界的自然步骤。Pandas 也常用于专业环境和更复杂的数据分析中。Pandas
+    在简单的教科书练习中看起来很诱人，但在我们的简单现实用例中使用起来不够方便。
 - en: There is more focus on extending Pandas and support large tables via cluster
     computing. Ray, Dask and Modin are in an early phase with a bunch of limitations.
     In our use case, they simply added syntactical complexity and actually decreased
     performance.
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前更多的关注集中在扩展 Pandas 和通过集群计算支持大表。Ray、Dask 和 Modin 仍处于早期阶段，存在许多限制。在我们的用例中，它们只是增加了语法复杂性，并且实际上降低了性能。
 - en: R outperformed Pandas in every sense, including simplicity, elegance and performance.
     There are several built-in optimizations, such as inherent multi-threading. Optimization
     of string representation works like a charm and allows developers to focus on
     the analyses as opposed to minor technical details. It comes as no surprise that
     R data.table is being [ported to Python](https://github.com/h2oai/datatable).
     Maybe package data.table will be the replacement of Pandas in the future?
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: R 在简洁性、优雅性和性能方面都优于 Pandas。它拥有几个内置的优化功能，例如固有的多线程。字符串表示的优化效果非常好，使得开发人员可以专注于分析而非细节问题。不足为奇的是，R
+    data.table 正在 [移植到 Python](https://github.com/h2oai/datatable)。也许未来 data.table
+    包会成为 Pandas 的替代品？
 - en: Kdb+ takes data analyses to the next level. It is designed for extreme productivity.
     In our use case, it was the clear winner of simplicity, elegance, and performance.
     No wonder that 20 out of the 20 top organizations in the capital market chose
     kdb+ as a primary tool for data analyses. In this industry, the data analysis
     drives the revenue and the tools are tested under extreme conditions.
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: kdb+ 将数据分析提升到了一个新的水平。它设计用于极高的生产力。在我们的用例中，它在简洁性、优雅性和性能方面都是明显的赢家。难怪资本市场的 20 家顶尖组织中有
+    20 家选择了 kdb+ 作为数据分析的主要工具。在这个行业中，数据分析推动了收入，工具在极端条件下进行测试。
 - en: BigQuery is a winner in performance above 100 Billion rows assuming that you
     don't have a cluster of computers at hand. If you need to analyze huge tables
     and you are sensitive to run-times then BigQuery does a great job for you.
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你没有手头的计算机集群，那么 BigQuery 在处理超过 100 亿行的数据时表现出色。如果你需要分析巨大的表格且对运行时间非常敏感，那么 BigQuery
+    能很好地满足你的需求。
 - en: Related works
+  id: totrans-146
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关工作
 - en: '[DB ops benchmark](https://h2oai.github.io/db-benchmark/) was initially started
     by [Matt Dowle](https://twitter.com/MattDowle) the creator of R data.table. Besides
     Pandas, data.table, dask dplyr they also test [Apache Spark](https://spark.apache.org/), [ClickHouse](https://clickhouse.yandex/) and [Julia
@@ -696,8 +1043,12 @@
     queries with different parameters. Anyone can see the queries side-by-side and
     even download the test environment to conduct the experiments of his/her custom
     hardware.'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: '[数据库操作基准测试](https://h2oai.github.io/db-benchmark/) 最初由 [Matt Dowle](https://twitter.com/MattDowle)
+    启动，他是 R data.table 的创建者。除了 Pandas、data.table、dask dplyr，他们还测试了 [Apache Spark](https://spark.apache.org/)、[ClickHouse](https://clickhouse.yandex/)
+    和 [Julia 数据帧](https://juliadata.github.io/DataFrames.jl/stable/) 在各种查询和不同参数下的表现。任何人都可以并排查看这些查询，甚至可以下载测试环境以进行自定义硬件的实验。'
 - en: '[Mark Litwintschik](https://www.linkedin.com/in/marklitwintschik/) uses the
     NYC taxi drives database and four queries on [33 database-like systems](https://tech.marksblogg.com/benchmarks.html).
     He provides a detailed description of the test environments, the settings he used
@@ -705,8 +1056,12 @@
     outstanding knowledge in Big Data platforms. His observation is in line with our
     experiments, kdb+ turned out the be the fastest among the non-GPU-based database
     solutions.'
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Mark Litwintschik](https://www.linkedin.com/in/marklitwintschik/) 使用了 NYC
+    出租车驾驶数据库和四个查询，测试了 [33 个数据库类系统](https://tech.marksblogg.com/benchmarks.html)。他提供了测试环境的详细描述、所用设置以及一些宝贵的个人备注。这是一项全面的工作，展示了
+    Mark 在大数据平台方面的杰出知识。他的观察与我们的实验一致，kdb+ 在非 GPU 基于的数据库解决方案中表现出最快的速度。'
 - en: The STAC-M3 benchmark was originally [developed in 2010](https://stacresearch.com/system/files/central/STAC-M3_Overview.pdf) by
     several of the world’s largest banks and trading firms. It is designed to measure
     exactly how much emerging hardware and software innovations improve the performance
@@ -717,94 +1072,142 @@
     analytics. They used kdb+ to [demonstrate](https://cloud.google.com/blog/products/compute/can-cloud-instances-perform-better-than-bare-metal-latest-stac-m3-benchmarks-say-yes) that
     migrating data and workload from on-premise to GCP does not mean compromising
     the performance.
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: STAC-M3基准测试最初由几家全球最大的银行和交易公司于[2010年开发](https://stacresearch.com/system/files/central/STAC-M3_Overview.pdf)。其目的是精确测量新兴硬件和软件创新如何提高时间序列分析的性能。在STAC-M3开发之后，kdb+迅速成为硬件供应商运行测试时的首选数据库平台，因为它设定了其他软件供应商无法超越的性能标准。此外，Google也认可STAC-M3作为时间序列分析的行业标准基准。他们使用kdb+来[展示](https://cloud.google.com/blog/products/compute/can-cloud-instances-perform-better-than-bare-metal-latest-stac-m3-benchmarks-say-yes)将数据和工作负载从本地迁移到GCP并不意味着性能的妥协。
 - en: Acknowledgments
+  id: totrans-150
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 致谢
 - en: I would like to thank [Péter Györök](https://github.com/gyorokpeter), [Péter
     Simon Vargha](https://www.linkedin.com/in/varghaps/) and [Gergely Daróczi](https://www.linkedin.com/in/daroczig/) for
     their insightful bits of advice.
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 我想感谢[Péter Györök](https://github.com/gyorokpeter)、[Péter Simon Vargha](https://www.linkedin.com/in/varghaps/)和[Gergely
+    Daróczi](https://www.linkedin.com/in/daroczig/)提供的有见地的建议。
 - en: '**Bio: [Ferenc Bodon Ph.D.](https://www.linkedin.com/in/ferencbodon/)** is
     an experienced data engineer, software developer, multi language programmer, software
     architect with academic background in data mining and statistics. Reflects long-term
     thinking and always striving to find top quality, robust solutions that are scalable
     and allow rapid development. Believes in software quality and cannot relax until
     the "glory solution" is found.'
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Ferenc Bodon博士](https://www.linkedin.com/in/ferencbodon/)** 是一位经验丰富的数据工程师、软件开发人员、多语言程序员和软件架构师，拥有数据挖掘和统计学的学术背景。他具备长期思考能力，始终致力于寻找高质量、可靠且可扩展的解决方案，并允许快速开发。相信软件质量，并且在找到“卓越解决方案”之前无法放松。'
 - en: '[Original](https://www.linkedin.com/pulse/python-data-analysis-really-simple-ferenc-bodon-ph-d-/).
     Reposted with permission.'
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.linkedin.com/pulse/python-data-analysis-really-simple-ferenc-bodon-ph-d-/)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[10 Simple Hacks to Speed up Your Data Analysis in Python](/2019/07/10-simple-hacks-speed-data-analysis-python.html)'
+  id: totrans-155
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[10个简单技巧加速你的Python数据分析](/2019/07/10-simple-hacks-speed-data-analysis-python.html)'
 - en: '[The Last SQL Guide for Data Analysis You’ll Ever Need](/2019/10/last-sql-guide-data-analysis-ever-need.html)'
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你所需的最后一份SQL数据分析指南](/2019/10/last-sql-guide-data-analysis-ever-need.html)'
 - en: '[The Berlin Rent Freeze: How many illegal overpriced offers can I find online?](/2020/03/berlin-rent-freeze-illegal-overpriced-offers.html)'
+  id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[柏林租金冻结：我可以在网上找到多少非法的高价房源？](/2020/03/berlin-rent-freeze-illegal-overpriced-offers.html)'
 - en: '* * *'
+  id: totrans-158
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-159
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的捷径。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-162
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织在IT方面'
 - en: '* * *'
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-164
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-165
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-166
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-167
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目的，并以寻找目的为…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-168
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学的顶级统计资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-169
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-170
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一项90亿美元的AI失败，经过审查](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
