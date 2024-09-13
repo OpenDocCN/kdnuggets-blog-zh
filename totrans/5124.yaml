@@ -1,355 +1,546 @@
 - en: SQL in Pandas with Pandasql
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Pandas中的SQL与Pandasql
 - en: 原文：[https://www.kdnuggets.com/sql-in-pandas-with-pandasql](https://www.kdnuggets.com/sql-in-pandas-with-pandasql)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/sql-in-pandas-with-pandasql](https://www.kdnuggets.com/sql-in-pandas-with-pandasql)
 - en: '![XXXXX](../Images/b2929d05329add91763391541819c4a1.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/b2929d05329add91763391541819c4a1.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: If you can add *only one skill*—and inarguably the most important—to your data
     science toolbox, it is **SQL**. In the Python data analysis ecosystem, however,
     [pandas](https://pandas.pydata.org/) is a powerful and popular library.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你只能添加*一个技能*——并且无可争辩地是最重要的——到你的数据科学工具箱中，那就是**SQL**。然而，在Python数据分析生态系统中，[pandas](https://pandas.pydata.org/)是一个强大且流行的库。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在的组织进行IT管理'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: But, if you are new to pandas, learning your way around pandas functions—for
     grouping, aggregation, joins, and more—can be overwhelming. It would be much easier
     to query your dataframes with SQL instead. The [pandasql](https://pypi.org/project/pandasql/)
     library lets you do just that!
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，如果你对pandas不熟悉，学习pandas函数——如分组、聚合、连接等——可能会感到不知所措。用SQL查询数据框会更容易一些。[pandasql](https://pypi.org/project/pandasql/)库可以让你做到这一点！
 - en: So let’s learn how to use the pandasql library to run SQL queries on a pandas
     dataframe on  a sample dataset.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，让我们学习如何使用pandasql库在样本数据集上的pandas数据框中运行SQL查询。
 - en: First Steps with Pandasql
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用Pandasql的第一步
 - en: Before we go any further, let’s set up our working environment.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们进一步讨论之前，让我们设置我们的工作环境。
 - en: Installing pandasql
+  id: totrans-15
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 安装pandasql
 - en: 'If you’re using Google Colab, you can install pandasql using `pip` and code
     along:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你使用Google Colab，可以使用`pip`安装pandasql并跟着代码操作：
 - en: '[PRE0]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: If you’re using Python on your local machine, ensure that you have [pandas](https://pandas.pydata.org/)
     and [Seaborn](http://seaborn.pydata.org/) installed in a dedicated virtual environment
     for this project. You can use the built-in [venv](https://docs.python.org/3/library/venv.html)
     package to create and manage virtual environments.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你在本地机器上使用Python，请确保在此项目的专用虚拟环境中安装了[pandas](https://pandas.pydata.org/)和[Seaborn](http://seaborn.pydata.org/)。你可以使用内置的[venv](https://docs.python.org/3/library/venv.html)包来创建和管理虚拟环境。
 - en: I’m running Python 3.11 on Ubuntu LTS 22.04\. So the following instructions
     are for Ubuntu (should also work on a Mac). If you’re on a Windows machine, follow
     [these instructions to create and activate virtual environments](https://docs.python.org/3/library/venv.html#how-venvs-work).
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在Ubuntu LTS 22.04上运行Python 3.11。以下指令适用于Ubuntu（也应该适用于Mac）。如果你使用的是Windows机器，请参考[这些创建和激活虚拟环境的说明](https://docs.python.org/3/library/venv.html#how-venvs-work)。
 - en: 'To create a virtual environment (v1 here), run the following command in your
     project directory:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 要创建虚拟环境（这里是v1），请在项目目录中运行以下命令：
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Then activate the virtual environment:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后激活虚拟环境：
 - en: '[PRE2]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Now install pandas, seaborn, and pandasql:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在安装pandas、seaborn和pandasql：
 - en: '[PRE3]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '**Note**: If you don’t already have `pip` installed, you can update the system
     packages and install it by running: `apt install python3-pip`.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意**：如果你尚未安装`pip`，可以通过运行以下命令更新系统包并安装：`apt install python3-pip`。'
 - en: The `sqldf` Function
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: '`sqldf`函数'
 - en: 'To run SQL queries on a pandas dataframe, you can import and use `sqldf` with
     the following syntax:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在pandas数据框上运行SQL查询，你可以导入并使用`sqldf`，其语法如下：
 - en: '[PRE4]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Here,
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里，
 - en: '`query` represents the SQL query that you want to execute on the pandas dataframe.
     It should be a string containing a valid SQL query.'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`query`代表你想在pandas数据框上执行的SQL查询。它应该是一个包含有效SQL查询的字符串。'
 - en: '`globals()` specifies the global namespace where the dataframe(s) used in the
     query are defined.'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`globals()`指定了查询中使用的数据框所定义的全局命名空间。'
 - en: Querying a Pandas DataFrame with Pandasql
+  id: totrans-33
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用Pandasql查询Pandas数据框
 - en: 'Let’s start by importing the required packages and the `sqldf`  function from
     pandasql:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们首先导入所需的包和来自pandasql的`sqldf`函数：
 - en: '[PRE5]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Because we’ll run several queries on the dataframe, we can define a function
     so we can call it by passing in the query as the argument:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们将对数据框运行几个查询，我们可以定义一个函数，以便通过传递查询作为参数来调用它：
 - en: '[PRE6]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: For all the examples that follow, we’ll run the `run_query` function (that uses
     `sqldf()` under the hood) to execute the SQL query on the `tips_df` dataframe.
     We’ll then print out the returned result.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于以下所有示例，我们将运行`run_query`函数（底层使用`sqldf()`）来在`tips_df`数据框上执行SQL查询。然后我们将打印出返回的结果。
 - en: Loading the Dataset
+  id: totrans-39
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 加载数据集
 - en: For this tutorial, we’ll use the "tips" dataset built into the [Seaborn](http://seaborn.pydata.org/)
     library. The "tips" dataset contains information about restaurant tips, including
     the total bill, tip amount, gender of the payer, day of the week, and more.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于本教程，我们将使用内置于[Seaborn](http://seaborn.pydata.org/)库中的“tips”数据集。“tips”数据集包含有关餐厅小费的信息，包括总账单、小费金额、付款者的性别、星期几等。
 - en: 'Lload the “tip” dataset into the dataframe `tips_df`:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 将“tip”数据集加载到数据框`tips_df`中：
 - en: '[PRE7]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Example 1 – Selecting Data
+  id: totrans-43
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例 1 – 选择数据
 - en: 'Here’s our first query—a simple SELECT statement:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我们的第一个查询——一个简单的SELECT语句：
 - en: '[PRE8]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'As seen, this query selects *all* the columns from the `tips_df` dataframe,
     and limits the output to the first 10 rows using the `LIMIT` keyword. It is equivalent
     to performing `tips_df.head(10)` in pandas:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所示，此查询选择`tips_df`数据框中的*所有*列，并使用`LIMIT`关键字将输出限制为前10行。这等同于在pandas中执行`tips_df.head(10)`：
 - en: '![XXXXX](../Images/83461cdf96b27b8217aec44229d417c1.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/83461cdf96b27b8217aec44229d417c1.png)'
 - en: Output of query_1
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '`query_1`的输出'
 - en: Example 2 – Filtering Based on a Condition
+  id: totrans-49
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例 2 – 基于条件筛选
 - en: 'Next, let’s write a query to filter the results based on conditions:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，让我们编写一个查询来根据条件筛选结果：
 - en: '[PRE9]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: This query filters the `tips_df` dataframe based on the condition specified
     in the WHERE clause. It selects all columns from the `tips_df` dataframe where
     the ‘total_bill’ is greater than 30 *and* the ‘tip’ amount is greater than 5.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 此查询根据WHERE子句中指定的条件筛选`tips_df`数据框。它选择`tips_df`数据框中所有列，其中‘total_bill’大于30 *且*‘tip’金额大于5。
 - en: 'Running `query_2` gives the following result:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行`query_2`给出以下结果：
 - en: '![XXXXX](../Images/ed66703cde7b3584ac91f8fde7524b13.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/ed66703cde7b3584ac91f8fde7524b13.png)'
 - en: Output of query_2
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '`query_2`的输出'
 - en: Example 3 – Grouping and Aggregation
+  id: totrans-56
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例 3 – 分组和聚合
 - en: 'Let’s run the following query to get the average bill amount grouped by the
     day:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们运行以下查询以获取按天分组的平均账单金额：
 - en: '[PRE10]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'Here’s the output:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是输出结果：
 - en: '![XXXXX](../Images/0b541becf82c4045f870608c94eecaf8.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/0b541becf82c4045f870608c94eecaf8.png)'
 - en: Output of query_3
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '`query_3`的输出'
 - en: We see that the average bill amount on weekends is marginally higher.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们看到周末的平均账单金额略高。
 - en: 'Let’s take another example for grouping and aggregations. Consider the following
     query:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们再看一个分组和聚合的示例。考虑以下查询：
 - en: '[PRE11]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'The query `query_4` groups the data in the `tips_df` dataframe by the ‘day’
     column and calculates the following aggregate functions for each group:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 查询`query_4`按‘day’列对`tips_df`数据框中的数据进行分组，并计算每组的以下聚合函数：
 - en: '`num_transactions`: the count of transactions,'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`num_transactions`：交易的计数，'
 - en: '`avg_bill`: the average of the ‘total_bill’ column, and'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`avg_bill`：‘total_bill’列的平均值，以及'
 - en: '`max_tip`: the maximum value of the ‘tip’ column.'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`max_tip`：‘tip’列的最大值。'
 - en: 'As seen, we get the above quantities grouped by the day:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所示，我们按天对上述数量进行了分组：
 - en: '![XXXXX](../Images/8a5ef46053ceeea7451808be5e806ba6.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/8a5ef46053ceeea7451808be5e806ba6.png)'
 - en: Output of query_4
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '`query_4`的输出'
 - en: Example 4 – Subqueries
+  id: totrans-72
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例 4 – 子查询
 - en: 'Let’s add an example query that uses a subquery:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们添加一个使用子查询的示例查询：
 - en: '[PRE12]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Here,
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里，
 - en: The inner subquery calculates the average value of the ‘total_bill’ column from
     the `tips_df` dataframe.
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 内部子查询计算`tips_df`数据框中‘total_bill’列的平均值。
 - en: The outer query then selects all columns from the `tips_df` dataframe where
     the ‘total_bill’ is greater than the calculated average value.
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 外部查询然后从`tips_df`数据框中选择所有列，其中‘total_bill’大于计算出的平均值。
 - en: 'Running `query_5` gives the following:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行`query_5`给出如下结果：
 - en: '![XXXXX](../Images/7dde12833115494848fb9ef98f12ca4c.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/7dde12833115494848fb9ef98f12ca4c.png)'
 - en: Output of query_5
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '`query_5`的输出'
 - en: Example 5 – Joining Two DataFrames
+  id: totrans-81
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 示例 5 – 连接两个数据框
 - en: 'We only have one dataframe. To perform a simple join, let’s create another
     dataframe like so:'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们只有一个数据框。为了进行简单的连接，我们可以像这样创建另一个数据框：
 - en: '[PRE13]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: The `other_data` dataframe associates each day with a special event.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '`other_data`数据框将每一天与特殊事件关联起来。'
 - en: 'Let’s now perform a LEFT JOIN between the `tips_df` and the `other_data` dataframes
     on the common ‘day’ column:'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们在`tips_df`和`other_data`数据框之间的公共‘day’列上执行LEFT JOIN：
 - en: '[PRE14]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'Here’s the result of the join operation:'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是连接操作的结果：
 - en: '![XXXXX](../Images/17dd45a6768b2554d90eb0d677e376ad.png)'
+  id: totrans-88
   prefs: []
   type: TYPE_IMG
+  zh: '![XXXXX](../Images/17dd45a6768b2554d90eb0d677e376ad.png)'
 - en: Output of query_6
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: query_6的输出
 - en: Wrap-Up and Next Steps
+  id: totrans-90
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 总结和下一步
 - en: In this tutorial, we went over how to run SQL queries on pandas dataframes using
     pandasql. Though pandasql makes querying dataframes with SQL super simple, there
     are some limitations.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们讨论了如何使用pandasql在pandas数据框上运行SQL查询。虽然pandasql使得用SQL查询数据框变得非常简单，但也存在一些限制。
 - en: The key limitation is that pandasql can be several orders slower than native
     pandas. So what should you do? Well, if you need to perform data analysis with
     pandas, you can use pandasql to query dataframes when you are *learning* pandas—and
     ramping up quickly. You can then switch to pandas or another library like [Polars](https://www.pola.rs/)
     once you’re comfortable with pandas.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 关键限制是pandasql可能比原生pandas慢几个数量级。那么你应该怎么做呢？如果你需要用pandas进行数据分析，你可以在*学习*pandas时使用pandasql来查询数据框，并迅速提升。然后，你可以在对pandas感到舒适后，切换到pandas或其他库，如[Polars](https://www.pola.rs/)。
 - en: To take the first steps in this direction, try writing and running the pandas
     equivalents of the SQL queries that we’ve run so far. All the code examples used
     in this tutorial are [on GitHub](https://github.com/balapriyac/python-data-analysis/tree/main/pandasql-tutorial).
     Keep coding!
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了迈出这一步，尝试编写并运行到目前为止我们执行的SQL查询的pandas等效代码。本教程中使用的所有代码示例都[在GitHub上](https://github.com/balapriyac/python-data-analysis/tree/main/pandasql-tutorial)。继续编码！
 - en: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** is a developer
     and technical writer from India. She likes working at the intersection of math,
     programming, data science, and content creation. Her areas of interest and expertise
@@ -357,33 +548,49 @@
     writing, coding, and coffee! Currently, she''s working on learning and sharing
     her knowledge with the developer community by authoring tutorials, how-to guides,
     opinion pieces, and more.'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正在通过撰写教程、操作指南、评论文章等来学习和分享她的知识。'
 - en: More On This Topic
+  id: totrans-95
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题
 - en: '[Query Your Pandas DataFrames with SQL](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用SQL查询你的Pandas数据框](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
 - en: '[Using SQL with Python: SQLAlchemy and Pandas](https://www.kdnuggets.com/using-sql-with-python-sqlalchemy-and-pandas)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Python的SQL：SQLAlchemy和Pandas](https://www.kdnuggets.com/using-sql-with-python-sqlalchemy-and-pandas)'
 - en: '[How to Select Rows and Columns in Pandas Using [ ], .loc, iloc, .at…](https://www.kdnuggets.com/2019/06/select-rows-columns-pandas.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用[ ], .loc, iloc, .at…在Pandas中选择行和列](https://www.kdnuggets.com/2019/06/select-rows-columns-pandas.html)'
 - en: '[Introduction to Pandas for Data Science](https://www.kdnuggets.com/2020/06/introduction-pandas-data-science.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中的Pandas入门](https://www.kdnuggets.com/2020/06/introduction-pandas-data-science.html)'
 - en: '[The Easiest Way to Make Beautiful Interactive Visualizations With Pandas](https://www.kdnuggets.com/2021/12/easiest-way-make-beautiful-interactive-visualizations-pandas.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Pandas制作漂亮的交互式可视化的最简单方法](https://www.kdnuggets.com/2021/12/easiest-way-make-beautiful-interactive-visualizations-pandas.html)'
 - en: '[Introductory Pandas Tutorial](https://www.kdnuggets.com/2022/03/introductory-pandas-tutorial.html)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[入门Pandas教程](https://www.kdnuggets.com/2022/03/introductory-pandas-tutorial.html)'
