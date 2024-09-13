@@ -1,34 +1,48 @@
 - en: 'Mining Twitter Data with Python Part 4: Rugby and Term Co-occurrences'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用Python挖掘Twitter数据 第四部分：橄榄球和术语共现
 - en: 原文：[https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-4.html](https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-4.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-4.html](https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-4.html)
 - en: '**By Marco Bonzanini, Independent Data Science Consultant**.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Marco Bonzanini，独立数据科学顾问**。'
 - en: 'Last Saturday (*Editor''s note: happened a while ago*) was the closing day
     of the [Six Nations Championship](https://en.wikipedia.org/wiki/Six_Nations_Championship),
     an annual international [rugby](https://en.wikipedia.org/wiki/Rugby_union) competition.
     Before turning on the TV to watch Italy being trashed by Wales, I decided to use
     this event to collect some data from Twitter and perform some exploratory text
     analysis on something more interesting than the small list of my tweets.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 上周六（*编者注：已经过去一段时间*）是[六国锦标赛](https://en.wikipedia.org/wiki/Six_Nations_Championship)的闭幕日，这是一个年度国际[橄榄球](https://en.wikipedia.org/wiki/Rugby_union)比赛。在打开电视观看意大利被威尔士击败之前，我决定利用这个事件从Twitter收集一些数据，并对比我的小列表的推文进行一些更有趣的探索性文本分析。
 - en: This article continues the tutorial on Twitter Data Mining, re-using what we
     discussed in the previous articles with some more realistic data. It also expands
     the analysis by introducing the concept of term co-occurrence.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文继续Twitter数据挖掘教程，重用我们在之前文章中讨论的内容，并引入更具现实的数据。它还通过引入术语共现的概念来扩展分析。
 - en: '![Twitter](../Images/3da5b4dea824ea453ca3ae25f3548634.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![Twitter](../Images/3da5b4dea824ea453ca3ae25f3548634.png)'
 - en: The Application Domain
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 应用领域
 - en: 'As the name suggests, six teams are involved in the competition: England, Ireland,
     Wales, Scotland, France and Italy. This means that we can expect the event to
     be tweeted in multiple languages (English, French, Italian, Welsh, Gaelic, possibly
@@ -38,12 +52,17 @@
     day of the competition, three matches are played sequentially. Three teams in
     particular had a shot for the title: England, Ireland and Wales. At the end, Ireland
     won the competition but everything was open until the very last minute.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如名称所示，比赛涉及六支队伍：英格兰、爱尔兰、威尔士、苏格兰、法国和意大利。这意味着我们可以预计比赛会用多种语言（英语、法语、意大利语、威尔士语、盖尔语，可能还有其他语言）进行推文，其中英语是主要语言。假设队伍名称会被频繁提及，我们可以决定也查找它们的昵称，例如法国的*Les
+    Bleus*或意大利的*Azzurri*。在比赛的最后一天，三场比赛依次进行。特别是三支队伍有机会争夺冠军：英格兰、爱尔兰和威尔士。最后，爱尔兰赢得了比赛，但一切都悬而未决直到最后一刻。
 - en: Setting Up
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 设置
 - en: I used the [streaming API](/2016/06/mining-twitter-data-python-part-1.html) to
     download all the tweets containing the string `#rbs6nations` during the day. Obviously
     not all the tweets about the event contained the hashtag, but this is a good baseline.
@@ -53,58 +72,77 @@
     format, making for about 75Mb of data. This should be small enough to quickly
     do some processing in memory, and at the same time big enough to observe something
     possibly interesting.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 我使用了[流式API](/2016/06/mining-twitter-data-python-part-1.html)下载了当天包含字符串`#rbs6nations`的所有推文。显然，并非所有关于此事件的推文都包含该标签，但这是一个很好的基准。下载时间范围是从大约12:15PM到7:15PM
+    GMT，即从第一场比赛前大约15分钟，到最后一场比赛结束后大约15分钟。最后，下载了超过18,000条推文，JSON格式，总数据约为75Mb。这应该足够小以便在内存中快速处理，同时又足够大以观察到一些可能有趣的内容。
 - en: The textual content of the tweets has been pre-processed with [tokenisation
     and lowercasing](/2016/06/mining-twitter-data-python-part-2.html) using the `preprocess()` function
     introduced in Part 2 of the tutorial.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 推文的文本内容已经通过使用教程第二部分中介绍的`preprocess()`函数进行了[分词和小写处理](/2016/06/mining-twitter-data-python-part-2.html)。
 - en: Interesting terms and hashtags
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 有趣的术语和标签
 - en: Following what we discussed in [Part 3 (Term Frequencies)](/2016/06/mining-twitter-data-python-part-3.html),
     we want to observe the most common terms and hashtags used during day. If you
     have followed the discussion about creating different lists of tokens in order
     to capture terms without hashtags, hashtags only, removing stop-words, etc. you
     can play around with the different lists.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: This is the unsurprising list of top 10 most frequent terms (`terms_only` in
     Part 3) in the data set.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The first three terms correspond to the teams who had a go for the title. The
     frequencies also respect the order in the final table. The fourth term is instead
     a punctuation mark that we missed and didn’t include in the list of stop-words.
     This is because `string.punctuation` only contains ASCII symbols, while here we’re
     dealing with a unicode character. If we dig into the data, there will be more
     examples like this, but for the moment we don’t worry about it.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: 'After adding the suspension-points symbol to the list of stop-words, we have
     a new entry at the end of the list:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Interestingly, a new token we didn’t account for, an [Emoji symbol](https://en.wikipedia.org/wiki/Emoji) (in
     this case, the [Irish Shamrock](https://en.wikipedia.org/wiki/Shamrock)).
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: 'If we have a look at the most common hashtags, we need to consider that`#rbs6nations` will
     be by far the most common token (that’s our search term for downloading the tweets),
     so we can exclude it from the list. This leave us with:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'We can observe that the most common hashtags, a part from `#rugby`, are related
     to the individual matches. In particular England v France has received the highest
     number of mentions, probably being the last match of the day with a dramatic finale.
@@ -113,9 +151,11 @@
     Those unfamiliar with rugby probably wouldn’t recognise that also `#crunch` should
     be included with`#EngvFra` match, as *Le Crunch* is the traditional name for this
     event. So by far, the last match has received a lot of attention.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: Term co-occurrences
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -124,67 +164,100 @@
     applications such as word disambiguation or semantic similarity. We discussed
     the option of using *bigrams* [in the previous article](/2016/06/mining-twitter-data-python-part-3.html),
     but we want to extend the context of a term to the whole tweet.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: 'We can refactor the code from [the previous article](/2016/06/mining-twitter-data-python-part-3.html) in
     order to capture the co-occurrences. We build a co-occurrence matrix `com` such
     that`com[x][y]` contains the number of times the term `x` has been seen in the
     same tweet as the term `y`:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: While building the co-occurrence matrix, we don’t want to count the same term
     pair twice, e.g. `com[A][B] == com[B][A]`, so the inner for loop starts from `i+1` in
     order to build a triangular matrix, while `sorted` will preserve the alphabetical
     order of the terms.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 在构建共现矩阵时，我们不想重复计算相同的术语对，例如 `com[A][B] == com[B][A]`，因此内层循环从 `i+1` 开始，以构建一个三角矩阵，而
+    `sorted` 会保持术语的字母顺序。
 - en: 'For each term, we then extract the 5 most frequent co-occurrent terms, creating
     a list of tuples in the form `((term1, term2), count)`:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于每个术语，我们提取 5 个最频繁的共现术语，创建一个形式为 `((term1, term2), count)` 的元组列表：
 - en: '[PRE4]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'The results:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果：
 - en: '[PRE5]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: This implementation is pretty straightforward, but depending on the data set
     and on the use of the matrix, one might want to look into tools like `scipy.sparse` for
     building a sparse matrix.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个实现方法相当直接，但根据数据集和矩阵的使用情况，可能需要考虑使用像 `scipy.sparse` 这样的工具来构建稀疏矩阵。
 - en: 'We could also look for a specific term and extract its most frequent co-occurrences.
     We simply need to modify the main loop including an extra counter, for example:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以寻找特定术语，并提取其最频繁的共现术语。我们只需在主循环中添加一个额外的计数器，例如：
 - en: '[PRE6]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'The outcome for “ireland”:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: “ireland”的结果：
 - en: '[PRE7]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'The outcome for “rugby”:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: “rugby”的结果：
 - en: '[PRE8]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Overall, quite interesting.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 总体来说，非常有趣。
 - en: Summary
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结
 - en: This article has discussed a toy example of Text Mining on Twitter, using some
     realistic data taken during a sport event. Using what we have learnt in the previous
     episodes, we have downloaded some data using the streaming API, pre-processed
@@ -192,84 +265,130 @@
     the tweets. The article has also introduced the concept of term co-occurrence,
     shown how to build a co-occurrence matrix and discussed how to use it to find
     some interesting insight.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇文章讨论了一个关于 Twitter 上文本挖掘的示例，使用了一些在体育赛事中收集的现实数据。运用我们在之前的章节中学到的知识，我们通过流媒体 API
+    下载了一些数据，处理成 JSON 格式，并从推文中提取了一些有趣的术语和标签。文章还介绍了术语共现的概念，展示了如何构建共现矩阵，并讨论了如何使用它来发现一些有趣的洞察。
 - en: '**Bio: [Marco Bonzanini](https://twitter.com/marcobonzanini)** is a Data Scientist
     based in London, UK. Active in the PyData community, he enjoys working in text
     analytics and data mining applications. He''s the author of "[Mastering Social
     Media Mining with Python](https://www.amazon.com/Mastering-Social-Media-Mining-Python-ebook/dp/B01BFD2Z2Q)"
     (Packt Publishing, July 2016).'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [Marco Bonzanini](https://twitter.com/marcobonzanini)** 是一名驻伦敦的 数据科学家。活跃于
+    PyData 社区，他喜欢从事文本分析和数据挖掘应用。他是《[用 Python 精通社交媒体挖掘](https://www.amazon.com/Mastering-Social-Media-Mining-Python-ebook/dp/B01BFD2Z2Q)》（Packt
+    Publishing，2016 年 7 月）的作者。'
 - en: '[Original](https://marcobonzanini.com/2015/03/23/mining-twitter-data-with-python-part-4-rugby-and-term-co-occurrences/).
     Reposted with permission.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://marcobonzanini.com/2015/03/23/mining-twitter-data-with-python-part-4-rugby-and-term-co-occurrences/)。经许可转载。'
 - en: '**Related**:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[Mining Twitter Data with Python Part 1: Collecting Data](/2016/06/mining-twitter-data-python-part-1.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 挖掘 Twitter 数据 第 1 部分：数据收集](/2016/06/mining-twitter-data-python-part-1.html)'
 - en: '[Mining Twitter Data with Python Part 2: Text Pre-processing](/2016/06/mining-twitter-data-python-part-2.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 挖掘 Twitter 数据 第 2 部分：文本预处理](/2016/06/mining-twitter-data-python-part-2.html)'
 - en: '[Mining Twitter Data with Python Part 3: Term Frequencies](/2016/06/mining-twitter-data-python-part-3.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 挖掘 Twitter 数据 第 3 部分：术语频率](/2016/06/mining-twitter-data-python-part-3.html)'
 - en: '* * *'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-48
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织在 IT 方面'
 - en: '* * *'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Machine Learning Is Not Like Your Brain Part 6: The Importance of…](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习不像你的大脑 第6部分：精确突触权重的重要性](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)'
 - en: '[KDnuggets News, April 6: 8 Free MIT Courses to Learn Data Science…](https://www.kdnuggets.com/2022/n14.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，4月6日：8门免费MIT课程学习数据科学](https://www.kdnuggets.com/2022/n14.html)'
 - en: '[The Complete Collection of Data Science Cheat Sheets - Part 1](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学备忘单完整合集 - 第1部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)'
 - en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第1部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
 - en: '[The Complete Collection of Data Science Cheat Sheets - Part 2](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学备忘单完整合集 - 第2部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)'
 - en: '[The Complete Collection Of Data Repositories - Part 1](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-1.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据仓库完整合集 - 第1部分](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-1.html)'
