@@ -1,56 +1,83 @@
 - en: Date Processing and Feature Engineering in Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python 中的日期处理和特征工程
 - en: 原文：[https://www.kdnuggets.com/2021/07/date-pre-processing-feature-engineering-python.html](https://www.kdnuggets.com/2021/07/date-pre-processing-feature-engineering-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/07/date-pre-processing-feature-engineering-python.html](https://www.kdnuggets.com/2021/07/date-pre-processing-feature-engineering-python.html)
 - en: '![Figure](../Images/02425d80b59385202558ada22d460b29.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/02425d80b59385202558ada22d460b29.png)'
 - en: Photo by [Sonja Langford](https://unsplash.com/@sonjalangford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
     on [Unsplash](https://unsplash.com/s/photos/time?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 由[Sonja Langford](https://unsplash.com/@sonjalangford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)拍摄于[Unsplash](https://unsplash.com/s/photos/time?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 - en: Maybe, like me, you deal with dates a lot when processing data in Python. Maybe,
     also like me, you get frustrated with dealing with dates in Python, and find you
     consult the documentation far too often to do the same things over and over again.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 也许像我一样，你在用 Python 处理数据时经常处理日期。也许像我一样，你在处理 Python 中的日期时感到沮丧，并发现你为了重复做相同的事情而过于频繁地查阅文档。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 门课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT Support Professional
+    Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Like anyone who codes and finds themselves doing the same thing more than a
     handful of times, I wanted to make my life easier by automating some common date
     processing tasks, as well as some simple and frequent feature engineering, so
     that my common date parsing and processing tasks for a given date could be done
     with a single function call. I could then select which features I was interested
     in extracting at a given time afterwards.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 就像任何编程的人一样，当发现自己重复做同样的事情时，我想通过自动化一些常见的日期处理任务以及一些简单而频繁的特征工程来简化生活，从而使得对给定日期的常见日期解析和处理任务可以通过一次函数调用完成。然后我可以在之后选择我感兴趣的特征进行提取。
 - en: This date processing is accomplished via the use of a single Python function,
     which accepts only a single date string formatted as '`YYYY-MM-DD`' (because that's
     how dates are formatted), and which returns a dictionary consisting of (currently)
@@ -60,138 +87,206 @@
     be able to figure out how to alter or extend it to suit your needs. For some ideas
     on additional date/time related features you may want to code the generation of,
     [check out this article](https://www.kdnuggets.com/2021/04/feature-engineering-datetime-variables-data-science-machine-learning.html).
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个日期处理是通过一个单一的 Python 函数实现的，该函数仅接受一个格式为 '`YYYY-MM-DD`' 的日期字符串（因为这是日期的格式），并返回一个包含（当前）18
+    对键/值特征的字典。其中一些键是非常直接的（例如解析出的四位数年份），而其他的是经过工程处理的（例如日期是否为公共假期）。如果你觉得这段代码有用，你应该能够弄清楚如何修改或扩展它以适应你的需求。有关你可能想要编写的其他日期/时间相关特征的一些想法，[请查看这篇文章](https://www.kdnuggets.com/2021/04/feature-engineering-datetime-variables-data-science-machine-learning.html)。
 - en: Most of the functionality is accomplished using the Python [`datetime`](https://docs.python.org/3/library/datetime.html)
     module, much of which relies on the [`strftime()`](https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior)
     method. The real benefit, however, is that there is a standard, automated approach
     to the same repetitive queries.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 大部分功能是通过 Python [`datetime`](https://docs.python.org/3/library/datetime.html)
+    模块实现的，许多功能依赖于 [`strftime()`](https://docs.python.org/3/library/datetime.html#strftime-strptime-behavior)
+    方法。然而，真正的好处是有一种标准的、自动化的方法来处理相同的重复查询。
 - en: The only non-standard library used is [`holidays`](https://pypi.org/project/holidays/),
     a "fast, efficient Python library for generating country, province and state specific
     sets of holidays on the fly." While the library can accommodate a whole host of
     national and sub-national holiodays, I have used the US national holidays for
     this example. With a quick glance at the project's documentation and the code
     below, you will very easily determine how to change this if needed.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 唯一使用的非标准库是 [`holidays`](https://pypi.org/project/holidays/)，它是一个“快速、高效的 Python
+    库，用于即时生成特定国家、省份和州的假期集合。”虽然该库可以处理各种国家和次国家的假期，但我在这个例子中使用了美国的全国假期。只需快速浏览项目文档和以下代码，你就能很容易确定如何在需要时进行更改。
 - en: So, let's first take a look at `process_date()` function. The comments should
     provide insight into what is going on, should you need it.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，让我们首先查看 `process_date()` 函数。评论应该能提供有关发生了什么的见解，如果你需要的话。
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'A few points to note:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 有几点需要注意：
 - en: By default, Python treats days of the week as starting on Sunday (0) and ending
     on Saturday (6); For me, and my processing, weeks start on Monday, and end on
     Sunday — and I don't need a day 0 (as opposed to starting the week on day 1) —
     and so this needed to be changed
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 默认情况下，Python 将一周的天数视为从星期天（0）开始，到星期六（6）结束；对我而言，我的处理方式是一周从星期一开始，到星期天结束——我不需要第0天（与将一周从第1天开始相对）——所以这需要进行更改。
 - en: A weekday/weekend feature was easy to create
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个工作日/周末特征很简单。
 - en: Holiday-related features were easy to engineer using the `holidays` library,
     and performing simple date addition and subtraction; again, substituting other
     national or sub-national holidays (or adding to the existing) would be easy to
     do
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 `holidays` 库创建假期相关特征很简单，并且可以执行简单的日期加减运算；同样，替换其他国家或次国家假期（或添加到现有假期中）也是很容易做到的。
 - en: A `days_from_today` feature was created with another line or 2 of simple date
     math; negative numbers are the number of days a given dates was *before* today,
     while positive numbers are days from today *until* the given date
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个 `days_from_today` 功能是通过一两行简单的日期数学运算创建的；负数表示给定日期在今天*之前*的天数，而正数则表示从今天*到*给定日期的天数。
 - en: I don't personally need, for example, a `is_end_of_month` feature, but you should
     be able to see how this could be added to the above code with relative ease at
     this point. Give some customization a try for yourself.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我个人不需要，例如，`is_end_of_month` 特征，但你应该能看到如何在此时相对轻松地将其添加到上述代码中。自己尝试一些自定义设置吧。
 - en: Now let's test it out. We will process one date and print out what is returned,
     the full dictionary of key-value feature pairs.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们测试一下。我们将处理一个日期，并打印返回的内容，即键值特征对的完整字典。
 - en: '[PRE1]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '[PRE2]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Here you can see the full list of feature keys, and corresponding values. Now,
     in a normal situation I won't need to print out the entire dictionary, but instead
     get the values of a particular key or set of keys.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里你可以看到特征键的完整列表以及相应的值。通常情况下，我不需要打印整个字典，而是获取特定键或键集合的值。
 - en: We can demonstrate how this might work practically with the below code. We will
     create a list of dates, and then process this list of dates one by one, ultimately
     creating a Pandas data frame of a selection of processed date features, printing
     it out to screen.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过下面的代码演示这如何实际工作。我们将创建一个日期列表，然后逐个处理这些日期，最终创建一个 Pandas 数据框，其中包含处理过的日期特征的选择，并将其打印到屏幕上。
 - en: '[PRE3]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: And this data frame hopefully gives you a better idea of how this functionality
     could be useful in practice.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望这个数据框能让你更好地了解这种功能在实际应用中的有用性。
 - en: Good luck, and happy data processing.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 祝好运，数据处理愉快。
 - en: '**Related**:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[5 Python Data Processing Tips & Code Snippets](/2021/07/python-tips-snippets-data-processing.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5 个 Python 数据处理技巧与代码片段](/2021/07/python-tips-snippets-data-processing.html)'
 - en: '[Feature Engineering of DateTime Variables for Data Science, Machine Learning](/2021/04/feature-engineering-datetime-variables-data-science-machine-learning.html)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学与机器学习中的日期时间变量特征工程](/2021/04/feature-engineering-datetime-variables-data-science-machine-learning.html)'
 - en: '[Working With Time Series Using SQL](/2021/04/time-series-using-sql.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 SQL 处理时间序列](/2021/04/time-series-using-sql.html)'
 - en: '[comments](#comments)'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: More On This Topic
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征存储峰会 2022：关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
 - en: '[Tick-Tock: Using Pendulum For Easy Date And Time Management In Python](https://www.kdnuggets.com/tick-tock-using-pendulum-for-easy-date-and-time-management-in-python)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[滴答：使用 Pendulum 实现 Python 中的轻松日期和时间管理](https://www.kdnuggets.com/tick-tock-using-pendulum-for-easy-date-and-time-management-in-python)'
 - en: '[How to Engineer Date Features in Python](https://www.kdnuggets.com/2021/08/engineer-date-features-python.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在 Python 中工程化日期特征](https://www.kdnuggets.com/2021/08/engineer-date-features-python.html)'
 - en: '[Using NumPy to Perform Date and Time Calculations](https://www.kdnuggets.com/using-numpy-to-perform-date-and-time-calculations)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 NumPy 进行日期和时间计算](https://www.kdnuggets.com/using-numpy-to-perform-date-and-time-calculations)'
 - en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建可处理的、多变量特征工程管道](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
 - en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用 RAPIDS cuDF 在特征工程中发挥 GPU 的作用](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
