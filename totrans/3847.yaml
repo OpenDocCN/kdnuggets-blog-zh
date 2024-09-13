@@ -1,17 +1,21 @@
 - en: Parallelizing Python Code
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2021/10/parallelizing-python-code.html](https://www.kdnuggets.com/2021/10/parallelizing-python-code.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '**By [Dawid Borycki](https://www.linkedin.com/in/dawidborycki/), Biomedical
     Researcher and Software Engineer & [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/),
     Data Science Professional**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: Python is great for tasks like training machine learning models, performing
@@ -22,32 +26,40 @@
     standard CPython implementation means you cannot fully use the underlying hardware
     because of the global interpreter lock (GIL) that prevents running the bytecode
     from multiple threads simultaneously.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: 'This article reviews some common options for parallelizing Python code including:'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: '[Process-based parallelism](https://docs.python.org/3/library/multiprocessing.html)'
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Specialized libraries
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[IPython Parallel](https://ipython.readthedocs.io/en/stable/)'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Ray](https://docs.ray.io/en/master/)'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: For each technique, this article lists some advantages and disadvantages and
     shows a code sample to help you understand what it’s like to use.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: How to Parallelize Python Code
+  id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -55,91 +67,117 @@
     application instances or a script to perform jobs in parallel. This approach is
     great when you don’t need to exchange data between parallel jobs. Otherwise, sharing
     data between processes significantly reduces performance when aggregating data.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: Starting multiple threads within the same process allows you to share data between
     jobs more efficiently. In this case, thread-based parallelization can offload
     some work to the background. However, the standard CPython implementation’s global
     interpreter lock (GIL) prevents running the bytecode in multiple threads simultaneously.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: The sample function below simulates complex calculations (meant to mimic activation
     functions)
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '`complex_operation` executes several times to better estimate the processing
     time. It divides the long-running operation into a batch of smaller ones. It does
     this by dividing the input values into several subsets and then processing the
     inputs from those subsets in parallel.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: 'Here’s the code that runs `complex_operation` several times (input range of
     ten) and measures the execution time with the timebudget package:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'After executing [this script](https://gist.github.com/mGalarnyk/8c491fbdfe6ce3e498a7f62f03fa9ca4),
     you will get an output similar to the one below:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: '![parallelizing blog 1](../Images/556b374ed5ce8fe0d936731ac27c8969.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
 - en: As you can see, it took about 39 seconds to execute this code on the laptop
     used in this tutorial. Let’s see how to improve this result.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: Process-Based Parallelism
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: The first approach is to use process-based parallelism. With this approach,
     it is possible to start several processes at the same time (concurrently). This
     way, they can concurrently perform calculations.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: Starting from Python 3, the[ multiprocessing package](https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing) is
     preinstalled and gives us a convenient syntax for launching concurrent processes.
     It provides the Pool object, which automatically divides input into subsets and
     distributes them among many processes.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: '[Here is an example](https://gist.github.com/mGalarnyk/b5455b0454815b04363ef9994f22fbf3) of
     how to use a Pool object to launch ten processes:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE2]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[Code sample](https://gist.github.com/mGalarnyk/b5455b0454815b04363ef9994f22fbf3)'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: Each process concurrently performs the complex operation. So, the code could
     theoretically reduce the total execution time by up to ten times. However, the
     output from the code below only shows about a fourfold improvement (39 seconds
     in the previous section vs 9.4 in this section).
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: '![parallelizing blog 2](../Images/586ee96a1d06dc9d5c7323aed2b130ef.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
 - en: There are a couple reasons why the improvement is not tenfold. First, the maximum
     number of processes that can run concurrently depends on the the number of CPUs
     in the system. You can find out how many CPUs your system has by using the `os.cpu_count()` method.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![Figure](../Images/e533ca816283748e2fbec835c8a9607d.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
 - en: The machine used in this tutorial has eight CPUs
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: The next reason why the improvement is not more is that the computations in
@@ -151,12 +189,15 @@
     about multiprocessing, Selva Prabhakaran has an [excellent blog](https://www.anyscale.com/blog/writing-your-first-distributed-python-application-with-ray) which
     inspired this section of the tutorial. If you would like to learn about some more
     of the trade-offs in parallel/distributed computing, [check out this tutorial](https://towardsdatascience.com/writing-your-first-distributed-python-application-with-ray-4248ebc07f41).
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: '![parallelizing blog 4](../Images/0950f9777fafefce27b2135f25e3ebea.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
 - en: Specialized Libraries
+  id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -164,27 +205,36 @@
     GIL](https://stackoverflow.com/questions/36479159/why-are-numpy-calculations-not-affected-by-the-global-interpreter-lock) and
     can use threads and other techniques to work in parallel. This section of the
     tutorial goes over the benefits of combining NumPy and multiprocessing'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: 'To demonstrate the differences between the naïve implementation and the NumPy-based
     implementation, an additional function needs to be implemented:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'The code now uses the NumPy exp and sinh functions to perform calculations
     on the input sequence. Then, the code executes complex_operation and complex_operation_numpy
     ten times using the processes pool to compare their performance:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The output below shows the performance with and without NumPy for [this script](https://gist.github.com/mGalarnyk/703c53bb98aa94d66bb6c49d48ce5c09).
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: '![parallelizing blog 5](../Images/674158bdcd5d5338901af10c077dfd72.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
 - en: NumPy offers a rapid boost in performance. Here, NumPy reduced the computation
@@ -194,12 +244,15 @@
     multiple array elements at once, rather than looping through them one at a time.
     If you are interested in learning more about this, Jake Vanderplas gave an excellent
     talk on the subject [here](https://youtu.be/EEUXKG97YRw?t=613).
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: '![parallelizing blog 6](../Images/5202adfec876af490cac38a2ffebf8a9.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
 - en: IPython Parallel
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -211,46 +264,60 @@
     applications to be developed, executed, and monitored interactively. When using
     IPython Parallel for parallel computing, you typically start with the ipcluster
     command.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'The last parameter controls the number of engines (nodes) to launch. The command
     above becomes available after [installing the ipyparallel Python package](https://ipyparallel.readthedocs.io/en/latest/).
     Below is a sample output:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '![parallelizing blog 7](../Images/49b3a897c2a925662927af084c4d024c.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
 - en: 'The next step is to provide Python code that should connect to ipcluster and
     start parallel jobs. Fortunately, IPython provides a convenient API for doing
     this. The code looks like process-based parallelism based on the Pool object:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE7]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '[Code sample](https://gist.github.com/mGalarnyk/6dab23cc6485f145d2b148fc64d34b3c)'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: 'The code above executed in a new tab in the terminal produces the output shown
     below:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: '![parallelizing blog 8](../Images/e475926323d5f6e832d388f481c8efc1.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
 - en: The execution times with and without NumPy for IPython Parallel are 13.88 ms
     and 9.98 ms, respectively. Note, there are no logs included in the standard output,
     however they can be assessed with additional commands.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: '![parallelizing blog 9](../Images/433106b430695e82862e568760b0396d.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
 - en: Ray
+  id: totrans-58
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -260,68 +327,88 @@
     state of the art machine learning libraries. Using Ray, you can take Python code
     that runs sequentially and transform it into a distributed application with minimal
     code changes.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/8e1afe4eff7de3591f54c705e0083009.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
 - en: While this tutorial briefly goes over how Ray makes it easy to parallelize plain
     Python code, it is important to note that Ray and its ecosystem also make it easy
     to parallelize existing libraries like [scikit-learn](https://medium.com/distributed-computing-with-ray/how-to-speed-up-scikit-learn-model-training-aaf17e2d1e1), [XGBoost](https://www.anyscale.com/blog/distributed-xgboost-training-with-ray), [LightGBM](https://www.anyscale.com/blog/introducing-distributed-lightgbm-training-with-ray), [PyTorch](https://medium.com/pytorch/getting-started-with-distributed-machine-learning-with-pytorch-and-ray-fd83c98fdead),
     and much more.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: To use Ray, ray.init() is needed to start all of the relevant Ray processes.
     By default, Ray creates one worker process per CPU core. If you would want to
     run Ray on a cluster, you would need to pass in a cluster address with something
     like ray.init(address='insertAddressHere').
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE8]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'The next step is to create a Ray task. This can be done by decorating a normal
     Python function with the @ray.remote decorator. This creates a task which can
     be scheduled across your laptop’s CPU cores (or Ray cluster). Here’s an example
     for the previously created complex_operation_numpy:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE9]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'In the last step, execute these functions within the ray runtime, like so:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE10]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'After executing [this script](https://gist.github.com/mGalarnyk/30c8672620c8655a37940be935899a57),
     you will get an output similar to the one below:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
 - en: '![parallelizing blog 11](../Images/464768f1d47ae3ef302ee401e8f70cac.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
 - en: The execution times with and without NumPy for Ray are 3.382sec and 419.98ms,
     respectively. It is important to remember that the performance benefits of Ray
     will be more pronounced when executing long-running tasks like the graph below
     shows.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/da5f3e3440818c336832cd06dfbab026.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
 - en: Ray has more pronounced benefits when running bigger jobs [(image source)](https://towardsdatascience.com/10x-faster-parallel-python-without-python-multiprocessing-e5017c93cce1)
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
 - en: If you would like to learn about Ray’s syntax, there is an introductory tutorial
     on it [here](https://www.anyscale.com/blog/writing-your-first-distributed-python-application-with-ray).
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
 - en: '![parallelizing blog 13](../Images/ff1bcf03b91977091f603a756bd3e9a3.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
 - en: Alternative Python Implementations
+  id: totrans-75
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -330,9 +417,11 @@
     such cases, you could use the low-level threading support from the underlying
     frameworks. This approach is beneficial if you already have experience with the
     multi-processing capabilities of .NET or Java.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
 - en: Conclusion
+  id: totrans-77
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -342,6 +431,7 @@
     that parallelized code often introduces some overhead and that the benefits of
     parallelization are more pronounced with bigger jobs rather than the short computations
     in this tutorial.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
 - en: Keep in mind that the parallelization can be more powerful for other applications.
@@ -349,85 +439,109 @@
     repetitive fine-tuning of your models. In such cases, [Ray](https://github.com/ray-project/ray) offers
     the best support due to its rich ecosystem, autoscaling, fault tolerance, and
     capability of using remote machines.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
 - en: '**[Dawid Borycki](https://www.linkedin.com/in/dawidborycki/)** is a Biomedical
     Researcher and Software Engineer, book author and conference speaker.'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
 - en: '**[Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)** is a Data
     Science Professional, and works in Developer Relations at Anyscale.'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://www.anyscale.com/blog/parallelizing-python-code). Reposted
     with permission.'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
 - en: '[How to Speed up Scikit-Learn Model Training](/2021/02/speed-up-scikit-learn-model-training.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Writing Your First Distributed Python Application with Ray](/2021/08/distributed-python-application-ray.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Dask and Pandas: No Such Thing as Too Much Data](/2021/03/dask-pandas-data.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-88
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-93
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Managing Your Reusable Python Code as a Data Scientist](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Announcing PyCaret 3.0: Open-source, Low-code Machine Learning in Python](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
 - en: '[3 Tools to Track and Visualize the Execution of Your Python Code](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[追踪和可视化 Python 代码执行的 3 个工具](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)'
 - en: '[Profiling Python Code Using timeit and cProfile](https://www.kdnuggets.com/profiling-python-code-using-timeit-and-cprofile)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 timeit 和 cProfile 进行 Python 代码性能分析](https://www.kdnuggets.com/profiling-python-code-using-timeit-and-cprofile)'
