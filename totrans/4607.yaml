@@ -1,247 +1,369 @@
 - en: Keras Callbacks Explained In Three Minutes
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Keras 回调函数三分钟解释
 - en: 原文：[https://www.kdnuggets.com/2019/08/keras-callbacks-explained-three-minutes.html](https://www.kdnuggets.com/2019/08/keras-callbacks-explained-three-minutes.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/08/keras-callbacks-explained-three-minutes.html](https://www.kdnuggets.com/2019/08/keras-callbacks-explained-three-minutes.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Andre Duong](https://www.linkedin.com/in/andreduong/), UT Dallas**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Andre Duong](https://www.linkedin.com/in/andreduong/)，德克萨斯大学达拉斯分校**'
 - en: '![Figure](../Images/ee815a0cbb38fb79a1ddf4df0d08caae.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/ee815a0cbb38fb79a1ddf4df0d08caae.png)'
 - en: '[Image Source](https://keras.io/)'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '[图片来源](https://keras.io/)'
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能。'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT。'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Building Deep Learning models without callbacks is like driving a car with no
     functioning brakes — you have little to no control over the whole process that
     is very likely to result in a disaster. In this article, you will learn how to
     monitor and improve your Deep Learning models using Keras callbacks like ModelCheckpoint
     and EarlyStopping.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在没有回调函数的情况下构建深度学习模型，就像开着没有正常刹车的车——你对整个过程几乎没有控制，很可能会导致灾难。在这篇文章中，你将学习如何使用 Keras
+    回调函数（如 ModelCheckpoint 和 EarlyStopping）来监控和改进你的深度学习模型。
 - en: What are callbacks?
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是回调函数？
 - en: 'From the [Keras documentation](https://keras.io/callbacks/):'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '来自 [Keras 文档](https://keras.io/callbacks/):'
 - en: A callback is a set of functions to be applied at given stages of the training
     procedure. You can use callbacks to get a view on internal states and statistics
     of the model during training.
+  id: totrans-15
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 回调函数是一组在训练过程的特定阶段应用的函数。你可以使用回调函数来查看模型在训练期间的内部状态和统计信息。
 - en: You define and use a callback when you want to automate some tasks after every
     training/epoch that help you have controls over the training process. This includes
     stopping training when you reach a certain accuracy/loss score, saving your model
     as a checkpoint after each successful epoch, adjusting the learning rates over
     time, and more. Let’s dive deep into some callback functions!
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你希望在每次训练/轮次后自动执行某些任务时，你会定义并使用回调函数，这些任务有助于你控制训练过程。这包括在达到特定的准确度/损失分数时停止训练、在每次成功的轮次后将模型保存为检查点、随着时间调整学习率等等。让我们深入探讨一些回调函数！
 - en: EarlyStopping
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: EarlyStopping
 - en: 'Overfitting is a nightmare for Machine Learning practitioners. One way to avoid
     overfitting is to terminate the process early. The `EarlyStopping`function has
     various metrics/arguments that you can modify to set up when the training process
     should stop. Here are some relevant metrics:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 过拟合是机器学习从业者的噩梦。避免过拟合的一种方法是提前终止训练过程。`EarlyStopping` 函数具有各种指标/参数，你可以修改这些指标来设置训练过程应何时停止。以下是一些相关的指标：
 - en: '**monitor**: value being monitored, i.e: val_loss'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**monitor**: 被监控的值，例如: val_loss'
 - en: '**min_delta**: minimum change in the monitored value. For example, min_delta=1
     means that the training process will be stopped if the absolute change of the
     monitored value is less than 1'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**min_delta**: 监控值的最小变化。例如，min_delta=1 意味着如果监控值的绝对变化小于 1，则训练过程将被停止。'
 - en: '**patience**: number of epochs with no improvement after which training will
     be stopped'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**patience**: 在训练停止之前没有改进的轮次数量。'
 - en: '**restore_best_weights**: set this metric to True if you want to keep the best
     weights once stopped'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**restore_best_weights**: 将此指标设置为 True，如果你希望在训练停止后保留最佳权重。'
 - en: 'The code example below will define an EarlyStopping function that tracks the
     val_loss value, stops the training if there are no changes towards val_loss after
     3 epochs, and keeps the best weights once the training stops:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码示例将定义一个 EarlyStopping 函数，该函数跟踪 val_loss 值，如果在 3 个轮次后 val_loss 没有变化，则停止训练，并在训练停止时保留最佳权重：
 - en: '[PRE0]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: ModelCheckpoint
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ModelCheckpoint
 - en: 'This callback saves the model after every epoch. Here are some relevant metrics:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个回调在每个epoch之后保存模型。以下是一些相关指标：
 - en: '**filepath**: the file path you want to save your model in'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**filepath**：你想保存模型的文件路径'
 - en: '**monitor**: the value being monitored'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**monitor**：正在监控的值'
 - en: '**save_best_only**: set this to True if you do not want to overwrite the latest
     best model'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**save_best_only**：如果你不想覆盖最新的最佳模型，请将其设置为True'
 - en: '**mode**: auto, min, or max. For example, you set `mode=’min’` if the monitored
     value is `val_loss` and you want to minimize it.'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**mode**：auto, min 或 max。例如，如果监控的值是 `val_loss` 且你想要最小化它，则设置 `mode=’min’`。'
 - en: 'Example:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 示例：
 - en: '[PRE1]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: LearningRateScheduler
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: LearningRateScheduler
 - en: '[PRE2]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'This one is pretty straightforward: it adjusts the learning rate over time
     using a `schedule` that you already write beforehand. This function returns the
     desired learning rate (output) based on the current epoch (epoch index as input).'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个非常简单明了：它根据你事先编写的 `schedule` 来调整学习率。此函数根据当前的epoch（作为输入的epoch索引）返回所需的学习率（输出）。
 - en: Other Callbacks functions
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 其他回调函数
 - en: 'Along with the above functions, there are other callbacks that you might encounter
     or want to use in your Deep Learning project:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了上述函数，还有其他回调函数你可能会遇到或想在深度学习项目中使用：
 - en: '**History **and** BaseLogger**: callbacks that are applied automatically to
     your model by default'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**History** 和 **BaseLogger**：默认情况下自动应用于你的模型的回调'
 - en: '**TensorBoard**: This is hands down my favorite Keras callback. This callback
     writes a log for TensorBoard, which is TensorFlow’s excellent visualization tool.
     If you have installed TensorFlow with pip, you should be able to launch TensorBoard
     from the command line: `tensorboard — logdir=/full_path_to_your_logs`'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**TensorBoard**：这是我最喜欢的Keras回调。这一回调为TensorBoard写入日志，而TensorBoard是TensorFlow的优秀可视化工具。如果你通过pip安装了TensorFlow，你应该能从命令行启动TensorBoard：`tensorboard
+    — logdir=/full_path_to_your_logs`'
 - en: '**CSVLogger**: This callback streams epoch results to a csv file'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**CSVLogger**：此回调将epoch结果流式传输到csv文件'
 - en: '**LambdaCallback**: This callback allows you to build custom callback'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**LambdaCallback**：此回调允许你构建自定义回调'
 - en: Conclusion
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: In this article, you have learned the main concept of callbacks in Keras and
     the callback functions. Keras document has a very comprehensive page on callbacks
     that you should definitely check out: [http://keras.io/callbacks/](http://keras.io/callbacks/)
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，你已经学习了Keras中回调函数的主要概念。Keras文档中有一个非常全面的回调页面，你绝对应该查看一下：[http://keras.io/callbacks/](http://keras.io/callbacks/)
 - en: Leave comments if you have any suggestions on how to improve this post. Follow
     me up at [Medium](https://medium.com/@andreduong07) or connect with me on [LinkedIn](https://www.linkedin.com/in/andreduong/) for
     more quality content!
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你对如何改进这篇文章有任何建议，请留言。关注我 [Medium](https://medium.com/@andreduong07) 或在 [LinkedIn](https://www.linkedin.com/in/andreduong/)
+    上与我联系，获取更多优质内容！
 - en: '**Bio: [Andre Duong](https://www.linkedin.com/in/andreduong/)** is a sophomore
     CS Undergrad @ UT Dallas. His interests include Machine Learning, Data Science,
     and Software Development.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Andre Duong](https://www.linkedin.com/in/andreduong/)** 是UT达拉斯的大二计算机科学本科生。他的兴趣包括机器学习、数据科学和软件开发。'
 - en: '[Original](https://medium.com/towards-artificial-intelligence/keras-callbacks-explained-in-three-minutes-846a43b44a16).
     Reposted with permission.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/towards-artificial-intelligence/keras-callbacks-explained-in-three-minutes-846a43b44a16)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Advanced Keras — Constructing Complex Custom Losses and Metrics](/2019/04/advanced-keras-constructing-complex-custom-losses-metrics.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[高级Keras——构建复杂的自定义损失和指标](/2019/04/advanced-keras-constructing-complex-custom-losses-metrics.html)'
 - en: '[Convolutional Neural Networks: A Python Tutorial Using TensorFlow and Keras](/2019/07/convolutional-neural-networks-python-tutorial-tensorflow-keras.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[卷积神经网络：使用TensorFlow和Keras的Python教程](/2019/07/convolutional-neural-networks-python-tutorial-tensorflow-keras.html)'
 - en: '[Which Deep Learning Framework is Growing Fastest?](/2019/05/which-deep-learning-framework-growing-fastest.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[哪个深度学习框架增长最快？](/2019/05/which-deep-learning-framework-growing-fastest.html)'
 - en: More On This Topic
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多主题
 - en: '[5 Machine Learning Models Explained in 5 Minutes](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5种机器学习模型在5分钟内讲解](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)'
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的三种R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用TensorFlow和Keras构建和训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[Keras 3.0: Everything You Need To Know](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Keras 3.0：你需要知道的一切](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)'
 - en: '[Understanding Bias-Variance Trade-Off in 3 Minutes](https://www.kdnuggets.com/2020/09/understanding-bias-variance-trade-off-3-minutes.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[3分钟理解偏差-方差权衡](https://www.kdnuggets.com/2020/09/understanding-bias-variance-trade-off-3-minutes.html)'
 - en: '[Build a Machine Learning Web App in 5 Minutes](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5分钟构建机器学习网络应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)'
