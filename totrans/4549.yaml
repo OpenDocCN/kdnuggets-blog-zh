@@ -1,131 +1,196 @@
 - en: The Notebook Anti-Pattern
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 笔记本反模式
 - en: 原文：[https://www.kdnuggets.com/2019/11/notebook-anti-pattern.html](https://www.kdnuggets.com/2019/11/notebook-anti-pattern.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/11/notebook-anti-pattern.html](https://www.kdnuggets.com/2019/11/notebook-anti-pattern.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Kristina Young](https://www.linkedin.com/in/kristina-georgieva/), Senior
     Data Scientist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Kristina Young](https://www.linkedin.com/in/kristina-georgieva/)，高级数据科学家**'
 - en: In the past few years there has been a large increase in tools trying to solve
     the challenge of bringing machine learning models to production. One thing that
     these tools seem to have in common is the incorporation of notebooks into production
     pipelines. This article aims to explain why this drive towards the use of notebooks
     in production is an anti pattern, giving some suggestions along the way.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在过去几年中，许多工具尝试解决将机器学习模型投入生产的挑战。这些工具似乎都有一个共同点，那就是将笔记本集成到生产流程中。本文旨在解释为什么这种推动将笔记本用于生产的趋势是一种反模式，并给出一些建议。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯的快车道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: What is a notebook?
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是笔记本？
 - en: Let’s start by defining what these are, for those readers who haven’t been exposed
     to notebooks, or call them by a different name.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们首先定义一下这些是什么，特别是对于那些没有接触过笔记本的读者，或者称其为其他名称的读者。
 - en: 'Notebooks are web interfaces that allow a user to create documents containing
     code, visualisations and text. They look as follows:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 笔记本是允许用户创建包含代码、可视化和文本的文档的 web 界面。它们如下所示：
 - en: '![Figure](../Images/6d91b303d6dd5a0c6297a07a3b9b8823.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/6d91b303d6dd5a0c6297a07a3b9b8823.png)'
 - en: Image credit to [http://arogozhnikov.github.io/2016/09/10/jupyter-features.html](http://arogozhnikov.github.io/2016/09/10/jupyter-features.html)
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：[http://arogozhnikov.github.io/2016/09/10/jupyter-features.html](http://arogozhnikov.github.io/2016/09/10/jupyter-features.html)
 - en: What are notebooks good for?
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 笔记本适合做什么？
 - en: Contrary to what you might have gathered from the introduction, Notebooks are
     not all bad. They can be quite useful in certain scenarios, which will be described
     in the sub-sections below.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 与你从引言中得到的印象相反，笔记本并非全然不好。在某些场景中，它们可能非常有用，这将在下面的子节中描述。
 - en: '**Data analysis**'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据分析**'
 - en: 'This is probably their most common use. When greeted by a new dataset, one
     needs to dig into the data and do certain visualisations in order to make sense
     of it. Notebooks are good for this because they allow us to:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可能是它们最常见的用途。当遇到新的数据集时，需要深入挖掘数据并进行某些可视化以便理解。笔记本适合这种情况，因为它们允许我们：
 - en: quickly get started
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 快速开始
 - en: see the raw data and visualisations in one place
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在一个地方查看原始数据和可视化
 - en: have access to many existing cleaning and visualisation tools
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可以使用许多现有的清理和可视化工具
 - en: document our progress and findings (which can be extracted as HTML)
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 记录我们的进展和发现（可以提取为 HTML）
 - en: '**Experimentation**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**实验**'
 - en: When it comes to machine learning, a lot of experimentation takes place before
     a final approach to solve a problem is chosen. Notebooks are good to play around
     with the data and various models in order to gain an understanding of what works
     with the give data and what does not.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习方面，通常需要进行大量实验，才能选择最终的解决方案。笔记本在玩弄数据和各种模型时很有用，以便了解什么对给定的数据有效，什么无效。
 - en: '**One time tasks**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**一次性任务**'
 - en: Notebooks are also a good playground. Sometimes one needs to perform an automated
     task once whilst perhaps not being familiar or comfortable with writing bash or
     using other similar tools.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 笔记本也是一个很好的试验场。有时需要执行一次自动化任务，但可能不熟悉或不愿意编写 bash 脚本或使用其他类似工具。
 - en: '**Teaching or technical presentations**'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**教学或技术演示**'
 - en: When teaching python, or performing a technical presentation for your peers,
     you may want to show code and the result of that code immediately after. Notebooks
     are great for this as they allow you to run code and show the result within the
     same document. They can show visualisations, represent sections with titles and
     provide additional documentation that may be needed by the presenter.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在教授 Python 或为同事进行技术演示时，你可能希望立即展示代码及其结果。笔记本在这方面表现出色，因为它们允许你在同一文档中运行代码并显示结果。它们可以展示可视化效果，使用标题表示各个部分，并提供演示者可能需要的额外文档。
 - en: '**Code assessments**'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**代码评估**'
 - en: If your company provides code challenges to candidates, notebooks can be a useful
     tool. This also depends on what your company needs to assess. Notebooks allow
     a candidate to combine documentation, explanations and their solution into a single
@@ -133,12 +198,16 @@
     has given the package requirements. However, what they cannot provide is a wide
     enough assessment of the candidate’s understanding of software engineering principles,
     as we will understand better from the next section.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你的公司向候选人提供编码挑战，笔记本可能是一个有用的工具。这也取决于你的公司需要评估的内容。笔记本允许候选人将文档、解释和他们的解决方案合并到一个页面中。只要候选人提供了包需求，它们也很容易让评估者运行。然而，它们不能提供对候选人对软件工程原则理解的广泛评估，这一点我们将在下一节中更好地理解。
 - en: What are notebooks bad at?
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 笔记本的不足之处是什么？
 - en: 'A lot of companies these days are trying to solve the challenge of bringing
     models to production. Data scientists within these companies may come from very
     varying backgrounds, including: statistics, pure mathematics, natural sciences
@@ -149,36 +218,53 @@
     deployment” tools within the Notebook ecosystem, therefore encouraging the use
     of notebooks in production. Unfortunately, as notebooks were never designed to
     serve this purpose to begin with, this can lead to unmaintainable production systems.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在许多公司都在尝试解决将模型投入生产的问题。这些公司的数据科学家可能来自各种背景，包括：统计学、纯数学、自然科学和工程学。他们共同的特点是通常能够舒适地使用笔记本进行分析和实验，因为这个工具就是为此目的而设计的。因此，大型基础设施公司一直专注于通过在笔记本生态系统中提供“一键部署”工具来弥补“生产化差距”，从而鼓励在生产中使用笔记本。不幸的是，由于笔记本最初并未设计为服务于这个目的，这可能会导致无法维护的生产系统。
 - en: The thought of notebooks in production always makes me think of the practicality
     of a onesie comic – *looks beautiful but is very impractical for certain scenarios. *
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 一想到笔记本在生产环境中的应用，我总会想到连体漫画的实用性——*看起来美观，但在某些情况下非常不实用。*
 - en: '![Figure](../Images/5b3abe314b728cec151d81f95a64e0b2.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/5b3abe314b728cec151d81f95a64e0b2.png)'
 - en: Image credit to [https://twitter.com/lorynbrantz/status/765220720595066880](https://twitter.com/lorynbrantz/status/765220720595066880)
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：[https://twitter.com/lorynbrantz/status/765220720595066880](https://twitter.com/lorynbrantz/status/765220720595066880)
 - en: Now that we know what Notebooks can do well, let’s dive into what they are really
     bad at in the following sections.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们知道了笔记本的优势，让我们在接下来的章节中探讨它们的不足之处。
 - en: '**Continuous integration (CI)**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**持续集成（CI）**'
 - en: Notebooks are not designed to be automatically ran or handled via a CI pipeline,
     as they were built for exploration. They tend to involve documentation and visualisations,
     which would add unnecessary work to any CI pipeline. Though they can be extracted
     as a normal python script and then ran on the CI pipeline, in most cases you will
     want to run the tests for the script, not the script itself (unless you are creating
     some artefact that needs to be exposed by the pipeline).
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 笔记本并不是为自动运行或通过 CI 管道处理而设计的，因为它们是为了探索而建的。它们通常涉及文档和可视化，这会给任何 CI 管道增加不必要的工作。尽管它们可以作为普通的
+    Python 脚本提取，然后在 CI 管道中运行，但在大多数情况下，你会想要运行脚本的测试，而不是脚本本身（除非你正在创建需要通过管道暴露的工件）。
 - en: '****Testing****'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '****测试****'
 - en: Notebooks are not testable, which is one of my main pain points about them.
     No testing framework has been created around these because their purpose is to
     be playgrounds, not production systems. Contrary to popular belief, testing in
@@ -187,116 +273,161 @@
     to a script, which means that the notebook is redundant anyway. It would need
     to be maintained to match the code in the extracted script, or diverge into some
     more untested chaos.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 笔记本不可测试，这是我对它们的主要痛点之一。没有围绕这些笔记本创建的测试框架，因为它们的目的是作为游乐场，而不是生产系统。与普遍的看法相反，数据产品中的测试和其他软件产品中的测试一样重要且可能。为了测试一个笔记本，必须将笔记本中的代码提取到脚本中，这意味着笔记本本身无用。它需要维护以匹配提取脚本中的代码，或者分叉成更多未经测试的混乱。
 - en: If you want to learn more about testing ML pipelines, check out the article: [Testing
     your ML pipelines](https://intothedepthsofdataengineering.wordpress.com/2019/07/18/testing-your-machine-learning-ml-pipelines/).
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解更多关于测试ML管道的内容，可以查看这篇文章： [测试你的ML管道](https://intothedepthsofdataengineering.wordpress.com/2019/07/18/testing-your-machine-learning-ml-pipelines/)。
 - en: '**Version control**'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**版本控制**'
 - en: If you have ever had to put a Notebook on git or any other version control system
     and open a pull request, you may have noticed that this pull request is completely
     unreadable. That is because the notebook needs to keep track of the state of the
     cells and therefore has a lot of changes taking place behind the curtains when
     it is ran to create your beautiful HTML view. These changes also need to be versioned,
     causing the unreadable view.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你曾经把笔记本放到git或任何其他版本控制系统中并打开了一个拉取请求，你可能会注意到这个拉取请求完全无法阅读。这是因为笔记本需要跟踪单元格的状态，因此在运行笔记本以生成你美丽的HTML视图时，后台会发生很多更改。这些更改也需要被版本化，导致视图不可读。
 - en: 'Of course you may be in a team that uses pairing and not pull requests, so
     you may not care about the pull request being unreadable. However, you lose another
     advantage of version control through this readability decrease: when reverting
     code, or looking into old versions for a change that may have introduced or fixed
     a problem, you need to rely purely on the commit messages and manually revert
     to check a change.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，你可能在一个使用配对而不是拉取请求的团队中，所以你可能不关心拉取请求不可读。然而，你通过这种可读性的降低失去了版本控制的另一个优势：在恢复代码或查看旧版本以查找可能引入或修复问题的更改时，你需要完全依赖提交信息并手动回退以检查更改。
 - en: This is a well known problem of notebooks, but also one that people are working
     on. There are some plugins that can be used in order to alleviate this at least
     in a web view of your version control system. One example of such a tool is [Review
     Notebook App](https://github.com/marketplace/review-notebook-app).
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是笔记本的一个众所周知的问题，但也是人们正在努力解决的问题。有一些插件可以用来至少在你的版本控制系统的网页视图中缓解这个问题。一个这样的工具示例是 [Review
+    Notebook App](https://github.com/marketplace/review-notebook-app)。
 - en: '**Collaboration**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**协作**'
 - en: 'Collaboration in a notebook is hard.  Your only viable collaboration option
     is to pair, or take turns on the notebook like a game of Civilization. This is
     why:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 在笔记本中进行协作是困难的。你唯一可行的协作选项是配对，或者像玩文明游戏一样轮流使用笔记本。这是因为：
 - en: Notebooks have a lot of state being managed in the background, therefore working
     asynchronously on the same notebook can lead to a lot of unmanageable merge conflicts.
     This can be a particular nightmare for remote teams.
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 笔记本在后台管理大量状态，因此在同一个笔记本上异步工作可能会导致许多不可管理的合并冲突。这对远程团队来说尤其糟糕。
 - en: All the code is also in the same place (other than imported packages), therefore
     there are continuously changes to the same code, making it harder to track the
     effect of changes. This is particularly bad due to the lack of testing (explained
     above)
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 所有的代码也都在同一个地方（除了导入的包），因此对相同的代码有持续的更改，使得跟踪更改的效果变得更加困难。这由于缺乏测试（如上所述）特别糟糕。
 - en: The issues already mentioned in version control above
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 上面提到的版本控制问题
 - en: '**State**'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**状态**'
 - en: 'State has already been mentioned in both of the above, but it deserves its
     own point for emphasis. Notebooks have a notebook wide state. This state changes
     every time that you run a cell, which may lead to the following issues:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 状态在上述两个问题中已经提到过，但它值得单独列出以强调。笔记本具有一个全局状态。每次运行单元格时，这个状态都会发生变化，这可能会导致以下问题：
 - en: Unmanageable merge conflicts within the state and not the code itself
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 状态而非代码本身的不可管理的合并冲突
 - en: Lack of readability in version control
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 版本控制的可读性差
 - en: Lack of reproducibility. You may have been working in the notebook with a state
     that is no longer reproducible because the code that lead to that state has been
     removed, yet the state has not been updated.
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 缺乏可重现性。你可能在笔记本中工作时，其状态已经无法重现，因为导致该状态的代码已经被删除，但状态没有更新。
 - en: '**Engineering standards**'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '**工程标准**'
 - en: 'Notebooks encourage bad engineering standards. I want to highlight the word **encourage **here,
     as a lot of these are things are avoidable by the user of the notebook. Anti-patterns
     that are often seen in notebooks are:'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 笔记本鼓励不良工程标准。我想强调这里的**鼓励**一词，因为很多这些问题是笔记本用户可以避免的。笔记本中常见的反模式有：
 - en: '**Reliance on state**: Notebooks rely heavily on state, especially because
     they generally involve some operations being performed on the data in the first
     few cells in order to feed this data into some algorithm. Reliance on state can
     lead to unintended consequences and side-effects throughout your code.'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**依赖状态**：笔记本严重依赖状态，尤其是因为它们通常涉及在前几个单元格中对数据执行一些操作，以便将这些数据输入到某个算法中。对状态的依赖可能导致代码中的意外后果和副作用。'
 - en: '**Duplication**: One cannot import one notebook into another, therefore when
     trying multiple experiments in different notebooks one tends to copy paste the
     common pieces across. Should one of these notebooks change, the others are immediately
     out of date. This can be improved by extracting the common parts of the code and
     importing them into the separate notebooks. Duplication is also seen a lot within
     the notebooks themselves, though this is easily avoidable by just using functions.'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**重复**：不能将一个笔记本导入到另一个笔记本中，因此在不同笔记本中进行多次实验时，往往需要复制粘贴公共部分。如果其中一个笔记本发生变化，其他笔记本立即过时。通过提取公共代码部分并将其导入到不同的笔记本中，可以改善这一点。笔记本内部也经常出现重复，不过只需使用函数即可轻松避免。'
 - en: '**Lack of testing**: One cannot test a notebook, as we have seen in the above
     testing section.'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**缺乏测试**：无法测试笔记本，如上述测试部分所示。'
 - en: '**Package management**'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**包管理**'
 - en: There is no package management in notebooks. The notebook uses the packages
     installed in the environment that it is running in. One needs to manually keep
     track of the packages used by that specific notebook, as different notebooks running
@@ -304,248 +435,363 @@
     run a new notebook in a fresh virtual environment, keeping track of that specific
     notebook’s requirements separately. Alternatively all the notebooks in an environment
     would rely on a single requirements file.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 笔记本中没有包管理。笔记本使用其运行环境中安装的包。需要手动跟踪该特定笔记本使用的包，因为在同一环境中运行的不同笔记本可能需要不同的包。一个建议是始终在新的虚拟环境中运行笔记本，分别跟踪该特定笔记本的需求。或者，环境中的所有笔记本都依赖于单个要求文件。
 - en: So what can we do?
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 那我们该怎么做呢？
 - en: '![Figure](../Images/d42284356b88cdb8461f72162b5ca23c.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/d42284356b88cdb8461f72162b5ca23c.png)'
 - en: Image credit to [https://theverybesttop10.com/animal-imposters/](https://theverybesttop10.com/animal-imposters/)
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源 [https://theverybesttop10.com/animal-imposters/](https://theverybesttop10.com/animal-imposters/)
 - en: 'Great, so now we know why notebooks in production are a bad idea and why we
     need to stop dressing up experimentation tools as productionization tools. Where
     does that leave us though? That depends on the skills and structure of your team.
     Your team most likely consists either of:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 很好，现在我们知道为什么生产环境中的笔记本是个坏主意，也知道为什么我们需要停止将实验工具伪装成生产化工具。那么这使我们处于何种境地呢？这取决于你团队的技能和结构。你的团队很可能由以下两种人组成：
 - en: Data scientists with engineering skills
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 具有工程技能的数据科学家
 - en: Or, data scientists focused on experimentation and ML/data engineers bringing
     models to production
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 或者，专注于实验的数据科学家和将模型投入生产的ML/数据工程师
 - en: So let’s take a look at the two scenarios below.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么我们来看一下下面这两种情境。
 - en: '**A team of data scientists with engineering skills**'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: '**具有工程技能的数据科学团队**'
 - en: 'In this scenario, your data science team is in charge of the models end to
     end. That is, in charge of experimentation as well as productionization. These
     are some things to keep in mind:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情境下，你的数据科学团队负责从头到尾的模型。这就是说，负责实验以及生产化。这些是需要记住的一些事项：
 - en: 'You may keep using notebooks for the experimentation if that is a preferred
     tool, but move away from these when:'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果你仍然喜欢使用笔记本进行实验，可以继续使用，但在以下情况下需要避免使用：
 - en: Collaborating
+  id: totrans-74
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 协作
 - en: Bringing the model anywhere outside of your playground
+  id: totrans-75
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将模型带到你的游乐场之外
 - en: Learn from existing software engineering frameworks and principles
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从现有的软件工程框架和原则中学习
 - en: '[Test and validate the pipeline](https://intothedepthsofdataengineering.wordpress.com/2019/07/18/testing-your-machine-learning-ml-pipelines/)'
+  id: totrans-77
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[测试和验证管道](https://intothedepthsofdataengineering.wordpress.com/2019/07/18/testing-your-machine-learning-ml-pipelines/)'
 - en: '[Continuous delivery for the models](https://www.thoughtworks.com/insights/articles/intelligent-enterprise-series-cd4ml)'
+  id: totrans-78
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模型的持续交付](https://www.thoughtworks.com/insights/articles/intelligent-enterprise-series-cd4ml)'
 - en: '[Write maintainable code](https://medium.com/mindorks/how-to-write-clean-code-lessons-learnt-from-the-clean-code-robert-c-martin-9ffc7aef870c)'
+  id: totrans-79
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[编写可维护的代码](https://medium.com/mindorks/how-to-write-clean-code-lessons-learnt-from-the-clean-code-robert-c-martin-9ffc7aef870c)'
 - en: '[Refactor along the way](https://martinfowler.com/books/refactoring.html)'
+  id: totrans-80
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[沿途重构](https://martinfowler.com/books/refactoring.html)'
 - en: 'Check out some of these tools and architectures, which may help you design
     your infrastructure or just provide inspiration (be careful, sometimes a notebook
     option is available – it’s a trap!):'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 查看一些可能帮助你设计基础设施或提供灵感的工具和架构（小心，有时会有笔记本选项可用——这是个陷阱！）：
 - en: '[Kubeflow](https://www.kubeflow.org/)'
+  id: totrans-82
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kubeflow](https://www.kubeflow.org/)'
 - en: '[Azure DevOps](https://azure.microsoft.com/en-us/services/devops/)'
+  id: totrans-83
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Azure DevOps](https://azure.microsoft.com/en-us/services/devops/)'
 - en: '[TFX](https://www.tensorflow.org/tfx)'
+  id: totrans-84
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TFX](https://www.tensorflow.org/tfx)'
 - en: '[Deploying models using AWS lambda](https://aws.amazon.com/blogs/machine-learning/how-to-deploy-deep-learning-models-with-aws-lambda-and-tensorflow/)'
+  id: totrans-85
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 AWS lambda 部署模型](https://aws.amazon.com/blogs/machine-learning/how-to-deploy-deep-learning-models-with-aws-lambda-and-tensorflow/)'
 - en: '**Separation of engineering and data science skills**'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '**工程与数据科学技能的分离**'
 - en: 'Some larger organisations prefer more specialised skillsets, where data scientists
     work on the experimental work and ML/data engineers bring those to production.
     The points listed in the above scenario are still relevant, but I have 1 additional
     suggestion specific to this scenario:'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些大型组织倾向于更专业化的技能组合，其中数据科学家从事实验工作，而 ML/数据工程师则将其推向生产。上述场景中列出的点仍然适用，但我有一个针对该场景的额外建议：
 - en: '*Please, please, please **Don’t throw the model over the fence!** Sit together,
     communicate and pair/mob program the pipeline into production. **The model doesn’t
     work unless it provides value for the end users.***'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '*请，请，请 **不要把模型扔过围栏！** 一起坐下来，沟通并进行配对/集体编程，将管道推向生产。**模型只有为最终用户提供价值时才有效。***'
 - en: Conclusion
+  id: totrans-89
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: Like with any tool, there are places to use notebooks and places to avoid using
     them in. Let’s do one last recap for these.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 像对待任何工具一样，笔记本有其使用场所，也有应避免使用的地方。让我们最后回顾一下这些内容。
 - en: '| **Good** | **Bad** |'
+  id: totrans-91
   prefs: []
   type: TYPE_TB
+  zh: '| **好** | **差** |'
 - en: '| Data analysis | Continuous integration |'
+  id: totrans-92
   prefs: []
   type: TYPE_TB
+  zh: '| 数据分析 | 持续集成 |'
 - en: '| Experimentation | Testing |'
+  id: totrans-93
   prefs: []
   type: TYPE_TB
+  zh: '| 实验 | 测试 |'
 - en: '| One time tasks | Version control |'
+  id: totrans-94
   prefs: []
   type: TYPE_TB
+  zh: '| 一次性任务 | 版本控制 |'
 - en: '| Teaching/technical presentations | Collaboration |'
+  id: totrans-95
   prefs: []
   type: TYPE_TB
+  zh: '| 教学/技术演示 | 协作 |'
 - en: '| Code assessments | State |'
+  id: totrans-96
   prefs: []
   type: TYPE_TB
+  zh: '| 代码评估 | 状态 |'
 - en: '|  | Engineering standards |'
+  id: totrans-97
   prefs: []
   type: TYPE_TB
+  zh: '|  | 工程标准 |'
 - en: '|  | Package management |'
+  id: totrans-98
   prefs: []
   type: TYPE_TB
+  zh: '|  | 包管理 |'
 - en: 'In conclusion, there are two messages that I would like you to take from this
     article:'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结来说，我希望你从这篇文章中得到两个信息：
 - en: '**To the ML practitioner**: notebooks are for experimentation, not for productionization.
     Stick to software engineering principles and frameworks for bringing things to
     production, they have been designed from past learnings which we should be leveraging.'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**对 ML 从业者**：笔记本用于实验，而不是生产化。坚持软件工程原则和框架来将事物推向生产，它们基于过去的经验教训设计而成，我们应当加以利用。'
 - en: '**To the people creating tooling**: We appreciate you working on making things
     easier for everyone ♥ , but please move away from the notebook anti-pattern. Focus
     on creating easier to use tools that encourage positive software engineering patterns.
     We want:'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**对创建工具的人**：我们感谢你们为大家简化工作 ♥，但请远离笔记本反模式。专注于创建更易用的工具，鼓励积极的软件工程模式。我们希望：'
 - en: Testability
+  id: totrans-102
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可测试性
 - en: Versioning
+  id: totrans-103
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 版本管理
 - en: Collaboration
+  id: totrans-104
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 协作
 - en: Reproducibility
+  id: totrans-105
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可重复性
 - en: Scalability
+  id: totrans-106
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可扩展性
 - en: '**Bio: [Kristina Young](https://www.linkedin.com/in/kristina-georgieva/)**
     is a Senior Data Scientist at BCG Digital Ventures. She has previously worked
     at SoundCloud as a Backend and Data Engineer in the Recommendations team. Her
     previous experience is as a consultant and researcher. She has worked as a back
     end, web and mobile developer in the past on a variety of technologies.'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：[Kristina Young](https://www.linkedin.com/in/kristina-georgieva/)** 是BCG
+    Digital Ventures的高级数据科学家。她曾在SoundCloud担任推荐团队的后端和数据工程师。她的工作经历包括咨询和研究。她曾在各种技术领域担任过后端、Web和移动开发人员。'
 - en: '[Original](https://intothedepthsofdataengineering.wordpress.com/2019/10/21/the-notebook-anti-pattern/).
     Reposted with permission.'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始文章](https://intothedepthsofdataengineering.wordpress.com/2019/10/21/the-notebook-anti-pattern/)。已获得转载许可。'
 - en: '**Related:**'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Testing Your Machine Learning Pipelines](/2019/11/testing-machine-learning-pipelines.html)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[测试你的机器学习管道](/2019/11/testing-machine-learning-pipelines.html)'
 - en: '[Automatic Version Control for Data Scientists](/2019/09/automatic-version-control-data-scientists.html)'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家的自动版本控制](/2019/09/automatic-version-control-data-scientists.html)'
 - en: '[Easy, One-Click Jupyter Notebooks](/2019/07/easy-one-click-jupyter-notebooks.html)'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[简易一键Jupyter Notebook](/2019/07/easy-one-click-jupyter-notebooks.html)'
 - en: More On This Topic
+  id: totrans-113
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[An Overview of Mercury: Creating Data Science Portfolio and…](https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html)'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Mercury概述：创建数据科学作品集和…](https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html)'
 - en: '[How to Setup Julia on Jupyter Notebook](https://www.kdnuggets.com/2022/11/setup-julia-jupyter-notebook.html)'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在Jupyter Notebook中设置Julia](https://www.kdnuggets.com/2022/11/setup-julia-jupyter-notebook.html)'
 - en: '[10 Jupyter Notebook Tips and Tricks for Data Scientists](https://www.kdnuggets.com/2023/06/10-jupyter-notebook-tips-tricks-data-scientists.html)'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家的10个Jupyter Notebook技巧和窍门](https://www.kdnuggets.com/2023/06/10-jupyter-notebook-tips-tricks-data-scientists.html)'
 - en: '[Jupyter Notebook Magic Methods Cheat Sheet](https://www.kdnuggets.com/jupyter-notebook-magic-methods-cheat-sheet)'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Jupyter Notebook魔法方法备忘单](https://www.kdnuggets.com/jupyter-notebook-magic-methods-cheat-sheet)'
 - en: '[Python in Finance: Real Time Data Streaming within Jupyter Notebook](https://www.kdnuggets.com/python-in-finance-real-time-data-streaming-within-jupyter-notebook)'
+  id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[金融中的Python：在Jupyter Notebook内实时数据流](https://www.kdnuggets.com/python-in-finance-real-time-data-streaming-within-jupyter-notebook)'
 - en: '[5 Free Templates for Data Science Projects on Jupyter Notebook](https://www.kdnuggets.com/5-free-templates-for-data-science-projects-on-jupyter-notebook)'
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5个免费的数据科学项目模板在Jupyter Notebook](https://www.kdnuggets.com/5-free-templates-for-data-science-projects-on-jupyter-notebook)'
