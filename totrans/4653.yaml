@@ -1,26 +1,36 @@
 - en: 'Who is your Golden Goose?: Cohort Analysis'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '谁是你的“金鹅”?: 同期分析'
 - en: 原文：[https://www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html](https://www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html](https://www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/05/golden-goose-cohort-analysis.html/2#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/05/golden-goose-cohort-analysis.html/2#comments)'
 - en: '**By [Jiwon Jeong](https://www.linkedin.com/in/jiwon-jeong/), a Graduate Research
     Assistant at Yonsei University**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[由 Jiwon Jeong](https://www.linkedin.com/in/jiwon-jeong/)，延世大学研究生助理**'
 - en: Customer segmentation is the technique of dividing customers into groups based
     on their purchase patterns to identify who are the most profitable groups. In
     segmenting customers, various criteria can also be used depending on the market
     such as geographic, demographic characteristics or behavior bases. This technique
     assumes that groups with different features require different approaches to marketing
     and wants to figure out the groups who can boost their profitability the most.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 客户细分是一种根据客户购买模式将客户划分为不同组的技术，以识别哪些是最有利可图的组。在细分客户时，也可以根据市场使用各种标准，例如地理、人口统计特征或行为基础。这种技术假设具有不同特征的群体需要不同的营销方法，并希望找出那些能最大限度提升盈利的群体。
 - en: Today, we are going to discuss how to do customer segmentation analysis with
     the [online retail dataset](https://www.kaggle.com/jihyeseo/online-retail-data-set-from-uci-ml-repo) from
     UCI ML repo. This analysis will be focused on two steps getting the RFM values
@@ -28,217 +38,327 @@
     also available on my [Github](https://github.com/jjone36/Cohort/blob/master/Cohort_Anaylsis_Medium.ipynb).
     The original resource of this note is from the course “[Customer Segmentation
     Analysis in Python](https://www.datacamp.com/courses/customer-segmentation-in-python).”
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天，我们将讨论如何使用来自 UCI ML repo 的 [在线零售数据集](https://www.kaggle.com/jihyeseo/online-retail-data-set-from-uci-ml-repo)
+    进行客户细分分析。此分析将重点关注两个步骤：获取 RFM 值和使用 K-means 算法进行聚类。数据集和完整代码也可以在我的 [Github](https://github.com/jjone36/Cohort/blob/master/Cohort_Anaylsis_Medium.ipynb)
+    上找到。本笔记的原始资源来自课程 “[Python 中的客户细分分析](https://www.datacamp.com/courses/customer-segmentation-in-python)。”
 - en: What is RFM?
+  id: totrans-6
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是 RFM？
 - en: RFM is an acronym of recency, frequency and monetary. **Recency **is about when
     was the last order of a customer. It means the number of days since a customer
     made the last purchase. If it’s a case for a website or an app, this could be
     interpreted as the last visit day or the last login time.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: RFM 是近期（Recency）、频率（Frequency）和货币（Monetary）的首字母缩略词。**近期** 指的是客户最后一次订单的时间。这意味着自客户最后一次购买以来的天数。如果是网站或应用程序的情况，这可以解释为最后一次访问日期或最后一次登录时间。
 - en: '**Frequency **is about the number of purchase in a given period. It could be
     3 months, 6 months or 1 year. So we can understand this value as for how often
     or how many a customer used the product of a company. The bigger the value is,
     the more engaged the customers are. Could we say them as our VIP? Not necessary.
     Cause we also have to think about how much they actually paid for each purchase,
     which means monetary value.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '**频率** 指的是在给定时间段内的购买次数。这可以是 3 个月、6 个月或 1 年。因此，我们可以将此值理解为客户使用公司产品的频率或数量。值越大，客户的参与度越高。我们可以称他们为
+    VIP 吗？不一定。因为我们还必须考虑他们每次购买实际支付了多少，这意味着货币价值。'
 - en: '**Monetary **is the total amount of money a customer spent in that given period.
     Therefore big spenders will be differentiated with other customers such as MVP
     or VIP.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '**货币** 是指客户在给定时间段内花费的总金额。因此，大额消费的客户将与其他客户如 MVP 或 VIP 区分开来。'
 - en: '![Figure](../Images/3425b2287bfac7a1cfbe638805f406cb.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/3425b2287bfac7a1cfbe638805f406cb.png)'
 - en: Photo from CleverTap
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于 CleverTap
 - en: These three values are commonly used quantifiable factors in cohort analysis.
     Because of their simple and intuitive concept, they are popular among other customer
     segmentation methods.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 这三个值是同期分析中常用的可量化因素。由于它们简单直观的概念，它们在其他客户细分方法中也很受欢迎。
 - en: Import the data
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 导入数据
 - en: So we are going to apply RFM to our cohort analysis today. The dataset we are
     going to use is the transaction history data occurring from Jan 2010 to Sep 2011\.
     As this is a tutorial guideline for cohort analysis, I’m going to use only the
     randomly selected fraction of the original dataset.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以今天我们将把 RFM 应用于我们的同期分析。我们将使用的数据集是从 2010 年 1 月到 2011 年 9 月的交易历史数据。由于这是同期分析的教程指南，我将仅使用原始数据集的随机选取部分。
 - en: '[PRE0]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![importing rfm data](../Images/82ba67ed2348ffcb5e56742d2640f096.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![importing rfm data](../Images/82ba67ed2348ffcb5e56742d2640f096.png)'
 - en: Calculating RFM values
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 计算RFM值
 - en: The first thing we’re going to count is the recency value, the number of days
     since the last order of a customer. From which column could we get that value? **InvoiceData**.
     With this column, we can get when was the first purchase and when was the last
     purchase of a customer. Let’s call the first one as **CohortDay**. As **InvoiceDate** also
     contains additional time data, we need to extract the year, month and day part.
     After that, we’ll get **CohortDay **which is the minimum of **InvoiceDay**.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们首先要计算的是最近值，即自客户最后一次订单以来的天数。我们可以从哪个列中获得这个值？**InvoiceData**。通过这个列，我们可以得到客户的首次购买和最后一次购买的时间。我们将第一次购买称为**CohortDay**。由于**InvoiceDate**还包含附加的时间数据，我们需要提取年、月和日部分。之后，我们将得到**CohortDay**，即**InvoiceDay**的最小值。
 - en: '[PRE1]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![calculating rfm values](../Images/5a33209e8858b432108dd99ae9c19301.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![calculating rfm values](../Images/5a33209e8858b432108dd99ae9c19301.png)'
 - en: As we randomly chose the subset of the data, we also need to know the time period
     of our data. Like what you can see below, the final day of our dataset is December
     9th, 2011\. Therefore set December 10th as our pining date and count backward
     the number of days from the latest purchase for each customer. That will be the
     recency value.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们随机选择了数据的子集，我们还需要了解数据的时间周期。如下面所示，我们的数据集的最后一天是2011年12月9日。因此，将12月10日设为我们的基准日期，并从每位客户的最近一次购买向后计算天数。这将是最近值。
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![Figure](../Images/14ab7f9a8d69a837a9d3ac8359fbe2dd.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/14ab7f9a8d69a837a9d3ac8359fbe2dd.png)'
 - en: '[PRE3]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Before getting the recency, let’s count one more value in advance, the total
     amount of money each customer spent. This is for counting the monetary value.
     How can we get that? Easy! Multiplying the product price and the quantity of the
     order in each row.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 在计算最近值之前，让我们先计算另一个值，即每位客户花费的总金额。这是为了计算货币值。我们怎么得到这个值？很简单！将每行的产品价格与订单数量相乘。
 - en: '[PRE4]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![total spend dataframe](../Images/fb9408756d1642695f6129e79e9076bd.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![total spend dataframe](../Images/fb9408756d1642695f6129e79e9076bd.png)'
 - en: Now we are ready to get the three RFM values at once. I’ll group the data for
     each customer and aggregate it for each recency, frequency, and monetary value.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们准备一次性获取三个RFM值。我将按客户分组数据，并对每个最近、频率和货币值进行汇总。
 - en: '[PRE5]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![RFM table](../Images/312a3e54cb8f148d479933ff79cf8817.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![RFM table](../Images/312a3e54cb8f148d479933ff79cf8817.png)'
 - en: RFM quartiles
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: RFM四分位数
 - en: Now we’ll group the customers based on RFM values. Cause these are continuous
     values, we can also use the quantile values and divide them into 4 groups.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将基于RFM值对客户进行分组。由于这些是连续值，我们也可以使用分位数值，将其分成4组。
 - en: '[PRE6]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Please pay extra care for the `r_labels`. I gave the labels in descending order.
     Why is that? Because recency means how much time has elapsed since a customer’s
     last order. Therefore the smaller the value is, the more engaged a customer to
     that brand. Now let’s make a new column for indicating group labels.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 请特别注意`r_labels`。我按降序给出了标签。为什么呢？因为最近值表示自客户最后一次订单以来经过了多少时间。因此，值越小，客户对品牌的参与度越高。现在，让我们创建一个新列以指示组标签。
 - en: '[PRE7]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![RFM segmentation](../Images/7998d13c65a432e39e4cae794cadebd1.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![RFM segmentation](../Images/7998d13c65a432e39e4cae794cadebd1.png)'
 - en: I attached all three labels in one cell as `RFM_Segment`. In this way, we can
     easily check what level or segment a customer belongs to. `RFM_Score` is the total
     sum of the three values. It doesn’t necessarily have to be the sum so the mean
     value is also possible. Moreover, we can catch further patterns with the mean
     or count values of recency, frequency and monetary grouped by this score like
     below.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将所有三个标签附在一个单元格中，称为`RFM_Segment`。这样，我们可以轻松检查客户属于哪个级别或段。`RFM_Score`是这三个值的总和。它不一定非得是总和，均值也是可能的。此外，我们还可以通过以下方式，使用均值或计数值来捕捉进一步的模式。
 - en: '[PRE8]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![RFM_score](../Images/066155e851839111bdb97293bdb92917.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![RFM_score](../Images/066155e851839111bdb97293bdb92917.png)'
 - en: '`RFM_Score` will be the total score of a customer’s engagement or loyalty.
     Summing up the three values altogether, we can finally categorize customers into
     ‘Gold,’ ‘Silver,’ ‘Bronze,’ and ‘Green’.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '`RFM_Score`将是客户参与度或忠诚度的总分。将这三个值加在一起，我们最终可以将客户分类为“金”、“银”、“铜”和“绿”。'
 - en: '[PRE9]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![cohort analysis with RFM values](../Images/18d7bfac61225ee0d20d57b5a7a7b654.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![cohort analysis with RFM values](../Images/18d7bfac61225ee0d20d57b5a7a7b654.png)'
 - en: Great! We’re done with one cohort analysis with RFM values. We identified who
     is our golden goose and where we should take extra care. Now why don’t we try
     a different method for customer segmentation and compare the two results?
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 太好了！我们已经完成了一个使用RFM值的群体分析。我们识别了我们的“金鹅”以及需要额外关注的地方。现在为什么不尝试一种不同的方法进行客户细分，并比较这两种结果呢？
 - en: '* * *'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-45
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT需求'
 - en: '* * *'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Last call: Stefan Krawcyzk’s ''Mastering MLOps'' Live Cohort](https://www.kdnuggets.com/2022/08/sphere-last-call-stefan-krawcyzk-mastering-mlops.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[最后呼叫：Stefan Krawcyzk的《掌握MLOps》直播小组](https://www.kdnuggets.com/2022/08/sphere-last-call-stefan-krawcyzk-mastering-mlops.html)'
 - en: '[Using Cluster Analysis to Segment Your Data](https://www.kdnuggets.com/using-cluster-analysis-to-segment-your-data)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用聚类分析进行数据细分](https://www.kdnuggets.com/using-cluster-analysis-to-segment-your-data)'
 - en: '[Best Architecture for Your Text Classification Task: Benchmarking…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本分类任务的最佳架构：基准测试…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)'
 - en: '[Market Data and News: A Time Series Analysis](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[市场数据与新闻：时间序列分析](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)'
 - en: '[The Best Python Courses: An Analysis Summary](https://www.kdnuggets.com/2022/01/best-python-courses-analysis-summary.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[最佳Python课程：分析总结](https://www.kdnuggets.com/2022/01/best-python-courses-analysis-summary.html)'
 - en: '[Machine Learning’s Sweet Spot: Pure Approaches in NLP and Document Analysis](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习的甜点：NLP和文档分析中的纯方法](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)'
