@@ -1,47 +1,72 @@
 - en: 'Python Data Preparation Case Files: Group-based Imputation'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python 数据准备案例文件：基于分组的插补
 - en: 原文：[https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-group-based-imputation.html](https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-group-based-imputation.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-group-based-imputation.html](https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-group-based-imputation.html)
 - en: '![Header image](../Images/00e1dafff08a57b5dc7e3551854f78ad.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![标题图像](../Images/00e1dafff08a57b5dc7e3551854f78ad.png)'
 - en: This is the second post in this series on Python data preparation, and focuses
     on group-based imputation.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是本系列关于 Python 数据准备的第二篇文章，专注于基于分组的插补。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: The Refresher
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 复习
 - en: While the first post demonstrated a simple manner for imputing missing values,
     based on the same variable's mean, this isn't really the most complex approach
     to filling in missing values. Suppose, as in our dataset example (see [the first
@@ -49,151 +74,229 @@
     have customers in 4 states, and we are interested in using residence in these
     states as a means to treating customers as distinct groups, and filling in missing
     values accordingly. This is a more nuanced approach.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然第一篇文章展示了一种简单的插补缺失值的方法，基于相同变量的均值，但这并不是填补缺失值的最复杂方法。假设，如我们的数据集示例（见[第一篇文章](/2017/09/python-data-preparation-case-files-basic-imputation.html)），我们有四个州的客户，我们希望利用这些州的居住地作为区分客户的手段，并相应地填补缺失值。这是一种更为细致的方法。
 - en: A bit more specifically, let's use the mean account balance of customers in
     a given state to determine the value to use for other customer missing balance
     values in the same state.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 更具体地说，让我们使用给定状态下客户的平均账户余额来确定在相同状态下其他客户缺失余额值的替代值。
 - en: I won't go into any more detail about the mock data or task; feel free to look
     at [the first post](/2017/09/python-data-preparation-case-files-basic-imputation.html)
     for the requisite background. Also, [grab the dataset here](https://drive.google.com/file/d/0B6GhBwm5vaB2ekdlZW5WZnppb28/view?usp=sharing)
     (as it sits after the first post's exercises).
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我不会详细介绍模拟数据或任务；可以查看[第一篇文章](/2017/09/python-data-preparation-case-files-basic-imputation.html)以获取必要的背景。同时，[在这里获取数据集](https://drive.google.com/file/d/0B6GhBwm5vaB2ekdlZW5WZnppb28/view?usp=sharing)（在第一篇文章练习后的状态）。
 - en: '![Dataset](../Images/b227855f302f981c69eaedf6495c4b1a.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![数据集](../Images/b227855f302f981c69eaedf6495c4b1a.png)'
 - en: '**Figure 1:** Mock bank dataset for our exercise (after exercise 1).'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 1：** 我们练习的模拟银行数据集（练习 1 之后）。'
 - en: The Process
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 过程
 - en: The process is pretty cut and dry this time out, as we only have a single task.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 这次的过程非常简单，因为我们只有一个任务。
 - en: '**Imputing Missing Account Balances**'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**插补缺失账户余额**'
 - en: We will assume that our domain experts have concluded that missing account balances
     are best replaced with the mean account balances of customers in the same state
     (lending to why we had to drop instances with missing state values). This will
     be done for both checking and savings accounts.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将假设我们的领域专家已得出结论，缺失的账户余额最好用同一状态下客户的平均账户余额来替代（这也是为什么我们必须删除缺少状态值的实例）。这将适用于支票账户和储蓄账户。
 - en: First, let's have a look at the current state of missing values in our dataset.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们看看数据集中缺失值的当前状态。
 - en: '[PRE0]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Our checking account balance (pardon the 'q'; I'm Canadian) and savings account
     balances have 23 and 91 missing values, respectively.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的支票账户余额（请原谅“q”；我是加拿大人）和储蓄账户余额分别有 23 个和 91 个缺失值。
 - en: The Code
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 代码
 - en: First, let's compare the by-state balance means with the overall mean (prior
     to imputation), for interest's sake.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们比较按州划分的余额均值与总体均值（插补前），以满足兴趣。
 - en: '[PRE2]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[PRE3]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Though perhaps not as dramatic as hoped, it should be clear to see why such
     group-based imputation is a valid approach to a problem such as this. The mean
     savings account balance difference between California ($9174.56) and New York
     ($10443.61), for example, is nearly $1270\. Taking an overall mean of $9603.64
     to fill in missing values would not provide the most accurate picture. This goes
     to [goodness of fit](https://en.wikipedia.org/wiki/Goodness_of_fit).
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然可能没有预期的那么戏剧性，但很明显为什么这种基于分组的填补方法对于这种问题是有效的。例如，加利福尼亚州（$9174.56）和纽约州（$10443.61）之间的平均储蓄账户余额差异接近$1270。使用$9603.64的整体均值来填补缺失值不会提供最准确的画面。这涉及到[拟合优度](https://en.wikipedia.org/wiki/Goodness_of_fit)。
 - en: Let's go ahead and fill in these missing values by using the Pandas 'groupby'
     and 'transform' functionality, along with a lambda function. We then round the
     result in the line of code beneath.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以使用Pandas的‘groupby’和‘transform’功能，以及一个lambda函数来填补这些缺失值。然后我们在下面的代码行中对结果进行四舍五入。
 - en: '[PRE5]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: That's it. Our pertinent missing values are now filled in with the mean values
     of those in the same state.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样。我们相关的缺失值现在已经用相同州的均值填补好了。
 - en: 'Checking the results:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 检查结果：
 - en: '[PRE6]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Bingo!
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 好了！
 - en: Now let's save the dataset for next time.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们保存数据集以备下次使用。
 - en: '[PRE7]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: That's it for this exercise. We still have to deal with 'sex' and 'age' variable
     missing values. Next time we will look at regression-based imputation to help
     deal with one of these.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是本次练习的全部内容。我们仍然需要处理‘性别’和‘年龄’变量的缺失值。下次我们将探讨基于回归的填补方法，以帮助处理其中之一。
 - en: '**Related**:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[7 Steps to Mastering Data Preparation with Python](/2017/06/7-steps-mastering-data-preparation-python.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[7步掌握Python数据准备](/2017/06/7-steps-mastering-data-preparation-python.html)'
 - en: '[Machine Learning Workflows in Python from Scratch Part 1: Data Preparation](/2017/05/machine-learning-workflows-python-scratch-part-1.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从零开始的Python机器学习工作流第1部分：数据准备](/2017/05/machine-learning-workflows-python-scratch-part-1.html)'
 - en: '[Data Preparation Tips, Tricks, and Tools: An Interview with the Insiders](/2016/10/data-preparation-tips-tricks-tools.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据准备技巧、窍门和工具：与内部人士的访谈](/2016/10/data-preparation-tips-tricks-tools.html)'
 - en: More On This Topic
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[3 Approaches to Data Imputation](https://www.kdnuggets.com/2022/12/3-approaches-data-imputation.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据填补的3种方法](https://www.kdnuggets.com/2022/12/3-approaches-data-imputation.html)'
 - en: '[Approaches to Data Imputation](https://www.kdnuggets.com/2023/01/approaches-data-imputation.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据填补方法](https://www.kdnuggets.com/2023/01/approaches-data-imputation.html)'
 - en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Datawig，一个AWS深度学习库进行缺失值填补](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
 - en: '[Data Preparation and Raw Data in Machine Learning](https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的数据准备和原始数据](https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html)'
 - en: '[Data Preparation with SQL Cheatsheet](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL数据准备备忘单](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'
 - en: '[Data Preparation in R Cheatsheet](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[R中的数据准备备忘单](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)'
