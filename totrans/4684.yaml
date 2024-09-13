@@ -1,97 +1,142 @@
 - en: All you need to know about text preprocessing for NLP and Machine Learning
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 关于NLP和机器学习的文本预处理，你需要知道的一切
 - en: 原文：[https://www.kdnuggets.com/2019/04/text-preprocessing-nlp-machine-learning.html](https://www.kdnuggets.com/2019/04/text-preprocessing-nlp-machine-learning.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/04/text-preprocessing-nlp-machine-learning.html](https://www.kdnuggets.com/2019/04/text-preprocessing-nlp-machine-learning.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Kavita Ganesan](http://kavita-ganesan.com/), Data Scientist**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Kavita Ganesan](http://kavita-ganesan.com/)，数据科学家**。'
 - en: Based on some recent conversations, I realized that text preprocessing is a
     severely overlooked topic. A few people I spoke to mentioned inconsistent results
     from their NLP applications only to realize that they were not preprocessing their
     text or were using the wrong kind of text preprocessing for their project.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据最近的一些对话，我意识到文本预处理是一个严重被忽视的话题。我谈到的几个人提到他们的NLP应用出现了不一致的结果，结果发现他们没有预处理文本或使用了不适合项目的文本预处理方法。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行IT管理'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: With that in mind, I thought of shedding some light around what text preprocessing
     really is, the different methods of text preprocessing, and a way to estimate
     how much preprocessing you may need. For those interested, I’ve also made some [text
     preprocessing code snippets](https://github.com/kavgan/nlp-text-mining-working-examples/tree/master/text-pre-processing) for
     you to try. Now, let’s get started!
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑到这一点，我想澄清一下什么是文本预处理，文本预处理的不同方法，以及如何估计你可能需要多少预处理。对于感兴趣的人，我还提供了一些[文本预处理代码片段](https://github.com/kavgan/nlp-text-mining-working-examples/tree/master/text-pre-processing)供你尝试。现在，让我们开始吧！
 - en: What is text preprocessing?
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是文本预处理？
 - en: To preprocess your text simply means to bring your text into a form that is ***predictable***and ***analyzable***for
     your task. A task here is a combination of approach and domain. For example, extracting
     top keywords with TF-IDF (approach) from Tweets (domain) is an example of a *Task*.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 对文本进行预处理只是将文本转化为对你的任务***可预测***和***可分析***的形式。这里的任务是方法和领域的组合。例如，从推文（领域）中提取顶级关键词（方法）就是一个*任务*的例子。
 - en: '*Task = approach + domain*'
+  id: totrans-14
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*任务 = 方法 + 领域*'
 - en: 'One task’s ideal preprocessing can become another task’s worst nightmare. So
     take note: text preprocessing is not directly transferable from task to task.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个任务的理想预处理可能会变成另一个任务的噩梦。因此，请注意：文本预处理不能直接从任务到任务转移。
 - en: Let’s take a very simple example, let’s say you are trying to discover commonly
     used words in a news dataset. If your pre-processing step involves removing [stop
     words](http://kavita-ganesan.com/what-are-stop-words/) because some other task
     used it, then you are probably going to miss out on some of the common words as
     you have ALREADY eliminated it. So really, it’s not a one-size-fits-all approach.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们举一个非常简单的例子，假设你正在尝试发现新闻数据集中常用的词汇。如果你的预处理步骤包括删除[停用词](http://kavita-ganesan.com/what-are-stop-words/)，因为其他任务使用了它，那么你可能会错过一些常见词汇，因为你已经*删除*了它。所以，实际上，它并不是一个一刀切的方法。
 - en: Types of text preprocessing techniques
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文本预处理技术类型
 - en: There are different ways to preprocess your text. Here are some of the approaches
     that you should know about and I will try to highlight the importance of each.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 有不同的方法来预处理文本。以下是一些你应该了解的方法，我会尝试强调每种方法的重要性。
 - en: Lowercasing
+  id: totrans-19
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 小写化
 - en: Lowercasing ALL your text data, although commonly overlooked, is one of the
     simplest and most effective form of text preprocessing. It is applicable to most
     text mining and NLP problems and can help in cases where your dataset is not very
     large and significantly helps with consistency of expected output.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 小写化所有文本数据，虽然常被忽视，却是最简单和最有效的文本预处理方法之一。它适用于大多数文本挖掘和自然语言处理问题，并且在数据集不大时可以显著提高预期输出的一致性。
 - en: Quite recently, one of my blog readers trained a [word embedding model for similarity
     lookups](http://kavita-ganesan.com/gensim-word2vec-tutorial-starter-code/). He
     found that different variation in input capitalization (e.g. ‘Canada’ vs. ‘canada’)
@@ -100,75 +145,106 @@
     was insufficient evidence for the neural-network to effectively learn the weights
     for the less common version. This type of issue is bound to happen when your dataset
     is fairly small, and lowercasing is a great way to deal with sparsity issues.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 最近，我的一位博客读者训练了一个[word embedding model for similarity lookups](http://kavita-ganesan.com/gensim-word2vec-tutorial-starter-code/)。他发现输入大小写的不同变化（例如‘Canada’与‘canada’）会给出不同类型的输出或根本没有输出。这可能是因为数据集中存在混合大小写的‘Canada’，且神经网络的证据不足以有效地学习较少见版本的权重。当数据集相对较小时，这种问题很容易出现，小写化是解决稀疏性问题的好方法。
 - en: 'Here is an example of how lowercasing solves the sparsity issue, where the
     same words with different cases map to the same lowercase form:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是一个小写化如何解决稀疏性问题的例子，其中相同单词的不同大小写映射到相同的小写形式：
 - en: '![](../Images/2e10cb05281aa5edaddfe9d48d76c788.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2e10cb05281aa5edaddfe9d48d76c788.png)'
 - en: '**Word with different cases all map to the same lowercase form**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**不同大小写的单词都映射到相同的小写形式**'
 - en: Another example where lowercasing is very useful is for search. Imagine, you
     are looking for documents containing “usa”. However, no results were showing up
     because “usa” was indexed as **“USA”.** Now, who should we blame? The U.I. designer
     who set-up the interface or the engineer who set-up the search index?
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个小写化非常有用的例子是搜索。假设你在寻找包含“usa”的文档。然而，没有结果出现，因为“usa”被索引为**“USA”。** 现在，我们应该责怪谁？设置界面的UI设计师还是设置搜索索引的工程师？
 - en: While lowercasing should be standard practice, I’ve also had situations where
     preserving the capitalization was important. For example, in predicting the programming
     language of a source code file. The word System in Java is quite different from system in
     python. Lowercasing the two makes them identical, causing the classifier to lose
     important predictive features. While lowercasing *is generally *helpful, it may
     not be applicable for all tasks.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然小写化应该是标准做法，但我也遇到过需要保留大小写的情况。例如，在预测源代码文件的编程语言时，Java中的单词System与Python中的system有很大不同。将两者小写化会使它们变得相同，从而导致分类器丧失重要的预测特征。虽然小写化*通常是*有帮助的，但它可能不适用于所有任务。
 - en: Stemming
+  id: totrans-27
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 词干提取
 - en: Stemming is the process of reducing inflection in words (e.g. troubled, troubles)
     to their root form (e.g. trouble). The “root” in this case may not be a real root
     word, but just a canonical form of the original word.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 词干提取是将单词（例如troubled，troubles）的词形变化减少到其词根形式（例如trouble）的过程。在这种情况下，“根”可能不是一个真正的词根单词，而只是原始单词的规范形式。
 - en: Stemming uses a crude heuristic process that chops off the ends of words in
     the hope of correctly transforming words into its root form. So the words “trouble”,
     “troubled” and “troubles” might actually be converted to troublinstead of trouble because
     the ends were just chopped off (ughh, how crude!).
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 词干提取使用一种粗糙的启发式过程，试图通过去掉单词末尾的部分来正确地将单词转换为其词根形式。因此，单词“trouble”、“troubled”和“troubles”可能实际上会被转换为troubl，而不是trouble，因为末尾部分只是被切掉了（唉，真粗糙！）。
 - en: 'There are different algorithms for stemming. The most common algorithm, which
     is also known to be empirically effective for English, is [Porters Algorithm](https://tartarus.org/martin/PorterStemmer/).
     Here is an example of stemming in action with Porter Stemmer:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 有不同的词干提取算法。最常见的算法，也被实证证明对英语有效，是[Porters Algorithm](https://tartarus.org/martin/PorterStemmer/)。以下是Porter
+    Stemmer进行词干提取的实际例子：
 - en: '![](../Images/0eb52986e6bd9d09ccb2d5c531905e44.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0eb52986e6bd9d09ccb2d5c531905e44.png)'
 - en: '**Effects of stemming inflected words**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**词干提取对变形词的影响**'
 - en: Stemming is useful for dealing with sparsity issues as well as standardizing
     vocabulary. I’ve had success with stemming in search applications in particular.
     The idea is that, if say you search for “deep learning classes”, you also want
     to surface documents that mention “deep learning ***class***” as well as “deep ***learn*** classes”,
     although the latter doesn’t sound right. But you get where we are going with this.
     You want to match all variations of a word to bring up the most relevant documents.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 词干提取对于处理稀疏性问题以及标准化词汇很有用。我在搜索应用中尤其成功。这个想法是，例如，如果你搜索“深度学习课程”，你还希望能够检索提到“深度学习***班级***”以及“深度***学习***课程”的文档，尽管后者听起来不太对。但你明白我们的意思。你希望匹配一个词的所有变体，以获取最相关的文档。
 - en: In most of my previous text classification work however, stemming only marginally
     helped improved classification accuracy as opposed to using better engineered
     features and text enrichment approaches such as using word embeddings.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，在我以前的大多数文本分类工作中，词干提取仅在一定程度上提高了分类准确性，相比之下，使用更好的特征工程和文本丰富化方法（例如，使用词嵌入）更为有效。
 - en: Lemmatization
+  id: totrans-35
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 词形还原
 - en: 'Lemmatization on the surface is very similar to stemming, where the goal is
     to remove inflections and map a word to its root form. The only difference is
     that, lemmatization tries to do it the proper way. It doesn’t just chop things
@@ -176,14 +252,20 @@
     would map to “good”. It may use a dictionary such as [WordNet for mappings](https://www.nltk.org/_modules/nltk/stem/wordnet.html) or
     some special [rule-based approaches](https://www.semanticscholar.org/paper/A-Rule-based-Approach-to-Word-Lemmatization-Plisson-Lavrac/5319539616e81b02637b1bf90fb667ca2066cf14).
     Here is an example of lemmatization in action using a WordNet-based approach:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 词形还原在表面上与词干提取非常相似，目标是去除词的屈折形式并将其映射到根形式。唯一的区别是，词形还原试图以正确的方式进行。它不仅仅是削减，而是将词实际转换为根词。例如，词“better”将映射到“good”。它可能使用像[WordNet的映射](https://www.nltk.org/_modules/nltk/stem/wordnet.html)这样的字典，或者一些特殊的[基于规则的方法](https://www.semanticscholar.org/paper/A-Rule-based-Approach-to-Word-Lemmatization-Plisson-Lavrac/5319539616e81b02637b1bf90fb667ca2066cf14)。以下是使用基于WordNet的方法进行词形还原的示例：
 - en: '![](../Images/b66bdaba8be78fc48941b003a6f3b76e.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b66bdaba8be78fc48941b003a6f3b76e.png)'
 - en: Effects of Lemmatization with WordNet
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 词形还原的效果与WordNet
 - en: In my experience, lemmatization provides no significant benefit over stemming
     for search and text classification purposes. In fact, depending on the algorithm
     you choose, it could be much slower compared to using a very basic stemmer and
@@ -191,138 +273,195 @@
     a correct lemma. [This paper](https://arxiv.org/pdf/1707.01780.pdf) finds that
     lemmatization has no significant impact on accuracy for text classification with
     neural architectures.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据我的经验，词形还原在搜索和文本分类方面并未比词干提取提供显著好处。实际上，根据你选择的算法，它可能比使用非常基本的词干提取器要慢得多，而且你可能需要知道词的词性才能得到正确的词形。[这篇论文](https://arxiv.org/pdf/1707.01780.pdf)发现，词形还原对神经网络架构的文本分类准确性没有显著影响。
 - en: I would personally use lemmatization sparingly. The additional overhead may
     or may not be worth it. But you could always try it to see the impact it has on
     your performance metric.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 我个人会谨慎使用词形还原。额外的开销可能不值得。然而，你可以尝试一下，以查看它对性能指标的影响。
 - en: Stopword Removal
+  id: totrans-41
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 停用词移除
 - en: Stop words are a set of commonly used words in a language. Examples of stop
     words in English are “a”, “the”, “is”, “are” and etc. The intuition behind using
     stop words is that, by removing low information words from text, we can focus
     on the important words instead.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 停用词是一组在语言中常用的词。例如，英语中的停用词有“a”、“the”、“is”、“are”等。使用停用词的直觉是，通过从文本中移除低信息量的词，我们可以集中关注重要的词。
 - en: For example, in the context of a search system, if your search query is* “what
     is text preprocessing?”*, you want the search system to focus on surfacing documents
     that talk about text preprocessing over documents that talk about what is. This
     can be done by preventing all words from your stop word list from being analyzed.
     Stop words are commonly applied in search systems, text classification applications,
     topic modeling, topic extraction and others.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，在搜索系统的上下文中，如果你的搜索查询是*“什么是文本预处理？”*，你希望搜索系统关注那些谈论文本预处理的文档，而不是那些谈论“是什么”的文档。这可以通过阻止所有停用词列表中的词被分析来实现。停用词通常应用于搜索系统、文本分类应用、主题建模、主题提取等。
 - en: In my experience, stop word removal, while effective in search and topic extraction
     systems, showed to be non-critical in classification systems. However, it does
     help reduce the number of features in consideration which helps keep your models
     decently sized.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据我的经验，虽然停用词删除在搜索和主题提取系统中有效，但在分类系统中并非至关重要。然而，它确实有助于减少考虑的特征数量，从而使模型保持合理大小。
 - en: 'Here is an example of stop word removal in action. All stop words are replaced
     with a dummy character, **W**:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个停用词删除的例子。所有停用词都被替换为一个虚拟字符，**W**：
 - en: '![](../Images/7f59c74fc0fa0c2d82bc78fe11a97cda.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7f59c74fc0fa0c2d82bc78fe11a97cda.png)'
 - en: '**Sentence before and after stop word removal**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**停用词删除前后的句子**'
 - en: '[Stop word lists](http://kavita-ganesan.com/what-are-stop-words/) can come
     from pre-established sets or you can create a [custom one for your domain](http://kavita-ganesan.com/tips-for-constructing-custom-stop-word-lists/).
     Some libraries (e.g. sklearn) allow you to remove words that appeared in X% of
     your documents, which can also give you a stop word removal effect.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '[停用词列表](http://kavita-ganesan.com/what-are-stop-words/)可以来自预先建立的集合，或者你可以为你的领域创建一个[自定义列表](http://kavita-ganesan.com/tips-for-constructing-custom-stop-word-lists/)。一些库（例如sklearn）允许你删除出现在X%文档中的词汇，这也可以达到停用词删除的效果。'
 - en: Normalization
+  id: totrans-49
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 标准化
 - en: A highly overlooked preprocessing step is text normalization. Text normalization
     is the process of transforming a text into a canonical (standard) form. For example,
     the word “gooood” and “gud” can be transformed to “good”, its canonical form.
     Another example is mapping of near identical words such as “stopwords”, “stop-words”
     and “stop words” to just “stopwords”.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个被高度忽视的预处理步骤是文本标准化。文本标准化是将文本转化为标准（规范）形式的过程。例如，单词“gooood”和“gud”可以转换为“good”，即其规范形式。另一个例子是将近乎相同的词汇，如“stopwords”、“stop-words”和“stop
+    words”，映射到“stopwords”。
 - en: Text normalization is important for noisy texts such as social media comments,
     text messages and comments to blog posts where abbreviations, misspellings and
     use of out-of-vocabulary words (oov) are prevalent. [This paper](https://sentic.net/microtext-normalization.pdf) showed
     that by using a text normalization strategy for Tweets, they were able to improve
     sentiment classification accuracy by ~4%.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 文本标准化对于噪声文本（如社交媒体评论、短信和博客评论）非常重要，因为这些文本中常出现缩写、拼写错误和超出词汇表的词汇（oov）。[这篇论文](https://sentic.net/microtext-normalization.pdf)显示，通过对推文使用文本标准化策略，他们能够将情感分类准确度提高约4%。
 - en: 'Here’s an example of words before and after normalization:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个文本标准化前后的例子：
 - en: '![](../Images/7dc21a06e55993824319453994949765.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7dc21a06e55993824319453994949765.png)'
 - en: '**Effects of Text Normalization**'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '**文本标准化的效果**'
 - en: Notice how the variations, map to the same canonical form.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意这些变体如何映射到相同的标准形式。
 - en: In my experience, text normalization has even been effective for analyzing [highly
     unstructured clinical texts](http://kavita-ganesan.com/general-supervised-approach-segmentation-clinical-texts/) where
     physicians take notes in non-standard ways. I’ve also found it useful for [topic
     extraction](https://githubengineering.com/topics/) where near synonyms and spelling
     differences are common (e.g. topic modelling, topic modeling, topic-modeling,
     topic-modelling).
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据我的经验，文本标准化在分析[高度非结构化的临床文本](http://kavita-ganesan.com/general-supervised-approach-segmentation-clinical-texts/)中也有效，其中医生以非标准化的方式记录笔记。我还发现它在[主题提取](https://githubengineering.com/topics/)中很有用，其中近义词和拼写差异很常见（例如，主题建模、主题建模、主题建模、主题建模）。
 - en: Unfortunately, unlike stemming and lemmatization, there isn’t a standard way
     to normalize texts. It typically depends on the task. For example, the way you
     would normalize clinical texts would arguably be different from how you normalize
     sms text messages.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 不幸的是，与词干提取和词形还原不同，文本标准化没有标准化的方式。它通常取决于任务。例如，你标准化临床文本的方式与标准化短信的方式可能会有所不同。
 - en: Some common approaches to text normalization include dictionary mappings (easiest),
     statistical machine translation (SMT) and spelling-correction based approaches. [This
     interesting article](https://nlp.stanford.edu/courses/cs224n/2009/fp/27.pdf) compares
     the use of a dictionary based approach and a SMT approach for normalizing text
     messages.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些常见的文本标准化方法包括词典映射（最简单）、统计机器翻译（SMT）和基于拼写修正的方法。[这篇有趣的文章](https://nlp.stanford.edu/courses/cs224n/2009/fp/27.pdf)比较了基于词典的方法和SMT方法在标准化短信中的使用。
 - en: Noise Removal
+  id: totrans-59
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 噪声去除
 - en: Noise removal is about removing characters digits and pieces of text that can
     interfere with your text analysis. Noise removal is one of the most essential
     text preprocessing steps. It is also highly domain dependent.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 噪声移除是指移除可能干扰文本分析的字符、数字和文本片段。噪声移除是最基本的文本预处理步骤之一，也高度依赖于领域。
 - en: 'For example, in Tweets, noise could be all special characters except hashtags
     as it signifies concepts that can characterize a Tweet. The problem with noise
     is that it can produce results that are inconsistent in your downstream tasks.
     Let’s take the example below:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，在推文中，噪声可能是所有特殊字符，除了标签，因为标签标志着可以表征推文的概念。噪声的问题在于它可能会在下游任务中产生不一致的结果。以下是一个示例：
 - en: '![](../Images/b1f2de865ee7ac0fcd66bf86c4b26a02.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b1f2de865ee7ac0fcd66bf86c4b26a02.png)'
 - en: '**Stemming without Noise Removal**'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '**词干提取与噪声移除**'
 - en: 'Notice that all the raw words above have some surrounding noise in them. If
     you stem these words, you can see that the stemmed result does not look very pretty.
     None of them have a correct stem. However, with some cleaning as applied in [this
     notebook](https://github.com/kavgan/nlp-text-mining-working-examples/blob/master/text-pre-processing/Text%20Pre-Processing%20Examples.ipynb),
     the results now look much better:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，以上所有原始词汇都有一些周围的噪声。如果你对这些词汇进行词干提取，你会发现词干提取结果并不好看。它们都没有正确的词干。然而，通过在[这个笔记本](https://github.com/kavgan/nlp-text-mining-working-examples/blob/master/text-pre-processing/Text%20Pre-Processing%20Examples.ipynb)中应用一些清理，结果现在看起来好多了：
 - en: '![](../Images/6c5455c30e466d2d29fa068c8353ed7a.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6c5455c30e466d2d29fa068c8353ed7a.png)'
 - en: Stemming **with** Noise Removal
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 词干提取**与**噪声移除
 - en: Noise removal is one of the first things you should be looking into when it
     comes to Text Mining and NLP. There are various ways to remove noise. This includes *punctuation
     removal*, *special character removal*, *numbers removal, html formatting removal,
@@ -330,234 +469,336 @@
     header removal* and more. It all depends on which domain you are working in and
     what entails noise for your task. The [code snippet in my notebook](https://github.com/kavgan/nlp-text-mining-working-examples/tree/master/text-pre-processing) shows
     how to do some basic noise removal.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 噪声移除是文本挖掘和自然语言处理中的首要任务之一。有多种方法可以移除噪声。这包括*标点符号移除*、*特殊字符移除*、*数字移除、HTML格式移除、特定领域关键词移除*（例如‘RT’表示转发）、源代码移除、头部信息移除*等。这完全取决于你所在的领域以及你的任务中什么算作噪声。[我笔记本中的代码片段](https://github.com/kavgan/nlp-text-mining-working-examples/tree/master/text-pre-processing)展示了如何进行一些基本的噪声移除。
 - en: Text Enrichment / Augmentation
+  id: totrans-68
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 文本丰富化 / 增强
 - en: Text enrichment involves augmenting your original text data with information
     that you did not previously have. Text enrichment provides more semantics to your
     original text, thereby improving its predictive power and the depth of analysis
     you can perform on your data.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 文本丰富化涉及将你原有的文本数据与先前没有的信息进行扩充。文本丰富化为你的原始文本提供更多的语义，从而提高其预测能力以及你对数据进行分析的深度。
 - en: In an information retrieval example, expanding a user’s query to improve the
     matching of keywords is a form of augmentation. A query like text mining could
     become text document mining analysis. While this doesn’t make sense to a human,
     it can help fetch documents that are more relevant.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 在信息检索的例子中，扩展用户查询以提高关键词匹配的准确度是一种增强形式。例如，查询“文本挖掘”可以变成“文本文件挖掘分析”。虽然这对人类来说没有意义，但它有助于获取更相关的文档。
 - en: You can get really creative with how you enrich your text. You can use [**part-of-speech
     tagging**](https://en.wikipedia.org/wiki/Part-of-speech_tagging) to get more granular
     information about the words in your text.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以非常有创意地丰富你的文本。你可以使用[**词性标注**](https://en.wikipedia.org/wiki/Part-of-speech_tagging)来获取关于文本中词汇的更详细信息。
 - en: For example, in a document classification problem, the appearance of the word **book** as
     a **noun** could result in a different classification than **book** as a **verb** as
     one is used in the context of reading and the other is used in the context of
     reserving something. [This article](http://www.iapr-tc11.org/archive/icdar2011/fileup/PDF/4520a920.pdf) talks
     about how Chinese text classification is improved with a combination of nouns
     and verbs as input features.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，在文档分类问题中，单词**book**作为**名词**的出现可能会导致不同的分类，而**book**作为**动词**的出现则是用在阅读的上下文中，另一个则用在预定的上下文中。[这篇文章](http://www.iapr-tc11.org/archive/icdar2011/fileup/PDF/4520a920.pdf)讨论了如何通过名词和动词的组合作为输入特征来改善中文文本分类。
 - en: With the availability of large amounts texts however, people have started using [embeddings](https://en.wikipedia.org/wiki/Word_embedding) to
     enrich the meaning of words, phrases and sentences for classification, search,
     summarization and text generation in general. This is especially true in deep
     learning based NLP approaches where a [word level embedding layer](https://keras.io/layers/embeddings/) is
     quite common. You can either start with [pre-established embeddings](https://blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html) or
     create your own and use it in downstream tasks.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着大量文本的出现，人们开始使用[词嵌入](https://en.wikipedia.org/wiki/Word_embedding)来丰富词语、短语和句子的意义，用于分类、搜索、摘要和文本生成等。尤其是在深度学习的NLP方法中，[词级嵌入层](https://keras.io/layers/embeddings/)非常常见。你可以选择使用[预训练的嵌入](https://blog.keras.io/using-pre-trained-word-embeddings-in-a-keras-model.html)或创建自己的嵌入并在下游任务中使用它。
 - en: Other ways to enrich your text data include [phrase extraction](http://kavita-ganesan.com/how-to-incorporate-phrases-into-word2vec-a-text-mining-approach/#.XHCcJ1xKg2w),
     where you recognize compound words as one (aka chunking), [expansion with synonyms](http://aclweb.org/anthology/R09-1073)and [dependency
     parsing](http://www.cs.virginia.edu/~kc2wc/teaching/NLP16/slides/15-DP.pdf).
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他丰富文本数据的方法包括[短语提取](http://kavita-ganesan.com/how-to-incorporate-phrases-into-word2vec-a-text-mining-approach/#.XHCcJ1xKg2w)，即将复合词识别为一个（也叫做分块），[同义词扩展](http://aclweb.org/anthology/R09-1073)和[依存句法分析](http://www.cs.virginia.edu/~kc2wc/teaching/NLP16/slides/15-DP.pdf)。
 - en: Do you need it all?
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 你需要全部做吗？
 - en: '![](../Images/8faa55aebf384c9173f88e136c256e1d.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8faa55aebf384c9173f88e136c256e1d.png)'
 - en: Not really, but you do have to do some of it for sure if you want good, consistent
     results. To give you an idea of what the bare minimum should be, I’ve broken it
     down to ***Must Do***, ***Should Do*** and ***Task Dependent***. Everything that
     falls under task dependent can be quantitatively or qualitatively tested before
     deciding you actually need it.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 不完全是，但如果你想获得良好且一致的结果，你确实需要做一些。为了让你了解最低限度的要求，我将其分为***必须做的***、***应该做的***和***任务相关的***。任务相关的部分可以在决定是否需要之前进行定量或定性测试。
 - en: Remember, less is more and you want to keep your approach as elegant as possible.
     The more overhead you add, the more layers you will have to peel back when you
     run into issues.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 记住，少即是多，你要尽可能保持方法的优雅。添加的开销越多，当遇到问题时，你需要剥离的层次就越多。
 - en: 'Must Do:'
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 必须做的：
 - en: Noise removal
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 噪声移除
 - en: Lowercasing (can be task dependent in some cases)
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 小写化（在某些情况下可能与任务相关）
 - en: 'Should Do:'
+  id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 应该做的：
 - en: Simple normalization — (e.g. standardize near identical words)
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 简单标准化 — （例如，标准化几乎相同的词）
 - en: 'Task Dependent:'
+  id: totrans-84
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 任务相关的：
 - en: Advanced normalization (e.g. addressing out-of-vocabulary words)
+  id: totrans-85
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 高级标准化（例如，处理词汇表外的词）
 - en: Stop-word removal
+  id: totrans-86
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 停用词移除
 - en: Stemming / lemmatization
+  id: totrans-87
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 词干提取/词形还原
 - en: Text enrichment / augmentation
+  id: totrans-88
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 文本丰富/增强
 - en: So, for any task, the minimum you should do is try to lowercase your text and
     remove noise. What entails noise depends on your domain (see section on Noise
     Removal). You can also do some basic normalization steps for more consistency
     and then systematically add other layers as you see fit.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，对于任何任务，你至少应该尝试将文本转换为小写并去除噪声。噪声的定义取决于你的领域（参见噪声移除部分）。你还可以做一些基本的标准化步骤以提高一致性，然后根据需要系统地添加其他层。
 - en: General Rule of Thumb
+  id: totrans-90
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一般经验法则
 - en: Not all tasks need the same level of preprocessing. For some tasks, you can
     get away with the minimum. However, for others, the dataset is so noisy that,
     if you don’t preprocess enough, it’s going to be garbage-in-garbage-out.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 并非所有任务都需要相同程度的预处理。对于一些任务，你可以只做最基本的处理。然而，对于其他任务，数据集可能如此嘈杂，如果不进行足够的预处理，结果将会是“垃圾进垃圾出”。
 - en: Here’s a general rule of thumb. This will not always hold true, but works for
     most cases. If you have a lot of well written texts to work with in a fairly general
     domain, then preprocessing is not extremely critical; you can get away with the
     bare minimum (e.g. training a word embedding model using all of Wikipedia texts
     or Reuters news articles).
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有一个一般经验法则。虽然这并不总是成立，但适用于大多数情况。如果你有大量写得很好的文本可以处理，并且领域相对通用，那么预处理不是特别关键；你可以只做最低限度的处理（例如，使用维基百科的所有文本或路透社新闻文章训练词嵌入模型）。
 - en: However, if you are working in a very narrow domain (e.g. Tweets about health
     foods) and data is sparse and noisy, you could benefit from more preprocessing
     layers, although each layer you add (e.g. stop word removal, stemming, normalization)
     needs to be quantitatively or qualitatively verified as a meaningful layer. Here’s
     a table that summarizes how much preprocessing you should be performing on your
     text data
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，如果你在一个非常狭窄的领域（例如关于健康食品的推文）工作，并且数据稀疏且嘈杂，你可能会从更多的预处理层中受益，尽管每一层（例如停用词移除、词干提取、标准化）都需要通过定量或定性的方法验证其有效性。这里有一个表格总结了你应对文本数据进行多少预处理。
 - en: '![](../Images/2582e830c52b2f3ca10fa22dbee429ca.png)'
+  id: totrans-94
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2582e830c52b2f3ca10fa22dbee429ca.png)'
 - en: I hope the ideas here steer you towards the right preprocessing steps for your
     projects. Remember, *less is more*. A friend of mine once mentioned to me how
     he made a large e-commerce search system more efficient and less buggy just by
     throwing out layers of *unneeded* preprocessing.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望这里的想法能引导你找到适合你项目的正确预处理步骤。记住，*少即是多*。我的一位朋友曾提到，他通过去除不必要的预处理层，使一个大型电子商务搜索系统更高效、更稳定。
 - en: Resources
+  id: totrans-96
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 资源
 - en: '[Python code for basic text preprocessing using NLTK and regex](https://github.com/kavgan/nlp-text-mining-working-examples/blob/master/text-pre-processing/Text%20Preprocessing%20Examples.ipynb)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用NLTK和正则表达式进行基本文本预处理的Python代码](https://github.com/kavgan/nlp-text-mining-working-examples/blob/master/text-pre-processing/Text%20Preprocessing%20Examples.ipynb)'
 - en: '[Constructing custom stop word lists](http://kavita-ganesan.com/tips-for-constructing-custom-stop-word-lists/)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建自定义停用词列表](http://kavita-ganesan.com/tips-for-constructing-custom-stop-word-lists/)'
 - en: '[Source code for phrase extraction](https://kavgan.github.io/phrase-at-scale/)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[短语提取的源代码](https://kavgan.github.io/phrase-at-scale/)'
 - en: References
+  id: totrans-100
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: For an updated list of papers, please see [my original article](http://kavita-ganesan.com/text-preprocessing-tutorial/#Relevant-Papers)
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如需查看最新的论文列表，请参阅[我的原始文章](http://kavita-ganesan.com/text-preprocessing-tutorial/#Relevant-Papers)
 - en: 'Bio: [Kavita Ganesan](http://kavita-ganesan.com/about-me/) is a Data Scientist
     with expertise in Natural Language Processing, Text Mining, Search and Machine
     Learning. Over the last decade, she worked for various technology organizations
     including GitHub (Microsoft), 3M Health Information Systems and eBay.'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 简介：[Kavita Ganesan](http://kavita-ganesan.com/about-me/) 是一位数据科学家，擅长自然语言处理、文本挖掘、搜索和机器学习。在过去十年中，她曾在多个技术组织工作，包括GitHub（微软）、3M健康信息系统和eBay。
 - en: '[Original](https://medium.freecodecamp.org/all-you-need-to-know-about-text-preprocessing-for-nlp-and-machine-learning-bc1c5765ff67).
     Reposted with permission.'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.freecodecamp.org/all-you-need-to-know-about-text-preprocessing-for-nlp-and-machine-learning-bc1c5765ff67)。经许可转载。'
 - en: '**Resources:**'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '**资源：**'
 - en: '[On-line and web-based: Analytics, Data Mining, Data Science, Machine Learning
     education](https://www.kdnuggets.com/education/online.html)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在线和基于Web的：分析、数据挖掘、数据科学、机器学习教育](https://www.kdnuggets.com/education/online.html)'
 - en: '[Software for Analytics, Data Science, Data Mining, and Machine Learning](https://www.kdnuggets.com/software/index.html)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用于分析、数据科学、数据挖掘和机器学习的软件](https://www.kdnuggets.com/software/index.html)'
 - en: '**Related:**'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Getting started with NLP using the PyTorch framework](https://www.kdnuggets.com/2019/04/nlp-pytorch.html)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用PyTorch框架开始NLP](https://www.kdnuggets.com/2019/04/nlp-pytorch.html)'
 - en: '[Building NLP Classifiers Cheaply With Transfer Learning and Weak Supervision](https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过迁移学习和弱监督以低成本构建NLP分类器](https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html)'
 - en: '[Beyond news contents: the role of social context for fake news detection](https://www.kdnuggets.com/2019/03/beyond-news-contents-role-of-social-context-for-fake-news-detection.html)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超越新闻内容：社会背景在假新闻检测中的作用](https://www.kdnuggets.com/2019/03/beyond-news-contents-role-of-social-context-for-fake-news-detection.html)'
 - en: More On This Topic
+  id: totrans-111
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Cleaning and Preprocessing Text Data in Pandas for NLP Tasks](https://www.kdnuggets.com/cleaning-and-preprocessing-text-data-in-pandas-for-nlp-tasks)'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在Pandas中清洗和预处理文本数据以用于NLP任务](https://www.kdnuggets.com/cleaning-and-preprocessing-text-data-in-pandas-for-nlp-tasks)'
 - en: '[Textbooks Are All You Need: A Revolutionary Approach to AI Training](https://www.kdnuggets.com/2023/07/textbooks-all-you-need-revolutionary-approach-ai-training.html)'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[教科书就是你所需要的：一种革命性的AI培训方法](https://www.kdnuggets.com/2023/07/textbooks-all-you-need-revolutionary-approach-ai-training.html)'
 - en: '[KDnuggets News, April 13: Python Libraries Data Scientists Should…](https://www.kdnuggets.com/2022/n15.html)'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets新闻，4月13日：数据科学家应关注的Python库……](https://www.kdnuggets.com/2022/n15.html)'
 - en: '[5 Skills All Marketing Analytics and Data Science Pros Need Today](https://www.kdnuggets.com/2023/08/mads-5-skills-marketing-analytics-data-science-pros-need-today.html)'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[今天所有市场营销分析和数据科学专业人士需要掌握的5项技能](https://www.kdnuggets.com/2023/08/mads-5-skills-marketing-analytics-data-science-pros-need-today.html)'
 - en: '[Statistics for Machine Learning: What you need to know to become a…](https://www.kdnuggets.com/2024/03/sas-statistics-machine-learning-need-know-become-certified-expert)'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的统计学：你需要知道的成为…](https://www.kdnuggets.com/2024/03/sas-statistics-machine-learning-need-know-become-certified-expert)'
 - en: '[6 Things You Need To Know About Data Management And Why It Matters…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关于数据管理你需要知道的6件事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
