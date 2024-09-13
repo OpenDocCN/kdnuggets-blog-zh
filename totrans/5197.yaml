@@ -1,17 +1,25 @@
 - en: How to Deploy a Flask API in Kubernetes and Connect it with Other Micro-services
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何在 Kubernetes 中部署 Flask API 并将其与其他微服务连接
 - en: 原文：[https://www.kdnuggets.com/2021/02/deploy-flask-api-kubernetes-connect-micro-services.html](https://www.kdnuggets.com/2021/02/deploy-flask-api-kubernetes-connect-micro-services.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/02/deploy-flask-api-kubernetes-connect-micro-services.html](https://www.kdnuggets.com/2021/02/deploy-flask-api-kubernetes-connect-micro-services.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By Rik Kraan, Vantage AI**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Rik Kraan, Vantage AI**'
 - en: 'Kubernetes is a powerful container orchestration tool that automates deployment
     and management of [containers](https://www.docker.com/resources/what-container).
     If you have a simple lightweight application that exists of one service, don’t
@@ -19,89 +27,137 @@
     with several components working together. It is a ‘open-source system for automating
     deployment, scaling and management of containerized applications and comes with
     several benefits including:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: Kubernetes 是一个强大的容器编排工具，它自动化了 [容器](https://www.docker.com/resources/what-container)
+    的部署和管理。如果你有一个简单的轻量级应用，由一个服务组成，不用考虑使用 Kubernetes。Kubernetes 的优势在于，当你的应用具有 [微服务](https://microservices.io/)
+    架构并且多个组件协同工作时，它会显现出来。它是一个‘自动化部署、扩展和管理容器化应用的开源系统’，具有以下几个优势：
 - en: Easy (auto-)scaling based on demand
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 根据需求进行简单（自动）扩展
 - en: Ways to make your application fault tolerant by distributing workloads in a
     way that it will remain functional in case of partial failure
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过分配负载以使应用在部分故障时仍能正常运行，从而使应用具有容错能力
 - en: Automated health-checks and self-healing processes
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 自动化健康检查和自我修复过程
 - en: Taking care of the communication between your micro-services and balancing incoming
     traffic evenly over all your resources
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 处理微服务之间的通信，并将传入的流量均匀分配到所有资源上
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-10
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Starting with Kubernetes may seem daunting at first, but if you grasp the main
     concepts of it and play around with the excellent tutorials on the [official website](https://www.kubernets.io/),
     you can get started fairly easily.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 初次使用 Kubernetes 可能会让人感到畏惧，但如果你掌握其主要概念，并在 [官方网站](https://www.kubernets.io/) 上进行一些练习，你可以相对轻松地入门。
 - en: 'In this blog I will:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本博客中，我将：
 - en: Provide a quick overview of the main concepts of Kubernetes
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 提供 Kubernetes 主要概念的快速概述
 - en: Demonstrate how to start your own local cluster
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 演示如何启动自己的本地集群
 - en: Deploy a MySQL database on your cluster
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在集群上部署 MySQL 数据库
 - en: Set up an Flask app that functions as REST API to communicate with the database
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 设置一个作为 REST API 与数据库通信的 Flask 应用
 - en: '![Figure](../Images/820257ddf06ce4520b4c58d413e65d86.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/820257ddf06ce4520b4c58d413e65d86.png)'
 - en: Network. Photo by [Alina Grubnyak](https://unsplash.com/@alinnnaaaa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/network?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 网络。照片由 [Alina Grubnyak](https://unsplash.com/@alinnnaaaa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+    提供，来自 [Unsplash](https://unsplash.com/s/photos/network?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 - en: '**Kubernetes basics**'
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**Kubernetes 基础**'
 - en: In this section I will cover the basics of Kubernetes without too many details;
     feel free to dive deeper by reading the official documentation.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这一部分，我将介绍 Kubernetes 的基础知识而不涉及过多细节；可以通过阅读官方文档深入了解。
 - en: A Kubernetes cluster consists of a **master **and one or more **worker nodes. **This
     architecture is one of the main features of Kubernetes. As you will see, your
     micro-services are distributed over different nodes so they will remain healthy
@@ -109,27 +165,38 @@
     cluster and exposes the API via which you can communicate with your cluster. By
     default, **worker nodes** come with a few components including some pre-installed
     software that enables running containers of popular container services as *Docker* and *containerd.*
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个 Kubernetes 集群由一个**主节点**和一个或多个**工作节点**组成。这种架构是 Kubernetes 的主要特征之一。如你所见，你的微服务分布在不同的节点上，以便在其中一个工作节点故障时保持健康。**主节点**负责管理集群，并通过
+    API 让你与集群进行通信。默认情况下，**工作节点** 配备了一些组件，包括预安装的软件，以便运行流行的容器服务如*Docker* 和 *containerd*。
 - en: Three main concepts are essential to deploy your own applications on a Kubernetes
     cluster: *Deployments, Pods and Services.*
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 部署你自己应用程序到 Kubernetes 集群上有三个主要概念是必不可少的：*部署、Pods 和服务。*
 - en: A *Deployment* is a set of instructions provided to the **master **on how to
     create and update your application. With these instructions the **master **will
     schedule and run your application on individual **worker nodes**. The deployment
     is continuously monitored by the **master**. If one of the instances of your applications
     goes down (e.g. if a **worker node **goes down), it will be automatically replaced
     by a new instance.
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个*部署* 是一组指令，提供给**主节点**，用于创建和更新你的应用程序。根据这些指令，**主节点** 将调度并在各个**工作节点**上运行你的应用程序。部署会持续由**主节点**监控。如果你的应用程序的某个实例出现故障（例如，如果**工作节点**出现故障），它将被自动替换为一个新实例。
 - en: '![Figure](../Images/8656266b082e8bb64801145fb1288179.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/8656266b082e8bb64801145fb1288179.png)'
 - en: Kubernetes cluster with a deployment (source: [https://kubernetes.io/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/](https://kubernetes.io/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/))
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: Kubernetes 集群与部署（来源：[https://kubernetes.io/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/](https://kubernetes.io/docs/tutorials/kubernetes-basics/deploy-app/deploy-intro/)）
 - en: A *Pod *is the atomic unit within the Kubernetes platform. It represents a group
     of one or more containers and some shared resources for those containers (shared
     storage, a unique cluster IP address etc.). If you create a *deployment*, this
@@ -137,15 +204,22 @@
     to a **worker node**. It is essential to understand that a **worker node** can
     have multiple *pods, *and all these pods will be rebuild on a different available **worker
     node** if the current **worker node** fails.
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个*Pod* 是 Kubernetes 平台中的原子单位。它代表一个或多个容器及这些容器共享的一些资源（共享存储、唯一的集群 IP 地址等）。如果你创建一个*部署*，该部署将创建带有容器的*pods*。每个*pod*
+    都绑定到一个**工作节点**。需要理解的是，一个**工作节点**可以拥有多个*pods*，如果当前的**工作节点**出现故障，这些*pods* 将会在另一个可用的**工作节点**上重新创建。
 - en: '![Figure](../Images/2483f4d875e15cb72d63ea23737eda68.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/2483f4d875e15cb72d63ea23737eda68.png)'
 - en: Overview of a **worker node** with several pods (source: [https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-intro/](https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-intro/))
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 带有多个 pods 的**工作节点**概述（来源：[https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-intro/](https://kubernetes.io/docs/tutorials/kubernetes-basics/explore/explore-intro/)）
 - en: A *service* basically defines a logical set of *pods* and defines a policy on
     how to access them. This is necessary as* pods *can go down and be restarted (e.g.
     if a **worker node** is deleted or crashes). A *service *routes traffic across
@@ -156,52 +230,74 @@
     the outside world. In this case you can create a *LoadBalancer* service, which
     creates an external load balancer and assigns a fixed external IP to it, so it
     can be accessed from outside the cluster (for example in your browser).
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个*service*基本上定义了一组逻辑上的*pods*并定义了访问它们的策略。这是必要的，因为*pods*可能会停止并重启（例如，如果**工作节点**被删除或崩溃）。一个*service*在一组pods之间路由流量，并允许pods在不影响应用程序的情况下死亡和复制。在定义一个服务时，你可以指定服务的类型。默认情况下，Kubernetes创建一个ClusterIP服务，这使得你的*service*只能从集群内部访问。你可能想将一些*services*（例如前端）暴露给外界。在这种情况下，你可以创建一个*LoadBalancer*服务，它创建一个外部负载均衡器并分配一个固定的外部IP，使其可以从集群外部访问（例如在你的浏览器中）。
 - en: '![Figure](../Images/854f352441eedb040b9ea341f26ca329.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/854f352441eedb040b9ea341f26ca329.png)'
 - en: A cluster with 3 **worker nodes**, several pods and two services (A & B) tying
     pods together (source: [https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/))
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个包含3个**工作节点**、若干个pods和两个将pods绑定在一起的服务（A & B）的集群（来源：[https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/](https://kubernetes.io/docs/tutorials/kubernetes-basics/expose/expose-intro/)）
 - en: '**Getting started with your own cluster**'
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**开始使用自己的集群**'
 - en: 'If you want to get your cluster to work quickly: all the code in this blog
     (and an explanatory Readme) can be found [here](https://github.com/RikKraanVantage/kubernetes-flask-mysql).
     The application we will build consists of two micro-services:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想让你的集群快速运行：本博客中的所有代码（以及一个说明性的Readme）可以在[此处](https://github.com/RikKraanVantage/kubernetes-flask-mysql)找到。我们将构建的应用程序由两个微服务组成：
 - en: a MySQL database
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一个MySQL数据库
 - en: a Flask app that implements an API to access and perform CRUD (create, read,
     update delete) operations on the database.
+  id: totrans-39
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 一个实现API以访问和执行数据库CRUD（创建、读取、更新、删除）操作的Flask应用程序。
 - en: '**Prerequisites**: *Have *`*kubectl*`*and *`*minikube*`* installed (*[*https://kubernetes.io/docs/tasks/tools/*](https://kubernetes.io/docs/tasks/tools/)*).
     And make sure your *Docker CLI *uses the *Docker deamon *in your cluster via the
     command *`*eval $(minikube docker-env)*`*. No worries: if you restart your terminal
     you will automatically use your own *Docker daemon *again. Finally start your
     local cluster via the command *`*minikube start*`*.*'
+  id: totrans-40
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**先决条件**：*请确保已安装`*kubectl*`*和`*minikube*`*（[*https://kubernetes.io/docs/tasks/tools/*](https://kubernetes.io/docs/tasks/tools/)）。并确保你的*Docker
+    CLI*通过命令*`*eval $(minikube docker-env)*`*使用集群中的*Docker daemon*。不用担心：如果你重启终端，你将自动使用自己的*Docker
+    daemon*。最后通过命令*`*minikube start*`*启动本地集群。*'
 - en: 'First things first: when setting up a MySQL database we need to take into account
     two things. 1) To access the database we need some credentials configured and
     2) we will need a persistent volume for the database so we will not lose all our
     data if the nodes will accidentally be taken down.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先：在设置MySQL数据库时，我们需要考虑两件事。1) 要访问数据库，我们需要配置一些凭据；2) 我们需要一个持久卷，以防节点意外关闭时不会丢失所有数据。
 - en: '**Creating secrets**'
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**创建密钥**'
 - en: Kubernetes has it’s own method of dealing with your sensitive information by
     configuring Kubernetes *Secrets.* This can be done with a simple YAML file. These *secrets* can
     be accessed by any *pod* in your cluster by specifying environment variables (which
@@ -211,14 +307,19 @@
     *secrets.yml* file at the `db_root_password` field. The *metadata.name* field
     is important as we have to specify this in a later stage, so be sure to remember
     it
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: Kubernetes有自己处理敏感信息的方法，通过配置Kubernetes *Secrets*。这可以通过一个简单的YAML文件完成。这些*secrets*可以通过指定环境变量（稍后我们将看到）被集群中的任何*pod*访问。*Secrets*应该指定为**base64编码**字符串。因此，我们首先需要通过终端获取密码的编码版本：`echo
+    -n <super-secret-passwod> | base64`。复制输出并将其嵌入到以下*secrets.yml*文件中的`db_root_password`字段中。*metadata.name*字段很重要，因为我们需要在后面的阶段中指定它，所以一定要记住它。
 - en: You can now add the secrets to your cluster via your terminal: `kubectl apply
     -f secrets.yml` . And see if it worked by checking the secrets via `kubectl get
     secrets.`
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: '**Persistent volume**'
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -233,17 +334,21 @@
     However, make sure to use another type ([see the documentation](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#types-of-persistent-volumes))
     in a production environment as your data will be lost if you delete your minikube
     node when using a *hostPath* type.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: 'Making your application use a *persistent volume* exists of two parts:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: Specifying the actual storage type, location, size and properties of the *volume*.
+  id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Specify a *persistent volume claim* that requests a specific size and access
     modes of the persistent volume for your deployments.
+  id: totrans-49
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
@@ -254,6 +359,7 @@
     if the claim is deleted, so you can manually retrieve or backup the data. The
     default reclaim policy is inherited from the type of *persistent volume, *so it
     is good practice to always specify it in the yml file.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: Again you can add the storage via `kubectl apply -f persistent-volume.yml` .
@@ -261,9 +367,11 @@
     describe pvc mysql-pv-claim`. As you made a hostPath type *persistent volume*,
     you can find the data by logging into the minikube node `minikube ssh `and navigate
     to the spcified path (`/mnt/data`).
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '**Deploy the MySQL server**'
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -280,41 +388,67 @@
     volume `spec.selector.template.spec.containers.volumeMounts.mountPath: /var/lib/mysql`.
     At the bottom we also specify a service also called mysql of the `LoadBalancer`type
     so we can access our database via this service.'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '在我们的秘密和持久卷（声明）就位后，我们可以开始构建我们的应用程序。首先，我们将部署一个 *MySQL* 服务器。拉取最新的 *mysql* 镜像 `docker
+    pull mysql` 并创建 *mysql-deployment.yml* 文件。关于这个文件，有几件事值得提及。我们指定仅启动一个 Pod（`spec.replicas:
+    1`）。该部署将管理所有带有标签 `db` 的 Pod，标签由 `spec.selector.matchLabels.app: db` 指定。`template`
+    字段及其所有子字段指定了 *pod* 的特征。它将运行 *mysql* 镜像，名称也为 *mysql*，并在 `flaskapi-secrets` *secret*
+    中查找 db_root_password 字段，将其值设置为 `MYSQL_ROOT_PASSWORD` 环境变量。此外，我们指定了一个容器暴露的端口，以及持久卷应该挂载的路径
+    `spec.selector.template.spec.containers.volumeMounts.mountPath: /var/lib/mysql`。在底部，我们还指定了一个名为
+    mysql 的 `LoadBalancer` 类型的服务，以便我们可以通过该服务访问我们的数据库。'
 - en: You can now deploy the MySQL server with `kubectl apply -f mysql-deployment.yml`.
     And see if a pod is running via `kubectl get pods`.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你可以通过 `kubectl apply -f mysql-deployment.yml` 部署 MySQL 服务器。然后通过 `kubectl get
+    pods` 查看 Pod 是否正在运行。
 - en: Create database and table
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 创建数据库和表格
 - en: 'The last thing we have to do before implementing the API is initializing a
     database and schema on our MySQL server. We can do this using multiple methods,
     but for the sake of simplicity let’s access the MySQL server via the newly created *service. *As
     the pod running the MySQL *service *is only accessible from inside the cluster,
     you will start up a temporary pod that serves as `mysql-client`:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 在实现 API 之前，我们必须做的最后一件事是初始化 MySQL 服务器上的数据库和模式。我们可以使用多种方法来完成这项工作，但为了简单起见，让我们通过新创建的
+    *service* 访问 MySQL 服务器。由于运行 MySQL *service* 的 Pod 仅能从集群内部访问，你需要启动一个作为 `mysql-client`
+    的临时 Pod：
 - en: Set up the `mysql-client` via the terminal: `kubectl run -it --rm --image=mysql
     --restart=Never mysql-client -- mysql --host mysql --password=<your_password>`.
     Fill in the (decoded) password that you specified in the *secrets.yml* file.
+  id: totrans-57
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通过终端设置 `mysql-client`： `kubectl run -it --rm --image=mysql --restart=Never mysql-client
+    -- mysql --host mysql --password=<your_password>`。填写你在 *secrets.yml* 文件中指定的（解码）密码。
 - en: 'Create the database, table and schema. You can do whatever you like, but to
     make sure the sample Flask app will work do as follows:'
+  id: totrans-58
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建数据库、表格和模式。你可以做任何你喜欢的事，但为了确保样本 Flask 应用程序能够正常工作，请按照以下步骤操作：
 - en: '[PRE0]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Deploying the API
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 部署 API
 - en: Finally it is time to deploy your REST API. The following gist demonstrates
     an example of a Flask app that implements the API with only two endpoints. One
     for checking if the API functions and one for creating users in our database.
@@ -325,8 +459,13 @@
     rest of the environment variables (e.g `MYSQL_DATABASE_HOST`) is retrieved from
     the MySQL *service *that was implemented before (further on I will explain how
     to make sure the Flask app has access to this information).
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后是时候部署你的 REST API 了。以下示例展示了一个实现了只有两个端点的 Flask 应用程序的示例。一个用于检查 API 是否正常工作，另一个用于在我们的数据库中创建用户。在
+    GitHub 的 [repo](https://github.com/RikKraanVantage/kubernetes-flask-mysql) 中，你可以找到具有读取、更新和删除数据库条目的端点的
+    Python 文件。连接到数据库 API 的密码是从创建的 *secrets* 中检索的。其余的环境变量（例如 `MYSQL_DATABASE_HOST`）则从之前实现的
+    MySQL *service* 中检索（稍后我将解释如何确保 Flask 应用程序能够访问这些信息）。
 - en: To deploy this app in your Kubernetes cluster you have to make an image of this
     Flask app by creating a simple Dockerfile. Nothing special, preparing your container,
     installing requirements, copying the folder content and running the Flask app.
@@ -334,8 +473,13 @@
     find the Dockerfile and the requirements.txt file that is required for building
     the image. Before you can deploy the Flask app in the Kubernetes cluster, you
     first have to build the image and name it *flask-api* via `docker build . -t flask-api`.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在 Kubernetes 集群中部署这个应用，你需要通过创建一个简单的 Dockerfile 来制作这个 Flask 应用的镜像。没有特别之处，准备你的容器，安装所需的软件包，复制文件夹内容并运行
+    Flask 应用。前往 [GitHub 仓库](https://github.com/RikKraanVantage/kubernetes-flask-mysql)
+    查找构建镜像所需的 Dockerfile 和 requirements.txt 文件。在你可以将 Flask 应用部署到 Kubernetes 集群之前，你首先需要构建镜像并将其命名为
+    *flask-api*，命令为 `docker build . -t flask-api`。
 - en: 'Now it is time to define the *deployment* and *service *for the Flask app that
     implements a RESTful API. The deployment will start up 3 pods (specified in the
     *flaskapp-deployment.yml* at the `spec.replicas: 3` field) Within each of these *pods* a
@@ -349,20 +493,34 @@
     to worry about having to specify the `host` and `port` of the MySQL database to
     the Flask app. Finally, you will define a *service* of the `LoadBalancer `type
     to divide the incoming traffic between the three pods.'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '现在是定义 *deployment* 和 *service* 的时候了，目的是为了实现一个 RESTful API 的 Flask 应用。部署将启动
+    3 个 Pod（在 *flaskapp-deployment.yml* 的 `spec.replicas: 3` 字段中指定）。在每个这些 *pods* 中，将从你刚刚构建的
+    *flask-api* 镜像创建一个容器。为了确保 Kubernetes 使用本地构建的镜像（而不是从外部仓库如 Dockerhub 下载镜像），请确保将
+    `imagePullPolicy` 设置为 `never`。为了确保 Flask 应用可以与数据库通信，应该设置一些环境变量。`db_root_password`
+    是从你创建的 *secrets* 中获取的。每个启动的容器都继承包含所有正在运行的 *services* 信息的环境变量，包括 `IP` 和 `port`
+    地址。因此，你不必担心在 Flask 应用中指定 MySQL 数据库的 `host` 和 `port`。最后，你将定义一个 `LoadBalancer` 类型的
+    *service*，以便在三个 Pod 之间分配传入的流量。'
 - en: Making requests to the API
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 向 API 发起请求
 - en: You are now ready to use our API and interact with your database. The last step
     is to expose the API *service* to the outside world via your terminal: `minikube
     service flask-service`. You will now see something like
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 你现在可以使用我们的 API 并与数据库交互。最后一步是通过终端暴露 API *service*：`minikube service flask-service`。你现在会看到类似的内容
 - en: '![Image for post](../Images/ddcfcbc6118cd2addf8c0f3d02949944.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子图片](../Images/ddcfcbc6118cd2addf8c0f3d02949944.png)'
 - en: 'Go to the provided URL and you will see the **Hello World **message, to make
     sure your API is running correctly. You can now interact with the API using your
     favorite request service like **Postman **or **curl **in your terminal. To create
@@ -371,81 +529,128 @@
     "pwd": "<user_password>"}'' <flask-service_URL>/create`. If you implemented the
     other methods of the API (as defined in the [GitHub repo](https://github.com/RikKraanVantage/kubernetes-flask-mysql))
     as well, you may now be able to query all users in the database via: `curl <flask-service_URL>/users`.'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '访问提供的 URL，你将看到 **Hello World** 消息，以确保你的 API 正常运行。现在你可以使用你喜欢的请求服务如 **Postman**
+    或 **curl** 在终端中与 API 交互。要创建一个用户，提供一个 **json** 文件，其中包含 name、email 和 pwd 字段。例如：`curl
+    -H "Content-Type: application/json" -d ''{"name": "<user_name>", "email": "<user_email>",
+    "pwd": "<user_password>"}'' <flask-service_URL>/create`。如果你也实现了 API 的其他方法（如在 [GitHub
+    仓库](https://github.com/RikKraanVantage/kubernetes-flask-mysql) 中定义），你现在可能可以通过以下命令查询数据库中的所有用户：`curl
+    <flask-service_URL>/users`。'
 - en: Conclusion
+  id: totrans-68
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: '**curl **in your terminal. To create a user provide a **json** file with a
     name, email and pwd field. for example:`curl -H "Content-Type: application/json"
     -d ''{"name": "<user_name>", "email": "<user_email>", "pwd": "<user_password>"}''
     <flask-service_URL>/create`. If you implemented the other methods of the API (as
     defined in the [GitHub repo](https://github.com/RikKraanVantage/kubernetes-flask-mysql))
     as well, you may now be able to query all users in the database via: `curl <flask-service_URL>/users`.'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '**在你的终端中使用 curl**。要创建用户，提供一个包含 name、email 和 pwd 字段的**json**文件。例如：`curl -H "Content-Type:
+    application/json" -d ''{"name": "<user_name>", "email": "<user_email>", "pwd":
+    "<user_password>"}'' <flask-service_URL>/create`。如果你还实现了 API 的其他方法（如[GitHub 仓库](https://github.com/RikKraanVantage/kubernetes-flask-mysql)中定义的那样），你现在可以通过以下命令查询数据库中的所有用户：`curl
+    <flask-service_URL>/users`。'
 - en: In this hands-on tutorial you set up *deployments*, *services* and *pods, *implemented
     a RESTful API by deploying a Flask app and connected it with other micro-services
     (a MySQL database in this case). You can keep running this locally, or implement
     it on a remote server for example in the cloud and get it to production. Feel
     free to clone the [repo](https://github.com/RikKraanVantage/kubernetes-flask-mysql) and
     adjust the API as you like, or add additional micro-services.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个动手教程中，你将设置*部署*、*服务*和*Pods*，通过部署 Flask 应用实现一个 RESTful API，并将其与其他微服务（在此案例中是
+    MySQL 数据库）连接。你可以在本地持续运行，也可以在云等远程服务器上实现并投入生产。欢迎克隆[仓库](https://github.com/RikKraanVantage/kubernetes-flask-mysql)并根据需要调整
+    API，或者添加其他微服务。
 - en: Feel free to reach out to me if you have any additional questions, remarks or
     suggestions!
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有任何额外的问题、意见或建议，随时与我联系！
 - en: '**Bio: [Rik Kraan](https://www.linkedin.com/in/rikkraan/)** is a medical doctor
     with a PhD in radiology, working as a data scientist at **Vantage AI**, a data
     science consultancy company in the Netherlands. Get in touch via [rik.kraan@vantage-ai.com](mailto:rik.kraan@vantage-ai.com)'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [Rik Kraan](https://www.linkedin.com/in/rikkraan/)** 是一位医学博士，拥有放射学博士学位，目前在**Vantage
+    AI**，一家位于荷兰的数据科学咨询公司担任数据科学家。可以通过[rik.kraan@vantage-ai.com](mailto:rik.kraan@vantage-ai.com)与他联系。'
 - en: '[Original](https://towardsdatascience.com/how-to-deploy-a-flask-api-in-kubernetes-and-connect-it-with-other-micro-services-af16965b67fe).
     Reposted with permission.'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/how-to-deploy-a-flask-api-in-kubernetes-and-connect-it-with-other-micro-services-af16965b67fe)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Kubernetes vs. Amazon ECS for Data Scientists](/2020/11/kubernetes-amazon-ecs-data-scientists.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kubernetes 与 Amazon ECS 对数据科学家的比较](/2020/11/kubernetes-amazon-ecs-data-scientists.html)'
 - en: '[Create and Deploy your First Flask App using Python and Heroku](/2020/09/flask-app-using-python-heroku.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 和 Heroku 创建并部署你的第一个 Flask 应用](/2020/09/flask-app-using-python-heroku.html)'
 - en: '[Data Science Meets Devops: MLOps with Jupyter, Git, and Kubernetes](/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学与 DevOps 的结合：Jupyter、Git 和 Kubernetes 下的 MLOps](/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html)'
 - en: More On This Topic
+  id: totrans-78
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Kubernetes In Action: Second Edition](https://www.kdnuggets.com/2022/03/manning-kubernetes-action-second-edition.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kubernetes 实战：第二版](https://www.kdnuggets.com/2022/03/manning-kubernetes-action-second-edition.html)'
 - en: '[High Availability SQL Server Docker Containers in Kubernetes](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kubernetes 中的高可用性 SQL Server Docker 容器](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)'
 - en: '[Connect With the Data Science Community at Rev 3 in NYC, the #1…](https://www.kdnuggets.com/2022/03/domino-connect-data-science-community-nyc-mlops-conference.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在纽约市 Rev 3 会议上与数据科学社区联系，#1…](https://www.kdnuggets.com/2022/03/domino-connect-data-science-community-nyc-mlops-conference.html)'
 - en: '[How to Successfully Deploy Data Science Projects](https://www.kdnuggets.com/2022/01/successfully-deploy-data-science-projects.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何成功部署数据科学项目](https://www.kdnuggets.com/2022/01/successfully-deploy-data-science-projects.html)'
 - en: '[Survey: Machine Learning Projects Still Routinely Fail to Deploy](https://www.kdnuggets.com/survey-machine-learning-projects-still-routinely-fail-to-deploy)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[调查：机器学习项目仍然经常无法部署](https://www.kdnuggets.com/survey-machine-learning-projects-still-routinely-fail-to-deploy)'
 - en: '[Deploy a Machine Learning Web App with Heroku](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Heroku 部署机器学习网络应用](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)'

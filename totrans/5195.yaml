@@ -3,60 +3,76 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据可观测性：使用 SQL 构建数据质量监视器
 - en: 原文：[https://www.kdnuggets.com/2021/02/data-observability-building-data-quality-monitors-using-sql.html](https://www.kdnuggets.com/2021/02/data-observability-building-data-quality-monitors-using-sql.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/02/data-observability-building-data-quality-monitors-using-sql.html](https://www.kdnuggets.com/2021/02/data-observability-building-data-quality-monitors-using-sql.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Ryan Kearns](https://www.linkedin.com/in/ryanothnielkearns/), Stanford
     University & [Barr Moses](https://www.linkedin.com/in/barrmoses/), CEO and Co-founder
     of Monte Carlo**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Ryan Kearns](https://www.linkedin.com/in/ryanothnielkearns/)，斯坦福大学 和 [Barr
+    Moses](https://www.linkedin.com/in/barrmoses/)，Monte Carlo 首席执行官兼联合创始人**'
 - en: '![Figure](../Images/7a97509a8e11f2e885c0d1f8ee9db2a3.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/7a97509a8e11f2e885c0d1f8ee9db2a3.png)'
 - en: Image courtesy of [faaiq ackmerd](https://www.pexels.com/@faaiq-ackmerd-383634) on [Pexels](http://www.pexels.com/).
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由 [faaiq ackmerd](https://www.pexels.com/@faaiq-ackmerd-383634) 提供，来源于 [Pexels](http://www.pexels.com/)。
 - en: '* * *'
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在的组织的 IT'
 - en: '* * *'
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '*In this article series, we walk through how you can create your own data observability
     monitors from scratch, mapping to *[*five key pillars of data health*](https://towardsdatascience.com/introducing-the-five-pillars-of-data-observability-e73734b263d5)*.
     Part 1 of this series was adapted from Barr Moses and Ryan Kearns’ O’Reilly training, *[***Managing
@@ -67,6 +83,8 @@
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '*在本系列文章中，我们将详细介绍如何从零开始创建自己的数据可观测性监视器，映射到*[*数据健康的五大支柱*](https://towardsdatascience.com/introducing-the-five-pillars-of-data-observability-e73734b263d5)*。本系列的第一部分改编自
+    Barr Moses 和 Ryan Kearns 的 O''Reilly 培训，*[*《管理数据停机时间：将可观测性应用于数据管道》*](https://www.oreilly.com/live-training/courses/managing-data-downtime/0636920508717/)*，这是行业首个数据可观测性课程。相关练习可在*[*这里*](https://github.com/monte-carlo-data/data-downtime-challenge)*找到，本文所示的改编代码可在*[*这里*](https://github.com/monte-carlo-data/data-observability-in-practice)*获取。*'
 - en: From null values and duplicate rows, to modeling errors and schema changes,
     data can break for many reasons. [Data testing](https://towardsdatascience.com/why-testing-your-data-is-insufficient-6914275a9762) is
     often our first line of defense against bad data, but what happens if data breaks
@@ -74,37 +92,46 @@
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 从空值和重复行，到建模错误和模式变化，数据可能因多种原因而损坏。[数据测试](https://towardsdatascience.com/why-testing-your-data-is-insufficient-6914275a9762)
+    通常是对抗不良数据的第一道防线，但如果数据在其生命周期中发生故障会发生什么？
 - en: 'We call this phenomenon data downtime, and it refers to periods of time where
     data is missing, erroneous, or otherwise inaccurate. [Data downtime](https://towardsdatascience.com/the-rise-of-data-downtime-841650cedfd5) prompts
     us to ask questions such as:'
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将这种现象称为数据停机时间，指的是数据缺失、错误或其他不准确的时间段。[数据停机时间](https://towardsdatascience.com/the-rise-of-data-downtime-841650cedfd5)
+    促使我们提出以下问题：
 - en: Is the data up to date?
   id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据是否是最新的？
 - en: Is the data complete?
   id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据是否完整？
 - en: Are fields within expected ranges?
   id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 字段是否在预期范围内？
 - en: Is the null rate higher or lower than it should be?
   id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 空值率是高于还是低于预期？
 - en: Has the schema changed?
   id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模式是否发生了变化？
 - en: To trigger an alert when data breaks and prevent data downtime, data teams can
     leverage a tried and true tactic from our friends in software engineering: [**monitoring
     and observability**](https://observability.workshop.aws/en/anomalydetection.html).
