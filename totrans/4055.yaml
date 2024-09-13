@@ -1,309 +1,475 @@
 - en: Profiling Python Code Using timeit and cProfile
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 timeit 和 cProfile 进行 Python 代码性能分析
 - en: 原文：[https://www.kdnuggets.com/profiling-python-code-using-timeit-and-cprofile](https://www.kdnuggets.com/profiling-python-code-using-timeit-and-cprofile)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/profiling-python-code-using-timeit-and-cprofile](https://www.kdnuggets.com/profiling-python-code-using-timeit-and-cprofile)
 - en: '![Profiling Python Code Using timeit and cProfile](../Images/fa9801a9e924ea0b2e0312ae54e644a0.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 timeit 和 cProfile 进行 Python 代码性能分析](../Images/fa9801a9e924ea0b2e0312ae54e644a0.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片
 - en: As a software developer, you’ll have likely heard the quote [“Premature optimization
     is the root of all evil”](https://ubiquity.acm.org/article.cfm?id=1513451#:~:text=The%20second%20thing%20to%20note,you%20get%20with%20micro%2Doptimization))—more
     than once—in your career. While optimization may not be super helpful (or absolutely
     necessary) for small projects, profiling is often helpful.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为一名软件开发人员，你在职业生涯中可能会多次听到 [“过早优化是万恶之源”](https://ubiquity.acm.org/article.cfm?id=1513451#:~:text=The%20second%20thing%20to%20note,you%20get%20with%20micro%2Doptimization)
+    的名言。虽然对于小项目来说，优化可能不是非常有用（或绝对必要），但性能分析通常是有帮助的。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: After you’ve finished coding a module, it’s a good practice to profile your
     code to measure how long each of the sections takes to execute. This can help
     identify code smells and guide optimizations to improve code quality. So always
     profile your code before optimizing!
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 完成模块编码后，进行性能分析是一种良好的实践，可以测量每个部分执行所需的时间。这有助于识别代码异味并指导优化以提高代码质量。所以在优化之前一定要进行性能分析！
 - en: To take the first steps, this guide will help you get started with profiling
     in Python—using the built-in [timeit](https://docs.python.org/3/library/timeit.html)
     and [cProfile](https://docs.python.org/3/library/profile.html#module-cProfile)
     modules. You’ll learn to use both the command-line interface and the equivalent
     callables inside Python scripts.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 要迈出第一步，本指南将帮助你开始使用 Python 中的内置 [timeit](https://docs.python.org/3/library/timeit.html)
+    和 [cProfile](https://docs.python.org/3/library/profile.html#module-cProfile) 模块进行性能分析。你将学习如何使用命令行界面和在
+    Python 脚本中等效的调用方式。
 - en: How To Profile Python Code Using timeit
+  id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用 timeit 性能分析 Python 代码
 - en: The timeit module is part of the Python standard library and offers a few convenience
     functions that can be used to time short snippets of code.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: timeit 模块是 Python 标准库的一部分，提供了一些方便的函数，可以用来计时短代码片段。
 - en: 'Let''s take a simple example of reversing a Python list. We’ll measure the
     execution times of obtaining a reversed copy of the list using:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们以反转 Python 列表的简单示例为例。我们将测量使用以下方法获取列表反转副本的执行时间：
 - en: the `reversed()` function, and
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`reversed()` 函数，以及'
 - en: list slicing.
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 列表切片。
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Running timeit at the Command Line
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在命令行中运行 timeit
 - en: 'You can run `timeit` at the command line using the syntax:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用以下语法在命令行中运行 `timeit`：
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: You’re required to provide the statement `stmt` whose execution time is to be
     measured.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 你需要提供要测量执行时间的语句 `stmt`。
 - en: You can specify the `setup` code when needed—using the short option -s or the
     long option --setup. The setup code will be run only once.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在需要时指定 `setup` 代码——使用短选项 -s 或长选项 --setup。setup 代码只会运行一次。
 - en: 'The `number` of times to run the statement: short option -n or the long option
     --number is optional. And the number of times to repeat this cycle: short option
     -r or the long option --repeat is optional, too.'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行语句的次数：短选项 -n 或长选项 --number 是可选的。重复此循环的次数：短选项 -r 或长选项 --repeat 也是可选的。
 - en: 'Let’s see the above in action for our example:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们在示例中查看上述内容：
 - en: 'Here creating the list is the `setup` code and reversing the list is the statement
     to be timed:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里创建列表是 `setup` 代码，反转列表是要计时的语句：
 - en: '[PRE2]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: When you don’t specify values for `repeat`, the default value of 5 is used.
     And when you don’t specify `number`, the code is run as many times as needed so
     as to reach a total time of [at least 0.2 seconds](https://docs.python.org/3/library/timeit.html#cmdoption-timeit-n).
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你没有指定`repeat`的值时，使用默认值5。当你没有指定`number`时，代码将运行足够多的次数，以达到至少[0.2秒](https://docs.python.org/3/library/timeit.html#cmdoption-timeit-n)的总时间。
 - en: 'This example explicitly sets the number of times to execute the statement:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 此示例明确设置了执行语句的次数：
 - en: '[PRE3]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The default value of `repeat` is 5, but we can set it to any suitable value:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '`repeat`的默认值是5，但我们可以将其设置为任何合适的值：'
 - en: '[PRE4]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Let’s also time the list slicing approach:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们也来测量列表切片方法的时间：
 - en: '[PRE5]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The list slicing approach seems to be faster (all examples are in Python 3.10
     on Ubuntu 22.04).
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 列表切片方法似乎更快（所有示例均在Ubuntu 22.04上的Python 3.10中）。
 - en: Running timeit in a Python Script
+  id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在Python脚本中运行timeit
 - en: 'Here’s the equivalent of running timeit inside the Python script:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是在Python脚本中运行timeit的等效方法：
 - en: '[PRE6]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The `timeit()` callable returns the execution time of `stmt` for `number` of
     times. Notice that we can explicitly mention the number of times to run, or make
     `number` take the default value of 1000000.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '`timeit()`可调用对象返回`stmt`执行`number`次的执行时间。注意，我们可以明确指定运行次数，或者让`number`取默认值1000000。'
 - en: '[PRE7]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'This runs the statement—without repeating the timer function—for the specified
     `number` of times and returns the execution time. It is also quite common to use
     `time.repeat()` and take the minimum time as shown:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将执行语句——而不重复计时器函数——指定的`number`次，并返回执行时间。通常也可以使用`time.repeat()`并取最小时间，如下所示：
 - en: '[PRE8]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: This will repeat the process of running the code `number` of times `repeat`
     number of times and returns the minimum execution time. Here we have 5 repetitions
     of 100000 times each.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将重复运行代码`number`次，重复`repeat`次，并返回最小执行时间。这里我们有5次重复，每次100000次。
 - en: '[PRE9]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: How To Profile a Python Script Using cProfile
+  id: totrans-45
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用cProfile分析Python脚本
 - en: We have seen how timeit can be used to measure the execution times of short
     code snippets. However, in practice, it's more helpful to profile an entire Python
     script.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经看到timeit可以用来测量短代码片段的执行时间。然而，在实际应用中，分析整个Python脚本更有帮助。
 - en: 'This will give us the execution times of all the functions and method calls—including
     built-in functions and methods. So we can get a better idea of the more expensive
     function calls and identify opportunities for optimization. For example: there
     might be an API call that''s too slow. Or a function may have a loop that can
     be replaced by a more Pythonic comprehension expression.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将给我们所有函数和方法调用的执行时间——包括内置函数和方法。因此，我们可以更好地了解更昂贵的函数调用，并识别优化机会。例如：可能存在一个过慢的API调用。或者一个函数可能有一个可以用更Pythonic的推导式替换的循环。
 - en: Let’s learn how to profile Python scripts using the cProfile module (also part
     of the Python standard library).
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们学习如何使用cProfile模块（也属于Python标准库）来分析Python脚本。
 - en: 'Consider the following Python script:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑以下Python脚本：
 - en: '[PRE10]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'Here we have three functions:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有三个函数：
 - en: '`func()` that loops through a range of numbers and prints them out.'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`func()`循环遍历数字范围并打印出来。'
 - en: '`another func()` that contains a call to the `sleep()` function.'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 包含对`sleep()`函数调用的`another func()`。
 - en: '`useful_func()` that returns the index of a target number in list (if the target
     is present in the list).'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`useful_func()`返回列表中目标数字的索引（如果目标在列表中）。'
 - en: The above-listed functions will be called each time you run the main.py script.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述列出的函数将在每次运行main.py脚本时被调用。
 - en: Running cProfile at the Command Line
+  id: totrans-56
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在命令行运行cProfile
 - en: 'Run cProfile at the command line using:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用命令行运行cProfile：
 - en: '[PRE11]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Here we’ve named the file main.py:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里我们将文件命名为main.py：
 - en: '[PRE12]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: 'Running this should give you the following output:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行此代码应该会得到以下输出：
 - en: '[PRE13]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'And the following profile:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 以及以下配置文件：
 - en: '![Profiling Python Code Using timeit and cProfile](../Images/25aca12ae8639e7c2b0a59e3d1e3f1a9.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![使用timeit和cProfile分析Python代码](../Images/25aca12ae8639e7c2b0a59e3d1e3f1a9.png)'
 - en: Here, `ncalls` refers to the number of calls to the function and `percall` refers
     to the time per function call. If the value of `ncalls` is greater than one, then
     `percall` is the average time across all calls.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里，`ncalls`指的是函数调用的次数，`percall`指的是每次函数调用的时间。如果`ncalls`的值大于1，则`percall`是所有调用的平均时间。
 - en: The execution time of script is dominated by `another_func` that uses the built-in
     `sleep` function call (sleeps for 20 seconds). We see that `print` function calls
     are quite expensive too.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 脚本的执行时间被 `another_func` 所主导，该函数使用内置的 `sleep` 函数调用（休眠 20 秒）。我们也看到 `print` 函数调用的开销相当大。
 - en: Using cProfile in the Python Script
+  id: totrans-67
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在 Python 脚本中使用 cProfile
 - en: While running cProfile at the command line works fine, you can also add the
     profiling functionality to the Python script. You can use cProfile coupled with
     the [pstats module](https://docs.python.org/3/library/profile.html) for profiling
     and accessing statistics.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管在命令行运行 cProfile 工作得很好，你也可以将性能分析功能添加到 Python 脚本中。你可以使用 cProfile 结合 [pstats
+    模块](https://docs.python.org/3/library/profile.html) 来进行性能分析和访问统计信息。
 - en: 'As a best practice to handle resource setup and teardown better, use the with
     statement and create a profile object that’s used as a context manager:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为处理资源设置和拆除的最佳实践，使用 with 语句并创建一个作为上下文管理器的 profile 对象：
 - en: '[PRE14]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'Let’s take a closer look at the output profile generated:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们更深入地查看生成的输出文件：
 - en: '![Profiling Python Code Using timeit and cProfile](../Images/cb3d21db14288a67207a1a122de8946e.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 timeit 和 cProfile 进行 Python 性能分析](../Images/cb3d21db14288a67207a1a122de8946e.png)'
 - en: 'When you’re profiling a large script, it’ll be helpful to *sort the results
     by execution time*. To do so you can call `sort_stats` on the profile object and
     sort based on the execution time:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你分析一个大型脚本时，*按执行时间排序结果* 会很有帮助。为此，你可以在 profile 对象上调用 `sort_stats` 方法，并根据执行时间进行排序：
 - en: '[PRE15]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'When you now run the script, you should be able to see the results sorted by
     time:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在运行脚本时，你应该能看到按时间排序的结果：
 - en: '![Profiling Python Code Using timeit and cProfile](../Images/ae9bde6a1312f616cb0873602633ea6f.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 timeit 和 cProfile 进行 Python 性能分析](../Images/ae9bde6a1312f616cb0873602633ea6f.png)'
 - en: Conclusion
+  id: totrans-77
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: I hope this guide helps you get started with profiling in Python. Always remember,
     optimizations should never come at the cost of readability. If you’re interested
     in learning about other profilers, including third-party Python packages, check
     out this [article on Python profilers](/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html).
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望这份指南能帮助你开始使用 Python 进行性能分析。始终记住，优化不应以牺牲可读性为代价。如果你有兴趣了解其他性能分析工具，包括第三方 Python
+    包，请查看这篇[关于 Python 性能分析器的文章](/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)。
 - en: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** is a developer
     and technical writer from India. She likes working at the intersection of math,
     programming, data science, and content creation. Her areas of interest and expertise
@@ -311,33 +477,50 @@
     writing, coding, and coffee! Currently, she''s working on learning and sharing
     her knowledge with the developer community by authoring tutorials, how-to guides,
     opinion pieces, and more.'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交集处工作。她的兴趣和专长领域包括
+    DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和咖啡！目前，她正在学习并通过撰写教程、操作指南、意见文章等与开发者社区分享她的知识。'
 - en: More On This Topic
+  id: totrans-80
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Introduction to Memory Profiling in Python](https://www.kdnuggets.com/introduction-to-memory-profiling-in-python)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 内存分析简介](https://www.kdnuggets.com/introduction-to-memory-profiling-in-python)'
 - en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
 - en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化 Python 代码性能：深入分析 Python 性能分析器](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
 - en: '[3 Tools to Track and Visualize the Execution of Your Python Code](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[追踪和可视化 Python 代码执行的 3 个工具](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)'
 - en: '[KDnuggets™ News 22:n01, Jan 5: 3 Tools to Track and Visualize…](https://www.kdnuggets.com/2022/n01.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets™ 新闻 22:n01，1 月 5 日：追踪和可视化的 3 个工具…](https://www.kdnuggets.com/2022/n01.html)'
 - en: '[Mastering Python: 7 Strategies for Writing Clear, Organized, and…](https://www.kdnuggets.com/mastering-python-7-strategies-for-writing-clear-organized-and-efficient-code)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握 Python：编写清晰、组织良好的代码的 7 种策略](https://www.kdnuggets.com/mastering-python-7-strategies-for-writing-clear-organized-and-efficient-code)'
