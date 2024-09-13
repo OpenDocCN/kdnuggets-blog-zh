@@ -105,6 +105,7 @@
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 缺失值在 SQL 中由 NULL 标记表示，但数据可能并不总是明确标记。假设有一个包含医学研究中患者信息的表*Patients*的数据集。一个属性是*i*d，一个标识符，另外两个属性是*Height*和*Weight*，分别表示研究开始时每位患者的身高和体重。我们注意到一些体重值缺失，由-1表示。然后我们按如下方式“清理”表：
 - en: '[PRE0]'
   id: totrans-14
   prefs: []
@@ -115,6 +116,7 @@
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦完成这一点，我们可以使用谓词*IS NULL*来统一处理所有缺失值：查询
 - en: '[PRE1]'
   id: totrans-16
   prefs: []
@@ -125,6 +127,7 @@
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 将精确告诉我们缺失了多少值。如果只有少量值缺失，我们可能想要丢弃不完整的数据。SQL 命令
 - en: '[PRE2]'
   id: totrans-18
   prefs: []
@@ -135,6 +138,7 @@
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 将消除缺少权重的行（观察值）。如果该属性被认为在后续分析中不重要，则命令
 - en: '[PRE3]'
   id: totrans-20
   prefs: []
@@ -145,6 +149,7 @@
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 将从整个表中消除该属性——即，从所有行（观察值）中消除。如果我们更愿意*填补*缺失值，则命令：
 - en: '[PRE4]'
   id: totrans-22
   prefs: []
@@ -156,6 +161,7 @@
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 将所有缺失值替换为现有值的均值。更复杂的方法是从相关属性中填补缺失值。我们可能会想知道*Height*是否与体重相关；查询：
 - en: '[PRE5]'
   id: totrans-24
   prefs: []
@@ -167,6 +173,8 @@
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 将计算系统中两个属性之间的[相关系数](https://en.wikipedia.org/wiki/Correlation_and_dependence)，其中存在内置的相关函数`cor`。即使在没有该函数的系统中，SQL
+    允许我们自己编写：
 - en: '[PRE6]'
   id: totrans-26
   prefs: []
@@ -184,6 +192,8 @@
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为均值（*avg*）和标准差（*std*）函数是普遍存在的。如果我们认为相关性足够高，我们可以使用[kNN算法](https://link.springer.com/book/10.1007/978-3-319-14142-8)来推断适当的值。在一般情况下，SQL
+    允许我们使用常见的距离函数（如欧氏距离或其他范数）计算数据集元素之间的*距离*，并按计算出的距离对结果进行排序，以便使用*k*最近邻来外推所需的值。在这个具体的例子中，计算非常简单：我们使用高度差的绝对值作为我们的距离，并以最近的5个邻居的平均权重作为我们新的填补权重：
 - en: '[PRE7]'
   id: totrans-28
   prefs: []
@@ -200,6 +210,8 @@
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在此查询中，*FROM* 子查询计算两个*不同*数据点（患者）之间的距离，其中一个患者的体重缺失；按此距离排序（*ORDER BY*）并仅保留5个最近的结果（*LIMIT*）；然后使用这5个邻居的体重平均值作为填补值（注意：平局的情况会被任意打破）。我们为每个缺失体重的数据点返回一个结果，因此我们提供了这样一个点的*id*。该结果可以在第二个查询中使用，类似于上面的第二个
+    UPDATE，来更改*Patient*中的数据值。
 - en: SQL has the added advantage of being a well-established standard for operating
     rather efficiently on very large datasets (recall that a separate *query optimizer* analyzes
     all the statements above and determines the most efficient way that the system
