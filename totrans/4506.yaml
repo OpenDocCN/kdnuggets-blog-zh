@@ -1,43 +1,67 @@
 - en: Tokenization and Text Data Preparation with TensorFlow & Keras
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用TensorFlow和Keras进行分词和文本数据准备
 - en: 原文：[https://www.kdnuggets.com/2020/03/tensorflow-keras-tokenization-text-data-prep.html](https://www.kdnuggets.com/2020/03/tensorflow-keras-tokenization-text-data-prep.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/03/tensorflow-keras-tokenization-text-data-prep.html](https://www.kdnuggets.com/2020/03/tensorflow-keras-tokenization-text-data-prep.html)
 - en: '[comments](#comments)![Figure](../Images/012ff6cfe934b8ef10fb2581555d178f.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)![图](../Images/012ff6cfe934b8ef10fb2581555d178f.png)'
 - en: Image by [Willi Heidelbach](https://pixabay.com/users/wilhei-883152/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=705667)
     from [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=705667)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来自[Willi Heidelbach](https://pixabay.com/users/wilhei-883152/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=705667)
+    [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=705667)
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In the past we have had a look at a [general approach to preprocessing text
     data](/2017/12/general-approach-preprocessing-text-data.html), which focused on
     tokenization, normalization, and noise removal. We then followed that up with
@@ -46,8 +70,10 @@
     outlined in the former article, and which encompasses a mainly manual approach
     to text data preprocessing. We have also had a look at what goes into building
     an elementary [text data vocabulary using Python](/2019/11/create-vocabulary-nlp-tasks-python.html).
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 之前我们查看了一个[通用文本数据预处理方法](/2017/12/general-approach-preprocessing-text-data.html)，重点关注了分词、标准化和噪声去除。然后我们概述了[使用Python进行文本数据预处理](/2018/03/text-data-preprocessing-walkthrough-python.html)的内容，这本质上是前一篇文章中框架的实际应用，涵盖了主要的手动文本数据预处理方法。我们还探讨了如何[使用Python构建基础文本数据词汇](/2019/11/create-vocabulary-nlp-tasks-python.html)。
 - en: There are numerous tools available for automating much of this preprocessing
     and text data preparation, however. These tools existed prior to the publication
     of those articles for certain, but there has been an explosion in their proliferation
@@ -55,8 +81,10 @@
     sense that neural network implementation libraries such as TensorFlow — and also,
     yet simultaneously, Keras — would include methods for achieving these preparation
     tasks.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 不过，自动化许多这种预处理和文本数据准备的工具是存在的。这些工具在这些文章发表之前就已存在，但其普及程度自那时以来激增。由于许多NLP工作现在通过神经网络完成，使用神经网络实现库如TensorFlow——以及同时使用Keras——来实现这些准备任务是很自然的。
 - en: This article will look at tokenizing and further preparing text data for feeding
     into a neural network using TensorFlow and Keras preprocessing tools. While the
     additional concept of creating and padding sequences of encoded data for neural
@@ -65,72 +93,102 @@
     it will not be here. What constitutes noise in text data can be a task-specific
     undertaking, and the previous treatment of this topic is still relevant as it
     is.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文将探讨如何使用TensorFlow和Keras预处理工具对文本数据进行分词和进一步准备，以便输入神经网络。虽然前几篇文章没有涉及为神经网络创建和填充编码数据序列的附加概念，但本文将予以补充。相反，虽然噪声去除在之前的文章中有所涵盖，但本文不再涉及。文本数据中的噪声是什么可能是任务特定的，前文对这一主题的处理依然具有参考价值。
 - en: 'For what we will accomplish today, we will make use of 2 Keras preprocessing
     tools: the [`Tokenizer`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text/Tokenizer)
     class, and the [`pad_sequences`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/sequence/pad_sequences)
     module.'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '为了实现今天的目标，我们将使用两个Keras预处理工具: [`Tokenizer`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text/Tokenizer)
+    类和 [`pad_sequences`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/sequence/pad_sequences)
+    模块。'
 - en: Instead of using a real dataset, either a TensorFlow inclusion or something
     from the real world, we use a few toy sentences as stand-ins while we get the
     coding down. Next time we can extend our code to both use a real dataset and perform
     some interesting tasks, such as classification or something similar. Once this
     process is understood, extending it to larger datasets is trivial.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用一些示例句子代替真实数据集或来自现实世界的数据，来完成编码工作。下次我们可以扩展代码，使用真实数据集并执行一些有趣的任务，例如分类或类似任务。一旦理解了这个过程，扩展到更大的数据集将很简单。
 - en: Let's start with the necessary imports and some "data" for demonstration.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始进行必要的导入和一些“数据”演示。
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Next, some hyperparameters for performing tokenization and preparing the standardized
     data representation, with explanations below.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，一些执行分词和准备标准化数据表示的超参数，下面有解释。
 - en: '[PRE1]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '`num_words = 1000`'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`num_words = 1000`'
 - en: This will be the maximum number of words from our resulting tokenized data vocabulary
     which are to be used, truncated after the 1000 most common words in our case.
     This will not be an issue in our small dataset, but is being shown for demonstration
     purposes.
+  id: totrans-20
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这将是从结果分词数据词汇表中使用的最多词数，在我们的例子中是截断到前1000个最常见的词。虽然在我们的小数据集中这不会成为问题，但为了演示目的，这里展示了。
 - en: '`oov_token = <UNK>`'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`oov_token = <UNK>`'
 - en: This is the token which will be used for out of vocabulary tokens encountered
     during the tokenizing and encoding of test data sequences, created using the word
     index built during tokenization of our training data.
+  id: totrans-22
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这是用于处理在测试数据序列分词和编码过程中遇到的词汇表外的词汇的标记，使用在训练数据分词过程中构建的词索引创建的。
 - en: '`pad_type = ''post''`'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`pad_type = ''post''`'
 - en: When we are encoding our numeric sequence representations of the text data,
     our sentences (or arbitrary text chunk) lengths will not be uniform, and so we
     will need to select a maximum length for sentences and pad unused sentence positions
     in shorter sentences with a padding character. In our case, our maximum sentence
     length will be determined by searching our sentences for the one of maximum length,
     and padding characters will be '0'.
+  id: totrans-24
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 当我们对文本数据进行数字序列编码时，我们的句子（或任意文本块）的长度将不一致，因此我们需要选择一个最大长度，并用填充字符填补较短句子的未使用位置。在我们的例子中，最大句子长度将通过搜索最长的句子来确定，填充字符将是'0'。
 - en: '`trunc_type = ''post''`'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`trunc_type = ''post''`'
 - en: As in the above, when we are encoding our numeric sequence representations of
     the text data, our sentences (or arbitrary text chunk) lengths will not be uniform,
     and so we will need to select a maximum length for sentences and pad unused sentence
@@ -140,29 +198,43 @@
     entries will appear at the left-most positions of our resulting sentence vectors,
     while the padding characters ('0') will appear after our actual data at the right-most
     positions of our resulting sentence vectors.
+  id: totrans-26
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 与上面一样，当我们对文本数据进行数字序列编码时，我们的句子（或任意文本块）的长度将不一致，因此我们需要选择一个最大长度，并用填充字符填补较短句子的未使用位置。我们选择在句子的末尾进行填充（'post'），意味着我们的句子序列数字表示中的词索引条目将出现在结果句子向量的最左侧位置，而填充字符（'0'）将出现在实际数据之后，位于结果句子向量的最右侧位置。
 - en: '![Figure](../Images/14bc65aceee6b704b80532b634ab2b2b.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/14bc65aceee6b704b80532b634ab2b2b.png)'
 - en: 'Source: [Manning](https://freecontent.manning.com/deep-learning-for-text/)'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '来源: [Manning](https://freecontent.manning.com/deep-learning-for-text/)'
 - en: Now let's perform the tokenization, sequence encoding, and sequence padding.
     We will walk through this code chunk by chunk below.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们来进行分词、序列编码和序列填充。我们将逐块讲解这段代码。
 - en: '[PRE2]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Here''s what''s happening chunk by chunk:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是逐块发生的情况：
 - en: '`# Tokenize our training data`'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`# Tokenize our training data`'
 - en: This is straightforward; we are using the TensorFlow (Keras) [`Tokenizer`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text/Tokenizer)
     class to automate the tokenization of our training data. First we create the `Tokenizer`
     object, providing the maximum number of words to keep in our vocabulary after
@@ -173,24 +245,35 @@
     the [documentation](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text/Tokenizer).
     After the `Tokenizer` has been created, we then fit it on the training data (we
     will use it later to fit the testing data as well).
+  id: totrans-33
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 这很简单；我们使用 TensorFlow（Keras）的 [`Tokenizer`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text/Tokenizer)
+    类来自动化我们的训练数据的标记化。首先，我们创建 `Tokenizer` 对象，提供最大保留的词汇数量，以及一个用于编码测试数据中未见过的词汇的超出词汇表的标记，否则这些之前未见过的词汇将被简单地从我们的词汇表中删除，且神秘地未被计算在内。要了解更多有关
+    TensorFlow 标记化器的其他参数，请查看 [文档](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text/Tokenizer)。创建
+    `Tokenizer` 后，我们将其拟合在训练数据上（我们稍后也会用它来拟合测试数据）。
 - en: '`# Get our training data word index`'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`# 获取我们的训练数据单词索引`'
 - en: A byproduct of the tokenization process is the creation of a word index, which
     maps words in our vocabulary to their numeric representation, a mapping which
     will be essential for encoding our sequences. Since we will reference this later
     to print out, we assign it a variable here to simplify a bit.
+  id: totrans-35
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 标记化过程的副产品是创建了一个单词索引，将词汇表中的单词映射到其数字表示，这一映射对于编码我们的序列至关重要。由于我们稍后会引用这个映射以进行打印，因此我们在这里为其分配一个变量以简化操作。
 - en: '`# Encode training data sentences into sequences`'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`# 将训练数据句子编码为序列`'
 - en: Now that we have tokenized our data and have a word to numeric representation
     mapping of our vocabulary, let's use it to encode our sequences. Here, we are
     converting our text sentences from something like "My name is Matthew," to something
@@ -199,26 +282,35 @@
     in a bunch of words won't work. Hence, sequences. And remember that this is only
     the training data we are working on right now; testing data is necessarily tokenized
     and encoded afterwards, below.
+  id: totrans-37
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 现在我们已经将数据标记化，并且有了词汇表的单词到数字表示的映射，让我们利用这个映射来编码序列。在这里，我们将文本句子从类似“我的名字是马修”的形式转换为类似“6
+    8 2 19”的形式，其中每个数字在索引中与相应的单词匹配。由于神经网络通过对数字进行计算来工作，直接传入一堆单词是不行的。因此，我们使用序列。并且记住，这仅仅是我们目前处理的训练数据；测试数据在之后会被标记化和编码。
 - en: '`# Get max training sequence length`'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`# 获取最大训练序列长度`'
 - en: Remember when we said we needed to have a maximum sequence length for padding
     our encoded sentences? We could set this limit ourselves, but in our case we will
     simply find the longest encoded sequence and use that as our maximum sequence
     length. There would certainly be reasons you would not want to do this in practice,
     but there would also be times it would be appropriate. The `maxlen` variable is
     then used below in the actual training sequence padding.
+  id: totrans-39
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 记得我们之前提到过需要为编码的句子设置一个最大序列长度吗？我们可以自己设置这个限制，但在我们的案例中，我们将找到最长的编码序列，并以此作为最大序列长度。在实际操作中，确实有不想这样做的原因，但也有时这样做是合适的。接下来，在实际训练序列填充中，将使用`maxlen`变量。
 - en: '`# Pad the training sequences`'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`# 填充训练序列`'
 - en: As mentioned above, we need our encoded sequences to be of the same length.
     We just found out the length of the longest sequence, and will use that to pad
     all other sequences with extra '0's at the end ('post') and will also truncate
@@ -226,104 +318,154 @@
     use the TensorFlow (Keras) [`pad_sequences`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/sequence/pad_sequences)
     module to accomplish this. You can look at the documentation for additional padding
     options.
+  id: totrans-41
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 如上所述，我们需要确保编码序列的长度一致。我们刚刚找出了最长序列的长度，并将使用该长度对所有其他序列进行填充，填充额外的‘0’在末尾（‘post’），并且也会从末尾（‘post’）截断任何超出最大长度的序列。这里我们使用
+    TensorFlow（Keras）的 [`pad_sequences`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/sequence/pad_sequences)
+    模块来完成这一任务。你可以查看文档以获取其他填充选项。
 - en: '`# Output the results of our work`'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`# 输出我们工作的结果`'
 - en: Now let's see what we've done. We would expect to note the longest sequence
     and the padding of those which are shorter. Also note that when padded, our sequences
     are converted from Python lists to Numpy arrays, which is helpful since that is
     what we will ultimately feed into our neural network. The shape of our training
     sequences matrix is the number of sentences (sequences) in our training set (4)
     by the length of our longest sequence (`maxlen`, or 12).
+  id: totrans-43
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 现在让我们看看我们所做的工作。我们期望注意到最长的序列以及填充较短序列的情况。还要注意，当进行填充时，我们的序列会从Python列表转换为Numpy数组，这很有帮助，因为这就是我们最终会送入神经网络的内容。我们的训练序列矩阵的形状是训练集中句子（序列）的数量（4）与最长序列的长度（`maxlen`，或12）。
 - en: '[PRE3]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Now let's use our tokenizer to tokenize the test data, and then similarly encode
     our sequences. This is all quite similar to the above. Note that we are using
     the same tokenizer we created for training in order to facilitate simpatico between
     the 2 datasets, using the same vocabulary. We also pad to the same length and
     specifications as the training sequences.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们使用我们的分词器对测试数据进行分词，然后类似地编码我们的序列。这些操作与上述内容非常相似。请注意，我们使用的是为训练创建的相同分词器，以便在两个数据集之间实现一致，使用相同的词汇表。我们还按照与训练序列相同的长度和规格进行填充。
 - en: '[PRE4]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '[PRE5]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Can you see, for instance, how having different lengths of padded sequences
     between training and testing sets would cause a problem?
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，你能看到训练集和测试集之间的填充序列长度不同会造成什么问题吗？
 - en: Finally, let's check out are encoded test data.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，让我们检查编码后的测试数据。
 - en: '[PRE6]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '[PRE7]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Note that, since we are encoding some words in the test data which were not
     seen in the training data, we now have some out of vocabulary tokens which we
     encoded as <UNK> (specifically 'want', for example).
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，由于我们在测试数据中编码了一些在训练数据中未见过的单词，我们现在有一些词汇外的标记，这些标记被编码为<UNK>（例如，‘want’）。
 - en: Now that we have padded sequences, and more importantly know how to get them
     again with different data, we are ready to do something with them. Next time,
     we will replace the toy data we were using this time with actual data, and with
     very little change to our code (save the possible necessity of classification
     labels for our train and test data), we will move forward with an NLP task of
     some sort, most likely classification.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了填充序列，更重要的是知道如何使用不同的数据再次获取它们，我们可以开始做一些事情了。下一次，我们将用实际数据替代这次使用的玩具数据，并且只需对代码做很小的更改（除非我们需要为训练和测试数据添加分类标签），我们将继续进行某种NLP任务，最有可能是分类。
 - en: '**Related**:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[10 Python String Processing Tips & Tricks](/2020/01/python-string-processing-primer.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[10个Python字符串处理技巧与窍门](/2020/01/python-string-processing-primer.html)'
 - en: '[Getting Started with Automated Text Summarization](/2019/11/getting-started-automated-text-summarization.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动文本摘要入门](/2019/11/getting-started-automated-text-summarization.html)'
 - en: '[How to Create a Vocabulary for NLP Tasks in Python](/2019/11/create-vocabulary-nlp-tasks-python.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在Python中为NLP任务创建词汇表](/2019/11/create-vocabulary-nlp-tasks-python.html)'
 - en: More On This Topic
+  id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用TensorFlow和Keras构建并训练第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[Data Preparation and Raw Data in Machine Learning](https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的数据准备和原始数据](https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html)'
 - en: '[Data Preparation with SQL Cheatsheet](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL中的数据准备备忘单](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'
 - en: '[Data Preparation in R Cheatsheet](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[R中的数据准备备忘单](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)'
 - en: '[Keras 3.0: Everything You Need To Know](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Keras 3.0：你需要知道的一切](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)'
 - en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow用于计算机视觉 - 简化的迁移学习](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
