@@ -3,56 +3,70 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 《解决 MySQL 中幻读问题的权威指南》
 - en: 原文：[https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html](https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html](https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html)
 - en: '![The Definitive Guide to Solving the Phantom Read in MySQL](../Images/3278c7a60acba0db970ee57e95209464.png)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![解决 MySQL 中幻读问题的权威指南](../Images/3278c7a60acba0db970ee57e95209464.png)'
 - en: Image by [storyset](https://www.freepik.com/author/stories)
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：[storyset](https://www.freepik.com/author/stories)
 - en: When most people think of relational databases, MySQL typically comes to mind
     first. MySQL uses InnoDB as its storage engine, and the *Repeatable Read* isolation
     level, which sees data before a transaction begins, is the most common.
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 当大多数人想到关系数据库时，MySQL 通常会首先浮现在脑海中。MySQL 使用 InnoDB 作为存储引擎，而 *可重复读* 隔离级别是最常见的，它在事务开始之前查看数据。
 - en: '* * *'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 需求'
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Unlike PostgreSQL, though, the [*Repeatable Read* isolation level](https://www.ibm.com/docs/en/wxs/8.6.1?topic=overview-transaction-isolation)
     in InnoDB is unable to handle certain issues smoothly. Namely, problems such as
     lost updates and phantom reads can't be handled at the InnoDB *Repeatable Read*
@@ -62,6 +76,8 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，与 PostgreSQL 不同，InnoDB 中的 [*可重复读* 隔离级别](https://www.ibm.com/docs/en/wxs/8.6.1?topic=overview-transaction-isolation)
+    无法平滑处理某些问题。具体来说，诸如丢失更新和幻读等问题无法在 InnoDB *可重复读* 隔离级别下处理，而在 PostgreSQL 中，解决丢失更新不需要额外的黑客手段。然而，你可以使用一些技巧来执行幻读，例如范围类型和其他机制。
 - en: MySQL developers should understand possible pitfalls and be able to tackle them
     appropriately to avoid issues like lost updates and phantom reads. This article
     will cover how [MySQL developers](/2022/01/developers-python-machine-learning-projects.html)
@@ -69,11 +85,14 @@
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: MySQL 开发人员应了解可能的陷阱，并能够适当地解决它们，以避免丢失更新和幻读等问题。本文将介绍 [MySQL 开发人员](/2022/01/developers-python-machine-learning-projects.html)
+    如何排除幻读可能造成的“写入”偏差。
 - en: Scenarios That Result in Phantom Reads
   id: totrans-13
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 导致幻读的场景
 - en: There are different scenarios that can lead to phantom reads. Generally speaking,
     however, these scenarios all follow a similar pattern. They initially will search
     a specific range in a MySQL database and then CREATE, UPDATE, or DELETE depending
@@ -82,6 +101,8 @@
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 导致幻读的场景各不相同。然而，一般来说，这些场景都遵循类似的模式。它们最初会在 MySQL 数据库中搜索特定范围，然后根据搜索结果进行 CREATE、UPDATE
+    或 DELETE 操作。之后，执行的操作直接影响从已搜索范围中获得的结果。
 - en: Let's assume, for example, that the action taken after a specific range has
     been searched is an UPDATE or DELETE. In this case, MySQL developers can use an
     exclusive lock to avoid a "write" skew. Developers may then use a FOR UPDATE at
@@ -92,6 +113,8 @@
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设，例如，在搜索特定范围后采取的操作是UPDATE或DELETE。在这种情况下，MySQL开发人员可以使用排他锁以避免“写偏斜”。然后，开发人员可以在SELECT的开头使用FOR
+    UPDATE，之后他们可以强制两个同时进行的事务一个接一个地执行。因此，这两个同时进行的事务在[竞争条件](/2020/05/complex-logic-breakneck-speed-julia-data-science.html)期间，绕过了“写偏斜”。
 - en: 'If we''re assuming that the action taken according to a specific range''s search
     results is CREATE, though, the above solution is incomplete: no corresponding
     row exists that allows a developer to lock in SELECT, which means a row is formed
@@ -99,17 +122,20 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们假设根据特定范围的搜索结果采取的操作是CREATE，那么上述解决方案是不完整的：没有对应的行允许开发人员在SELECT时锁定，这意味着行会在后面形成。
 - en: Solving Phantom Reads When Using CREATE
   id: totrans-17
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用CREATE时解决幽灵读
 - en: We'll introduce a practical scenario to better understand the issue that a phantom
     read causes when using CREATE. Once we describe this example, we'll then cover
     the corresponding solution.
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将介绍一个实际场景，以更好地理解在使用CREATE时幽灵读导致的问题。一旦我们描述了这个例子，我们将讨论相应的解决方案。
 - en: Imagine a system that allows people to book a meeting room; after someone has
     reserved a room using this system, new data is added to a table. This system lets
     users know that a room is available for use depending on the time slot they want
@@ -118,6 +144,7 @@
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象一个允许人们预订会议室的系统；在有人通过这个系统预订了房间后，会向表中添加新数据。这个系统让用户知道房间是否可用，取决于他们想要预订的时间段。一旦有人创建了新的预订记录，所有其他用户就可以避免时间冲突。
 - en: Issues arise, however, when two people need to reserve a room at the same time
     concurrently. Both users are able to get past the initial SELECT validation, which
     means that on paper, they both have a reservation for the same time, resulting
@@ -129,17 +156,20 @@
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，当两个人需要同时预订一个房间时，就会出现问题。两个用户都能够通过初始SELECT验证，这意味着在纸面上，他们都有同一时间的预订，从而导致时间冲突。如果例如，多个用户[通过VPN连接](https://thebestvpn.com/reviews/surfshark/)到远程SQL服务器并需要使用这个预订系统，那么问题可能会加剧。即使MySQL开发人员添加了排他锁，也无法避免这个问题，因为他们不能在开始的SELECT验证时锁定行。
 - en: Solving With Unique Constraint Indexes
   id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用唯一约束索引来解决
 - en: MySQL developers cannot turn a concurrent operation into one that is sequential
     by using exclusive locks. Therefore, they'll need to let one operation fail by
     adding unique constraints to their table.
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: MySQL开发人员不能通过使用排他锁将并发操作转变为顺序操作。因此，他们需要通过向表中添加唯一约束来让一个操作失败。
 - en: Developers can target the room reservation table's columns corresponding to
     room numbers and meeting start times with unique constraint indexes. This solution
     prevents someone from reserving a time slot that someone else has already reserved,
@@ -147,17 +177,20 @@
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 开发人员可以在房间预订表的列中，针对房间号和会议开始时间使用唯一约束索引。这种解决方案可以防止有人预订已经被别人预订的时间段，并且开发人员可以确保没有人能预订超过一个小时的房间。
 - en: However, this solution also prevents a unique constraint from being effective
     if two users have meetings with overlapping times. To correctly solve the issue,
     developers must instead materialize conflicts.
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，这个解决方案还会阻止唯一约束在两个用户的会议时间重叠时有效。要正确解决这个问题，开发人员必须改为实现冲突检测。
 - en: Solving By Materializing Conflicts
   id: totrans-25
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 通过实现冲突来解决
 - en: The correct way to solve the phantom reads we're discussing is by uncovering
     conflicts that a table hides. Developers can pre-fill a brand new table with [sets
     of data](/2021/09/springboard-unique-data-sets-data-science-skills.html) that
@@ -167,6 +200,7 @@
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 解决我们讨论的幻读问题的正确方法是揭示表隐藏的冲突。开发人员可以用[数据集](/2021/09/springboard-unique-data-sets-data-science-skills.html)预填充一个全新的表，这些数据集协调并发操作。如果我们以我们的会议室系统为例，可以想象创建一个新表来规定时间段，并提前显示所有可用的时间段。
 - en: With this new table, developers would now execute a SELECT on the column that
     dictates available time slots and include a FOR UPDATE since the data already
     exists. Developers would need to run this SELECT FOR UPDATE before the initial
@@ -174,6 +208,8 @@
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用这个新表，开发人员现在需要对决定可用时间段的列执行 SELECT，并包括 FOR UPDATE，因为数据已经存在。开发人员需要在初始 SELECT
+    之前运行这个 SELECT FOR UPDATE。
 - en: By materializing conflicts in the above example, developers can block any two
     reserved slots of time that overlap with each other with an exclusive lock, therefore
     forcing one time slot to come before or after the other. Whichever slot of time
@@ -181,11 +217,13 @@
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过在上述示例中实现冲突，开发人员可以使用排他锁阻止任何两个重叠的保留时间段，从而强制一个时间段在另一个时间段之前或之后。较晚的时间段会因为第一个时间段的完成而立即失败。
 - en: Conclusion
   id: totrans-29
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: Although materializing conflicts is a tough and unintuitive solution to pull
     off, it's necessary to avoid sacrificing any significant level of performance
     when using a MySQL database. MySQL's InnoDB isolation level is unfortunately not
@@ -194,6 +232,8 @@
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管实现冲突是一种困难且不直观的解决方案，但在使用 MySQL 数据库时，为了避免牺牲任何显著的性能水平，这是必要的。遗憾的是，MySQL 的 InnoDB
+    隔离级别并非可序列化，因此开发人员需要为可接受的性能水平牺牲一定的复杂性。
 - en: Anyone using a database must [understand that database's capabilities](https://www.itprotoday.com/analytics-and-reporting/5-questions-evaluating-dbms-features-and-capabilities)
     as well as its hard-to-solve solutions. Otherwise, it would be impossible to anticipate
     which behaviors of that database may potentially compromise database design and
@@ -201,6 +241,7 @@
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用数据库的人必须[了解该数据库的能力](https://www.itprotoday.com/analytics-and-reporting/5-questions-evaluating-dbms-features-and-capabilities)以及其难以解决的解决方案。否则，无法预见该数据库的哪些行为可能会影响数据库设计和开发工作。
 - en: Additionally, understanding how to appropriately tackle potential risks is equally
     important. While the use case we've described in this article via our time reservation
     system isn't identical to other use cases, the patterns it exhibits are similar
@@ -209,6 +250,7 @@
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，了解如何适当地应对潜在风险同样重要。尽管我们在本文中通过时间预订系统描述的用例与其他用例不完全相同，但其展示的模式足够相似，理解如何解决这些问题可以使处理其他情况更加轻松。
 - en: '**[Nahla Davies](http://nahlawrites.com/)** is a software developer and tech
     writer. Before devoting her work full time to technical writing, she managed —
     among other intriguing things — to serve as a lead programmer at an Inc. 5,000
@@ -217,26 +259,32 @@
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Nahla Davies](http://nahlawrites.com/)** 是一名软件开发人员和技术作家。在全职投入技术写作之前，她管理了包括三星、时代华纳、Netflix
+    和索尼在内的 Inc. 5000 实验性品牌组织的首席程序员等其他引人注目的工作。'
 - en: More On This Topic
   id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[The Definitive Guide To Switching Your Career Into Data Science](https://www.kdnuggets.com/2022/05/definitive-guide-switching-career-data-science.html)'
   id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[转行数据科学的权威指南](https://www.kdnuggets.com/2022/05/definitive-guide-switching-career-data-science.html)'
 - en: '[Python Function Arguments: A Definitive Guide](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)'
   id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 函数参数：权威指南](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)'
 - en: '[Solving 5 Complex SQL Problems: Tricky Queries Explained](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)'
   id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[解决 5 个复杂 SQL 问题：难解查询解析](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)'
 - en: '[Graph of Thoughts: A New Paradigm for Elaborate Problem-Solving in…](https://www.kdnuggets.com/graph-of-thoughts-a-new-paradigm-for-elaborate-problem-solving-in-large-language-models)'
   id: totrans-38
   prefs:
