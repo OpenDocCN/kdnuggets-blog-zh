@@ -1,36 +1,54 @@
 - en: Gradient Boosting in TensorFlow vs XGBoost
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: TensorFlow 中的梯度提升与 XGBoost
 - en: 原文：[https://www.kdnuggets.com/2018/01/gradient-boosting-tensorflow-vs-xgboost.html](https://www.kdnuggets.com/2018/01/gradient-boosting-tensorflow-vs-xgboost.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/01/gradient-boosting-tensorflow-vs-xgboost.html](https://www.kdnuggets.com/2018/01/gradient-boosting-tensorflow-vs-xgboost.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Nicolò Valigi](https://www.linkedin.com/in/nicolovaligi/), Founder of
     AI Academy**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Nicolò Valigi](https://www.linkedin.com/in/nicolovaligi/)，AI Academy 创始人**'
 - en: Tensorflow 1.4 was released a few weeks ago with an implementation of Gradient
     Boosting, called **TensorFlow Boosted Trees (TFBT)**. Unfortunately, the [paper](https://arxiv.org/abs/1710.11555) does
     not have any benchmarks, so I ran some against XGBoost.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: TensorFlow 1.4 最近几周发布了，带有梯度提升的实现，称为 **TensorFlow Boosted Trees (TFBT)**。不幸的是，[论文](https://arxiv.org/abs/1710.11555)
+    中没有任何基准测试，因此我对 XGBoost 进行了一些测试。
 - en: For many Kaggle-style data mining problems, XGBoost has been the go-to solution
     since its release in 2016\. It's probably as close to an out-of-the-box machine
     learning algorithm as you can get today, as it gracefully handles un-normalized
     or missing data, while being accurate and fast to train.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于许多 Kaggle 风格的数据挖掘问题，自 2016 年发布以来，XGBoost 一直是首选解决方案。它今天可能是最接近即插即用的机器学习算法的，因为它优雅地处理未规范化或缺失的数据，同时准确且训练速度快。
 - en: The code to reproduce the results in this article is [on GitHub](https://github.com/nicolov/gradient_boosting_tensorflow_xgboost).
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文中重现结果的代码可以在 [GitHub](https://github.com/nicolov/gradient_boosting_tensorflow_xgboost)
+    上找到。
 - en: The experiment
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实验
 - en: I wanted a decently sized dataset to test the scalability of the two solutions,
     so I picked the **airlines dataset** available [here](http://stat-computing.org/dataexpo/2009/).
     It has around 120 million data points for all commercial flights within the USA
@@ -38,67 +56,104 @@
     and time of departure, arline, and flight distance. I set up a straightforward
     binary classification task that tries to predict whether a flight would be more
     than 15 minutes late.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 我想要一个足够大的数据集来测试这两种解决方案的可扩展性，因此我选择了 [这里](http://stat-computing.org/dataexpo/2009/)
+    提供的 **航空公司数据集**。该数据集包含大约 1.2 亿个数据点，涵盖了从 1987 年到 2008 年期间的所有美国商业航班。特征包括起始和目的地机场、起飞日期和时间、航空公司以及飞行距离。我设定了一个简单的二分类任务，试图预测航班是否会延误超过
+    15 分钟。
 - en: 'I sampled 100k flights from 2006 for the training set, and 100k flights from
     2007 for the test set. Sadly, roughly 20% of flights were more than 15 minutes
     late, a fact that doesn''t reflect well on the airline industry :D. It''s easy
     to see how strongly departure time throughout the day correlates with the likelihood
     of delay:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 我从 2006 年抽取了 10 万个航班作为训练集，从 2007 年抽取了 10 万个航班作为测试集。遗憾的是，大约 20% 的航班延迟超过了 15 分钟，这一事实对航空公司行业并不好
+    :D。很容易看出，全天的起飞时间与延迟的可能性之间的相关性有多强：
 - en: '![](../Images/5441b90ecfb58bced314c9b7eb110c9a.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5441b90ecfb58bced314c9b7eb110c9a.png)'
 - en: 'I did not do any feature engineering, so the list of features is very basic:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我没有进行任何特征工程，因此特征列表非常基础：
 - en: '[PRE0]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: I used the scikit-style wrapper for XGBoost, which makes training and prediction
     from NumPy arrays a two-line affair ([code](https://github.com/nicolov/gradient_boosting_tensorflow_xgboost/blob/master/do_xgboost.py)).
     For TensorFlow, I used `tf.Experiment`, `tf.learn.runner`, and the NumPy input
     functions to save some boilerplate ([code](https://github.com/nicolov/gradient_boosting_tensorflow_xgboost/blob/master/do_tensorflow.py)).
     TODO
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我使用了用于 XGBoost 的 scikit 风格的封装，它使得从 NumPy 数组中进行训练和预测变成了两行代码的事情（[代码](https://github.com/nicolov/gradient_boosting_tensorflow_xgboost/blob/master/do_xgboost.py)）。对于
+    TensorFlow，我使用了`tf.Experiment`、`tf.learn.runner`和 NumPy 输入函数，以节省一些样板代码（[代码](https://github.com/nicolov/gradient_boosting_tensorflow_xgboost/blob/master/do_tensorflow.py)）。TODO
 - en: Results
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结果
 - en: I started out with XGBoost and a decent guess at the hyperparameters, and immediately
     got an [AUC score](https://stats.stackexchange.com/questions/132777/what-does-auc-stand-for-and-what-is-it) I
     was happy with. When I tried the same settings on TensorFlow Boosted Trees, I
     didn't even have enough patience for the training to end!
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我从 XGBoost 开始，并对超参数做了合理的猜测，立刻得到了一个我满意的 [AUC 评分](https://stats.stackexchange.com/questions/132777/what-does-auc-stand-for-and-what-is-it)。当我尝试在
+    TensorFlow Boosted Trees 上使用相同的设置时，我甚至没有耐心等训练结束！
 - en: 'While I kept `num_trees=50` and `learning_rate=0.1` for both models, I ended
     up having to tweak the TF Boosted Trees `examples_per_layer` knob using an hold-out
     set. It''s likely that this is related to the novel *layer-by-layer* learning
     algorithm featured in the TFBT paper, but I haven''t dug in deeper. As a starting
     point for comparison, I selected two values (1k and 5k) that yielded similar training
     times and accuracy to XGBoost. Here''s how the results look like:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管我在两个模型中都保持了 `num_trees=50` 和 `learning_rate=0.1`，但最终我不得不使用持出集来调整 TF Boosted
+    Trees 的 `examples_per_layer` 旋钮。这可能与 TFBT 论文中提出的新颖 *逐层* 学习算法有关，但我还没有深入研究。作为比较的起点，我选择了两个值（1k
+    和 5k），它们的训练时间和准确率与 XGBoost 相似。以下是结果：
 - en: '![](../Images/edf8da04192ca1cbff995991242c0161.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/edf8da04192ca1cbff995991242c0161.png)'
 - en: '![](../Images/7acb4573030b1a09dddcca330f037844.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7acb4573030b1a09dddcca330f037844.png)'
 - en: 'Accuracy numbers:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 准确率数据：
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Training runtime:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练运行时间：
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Neither of the two settings shown for TensorFlow could match the training time/accuracy
     of XGBoost. Besides the disadvantage in `user` time (total CPU time used), it
     also seems that TensorFlow isn't very effective at parallelizing on multiple cores
@@ -107,105 +162,162 @@
     more trees), whereas TensorFlow uses less than 4\. I guess that the whole "distributed
     TF" toolbox could be used to make TFBT scale better, but that seems overkill just
     to make full use of a *single* server.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 显示的两个 TensorFlow 设置都无法匹配 XGBoost 的训练时间/准确率。除了在 `user` 时间（总 CPU 使用时间）上的劣势外，TensorFlow
+    在多个核心上的并行效果也似乎不佳，导致 `total`（即墙）时间也存在巨大差距。XGBoost 可以顺利使用我机器上的 32 个核心中的 16 个（当使用更多树时表现更好），而
+    TensorFlow 使用的核心不到 4 个。我猜测整个“分布式 TF”工具箱可以用来让 TFBT 更好地扩展，但为了充分利用一个 *单一* 服务器，这似乎有些过头了。
 - en: Conclusion
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: With a few hours of tweaking, I couldn't get TensorFlow's Boosted Trees implementation
     to match XGBoost's results, neither in training time nor accuracy. This immediately
     disqualifies it from many of the quick-n-dirty projects I would use XGBoost for.
     The limited parallelism of the implementation also means that it wouldn't scale
     up to big datasets either.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 经过几小时的调整，我无法让 TensorFlow 的 Boosted Trees 实现达到 XGBoost 的结果，无论是在训练时间还是准确率上。这立即使它不适合我用
+    XGBoost 进行的许多快速粗糙项目。实现的有限并行性也意味着它不能扩展到大数据集。
 - en: TensorFlow Boosted Trees might make sense within an infrastructure that's heavily
     invested in TensorFlow tooling already. TensorBoard and the data loading pipeline
     are two features that work fine on Boosted Trees too and could easily migrated
     from other Deep Learning projects based on TensorFlow. However, TF Boosted Trees
     won't be very useful in most cases until the implementation can match the performance
     of XGBoost (or I learn how to tune it).
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: TensorFlow Boosted Trees 可能在已经大量投资于 TensorFlow 工具的基础设施中是有意义的。TensorBoard 和数据加载管道也是两个在
+    Boosted Trees 上运行良好的特性，可以轻松迁移自其他基于 TensorFlow 的深度学习项目。然而，直到实现能够匹配 XGBoost 的性能（或者我学会如何调优），TF
+    Boosted Trees 在大多数情况下不会非常有用。
 - en: To reproduce my results, get the [training code on GitHub](https://github.com/nicolov/gradient_boosting_tensorflow_xgboost).
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 要重现我的结果，请获取 [GitHub 上的训练代码](https://github.com/nicolov/gradient_boosting_tensorflow_xgboost)。
 - en: '**Bio: [Nicolò Valigi](https://www.linkedin.com/in/nicolovaligi/)** is fascinated
     by the code and infrastructure that power machine learning. He founded AI Academy,
     a consultancy to help companies learn about AI, and is a Senior Software Engineer
     at Cruise Automation, where he takes care of the self-driving car platform.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Nicolò Valigi](https://www.linkedin.com/in/nicolovaligi/)** 对推动机器学习的代码和基础设施充满热情。他创办了
+    AI Academy，一家帮助公司了解 AI 的咨询公司，并且是 Cruise Automation 的高级软件工程师，负责自动驾驶汽车平台。'
 - en: '[Original](https://nicolovaligi.com/gradient-boosting-tensorflow-xgboost.html).
     Reposted with permission.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://nicolovaligi.com/gradient-boosting-tensorflow-xgboost.html)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[XGBoost: A Concise Technical Overview](/2017/10/xgboost-concise-technical-overview.html)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[XGBoost：简明技术概述](/2017/10/xgboost-concise-technical-overview.html)'
 - en: '[Lessons Learned From Benchmarking Fast Machine Learning Algorithms](/2017/08/lessons-benchmarking-fast-machine-learning-algorithms.html)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从基准测试快速机器学习算法中获得的经验教训](/2017/08/lessons-benchmarking-fast-machine-learning-algorithms.html)'
 - en: '[A Simple XGBoost Tutorial Using the Iris Dataset](/2017/03/simple-xgboost-tutorial-iris-dataset.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个简单的使用 Iris 数据集的 XGBoost 教程](/2017/03/simple-xgboost-tutorial-iris-dataset.html)'
 - en: '* * *'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-35
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How to Speed Up XGBoost Model Training](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何加速 XGBoost 模型训练](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)'
 - en: '[Boosting Machine Learning Algorithms: An Overview](https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提升机器学习算法：概述](https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html)'
 - en: '[What are the Assumptions of XGBoost?](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[XGBoost 的假设是什么？](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)'
 - en: '[Tuning XGBoost Hyperparameters](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[调优 XGBoost 超参数](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)'
 - en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用 XGBoost 进行时间序列预测](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
 - en: '[The Ultimate Guide to Mastering Seasonality and Boosting Business Results](https://www.kdnuggets.com/2023/08/media-mix-modeling-ultimate-guide-mastering-seasonality-boosting-business-results.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握季节性和提升业务成果的终极指南](https://www.kdnuggets.com/2023/08/media-mix-modeling-ultimate-guide-mastering-seasonality-boosting-business-results.html)'

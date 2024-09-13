@@ -1,17 +1,25 @@
 - en: Using Genetic Algorithm for Optimizing Recurrent Neural Networks
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用遗传算法优化递归神经网络
 - en: 原文：[https://www.kdnuggets.com/2018/01/genetic-algorithm-optimizing-recurrent-neural-network.html](https://www.kdnuggets.com/2018/01/genetic-algorithm-optimizing-recurrent-neural-network.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/01/genetic-algorithm-optimizing-recurrent-neural-network.html](https://www.kdnuggets.com/2018/01/genetic-algorithm-optimizing-recurrent-neural-network.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By Aaqib Saeed, University of Twente**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 Aaqib Saeed，特温特大学**'
 - en: Recently, there has been a lot of work on automating machine learning, from
     a selection of appropriate algorithm to feature selection and hyperparameters
     tuning. Several tools are available (e.g. *AutoML* and *TPOT*), that can aid the
@@ -22,33 +30,50 @@
     in available computing power, researchers are employing [Reinforcement Learning](https://openreview.net/pdf?id=r1Ue8Hcxg) and [Evolutionary
     Algorithms](http://nn.cs.utexas.edu/downloads/papers/stanley.ec02.pdf) to automatically
     search for optimal neural architectures.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 最近，自动化机器学习的工作增多了，从选择合适的算法到特征选择和超参数调整。有多个工具（如*AutoML*和*TPOT*），可以帮助用户高效地进行数百次实验。同样，深度神经网络架构通常由专家通过试错方法设计。虽然这种方法在多个领域产生了最先进的模型，但却非常耗时。最近，由于计算能力的增加，研究人员正在使用[强化学习](https://openreview.net/pdf?id=r1Ue8Hcxg)和[进化算法](http://nn.cs.utexas.edu/downloads/papers/stanley.ec02.pdf)来自动搜索最佳神经网络架构。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In this tutorial, we will see how to apply a Genetic Algorithm (GA) for finding
     an optimal window size and a number of units in Long Short-Term Memory (LSTM)
     based Recurrent Neural Network (RNN). For this purpose, we will train and evaluate
@@ -58,15 +83,23 @@
     to find optimal settings automatically; hence, only two parameters will be explored.
     Moreover, reader’s knowledge (theoretical and applied) about RNNs is assumed.
     If you are unfamiliar with them, please consult following resources [[1]](http://colah.github.io/posts/2015-08-Understanding-LSTMs/) and [[2]](https://r2rt.com/recurrent-neural-networks-in-tensorflow-i.html).
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将探讨如何应用遗传算法（GA）来寻找基于长短期记忆（LSTM）的递归神经网络（RNN）的最佳窗口大小和单元数量。为此，我们将使用[Keras](https://github.com/fchollet/keras)训练和评估时间序列预测问题的模型。GA
+    将使用一个名为[DEAP](https://github.com/DEAP/deap)的 Python 包。教程的主要目的是使读者熟悉使用 GA 自动寻找最佳设置；因此，仅探索两个参数。此外，假设读者对
+    RNN 的理论和应用知识有所了解。如果不熟悉，请参阅以下资源[[1]](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)和[[2]](https://r2rt.com/recurrent-neural-networks-in-tensorflow-i.html)。
 - en: The ipython netbook with the complete code is available at the following [link](https://github.com/aqibsaeed/Genetic-Algorithm-RNN).
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 带有完整代码的 ipython 笔记本可在以下[链接](https://github.com/aqibsaeed/Genetic-Algorithm-RNN)获取。
 - en: Genetic Algorithm
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 遗传算法
 - en: The genetic algorithm is a heuristic search and an optimization method inspired
     by the process of natural selection. They are widely used for finding a near optimal
     solution to optimization problems with large parameter space. The process of evolution
@@ -74,33 +107,46 @@
     components e.g. crossover. Furthermore, as it doesn’t take auxiliary information
     into account, (e.g. derivatives) it can be used for both discrete and continuous
     optimization.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 遗传算法是一种启发式搜索和优化方法，灵感来自自然选择过程。它们广泛用于寻找具有大参数空间的优化问题的近似最优解。通过依赖生物启发的组件（例如交叉）来模拟物种（在我们的例子中是解决方案）的进化过程。此外，由于它不考虑辅助信息（例如导数），因此可以用于离散和连续优化。
 - en: 'For using a GA, two preconditions have to be fulfilled, a) a solution representation
     or defining a chromosome and b) a fitness function to evaluate produced solutions.
     In our case, a binary array is a genetic representation of a solution (see **Figure
     1**) and model’s Root-Mean-Square Error (RMSE) on validation set will act a fitness
     value. Moreover, three basic operations that constitute a GA, are as follows:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 GA 需要满足两个前提条件：a）解决方案表示或定义一个染色体；b）一个用于评估生成解决方案的适应度函数。在我们的例子中，二进制数组是解决方案的遗传表示（见
+    **图 1**），模型在验证集上的均方根误差（RMSE）将作为适应度值。此外，构成 GA 的三种基本操作如下：
 - en: '**Selection**: It defines which solutions to preserve for further reproduction
     e.g. roulette wheel selection.'
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**选择**：它定义了哪些解决方案将被保留以供进一步繁殖，例如轮盘赌选择。'
 - en: '**Crossover**: It describes how new solutions are created from existing ones
     e.g. n-point crossover.'
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**交叉**：它描述了如何从现有的解决方案中生成新的解决方案，例如 n 点交叉。'
 - en: '**Mutation**: Its aim is to introduce diversity and novelty into the solution
     pool by means of randomly swapping or turning-off solution bits e.g. binary mutation.'
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**突变**：其目的是通过随机交换或关闭解决方案位引入多样性和新颖性，例如二进制突变。'
 - en: '![Genetic representation of a solution](../Images/bba3790751846c9f5fc72ffb4653617c.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![解决方案的遗传表示](../Images/bba3790751846c9f5fc72ffb4653617c.png)'
 - en: Occasionally, a technique called “Elitism” is also used, which preserve few
     best solutions from the population, and pass on to next generation. **Figure 2** depicts
     a complete genetic algorithm, where, initial solutions (population) are randomly
@@ -109,26 +155,39 @@
     a defined number of iteration (called generations in GA terminology). At the end,
     a solution with highest fitness score is selected as the best solution. To learn
     more, please check following resources [[3]](http://www.flll.jku.at/div/teaching/Ga/GA-Notes.pdf) and [[4]](http://www.cs.cmu.edu/~tom/mlbook.html).
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时还使用一种称为“精英主义”的技术，它保留一些最佳解决方案，并传递给下一代。**图 2** 描述了一个完整的遗传算法，其中，初始解决方案（种群）是随机生成的。接下来，它们根据适应度函数进行评估，然后执行选择、交叉和突变。这个过程会重复定义的迭代次数（在
+    GA 术语中称为代）。最后，选择适应度得分最高的解决方案作为最佳解决方案。要了解更多信息，请查看以下资源 [[3]](http://www.flll.jku.at/div/teaching/Ga/GA-Notes.pdf)
+    和 [[4]](http://www.cs.cmu.edu/~tom/mlbook.html)。
 - en: '![Genetic Algorithm](../Images/39049a30d230fa390264432946b6aa1a.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![遗传算法](../Images/39049a30d230fa390264432946b6aa1a.png)'
 - en: Implementation
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实现
 - en: Now, we have a fair understanding of what GA is and how it works. Next, let’s
     get to coding.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们对 GA 的工作原理有了基本了解。接下来，让我们开始编码。
 - en: We will use wind power forecast data, which is available at the following [link](https://www.kaggle.com/c/GEF2012-wind-forecasting/data).
     It consists of normalized (between zero and one) wind power measurements from
     seven wind farms. To keep things simple, we will use first wind farm data (column
     named **wp1**) but I encourage the reader to experiment and extend the code to
     forecast energy for all seven, wind farms.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用风电预测数据，数据可以在以下 [链接](https://www.kaggle.com/c/GEF2012-wind-forecasting/data)中找到。数据包括来自七个风电场的风电测量值（归一化在零和一之间）。为了简化起见，我们将使用第一个风电场的数据（名为
+    **wp1** 的列），但我鼓励读者尝试并扩展代码，以预测所有七个风电场的能源。
 - en: Let’s import required packages, load the dataset and define two helper functions.
     The first method `prepare_dataset` will segment the data into chunks to create *X*, *Y* pair
     for model training. The *X* will the wind power values from the past (e.g. *1* to *t-1*)
@@ -137,113 +196,174 @@
     2) Prepare the dataset using window size found by GA and divide into train and
     validation set, and 3) train LSTM model, calculate RMSE on validation set and
     return it as a fitness score of the current GA solution.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们导入所需的包，加载数据集并定义两个辅助函数。第一个方法 `prepare_dataset` 将数据分段以创建用于模型训练的 *X*、*Y* 对。*X*
+    将是过去的风力值（例如 *1* 到 *t-1*），*Y* 将是时间 *t* 的未来值。第二个方法 `train_evaluate` 完成三件事，1）解码 GA
+    解以获取窗口大小和单位数量。2）使用 GA 找到的窗口大小准备数据集，并将其分为训练集和验证集，3）训练 LSTM 模型，计算验证集上的 RMSE，并将其作为当前
+    GA 解的适应度得分返回。
 - en: '[PRE0]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '[PRE2]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Next, use DEAP package to define things to run GA. We will use a binary representation
     for the solution of length ten. It will be randomly initialized using Bernoulli
     distribution. Likewise, ordered crossover, shuffle mutation and roulette wheel
     selection is used. The GA parameter values are initialized arbitrarily; I will
     suggest you, to play around with different settings.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，使用 DEAP 包来定义运行 GA 所需的内容。我们将使用长度为十的二进制表示。它将通过伯努利分布随机初始化。同样，使用有序交叉、洗牌突变和轮盘选择。GA
+    参数值被任意初始化；我建议你尝试不同的设置。
 - en: '[PRE3]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The K best-found solution via GA can be seen easily seen using `tools.selBest(population,k
     = 1)`. Afterward, the optimal configuration can be used to train on the complete
     training set and test it on holdout test set.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过 GA 找到的 K 个最佳解可以通过 `tools.selBest(population,k = 1)` 轻松查看。之后，可以使用最佳配置在完整的训练集上进行训练，并在保留的测试集上进行测试。
 - en: '[PRE4]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '[PRE5]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: In this tutorial, we saw how to employ GA to automatically find optimal window
     size (or lookback) and a number of units to use in RNN. For further learning,
     I would suggest you, to experiment with different GA parameter configurations,
     extend genetic representation to include more parameters to explore and share
     your findings and questions below in the comment section below.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们探讨了如何使用遗传算法（GA）自动找到 RNN 中的最佳窗口大小（或回溯期）和单位数量。为了进一步学习，我建议你尝试不同的 GA 参数配置，将遗传表示扩展到包括更多参数进行探索，并在下方评论区分享你的发现和问题。
 - en: '**References:**'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**参考文献：**'
 - en: Understanding LSTM Networks, by Christopher Olah
+  id: totrans-36
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 理解 LSTM 网络，作者 Christopher Olah
 - en: Recurrent Neural Networks in Tensorflow I, by R2RT
+  id: totrans-37
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Tensorflow 中的递归神经网络 I，作者 R2RT
 - en: 'Genetic Algorithms: Theory and Applications, by Ulrich Bodenhofer'
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 遗传算法：理论与应用，作者 Ulrich Bodenhofer
 - en: Chapter 9, Genetic Algorithms of Machine Learning book, by Tom M. Mitchell
+  id: totrans-39
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 《机器学习》一书第 9 章，遗传算法，作者 Tom M. Mitchell
 - en: '![Author](../Images/f9c21800dc7ef2fdf98de5b260d7c466.png)**Bio: [Aaqib Saeed](http://aqibsaeed.github.io/)**
     is a graduate student of Computer Science (specializing in Data Science and Smart
     Services) at University of Twente (The Netherlands).'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '![作者](../Images/f9c21800dc7ef2fdf98de5b260d7c466.png)**简介： [Aaqib Saeed](http://aqibsaeed.github.io/)**
+    是荷兰特温特大学（University of Twente）计算机科学（专注于数据科学和智能服务）的研究生。'
 - en: '[Original](http://aqibsaeed.github.io/2017-08-11-genetic-algorithm-for-optimizing-rnn/).
     Reposted with permission.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](http://aqibsaeed.github.io/2017-08-11-genetic-algorithm-for-optimizing-rnn/)。转载已获许可。'
 - en: '**Related:**'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Urban Sound Classification with Neural Networks in Tensorflow](/2016/09/urban-sound-classification-neural-networks-tensorflow.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Tensorflow 中的神经网络进行城市声音分类](/2016/09/urban-sound-classification-neural-networks-tensorflow.html)'
 - en: '[Implementing a CNN for Human Activity Recognition in Tensorflow](/2016/11/implementing-cnn-human-activity-recognition-tensorflow.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Tensorflow 中实现 CNN 进行人类活动识别](/2016/11/implementing-cnn-human-activity-recognition-tensorflow.html)'
 - en: '[Today I Built a Neural Network During My Lunch Break with Keras](/2017/12/today-built-neural-network-during-lunch-break-keras.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[今天我在午休时间用 Keras 构建了一个神经网络](/2017/12/today-built-neural-network-during-lunch-break-keras.html)'
 - en: More On This Topic
+  id: totrans-46
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Optimizing Genes with a Genetic Algorithm](https://www.kdnuggets.com/2022/04/optimizing-genes-genetic-algorithm.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用遗传算法优化基因](https://www.kdnuggets.com/2022/04/optimizing-genes-genetic-algorithm.html)'
 - en: '[Genetic Algorithm Key Terms, Explained](https://www.kdnuggets.com/2018/04/genetic-algorithm-key-terms-explained.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[遗传算法关键术语解释](https://www.kdnuggets.com/2018/04/genetic-algorithm-key-terms-explained.html)'
 - en: '[Strategies for Optimizing Performance and Costs When Using Large…](https://www.kdnuggets.com/strategies-for-optimizing-performance-and-costs-when-using-large-language-models-in-the-cloud)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用大型语言模型时优化性能和成本的策略](https://www.kdnuggets.com/strategies-for-optimizing-performance-and-costs-when-using-large-language-models-in-the-cloud)'
 - en: '[10 Simple Things to Try Before Neural Networks](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在使用神经网络之前尝试的 10 个简单方法](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)'
 - en: '[Interpretable Neural Networks with PyTorch](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[可解释的 PyTorch 神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)'
 - en: '[Deep Neural Networks Don''t Lead Us Towards AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度神经网络不会引领我们走向 AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)'
