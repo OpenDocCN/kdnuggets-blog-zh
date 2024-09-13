@@ -3,82 +3,101 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 实用超参数优化
 - en: 原文：[https://www.kdnuggets.com/2020/02/practical-hyperparameter-optimization.html](https://www.kdnuggets.com/2020/02/practical-hyperparameter-optimization.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/02/practical-hyperparameter-optimization.html](https://www.kdnuggets.com/2020/02/practical-hyperparameter-optimization.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[comments](#comments)'
 - en: '**By [Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/), The University
     of Southampton**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)，南安普顿大学**'
 - en: '![](../Images/e7d267de83d374a4b81eacc48c82c3dc.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e7d267de83d374a4b81eacc48c82c3dc.png)'
 - en: '* * *'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速入门网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 工作'
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Introduction
   id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: 'Machine Learning models are composed of two different types of parameters:'
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习模型由两种不同类型的参数组成：
 - en: '**Hyperparameters** = are all the parameters which can be arbitrarily set by
     the user before starting training (eg. number of estimators in Random Forest).'
   id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**超参数** = 是用户在开始训练前可以任意设置的所有参数（例如随机森林中的估计器数量）。'
 - en: '**Model parameters =** are instead learned during the model training (eg. weights
     in Neural Networks, Linear Regression).'
   id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**模型参数 =** 是在模型训练过程中学习到的参数（例如神经网络中的权重，线性回归）。'
 - en: The model parameters define how to use input data to get the desired output
     and are learned at training time. Instead, Hyperparameters determine how our model
     is structured in the first place.
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型参数定义了如何使用输入数据来获取期望的输出，并在训练时学习。而超参数则决定了我们的模型最初是如何结构化的。
 - en: Machine Learning models tuning is a type of optimization problem. We have a
     set of hyperparameters and we aim to find the right combination of their values
     which can help us to find either the minimum (eg. loss) or the maximum (eg. accuracy)
@@ -86,6 +105,7 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习模型调整是一种优化问题。我们有一组超参数，目标是找到这些参数值的正确组合，以帮助我们找到函数的最小值（例如损失）或最大值（例如准确度）（图 1）。
 - en: This can be particularly important when comparing how different Machine Learning
     models performs on a dataset. In fact, it would be unfair for example to compare
     an SVM model with the best Hyperparameters against a Random Forest model which
@@ -93,44 +113,53 @@
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 这在比较不同机器学习模型在数据集上的表现时尤为重要。例如，将具有最佳超参数的 SVM 模型与未经过优化的随机森林模型进行比较是不公平的。
 - en: 'In this post, the following approaches to Hyperparameter optimization will
     be explained:'
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，将解释以下超参数优化方法：
 - en: '**Manual Search**'
   id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**手动搜索**'
 - en: '**Random Search**'
   id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**随机搜索**'
 - en: '**Grid Search**'
   id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**网格搜索**'
 - en: '**Automated Hyperparameter Tuning (Bayesian Optimization, Genetic Algorithms)**'
   id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**自动超参数调整（贝叶斯优化，遗传算法）**'
 - en: '**Artificial Neural Networks (ANNs) Tuning**'
   id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**人工神经网络（ANNs）调整**'
 - en: '![Figure](../Images/a925c643693adacdb575d44ea48f69bb.png)'
   id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/a925c643693adacdb575d44ea48f69bb.png)'
 - en: 'Figure 1: ML Optimization Workflow [1]'
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 1：ML 优化工作流程 [1]
 - en: In order to demonstrate how to perform Hyperparameters Optimization in Python,
     I decided to perform a complete Data Analysis of the [Credit Card Fraud Detection
     Kaggle Dataset](https://www.kaggle.com/mlg-ulb/creditcardfraud). Our objective
@@ -141,6 +170,7 @@
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了演示如何在 Python 中执行超参数优化，我决定对 [信用卡欺诈检测 Kaggle 数据集](https://www.kaggle.com/mlg-ulb/creditcardfraud)进行完整的数据分析。本文的目标是正确分类哪些信用卡交易应标记为欺诈或真实（即二分类）。该数据集在分发之前已被匿名化，因此大多数特征的含义尚未公开。
 - en: In this case, I decided to use just a subset of the dataset, in order to speed
     up training times and make sure to achieve a perfect balance between the two different
     classes. Additionally, just a limited amount of features has been used to make
@@ -149,33 +179,42 @@
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，我决定只使用数据集的一个子集，以加快训练时间并确保在两个不同类别之间实现完美平衡。此外，仅使用有限数量的特征以使优化任务更具挑战性。最终的数据集如下面的图（图2）所示。
 - en: '![Figure](../Images/ac4eeb1e5f700fc844f3fead905f2a0d.png)'
   id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/ac4eeb1e5f700fc844f3fead905f2a0d.png)'
 - en: 'Figure 2: Credit Card Fraud Detection Dataset'
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 图2：信用卡欺诈检测数据集
 - en: All the code used in this article (and more!) is available in my [GitHub repository](https://github.com/pierpaolo28/Kaggle-Challenges/blob/master/credit-card-fraud-model-tuning.ipynb) and [Kaggle
     Profile](https://www.kaggle.com/pierpaolo28/credit-card-fraud-model-tuning).
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文中使用的所有代码（以及更多！）可以在我的 [GitHub 仓库](https://github.com/pierpaolo28/Kaggle-Challenges/blob/master/credit-card-fraud-model-tuning.ipynb)
+    和 [Kaggle 个人资料](https://www.kaggle.com/pierpaolo28/credit-card-fraud-model-tuning)
+    中找到。
 - en: Machine Learning
   id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 机器学习
 - en: First of all, we need to divide our dataset into training and test sets.
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们需要将数据集分为训练集和测试集。
 - en: Throughout this article, we will use a Random Forest Classifier as our model
     to optimize.
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们将使用随机森林分类器作为优化的模型。
 - en: Random Forest models are formed by a large number of uncorrelated decision trees,
     which joint together constitute an ensemble. In Random Forest, each decision tree
     makes its own prediction and the overall model output is selected to be the prediction
@@ -183,10 +222,12 @@
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林模型由大量不相关的决策树组成，这些树共同构成一个集合。在随机森林中，每棵决策树做出自己的预测，整体模型输出被选为出现频率最高的预测。
 - en: We can now start by calculating our base model accuracy.
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以开始计算我们的基础模型准确率。
 - en: '[PRE0]'
   id: totrans-36
   prefs: []
@@ -198,62 +239,75 @@
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用默认的 scikit-learn 参数的随机森林分类器达到了 95% 的总体准确率。现在我们来看看应用一些优化技术是否可以获得更好的准确率。
 - en: Manual Search
   id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 手动搜索
 - en: When using Manual Search, we choose some model hyperparameters based on our
     judgment/experience. We then train the model, evaluate its accuracy and start
     the process again. This loop is repeated until a satisfactory accuracy is scored.
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用手动搜索时，我们根据自己的判断/经验选择一些模型超参数。然后训练模型，评估其准确率，并重新开始这个过程。这个循环会重复直到获得满意的准确率。
 - en: 'The main parameters used by a Random Forest Classifier are:'
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林分类器使用的主要参数包括：
 - en: '**criterion** = the function used to evaluate the quality of a split.'
   id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**criterion** = 用于评估分裂质量的函数。'
 - en: '**max_depth** = maximum number of levels allowed in each tree.'
   id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**max_depth** = 每棵树允许的最大层数。'
 - en: '**max_features** = maximum number of features considered when splitting a node.'
   id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**max_features** = 分裂节点时考虑的最大特征数。'
 - en: '**min_samples_leaf** = minimum number of samples which can be stored in a tree
     leaf.'
   id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**min_samples_leaf** = 树叶中可以存储的最小样本数。'
 - en: '**min_samples_split** = minimum number of samples necessary in a node to cause
     node splitting.'
   id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**min_samples_split** = 节点分裂所需的最小样本数。'
 - en: '**n_estimators** = number of trees in the ensemble.'
   id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**n_estimators** = 集合中的树木数量。'
 - en: More information about Random Forest parameters can be found on the scikit-learn[ Documentation](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html).
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关随机森林参数的更多信息可以在 scikit-learn 的 [文档](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
+    中找到。
 - en: As an example of Manual Search, I tried to specify the number of estimators
     in our model. Unfortunately, this didn’t lead to any improvement in accuracy.
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为手动搜索的一个例子，我尝试指定我们模型中的估计器数量。不幸的是，这没有带来任何准确率的提高。
 - en: '[PRE1]'
   id: totrans-49
   prefs: []
@@ -264,12 +318,14 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 随机搜索
 - en: In Random Search, we create a grid of hyperparameters and train/test our model
     on just some random combination of these hyperparameters. In this example, I additionally
     decided to perform Cross-Validation on the training set.
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 在随机搜索中，我们创建一个超参数网格，并在这些超参数的随机组合上训练/测试我们的模型。在这个例子中，我还决定在训练集上进行交叉验证。
 - en: When performing Machine Learning tasks, we generally divide our dataset in training
     and test sets. This is done so that to test our model after having trained it
     (in this way we can check it’s performances when working with unseen data). When
@@ -278,6 +334,8 @@
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 在进行机器学习任务时，我们通常将数据集划分为训练集和测试集。这是为了在训练模型后对其进行测试（这样我们可以检查模型在处理未见数据时的表现）。使用交叉验证时，我们将训练集划分为
+    N 个分区，以确保我们的模型不会过拟合数据。
 - en: One of the most common used Cross-Validation methods is K-Fold Validation. In
     K-Fold, we divide our training set into N partitions and then iteratively train
     our model using N-1 partitions and test it with the left-over partition (at each
@@ -287,20 +345,25 @@
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 最常用的交叉验证方法之一是 K 折验证。在 K 折中，我们将训练集划分为 N 个分区，然后迭代地使用 N-1 个分区训练模型，并用剩下的分区进行测试（在每次迭代中我们会改变剩下的分区）。在训练了
+    N 次模型后，我们将平均每次迭代中获得的训练结果，以得到整体训练性能结果（图 3）。
 - en: '![Figure](../Images/ef469d0bf742072bd0a720a564e8c996.png)'
   id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/ef469d0bf742072bd0a720a564e8c996.png)'
 - en: 'Figure 3: K-Fold Cross-Validation [2]'
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 3：K 折交叉验证 [2]
 - en: Using Cross-Validation when implementing Hyperparameters optimization can be
     really important. In this way, we might avoid using some Hyperparameters which
     works really good on the training data but not so good with the test data.
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 在实现超参数优化时使用交叉验证非常重要。通过这种方式，我们可以避免使用在训练数据上表现很好但在测试数据上表现不佳的超参数。
 - en: We can now start implementing Random Search by first defying a grid of hyperparameters
     which will be randomly sampled when calling ***RandomizedSearchCV()***. For this
     example, I decided to divide our training set into 4 Folds (***cv = 4***) and
@@ -310,6 +373,9 @@
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以通过首先定义一个超参数网格来开始实现随机搜索，这个网格将在调用 ***RandomizedSearchCV()*** 时被随机采样。对于这个示例，我决定将训练集划分为
+    4 个折（***cv = 4***），并选择 80 作为要采样的组合数量（***n_iter = 80***）。使用 scikit-learn 的 ***best_estimator_***
+    属性，我们可以检索在训练过程中表现最好的超参数集合来测试我们的模型。
 - en: Once trained our model, we can then visualize how changing some of its Hyperparameters
     can affect the overall model accuracy (Figure 4). In this case, I decided to observe
     how changing the number of estimators and the criterion can affect our Random
@@ -317,14 +383,17 @@
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦训练好模型，我们可以可视化超参数的变化如何影响整体模型准确度（图 4）。在这个例子中，我决定观察估算器数量和准则的变化如何影响随机森林的准确性。
 - en: '![Figure](../Images/f655111ff344502011d6b50d2e15d0ba.png)'
   id: totrans-59
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/f655111ff344502011d6b50d2e15d0ba.png)'
 - en: 'Figure 4: Criterion vs N Estimators Accuracy Heatmap'
   id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 4：准则与 N 估算器准确度热图
 - en: We can then take this a step further by making our visualization more interactive.
     In the chart below, we can examine (using the slider) how varying the number of
     estimators in our model can affect the overall accuracy of our model considered
@@ -332,12 +401,15 @@
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们可以更进一步，通过使我们的可视化更具互动性。在下图中，我们可以通过滑块检查模型中估算器数量的变化如何影响模型的整体准确性，考虑了所选的 min_split
+    和 min_leaf 参数。
 - en: Feel free to play with the graph below by changing the n_estimators parameters,
     zooming in and out of the graph, changing it’s orientation and hovering over the
     single data points to get additional information about them!
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 随意调整下图中的图表，改变 n_estimators 参数，放大和缩小图表，改变图表方向，并悬停在单个数据点上以获取更多信息！
 - en: If you are interested in finding out more about how to create these animations
     using [Plotly](https://towardsdatascience.com/interactive-data-visualization-167ae26016e8),
     my code is available [here](https://www.kaggle.com/kernels/scriptcontent/20590929/download).
@@ -346,6 +418,10 @@
   id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有兴趣了解如何使用 [Plotly](https://towardsdatascience.com/interactive-data-visualization-167ae26016e8)
+    创建这些动画，我的代码可以在 [这里](https://www.kaggle.com/kernels/scriptcontent/20590929/download)
+    获得。此外，这个内容也被 [Xoel López Barata](https://towardsdatascience.com/using-3d-visualizations-to-tune-hyperparameters-of-ml-models-with-python-ba2885eab2e9)
+    的文章覆盖了。
 - en: We can now evaluate how our model performed using Random Search. In this case,
     using Random Search leads to a consistent increase in accuracy compared to our
     base model.
@@ -624,112 +700,137 @@
   id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想获取我的最新文章和项目动态，[请关注我在 Medium](https://medium.com/@pierpaoloippolito28?source=post_page---------------------------)
+    并订阅我的 [邮件列表](http://eepurl.com/gwO-Dr?source=post_page---------------------------)。以下是我的一些联系方式：
 - en: '[Linkedin](https://uk.linkedin.com/in/pier-paolo-ippolito-202917146?source=post_page---------------------------)'
   id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Linkedin](https://uk.linkedin.com/in/pier-paolo-ippolito-202917146?source=post_page---------------------------)'
 - en: '[Personal Blog](https://pierpaolo28.github.io/blog/?source=post_page---------------------------)'
   id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[个人博客](https://pierpaolo28.github.io/blog/?source=post_page---------------------------)'
 - en: '[Personal Website](https://pierpaolo28.github.io/?source=post_page---------------------------)'
   id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[个人网站](https://pierpaolo28.github.io/?source=post_page---------------------------)'
 - en: '[Medium Profile](https://towardsdatascience.com/@pierpaoloippolito28?source=post_page---------------------------)'
   id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Medium 个人资料](https://towardsdatascience.com/@pierpaoloippolito28?source=post_page---------------------------)'
 - en: '[GitHub](https://github.com/pierpaolo28?source=post_page---------------------------)'
   id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[GitHub](https://github.com/pierpaolo28?source=post_page---------------------------)'
 - en: '[Kaggle](https://www.kaggle.com/pierpaolo28?source=post_page---------------------------)'
   id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kaggle](https://www.kaggle.com/pierpaolo28?source=post_page---------------------------)'
 - en: Bibliography
   id: totrans-115
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[1] Hyperparameter optimization: Explanation of automatized algorithms, Dawid
     Kopczyk. Accessed at: [https://dkopczyk.quantee.co.uk/hyperparameter-optimization/](https://dkopczyk.quantee.co.uk/hyperparameter-optimization/)'
   id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] 超参数优化：自动化算法的解释，Dawid Kopczyk。访问地址：[https://dkopczyk.quantee.co.uk/hyperparameter-optimization/](https://dkopczyk.quantee.co.uk/hyperparameter-optimization/)'
 - en: '[2] Model Selection, ethen8181\. Accessed at: [http://ethen8181.github.io/machine-learning/model_selection/model_selection.html](http://ethen8181.github.io/machine-learning/model_selection/model_selection.html)'
   id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2] 模型选择，ethen8181。访问地址：[http://ethen8181.github.io/machine-learning/model_selection/model_selection.html](http://ethen8181.github.io/machine-learning/model_selection/model_selection.html)'
 - en: '**Bio: [Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)** is
     a final year MSc Artificial Intelligence student at The University of Southampton.
     He is an AI Enthusiast, Data Scientist and RPA Developer.'
   id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)** 是南安普顿大学人工智能专业的最后一年硕士生。他是
+    AI 爱好者、数据科学家和 RPA 开发人员。'
 - en: '[Original](https://towardsdatascience.com/hyperparameters-optimization-526348bb8e2d).
     Reposted with permission.'
   id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/hyperparameters-optimization-526348bb8e2d)。转载经许可。'
 - en: '**Related:**'
   id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Automated Machine Learning Project Implementation Complexities](/2019/11/automl-implementation-complexities.html)'
   id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动化机器学习项目实施复杂性](/2019/11/automl-implementation-complexities.html)'
 - en: '[Automated Machine Learning: How do teams work together on an AutoML project?](/2020/01/teams-work-together-automl-project.html)'
   id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动化机器学习：团队如何在 AutoML 项目中协作？](/2020/01/teams-work-together-automl-project.html)'
 - en: '[How to Automate Hyperparameter Optimization](/2019/06/automate-hyperparameter-optimization.html)'
   id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何自动化超参数优化](/2019/06/automate-hyperparameter-optimization.html)'
 - en: More On This Topic
   id: totrans-124
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
   id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超参数优化：10 个顶级 Python 库](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
 - en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
   id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用网格搜索和随机搜索进行超参数调整](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
 - en: '[Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
   id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超参数调整：GridSearchCV 和 RandomizedSearchCV 的解释](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
 - en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
   id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TPOT 的机器学习管道优化](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
 - en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
   id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 查询优化技术](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
 - en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
   id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据库优化：探索 SQL 中的索引](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
