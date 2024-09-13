@@ -1,23 +1,35 @@
 - en: Analyzing Scientific Articles with fine-tuned SciBERT NER Model and Neo4j
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用微调的 SciBERT NER 模型和 Neo4j 分析科学文章
 - en: 原文：[https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html](https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html](https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Khaled Adrani](https://www.linkedin.com/in/khaled-adrani/), UBIAI**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Khaled Adrani](https://www.linkedin.com/in/khaled-adrani/)，UBIAI**'
 - en: '![](../Images/5ce6147a3d8777d31d2d2c689b15cd97.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5ce6147a3d8777d31d2d2c689b15cd97.png)'
 - en: 'Image by Author: Knowledge graph of scientific articles'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片：科学文章的知识图谱
 - en: 'It is [estimated](https://ncses.nsf.gov/pubs/nsb20206/) that 1.8 million articles
     are published each year, in about 28,000 journals. The publications throughput
     has increased by 4% each since the last decade and grew from 1.8 million to 2.6
@@ -27,8 +39,11 @@
     journal editors. Analyzing articles manually is tedious and time-consuming. Therefore
     providing researchers with the tool that quickly extracts and analyze information
     from articles will have a tremendous impact on accelerating new discoveries.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 据[估计](https://ncses.nsf.gov/pubs/nsb20206/)，每年发表约 180 万篇文章，分布在大约 28,000 个期刊中。出版物的产出在过去十年中每年增长了
+    4%，从 2008 年到 2018 年从 180 万增长到 260 万。但实际上谁在阅读这些论文呢？[根据 2007 年的一项研究](https://www.smithsonianmag.com/smart-news/half-academic-studies-are-never-read-more-three-people-180950222/)，阅读这些论文的人并不多：一半的学术论文仅由作者和期刊编辑阅读。手动分析文章是繁琐且耗时的。因此，为研究人员提供一个能够快速提取和分析文章信息的工具，将对加速新发现产生巨大的影响。
 - en: Knowledge graphs KG present an ideal solution for quick and rapid analysis of
     information. They represent a network of real-world entities like objects and
     concepts and provide the relationships between them. This information is usually
@@ -36,286 +51,441 @@
     a knowledge graph manually is a time-consuming task. Fortunately, with the recent
     advancement in Machine Learning and Natural Language Processing, Named Entity
     Recognition (NER) came to the rescue.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 知识图谱 KG 是快速和高效分析信息的理想解决方案。它们表示现实世界实体（如对象和概念）之间的网络，并提供它们之间的关系。这些信息通常存储在图形数据库中，并以图形结构可视化。然而，手动构建知识图谱是一项耗时的任务。幸运的是，随着机器学习和自然语言处理的最新进展，命名实体识别（NER）得到了救援。
 - en: In this article, we will be analyzing a dataset of scientific abstracts using
     the Neo4j Graph database and a fine-tuned SciBERT model. After, we will be querying
     the data to answer some questions as our analysis for this corpus. This article
     assumes that you have the basic fundamentals of NLP and Neo4j.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们将使用 Neo4j 图形数据库和微调的 SciBERT 模型分析科学摘要数据集。之后，我们将查询数据以回答一些问题，作为我们对该语料库的分析。本文假设你具有
+    NLP 和 Neo4j 的基本知识。
 - en: '**Model training**'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '**模型训练**'
 - en: 'The NER model we will be using is based on SciBERT and has been fine-tuned
     on scientific articles by annotating Materials, processes, and tasks:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用的 NER 模型基于 SciBERT，并通过对材料、过程和任务的注释进行了微调：
 - en: 'Material: Represents any mention of material in the abstract'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 材料：表示摘要中提到的任何材料
 - en: 'Process: Represents a process or a method used in the experiment'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 过程：表示实验中使用的过程或方法
 - en: 'Task: Represents the task of the study to be carried'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 任务：表示要进行的研究任务
 - en: 'For the annotation part, we have used [UBIAI text annotation tool](https://ubiai.tools/) and
     have exported the annotation in IOB format as shown below:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于注释部分，我们使用了[UBIAI 文本注释工具](https://ubiai.tools/)，并将注释导出为 IOB 格式，如下所示：
 - en: '![](../Images/ab8bf89a7ef3e679a06618139574e80b.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ab8bf89a7ef3e679a06618139574e80b.png)'
 - en: 'Image by Author: UBIAI Text Annotation Tool'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片：UBIAI 文本注释工具
 - en: 'For more information on how to generate training data using UBIAI and fine-tuning
     the NER model, check out the articles below:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关如何使用 UBIAI 生成训练数据和微调 NER 模型的更多信息，请查看以下文章：
 - en: '[Introducing UBIAI: Easy-to-Use Text Annotation for NLP Applications](https://chatbotslife.com/introducing-ubiai-easy-to-use-text-annotation-for-nlp-applications-74a2401fa725?gi=61b6ebb7114d)'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[介绍 UBIAI：适用于 NLP 应用的易用文本注释工具](https://chatbotslife.com/introducing-ubiai-easy-to-use-text-annotation-for-nlp-applications-74a2401fa725?gi=61b6ebb7114d)'
 - en: '[How to Train a Joint Entities and Relation Extraction Classifier using BERT
     Transformer with spaCy 3](https://towardsdatascience.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c)'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 spaCy 3 对 BERT Transformer 进行联合实体和关系提取分类器的训练](https://towardsdatascience.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c)'
 - en: '[How to Fine-Tune BERT Transformer with spaCy 3](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647)'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 spaCy 3 对 BERT Transformer 进行微调](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647)'
 - en: '**Setup**'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**设置**'
 - en: We will be working on Google Collaboratory. Obviously, we will be using Python.
     We mount our google drive which contains the dataset and the model. We need also
     to install various dependencies.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将在 Google Collaboratory 上工作。显然，我们将使用 Python。我们挂载了包含数据集和模型的 Google 云端硬盘。我们还需要安装各种依赖项。
 - en: '[PRE0]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Let us load our NER model:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们加载我们的 NER 模型：
 - en: '[PRE1]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '**Data Preparation**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据准备**'
 - en: 'The dataset contains the abstracts of scientific articles written by the main
     authors and published in various scientific journals. We are also interested in
     the entities mentioned within these articles. So, you can see clearly how our
     graph will be structured. Let us load our data and get a look at some examples:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集包含了主要作者撰写并发表在各种科学期刊上的科学文章的摘要。我们还对这些文章中提到的实体感兴趣。因此，你可以清楚地看到我们的图谱将如何结构化。让我们加载数据并查看一些示例：
 - en: '[PRE2]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![](../Images/b9b5aad77938bbae47a626eb10af0c9d.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b9b5aad77938bbae47a626eb10af0c9d.png)'
 - en: A sample of our dataset
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们数据集的一个样本
 - en: To make our knowledge graph, we will add the authors, the journals, and the
     articles with their properties, then we will add existing relationships between
     them.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了构建我们的知识图谱，我们将添加作者、期刊和具有其属性的文章，然后添加它们之间的现有关系。
 - en: We start easy by extracting the list of authors. Some preprocessing was required.
     Each article usually has multiple authors and so for each article, we transformed
     the string containing their names into a list. We will also need to produce ids
     through hashing our entities.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们从提取作者列表开始。需要进行一些预处理。每篇文章通常有多个作者，因此我们将包含作者姓名的字符串转换为列表。我们还需要通过对实体进行哈希来生成 ids。
 - en: '[PRE3]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Here is the code to get the list of all journals:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是获取所有期刊列表的代码：
 - en: '[PRE4]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: For the articles, we will be transforming the dataframe into a list of dictionaries.
     Each article will hold the attribute of its own dictionary as properties in the
     graph (like name, list of authors, etc).
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这些文章，我们将把数据框转换为字典列表。每篇文章将把其字典的属性作为图谱中的属性（例如名称、作者列表等）。
 - en: '[PRE5]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'To extract entities from each article, we will combine its title and its abstract
     as the text to be analyzed. At the same time, we added its own id by making it
     the hash of its text content:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了从每篇文章中提取实体，我们将其标题和摘要结合起来作为待分析的文本。同时，我们通过将其文本内容进行哈希来添加其自身的 id：
 - en: '[PRE6]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Now, this function served me well as a reusable code to work with a list of
     documents. The labels of our entities are:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，这个函数作为一个可重用的代码来处理文档列表对我很有帮助。我们的实体标签是：
 - en: PROCESS
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 过程
 - en: MATERIAL
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 材料
 - en: TASK
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 任务
 - en: '[PRE7]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'Let us see what are the entities extracted from the first article:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看从第一篇文章中提取的实体是什么：
 - en: '[PRE8]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![](../Images/bc438beb6a5c381f0c8818fea62cd3d0.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bc438beb6a5c381f0c8818fea62cd3d0.png)'
 - en: An example of entities present within an article
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 文章中存在的实体示例
 - en: 'Finally, we add every dictionary to its appropriate article dictionary in the
     articles list:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们将每个字典添加到文章列表中其适当的文章字典中：
 - en: '[PRE9]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '**Creating the Knowledge Graph**'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**创建知识图谱**'
 - en: Data preparation is done. Now is the time to insert and manipulate it using
     Neo4j!
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据准备已经完成。现在是时候使用 Neo4j 插入和操作这些数据了！
 - en: We defined a function that we will be using to communicate with our instance
     from the [Neo4j Aura database](https://neo4j.com/cloud/aura/).
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们定义了一个函数，用于与我们的[Neo4j Aura 数据库](https://neo4j.com/cloud/aura/)进行通信。
 - en: '[PRE10]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: These are the queries we used to populate our database, they are very straightforward.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些是我们用来填充数据库的查询，它们非常直接。
 - en: '[PRE11]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '![](../Images/b370e26c881150bb6ddc51337320f2e5.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b370e26c881150bb6ddc51337320f2e5.png)'
 - en: 'Image by Author: Three journals and their published articles'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图像：三本期刊及其发表的文章
 - en: 'Adding the entities is a little bit tricky. This query is composed of three
     parts:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 添加实体有点棘手。这个查询由三部分组成：
 - en: First, we match every article node in the database with its own dictionary from
     our list of articles. UNWIND helps us loop through the list and get one article
     each time.
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 首先，我们将数据库中的每个文章节点与我们文章列表中的字典进行匹配。UNWIND 帮助我们遍历列表，每次获取一篇文章。
 - en: Second, for every entity, we create it if it does not exist or match it by using
     MERGE. After, the entity we will be linked with the current article.
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 其次，对于每个实体，我们如果它不存在则创建它，或者使用 MERGE 来匹配它。之后，实体将与当前文章连接。
 - en: Last, we add the label PROCESS, MATERIAL, or TASK for every entity, the value
     of the label is already contained within a property with the same name. Then we
     proceed to remove that property.
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最后，我们为每个实体添加标签 PROCESS、MATERIAL 或 TASK，标签的值已经包含在一个同名属性中。然后我们继续删除该属性。
 - en: '[PRE12]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '![](../Images/50ce069828e7c231cbd29ba3538ee88f.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/50ce069828e7c231cbd29ba3538ee88f.png)'
 - en: 'Image by Author: An article and its connected nodes'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片：一篇文章及其连接的节点
 - en: '**Abstract Analysis**'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**摘要分析**'
 - en: Finally, we arrive at the most interesting part!
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终，我们来到了最有趣的部分！
 - en: 'Say that you are an NLP expert working with a physics expert. He wants you
     to analyze the abstracts of some scientific papers he finds very interesting.
     He gives you four questions:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你是一名自然语言处理（NLP）专家，与一位物理学专家合作。他希望你分析他认为非常有趣的几篇科学论文的摘要。他给你四个问题：
 - en: 1) Most popular material and process
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 1) 最受欢迎的材料和过程
 - en: 2) Most popular author
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 2) 最受欢迎的作者
 - en: 3) Highest co-occurrence between materials and processes
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 3) 材料和过程之间的最高共现
 - en: 4) Shortest path between two given authors
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 4) 两个给定作者之间的最短路径
 - en: Let us answer these questions using Neo4j!
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用 Neo4j 来回答这些问题！
 - en: 'To find out the most popular material and process in the entirety of our corpus,
     we need to count how many relations one entity has with journals, to see how many
     times they appeared:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 要找出在整个语料库中最受欢迎的材料和过程，我们需要计算一个实体与期刊的关系数，以查看它们出现了多少次：
 - en: '[PRE13]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '![](../Images/5ed5bf8a1dc102cf0210e2af125445b5.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5ed5bf8a1dc102cf0210e2af125445b5.png)'
 - en: Top ten popular materials and processes in our corpus
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们语料库中的十大热门材料和过程
 - en: 'The most popular author can be obtained using the same reasoning and here is
     the query for that:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 最受欢迎的作者可以使用相同的推理来获得，以下是查询语句：
 - en: '[PRE14]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: Now, Co-occurrence analysis is the counting of the occurrences of a pair of
     entities within the document. For example, we want to know how many times a certain
     process and a certain material were mentioned together within the same article.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，共现分析是计算文档中一对实体的出现次数。例如，我们想知道某个过程和某种材料在同一篇文章中一共提到了多少次。
 - en: '[PRE15]'
+  id: totrans-81
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '![](../Images/a4ffb378250657c272e91d5537609a17.png)'
+  id: totrans-82
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a4ffb378250657c272e91d5537609a17.png)'
 - en: Co-occurrence analysis output
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 共现分析输出
 - en: We can see that the material van der Waals heterostructures and the term VB
     were mentioned three times together in the entirety of the corpus. VB is the acronym
     of Valence Band which is the highest energy an electron can jump out of, moving
@@ -323,119 +493,182 @@
     der Waals structures. Using our knowledge graph we have discovered this correlation
     semantically without any prior knowledge! Such analysis can help us find new connections
     and unseen correlations between scientific concepts.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到，材料范德华异质结构和术语 VB 在整个语料库中一共提到了三次。VB 是价带（Valence Band）的缩写，表示电子可以跃迁到导带的最高能量，它在范德华结构中扮演着重要角色。通过我们的知识图谱，我们在没有任何先验知识的情况下语义上发现了这种相关性！这样的分析可以帮助我们发现科学概念之间的新连接和未曾发现的关联。
 - en: Lastly, we want to find the shortest path between two given authors, for that,
     we match each one with their respective id, use the predefined function shortestPath
     which accepts a path as an input, and then we get our result. We ran this query
     directly on the Neo4j browser to be able to get the graph picture.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们希望找到两个给定作者之间的最短路径，为此，我们将每个作者与他们各自的 ID 匹配，使用预定义的函数 shortestPath 作为输入，然后得到结果。我们直接在
+    Neo4j 浏览器上运行了这个查询，以便获得图形图片。
 - en: '[PRE16]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: '![](../Images/dbafefa8ad1eb1ef7c48f6eaecf7acf6.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/dbafefa8ad1eb1ef7c48f6eaecf7acf6.png)'
 - en: 'Image by Author: Shortest path between two given authors'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图片：两个给定作者之间的最短路径
 - en: Interestingly enough, we can predict that these two authors might need a common
     article for their research, or that they can actually cooperate together in some
     form or another. Visualizing meaningful relationships is of utmost importance
     in making informed decisions.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 有趣的是，我们可以预测这两位作者可能需要一个共同的文章来进行研究，或者他们实际上可以以某种形式合作。可视化有意义的关系在做出明智决策时至关重要。
 - en: '**Conclusion**'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '**结论**'
 - en: This was a demonstration of the power of combining Named Entity Recognition
     and Knowledge Graph in Text Mining. We did not delve into details because we wanted
     to focus more on showcasing the workflow of handling text semantic analysis. I
     hope that you have learned a thing or two and in the future, we will be delving
     more in-depth!
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 这展示了将命名实体识别与知识图谱结合在文本挖掘中的力量。我们没有深入细节，因为我们想更多地展示处理文本语义分析的工作流程。希望你已经学到了一些东西，未来我们将深入探讨更多内容！
 - en: If you have any questions or want to create custom models for your specific
     case, leave a note below or send us an email at admin@ubiai.tools.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你有任何问题或想为你的具体情况创建自定义模型，请在下方留言或通过电子邮件联系 admin@ubiai.tools。
 - en: Follow us on Twitter [@UBIAI5](https://twitter.com/UBIAI5)
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Twitter 上关注我们 [@UBIAI5](https://twitter.com/UBIAI5)
 - en: '**Bio: [Khaled Adrani](https://www.linkedin.com/in/khaled-adrani/)** is a Computer
     Science Engineer and intern at UBIAI.'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Khaled Adrani](https://www.linkedin.com/in/khaled-adrani/)** 是一名计算机科学工程师及
+    UBIAI 实习生。'
 - en: '[Original](https://medium.com/ubiai-nlp/analyzing-scientific-documents-with-fine-tuned-scibert-ner-model-and-neo4j-133015a29418).
     Reposted with permission.'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://medium.com/ubiai-nlp/analyzing-scientific-documents-with-fine-tuned-scibert-ner-model-and-neo4j-133015a29418)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Build a Serverless News Data Pipeline using ML on AWS Cloud](/2021/11/build-serverless-news-data-pipeline-ml-aws-cloud.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 AWS 云上的 ML 构建无服务器新闻数据管道](/2021/11/build-serverless-news-data-pipeline-ml-aws-cloud.html)'
 - en: '[Meta-Learning for Keyphrase Extraction](/2021/12/metalearning-keyphrase-extraction.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[关键短语提取的元学习](/2021/12/metalearning-keyphrase-extraction.html)'
 - en: '[The Ultimate Guide To Different Word Embedding Techniques In NLP](/2021/11/guide-word-embedding-techniques-nlp.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[NLP 中不同词嵌入技术的终极指南](/2021/11/guide-word-embedding-techniques-nlp.html)'
 - en: '* * *'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-101
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 相关工作'
 - en: '* * *'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-106
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Analyzing the Probability of Future Success with Intelligence…](https://www.kdnuggets.com/2022/02/analyzing-probability-future-success-intelligence-node-attributes-evolution-model.html)'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过智能分析未来成功的概率……](https://www.kdnuggets.com/2022/02/analyzing-probability-future-success-intelligence-node-attributes-evolution-model.html)'
 - en: '[Data Analytics: The Four Approaches to Analyzing Data and How To…](https://www.kdnuggets.com/2023/04/data-analytics-four-approaches-analyzing-data-effectively.html)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据分析：分析数据的四种方法及如何……](https://www.kdnuggets.com/2023/04/data-analytics-four-approaches-analyzing-data-effectively.html)'
 - en: '[Analyzing Diversity & Inclusion with SQL](https://www.kdnuggets.com/2022/11/analyzing-diversity-inclusion-sql.html)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 SQL 分析多样性与包容性](https://www.kdnuggets.com/2022/11/analyzing-diversity-inclusion-sql.html)'
 - en: '[Master the Power of Data Analytics: The Four Approaches to Analyzing Data](https://www.kdnuggets.com/2023/03/master-power-data-analytics-four-approaches-analyzing-data.html)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握数据分析的力量：分析数据的四种方法](https://www.kdnuggets.com/2023/03/master-power-data-analytics-four-approaches-analyzing-data.html)'
 - en: '[Segment Anything Model: Foundation Model for Image Segmentation](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[任何模型：图像分割的基础模型](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)'
 - en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[可解释的预测和实时预测的最新深度学习方法](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
