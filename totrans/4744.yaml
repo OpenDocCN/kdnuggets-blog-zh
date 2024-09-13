@@ -1,14 +1,20 @@
 - en: Sales Forecasting Using Facebook’s Prophet
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Facebook 的 Prophet 进行销售预测
 - en: 原文：[https://www.kdnuggets.com/2018/11/sales-forecasting-using-prophet.html](https://www.kdnuggets.com/2018/11/sales-forecasting-using-prophet.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/11/sales-forecasting-using-prophet.html](https://www.kdnuggets.com/2018/11/sales-forecasting-using-prophet.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: Sales forecasting is one the most common tasks in many sales driven organizations.
     This activity enables organizations to adequately plan for the future with a degree
     of confidence. In this tutorial we’ll use [Prophet](https://medium.com/r/?url=https%3A%2F%2Fresearch.fb.com%2Fprophet-forecasting-at-scale%2F),
@@ -16,238 +22,358 @@
     show how one can achieve this. This package is available in both [Python](https://medium.com/r/?url=https%3A%2F%2Fpypi.org%2Fproject%2Ffbprophet%2F) and [R](https://medium.com/r/?url=https%3A%2F%2Fcran.r-project.org%2Fpackage%3Dprophet).
     We assume that the reader has basic understanding of handling [time series ](https://medium.com/r/?url=https%3A%2F%2Ftowardsdatascience.com%2Fanalyzing-time-series-data-in-pandas-be3887fdd621)data
     in Python.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 销售预测是许多以销售为驱动的组织中最常见的任务之一。这项活动使组织能够以一定的信心充分规划未来。在本教程中，我们将使用 [Prophet](https://medium.com/r/?url=https%3A%2F%2Fresearch.fb.com%2Fprophet-forecasting-at-scale%2F)，这是
+    [Facebook](https://medium.com/r/?url=https%3A%2F%2Fresearch.fb.com%2Fprophet-forecasting-at-scale%2F)
+    开发的一个包，展示如何实现这一点。此包在 [Python](https://medium.com/r/?url=https%3A%2F%2Fpypi.org%2Fproject%2Ffbprophet%2F)
+    和 [R](https://medium.com/r/?url=https%3A%2F%2Fcran.r-project.org%2Fpackage%3Dprophet)
+    中均可用。我们假设读者对在 Python 中处理 [时间序列](https://medium.com/r/?url=https%3A%2F%2Ftowardsdatascience.com%2Fanalyzing-time-series-data-in-pandas-be3887fdd621)
+    数据有基本的理解。
 - en: Plan of Attack
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 攻击计划
 - en: Introduction and Installation
+  id: totrans-5
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 介绍与安装
 - en: Model Fitting
+  id: totrans-6
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 模型拟合
 - en: Making Future Predictions
+  id: totrans-7
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 未来预测
 - en: Obtaining the Forecasts
+  id: totrans-8
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 获取预测
 - en: Plotting the Forecasts
+  id: totrans-9
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 绘制预测
 - en: Plotting the Forecast Components
+  id: totrans-10
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 绘制预测组件
 - en: Cross Validation
+  id: totrans-11
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 交叉验证
 - en: Obtaining the Performance Metrics
+  id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 获取性能指标
 - en: Visualizing Performance Metrics
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 可视化性能指标
 - en: Conclusion
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 结论
 - en: Introduction and Installation
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍与安装
 - en: 'There are very many open source forecastings tools, however none of these would
     be fit to solve all forecasting problems. [Prophet](https://medium.com/r/?url=https%3A%2F%2Fgithub.com%2Ffacebook%2Fprophet) works
     best with hourly, and weekly data that is several months. When working with Prophet
     yearly data is most prefered. According to Facebook Research:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 有很多开源预测工具，但没有一种能够解决所有预测问题。[Prophet](https://medium.com/r/?url=https%3A%2F%2Fgithub.com%2Ffacebook%2Fprophet)
+    最适合处理几个月的每小时和每周数据。使用 Prophet 时，年度数据是最理想的。根据 Facebook 研究：
 - en: 'At its core, the Prophet procedure is an [additive regression model](https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAdditive_model) with
     four main components:'
+  id: totrans-17
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 从根本上说，Prophet 程序是一个 [加性回归模型](https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FAdditive_model)，具有四个主要组件：
 - en: ''
+  id: totrans-18
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: 1\. A piecewise linear or logistic growth curve trend. Prophet automatically
     detects changes in trends by selecting changepoints from the data.
+  id: totrans-19
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 1\. 分段线性或逻辑增长曲线趋势。Prophet 通过从数据中选择变化点来自动检测趋势变化。
 - en: 2\. A yearly seasonal component modeled using [Fourier series.](https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FFourier_series)
+  id: totrans-20
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 2\. 使用 [傅里叶级数](https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FFourier_series)
+    建模的年度季节性组件。
 - en: 3\. A weekly seasonal component using dummy variables.
+  id: totrans-21
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 3\. 使用虚拟变量的每周季节性组件。
 - en: 4\. A user-provided list of important holidays.
+  id: totrans-22
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 4\. 用户提供的重要节假日列表。
 - en: Prophet can be installed using pip in Python as shown below. Prophet depends
     on a Python module called `pystan.` This module will be installed automatically
     as we install Prophet.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以使用 pip 在 Python 中安装 Prophet，如下所示。Prophet 依赖于名为 `pystan.` 的 Python 模块。我们在安装
+    Prophet 时，此模块将自动安装。
 - en: The dataset we’ve used for this tutorial is available [here](https://medium.com/r/?url=https%3A%2F%2Fdatamarket.com%2Fdata%2Fset%2F235d%2Fmean-daily-temperature-fisher-river-near-dallas-jan-01-1988-to-dec-31-1991%23!ds%3D235d%26display%3Dline).
     Once you download the dataset make sure to delete some unnecessary rows towards
     the end of the file because they might interfere with the analysis. For this [univariate
     analysis](https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FUnivariate)Prophet
     expects the dataset to have two columns named as *ds* and *y*. *ds* is the date
     column while *y* is the column that we are forecasting.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在本教程中使用的数据集可以在[这里](https://medium.com/r/?url=https%3A%2F%2Fdatamarket.com%2Fdata%2Fset%2F235d%2Fmean-daily-temperature-fisher-river-near-dallas-jan-01-1988-to-dec-31-1991%23!ds%3D235d%26display%3Dline)下载。一旦下载数据集，请确保删除文件末尾的一些不必要的行，因为它们可能会干扰分析。对于这个[单变量分析](https://medium.com/r/?url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FUnivariate)Prophet
+    期望数据集包含两列，分别命名为*ds*和*y*。*ds*是日期列，而*y*是我们进行预测的列。
 - en: Let’s get the ball rolling by importing Pandas for data manipulation and Prophet
     for forecasting. Next we load in our dataset and check its head.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始导入 Pandas 进行数据处理，以及 Prophet 进行预测。接下来，我们加载数据集并查看其头部。
 - en: '![](../Images/a8bb0bb5c5f8a89701ab19d413f19630.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a8bb0bb5c5f8a89701ab19d413f19630.png)'
 - en: Model Fitting
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型拟合
 - en: Since we’ve worked with [Scikit-learn](https://medium.com/r/?url=https%3A%2F%2Fscikit-learn.org%2F) before,working
     with Prophet will be a walk in the park for us. This is because the API implementation
     for Prophet and Scikit-learn are very similar as we’ll see below. We start by
     creating an instance of the Prophet class and then fit it to our dataset.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们之前使用过[Scikit-learn](https://medium.com/r/?url=https%3A%2F%2Fscikit-learn.org%2F)，因此使用
+    Prophet 对我们来说将是一件轻而易举的事。这是因为 Prophet 和 Scikit-learn 的 API 实现非常相似，如下所示。我们首先创建一个
+    Prophet 类的实例，然后将其拟合到我们的数据集上。
 - en: Making Future Predictions
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 进行未来预测
 - en: The next step is to prepare our model to make future predictions. This is achieved
     using the *Prophet.make_future_dataframe *method and passing the number of days
     we’d like to predict in the future. We use the *periods* attribute to specify
     this. This also include the historical dates. We’ll use these historical dates
     to compare the predictions with the actual values in the *ds* column.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是准备我们的模型进行未来预测。这可以通过使用*Prophet.make_future_dataframe*方法并传入我们希望预测的天数来实现。我们使用*periods*属性来指定这个值。这还包括历史日期。我们将使用这些历史日期将预测值与*ds*列中的实际值进行比较。
 - en: '![](../Images/73e6e0d67ebd1a4ce5cc0bbfe1ba9bde.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/73e6e0d67ebd1a4ce5cc0bbfe1ba9bde.png)'
 - en: Obtaining the Forecasts
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 获取预测结果
 - en: We use the *predict* method to make future predictions. This will generate a
     dataframe with a *yhat *column that will contain the predictions.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用*predict*方法来进行未来的预测。这将生成一个包含*yhat*列的数据框，该列将包含预测结果。
 - en: If we check the *head* for our forecast dataframe we’ll notice that it has very
     many columns. However, we are mainly interested in ***ds, yhat, yhat_lower ***and** *yhat_upper.
     yhat ***is our predicted forecast, ***yhat_lower ***is the lower bound for our
     predictions and ***yhat_upper*** is the upper bound for our predictions.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们查看预测数据框的*head*，会发现它有很多列。然而，我们主要关注***ds, yhat, yhat_lower***和**yhat_upper。yhat***是我们的预测值，***yhat_lower***是我们预测的下限，***yhat_upper***是我们预测的上限。
 - en: '![](../Images/9611e5d094b1b70f52590abf5917cd02.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9611e5d094b1b70f52590abf5917cd02.png)'
 - en: Let’s proceed to check the tail and head of the forecast’s dataframe.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们继续查看预测数据框的尾部和头部。
 - en: '![](../Images/1eb594eb646016567b3b1905b20692dc.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1eb594eb646016567b3b1905b20692dc.png)'
 - en: Plotting the Forecasts
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 绘制预测结果
 - en: Prophet has an inbuilt feature that enables us to plot the forecasts we just
     generated. This is achieved using *mode.plot() *and passing in our forecasts as
     the argument. The blue line in the graph represents the predicted values while
     the black dots represents the data in our dataset.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: Prophet 具有一个内置功能，允许我们绘制刚刚生成的预测结果。这可以通过使用*mode.plot()*方法并将我们的预测结果作为参数传递来实现。图中的蓝线表示预测值，而黑点表示我们数据集中的数据。
 - en: '![](../Images/5e8321f5aa1266894a1c30d11b557c36.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5e8321f5aa1266894a1c30d11b557c36.png)'
 - en: Plotting the Forecast Components
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 绘制预测组件
 - en: The *plot_components *method plots the trend, yearly and weekly seasonality
     of the time series data.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '*plot_components* 方法绘制了时间序列数据的趋势、年度和每周季节性。'
 - en: '![](../Images/c57f0df60f7021d68d76c0115b382199.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c57f0df60f7021d68d76c0115b382199.png)'
 - en: Cross Validation
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 交叉验证
 - en: 'Next let’s measure the forecast error using the historical data. We’ll do this
     by comparing the predicted values with the actual values. In order to perform
     this operation we select cut of points in the history of the data and fit the
     model with data upto that cut off point. Afterwards we compare the actual values
     to the predicted values. The *cross_validation *method allows us to do this in
     Prophet. This method take the following parameters as explained below:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，让我们使用历史数据测量预测误差。我们将通过将预测值与实际值进行比较来完成此操作。为了执行此操作，我们选择数据历史中的截止点，并用该截止点之前的数据拟合模型。然后，我们将实际值与预测值进行比较。*交叉验证*方法允许我们在Prophet中执行此操作。此方法使用以下参数，如下所述：
 - en: '*horizon *the forecast horizon'
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*预测范围*预测范围'
 - en: '*initial *the size of the initial training period'
+  id: totrans-47
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*初始*初始训练期的大小'
 - en: '*period *the spacing between cutoff dates'
+  id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '*周期*截止日期之间的间隔'
 - en: The output of the *cross_validation *method is a dataframe containing *y* the
     true values and *yhat* the predicted values. We’ll use this dataframe to compute
     the prediction errors.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '*交叉验证*方法的输出是一个数据框，其中包含*y*真实值和*yhat*预测值。我们将使用此数据框来计算预测误差。'
 - en: '![](../Images/90de0b7c64702b4ab65fe3c99a072cb4.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/90de0b7c64702b4ab65fe3c99a072cb4.png)'
 - en: Obtaining the Performance Metrics
+  id: totrans-51
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 获取性能指标
 - en: We use the *performance_metrics* utility to compute the Mean Squared Error(MSE),
     Root Mean Squared Error(RMSE),Mean Absolute Error(MAE), Mean Absolute Percentage
     Error(MAPE) and the coverage of the the `yhat_lower` and `yhat_upper` estimates.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用*performance_metrics*工具计算均方误差（MSE）、均方根误差（RMSE）、平均绝对误差（MAE）、平均绝对百分比误差（MAPE）以及`yhat_lower`和`yhat_upper`估计值的覆盖率。
 - en: '![](../Images/712e69f483eb285945db01796056aeb1.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/712e69f483eb285945db01796056aeb1.png)'
 - en: '**Visualizing Performance Metrics**'
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**可视化性能指标**'
 - en: The performance Metrics can be visualized using the *plot_cross_validation_metric* utility.
     Let’s visualize the RMSE below.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 性能指标可以使用*plot_cross_validation_metric*工具进行可视化。让我们下面可视化RMSE。
 - en: '![](../Images/bf30e4505691c8f74fb932ec9b19ea7a.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bf30e4505691c8f74fb932ec9b19ea7a.png)'
 - en: Conclusion
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: As we have seen Prophet is very powerful and effective in time series forecasting.
     However, as we mentioned earlier there are a few other forecasting tools. Choice
     of tool is on a case by case basis depending on the nature of the dataset. One
@@ -259,78 +385,123 @@
     Averages](https://medium.com/r/?url=https%3A%2F%2Fwww.babypips.com%2Flearn%2Fforex%2Fusing-moving-averages) among
     others. You can learn more about Prophet from the [official docs](https://medium.com/r/?url=https%3A%2F%2Ffacebook.github.io%2Fprophet%2F) or
     by reading [Prophet’s Paper](https://medium.com/r/?url=https%3A%2F%2Fpeerj.com%2Fpreprints%2F3190.pdf).
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们所见，Prophet在时间序列预测中非常强大和有效。然而，正如我们之前提到的，还有一些其他预测工具。工具的选择是基于数据集的性质逐案决定的。人们可以始终比较这些工具，并使用那些能提供最佳预测且误差最小的工具。这些方法包括[ARIMA](https://medium.com/r/?url=https%3A%2F%2Fwww.statsmodels.org%2Fdev%2Fgenerated%2Fstatsmodels.tsa.arima_model.ARIMA.html)、[Holt-Winters
+    方法](https://medium.com/r/?url=https%3A%2F%2Fotexts.org%2Ffpp2%2Fholt-winters.html)、[Holt
+    的线性趋势](https://medium.com/r/?url=https%3A%2F%2Fotexts.org%2Ffpp2%2Fholt.html)、[简单指数平滑](https://medium.com/r/?url=https%3A%2F%2Fotexts.org%2Ffpp2%2Fses.html)和[移动平均](https://medium.com/r/?url=https%3A%2F%2Fwww.babypips.com%2Flearn%2Fforex%2Fusing-moving-averages)等。您可以从[官方文档](https://medium.com/r/?url=https%3A%2F%2Ffacebook.github.io%2Fprophet%2F)或阅读[Prophet
+    论文](https://medium.com/r/?url=https%3A%2F%2Fpeerj.com%2Fpreprints%2F3190.pdf)了解更多关于Prophet的信息。
 - en: '**Bio: [Derrick Mwiti](https://derrickmwiti.com/)** is a data analyst, a writer,
     and a mentor. He is driven by delivering great results in every task, and is a
     mentor at Lapid Leaders Africa.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Derrick Mwiti](https://derrickmwiti.com/)** 是一名数据分析师、作家和导师。他致力于在每个任务中取得优异成果，并且是Lapid
+    Leaders Africa的导师。'
 - en: '**Related:**'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Using a Keras Long Short-Term Memory (LSTM) Model to Predict Stock Prices](/2018/11/keras-long-short-term-memory-lstm-model-predict-stock-prices.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Keras 长短期记忆（LSTM）模型预测股票价格](/2018/11/keras-long-short-term-memory-lstm-model-predict-stock-prices.html)'
 - en: '[Introduction to Deep Learning with Keras](/2018/10/introduction-deep-learning-keras.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Keras 深度学习入门](/2018/10/introduction-deep-learning-keras.html)'
 - en: '[Introduction to PyTorch for Deep Learning](/2018/11/introduction-pytorch-deep-learning.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyTorch 深度学习入门](/2018/11/introduction-pytorch-deep-learning.html)'
 - en: '* * *'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-65
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您组织的 IT 工作'
 - en: '* * *'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题
 - en: '[Time Series Forecasting with statsmodels and Prophet](https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 statsmodels 和 Prophet 进行时间序列预测](https://www.kdnuggets.com/2023/03/time-series-forecasting-statsmodels-prophet.html)'
 - en: '[Explainable Forecasting and Nowcasting with State-of-the-art Deep…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[最先进的深度学习技术进行可解释预测和即时预测…](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)'
 - en: '[Time Series Forecasting with Ploomber, Arima, Python, and Slurm](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Ploomber、Arima、Python 和 Slurm 进行时间序列预测](https://www.kdnuggets.com/2022/03/time-series-forecasting-ploomber-arima-python-slurm.html)'
 - en: '[Learn modern forecasting techniques to help predict future business…](https://www.kdnuggets.com/2022/12/sphere-learn-modern-forecasting-techniques-help-predict-future-business-outcomes.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习现代预测技术，帮助预测未来的商业成果…](https://www.kdnuggets.com/2022/12/sphere-learn-modern-forecasting-techniques-help-predict-future-business-outcomes.html)'
 - en: '[Forecasting Future Events: The Capabilities and Limitations of AI and ML](https://www.kdnuggets.com/2023/06/forecasting-future-events-capabilities-limitations-ai-ml.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[预测未来事件：AI 和 ML 的能力与局限性](https://www.kdnuggets.com/2023/06/forecasting-future-events-capabilities-limitations-ai-ml.html)'
 - en: '[Leveraging XGBoost for Time-Series Forecasting](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用 XGBoost 进行时间序列预测](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)'
