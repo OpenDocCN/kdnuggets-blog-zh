@@ -3,50 +3,63 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python中的蒙特卡洛积分
 - en: 原文：[https://www.kdnuggets.com/2020/12/monte-carlo-integration-python.html](https://www.kdnuggets.com/2020/12/monte-carlo-integration-python.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/12/monte-carlo-integration-python.html](https://www.kdnuggets.com/2020/12/monte-carlo-integration-python.html)
 - en: '[comments](#comments)![Figure](../Images/77fa6f289cd10c116556006943d8d173.png)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)![图](../Images/77fa6f289cd10c116556006943d8d173.png)'
 - en: 'Image source: Wikipedia(Free) and collage made by the author'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：维基百科（免费）及作者制作的拼贴图
 - en: '* * *'
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的IT工作'
 - en: '* * *'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '**Disclaimer**: The inspiration for this article stemmed from [**Georgia Tech’s
     Online Masters in Analytics (OMSA)**](https://www.gatech.edu/academics/degrees/masters/analytics-online-degree-oms-analytics)program
     study material. I am proud to pursue this excellent Online MS program. You can
@@ -54,31 +67,38 @@
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '**免责声明**：本文的灵感来源于 [**乔治亚理工学院的在线分析硕士（OMSA）**](https://www.gatech.edu/academics/degrees/masters/analytics-online-degree-oms-analytics)
+    项目的学习资料。我为追求这一优秀的在线硕士项目而感到自豪。你也可以 [在这里查看详细信息。](http://catalog.gatech.edu/programs/analytics-ms/#onlinetext)'
 - en: What is Monte Carlo integration?
   id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是蒙特卡洛积分？
 - en: Monte Carlo, is in fact, the name of the world-famous casino located in the
     eponymous district of the city-state (also called a Principality) of Monaco, on
     the world-famous French Riviera.
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 蒙特卡洛实际上是位于摩纳哥（这个城市-国家，也称为公国）同名区的世界著名赌场的名字，位于世界闻名的法国里维埃拉。
 - en: It turns out that the casino inspired the minds of famous scientists to devise
     an intriguing mathematical technique for solving complex problems in statistics,
     numerical computing, system simulation.
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 事实证明，这个赌场激发了著名科学家们发明一种有趣的数学技术，用于解决统计学、数值计算和系统模拟中的复杂问题。
 - en: '![Figure](../Images/5d936d7a368551f4e0f6c19eacdf55d8.png)'
   id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/5d936d7a368551f4e0f6c19eacdf55d8.png)'
 - en: Image source: [Wikipedia](https://en.wikipedia.org/wiki/Monte_Carlo#/media/File:Monaco_Monte_Carlo_1.jpg)
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：[维基百科](https://en.wikipedia.org/wiki/Monte_Carlo#/media/File:Monaco_Monte_Carlo_1.jpg)
 - en: One of the [first and most famous uses of this technique was during the Manhattan
     Project](https://www.solver.com/press/monte-carlo-methods-led-atomic-bomb-may-be-your-best-bet-business-decision-making) when
     the chain-reaction dynamics in highly enriched uranium presented an unimaginably
@@ -89,24 +109,29 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[这种技术的最早和最著名的用途之一是在曼哈顿计划期间](https://www.solver.com/press/monte-carlo-methods-led-atomic-bomb-may-be-your-best-bet-business-decision-making)，当时，高度浓缩铀的链式反应动力学给科学家们带来了极其复杂的理论计算。即使是像约翰·冯·诺依曼、斯坦尼斯瓦夫·乌拉姆、尼古拉斯·美特罗波利斯这样的天才也无法用传统的方法解决。因此，他们转向了随机数的奇妙世界，让这些概率量驯服了原本难以处理的计算。'
 - en: '![Figure](../Images/f6471b50a5066adf386399f5bf10668f.png)'
   id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/f6471b50a5066adf386399f5bf10668f.png)'
 - en: 'Trinity test: (Image source: [Wikipedia](https://en.wikipedia.org/wiki/Nuclear_weapon#/media/File:Trinity_Detonation_T&B.jpg))'
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 三位一体试验：（图片来源：[维基百科](https://en.wikipedia.org/wiki/Nuclear_weapon#/media/File:Trinity_Detonation_T&B.jpg)）
 - en: Amazingly, these random variables could solve the computing problem, which stymied
     the sure-footed deterministic approach. The elements of uncertainty actually won.
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 令人惊讶的是，这些随机变量能够解决计算问题，这个问题困扰了确定性方法。实际上，不确定性的元素赢得了胜利。
 - en: Just like **uncertainty and randomness rule in the world of Monte Carlo games**.
     That was the inspiration for this particular moniker.
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如**不确定性和随机性主导了蒙特卡洛游戏的世界**。这就是这个名字的灵感来源。
 - en: '![Figure](../Images/b1d55e1477e3b74105c3c32742467f99.png)'
   id: totrans-21
   prefs: []
@@ -302,128 +327,155 @@
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们没有时间或范围来证明背后的理论，但可以表明 **通过合理数量的随机抽样，我们实际上可以以足够高的准确度计算积分**！
 - en: We just choose random numbers (between the limits), evaluate the function at
     those points, add them up, and scale it by a known factor. We are done.
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们只需选择随机数（在限制范围内），在这些点上评估函数，将它们加起来，并按已知因子进行缩放。这样就完成了。
 - en: OK. What are we waiting for? Let’s demonstrate this claim with some simple Python
     code.
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的。我们在等什么呢？让我们用一些简单的 Python 代码来演示这个说法。
 - en: For all its successes and fame, the basic idea is deceptively simple and easy
     to demonstrate.
   id: totrans-56
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 尽管取得了许多成功和声誉，但基本思想却 deceptively simple，容易演示。
 - en: The Python code
   id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Python 代码
 - en: Replace complex math by simple averaging
   id: totrans-58
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 用简单的平均值替代复杂的数学
 - en: If we are trying to calculate an integral — any integral — of the form below,
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们尝试计算下面这种形式的积分——任何积分，
 - en: '![Image for post](../Images/e694aead902052e72285e6f482d86286.png)'
   id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![用于帖子图片](../Images/e694aead902052e72285e6f482d86286.png)'
 - en: we just replace the ‘estimate’ of the integral by the following average,
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们只是用以下平均值替代积分的‘估算’，
 - en: '![Image for post](../Images/4b7c9ef1712f1a273a6da80a3211e1c6.png)'
   id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![用于帖子图片](../Images/4b7c9ef1712f1a273a6da80a3211e1c6.png)'
 - en: where the ***U***’s represent uniform random numbers between 0 and 1\. Note,
     how we **replace the complex integration process by simply adding up a bunch of
     numbers and taking their average**!
   id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中 ***U*** 代表介于 0 和 1 之间的均匀随机数。注意，我们是如何 **通过简单地将一堆数字相加并取其平均值来替代复杂的积分过程**！
 - en: In any modern computing system, programming language, or even commercial software
     packages like Excel, you have access to this uniform random number generator.
     Check out my article on this topic,
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 在任何现代计算系统、编程语言，甚至是像 Excel 这样的商业软件包中，你都可以访问这个统一的随机数生成器。查看我关于这个主题的文章，
 - en: '[**How to generate random variables from scratch (no library used)**](https://towardsdatascience.com/how-to-generate-random-variables-from-scratch-no-library-used-4b71eb3c8dc7)'
   id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**如何从头开始生成随机变量（不使用库）**](https://towardsdatascience.com/how-to-generate-random-variables-from-scratch-no-library-used-4b71eb3c8dc7)'
 - en: We go through a simple pseudo-random generator algorithm and show how to use
     that for generating important random…
   id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用一个简单的伪随机生成器算法，并展示如何使用它生成重要的随机数……
 - en: We just choose random numbers (between the limits), evaluate the function at
     those points, add them up, and scale it by a known factor. We are done.
   id: totrans-67
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 我们只需选择随机数（在限制范围内），在这些点上评估函数，将它们加起来，并按已知因子进行缩放。这样就完成了。
 - en: The function
   id: totrans-68
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 函数
 - en: Here is a Python function, which accepts another function as the first argument,
     two limits of integration, and an optional integer to compute the definite integral
     represented by the argument function.
   id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个 Python 函数，它接受另一个函数作为第一个参数，两个积分限制，以及一个可选的整数来计算由参数函数表示的定积分。
 - en: '![Image for post](../Images/dd2bbe370a2489b1e53a194d4bca82c7.png)'
   id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![用于帖子图片](../Images/dd2bbe370a2489b1e53a194d4bca82c7.png)'
 - en: The code may look slightly different than the equation above (or another version
     that you might have seen in a textbook). That is because **I am making the computation
     more accurate by distributing random samples over 10 intervals**.
   id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码可能看起来与上面的方程（或你可能在教科书中见到的另一个版本）略有不同。这是因为 **我通过将随机样本分布在 10 个区间上来提高计算的准确性**。
 - en: For our specific example, the argument function looks like,
   id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于我们具体的例子，参数函数看起来像这样，
 - en: '![Image for post](../Images/90901243ac85649d978edecb4e9afb5b.png)'
   id: totrans-73
   prefs: []
   type: TYPE_IMG
+  zh: '![用于帖子图片](../Images/90901243ac85649d978edecb4e9afb5b.png)'
 - en: And we can compute the integral by simply passing this to the `monte_carlo_uniform()` function,
   id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过将其传递给 `monte_carlo_uniform()` 函数来计算该积分，
 - en: '![Image for post](../Images/998b1b0d47e2acf9699163806c68d5a3.png)'
   id: totrans-75
   prefs: []
   type: TYPE_IMG
+  zh: '![用于帖子图片](../Images/998b1b0d47e2acf9699163806c68d5a3.png)'
 - en: Here, as you can see, we have taken 100 random samples between the integration
     limits ***a*** = 0 and ***b*** = 4.
   id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，如你所见，我们在积分限制 ***a*** = 0 和 ***b*** = 4 之间取了 100 个随机样本。
 - en: How good is the calculation anyway?
   id: totrans-77
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 那计算效果到底如何？
 - en: This integral cannot be calculated analytically. So, we need to benchmark the
     accuracy of the Monte Carlo method against another numerical integration technique
     anyway. We chose the Scipy `integrate.quad()`function for that.
   id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个积分无法用解析方法计算。因此，我们需要将蒙特卡洛方法的准确性与另一种数值积分技术进行基准比较。为此我们选择了 Scipy 的 `integrate.quad()`
+    函数。
 - en: Now, you may also be thinking — **what happens to the accuracy as the sampling
     density changes**. This choice clearly impacts the computation speed — we need
     to add less number of quantities if we choose a reduced sampling density.
@@ -571,6 +623,7 @@
   id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 在更高维度中，蒙特卡洛方法相较于基于黎曼和的方法特别突出。对于蒙特卡洛方法而言，样本密度可以以更有利的方式进行优化，使其在不影响准确性的情况下大大加快速度。
 - en: In mathematical terms, the convergence rate of the method is independent of
     the number of dimensions. In machine learning speak, the **Monte Carlo method
     is the best friend you have to beat the curse of dimensionality when it comes
@@ -578,30 +631,36 @@
   id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 从数学角度看，该方法的收敛速度与维度数量无关。用机器学习的术语来说，**蒙特卡洛方法是你在复杂积分计算中战胜维度诅咒的最佳朋友**。
 - en: Read this article for a great introduction,
   id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 阅读这篇文章以获得一个很好的介绍，
 - en: '[**Monte Carlo Methods in Practice (Monte Carlo Integration)**](https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/monte-carlo-methods-in-practice/monte-carlo-integration)'
   id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**实践中的蒙特卡洛方法（蒙特卡洛积分）**](https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/monte-carlo-methods-in-practice/monte-carlo-integration)'
 - en: Monte Carlo Methods in Practice If you understand and know about the most important
     concepts of probability and…
   id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 实践中的蒙特卡洛方法 如果你了解并掌握了概率的最重要概念和…
 - en: And it is in this higher dimension that the Monte Carlo method particularly
     shines as compared to Riemann sum based approaches.
   id: totrans-107
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 在更高维度中，蒙特卡洛方法相较于基于黎曼和的方法特别突出。
 - en: Summary
   id: totrans-108
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结
 - en: We introduced the concept of Monte Carlo integration and illustrated how it
     differs from the conventional numerical integration methods. We also showed a
     simple set of Python codes to evaluate a one-dimensional function and assess the
@@ -609,60 +668,72 @@
   id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们介绍了蒙特卡洛积分的概念，并展示了它如何与传统的数值积分方法不同。我们还展示了一组简单的 Python 代码，以评估一维函数，并评估这些技术的准确性和速度。
 - en: The broader class of [Monte Carlo simulation techniques](https://en.wikipedia.org/wiki/Monte_Carlo_method) is
     more exciting and is used in a ubiquitous manner in fields related to artificial
     intelligence, data science, and statistical modeling.
   id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 更广泛的[蒙特卡洛模拟技术](https://en.wikipedia.org/wiki/Monte_Carlo_method)更令人兴奋，并在人工智能、数据科学和统计建模等领域得到普遍应用。
 - en: For example, the famous Alpha Go program from DeepMind used a Monte Carlo search
     technique to be computationally efficient in the high-dimensional space of the
     game Go. Numerous such examples can be found in practice.
   id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，DeepMind 的著名 Alpha Go 程序使用了蒙特卡洛搜索技术，在围棋这一高维空间中实现了计算效率。实践中可以找到许多类似的例子。
 - en: '[**Introduction to Monte Carlo Tree Search: The Game-Changing Algorithm behind
     DeepMind''s AlphaGo**](https://www.analyticsvidhya.com/blog/2019/01/monte-carlo-tree-search-introduction-algorithm-deepmind-alphago/)'
   id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**蒙特卡洛树搜索简介：深度学习 AlphaGo 背后的游戏改变算法**](https://www.analyticsvidhya.com/blog/2019/01/monte-carlo-tree-search-introduction-algorithm-deepmind-alphago/)'
 - en: A best-of five-game series, $1 million dollars in prize money - A high stakes
     shootout. Between 9 and 15 March, 2016…
   id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 五局三胜制，总奖金100万美元——一场高风险的对决。2016年3月9日至15日…
 - en: If you liked it…
   id: totrans-114
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如果你喜欢它…
 - en: If you liked this article, you may also like my other articles on similar topics,
   id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你喜欢这篇文章，你可能还会喜欢我关于类似主题的其他文章，
 - en: '[**How to generate random variables from scratch (no library used)**](https://towardsdatascience.com/how-to-generate-random-variables-from-scratch-no-library-used-4b71eb3c8dc7)'
   id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**如何从零开始生成随机变量（不使用库）**](https://towardsdatascience.com/how-to-generate-random-variables-from-scratch-no-library-used-4b71eb3c8dc7)'
 - en: We go through a simple pseudo-random generator algorithm and show how to use
     that for generating important random…
   id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们介绍了一个简单的伪随机生成器算法，并展示了如何使用它生成重要的随机…
 - en: '[**Mathematical programming — a key habit to build up for advancing in data
     science**](https://towardsdatascience.com/mathematical-programming-a-key-habit-to-built-up-for-advancing-in-data-science-c6d5c29533be)'
   id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**数学编程——推进数据科学的关键习惯**](https://towardsdatascience.com/mathematical-programming-a-key-habit-to-built-up-for-advancing-in-data-science-c6d5c29533be)'
 - en: We show a small step towards building the habit of mathematical programming,
     a key skill in the repertoire of a budding…
   id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们展示了迈向数学编程习惯的一个小步骤，这在新兴数据科学家的技能库中是一个关键技能…
 - en: '[**Brownian motion with Python**](https://towardsdatascience.com/brownian-motion-with-python-9083ebc46ff0)'
   id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**用 Python 进行布朗运动**](https://towardsdatascience.com/brownian-motion-with-python-9083ebc46ff0)'
 - en: We show how to emulate Brownian motion, the most famous stochastic process used
     in a wide range of applications, using…
   id: totrans-121
