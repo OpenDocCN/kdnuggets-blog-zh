@@ -1,123 +1,185 @@
 - en: Working With The Lambda Layer in Keras
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在Keras中使用Lambda层
 - en: 原文：[https://www.kdnuggets.com/2021/01/working-lambda-layer-keras.html](https://www.kdnuggets.com/2021/01/working-lambda-layer-keras.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/01/working-lambda-layer-keras.html](https://www.kdnuggets.com/2021/01/working-lambda-layer-keras.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '![Working With The Lambda Layer in Keras](../Images/c3a523288bdaacf398ad685f673c0a8e.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![在Keras中使用Lambda层](../Images/c3a523288bdaacf398ad685f673c0a8e.png)'
 - en: 'Keras is a popular and easy-to-use library for building deep learning models.
     It supports all known type of layers: input, dense, convolutional, transposed
     convolution, reshape, normalization, dropout, flatten, and activation. Each layer
     performs a particular operations on the data.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: Keras是一个流行且易于使用的深度学习模型构建库。它支持所有已知类型的层：输入层、全连接层、卷积层、转置卷积层、重塑层、归一化层、丢弃层、展平层和激活层。每个层对数据执行特定操作。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: That being said, you might want to perform an operation over the data that is
     not applied in any of the existing layers, and then these preexisting layer types
     will not be enough for your task. As a trivial example, imagine you need a layer
     that performs the operation of adding a fixed number at a given point of the model
     architecture. Because there is no existing layer that does this, you can build
     one yourself.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管如此，你可能希望对数据执行一些现有层未应用的操作，这时候现有的层类型可能不够用。举个简单的例子，假设你需要一个在模型架构的某个特定点添加固定数字的层。因为没有现有的层可以做到这一点，你可以自己构建一个。
 - en: In this tutorial we'll discuss using the `Lambda` layer in Keras. This allows
     you to specify the operation to be applied as a function. We'll also see how to
     debug the Keras loading feature when building a model that has lambda layers.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将讨论在Keras中使用`Lambda`层。这使你能够将操作指定为函数。我们还将看到如何调试Keras加载功能，当构建一个包含lambda层的模型时。
 - en: 'The sections covered in this tutorial are as follows:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程涵盖的部分如下：
 - en: Building a Keras model using the `Functional API`
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用`Functional API`构建Keras模型
 - en: Adding a `Lambda` layer
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 添加一个`Lambda`层
 - en: Passing more than one tensor to the lambda layer
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 向lambda层传递多个张量
 - en: Saving and loading a model with a lambda layer
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 保存和加载带有lambda层的模型
 - en: Solving the SystemError while loading a model with a lambda layer
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 解决加载带有lambda层的模型时的SystemError
 - en: Bring this project to life
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 让这个项目成为现实
 - en: '[RUN ON GRADIENT](https://www.paperspace.com/account/signup)'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '[在Gradient上运行](https://www.paperspace.com/account/signup)'
 - en: '**Building a Keras Model Using the `Functional API`**'
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**使用`Functional API`构建Keras模型**'
 - en: 'There are three different APIs which can be used to build a model in Keras:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Keras中可以使用三种不同的API来构建模型：
 - en: Sequential API
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 顺序API
 - en: Functional API
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 功能API
 - en: Model Subclassing API
+  id: totrans-25
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 模型子类化API
 - en: You can find more information about each of these in [this post](https://www.pyimagesearch.com/2019/10/28/3-ways-to-create-a-keras-model-with-tensorflow-2-0-sequential-functional-and-model-subclassing),
     but in this tutorial we'll focus on using the Keras `Functional API` for building
     a custom model. Since we want to focus on our architecture, we'll just use a simple
     problem example and build a model which recognizes images in the MNIST dataset.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在[this post](https://www.pyimagesearch.com/2019/10/28/3-ways-to-create-a-keras-model-with-tensorflow-2-0-sequential-functional-and-model-subclassing)中找到有关这些内容的更多信息，但在本教程中我们将专注于使用Keras
+    `Functional API`构建自定义模型。由于我们希望专注于架构，我们将使用一个简单的问题示例来构建一个识别MNIST数据集图像的模型。
 - en: To build a model in Keras you stack layers on top of one another. These layers
     are available in the `keras.layers` module (imported below). The module name is
     prepended by `tensorflow` because we use TensorFlow as a backend for Keras.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Keras中构建模型时，你需要将层一个接一个地堆叠。这些层在`keras.layers`模块中可用（如下所示）。模块名称以`tensorflow`为前缀，因为我们使用TensorFlow作为Keras的后端。
 - en: '[PRE0]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The first layer to create is the `Input` layer. This is created using the `tensorflow.keras.layers.Input()`
     class. One of the necessary arguments to be passed to the constructor of this
     class is the `shape` argument which specifies the shape of each sample in the
@@ -126,140 +188,211 @@
     is thus assigned a tuple with one value (shown below). The value is 784 because
     the size of each image in the MNIST dataset is 28 x 28 = 784\. An optional `name` argument
     specifies the name of that layer.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建的第一层是`Input`层。这是使用`tensorflow.keras.layers.Input()`类创建的。这个类的构造函数必须传递的一个必要参数是`shape`参数，它指定了将用于训练的数据中每个样本的形状。在本教程中，我们将从密集层开始，因此输入应为1-D向量。`shape`参数因此被赋值为一个包含一个值的元组（如下所示）。这个值是784，因为MNIST数据集中每个图像的大小是28
+    x 28 = 784。一个可选的`name`参数指定了该层的名称。
 - en: '[PRE1]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The next layer is a dense layer created using the `Dense` class according to
     the code below. It accepts an argument named `units` to specify the number of
     neurons in this layer. Note how this layer is connected to the input layer by
     specifying the name of that layer in parentheses. This is because a layer instance
     in the functional API is callable on a tensor, and also returns a tensor.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一层是使用`Dense`类创建的密集层，如下代码所示。它接受一个名为`units`的参数来指定这一层中的神经元数量。请注意这一层是通过在括号中指定该层的名称来连接到输入层的。这是因为功能API中的层实例是可以调用在张量上的，并且也返回一个张量。
 - en: '[PRE2]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Following the dense layer, an activation layer is created using the `ReLU` class
     according to the next line.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在密集层之后，根据下一行的代码，使用`ReLU`类创建了一个激活层。
 - en: '[PRE3]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Another couple of dense-ReLu layers are added according to the following lines.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据以下几行代码，添加了另几个密集-ReLu层。
 - en: '[PRE4]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: The next line adds the last layer to the network architecture according to the
     number of classes in the MNIST dataset. Because the MNIST dataset includes 10
     classes (one for each number), the number of units used in this layer is 10.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一行根据MNIST数据集中的类别数量向网络架构中添加了最后一层。由于MNIST数据集包含10个类别（每个数字一个），因此在这一层中使用的单位数量为10。
 - en: '[PRE5]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: To return the score for each class, a `softmax` layer is added after the previous
     dense layer according to the next line.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了返回每个类别的得分，根据下一行的代码，在之前的密集层后添加了一个`softmax`层。
 - en: '[PRE6]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: We've now connected the layers but the model is not yet created. To build a
     model we must now use the `Model` class, as shown below. The first two arguments
     it accepts represent the input and output layers.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在已经连接了层，但模型尚未创建。要构建模型，我们现在必须使用`Model`类，如下所示。它接受的前两个参数代表输入和输出层。
 - en: '[PRE7]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Before loading the dataset and training the model, we have to compile the model
     using the `compile()` method.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 在加载数据集和训练模型之前，我们必须使用`compile()`方法来编译模型。
 - en: '[PRE8]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Using `model.summary()` we can see an overview of the model architecture. The
     input layer accepts a tensor of shape (None, 784) which means that each sample
     must be reshaped into a vector of 784 elements. The output `Softmax` layer returns
     10 numbers, each being the score for that class of the MNIST dataset.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用`model.summary()`我们可以查看模型架构的概述。输入层接受形状为(None, 784)的张量，这意味着每个样本必须被重塑为784个元素的向量。输出`Softmax`层返回10个数字，每个数字是MNIST数据集相应类别的得分。
 - en: '[PRE9]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Now that we've built and compiled the model, let's see how the dataset is prepared.
     First we'll load MNIST from the `keras.datasets` module, got their data type changed
     to `float64` because this makes training the network easier than leaving its values
     in the 0-255 range, and finally reshaped so that each sample is a vector of 784
     elements.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经构建并编译了模型，让我们看看数据集是如何准备的。首先，我们将从`keras.datasets`模块加载MNIST，将数据类型更改为`float64`，因为这比将其值保持在0-255范围内更容易训练网络，最后重新塑形，使每个样本成为784个元素的向量。
 - en: '[PRE10]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Because the used loss function in the `compile()` method is `categorical_crossentropy`,
     the labels of the samples should be on hot encoded according to the next code.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于`compile()`方法中使用的损失函数是`categorical_crossentropy`，样本的标签应根据下一个代码进行热编码。
 - en: '[PRE11]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Finally, the model training starts using the `fit()` method.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，模型训练开始使用 `fit()` 方法。
 - en: '[PRE12]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: At this point, we have created the model architecture using the already existing
     types of layers. The next section discusses using the `Lambda` layer for building
     custom operations.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 到此为止，我们已经使用现有的层类型创建了模型架构。下一节讨论如何使用 `Lambda` 层来构建自定义操作。
 - en: '**Using Lambda Layers**'
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**使用 Lambda 层**'
 - en: Let's say that after the dense layer named `dense_layer_3` we'd like to do some
     sort of operation on the tensor, such as adding the value 2 to each element. How
     can we do that? None of the existing layers does this, so we'll have to build
     a new layer ourselves. Fortunately, the `Lambda` layer exists for precisely that
     purpose. Let's discuss how to use it.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设在名为 `dense_layer_3` 的全连接层之后，我们希望对张量进行某种操作，比如给每个元素加上 2。我们该如何做到这一点呢？现有的层都不提供这种功能，所以我们需要自己构建一个新的层。幸运的是，`Lambda`
+    层正是为了这个目的而存在的。我们来讨论一下如何使用它。
 - en: Start by building the function that will do the operation you want. In this
     case, a function named `custom_layer` is created as follows. It just accepts the
     input tensor(s) and returns another tensor as output. If more than one tensor
     is to be passed to the function, then they will be passed as a list.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先构建将执行所需操作的函数。在这种情况下，创建了一个名为 `custom_layer` 的函数。它只接受输入张量（或张量），并返回另一个张量作为输出。如果需要将多个张量传递给函数，则它们将作为列表传递。
 - en: In this example just a single tensor is fed as input, and 2 is added to each
     element in the input tensor.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个例子中，仅输入一个张量，并且将 2 添加到输入张量中的每个元素上。
 - en: '[PRE13]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: After building the function that defines the operation, next we need to create
     the lambda layer using the `Lambda` class as defined in the next line. In this
     case, only one tensor is fed to the `custom_layer` function because the lambda
     layer is callable on the single tensor returned by the dense layer named `dense_layer_3`.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 在构建定义操作的函数之后，我们接下来需要使用 `Lambda` 类来创建 lambda 层，如下行所示。在这种情况下，只有一个张量被传递给 `custom_layer`
+    函数，因为 lambda 层是在名为 `dense_layer_3` 的全连接层返回的单个张量上可调用的。
 - en: '[PRE14]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: Here is the code that builds the full network after using the lambda layer.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是使用 lambda 层后构建完整网络的代码。
 - en: '[PRE15]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: In order to see the tensor before and after being fed to the lambda layer we'll
     create two new models in addition to the previous one. We'll call these `before_lambda_model` and `after_lambda_model`.
     Both models use the input layer as their inputs, but the output layer differs.
@@ -267,162 +400,247 @@
     the layer that exists exactly before the lambda layer. The output of the `after_lambda_model`
     model is the output from the lambda layer named `lambda_layer`. By doing this,
     we can see the input before and the output after applying the lambda layer.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了查看张量在被传递给 lambda 层之前和之后的情况，我们将创建两个新的模型，除了之前的模型。我们将这两个模型称为 `before_lambda_model`
+    和 `after_lambda_model`。这两个模型都使用输入层作为它们的输入，但输出层有所不同。`before_lambda_model` 模型返回的是
+    `dense_layer_3` 的输出，即位于 lambda 层之前的层的输出。`after_lambda_model` 模型的输出是名为 `lambda_layer`
+    的 lambda 层的输出。通过这样做，我们可以看到应用 lambda 层前后的输入和输出。
 - en: '[PRE16]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: The complete code that builds and trains the entire network is listed below.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 构建和训练整个网络的完整代码如下所示。
 - en: '[PRE17]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: Note that you do not have to compile or train the 2 newly created models because
     their layers are actually reused from the main model that exists in the `model` variable.
     After that model is trained, we can use the `predict()` method for returning the
     outputs of the `before_lambda_model` and `after_lambda_model` models to see how
     the result of the lambda layer.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，你不需要编译或训练这两个新创建的模型，因为它们的层实际上是从存在于 `model` 变量中的主模型中重用的。在训练好该模型之后，我们可以使用 `predict()`
+    方法来返回 `before_lambda_model` 和 `after_lambda_model` 模型的输出，以查看 lambda 层的结果。
 - en: '[PRE18]'
+  id: totrans-68
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: The next code just prints the outputs of the first 2 samples. As you can see,
     each element returned from the `m2`  array is actually the result of `m1` after
     adding 2\. This is exactly the operation we applied in our custom lambda layer.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来的代码仅打印前两个样本的输出。正如你所见，从 `m2` 数组中返回的每个元素实际上是 `m1` 在加上 2 之后的结果。这正是我们在自定义 lambda
+    层中应用的操作。
 - en: '[PRE19]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: In this section the lambda layer was used to do an operation over a single input
     tensor. In the next section we see how we can pass two input tensors to this layer.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本节中，lambda 层用于对单个输入张量执行操作。在下一节中，我们将看到如何将两个输入张量传递给该层。
 - en: '**Passing More Than One Tensor to the Lambda Layer**'
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**将多个张量传递给 Lambda 层**'
 - en: Assume that we want to do an operation that depends on the two layers named
     `dense_layer_3` and `relu_layer_3`. In this case we have to call the lambda layer
     while passing two tensors. This is simply done by creating a list with all of
     these tensors, as given in the next line.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们要执行一个依赖于两个层`dense_layer_3`和`relu_layer_3`的操作。在这种情况下，我们必须在传递两个张量的同时调用 lambda
+    层。这可以通过创建一个包含所有这些张量的列表来完成，如下一行所示。
 - en: '[PRE20]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: This list is passed to the `custom_layer()` function and we can fetch the individual
     layers simply according to the next code. It just adds these two layers together.
     There is actually layer in Keras named `Add` that can be used for adding two layers
     or more, but we are just presenting how you could do it yourself in case there's
     another operation not supported by Keras.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个列表被传递给`custom_layer()`函数，我们可以根据下一段代码简单地提取各个层。它只是将这两个层加在一起。实际上，Keras 中有一个名为`Add`的层可以用来添加两个或更多层，但我们只是展示了如何在
+    Keras 不支持其他操作的情况下自己实现它。
 - en: '[PRE21]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: 'The next code builds three models: two for capturing the outputs from the `dense_layer_3`
     and `activ_layer_3` passed to the lambda layer, and another one for capturing
     the output from the lambda layer itself.'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一段代码构建了三个模型：两个用于捕捉从`dense_layer_3`和`activ_layer_3`传递到 lambda 层的输出，另一个用于捕捉 lambda
+    层本身的输出。
 - en: '[PRE22]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: To see the outputs from the `dense_layer_3`, `activ_layer_3`, and `lambda_layer` layers,
     the next code predicts their outputs and prints it.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了查看`dense_layer_3`、`activ_layer_3`和`lambda_layer`层的输出，下一段代码会预测它们的输出并打印出来。
 - en: '[PRE23]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: Using the lambda layer is now clear. The next section discusses how you can
     save and load a model that uses a lambda layer.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 lambda 层现在已经很清楚了。下一节讨论了如何保存和加载使用 lambda 层的模型。
 - en: '**Saving and Loading a Model With a Lambda Layer**'
+  id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**保存和加载带有 Lambda 层的模型**'
 - en: In order to save a model (whether it uses a lambda layer or not) the `save()` method
     is used. Assuming we are just interested in saving the main model, here's the
     line that saves it.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了保存模型（无论是否使用 lambda 层），使用`save()`方法。假设我们只对保存主模型感兴趣，下面是保存它的代码行。
 - en: '[PRE24]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: We can also load the saved model using the `load_model()` method, as in the
     next line.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以使用`load_model()`方法加载保存的模型，如下一行所示。
 - en: '[PRE25]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: 'Hopefully, the model could be successfully loaded. Unfortunately there are
     some issues in Keras that may result in the `SystemError: unknown opcode` while
     loading a model with a lambda layer. It might be due to building the model using
     a Python version and using it in another version. We are going to discuss the
     solution in the next section.'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '希望模型能够成功加载。不幸的是，Keras 中存在一些问题，可能会导致在加载带有 lambda 层的模型时出现`SystemError: unknown
+    opcode`。这可能是由于使用一个 Python 版本构建模型并在另一个版本中使用它。我们将在下一节中讨论解决方案。'
 - en: '**Solving The SystemError While Loading a Model with a Lambda Layer**'
+  id: totrans-88
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**解决带有 Lambda 层的模型加载时的 SystemError**'
 - en: To solve this issue we're not going to save the model in the way discussed above.
     Instead, we'll save the model weights using the `save_weights()` method.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了解决这个问题，我们不会使用上述讨论的方法保存模型。相反，我们将使用`save_weights()`方法保存模型权重。
 - en: Now we've only saved the weights. What about the model architecture? The model
     architecture will be recreated using the code. Why not save the model architecture
     as a JSON file and then load it again? The reason is that the error persists after
     loading the architecture.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们只保存了权重。模型架构呢？模型架构将使用代码重新创建。为什么不将模型架构保存为 JSON 文件，然后再加载它？原因是加载架构后错误仍然存在。
 - en: In summary, the trained model weights will be saved, the model architecture
     will be reproduced using the code, and finally the weights will be loaded into
     that architecture.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结来说，训练好的模型权重将被保存，模型架构将使用代码再现，最后权重将被加载到那个架构中。
 - en: The weights of the model can be saved using the next line.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型的权重可以使用下一行代码保存。
 - en: '[PRE26]'
+  id: totrans-93
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE26]'
 - en: Here's the code that reproduces the model architecture. The `model` will not
     be trained, but the saved weights will be assigned to it again.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的代码再现了模型架构。`model`将不会被训练，但保存的权重将被重新分配给它。
 - en: '[PRE27]'
+  id: totrans-95
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE27]'
 - en: Here's how the saved weights are loaded using the `load_weights()` method, and
     assigned to the reproduced architecture.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是如何使用`load_weights()`方法加载保存的权重，并将其分配给再现的架构。
 - en: '[PRE28]'
+  id: totrans-97
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE28]'
 - en: '**Conclusion**'
+  id: totrans-98
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**结论**'
 - en: This tutorial discussed using the `Lambda` layer to create custom layers which
     do operations not supported by the predefined layers in Keras. The constructor
     of the `Lambda` class accepts a function that specifies how the layer works, and
     the function accepts the tensor(s) that the layer is called on. Inside the function,
     you can perform whatever operations you want and then return the modified tensors.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程讨论了如何使用`Lambda`层创建自定义层，以执行Keras中预定义层不支持的操作。`Lambda`类的构造函数接受一个函数，该函数指定了层的工作方式，并接受层调用时的张量。在函数内部，你可以执行任何操作，然后返回修改后的张量。
 - en: Although Keras has an issue with loading models that use the lambda layer, we
     also saw how to solve this simply by saving the trained model weights, reproducing
     the model architecture using code, and loading the weights into this architecture.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管Keras在加载使用lambda层的模型时存在问题，但我们也看到如何通过保存训练模型权重、使用代码重现模型架构，并将权重加载到该架构中来简单解决此问题。
 - en: '**Bio: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** received his B.Sc.
     degree with excellent with honors in information technology from the Faculty of
     Computers and Information (FCI), Menoufia University, Egypt, in July 2015\. For
@@ -431,52 +649,78 @@
     assistant and a researcher in his faculty. His current research interests include
     deep learning, machine learning, artificial intelligence, digital signal processing,
     and computer vision.'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** 于2015年7月获得埃及梅努非亚大学计算机与信息学院（FCI）信息技术学士学位，并以优异的成绩排名第一。由于在学院排名第一，他被推荐于2015年在埃及的某所学院担任助教，随后于2016年继续担任助教及研究员。他目前的研究兴趣包括深度学习、机器学习、人工智能、数字信号处理和计算机视觉。'
 - en: '[Original](https://blog.paperspace.com/working-with-the-lambda-layer-in-keras/).
     Reposted with permission.'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://blog.paperspace.com/working-with-the-lambda-layer-in-keras/)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容:**'
 - en: '[From Y=X to Building a Complete Artificial Neural Network](/2020/11/building-complete-artificial-neural-network.html)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从Y=X到构建完整的人工神经网络](/2020/11/building-complete-artificial-neural-network.html)'
 - en: '[Build PyTorch Models Easily Using torchlayers](/2020/04/pytorch-models-torchlayers.html)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[轻松使用torchlayers构建PyTorch模型](/2020/04/pytorch-models-torchlayers.html)'
 - en: '[How to Create Custom Real-time Plots in Deep Learning](/2020/12/create-custom-real-time-plots-deep-learning.html)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在深度学习中创建自定义实时图表](/2020/12/create-custom-real-time-plots-deep-learning.html)'
 - en: More On This Topic
+  id: totrans-107
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Python Lambda Functions, Explained](https://www.kdnuggets.com/2023/01/python-lambda-functions-explained.html)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python Lambda 函数详解](https://www.kdnuggets.com/2023/01/python-lambda-functions-explained.html)'
 - en: '[The Power of a Semantic Layer: A Data Engineer''s Guide](https://www.kdnuggets.com/2023/10/cube-power-of-a-semantic-layer-a-data-engineers-guide)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[语义层的力量：数据工程师指南](https://www.kdnuggets.com/2023/10/cube-power-of-a-semantic-layer-a-data-engineers-guide)'
 - en: '[Semantic Layer: The Backbone of AI-powered Data Experiences](https://www.kdnuggets.com/2023/10/cube-semantic-layer-backbone-aipowered-data-experiences)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[语义层：AI驱动数据体验的骨干](https://www.kdnuggets.com/2023/10/cube-semantic-layer-backbone-aipowered-data-experiences)'
 - en: '[6 Reasons Why a Universal Semantic Layer is Beneficial to Your Data Stack](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[6个理由说明通用语义层对你的数据栈有益](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)'
 - en: '[Working with Big Data: Tools and Techniques](https://www.kdnuggets.com/working-with-big-data-tools-and-techniques)'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[大数据处理：工具与技术](https://www.kdnuggets.com/working-with-big-data-tools-and-techniques)'
 - en: '[A Guide to Working with SQLite Databases in Python](https://www.kdnuggets.com/a-guide-to-working-with-sqlite-databases-in-python)'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python中SQLite数据库使用指南](https://www.kdnuggets.com/a-guide-to-working-with-sqlite-databases-in-python)'
