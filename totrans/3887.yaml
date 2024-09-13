@@ -1,281 +1,414 @@
 - en: Making Python Programs Blazingly Fast
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 让 Python 程序飞快
 - en: 原文：[https://www.kdnuggets.com/2020/09/making-python-programs-blazingly-fast.html](https://www.kdnuggets.com/2020/09/making-python-programs-blazingly-fast.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/09/making-python-programs-blazingly-fast.html](https://www.kdnuggets.com/2020/09/making-python-programs-blazingly-fast.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Martin Heinz](https://www.linkedin.com/in/heinz-martin/), DevOps Engineer
     at IBM**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Martin Heinz](https://www.linkedin.com/in/heinz-martin/)，IBM 的 DevOps
+    工程师**'
 - en: '*Python* haters always say, that one of the reasons they don’t want to use
     it, is that it’s *slow*. Well, whether specific program — regardless of the programming
     language used — is fast or slow is very much dependent on the developer who wrote
     it and their skill and ability to write *optimized* and *fast* programs.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Python* 反对者总是说，他们不愿意使用它的原因之一是它*慢*。无论具体程序——不论使用的编程语言如何——是快还是慢，都很大程度上取决于编写它的开发者及其编写*优化*和*快速*程序的技能和能力。'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你在 IT 领域的组织'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: So, let’s prove some people wrong and let’s see how we can improve performance
     of our *Python* programs and make them really fast!
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，让我们证明一些人错了，看看如何提升我们的*Python* 程序的性能，让它们真的很快！
 - en: '![Figure](../Images/8e2b22b053bf334d3c9ae781110804fe.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/8e2b22b053bf334d3c9ae781110804fe.png)'
 - en: by [@veri_ivanova](https://unsplash.com/@veri_ivanova) on unsplash
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 由 [@veri_ivanova](https://unsplash.com/@veri_ivanova) 在 unsplash 上提供
 - en: Timing and Profiling
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 计时和分析
 - en: 'Before we start optimizing anything, we first need to find out which parts
     of our code actually slow down the whole program. Sometimes the bottleneck of
     the program might be obvious, but in case you don’t know where it is, then here
     are options you have for finding out:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们开始优化之前，我们首先需要找出代码中哪些部分实际上拖慢了整个程序。有时程序的瓶颈可能很明显，但如果你不知道在哪里，那这里有一些找出瓶颈的选项：
 - en: '*Note: This is the program I will be using for demonstration purposes, it computes *`*e*`* to
     power of *`*X*`* (taken from Python docs):*'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '*注意：这是我用于演示的程序，它计算*`*e*`*的*`*X*`*次方（取自 Python 文档）：*'
 - en: The Laziest “Profiling”
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最懒的“分析”
 - en: 'First off, the simplest and honestly very lazy solution — Unix `time` command:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，最简单而且坦白说非常懒的解决方案——Unix `time` 命令：
 - en: This could work if you just want to time your whole program, which is usually
     not enough…
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你只是想对整个程序进行计时，这可能会有效，但通常还不够……
 - en: The Most Detailed Profiling
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最详细的分析
 - en: 'On the other end of the spectrum is `cProfile`, which will give you *too much* information:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一端的选择是`cProfile`，它会给你*过多*的信息：
 - en: Here, we ran the testing script with `cProfile` module and `time` argument,
     so that lines are ordered by internal time ( `cumtime`). This gives us *a lot* of
     information, the lines you can see above are about 10% of the actual output. From
     this, we can see that `exp` function is the culprit ( *surprise, surprise*) and
     now we can get little more specific with timing and profiling...
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们用`cProfile`模块和`time`参数运行了测试脚本，以便按内部时间（`cumtime`）排序行。这给我们提供了*大量*的信息，上面显示的行仅是实际输出的约
+    10%。由此，我们可以看到`exp`函数是罪魁祸首（*惊喜，惊喜*），现在我们可以对计时和分析做得更具体一些……
 - en: Timing Specific Functions
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 计时特定函数
 - en: 'Now that we know where to direct our attention, we might want to time the slow
     function, without measuring the rest of the code. For that we can use simple decorator:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们知道了应该把注意力集中在哪里，我们可能想要对慢函数进行计时，而不测量其余代码。为此，我们可以使用简单的装饰器：
 - en: 'This decorator can be then applied to function under test like so:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个装饰器可以像这样应用于测试函数：
 - en: 'This gives us output like this:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这会给我们输出如下：
 - en: One thing to consider is *what kind* of time we actually (want to) measure.
     Time package provides `time.perf_counter` and `time.process_time`. The difference
     here is that `perf_counter` returns absolute value, which includes time when your
     Python program process is not running, therefore it might be impacted by machine
     load. On the other hand `process_time` returns only *user time* (excluding *system
     time*), which is only the time of your process.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个需要考虑的因素是*我们实际（想要）测量*的时间种类。时间包提供了`time.perf_counter`和`time.process_time`。它们的区别在于，`perf_counter`返回的是绝对值，包括你的
+    Python 程序处理过程没有运行的时间，因此可能会受到机器负载的影响。另一方面，`process_time`只返回*用户时间*（排除*系统时间*），这只是你进程的时间。
 - en: Making It Faster
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 提升速度
 - en: Now, for the fun part. Let’s make your Python programs run faster. I’m (mostly)
     not going to show you some hacks, tricks and code snippets that will magically
     solve your performance issues. This is more about general ideas and strategies,
     which when used, can make a huge impact on performance, in some cases up to 30%
     speed-up.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，进入有趣的部分。让我们来提高你的 Python 程序的运行速度。我（大部分情况下）不会给你展示一些技巧、窍门或代码片段，这些东西可以神奇地解决你的性能问题。这更多的是关于一些通用的想法和策略，运用这些策略可以对性能产生巨大的影响，在某些情况下甚至可以提高30%的速度。
 - en: Use Built-in Data Types
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用内置数据类型
 - en: This one is pretty obvious. Built-in data types are very fast, especially in
     comparison to our custom types like trees or linked lists. That’s mainly because
     the built-ins are implemented in *C*, which we can’t really match in speed when
     coding in Python.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一点很明显。内置数据类型非常快速，尤其是与我们的自定义类型（如树或链表）相比。这主要是因为内置类型是用*C*实现的，而在用 Python 编码时，我们无法匹敌这种速度。
 - en: Caching/Memoization with lru_cache
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 lru_cache 进行缓存/记忆化
 - en: 'I have already shown this one in a previous blog post [here](https://martinheinz.dev/blog/4),
     but I think it’s worth repeating it with simple example:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在之前的博客文章中已经展示过这个[这里](https://martinheinz.dev/blog/4)，但我认为用一个简单的例子重复这个例子是值得的：
 - en: The function above simulates heavy computation using `time.sleep`. When called
     first time with parameter `1`, it waits for 2 seconds and only then returns the
     result. When called again, the result is already cached so it skips the body of
     the function and returns the result immediately. For more *real life* example
     see previous blog posts [here](https://martinheinz.dev/blog/4).
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的函数使用`time.sleep`模拟了重计算。当第一次调用参数`1`时，它会等待2秒钟然后返回结果。再次调用时，结果已经被缓存，因此跳过函数体并立即返回结果。有关更多*现实生活*中的示例，请参阅之前的博客文章[这里](https://martinheinz.dev/blog/4)。
 - en: Use Local Variables
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用局部变量
 - en: This has to do with the speed of lookup of variables in each scope. I’m writing *each
     scope*, because it’s not just about using local vs. global variables. There’s
     actually a difference in speed of lookup even between — let’s say — local variable
     in function (fastest), class-level attribute (e.g. `self.name` - slower) and global
     for example imported function like `time.time` (slowest).
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 这与每个作用域中变量查找的速度有关。我说*每个作用域*，因为这不仅仅是关于使用局部变量还是全局变量。实际上，即使是在——比如说——函数中的局部变量（最快），类级别属性（例如`self.name`
+    - 较慢）和全局变量，例如导入的函数`time.time`（最慢）之间也存在查找速度的差异。
 - en: 'You can improve performance, by using seemingly unnecessary (straight-up useless)
     assignments like this:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过使用看似不必要（完全无用）的赋值来提升性能，例如：
 - en: Use Functions
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用函数
 - en: 'This might seem counter-intuitive, as calling function will put more stuff
     onto the stack and create overhead from function returns, but it relates to the
     previous point. If you just put your whole code into one file without putting
     it into function, it will be much slower because of global variables. Therefore
     you can speed up your code just by wrapping whole code in `main` function and
     calling it once, like so:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可能看起来有些违反直觉，因为调用函数会在栈上增加更多内容并产生函数返回的开销，但这与之前的观点有关。如果你只是把整个代码放到一个文件中而不把它放入函数中，它会因为全局变量而变得更慢。因此，你可以通过将整个代码封装到`main`函数中并只调用一次来加快代码速度，如下所示：
 - en: Don’t Access Attributes
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 不要访问属性
 - en: Another thing that might slow down your programs is *dot operator* (`.`) which
     is used when accessing object attributes. This operator triggers dictionary lookup
     using `__getattribute__`, which creates extra overhead in your code. So, how can
     we actually avoid (limit) using it?
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个可能会减慢你程序的因素是*点运算符*(`.`)，它在访问对象属性时使用。这个运算符会触发通过`__getattribute__`的字典查找，这会在你的代码中产生额外的开销。那么，我们如何实际避免（限制）使用它呢？
 - en: Beware of Strings
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 注意字符串
 - en: 'Operations on strings can get quite slow when ran in loop using for example *modulus* (`%s`)
     or `.format()`. What better options do we have? Based on recent [tweet from Raymond
     Hettinger](https://twitter.com/raymondh/status/1205969258800275456), the only
     thing we should be using is *f-string*, it''s most readable, concise AND the fastest
     method. So, based on that tweet, this is the list of methods you can use - fastest
     to slowest:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 对字符串进行操作时，当使用例如*模运算*(`%s`)或`.format()`在循环中运行时，可能会变得相当慢。我们有什么更好的选择？根据雷蒙德·赫廷格最近的[tweet](https://twitter.com/raymondh/status/1205969258800275456)，我们应该使用的是*f-string*，它是最可读、简洁且最快的方法。因此，根据那个
+    tweet，这里是你可以使用的方法列表 - 从最快到最慢：
 - en: Generators are not inherently faster as they were made to allow for lazy computation,
     which saves memory rather than time. However, the saved memory can be cause for
     your program to actually run faster. How? Well, if you have a large dataset and
     you don’t use generators (iterators), then the data might overflow CPUs *L1 cache*,
     which will slow down lookup of values in memory significantly.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成器本身并不比其他方式快，它们是为了实现延迟计算而设计的，这样能节省内存而不是时间。然而，节省的内存可以使你的程序实际运行得更快。如何做到这一点？如果你有一个大型数据集而没有使用生成器（迭代器），那么数据可能会溢出
+    CPU 的*L1 缓存*，这将显著降低内存中的值查找速度。
 - en: When it comes to performance, it’s very import that CPU can save all the data
     it’s working on, as close as possible, which is in the cache. You can watch [Raymond
     Hettingers talk](https://www.youtube.com/watch?v=OSGv2VnC0go&t=8m17s), where he
     mentions these issues.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 在性能方面，CPU 能够将其处理的数据尽可能靠近地存储在缓存中是非常重要的。你可以观看[雷蒙德·赫廷格的讲座](https://www.youtube.com/watch?v=OSGv2VnC0go&t=8m17s)，他提到了这些问题。
 - en: Conclusion
+  id: totrans-46
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: The first rule of optimization is to *not do it*. But, if you really have to,
     then I hope these few tips help you with that. However, be mindful when optimizing
     your code as it might end up making your code hard to read and therefore hard
     to maintain, which might outweigh benefits of optimization.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 优化的第一个原则是*不要做*。但是，如果你真的需要这样做，那么希望这些小提示能对你有所帮助。不过，在优化代码时要小心，因为这可能会使代码难以阅读，从而难以维护，这可能会抵消优化带来的好处。
 - en: '*Note: This was originally posted at *[*martinheinz.dev*](https://martinheinz.dev/blog/13)'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '*注意：这篇文章最初发布在*[*martinheinz.dev*](https://martinheinz.dev/blog/13)'
 - en: '**Bio: [Martin Heinz](https://www.linkedin.com/in/heinz-martin/)** is a DevOps
     Engineer at IBM. A software developer, Martin is passionate about computer security,
     privacy and cryptography, focused on cloud and serverless computing, and is always
     ready to take on a new challenge.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[马丁·海因茨](https://www.linkedin.com/in/heinz-martin/)** 是 IBM 的 DevOps 工程师。作为一名软件开发者，马丁对计算机安全、隐私和密码学充满热情，专注于云计算和无服务器计算，并时刻准备接受新的挑战。'
 - en: '[Original](https://towardsdatascience.com/making-python-programs-blazingly-fast-c1cd79bd1b32).
     Reposted with permission.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/making-python-programs-blazingly-fast-c1cd79bd1b32)。经允许转载。'
 - en: '**Related:**'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Automating Every Aspect of Your Python Project](/2020/09/automating-every-aspect-python-project.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动化你 Python 项目的每一个方面](/2020/09/automating-every-aspect-python-project.html)'
 - en: '[Free From MIT: Intro to Computer Science and Programming in Python](/2020/09/free-mit-intro-computer-science-programming-python.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MIT 免费课程：Python 计算机科学和编程导论](/2020/09/free-mit-intro-computer-science-programming-python.html)'
 - en: '[Statistical and Visual Exploratory Data Analysis with One Line of Code](/2020/09/statistical-visual-exploratory-data-analysis-one-line-code.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用一行代码进行统计和视觉探索数据分析](/2020/09/statistical-visual-exploratory-data-analysis-one-line-code.html)'
 - en: More On This Topic
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Thomas Miller, PhD, explores Northwestern University’s Online…](https://www.kdnuggets.com/2024/05/nwu/thomas-miller-phd-explores-northwestern-universitys-online-graduate-programs-in-data-science)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[托马斯·米勒博士探索西北大学的在线…](https://www.kdnuggets.com/2024/05/nwu/thomas-miller-phd-explores-northwestern-universitys-online-graduate-programs-in-data-science)'
 - en: '[Step up your Python game with Fast Python for Data Science!](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过《快速 Python 数据科学》提升你的 Python 技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)'
 - en: '[How to Make Python Code Run Incredibly Fast](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使 Python 代码运行得极快](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)'
 - en: '[Making Predictions: A Beginner''s Guide to Linear Regression in Python](https://www.kdnuggets.com/2023/06/making-predictions-beginner-guide-linear-regression-python.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[预测：Python 中线性回归的初学者指南](https://www.kdnuggets.com/2023/06/making-predictions-beginner-guide-linear-regression-python.html)'
 - en: '[How Fast Can BERT Go With Sparsity?](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[BERT在稀疏性下能有多快？](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
 - en: '[Speed up Machine Learning with Fast Kriging (FKR)](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[加速机器学习与快速克里金（FKR）](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)'
