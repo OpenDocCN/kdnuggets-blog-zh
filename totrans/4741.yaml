@@ -1,428 +1,634 @@
 - en: Four Techniques for Outlier Detection
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 四种异常值检测技术
 - en: 原文：[https://www.kdnuggets.com/2018/12/four-techniques-outlier-detection.html](https://www.kdnuggets.com/2018/12/four-techniques-outlier-detection.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/12/four-techniques-outlier-detection.html](https://www.kdnuggets.com/2018/12/four-techniques-outlier-detection.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By Maarit Widmann, Moritz Heine, Rosaria Silipo, Data Scientists at [KNIME](http://www.knime.com)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Maarit Widmann, Moritz Heine, Rosaria Silipo，[KNIME](http://www.knime.com)的数据科学家**'
 - en: Anomalies, or outliers, can be a serious issue when training machine learning
     algorithms or applying statistical techniques. They are often the result of errors
     in measurements or exceptional system conditions and therefore do not describe
     the common functioning of the underlying system. Indeed, the best practice is
     to implement an outlier removal phase before proceeding with further analysis.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 异常值或离群值在训练机器学习算法或应用统计技术时可能是一个严重的问题。它们通常是测量误差或特殊系统条件的结果，因此不能描述基础系统的常见功能。实际上，最佳实践是在进行进一步分析之前实施异常值去除阶段。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前3个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: But hold on there! In some cases, outliers can give us information about localized
     anomalies in the whole system; so the detection of outliers is a valuable process
     because of the additional information they can provide about your dataset.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 但等一下！在某些情况下，异常值可以为我们提供关于整个系统的局部异常的信息；因此，异常值检测是一个有价值的过程，因为它们可以提供关于数据集的额外信息。
 - en: There are many techniques to detect and optionally remove outliers from a dataset.
     In this blog post, we show an implementation in [KNIME Analytics Platform](http://www.knime.com)
     of four of the most frequently used - traditional and novel - techniques for outlier
     detection.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 有许多技术可以检测并选择性地去除数据集中的异常值。在这篇博文中，我们展示了[KNIME Analytics Platform](http://www.knime.com)中四种最常用的
+    - 传统和新型 - 异常值检测技术的实现。
 - en: The Dataset and the Outlier Detection Problem
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据集和异常值检测问题
 - en: The dataset we used to test and compare the proposed outlier detection techniques
     is the well known [airline dataset](http://stat-computing.org/dataexpo/2009/the-data.html).
     The dataset includes information about US domestic flights between 2007 and 2012,
     such as departure time, arrival time, origin airport, destination airport, time
     on air, delay at departure, delay on arrival, flight number, vessel number, carrier,
     and more. Some of those columns could contain anomalies, i.e. outliers.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们用于测试和比较所提议的异常值检测技术的数据集是著名的[航空公司数据集](http://stat-computing.org/dataexpo/2009/the-data.html)。该数据集包括2007年至2012年间美国国内航班的信息，如起飞时间、到达时间、起始机场、目的地机场、空中时间、起飞延误、到达延误、航班号、船只号、承运人等。这些列中有些可能包含异常值，即离群值。
 - en: From the original dataset we extracted a random sample of 1500 flights departing
     from Chicago O’Hare airport (ORD) in 2007 and 2008.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 从原始数据集中，我们提取了1500个从芝加哥奥黑尔机场（ORD）出发的航班样本，数据来自2007年和2008年。
 - en: In order to show how the selected outlier detection techniques work, we focused
     on finding outliers in terms of average arrival delays at airports, calculated
     on all flights landing at a given airport. We are looking for those airports that
     show unusual average arrival delay times.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了展示所选的异常值检测技术的工作原理，我们集中于在机场的平均到达延误时间方面寻找异常值，这些时间是基于所有降落在特定机场的航班计算得出的。我们寻找那些显示出异常平均到达延误时间的机场。
 - en: Four Outlier Detection Techniques
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 四种异常值检测技术
 - en: '**Numeric Outlier**'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数值异常值**'
 - en: This is the simplest, nonparametric outlier detection method in a one dimensional
     feature space. Here outliers are calculated by means of the *IQR* (InterQuartile
     Range).
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是在一维特征空间中最简单的非参数异常值检测方法。这里，异常值是通过*IQR*（四分位距）来计算的。
 - en: 'The first and the third [quartile](https://en.wikipedia.org/wiki/Quartile)
     (*Q1, Q3*) are calculated. An outlier is then a data point x[i] that lies outside
     the interquartile range. That is:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算第一个和第三个[四分位数](https://en.wikipedia.org/wiki/Quartile)（*Q1, Q3*）。然后，异常值是位于四分位距之外的数据点x[i]。即：
 - en: '![Equation](../Images/62c7680149465288c427662acf53d552.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/62c7680149465288c427662acf53d552.png)'
 - en: Using the interquartile multiplier value *k*=1.5, the range limits are the typical
     upper and lower whiskers of a box plot.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用四分位数乘数值*k*=1.5，范围限制是箱形图的典型上须和下须。
 - en: This technique was implemented using the Numeric Outliers node in a workflow
     built in  [KNIME Analytics Platform](http://www.knime.com) (Figure 1).
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 该技术通过在[KNIME Analytics Platform](http://www.knime.com)中构建的工作流中的Numeric Outliers节点实现（图1）。
 - en: '**Z-Score**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Z-Score**'
 - en: Z-score is a parametric outlier detection method in a one or low dimensional
     feature space.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: Z-score是一种在一维或低维特征空间中的参数化异常值检测方法。
 - en: 'This technique assumes a Gaussian distribution of the data. The outliers are
     the data points that are in the tails of the distribution and therefore far from
     the mean. How far depends on a set threshold z[thr] for the normalized data points
     z[i] calculated with the formula:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 该技术假设数据服从高斯分布。异常值是分布尾部的数据点，因此远离均值。距离的远近取决于为标准化数据点z[i]设置的阈值z[thr]，计算公式如下：
 - en: '![Equation](../Images/31c99a6ea8539fd5c01ec0d6939d396c.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/31c99a6ea8539fd5c01ec0d6939d396c.png)'
 - en: where x[i] is a data point, μ is the mean of all x[i] and is the standard deviation
     of all x[i].
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中x[i]是数据点，μ是所有x[i]的均值， 是所有x[i]的标准差。
 - en: 'An outlier is then a normalized data point which has an absolute value greater
     than z[thr]. That is:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 异常值是一个标准化的数据点，其绝对值大于z[thr]。即：
 - en: '![Equation](../Images/d81e94630a05d13443fada38034871bd.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![方程](../Images/d81e94630a05d13443fada38034871bd.png)'
 - en: Commonly used z[thr] values are 2.5, 3.0 and 3.5.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 常用的z[thr]值为2.5、3.0和3.5。
 - en: This technique was implemented using the Row Filter node in a KNIME workflow
     (Figure 1).
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 该技术通过在KNIME工作流中的Row Filter节点实现（图1）。
 - en: '**DBSCAN**'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**DBSCAN**'
 - en: This technique is based on the [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN)
     clustering method. DBSCAN is a non-parametric, density based outlier detection
     method in a one or multi dimensional feature space.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 该技术基于[DBSCAN](https://en.wikipedia.org/wiki/DBSCAN)聚类方法。DBSCAN是一种在一维或多维特征空间中基于密度的非参数异常值检测方法。
 - en: In the DBSCAN clustering technique, all data points are defined either as *Core
     Points*, *Border Points* or *Noise Points*.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在DBSCAN聚类技术中，所有数据点被定义为*核心点*、*边界点*或*噪声点*。
 - en: '***Core Points*** are data points that have at least *MinPts* neighboring data
     points within a distance ℇ.'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***核心点***是距离ℇ内至少有*MinPts*个邻居的数据点。'
 - en: '***Border Points*** are neighbors of a *Core Point* within the distance ℇ but
     with less than *MinPts* neighbors within the distance ℇ.'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '***边界点***是*核心点*在距离ℇ内的邻居，但在距离ℇ内的邻居少于*MinPts*。'
 - en: All other data points are ***Noise Points****,* also identified as outliers.
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 所有其他数据点都是***噪声点****，也被识别为异常值。
 - en: Outlier detection thus depends on the required number of neighbors *MinPts*,
     the distance ℇ and the selected distance measure, like Euclidean or Manhattan.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 异常值检测因此依赖于所需的邻居数*MinPts*、距离ℇ以及选择的距离度量，如欧几里得或曼哈顿距离。
 - en: This technique was implemented using the DBSCAN node in the KNIME workflow in
     Figure 1.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 该技术通过图1中的KNIME工作流中的DBSCAN节点实现。
 - en: '**Isolation Forest**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**隔离森林**'
 - en: This is a non-parametric method for large datasets in a one or multi dimensional
     feature space.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一种用于大数据集的非参数方法，适用于一维或多维特征空间。
 - en: An important concept in this method is the isolation number.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 该方法中的一个重要概念是隔离数。
 - en: 'The isolation number is the number of splits needed to isolate a data point.
     This number of splits is ascertained by following these steps:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 隔离数是隔离一个数据点所需的分裂次数。通过以下步骤确定分裂次数：
 - en: A point “a” to isolate is selected randomly.
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 随机选择一个点“a”进行隔离。
 - en: A random data point “b” is selected that is between the minimum and maximum
     value and different from “a”.
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 随机选择一个数据点“b”，它位于最小值和最大值之间，并且与“a”不同。
 - en: If the value of “b” is lower than the value of “a”, the value of “b” becomes
     the new lower limit.
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果“b”的值低于“a”的值，“b”的值将成为新的下限。
 - en: If the value of “b” is greater than the value of “a”, the value of “b” becomes
     the new upper limit.
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果“b”的值大于“a”的值，“b”的值将成为新的上限。
 - en: This procedure is repeated as long as there are data points other than “a” between
     the upper and the lower limit.
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 只要在上限和下限之间存在其他数据点，程序就会重复执行。
 - en: It requires fewer splits to isolate an outlier than it does to isolate a non-outlier,
     i.e. an outlier has a lower isolation number in comparison to a non-outlier point.
     A data point is therefore defined as an outlier if its isolation number is lower
     than the threshold.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 与隔离非离群点相比，隔离离群点所需的拆分较少，即离群点的隔离数低于非离群点。因此，如果数据点的隔离数低于阈值，则定义为离群点。
 - en: The threshold is defined based on the estimated percentage of outliers in the
     data, which is the starting point of this outlier detection algorithm.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 阈值是基于数据中估计的离群点百分比定义的，这是该离群点检测算法的起点。
 - en: An explanation with images of the isolation forest technique is available at
     [https://quantdare.com/isolation-forest-algorithm/](https://quantdare.com/isolation-forest-algorithm/).
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于隔离森林技术的解释和图片可参考 [https://quantdare.com/isolation-forest-algorithm/](https://quantdare.com/isolation-forest-algorithm/)。
 - en: This technique was implemented in the KNIME workflow in Figure 1 by using a
     few lines of Python code within a Python Script node.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一技术通过在Python Script节点内使用几行Python代码在图1中的KNIME工作流中实现。
 - en: '[PRE0]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The Python Script node is part of the [KNIME Python Integration](https://www.knime.com/blog/setting-up-the-knime-python-extension-revisited-for-python-30-and-20),
     that allows you to write/import Python code into your KNIME workflow.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: Python Script节点是 [KNIME Python Integration](https://www.knime.com/blog/setting-up-the-knime-python-extension-revisited-for-python-30-and-20)
+    的一部分，它允许你在KNIME工作流中编写/导入Python代码。
 - en: Implementation in a KNIME Workflow
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 在KNIME工作流中的实现
 - en: '[KNIME Analytics Platform](http://www.knime.org) is an open source software
     for data science, covering all your data needs from data ingestion and data blending
     to data visualization, from machine learning algorithms to data wrangling, from
     reporting to deployment, and more. It is based on a Graphical User Interface for
     visual programming, which makes it very intuitive and easy to use, considerably
     reducing the learning time.'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '[KNIME Analytics Platform](http://www.knime.org) 是一个开源的数据科学软件，涵盖了从数据摄取和数据混合到数据可视化、从机器学习算法到数据清理、从报告到部署等所有数据需求。它基于图形用户界面进行可视化编程，使其非常直观易用，大大缩短了学习时间。'
 - en: It has been designed to be open to different data formats, data types, data
     sources, data platforms, as well as external tools, like [R](https://www.r-project.org/)
     and [Python](https://www.python.org/) for example. It also includes a number of
     extensions for the analysis of unstructured data, like texts, images, or graphs.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 它设计为支持不同的数据格式、数据类型、数据来源、数据平台，以及外部工具，例如 [R](https://www.r-project.org/) 和 [Python](https://www.python.org/)。它还包括用于分析非结构化数据（如文本、图像或图表）的多个扩展。
 - en: Computing units in KNIME Analytics Platform are small colorful blocks, named
     “nodes”. Assembling nodes in a pipeline, one after the other, implements a data
     processing application. A pipeline is called “workflow”.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: KNIME Analytics Platform中的计算单元是小的彩色块，称为“节点”。将节点一个接一个地组装在管道中，实现了数据处理应用程序。管道称为“工作流”。
 - en: Given all those characteristics - open source, visual programming, and integration
     with other data science tools - we have selected it to implement the four techniques
     for outlier detection described in this post.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑到所有这些特性——开源、可视化编程和与其他数据科学工具的集成——我们选择了它来实现本文中描述的四种离群点检测技术。
 - en: 'The final KNIME workflow implementing these four techniques for outlier detection
     is reported in Figure 1.The workflow:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 实现这四种离群点检测技术的最终KNIME工作流见图1。工作流：
 - en: Reads the data sample inside the Read data metanode.
+  id: totrans-62
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在Read data元节点内读取数据样本。
 - en: Preprocesses the data and calculate the average arrival delay per airport inside
     the Preproc metanode.
+  id: totrans-63
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在Preproc元节点内预处理数据，并计算每个机场的平均到达延误。
 - en: In the next metanode called Density of delay, it normalizes the data and plots
     the density of the normalized average arrival delays against the density of a
     standard normal distribution.
+  id: totrans-64
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在下一个名为“延误密度”的元节点中，它标准化数据，并将标准化的平均到达延误的密度与标准正态分布的密度进行绘制。
 - en: Detects outliers using the four selected techniques.
+  id: totrans-65
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用四种选定的技术检测异常值。
 - en: Visualizes the outlier airports in a map of the US in the MapViz metanode using
     the KNIME integration with Open Street Maps.
+  id: totrans-66
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 KNIME 与 Open Street Maps 的集成，在 MapViz 元节点中可视化美国的异常机场。
 - en: '![Figure](../Images/6c3d7b752a003765f27602a2ce554c50.png)'
+  id: totrans-67
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/6c3d7b752a003765f27602a2ce554c50.png)'
 - en: 'Figure 1: Workflow implementing four outlier detection techniques: Numeric
     Outlier, Z-score, DBSCAN, Isolation Forest. This workflow is available on the
     KNIME EXAMPLES server under [02_ETL_Data_Manipulation/01_Filtering/07_Four_Techniques_Outlier_Detection/Four_Techniques_Outlier_Detection](https://www.knime.com/nodeguide/etl-data-manipulation/filtering/four-techniques-outlier-detection/techniques-outlier-detection).'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '图 1: 实现四种异常检测技术的工作流程：数值异常值、Z-score、DBSCAN、孤立森林。该工作流程可在 KNIME EXAMPLES 服务器上找到，路径为
+    [02_ETL_Data_Manipulation/01_Filtering/07_Four_Techniques_Outlier_Detection/Four_Techniques_Outlier_Detection](https://www.knime.com/nodeguide/etl-data-manipulation/filtering/four-techniques-outlier-detection/techniques-outlier-detection)。'
 - en: The Detected Outliers
+  id: totrans-69
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 检测到的异常值
 - en: In Figures 2-5 you can see the outlier airports as detected by the different
     techniques.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 在图 2-5 中，您可以看到不同技术检测到的异常机场。
 - en: The blue circles represent airports with no outlier behavior while the red squares
     represent airports with outlier behavior. The average arrival delay time defines
     the size of the markers.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 蓝色圆圈代表没有异常行为的机场，而红色方块代表有异常行为的机场。平均到达延迟时间定义了标记的大小。
 - en: 'A few airports are consistently identified as outliers by all techniques: Spokane
     International Airport (GEG), University of Illinois Willard Airport (CMI) and
     Columbia Metropolitan Airport (CAE). Spokane International Airport (GEG) is the
     biggest outlier with a very large (180 min) average arrival delay.'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些机场被所有技术一致识别为异常值：斯波坎国际机场 (GEG)、伊利诺伊大学威拉德机场 (CMI) 和哥伦比亚大都会机场 (CAE)。斯波坎国际机场 (GEG)
+    是最大的异常值，其平均到达延迟时间非常长 (180 分钟)。
 - en: A few other airports however are identified by only some of the techniques.
     For example Louis Armstrong New Orleans International Airport (MSY) has been spotted
     by only the isolation forest and DBSCAN techniques.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，还有一些其他机场仅被部分技术识别。例如，路易斯·阿姆斯特朗新奥尔良国际机场 (MSY) 仅被孤立森林和 DBSCAN 技术发现。
 - en: Note that for this particular problem the Z-Score technique identifies the lowest
     number of outliers, while the DBSCAN technique identifies the highest number of
     outlier airports.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，对于这个特定的问题，Z-Score 技术识别出最少的异常值，而 DBSCAN 技术识别出最多的异常机场。
 - en: Only the DBSCAN method (*MinPts*=3, ℇ=1.5, distance measure Euclidean) and the
     isolation forest technique (estimated percentage of outliers 10%) find outliers
     in the early arrival direction.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 只有 DBSCAN 方法 (*MinPts*=3, ℇ=1.5, 距离度量欧氏) 和孤立森林技术 (估计异常值百分比 10%) 能在早到方向上找到异常值。
 - en: '![Figure](../Images/ce0e420f8e7e2dfccecdbf0b0f8bd305.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/ce0e420f8e7e2dfccecdbf0b0f8bd305.png)'
 - en: 'Figure 2: Outlier airports detected by numeric outlier technique![Figure](../Images/b291a48bac66624f6653ee6bc5bee0f8.png)'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '图 2: 使用数值异常值技术检测的异常机场 ![图](../Images/b291a48bac66624f6653ee6bc5bee0f8.png)'
 - en: 'Figure 3: Outlier airports detected by z-score technique![Figure](../Images/8364e699f968b441ef68a2a34966d0cc.png)'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '图 3: 使用 z-score 技术检测的异常机场 ![图](../Images/8364e699f968b441ef68a2a34966d0cc.png)'
 - en: 'Figure 4: Outlier airports detected by DBSCAN technique![Figure](../Images/dc1f7a4a688b8b58a5f43bd69f17cfdf.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '图 4: 使用 DBSCAN 技术检测的异常机场 ![图](../Images/dc1f7a4a688b8b58a5f43bd69f17cfdf.png)'
 - en: 'Figure 5: Outlier airports detected by isolation forest technique'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '图 5: 使用孤立森林技术检测的异常机场'
 - en: Summary
+  id: totrans-81
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 摘要
 - en: 'In this blog post, we have described and implemented four different outlier
     detection techniques in a one dimensional space: the average arrival delay for
     all US airports between 2007 and 2008 as described in the airline dataset.'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇博客文章中，我们描述并实现了四种不同的异常检测技术在一维空间中：2007 年至 2008 年间所有美国机场的平均到达延迟时间，如航空公司数据集中所述。
 - en: The four techniques we investigated are Numeric Outlier, Z-Score, DBSCAN and
     Isolation Forest methods. Some of them work for one dimensional feature spaces,
     some for low dimensional spaces, and some extend to high dimensional spaces. Some
     of the techniques require normalization and a Gaussian distribution of the inspected
     dimension. Some require a distance measure, and some the calculation of mean and
     standard deviation.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们研究的四种技术是数值异常值、Z-Score、DBSCAN 和孤立森林方法。其中一些适用于一维特征空间，有些适用于低维空间，还有一些扩展到高维空间。有些技术需要标准化和检查维度的高斯分布，有些需要距离度量，还有一些需要计算均值和标准差。
 - en: There are three airports that all the outlier detection techniques identify
     as outliers. However, only some of the techniques (DBSCAN and Isolation Forest)
     could identify the outliers in the left tail of the distribution, i.e. those airports
     where, on average, flights arrived earlier than their scheduled arrival time.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 有三个机场被所有异常检测技术识别为异常值。然而，只有部分技术（DBSCAN和Isolation Forest）能够识别分布左尾中的异常值，即那些平均上航班到达时间早于预定到达时间的机场。
 - en: '**References**'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**参考文献**'
 - en: 'The theoretical basis for this blog post was taken from:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 本博客文章的理论基础来自：
 - en: Santoyo, Sergio. (2017, September 12). A Brief Overview of Outlier Detection
     Techniques [Blog post]. [https://towardsdatascience.com/a-brief-overview-of-outlier-detection-techniques-1e0b2c19e561](https://towardsdatascience.com/a-brief-overview-of-outlier-detection-techniques-1e0b2c19e561)
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Santoyo, Sergio. (2017年9月12日). [异常检测技术的简要概述](https://towardsdatascience.com/a--brief-overview-of-outlier-detection-techniques-1e0b2c19e561)
+    [博客文章]。
 - en: '**Related:**'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Removing Outliers Using Standard Deviation in Python](/2017/02/removing-outliers-standard-deviation-python.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用标准差在Python中去除异常值](/2017/02/removing-outliers-standard-deviation-python.html)'
 - en: '[How to Make Your Machine Learning Models Robust to Outliers](/2018/08/make-machine-learning-models-robust-outliers.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何让你的机器学习模型对异常值具有鲁棒性](/2018/08/make-machine-learning-models-robust-outliers.html)'
 - en: '[8 Common Pitfalls That Can Ruin Your Prediction](/2018/03/8-common-pitfalls-ruin-prediction.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[8个可能毁掉你预测的常见陷阱](/2018/03/8-common-pitfalls-ruin-prediction.html)'
 - en: More On This Topic
+  id: totrans-92
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Density Kernel Depth for Outlier Detection in Functional Data](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[功能数据中用于异常检测的密度核深度](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)'
 - en: '[A Beginner''s Guide to Anomaly Detection Techniques in Data Science](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中异常检测技术的初学者指南](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)'
 - en: '[Learning Python in Four Weeks: A Roadmap](https://www.kdnuggets.com/2023/02/learning-python-four-weeks-roadmap.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[四周内学习Python：一条路线图](https://www.kdnuggets.com/2023/02/learning-python-four-weeks-roadmap.html)'
 - en: '[Master the Power of Data Analytics: The Four Approaches to Analyzing Data](https://www.kdnuggets.com/2023/03/master-power-data-analytics-four-approaches-analyzing-data.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握数据分析的力量：分析数据的四种方法](https://www.kdnuggets.com/2023/03/master-power-data-analytics-four-approaches-analyzing-data.html)'
 - en: '[Data Analytics: The Four Approaches to Analyzing Data and How To…](https://www.kdnuggets.com/2023/04/data-analytics-four-approaches-analyzing-data-effectively.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据分析：分析数据的四种方法及其有效性…](https://www.kdnuggets.com/2023/04/data-analytics-four-approaches-analyzing-data-effectively.html)'
 - en: '[How to Perform Motion Detection Using Python](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用Python进行运动检测](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)'
