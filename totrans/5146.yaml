@@ -1,286 +1,440 @@
 - en: Analyzing Diversity & Inclusion with SQL
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 用SQL分析多样性与包容性
 - en: 原文：[https://www.kdnuggets.com/2022/11/analyzing-diversity-inclusion-sql.html](https://www.kdnuggets.com/2022/11/analyzing-diversity-inclusion-sql.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/11/analyzing-diversity-inclusion-sql.html](https://www.kdnuggets.com/2022/11/analyzing-diversity-inclusion-sql.html)
 - en: '![Analyzing Diversity & Inclusion with SQL](../Images/e1f05e5d564df44e964521d749145439.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![用SQL分析多样性与包容性](../Images/e1f05e5d564df44e964521d749145439.png)'
 - en: Image by Editor
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：编辑
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: There has been a well-documented surge in positions related to Diversity, Equity,
     and Inclusion over the past 3-5 years. DEI Analysts may spend their time tracking,
     analyzing, and answering questions such as,
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在过去3-5年中，与多样性、公平性和包容性相关的职位急剧增加已得到充分记录。DEI分析师可能会花时间追踪、分析并回答诸如以下问题，
 - en: How do salaries compare across gender?
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 薪资在性别之间有何差异？
 - en: How do our departments rank in terms of diversity of race?
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们的部门在种族多样性方面的排名如何？
 - en: Which positions and titles are the least diverse?
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 哪些职位和头衔最不具多样性？
 - en: While DEI Analysts focus on answering different types of questions than Business
     Analysts, they still use the same technical skills and techniques.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然DEI分析师关注的问答类型与业务分析师不同，但他们仍然使用相同的技术技能和方法。
 - en: Protected classes are typically **categorical**:  Gender, Race, Ethnicity, and
     Age (usually Age is broken down into categories)
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 受保护的类别通常是**分类**的：性别、种族、民族和年龄（通常年龄被分为几个类别）
 - en: '**Numeric** data, such as salary, can be aggregated across protected classes
     with'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数值**数据，如薪资，可以在受保护类别之间进行汇总'
 - en: Average
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 平均值
 - en: Median
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 中位数
 - en: Minimum
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最小值
 - en: Maximum
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 最大值
 - en: 'When you analyze the combination of a **Categorical** and a **Numeric** variables,
     SQL makes it quite easy:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你分析**分类**变量与**数值**变量的组合时，SQL使其变得相当简单：
 - en: '[PRE0]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '| Ethnicity | AVG_SALARY | MEDIAN_SALARY |'
+  id: totrans-24
   prefs: []
   type: TYPE_TB
+  zh: '| 种族 | 平均薪资 | 中位薪资 |'
 - en: '| White | $68,513 | $60,050 |'
+  id: totrans-25
   prefs: []
   type: TYPE_TB
+  zh: '| 白人 | $68,513 | $60,050 |'
 - en: '| African American | $67,691 | $55,114 |'
+  id: totrans-26
   prefs: []
   type: TYPE_TB
+  zh: '| 非洲裔美国人 | $67,691 | $55,114 |'
 - en: '| Asian | $68,842 | $65,632 |'
+  id: totrans-27
   prefs: []
   type: TYPE_TB
+  zh: '| 亚洲 | $68,842 | $65,632 |'
 - en: 'But what methods exist to analyze **Categorical** and **Categorical** variables
     together? The standard choices are quite limited:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，分析**分类**变量与**分类**变量的结合有哪些方法呢？标准选项非常有限：
 - en: Mode (most common)
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 众数（最常见）
 - en: Count Distinct
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 计数唯一值
 - en: '[PRE1]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '| Department | Employees | Distinct Genders | Most Common Gender |'
+  id: totrans-32
   prefs: []
   type: TYPE_TB
+  zh: '| 部门 | 员工数 | 不同性别 | 最常见性别 |'
 - en: '| Sales | 100 | 2 | Male |'
+  id: totrans-33
   prefs: []
   type: TYPE_TB
+  zh: '| 销售 | 100 | 2 | 男性 |'
 - en: '| IT | 100 | 2 | Male |'
+  id: totrans-34
   prefs: []
   type: TYPE_TB
+  zh: '| IT | 100 | 2 | 男性 |'
 - en: 'At first glance, the departments look to be very similar. But how would you
     tell the difference between:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 初看起来，各部门似乎非常相似。但你如何区分：
 - en: Sales has **99** male employees and **1** female employee
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 销售部门有**99**名男性员工和**1**名女性员工
 - en: IT has **51** male employees and **49** female employees
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: IT部门有**51**名男性员工和**49**名女性员工。
 - en: Surely, we would consider the latter to be more diverse, but how would we know
     that quickly using SQL?
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们肯定会认为后者更加多样化，但如何使用SQL快速得知这一点呢？
 - en: I am here to teach you about an underrated aggregate function called **Entropy**,
     which will help us quantify exactly how diverse each department is.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在这里教你一种被低估的聚合函数，叫做**熵**，它将帮助我们准确量化每个部门的多样性。
 - en: '| Department | Employees | Distinct Genders | Most Common Gender | **Entropy**
     |'
+  id: totrans-40
   prefs: []
   type: TYPE_TB
+  zh: '| 部门 | 员工数 | 不同性别 | 最常见性别 | **熵** |'
 - en: '| Sales | 100 | 2 | Male | **0.08** |'
+  id: totrans-41
   prefs: []
   type: TYPE_TB
+  zh: '| 销售 | 100 | 2 | 男性 | **0.08** |'
 - en: '| IT | 100 | 2 | Male | **0.99** |'
+  id: totrans-42
   prefs: []
   type: TYPE_TB
+  zh: '| IT | 100 | 2 | 男性 | **0.99** |'
 - en: Unfortunately it isn’t as easy as simply doing SELECT Department, ENTROPY(ethnicity),
     but I will teach you the SQL logic, as well as add it into the open-source [SQL
     Generator 5000](https://app.rasgoml.com/sql), so that you can generate this SQL
     anytime you need it.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 不幸的是，这不是简单地执行 `SELECT Department, ENTROPY(ethnicity)` 这么简单，但我会教你 SQL 逻辑，并将其添加到开源的
+    [SQL Generator 5000](https://app.rasgoml.com/sql) 中，以便你随时生成所需的 SQL。
 - en: Some example HR data
+  id: totrans-44
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 一些示例 HR 数据
 - en: '[Dr. Rich Huebner](https://www.linkedin.com/in/RichHuebner/) provides some
     sample HR data on [Kaggle.com](https://www.kaggle.com/datasets/rhuebner/human-resources-data-set)
     that we can use to explore some of the ways to analyze Diversity.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Rich Huebner 博士](https://www.linkedin.com/in/RichHuebner/) 在 [Kaggle.com](https://www.kaggle.com/datasets/rhuebner/human-resources-data-set)
+    提供了一些示例 HR 数据，我们可以用来探索分析多样性的一些方法。'
 - en: 'Let’s start by querying the data to compare the Position with the Race. We’ll
     begin with the basics: Count, Count Distinct, and Mode.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始查询数据，将职位与种族进行比较。我们将从基础开始：计数、唯一计数和众数。
 - en: '[PRE2]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Looking at the results, the 3 most popular positions appear to be very similar
     in diversity:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 看结果，三个最受欢迎的职位在多样性方面似乎非常相似：
 - en: Entropy to the rescue
+  id: totrans-49
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Entropy 来拯救我们
 - en: So, how would we rank these 3 departments in terms of diversity? This is where
     Entropy comes in.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，我们如何按多样性对这三个部门进行排名呢？这就是 Entropy 的作用。
 - en: What is Entropy?
+  id: totrans-51
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 什么是 Entropy？
 - en: Before we continue, let’s take a minute to understand what Entropy is, and how
     we can interpret it. The concept of Entropy is rooted deep in the study of Information
     Theory, and has many different applications including machine learning, thermodynamics,
     and cryptography. Therefore, if you look up the definition, it can be confusing.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 在继续之前，让我们花一分钟时间了解 Entropy 是什么，以及我们如何解释它。Entropy 的概念根植于信息理论的深层研究，并在机器学习、热力学和密码学等多个领域有广泛应用。因此，如果你查阅定义，它可能会令人困惑。
 - en: 'Yet the most simple definition of entropy is something along the lines of this:
     *Entropy is a numeric measure to describe how diverse something is*.'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，Entropy 最简单的定义是类似于：*Entropy 是一个用来描述事物多样性的数值度量*。
 - en: 'Consider a bag of marbles that only have two colors: red, and blue.'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象一个只有两种颜色的弹珠袋：红色和蓝色。
 - en: Now, imagine we counted up the marbles in the bag and discovered that there
     were 99 blue and only 1 red marble. This situation is not very diverse, so the
     entropy of the bag is low.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，想象我们统计了袋子中的弹珠，发现有 99 个蓝色弹珠和仅 1 个红色弹珠。这种情况的多样性不高，因此袋子的 Entropy 很低。
 - en: Next, imagine a bag that has 50 blue and 50 red marbles. This bag is very diverse,
     in fact it can’t get any more diverse. A bag with 51 blue and 49 red marbles is
     slightly *less* diverse. Therefore, this bag has high entropy.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，想象一个包含 50 个蓝色和 50 个红色弹珠的袋子。这个袋子非常多样化，实际上已经不能再多样化了。一个包含 51 个蓝色和 49 个红色弹珠的袋子则稍微
+    *少* 一些多样性。因此，这个袋子的 Entropy 很高。
 - en: Thus,
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，
 - en: A bag with 100 blue marbles and 0 blue marbles is the least diverse:  Entropy
     = 0
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个包含 100 个蓝色弹珠和 0 个蓝色弹珠的袋子是最不具多样性的： Entropy = 0
 - en: A bag with 50 blue marbles and 50 red marbles is the most diverse:  Entropy
     = 1
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个包含 50 个蓝色弹珠和 50 个红色弹珠的袋子是最具多样性的： Entropy = 1
 - en: 'Therefore, entropy reaches a maximum of 1 at 50/50\. Here is a common plot
     of how Entropy changes with the Blue % of marbles:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，Entropy 在 50/50 时达到最大值 1。以下是 Entropy 随着弹珠蓝色百分比变化的常见图示：
 - en: '![Analyzing Diversity & Inclusion with SQL](../Images/4c41822a4863f67541e052d634ae1b0b.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 SQL 分析多样性与包容性](../Images/4c41822a4863f67541e052d634ae1b0b.png)'
 - en: 'Credit: [https://commons.wikimedia.org/wiki/File:Binary_entropy_plot.png](https://commons.wikimedia.org/wiki/File:Binary_entropy_plot.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 版权： [https://commons.wikimedia.org/wiki/File:Binary_entropy_plot.png](https://commons.wikimedia.org/wiki/File:Binary_entropy_plot.png)
 - en: 'To calculate entropy, we calculate the percentage for each color, and remember
     the formula:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 要计算 Entropy，我们需要计算每种颜色的百分比，并记住公式：
 - en: '![Analyzing Diversity & Inclusion with SQL](../Images/843de5c849e8054a964644e5d0983fae.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 SQL 分析多样性与包容性](../Images/843de5c849e8054a964644e5d0983fae.png)'
 - en: 'Then, for a bag that is 70% blue marbles, we construct the formula like this:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，对于一个 70% 是蓝色弹珠的袋子，我们构造公式如下：
 - en: '![Analyzing Diversity & Inclusion with SQL](../Images/58698d3d7717a45869408e32423b1245.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 SQL 分析多样性与包容性](../Images/58698d3d7717a45869408e32423b1245.png)'
 - en: When you extend this to more than 2 choices, you simply change the log’s base
     to match the number of possibilities.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你将其扩展到超过 2 种选择时，你只需将对数的底数更改为匹配可能性数量即可。
 - en: Using SQL
+  id: totrans-68
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 SQL
 - en: This is a rather simple and efficient operation for SQL to handle.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个 SQL 处理起来相当简单而高效的操作。
 - en: The final result shows us that while neither position is perfectly diverse,
     Area Sales Manager is more diverse than Production Technician.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终结果向我们展示了，尽管两个职位都不完全多样化，但区域销售经理的多样化程度高于生产技术员。
 - en: We can confirm this visually by plotting this on a graph.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过将其绘制在图表上来直观地确认这一点。
 - en: '![Analyzing Diversity & Inclusion with SQL](../Images/29c45e1f0eda26a2e616d2346e89b202.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![用SQL分析多样性和包容性](../Images/29c45e1f0eda26a2e616d2346e89b202.png)'
 - en: Conclusion
+  id: totrans-73
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结论
 - en: Entropy is a helpful method for describing diversity. It allows you to sort
     or rank departments, positions, or companies by combining those categories with
     a protected class such as race or gender. Even though the function doesn’t exist
@@ -290,8 +444,10 @@
     having worked in data for most of my career it’s great to see that the power of
     SQL works across all data informed teams, from traditional data analysts all the
     way to DEI analysts.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 熵是一种描述多样性的有用方法。它允许你通过将这些类别与受保护的类别（如种族或性别）结合，来对部门、职位或公司进行排序或排名。尽管这种函数在大多数RDMBS中并不存在，我们可以轻松构建SQL来计算它。我认为，对于从事多样性、公平性和包容性工作的人来说，在审视其组织的劳动力时，使用这些计算是很重要的。此外，作为在数据领域工作了大部分职业生涯的人，看到SQL的力量在所有数据驱动的团队中都有效，从传统的数据分析师到DEI分析师，真的很棒。
 - en: '**[Josh Berry](https://www.linkedin.com/in/joshberry022/)** ([**@Twitter**](https://mobile.twitter.com/itsamejoshabee))
     leads Customer Facing Data Science at Rasgo and has been in the data and analytics
     profession since 2008\. Josh spent 10 years at Comcast where he built the data
@@ -300,33 +456,50 @@
     a critical leader in building out Customer Facing Data Science at DataRobot. In
     his spare time Josh performs complex analysis on interesting topics such as baseball,
     F1 racing, housing market predictions, and more.'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Josh Berry](https://www.linkedin.com/in/joshberry022/)** ([**@Twitter**](https://mobile.twitter.com/itsamejoshabee))
+    负责Rasgo的面向客户的数据科学工作，自2008年起从事数据和分析行业。Josh在Comcast工作了10年，期间建立了数据科学团队，并且是内部开发的Comcast特性库的关键负责人之一——这是市场上首批特性库之一。在离开Comcast后，Josh在DataRobot领导了面向客户的数据科学团队。在闲暇时间，Josh会对一些有趣的主题进行复杂分析，比如棒球、F1赛车、住房市场预测等。'
 - en: More On This Topic
+  id: totrans-76
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Analyzing Scientific Articles with fine-tuned SciBERT NER Model and Neo4j](https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用微调的SciBERT NER模型和Neo4j分析科学文章](https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html)'
 - en: '[Analyzing the Probability of Future Success with Intelligence…](https://www.kdnuggets.com/2022/02/analyzing-probability-future-success-intelligence-node-attributes-evolution-model.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用智能分析未来成功的概率…](https://www.kdnuggets.com/2022/02/analyzing-probability-future-success-intelligence-node-attributes-evolution-model.html)'
 - en: '[Master the Power of Data Analytics: The Four Approaches to Analyzing Data](https://www.kdnuggets.com/2023/03/master-power-data-analytics-four-approaches-analyzing-data.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握数据分析的力量：四种数据分析方法](https://www.kdnuggets.com/2023/03/master-power-data-analytics-four-approaches-analyzing-data.html)'
 - en: '[Data Analytics: The Four Approaches to Analyzing Data and How To…](https://www.kdnuggets.com/2023/04/data-analytics-four-approaches-analyzing-data-effectively.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据分析：四种有效的数据分析方法及其应用…](https://www.kdnuggets.com/2023/04/data-analytics-four-approaches-analyzing-data-effectively.html)'
 - en: '[Query Your Pandas DataFrames with SQL](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用SQL查询你的Pandas数据框](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
 - en: '[Data Preparation with SQL Cheatsheet](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL数据准备备忘单](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)'
