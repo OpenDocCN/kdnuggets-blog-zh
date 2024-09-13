@@ -1,146 +1,211 @@
 - en: Artificial Neural Networks Optimization using Genetic Algorithm with Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用Python进行的人工神经网络优化，采用遗传算法
 - en: 原文：[https://www.kdnuggets.com/2019/03/artificial-neural-networks-optimization-genetic-algorithm-python.html](https://www.kdnuggets.com/2019/03/artificial-neural-networks-optimization-genetic-algorithm-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/03/artificial-neural-networks-optimization-genetic-algorithm-python.html](https://www.kdnuggets.com/2019/03/artificial-neural-networks-optimization-genetic-algorithm-python.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/03/artificial-neural-networks-optimization-genetic-algorithm-python.html?page=2#comments)![practical-computer-vision-applications-deepl-learning](../Images/2d2eba3f4293703bd96266e9008105f8.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/03/artificial-neural-networks-optimization-genetic-algorithm-python.html?page=2#comments)![实用计算机视觉应用深度学习](../Images/2d2eba3f4293703bd96266e9008105f8.png)'
 - en: 'In a previous tutorial titled "**Artificial Neural Network Implementation using
     NumPy and Classification of the Fruits360 Image Dataset**" available in my LinkedIn
     profile at this link [https://www.linkedin.com/pulse/artificial-neural-network-implementation-using-numpy-fruits360-gad](https://www.linkedin.com/pulse/artificial-neural-network-implementation-using-numpy-fruits360-gad),
     an artificial neural network (ANN) is created for classifying 4 classes of the
     Fruits360 image dataset. The source code used in this tutorial is available in
     my GitHub page here: [https://github.com/ahmedfgad/NumPyANN](https://github.com/ahmedfgad/NumPyANN)'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我LinkedIn个人资料中的上一篇教程标题为“**使用NumPy实现人工神经网络及Fruits360图像数据集的分类**”，可以在此链接 [https://www.linkedin.com/pulse/artificial-neural-network-implementation-using-numpy-fruits360-gad](https://www.linkedin.com/pulse/artificial-neural-network-implementation-using-numpy-fruits360-gad)
+    找到。该教程中使用的源代码可以在我的GitHub页面找到： [https://github.com/ahmedfgad/NumPyANN](https://github.com/ahmedfgad/NumPyANN)
 - en: A quick summary of this tutorial is extracting the feature vector (360 bins
     hue channel histogram) and reducing it to just 102 element by using a filter-based
     technique using the standard deviation. Later, the ANN is built from scratch using
     NumPy.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程的简要总结是提取特征向量（360个bins的色调通道直方图），并通过使用标准偏差的过滤器技术将其减少到仅102个元素。然后，使用NumPy从头构建人工神经网络（ANN）。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速入门网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的IT需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: The ANN was not completely created as just the forward pass was made ready but
     there is no backward pass for updating the network weights. This is why the accuracy
     is very low and not exceeds 45%. The solution to this problem is using an optimization
     technique for updating the network weights. This tutorial extends the previous
     one to use the genetic algorithm (GA) for optimizing the network weights.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 该ANN并未完全创建，只准备好了前向传播，但没有反向传播来更新网络权重。这就是为什么准确度非常低且未超过45%。解决此问题的方法是使用优化技术来更新网络权重。本教程扩展了前一个教程，使用遗传算法（GA）来优化网络权重。
 - en: 'It is worth-mentioning that both the previous and this tutorial are based on
     my 2018 book cited as "**Ahmed Fawzy Gad ''Practical Computer Vision Applications
     Using Deep Learning with CNNs''. Dec. 2018, Apress, 978-1-4842-4167-7** ". The
     book is available at Springer at this link: [https://springer.com/us/book/9781484241660](https://springer.com/us/book/9781484241660).
     You can find all details within this book.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 值得一提的是，前面和本教程都基于我2018年出版的书籍，“**Ahmed Fawzy Gad 'Practical Computer Vision Applications
+    Using Deep Learning with CNNs'. 2018年12月，Apress，978-1-4842-4167-7**”。这本书可以在Springer上找到，链接为：[https://springer.com/us/book/9781484241660](https://springer.com/us/book/9781484241660)。书中的所有详细信息均可在此找到。
 - en: 'The source code used in this tutorial is available in my GitHub page here:
     [https://github.com/ahmedfgad/NeuralGenetic](https://github.com/ahmedfgad/NeuralGenetic)'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程中使用的源代码可以在我的GitHub页面找到：[https://github.com/ahmedfgad/NeuralGenetic](https://github.com/ahmedfgad/NeuralGenetic)
 - en: Read More about Genetic Algorithm
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 阅读更多关于遗传算法的内容
 - en: 'Before starting this tutorial, I recommended reading about how the genetic
     algorithm works and its implementation in Python using NumPy from scratch based
     on my previous tutorials found at these links:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开始本教程之前，我建议阅读有关遗传算法如何工作及其在Python中使用NumPy从头实现的内容，可以参考我之前的教程，这些教程可以在以下链接找到：
 - en: Introduction to Optimization with Genetic Algorithm
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 遗传算法优化的介绍
 - en: '[https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/](https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/)'
+  id: totrans-17
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/](https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/)'
 - en: '[https://www.kdnuggets.com/2018/03/introduction-optimization-with-genetic-algorithm.html](/2018/03/introduction-optimization-with-genetic-algorithm.html)'
+  id: totrans-18
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.kdnuggets.com/2018/03/introduction-optimization-with-genetic-algorithm.html](/2018/03/introduction-optimization-with-genetic-algorithm.html)'
 - en: '[https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b](https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b)'
+  id: totrans-19
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b](https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b)'
 - en: '[https://www.springer.com/us/book/9781484241660](https://www.springer.com/us/book/9781484241660)'
+  id: totrans-20
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.springer.com/us/book/9781484241660](https://www.springer.com/us/book/9781484241660)'
 - en: Genetic Algorithm (GA) Optimization - Step-by-Step Example
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 遗传算法（GA）优化 - 分步示例
 - en: '[https://www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example](https://www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example)'
+  id: totrans-22
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example](https://www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example)'
 - en: Genetic Algorithm Implementation in Python
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 遗传算法在Python中的实现
 - en: '[https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/](https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/)'
+  id: totrans-24
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/](https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/)'
 - en: '[/2018/07/genetic-algorithm-implementation-python.html](/2018/07/genetic-algorithm-implementation-python.html)'
+  id: totrans-25
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[/2018/07/genetic-algorithm-implementation-python.html](/2018/07/genetic-algorithm-implementation-python.html)'
 - en: '[https://towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6](https://towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6)'
+  id: totrans-26
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6](https://towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6)'
 - en: '[https://github.com/ahmedfgad/GeneticAlgorithmPython](https://github.com/ahmedfgad/GeneticAlgorithmPython)'
+  id: totrans-27
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://github.com/ahmedfgad/GeneticAlgorithmPython](https://github.com/ahmedfgad/GeneticAlgorithmPython)'
 - en: After understanding how GA works based on numerical examples in addition to
     implementation using Python, we can start using GA to optimize the ANN by updating
     its weights (parameters).
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 在理解了基于数值示例的GA工作原理以及使用Python的实现之后，我们可以开始使用GA来优化ANN，通过更新其权重（参数）。
 - en: Using GA with ANN
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用GA与ANN
 - en: GA creates multiple solutions to a given problem and evolves them through a
     number of generations. Each solution holds all parameters that might help to enhance
     the results. For ANN, weights in all layers help achieve high accuracy. Thus,
@@ -151,35 +216,49 @@
     a total number of weights equal to 102x150+150x60+60x4=24,540\. If the population
     has 8 solutions with 24,540 parameters per solution, then the total number of
     parameters in the entire population is 24,540x8=196,320.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: GA创建了多个解决方案来解决给定的问题，并通过多个世代进行进化。每个解决方案包含所有可能帮助提高结果的参数。对于ANN，所有层中的权重有助于实现高准确率。因此，GA中的单个解决方案将包含ANN中的所有权重。根据之前教程讨论的网络结构和下图所示，ANN有4层（1层输入，2层隐藏，1层输出）。任何层中的任何权重都将成为同一解决方案的一部分。这样的网络的单个解决方案将包含总共102x150+150x60+60x4=24,540个权重。如果种群中有8个解决方案，每个解决方案有24,540个参数，那么整个种群的参数总数为24,540x8=196,320。
 - en: '![artificial-neural-network](../Images/d3ee8682d9b41f4e59bad5b79e948a75.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![人工神经网络](../Images/d3ee8682d9b41f4e59bad5b79e948a75.png)'
 - en: Looking at the above figure, the parameters of the network are in matrix form
     because this makes calculations of ANN much easier. For each layer, there is an
     associated weights matrix. Just multiply the inputs matrix by the parameters matrix
     of a given layer to return the outputs in such layer. Chromosomes in GA are 1D
     vectors and thus we have to convert the weights matrices into 1D vectors.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 从上图来看，网络的参数是矩阵形式，因为这使得ANN的计算更加简便。对于每一层，都有一个相应的权重矩阵。只需将输入矩阵乘以给定层的参数矩阵，就能得到该层的输出。遗传算法中的染色体是1D向量，因此我们必须将权重矩阵转换为1D向量。
 - en: Because matrix multiplication is a good option to work with ANN, we will still
     represent the ANN parameters in the matrix form when using the ANN. Thus, matrix
     form is used when working with ANN and vector form is used when working with GA.
     This makes us need to convert the matrix to vector and vice versa. The next figure
     summarizes the steps of using
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于矩阵乘法是处理人工神经网络（ANN）的一个良好选择，因此在使用ANN时，我们仍将ANN的参数表示为矩阵形式。因此，在处理ANN时使用矩阵形式，而在处理遗传算法（GA）时使用向量形式。这就需要我们将矩阵转换为向量，反之亦然。下图总结了使用的步骤。
 - en: GA with ANN. This figure is referred to as the **main figure**.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 与ANN的遗传算法。这张图被称为**主图**。
 - en: '![figure-name](../Images/57ce8711167885fdd567d24b6587d7b0.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/57ce8711167885fdd567d24b6587d7b0.png)'
 - en: Weights Matrices to 1D Vector
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 权重矩阵到1D向量
 - en: Each solution in the population will have two representations. First is a 1D
     vector for working with GA and second is a matrix to work with ANN. Because there
     are 3 weights matrices for the 3 layers (2 hidden + 1 output), there will be 3
@@ -188,11 +267,15 @@
     vector. Each solution will be represented as a vector of length 24,540\. The next
     Python code creates a function named **mat_to_vector()** that converts the parameters
     of all solutions within the population from matrix to vector.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 种群中的每个解将有两种表示方式。首先是用于处理GA的1D向量，其次是用于处理ANN的矩阵。由于3层（2层隐藏层 + 1层输出层）对应3个权重矩阵，因此会有3个向量，每个矩阵一个。由于GA中的解表示为单个1D向量，这3个单独的1D向量将连接成一个单一的1D向量。每个解将表示为长度为24,540的向量。下一个Python代码创建了一个名为**mat_to_vector()**的函数，用于将种群中所有解的参数从矩阵转换为向量。
 - en: '[PRE0]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The function accepts an argument representing the population of all solutions
     in order to loop through them and return their vector representation. At the beginning
     of the function, an empty list variable named **pop_weights_vector** is created
@@ -202,8 +285,10 @@
     the input matrix and the output size to which the matrix will be reshaped. The
     variable **curr_vector** accepts all vectors for a single solution. After all
     vectors are generated, they get appended into the **pop_weights_vector** variable.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 该函数接受一个参数，该参数表示所有解的种群，以便循环遍历它们并返回它们的向量表示。在函数开始时，会创建一个名为**pop_weights_vector**的空列表变量来保存结果（所有解的向量）。对于矩阵形式的每个解，有一个内部循环遍历其三个矩阵。对于每个矩阵，它使用**numpy.reshape()**函数转换为向量，该函数接受输入矩阵和矩阵将被重塑的输出大小。变量**curr_vector**接收单个解的所有向量。生成所有向量后，它们会被追加到**pop_weights_vector**变量中。
 - en: Note that we used the **numpy.extend()** function for vectors belonging to the
     same solution and **numpy.append()** for vectors belonging to different solutions.
     The reason is that **numpy.extend()** takes the numbers within the 3 vectors belonging
@@ -214,43 +299,61 @@
     lists, it returns a new list which is split into two sub-lists. This is not our
     objective. Finally, the function **mat_to_vector()** returns the population solutions
     as a NumPy array for easy manipulation later.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，我们对属于相同解的向量使用了**numpy.extend()**函数，而对属于不同解的向量使用了**numpy.append()**。原因在于**numpy.extend()**将属于相同解的3个向量中的数字连接在一起。换句话说，对两个列表调用该函数将返回一个新的单一列表，其中包含两个列表中的所有数字。这适用于为每个解创建一个1D染色体。但是**numpy.append()**会为每个解返回三个列表。对两个列表调用它，返回的新列表会被分成两个子列表。这不是我们的目标。最后，函数**mat_to_vector()**将种群解作为NumPy数组返回，以便后续的简单操作。
 - en: Implementing GA Steps
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实现GA步骤
 - en: After converting all solutions from matrices to vectors and concatenated together,
     we are ready to go through the GA steps discussed in the tutorial titled **"Introduction
     to Optimization with Genetic Algorithm"**. The steps are presented in the **main
     figure** and also summarized in the next figure.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 在将所有解从矩阵转换为向量并连接在一起后，我们准备进行教程中讨论的GA步骤，标题为**"基因算法优化入门"**。这些步骤在**主图**中呈现，并在下图中进行了总结。
 - en: '![genetic-algorithm-steps](../Images/6ab6d32f52e77336c2e67f65d9e0058b.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![genetic-algorithm-steps](../Images/6ab6d32f52e77336c2e67f65d9e0058b.png)'
 - en: Remember that GA uses a fitness function to returns a fitness value for each
     solution. The higher the fitness value the better the solution. The best solutions
     are returned as parents in the **parents selection** step.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 记住，GA使用适应度函数返回每个解的适应度值。适应度值越高，解越好。最佳解在**父代选择**步骤中作为父代返回。
 - en: One of the common fitness functions for a classifier such as ANN is the accuracy.
     It is the ratio between the correctly classified samples and the total number
     of samples. It is calculated according to the next equation. The classification
     accuracy of each solution is calculated according to steps in the **main figure**.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于像ANN这样的分类器，一个常见的适应度函数是准确率。它是正确分类样本与样本总数之间的比率。它按照下式计算。每个解的分类准确率根据**主图**中的步骤进行计算。
 - en: '![Equation](../Images/e8768f7eb7deeb08cb4bd8ca72e54f27.png)'
+  id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![Equation](../Images/e8768f7eb7deeb08cb4bd8ca72e54f27.png)'
 - en: The single 1D vector of each solution is converted back into 3 matrices, one
     matrix for each layer (2 hidden and 1 output). Conversion takes place using a
     function called **vector_to_mat()**. It is defined in the next code.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个解的单一1D向量被转换回3个矩阵，每层一个矩阵（2个隐藏层和1个输出层）。转换使用一个名为**vector_to_mat()**的函数进行。定义在接下来的代码中。
 - en: '[PRE1]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: It reverses the work done previously. But there is an important question. If
     the vector of a given solution is just one piece, how we can split into three
     different parts, each part represents a matrix? The size of the first parameters
@@ -261,8 +364,10 @@
     is used as an argument for the **vector_to_mat()** function in order to know the
     size of each matrix. We are not interested in using the weights from the **mat_pop_weights**
     variable but just the matrices sizes are used from it.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 它逆转了之前的工作。但有一个重要问题。如果给定解的向量只是一个片段，我们如何将其分成三个不同的部分，每个部分代表一个矩阵？输入层和隐藏层之间的第一个参数矩阵的大小是102x150。转换为向量时，其长度为15,300。由于它是根据**mat_to_vector()**函数插入到**curr_vector**变量中的第一个向量，因此其索引从0开始，直到15,299。**mat_pop_weights**作为**vector_to_mat()**函数的参数，用于确定每个矩阵的大小。我们不打算使用**mat_pop_weights**变量中的权重，只是使用了其中的矩阵大小。
 - en: For the second vector in the same solution, it will be the result of converting
     a matrix of size 150x60\. Thus the vector length is 9,000\. Such a vector is inserted
     into the **curr_vector** variable just before the previous vector of length 15,300\.
@@ -273,17 +378,27 @@
     9,000, then its index will start after it. That is its start index is 24,300 and
     its end index is 24,300+240-1=24,539\. So, we can successfully restore the vector
     into the original 3 matrices.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于同一解决方案中的第二个向量，它将是将 150x60 矩阵转换后的结果。因此，向量长度为 9,000。这样一个向量被插入到**curr_vector**变量中，紧接在前一个长度为
+    15,300 的向量之前。因此，它将从索引 15,300 开始，到索引 15,300+9,000-1=24,299 结束。使用 -1 是因为 Python
+    从 0 开始索引。对于从 60x4 参数矩阵创建的最后一个向量，其长度为 240。由于它被添加到**curr_vector**变量中，正好在前一个长度为 9,000
+    的向量之后，因此它的起始索引在它之后，即起始索引为 24,300，结束索引为 24,300+240-1=24,539。因此，我们可以成功地将向量恢复到原始的
+    3 个矩阵中。
 - en: The matrices returned for each solution are used to predict the class label
     for each of the 1,962 samples in the used dataset to calculate the accuracy. This
     is done using 2 functions which are **predict_outputs()** and **fitness()** according
     to the next code.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 返回的每个解决方案的矩阵用于预测数据集中 1,962 个样本的类别标签，以计算准确性。这是通过两个函数完成的，即**predict_outputs()**和**fitness()**，根据下面的代码。
 - en: '[PRE2]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The **predict_outputs()** function accepts the weights of a single solution,
     inputs, and outputs of the training data, and an optional parameter that specifies
     which activation function to use. It returns the accuracy of just one solution
@@ -292,41 +407,59 @@
     loops through each solution, pass it to the **predict_outputs()** function, store
     the accuracy of all solutions into the **accuracy** array, and finally return
     such an array.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**predict_outputs()**函数接受单个解决方案的权重、训练数据的输入和输出，以及一个可选参数来指定使用哪种激活函数。它仅返回一个解决方案的准确性，而不是种群中所有解决方案的准确性。为了返回种群中所有解决方案的适应度值（即准确性），**fitness()**函数遍历每个解决方案，将其传递给**predict_outputs()**函数，将所有解决方案的准确性存储到**accuracy**数组中，并最终返回该数组。'
 - en: After calculating the fitness value (i.e. accuracy) for all solutions, the remaining
     steps of GA in the main figure are applied the same way done previously. The best
     parents are selected, based on their accuracy, into the mating pool. Then mutation
     and crossover variants are applied in order to produce the offspring. The population
     of the new generation is created using both offspring and parents. These steps
     are repeated for a number of generations.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 在计算所有解决方案的适应度值（即准确性）之后，主图中的 GA 剩余步骤将以与之前相同的方式应用。根据准确性选择最佳的父代进入交配池。然后应用变异和交叉变体以生成后代。新一代的种群由后代和父代组成。这些步骤会在若干代中重复进行。
 - en: More On This Topic
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
 - en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并以找到目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
