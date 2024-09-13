@@ -3,21 +3,26 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 并行化 Python 代码
 - en: 原文：[https://www.kdnuggets.com/2021/10/parallelizing-python-code.html](https://www.kdnuggets.com/2021/10/parallelizing-python-code.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/10/parallelizing-python-code.html](https://www.kdnuggets.com/2021/10/parallelizing-python-code.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Dawid Borycki](https://www.linkedin.com/in/dawidborycki/), Biomedical
     Researcher and Software Engineer & [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/),
     Data Science Professional**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Dawid Borycki](https://www.linkedin.com/in/dawidborycki/)，生物医学研究员和软件工程师
+    & [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)，数据科学专业人士**'
 - en: Python is great for tasks like training machine learning models, performing
     numerical simulations, and quickly developing proof-of-concept solutions without
     setting up development tools and installing several dependencies. When performing
@@ -29,40 +34,49 @@
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 非常适合用于训练机器学习模型、执行数值模拟以及快速开发概念验证解决方案，而无需设置开发工具和安装多个依赖项。在执行这些任务时，您还希望尽可能充分利用底层硬件，以获得快速结果。并行化
+    Python 代码可以实现这一点。然而，使用标准 CPython 实现意味着由于全局解释器锁（GIL），您无法充分利用底层硬件，因为 GIL 阻止了多个线程同时运行字节码。
 - en: 'This article reviews some common options for parallelizing Python code including:'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文回顾了一些常见的 Python 代码并行化选项，包括：
 - en: '[Process-based parallelism](https://docs.python.org/3/library/multiprocessing.html)'
   id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[基于进程的并行性](https://docs.python.org/3/library/multiprocessing.html)'
 - en: Specialized libraries
   id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 专用库
 - en: '[IPython Parallel](https://ipython.readthedocs.io/en/stable/)'
   id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[IPython Parallel](https://ipython.readthedocs.io/en/stable/)'
 - en: '[Ray](https://docs.ray.io/en/master/)'
   id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Ray](https://docs.ray.io/en/master/)'
 - en: For each technique, this article lists some advantages and disadvantages and
     shows a code sample to help you understand what it’s like to use.
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于每种技术，本文列出了其一些优缺点，并展示了代码示例，以帮助您理解使用它的情况。
 - en: How to Parallelize Python Code
   id: totrans-11
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 如何并行化 Python 代码
 - en: There are several common ways to parallelize Python code. You can launch several
     application instances or a script to perform jobs in parallel. This approach is
     great when you don’t need to exchange data between parallel jobs. Otherwise, sharing
@@ -70,6 +84,7 @@
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 有几种常见的方法来并行化 Python 代码。您可以启动多个应用程序实例或脚本来并行执行任务。当您不需要在并行任务之间交换数据时，这种方法非常好。否则，在进程之间共享数据会在汇总数据时显著降低性能。
 - en: Starting multiple threads within the same process allows you to share data between
     jobs more efficiently. In this case, thread-based parallelization can offload
     some work to the background. However, the standard CPython implementation’s global
@@ -77,11 +92,13 @@
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在同一进程中启动多个线程可以更有效地在任务之间共享数据。在这种情况下，基于线程的并行化可以将一些工作卸载到后台。然而，标准 CPython 实现的全局解释器锁（GIL）阻止了在多个线程中同时运行字节码。
 - en: The sample function below simulates complex calculations (meant to mimic activation
     functions)
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下示例函数模拟复杂计算（旨在模拟激活函数）
 - en: '[PRE0]'
   id: totrans-15
   prefs: []
@@ -94,11 +111,13 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '`complex_operation` 执行多次以更好地估计处理时间。它将长时间运行的操作分成一批较小的操作。这通过将输入值划分为几个子集，然后并行处理这些子集中的输入来实现。'
 - en: 'Here’s the code that runs `complex_operation` several times (input range of
     ten) and measures the execution time with the timebudget package:'
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是运行 `complex_operation` 多次（输入范围为十）并使用 timebudget 包测量执行时间的代码：
 - en: '[PRE1]'
   id: totrans-18
   prefs: []
@@ -109,26 +128,32 @@
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行 [这个脚本](https://gist.github.com/mGalarnyk/8c491fbdfe6ce3e498a7f62f03fa9ca4)
+    后，您将获得类似于下面的输出：
 - en: '![parallelizing blog 1](../Images/556b374ed5ce8fe0d936731ac27c8969.png)'
   id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![并行化博客 1](../Images/556b374ed5ce8fe0d936731ac27c8969.png)'
 - en: As you can see, it took about 39 seconds to execute this code on the laptop
     used in this tutorial. Let’s see how to improve this result.
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 如您所见，在本教程中使用的笔记本电脑上执行此代码大约需要 39 秒。让我们看看如何改进这一结果。
 - en: Process-Based Parallelism
   id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 基于进程的并行性
 - en: The first approach is to use process-based parallelism. With this approach,
     it is possible to start several processes at the same time (concurrently). This
     way, they can concurrently perform calculations.
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个方法是使用基于进程的并行性。使用这种方法，可以同时启动多个进程（并发）。这样，它们可以同时执行计算。
 - en: Starting from Python 3, the[ multiprocessing package](https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing) is
     preinstalled and gives us a convenient syntax for launching concurrent processes.
     It provides the Pool object, which automatically divides input into subsets and
@@ -136,11 +161,13 @@
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 从Python 3开始，[multiprocessing包](https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing)已预安装，并为启动并发进程提供了便捷的语法。它提供了Pool对象，自动将输入分割成子集并在多个进程间分配。
 - en: '[Here is an example](https://gist.github.com/mGalarnyk/b5455b0454815b04363ef9994f22fbf3) of
     how to use a Pool object to launch ten processes:'
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '[这里是一个示例](https://gist.github.com/mGalarnyk/b5455b0454815b04363ef9994f22fbf3)，展示如何使用Pool对象来启动十个进程：'
 - en: '[PRE2]'
   id: totrans-26
   prefs: []
@@ -150,6 +177,7 @@
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '[代码示例](https://gist.github.com/mGalarnyk/b5455b0454815b04363ef9994f22fbf3)'
 - en: Each process concurrently performs the complex operation. So, the code could
     theoretically reduce the total execution time by up to ten times. However, the
     output from the code below only shows about a fourfold improvement (39 seconds
@@ -157,16 +185,19 @@
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个进程同时执行复杂操作。因此，理论上，这段代码可以将总执行时间减少多达十倍。然而，下面代码的输出仅显示了约四倍的改进（上一节39秒对比本节9.4秒）。
 - en: '![parallelizing blog 2](../Images/586ee96a1d06dc9d5c7323aed2b130ef.png)'
   id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![并行化博客 2](../Images/586ee96a1d06dc9d5c7323aed2b130ef.png)'
 - en: There are a couple reasons why the improvement is not tenfold. First, the maximum
     number of processes that can run concurrently depends on the the number of CPUs
     in the system. You can find out how many CPUs your system has by using the `os.cpu_count()` method.
   id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 改进没有达到十倍的原因有几个。首先，能并发运行的最大进程数量取决于系统中的CPU数量。你可以通过使用`os.cpu_count()`方法来查找你的系统有多少个CPU。
 - en: '[PRE3]'
   id: totrans-31
   prefs: []
@@ -176,10 +207,12 @@
   id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/e533ca816283748e2fbec835c8a9607d.png)'
 - en: The machine used in this tutorial has eight CPUs
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程使用的机器有八个CPU。
 - en: The next reason why the improvement is not more is that the computations in
     this tutorial are relatively small. Finally, it is important to note that there
     is usually some overhead when parallelizing computation as processes that want
@@ -192,15 +225,19 @@
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 改进没有更多的另一个原因是本教程中的计算相对较小。最后，需要注意的是，在并行计算时通常会有一些开销，因为想要通信的进程必须利用[进程间通信机制](https://en.wikipedia.org/wiki/Inter-process_communication)。这意味着对于非常小的任务，并行计算通常比串行计算（普通Python）更慢。如果你有兴趣了解更多关于多进程的知识，Selva
+    Prabhakaran有一个[出色的博客](https://www.anyscale.com/blog/writing-your-first-distributed-python-application-with-ray)，它启发了本教程的这一部分。如果你想了解更多关于并行/分布式计算的权衡，[查看这个教程](https://towardsdatascience.com/writing-your-first-distributed-python-application-with-ray-4248ebc07f41)。
 - en: '![parallelizing blog 4](../Images/0950f9777fafefce27b2135f25e3ebea.png)'
   id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![并行化博客 4](../Images/0950f9777fafefce27b2135f25e3ebea.png)'
 - en: Specialized Libraries
   id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 专门的库
 - en: '[Many calculations for specialized libraries like NumPy are unaffected by the
     GIL](https://stackoverflow.com/questions/36479159/why-are-numpy-calculations-not-affected-by-the-global-interpreter-lock) and
     can use threads and other techniques to work in parallel. This section of the
@@ -208,11 +245,13 @@
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '[许多针对NumPy等专门库的计算不受GIL影响](https://stackoverflow.com/questions/36479159/why-are-numpy-calculations-not-affected-by-the-global-interpreter-lock)，可以利用线程和其他技术并行工作。本教程的这一部分讲解了结合NumPy和多进程的好处。'
 - en: 'To demonstrate the differences between the naïve implementation and the NumPy-based
     implementation, an additional function needs to be implemented:'
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了演示朴素实现与基于 NumPy 的实现之间的差异，需要实现一个额外的函数：
 - en: '[PRE4]'
   id: totrans-39
   prefs: []
@@ -224,6 +263,8 @@
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码现在使用 NumPy 的 exp 和 sinh 函数对输入序列进行计算。然后，代码使用进程池执行 complex_operation 和 complex_operation_numpy
+    十次，以比较它们的性能：
 - en: '[PRE5]'
   id: totrans-41
   prefs: []
@@ -233,10 +274,13 @@
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下输出显示了 [这个脚本](https://gist.github.com/mGalarnyk/703c53bb98aa94d66bb6c49d48ce5c09)
+    使用和不使用 NumPy 的性能。
 - en: '![parallelizing blog 5](../Images/674158bdcd5d5338901af10c077dfd72.png)'
   id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![并行化博客 5](../Images/674158bdcd5d5338901af10c077dfd72.png)'
 - en: NumPy offers a rapid boost in performance. Here, NumPy reduced the computation
     time to about 10 percent of the original time (859ms vs 9.515sec). One reason
     why it is faster is because most processing in NumPy is vectorized. With vectorization,
@@ -247,15 +291,20 @@
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: NumPy 提供了性能的快速提升。在这里，NumPy 将计算时间减少到原始时间的约 10%（859 毫秒 vs 9.515 秒）。它更快的一个原因是 NumPy
+    的大部分处理都是向量化的。通过向量化，底层代码实际上被“并行化”，因为操作可以一次计算多个数组元素，而不是一个一个地循环遍历。如果你有兴趣了解更多，Jake
+    Vanderplas 在 [这里](https://youtu.be/EEUXKG97YRw?t=613) 做了一个很棒的讲座。
 - en: '![parallelizing blog 6](../Images/5202adfec876af490cac38a2ffebf8a9.png)'
   id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![并行化博客 6](../Images/5202adfec876af490cac38a2ffebf8a9.png)'
 - en: IPython Parallel
   id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: IPython 并行
 - en: The IPython shell supports interactive parallel and distributed computing across
     multiple IPython instances. IPython Parallel was developed (almost) together with
     IPython.  When IPython was renamed to Jupyter, they split out IPython Parallel
@@ -267,6 +316,9 @@
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: IPython shell 支持跨多个 IPython 实例的交互式并行和分布式计算。IPython Parallel 几乎是与 IPython 一起开发的。当
+    IPython 更名为 Jupyter 时，他们将 IPython Parallel 拆分成了一个独立的包。[IPython Parallel](https://ipython.org/ipython-doc/3/parallel/parallel_intro.html)
+    具有许多优点，但也许最大的优点是它使得并行应用程序可以交互式地开发、执行和监控。在进行并行计算时，通常会使用 ipcluster 命令开始。
 - en: '[PRE6]'
   id: totrans-48
   prefs: []
@@ -278,16 +330,21 @@
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一个参数控制要启动的引擎（节点）数量。上述命令在 [安装 ipyparallel Python 包](https://ipyparallel.readthedocs.io/en/latest/)
+    后变得可用。以下是一个示例输出：
 - en: '![parallelizing blog 7](../Images/49b3a897c2a925662927af084c4d024c.png)'
   id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![并行化博客 7](../Images/49b3a897c2a925662927af084c4d024c.png)'
 - en: 'The next step is to provide Python code that should connect to ipcluster and
     start parallel jobs. Fortunately, IPython provides a convenient API for doing
     this. The code looks like process-based parallelism based on the Pool object:'
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是提供 Python 代码，以连接到 ipcluster 并启动并行作业。幸运的是，IPython 提供了一个方便的 API 来实现这一点。代码看起来像是基于
+    Pool 对象的进程并行：
 - en: '[PRE7]'
   id: totrans-52
   prefs: []
@@ -297,30 +354,36 @@
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '[代码示例](https://gist.github.com/mGalarnyk/6dab23cc6485f145d2b148fc64d34b3c)'
 - en: 'The code above executed in a new tab in the terminal produces the output shown
     below:'
   id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 在终端的新标签页中执行上述代码会产生如下输出：
 - en: '![parallelizing blog 8](../Images/e475926323d5f6e832d388f481c8efc1.png)'
   id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![并行化博客 8](../Images/e475926323d5f6e832d388f481c8efc1.png)'
 - en: The execution times with and without NumPy for IPython Parallel are 13.88 ms
     and 9.98 ms, respectively. Note, there are no logs included in the standard output,
     however they can be assessed with additional commands.
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: IPython Parallel 使用和不使用 NumPy 的执行时间分别为 13.88 毫秒和 9.98 毫秒。请注意，标准输出中没有包含日志，但可以通过附加命令进行查看。
 - en: '![parallelizing blog 9](../Images/433106b430695e82862e568760b0396d.png)'
   id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![并行化博客 9](../Images/433106b430695e82862e568760b0396d.png)'
 - en: Ray
   id: totrans-58
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Ray
 - en: Like IPython Parallel, [Ray](https://docs.ray.io/en/master/index.html) can be
     used for parallel **and** distributed computing. Ray is a fast, simple distributed
     execution framework that makes it easy to scale your applications and to leverage
@@ -330,10 +393,13 @@
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 像 IPython Parallel 一样，[Ray](https://docs.ray.io/en/master/index.html) 可以用于并行**和**分布式计算。Ray
+    是一个快速、简单的分布式执行框架，使得扩展应用程序和利用最先进的机器学习库变得容易。使用 Ray，你可以将顺序运行的 Python 代码转换为分布式应用程序，几乎不需要修改代码。
 - en: '![Figure](../Images/8e1afe4eff7de3591f54c705e0083009.png)'
   id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/8e1afe4eff7de3591f54c705e0083009.png)'
 - en: While this tutorial briefly goes over how Ray makes it easy to parallelize plain
     Python code, it is important to note that Ray and its ecosystem also make it easy
     to parallelize existing libraries like [scikit-learn](https://medium.com/distributed-computing-with-ray/how-to-speed-up-scikit-learn-model-training-aaf17e2d1e1), [XGBoost](https://www.anyscale.com/blog/distributed-xgboost-training-with-ray), [LightGBM](https://www.anyscale.com/blog/introducing-distributed-lightgbm-training-with-ray), [PyTorch](https://medium.com/pytorch/getting-started-with-distributed-machine-learning-with-pytorch-and-ray-fd83c98fdead),
@@ -341,6 +407,7 @@
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然本教程简要介绍了 Ray 如何使平凡的 Python 代码并行化，但需要注意的是，Ray 及其生态系统也使得并行化现有库变得容易，比如 [scikit-learn](https://medium.com/distributed-computing-with-ray/how-to-speed-up-scikit-learn-model-training-aaf17e2d1e1)， [XGBoost](https://www.anyscale.com/blog/distributed-xgboost-training-with-ray)， [LightGBM](https://www.anyscale.com/blog/introducing-distributed-lightgbm-training-with-ray)， [PyTorch](https://medium.com/pytorch/getting-started-with-distributed-machine-learning-with-pytorch-and-ray-fd83c98fdead)，等等。
 - en: To use Ray, ray.init() is needed to start all of the relevant Ray processes.
     By default, Ray creates one worker process per CPU core. If you would want to
     run Ray on a cluster, you would need to pass in a cluster address with something
@@ -348,6 +415,8 @@
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 要使用 Ray，需要调用 ray.init() 来启动所有相关的 Ray 进程。默认情况下，Ray 为每个 CPU 核心创建一个工作进程。如果你想在集群上运行
+    Ray，则需要传入集群地址，例如 ray.init(address='insertAddressHere')。
 - en: '[PRE8]'
   id: totrans-63
   prefs: []
@@ -360,6 +429,8 @@
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是创建一个 Ray 任务。这可以通过使用 @ray.remote 装饰器装饰普通 Python 函数来完成。这会创建一个任务，可以在你笔记本电脑的
+    CPU 核心（或 Ray 集群）中调度。以下是之前创建的 complex_operation_numpy 的示例：
 - en: '[PRE9]'
   id: totrans-65
   prefs: []
@@ -369,6 +440,7 @@
   id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 在最后一步，像这样在 Ray 运行时中执行这些函数：
 - en: '[PRE10]'
   id: totrans-67
   prefs: []
@@ -379,10 +451,12 @@
   id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行 [这个脚本](https://gist.github.com/mGalarnyk/30c8672620c8655a37940be935899a57)后，你将获得类似于以下的输出：
 - en: '![parallelizing blog 11](../Images/464768f1d47ae3ef302ee401e8f70cac.png)'
   id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![并行化博客 11](../Images/464768f1d47ae3ef302ee401e8f70cac.png)'
 - en: The execution times with and without NumPy for Ray are 3.382sec and 419.98ms,
     respectively. It is important to remember that the performance benefits of Ray
     will be more pronounced when executing long-running tasks like the graph below
@@ -390,28 +464,34 @@
   id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: Ray 的执行时间在有 NumPy 和没有 NumPy 的情况下分别为 3.382 秒和 419.98 毫秒。需要记住的是，Ray 的性能优势在执行长期任务时会更加明显，如下图所示。
 - en: '![Figure](../Images/da5f3e3440818c336832cd06dfbab026.png)'
   id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/da5f3e3440818c336832cd06dfbab026.png)'
 - en: Ray has more pronounced benefits when running bigger jobs [(image source)](https://towardsdatascience.com/10x-faster-parallel-python-without-python-multiprocessing-e5017c93cce1)
   id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: Ray 在运行更大任务时具有更明显的好处 [(图片来源)](https://towardsdatascience.com/10x-faster-parallel-python-without-python-multiprocessing-e5017c93cce1)
 - en: If you would like to learn about Ray’s syntax, there is an introductory tutorial
     on it [here](https://www.anyscale.com/blog/writing-your-first-distributed-python-application-with-ray).
   id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解 Ray 的语法，可以在 [这里](https://www.anyscale.com/blog/writing-your-first-distributed-python-application-with-ray) 查看入门教程。
 - en: '![parallelizing blog 13](../Images/ff1bcf03b91977091f603a756bd3e9a3.png)'
   id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![并行化博客 13](../Images/ff1bcf03b91977091f603a756bd3e9a3.png)'
 - en: Alternative Python Implementations
   id: totrans-75
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 替代的 Python 实现
 - en: One final consideration is that you can apply multithreading using other Python
     implementations. Examples include IronPython for .NET and Jython for Java. In
     such cases, you could use the low-level threading support from the underlying
@@ -420,11 +500,14 @@
   id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一个考虑是，你可以使用其他 Python 实现来应用多线程。例如，包括 .NET 的 IronPython 和 Java 的 Jython。在这种情况下，你可以利用底层框架提供的低级线程支持。如果你已经对
+    .NET 或 Java 的多进程能力有经验，这种方法会很有用。
 - en: Conclusion
   id: totrans-77
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: This article reviewed common approaches for parallelizing Python through code
     samples and by highlighting some of their advantages and disadvantages. We performed
     tests using benchmarks on simple numerical data. It is important to keep in mind
@@ -434,6 +517,7 @@
   id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文通过代码示例回顾了并行化 Python 的常见方法，并突出了它们的一些优缺点。我们使用简单的数值数据进行了基准测试。需要注意的是，并行化的代码通常会引入一些开销，并且并行化的好处在较大的任务中比在本教程中的短小计算中更为明显。
 - en: Keep in mind that the parallelization can be more powerful for other applications.
     Especially when dealing with typical AI-based tasks in which you must perform
     repetitive fine-tuning of your models. In such cases, [Ray](https://github.com/ray-project/ray) offers
@@ -442,91 +526,114 @@
   id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 请记住，平行化在其他应用中可能更为强大。特别是在处理典型的 AI 任务时，你必须对模型进行重复的微调。在这种情况下，[Ray](https://github.com/ray-project/ray)
+    提供了最佳的支持，因为它拥有丰富的生态系统、自动扩展、容错能力和使用远程机器的能力。
 - en: '**[Dawid Borycki](https://www.linkedin.com/in/dawidborycki/)** is a Biomedical
     Researcher and Software Engineer, book author and conference speaker.'
   id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Dawid Borycki](https://www.linkedin.com/in/dawidborycki/)** 是生物医学研究员和软件工程师，同时也是书籍作者和会议演讲者。'
 - en: '**[Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)** is a Data
     Science Professional, and works in Developer Relations at Anyscale.'
   id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)** 是数据科学专家，现任
+    Anyscale 的开发者关系工作者。'
 - en: '[Original](https://www.anyscale.com/blog/parallelizing-python-code). Reposted
     with permission.'
   id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.anyscale.com/blog/parallelizing-python-code)。经允许转载。'
 - en: '**Related:**'
   id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How to Speed up Scikit-Learn Model Training](/2021/02/speed-up-scikit-learn-model-training.html)'
   id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何加速 Scikit-Learn 模型训练](/2021/02/speed-up-scikit-learn-model-training.html)'
 - en: '[Writing Your First Distributed Python Application with Ray](/2021/08/distributed-python-application-ray.html)'
   id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Ray 编写你的第一个分布式 Python 应用程序](/2021/08/distributed-python-application-ray.html)'
 - en: '[Dask and Pandas: No Such Thing as Too Much Data](/2021/03/dask-pandas-data.html)'
   id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Dask 和 Pandas：数据多到没法处理？](/2021/03/dask-pandas-data.html)'
 - en: '* * *'
   id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-88
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 工作'
 - en: '* * *'
   id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
   id: totrans-93
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Optimizing Python Code Performance: A Deep Dive into Python Profilers](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
   id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优化 Python 代码性能：深入探讨 Python 性能分析器](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)'
 - en: '[Managing Your Reusable Python Code as a Data Scientist](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)'
   id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[作为数据科学家管理可重用的 Python 代码](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)'
 - en: '[Announcing PyCaret 3.0: Open-source, Low-code Machine Learning in Python](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)'
   id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)'
 - en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
   id: totrans-97
   prefs:
