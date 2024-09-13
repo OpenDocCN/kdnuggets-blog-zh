@@ -1,46 +1,71 @@
 - en: Powerful CSV processing with kdb+
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 强大的 CSV 处理与 kdb+
 - en: 原文：[https://www.kdnuggets.com/2020/07/powerful-csv-processing-kdb.html](https://www.kdnuggets.com/2020/07/powerful-csv-processing-kdb.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/07/powerful-csv-processing-kdb.html](https://www.kdnuggets.com/2020/07/powerful-csv-processing-kdb.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Ferenc Bodon Ph.D.](https://www.linkedin.com/in/ferencbodon/), Data Engineer,
     Cloud Solutions Architect at Kx**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Ferenc Bodon 博士](https://www.linkedin.com/in/ferencbodon/)，数据工程师，Kx 的云解决方案架构师**'
 - en: '![Image](../Images/5312dad5957ac7d5fc264099ee0f10d3.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/5312dad5957ac7d5fc264099ee0f10d3.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Comma-separated text files (CSV) are the most fundamental format for data processing.
     All programming languages and software that support working with relational data,
     also provide some level of CSV handling. You can persist and process data without
@@ -48,92 +73,132 @@
     with all its features, like handling transactions and concurrent/remote access,
     indexing, etc… The lightweight CSV format allows for easy processing and sharing
     of the captured information.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 逗号分隔文本文件（CSV）是数据处理的最基本格式。所有支持处理关系数据的编程语言和软件，都提供一定程度的 CSV 处理功能。你可以在不安装数据库管理系统的情况下持久化和处理数据。通常，你不需要具有所有功能的完整
+    DBMS，如处理事务和并发/远程访问、索引等……轻量级的 CSV 格式允许轻松处理和共享捕获的信息。
 - en: The CSV format predates personal computers and has been one of the most common
     data exchange formats for almost 50 years. CSV files will remain with us in the
     future. Working with this format efficiently is a core requirement of a productive
     developer, data engineer/scientist, DevOps person, etc… You may need to filter
     rows, sort by a column, select existing or derive new columns. Perhaps you need
     to do complex analysis that requires aggregation and grouping.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: CSV 格式早于个人电脑，并且已成为近 50 年来最常见的数据交换格式之一。CSV 文件将在未来继续存在。有效地处理这种格式是高效开发人员、数据工程师/科学家、DevOps
+    人员等的核心要求……你可能需要过滤行、按列排序、选择现有列或派生新列。也许你需要进行复杂的分析，这需要聚合和分组。
 - en: This article provides a glimpse into the available tools to work with CSV files
     and describes how kdb+ and its query language q raise CSV processing to a new
     level of performance and simplicity.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文提供了处理 CSV 文件的可用工具的概述，并描述了 kdb+ 及其查询语言 q 如何将 CSV 处理提升到新的性能和简洁水平。
 - en: Common CSV tools
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 常见的 CSV 工具
 - en: Linux command-line tools
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Linux 命令行工具
 - en: Many CSV processing need to be done in a Linux or Mac environment that has a
     powerful terminal console with some kind of shells on it. Most shells, like Bash,
     support arrays. You can read a CSV line-by-line and store all fields in an array
     variable. You can use built-in string manipulation and integer calculations (even
     float calculations with e.g `bc -l`) to operate on cell values. The code will
     be lengthy and hard to maintain.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多 CSV 处理需要在具有强大终端控制台和某种 shell 的 Linux 或 Mac 环境中完成。大多数 shell，如 Bash，支持数组。你可以逐行读取
+    CSV 并将所有字段存储在数组变量中。你可以使用内置的字符串操作和整数计算（甚至用 `bc -l` 进行浮点计算）对单元格值进行操作。代码将会很长且难以维护。
 - en: General text processing tools like [`awk`](https://en.wikipedia.org/wiki/AWK) and [`sed`](https://en.wikipedia.org/wiki/Sed) scripts
     may result in shorter and simpler code. Commands like [`cut`](https://en.wikipedia.org/wiki/Cut_(Unix)), [`sort`](https://en.wikipedia.org/wiki/Sort_(Unix)), [`uniq`](https://en.wikipedia.org/wiki/Uniq) and [`paste`](https://en.wikipedia.org/wiki/Paste_(Unix)) further
     simplify CSV processing. You can specify the separator and **refer to fields by
     positions**.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 一般的文本处理工具如[`awk`](https://en.wikipedia.org/wiki/AWK)和[`sed`](https://en.wikipedia.org/wiki/Sed)脚本可能会导致更短更简单的代码。像[`cut`](https://en.wikipedia.org/wiki/Cut_(Unix))、[`sort`](https://en.wikipedia.org/wiki/Sort_(Unix))、[`uniq`](https://en.wikipedia.org/wiki/Uniq)和[`paste`](https://en.wikipedia.org/wiki/Paste_(Unix))这样的命令进一步简化了
+    CSV 处理。你可以指定分隔符并**按位置引用字段**。
 - en: 'The world is constantly changing. So do CSV files. Position-based reference
     breaks if a new column is added ahead of the referred column or columns are shuffled
     e.g. to move related columns next to each other. The problem manifests silently:
     your scripts may run smoothly, but you just use a different column in your calculation!
     If you don’t have a regression-testing framework to safeguard your codebase, then
     the end-user (or your competitor) might discover the problem. This can be embarrassing.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 世界在不断变化，CSV 文件也是如此。如果在引用的列前添加了新列，或者列被重新排列（例如，将相关列移到一起），基于位置的引用会被打破。这个问题表现得很隐蔽：你的脚本可能运行顺利，但你只是用到了不同的列进行计算！如果你没有回归测试框架来保护你的代码库，最终用户（或你的竞争对手）可能会发现这个问题。这可能会很尴尬。
 - en: Position-based reference creates fragile code. Processing CSV by these Linux
     commands is great for prototyping and for quick analysis but you hit the limits
     once your codebase starts increasing or you share scripts with other colleagues.
     No wonder that in SQL the position-based column reference is limited and discouraged.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于位置的引用会创建脆弱的代码。使用这些 Linux 命令处理 CSV 对于原型设计和快速分析很有效，但一旦你的代码库开始增加或你与其他同事共享脚本，就会遇到限制。难怪在
+    SQL 中，基于位置的列引用是有限制且不鼓励使用的。
 - en: The huge advantage of Linux command-line tools is that no installation is required.
     Your shell script will likely run on other's Linux systems. Familiarity with tools
     readily available in Linux is useful, but they should often be avoided for complex,
     long-lived, tasks.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: Linux 命令行工具的巨大优势在于无需安装。你的 shell 脚本很可能可以在其他人的 Linux 系统上运行。熟悉 Linux 中随手可用的工具是有用的，但在处理复杂且长期的任务时，通常应避免使用这些工具。
 - en: CSVKit
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: CSVKit
 - en: Many open-source libraries offer CSV support. The Python library [CSVKit](https://csvkit.readthedocs.io/en/latest/#) is
     one of the most popular. It offers a more robust solution than native Linux commands,
     such as allowing **reference of columns by name**. The column names are stored
     in the first row of the CSV. Reference by name is sensitive to column renaming
     but this probably happens less frequently than adding or moving columns.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多开源库提供 CSV 支持。Python 库[CSVKit](https://csvkit.readthedocs.io/en/latest/#)是最受欢迎的库之一。它提供了比本地
+    Linux 命令更强大的解决方案，例如允许**按名称引用列**。列名存储在 CSV 的第一行。按名称引用对列重命名很敏感，但这可能发生的频率低于添加或移动列。
 - en: Also, CSVKit handles the first rows better than the general-purpose text tools
     do. Linux command `sort` treats the first row as any other row and can place it
     in the middle of the output. Similarly, `cat` includes the first rows when you
     concatenate multiple CSV files. Commands `csvsort` and `csvstack` handle first
     rows properly.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，CSVKit 对第一行的处理比通用文本工具更好。Linux 命令`sort`将第一行视为其他任何一行，并可能将其放置在输出的中间。类似地，`cat`在连接多个
+    CSV 文件时包括了第一行。命令`csvsort`和`csvstack`正确处理第一行。
 - en: Finally, the CSVKit developers took special care to provide consistent command-line
     parameters, e.g. separator is defined by `-d`. In contrast, you need to remember
     that the separator is specified by `-t` for [`sort`](https://en.wikipedia.org/wiki/Sort_(Unix)) and `-d` for
     the other Linux commands, [`cut`](https://en.wikipedia.org/wiki/Cut_(Unix)), [`paste`](https://en.wikipedia.org/wiki/Paste_(Unix)).
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，CSVKit 开发者特别注意提供一致的命令行参数，例如分隔符由`-d`定义。相比之下，你需要记住`sort`的分隔符由`-t`指定，而其他 Linux
+    命令，如[`cut`](https://en.wikipedia.org/wiki/Cut_(Unix))、[`paste`](https://en.wikipedia.org/wiki/Paste_(Unix))，则使用`-d`。
 - en: CSVKit includes the simply-named utilities, [`csvcut`](https://csvkit.readthedocs.io/en/latest/scripts/csvcut.html), [`csvgrep`](https://csvkit.readthedocs.io/en/latest/scripts/csvgrep.html) and [`csvsort`](https://csvkit.readthedocs.io/en/latest/scripts/csvsort.html),
     which replace the traditional Linux commands `cut`, `grep` and `sort`. Nonetheless,
     the merit of the Linux commands is their speed.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: CSVKit 包含一些简单命名的工具，如 [`csvcut`](https://csvkit.readthedocs.io/en/latest/scripts/csvcut.html)、[`csvgrep`](https://csvkit.readthedocs.io/en/latest/scripts/csvgrep.html)
+    和 [`csvsort`](https://csvkit.readthedocs.io/en/latest/scripts/csvsort.html)，它们替代了传统的
+    Linux 命令 `cut`、`grep` 和 `sort`。尽管如此，Linux 命令的优点在于它们的速度。
 - en: You probably use Linux commands [`head`](https://en.wikipedia.org/wiki/Head_(Unix)), [`tail`](https://en.wikipedia.org/wiki/Tail_(Unix)), [`less`](https://en.wikipedia.org/wiki/Less_(Unix))/[`more`](https://en.wikipedia.org/wiki/More_(command)) and [`cat`](https://en.wikipedia.org/wiki/Cat_(Unix)) to
     take a quick look at the content of a text file. Unfortunately, the output of
     these tools is not appealing for CSV files. The columns are not aligned and you
@@ -143,45 +208,72 @@
     your desktop. You can save time and work in the console by using [`csvlook`](https://csvkit.readthedocs.io/en/latest/scripts/csvlook.html).
     Command `csvlook` nicely aligns column under the column name. To execute the command
     below, download arms dealership data and convert it to `data.csv` as [CSVKit tutorial](https://csvkit.readthedocs.io/en/latest/tutorial/1_getting_started.html#getting-the-data) describes.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能使用 Linux 命令 [`head`](https://en.wikipedia.org/wiki/Head_(Unix))、[`tail`](https://en.wikipedia.org/wiki/Tail_(Unix))、[`less`](https://en.wikipedia.org/wiki/Less_(Unix))/[`more`](https://en.wikipedia.org/wiki/More_(command))
+    和 [`cat`](https://en.wikipedia.org/wiki/Cat_(Unix)) 来快速查看文本文件的内容。不幸的是，这些工具的输出对于
+    CSV 文件并不理想。列对不齐，你会花费大量时间眯着眼睛在单色屏幕上判断给定单元格属于哪个列。你可能会放弃并将数据导入 Excel 或 Google 表格。但是，如果文件在远程机器上，你首先需要将其通过
+    SCP 传输到桌面。你可以通过使用 [`csvlook`](https://csvkit.readthedocs.io/en/latest/scripts/csvlook.html)
+    节省时间并在控制台中工作。命令 `csvlook` 能很好地对齐列名下的列。要执行下面的命令，请下载武器销售数据并将其转换为 `data.csv`，如 [CSVKit
+    教程](https://csvkit.readthedocs.io/en/latest/tutorial/1_getting_started.html#getting-the-data)
+    所述。
 - en: '[PRE0]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Don’t worry if your console is narrow: pipe the output to `less -S` and use
     arrow keys to move left and right.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你的控制台很窄，不用担心：将输出管道到 `less -S` 并使用箭头键左右移动。
 - en: Another useful extension included in CSVKit is the command [`csvstat`](https://csvkit.readthedocs.io/en/latest/scripts/csvstat.html).
     It analyzes the file contents and displays statistics like the number of distinct
     values of all columns. Also, it tries to infer types. If the column type is a
     number then it also returns maximum, minimum, mean, median, and standard deviation
     of the values.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: CSVKit 中另一个有用的扩展是命令 [`csvstat`](https://csvkit.readthedocs.io/en/latest/scripts/csvstat.html)。它分析文件内容并显示统计信息，比如所有列的不同值的数量。同时，它会尝试推断数据类型。如果列类型是数字，它还会返回值的最大值、最小值、均值、中位数和标准差。
 - en: To perform aggregations, filtering and grouping, you can use the CSVKit command [`csvsql`](https://csvkit.readthedocs.io/en/latest/scripts/csvsql.html) that
     lets you run ANSI SQL commands on CSV files.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 要执行聚合、过滤和分组操作，可以使用 CSVKit 命令 [`csvsql`](https://csvkit.readthedocs.io/en/latest/scripts/csvsql.html)，该命令允许你对
+    CSV 文件运行 ANSI SQL 命令。
 - en: xsv
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: xsv
 - en: Some CSVKit commands are slow because they load the entire file into the memory
     and create an in-memory database. Rust developers reimplemented several traditional
     tools like `cat`, `ls`, `grep` and `find` and tools like [`bat`](https://github.com/sharkdp/bat), [`exa`](https://github.com/ogham/exa), [`ripgrep`](https://github.com/BurntSushi/ripgrep) and [`fd`](https://github.com/sharkdp/fd) were
     born. No wonder they also created a performant tool for CSV processing, library [`xsv`](https://github.com/BurntSushi/xsv).
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些 CSVKit 命令比较慢，因为它们将整个文件加载到内存中并创建内存数据库。Rust 开发者重新实现了几个传统工具，如 `cat`、`ls`、`grep`
+    和 `find`，并且像 [`bat`](https://github.com/sharkdp/bat)、[`exa`](https://github.com/ogham/exa)、[`ripgrep`](https://github.com/BurntSushi/ripgrep)
+    和 [`fd`](https://github.com/sharkdp/fd) 这样的工具应运而生。难怪他们还创建了一个高性能的 CSV 处理工具，即库 [`xsv`](https://github.com/BurntSushi/xsv)。
 - en: The Rust library also supports selecting columns, filtering, sorting and joining
     CSV files. An index can be added to CSV files that are frequently processed to
     speed up operations. Indexing is an elegant and lightweight step towards DBMS.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: Rust 库还支持选择列、过滤、排序和连接 CSV 文件。可以为经常处理的 CSV 文件添加索引，以加快操作速度。索引是迈向 DBMS 的优雅而轻量化的一步。
 - en: Type inference
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 类型推断
 - en: CSV is a text format that holds no type information for the columns. A string
     can be converted to a datatype based on its value. If all values of a column match
     the pattern `YYYY.MM.DD` we can conclude that the column holds dates. But how
@@ -191,85 +283,125 @@
     engineer the data. If all values of the column match the string `HHMMSS` then
     we **can** conclude with high confidence that the column holds time values. The
     following are two approaches we can take to make a decision.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: CSV是一种文本格式，不包含列的类型信息。一个字符串可以根据其值转换为数据类型。如果列的所有值都匹配模式`YYYY.MM.DD`，我们可以得出列包含日期的结论。但我们如何处理字面量100000？它是整数，还是时间10:00:00？也许源过程只支持数字并省略了时间分隔符？在现实生活中，关于来源的信息并不总是可用，你需要逆向工程数据。如果列的所有值都匹配字符串`HHMMSS`，那么我们**可以**高置信度地得出列包含时间值的结论。以下是我们可以采取的两种方法来做出决定。
 - en: 'First, we could be strict: we predefine the pattern that any type needs to
     match. The patterns do not overlap. If time is defined as `HH:MM:SS` and integers
     as `[1-9][0-9]*` then 100000 is an integer.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们可以严格一些：我们预定义任何类型需要匹配的模式。模式不重叠。如果时间被定义为`HH:MM:SS`而整数定义为`[1-9][0-9]*`，那么100000是一个整数。
 - en: Second, we could let patterns overlap and in case of conflict we choose the
     type with the smaller domain or based on some rules. This approach prefers time
     over int for 100000 if the time pattern also contains `HHMMSS`.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 其次，我们可以让模式重叠，如果发生冲突，我们选择域较小的类型或基于某些规则。这种方法偏好时间而非整数，如果时间模式还包含`HHMMSS`。
 - en: The CSVKit library implements the first approach.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: CSVKit库实现了第一种方法。
 - en: q/kdb+
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: q/kdb+
 - en: Kdb+ is the [world's fastest time-series database](https://kx.com/media/2018/10/Kx-FAQ.pdf),
     optimized for ingesting, analyzing and storing massive amounts of structured data.
     Its query language, called [Q](https://code.kx.com/q4m3/), is a general-purpose
     programming language. Tables are first-class objects in q. Q tables are semantically
     similar to Pandas/R data frames. You can persist tables to disk, hence the solution
     can be considered a database, referred to as [kdb+](https://code.kx.com/q4m3/14_Introduction_to_Kdb+/).
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: Kdb+是[全球最快的时间序列数据库](https://kx.com/media/2018/10/Kx-FAQ.pdf)，经过优化，用于摄取、分析和存储大量结构化数据。其查询语言叫做[Q](https://code.kx.com/q4m3/)，是一种通用编程语言。表格在q中是第一类对象。Q表语义上类似于Pandas/R数据框。你可以将表格持久化到磁盘，因此这个解决方案可以被认为是一个数据库，称为[kdb+](https://code.kx.com/q4m3/14_Introduction_to_Kdb+/)。
 - en: Exporting and importing CSV files is part of the core language. Table `t` can
     be saved in directory `dir` by command
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 导出和导入CSV文件是核心语言的一部分。表`t`可以通过命令保存在目录`dir`中。
 - en: '[PRE1]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Here `q)` denotes the default prompt we get after starting the q interpreter.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里`q)`表示启动q解释器后的默认提示符。
 - en: To choose a different name, e.g. `output.csv` then use the File Text operator `0:` for
     saving text and the utility [`.h.cd`](https://code.kx.com/q/ref/doth/#hcd-csv-from-data) to
     convert a kdb+ table to a list of strings
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 要选择不同的名称，例如`output.csv`，然后使用文件文本操作符`0:`来保存文本，并使用实用工具[`.h.cd`](https://code.kx.com/q/ref/doth/#hcd-csv-from-data)将kdb+表转换为字符串列表。
 - en: '[PRE2]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: You can also use [other separators](https://code.kx.com/q/ref/file-text/#prepare-text) than
     a comma.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 你也可以使用[其他分隔符](https://code.kx.com/q/ref/file-text/#prepare-text)而不是逗号。
 - en: To import a CSV `data.csv`, specify the column types and the separator. The
     following command assumes the column names are in the first row.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 要导入CSV`data.csv`，请指定列类型和分隔符。以下命令假设列名在第一行。
 - en: '[PRE3]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The type encoding is available on the [kdb+ reference card](https://code.kx.com/q/ref/#datatypes), `E` stands
     for real, `I` for integer, `S` for enumeration (symbol in kdb+ parlance), `D` for
     date, etc… Use spaces to ignore columns. Character `*` denotes string.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 类型编码可以在[kdb+参考卡](https://code.kx.com/q/ref/#datatypes)上找到，`E`代表实数，`I`代表整数，`S`代表枚举（kdb+术语中的符号），`D`代表日期，等等……使用空格来忽略列。字符`*`代表字符串。
 - en: Specifying types manually has high maintenance costs, is laborious for wide
     CSV files and is prone to error. Inserting a single new column can break the code.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 手动指定类型的维护成本高，对于宽CSV文件来说繁琐且容易出错。插入一个新列可能会破坏代码。
 - en: Fortunately, Kx open-source libraries [csvutil](https://github.com/KxSystems/kdb/blob/master/utils/csvutil.q) and [csvguess](https://github.com/KxSystems/kdb/blob/master/utils/csvguess.q) offer
     a convenient and robust solution.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，Kx 开源库[csvutil](https://github.com/KxSystems/kdb/blob/master/utils/csvutil.q)和[csvguess](https://github.com/KxSystems/kdb/blob/master/utils/csvguess.q)提供了一个方便且可靠的解决方案。
 - en: Script `csvutil.q` contains a function to load a CSV file, analyze its values,
     infer types and return a kdb+ table.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 脚本`csvutil.q`包含一个函数，用于加载 CSV 文件，分析其值，推断类型并返回一个 kdb+ 表。
 - en: '[PRE4]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '[![displaying CSV content by .csv.read](../Images/fdebb8a6b54bd78bf986c1e29bd54f73.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/csvread.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![通过 .csv.read 显示 CSV 内容](../Images/fdebb8a6b54bd78bf986c1e29bd54f73.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/csvread.png)'
 - en: Script `csvguess.q` lets you save a metadata about the columns into a text file.
     Developers can review and adjust the type column and use the metadata in production
     to load a CSV with the correct types. The two scripts have different users. Data
@@ -277,129 +409,185 @@
     CSV feed then they use the assisted metadata export and import feature of `csvguess.q`.
     The type hints provide a less error-prone solution than manually entering types
     for all columns.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 脚本`csvguess.q`让你能够将关于列的元数据保存到文本文件中。开发人员可以查看和调整类型列，并在生产环境中使用这些元数据以正确的类型加载 CSV。这两个脚本有不同的用户。数据科学家更倾向于使用`csvutil.q`进行临时分析。当
+    IT 人员配置 kdb+ CSV 数据源时，他们会使用`csvguess.q`的辅助元数据导出和导入功能。类型提示提供了一个比手动输入所有列的类型更少出错的解决方案。
 - en: Type conversion
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 类型转换
 - en: Library `csvutil.q` supports both type conversions - the strict mode is implemented
     by `.csv.basicread`, while the `.csv.read` function checks more patterns to infer
     types.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 库`csvutil.q`支持两种类型转换 - 严格模式由`.csv.basicread`实现，而`.csv.read`函数检查更多模式以推断类型。
 - en: Function `.csv.read` is just a wrapper around the general function `.csv.data` that
     accepts a filename and a meta-data table. The meta-data can be generated by `.csv.basicinfo` and `.csv.info` depending
     on the inference rule set we would like to employ. You can see the function definition
     in the q interpreter by typing the function name the press Enter.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 函数`.csv.read`只是一个通用函数`.csv.data`的包装器，它接受一个文件名和一个元数据表。元数据可以通过`.csv.basicinfo`和`.csv.info`生成，具体取决于我们希望采用的推断规则。你可以在
+    q 解释器中通过输入函数名称并按 Enter 键来查看函数定义。
 - en: '[PRE5]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The column metadata table is a bit similar to `csvstat` output.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 列元数据表有点类似于`csvstat`的输出。
 - en: '[![CSV meta-information by csvinfo](../Images/97a66dfa6a6970a44e94db09b7821fd1.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/csvinfo.png)'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![通过 csvinfo 显示 CSV 元信息](../Images/97a66dfa6a6970a44e94db09b7821fd1.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/csvinfo.png)'
 - en: Each row belongs to a column and each field stores some useful information about
     the column, like name (`c`), inferred type (`t`), max width (`mw`), etc… Field `gr` short
     for *granularity* is particularly interesting as it indicates how well the column
     values compress and if they should be stored as an enumeration rather than as
     strings. For more details about the columns, please see the [documentation](https://github.com/KxSystems/kdb/blob/master/utils/csv.md).
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 每一行属于一列，每个字段存储一些关于列的有用信息，如名称（`c`）、推断的类型（`t`）、最大宽度（`mw`）等。字段`gr`，即*粒度*，特别有趣，因为它表示列值的压缩效果如何，以及它们是否应作为枚举存储而不是字符串。有关列的更多详细信息，请参见[文档](https://github.com/KxSystems/kdb/blob/master/utils/csv.md)。
 - en: You can control the number of lines to be examined for type inference by variable `READLINES`.
     The default value is 5555\. The smaller this number the more chance of an inference
     rule to be coincidental. For example in the sample table (that was also used in
     the CSVKit tutorial) column `fips` matches the pattern `HMMSS` for the first 916
     rows, so we could infer time as type. The pattern matching breaks from line 917
     with values like `31067`. To disable partial file-based type inference, just change `READLINES`.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过变量`READLINES`控制要检查的行数以进行类型推断。默认值为 5555。这个数字越小，推断规则的偶然性越大。例如，在样本表（也用于 CSVKit
+    教程）中，列`fips`在前 916 行匹配模式`HMMSS`，所以我们可以推断时间为类型。从第 917 行开始，模式匹配中断，出现了像`31067`这样的值。要禁用基于文件的部分类型推断，只需更改`READLINES`。
 - en: '[PRE6]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: kdb+ based one-liners
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 基于 kdb+ 的单行命令
 - en: Let us wrap the q interpreter and the load of `csvutil.q` into a simple shell
     function to create a powerful command-line CSV processing utility.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们将 q 解释器和`csvutil.q`的加载包装成一个简单的 shell 函数，以创建一个强大的命令行 CSV 处理工具。
 - en: '[PRE7]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: The `-c 25 320` command-line parameter modifies the default 25×80 console size
     to display wide tables better. Switch `-s` allocates multiple threads for parallel
     processing. We set this value to the number of cores in your machine. Use `$(sysctl
     -n hw.ncpu)` if you work on a Mac. You can verify the setting by executing
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE8]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: to display the number of worker threads allocated for `qcsv`.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
 - en: This simple wrapper can easily achieve what `csvlook`, `csvcut`, `csvgrep` and `csvsort` are
     built for… and even more. For example,
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE9]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: mocks `csvlook` and displays the first 10 rows of `data.csv` nicely aligned.
     You can pipe the output to `less -S` for wide tables.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
 - en: '[![qcsv mocks csvlook](../Images/c6c9d702eb1d053d896faaedc4e2f83e.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/qmockscsvlook.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
 - en: Whenever you would like to see a leading or a trailing subset of a table, use
     the [sublist](https://code.kx.com/q/ref/sublist/) function.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE10]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Selecting columns, filtering, sorting
+  id: totrans-77
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Once we have a kdb+ table, we can use the full power of qSQL to do any data
     manipulation. To select columns
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE11]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Perhaps, you dislike the idea of devoting resources to analyze columns, load
     them into memory, then discard them. Good news! We have a shortcut.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
 - en: In kdb+, function `.csv.infoonly` accepts a list of columns to restrict the
     column analyses. We can plug the output into the generic `.csv.read`.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE12]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Using qSQL again, we can further filter our results to select matching rows.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE13]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: We can use q keywords `xasc` and `xdesc` to mock `csvsort`.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE14]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: Pipes
+  id: totrans-87
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -408,37 +596,49 @@
     Once the content of a CSV is converted to a kdb+ table, you probably want to stay
     in this place as the power of q offers a convenient and powerful data-processing
     environment.'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
 - en: In some cases, however, it can happen that you need to execute a black-box script
     that accepts the input via STDIN. Our `qcsv` command can convert a kdb+ table
     to produce the required output. For example, in the command below we massage the
     input CSV via an anonymous function then send the output to command `blackboxcommand`.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE15]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: Remember the trailing semi-colon if you want to process the standard input.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
 - en: Using pipe is the most elegant solution if you would like to run a `csvsql` query
     on a table that does not fit into the memory, and the query contains a WHERE clause
     that can be used to reduce the table size. For example, instead of doing
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE16]'
+  id: totrans-93
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: that builds a large in-memory database, you can do
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE17]'
+  id: totrans-95
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: Unfortunately, the capability of the `csvgrep` filtering is limited. You can
     specify columns and a single value or a regular expression. Even ANSI SQL can
     express more complex filtering.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
 - en: Libraries `csvutil.q` and `csvguess.q` offer the full power of the q language
@@ -446,103 +646,137 @@
     the input CSV segment and its output will be appended to the final result. To
     avoid creating a bulky one-liner I used the q interpreter and executed all statements
     one-by-one.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE18]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: 'In the q functions, you can do anything: use business or utility functions,
     do mathematics operations, call out to an external server, etc…'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
 - en: Function `POSTLOADALL` is executed after the bulk load is finished. This post
     processing is particularly useful in the load script generated by `csvguess.q`.
     For example, several columns (e.g. `root_stone`) in the [NY Street tree data](https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/pi5s-9p35) contain `Yes/No` values,
     that you can easily convert to boolean by
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE19]'
+  id: totrans-101
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: Indexing
+  id: totrans-102
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: The index feature of xsv speeds up queries by creating a binary file with extension `idx` next
     to the CSV.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE20]'
+  id: totrans-104
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: The recommended way of CSVKit to use indices and speed up SQL queries is to
     move the content of the CSV into an [SQLite](https://sqlite.org/) database and
     use its CLI to create an index and query the data. All these assume that you have
     permission to create files on the computer.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE21]'
+  id: totrans-106
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: To get a nicely formatted output of a query, use command line options `-header` and `-csv`.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE22]'
+  id: totrans-108
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: Similarly, you can get a huge performance improvement if you convert the CSV
     to the proprietary kdb+ format and you can get further gain if you add indices
     to columns you query often. You can also sort the table before saving. The [sorted
     attribute](https://code.kx.com/q4m3/8_Tables/#881-sorted-s) is attached to the
     column and several operations speed up by e.g. replacing linear searches with
     binary searches.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
 - en: In the command below, I create the kdb+ equivalent of `data.csv` as table `t` in
     directory `db` and [apply an index](https://code.kx.com/q4m3/8_Tables/#88-attributes) on
     column `county` via attribute [`g#](https://github.com/BodonFerenc/blog/blob/master/csv)
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE23]'
+  id: totrans-111
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: You don't need the `qcsv` wrapper around the q interpreter to run queries.
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE24]'
+  id: totrans-113
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: If we have limited hardware resources and the CSV does not fit into the memory,
     then we can use `csvguess.q` that supports batch loading and saving.
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE25]'
+  id: totrans-115
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: Note that kdb+ is a columnar database and each column has its own file representation.
     When you run query `select count i by county from t` then only column `county` is
     read and requires resources. This lets you run queries on tables that do not fit
     into the memory and `csvsql` exits with an error message.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
 - en: Comparing SQLite and kdb+ is beyond the scope of this paper, however, a quick
     comparison on a table with 3.1 million rows suggest that there is a huge difference
     in performance.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
 - en: '| operation | SQLite | kdb+ |'
+  id: totrans-118
   prefs: []
   type: TYPE_TB
 - en: '| **exec time of importing a CSV** | 223 sec | 6 sec |'
+  id: totrans-119
   prefs: []
   type: TYPE_TB
 - en: '| **memory need of importing a CSV** | 5841 kbyte | 178 kbyte |'
+  id: totrans-120
   prefs: []
   type: TYPE_TB
 - en: '| **exec time of a query** | 6693 msec | 16 msec |'
+  id: totrans-121
   prefs: []
   type: TYPE_TB
 - en: Exotic functions
+  id: totrans-122
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -551,42 +785,61 @@
     the q programming language. All the features, libraries and functions of q are
     available to further massage a CSV file. These include vector operations, functional
     programming, advanced iterators, date/time and string manipulation, etc.'
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: '**qSQL 是 ANSI SQL 的超集**。通过我们的单行命令 `qcsv`，我们可以表达 ANSI SQL 无法处理的复杂逻辑。此外，qSQL
+    只是 q 编程语言的一部分。q 的所有特性、库和函数都可以进一步处理 CSV 文件。这些功能包括向量操作、函数式编程、高级迭代器、日期/时间和字符串操作等。'
 - en: Kdb+ has more tricks up in its sleeves. We can load the business logic that
     we use in production. **It is like employing the stored procedures of our DBMS
     to analyze a local CSV. Kdb+ provides a single solution for streaming, in-memory,
     historic data processing that you can also leverage in your ad hoc data analyses.**
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: Kdb+ 还有更多的技巧。我们可以加载我们在生产中使用的业务逻辑。**这就像使用我们数据库管理系统的存储过程来分析本地 CSV 文件一样。Kdb+ 提供了一个用于流处理、内存中的历史数据处理的单一解决方案，你还可以在你的临时数据分析中利用它。**
 - en: The possibilities do not end here. Besides loading existing scripts you can
     also connect to existing kdb+ services easily. For example, to evoke q function `fn` on
     a remote kdb+ server at e.g. `72.7.9.248:5001` with the parameter of the content
     of the CSV, you can use make use of the [one-shot](https://code.kx.com/q/basics/ipc/#sync-request-get) TCP
     request.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 可能性并不止于此。除了加载现有脚本外，你还可以轻松连接到现有的 kdb+ 服务。例如，要在远程 kdb+ 服务器（如 `72.7.9.248:5001`）上调用
+    q 函数 `fn` 并传递 CSV 内容作为参数，你可以使用 [one-shot](https://code.kx.com/q/basics/ipc/#sync-request-get)
+    TCP 请求。
 - en: '[PRE26]'
+  id: totrans-126
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE26]'
 - en: With kdb+ you get full flexibility to plug scripts and services into a one-liner
     to process a CSV file. Simple and powerful, right?
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 kdb+，你可以完全灵活地将脚本和服务嵌入到单行命令中以处理 CSV 文件。简单而强大，对吧？
 - en: Let us examine three areas to get a feel for how far you can go in analyzing
     CSV files.
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们考察三个领域，以了解在分析 CSV 文件时可以达到多远的深度。
 - en: Pivot
+  id: totrans-129
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Pivot
 - en: Pivoting a table is a frequently-used function in data analyses. It provides
     a more compact view of the data by transforming column values to new columns.
     The new view allows for examining related values side-by-side. The technique is
     often used to visualize the output of aggregation with multiple grouping.
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据透视表是数据分析中常用的功能。它通过将列值转换为新列来提供更紧凑的数据视图。新的视图允许并排检查相关值。这种技术常用于可视化多个分组的聚合结果。
 - en: I put a [wrapper function](https://github.com/BodonFerenc/kdbutils/blob/master/doc/md/pvt.md) around
     the most [wide-spread pivot implementation](https://code.kx.com/q/kb/pivoting-tables/#a-very-general-pivot-function-and-an-example) into `utils/pivot.q`.
     All we need is to load library `pivot.q` and prepend `.pvt.pivot`. It requires
@@ -594,140 +847,208 @@
     typically the result of an aggregation with multiple group-bys. The pivot column
     is the last key column. See how pivoting converts a narrow, hard-to-digest table
     to a square-shaped format that nicely fits the console.
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在最 [广泛使用的数据透视实现](https://code.kx.com/q/kb/pivoting-tables/#a-very-general-pivot-function-and-an-example)
+    周围添加了一个 [封装函数](https://github.com/BodonFerenc/kdbutils/blob/master/doc/md/pvt.md)，放在
+    `utils/pivot.q` 中。我们只需加载库 `pivot.q` 并添加 `.pvt.pivot` 前缀。它需要一个 [键控表](https://code.kx.com/q4m3/8_Tables/#84-primary-keys-and-keyed-tables)，通常是通过多个分组聚合的结果。数据透视列是最后一个键列。看看数据透视如何将一个狭窄、难以消化的表格转换为一个适合控制台的方形格式。
 - en: '[![pivot](../Images/b3bfab149c1349f3c1f069a115abfa54.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/pivot.png)'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![pivot](../Images/b3bfab149c1349f3c1f069a115abfa54.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/pivot.png)'
 - en: The q language lets you easily extend pivot tables by total columns and total
     rows provided you are ready to leave the convenient world of select statements
     and use functional forms. Exploring the functional equivalent of any select statement
     is beyond the scope of this paper. Here, I only show the solution to demonstrate
     feasibility.
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: q 语言允许你通过总计列和总计行轻松扩展数据透视表，前提是你愿意离开方便的选择语句世界并使用函数式形式。探索任何选择语句的函数等效形式超出了本文的范围。这里，我仅展示解决方案以演示其可行性。
 - en: '[![pivot](../Images/08965b0cc529a99ef6e41f5316a84fff.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/pivotWithTotal.png)'
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![pivot](../Images/08965b0cc529a99ef6e41f5316a84fff.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/pivotWithTotal.png)'
 - en: Note, that the median of the totals cannot be directly derived from the raw
     pivot table. Three additional select statements are executed under the hood.
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，总计的中位数不能直接从原始数据透视表中得出。后台执行了三个额外的选择语句。
 - en: Array columns
+  id: totrans-136
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数组列
 - en: Nothing prevents you from putting a list of values into a cell of a CSV. You
     just need to use a separator other than a comma, e.g. whitespace or semicolon.
     Unlike ANSI SQL, kdb+ can handle array columns.
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 没有什么阻止你将值列表放入CSV的一个单元格中。你只需要使用除逗号之外的分隔符，例如空白或分号。与ANSI SQL不同，kdb+可以处理数组列。
 - en: We already used function [.h.cd](https://code.kx.com/q/ref/doth/#hcd-csv-from-data) to
     convert a kdb+ table to a list of strings before saving that to a CSV. `.h.cd` handles
     array columns as expected. You can set the secondary delimiter via [.h.d](https://code.kx.com/q/ref/doth/#hd-delimiter).
     Although a string in q is a list of characters, `.h.cd` does not insert secondary
     delimiters between the characters. This is the behavior most users expect.
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们之前已经使用函数[.h.cd](https://code.kx.com/q/ref/doth/#hcd-csv-from-data)将kdb+表转换为字符串列表，然后保存到CSV中。.h.cd按预期处理数组列。你可以通过[.h.d](https://code.kx.com/q/ref/doth/#hd-delimiter)设置次级分隔符。尽管q中的字符串是字符列表，`.h.cd`不会在字符之间插入次级分隔符。这是大多数用户期望的行为。
 - en: When reading the array column of a CSV it will be stored as a string column.
     Kdb+ function [vs](https://code.kx.com/q/ref/vs/) (that abbreviates **v**ector
     from **s**tring) splits a string by a separator string.
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 在读取CSV的数组列时，它将被存储为字符串列。kdb+函数[vs](https://code.kx.com/q/ref/vs/)（缩写为**v**ector来自**s**tring）通过分隔符字符串分割一个字符串。
 - en: '[PRE27]'
+  id: totrans-140
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE27]'
 - en: You can convert a list of strings to a list of integers by integer cast, denoted
     by `"I"$`.
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过整数转换，将字符串列表转换为整数列表，用`"I"$`表示。
 - en: Like many functions in kdb+, `vs` can be used with either infix or bracket notation.
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 与kdb+中的许多函数一样，`vs`可以与中缀或括号符号一起使用。
 - en: '[PRE28]'
+  id: totrans-143
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE28]'
 - en: Kdb+ supports functional programming. You can easily apply a unary function
     to a list with `each`. This is similar to Python's `map` function. Furthermore,
     you can derive a unary function from a binary function by binding a parameter.
     This is called [projection](https://code.kx.com/q4m3/6_Functions/#64-projection).
     Putting this together we can split a list of strings by whitespaces as per
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: Kdb+支持函数式编程。你可以使用`each`轻松地将单目函数应用于列表。这类似于Python的`map`函数。此外，你可以通过绑定参数从二元函数推导出单目函数。这称为[投影](https://code.kx.com/q4m3/6_Functions/#64-projection)。将这些结合起来，我们可以按如下方式按空格分割字符串列表
 - en: '[PRE29]'
+  id: totrans-145
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE29]'
 - en: or more elegantly with the Each iterator (denoted by `'`) if the separator is
     a single character.
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者更优雅地使用Each迭代器（用`'`表示），如果分隔符是单个字符的话。
 - en: '[PRE30]'
+  id: totrans-147
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE30]'
 - en: A table column can be a list of strings. Suppose column `A` contains whitespace-separated
     integers. Function `.csv.read` returns a string column that we can easily convert
     to an array column.
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个表列可以是一个字符串列表。假设列`A`包含用空白分隔的整数。函数`.csv.read`返回一个字符串列，我们可以轻松将其转换为数组列。
 - en: '[PRE31]'
+  id: totrans-149
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE31]'
 - en: Just to illustrate the power of the q language, suppose `data.csv` has another
     array column called `IDX` containing indices. For each row, we need to calculate
     the sum of array column `A` restricted to the indices specified by `IDX`. Let
     me delve inside indexing a little bit.
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了展示q语言的强大功能，假设`data.csv`中有另一列数组称为`IDX`，其中包含索引。对于每一行，我们需要计算数组列`A`在`IDX`指定的索引处的和。让我稍微探讨一下索引操作。
 - en: In q you can index a list the same way as you do in other programming languages.
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 在q中，你可以像在其他编程语言中一样索引一个列表。
 - en: '[PRE32]'
+  id: totrans-152
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE32]'
 - en: Q is a vector language. Many operators accept not only scalars but lists as
     well. Indexing is such an operation.
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: Q是一个向量语言。许多运算符不仅接受标量，还接受列表。索引就是这样的一个操作。
 - en: '[PRE33]'
+  id: totrans-154
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE33]'
 - en: The square brackets are just syntactic sugar. You can instead use the `@` operator
     with infix notation.
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: 方括号只是语法糖。你可以改为使用`@`运算符和中缀符号。
 - en: '[PRE34]'
+  id: totrans-156
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE34]'
 - en: When passing a list of lists as both arguments of the `@` operator then we need
     the Each iterator again. Putting it all together, we add new column `sum_A_of` by
+  id: totrans-157
   prefs: []
   type: TYPE_NORMAL
+  zh: 当将列表的列表作为`@`运算符的两个参数传递时，我们需要再次使用Each迭代器。将所有内容汇总起来，我们通过
 - en: '[PRE35]'
+  id: totrans-158
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE35]'
 - en: '[![operations on array columns](../Images/2a9e1b662e317eb6a1c5f55261e9c172.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/array.png)'
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![数组列上的操作](../Images/2a9e1b662e317eb6a1c5f55261e9c172.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/array.png)'
 - en: I split the expression into multiple lines for readability, but from the shell’s
     perspective, it is still a single command.
+  id: totrans-160
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将表达式拆分成多行以提高可读性，但从shell的角度来看，这仍然是一个单一的命令。
 - en: The Each iterator (`'`) needs to be escaped and we need to use ANSI-C quoting,
     hence the `$` before the opening quotation mark.
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: Each迭代器（`'`）需要转义，我们需要使用ANSI-C引用，因此在开头的引号前面有`$`。
 - en: Join
+  id: totrans-162
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 连接
 - en: 'Joining two CSV files is already supported by the Linux command `join`. Command `csvjoin` goes
     further and supports all types of SQL joins: inner, left, right and outer. Q also
     supports these classic join operations.'
+  id: totrans-163
   prefs: []
   type: TYPE_NORMAL
 - en: For timeseries another type of join is frequently used. This is called [asof](https://code.kx.com/q/ref/asof/) and
     its generalization [window join](https://code.kx.com/q/ref/wj/). If you have two
     streams of data and the times are different then asof join can merge the two streams.
+  id: totrans-164
   prefs: []
   type: TYPE_NORMAL
 - en: Let me demonstrate the usage of window join in a real-life scenario to profile
@@ -737,150 +1058,208 @@
     the ratio of times the worker devoted to each request. Due to network delay, the
     start time of a task follows the start time of a request. An example of the main
     process’ data is below.
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
 - en: '| requestID | workerID | start | end |'
+  id: totrans-166
   prefs: []
   type: TYPE_TB
 - en: '| RQ1 | SL1 | 12:31 | 12:52 |'
+  id: totrans-167
   prefs: []
   type: TYPE_TB
 - en: '| RQ2 | SL2 | 12:31 | 12:50 |'
+  id: totrans-168
   prefs: []
   type: TYPE_TB
 - en: '| RQ3 | SL1 | 12:54 | 12:59 |'
+  id: totrans-169
   prefs: []
   type: TYPE_TB
 - en: '| RQ4 | SL3 | 12:51 | 13:00 |'
+  id: totrans-170
   prefs: []
   type: TYPE_TB
 - en: '| RQ5 | SL1 | 13:10 | 13:13 |'
+  id: totrans-171
   prefs: []
   type: TYPE_TB
 - en: And merged workers data is
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
 - en: '| workerID | taskID | start | duration |'
+  id: totrans-173
   prefs: []
   type: TYPE_TB
 - en: '| SL1 | 1 | 12:32 | 1 |'
+  id: totrans-174
   prefs: []
   type: TYPE_TB
 - en: '| SL1 | 2 | 12:35 | 2 |'
+  id: totrans-175
   prefs: []
   type: TYPE_TB
 - en: '| SL1 | 3 | 12:37 | 10 |'
+  id: totrans-176
   prefs: []
   type: TYPE_TB
 - en: '| SL2 | 1 | 12:31 | 17 |'
+  id: totrans-177
   prefs: []
   type: TYPE_TB
 - en: '| SL1 | 4 | 12:55 | 1 |'
+  id: totrans-178
   prefs: []
   type: TYPE_TB
 - en: '| SL1 | 5 | 12:56 | 3 |'
+  id: totrans-179
   prefs: []
   type: TYPE_TB
 - en: '| SL3 | 1 | 12:52 | 3 |'
+  id: totrans-180
   prefs: []
   type: TYPE_TB
 - en: '| SL3 | 2 | 12:58 | 1 |'
+  id: totrans-181
   prefs: []
   type: TYPE_TB
 - en: '| SL1 | 6 | 13:10 | 2 |'
+  id: totrans-182
   prefs: []
   type: TYPE_TB
 - en: Function `wj1` helps find the tasks with given workerID values that fall within
     a time window specified by the main table's `start` and `end` columns.
+  id: totrans-183
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE36]'
+  id: totrans-184
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE36]'
 - en: Character `h` at the end of the integer list in column `taskID` denotes the *short* datatype,
     i.e. an integer is stored in two bytes. Function `.csv.info` tries to save memory
     and use the integer and floating-point representation that requires the least
     space while preserving all information.
+  id: totrans-185
   prefs: []
   type: TYPE_NORMAL
 - en: To get the ratio, we need to work with elapsed times.
+  id: totrans-186
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE37]'
+  id: totrans-187
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE37]'
 - en: '[![advanced join operation](../Images/ff61bd59b9bb359068bee0590460c79a.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/windowjoin.png)'
+  id: totrans-188
   prefs: []
   type: TYPE_NORMAL
 - en: Performance
+  id: totrans-189
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Let us compare the performance of executing a simple aggregation on publicly
     available CSV used in benchmarking the `xsv` package. The 145 MByte file contains
     nearly 32 million lines.
+  id: totrans-190
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE38]'
+  id: totrans-191
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE38]'
 - en: We would like to see the top 10 regions by population. We need to sum the population
     of the cities of each region. Package xsv does not support aggregation, so it
     is out of the game.
+  id: totrans-192
   prefs: []
   type: TYPE_NORMAL
 - en: The q query is simple.
+  id: totrans-193
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE39]'
+  id: totrans-194
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE39]'
 - en: The aggregation requires columns `Population` and `Region` only so we can speed
     up the query by omitting type conversion of the unused columns.
+  id: totrans-195
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE40]'
+  id: totrans-196
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE40]'
 - en: The `csvsql` is quite similar
+  id: totrans-197
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE41]'
+  id: totrans-198
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE41]'
 - en: We can also disable type inference and dialect sniffing by command-line options `--no-inference
     --snifflimit 0`. This speeds up the command execution by a factor of two.
+  id: totrans-199
   prefs: []
   type: TYPE_NORMAL
 - en: Several other open-source tools run SQL statements on CSV files. I also evaluated
     two packages written in Go.
+  id: totrans-200
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE42]'
+  id: totrans-201
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE42]'
 - en: The run times in seconds are displayed below. The second row corresponds to
     the experiment with the same CSV bloated by repeating its content five times.
+  id: totrans-202
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面显示了以秒为单位的运行时间。第二行对应于对同一 CSV 文件进行五次重复的实验。
 - en: '| CSVKit | textql | csvq | kdb+ |'
+  id: totrans-203
   prefs: []
   type: TYPE_TB
+  zh: '| CSVKit | textql | csvq | kdb+ |'
 - en: '| 116 | 23 | 13 | 2 |'
+  id: totrans-204
   prefs: []
   type: TYPE_TB
+  zh: '| 116 | 23 | 13 | 2 |'
 - en: '| OUT OF MEM | 102 | OUT OF MEM | 6 |'
+  id: totrans-205
   prefs: []
   type: TYPE_TB
+  zh: '| OUT OF MEM | 102 | OUT OF MEM | 6 |'
 - en: The following table contains the memory needs in kbytes
+  id: totrans-206
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下表格包含了以千字节为单位的内存需求
 - en: '| CSVKit | textql | csvq | kdb+ |'
+  id: totrans-207
   prefs: []
   type: TYPE_TB
+  zh: '| CSVKit | textql | csvq | kdb+ |'
 - en: '| 5224 | 216 | 4343 | 172 |'
+  id: totrans-208
   prefs: []
   type: TYPE_TB
+  zh: '| 5224 | 216 | 4343 | 172 |'
 - en: 'Kdb+ is famous for its stunning speed. Benchmarks tend to focus on data that
     resides either in-memory or on disk using its proprietary format. CSV support
     is a useful feature of the language. However, the extreme optimization, the support
@@ -889,24 +1268,35 @@
     directly to productivity. How much does it cost you if the query returns in almost
     two minutes instead of 2 seconds? What do developers do if repeatedly interrupted
     by minutes-long wait phases?'
+  id: totrans-209
   prefs: []
   type: TYPE_NORMAL
+  zh: kdb+ 以其惊人的速度而著称。基准测试通常关注数据是否驻留在内存中或使用其专有格式存储在磁盘上。CSV 支持是该语言的一个有用功能。然而，极致的优化、对向量操作的支持以及固有的并行化都得到了回报：kdb+
+    在 CSV 分析工具中表现显著优越。执行速度直接转化为生产力。如果查询返回时间从2秒变成近两分钟，这会让你付出多少代价？如果开发人员在等待几分钟的过程中频繁中断，他们会怎么做？
 - en: The support is also a key factor when selecting a tool. Pet projects and other
     non-profit solutions with increasing maintenance costs can easily be abandoned.
     The vendor of q/kdb+, [Kx Systems](https://kx.com/), was founded in 1993 and provides
     a stable background, professional support channels, and [high quality documentation](https://code.kx.com/q/) for
     kdb+ developers.
+  id: totrans-210
   prefs: []
   type: TYPE_NORMAL
+  zh: 选择工具时，支持也是一个关键因素。维护成本不断增加的个人项目和其他非营利解决方案很容易被抛弃。q/kdb+ 的供应商，[Kx Systems](https://kx.com/)，成立于1993年，提供了稳定的背景、专业的支持渠道和[高质量文档](https://code.kx.com/q/)供
+    kdb+ 开发人员使用。
 - en: The test ran on a `n1-standard-4` GCP virtual machine. The run times of the
     kdb+ solution would further drop with machines of more cores, as kdb+ 4.0 makes
     use of [multithreaded primitives](https://code.kx.com/q/kb/mt-primitives/).
+  id: totrans-211
   prefs: []
   type: TYPE_NORMAL
+  zh: 测试在 `n1-standard-4` GCP 虚拟机上运行。kdb+ 解决方案的运行时间在更多核心的机器上会进一步下降，因为 kdb+ 4.0 利用
+    [多线程原语](https://code.kx.com/q/kb/mt-primitives/)。
 - en: Conclusion
+  id: totrans-212
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: There are myriads of libraries out there to process CSV files, and many have
     its reasons to exist. Kdb+ has an excellent open-source library `csvutil.q`/`csvguess.q` with
     a sophisticated type-inference engine. Once you convert CSV into a kdb+ in-memory
@@ -916,69 +1306,105 @@
     function. The solution is [greener](https://kx.com/blog/kdb-enables-green-computing/) than
     alternative approaches as it executes faster and requires a smaller amount of
     memory.
+  id: totrans-213
   prefs: []
   type: TYPE_NORMAL
+  zh: 处理 CSV 文件的库有很多，每个库都有其存在的理由。kdb+ 拥有一个出色的开源库 `csvutil.q`/`csvguess.q`，具有复杂的类型推断引擎。一旦将
+    CSV 转换为 kdb+ 内存表，你可以轻松处理其他工具仅能困难应对的问题 - 如果它们能处理的话。你可以以可读的方式表达复杂的逻辑，这种方式易于维护，只需将加载库的
+    q 解释器包装到一个 shell 函数中即可。该解决方案比替代方法[更环保](https://kx.com/blog/kdb-enables-green-computing/)，因为它执行速度更快，占用的内存更少。
 - en: '**Acknowledgement**'
+  id: totrans-214
   prefs: []
   type: TYPE_NORMAL
+  zh: '**致谢**'
 - en: I would like to express my gratitude to [Stephen Taylor](https://www.linkedin.com/in/stephen-taylor-b5ba78/), [Tim
     Thornton](https://www.linkedin.com/in/tthornton6/), [Rebecca Kelly](https://www.linkedin.com/in/kellyr13/) and [Rian
     O'Cuinneagain](https://github.com/rianoc) who provided valuable feedback and improved
     the content considerably.
+  id: totrans-215
   prefs: []
   type: TYPE_NORMAL
+  zh: 我想对[Stephen Taylor](https://www.linkedin.com/in/stephen-taylor-b5ba78/)、[Tim
+    Thornton](https://www.linkedin.com/in/tthornton6/)、[Rebecca Kelly](https://www.linkedin.com/in/kellyr13/)
+    和 [Rian O'Cuinneagain](https://github.com/rianoc) 表达我的感激，他们提供了宝贵的反馈，并大大改善了内容。
 - en: '**Bio: [Ferenc Bodon Ph.D.](https://www.linkedin.com/in/ferencbodon/)** is
     an experienced data engineer, software developer, multi language programmer, software
     architect with academic background in data mining and statistics. Reflects long-term
     thinking and always striving to find top quality, robust solutions that are scalable
     and allow rapid development. Believes in software quality and cannot relax until
     the "glory solution" is found.'
+  id: totrans-216
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Ferenc Bodon 博士](https://www.linkedin.com/in/ferencbodon/)** 是一位经验丰富的数据工程师、软件开发人员、多语言程序员、具有数据挖掘和统计学学术背景的软件架构师。他具有长远的思维，并始终致力于寻找顶级质量、稳健的解决方案，这些方案具有可扩展性并允许快速开发。他相信软件质量，直到找到“荣耀解决方案”才能放松。'
 - en: '[Original](https://github.com/BodonFerenc/blog/blob/master/csv/csv.md). Reposted
     with permission.'
+  id: totrans-217
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://github.com/BodonFerenc/blog/blob/master/csv/csv.md)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-218
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Python for data analysis… is it really that simple?!?](/2020/04/python-data-analysis-really-that-simple.html)'
+  id: totrans-219
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python用于数据分析……真的这么简单吗？！?](/2020/04/python-data-analysis-really-that-simple.html)'
 - en: '[10 Python String Processing Tips & Tricks](/2020/01/python-string-processing-primer.html)'
+  id: totrans-220
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[10个Python字符串处理技巧与窍门](/2020/01/python-string-processing-primer.html)'
 - en: '[Text Processing in R](/2018/03/text-processing-r.html)'
+  id: totrans-221
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[R中的文本处理](/2018/03/text-processing-r.html)'
 - en: More On This Topic
+  id: totrans-222
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[3 Ways to Process CSV Files in Python](https://www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html)'
+  id: totrans-223
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[3种处理CSV文件的Python方法](https://www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html)'
 - en: '[From CSV to Complete Analytical Report with ChatGPT in 5 Simple Steps](https://www.kdnuggets.com/from-csv-to-complete-analytical-report-with-chatgpt-in-5-simple-steps)'
+  id: totrans-224
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从CSV到完整的分析报告，使用ChatGPT的5个简单步骤](https://www.kdnuggets.com/from-csv-to-complete-analytical-report-with-chatgpt-in-5-simple-steps)'
 - en: '[LLaMA 3: Meta’s Most Powerful Open-Source Model Yet](https://www.kdnuggets.com/llama-3-metas-most-powerful-open-source-model-yet)'
+  id: totrans-225
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LLaMA 3：Meta最强大的开源模型](https://www.kdnuggets.com/llama-3-metas-most-powerful-open-source-model-yet)'
 - en: '[Natural Language Processing Key Terms, Explained](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)'
+  id: totrans-226
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理关键术语解释](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)'
 - en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
+  id: totrans-227
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理任务的数据表示](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
 - en: '[Python String Processing Cheatsheet](https://www.kdnuggets.com/2020/01/python-string-processing-primer.html)'
+  id: totrans-228
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 字符串处理备忘单](https://www.kdnuggets.com/2020/01/python-string-processing-primer.html)'
