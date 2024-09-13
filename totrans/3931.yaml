@@ -1,135 +1,209 @@
 - en: Are Vectorized Random Number Generators Actually Useful?
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 矢量化的随机数生成器真的有用吗？
 - en: 原文：[https://www.kdnuggets.com/2018/08/vectorized-random-number-generators-actually-useful.html](https://www.kdnuggets.com/2018/08/vectorized-random-number-generators-actually-useful.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/08/vectorized-random-number-generators-actually-useful.html](https://www.kdnuggets.com/2018/08/vectorized-random-number-generators-actually-useful.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By Daniel Lemire, University of Quebec**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：丹尼尔·勒梅尔，魁北克大学**'
 - en: '![Header image](../Images/25072eec309b6295ee5e3aecc0523253.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![Header image](../Images/25072eec309b6295ee5e3aecc0523253.png)'
 - en: Our processors benefit from “SIMD” instructions. These instructions can operate
     on several values at once, thus greatly accelerating some algorithms. Earlier,
     I reported that you can multiply the speed of common (fast) random number generators
     such as PCG and xorshift128+ by a factor of three or four by vectorizing them
     using SIMD instructions.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的处理器受益于“SIMD”指令。这些指令可以同时操作多个值，从而大大加速某些算法。早些时候，我报告过，你可以通过使用 SIMD 指令将常见（快速）随机数生成器如
+    PCG 和 xorshift128+ 的速度提高三到四倍。
 - en: 'A reader challenged me: is this actually useful in practice?'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 一位读者挑战我：这在实际中真的有用吗？
 - en: 'There are problems where the generation of random number is critical to the
     performance. That is the case in many simulations, for example. The simplest and
     best known one is probably the random shuffling of arrays. The standard algorithm
     is quite simple:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在一些问题中，随机数生成对性能至关重要。例如，许多模拟场景就属于这种情况。最简单且最为人知的可能就是数组的随机打乱。标准算法相当简单：
 - en: '[PRE0]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[If you are interested, O’Neill wrote a whole blog post of this specific problem](http://www.pcg-random.org/posts/bounded-rands.html).'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '[如果你感兴趣，O’Neill 写了一整篇关于这个特定问题的博客文章](http://www.pcg-random.org/posts/bounded-rands.html)。'
 - en: So can I accelerate the shuffling of an array using SIMD instructions?
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么我能否使用 SIMD 指令加速数组的打乱？
 - en: 'So I threw together a vectorized shuffle and a regular (scalar) shuffle, both
     of them using O’Neill’s PCG32\. The net result? I almost double the speed using
     SIMD instructions when the array is in cache:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，我快速组合了一个矢量化打乱算法和一个常规（标量）打乱算法，它们都使用了 O’Neill 的 PCG32。最终结果？当数组在缓存中时，我使用 SIMD
+    指令几乎将速度翻倍：
 - en: '| SIMD shuffle | 3.5 cycles per entry |'
+  id: totrans-12
   prefs: []
   type: TYPE_TB
+  zh: '| SIMD 打乱 | 每个条目 3.5 个周期 |'
 - en: '| scalar shuffle | 6.6 cycles per entry |'
+  id: totrans-13
   prefs: []
   type: TYPE_TB
+  zh: '| 标量打乱 | 每个条目 6.6 个周期 |'
 - en: '[My code is available](https://github.com/lemire/Code-used-on-Daniel-Lemire-s-blog/tree/master/2018/07/23).
     I do not do anything sophisticated so I expect it is possible to do a lot better.
     My sole goal was to demonstrate that SIMD random number generators are practical.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '[我的代码可以在这里找到](https://github.com/lemire/Code-used-on-Daniel-Lemire-s-blog/tree/master/2018/07/23)。我并没有做任何复杂的操作，所以我预计可以做得更好。我的唯一目标是演示
+    SIMD 随机数生成器的实际应用性。'
 - en: '**Bio: [Daniel Lemire](http://lemire.me/blog/)** is a computer science professor
     at the University of Quebec. His research is focused on software performance and
     indexing. He is a techno-optimist.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介： [丹尼尔·勒梅尔](http://lemire.me/blog/)** 是魁北克大学的计算机科学教授。他的研究集中在软件性能和索引方面。他是一个技术乐观主义者。'
 - en: '[Original](https://lemire.me/blog/2018/07/23/are-vectorized-random-number-generators-actually-useful/).
     Reposted with permission.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://lemire.me/blog/2018/07/23/are-vectorized-random-number-generators-actually-useful/)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[The Surprising Complexity of Randomness](/2017/06/surprising-complexity-randomness.html)'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[随机性的惊人复杂性](/2017/06/surprising-complexity-randomness.html)'
 - en: '[Common Sense in Artificial Intelligence… by 2026?](/2016/08/common-sense-artificial-intelligence-2026.html)'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2026年人工智能中的常识…](/2016/08/common-sense-artificial-intelligence-2026.html)'
 - en: '[Is Deep Learning the Silver Bullet?](/2017/02/deep-learning-silver-bullet.html)'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习是万能钥匙吗？](/2017/02/deep-learning-silver-bullet.html)'
 - en: '* * *'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的信息技术需求'
 - en: '* * *'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多相关主题
 - en: '[Getting Started with Python Generators](https://www.kdnuggets.com/2023/02/getting-started-python-generators.html)'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 生成器入门](https://www.kdnuggets.com/2023/02/getting-started-python-generators.html)'
 - en: '[What Junior ML Engineers Actually Need to Know to Get Hired?](https://www.kdnuggets.com/what-junior-ml-engineers-actually-need-to-know-to-get-hired)'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[初级机器学习工程师实际需要了解什么才能获得聘用？](https://www.kdnuggets.com/what-junior-ml-engineers-actually-need-to-know-to-get-hired)'
 - en: '[Free Courses That Are Actually Free: AI & ML Edition](https://www.kdnuggets.com/free-courses-that-are-actually-free-ai-ml-edition)'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[真正免费的课程：人工智能与机器学习版](https://www.kdnuggets.com/free-courses-that-are-actually-free-ai-ml-edition)'
 - en: '[Random Forest vs Decision Tree: Key Differences](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[随机森林与决策树：主要区别](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)'
 - en: '[Does the Random Forest Algorithm Need Normalization?](https://www.kdnuggets.com/2022/07/random-forest-algorithm-need-normalization.html)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[随机森林算法是否需要标准化？](https://www.kdnuggets.com/2022/07/random-forest-algorithm-need-normalization.html)'
 - en: '[Decision Trees vs Random Forests, Explained](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[决策树与随机森林解析](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)'
