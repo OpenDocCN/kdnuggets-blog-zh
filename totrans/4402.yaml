@@ -1,357 +1,551 @@
 - en: 'Looking Inside The Blackbox: How To Trick A Neural Network'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 探索黑箱：如何欺骗神经网络
 - en: 原文：[https://www.kdnuggets.com/2020/09/inside-blackbox-trick-neural-network.html](https://www.kdnuggets.com/2020/09/inside-blackbox-trick-neural-network.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/09/inside-blackbox-trick-neural-network.html](https://www.kdnuggets.com/2020/09/inside-blackbox-trick-neural-network.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [William Falcon](https://www.linkedin.com/in/wfalcon/), Founder PyTorch
     Lightning**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[William Falcon](https://www.linkedin.com/in/wfalcon/)，PyTorch Lightning创始人**'
 - en: '![Image for post](../Images/6ddc83afb3793567dba0feeb3ab56ae5.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图像用于帖子](../Images/6ddc83afb3793567dba0feeb3ab56ae5.png)'
 - en: Using gradient ascent to figure out how to change an input to be classified
     as a 5\. (All images are the author’s own with all rights reserved).
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用梯度上升来确定如何改变输入，使其被分类为5。（所有图像均为作者自有，版权所有）。
 - en: Neural networks get a bad reputation for being black boxes. And while it certainly
     takes creativity to understand their decision making, they are really not as opaque
     as people would have you believe.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 神经网络因被视为黑箱而声名不佳。虽然理解它们的决策过程确实需要创造力，但它们并不像人们所认为的那样不透明。
 - en: In this tutorial, I’ll show you how to use backpropagation to change the input
     as to classify it as whatever you would like.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我将展示如何使用反向传播来调整输入，使其分类为你希望的任何类别。
 - en: Follow along using this [colab](https://colab.research.google.com/drive/16HVAJHdCkyj7W43Q3ZChnxZ7DOwx6K5i?usp=sharing).
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用这个[colab](https://colab.research.google.com/drive/16HVAJHdCkyj7W43Q3ZChnxZ7DOwx6K5i?usp=sharing)进行跟随。
 - en: (This work was co-written with [Alfredo Canziani](https://twitter.com/alfcnz) ahead
     of an upcoming video)
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: （这项工作与[Alfredo Canziani](https://twitter.com/alfcnz)共同撰写，预告视频即将发布）
 - en: Humans as black boxes
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 人类作为黑箱
 - en: 'Let’s consider the case of humans. If I show you the following input:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们考虑人类的情况。如果我给你展示以下输入：
 - en: '![Image for post](../Images/03c7d3f8e8c802c6935b4453d30397a0.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![图像用于帖子](../Images/03c7d3f8e8c802c6935b4453d30397a0.png)'
 - en: there’s a good chance you have no idea whether this is a 5 or a 6\. In fact,
     I believe that I could even make a case for convincing you that this *might* also
     be an 8.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 你很可能不知道这是不是5还是6。实际上，我相信我甚至可以说服你认为这也*可能*是8。
 - en: 'Now, if you asked a human what they would have to do to make something more
     into a 5 you might visually do something like this:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，如果你问一个人如何使某物更接近于5，你可能会这样做：
 - en: '![Image for post](../Images/87315b2a5e7a928f9050c800c32aed84.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![图像用于帖子](../Images/87315b2a5e7a928f9050c800c32aed84.png)'
 - en: 'And if I wanted you to make this more into an 8, you might do something like
     this:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我想让你把这个调整得更像8，你可能会这样做：
 - en: '![Image for post](../Images/8f1abfd0624d81fdb93fb26bcac3bb7b.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![图像用于帖子](../Images/8f1abfd0624d81fdb93fb26bcac3bb7b.png)'
 - en: Now, the answer to this question is not easy to explain in a few if statements
     or by looking at a few coefficients (yes, I’m looking at you regression). Unfortunately,
     with certain types of inputs (images, sound, video, etc…) explainability certainly
     becomes much harder **but not impossible**.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，这个问题的答案并不容易通过几个if语句或查看几个系数来解释（是的，我在看你，回归）。不幸的是，对于某些类型的输入（图像、声音、视频等），可解释性确实变得更困难**但并非不可能**。
 - en: Asking the neural network
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 询问神经网络
 - en: How would a neural network answer the same questions I posed above? Well, to
     answer that, we can use gradient ascent to do exactly that.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 神经网络如何回答我上面提出的相同问题？要回答这个问题，我们可以使用梯度上升来实现。
 - en: Here’s how the neural network thinks we would need to modify the input to make
     it more into a 5.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是神经网络认为我们需要如何修改输入，使其更接近于5的方式。
 - en: '![Image for post](../Images/853d48279ee53c804e71b9b6dd02bb10.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![图像用于帖子](../Images/853d48279ee53c804e71b9b6dd02bb10.png)'
 - en: There are two interesting results from this. First, the black areas are where
     the network things we need to remove pixel density from. Second, the yellow areas
     are where it thinks we need to add more pixel density.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这有两个有趣的结果。首先，黑色区域是网络认为我们需要去除像素密度的地方。第二，黄色区域是它认为我们需要增加像素密度的地方。
 - en: We can take a step in that gradient direction by adding the gradients to the
     original image. We could of course repeat this procedure over and over again to
     eventually morph the input into the prediction we are hoping for.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过将梯度添加到原始图像中，朝着那个梯度方向迈出一步。我们当然可以重复这个过程，最终将输入形态调整为我们期望的预测。
 - en: '![Image for post](../Images/502f67373e4db5cc3c222c7f4fe1d9ec.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![图像用于帖子](../Images/502f67373e4db5cc3c222c7f4fe1d9ec.png)'
 - en: You can see that the black patch at the bottom left of the image is **very similar **to
     what a human might think to do as well.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以看到图像左下角的黑色斑块与人类可能认为的非常**相似**。
 - en: '![Figure](../Images/01456796f6f2dab3ad9a0c48c06503b5.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/01456796f6f2dab3ad9a0c48c06503b5.png)'
 - en: Human adds black on the left corner. Network suggests the same
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 人类在左下角添加了黑色。网络也建议这样做
 - en: What about making the input look more like an 8? Here’s how the network thinks
     you would have to change the input.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，如何让输入看起来更像一个 8 呢？以下是网络认为你需要如何改变输入的方式。
 - en: '![Image for post](../Images/dbcd6e19fecf7925c7f4590d40726455.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子用图像](../Images/dbcd6e19fecf7925c7f4590d40726455.png)'
 - en: 'The notable things, here again, are that there is a black mass at the bottom
     left and a bright mass around the middle. If we add this with the input we get
     the following result:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，再次值得注意的是，左下角有一个黑色的区域，而中间有一个明亮的区域。如果我们将这些与输入相加，我们会得到以下结果：
 - en: '![Image for post](../Images/b7ff288901f3e6c9deb2adfa8bcb1b8f.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子用图像](../Images/b7ff288901f3e6c9deb2adfa8bcb1b8f.png)'
 - en: In this case, I’m not particularly convinced that we’ve turned this 5 into an
     8\. However, we’ve made less of a 5, and the argument to convince you this is
     an 8 would certainly be easier to win using the image on the right instead of
     the image on the left.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，我不是特别相信我们已经把这个 5 转换成了 8。不过，我们已经减少了一个 5，用右侧的图像来说服你这是一个 8 的论点肯定会更容易。
 - en: Gradients are your guides
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 梯度是你的指南
 - en: In regression analysis, we look at coefficients to tell us about what we’ve
     learned. In a random forest, we can look at decision nodes.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 在回归分析中，我们查看系数来了解我们学到了什么。在随机森林中，我们可以查看决策节点。
 - en: In neural networks, it comes down to how **creative** we are at using gradients.
     To classify this digit, we generated a distribution over possible predictions.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在神经网络中，这归结为我们在使用梯度时有多么**创造性**。为了对这个数字进行分类，我们生成了一个可能预测的分布。
 - en: This is what we call the *forward pass.*
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是我们所称的*前向传播*。
 - en: '![Figure](../Images/8708a9e4f509d04cd35f4e5fe7f75603.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/8708a9e4f509d04cd35f4e5fe7f75603.png)'
 - en: During the forward pass we calculate a probability distribution over outputs
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在前向传播过程中，我们计算输出的概率分布
 - en: 'In code it looks like this ([follow along using this colab](https://colab.research.google.com/drive/16HVAJHdCkyj7W43Q3ZChnxZ7DOwx6K5i?usp=sharing)):'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 代码中它看起来是这样的（[可以使用这个 colab 跟随操作](https://colab.research.google.com/drive/16HVAJHdCkyj7W43Q3ZChnxZ7DOwx6K5i?usp=sharing)）：
 - en: '![Image for post](../Images/fc6670de2f2882aba6eed014289fde55.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子用图像](../Images/fc6670de2f2882aba6eed014289fde55.png)'
 - en: Now imagine that we wanted to trick the network into predicting “5” for the
     input x. Then the way to do this is to give it an image (x), calculate the predictions
     for the image and then **maximize** the probablitity of predicting the label “5”.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，想象一下我们想要欺骗网络，使其对输入 x 预测“5”。那么实现这一目标的方法是给它一个图像（x），计算图像的预测，然后**最大化**预测标签“5”的概率。
 - en: 'To do this we can use gradient ascent to calculate the gradients of a prediction
     at the 6th index (ie: label = 5) (**p**) with respect to the input **x**.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了做到这一点，我们可以使用梯度上升来计算第 6 个索引（即：标签 = 5）（**p**）的预测梯度相对于输入**x**。
 - en: '![Image for post](../Images/cf08bc766b5787508fe1093b6ad3af00.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子用图像](../Images/cf08bc766b5787508fe1093b6ad3af00.png)'
 - en: 'To do this in code we feed the input x as a parameter to the neural network,
     pick the 6th prediction (because we have labels: 0, 1, 2, 3, 4 , 5, …) and the
     6th index means label “5”.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在代码中做到这一点，我们将输入 x 作为参数传递给神经网络，选择第 6 个预测（因为我们有标签：0、1、2、3、4、5、……）第 6 个索引意味着标签“5”。
 - en: 'Visually this looks like:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 从视觉上看，这样：
 - en: '![Figure](../Images/6ddc83afb3793567dba0feeb3ab56ae5.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/6ddc83afb3793567dba0feeb3ab56ae5.png)'
 - en: Gradient of the prediction of a “5” with respect to the input.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 预测“5”的梯度相对于输入的变化。
 - en: 'And in code:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 在代码中：
 - en: '![Image for post](../Images/ad172a3ec602c6a3842d0753fa8a24e2.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子用图像](../Images/ad172a3ec602c6a3842d0753fa8a24e2.png)'
 - en: When we call .backward() the process that happens can be visualized by the previous
     animation.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们调用 .backward() 时，发生的过程可以通过前面的动画进行可视化。
 - en: 'Now that we calculated the gradients, we can visualize and plot them:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经计算了梯度，我们可以对它们进行可视化和绘图：
 - en: '![Image for post](../Images/7c1a1a81b0d0422c3eb204d15f80a3b0.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子用图像](../Images/7c1a1a81b0d0422c3eb204d15f80a3b0.png)'
 - en: '![Image for post](../Images/1d98a6aa283b8478938ded66d0feeaf8.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子用图像](../Images/1d98a6aa283b8478938ded66d0feeaf8.png)'
 - en: 'The above gradient looks like random noise because the network has not yet
     been trained… However, once we do train the network, the gradients will be more
     informative:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述梯度看起来像随机噪声，因为网络尚未训练……然而，一旦我们对网络进行训练，梯度将会更具信息量：
 - en: '![Image for post](../Images/9442f2f7ebc4fa0dd2e4ca9d3d836fba.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/9442f2f7ebc4fa0dd2e4ca9d3d836fba.png)'
 - en: Automating this via Callbacks
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 通过回调自动化这一过程
 - en: This is a hugely helpful tool in helping illuminate what happens inside your
     network as it trains. In this case, we would want to automate this process so
     that it happens automatically in training.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个极其有用的工具，有助于揭示你的网络在训练过程中发生了什么。在这种情况下，我们希望自动化这个过程，使其在训练中自动发生。
 - en: 'For this, we’ll use PyTorch Lightning to implement our neural network:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，我们将使用 PyTorch Lightning 来实现我们的神经网络：
 - en: The complicated code to automatically plot what we described here, can be abstracted
     out into a Callback in Lightning. A callback is a small program that is called
     at the parts of training you might care about.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了自动绘制我们在这里描述的内容，复杂的代码可以被抽象为 Lightning 中的一个回调。回调是一个在你可能关心的训练部分被调用的小程序。
 - en: In this case, when a training batch is processed, we want to generate these
     images in case some of the inputs are confused.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，当一个训练批次被处理时，我们希望生成这些图像，以防一些输入出现混淆。
 - en: But... we’ve made it even easier with pytorch-lightning-bolts which you can
     simply install
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 但... 我们通过 pytorch-lightning-bolts 使其变得更加简单，你只需安装它即可。
 - en: '[PRE0]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: and import the callback into your training code
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 并将回调导入你的训练代码中。
 - en: Putting it all together
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 将所有内容汇总
 - en: Finally we can train our model and automatically generate images when logits
     are “confused”
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终，我们可以训练我们的模型，并在 logits 出现“混淆”时自动生成图像。
 - en: 'and tensorboard will automatically generate images that look like this:'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: Tensorboard 将自动生成类似这样的图像：
 - en: '![Image for post](../Images/049f207dacc0e2290f9703fb9462af63.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/049f207dacc0e2290f9703fb9462af63.png)'
 - en: '![Image for post](../Images/606f77a46517b30e651038992c4c54db.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/606f77a46517b30e651038992c4c54db.png)'
 - en: Summary
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 摘要
 - en: '![Image for post](../Images/b84ae810c072e5fa7cd9a55a4847b2d3.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![Image for post](../Images/b84ae810c072e5fa7cd9a55a4847b2d3.png)'
 - en: 'In summary: You learned how to look inside the blackbox using PyTorch, learned
     the intuition, wrote a callback in PyTorch Lightning and automatically got your
     Tensorboard instance to plot questionable predictions'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结一下：你学会了如何使用 PyTorch 查看黑箱内部，了解了直觉，编写了一个 PyTorch Lightning 中的回调，并自动使你的 Tensorboard
+    实例绘制出可疑的预测。
 - en: Try it yourself with [PyTorch Lightning](https://github.com/PyTorchLightning/pytorch-lightning) and [PyTorch
     Lightning Bolts](https://github.com/PyTorchLightning/pytorch-lightning-bolts).
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 亲自尝试一下 [PyTorch Lightning](https://github.com/PyTorchLightning/pytorch-lightning) 和 [PyTorch
+    Lightning Bolts](https://github.com/PyTorchLightning/pytorch-lightning-bolts)。
 - en: (This article was written ahead of an upcoming video where me (William) and [Alfredo
     Canzian](https://twitter.com/alfcnz)i show you how to code this from scratch).
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: （这篇文章是为了即将发布的视频而写的，在视频中我（威廉）和 [阿尔弗雷多·坎齐安](https://twitter.com/alfcnz) 将向你展示如何从零开始编写这些代码。）
 - en: '**Bio: [William Falcon](https://www.linkedin.com/in/wfalcon/)** is an AI Researcher,
     and Founder at PyTorch Lightning. He is trying to understand the brain, build
     AI and use it at scale.'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [威廉·法尔肯](https://www.linkedin.com/in/wfalcon/)** 是一名 AI 研究员，且是 PyTorch
+    Lightning 的创始人。他致力于理解大脑，构建 AI 并在大规模应用中使用它。'
 - en: '[Original](https://towardsdatascience.com/peering-inside-the-blackbox-how-to-trick-a-neural-network-757c90a88a73).
     Reposted with permission.'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/peering-inside-the-blackbox-how-to-trick-a-neural-network-757c90a88a73)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关:**'
 - en: '[PyTorch Multi-GPU Metrics Library and More in New PyTorch Lightning Release](/2020/07/pytorch-multi-gpu-metrics-library-pytorch-lightning.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyTorch 多 GPU 指标库及 PyTorch Lightning 新版本中的更多内容](/2020/07/pytorch-multi-gpu-metrics-library-pytorch-lightning.html)'
 - en: '[Pytorch Lightning vs PyTorch Ignite vs Fast.ai](/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Pytorch Lightning 与 PyTorch Ignite 与 Fast.ai 比较](/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html)'
 - en: '[Lit BERT: NLP Transfer Learning In 3 Steps](/2019/11/lit-bert-nlp-transfer-learning-3-steps.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Lit BERT: NLP 转移学习的 3 个步骤](/2019/11/lit-bert-nlp-transfer-learning-3-steps.html)'
 - en: '* * *'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-82
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT'
 - en: '* * *'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-87
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Qualities Hiring Managers Are Looking For in Data Scientists](https://www.kdnuggets.com/2022/04/qualities-hiring-managers-looking-data-scientists.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家招聘经理寻找的素质](https://www.kdnuggets.com/2022/04/qualities-hiring-managers-looking-data-scientists.html)'
 - en: '[Inside DeepMind’s New Efforts to Use Deep Learning to Advance Mathematics](https://www.kdnuggets.com/2021/12/inside-deepmind-new-efforts-deep-learning-advance-mathematics.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深入了解 DeepMind 在利用深度学习推进数学领域的新努力](https://www.kdnuggets.com/2021/12/inside-deepmind-new-efforts-deep-learning-advance-mathematics.html)'
 - en: '[Neural Network Optimization with AIMET](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 AIMET 进行神经网络优化](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)'
 - en: '[Learn Deep Learning by Building 15 Neural Network Projects in 2022](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过构建 15 个神经网络项目来学习深度学习（2022年）](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)'
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[The Importance of Permutation in Neural Network Predictions](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[排列在神经网络预测中的重要性](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)'
