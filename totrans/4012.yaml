@@ -4,19 +4,23 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 理解 Python 的迭代和成员资格：__contains__ 和 __iter__ 魔法方法指南
 - en: 原文：[https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods](https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods](https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods)
 - en: '![A Guide to __contains__ and __iter__ Magic Methods](../Images/0e31af489ddc2b5846ca89419af9c6ec.png)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![__contains__ 和 __iter__ 魔法方法指南](../Images/0e31af489ddc2b5846ca89419af9c6ec.png)'
 - en: Image by Author
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图像
 - en: If you're new to Python, you may have come across the terms **"iteration"**
     and **"membership"** and wondered what they mean. These concepts are fundamental
     to understanding how Python handles collections of data, such as lists, tuples,
@@ -24,37 +28,48 @@
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你是 Python 新手，你可能遇到过 **"iteration"** 和 **"membership"** 这些术语，可能会想知道它们的意思。这些概念对于理解
+    Python 如何处理数据集合（如列表、元组和字典）是基础的。Python 使用特殊的 dunder 方法来实现这些功能。
 - en: '* * *'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'But what exactly are dunder methods? Dunder/Magic methods are special methods
     in Python that start and end with a double underscore, hence the name "dunder."
     They are used to implement various protocols and can be used to perform a wide
@@ -64,16 +79,20 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，什么是 dunder 方法呢？Dunder/魔法方法是 Python 中以双下划线开始和结束的特殊方法，因此得名“dunder”。它们用于实现各种协议，并可以执行广泛的任务，如检查成员资格、迭代元素等。在本文中，我们将重点关注两个最重要的
+    dunder 方法：**__contains__** 和 **__iter__**。那么，开始吧。
 - en: Understanding Pythonic Loops with Iter Method
   id: totrans-12
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用 Iter 方法理解 Pythonic 循环
 - en: 'Consider a basic implementation of a file directory using Python classes as
     follows:'
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑使用 Python 类实现的文件目录的基本示例：
 - en: '[PRE0]'
   id: totrans-14
   prefs: []
@@ -85,6 +104,7 @@
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个简单的代码示例，其中目录有一个包含 File 对象列表的实例参数。如果我们想遍历目录对象，我们应该能够使用如下的 for 循环：
 - en: '[PRE1]'
   id: totrans-16
   prefs: []
@@ -96,6 +116,8 @@
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '我们用十个随机命名的文件初始化一个目录对象，并使用 for 循环遍历每个项目。很简单，但哎呀！你会收到一个错误信息：**TypeError: ''Directory''
+    object is not iterable**。'
 - en: What went wrong? ​​Well, our Directory class isn't set up to be looped through.
     In Python, for a class object to become iterable, it must implement the **__iter__**
     dunder method. All iterables in Python like List, Dictionaries, and Set implement
@@ -103,6 +125,8 @@
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 问题出在哪里了？我们的 Directory 类没有设置为可遍历。在 Python 中，要使类对象变为可迭代对象，它必须实现 **__iter__** dunder
+    方法。Python 中的所有可迭代对象，如列表、字典和集合，都实现了这一功能，因此我们可以在循环中使用它们。
 - en: So, to make our Directory object iterable, we need to create an iterator. Think
     of an iterator as a helper that gives us items one by one when we ask for them.
     For example, when we loop over a list, the iterator object will provide us with
