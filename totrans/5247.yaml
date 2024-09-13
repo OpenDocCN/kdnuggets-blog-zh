@@ -3,65 +3,81 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据工程入门指南 - 第二部分
 - en: 原文：[https://www.kdnuggets.com/2018/03/beginners-guide-data-engineering-part-2.html/2](https://www.kdnuggets.com/2018/03/beginners-guide-data-engineering-part-2.html/2)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/03/beginners-guide-data-engineering-part-2.html/2](https://www.kdnuggets.com/2018/03/beginners-guide-data-engineering-part-2.html/2)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/03/beginners-guide-data-engineering-part-2.html?page=2#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2018/03/beginners-guide-data-engineering-part-2.html?page=2#comments)'
 - en: The Anatomy of an Airflow Pipeline
   id: totrans-3
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Airflow 管道的结构
 - en: '![](../Images/b3883f7be24a82be7a7c39fb4e3216e7.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b3883f7be24a82be7a7c39fb4e3216e7.png)'
 - en: Now that we have learned about the concept of fact tables, dimension tables,
     date partitions, and what it means to do data backfilling, let’s crystalize these
     concepts and put them in an actual Airflow ETL job.
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经了解了事实表、维度表、日期分区的概念，以及数据回填的含义，让我们进一步明确这些概念，并将其应用于实际的 Airflow ETL 作业中。
 - en: '* * *'
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织在 IT 方面'
 - en: '* * *'
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '**Defining the Directed Acyclic Graph (DAG)**'
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '**定义有向无环图 (DAG)**'
 - en: As we mentioned in the [earlier post](https://medium.com/@rchang/a-beginners-guide-to-data-engineering-part-i-4227c5c457d7),
     any ETL job, at its core, is built on top of three building blocks: **E**xtract, **T**ransform,
     and **L**oad. As simple as it might sound conceptually, ETL jobs in real life
@@ -74,15 +90,22 @@
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们在[早期文章](https://medium.com/@rchang/a-beginners-guide-to-data-engineering-part-i-4227c5c457d7)中提到的，任何
+    ETL 作业本质上都是建立在三个构建块之上的：**提取**、**转换**和**加载**。尽管从概念上讲这可能听起来很简单，但实际中的 ETL 作业往往很复杂，由许多
+    E、T 和 L 任务的组合组成。因此，使用图形可视化复杂的数据流通常很有用。从视觉上看，图中的*节点*代表一个任务，而*箭头*代表一个任务对另一个任务的依赖关系。由于数据只需要在给定任务上计算一次，然后计算结果会继续传递，图是*有向的*和*无环的*。这就是为什么
+    Airflow 作业通常被称为“DAG”（**有向** **无环** **图**）的原因。
 - en: '![](../Images/9c6359d1c3dedca683467b64d23bcb98.png)'
   id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9c6359d1c3dedca683467b64d23bcb98.png)'
 - en: '[Source](https://medium.com/airbnb-engineering/https-medium-com-jonathan-parks-scaling-erf-23fd17c91166):
     A screenshot of Airbnb’s Experimentation Reporting Framework DAG'
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[来源](https://medium.com/airbnb-engineering/https-medium-com-jonathan-parks-scaling-erf-23fd17c91166)：Airbnb
+    实验报告框架 DAG 的截图'
 - en: One of the clever designs about Airflow UI is that it allows any users to visualize
     the DAG in a [graph view](https://airflow.apache.org/ui.html#graph-view), using
     code as configuration. The author of a data pipeline must define the structure
@@ -92,40 +115,50 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: Airflow UI 的一个巧妙设计是它允许用户以[图形视图](https://airflow.apache.org/ui.html#graph-view)可视化
+    DAG，使用代码作为配置。数据管道的作者必须定义任务之间的依赖结构才能进行可视化。这个规范通常写在一个叫做*DAG 定义文件*的文件中，这个文件展示了 Airflow
+    作业的结构。
 - en: '**Operators: Sensors, Operators, and Transfers**'
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**操作符：传感器、操作符和传输**'
 - en: 'While DAGs describe *how* to run a data pipeline, operators describe *what* to
     do in a data pipeline. Typically, there are three broad categories of operators:'
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然 DAG 描述了*如何*运行数据管道，但操作符描述了*在数据管道中做什么*。通常，操作符分为三大类：
 - en: '**Sensors: **waits for a certain time, external file, or upstream data source'
   id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**传感器：**等待一定时间、外部文件或上游数据源'
 - en: '**Operators: **triggers a certain action (e.g. run a bash command, execute
     a python function, or execute a Hive query, etc)'
   id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**操作符：**触发某种操作（例如运行一个 bash 命令、执行一个 python 函数，或执行一个 Hive 查询等）。'
 - en: '**Transfers: **moves data from one location to another'
   id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**传输：**将数据从一个位置移动到另一个位置'
 - en: Shrewd readers can probably see how each of these operators correspond to the
     **E**xtract,
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 精明的读者可能会看到这些操作符如何对应于 **E**xtract，
 - en: '**T**ransform, and **L**oad steps that we discussed earlier.'
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**T**ransform 和 **L**oad 步骤是我们之前讨论过的。'
 - en: '**Sensors** unblock the data flow after a certain time has passed or when data
     from an upstream data source becomes available. At Airbnb, given that most of
     our ETL jobs involve Hive queries, we often used `[NamedHivePartitionSensors](https://github.com/apache/incubator-airflow/blob/master/airflow/sensors/named_hive_partition_sensor.py)` to
@@ -134,6 +167,8 @@
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**传感器**在经过一定时间或当上游数据源的数据可用时，解除数据流的阻塞。在 Airbnb，由于我们的大多数 ETL 作业涉及 Hive 查询，我们经常使用`[NamedHivePartitionSensors](https://github.com/apache/incubator-airflow/blob/master/airflow/sensors/named_hive_partition_sensor.py)`来检查
+    Hive 表的最新分区是否已准备好进行下游处理。'
 - en: '**Operators** trigger data transformations, which corresponds to the **T**ransform
     step. Because Airflow is open-source, contributors can [extend](https://github.com/apache/incubator-airflow/tree/master/airflow/operators) `BaseOperator`class
     to create custom operators as they see fit. At Airbnb, the most common operator
@@ -145,6 +180,11 @@
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**操作符**触发数据转换，这对应于 **T**ransform 步骤。由于 Airflow 是开源的，贡献者可以[扩展](https://github.com/apache/incubator-airflow/tree/master/airflow/operators)
+    `BaseOperator` 类以创建自定义操作符。 在 Airbnb，我们最常使用的操作符是`[HiveOperator](https://github.com/apache/incubator-airflow/blob/master/airflow/operators/hive_operator.py#L22)`（执行
+    hive 查询），但我们也经常使用`[PythonOperator](https://github.com/apache/incubator-airflow/blob/master/airflow/operators/python_operator.py)`（例如运行
+    Python 脚本）和`[BashOperator](https://github.com/apache/incubator-airflow/blob/master/airflow/operators/bash_operator.py)`（例如运行
+    bash 脚本，或甚至是一个 fancy Spark 作业）。这里的可能性是无限的！'
 - en: Finally, we also have special operators that **Transfers **data from one place
     to another, which often maps to the **L**oad step in ETL. At Airbnb, we use `[MySqlToHiveTransfer](https://github.com/apache/incubator-airflow/blob/master/airflow/operators/mysql_to_hive.py)`
     or `[S3ToHiveTransfer](https://github.com/apache/incubator-airflow/blob/master/airflow/operators/s3_to_hive_operator.py)`
@@ -153,42 +193,51 @@
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们还拥有专门的操作符，**传输**数据从一个地方到另一个地方，这通常对应于 ETL 中的 **L**oad 步骤。在 Airbnb，我们经常使用`[MySqlToHiveTransfer](https://github.com/apache/incubator-airflow/blob/master/airflow/operators/mysql_to_hive.py)`或`[S3ToHiveTransfer](https://github.com/apache/incubator-airflow/blob/master/airflow/operators/s3_to_hive_operator.py)`，但这在很大程度上取决于数据基础设施和数据仓库的位置。
 - en: '**A Simple Example**'
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**一个简单的例子**'
 - en: Below is a simple example that demonstrate how to define a DAG definition file,
     instantiate a Airflow DAG, and define the corresponding DAG structure using the
     various operators we described above.
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是一个简单的例子，展示了如何定义一个 DAG 定义文件、实例化一个 Airflow DAG，并使用我们之前描述的各种操作符来定义相应的 DAG 结构。
 - en: 'When the DAG is rendered, we see the following graph view:'
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 当 DAG 被渲染时，我们看到以下图形视图：
 - en: '![](../Images/8c6afb760a294b42682b86dae4f3237f.png)'
   id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8c6afb760a294b42682b86dae4f3237f.png)'
 - en: Graph View of the toy example DAG
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 玩具示例 DAG 的图形视图
 - en: ETL Best Practices To Follow
   id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: ETL 最佳实践
 - en: '![](../Images/2027a30a151a5a2c88b0ff1cdd567049.png)'
   id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2027a30a151a5a2c88b0ff1cdd567049.png)'
 - en: '[Image Credit](http://www.omen-azen.com/eat-together-1/): Building your craft
     takes practice, so it’s wise to follow best practices'
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '[图片来源](http://www.omen-azen.com/eat-together-1/)：打造你的工艺需要实践，因此遵循最佳实践是明智的'
 - en: 'Like any craft, writing Airflow jobs that are succinct, readable, and scalable
     requires practice. On my first job, ETL to me was just a series of mundane mechanical
     tasks that I had to get done. I did not see it as a craft nor did I know the best
@@ -198,6 +247,7 @@
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 像任何工艺一样，编写简洁、可读且可扩展的Airflow作业需要实践。在我第一次工作时，ETL对我而言只是一些我必须完成的平凡机械任务。我没有将其视为一种工艺，也不知道最佳实践。在Airbnb，我学到了很多关于最佳实践的知识，并开始欣赏优秀的ETL以及它们的美妙。下面，我列出了一些好的ETL管道应遵循的原则，但并非详尽无遗：
 - en: '**Partition Data Tables: **As we mentioned earlier,data partitioning can be
     especially useful when dealing with large-size tables with a long history. When
     data is partitioned using datestamps, we can leverage dynamic partitions to parallelize
@@ -206,6 +256,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**分区数据表：**如前所述，当处理大规模的长历史表时，数据分区特别有用。当数据使用日期戳进行分区时，我们可以利用动态分区来并行化回填。'
 - en: '**Load Data Incrementally: **This principle makes your ETL more modular and
     manageable, especially when building dimension tables from the fact tables. In
     each run, we only need to append the new transactions to the dimension table from
@@ -214,6 +265,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**增量加载数据：**这一原则使你的ETL更加模块化和易于管理，特别是在从事实表构建维度表时。在每次运行中，我们只需将新事务追加到之前日期分区的维度表中，而不是扫描整个事实历史。'
 - en: '**Enforce Idempotency: **Many data scientists rely on point-in-time snapshots
     to perform historical analysis. This means the underlying source table should
     not be mutable as time progresses, otherwise we would get a different answer.
@@ -224,6 +276,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**强制幂等性：**许多数据科学家依赖时间点快照进行历史分析。这意味着随着时间的推移，基础源表不应被修改，否则我们将得到不同的结果。管道应构建成这样，即相同的查询在相同的业务逻辑和时间范围内运行时返回相同的结果。这一属性有一个Fancy名称叫做幂等性。'
 - en: '**Parameterize Workflow: **Just like how templates greatly simplified the organization
     of HTML pages, Jinja can be used in conjunction with SQL. As we mentioned earlier,
     one common usage of Jinja template is to incorporate the backfilling logic into
@@ -233,6 +286,8 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**参数化工作流：**就像模板极大地简化了HTML页面的组织一样，Jinja可以与SQL结合使用。正如我们之前提到的，Jinja模板的一个常见用法是将回填逻辑纳入典型的Hive查询中。[Stitch
+    Fix](https://www.google.com/search?q=stitchfix+jinja&oq=stitchfix+jinja&aqs=chrome..69i57j69i59.3030j0j1&sourceid=chrome&ie=UTF-8)有一篇很好的文章总结了他们如何在ETL中使用这一技术。'
 - en: '**Add Data Checks Early and Often: **When processing data, it is useful to
     write data into a staging table, check the data quality, and only then exchange
     the staging table with the final production table. At Airbnb, we call this the *stage-check-exchange* paradigm.
@@ -244,10 +299,12 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**尽早并频繁地添加数据检查：**在处理数据时，将数据写入暂存表中，检查数据质量，然后再用最终生产表交换暂存表是很有用的。在Airbnb，我们称之为*stage-check-exchange*范式。这个3步范式中的检查是重要的防御机制——它们可以是简单的检查，例如统计记录总数是否大于0，或者复杂的异常检测系统，用于检查未见过的类别或异常值。'
 - en: A skeleton of stage-check-exchange operation (aka “Unit Test” for data pipelines)
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: stage-check-exchange操作的骨架（即数据管道的“单元测试”）
 - en: '**Build Useful Alerts & Monitoring System: **Since ETL jobs can often take
     a long time to run, it’s useful to add alerts and monitoring to them so we do
     not have to keep an eye on the progress of the DAG constantly. Different companies
@@ -260,6 +317,7 @@
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**构建有用的警报和监控系统：**由于ETL作业通常需要很长时间才能运行，因此添加警报和监控是很有用的，这样我们就不需要不断关注DAG的进度。不同的公司以多种创造性的方法来监控DAG——在Airbnb，我们经常使用EmailOperators发送缺失SLA的作业的警报邮件。其他团队则使用警报来标记实验失衡。还有一个[有趣的例子](https://www.slideshare.net/cloudera/building-robust-pipelines-with-airflow-wrangle-conference-2017)来自Zymergen，他们通过SlackOperator报告模型性能指标，如R平方。'
 - en: 'Many of these principles are inspired by a combination of conversations with
     seasoned data engineers, my own experience building Airflow DAGs, and readings
     from Gerard Toonstra’s [ETL Best Practices with Airflow](https://gtoonstra.github.io/etl-with-airflow/principles.html).
@@ -267,16 +325,19 @@
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些原则很多灵感来自于与经验丰富的数据工程师的对话、我自己构建Airflow DAGs的经验，以及对Gerard Toonstra的[ETL最佳实践与Airflow](https://gtoonstra.github.io/etl-with-airflow/principles.html)的阅读。对于感兴趣的读者，我强烈推荐Maxime的以下演讲：
 - en: '[Source](https://www.youtube.com/watch?v=dgaoqOZlvEA): Maxime, the original
     author of Airflow, talking about ETL best practices'
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '[来源](https://www.youtube.com/watch?v=dgaoqOZlvEA)：Airflow的原创作者Maxime谈论ETL最佳实践'
 - en: Recap of Part II
   id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 第二部分回顾
 - en: In the second post of this series, we discussed star schema and data modeling
     in much more details. We learned the distinction between fact and dimension tables,
     and saw the advantages of using datestamps as partition keys, especially for backfilling.
@@ -287,6 +348,7 @@
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这一系列的第二篇文章中，我们更详细地讨论了星型模式和数据建模。我们了解了事实表和维度表之间的区别，并看到了使用日期戳作为分区键的优势，尤其是在回填时。此外，我们剖析了Airflow作业的结构，并明确了Airflow中不同操作符的功能。我们还强调了构建ETL的最佳实践，并展示了Airflow作业在与Jinja和SlackOperators结合使用时的灵活性。可能性无穷无尽！
 - en: In the last post of the series, I will discuss a few advanced data engineering
     patterns — specifically, how to go from building pipelines to building frameworks.
     I will again use a few example frameworks that we used at Airbnb as motivating
@@ -294,16 +356,19 @@
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 在系列的最后一篇文章中，我将讨论一些高级数据工程模式——具体来说，从构建管道到构建框架的过程。我将再次使用我们在Airbnb使用的一些示例框架作为激励示例。
 - en: If you found this post useful, please visit [**Part I**](https://medium.com/@rchang/a-beginners-guide-to-data-engineering-part-i-4227c5c457d7)and
     stay tuned for **Part III**.
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你觉得这篇文章有用，请访问[**第一部分**](https://medium.com/@rchang/a-beginners-guide-to-data-engineering-part-i-4227c5c457d7)，并关注**第三部分**。
 - en: '*I want to appreciate *[*Jason Goodman*](https://medium.com/@jasonkgoodman)* and
     Michael Musson for providing invaluable feedback to me*'
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '*我想感谢*[*Jason Goodman*](https://medium.com/@jasonkgoodman)*和Michael Musson对我的宝贵反馈*'
 - en: '**Bio: [Robert Chang](https://www.linkedin.com/in/robert-chang-877b1720/)**
     is a data scientist at Airbnb working on Machine Learning, Machine Learning Infrastructure,
     and Host Growth. Prior to Airbnb, he was a data scientist at Twitter and have
@@ -312,25 +377,30 @@
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Robert Chang](https://www.linkedin.com/in/robert-chang-877b1720/)** 是Airbnb的一个数据科学家，专注于机器学习、机器学习基础设施和房东增长。在加入Airbnb之前，他曾是Twitter的数据科学家，并拥有斯坦福大学的统计学学位和加州大学伯克利分校的运筹学学位。'
 - en: '[Original](https://towardsdatascience.com/a-beginners-guide-to-data-engineering-part-ii-47c4e7cbda71).
     Reposted with permission.'
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/a-beginners-guide-to-data-engineering-part-ii-47c4e7cbda71)。经许可转载。'
 - en: '**Related:**'
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[A Beginner’s Guide to Data Engineering  –  Part I](/2018/01/beginners-guide-data-engineering-1.html)'
   id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据工程初学者指南——第一部分](/2018/01/beginners-guide-data-engineering-1.html)'
 - en: '[Advice For New and Junior Data Scientists](/2017/11/chang-advice-new-junior-data-scientists.html)'
   id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[对新手和初级数据科学家的建议](/2017/11/chang-advice-new-junior-data-scientists.html)'
 - en: '[How to Build a Data Science Pipeline](/2017/07/build-data-science-pipeline.html)'
   id: totrans-55
   prefs:
