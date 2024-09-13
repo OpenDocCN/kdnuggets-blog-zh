@@ -1,218 +1,328 @@
 - en: 5 Tips for Improving SQL Query Performance
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 提升 SQL 查询性能的 5 个技巧
 - en: 原文：[https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)
 - en: '![sql-tips](../Images/240e20747f5fcbe8b0d0836f5b4b7b8f.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![sql-tips](../Images/240e20747f5fcbe8b0d0836f5b4b7b8f.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者提供的图像
 - en: Strong database and SQL skills are necessary for all data roles. In practice,
     you’ll query super large database tables—with several thousands or even millions
     of rows—on a typical day at work. Which is why the performance of SQL queries
     becomes a significant factor in deciding the overall performance of the application.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 强大的数据库和 SQL 技能对所有数据角色都很重要。在实际工作中，你会查询超大数据库表——通常有几千甚至几百万行。这就是为什么 SQL 查询的性能成为决定应用程序整体性能的一个重要因素。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Poorly optimized queries can often lead to slower response times, increased
     server load, and a suboptimal user experience. Therefore, understanding and applying
     SQL query optimization techniques is essential.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 未优化的查询通常会导致响应时间变慢、服务器负载增加以及用户体验不佳。因此，理解和应用 SQL 查询优化技术至关重要。
 - en: This tutorial goes over practical tips for optimizing SQL queries. Let's get
     started.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程介绍了优化 SQL 查询的实用技巧。让我们开始吧。
 - en: 'Before You Start: Get a Sample Database Table'
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在开始之前：获取一个示例数据库表
 - en: You can use the following tips when writing SQL queries for any database you’re
     working with. But if you’d like to use a sample database table to run these queries,
     you can use [this Python script](https://github.com/balapriyac/python-basics/blob/main/sql-tips/main.py).
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在编写任何数据库的 SQL 查询时，可以使用以下技巧。但如果你希望使用示例数据库表来运行这些查询，可以使用[这个 Python 脚本](https://github.com/balapriyac/python-basics/blob/main/sql-tips/main.py)。
 - en: 'It connects to an SQLite database: **employees.db**, creates an **employees**
     table and populates it with 10000 records. As mentioned, you can always spin up
     your own example.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 它连接到一个 SQLite 数据库：**employees.db**，创建了一个**employees**表，并填充了 10000 条记录。如前所述，你总是可以创建你自己的示例。
 - en: 1\. Don’t Use SELECT *; Select Specific Columns Instead
+  id: totrans-16
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 1\. 不要使用 SELECT *; 应选择特定列
 - en: It’s quite common for beginners to use **SELECT *** to retrieve all columns
     from the table. This can be inefficient if you only need a few columns—which is
     almost always the case.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 初学者使用**SELECT ***来检索表中的所有列是很常见的。如果你只需要少数几列，这可能会低效——这几乎总是如此。
 - en: Using **SELECT *** can, therefore, lead to excessive data processing, especially
     if the table has many columns or if you're working with a large dataset.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用**SELECT ***可能会导致数据处理过多，特别是如果表有很多列或你在处理大型数据集时。
 - en: 'Instead of this:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 替代方法如下：
 - en: '[PRE0]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Do this:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这样做：
 - en: '[PRE1]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Reading only the necessary columns can make the queries more readable and maintainable.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 只读取必要的列可以使查询更加易读和易于维护。
 - en: 2\. Avoid Using SELECT DISTINCT; Use GROUP BY Instead
+  id: totrans-24
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 2\. 避免使用 SELECT DISTINCT; 使用 GROUP BY 代替
 - en: '**SELECT DISTINCT** can be costly because it requires sorting and filtering
     the results to remove duplicates. It''s better to ensure that the data being queried
     is unique by design—using primary keys or unique constraints.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**SELECT DISTINCT** 可能代价高昂，因为它需要对结果进行排序和过滤以移除重复项。最好通过设计上的唯一性来确保查询的数据是唯一的——使用主键或唯一约束。'
 - en: 'Instead of this:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 替代方法如下：
 - en: '[PRE2]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'The following query with the GROUP BY clause is much more helpful:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下带有 GROUP BY 子句的查询要有帮助得多：
 - en: '[PRE3]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: GROUP BY can be more efficient, especially with proper indexing (we’ll talk
     about indexes later). So when writing queries, ensure you understand your data—the
     different fields—at the data model level.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: GROUP BY 可以更高效，特别是使用适当的索引时（我们稍后会讨论索引）。所以在编写查询时，确保你理解数据——不同的字段——在数据模型层面。
 - en: 3\. Limit Query Results
+  id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 3\. 限制查询结果
 - en: Often you’ll query large tables with thousands of rows, but you don’t always
     need to (and cannot) process all the rows. Using the **LIMIT** clause (or its
     equivalent) helps to reduce the number of rows returned, which can speed up query
     performance.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常你会查询包含数千行的大表，但你不总是需要（也无法）处理所有行。使用 **LIMIT** 子句（或其等效功能）有助于减少返回的行数，从而加快查询性能。
 - en: 'You can limit the results to 15 records:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以将结果限制为 15 条记录：
 - en: '[PRE4]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Using a LIMIT clause reduces the result set size, decreasing the amount of data
     to process and transfer. This is also useful for paginating results in applications.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 LIMIT 子句减少结果集的大小，减少处理和传输的数据量。这也对应用程序中的分页结果很有用。
 - en: 4\. Use Indexes for Faster Retrieval
+  id: totrans-36
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 4\. 使用索引以加快检索速度
 - en: Indexes can significantly improve query performance by allowing the database
     to find rows faster than scanning the entire table. They are particularly useful
     for columns frequently used in WHERE, JOIN, and ORDER BY clauses.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 索引可以显著提高查询性能，通过使数据库比扫描整个表更快地找到行。它们对于经常在 WHERE、JOIN 和 ORDER BY 子句中使用的列特别有用。
 - en: 'Here’s an example index created on the ‘department’ column:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个在‘department’列上创建的示例索引：
 - en: '[PRE5]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: You can now run queries that involve filtering on the ‘department’ column and
     compare the execution times. You should be able to see the results are much faster
     with the index. To learn more about creating indexes and performance improvements,
     use [How To Speed Up SQL Queries Using Indexes [Python Edition]](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html).
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 你现在可以运行涉及‘department’列的过滤查询，并比较执行时间。你应该能够看到使用索引后结果速度大幅提高。要了解更多关于创建索引和性能改进的信息，请访问
+    [如何使用索引加速 SQL 查询 [Python 版]](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)。
 - en: As mentioned, indexing improves the efficiency of queries that filter on indexed
     columns. But creating too many indexes can become too much of a good thing. Which
     leads us to the next tip!
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 如前所述，索引提高了对索引列的过滤查询的效率。但创建过多的索引可能会适得其反。这引出了下一个提示！
 - en: 5\. Use Indexes with Caution
+  id: totrans-42
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 5\. 谨慎使用索引
 - en: While indexes improve read performance, they can degrade write performance—INSERT,
     UPDATE,  and DELETE queries—because the index must be updated each time the table
     is modified. It's important to balance the number and types of indexes based on
     the type of queries you run often.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然索引提高了读取性能，但它们可能会降低写入性能——INSERT、UPDATE 和 DELETE 查询——因为每次修改表时，索引必须更新。根据你经常运行的查询类型，平衡索引的数量和类型是很重要的。
 - en: 'As go-to rules:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为通用规则：
 - en: Only index columns that are frequently queried.
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 仅索引经常查询的列。
 - en: Avoid excessive indexing on columns with low cardinality (few unique values)
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 避免对低基数（唯一值较少）的列进行过度索引。
 - en: Regularly check indexes and update and remove them as needed.
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 定期检查索引，根据需要更新和删除它们。
 - en: In summary, create indexes to speed up retrieval on columns that are frequently
     queried but rarely updated. This ensures that the benefits of indexes outweigh
     their maintenance costs.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 总之，创建索引以加快对经常查询但很少更新的列的检索。这确保了索引的好处超过其维护成本。
 - en: Wrapping Up
+  id: totrans-49
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 总结
 - en: Optimizing SQL queries involves understanding the specific needs of your queries
     and the structure of your data.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 优化 SQL 查询涉及理解查询的具体需求和数据的结构。
 - en: By avoiding SELECT *, being careful with using SELECT DISTINCT, limiting query
     results, creating appropriate indexes, and being mindful of the trade-offs with
     indexing, you can significantly improve the performance and efficiency of your
     database operations.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过避免使用 SELECT *，小心使用 SELECT DISTINCT，限制查询结果，创建适当的索引，并注意索引的权衡，你可以显著提高数据库操作的性能和效率。
 - en: So happy querying!
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 祝你查询愉快！
 - en: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
     is a developer and technical writer from India. She likes working at the intersection
     of math, programming, data science, and content creation. Her areas of interest
@@ -221,33 +331,50 @@
     and sharing her knowledge with the developer community by authoring tutorials,
     how-to guides, opinion pieces, and more. Bala also creates engaging resource overviews
     and coding tutorials.'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)****
+    是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正致力于通过撰写教程、操作指南、观点文章等方式学习并与开发者社区分享她的知识。Bala还创建了引人入胜的资源概述和编程教程。'
 - en: More On This Topic
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题
 - en: '[Query Your Pandas DataFrames with SQL](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用SQL查询你的Pandas数据框](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
 - en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL查询优化技巧](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
 - en: '[Can We Query a Table with T5?](https://www.kdnuggets.com/2022/05/query-table-t5.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我们可以用T5查询表格吗？](https://www.kdnuggets.com/2022/05/query-table-t5.html)'
 - en: '[Beyond Accuracy: Evaluating & Improving a Model with the NLP Test Library](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超越准确度：使用NLP测试库评估和改进模型](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)'
 - en: '[More Performance Evaluation Metrics for Classification Problems You…](https://www.kdnuggets.com/2020/04/performance-evaluation-metrics-classification.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[更多分类问题的性能评估指标](https://www.kdnuggets.com/2020/04/performance-evaluation-metrics-classification.html)'
 - en: '[The Curse of Delayed Performance](https://www.kdnuggets.com/2022/05/nannyml-curse-delayed-performance.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[延迟性能的诅咒](https://www.kdnuggets.com/2022/05/nannyml-curse-delayed-performance.html)'
