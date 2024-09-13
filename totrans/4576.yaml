@@ -1,306 +1,470 @@
 - en: 'Natural Language in Python using spaCy: An Introduction'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 spaCy 的 Python 自然语言：简介
 - en: 原文：[https://www.kdnuggets.com/2019/09/natural-language-python-using-spacy-introduction.html](https://www.kdnuggets.com/2019/09/natural-language-python-using-spacy-introduction.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/09/natural-language-python-using-spacy-introduction.html](https://www.kdnuggets.com/2019/09/natural-language-python-using-spacy-introduction.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Paco Nathan](https://twitter.com/pacoid)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Paco Nathan](https://twitter.com/pacoid)**'
 - en: '*This article provides a brief introduction to natural language using spaCy
     and related libraries in Python. The [complementary Domino project is also available](https://try.dominodatalab.com/u/domino-johnjoo/spacy-dev/overview).*'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '*本文提供了使用 spaCy 和 Python 相关库的自然语言简要介绍。[补充的 Domino 项目也可以查看](https://try.dominodatalab.com/u/domino-johnjoo/spacy-dev/overview)。*'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Introduction
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 简介
 - en: This article and paired [Domino project](https://try.dominodatalab.com/u/domino-johnjoo/spacy-dev/overview) provide
     a brief introduction to working with *natural language* (sometimes called “text
     analytics”) in Python using [*spaCy* ](https://spacy.io/)and related libraries.
     Data science teams in industry must work with lots of text, one of the top four
     categories of data used in machine learning. Usually it’s human-generated text,
     but not always.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文和配套的 [Domino 项目](https://try.dominodatalab.com/u/domino-johnjoo/spacy-dev/overview)
+    提供了使用 *自然语言*（有时称为“文本分析”）的 Python 简要介绍，使用的工具包括 [*spaCy*](https://spacy.io/) 和相关库。工业界的数据科学团队必须处理大量文本，这是机器学习中使用的四大数据类别之一。通常是人类生成的文本，但并非总是如此。
 - en: 'Think about it: how does the “operating system” for business work? Typically,
     there are contracts (sales contracts, work agreements, partnerships), there are
     invoices, there are insurance policies, there are regulations and other laws,
     and so on. All of those are represented as text.'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 想一想：商业的“操作系统”是如何工作的？通常，包括合同（销售合同、工作协议、合作伙伴关系）、发票、保险单、规章制度及其他法律等。所有这些都以文本形式存在。
 - en: You may run across a few acronyms: *natural language processing* (NLP), n*atural
     language understanding* (NLU), *natural language generation* (NLG)—which are roughly
     speaking “read text”, “understand meaning”, “write text” respectively. Increasingly
     these tasks overlap and it becomes difficult to categorize any given feature.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能会遇到一些缩略语：*自然语言处理*（NLP）、*自然语言理解*（NLU）、*自然语言生成*（NLG）——它们分别大致表示“读取文本”、“理解意义”、“编写文本”。这些任务的重叠越来越多，因此很难对任何特定功能进行分类。
 - en: The *spaCy* framework—along with a wide and growing range of plug-ins and other
     integrations—provides features for a wide range of natural language tasks. It’s
     become one of the most widely used natural language libraries in Python for industry
     use cases, and has quite a large community—and with that, much support for commercialization
     of research advances as this area continues to evolve rapidly.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '*spaCy* 框架——以及越来越多的插件和其他集成——提供了广泛的自然语言任务功能。它已成为 Python 中工业应用最广泛使用的自然语言库之一，并拥有相当大的社区——因此，对研究进展的商业化支持也较多，随着该领域的快速发展，支持也在不断增加。'
 - en: Getting Started
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 入门
 - en: We have configured the default Compute Environment in Domino to include all
     of the packages, libraries, models, and data you’ll need for this tutorial.  [Check
     out the Domino project to run the code.](https://try.dominodatalab.com/u/domino-johnjoo/spacy-dev/overview)
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经在 Domino 中配置了默认计算环境，以包含本教程所需的所有软件包、库、模型和数据。[查看 Domino 项目以运行代码。](https://try.dominodatalab.com/u/domino-johnjoo/spacy-dev/overview)
 - en: '![](../Images/12edb7abbae9b1e4aad03968716e8847.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/12edb7abbae9b1e4aad03968716e8847.png)'
 - en: '![](../Images/6a52a1f569a31b20cf65e6d774fbf268.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6a52a1f569a31b20cf65e6d774fbf268.png)'
 - en: If you’re interested in how Domino’s Compute Environments work, check out the [Support
     Page](https://support.dominodatalab.com/hc/en-us/articles/115000392643-Environment-management).
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你对 Domino’s 计算环境如何工作感兴趣，可以查看 [支持页面](https://support.dominodatalab.com/hc/en-us/articles/115000392643-Environment-management)。
 - en: 'Now let’s load *spaCy* and run some code:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们加载 *spaCy* 并运行一些代码：
 - en: '[PRE0]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'That `nlp` variable is now your gateway to all things *spaCy* and loaded with
     the `en_core_web_sm` small model for English. Next, let’s run a small “document”
     through the natural language parser:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，`nlp` 变量是你接触所有 *spaCy* 相关内容的入口，并加载了用于英语的 `en_core_web_sm` 小型模型。接下来，让我们通过自然语言解析器运行一个小的“文档”：
 - en: '[PRE1]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '[PRE2]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: First we created a [doc](https://spacy.io/api/doc) from the text, which is a
     container for a document and all of its annotations. Then we iterated through
     the document to see what *spaCy *had parsed.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们从文本中创建了一个 [doc](https://spacy.io/api/doc)，它是一个容器，包含了文档及其所有注释。然后我们遍历了文档，以查看
+    *spaCy* 解析了什么。
 - en: 'Good, but it’s a lot of info and a bit difficult to read. Let’s reformat the *spaCy* parse
     of that sentence as a [pandas](https://pandas.pydata.org/) dataframe:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 很好，但信息量很大，阅读起来有点困难。让我们将 *spaCy* 解析的句子重新格式化为一个 [pandas](https://pandas.pydata.org/)
+    数据框：
 - en: '[PRE3]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![](../Images/6efac198b9c30e6826f149f2fef68f55.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6efac198b9c30e6826f149f2fef68f55.png)'
 - en: 'Much more readable! In this simple case, the entire document is merely one
     short sentence. For each word in that sentence *spaCy* has created a token, and
     we accessed fields in each token to show:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 可读性提高了！在这个简单的例子中，整个文档只是一个简短的句子。在那个句子中的每个词，*spaCy* 都创建了一个标记，我们访问了每个标记中的字段来显示：
 - en: raw text
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 原始文本
 - en: '[lemma](https://en.wikipedia.org/wiki/Lemma_(morphology) – a root form of the
     word'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[词元](https://en.wikipedia.org/wiki/Lemma_(morphology) - 词的根形式'
 - en: '[part of speech](https://en.wikipedia.org/wiki/Part_of_speech)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[词性](https://en.wikipedia.org/wiki/Part_of_speech)'
 - en: a flag for whether the word is a *stopword*—i.e., a common word that may be
     filtered out
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 一个标记是否是 *停用词* 的标志——即，可能被过滤掉的常见词
 - en: 'Next let’s use the [displaCy](https://ines.io/blog/developing-displacy) library
     to visualize the parse tree for that sentence:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，让我们使用 [displaCy](https://ines.io/blog/developing-displacy) 库来可视化该句子的解析树：
 - en: '[PRE4]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![](../Images/11f4063ce82c16944df254f90c40ecbd.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/11f4063ce82c16944df254f90c40ecbd.png)'
 - en: Does that bring back memories of grade school? Frankly, for those of us coming
     from more of a computational linguistics background, that diagram sparks joy.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是否让你想起了小学的回忆？坦白说，对于那些来自计算语言学背景的人来说，这个图示确实带来快乐。
 - en: But let’s backup for a moment. How do you handle multiple sentences?
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 但我们稍微退一步。你如何处理多个句子？
 - en: 'There are features for *sentence boundary detection* (SBD)—also known as *sentence
     segmentation*—based on the builtin/default [sentencizer](https://spacy.io/api/sentencizer/):'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 有用于 *句子边界检测*（SBD）—也称为 *句子分割*—的功能，基于内置/默认的 [sentencizer](https://spacy.io/api/sentencizer/)：
 - en: '[PRE5]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '[PRE6]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'When *spaCy* creates a document, it uses a principle of *non-destructive tokenization,* meaning
     that the tokens, sentences, etc., are simply indexes into a long array. In other
     words, they don’t carve the text stream into little pieces. So each sentence is
     a [span](https://spacy.io/api/span) with a *start* and an *end* index into the
     document array:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 当 *spaCy* 创建文档时，它使用了一种 *非破坏性分词* 原则，意味着标记、句子等只是长数组中的索引。换句话说，它们不会将文本流切割成小块。因此，每个句子都是一个
+    [span](https://spacy.io/api/span)，具有 *start* 和 *end* 索引到文档数组：
 - en: '[PRE7]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '[PRE8]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'We can index into the document array to pull out the tokens for one sentence:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以在文档数组中索引，以提取一个句子的标记：
 - en: '[PRE9]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '[PRE10]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'Or simply index into a specific token, such as the verb `went` in the last
     sentence:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 或简单地索引到一个特定的标记，例如最后一个句子中的动词 `went`：
 - en: '[PRE11]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '[PRE12]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: At this point we can parse a document, segment that document into sentences,
     then look at annotations about the tokens in each sentence. That’s a good start.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，我们可以解析文档，将文档分割成句子，然后查看每个句子中标记的注释。这是一个良好的开端。
 - en: Acquiring Text
+  id: totrans-53
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 获取文本
 - en: Now that we can parse texts, where do we get texts? One quick source is to leverage
     the interwebs. Of course when we download web pages we’ll get HTML, and then need
     to extract text from them. [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) is
     a popular package for that.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以解析文本了，那我们从哪里获取文本呢？一个快速的来源是利用网络。当然，当我们下载网页时，我们会得到 HTML，然后需要从中提取文本。[Beautiful
+    Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) 是一个流行的包来实现这一点。
 - en: 'First, a little housekeeping:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，进行一些基础操作：
 - en: '[PRE13]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: 'In the following function `get_text()` we’ll parse the HTML to find all of
     the `<p/>`tags, then extract the text for those:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 在以下函数`get_text()`中，我们将解析HTML以查找所有的`<p/>`标签，然后提取这些标签的文本：
 - en: '[PRE14]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'Now let’s grab some text from online sources. We can compare open source licenses
     hosted on the [Open Source Initiative](https://opensource.org/licenses/) site:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们从在线来源抓取一些文本。我们可以比较[Open Source Initiative](https://opensource.org/licenses/)网站上托管的开源许可证：
 - en: '[PRE15]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '[PRE16]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: 'One common use case for natural language work is to compare texts. For example,
     with those open source licenses we can download their text, parse, then compare [similarity](https://spacy.io/api/doc#similarity) metrics
     among them:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 自然语言工作中的一个常见用例是比较文本。例如，通过这些开源许可证，我们可以下载它们的文本，解析，然后比较[similarity](https://spacy.io/api/doc#similarity)度量：
 - en: '[PRE17]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: '[PRE18]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: This is interesting since the [BSD](https://opensource.org/licenses/BSD-3-Clause) and [MIT](https://opensource.org/licenses/MIT) licenses
     appear to be the most similar documents. In fact they are closely related.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 这很有趣，因为[BSD](https://opensource.org/licenses/BSD-3-Clause)和[MIT](https://opensource.org/licenses/MIT)许可证似乎是最相似的文档。事实上，它们密切相关。
 - en: Admittedly, there was some extra text included in each document due to the OSI
     disclaimer in the footer—but this provides a reasonable approximation for comparing
     the licenses.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 坦率地说，由于OSI免责声明在页脚中包含了一些额外的文本——但这为比较许可证提供了一个合理的近似。
 - en: Natural Language Understanding
+  id: totrans-67
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 自然语言理解
 - en: 'Now let’s dive into some of the* spaCy* features for NLU. Given that we have
     a parse of a document, from a purely grammatical standpoint we can pull the [noun
     chunks](https://spacy.io/usage/linguistic-features#noun-chunks), i.e., each of
     the noun phrases:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们*深入探讨*一些*spaCy*的自然语言理解（NLU）功能。鉴于我们有一个文档的解析，从纯语法的角度来看，我们可以提取[noun chunks](https://spacy.io/usage/linguistic-features#noun-chunks)，即每个名词短语：
 - en: '[PRE19]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: '[PRE20]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: Not bad. The noun phrases in a sentence generally provide more information content—as
     a simple filter used to reduce a long document into a more “distilled” representation.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 不错。句子中的名词短语通常提供更多的信息内容——作为一种简单的过滤器，用于将长文档减少到更“精炼”的表示形式。
 - en: 'We can take this approach further and identify [named entities](https://spacy.io/usage/linguistic-features#named-entities) within
     the text, i.e., the proper nouns:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以进一步采用这种方法，并识别文本中的[named entities](https://spacy.io/usage/linguistic-features#named-entities)，即专有名词：
 - en: '[PRE21]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: '[PRE22]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: 'The *displaCy* library provides an excellent way to visualize named entities:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '*displaCy*库提供了一种出色的可视化命名实体的方式：'
 - en: '[PRE23]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: '![](../Images/d89ad761f54624be253828504cdedc5e.png)'
+  id: totrans-77
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d89ad761f54624be253828504cdedc5e.png)'
 - en: If you’re working with [knowledge graph](https://www.akbc.ws/2019/) applications
     and other [linked data](http://linkeddata.org/), your challenge is to construct
     links between the named entities in a document and other related information for
@@ -308,144 +472,214 @@
     Identifying the named entities in a document is the first step in this particular
     kind of AI work. For example, given the text above, one might link the `Steve
     Wozniak` named entity to a [lookup in DBpedia](http://dbpedia.org/page/Steve_Wozniak).
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你正在处理[knowledge graph](https://www.akbc.ws/2019/)应用程序和其他[linked data](http://linkeddata.org/)，你的挑战是构建文档中的命名实体与其他相关信息之间的链接，这称为[entity
+    linking](http://nlpprogress.com/english/entity_linking.html)。识别文档中的命名实体是这种特定类型的AI工作中的第一步。例如，给定上述文本，可以将`Steve
+    Wozniak`命名实体链接到[lookup in DBpedia](http://dbpedia.org/page/Steve_Wozniak)。
 - en: In more general terms, one can also link *lemmas* to resources that describe
     their meanings. For example, in an early section we parsed the sentence `The gorillas
     just went wild` and were able to show that the lemma for the word `went` is the
     verb `go`. At this point we can use a venerable project called [WordNet](https://wordnet.princeton.edu/) which
     provides a lexical database for English—in other words, it’s a computable thesaurus.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 更一般来说，还可以将*lemmas*链接到描述其含义的资源。例如，在早期部分，我们解析了句子`The gorillas just went wild`，并能够显示单词`went`的词元是动词`go`。此时我们可以使用一个叫做[WordNet](https://wordnet.princeton.edu/)的古老项目，它提供了一个英语的词汇数据库——换句话说，它是一个可计算的词典。
 - en: There’s a *spaCy* integration for WordNet called [spacy-wordnet](https://github.com/recognai/spacy-wordnet) by [Daniel
     Vila Suero](https://twitter.com/dvilasuero), an expert in natural language and
     knowledge graph work.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 有一个名为[spacy-wordnet](https://github.com/recognai/spacy-wordnet)的*spaCy*与WordNet的集成，由自然语言和知识图谱工作的专家*[Daniel
+    Vila Suero](https://twitter.com/dvilasuero)*提供。
 - en: 'Then we’ll load the WordNet data via NLTK (these things happen):'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们将通过NLTK加载WordNet数据（这些事情会发生）：
 - en: '[PRE24]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: '[PRE25]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: 'Note that *spaCy* runs as a “pipeline” and allows means for customizing parts
     of the pipeline in use. That’s excellent for supporting really interesting workflow
     integrations in data science work. Here we’ll add the *WordnetAnnotator* from
     the *spacy-wordnet* project:'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意到*spaCy*作为一个“管道”运行，并允许自定义管道中的部分内容。这对于支持数据科学工作中的非常有趣的工作流集成非常有用。在这里，我们将从*spacy-wordnet*项目中添加*WordnetAnnotator*：
 - en: '[PRE26]'
+  id: totrans-85
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE26]'
 - en: '[PRE27]'
+  id: totrans-86
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE27]'
 - en: Within the English language, some words are infamous for having many possible
     meanings. For example, click through the results online in a [WordNet](http://wordnetweb.princeton.edu/perl/webwn?s=star&sub=Search+WordNet&o2&o0=1&o8=1&o1=1&o7&o5&o9&o6&o3&o4&h) search
     to find the meanings related to the word `withdraw`.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 在英语中，一些词因具有多种可能的含义而臭名昭著。例如，通过[WordNet](http://wordnetweb.princeton.edu/perl/webwn?s=star&sub=Search+WordNet&o2&o0=1&o8=1&o1=1&o7&o5&o9&o6&o3&o4&h)搜索结果来查找与`withdraw`一词相关的含义。
 - en: 'Now let’s use *spaCy* to perform that lookup automatically:'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们使用*spaCy*来自动执行该查找：
 - en: '[PRE28]'
+  id: totrans-89
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE28]'
 - en: '[PRE29]'
+  id: totrans-90
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE29]'
 - en: '[PRE30]'
+  id: totrans-91
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE30]'
 - en: '[PRE31]'
+  id: totrans-92
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE31]'
 - en: '[PRE32]'
+  id: totrans-93
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE32]'
 - en: '[PRE33]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE33]'
 - en: Again, if you are working with knowledge graphs, those “word sense” links from *WordNet* could
     be used along with graph algorithms to help identify the meanings for a particular
     word. This can also be used to develop summaries for larger sections of text through
     a technique called *summarization*. It’s beyond the scope of this tutorial, but
     an interesting application currently for natural language in industry.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 同样，如果你正在处理知识图谱，那些来自*WordNet*的“词义”链接可以与图算法一起使用，以帮助识别特定词的含义。这也可以用于通过一种叫做*总结*的技术开发较大文本部分的摘要。这超出了本教程的范围，但在自然语言处理领域中这是一个有趣的应用。
 - en: 'Going in the other direction, if you know *a priori* that a document was about
     a particular domain or set of topics, then you can constrain the meanings returned
     from *WordNet*. In the following example, we want to consider NLU results that
     are within Finance and Banking:'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 反过来，如果你知道*a priori*一份文档是关于特定领域或主题集合的，那么你可以限制从*WordNet*返回的含义。在以下示例中，我们希望考虑金融和银行领域的NLU结果：
 - en: '[PRE34]'
+  id: totrans-97
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE34]'
 - en: '[PRE35]'
+  id: totrans-98
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE35]'
 - en: 'That example may look simple but, if you play with the `domains` list, you’ll
     find that the results have a kind of combinatorial explosion when run without
     reasonable constraints. Imagine having a knowledge graph with millions of elements:
     you’d want to constrain searches where possible to avoid having every query take
     days/weeks/months/years to compute.'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个示例看起来很简单，但如果你玩一下`domains`列表，你会发现结果在没有合理约束的情况下会出现一种组合爆炸的情况。想象一下拥有一个包含数百万个元素的知识图谱：你会想尽可能地限制搜索，以避免每个查询都需要数天/周/月/年来计算。
 - en: Sometimes the problems encountered when trying to understand a text—or better
     yet when trying to understand a *corpus* (a dataset with many related texts)—become
     so complex that you need to visualize it first. Here’s an interactive visualization
     for understanding texts: [scattertext](https://spacy.io/universe/project/scattertext),
     a product of the genius of [Jason Kessler](https://twitter.com/jasonkessler).
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时，试图理解文本——或者更好地说，理解一个*corpus*（一个包含许多相关文本的数据集）——时遇到的问题变得如此复杂，以至于你需要先可视化它。这是一个用于理解文本的交互式可视化工具：[scattertext](https://spacy.io/universe/project/scattertext)，这是[Jason
+    Kessler](https://twitter.com/jasonkessler)的天才作品。
 - en: 'Let’s analyze text data from the party conventions during the 2012 US Presidential
     elections. Note: this cell may take a few minutes to run but the results from
     all that number crunching is worth the wait.'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们分析2012年美国总统选举期间的党派大会的文本数据。注意：这个单元可能需要几分钟才能运行，但经过所有这些数字运算后，结果是值得等待的。
 - en: '[PRE36]'
+  id: totrans-102
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE36]'
 - en: 'Once you have the `corpus` ready, generate an interactive visualization in
     HTML:'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦你准备好了`corpus`，生成一个HTML中的交互式可视化：
 - en: '[PRE37]'
+  id: totrans-104
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE37]'
 - en: '[PRE38]'
+  id: totrans-105
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE38]'
 - en: 'Now we’ll render the HTML—give it a minute or two to load, it’s worth the wait:'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将渲染HTML——请稍等一两分钟，它值得等待：
 - en: '![](../Images/82c17273d5bee33940a24dde852dbb2a.png)'
+  id: totrans-107
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/82c17273d5bee33940a24dde852dbb2a.png)'
 - en: Imagine if you had text from the past three years of customer support for a
     particular product in your organization. Suppose your team needed to understand
     how customers have been talking about the product? This *scattertext* library
     might come in quite handy! You could cluster (k=2) on *NPS scores* (a customer
     evaluation metric) then replace the Democrat/Republican dimension with the top
     two components from the clustering.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象一下，如果你有过去三年中针对特定产品的客户支持文本。假设你的团队需要了解客户如何谈论该产品？这个*scattertext*库可能会非常有用！你可以对*NPS评分*（一个客户评估指标）进行聚类（k=2），然后用聚类中的前两个组件替换民主党/共和党的维度。
 - en: Summary
+  id: totrans-109
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 概要
 - en: Five years ago, if you’d asked about open source in Python for natural language,
     a default answer from many people working in data science would’ve been [NLTK](https://www.nltk.org/).
     That project includes just about everything but the kitchen sink and has components
     which are relatively academic. Another popular natural language project is [CoreNLP](https://stanfordnlp.github.io/CoreNLP/) from
     Stanford. Also quite academic, albeit powerful, though CoreNLP can be challenging
     to integrate with other software for production use.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 五年前，如果你询问有关Python中自然语言的开源工具，许多数据科学工作者的默认答案可能是[NLTK](https://www.nltk.org/)。该项目包括几乎所有内容，但组件相对学术。另一个受欢迎的自然语言项目是斯坦福大学的[CoreNLP](https://stanfordnlp.github.io/CoreNLP/)，虽然也相当学术，但功能强大，不过CoreNLP在生产环境中与其他软件集成可能会有挑战。
 - en: Then a few years ago everything in this natural language corner of the world
     began to change. The two principal authors for *spaCy*,[ Matthew Honnibal](https://twitter.com/honnibal) and [Ines
     Montani,](https://twitter.com/_inesmontani) launched the project in 2015 and industry
@@ -458,8 +692,11 @@
     and being commercial-grade software (not academic research). That said, *spaCy* has
     been quick to incorporate the SOTA advances in machine learning, effectively becoming
     a conduit for moving research into industry.
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 几年前，这个自然语言领域的一切开始发生变化。*spaCy*的两位主要作者，[Matthew Honnibal](https://twitter.com/honnibal)和[Ines
+    Montani](https://twitter.com/_inesmontani)，于2015年推出了该项目，行业采纳迅速。他们专注于一种*主观性*的方法（做必要的事，做到最好，不多也不少），这使得在Python中的数据科学工作流程中能够简单、快速地集成，并且执行速度更快、准确性更高。基于这些优先级，*spaCy*变成了*NLTK*的反面。自2015年以来，*spaCy*始终专注于作为一个开源项目（即依赖其社区进行方向指导、集成等）以及商业级软件（而非学术研究）。尽管如此，*spaCy*迅速纳入了机器学习的SOTA进展，实际上成为了将研究成果转化为行业应用的桥梁。
 - en: It’s important to note that machine learning for natural language got a big
     boost during the mid-2000’s as Google began to win international language translation
     competitions. Another big change occurred during 2017-2018 when, following the
@@ -472,8 +709,12 @@
     on deep learning, which is now state of the art (SOTA). Speaking of which, to
     keep track of SOTA for natural language keep an eye on [NLP-Progress](http://nlpprogress.com/) and [Papers
     with Code](https://paperswithcode.com/sota).
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 值得注意的是，自2000年代中期谷歌开始赢得国际语言翻译竞赛后，自然语言的机器学习得到了极大的提升。另一个重大变化发生在2017-2018年，当时，随着*深度学习*的诸多成功，这些方法开始超越之前的机器学习模型。例如，请参见[ELMo](https://arxiv.org/abs/1802.05365)对语言嵌入的工作，由Allen
+    AI主导，接着是[Google的BERT](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)，以及最近的[百度的ERNIE](https://medium.com/syncedreview/baidus-ernie-tops-google-s-bert-in-chinese-nlp-tasks-d6a42b49223d)——换句话说，全球的搜索引擎巨头们为我们提供了基于深度学习的开源嵌入语言模型的《芝麻街》剧目，这些模型现在是最先进的（SOTA）。说到这一点，为了跟踪自然语言的SOTA，可以关注[NLP-Progress](http://nlpprogress.com/)和[Papers
+    with Code](https://paperswithcode.com/sota)。
 - en: The use cases for natural language have shifted dramatically over the past two
     years, after deep learning techniques arose to the fore. Circa 2014, a natural
     language tutorial in Python might have shown *word count* or *keyword search* or *sentiment
@@ -484,105 +725,156 @@
     disclosures. More contemporary natural language work tends to be in NLU, often
     to support construction of *knowledge graphs*, and increasingly in NLG where large
     numbers of similar documents can be summarized at human scale.
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 过去两年自然语言的应用场景发生了剧烈变化，深度学习技术的出现使得这些变化加速。大约在 2014 年，一个 Python 自然语言教程可能会展示*词频统计*、*关键词搜索*或*情感检测*，当时的目标用例相对较为平淡。而到了
+    2019 年，我们谈论的则是分析成千上万的文档以优化工业*supply chain*…或分析数亿份文档用于保险公司保单持有人，或无数份关于财务披露的文档。更现代的自然语言处理工作倾向于自然语言理解（NLU），通常用于支持*知识图谱*的构建，并且越来越多地应用于自然语言生成（NLG），在这里，大量类似文档可以在人工规模下进行总结。
 - en: 'The [spaCy Universe](https://spacy.io/universe) is a great place to check for
     deep-dives into particular use cases and to see how this field is evolving. Some
     selections from this “universe” include:'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '[spaCy Universe](https://spacy.io/universe) 是检查特定用例深度探讨以及了解这一领域如何发展的好地方。从这个“宇宙”中选择的一些项目包括：'
 - en: '[Blackstone](https://spacy.io/universe/project/blackstone) – parsing unstructured
     legal texts'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Blackstone](https://spacy.io/universe/project/blackstone) – 解析非结构化法律文本'
 - en: '[Kindred](https://spacy.io/universe/project/kindred) – extracting entities
     from biomedical texts (e.g., Pharma)'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Kindred](https://spacy.io/universe/project/kindred) – 从生物医学文本（例如，制药领域）中提取实体'
 - en: '[mordecai](https://spacy.io/universe/project/mordecai) – parsing geographic
     information'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[mordecai](https://spacy.io/universe/project/mordecai) – 解析地理信息'
 - en: '[Prodigy](https://spacy.io/universe/project/prodigy) – human-in-the-loop annotation
     for labelling datasets'
+  id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Prodigy](https://spacy.io/universe/project/prodigy) – 人工干预标注数据集'
 - en: '[spacy-raspberry](https://spacy.io/universe/project/spacy-raspberry) – Raspberry
     PI image for running spaCy and deep learning on edge devices'
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[spacy-raspberry](https://spacy.io/universe/project/spacy-raspberry) – Raspberry
+    PI 镜像，用于在边缘设备上运行 spaCy 和深度学习'
 - en: '[Rasa NLU](https://spacy.io/universe/project/rasa) – Rasa integration for chat
     apps'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Rasa NLU](https://spacy.io/universe/project/rasa) – Rasa 集成用于聊天应用'
 - en: 'Also, a couple super new items to mention:'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 另外，还有几个超级新的项目值得一提：
 - en: '[spacy-pytorch-transformers](https://explosion.ai/blog/spacy-pytorch-transformers) to
     fine tune (i.e., use transfer learning with) the Sesame Street characters and
     friends: BERT, GPT-2, XLNet, etc.'
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[spacy-pytorch-transformers](https://explosion.ai/blog/spacy-pytorch-transformers)
+    用于微调（即，使用迁移学习）Sesame Street 的角色和朋友：BERT、GPT-2、XLNet 等。'
 - en: '[spaCy IRL 2019](https://irl.spacy.io/2019/) conference – check out videos
     from the talks!'
+  id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[spaCy IRL 2019](https://irl.spacy.io/2019/) 会议 – 查看演讲视频！'
 - en: There’s so much more we can be done with *spaCy*— hopefully this tutorial provides
     an introduction. We wish you all the best in your natural language work.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以用*spaCy*做更多的事情——希望这个教程能够提供一个入门介绍。祝你在自然语言处理工作中一切顺利。
 - en: '[Original](https://blog.dominodatalab.com/natural-language-in-python-using-spacy/).
     Reposted with permission.'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始](https://blog.dominodatalab.com/natural-language-in-python-using-spacy/)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[The State of Transfer Learning in NLP](/2019/09/state-transfer-learning-nlp.html)'
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理中的迁移学习现状](/2019/09/state-transfer-learning-nlp.html)'
 - en: '[Reddit Post Classification](/2019/09/reddit-post-classification.html)'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Reddit 帖子分类](/2019/09/reddit-post-classification.html)'
 - en: '[2018’s Top 7 Python Libraries for Data Science and AI](/2019/01/vazquez-2018-top-7-python-libraries.html)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2018 年数据科学和 AI 的顶级 7 个 Python 库](/2019/01/vazquez-2018-top-7-python-libraries.html)'
 - en: More On This Topic
+  id: totrans-130
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关话题
 - en: '[Natural Language Processing with spaCy](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 spaCy 的自然语言处理](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)'
 - en: '[Getting Started with spaCy for NLP](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 spaCy 入门 NLP](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)'
 - en: '[N-gram Language Modeling in Natural Language Processing](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理中的 N-gram 语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)'
 - en: '[A Gentle Introduction to Natural Language Processing](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理的温和介绍](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
 - en: '[Introduction to Natural Language Processing](https://www.kdnuggets.com/introduction-to-natural-language-processing)'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理简介](https://www.kdnuggets.com/introduction-to-natural-language-processing)'
 - en: '[How to Start Using Natural Language Processing With PyTorch](https://www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html)'
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何开始使用 PyTorch 进行自然语言处理](https://www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html)'
