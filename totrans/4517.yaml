@@ -1,292 +1,437 @@
 - en: Adversarial Validation Overview
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 对抗性验证概述
 - en: 原文：[https://www.kdnuggets.com/2020/02/adversarial-validation-overview.html](https://www.kdnuggets.com/2020/02/adversarial-validation-overview.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/02/adversarial-validation-overview.html](https://www.kdnuggets.com/2020/02/adversarial-validation-overview.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: If you were to study some of the competition-winning solutions on Kaggle, you
     might notice references to “adversarial validation” ([like this one](https://www.kaggle.com/c/ieee-fraud-detection/discussion/111284)).
     What is it?
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你研究一些Kaggle上的竞赛获胜解决方案，你可能会注意到对“对抗性验证”的引用（[例如这个](https://www.kaggle.com/c/ieee-fraud-detection/discussion/111284)）。这是什么？
 - en: In short, we build a classifier to try to predict which data rows are from the
     training set, and which are from the test set. If the two datasets came from the
     same distribution, this should be impossible. But if there are systematic differences
     in the feature values of your training and test datasets, then a classifier will
     be able to successfully learn to distinguish between them. The better a model
     you can learn to distinguish them, the bigger the problem you have.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 简而言之，我们构建一个分类器来尝试预测哪些数据行来自训练集，哪些来自测试集。如果这两个数据集来自相同的分布，那么这应该是不可能的。但是，如果训练集和测试集的特征值存在系统性的差异，那么分类器将能够成功地学会区分它们。你越能训练出一个更好的模型来区分它们，你面临的问题就越大。
 - en: But the good news is that *you can analyze the learned model to help you diagnose
     the problem*. And once you understand the problem, you can go about fixing it.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 不过好消息是*你可以分析学习到的模型来帮助你诊断问题*。一旦你理解了问题，你就可以开始解决它。
 - en: This post is meant to accompany a [YouTube video](https://youtu.be/7cUCDRaIZ7I)
     I made to explain the intuition of Adversarial Validation. This blog post walks
     through the code implementation of the example presented in this video but is
     complete enough to be self-contained. You can find the complete code for this
     post on [GitHub](https://github.com/zjost/blog_code/tree/master/adversarial_validation).
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文旨在配合我制作的[YouTube视频](https://youtu.be/7cUCDRaIZ7I)来解释对抗性验证的直觉。这个博客帖子逐步讲解了这个视频中展示的示例的代码实现，但足够完整，可以自成一体。你可以在[GitHub](https://github.com/zjost/blog_code/tree/master/adversarial_validation)上找到这篇文章的完整代码。
 - en: Learning the Adversarial Validation model
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 学习对抗性验证模型
 - en: 'First, some boilerplate import statements to avoid confusion:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，一些基本的导入语句以避免混淆：
 - en: '[PRE0]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Data Preparation
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据准备
 - en: For this tutorial, we're going to be using the [IEEE-CIS Credit Card Fraud Detection
     dataset](https://www.kaggle.com/c/ieee-fraud-detection/data) from Kaggle. First,
     I'll assume you've loaded the training and test data into pandas DataFrames and
     called them *df_train* and *df_test*, respectively. Then we'll do some basic cleaning
     by replacing missing values.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于本教程，我们将使用来自Kaggle的[IEEE-CIS信用卡欺诈检测数据集](https://www.kaggle.com/c/ieee-fraud-detection/data)。首先，我假设你已经将训练数据和测试数据加载到pandas
+    DataFrames中，并分别命名为*df_train*和*df_test*。然后，我们将通过替换缺失值来进行一些基本的清理。
 - en: '[PRE1]'
+  id: totrans-12
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'For adversarial validation, we want to learn a model that predicts which rows
     are in the training dataset, and which are in the test set. We, therefore, create
     a new target column in which the test samples are labeled with 1 and the train
     samples with 0, like this:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于对抗性验证，我们希望学习一个模型，预测哪些行在训练数据集中，哪些行在测试集中。因此，我们创建一个新的目标列，其中测试样本标记为1，训练样本标记为0，如下所示：
 - en: '[PRE2]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'This is the target that we''ll train a model to predict. Right now, the train
     and test datasets are separate, and each dataset has only one label for the target
     value. If we trained a model on *this* training set, it would just learn that
     everything was 0\. We want to instead shuffle the train and test datasets, and
     then create new datasets for fitting and evaluating the adversarial validation
     model. I define a function for combining, shuffling, and re-splitting:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我们将训练一个模型来预测的目标。现在，训练集和测试集是分开的，每个数据集只有一个目标值的标签。如果我们在*这个*训练集上训练一个模型，它只会学到一切都是0。我们希望将训练集和测试集进行洗牌，然后创建新的数据集来拟合和评估对抗性验证模型。我定义了一个用于合并、洗牌和重新拆分的函数：
 - en: '[PRE3]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'The new datasets, *adversarial_train* and *adversarial_test*, include a mix
     of the original training and test sets, and the target indicates the original
     dataset. *Note: I added* TransactionDT *to the feature list. The reason for this
     will become apparent.*'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 新的数据集，*adversarial_train* 和 *adversarial_test*，包括了原始训练集和测试集的混合，并且目标指示了原始数据集。*注意：我将*
+    TransactionDT *添加到了特征列表中。这一点的原因将在之后变得明显。*
 - en: For modeling, I'm going to be using Catboost. I finish data preparation by putting
     the DataFrames into Catboost Pool objects.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于建模，我将使用Catboost。我通过将DataFrames放入Catboost Pool对象中来完成数据准备。
 - en: '[PRE4]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Modeling
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 建模
 - en: 'This part is simple: we just instantiate a Catboost Classifier and fit it on
     our data:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一部分很简单：我们只需实例化一个Catboost分类器，并在我们的数据上进行训练：
 - en: '[PRE5]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Let''s go ahead and plot the ROC curve on the holdout dataset:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们继续绘制持出数据集的ROC曲线：
 - en: '![](../Images/f85665598d59b9f283d690f8207dbbfb.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f85665598d59b9f283d690f8207dbbfb.png)'
 - en: This is a perfect model, which means there's a clear way to tell whether any
     given record is in the training or test sets. This is a violation of the assumption
     that our training and test sets are identically distributed.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个完美的模型，这意味着可以明确区分任何给定记录是否在训练集或测试集中。这违反了我们训练集和测试集是同分布的假设。
 - en: Diagnosing the problem and iterating
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 诊断问题并进行迭代
 - en: 'To understand how the model was able to do this, let''s look at the most important
     features:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 要了解模型是如何做到这一点的，我们来看看最重要的特征：
 - en: '![](../Images/41ce4a631fbd77d8648a2dffc386b240.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/41ce4a631fbd77d8648a2dffc386b240.png)'
 - en: The TransactionDT is by far the most important feature. And that makes total
     sense given that the original training and test datasets came from different periods
     (the test set occurs in the future of the training set). The model has just learned
     that if the TransactionDT is larger than the last training sample, it's in the
     test set.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: TransactionDT仍然是最重要的特征。这完全可以理解，因为原始训练集和测试集来自不同的时间段（测试集发生在训练集的未来）。模型刚刚学会了如果TransactionDT大于最后一个训练样本，它就属于测试集。
 - en: I included the TransactionDT just to make this point–it's not advised to throw
     a raw date in as a model feature normally. But it's good news that this technique
     found it in such a dramatic fashion. This analysis would clearly help you identify
     such an error.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我包括了TransactionDT只是为了说明这一点——通常不建议将原始日期作为模型特征。然而，这一技术以如此戏剧性的方式发现了这一点，这确实是好消息。这项分析显然将帮助你识别这样的错误。
 - en: Let's eliminate TransactionDT, and run this analysis again.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们去掉TransactionDT，再次运行此分析。
 - en: '[PRE6]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Now the ROC curve looks like this:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在ROC曲线如下所示：
 - en: '![](../Images/ad8f85b1360a4d48945cf9297ee74bdf.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ad8f85b1360a4d48945cf9297ee74bdf.png)'
 - en: 'It''s still a fairly strong model with AUC > 0.91, but much weaker than before.
     Let''s look at the feature importances for this model:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 这仍然是一个相当强的模型，AUC > 0.91，但比之前要弱得多。让我们看看这个模型的特征重要性：
 - en: '![](../Images/e4ee0d6af6f44b5053021a591cf35934.png)'
+  id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e4ee0d6af6f44b5053021a591cf35934.png)'
 - en: Now, *id_31* is the most important feature. Let's look at some values to understand
     what it is.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，*id_31*是最重要的特征。让我们查看一些值来了解它是什么。
 - en: '[PRE7]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: This column contains software version numbers. Clearly, this is similar in concept
     to including a raw date, because the first occurrence of a particular software
     version will correspond to its release date.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 本栏目包含软件版本号。显然，这在概念上类似于包含原始日期，因为特定软件版本的第一次出现将对应其发布日期。
 - en: 'Let''s get around this problem by dropping any characters that are not letters
     from the column:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们通过从列中删除任何非字母字符来绕过这个问题：
 - en: '[PRE8]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Now the values of our column look like this:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们栏目的值如下所示：
 - en: '[PRE9]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'Let''s train a new adversarial validation model using this cleaned column:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用这个清理过的列训练一个新的对抗验证模型：
 - en: '[PRE10]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'The ROC plot now looks like this:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在ROC图如下所示：
 - en: '![](../Images/5e0a44192531181d62184c1f42b7b23f.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5e0a44192531181d62184c1f42b7b23f.png)'
 - en: The performance has dropped from an AUC of 0.917 to 0.906\. This means that
     we've made it a little harder for a model to distinguish between our training
     and test datasets, but it's still quite capable.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 性能从0.917的AUC下降到0.906。这意味着我们让模型区分训练集和测试集的难度稍微增加了一点，但它仍然相当有能力。
 - en: Conclusion
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: When we naively tossed the transaction date into the feature set, the adversarial
     validation process helped to clearly diagnose the problem. Additional iterations
     gave us more clues that a column containing software version information had clear
     differences between the training and test sets.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们天真地将交易日期投入特征集时，对抗验证过程帮助我们清楚地诊断了问题。额外的迭代给了我们更多线索，表明包含软件版本信息的列在训练集和测试集之间存在明显差异。
 - en: But what the process is not able to do is tell us *how to fix it*. We still
     need to apply our creativity here. In this example, we simply removed all numbers
     from the software version information, but this is throwing away potentially useful
     information and might ultimately hurt our fraud modeling task, which is our real
     goal. The idea is that *you want to remove information that is not important for
     predicting fraud but is important for separating your training and test sets*.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 但这个过程无法告诉我们*如何修复它*。我们仍然需要发挥创造力。在这个例子中，我们简单地从软件版本信息中移除了所有数字，但这丢弃了潜在有用的信息，并可能*最终损害我们的欺诈建模任务*，这才是我们的真正目标。其想法是*你需要移除对预测欺诈不重要但对分离训练和测试集重要的信息*。
 - en: A better approach might have been to find a dataset that gave the software release
     dates for each software version, and then created a “days since release” column
     that replaced the raw version number. This might make for a better match for the
     train and test distributions while also maintaining the predictive power that
     software version information encodes.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个更好的方法可能是找到一个数据集，提供每个软件版本的发布日期，然后创建一个“自发布以来的天数”列，替代原始版本号。这可能更适合训练和测试分布，同时保持软件版本信息所包含的预测能力。
 - en: '**Related:**'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Adversarial Validation, Explained](https://www.kdnuggets.com/2016/10/adversarial-validation-explained.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[对抗性验证解释](https://www.kdnuggets.com/2016/10/adversarial-validation-explained.html)'
 - en: '[Reproducibility, Replicability, and Data Science](https://www.kdnuggets.com/2019/11/reproducibility-replicability-data-science.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[可重复性、复制性与数据科学](https://www.kdnuggets.com/2019/11/reproducibility-replicability-data-science.html)'
 - en: '[Careful! Looking at your model results too much can cause information leakage](https://www.kdnuggets.com/2019/05/careful-looking-model-results-cause-information-leakage.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[小心！过度查看模型结果可能导致信息泄漏](https://www.kdnuggets.com/2019/05/careful-looking-model-results-cause-information-leakage.html)'
 - en: '* * *'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-58
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-63
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[What is Adversarial Machine Learning?](https://www.kdnuggets.com/2022/03/adversarial-machine-learning.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是对抗性机器学习？](https://www.kdnuggets.com/2022/03/adversarial-machine-learning.html)'
 - en: '[Why Use k-fold Cross Validation?](https://www.kdnuggets.com/2022/07/kfold-cross-validation.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为何使用 k 折交叉验证？](https://www.kdnuggets.com/2022/07/kfold-cross-validation.html)'
 - en: '[Data Validation for PySpark Applications using Pandera](https://www.kdnuggets.com/2023/08/data-validation-pyspark-applications-pandera.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Pandera 对 PySpark 应用程序进行数据验证](https://www.kdnuggets.com/2023/08/data-validation-pyspark-applications-pandera.html)'
 - en: '[Pydantic Tutorial: Data Validation in Python Made Simple](https://www.kdnuggets.com/pydantic-tutorial-data-validation-in-python-made-simple)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Pydantic 教程：简化 Python 数据验证](https://www.kdnuggets.com/pydantic-tutorial-data-validation-in-python-made-simple)'
 - en: '[MarshMallow: The Sweetest Python Library for Data Serialization and…](https://www.kdnuggets.com/marshmallow-the-sweetest-python-library-for-data-serialization-and-validation)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MarshMallow：最甜蜜的 Python 数据序列化和验证库](https://www.kdnuggets.com/marshmallow-the-sweetest-python-library-for-data-serialization-and-validation)'
 - en: '[Approaches to Text Summarization: An Overview](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本摘要方法概述](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)'

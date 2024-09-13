@@ -1,108 +1,134 @@
 - en: Practical Hyperparameter Optimization
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2020/02/practical-hyperparameter-optimization.html](https://www.kdnuggets.com/2020/02/practical-hyperparameter-optimization.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '**By [Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/), The University
     of Southampton**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e7d267de83d374a4b81eacc48c82c3dc.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: Introduction
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'Machine Learning models are composed of two different types of parameters:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: '**Hyperparameters** = are all the parameters which can be arbitrarily set by
     the user before starting training (eg. number of estimators in Random Forest).'
+  id: totrans-13
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**Model parameters =** are instead learned during the model training (eg. weights
     in Neural Networks, Linear Regression).'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: The model parameters define how to use input data to get the desired output
     and are learned at training time. Instead, Hyperparameters determine how our model
     is structured in the first place.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: Machine Learning models tuning is a type of optimization problem. We have a
     set of hyperparameters and we aim to find the right combination of their values
     which can help us to find either the minimum (eg. loss) or the maximum (eg. accuracy)
     of a function (Figure 1).
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: This can be particularly important when comparing how different Machine Learning
     models performs on a dataset. In fact, it would be unfair for example to compare
     an SVM model with the best Hyperparameters against a Random Forest model which
     has not been optimized.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: 'In this post, the following approaches to Hyperparameter optimization will
     be explained:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: '**Manual Search**'
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: '**Random Search**'
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: '**Grid Search**'
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: '**Automated Hyperparameter Tuning (Bayesian Optimization, Genetic Algorithms)**'
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: '**Artificial Neural Networks (ANNs) Tuning**'
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: '![Figure](../Images/a925c643693adacdb575d44ea48f69bb.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
 - en: 'Figure 1: ML Optimization Workflow [1]'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: In order to demonstrate how to perform Hyperparameters Optimization in Python,
@@ -112,6 +138,7 @@
     be labelled as fraudulent or genuine (binary classification). This Dataset has
     been anonymized before being distributed, therefore, the meaning of most of the
     features has not been disclosed.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: In this case, I decided to use just a subset of the dataset, in order to speed
@@ -119,101 +146,128 @@
     classes. Additionally, just a limited amount of features has been used to make
     the optimization tasks more challenging. The final dataset is shown in the figure
     below (Figure 2).
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/ac4eeb1e5f700fc844f3fead905f2a0d.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
 - en: 'Figure 2: Credit Card Fraud Detection Dataset'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: All the code used in this article (and more!) is available in my [GitHub repository](https://github.com/pierpaolo28/Kaggle-Challenges/blob/master/credit-card-fraud-model-tuning.ipynb) and [Kaggle
     Profile](https://www.kaggle.com/pierpaolo28/credit-card-fraud-model-tuning).
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: Machine Learning
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: First of all, we need to divide our dataset into training and test sets.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: Throughout this article, we will use a Random Forest Classifier as our model
     to optimize.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: Random Forest models are formed by a large number of uncorrelated decision trees,
     which joint together constitute an ensemble. In Random Forest, each decision tree
     makes its own prediction and the overall model output is selected to be the prediction
     which appeared most frequently.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: We can now start by calculating our base model accuracy.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Using the Random Forest Classifier with the default scikit-learn parameters
     lead to 95% overall accuracy. Let’s see now if applying some optimization techniques
     we can achieve better accuracy.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: Manual Search
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: When using Manual Search, we choose some model hyperparameters based on our
     judgment/experience. We then train the model, evaluate its accuracy and start
     the process again. This loop is repeated until a satisfactory accuracy is scored.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: 'The main parameters used by a Random Forest Classifier are:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '**criterion** = the function used to evaluate the quality of a split.'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**max_depth** = maximum number of levels allowed in each tree.'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**max_features** = maximum number of features considered when splitting a node.'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**min_samples_leaf** = minimum number of samples which can be stored in a tree
     leaf.'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**min_samples_split** = minimum number of samples necessary in a node to cause
     node splitting.'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**n_estimators** = number of trees in the ensemble.'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: More information about Random Forest parameters can be found on the scikit-learn[ Documentation](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html).
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: As an example of Manual Search, I tried to specify the number of estimators
     in our model. Unfortunately, this didn’t lead to any improvement in accuracy.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Random Search
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: In Random Search, we create a grid of hyperparameters and train/test our model
     on just some random combination of these hyperparameters. In this example, I additionally
     decided to perform Cross-Validation on the training set.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: When performing Machine Learning tasks, we generally divide our dataset in training
@@ -221,6 +275,7 @@
     (in this way we can check it’s performances when working with unseen data). When
     using Cross-Validation, we divide our training set into N other partitions to
     make sure our model is not overfitting our data.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
 - en: One of the most common used Cross-Validation methods is K-Fold Validation. In
@@ -229,17 +284,21 @@
     iteration we change the left-over partition). Once having trained N times the
     model we then average the training results obtained in each iteration to obtain
     our overall training performance results (Figure 3).
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/ef469d0bf742072bd0a720a564e8c996.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
 - en: 'Figure 3: K-Fold Cross-Validation [2]'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: Using Cross-Validation when implementing Hyperparameters optimization can be
     really important. In this way, we might avoid using some Hyperparameters which
     works really good on the training data but not so good with the test data.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: We can now start implementing Random Search by first defying a grid of hyperparameters
@@ -248,29 +307,35 @@
     select 80 as the number of combinations to sample (***n_iter = 80***). Using the
     scikit-learn ***best_estimator_ ***attribute, we can then retrieve the set of
     hyperparameters which performed best during training to test our model.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: Once trained our model, we can then visualize how changing some of its Hyperparameters
     can affect the overall model accuracy (Figure 4). In this case, I decided to observe
     how changing the number of estimators and the criterion can affect our Random
     Forest accuracy.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/f655111ff344502011d6b50d2e15d0ba.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_IMG
 - en: 'Figure 4: Criterion vs N Estimators Accuracy Heatmap'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
 - en: We can then take this a step further by making our visualization more interactive.
     In the chart below, we can examine (using the slider) how varying the number of
     estimators in our model can affect the overall accuracy of our model considered
     the selected min_split and min_leaf parameters.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: Feel free to play with the graph below by changing the n_estimators parameters,
     zooming in and out of the graph, changing it’s orientation and hovering over the
     single data points to get additional information about them!
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: If you are interested in finding out more about how to create these animations
@@ -278,128 +343,180 @@
     my code is available [here](https://www.kaggle.com/kernels/scriptcontent/20590929/download).
     Additionally, this has also been covered in an article written by [Xoel López
     Barata](https://towardsdatascience.com/using-3d-visualizations-to-tune-hyperparameters-of-ml-models-with-python-ba2885eab2e9).
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
 - en: We can now evaluate how our model performed using Random Search. In this case,
     using Random Search leads to a consistent increase in accuracy compared to our
     base model.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以评估使用随机搜索的模型性能。在这种情况下，使用随机搜索相比于我们的基线模型，准确性有了一致的提高。
 - en: '[PRE2]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Grid Seach
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 网格搜索
 - en: In Grid Search, we set up a grid of hyperparameters and train/test our model
     on each of the possible combinations.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 在网格搜索中，我们建立一个超参数网格，并在每个可能的组合上训练/测试我们的模型。
 - en: In order to choose the parameters to use in Grid Search, we can now look at
     which parameters worked best with Random Search and form a grid based on them
     to see if we can find a better combination.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了选择在网格搜索中使用的参数，我们现在可以查看随机搜索中表现最好的参数，并基于这些参数形成一个网格，以查看是否能找到更好的组合。
 - en: Grid Search can be implemented in Python using scikit-learn ***GridSearchCV() ***function.
     Also on this occasion, I decided to divide our training set into 4 Folds (***cv
     = 4***).
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以使用Python中的scikit-learn ***GridSearchCV()***函数来实现网格搜索。此次，我决定将训练集分成4个折叠（***cv
+    = 4***）。
 - en: When using Grid Search, all the possible combinations of the parameters in the
     grid are tried. In this case, 128000 combinations (2 × 10 × 4 × 4 × 4 × 10) will
     be used during training. Instead, in the Grid Search example before, just 80 combinations
     have been used.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用网格搜索时，会尝试网格中所有可能的参数组合。在这种情况下，训练期间将使用128000种组合（2 × 10 × 4 × 4 × 4 × 10）。而在之前的网格搜索示例中，仅使用了80种组合。
 - en: '[PRE3]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Grid Search is slower compared to Random Search but it can be overall more effective
     because it can go through the whole search space. Instead, Random Search can be
     faster fast but might miss some important points in the search space.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 与随机搜索相比，网格搜索较慢，但由于可以遍历整个搜索空间，它总体上可能更有效。而随机搜索可能较快，但可能会遗漏搜索空间中的一些重要点。
 - en: Automated Hyperparameter Tuning
+  id: totrans-73
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 自动超参数调整
 - en: 'When using Automated Hyperparameter Tuning, the model hyperparameters to use
     are identified using techniques such as: Bayesian Optimization, Gradient Descent
     and Evolutionary Algorithms.'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 在使用自动超参数调整时，使用贝叶斯优化、梯度下降和进化算法等技术来确定要使用的模型超参数。
 - en: Bayesian Optimization
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 贝叶斯优化
 - en: Bayesian Optimization can be performed in Python using the Hyperopt library.
     Bayesian optimization uses probability to find the minimum of a function. The
     final aim is to find the input value to a function which can give us the lowest
     possible output value.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 贝叶斯优化可以在Python中使用Hyperopt库进行。贝叶斯优化利用概率来找到函数的最小值。最终目标是找到能使函数输出值最低的输入值。
 - en: Bayesian optimization has been proved to be more efficient than random, grid
     or manual search. Bayesian Optimization can, therefore, lead to better performance
     in the testing phase and reduced optimization time.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 已经证明，贝叶斯优化比随机搜索、网格搜索或手动搜索更高效。因此，贝叶斯优化可以在测试阶段带来更好的性能，并减少优化时间。
 - en: In Hyperopt, Bayesian Optimization can be implemented giving 3 three main parameters
     to the function **fmin()**.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Hyperopt中，可以通过给函数**fmin()**传递3个主要参数来实现贝叶斯优化。
 - en: '**Objective Function** = defines the loss function to minimize.'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**目标函数** = 定义要最小化的损失函数。'
 - en: '**Domain Space** = defines the range of input values to test (in Bayesian Optimization
     this space creates a probability distribution for each of the used Hyperparameters).'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**领域空间** = 定义测试输入值的范围（在贝叶斯优化中，该空间为每个使用的超参数创建概率分布）。'
 - en: '**Optimization Algorithm** = defines the search algorithm to use to select
     the best input values to use in each new iteration.'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**优化算法** = 定义用于选择每次新迭代中使用的最佳输入值的搜索算法。'
 - en: Additionally, can also be defined in ***fmin()*** the maximum number of evaluations
     to perform.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，还可以在***fmin()***中定义最大评估次数。
 - en: Bayesian Optimization can reduce the number of search iterations by choosing
     the input values bearing in mind the past outcomes. In this way, we can concentrate
     our search from the beginning on values which are closer to our desired output.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 贝叶斯优化通过考虑过去的结果来减少搜索迭代次数。通过这种方式，我们可以从一开始就将搜索集中在接近我们期望输出的值上。
 - en: We can now run our Bayesian Optimizer using the **fmin()** function. A **Trials()** object
     is first created to make possible to visualize later what was going on while the **fmin()** function
     was running (eg. how the loss function was changing and how to used Hyperparameters
     were changing).
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以使用**fmin()**函数运行我们的贝叶斯优化器。首先创建一个**Trials()**对象，以便之后可视化**fmin()**函数运行期间的情况（例如，损失函数的变化以及所使用的超参数的变化）。
 - en: '[PRE4]'
+  id: totrans-85
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: We can now retrieve the set of best parameters identified and test our model
     using the ***best*** dictionary created during training. Some of the parameters
     have been stored in the ***best*** dictionary numerically using indices, therefore,
     we need first to convert them back as strings before input them in our Random
     Forest.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: The classification report using Bayesian Optimization is shown below.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-88
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Genetic Algorithms
+  id: totrans-89
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Genetic Algorithms tries to apply natural selection mechanisms to Machine Learning
     contexts. They are inspired by the Darwinian process of Natural Selection and
     they are therefore also usually called as Evolutionary Algorithms.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
 - en: Let’s imagine we create a population of N Machine Learning models with some
@@ -410,29 +527,38 @@
     calculate the accuracy of each model and repeat the cycle for a defined number
     of generations. In this way, just the best models will survive at the end of the
     process.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
 - en: In order to implement Genetic Algorithms in Python, we can use the [TPOT Auto
     Machine Learning library](https://epistasislab.github.io/tpot/). TPOT is built
     on the scikit-learn library and it can be used for either regression or classification
     tasks.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
 - en: The training report and the best parameters identified using Genetic Algorithms
     are shown in the following snippet.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE6]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The overall accuracy of our Random Forest Genetic Algorithm optimized model
     is shown below.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE7]'
+  id: totrans-96
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Artificial Neural Networks (ANNs) Tuning
+  id: totrans-97
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -442,39 +568,52 @@
     of our ANN parameters such as: how many neurons to use in each layer and which
     activation function and optimizer to use. More examples of Deep Learning Hyperparameters
     optimization are available [here](https://machinelearningmastery.com/grid-search-hyperparameters-deep-learning-models-python-keras/).'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE8]'
+  id: totrans-99
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: The overall accuracy scored using our Artificial Neural Network (ANN) can be
     observed below.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE9]'
+  id: totrans-101
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Evaluation
+  id: totrans-102
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: We can now compare how all the different optimization techniques performed on
     this given exercise. Overall, Random Search and Evolutionary Algorithms performed
     best.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE10]'
+  id: totrans-104
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: The results obtained, are highly dependent on the chosen grid space and dataset
     used. Therefore, in different situations, different optimization techniques will
     perform better than others.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
 - en: '*I hope you enjoyed this article, thank you for reading!*'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
 - en: Contacts
+  id: totrans-107
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -482,92 +621,115 @@
     on Medium](https://medium.com/@pierpaoloippolito28?source=post_page---------------------------) and
     subscribe to my [mailing list](http://eepurl.com/gwO-Dr?source=post_page---------------------------).
     These are some of my contacts details:'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
 - en: '[Linkedin](https://uk.linkedin.com/in/pier-paolo-ippolito-202917146?source=post_page---------------------------)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Personal Blog](https://pierpaolo28.github.io/blog/?source=post_page---------------------------)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Personal Website](https://pierpaolo28.github.io/?source=post_page---------------------------)'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Medium Profile](https://towardsdatascience.com/@pierpaoloippolito28?source=post_page---------------------------)'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[GitHub](https://github.com/pierpaolo28?source=post_page---------------------------)'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Kaggle](https://www.kaggle.com/pierpaolo28?source=post_page---------------------------)'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Bibliography
+  id: totrans-115
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[1] Hyperparameter optimization: Explanation of automatized algorithms, Dawid
     Kopczyk. Accessed at: [https://dkopczyk.quantee.co.uk/hyperparameter-optimization/](https://dkopczyk.quantee.co.uk/hyperparameter-optimization/)'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
 - en: '[2] Model Selection, ethen8181\. Accessed at: [http://ethen8181.github.io/machine-learning/model_selection/model_selection.html](http://ethen8181.github.io/machine-learning/model_selection/model_selection.html)'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)** is
     a final year MSc Artificial Intelligence student at The University of Southampton.
     He is an AI Enthusiast, Data Scientist and RPA Developer.'
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://towardsdatascience.com/hyperparameters-optimization-526348bb8e2d).
     Reposted with permission.'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
 - en: '[Automated Machine Learning Project Implementation Complexities](/2019/11/automl-implementation-complexities.html)'
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Automated Machine Learning: How do teams work together on an AutoML project?](/2020/01/teams-work-together-automl-project.html)'
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[How to Automate Hyperparameter Optimization](/2019/06/automate-hyperparameter-optimization.html)'
+  id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-124
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Machine Learning Pipeline Optimization with TPOT](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL

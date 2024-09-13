@@ -1,25 +1,37 @@
 - en: Using the Fitbit Web API with Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Python 和 Fitbit Web API
 - en: 原文：[https://www.kdnuggets.com/2020/02/using-fitbit-web-api-python.html](https://www.kdnuggets.com/2020/02/using-fitbit-web-api-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/02/using-fitbit-web-api-python.html](https://www.kdnuggets.com/2020/02/using-fitbit-web-api-python.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/), Data
     Scientist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)，数据科学家**'
 - en: '![Figure](../Images/12cb0f35adee20ec48a85dceef1e0e44.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/12cb0f35adee20ec48a85dceef1e0e44.png)'
 - en: The graph above was made from Fitbit data, just not through the API. I just
     figured I would share my colleagues work. [https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227709](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227709)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 上面的图表是从 Fitbit 数据制作的，只是没有通过 API。我只是想分享我同事的工作。[https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227709](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227709)
 - en: Fitbit provides a Web API for accessing data from Fitbit activity trackers,
     Aria & Aria 2 scales, and manually entered logs. So if you have been using a Fitbit,
     you can use the [Fitbit API](https://dev.fitbit.com/build/reference/web-api/basics/)
@@ -32,472 +44,743 @@
     get, and show a bit of how you could go about graphing data. As always, the code
     used in this tutorial is available on my [GitHub](https://github.com/mGalarnyk/Python_Tutorials/blob/master/Apis/Fitbit/Fitbit_API.ipynb).
     With that, let’s get started!
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: Fitbit 提供了一个 Web API 来访问 Fitbit 活动追踪器、Aria 和 Aria 2 称重器的数据以及手动输入的日志。因此，如果你使用了
+    Fitbit，你可以使用 [Fitbit API](https://dev.fitbit.com/build/reference/web-api/basics/)
+    ([https://dev.fitbit.com/build/reference/web-api/basics/](https://dev.fitbit.com/build/reference/web-api/basics/))
+    来获取自己的数据。除了使用 API 获取数据的便利外，你还可以获得在线应用程序中无法获得的日内（逐分钟）数据。虽然这个教程最初类似于 [Stephen Hsu](https://towardsdatascience.com/@shsu14)
+    的精彩 [教程](https://towardsdatascience.com/collect-your-own-fitbit-data-with-python-ff145fa10873)，但我决定稍微更新一下流程，解决一些可能出现的错误，并展示如何绘制数据。与往常一样，本教程中使用的代码可以在我的
+    [GitHub](https://github.com/mGalarnyk/Python_Tutorials/blob/master/Apis/Fitbit/Fitbit_API.ipynb)
+    上找到。那么，我们开始吧！
 - en: 1.) Create a Fitbit account
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1.) 创建一个 Fitbit 账户
 - en: You can create a Fitbit account by clicking [here](https://www.fitbit.com/signup).
     It will take you to a page similar to the one below.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过点击 [这里](https://www.fitbit.com/signup) 创建一个 Fitbit 账户。这将带你到一个类似于下面的页面。
 - en: '![Figure](../Images/49501ab814fd1eaa538692c8e96e0579.png)'
+  id: totrans-9
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/49501ab814fd1eaa538692c8e96e0579.png)'
 - en: You don’t need to check the “Keep me updated” box like I did. Also fakeuser@gmail
     is not the email I used for my account.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 你不需要像我一样勾选“保持更新”框。此外，fakeuser@gmail 不是我为我的账户使用的电子邮件。
 - en: 2.) Set up your account and create the app
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2.) 设置你的账户并创建应用
 - en: Go to [dev.fitbit.com](https://dev.fitbit.com/getting-started/). Hover on “Manage”
     and click on “Register An App”.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 访问 [dev.fitbit.com](https://dev.fitbit.com/getting-started/)。将鼠标悬停在“管理”上，然后点击“注册应用”。
 - en: '![](../Images/0bbe00ce8758bbf6eefe83ed77c3be39.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0bbe00ce8758bbf6eefe83ed77c3be39.png)'
 - en: A page should appear that looks similar to the one below.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 应该会出现一个类似于下面的页面。
 - en: '![Figure](../Images/e3b1617cbcb247869432a20d8e52847a.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/e3b1617cbcb247869432a20d8e52847a.png)'
 - en: (**A**) You need to specify Personal to be able more easily ask to download
     intraday data (If you don’t or get an error, you can always request it [here](https://dev.fitbit.com/build/reference/web-api/intraday-requests/)).
     (**B**) The callback URL is http://127.0.0.1:8080 because the Python API we will
     use has it as the default redirect URL.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: (**A**) 你需要将个人设置为更容易请求下载日内数据（如果你没有设置或遇到错误，你可以在 [这里](https://dev.fitbit.com/build/reference/web-api/intraday-requests/)
+    进行请求）。(**B**) 回调 URL 是 http://127.0.0.1:8080，因为我们将使用的 Python API 将其作为默认重定向 URL。
 - en: For each of the fields in the image, here is some advice of what you can put
     in the registration page.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于图像中的每个字段，以下是一些你可以在注册页面填写的建议。
 - en: '**Application Name:** Can be anything.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '**应用名称：** 可以是任何内容。'
 - en: '**Description:** Can be anything.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**描述：** 可以是任何内容。'
 - en: '**Application Website:** Can be anything.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '**应用网站：** 可以是任何内容。'
 - en: '**Organization: **Can be anything.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**组织：** 可以是任何内容。'
 - en: '**Organization Website:** Since I am using it for personal use (to look at
     personal fitbit data), this may not apply.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '**组织网站：** 由于我将其用于个人用途（查看个人 Fitbit 数据），这可能不适用。'
 - en: '**Terms of Service Url:** I put in the Fitbit terms of service: [https://dev.fitbit.com/legal/platform-terms-of-service/](https://dev.fitbit.com/legal/platform-terms-of-service/)'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**服务条款网址：** 我放入了 Fitbit 的服务条款：[https://dev.fitbit.com/legal/platform-terms-of-service/](https://dev.fitbit.com/legal/platform-terms-of-service/)'
 - en: '**Privacy Policy Url:** I put in the Fitbit privacy policy: [https://www.fitbit.com/legal/privacy-policy](https://www.fitbit.com/legal/privacy-policy)'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**隐私政策网址：** 我放入了 Fitbit 的隐私政策：[https://www.fitbit.com/legal/privacy-policy](https://www.fitbit.com/legal/privacy-policy)'
 - en: '**OAuth 2.0 Application Type:** OAuth 2.0 Application Type should be “Personal”
     if you want to download your intraday data. By the way, if you don’t know what
     OAuth is, [here is an explanation](https://www.varonis.com/blog/what-is-oauth/).'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**OAuth 2.0 应用程序类型：** 如果你想下载你的 intraday 数据，OAuth 2.0 应用程序类型应为“个人”。顺便提一下，如果你不知道
+    OAuth 是什么，[这里有一个解释](https://www.varonis.com/blog/what-is-oauth/)。'
 - en: '**Callback Url:** Make sure the Callback URL is http://127.0.0.1:8080/ in order
     to get our Fitbit API to connect properly. This is due to the library we will
     use that requires this as you can see below.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**回调网址：** 确保回调网址为 http://127.0.0.1:8080/ 以确保我们的 Fitbit API 能正确连接。这是因为我们将使用的库需要这样做，如下所示。'
 - en: '![](../Images/88b7255a6602ccaa74594331dbd1cfde.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/88b7255a6602ccaa74594331dbd1cfde.png)'
 - en: Finally, click on the agreement box and click on register. A page that looks
     similar to the one below should appear.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，点击同意框，然后点击注册。应该会出现一个类似下面的页面。
 - en: '![Figure](../Images/1dec7c838f6608b801d0e68f30d8bd9a.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/1dec7c838f6608b801d0e68f30d8bd9a.png)'
 - en: Keep note of your OAuth 2.0 Client ID and Client Secret.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 记住你的 OAuth 2.0 客户端 ID 和客户端密钥。
 - en: The parts we will need from this page are the OAuth 2.0 Client ID and the Client
     Secret. You will need the client ID and client secret for later so take note of
     them.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将从此页面中需要的部分是 OAuth 2.0 客户端 ID 和客户端密钥。你需要记下客户端 ID 和客户端密钥，以备后用。
 - en: '[PRE0]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 3.) Installing the Python Library
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3.) 安装 Python 库
 - en: The next step is to use a [Fitbit unofficial API](https://github.com/orcasgit/python-fitbit).
     After clicking on the link, click the green button. Next, click on Download Zip
     and proceed to unzip the file.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是使用 [Fitbit 非官方 API](https://github.com/orcasgit/python-fitbit)。点击链接后，点击绿色按钮。接下来，点击下载
+    Zip 并解压文件。
 - en: '![Figure](../Images/b27d3483e359adf3a208a3eda835db44.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/b27d3483e359adf3a208a3eda835db44.png)'
 - en: Download the zip file.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 下载压缩文件。
 - en: After that, open up a terminal/command line to change directories to the unzipped
     folder and run the command below.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，打开终端/命令行，切换到解压后的文件夹，并运行下面的命令。
 - en: '[PRE1]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![Figure](../Images/3c7410fca134baea83e97bb3a150543c.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/3c7410fca134baea83e97bb3a150543c.png)'
 - en: Go inside the directory of the folder and type **python setup.py install **in
     your terminal/command line.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 进入文件夹目录，并在终端/命令行中输入 **python setup.py install**。
 - en: 4.) API Authorization
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 4.) API 授权
 - en: Before starting this section, I should note two things. First, the code used
     in this tutorial is available on my [GitHub](https://github.com/mGalarnyk/Python_Tutorials/blob/master/Apis/Fitbit/Fitbit_API.ipynb). **Second,
     if you have errors, I have a potential errors section later in the blog post.**
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开始这一部分之前，我需要说明两点。首先，本教程中使用的代码可以在我的 [GitHub](https://github.com/mGalarnyk/Python_Tutorials/blob/master/Apis/Fitbit/Fitbit_API.ipynb)
+    上找到。**其次，如果你遇到错误，我在博客文章后面有一个潜在错误部分。**
 - en: The code below imports various libraries and assigns your CLIENT_ID and CLIENT_SECRET
     from step 2 to variables.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码导入了各种库，并将步骤 2 中的 CLIENT_ID 和 CLIENT_SECRET 分配给变量。
 - en: '[PRE2]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The code below enables the authorization process to take place
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码启用授权过程。
 - en: '[PRE3]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![Figure](../Images/59c899dd7d69bc7cb6e9df48ee4224cd.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/59c899dd7d69bc7cb6e9df48ee4224cd.png)'
 - en: When you run the code above (shown in A), the cell shows that is still running
     until you sign into your fitbit account (B) and click on allow access to various
     data in your Fitbit account.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你运行上面的代码（如 A 所示）时，单元格会显示仍在运行，直到你登录到你的 Fitbit 账户（B）并点击允许访问 Fitbit 账户中的各种数据。
 - en: What the page should look like after authorization and signing in.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 授权和登录后页面的样子。
 - en: '![Figure](../Images/5c90e42e48789052e7e68f7e56f89919.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/5c90e42e48789052e7e68f7e56f89919.png)'
 - en: This window should be what you get.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个窗口应该是你看到的内容。
 - en: 5a.) Get One Day of Data
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 5a.) 获取一天的数据
 - en: '![Figure](../Images/8a5e2cc1320e007ab0f7f1389c75f171.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/8a5e2cc1320e007ab0f7f1389c75f171.png)'
 - en: You will be using the intraday_time_series method to get data.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 你将使用 `intraday_time_series` 方法来获取数据。
 - en: I will first start by getting one day of data so that the next section will
     be easier to understand.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将首先获取一天的数据，以便下一个部分更容易理解。
 - en: '[PRE4]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![](../Images/0ab5ac3a7c0d5d3e353f99d6b018227c.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0ab5ac3a7c0d5d3e353f99d6b018227c.png)'
 - en: You can put this data into a pandas DataFrame if you want.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你愿意，可以将这些数据放入 pandas DataFrame 中。
 - en: '![](../Images/fc830e186c1aaa38469dc75dd9c07c75.png)'
+  id: totrans-59
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fc830e186c1aaa38469dc75dd9c07c75.png)'
 - en: Of course, you can always export your data to a csv or excel file.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，你始终可以将数据导出为 CSV 或 Excel 文件。
 - en: '[PRE5]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 5b.) Get Multiple Days of Data
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 5b.) 获取多天的数据
 - en: The code below gets all the days of data you have starting from the `startTime` variable
     (called `oneDate` in the code below).
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的代码获取从 `startTime` 变量（在下面的代码中称为 `oneDate`）开始的所有天的数据。
 - en: '![](../Images/d00c0b640b562d6534adeaf24734853a.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d00c0b640b562d6534adeaf24734853a.png)'
 - en: You can of course export `final_df` to a csv file (I would recommend not trying
     to export to excel as the there can be too many rows to easily export to excel).
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，你可以将 `final_df` 导出为 CSV 文件（我建议不要尝试导出为 Excel，因为行数可能过多，不容易导出到 Excel）。
 - en: '[PRE6]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 6.) Try to Graph Intraday Data
+  id: totrans-67
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 6.) 尝试绘制日内数据图表
 - en: This is a section I would highly advise you look at the [GitHub](https://github.com/mGalarnyk/Python_Tutorials/blob/master/Apis/Fitbit/Fitbit_API.ipynb) code
     for with your own data.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 我强烈建议你查看[GitHub](https://github.com/mGalarnyk/Python_Tutorials/blob/master/Apis/Fitbit/Fitbit_API.ipynb)上的代码，以便处理自己的数据。
 - en: The end goal of this section is to get a particular time on a particular day
     graphed appropriately (date to also have the time of the day included). I should
     note that I am not making my code efficient partially due to my laziness. If you
     don’t understand what is going on, don’t worry. You can scroll down and see the
     end result.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 本节的最终目标是将特定时间的特定日期图表化（日期也包括一天中的时间）。我应该指出，我的代码不够高效部分是由于懒惰。如果你不理解发生了什么，不用担心。你可以向下滚动查看最终结果。
 - en: '[PRE7]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: The next step for me will be looking at 3 days of data rather than bunch of
     days.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 我接下来的步骤是查看3天的数据，而不是多天的数据。
 - en: '[PRE8]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Keep in mind that you can also try to graph by grouping by date and hour (or
     even seconds if you want) and taking the mean of the heart rate. The code also
     tries to make the graph look a bit better.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 请记住，你还可以尝试通过按日期和小时（甚至秒）分组绘制图表，并取心率的平均值。代码也尝试使图表看起来更好一些。
 - en: '[PRE9]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: With all this work, maybe this is not a good avenue for me to go down as the
     current data doesn’t give enough context to know it was during rest or moving
     around.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 做了这么多工作，也许这不是我应该继续的方向，因为当前数据并没有足够的背景来判断是在休息还是在移动。
 - en: 7.) Resting Heart Rate
+  id: totrans-76
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 7.) 静息心率
 - en: There are studies that talk about how [resting heart rate](https://www.health.harvard.edu/blog/resting-heart-rate-can-reflect-current-future-health-201606179806) can
     reflect your current and future health. There was actually a [research paper that
     showed the Inter- and intraindividual variability in daily resting heart rate
     and its associations with age, sex, sleep, BMI, and time of year for 92,447 adults](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227709) who
     wore a Fitbit consistently. Below is an image from the paper (with text added
     for clarity).
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 有研究讨论了[静息心率](https://www.health.harvard.edu/blog/resting-heart-rate-can-reflect-current-future-health-201606179806)如何反映你的当前和未来健康。实际上，有一篇[研究论文展示了92,447名佩戴
+    Fitbit 的成年人在静息心率的个体间和个体内变异性及其与年龄、性别、睡眠、BMI和季节的关联](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227709)。以下是论文中的一张图片（添加了文本以便于理解）。
 - en: '![Figure](../Images/12cb0f35adee20ec48a85dceef1e0e44.png)'
+  id: totrans-78
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/12cb0f35adee20ec48a85dceef1e0e44.png)'
 - en: '[https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227709](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227709)'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '[https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227709](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0227709)'
 - en: The api call we have been using also returns resting heart rate so the code
     below isn’t too different than earlier steps.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们一直使用的 API 调用也返回静息心率，因此下面的代码与之前的步骤并没有太大区别。
 - en: '[PRE10]'
+  id: totrans-81
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Try and graph your data.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 尝试绘制你的数据图表。
 - en: 8.) Get Sleep Data
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 8.) 获取睡眠数据
 - en: Without going into too much detail, the code below gets sleep data per minute
     (`final_df`) and sleep summary information `final_stages_df` of how much overall
     time in minutes a Fitbit user spends in deep, light, rem, and wake stages of sleep.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 不深入细节，下面的代码获取每分钟的睡眠数据（`final_df`）以及有关 Fitbit 用户在深度、浅度、快速眼动和清醒阶段的总时间（`final_stages_df`）的睡眠总结信息。
 - en: '![](../Images/1c75055fb718eb7345f22bbcc1ac6da0.png)'
+  id: totrans-85
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1c75055fb718eb7345f22bbcc1ac6da0.png)'
 - en: '`final_stages_df` is a pandas DataFrame which shows how much of each stages
     a Fitbit user slept in a given night (wake, deep, light, rem) for a given date
     as well as total time in bed.'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '`final_stages_df` 是一个 pandas DataFrame，显示了 Fitbit 用户在给定日期晚上每个阶段的睡眠时长（清醒、深度、浅睡、快速眼动）以及总的卧床时间。'
 - en: '![](../Images/fc771311539e79accd8e91530619af00.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fc771311539e79accd8e91530619af00.png)'
 - en: '`final_df` is a pandas DataFrame which gives a dateTime, date, and a value.
     A 1 in value column is “asleep”, **2** is awake, and **3** is really awake.'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '`final_df` 是一个 pandas DataFrame，提供了一个日期时间、日期和一个值。值列中的 1 表示“睡着了”，**2** 表示清醒，**3**
+    表示真正清醒。'
 - en: '![](../Images/61f9c423167d904fe0b8a6e7c83e5a6b.png)'
+  id: totrans-89
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/61f9c423167d904fe0b8a6e7c83e5a6b.png)'
 - en: Potential Errors
+  id: totrans-90
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 潜在错误
 - en: No module named gather_keys_oauth2
+  id: totrans-91
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 没有名为 gather_keys_oauth2 的模块
 - en: This is for the case where you get an error similar to the one below.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是针对你遇到类似以下错误的情况。
 - en: '![](../Images/3561aaeacba4842cedfa67196546248c.png)'
+  id: totrans-93
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3561aaeacba4842cedfa67196546248c.png)'
 - en: To solve this, you can put the gather_keys_oauth2.py file into the same directory
     where you have python file or jupyter notebook. You can see how my project directory
     is arranged below.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了解决这个问题，你可以将 `gather_keys_oauth2.py` 文件放入与你的 Python 文件或 jupyter notebook 相同的目录。你可以看到我的项目目录安排如下。
 - en: '![](../Images/044b46290eb04fc7fc85b79dfdfc3985.png)'
+  id: totrans-95
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/044b46290eb04fc7fc85b79dfdfc3985.png)'
 - en: Notice that gather_keys_oauth2.py is in the same directory as my jupyter notebook.
     This is a file contained in python-fitbit-master we downloaded in step 3.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意 `gather_keys_oauth2.py` 文件位于我的 jupyter notebook 同一目录下。这是我们在第三步中下载的 python-fitbit-master
+    中包含的一个文件。
 - en: CherryPy Not Recognized, No module named cherrypy
+  id: totrans-97
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: CherryPy 未被识别，没有名为 cherrypy 的模块
 - en: If you get an error similar to the one below, first close your jupyter notebook
     or python file.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你遇到类似下面的错误，首先关闭你的 jupyter notebook 或 Python 文件。
 - en: '![](../Images/71f6dc17a055457e70f677b78f7118ab.png)'
+  id: totrans-99
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/71f6dc17a055457e70f677b78f7118ab.png)'
 - en: You can solve the problem by using the following command.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过以下命令解决问题。
 - en: '[PRE11]'
+  id: totrans-101
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '![](../Images/6467ac8a0b6929fd531a3e3f0f2acab4.png)'
+  id: totrans-102
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6467ac8a0b6929fd531a3e3f0f2acab4.png)'
 - en: Https vs Http Error
+  id: totrans-103
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Https 与 Http 错误
 - en: The following error was from step 2 when I once tried to make the callback url
     be https instead of http.
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下错误发生在我尝试将回调 URL 更改为 https 而不是 http 的第二步中。
 - en: '![](../Images/d750a43c28d005aa71e09049810e9e5a.png)'
+  id: totrans-105
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d750a43c28d005aa71e09049810e9e5a.png)'
 - en: 'HTTPTooManyRequests: Too Many Requests'
+  id: totrans-106
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 'HTTPTooManyRequests: 请求过多'
 - en: '![](../Images/c36f10826d885e3e28d287ee84b9f209.png)'
+  id: totrans-107
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c36f10826d885e3e28d287ee84b9f209.png)'
 - en: The [fitbit community forum](https://community.fitbit.com/t5/Web-API-Development/Too-many-request/td-p/1644362) has
     an answer for this question. With the API, you can do up to 150 requests per user/fitbit
     per hour. This means that if you have over 150 days of data and you use the code
     from step 5b in this tutorial, you might need to wait a bit to get the rest of
     your data.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: '[fitbit 论坛](https://community.fitbit.com/t5/Web-API-Development/Too-many-request/td-p/1644362)
+    对这个问题有答案。使用 API，你可以每小时对每个用户/fitbit 进行最多 150 次请求。这意味着如果你有超过 150 天的数据，并且使用了本教程第五步
+    b 的代码，你可能需要稍等片刻才能获取其余的数据。'
 - en: Concluding Remarks
+  id: totrans-109
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: This post went over how to get data from an individual Fitbit. While I covered
     quite a bit, there are still things I didn’t cover over like how the [Fitbit api
     can get your step counts](https://python-fitbit.readthedocs.io/en/latest/). The
     Fitbit API is something I am still learning so if you have contributions, please
     let me know. If you have any questions or thoughts on the tutorial, feel free
     to reach out in the comments below or through [Twitter](https://twitter.com/GalarnykMichael).
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文介绍了如何从单个 Fitbit 获取数据。虽然我涵盖了相当多的内容，但仍有一些内容没有涉及，比如 [Fitbit API 如何获取你的步数](https://python-fitbit.readthedocs.io/en/latest/)。Fitbit
+    API 是我仍在学习的内容，因此如果你有任何贡献，请告诉我。如果你对教程有任何问题或想法，请随时在下方评论或通过 [Twitter](https://twitter.com/GalarnykMichael)
+    联系我。
 - en: '**Bio: [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)** is
     a Data Scientist and Corporate Trainer. He currently works at Scripps Translational
     Research Institute. You can find him on Twitter (https://twitter.com/GalarnykMichael),
     Medium (https://medium.com/@GalarnykMichael), and GitHub (https://github.com/mGalarnyk).'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：[Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)** 是一名数据科学家和企业培训师。他目前在
+    Scripps Translational Research Institute 工作。你可以在 Twitter (https://twitter.com/GalarnykMichael)、Medium
+    (https://medium.com/@GalarnykMichael) 和 GitHub (https://github.com/mGalarnyk)
+    上找到他。'
 - en: '[Original](https://towardsdatascience.com/using-the-fitbit-web-api-with-python-f29f119621ea).
     Reposted with permission.'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/using-the-fitbit-web-api-with-python-f29f119621ea)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Understanding Decision Trees for Classification in Python](/2019/08/understanding-decision-trees-classification-python.html)'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解 Python 中的决策树分类](/2019/08/understanding-decision-trees-classification-python.html)'
 - en: '[Python Lists and List Manipulation](/2019/11/python-lists-list-manipulation.html)'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 列表及列表操作](/2019/11/python-lists-list-manipulation.html)'
 - en: '[Python Tuples and Tuple Methods](/2019/11/python-tuples-methods.html)'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 元组及其方法](/2019/11/python-tuples-methods.html)'
 - en: '* * *'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-118
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 需求'
 - en: '* * *'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-123
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[A Beginner’s Guide to Web Scraping Using Python](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 网页抓取初学者指南](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
 - en: '[HuggingChat Python API: Your No-Cost Alternative](https://www.kdnuggets.com/2023/05/huggingchat-python-api-alternative.html)'
+  id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[HuggingChat Python API: 你的无成本替代方案](https://www.kdnuggets.com/2023/05/huggingchat-python-api-alternative.html)'
 - en: '[Exploring the OpenAI API with Python](https://www.kdnuggets.com/exploring-the-openai-api-with-python)'
+  id: totrans-126
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 探索 OpenAI API](https://www.kdnuggets.com/exploring-the-openai-api-with-python)'
 - en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  id: totrans-127
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[创建一个 Web 应用程序以使用 Python 从音频中提取主题](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
 - en: '[Build a Web Scraper with Python in 5 Minutes](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)'
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 5 分钟内用 Python 构建网页抓取器](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)'
 - en: '[A Step-by-Step Guide to Web Scraping with Python and Beautiful Soup](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 和 Beautiful Soup 的网页抓取逐步指南](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
