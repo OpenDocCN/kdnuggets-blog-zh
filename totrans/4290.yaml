@@ -1,412 +1,618 @@
 - en: How to Apply Transformers to Any Length of Text
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何将变压器应用于任何长度的文本
 - en: 原文：[https://www.kdnuggets.com/2021/04/apply-transformers-any-length-text.html](https://www.kdnuggets.com/2021/04/apply-transformers-any-length-text.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/04/apply-transformers-any-length-text.html](https://www.kdnuggets.com/2021/04/apply-transformers-any-length-text.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [James Briggs](https://youtube.com/c/JamesBriggs), Data Scientist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[James Briggs](https://youtube.com/c/JamesBriggs)，数据科学家**'
 - en: The de-facto standard in many natural language processing (NLP) tasks nowadays
     is to use a transformer. Text generation? *Transformer*. Question-and-answering? *Transformer*.
     Language classification? *Transformer*!
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前在许多自然语言处理（NLP）任务中，使用变压器（transformer）已成为事实上的标准。文本生成？*变压器*。问答系统？*变压器*。语言分类？*变压器*！
 - en: However, one of the problems with many of these models (a problem that is not
     just restricted to transformer models) is that we **cannot **process long pieces
     of text.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，许多这些模型（这个问题不仅仅限于变压器模型）面临的问题是我们**不能**处理长篇文本。
 - en: Almost every article I write on Medium contains 1000+ words, which, when tokenized
     for a transformer model like BERT, will produce 1000+ tokens. BERT (and many other
     transformer models) will consume **512 tokens max** — truncating anything beyond
     this length.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在Medium上写的几乎每一篇文章都包含1000多个单词，当这些单词被用于像BERT这样的变压器模型时，会生成1000多个标记。BERT（和许多其他变压器模型）最多接受**512个标记**——超出这个长度的内容将被截断。
 - en: Although I think you may struggle to find value in processing my Medium articles,
     the same applies to many useful data sources — like news articles or Reddit posts.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管我认为你可能会发现处理我的Medium文章的价值不大，但这同样适用于许多有用的数据来源——如新闻文章或Reddit帖子。
 - en: 'We will take a look at how we can work around this limitation. In this article,
     we will find the sentiment for long posts from the */r/investing* subreddit. This
     article will cover:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将探讨如何绕过这个限制。在本文中，我们将找出来自*/r/investing*子版块的长帖子中的情感。这篇文章将涵盖：
 - en: '[PRE0]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'If you prefer video, I cover everything here too:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你更喜欢视频，我在这里也涵盖了所有内容：
 - en: High-Level Approach
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 高级方法
 - en: The logic behind calculating the sentiment for longer pieces of text is, in
     reality, very simple.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算长篇文本情感的逻辑实际上非常简单。
 - en: We will be taking our text (say 1361 tokens) and breaking it into chunks containing
     no more than 512 tokens each.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将把文本（例如1361个标记）分解成每个不超过512个标记的块。
 - en: '![](../Images/14b47a652ba55c759d07ea03746fb0c7.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/14b47a652ba55c759d07ea03746fb0c7.png)'
 - en: A tensor containing 1361 tokens can be split into three smaller tensors. The
     first two would contain 512 tokens each, with the final tensor containing the
     remaining 337 tokens.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个包含1361个标记的张量可以被拆分成三个较小的张量。前两个张量每个包含512个标记，而最后一个张量包含剩余的337个标记。
 - en: Once we have our chunks and transformed them so that they are ready to be consumed
     by BERT (more on that soon) — we pass them through our model and retrieve the
     sentiment scores for each chunk.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们有了这些块并将其转换为可以被BERT（稍后会详细说明）处理的格式——我们将它们传递给我们的模型，并检索每个块的情感得分。
 - en: Finally, an average is taken for each sentiment class — providing us with an
     overall sentiment prediction for the entire piece of text (all 1361 tokens).
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，对每个情感类别取平均——为我们提供整个文本（所有1361个标记）的总体情感预测。
 - en: Now, explaining the high-level approach is one-thing. Writing it out is another.
     So let’s start work through an example.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，解释高级方法是一回事。编写代码则是另一回事。所以让我们开始通过一个示例来工作。
 - en: Getting Started
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 入门指南
 - en: Data
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据
 - en: 'First, we need some data to process. I found this rather long post on /r/investing:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们需要一些数据进行处理。我在/r/investing上找到了这个相当长的帖子：
 - en: '[PRE1]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: We will use this for our example.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将用这个作为我们的示例。
 - en: Initialization
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 初始化
 - en: The next thing we need to do is initialize our model and tokenizer. We’re going
     to be using PyTorch and the HuggingFace transformers library for everything.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是初始化我们的模型和分词器。我们将使用PyTorch和HuggingFace变压器库来完成所有任务。
 - en: 'Fortunately, initialization with the transformers library is incredibly easy.
     We’re going to be using a BERT model for sequence classification and the corresponding
     BERT tokenizer, so we write:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，使用变压器库进行初始化非常简单。我们将使用BERT模型进行序列分类和相应的BERT分词器，所以我们写：
 - en: Because we’re working with finance-heavy language, we have loaded the `ProsusAI/finbert` model
     — a more finance savvy BERT [1]. You can find the model details [here](https://huggingface.co/ProsusAI/finbert).
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为我们处理的是金融相关的语言，我们加载了`ProsusAI/finbert`模型——一个更懂金融的BERT [1]。你可以在[这里](https://huggingface.co/ProsusAI/finbert)找到模型的详细信息。
 - en: Tokenization
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 分词
 - en: Tokenization is the process of converting a string of text into a list of tokens
     (individual words/punctuation) and/or token IDs (integers that map a word to a
     vector representation of that word in an embedding array).
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 标记化是将文本字符串转换为标记（单词/标点）和/或标记 ID（将单词映射到嵌入数组中单词向量表示的整数）的过程。
 - en: 'With the transformers library and BERT, this typically looks like:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 transformers 库和 BERT，这通常如下所示：
 - en: '[PRE2]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Here we are using the tokenizers `encode_plus` method to create our tokens from
     the `txt` string.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们使用标记器`encode_plus`方法从`txt`字符串创建我们的标记。
 - en: '`add_special_tokens=True` adds special BERT tokens like *[CLS]*,* [SEP]*, and *[PAD]* to
     our new ‘tokenized’ encodings.'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`add_special_tokens=True`添加像*[CLS]*，*[SEP]*和*[PAD]*这样的特殊 BERT 标记到我们新的“标记化”编码中。'
 - en: '`max_length=512` tells the encoder the target length of our encodings.'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`max_length=512`告知编码器我们编码的目标长度。'
 - en: '`truncation=True` ensures we cut any sequences that are longer than the specified `max_length`.'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`truncation=True`确保我们裁剪任何长于指定`max_length`的序列。'
 - en: '`padding="max_length"` tells the encoder to pad any sequences that are shorter
     than the `max_length` with padding tokens.'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`padding="max_length"`指示编码器用填充标记填充任何短于`max_length`的序列。'
 - en: These parameters make up the typical approach to tokenization. Still, as you
     can see, they’re simply not compatible when we are aiming to split a longer sequence
     into multiple shorter chunks.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些参数构成了标记化的典型方法。但正如你所见，当我们旨在将较长的序列分割成多个较短的块时，它们显然不兼容。
 - en: For that, we modify the `encode_plus` method to not perform any truncation or
     padding.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，我们修改了`encode_plus`方法，以不进行任何裁剪或填充。
 - en: Additionally, the special tokens *[CLS]* and *[SEP]* are expected at the start
     and end of a sequence, respectively. As we will be creating these sequences separately,
     we must also add these tokens separately too.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，特殊标记*[CLS]*和*[SEP]*分别期望出现在序列的开始和结束。由于我们将分别创建这些序列，我们也必须分别添加这些标记。
 - en: 'The new `encode_plus` method looks like this:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 新的`encode_plus`方法如下所示：
 - en: Which will return a dictionary containing three key-value pairs, `input_ids`, `token_type_ids`,
     and `attention_mask`.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将返回一个包含三个键值对的字典，`input_ids`，`token_type_ids`和`attention_mask`。
 - en: We have *also *added `return_tensors='pt'` to return PyTorch tensors from the
     tokenizer (rather than Python lists).
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们*还*添加了`return_tensors='pt'`以从标记器返回 PyTorch 张量（而不是 Python 列表）。
 - en: Preparing The Chunks
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 准备块
 - en: Now we have our tokenized tensor; we need to break it into chunks of no more
     than **510** tokens. We choose 510 rather than 512 to leave two places spare to
     add our *[CLS]* and *[SEP]* tokens.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了标记化的张量；我们需要将其分解为不超过**510**个标记的块。我们选择510而不是512，以保留两个位置用于添加我们的*[CLS]*和*[SEP]*标记。
 - en: Split
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 分割
 - en: We apply the `split` method to both our input IDs and attention mask tensors
     (we don’t need the token type IDs and can discard them).
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们对输入 ID 和注意力掩码张量应用`split`方法（我们不需要标记类型 ID，因此可以丢弃它们）。
 - en: Now we have three chunks for each tensor set. Note that we will need to add
     padding to the final chunk as it will not satisfy the tensor size of 512 required
     by BERT.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有三个块用于每个张量集。注意，我们需要为最后一个块添加填充，因为它不满足 BERT 所需的 512 的张量大小。
 - en: CLS and SEP
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: CLS 和 SEP
 - en: Next, we add the start of sequence *[CLS]* and separator *[SEP]* tokens. For
     this, we can use the `torch.cat` function, which con**cat**enates a list of tensors.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们添加序列的开始标记*[CLS]*和分隔标记*[SEP]*。为此，我们可以使用`torch.cat`函数，它将一个张量列表**拼接**在一起。
 - en: Our tokens are already in token ID format, so we can refer to the special tokens
     table above to create the token ID versions of our *[CLS]* and *[SEP]* tokens.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的标记已经是标记 ID 格式，所以我们可以参考上述特殊标记表来创建我们的*[CLS]*和*[SEP]*标记的标记 ID 版本。
 - en: Because we are doing this for multiple tensors, we place the `torch.cat` function
     into a for-loop and perform the concatenation for each of our chunks individually.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于我们要对多个张量执行此操作，我们将`torch.cat`函数放入一个循环中，并分别对每个块执行拼接。
 - en: Additionally, our attention mask chunks are concatenated with **1**s rather
     than **101** and **102**. We do this because the attention mask does not contain *token
     IDs* but instead a set of **1**s and **0**s.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，我们的注意力掩码块使用**1**而不是**101**和**102**进行连接。我们这样做是因为注意力掩码不包含*标记 ID*，而是由一组**1**和**0**组成。
 - en: Zeros in the attention mask represent the location of padding tokens (which
     we will add next), and as *[CLS]* and *[SEP]* are not padding tokens, they are
     represented with **1**s.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意力掩码中的零表示填充标记的位置（我们将接下来添加这些标记），由于*[CLS]*和*[SEP]*不是填充标记，因此它们用**1**表示。
 - en: Padding
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 填充
 - en: We need to add padding to our tensor chunks to ensure they satisfy the 512 tensor
     length required by BERT.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要向张量块中添加填充，以确保它们满足BERT要求的512张量长度。
 - en: Our first two chunks don’t require any padding as they already satisfy this
     length requirement, but the final chunks do.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的前两个块不需要填充，因为它们已经满足了这个长度要求，但最后的块需要填充。
 - en: To check if a chunk requires padding, we add an if-statement that checks the
     tensor length. If the tensor is shorter than 512 tokens, we add padding using
     the `torch.cat` function.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了检查一个块是否需要填充，我们添加了一个检查张量长度的if语句。如果张量短于512个令牌，我们使用`torch.cat`函数进行填充。
 - en: We should add this statement to the same for-loop where we add our *[CLS]* and *[SEP]* tokens
     — if you need help with this, I’ve included the full scripts at the end of the
     article.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们应该将此语句添加到添加* [CLS]*和*[SEP]*令牌的相同for循环中——如果你需要帮助，我已经在文章末尾附上了完整的脚本。
 - en: Reshaping For BERT
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 为BERT重新格式化
 - en: We have our chunks, but we now need to reshape them into single tensors and
     add them to an input dictionary for BERT.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们有了我们的块，但现在需要将它们重新格式化为单个张量，并将其添加到BERT的输入字典中。
 - en: Stacking all of the tensors together is done using the `torch.stack` function.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 将所有张量堆叠在一起是通过`torch.stack`函数完成的。
 - en: We then format these into an input dictionary and change the input IDs tensor
     datatype to `long`, and the attention mask tensor datatype to `int` — as required
     by BERT.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们将这些格式化为输入字典，并将输入ID张量的数据类型更改为`long`，将注意力掩码张量的数据类型更改为`int`——这是BERT所要求的。
 - en: That is our data ready for passing into BERT!
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 这样，我们的数据就准备好传递给BERT了！
 - en: Making Predictions
+  id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 做出预测
 - en: Making our predictions is the easy part. We pass our `input_dict` as a `**kwargs` argument
     to our `model` — ***kwargs* allows the model to match `input_ids` and `attention_mask` keywords
     to variables within the model.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 做出预测是容易的部分。我们将`input_dict`作为`**kwargs`参数传递给我们的`model`——***kwargs*允许模型将`input_ids`和`attention_mask`关键字匹配到模型中的变量。
 - en: From here, we can see that we get a set of three activation values for each
     chunk. These activation values are not our output probabilities yet. To transform
     these into output probabilities, we must apply a softmax function to the output
     tensor.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 从这里，我们可以看到每个块得到一组三个激活值。这些激活值还不是我们的输出概率。要将其转化为输出概率，我们必须对输出张量应用softmax函数。
 - en: Finally, we take the `mean` of the values in each class (or column) to get our
     final positive, negative, or neutral sentiment probability.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们对每个类别（或列）的值进行`mean`计算，以获得最终的正面、负面或中性情感概率。
 - en: 'If you’d like to extract the winning class, we can add an `argmax` function:'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想提取获胜的类别，我们可以添加一个`argmax`函数：
 - en: There we have our sentiment predictions for longer pieces of text!
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 这样，我们就得到了对更长文本的情感预测！
 - en: We’ve taken a long piece of text containing 1000s of tokens, broke it down into
     chunks, manually added special tokens, and calculated the average sentiment across
     all chunks.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将一段包含1000多个令牌的长文本分解成块，手动添加了特殊令牌，并计算了所有块的平均情感。
 - en: More often than not, looking at the full-length of a text is absolutely required
     to understand the sentiment of the topic being discussed. We have built a method
     to make that possible and allow us to work around typical text size limitations.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 大多数时候，查看文本的完整长度是理解讨论主题情感的绝对必要的。我们建立了一种方法来实现这一点，并绕过了典型的文本大小限制。
 - en: If you’d like to see the code in full — you can find it in the references below
     (there are two notebooks, but number **two **contains the exact code used here).
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想查看完整的代码——可以在下面的参考文献中找到（有两个笔记本，但编号**二**包含了这里使用的确切代码）。
 - en: I hope you’ve enjoyed the article. Let me know if you have any questions or
     suggestions via [Twitter](https://twitter.com/jamescalam) or in the comments below!
     If you’re interested in more content like this, I post on [YouTube](https://www.youtube.com/c/jamesbriggs) too.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望你喜欢这篇文章。如果有任何问题或建议，请通过[Twitter](https://twitter.com/jamescalam)或在下面的评论中告诉我！如果你对类似的内容感兴趣，我也会在[YouTube](https://www.youtube.com/c/jamesbriggs)上发布相关内容。
 - en: Thanks for reading!
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢阅读！
 - en: References
+  id: totrans-75
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[1] D. Araci, [FinBERT: Financial Sentiment Analysis with Pre-trained Language
     Models](https://arxiv.org/abs/1908.10063) (2019)'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1] D. Araci，[FinBERT: Financial Sentiment Analysis with Pre-trained Language
+    Models](https://arxiv.org/abs/1908.10063) (2019)'
 - en: '[Jupyter Notebook 1](https://github.com/jamescalam/transformers/blob/main/course/language_classification/03_long_text_sentiment.ipynb)'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Jupyter Notebook 1](https://github.com/jamescalam/transformers/blob/main/course/language_classification/03_long_text_sentiment.ipynb)'
 - en: '[Jupyter Notebook 2](https://github.com/jamescalam/transformers/blob/main/course/language_classification/04_window_method_in_pytorch.ipynb)'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Jupyter Notebook 2](https://github.com/jamescalam/transformers/blob/main/course/language_classification/04_window_method_in_pytorch.ipynb)'
 - en: 'If you’d like to learn more about sentiment analysis with transformers (this
     time with TensorFlow), check out my article on language classification here:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解更多关于使用变换器进行情感分析（这次使用 TensorFlow），请查看我关于语言分类的文章：
 - en: '[**Build a Natural Language Classifier With Bert and Tensorflow**'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**使用 Bert 和 Tensorflow 构建自然语言分类器**](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)'
 - en: Apply cutting-edge transformer models to your language problems](https://betterprogramming.pub/build-a-natural-language-classifier-with-bert-and-tensorflow-4770d4442d41)
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '[将前沿变换器模型应用于你的语言问题](https://betterprogramming.pub/build-a-natural-language-classifier-with-bert-and-tensorflow-4770d4442d41)'
 - en: '**Bio: [James Briggs](https://youtube.com/c/JamesBriggs)** is a data scientist
     specializing in natural language processing and working in the finance sector,
     based in London, UK. He is also a freelance mentor, writer, and content creator.
     You can reach the author via email ([jamescalam94@gmail.com](mailto:jamescalam94@gmail.com)).'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[James Briggs](https://youtube.com/c/JamesBriggs)** 是一名数据科学家，专注于自然语言处理，工作于英国伦敦的金融行业。他还是一名自由职业导师、作家和内容创作者。你可以通过电子邮件联系作者（[jamescalam94@gmail.com](mailto:jamescalam94@gmail.com)）。'
 - en: '[Original](https://towardsdatascience.com/how-to-apply-transformers-to-any-length-of-text-a5601410af7f).
     Reposted with permission.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/how-to-apply-transformers-to-any-length-of-text-a5601410af7f)。转载经许可。'
 - en: '**Related:**'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Hugging Face Transformers Package – What Is It and How To Use It](/2021/02/hugging-face-transformer-basics.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Hugging Face Transformers 包 – 它是什么以及如何使用](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
 - en: '[Speech to Text with Wav2Vec 2.0](/2021/03/speech-text-wav2vec.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Wav2Vec 2.0 进行语音转文本](/2021/03/speech-text-wav2vec.html)'
 - en: '[Topic Modeling with BERT](/2020/11/topic-modeling-bert.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 BERT 进行主题建模](/2020/11/topic-modeling-bert.html)'
 - en: '* * *'
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-89
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-94
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Introduction to NExT-GPT: Any-to-Any Multimodal Large Language Model](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[NExT-GPT 介绍：任何对任何的多模态大型语言模型](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)'
 - en: '[Introduction to Streaming-LLM: LLMs for Infinite-Length Inputs](https://www.kdnuggets.com/introduction-to-streaming-llm-llms-for-infinite-length-inputs)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Streaming-LLM 介绍：无限长度输入的 LLM](https://www.kdnuggets.com/introduction-to-streaming-llm-llms-for-infinite-length-inputs)'
 - en: '[SHAP: Explain Any Machine Learning Model in Python](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)'
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SHAP：用 Python 解释任何机器学习模型](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)'
 - en: '[How to Get Your First Job in Data Science without Any Work Experience](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在没有工作经验的情况下获得数据科学领域的第一份工作](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)'
 - en: '[Read This Before You Take Any Free Data Science Course](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在参加任何免费数据科学课程前请阅读此文](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)'
 - en: '[Using Hugging Face Transformers for Emotion Detection in Text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Hugging Face Transformers 进行情感检测](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)'
