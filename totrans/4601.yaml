@@ -3,24 +3,29 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 深度学习与 NLP：使用 Keras 创建聊天机器人！
 - en: 原文：[https://www.kdnuggets.com/2019/08/deep-learning-nlp-creating-chatbot-keras.html](https://www.kdnuggets.com/2019/08/deep-learning-nlp-creating-chatbot-keras.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/08/deep-learning-nlp-creating-chatbot-keras.html](https://www.kdnuggets.com/2019/08/deep-learning-nlp-creating-chatbot-keras.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Jaime Zornoza](https://www.linkedin.com/in/jaime-zornoza/), Universidad
     Politecnica de Madrid**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Jaime Zornoza](https://www.linkedin.com/in/jaime-zornoza/)，马德里理工大学**'
 - en: '![Figure](../Images/466171708fa0abb0c85f38ffa04addb0.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/466171708fa0abb0c85f38ffa04addb0.png)'
 - en: In the previous post, we learned what **Artificial Neural Networks and Deep
     Learning **are. Also, some neural network structures for exploiting sequential
     data like text or audio were introduced. If you haven’t read that post, you should
@@ -28,6 +33,7 @@
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上一篇文章中，我们了解了**人工神经网络和深度学习**是什么。还介绍了一些用于处理序列数据（如文本或音频）的神经网络结构。如果你还没有阅读那篇文章，你应该放松一下，拿杯咖啡，慢慢享受它。**它可以在**[**这里**](https://towardsdatascience.com/deep-learning-for-nlp-anns-rnns-and-lstms-explained-95866c1db2e4?source=friends_link&sk=3f07244ea80a8ceaf23ee8a4e8a4beea)**找到**。
 - en: This new post will cover** how to use Keras**, a very popular library for neural
     networks to build a Chatbot. The main concepts of this library will be explained,
     and then we will go through a step-by-step guide on how to use it to create a
@@ -37,6 +43,8 @@
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇新文章将讲解**如何使用 Keras**，这是一个非常流行的神经网络库来构建聊天机器人。将解释该库的主要概念，然后我们将逐步指南如何使用它来创建一个“是/否**回答机器人**”的
+    Python 示例。我们将利用 Keras 的简便性来实现来自 Sukhbaatar 等人论文中的 RNN 结构（你可以在[这里](https://arxiv.org/pdf/1503.08895.pdf)找到）。
 - en: This is interesting because having defined a task or application (creating a
     yes/no chatbot to answer specific questions), we will learn how **to translate
     the insights from a research work onto an actual model** that we can then use
@@ -44,6 +52,7 @@
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这很有趣，因为在定义了一个任务或应用（创建一个“是/否”聊天机器人以回答特定问题）之后，我们将学习如何**将研究工作中的洞察转化为实际模型**，然后我们可以使用这个模型来实现我们的应用目标。
 - en: Don’t be scared if this is your first time **implementing an NLP model**; I
     will go through every step, and put a link to the code at the end. For the **best
     learning experience**, I suggest you first read the post, and then go through
@@ -51,15 +60,18 @@
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果这是你第一次**实现一个 NLP 模型**，不要感到害怕；我会逐步讲解每一步，并在最后提供代码的链接。为了获得**最佳学习体验**，我建议你先阅读文章，然后在查看代码的同时，浏览与之相关的文章部分。
 - en: Lets get to it then!
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 那我们开始吧！
 - en: '**Keras: Easy Neural Networks in Python**'
   id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**Keras：Python 中的简单神经网络**'
 - en: Keras is an **open source, high level library **for developing neural network
     models. It was developed by François Chollet, a Deep Learning researcher from
     Google. It’s core principle is to make the process of building a neural network,
@@ -69,21 +81,26 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: Keras 是一个**开源的高级库**，用于开发神经网络模型。它由 Google 的深度学习研究员 François Chollet 开发。它的核心原则是使构建神经网络、训练它，然后使用它进行预测的过程**对任何具有基础编程知识的人都简单易用**，同时仍允许开发者完全自定义
+    ANN 的参数。
 - en: Basically, Keras is actually just an interface that can run on top of different
     Deep Learning frameworks like** CNTK, Tensorflow, or Theano** for example. It
     works the same, independently of the back-end that is used.
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 基本上，Keras 实际上只是一个可以运行在不同深度学习框架之上的接口，比如**CNTK、Tensorflow 或 Theano**。无论使用哪个后端，它的工作方式都是一样的。
 - en: '![](../Images/216ff5898cd42996150f992a83cd0b75.png)'
   id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/216ff5898cd42996150f992a83cd0b75.png)'
 - en: Layered structure of the Keras API. As it can be seen, it can run on top of
     different frameworks seamlessly.
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: Keras API 的分层结构。如图所示，它可以无缝运行在不同的框架之上。
 - en: As we mentioned in the previous post, in a Neural Network each node in a specific
     layer takes the weighted sum of the outputs from the previous layer, applies a
     mathematical function to them, and then passes that result to the next layer.
