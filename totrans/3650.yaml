@@ -1,277 +1,405 @@
 - en: ReAct, Reasoning and Acting augments LLMs with Tools!
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ReAct，推理与行动通过工具增强LLMs！
 - en: 原文：[https://www.kdnuggets.com/react-reasoning-and-acting-augments-llms-with-tools](https://www.kdnuggets.com/react-reasoning-and-acting-augments-llms-with-tools)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/react-reasoning-and-acting-augments-llms-with-tools](https://www.kdnuggets.com/react-reasoning-and-acting-augments-llms-with-tools)
 - en: Introduction
+  id: totrans-2
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 介绍
 - en: Short for Reasoning and Acting, this [paper](https://arxiv.org/pdf/2210.03629.pdf) introduces
     a new concept that improves the performance of LLMs and also provides us with
     more explainability and interpretability.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 缩写为推理与行动的这个[论文](https://arxiv.org/pdf/2210.03629.pdf)介绍了一个新概念，它提高了LLMs的性能，并为我们提供了更多的解释性和可解释性。
 - en: The goal of AGI could be one of the most important goals for human civilization
     to achieve. Imagine creating artificial intelligence that could generalize to
     many problems. There are many interpretations of what an AGI is, and when do we
     say that we have achieved it?
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 人工智能通用智能（AGI）的目标可能是人类文明可以实现的最重要目标之一。想象一下创建能够推广到许多问题的人工智能。对于AGI的定义有很多种解释，我们什么时候可以说我们已经实现了它？
 - en: The most promising method for AGI in the last decades was the reinforcement
     learning path, more specifically what DeepMind was able to achieve hard tasks,
     AlphaGo, AlphaStar and so many breakthroughs…
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在过去几十年里，最有前途的AGI方法是强化学习路径，更具体地说，是DeepMind在解决困难任务方面取得的成就，如AlphaGo、AlphaStar以及许多突破……
 - en: However, ReAct outperforms imitation and reinforcement learning methods by an
     absolute success rate of 34% and 10% respectively, while being prompted with only
     one or two in-context examples.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，ReAct的表现超越了模仿学习和强化学习方法，分别提高了34%和10%的绝对成功率，同时仅使用一个或两个上下文示例。
 - en: With this kind of result (of course, provided there is no data leakage and we
     can trust the evaluation methods provided in the paper), we can no longer ignore
     LLMs’ potential to reason and divide complex tasks into logical steps.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过这种结果（当然，前提是没有数据泄漏，我们可以信任论文中提供的评估方法），我们不能再忽视LLMs推理的潜力，并将复杂任务分解为逻辑步骤。
 - en: The Motivation Behind The Paper
+  id: totrans-8
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 论文背后的动机
 - en: This paper starts with the idea that LLMs so far are impressive in language
     understanding, they have been used to generate CoT (Chain of thought) to solve
     some problems, and they were also used for acting and plan generation.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文从一个观点出发，即迄今为止，大型语言模型（LLMs）在语言理解方面表现令人印象深刻，它们已被用于生成 CoT（思维链）来解决一些问题，并且也被用于行动和计划生成。
 - en: Although these two have been studied separately, the paper aims to combine both
     reasoning and acting in an interleaved manner to enhance LLM's performance.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管这两者一直被分开研究，但本文旨在以交替的方式结合推理和行动，以增强LLM的性能。
 - en: The reason behind this idea is that if you think about how you, as a human,
     behave in order to execute some task.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一观点背后的原因是，如果你考虑一下你作为一个人如何执行某项任务。
 - en: The first step is that you’ll use “inner Speech” or you’ll write down or communicate
     with yourself somehow, saying “How do I execute task X? to do task X I need to
     first do step 1 and then do step2 and so on”
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一步是你使用“内在语言”或以某种方式写下或与自己沟通，说明“我如何执行任务X？要完成任务X，我需要先做步骤1，然后做步骤2，依此类推”
 - en: 'More concretely, if you were to cook up a dish in the kitchen, you could ReAct
     something like this:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 更具体地说，如果你在厨房里做一道菜，你可以这样使用 ReAct：
 - en: “Now that everything is cut, I should heat up the pot of water”), to handle
     exceptions or adjust the plan according to the situation (“I don’t have salt,
     so let me use soy sauce and pepper instead”), and to realize when external information
     is needed (“how do I prepare dough? Let me search on the Internet”).
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: “现在一切都切好了，我应该加热水锅”，以处理例外情况或根据情况调整计划（“我没有盐，所以我用酱油和胡椒代替”），并意识到何时需要外部信息（“我怎么准备面团？让我在互联网上搜索”）。
 - en: You can also act (open a cookbook to read the recipe, open the fridge, check
     ingredients) to support the reasoning and answer questions (“What dish can I make
     right now?”).
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以采取行动（翻开食谱书阅读食谱，打开冰箱，检查配料）来支持推理并回答问题（“我现在可以做什么菜？”）。
 - en: This combination of both reasoning and acting is what makes humans learn and
     achieve tasks even under previously unseen circumstances or when faced with information
     uncertainties.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种推理与行动的结合使得人类即使在之前未见的情况下或面对信息不确定性时，仍能学习并完成任务。
 - en: Reasoning Only Approach
+  id: totrans-17
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 仅有推理的方法
 - en: Previous works demonstrated the capabilities of LLMs to reason, for example,
     Chain of Thought Prompting demonstrated that the model could come up with plans
     to answer questions in arithmetic, common sense, and symbolic reasoning.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 先前的研究展示了LLMs进行推理的能力，例如，思维链提示（Chain of Thought Prompting）展示了模型能够提出解决算术、常识和符号推理问题的计划。
 - en: However, the model here is still a “static black box” because it uses its internal
     language representation to answer these questions, and this representation may
     not always be accurate or up-to-date which leads to fact hallucination (coming
     with facts from its own imagination) or error propagation (one error in the chain
     of thoughts propagates to a wrong answer).
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，这里的模型仍然是一个“静态黑箱”，因为它使用其内部语言表示来回答这些问题，而这种表示可能并不总是准确或最新的，这会导致事实幻觉（从自身想象中得出事实）或错误传播（思维链中的一个错误传播到错误答案）。
 - en: Without the ability to take some sort of action and update its knowledge, the
     model is limited.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果没有采取某种行动和更新其知识的能力，模型将受到限制。
 - en: Acting Only Approach
+  id: totrans-21
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 仅行动方法
 - en: There have also been studies that employed LLMs to do actions based on language,
     these studies usually take in multimodal inputs (audio, text, and images), convert
     them to text, use the model to generate in-domain actions, and then use a controller
     to do these actions.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 也有一些研究使用LLMs根据语言进行动作，这些研究通常会接收多模态输入（音频、文本和图像），将其转换为文本，使用模型生成领域内的动作，然后使用控制器执行这些动作。
 - en: Without the ability to plan some steps and reason about what to do, the model
     will simply output the wrong actions.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果没有规划一些步骤和推理该做什么的能力，模型将简单地输出错误的动作。
 - en: Combining both into ReAct
+  id: totrans-24
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 将两者结合成ReAct
 - en: The proposal of this paper is to combine both methods mentioned above. ReAct
     prompts LLMs to generate both verbal reasoning traces and actions pertaining to
     a task in an interleaved manner, which allows the model to perform dynamic reasoning
     to create, maintain, and adjust high-level plans for acting (reason to act), while
     also interacting with external environments (e.g., Wikipedia) to incorporate additional
     information into reasoning (act to reason).
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文的提议是结合上述两种方法。ReAct提示LLMs以交替的方式生成与任务相关的口头推理痕迹和行动，这允许模型进行动态推理，创建、维护和调整高层次的行动计划（推理以行动），同时也与外部环境（例如维基百科）互动，将额外的信息纳入推理（行动以推理）。
 - en: 'This is shown in the figure below:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的图示展示了这一点：
 - en: '![ReAct, Reasoning and Acting augments LLMs with Tools!](../Images/28fb953eec4af128731c669f8aa929e8.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![ReAct, Reasoning and Acting augments LLMs with Tools!](../Images/28fb953eec4af128731c669f8aa929e8.png)'
 - en: Difference between Reason, Act and ReAct (Photo taken from the paper)
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: Reason、Act和ReAct之间的区别（照片摘自论文）
 - en: The Action Space
+  id: totrans-29
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 动作空间
 - en: So in order to make the reasoning prompting better, they design an action space,
     which means three actions that the model is allowed to use when answering questions.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，为了改进推理提示，他们设计了一个动作空间，即模型在回答问题时允许使用的三种动作。
 - en: 'This is done through a Wikipedia API that provides the following:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是通过维基百科API完成的，该API提供以下内容：
 - en: '**search[entity]**: returns the first 5 sentences from the corresponding entity
     wiki page if it exists, or else suggests top-5 similar entities from the Wikipedia
     search engine'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**search[entity]**：返回对应实体维基页面的前5个句子（如果存在），否则建议维基百科搜索引擎中的前5个相似实体'
 - en: '**lookup**[string], which would return the next sentence in the page containing
     the string, simulating Ctrl+F functionality on the browser'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**lookup**[string]，将返回包含字符串的页面中的下一句，模拟浏览器中的Ctrl+F功能'
 - en: '**finish**[answer], which would finish the current task with the answer'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**finish**[answer]，将用答案完成当前任务'
 - en: Something that is not usual here is that there are way more powerful information
     retrieval tools than the ones mentioned above.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里不常见的一点是，信息检索工具比上述提到的工具强大得多。
 - en: The goal behind this is to simulate human behavior and how a human would interact
     with Wikipedia and reason to find an answer.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 这样做的目标是模拟人类行为以及人类如何与维基百科互动并推理以找到答案。
 - en: Prompting
+  id: totrans-37
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 提示
 - en: In addition to the provided tools, we need to properly prompt the LLM, to provide
     reasoning and properly chain actions.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了提供的工具，我们还需要正确提示LLM，以提供推理并适当地链式执行动作。
 - en: To this end, they use a combination of thoughts that decompose a question like
     (“I need to search x, find y, then find z”), extract information from Wikipedia
     observations (“x was started in 1844”, “The paragraph does not tell x”), perform
     common sense (“x is not y, so z must instead be…”) or arithmetic reasoning (“1844
     < 1989”), guide search reformulation (“maybe I can search/lookup x instead”),
     and synthesize the final answer (“…so the answer is x”)
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，他们使用了多种思路组合来分解问题，例如（“我需要搜索 x，找到 y，然后找到 z”），从维基百科观察中提取信息（“x 起始于 1844”， “该段落没有告诉
+    x”），进行常识推理（“x 不是 y，所以 z 必须是…”）或算术推理（“1844 < 1989”），指导搜索重组（“也许我可以搜索/查找 x”），并综合最终答案（“...所以答案是
+    x”）。
 - en: 'Finally, the results look something like this:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终结果大致如下：
 - en: '![ReAct, Reasoning and Acting augments LLMs with Tools!](../Images/b18dc3f25792762e011e0fbff2659169.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![ReAct, Reasoning and Acting augments LLMs with Tools!](../Images/b18dc3f25792762e011e0fbff2659169.png)'
 - en: How ReAct works and leads to better results (Photo taken from the paper)
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: ReAct 如何工作并带来更好的结果（照片来自论文）
 - en: Results
+  id: totrans-43
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 结果
 - en: 'The datasets chosen for the evaluation are the following:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 选择用于评估的数据集如下：
 - en: '[**HotPotQA**](https://arxiv.org/abs/1809.09600): is a question-answering dataset
     that requires reasoning over one or two Wikipedia pages.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**HotPotQA**](https://arxiv.org/abs/1809.09600)：一个问答数据集，要求对一个或两个维基百科页面进行推理。'
 - en: '[**FEVER**](https://arxiv.org/abs/1803.05355): a fact verification benchmark
     where each claim is annotated SUPPORTS, REFUTES, or NOT ENOUGH INFO, based on
     whether there exists a Wikipedia passage to verify the claim.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**FEVER**](https://arxiv.org/abs/1803.05355)：一个事实验证基准，每个声明根据是否存在维基百科段落来验证该声明，标注为
+    SUPPORTS、REFUTES 或 NOT ENOUGH INFO。'
 - en: '[**ALFWorld**](https://arxiv.org/abs/2010.03768): Text Based game that includes
     6 types of tasks that the agent needs to perform to achieve a high-level goal.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**ALFWorld**](https://arxiv.org/abs/2010.03768)：一个基于文本的游戏，包括 6 种任务类型，代理需要完成这些任务以实现高层次目标。'
 - en: An example would be “examine paper under desk lamp” by navigating and interacting
     with a simulated household via text actions (e.g. go to coffee table 1, take paper
     2, use desk lamp 1)
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个例子是“在桌灯下检查纸张”，通过文本行动（例如，去咖啡桌 1，拿纸 2，用桌灯 1）导航和与模拟的家庭进行互动。
 - en: '[**WebShop**](https://arxiv.org/abs/2207.01206): an online shopping website
     environment with 1.18M real-world products and 12k human instructions with much
     more variety and complexity.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**WebShop**](https://arxiv.org/abs/2207.01206)：一个包含 118 万个真实世界产品和 1.2 万条人类指令的在线购物网站环境，具有更多的多样性和复杂性。'
 - en: It requires an agent to purchase a product based on user instructions. For example
     “I am looking for a nightstand with drawers. It should have a nickel finish, and
     be priced lower than $140”, the agent needs to achieve this through web interactions.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 它要求一个代理根据用户指令购买产品。例如，“我在找一个带抽屉的床头柜。它应该有镍质饰面，价格低于 140 美元”，代理需要通过网络互动来实现这一点。
 - en: So the results show that **ReAct always outperforms Act**, which goes to show
     that the reasoning part is extremely important to enhance the actions.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以结果显示**ReAct 总是优于 Act**，这表明推理部分对于增强行动是极其重要的。
 - en: On the other hand, ReAct outperforms CoT on Fever (60.9 vs. 56.3) and slightly
     lags behind CoT on HotpotQA (27.4 vs. 29.4). So for the FEVER dataset, acting
     to get updated knowledge is showing to give the needed boost to make the right
     SUPPORT or REFUTE decision.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一方面，ReAct 在 Fever 上的表现优于 CoT（60.9 对 56.3），而在 HotpotQA 上略逊于 CoT（27.4 对 29.4）。因此，对于
+    FEVER 数据集，通过获取更新的知识来采取行动显示出能够提供所需的提升，以做出正确的 SUPPORT 或 REFUTE 决策。
 - en: 'When comparing CoT vs ReAct on HotpotQA and why the performance is comparable,
     these are the key observations found:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 在比较 CoT 和 ReAct 在 HotpotQA 上的表现及其可比性时，发现了以下关键观察：
 - en: Hallucination is a serious problem for CoT,so with no way to update its knowledge,
     CoT has to imagine and hallucinate things, which is a big hurdle.
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对 CoT 来说，幻觉是一个严重的问题，因此在没有更新知识的情况下，CoT 必须想象和产生幻觉，这是一个巨大的障碍。
 - en: While interleaving reasoning, action, and observation steps improve **ReAct**’s
     groundedness and trustworthiness, such a structural constraint also reduces its
     flexibility in formulating reasoning steps. ReAct may force the LLM to do actions
     when just doing CoT is sometimes enough.
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 虽然交替进行推理、行动和观察步骤可以提高**ReAct**的基础性和可信度，但这种结构约束也降低了其在制定推理步骤时的灵活性。ReAct 可能会迫使 LLM
+    执行动作，而有时仅仅进行 CoT 就足够了。
 - en: For **ReAct**, successfully retrieving informative knowledge via search is critical.
     If search retrieves wrong information than automatically any reasoning based that
     false information is wrong, so getting the right information is crutial.
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于**ReAct**来说，通过搜索成功检索信息性知识至关重要。如果搜索检索到错误的信息，那么基于这些错误信息的推理也是错误的，所以获取正确的信息至关重要。
 - en: '![ReAct, Reasoning and Acting augments LLMs with Tools!](../Images/d74b0a1644c0f11b9292c2bec8ffacdd.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![ReAct，推理和行动增强LLMs工具！](../Images/d74b0a1644c0f11b9292c2bec8ffacdd.png)'
 - en: ReAct and CoT results on different datasets (Photo taken from the paper)
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: ReAct和CoT在不同数据集上的结果（照片取自论文）
 - en: I hope this article helped you to understand this paper. You can check it out
     here [https://arxiv.org/pdf/2210.03629.pdf](https://arxiv.org/pdf/2210.03629.pdf)
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 希望这篇文章帮助你理解这篇论文。你可以在这里查看它 [https://arxiv.org/pdf/2210.03629.pdf](https://arxiv.org/pdf/2210.03629.pdf)
 - en: Implementations of ReAct exist already [here](https://langchain.readthedocs.io/en/latest/modules/agents/implementations/react.html?highlight=react+agent#react) and [here](https://github.com/jina-ai/agentchain).
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: ReAct的实现已经存在 [这里](https://langchain.readthedocs.io/en/latest/modules/agents/implementations/react.html?highlight=react+agent#react)
+    和 [这里](https://github.com/jina-ai/agentchain)。
 - en: '**[Mohamed Aziz Belaweid](https://www.linkedin.com/in/mohamed-aziz-belaweid/)**
     is a Machine Learning / Data Engineer at SoundCloud. He is interested in both
     Research and Engineering. He like reading papers and actually bringing their innovation
@@ -279,62 +407,95 @@
     Extracting information from text using Named Entity Recognition, Multi Modal search
     systems, Image classification and detection. Also worked in operations side such
     as model deployment, reproducibility, scaling and inference.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Mohamed Aziz Belaweid](https://www.linkedin.com/in/mohamed-aziz-belaweid/)**是SoundCloud的机器学习/数据工程师。他对研究和工程都很感兴趣。他喜欢阅读论文并实际将其创新实现。他曾从零开始训练语言模型到特定领域。从文本中提取信息，使用命名实体识别、多模态搜索系统、图像分类和检测。他还在模型部署、可复现性、扩展和推理等操作方面有工作经验。'
 - en: '[Original](https://generativeai.pub/react-augmenting-llms-with-actions-b6ecfadcb4e9).
     Reposted with permission.'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://generativeai.pub/react-augmenting-llms-with-actions-b6ecfadcb4e9)。经许可转载。'
 - en: '* * *'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-64
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的IT工作'
 - en: '* * *'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-69
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Orca LLM: Simulating the Reasoning Processes of ChatGPT](https://www.kdnuggets.com/2023/06/orca-llm-reasoning-processes-chatgpt.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Orca LLM：模拟ChatGPT的推理过程](https://www.kdnuggets.com/2023/06/orca-llm-reasoning-processes-chatgpt.html)'
 - en: '[Enhancing LLM Reasoning: Unveiling Chain of Code Prompting](https://www.kdnuggets.com/enhancing-llm-reasoning-unveiling-chain-of-code-prompting)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[增强LLM推理：揭示代码链提示](https://www.kdnuggets.com/enhancing-llm-reasoning-unveiling-chain-of-code-prompting)'
 - en: '[Thought Propagation: An Analogical Approach to Complex Reasoning…](https://www.kdnuggets.com/thought-propagation-an-analogical-approach-to-complex-reasoning-with-large-language-models)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[思维传播：复杂推理的类比方法…](https://www.kdnuggets.com/thought-propagation-an-analogical-approach-to-complex-reasoning-with-large-language-models)'
 - en: '[Vector Database for LLMs, Generative AI, and Deep Learning](https://www.kdnuggets.com/vector-database-for-llms-generative-ai-and-deep-learning)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LLMs、生成式AI和深度学习的向量数据库](https://www.kdnuggets.com/vector-database-for-llms-generative-ai-and-deep-learning)'
 - en: '[Quantization and LLMs: Condensing Models to Manageable Sizes](https://www.kdnuggets.com/quantization-and-llms-condensing-models-to-manageable-sizes)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[量化与LLMs：将模型压缩到可管理的大小](https://www.kdnuggets.com/quantization-and-llms-condensing-models-to-manageable-sizes)'
 - en: '[History and Future of LLMs](https://www.kdnuggets.com/history-and-future-of-llms)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LLMs的历史与未来](https://www.kdnuggets.com/history-and-future-of-llms)'

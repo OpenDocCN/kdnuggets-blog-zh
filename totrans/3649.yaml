@@ -1,359 +1,556 @@
 - en: Fine Tuning LLAMAv2 with QLora on Google Colab for Free
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在Google Colab上免费微调LLAMAv2与QLora
 - en: 原文：[https://www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free](https://www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free](https://www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free)
 - en: '![Fine Tuning LLAMAv2 with QLora on Google Colab for Free](../Images/c4099ca8d941760761ce95a69a350c6b.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![在Google Colab上免费微调LLAMAv2与QLora](../Images/c4099ca8d941760761ce95a69a350c6b.png)'
 - en: 'Generated using ideogram.ai with the prompt: “A photo of LLAMA with the banner
     written “QLora” on it., 3d render, wildlife photography”'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用ideogram.ai生成，提示为：“一张LLAMA的照片，横幅上写着‘QLora’，3D渲染，野生动物摄影”
 - en: It was a dream to fine-tune a 7B model on a single GPU for free on Google Colab
     until recently. On 23 May 2023, Tim Dettmers and his team submitted a revolutionary
     paper[1] on fine-tuning Quantized Large Language Models.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 直到最近，在Google Colab上使用单个GPU免费微调一个7B模型曾是一个梦想。2023年5月23日，Tim Dettmers及其团队提交了一篇关于微调量化大语言模型的革命性论文[1]。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速入门网络安全职业'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织IT需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: A Quantized model is a model that has its weights in a data type that is lower
     than the data type on which it was trained. For example, if you train a model
     in a 32-bit floating point, and then convert those weights to a lower data type
     such as 16/8/4 bit floating point such that there is minimal to no effect on the
     performance of the model.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 量化模型是将其权重的数据类型降至比训练时使用的数据类型更低的模型。例如，如果你在32位浮点数上训练一个模型，然后将这些权重转换为较低的数据类型，如16/8/4位浮点数，而对模型性能的影响最小或没有影响。
 - en: '![Fine Tuning LLAMAv2 with QLora on Google Colab for Free](../Images/0b322b679c4a64d081cc5545a40f8991.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![在Google Colab上免费微调LLAMAv2与QLora](../Images/0b322b679c4a64d081cc5545a40f8991.png)'
 - en: Source [2]
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源 [2]
 - en: We are not going to talk much about the theory of quantization here, You can
     refer to the excellent blog post by Hugging-Face[2][3] and an excellent YouTube
     video[4] by Tim Dettmers himself to understand the underlying theory.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们这里不会多谈量化的理论，你可以参考Hugging-Face的优秀博客文章[2][3]以及Tim Dettmers本人的优秀YouTube视频[4]以了解基础理论。
 - en: 'In short, it can be said that QLora means:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 简而言之，可以说QLora的意思是：
 - en: Fine-Tuning a Quantized Large Language models using Low Rank Adaptation Matrices
     (LoRA)[5]
+  id: totrans-16
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 使用低秩适配矩阵（LoRA）微调量化大语言模型[5]
 - en: 'Let’s jump straight into the code:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们直接进入代码：
 - en: Data Preparation
+  id: totrans-18
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据准备
 - en: It is important to understand that the large language models are designed to
     take instructions, this was first introduced in the 2021 ACL paper[6]. The idea
     is simple, we give a language model an instruction, and it follows the instruction
     and performs that task. So the dataset that we want to fine-tune our model should
     be in the instruct format, if not we can convert it.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 重要的是要理解，大语言模型旨在接受指令，这一点在2021年ACL论文[6]中首次介绍。其核心思想很简单，我们给语言模型一个指令，它会遵循指令并执行该任务。因此，我们要微调的模型所需的数据集应为指令格式，如果不是，我们可以转换它。
 - en: One of the common formats is the instruct format. We will be using the Alpaca
     Prompt Template[7] which is
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 一种常见的格式是指令格式。我们将使用Alpaca Prompt模板[7]。
 - en: '[PRE0]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: We will be using the [SNLI dataset](https://nlp.stanford.edu/projects/snli/) which
     is a dataset that has 2 sentences and the relationship between them whether they
     are contradiction, entailment of each other, or neutral. We will be using it to
     generate contradiction for a sentence using LLAMAv2\. We can load this dataset
     simply using pandas.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用[SNLI数据集](https://nlp.stanford.edu/projects/snli/)，这是一个包含2个句子及其之间关系的数据集，关系可能是矛盾、蕴含或中立。我们将利用它通过LLAMAv2生成句子的矛盾。我们可以简单地使用pandas加载此数据集。
 - en: '[PRE1]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![Fine Tuning LLAMAv2 with QLora on Google Colab for Free](../Images/d2eac6c0d0e494320d1cdd66f4ce7704.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![在 Google Colab 上免费微调 LLAMAv2 与 QLora](../Images/d2eac6c0d0e494320d1cdd66f4ce7704.png)'
 - en: Labels Distribution
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 标签分布
 - en: We can see a few random contradiction examples here.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以在这里看到一些随机的矛盾示例。
 - en: '[PRE2]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![Fine Tuning LLAMAv2 with QLora on Google Colab for Free](../Images/6effab1043714f8a9c0e22f8cdfe4170.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![在 Google Colab 上免费微调 LLAMAv2 与 QLora](../Images/6effab1043714f8a9c0e22f8cdfe4170.png)'
 - en: Contradiction Examples from SNLI
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 来自 SNLI 的矛盾示例
 - en: Now we can create a small function that takes only the contradictory sentences
     and converts the dataset instruct format.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以创建一个小函数，只处理矛盾的句子并将数据集转换为 instruct 格式。
 - en: '[PRE3]json'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE3]json'
 - en: '{{''orignal_sentence'': ''{sentence1}'', ''generated_negation'': ''{sentence2}''}}'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '{{''orignal_sentence'': ''{sentence1}'', ''generated_negation'': ''{sentence2}''}}'
 - en: '[PRE4]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Here is an example of the sample data point:'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个示例数据点：
 - en: '[PRE5]json'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE5]json'
 - en: '{''orignal_sentence'': ''A couple playing with a little boy on the beach.'',
     ''generated_negation'': ''A couple watch a little girl play by herself on the
     beach.''}'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '{''orignal_sentence'': ''一对夫妇在海滩上和一个小男孩玩耍。'', ''generated_negation'': ''一对夫妇在海滩上看着一个小女孩自己玩耍。''}'
 - en: '[PRE6]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Now we have our dataset in the correct format, let’s start with fine-tuning.
     Before starting it, let’s install the necessary packages. We will be using accelerate,
     peft (Parameter efficient Fine Tuning), combined with Hugging Face Bits and bytes
     and transformers.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了正确格式的数据集，开始微调吧。在开始之前，让我们安装必要的软件包。我们将使用 accelerate、peft（参数高效微调），结合 Hugging
+    Face 的 Bits 和 bytes 以及 transformers。
 - en: '[PRE7]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '[PRE8]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: You can upload the formatted dataset to the drive and load it in the Colab.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以将格式化的数据集上传到云端并在 Colab 中加载它。
 - en: '[PRE9]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: You can convert it to the Hugging Face dataset format easily using `from_pandas` method,
     this will be helpful in training the model.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用 `from_pandas` 方法轻松地将其转换为 Hugging Face 数据集格式，这将有助于训练模型。
 - en: '[PRE10]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'We will be using the already quantized LLamav2 model which is provided by [abhishek/llama-2–7b-hf-small-shards](https://huggingface.co/abhishek/llama-2-7b-hf-small-shards).
     Let’s define some hyperparameters and variables here:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用由 [abhishek/llama-2–7b-hf-small-shards](https://huggingface.co/abhishek/llama-2-7b-hf-small-shards)
+    提供的已量化 LLamav2 模型。在这里定义一些超参数和变量：
 - en: '[PRE11]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Most of these are pretty straightforward hyper-parameters having these default
     values. You can always refer to the documentation for more details.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中大多数是相当直观的超参数，具有这些默认值。你可以随时参考文档获取更多详细信息。
 - en: We can now simply use BitsAndBytesConfig class to create the config for 4-bit
     fine-tuning.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以简单地使用 BitsAndBytesConfig 类来创建 4 位微调的配置。
 - en: '[PRE12]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Now we can load the base model with 4 bit BitsAndBytesConfig and tokenizer for
     Fine-Tuning.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以加载带有 4 位 BitsAndBytesConfig 和 tokenizer 的基础模型进行微调。
 - en: '[PRE13]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: We can now create the LoRA config and set the training parameters.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以创建 LoRA 配置并设置训练参数。
 - en: '[PRE14]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: Now we can simply use SFTTrainer which is provided by trl from HuggingFace to
     start the training.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以简单地使用由 HuggingFace 提供的 trl 中的 SFTTrainer 开始训练。
 - en: '[PRE15]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: This will start the training for the number of epochs you have set above. Once
     the model is trained, make sure to save it in the drive so that you can load it
     again (as you have to restart the session in the colab). You can store the model
     in the drive via zip and mv command.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将开始训练你上述设置的周期数。一旦模型训练完成，确保将其保存在云端，以便你可以再次加载它（因为你需要在 Colab 中重启会话）。你可以通过 zip
+    和 mv 命令将模型存储在云端。
 - en: '[PRE16]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: Now when you restart the Colab session, you can move it back to your session
     again.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在当你重启 Colab 会话时，可以将其移回到你的会话中。
 - en: '[PRE17]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: You need to load the base model again and merge it with the fine-tuned LoRA
     matrices. This can be done using `merge_and_unload()` function.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 你需要重新加载基础模型，并将其与微调后的 LoRA 矩阵合并。这可以使用 `merge_and_unload()` 函数来完成。
 - en: '[PRE18]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: Inference
+  id: totrans-62
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 推理
 - en: You can test your model by simply passing in the inputs in the same prompt template
     that we have defined above.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过将输入传递到我们上述定义的相同提示模板中来测试你的模型。
 - en: '[PRE19]'
+  id: totrans-64
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: Output
+  id: totrans-65
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 输出
 - en: '[PRE20]json'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE20]json'
 - en: '{'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '{'
 - en: '"sentence": "The weather forecast predicts a sunny day with a high temperature
     around 30 degrees Celsius, perfect for a day at the beach with friends and family.",'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '"sentence": "天气预报预测天气晴朗，气温高达 30 摄氏度，非常适合与朋友和家人一起去海滩度过一天。",'
 - en: '"negation": "The weather forecast predicts a rainy day with a low temperature
     around 10 degrees Celsius, not ideal for a day at the beach with friends and family."'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '"negation": "天气预报预测降雨，气温低至 10 摄氏度，不适合与朋友和家人一起去海滩度过一天。"'
 - en: '}'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '}'
 - en: '[PRE21]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: Filter Useful Output
+  id: totrans-72
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 过滤有用的输出
 - en: There will be many times when the model will keep on predicting even after the
     response is generated due to the token limit. In this case, you need to add a
     post-processing function that filters the JSON part which is what we need. This
     can be done using a simple Regex.
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于令牌限制，模型可能在生成响应后仍会继续预测。在这种情况下，你需要添加一个后处理函数来过滤我们需要的JSON部分。可以使用简单的正则表达式来完成。
 - en: '[PRE22]json\n(.*?)\n[PRE23]'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE22]json\n(.*?)\n[PRE23]'
 - en: This will give you the required output instead of the model repeating random
     output tokens.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 这样会给你所需的输出，而不是模型重复随机输出的令牌。
 - en: Summary
+  id: totrans-76
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 摘要
 - en: In this blog, you learned the basics of QLora, fine-tuning a LLama v2 model
     on Colab using QLora, Instruction Tuning, and a sample template from the Alpaca
     dataset that can be used to instruct tune a model further.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇博客中，你学习了QLora的基础知识，如何在Colab上使用QLora微调LLama v2模型，Instruction Tuning，以及一个可以用来进一步指导微调模型的Alpaca数据集样本模板。
 - en: References
+  id: totrans-78
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 参考文献
 - en: '[1]: QLoRA: Efficient Finetuning of Quantized LLMs, 23 May 2023, Tim Dettmers
     et al.'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '[1]: QLoRA：高效微调量化LLM，2023年5月23日，Tim Dettmers等人'
 - en: '[2]: [https://huggingface.co/blog/hf-bitsandbytes-integration](https://huggingface.co/blog/hf-bitsandbytes-integration)'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '[2]: [https://huggingface.co/blog/hf-bitsandbytes-integration](https://huggingface.co/blog/hf-bitsandbytes-integration)'
 - en: '[3]: [https://huggingface.co/blog/4bit-transformers-bitsandbytes](https://huggingface.co/blog/4bit-transformers-bitsandbytes)'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '[3]: [https://huggingface.co/blog/4bit-transformers-bitsandbytes](https://huggingface.co/blog/4bit-transformers-bitsandbytes)'
 - en: '[4]: [https://www.youtube.com/watch?v=y9PHWGOa8HA](https://www.youtube.com/watch?v=y9PHWGOa8HA)'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '[4]: [https://www.youtube.com/watch?v=y9PHWGOa8HA](https://www.youtube.com/watch?v=y9PHWGOa8HA)'
 - en: '[5]: [https://arxiv.org/abs/2106.09685](https://arxiv.org/abs/2106.09685)'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '[5]: [https://arxiv.org/abs/2106.09685](https://arxiv.org/abs/2106.09685)'
 - en: '[6]: [https://aclanthology.org/2022.acl-long.244/](https://aclanthology.org/2022.acl-long.244/)'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '[6]: [https://aclanthology.org/2022.acl-long.244/](https://aclanthology.org/2022.acl-long.244/)'
 - en: '[7]: [https://crfm.stanford.edu/2023/03/13/alpaca.html](https://crfm.stanford.edu/2023/03/13/alpaca.html)'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '[7]: [https://crfm.stanford.edu/2023/03/13/alpaca.html](https://crfm.stanford.edu/2023/03/13/alpaca.html)'
 - en: '[8]: Colab Notebook by @[maximelabonne](https://twitter.com/maximelabonne) [https://colab.research.google.com/drive/1PEQyJO1-f6j0S_XJ8DV50NkpzasXkrzd?usp=sharing](https://colab.research.google.com/drive/1PEQyJO1-f6j0S_XJ8DV50NkpzasXkrzd?usp=sharing)'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '[8]: Colab Notebook由@[maximelabonne](https://twitter.com/maximelabonne) [https://colab.research.google.com/drive/1PEQyJO1-f6j0S_XJ8DV50NkpzasXkrzd?usp=sharing](https://colab.research.google.com/drive/1PEQyJO1-f6j0S_XJ8DV50NkpzasXkrzd?usp=sharing)'
 - en: '**Ahmad Anis** is a passionate Machine Learning Engineer and Researcher currently
     working at [redbuffer.ai](https://redbuffer.ai/). Beyond his day job, Ahmad actively
     engages with the Machine Learning community. He serves as a regional lead for
     Cohere for AI, a nonprofit dedicated to open science, and is an AWS Community
     Builder. Ahmad is an active contributor at Stackoverflow, where he has 2300+ points.
     He has contributed to many famous open-source projects, including Shap-E by OpenAI.'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Ahmad Anis**是一位热情的机器学习工程师和研究员，目前在[redbuffer.ai](https://redbuffer.ai/)工作。除了本职工作外，Ahmad还积极参与机器学习社区。他担任了Cohere
+    for AI的区域负责人，这是一个致力于开放科学的非营利组织，同时还是AWS社区建设者。Ahmad是Stackoverflow的活跃贡献者，拥有2300多积分。他为许多著名的开源项目做出了贡献，包括OpenAI的Shap-E。'
 - en: More On This Topic
+  id: totrans-88
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Running Mixtral 8x7b On Google Colab For Free](https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在Google Colab上免费运行Mixtral 8x7b](https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free)'
 - en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用HuggingFace微调BERT以进行推文分类](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
 - en: '[Fine-Tuning OpenAI Language Models with Noisily Labeled Data](https://www.kdnuggets.com/2023/04/finetuning-openai-language-models-noisily-labeled-data.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用噪声标签数据微调OpenAI语言模型](https://www.kdnuggets.com/2023/04/finetuning-openai-language-models-noisily-labeled-data.html)'
 - en: '[Overview of PEFT: State-of-the-art Parameter-Efficient Fine-Tuning](https://www.kdnuggets.com/overview-of-peft-stateoftheart-parameterefficient-finetuning)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PEFT概述：最先进的参数高效微调](https://www.kdnuggets.com/overview-of-peft-stateoftheart-parameterefficient-finetuning)'
 - en: '[7 Steps to Mastering Large Language Model Fine-tuning](https://www.kdnuggets.com/7-steps-to-mastering-large-language-model-fine-tuning)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握大型语言模型微调的7个步骤](https://www.kdnuggets.com/7-steps-to-mastering-large-language-model-fine-tuning)'
 - en: '[Mistral 7B-V0.2: Fine-Tuning Mistral’s New Open-Source LLM with…](https://www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Mistral 7B-V0.2：用Hugging Face微调Mistral的新开源LLM…](https://www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face)'
