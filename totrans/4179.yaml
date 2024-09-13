@@ -1,175 +1,262 @@
 - en: Dask DataFrame is not Pandas
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Dask DataFrame 不是 Pandas
 - en: 原文：[https://www.kdnuggets.com/2021/11/dask-dataframe-not-pandas.html](https://www.kdnuggets.com/2021/11/dask-dataframe-not-pandas.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/11/dask-dataframe-not-pandas.html](https://www.kdnuggets.com/2021/11/dask-dataframe-not-pandas.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Hugo Shi](https://www.linkedin.com/in/hugo-shi/), Founder of Saturn Cloud**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Hugo Shi](https://www.linkedin.com/in/hugo-shi/)，Saturn Cloud 创始人**'
 - en: The Allure
+  id: totrans-4
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 吸引力
 - en: You start with medium-sized data sets. Pandas does quite well. Then the data
     sets get larger, and so you scale up to a larger machine. But eventually, you
     run out of memory on that machine, or you need to find a way to leverage more
     cores because your code is running slowly. At that point, you replace your Pandas
     DataFrame object with a Dask DataFrame.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 你从中等大小的数据集开始。Pandas 做得相当好。然后数据集变大，因此你升级到更大的机器。但最终，你会在那台机器上耗尽内存，或者需要找到一种利用更多核心的方法，因为你的代码运行缓慢。此时，你将
+    Pandas DataFrame 对象替换为 Dask DataFrame。
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Unfortunately, this doesn’t usually go well, and results in a good amount of
     pain. Either some of the methods you rely on in Pandas, are not implemented in
     Dask DataFrame (I’m looking at you, MultiIndex), the behavior of the methods is
     slightly different, or the corresponding Dask operation fails, runs out of memory
     and crashes (I thought it wasn’t supposed to do that!)
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 不幸的是，这通常不会顺利进行，结果会带来很多痛苦。你依赖于的一些 Pandas 方法在 Dask DataFrame 中未实现（我在看你，MultiIndex），这些方法的行为稍有不同，或者相应的
+    Dask 操作失败、内存耗尽并崩溃（我还以为不会这样！）
 - en: Pandas is a library designed for a single Python process. Distributed algorithms
     and data structures are fundamentally different. There is work that can be done
     on the Dask DataFrame side to make this better, but single processes, and clusters
     of machines, will always have very different performance characteristics. You
     should not try to fight this fundamental truth.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 是为单个 Python 进程设计的库。分布式算法和数据结构本质上是不同的。在 Dask DataFrame 方面可以做一些工作来改善这一点，但单个进程和机器集群总是会有非常不同的性能特征。你不应该试图抗拒这一基本事实。
 - en: '**Dask is a great way to scale up your Pandas code. Naively converting your
     Pandas DataFrame into a Dask DataFrame is not the right way to do it.** The fundamental
     shift should not be to replace Pandas with Dask, but to re-use the algorithms,
     code, and methods you wrote for a single Python process. That’s the meat of this
     article. Once you reframe your thinking, the rest isn’t rocket science.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Dask 是扩展你的 Pandas 代码的绝佳方法。盲目地将你的 Pandas DataFrame 转换为 Dask DataFrame 并不是正确的做法。**
+    基本的转变不应是用 Dask 替代 Pandas，而是重用你为单个 Python 进程编写的算法、代码和方法。这才是本文的核心。一旦你调整了思维，其余的就不是火箭科学了。'
 - en: '**There are 3 main ways to leverage your Pandas code with Dask**'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '**有三种主要方式可以将你的 Pandas 代码与 Dask 结合使用**'
 - en: Break up your big problem into many small problems
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将你的大问题拆分成许多小问题
 - en: Use group by and aggregations
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用分组和聚合
 - en: Use dask dataframes as a container for other distributed algorithms.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将 dask 数据帧用作其他分布式算法的容器。
 - en: Break up your big problem into many small problems
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 将你的大问题拆分成许多小问题
 - en: '![](../Images/79cba8868646230a4c12f31222c81a79.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/79cba8868646230a4c12f31222c81a79.png)'
 - en: A Dask DataFrame is made up of many Pandas DataFrames. It’s really good at moving
     rows from those Pandas DataFrames around, so that you can use them in your own
     functions. The general approach here is to express your problem in a split-apply-combine
     pattern.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask DataFrame 由许多 Pandas DataFrame 组成。它非常擅长在这些 Pandas DataFrame 之间移动行，以便你可以在自己的函数中使用它们。这里的一般方法是以拆分-应用-合并模式来表达你的问题。
 - en: Split your big dataset (Dask DataFrame) into smaller datasets (Pandas DataFrame)
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将大数据集（Dask DataFrame）拆分成较小的数据集（Pandas DataFrame）
 - en: Apply a function (a Pandas function, not a Dask function) to those smaller datasets
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对这些较小的数据集应用一个函数（Pandas 函数，而非 Dask 函数）
 - en: Combine the results back into a big dataset (Dask DataFrame)
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将结果合并回一个大数据集（Dask DataFrame）
 - en: 'There are 2 main approaches to splitting your data:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 有两种主要方法来拆分数据：
 - en: '`set_index` will make one column of the Dask DataFrame the index, and sort
     the data according to that index. It will by default estimate the data distribution
     of that column so that you end up with evenly sized partitions (Pandas DataFrames).'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '`set_index` 将 Dask DataFrame 的一列设为索引，并根据该索引对数据进行排序。默认情况下，它会估计该列的数据分布，以便生成大小均匀的分区（Pandas
+    DataFrames）。'
 - en: '`shuffle` will group rows together, so that rows with the same values for shuffle
     columns are in the same partition. This is different than set_index in that there
     are no sorting guarantees on the result, but you can group by multiple columns.'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '`shuffle` 将行分组，使得具有相同 shuffle 列值的行在同一分区内。这与 set_index 不同，因为结果没有排序保证，但你可以按多个列进行分组。'
 - en: Once your data has been split up, `map_partitions` is a good way to apply a
     function to each Pandas DataFrame, and combine the results back into a Dask DataFrame.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦你的数据被拆分，`map_partitions` 是将函数应用于每个 Pandas DataFrame 并将结果合并回 Dask DataFrame
+    的好方法。
 - en: '**But I have more than one DataFrame**'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '**但我有多个 DataFrame**'
 - en: No problem! As long as you can split all the Dask DataFrames used in your computation
     the same way, you’re good to go.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 没问题！只要你能以相同的方式拆分所有用于计算的 Dask DataFrame，你就可以继续。
 - en: A concrete example
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一个具体的例子
 - en: I’m not going to go into code here. The objective is to put a concrete example
     on top of this theoretical description to gain some intuition for what this looks
     like. Imagine that I have one Dask DataFrame of stock prices, and another Dask
     DataFrame of analyst estimates for the same stocks, and I want to figure out if
     the analysts were right.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我不会在这里深入代码。目标是为这个理论描述提供一个具体的例子，以获得对其样子的直观理解。假设我有一个包含股票价格的 Dask DataFrame，还有一个包含相同股票分析师估计的
+    Dask DataFrame，我想弄清楚分析师是否正确。
 - en: write a function that takes prices for a single stock, and analyst estimates
     for that same stock and figures out if they were right.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 编写一个函数，该函数接受单一股票的价格和相同股票的分析师估计，并判断他们是否正确。
 - en: call `set_index` on stock prices, to sort them by ticker. The `index` of your
     resulting DataFrame will have a `divisions` attribute which describes which tickers
     are in which partitions. (Everything before B is in the first parittion, everything
     between B and D in the second partition, etc..). Call `set_index` on the Dask
     DataFrame of analyst estimates using the stock price `divisions`.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对股票价格调用 `set_index`，按股票代码排序。结果 DataFrame 的 `index` 将具有 `divisions` 属性，描述了每个分区包含哪些股票代码。（所有
+    B 之前的内容在第一个分区，B 和 D 之间的内容在第二个分区，等等）。使用股票价格 `divisions` 对分析师估计的 Dask DataFrame
+    调用 `set_index`。
 - en: use `map_partitions` to apply a function to the partitions of both Dask DataFrames.
     That function will look at the tickers within each dataframe, and then apply your
     function.
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 `map_partitions` 将函数应用于两个 Dask DataFrame 的分区。该函数将查看每个 DataFrame 中的股票代码，然后应用你的函数。
 - en: Use Group By Aggregations
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用分组聚合
 - en: '![simple-gb-split-every](../Images/41a6dc52d77c34b5260975aaac758b31.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![simple-gb-split-every](../Images/41a6dc52d77c34b5260975aaac758b31.png)'
 - en: Dask has an excellent implementation of Pandas [GroupBy Aggregation algorithms](https://saturncloud.io/docs/reference/dask_groupby_aggregations/).
     The actual algorithm is pretty complicated, but we have a detailed write up in
     our [docs](https://saturncloud.io/docs/reference/dask_groupby_aggregations/).
@@ -179,85 +266,127 @@
     and `split_every` helps dask compute how many layers there are in the tree. Both
     parameters can be tuned based on the size of your data to ensure that you don’t
     run out of memory.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask 有一个出色的 Pandas [分组聚合算法](https://saturncloud.io/docs/reference/dask_groupby_aggregations/)。实际算法相当复杂，但我们在
+    [文档](https://saturncloud.io/docs/reference/dask_groupby_aggregations/) 中有详细的描述。如果你的问题符合这种模式，你就找对地方了。Dask
+    在分组聚合的实现中使用了树形化简。你可能需要调整两个参数，`split_out` 控制结果最终分成多少个分区，`split_every` 帮助 Dask 计算树中的层数。可以根据数据的大小调整这两个参数，以确保不会耗尽内存。
 - en: Use Dask as a container for other algorithms
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用 Dask 作为其他算法的容器
 - en: '![containers](../Images/9aa4eac21b6dc0d007c35f68b7520b29.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![容器](../Images/9aa4eac21b6dc0d007c35f68b7520b29.png)'
 - en: Many libraries have Dask integrations built-in. `dask-ml` integrates with `scikit-learn`. `cuML` has
     multi-node multi-GPU implementations of many common ML algorithms. `tsfresh` for
     timeseries. `scanpy` for single cell analysis. `xgboost` and `lightgbm` all have
     parallel algorithms that are Dask enabled.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多库都内置了 Dask 集成。`dask-ml` 与 `scikit-learn` 集成。`cuML` 有多节点多 GPU 实现的许多常见 ML 算法。`tsfresh`
+    用于时间序列。`scanpy` 用于单细胞分析。`xgboost` 和 `lightgbm` 都有 Dask 支持的并行算法。
 - en: Conclusions
+  id: totrans-42
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: Dask is a great way to scale up your Pandas code. Naively converting your Pandas
     DataFrame into a Dask DataFrame is not the right way to do it. But Dask makes
     it easy for you to break your big dataset into smaller parts, and leverage your
     existing Pandas code.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: Dask 是扩展 Pandas 代码的绝佳方式。简单地将 Pandas DataFrame 转换为 Dask DataFrame 不是正确的方法。但 Dask
+    使你可以轻松地将大型数据集拆分成更小的部分，并利用现有的 Pandas 代码。
 - en: '[Try Saturn Cloud Now](https://accounts.community.saturnenterprise.io/register?trackid=17d2e7598417f6-08ec90c572b54a-14241209-1fa400-17d2e75984292e)'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '[立即尝试 Saturn Cloud](https://accounts.community.saturnenterprise.io/register?trackid=17d2e7598417f6-08ec90c572b54a-14241209-1fa400-17d2e75984292e)'
 - en: '**Bio: [Hugo Shi](https://www.linkedin.com/in/hugo-shi/)** is Founder of Saturn
     Cloud, the go-to cloud workspace to scale Python, collaborate, deploy jobs, and
     more.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Hugo Shi](https://www.linkedin.com/in/hugo-shi/)** 是 Saturn Cloud 的创始人，这是一个用于扩展
+    Python、协作、部署任务等的首选云工作区。'
 - en: '[Original](https://saturncloud.io/blog/dask-is-not-pandas/). Reposted with
     permission.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://saturncloud.io/blog/dask-is-not-pandas/)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容:**'
 - en: '[Pandas not enough? Here are a few good alternatives to processing larger and
     faster data in Python](/2021/07/pandas-alternatives-processing-larger-faster-data-python.html)*   [If
     You Can Write Functions, You Can Use Dask](/2021/09/write-functions-use-dask.html)*   [Setting
     Up Your Data Science & Machine Learning Capability in Python](/2020/08/data-science-machine-learning-capability-python.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Pandas 不够？这里有几个处理更大、更快数据的好替代方案](/2021/07/pandas-alternatives-processing-larger-faster-data-python.html)*   [如果你会写函数，你就可以使用
+    Dask](/2021/09/write-functions-use-dask.html)*   [在 Python 中设置你的数据科学和机器学习能力](/2020/08/data-science-machine-learning-capability-python.html)'
 - en: More On This Topic
+  id: totrans-49
   prefs:
   - PREF_IND
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Pandas vs. Polars: A Comparative Analysis of Python''s Dataframe Libraries](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)'
+  id: totrans-50
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Pandas 与 Polars：Python 数据框库的比较分析](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)'
 - en: '[How to Convert JSON Data into a DataFrame with Pandas](https://www.kdnuggets.com/how-to-convert-json-data-into-a-dataframe-with-pandas)'
+  id: totrans-51
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Pandas 将 JSON 数据转换为 DataFrame](https://www.kdnuggets.com/how-to-convert-json-data-into-a-dataframe-with-pandas)'
 - en: '[How to Process a DataFrame with Millions of Rows in Seconds](https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html)'
+  id: totrans-52
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在几秒钟内处理包含百万行的 DataFrame](https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html)'
 - en: '[5 Pandas Plotting Functions You Might Not Know](https://www.kdnuggets.com/2023/02/5-pandas-plotting-functions-might-know.html)'
+  id: totrans-53
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你可能不知道的 5 个 Pandas 绘图函数](https://www.kdnuggets.com/2023/02/5-pandas-plotting-functions-might-know.html)'
 - en: '[Machine learning does not produce value for my business. Why?](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)'
+  id: totrans-54
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习没有为我的业务创造价值。为什么？](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)'
 - en: '[The Not-so-Sexy SQL Concepts to Make You Stand Out](https://www.kdnuggets.com/2022/02/not-so-sexy-sql-concepts-stand-out.html)'
+  id: totrans-55
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[让你脱颖而出的那些不起眼的 SQL 概念](https://www.kdnuggets.com/2022/02/not-so-sexy-sql-concepts-stand-out.html)'
