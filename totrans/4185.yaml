@@ -1,215 +1,323 @@
 - en: Advanced PyTorch Lightning with TorchMetrics and Lightning Flash
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 高级 PyTorch Lightning 使用 TorchMetrics 和 Lightning Flash
 - en: 原文：[https://www.kdnuggets.com/2021/11/advanced-pytorch-lightning-torchmetrics-lightning-flash.html](https://www.kdnuggets.com/2021/11/advanced-pytorch-lightning-torchmetrics-lightning-flash.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/11/advanced-pytorch-lightning-torchmetrics-lightning-flash.html](https://www.kdnuggets.com/2021/11/advanced-pytorch-lightning-torchmetrics-lightning-flash.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '![blog-advanced-pytorch-lightning.jpg](../Images/006950f7cf1ddac40699ea278992b451.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![blog-advanced-pytorch-lightning.jpg](../Images/006950f7cf1ddac40699ea278992b451.png)'
 - en: 'Just to recap from our last post on [Getting Started with PyTorch Lightning](https://www.exxactcorp.com/blog/Deep-Learning/getting-started-with-pytorch-lightning),
     in this tutorial we will be diving deeper into two additional tools you should
     be using: TorchMetrics and Lightning Flash.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅回顾一下我们上一个帖子中关于[PyTorch Lightning 入门](https://www.exxactcorp.com/blog/Deep-Learning/getting-started-with-pytorch-lightning)的内容，在本教程中，我们将深入探讨你应该使用的两个额外工具：TorchMetrics
+    和 Lightning Flash。
 - en: TorchMetrics unsurprisingly provides a modular approach to define and track
     useful metrics across batches and devices, while Lightning Flash offers a suite
     of functionality facilitating more efficient transfer learning and data handling,
     and a recipe book of state-of-the-art approaches to typical deep learning problems.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: TorchMetrics 不出所料地提供了一个模块化的方法来定义和跟踪跨批次和设备的有用指标，而 Lightning Flash 提供了一套功能，促进更高效的迁移学习和数据处理，以及一份针对典型深度学习问题的最新方法的配方书。
 - en: We’ll start by adding a few useful classification metrics to the MNIST example
     we started with earlier. We’ll also swap out the PyTorch Lightning Trainer object
     with a Flash Trainer object, which will make it easier to perform transfer learning
     on a new classification problem. We’ll then train our classifier on a new dataset, [CIFAR10](https://en.wikipedia.org/wiki/CIFAR-10),
     which we’ll use as the basis for a transfer learning example to[ CIFAR100](https://www.cs.toronto.edu/~kriz/cifar.html).
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将从向之前开始的 MNIST 示例中添加一些有用的分类指标开始。我们还将用 Flash Trainer 对象替换 PyTorch Lightning
+    Trainer 对象，这将使我们更容易在新的分类问题上进行迁移学习。然后，我们将使用新的数据集[CIFAR10](https://en.wikipedia.org/wiki/CIFAR-10)来训练我们的分类器，我们将以此作为迁移学习示例的基础，转移到[CIFAR100](https://www.cs.toronto.edu/~kriz/cifar.html)。
 - en: '**TorchMetrics**'
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**TorchMetrics**'
 - en: 'First things first, and that’s ensuring that we have all needed packages installed.
     If you already followed the install instructions from the "Getting Started" tutorial
     and now check your virtual environment contents with `pip freeze`, you’ll notice
     that you probably already have TorchMetrics installed. If not, install both TorchMetrics
     and Lightning Flash with the following:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先要做的是确保我们已经安装了所有需要的包。如果你已经按照“入门”教程中的安装说明操作，并现在通过 `pip freeze` 检查你的虚拟环境内容，你会发现你可能已经安装了
+    TorchMetrics。如果没有，请使用以下命令安装 TorchMetrics 和 Lightning Flash：
 - en: '[PRE0]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Next we’ll modify our training and validation loops to log the[ F1 score ](https://en.wikipedia.org/wiki/F-score)and [Area
     Under the Receiver Operator Characteristic Curve (AUROC)](https://en.wikipedia.org/wiki/Auroc) as
     well as accuracy. We’ll remove the (deprecated) accuracy from `pytorch_lightning.metrics` and
     the similar sklearn function from the `validation_epoch_end` callback in our model,
     but first let’s make sure to add the necessary imports at the top.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将修改我们的训练和验证循环，以记录[ F1 分数](https://en.wikipedia.org/wiki/F-score)和[接收者操作特征曲线下面积（AUROC）](https://en.wikipedia.org/wiki/Auroc)以及准确率。我们将从
+    `pytorch_lightning.metrics` 中移除（已弃用的）准确率，并从我们的模型中 `validation_epoch_end` 回调中移除类似的
+    sklearn 函数，但首先，让我们确保在顶部添加必要的导入。
 - en: '[PRE1]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Next, remove the lines we used previously to calculate accuracy:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，移除我们之前用来计算准确率的代码行：
 - en: '[PRE2]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'And:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 和：
 - en: '[PRE3]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Now, we could just replace what we removed with the equivalent TorchMetrics
     functional implementation for calculating accuracy and leave it at that:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们可以用等效的 TorchMetrics 函数实现来替换我们删除的部分，计算准确率，然后就这样结束：
 - en: '[PRE4]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'and:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 和：
 - en: '[PRE5]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: However, there are additional advantages to using the class-based, modular versions
     of metrics.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 不过，使用基于类的模块化版本的指标还有其他优势。
 - en: With class-based metrics, we can continuously accumulate data while running
     training and validation, and compute the result at the end. This is convenient
     and efficient on a single device, but it really becomes useful with multiple devices
     as the metrics modules can automatically synchronize between multiple devices.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用基于类的指标，我们可以在运行训练和验证时持续积累数据，并在最后计算结果。这在单一设备上很方便和高效，但在多个设备上，它真正变得有用，因为指标模块可以在多个设备之间自动同步。
 - en: We’ll initialize our metrics in the `__init__` function, and add calls for each
     metric in the training and validation steps.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将在 `__init__` 函数中初始化我们的指标，并在训练和验证步骤中添加每个指标的调用。
 - en: '[PRE6]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The metrics modules defined in `__init__` will be called during `training_step`
     and `validation_step`, and we’ll compute them at the end of each training and
     validation epoch.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 `__init__` 中定义的指标模块将在 `training_step` 和 `validation_step` 中被调用，我们将在每个训练和验证周期结束时计算这些指标。
 - en: In the step function, we’ll call our metrics objects to accumulate metrics data
     throughout training and validation epochs. We can either call the “forward” method
     for each metrics object to accumulate data while also returning the value for
     the current batch, or we can call the “update” method to silently accumulate metrics
     data.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 在步骤函数中，我们将调用我们的指标对象以在训练和验证周期中累积指标数据。我们可以为每个指标对象调用“forward”方法以在返回当前批次的值的同时累积数据，或者调用“update”方法来静默累积指标数据。
 - en: '[PRE7]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: We’ll re-write `validation_epoch_end` and overload `training_epoch_end` to compute
     and report metrics for the entire epoch at once.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将重写 `validation_epoch_end` 并重载 `training_epoch_end` 以一次计算和报告整个周期的指标。
 - en: '[PRE8]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: With those few changes, we can take advantage of more than 25 different metrics
     implemented in TorchMetrics, or sub-class the `torchmetrics.Metrics` class and
     implement our own. Keep in mind though that there are simpler ways to implement
     training for common tasks like image classification than sub-classing the LightningModule
     class.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过这些少量更改，我们可以利用 TorchMetrics 中实现的 25 种不同的指标，或子类化 `torchmetrics.Metrics` 类并实现我们自己的指标。不过，请记住，子类化
+    LightningModule 类比实现常见任务如图像分类的训练有更简单的方法。
 - en: '**Lightning Flash**'
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**Lightning Flash**'
 - en: Like a set of Russian nesting dolls of deep learning abstraction libraries,
     Lightning Flash adds further abstractions and simplification on top of PyTorch
     Lightning. In fact we can train an image classification task in only 7 lines.
     We’ll use the CIFAR10 dataset and a classification model based on the ResNet18
     backbone built into Lightning Flash. Then we’ll show how the model backbone can
     be repurposed for classifying a new dataset, CIFAR100,
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 如同一套俄罗斯套娃的深度学习抽象库，Lightning Flash 在 PyTorch Lightning 上添加了更多抽象和简化。事实上，我们只需7行代码就能训练一个图像分类任务。我们将使用
+    CIFAR10 数据集以及基于 Lightning Flash 内置 ResNet18 主干的分类模型。接着，我们将展示如何将模型主干重新用于分类新数据集
+    CIFAR100。
 - en: While Lightning Flash is very much still under active development and has plenty
     of sharp edges, you can already put together certain workflows with very little
     code, and there’s even a “no-code” capability they call Flash Zero. For our purposes,
     we can put together a transfer learning workflow with less than 20 lines.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管 Lightning Flash 仍在积极开发中，且有许多尖锐的边角，但你已经可以用很少的代码组装特定的工作流程，甚至有一个他们称之为 Flash
+    Zero 的“无代码”功能。为了我们的目的，我们可以用不到20行代码组装一个迁移学习工作流程。
 - en: First, we’ll conduct training on the CIFAR10 dataset with 8 lines of code. We
     take advantage of the `ImageClassifier` class and its built-in backbone architectures,
     as well as the `ImageClassificationData` class to replace both training and validation
     dataloaders.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们将用8行代码在 CIFAR10 数据集上进行训练。我们利用 `ImageClassifier` 类及其内置的主干架构，以及 `ImageClassificationData`
+    类来替代训练和验证的数据加载器。
 - en: '[PRE9]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: After that we can train on a new image classification task, the CIFAR100 dataset,
     which has fewer examples per class, by re-using the feature extraction backbone
     of our previously trained model and transfer learning using the “freeze” method.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们可以通过重新使用我们之前训练的模型的特征提取主干并使用“freeze”方法进行迁移学习，来训练新的图像分类任务 CIFAR100 数据集，该数据集每个类别的示例较少。
 - en: This strategy only updates the parameters on the new classification head, while
     leaving the backbone parameters unchanged.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种策略只更新新的分类头上的参数，同时保持主干参数不变。
 - en: '[PRE10]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: This type of parameter re-application to new tasks is at the core of transfer
     learning and saves time and compute, and the costs associated with both. Given
     that developer time is even more valuable than compute time, the concise programming
     style of Lightning Flash can be well worth the investment of learning a few new
     API patterns to use it.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种将参数重新应用于新任务的方式是迁移学习的核心，节省了时间和计算以及相关成本。考虑到开发者的时间比计算时间更宝贵，Lightning Flash 的简洁编程风格可能非常值得学习几个新的
+    API 模式。
 - en: Some of the most practical deep learning advice can be boiled down to “[don’t
     be a hero](https://karpathy.github.io/2019/04/25/recipe/),” *i.e.* don’t reinvent
     the wheel and ignore all the convenient tools like Flash that can make your life
     easier.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 一些最实用的深度学习建议可以归结为“[不要做英雄](https://karpathy.github.io/2019/04/25/recipe/)”，*即*不要重新发明轮子，忽视像
+    Flash 这样的便捷工具，这些工具可以让你的生活更轻松。
 - en: Speaking of easier, there’s one more way to train models with Flash that we’d
     be remiss not to mention. With **Flash Zero**, you can call Lightning Flash directly
     from the command line to train common deep learning tasks with built-in SOTA models.
     Flash Zero also has plenty of sharp edges and if you want to adapt it to your
     needs, be ready to work on a few pull request contributions to the PyTorch Lightning
     project.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 说到简化，还有一种使用 Flash 训练模型的方法我们不得不提及。通过 **Flash Zero**，你可以直接从命令行调用 Lightning Flash，使用内置的
+    SOTA 模型来训练常见的深度学习任务。Flash Zero 也有很多棱角分明的地方，如果你想根据自己的需求进行调整，准备好为 PyTorch Lightning
+    项目贡献一些 pull request。
 - en: 'For example, the following is a modified example from the[ Flash Zero](https://lightning-flash.readthedocs.io/en/latest/general/flash_zero.html) documentation.
     If you look at the[ original version](https://lightning-flash.readthedocs.io/en/latest/general/flash_zero.html#using-your-own-data) (as
     of this writing), you’ll likely notice right away that there is a typo in the
     command line argument for downloading the hymenoptera dataset: the download output
     filename is missing its extension. The fixed version below downloads the hymenoptera
     dataset and then trains a classifier with the ResNet18 backbone for 10 epochs:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，下面是从[ Flash Zero](https://lightning-flash.readthedocs.io/en/latest/general/flash_zero.html) 文档中修改的一个示例。如果你查看[ 原版](https://lightning-flash.readthedocs.io/en/latest/general/flash_zero.html#using-your-own-data) （截至本写作时），你可能会立即注意到下载
+    hymenoptera 数据集的命令行参数中有一个错别字：下载输出文件名缺少扩展名。下面的修正版下载了 hymenoptera 数据集，并用 ResNet18
+    主干训练了一个分类器，训练了10个周期：
 - en: '[PRE11]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: A documentation typo is a pretty minor error (and also a welcome opportunity
     for you to open your first pull request to the project!), but it is a good sign
     that things are changing quickly at the PyTorch Lightning and Lightning Flash
     projects.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 文档中的错别字是一个相当小的错误（也是你为项目打开第一个 pull request 的一个良机！），但这表明 PyTorch Lightning 和 Lightning
+    Flash 项目正在快速变化。
 - en: Expect development to continue at a rapid pace as the project scales. That means
     it’s probably a good idea to use static version numbers when setting up your dependencies
     on a new project, to avoid breaking changes as Lightning code is updated. At the
     same time, this presents an opportunity to shape the future of the project to
     meet your specific R&D needs, either by pull requests, contributing comments,
     or opening issues on the project’s [GitHub channel](https://github.com/PyTorchLightning).
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着项目的扩展，预计开发将以快速的速度继续进行。这意味着在新项目中设置依赖时，使用静态版本号可能是个好主意，以避免 Lightning 代码更新时出现破坏性更改。同时，这也为你提供了塑造项目未来的机会，以满足你特定的研发需求，无论是通过
+    pull request、贡献评论，还是在项目的 [GitHub 频道](https://github.com/PyTorchLightning) 上提出问题。
 - en: In these PyTorch Lightning tutorial posts we’ve seen how PyTorch Lightning can
     be used to simplify training of common deep learning tasks at multiple levels
     of complexity. By sub-classing the `LightningModule`, we were able to define an
@@ -218,96 +326,148 @@
     loop. The model also used a PyTorch Lightning Trainer object that made switching
     the entire training flow over to the GPU a breeze. **Building models from Lightning
     Modules is a great way to gain utility without sacrificing control.**
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这些 PyTorch Lightning 教程文章中，我们已经看到 PyTorch Lightning 如何用于简化在多个复杂度层级上的常见深度学习任务的训练。通过子类化
+    `LightningModule`，我们能够定义一个有效的图像分类器，该模型负责训练、验证、指标和日志记录，极大地简化了编写外部训练循环的需要。该模型还使用了
+    PyTorch Lightning Trainer 对象，使得将整个训练流程切换到 GPU 变得轻而易举。**从 Lightning Modules 构建模型是获得实用性而不牺牲控制的一种好方法。**
 - en: By using Lightning Flash, we then built a transfer learning workflow in just
     15 lines of code, excepting imports. For problems with known solutions and an
     established state-of-the-art, you can save a lot of time by taking advantage of
     built-in architectures and training infrastructure with Flash!
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过使用 Lightning Flash，我们在仅 15 行代码（不包括导入部分）中构建了一个迁移学习工作流。对于那些已知解决方案和成熟的最先进技术的问题，你可以通过利用
+    Flash 内置的架构和训练基础设施节省大量时间！
 - en: Finally, we had a glimpse at Flash Zero for no-code training from the command
     line. No-code is an increasingly popular approach to machine learning, and although
     begrudged by engineers, no-code has a lot of promise. Currently developing rapidly, **Flash
     Zero is set to become a powerful way to apply the best-engineered solutions out-of-the-box,
     so that machine learning and data scientists can focus on the science part of
     their job title.**
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们对 Flash Zero 从命令行进行无代码训练有了初步了解。无代码是一种越来越受欢迎的机器学习方法，尽管工程师对此有所不满，但无代码具有很大的潜力。目前正在迅速发展，**Flash
+    Zero 有望成为一种强大的方式，以开箱即用的最佳工程解决方案应用于机器学习和数据科学领域，让科学家可以专注于工作标题中的科学部分。**
 - en: '**Bio: [Kevin Vu](https://www.kdnuggets.com/author/kevin-vu)** manages Exxact
     Corp blog and works with many of its talented authors who write about different
     aspects of Deep Learning.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Kevin Vu](https://www.kdnuggets.com/author/kevin-vu)** 负责 Exxact Corp
+    博客，并与许多才华横溢的作者合作，这些作者撰写有关深度学习各个方面的内容。'
 - en: '[Original](https://www.exxactcorp.com/blog/Deep-Learning/advanced-pytorch-lightning-using-torchmetrics-and-lightning-flash).
     Reposted with permission.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.exxactcorp.com/blog/Deep-Learning/advanced-pytorch-lightning-using-torchmetrics-and-lightning-flash)。已获许可转载。'
 - en: '**Related:**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关:**'
 - en: '[Introduction to PyTorch Lightning](/2021/10/introduction-pytorch-lightning.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyTorch Lightning 入门](/2021/10/introduction-pytorch-lightning.html)'
 - en: '[How to deploy PyTorch Lightning models to production](/2020/11/deploy-pytorch-lightning-models-production.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何将 PyTorch Lightning 模型部署到生产环境](/2020/11/deploy-pytorch-lightning-models-production.html)'
 - en: '[Getting Started with PyTorch Lightning](/2021/10/getting-started-pytorch-lightning.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[开始使用 PyTorch Lightning](/2021/10/getting-started-pytorch-lightning.html)'
 - en: '* * *'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-55
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的 IT 需求'
 - en: '* * *'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Introduction to Deep Learning Libraries: PyTorch and Lightning AI](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习库简介：PyTorch 和 Lightning AI](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)'
 - en: '[Getting Started with PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[开始使用 PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
 - en: '[Using Lightning AI Studio For Free](https://www.kdnuggets.com/using-lightning-ai-studio-for-free)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[免费使用 Lightning AI Studio](https://www.kdnuggets.com/using-lightning-ai-studio-for-free)'
 - en: '[The Complete Free PyTorch Course for Deep Learning](https://www.kdnuggets.com/2022/10/complete-free-pytorch-course-deep-learning.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[深度学习的完整免费 PyTorch 课程](https://www.kdnuggets.com/2022/10/complete-free-pytorch-course-deep-learning.html)'
 - en: '[Tuning Adam Optimizer Parameters in PyTorch](https://www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[调整 PyTorch 中 Adam 优化器的参数](https://www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html)'
 - en: '[YOLOv5 PyTorch Tutorial](https://www.kdnuggets.com/2022/12/yolov5-pytorch-tutorial.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[YOLOv5 PyTorch 教程](https://www.kdnuggets.com/2022/12/yolov5-pytorch-tutorial.html)'
