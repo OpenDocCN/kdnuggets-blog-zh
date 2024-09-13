@@ -1,73 +1,106 @@
 - en: Sparse Matrix Representation in Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python中的稀疏矩阵表示
 - en: 原文：[https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)
 - en: Most machine learning practitioners are accustomed to adopting a matrix representation
     of their datasets prior to feeding the data into a machine learning algorithm.
     Matrices are an ideal form for this, usually with rows representing dataset instances
     and columns representing features.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 大多数机器学习从业者习惯于在将数据输入机器学习算法之前采用矩阵表示法。矩阵是理想的形式，通常行表示数据集实例，列表示特征。
 - en: A [sparse matrix](https://en.wikipedia.org/wiki/Sparse_matrix) is a matrix in
     which most elements are zeroes. This is in contrast to a dense matrix, the differentiating
     characteristic of which you can likely figure out at this point without any help.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '[稀疏矩阵](https://en.wikipedia.org/wiki/Sparse_matrix)是大多数元素为零的矩阵。这与密集矩阵相对，后者的区分特征你现在可能已经能自己弄明白了。'
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速通道进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![Figure](../Images/1a29300a49b9bb3c0a35a3f3f0f7a31d.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/1a29300a49b9bb3c0a35a3f3f0f7a31d.png)'
 - en: 'Image source: [TU Berlin](http://wordpress.discretization.de/geometryprocessingandapplicationsws19/2019/11/28/tutorial-05-textures-and-exterior-calculus/)'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：[TU 柏林](http://wordpress.discretization.de/geometryprocessingandapplicationsws19/2019/11/28/tutorial-05-textures-and-exterior-calculus/)
 - en: 'Often our data is dense, with feature columns filled up for every instance
     we have. If we are using a finite number of columns to robustly describe some
     thing, generally the allotted descriptive values for a given data point have their
     work cut out for them in order to provide meaningful representation: a person,
     an image, an iris, housing prices, a potential credit risk.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的数据通常是密集的，每个实例的特征列都被填满。如果我们使用有限数量的列来全面描述某些事物，一般来说，给定数据点的描述值需要充分发挥作用，以提供有意义的表示：一个人、一张图片、一朵鸢尾花、房价、潜在的信用风险。
 - en: But some types of data are not in need of such verbosity in their representation.
     Think *relationships*. There may be a large number of potential things we need
     to capture the relationship status of, but at the intersection of these things
     we may need to simply record either yes, there is a relationship, or no, there
     is not.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 但有些类型的数据在其表示中并不需要如此冗长。想想*关系*。我们可能需要捕捉大量潜在事物的关系状态，但在这些事物的交集处，我们可能只需记录“是的，有关系”或“不是，没有关系”。
 - en: Did this person purchase that item? Does that sentence have this word in it?
     There are a lot of potential words that could show up in any given sentence, but
     not very many of them actually do. Similarly, there may be a lot of items for
     sale, but any individual person will not have purchased many of them.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个人是否购买了那个物品？那句话中是否包含这个词？在任何给定的句子中可能出现很多潜在的词，但实际出现的词却不多。同样，虽然市场上可能有很多销售的物品，但任何一个人实际上购买的物品却不多。
 - en: This is one way in which sparse matrices come into play in machine learning.
     Picture a column as items for sales, and rows as shoppers. For every intersection
     where a given item was not purchased by a given shopper, there would be a "no"
@@ -75,90 +108,133 @@
     purchased by a given shopper would there need to be a "yes" representation, such
     as a 1\. The same goes for occurrences of given words in given sentences. You
     can see why such matrices would contain many zeroes, meaning they would be sparse.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是稀疏矩阵在机器学习中发挥作用的一种方式。想象一下列代表销售项，行代表购物者。在每个给定项没有被给定购物者购买的交集处，将有一个“无”（空）表示，比如
+    0\. 只有在给定购物者购买了给定项的交集处才需要有“是”表示，比如 1\. 对于给定句子中的单词出现情况也是如此。你可以看到为什么这样的矩阵会包含很多零，即它们会是稀疏的。
 - en: One problem that comes up with sparse matrices is that they can be very taxing
     on memory. Assuming you take a standard approach to representing a 2x2 matrix,
     allocations for every null representation need to be made in memory, though there
     is no useful information captured. This memory taxation continues on to permanent
     storage as well. In a standard approach to matrix representation, we are forced
     to also record the absence of a thing, as opposed to simply its presence.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 稀疏矩阵的一个问题是它们可能会对内存造成很大的压力。假设你采用标准的方法来表示一个 2x2 矩阵，那么每个空的表示都需要在内存中分配，尽管没有捕捉到有用的信息。这种内存压力还会持续到永久存储中。在标准的矩阵表示方法中，我们被迫记录事物的缺失，而不仅仅是存在。
 - en: But wait. There's got to be a better way!
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 但等等，一定还有更好的方法！
 - en: It just so happens that there is. Sparse matrices need not be represented in
     the standard matrix form. There are a number of approaches to relieving the stress
     that this standard form puts our computational systems under, and it just so happens
     that some algorithms in prevalent Python machine learning workhorse Scikit-learn
     accept some of these sparse representations as input. Getting familiar could save
     you time, trouble, and sanity.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 确实有。稀疏矩阵不必以标准矩阵形式表示。有很多方法可以缓解这种标准形式对计算系统的压力，而恰好在流行的 Python 机器学习工具包 Scikit-learn
+    中，一些算法接受这些稀疏表示作为输入。熟悉这些方法可以节省你的时间、麻烦和精力。
 - en: How can we better represent these sparse matrices? We need a manner in which
     to track where zeroes are *not*. What about a 2 column table, in which we track
     in one column the `row,col` of where a non-zero item exists, and its corresponding
     value in the other column? Keep in mind there is no necessity for sparse matrices
     to only house zeroes and ones; so long as most elements are zeroes, the matrix
     is sparse, regardless of what exists in non-zero elements.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们如何更好地表示这些稀疏矩阵？我们需要一种方式来跟踪零值**不在**的位置。怎样用一个两列的表格，其中一列跟踪`row,col`（行，列）位置的非零项，另一列记录对应的值？请记住，稀疏矩阵不必仅仅包含零和一；只要大多数元素是零，无论非零元素是什么，矩阵就是稀疏的。
 - en: We also need an order in which we go about creating the sparse matrix — do we
     go row by row, storing each non-zero element as we encounter them, or do we go
     column by column? If we decide to go row by row, congratulations, you have just
     created a compressed sparse *row* matrix. If by column, you now have a compressed
     sparse *column* matrix. Conveniently, Scipy includes support for both.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还需要确定创建稀疏矩阵的顺序——是逐行处理，每遇到一个非零元素就存储它，还是逐列处理？如果决定逐行处理，恭喜你，你刚刚创建了一个压缩稀疏*行*矩阵。如果逐列处理，你现在拥有的是一个压缩稀疏*列*矩阵。方便的是，Scipy
+    支持这两种方法。
 - en: Let's have a look at how to create these matrices. First we create a simple
     matrix in Numpy.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看一下如何创建这些矩阵。首先，我们在 Numpy 中创建一个简单的矩阵。
 - en: '[PRE0]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Then we need to zero out a majority of the matrix elements, making it sparse.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们需要将大多数矩阵元素置为零，使其变为稀疏矩阵。
 - en: '[PRE2]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[PRE3]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Now we store standard matrix X as a compressed sparse row matrix. In order to
     do so, elements are traversed row by row, left to right, and entered into this
     compressed matrix representation as they encountered.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将标准矩阵 X 存储为压缩稀疏行矩阵。为此，元素按照从左到右的顺序逐行遍历，并在遇到时输入到这个压缩矩阵表示中。
 - en: '[PRE4]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '[PRE5]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Presto!
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 瞧！
 - en: And what about a compressed sparse *column* matrix? For its creation, elements
     are traversed column by column, top to bottom, and entered into the compressed
     representation as they are encountered.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么压缩稀疏*列*矩阵怎么样呢？在其创建过程中，元素按照从上到下的顺序逐列遍历，并在遇到时输入到压缩表示中。
 - en: '[PRE6]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '[PRE7]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Note the differences between the resultant sparse matrix representations, specifically
     the difference in location of the same element values.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意结果稀疏矩阵表示之间的差异，特别是相同元素值的位置差异。
 - en: As noted, many Scikit-learn algorithms accept `scipy.sparse` matrices of shape
     `[num_samples, num_features]` is place of Numpy arrays, so there is no pressing
     requirement to transform them back to standard Numpy representation at this point.
@@ -166,38 +242,57 @@
     was one of the main reasons for employing this approach). However, just for demonstration,
     here's how to convert a sparse Scipy matrix representation back to a Numpy multidimensional
     array.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 如前所述，许多 Scikit-learn 算法接受形状为 `[num_samples, num_features]` 的 `scipy.sparse`
+    矩阵作为 Numpy 数组的替代，因此目前没有迫切需要将它们转换回标准的 Numpy 表示形式。也可能存在内存限制阻止这种转换（回想一下，这是采用这种方法的主要原因之一）。但为了演示，以下是如何将稀疏的
+    Scipy 矩阵表示转换回 Numpy 多维数组。
 - en: '[PRE8]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '[PRE9]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: And what about the difference in memory requirements between the 2 representations?
     Let's go through the process again, starting off with a larger matrix in standard
     Numpy form, and then compute the memory (in bytes) that each representation uses.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么两种表示方式之间的内存需求差异呢？让我们再次通过这个过程，从一个更大的标准 Numpy 矩阵开始，然后计算每种表示方式所使用的内存（以字节为单位）。
 - en: '[PRE10]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '[PRE11]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: There you can see a significant savings in memory that the compressed matrix
     form enjoys over the standard Numpy representation, approximately 360 megabytes
     versus 800 megabytes. That's a 440 megabyte savings, with nearly no time overhead,
     given that the conversion between formats is highly optimized. Obviously these
     sparse SciPy matrices can be created directly as well, saving the interim memory-hogging
     step.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里你可以看到，压缩矩阵形式相比标准 Numpy 表示方式在内存上的显著节省，大约 360 兆字节对比 800 兆字节。这节省了 440 兆字节，并且几乎没有时间开销，因为格式之间的转换经过高度优化。显然，这些稀疏的
+    SciPy 矩阵也可以直接创建，从而节省了中间内存消耗的步骤。
 - en: Now imagine you are working on a huge dataset, and think of the memory savings
     (and associated storage and processing times) you could enjoy by properly using
     a sparse matrix format.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在想象一下你正在处理一个庞大的数据集，并考虑通过正确使用稀疏矩阵格式所能享受的内存节省（以及相关的存储和处理时间）。
 - en: '**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13))
     is a Data Scientist and the Editor-in-Chief of KDnuggets, the seminal online Data
     Science and Machine Learning resource. His interests lie in natural language processing,
@@ -205,33 +300,51 @@
     automated approaches to machine learning. Matthew holds a Master''s degree in
     computer science and a graduate diploma in data mining. He can be reached at editor1
     at kdnuggets[dot]com.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13))
+    是数据科学家和 KDnuggets 的总编辑，KDnuggets 是开创性的在线数据科学和机器学习资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络以及自动化机器学习方法。Matthew
+    拥有计算机科学硕士学位和数据挖掘研究生文凭。他的联系方式是 editor1 at kdnuggets[dot]com。'
 - en: More On This Topic
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关话题更多内容
 - en: '[Working With Sparse Features In Machine Learning Models](https://www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在机器学习模型中处理稀疏特征](https://www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html)'
 - en: '[Best Machine Learning Model For Sparse Data](https://www.kdnuggets.com/2023/04/best-machine-learning-model-sparse-data.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[最适合稀疏数据的机器学习模型](https://www.kdnuggets.com/2023/04/best-machine-learning-model-sparse-data.html)'
 - en: '[Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[广义且可扩展的最优稀疏决策树(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
 - en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理任务的数据表示](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
 - en: '[Unsupervised Disentangled Representation Learning in Class…](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[无监督解耦表示学习在类别不平衡数据集中的应用…](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)'
 - en: '[Idiot''s Guide to Precision, Recall, and Confusion Matrix](https://www.kdnuggets.com/2020/01/guide-precision-recall-confusion-matrix.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[精确度、召回率和混淆矩阵的傻瓜指南](https://www.kdnuggets.com/2020/01/guide-precision-recall-confusion-matrix.html)'
