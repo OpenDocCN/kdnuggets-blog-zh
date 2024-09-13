@@ -1,326 +1,503 @@
 - en: How To Speed Up SQL Queries Using Indexes [Python Edition]
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用索引加速 SQL 查询 [Python 版]
 - en: 原文：[https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)
 - en: '![How To Speed Up SQL Queries Using Indexes [Python Edition]](../Images/6dd7f74dcf25f10a17a48f0c17ae157a.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![如何使用索引加速 SQL 查询 [Python 版]](../Images/6dd7f74dcf25f10a17a48f0c17ae157a.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Suppose you’re sifting through the pages of a book. And you want to find the
     information that you’re looking for much faster. How’d you do that? Well, you’d
     probably look up the index of terminologies and then jump to the pages that reference
     a particular term. **Indexes in SQL** work similarly to the indexes in books.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你在翻阅一本书的页面。你想更快地找到你正在寻找的信息。你会怎么做？你可能会查找术语的索引，然后跳到引用特定术语的页面。**SQL 中的索引** 与书籍中的索引类似。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在的组织 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In most real-world systems, you’ll run queries against a database table with
     a large number of rows (think millions of rows). Queries that require a full-table
     scan through all the rows to retrieve the results will be quite slow. If you know
     that you’ll have to query information based on some of the columns often, you
     can create database indexes on those columns. This will speed up the query significantly.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在大多数实际系统中，你会对包含大量行（比如数百万行）的数据库表运行查询。需要对所有行进行全表扫描以检索结果的查询会非常慢。如果你知道经常需要基于某些列查询信息，你可以在这些列上创建数据库索引。这将显著加快查询速度。
 - en: So what’ll we learn today? We’ll learn to connect to and query a SQLite database
     in Python—using the sqlite3 module. We’ll also learn how to add indexes and see
     how it improves performance.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么今天我们将学习什么？我们将学习如何在 Python 中连接和查询 SQLite 数据库—使用 sqlite3 模块。我们还将学习如何添加索引以及如何提升性能。
 - en: To code along to this tutorial, you should have Python 3.7+ and SQLite installed
     in your working environment.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 要跟随本教程进行编码，你的工作环境中应安装 Python 3.7+ 和 SQLite。
 - en: '**Note**: The examples and sample output in this tutorial are for Python 3.10
     and SQLite3 (version 3.37.2) on Ubuntu LTS 22.04.'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意**：本教程中的示例和输出样本适用于 Ubuntu LTS 22.04 上的 Python 3.10 和 SQLite3（版本 3.37.2）。'
 - en: Connecting to a Database in Python
+  id: totrans-15
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在 Python 中连接到数据库
 - en: 'We’ll use the [built-in sqlite3 module](https://docs.python.org/3/library/sqlite3.html).
     Before we start running queries, we need to:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用 [内置的 sqlite3 模块](https://docs.python.org/3/library/sqlite3.html)。在开始运行查询之前，我们需要：
 - en: connect to the database
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 连接到数据库
 - en: create a database cursor to run queries
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建一个数据库游标来运行查询
 - en: 'To connect to the database, we’ll use the `connect()` function from sqlite3
     module. Once we have established a connection, we can call `cursor()` on the connection
     object to create a database cursor as shown:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 连接到数据库时，我们将使用来自 sqlite3 模块的 `connect()` 函数。一旦建立连接，我们可以在连接对象上调用 `cursor()` 来创建一个数据库游标，如下所示：
 - en: '[PRE0]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Here we try to connect to the database `people_db`. If the database doesn’t
     exist, running the above snippet will create the sqlite database for us.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里我们尝试连接到数据库 `people_db`。如果数据库不存在，运行上述代码片段将为我们创建 SQLite 数据库。
 - en: Creating a Table and Inserting Records
+  id: totrans-22
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 创建表格并插入记录
 - en: Now, we’ll create a table in the database and populate it with records.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们将在数据库中创建一个表格，并填充记录。
 - en: 'Let''s create a table named **people** in the `people_db` database with the
     following fields:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们在 `people_db` 数据库中创建一个名为 **people** 的表格，包含以下字段：
 - en: name
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: name
 - en: email
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: email
 - en: job
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: job
 - en: '[PRE1]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Synthetic Data Generation with Faker
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用 Faker 生成合成数据
 - en: 'We now have to insert records into the table. To do this, we’ll use the [Faker](https://faker.readthedocs.io/)—a
     Python package for synthetic data generation—installable through [pip](https://pypi.org/project/pip/):'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们必须将记录插入到表中。为此，我们将使用 [Faker](https://faker.readthedocs.io/)——一个用于合成数据生成的
+    Python 包——通过 [pip](https://pypi.org/project/pip/) 安装：
 - en: '[PRE2]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'After installing faker, you can import the `Faker` class into the Python script:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 安装 faker 后，你可以将 `Faker` 类导入到 Python 脚本中：
 - en: '[PRE3]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The next step is to generate and insert records into the people table. Just
     so we know how indexes can speed up queries, let’s insert a large number of records.
     Here, we’ll insert 100K records; set the `num_records` variable to 100000.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是生成并插入记录到 people 表中。为了让我们了解索引如何加速查询，让我们插入大量记录。在这里，我们将插入 100K 条记录；将 `num_records`
+    变量设置为 100000。
 - en: 'Then, we do the following:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们做以下操作：
 - en: Instantiate a `Faker` object `fake` and set the seed so we get reproducibility.
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 实例化一个 `Faker` 对象 `fake` 并设置种子，以确保结果的可重现性。
 - en: Get a name string using first and last names—by calling `first_name()` and `last_name()`
     on the `fake` object.
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用名字和姓氏——通过在 `fake` 对象上调用 `first_name()` 和 `last_name()`——获取一个姓名字符串。
 - en: Generate a fake domain by calling `domain_name()`.
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过调用 `domain_name()` 生成一个虚假的域名。
 - en: Use the first and last names and the domain to generate the email field.
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用名字和姓氏以及域名生成电子邮件字段。
 - en: Get a job for each individual record using `job()`.
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 `job()` 为每个记录获取一个工作。
 - en: 'We generate and insert records into the `people` table:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们生成并插入记录到 `people` 表中：
 - en: '[PRE4]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Now the main.py file has the following code:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在 main.py 文件包含以下代码：
 - en: '[PRE5]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Run this script—once—to populate the table with `num_records` number of records.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行这个脚本——一次——以用 `num_records` 数量的记录填充表格。
 - en: Querying the Database
+  id: totrans-46
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 查询数据库
 - en: Now that we have the table with 100K records, let’s run a sample query on the
     `people` table.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有了包含 100K 记录的表格，让我们对 `people` 表运行一个示例查询。
 - en: 'Let’s run a query to:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们运行一个查询来：
 - en: get the names and emails of the records where the job title ‘Product manager’,
     and
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 获取工作职位为 ‘Product manager’ 的记录的姓名和电子邮件，
 - en: limit the query results to 10 records.
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将查询结果限制为 10 条记录。
 - en: We’ll use the default timer from the time module to get the approximate execution
     time for the query.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用 time 模块的默认计时器来获取查询的大致执行时间。
 - en: '[PRE6]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: 'Here’s the output:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出结果：
 - en: '[PRE7]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'You can also invoke the SQLite command-line client by running `sqlite3 db_name`
     at the command line:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以通过在命令行中运行 `sqlite3 db_name` 来调用 SQLite 命令行客户端：
 - en: '[PRE8]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'To get the list of indexes, you can run `.index`:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 要获取索引列表，你可以运行 `.index`：
 - en: '[PRE9]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: As there are no indexes currently, no index will be listed.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于当前没有索引，所以不会列出任何索引。
 - en: 'You can also check the query plan like so:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以这样检查查询计划：
 - en: '[PRE10]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Here the query plan is to *scan all the rows* which is inefficient.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里的查询计划是 *扫描所有行*，这效率较低。
 - en: Creating an Index on a Specific Column
+  id: totrans-63
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在特定列上创建索引
 - en: 'To create a database index on a particular column you can use the syntax:'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在特定列上创建数据库索引，你可以使用以下语法：
 - en: '[PRE11]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Say we need to frequently look up the records of individuals with a particular
     job title. It’d help to create an index `people_job_index` on the job column:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们需要频繁查找具有特定职位名称的个人记录。创建一个 `people_job_index` 索引在 job 列上会有所帮助：
 - en: '[PRE12]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Even though creating the index takes this long, it's a one-time operation. You
     will still get substantial speed-up when running multiple queries.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管创建索引需要这么长时间，但这只是一次性操作。当运行多个查询时，你仍然会获得显著的加速。
 - en: 'Now if you run `.index` at the SQLite command-line client, you’ll get:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在如果你在 SQLite 命令行客户端运行 `.index`，你将得到：
 - en: '[PRE13]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Querying the Database with Index
+  id: totrans-71
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用索引查询数据库
 - en: 'If you now look at the query plan, you should be able to see that we now search
     `people` table using index `people_job_index` on the **job** column:'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你现在查看查询计划，你应该能够看到我们现在使用 **job** 列上的索引 `people_job_index` 来搜索 `people` 表：
 - en: '[PRE14]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'You can re-run sample_query.py. Only modify the `print()` statement and see
     how long it takes for the query to run now:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以重新运行 sample_query.py。只需修改 `print()` 语句，看看查询现在需要多长时间：
 - en: '[PRE15]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'Here’s the output:'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是输出结果：
 - en: '[PRE16]'
+  id: totrans-77
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: We see that the query now takes about 167.179 microseconds to execute.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们看到查询现在执行大约需要 167.179 微秒。
 - en: Performance Improvement
+  id: totrans-79
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 性能改进
 - en: For our sample query, querying with index is about 2.68 times faster. And we
     get a percentage speedup of 62.71% in execution times.
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于我们的示例查询，使用索引查询大约快 2.68 倍。我们在执行时间上获得了 62.71% 的百分比加速。
 - en: 'You can also try running a few more queries: queries that involve filtering
     on the job column and see the performance improvement.'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还可以尝试运行更多查询：涉及在 job 列上进行过滤的查询，并查看性能改进。
 - en: 'Also note: Because we have created an index only on the job column, if you
     are running queries that involve other columns, the queries *will not* run any
     faster than without index.'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 另外请注意：由于我们仅在工作列上创建了索引，如果你运行涉及其他列的查询，查询的速度*不会*比没有索引时快。
 - en: Wrap-Up and Next Steps
+  id: totrans-83
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 总结与下一步
 - en: I hope this guide helped you understand how creating database indexes—on frequently
     queried columns—can significantly speed up queries. This is an introduction to
     database indexes. You can also create multi-column indexes, multiple indexes for
     the same column, and much more.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望本指南帮助你了解如何通过在**频繁查询的列**上创建数据库索引来显著提高查询速度。这是关于数据库索引的介绍。你还可以创建多列索引、同一列的多个索引等。
 - en: You can find all the code used in this tutorial in [this GitHub repository](https://github.com/balapriyac/sql-index-intro).
     Happy coding!
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在[这个GitHub仓库](https://github.com/balapriyac/sql-index-intro)找到本教程中使用的所有代码。祝编程愉快！
 - en: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** is a developer
     and technical writer from India. She likes working at the intersection of math,
     programming, data science, and content creation. Her areas of interest and expertise
@@ -328,33 +505,49 @@
     writing, coding, and coffee! Currently, she''s working on learning and sharing
     her knowledge with the developer community by authoring tutorials, how-to guides,
     opinion pieces, and more.'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过编写教程、操作指南、观点文章等与开发者社区分享她的知识。'
 - en: More On This Topic
+  id: totrans-87
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Database Optimization: Exploring Indexes in SQL](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据库优化：探索SQL中的索引](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)'
 - en: '[Python Vector Databases and Vector Indexes: Architecting LLM Apps](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python向量数据库和向量索引：架构LLM应用](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)'
 - en: '[4 Useful Intermediate SQL Queries for Data Science](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中4个有用的中级SQL查询](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)'
 - en: '[5 Tricky SQL Queries Solved](https://www.kdnuggets.com/2020/11/5-tricky-sql-queries-solved.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5个棘手的SQL查询解决方案](https://www.kdnuggets.com/2020/11/5-tricky-sql-queries-solved.html)'
 - en: '[Solving 5 Complex SQL Problems: Tricky Queries Explained](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[解决5个复杂SQL问题：棘手查询解释](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)'
 - en: '[KDnuggets News, December 7: Top 10 Data Science Myths Busted • 4…](https://www.kdnuggets.com/2022/n47.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，12月7日：揭示数据科学的十大误区 • 4…](https://www.kdnuggets.com/2022/n47.html)'
