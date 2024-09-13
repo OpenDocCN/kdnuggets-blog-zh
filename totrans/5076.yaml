@@ -1,55 +1,69 @@
 - en: Integrating Python and R into a Data Analysis Pipeline, Part 1
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2015/10/integrating-python-r-data-analysis-part1.html](https://www.kdnuggets.com/2015/10/integrating-python-r-data-analysis-part1.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '**By Chris Musselle and Kate Ross-Smith,** ([Mango Solutions](http://www.mango-solutions.com))'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '**For a conference in the R language, EARL London 2015 saw a surprising number
     of discussions about Python. I like to think that at least some of this was to
     do with the fact that the day before the conference, we ran a 3-hour workshop
     outlining various strategies for integrating Python and R.**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: '**This is the first in a series of three blog posts that:'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: outline the basic strategy for integrating Python and R;
+  id: totrans-5
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: run through the different steps involved in this process; and
+  id: totrans-6
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: give a real example of how and why you would want to do this.
+  id: totrans-7
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'This post kicks everything off by:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: covering the reasons why you may want to include both languages in a pipeline;
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: introducing ways of running R and Python from the command line; and
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: showing how you can accept inputs as arguments and write outputs to various
     file formats.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '![python-r](../Images/cdbbdc8a1252db0dcf768a5e6fd70ecc.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
 - en: Why “And” not “Or”?
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -60,40 +74,48 @@
     been one of educational background: statisticians have preferred the approach
     that R takes, whereas programmers have made Python their language of choice. However,
     with the growing breed of data scientists, this distinction blurs:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: 'Data Scientist (n.): Person who is better at statistics than any software engineer
     and better at software engineering than any statistician. — [twitter @josh_wills](https://twitter.com/josh_wills/status/198093512149958656)'
+  id: totrans-15
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: 'With the wealth of distinct library resources provided by each language, there
     is a growing need for data scientists to be able to leverage their relative strengths.
     For example:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: 'Python tends to outperform R in such areas as:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: '**Web scraping and crawling**: though *rvest* has simplified web scraping and
     crawling within R, Python’s *beautifulsoup* and *Scrapy* are more mature and deliver
     more functionality.'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**Database connections**: though R has a large number of options for connecting
     to databases, Python’s *sqlachemy* offers this in a single package and is widely
     used in production environments.'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Whereas R outperforms Python in such areas as:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: '**Statistical analysis options**: though Python’s combination of *Scipy*, *Pandas*
     and *statsmodels* offer a great set of statistical analysis tools, R is built
     specifically around statistical analysis applications and so provides a much larger
     collection of such tools.'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -101,6 +123,7 @@
     all recently extended the use of Python graphics onto web browsers, but getting
     an example up and running using *shiny* and *shiny dashboard* in R is faster,
     and often requires less code.'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -108,111 +131,139 @@
     language of choice for any application may come down to prior knowledge and experience.
     For some applications – especially in prototyping and development – it is faster
     for people to use the tool that they already know.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: Flat File “Air Gap” Strategy
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: In this series of posts we are going to consider the simplest strategy for integrating
     the two languages, and step though it with some examples. Using a flat file as
     an air gap between the two languages requires you to do the following steps.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: Refactor your R and Python scripts to be executable from the command line and
     accept command line arguments.
+  id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Output the shared data to a common file format.
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: Execute one language from the other, passing in arguments as required.
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
 - en: '**Pros**'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: Simplest method, so commonly the quickest
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Can view the intermediate outputs easily
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Parsers already exist for many common file formats: CSV, JSON, YAML'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**Cons**'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: Need to agree upfront on a common schema or file format
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Can become cumbersome to manage intermediate outputs and paths if the pipeline
     grows.
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Reading and writing to disk can become a bottleneck if data becomes large.
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-38
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Integrating ChatGPT Into Data Science Workflows: Tips and Best Practices](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Cutting Down Implementation Time by Integrating Jupyter and KNIME](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Optimizing Data Analytics: Integrating GitHub Copilot in Databricks](https://www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Integrating Generative AI in Content Creation](https://www.kdnuggets.com/integrating-generative-ai-in-content-creation)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Monitor Model Performance in the MLOps Pipeline with Python](https://www.kdnuggets.com/2023/05/monitor-model-performance-mlops-pipeline-python.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Building a Formula 1 Streaming Data Pipeline With Kafka and Risingwave](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)**'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建 Formula 1 流数据管道与 Kafka 和 Risingwave](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)'
