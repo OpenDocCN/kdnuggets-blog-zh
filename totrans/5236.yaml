@@ -1,16 +1,20 @@
 - en: How to Execute R and Python in SQL Server with Machine Learning Services
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2018/06/microsoft-azure-machine-learning-r-python-sql-server.html](https://www.kdnuggets.com/2018/06/microsoft-azure-machine-learning-r-python-sql-server.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
 - en: '**By [Kyle Weller](https://www.linkedin.com/in/ai-is-the-future/), Microsoft
     Azure Machine Learning**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: Did you know that you can write R and Python code within your T-SQL statements? [Machine
@@ -21,9 +25,11 @@
     procedures making them accessible in your ETL processes or to any application.
     Train and store machine learning models in your database bringing intelligence
     to where your data lives.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '![Intelligent data](../Images/6327fa3e05e1afd562d076a88a58e7dc.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
 - en: You can install and run any of the latest open source R/Python packages to build
@@ -32,33 +38,40 @@
     high-performance algorithms in Microsoft's [RevoScaleR](https://docs.microsoft.com/en-us/machine-learning-server/r-reference/revoscaler/revoscaler) and [RevoScalePy](https://docs.microsoft.com/en-us/sql/advanced-analytics/python/what-is-revoscalepy?view=sql-server-2017) APIs.
     Using these with the latest innovations in the open source world allows you to
     bring unparalleled selection, performance, and scale to your applications.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
 - en: If you are excited to try out SQL Server Machine Learning Services, check out
     the hands on tutorial below. **If you do not have Machine Learning Services installed
     in SQL Server,you will first want to follow the getting started tutorial I published
     here:**
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: How-To Tutorial
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'In this tutorial, I will cover the basics of how to Execute R and Python in
     T-SQL statements. If you prefer learning through videos, I also published the
     tutorial on YouTube:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: Basics
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'Open up SQL Server Management Studio and make a connection to your server.
     Open a new query and paste this basic example: (*While I use Python in these samples,
     you can do everything with R as well*)'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: '`EXEC sp_execute_external_script @language = N''Python'', @script = N''print(3+4)''`'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: Sp_execute_external_script is a special system stored procedure that enables
@@ -66,45 +79,55 @@
     us to choose between Python and R. There is a "script" parameter where we can
     paste R or Python code. If you do not see an output print 7, go back and review
     the setup steps in [this article](https://blogs.msdn.microsoft.com/mlserver/2018/05/18/getting-started-with-machine-learning-services-in-sql-server/).
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: Parameter Introduction
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'Now that we discussed a basic example, let''s start adding more pieces:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: '`EXEC sp_execute_external_script  @language =N''Python'', @script = N'' OutputDataSet = InputDataSet;
     '', @input_data_1 =N''SELECT 1 AS Col1'';`'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: Machine Learning Services provides more natural communications between SQL and
     R/Python with an input data parameter that accepts any SQL query. The input parameter
     name is called "input_data_1".
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: 'You can see in the python code that there are default variables defined to
     pass data between Python and SQL. The default variable names are "OutputDataSet"
     and "InputDataSet" You can change these default names like this example:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: '`EXEC sp_execute_external_script  @language =N''Python'', @script = N'' MyOutput = MyInput;
     '', @input_data_1_name = N''MyInput'', @input_data_1 =N''SELECT 1 AS foo'', @output_data_1_name =N''MyOutput'';`'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: As you executed these examples, you might have noticed that they each return
     a result with "(No column name)"? You can specify a name for the columns that
     are returned by adding the WITH RESULT SETS clause to the end of the statement
     which is a comma separated list of columns and their datatypes.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: '`EXEC sp_execute_external_script  @language =N''Python'', @script=N'' MyOutput = MyInput;
     '', @input_data_1_name = N''MyInput'', @input_data_1 =N'' SELECT 1 AS foo, 2 AS bar
     '', @output_data_1_name =N''MyOutput'' WITH RESULT SETS ((MyColName int, MyColName2 int));`'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: Input/Output Data Types
+  id: totrans-22
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -113,38 +136,46 @@
     python relying on the [Python Pandas package](https://pypi.org/project/pandas/).
     Your output from Python back to SQL also needs to be in a Pandas Dataframe object.
     If you need to convert scalar values into a dataframe here is an example:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: '`EXEC sp_execute_external_script  @language =N''Python'', @script=N'' import pandas as pd
     c = 1/2 d = 1*2 s = pd.Series([c,d]) df = pd.DataFrame(s) OutputDataSet = df ''`'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: 'Variables c and d are both scalar values, which you can add to a pandas Series
     if you like, and then convert them to a pandas dataframe. This one shows a little
     bit more complicated example, go read up on the [python pandas package documentation](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.html) for
     more details and examples:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: '`EXEC sp_execute_external_script  @language =N''Python'', @script=N'' import pandas as pd
     s = {"col1": [1, 2], "col2": [3, 4]} df = pd.DataFrame(s) OutputDataSet = df ''`'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: You now know the basics to execute Python in T-SQL!
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: Did you know you can also write your R and Python code in your favorite IDE
     like RStudio and Jupyter Notebooks and then remotely send the execution of that
     code to SQL Server? Check out these documentation links to learn more: [https://aka.ms/R-RemoteSQLExecution
     https://aka.ms/PythonRemoteSQLExecution](https://aka.ms/R-RemoteSQLExecution)
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: Check out the [SQL Server Machine Learning Services](https://aka.ms/SQLMLDocs) documentation
     page for more documentation, samples, and solutions. Check out these E2E [tutorials
     on github](https://aka.ms/SQLMLDocs) as well.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: Would love to hear from you! Leave a comment below to ask a question, or start
     a discussion!
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio:** [Kyle Weller](https://www.linkedin.com/in/ai-is-the-future/) is a
@@ -156,74 +187,96 @@
     for the product. He now works on Azure machine learning products focusing on bringing
     intelligence to where data lives. This includes SQL Server’s new Machine Learning
     Services that allow R + Python execution in SQL.'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: '[Comparing Machine Learning as a Service: Amazon, Microsoft Azure, Google Cloud
     AI](https://www.kdnuggets.com/2018/01/mlaas-amazon-microsoft-azure-google-cloud-ai.html)'
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Choosing the Right Metric for Evaluating Machine Learning Models — Part 2](https://www.kdnuggets.com/2018/06/right-metric-evaluating-machine-learning-models-2.html)'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Which Database is best for an Analyst?](https://www.kdnuggets.com/2015/12/database-best-for-analyst.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-37
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[High Availability SQL Server Docker Containers in Kubernetes](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[How ML Model Explainability Accelerates the AI Adoption Journey for…](https://www.kdnuggets.com/2022/07/ml-model-explainability-accelerates-ai-adoption-journey-financial-services.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[25 Free Books to Master SQL, Python, Data Science, Machine…](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[25 本免费书籍，助你掌握 SQL、Python、数据科学、机器学习和自然语言处理](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)'
 - en: '[KDnuggets News, September 21: 7 Machine Learning Portfolio Projects…](https://www.kdnuggets.com/2022/n37.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，9月21日：7 个机器学习作品集项目](https://www.kdnuggets.com/2022/n37.html)'
 - en: '[SQL and Python Interview Questions for Data Analysts](https://www.kdnuggets.com/2023/02/sql-python-interview-questions-data-analysts.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据分析师的 SQL 和 Python 面试问题](https://www.kdnuggets.com/2023/02/sql-python-interview-questions-data-analysts.html)'
 - en: '[Collection of Guides on Mastering SQL, Python, Data Cleaning, Data…](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[掌握 SQL、Python、数据清理、数据整理和探索性数据分析的指南合集](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)'
