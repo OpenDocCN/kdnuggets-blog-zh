@@ -1,44 +1,55 @@
 - en: How causal inference lifts augmented analytics beyond flatland
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2021/08/causal-inference-augmented-analytics-beyond-flatland.html](https://www.kdnuggets.com/2021/08/causal-inference-augmented-analytics-beyond-flatland.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '**By [Michael Klaput](https://www.linkedin.com/in/michael-klaput-67375385),
     Chief Science Officer and Co-Founder at Kausa**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/d6a1b737c9bf044bc70dc03c45304f61.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: 'If the world was two-dimensional, life would be very odd indeed. Think about
@@ -52,6 +63,7 @@
     business, the quality of your decision-making is inevitably based on the quality
     of your data insights. However, in too many companies, those ’insights’ are effectively
     two-dimensional: flat, impractical, and hopelessly inconclusive.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: Businesses usually measure their performance in terms of a KPI. It has thus
@@ -62,6 +74,7 @@
     to low-dimensional explanations. In this article, we will give two arguments why
     this is the case based on bad scaling and unrealistic assumptions made in most
     predictive models.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: But why bother? It is not the well-performing model that improves business performance.
@@ -71,65 +84,94 @@
     in your data like needles in a haystack. This far from trivial problem motivated
     a relatively young branch of data analytics has been coined augmented analytics
     and has been pushed in a recent Gartner report [[1](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#7342acb5e89f)].
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 但为何要费心呢？并不是表现良好的模型提升了业务绩效。实际上，改善业务的唯一途径是通过决策，这最终应该由人类来完成。数据分析在业务中的目标应该是通过揭示洞察来为决策提供信息。不幸的是，这些洞察就像针一样隐藏在数据中。这一复杂的问题促使了一个相对年轻的数据分析分支——增强分析，并在近期的Gartner报告中得到了推动[[1](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#7342acb5e89f)]。
 - en: '![](../Images/116fd95d11ab92f5bf7081b935807c08.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/116fd95d11ab92f5bf7081b935807c08.png)'
 - en: '*Figure 1\. Cover of Flatland: a romance of many dimensions / with illustrations
     by the author, A Square. By Edwin Abbott Abbott (1838-1926). Published: London:
     Seeley & Co., 1884\. *EC85 Ab264 884f Houghton Library, Harvard University*'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图1\. 《平面国的封面：多维度的浪漫 / 作者A Square插图，作者：爱德温·阿博特（1838-1926）。出版：伦敦：Seeley & Co.，1884年\.
+    *EC85 Ab264 884f 哈佛大学豪顿图书馆*'
 - en: We want to challenge the perception that predictive models should be the default
     option used to inform business decisions. They introduce a costly detour in the
     search for insights and might even render it practically infeasible. We will highlight
     in a simple problem that predictive modeling can offer only little aside from
     a massive overhead. Instead, we will try to mimic how a business analyst would
     operate. This will naturally bring us to methods from causal inference.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们想要挑战一种观念，即预测模型应该是用于指导业务决策的默认选项。它们在寻找洞察时引入了昂贵的绕行，甚至可能使其在实际操作中不可行。我们将在一个简单问题中突出显示，预测建模除了大量的开销外几乎无法提供什么。相反，我们将尝试模仿业务分析师的操作。这将自然引导我们到因果推断的方法上。
 - en: The Impactful Change
+  id: totrans-17
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 有影响的变化
 - en: 'We will consider the problem of diagnosing errors in regression models in big
     data scenarios. Most of the readers should have encountered the following scenario:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将考虑在大数据场景下诊断回归模型错误的问题。大多数读者应该遇到过以下场景：
 - en: '*Figure 2\. Key performance indicator actual vs. prediction using a single
     model.*'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图2\. 使用单一模型的关键绩效指标实际值与预测值对比。*'
 - en: Clearly, there has been an impactful change in the KPI that seems to persist
     for the time being. On the technical side, a reasonable reaction would be to retrain
     your predictive model on the data after the change point. Do you agree? If so,
     maybe keep this in mind.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 显然，KPI发生了显著变化，这种变化似乎暂时会持续。从技术角度来看，一个合理的反应是对变化点之后的数据重新训练你的预测模型。你同意吗？如果同意，也许可以记住这一点。
 - en: '*Figure 3\. Key performance indicator actual vs. prediction using two models.*'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图3\. 使用两个模型的关键绩效指标实际值与预测值对比。*'
 - en: The good news is that your model seems to be accurate. The bad news is that
     your manager will inevitably ask what happened to the KPI. But do not be afraid.
     This is an ideal situation for proving your value to the company. Can you identify
     the reason behind this change? Can you uncover insights that will inform the correct
     decision?
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 好消息是你的模型似乎很准确。坏消息是你的经理将不可避免地询问KPI发生了什么。但不要害怕。这是证明你对公司价值的理想情况。你能识别出这种变化背后的原因吗？你能揭示出有助于做出正确决策的洞察吗？
 - en: The Quest of Why
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 为什么的探究
 - en: 'Let''s say your company’s dataset looks something like this:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你公司的数据集大致如下所示：
 - en: '[PRE0]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '*Table 1\. Sample company data.*'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '*表1\. 示例公司数据。*'
 - en: 'Let us further assume that you are dealing with the simplest case: The KPI
     values of data points before and after the jump are perfectly fit using a linear
     regression model. Here, you are dealing with categorical data which you need to
@@ -137,146 +179,213 @@
     one-hot encoding of categorical values: for each category value, you introduce
     a feature that can be either true or false. For example, in the dataset above
     you would define the feature'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你正处理最简单的情况：使用线性回归模型完美拟合了跳跃前后的KPI值。在这里，你需要适当地处理分类数据以用于回归。标准方法是对分类值进行独热编码：对于每个类别值，你引入一个特征，该特征可以是真或假。例如，在上述数据集中，你会定义特征
 - en: '*customer_country = **Germany*.'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '*customer_country = **德国*。'
 - en: To finally enable feature selection, it is necessary to use a form of regularisation.
     Here,  you will use lasso regularisation (with ten-fold cross-validation).
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 要最终实现特征选择，有必要使用某种形式的正则化。在这里，你将使用Lasso正则化（通过十折交叉验证）。
 - en: After training two lasso regularised linear regression models, one before and
     one after the jump,  you can look at a ranked list of feature weight differences
     between these.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 在训练了两个Lasso正则化的线性回归模型后，一个是在跳跃之前，另一个是在跳跃之后，你可以查看这两个模型之间特征权重差异的排名列表。
 - en: '[PRE1]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '*Figure 4\. Feature weights using one-hot encoding.*'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图4\. 使用独热编码的特征权重。*'
 - en: It looks like subgroups such as android customers or customers older than 46+
     performed differently before and after the jump. Great, looks like you found the
     reasons for the KPI jump … or did you?
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 看起来像是安卓用户或年龄大于46岁的用户在跳跃前后表现不同。很好，看起来你找到了KPI跳跃的原因……或者说你找到了吗？
 - en: The Curse of Dimensionality
+  id: totrans-34
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 维度诅咒
 - en: 'In fact, this is a more non-trivial situation than we have appreciated so far.
     Imagine presenting this to the KPI owner. They will be very happy that you have
     delivered them reasons for the KPI change, and they will now be wondering about
     what to do based on this information. It will automatically lead them to questions
     like the following:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，这比我们目前所认识的情况要复杂得多。想象一下将这些信息呈现给KPI负责人。他们会非常高兴你为KPI变化提供了理由，但他们现在会考虑如何根据这些信息采取行动。这将自动引发他们提出如下问题：
 - en: “*Are the actual drivers for the KPI change all android-tv customers, all customers
     older 46, and all customers who made a purchase before? Maybe it could be the
     repeat customers older than 46 and the android-tv customers… or the Android-TV
     customers who purchased something before? Worse, are there maybe other combinations
     of features which you have missed?*”
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: “*KPI变化的实际驱动因素是所有安卓电视用户、所有年龄超过46岁的客户以及所有之前进行过购买的客户吗？也许可能是年龄超过46岁的重复客户和安卓电视用户……或者是之前购买过东西的安卓电视用户？更糟糕的是，是否还有其他你遗漏的特征组合？*”
 - en: '![](../Images/61163868cd07047afeb209817055d2cd.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/61163868cd07047afeb209817055d2cd.png)'
 - en: '*Figure 5\. Kausa - Because you know better.*'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图5\. Kausa - 因为你知道得更多。*'
 - en: Therefore, to be able to more confidently answer such questions, you would have
     to repeat your regression analysis with more complex one-hot encoded features
     … now representing finer subgroups than before. Thereby, you are searching among
     deeper subgroups of the dataset, see Figure 6, with new features like
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，为了更有信心地回答这些问题，你需要重复你的回归分析，使用更复杂的独热编码特征……现在表示比之前更细的子组。因此，你正在搜索数据集中的更深层次子组，见图6，新的特征如：
 - en: '*customer_age = 46+ and first_order_made = yes, customer_age = 18−−21 and first_order_made
     = no.*'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '*customer_age = 46+ 和 first_order_made = yes，customer_age = 18−−21 和 first_order_made
+    = no。*'
 - en: Again these subgroups enter via one-hot encoding. This is obviously problematic,
     as you are now falling victim to the *curse of dimensionality*. It is the era
     of big data, and you just increased your number of features by a factorial amount [[2](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#7558d6345a50)]. A
     piece of code that can be used to generate these refined subgroups is
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些子组通过独热编码再次进入。这显然是一个问题，因为你现在陷入了*维度诅咒*。这是大数据时代，你刚刚通过阶乘量增加了特征的数量[[2](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#7558d6345a50)]。可以用来生成这些精细子组的代码如下：
 - en: '[PRE2]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![](../Images/130e2a27e777769c746adb14d8cb937a.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/130e2a27e777769c746adb14d8cb937a.png)'
 - en: '*Figure 6\. Subgroup depth.*'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图6\. 子组深度。*'
 - en: Remember that linear regression is based on an inversion of a covariance matrix
     among all features - which scales
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 请记住，线性回归基于所有特征的协方差矩阵的逆——这会随特征的增加而扩展。
 - en: '*O(d³),*'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '*O(d³)，*'
 - en: with d being the number of features, i.e. in our case the number of possible
     subgroups. This introduces significant opportunity cost in comparison to non-predictive
     feature selection methods - as will be discussed later.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中d是特征的数量，即在我们这种情况下，是可能的子组数量。这相较于非预测性特征选择方法引入了显著的机会成本——这一点将在后面讨论。
 - en: '[PRE3]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '*Figure 7\. Feature weights of intersections using one-hot encoding.*'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图7\. 使用独热编码的交集特征权重。*'
 - en: After some time, your computation finishes. While your earlier computation took
     just 0.1 seconds, searching for third-order features already took over a minute.
     But it seems to be worth it. You find that the number of groups driving the KPI
     change was actually one, as in Figure 7\. Presenting this insight to your manager,
     he could quickly point to an update that directly affected the subgroup you reported.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 一段时间后，你的计算完成了。虽然之前的计算只需0.1秒，但寻找三阶特征却花费了超过一分钟。不过这似乎是值得的。你发现，驱动KPI变化的群体实际上是一个，如图7所示。向你的经理展示这一洞察后，他很快就能指出一个直接影响你报告的子群体的更新。
 - en: By refining the subgroup, you could render it actionable
+  id: totrans-51
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 通过精细化子群体，你可以使其具有可操作性。
 - en: While your regression approach finally worked out - it took extremely long to
     compute, resulting in opportunity cost to your company. In a realistic scenario
     of big data, your approach would have failed horribly. Additionally, original
     sets containing only shallow subgroups painted an incorrect picture. Only after
     refining sets and enormous computational effort could you pinpoint the actual
     subgroup that drove the jump in the KPI.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然你的回归方法最终奏效了——但计算时间极长，导致了公司机会成本。在大数据的现实场景中，你的方法可能会失败得很惨。此外，包含仅浅层子群体的原始集合描绘了一个不正确的图景。只有在经过精细化集合和大量计算工作之后，你才能确定导致KPI跳跃的实际子群体。
 - en: 'This begs several questions:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 这引出了几个问题：
 - en: Do you actually need to learn a predictive model to answer why the jump happened?
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你是否真的需要学习预测模型来回答为什么会发生跳跃？
 - en: How can you reduce opportunity costs?
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你如何减少机会成本？
 - en: How can you find subgroups at the appropriate level of granularity?
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你如何找到适当粒度的子群体？
 - en: Is it economical to retrain models at every jump for this piece of information?
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为了获得这些信息，每次跳跃时重新训练模型是否经济？
 - en: While answering all these questions is out-of-scope for this post, we will offer
     a new point-of-view that can help to resolve these issues. For this, we will develop
     an approach to feature selection that improves on linear regression.  Augmented
     analytics depends on it.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然回答所有这些问题超出了本文的范围，我们将提供一种新的观点，这可以帮助解决这些问题。为此，我们将开发一种改进线性回归的特征选择方法。增强分析依赖于此。
 - en: Learning from Business Analysts and Causal Inference
+  id: totrans-59
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 从业务分析师和因果推断中学习
 - en: Let’s take a step back… what happened here? You started off with a predictive
     model, and you saw that it could neither predict nor explain the observed jump
     in the KPI. Why is that? Because predictive models are unable to capture reality. They
@@ -285,16 +394,20 @@
     Data before and after the jump was generated under different conditions. You even
     intuitively made use of this fact, when you used two separate predictive models,
     which (after some tricks) helped us to uncover the reason for that jump.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们退一步……这里发生了什么？你从一个预测模型开始，发现它既不能预测也不能解释KPI的观察到的跳跃。这是为什么呢？因为预测模型无法捕捉现实。它们假设所有数据是独立同分布的[[3](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#c72ace9e8427)]。然而，在实际应用中，这通常是不正确的，正如这个例子所示。跳跃前后的数据是在不同条件下生成的。你甚至直观地利用了这一点，当你使用两个单独的预测模型时，这（经过一些技巧）帮助我们揭示了跳跃的原因。
 - en: As you had to give up on prediction and ultimately did not predict anything,
     what did the prediction models actually do for you? If you think about it, the
     key is that you are not interested in predicting the KPI as a function of all
     possible subgroups - you are interested in subgroups affecting the KPI! Thus,
     to search for insights at deeper levels, you have to get away from predictive
     modeling. This is where the data scientist can learn from the business analyst.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 既然你不得不放弃预测，并且最终没有做出任何预测，那么预测模型实际上对你有什么帮助呢？如果你思考一下，关键在于你并不关心所有可能子群体对KPI的预测，而是关心子群体对KPI的影响！因此，要在更深层次上寻找洞察，你必须远离预测建模。这正是数据科学家可以从业务分析师那里学习的地方。
 - en: A business analyst searches for insights through dashboards containing meaningful
     summaries of data. Instead of correlating all features together, as in the regression
     approach above, the business analyst will try to pinpoint what changes happened
@@ -302,33 +415,49 @@
     filtering the data for different conditions. Most importantly, the business analyst
     will never have to look at all features at once. How do you teach a machine to
     do that? How can you learn from a business analyst?
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 业务分析师通过包含有意义的数据总结的仪表板来寻找洞察。与上述回归方法中将所有特征关联在一起不同，业务分析师会尝试通过迭代地过滤数据以不同条件来确定数据中发生了什么变化（如均值、直方图或指标）。最重要的是，业务分析师无需一次查看所有特征。你如何教机器做到这一点？你如何从业务分析师那里学习？
 - en: Let us formalise the above in mathematical notation. Let X be a subgroup, e.g.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们用数学符号来形式化上述内容。设 X 为一个子组，例如
 - en: '*X = customer_age = 46+ and first_order_made = yes*'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '*X = customer_age = 46+ 和 first_order_made = yes*'
 - en: and
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 和
 - en: '*f(KPI[before], KPI[after])*'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '*f(KPI[before], KPI[after])*'
 - en: some summary of the KPI distributions before and after the jump in the KPI.
     Then, you introduce conditional summaries
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 对 KPI 跳跃前后的 KPI 分布做一些总结。然后，你引入条件总结
 - en: '*f(KPI[before], KPI[after]* ∣ *X)*'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '*f(KPI[before], KPI[after]* ∣ *X)*'
 - en: where you compute summaries of subsets of KPI values for which X is true. All
     that our method needs to do now, is to compute conditional summaries for each
     subgroup and rank them. I want to stress, that in practice these abstract summaries
     can be objects as means, histograms etc.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 你计算满足 X 为真的 KPI 值子集的总结。我们的方法现在只需要计算每个子组的条件总结并进行排名。我想强调的是，在实践中，这些抽象的总结可以是均值、直方图等对象。
 - en: The procedure detailed above is actually a common technique from causal inference [[4](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#8dfc0806606a)].
     You thereby implicitly changed our point of view. Now, you consider the mysterious
     jump in the KPI as an intervention that is now assumed to have happened due to
@@ -337,39 +466,58 @@
     in pricing, or, as in our case, a software update. You are thus explicitly *lifting *the
     wrong assumption that all data is independently and identically distributed. You
     are now searching for subgroups that are *causal* to the change in KPI.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述过程实际上是因果推断中的一种常见技术 [[4](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#8dfc0806606a)]。因此，你隐含地改变了我们的视角。现在，你将
+    KPI 中神秘的跳跃视为现在假定由于外部或内部 *处理* 发生的干预。外部处理的例子可能是节假日，内部处理可能是广告活动、定价变化，或如我们案例中的软件更新。因此，你明确地
+    *提升* 了所有数据是独立且同分布的错误假设。你现在正在寻找对 KPI 变化 *因果* 的子组。
 - en: The Quest of Why, Revisited
+  id: totrans-71
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 《为何探寻，再次回顾》
 - en: Now that you have a model of how a business analyst operates, let us proceed
     with the actual implementation. For now, you will use a standard summary used
     in causal inference called Conditional Average Treatment Effect (CATE) [[5](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#cc6447b58903)],
     for which our summary becomes
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你已经有了一个业务分析师如何操作的模型，让我们继续实际实施。现在，你将使用一种在因果推断中使用的标准总结，称为条件平均处理效应 (CATE) [[5](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#cc6447b58903)]，我们的总结变成了
 - en: '*f(KPI[before], KPI[after]* ∣ *X) = E*[*KPI[after]* ∣ *X*] *− E*[*KPI[before]*
     ∣ *X*]'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '*f(KPI[before], KPI[after]* ∣ *X) = E*[*KPI[after]* ∣ *X*] *− E*[*KPI[before]*
+    ∣ *X*]'
 - en: 'The CATE corresponds to the change in the mean of the KPI, conditioned on that
     subgroup X is true. Ranking by magnitude then gives us the correct subgroup as
     a result. To detect multiple subgroups, we repeat this procedure after removing
     the best performing subgroup after each iteration:'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: CATE 对应于 KPI 均值的变化，条件是该子组 X 为真。按大小排名然后给出正确的子组作为结果。为了检测多个子组，我们在每次迭代后移除表现最好的子组后重复这一过程：
 - en: '[PRE4]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '*Figure 8\. CATE Scores using the one-hot encoding of intersections.*'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 8\. 使用交集的独热编码的 CATE 分数。*'
 - en: This takes a fraction of the cost of our predictive model. The computation for
     first-order features took just 0.02 seconds, searching for third-order features
     took less than a  second.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 这只需要我们预测模型成本的一小部分。计算一阶特征仅需 0.02 秒，而搜索三阶特征则不到一秒。
 - en: 'Let us take a step back and compare this approach with the earlier one based
     on regression and what their respective objectives are. Feature selection via
     regression answers the question: ” Which subgroups best predict your KPI?”. While
@@ -378,13 +526,16 @@
     of CATE with the optimised *sklearn* implementation of linear regression in Figure
     9, we find that they lie order of magnitudes apart. This makes it clear that these
     questions, while superficially similar, have fundamental differences.'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
 - en: '*Figure 9\. Log-runtime over subgroup depth of linear regression (sklearn)
     vs. CATE for exhaustive subgroup search.*'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
 - en: Conclusion
+  id: totrans-80
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
@@ -395,6 +546,7 @@
     of the auxiliary task of predicting future KPI values, analytics finds reasons
     in the data to understand why the KPI changed, trying to find the answers for
     the right question.
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
 - en: 'Be wary next time you want to explain anything. Firstly, you should ask the
@@ -402,62 +554,82 @@
     based on causal inference and business analytics methods. This is our mission
     at Kausa: scale business analytics logic and couple it with causal inference to
     provide the right answers to KPI changes.'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
 - en: '*PS: Code and data to reproduce results from this article are available in
     our GitHub repository [[6](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland#5b4e41206487)].*'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://www.kausa.ai/blog/how-causal-inference-lifts-augmented-analytics-beyond-flatland).
     Reposted with permission.'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio:** [Michael](https://www.linkedin.com/in/michael-klaput-67375385) [Klaput](https://www.linkedin.com/in/michael-klaput-67375385) is
     the co-founder and CTO at Kausa ([www.kausa.ai](http://www.kausa.ai)), former
     VP Quantitative Analyst at Bank of America Merrill Lynch, and Ph.D. in Theoretical
     Physics Oxford University.'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: '[Analytics Engineering Everywhere](https://www.kdnuggets.com/2021/06/analytics-engineering-everywhere.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Why machine learning struggles with causality](https://www.kdnuggets.com/2021/04/machine-learning-struggles-causality.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Must Know for Data Scientists and Data Analysts: Causal Design Patterns](https://www.kdnuggets.com/2021/03/causal-design-patterns.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-90
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Meet Gorilla: UC Berkeley and Microsoft’s API-Augmented LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Retrieval Augmented Generation: Where Information Retrieval Meets…](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[检索增强生成：信息检索与文本生成的交汇点](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)'
 - en: '[Unify Batch and ML Systems with Feature/Training/Inference Pipelines](https://www.kdnuggets.com/2023/09/hopsworks-unify-batch-ml-systems-feature-training-inference-pipelines)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过特征/训练/推理管道统一批处理和机器学习系统](https://www.kdnuggets.com/2023/09/hopsworks-unify-batch-ml-systems-feature-training-inference-pipelines)'
 - en: '[10 Key AI & Data Analytics Trends for 2022 and Beyond](https://www.kdnuggets.com/2021/12/10-key-ai-trends-for-2022.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2022年及以后10个关键AI与数据分析趋势](https://www.kdnuggets.com/2021/12/10-key-ai-trends-for-2022.html)'
 - en: '[Beyond Pipelines: Graphs as Scikit-Learn Metaestimators](https://www.kdnuggets.com/2022/09/graphs-scikitlearn-metaestimators.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超越管道：图形作为 Scikit-Learn 元估计器](https://www.kdnuggets.com/2022/09/graphs-scikitlearn-metaestimators.html)'
 - en: '[Beyond Coding: Why The Human Touch Matters](https://www.kdnuggets.com/beyond-coding-why-the-human-touch-matters)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超越编码：为什么人性化的触感很重要](https://www.kdnuggets.com/beyond-coding-why-the-human-touch-matters)'
