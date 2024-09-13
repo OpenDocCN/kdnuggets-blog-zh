@@ -1,414 +1,607 @@
 - en: How to Process a DataFrame with Millions of Rows in Seconds
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html](https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![How to process a DataFrame with millions of rows in seconds?](../Images/2de067561faae5b8eb4d567583434cd1.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
 - en: Photo by [Jason Blackeye](https://unsplash.com/@jeisblack?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: Data Science is having its renaissance moment. It's hard to keep track of all
     new Data Science tools that have the potential to change the way Data Science
     gets done.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: I learned about this new Data Processing Engine only recently in a conversation
     with a colleague, also a Data Scientist. We had a discussion about Big Data processing,
     which is at the forefront of innovation in the field, and this new tool popped
     up.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: While [pandas](https://towardsdatascience.com/11-pandas-built-in-functions-you-should-know-1cf1783c2b9) is
     the defacto tool for data processing in Python, it doesn’t handle big data well.
     With bigger datasets, you’ll get an out-of-memory exception sooner or later.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: Researchers were confronted with this issue a long time ago, which prompted
     the development of tools like [Dask and Spark](https://towardsdatascience.com/are-you-still-using-pandas-for-big-data-12788018ba1a),
     which try to overcome “the single machine” constrain by distributing processing
     to multiple machines.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: This active area of innovation also brought us tools like [Vaex](https://towardsdatascience.com/are-you-still-using-pandas-to-process-big-data-in-2021-850ab26ad919),
     which try to solve this issue by making processing on a single machine more memory
     efficient.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: And it doesn’t end there. There is another tool for big data processing you
     should know about …
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: Meet Terality
+  id: totrans-16
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![How to process a DataFrame with millions of rows in seconds?](../Images/b5eb8dba8279c6a93aa0d3ff1bffb3b3.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
 - en: Photo by [frank mckenna](https://unsplash.com/@frankiefoto?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: '[Terality](https://www.terality.com/) is a Serverless Data Processing Engine
     that processes the data in the Cloud. There is no need to manage infrastructure
     as Terality takes care of scaling compute resources. Its target audiences are
     Engineers and Data Scientists.'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Terality](https://www.terality.com/) 是一个无服务器数据处理引擎，在云端处理数据。无需管理基础设施，因为 Terality
+    负责计算资源的扩展。其目标用户是工程师和数据科学家。'
 - en: 'I exchanged a few emails with the Terality’s team as I was interested in the
     tool they’ve developed. They answered swiftly. These were my questions to the
     team:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 我与 Terality 团队交换了几封电子邮件，因为我对他们开发的工具感兴趣。他们迅速回复了。这些是我向团队提出的问题：
 - en: '![How to process a DataFrame with millions of rows in seconds?](../Images/e2d665667a01d44cb4b0515081c0cb5c.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![如何在几秒钟内处理包含百万行的 DataFrame？](../Images/e2d665667a01d44cb4b0515081c0cb5c.png)'
 - en: My n-th email to the Terality’s team (screenshot by author)
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我给 Terality 团队发的第 n 封邮件（作者截图）
 - en: What are the main steps of data processing with Terality?
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 使用 Terality 进行数据处理的主要步骤是什么？
 - en: Terality comes with a Python client that you import into a Jupyter Notebook.
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Terality 附带一个 Python 客户端，你可以将其导入到 Jupyter Notebook 中。
 - en: Then you write the code in **“a pandas way”** and Terality securely uploads
     your data and takes care of distributed processing (and scaling) to calculate
     your analysis.
+  id: totrans-25
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 然后你以**“pandas 方式”**编写代码，Terality 安全地上传你的数据，并处理分布式计算（以及扩展）以计算你的分析。
 - en: After processing is completed, you can convert the data back to a regular pandas
     DataFrame and continue with analysis locally.
+  id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 处理完成后，你可以将数据转换回常规的 pandas DataFrame，并在本地继续分析。
 - en: What’s happening behind the scenes?
+  id: totrans-27
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 幕后发生了什么？
 - en: Terality team developed a proprietary data processing engine — it’s not a fork
     of Spark or Dask.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: Terality 团队开发了一个专有的数据处理引擎——它不是 Spark 或 Dask 的分支。
 - en: The goal was to avoid the imperfections of Dask, which doesn’t have the same
     syntax as pandas, it’s asynchronous, doesn’t have all pandas functions and it
     doesn’t support auto-scaling.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 目标是避免 Dask 的缺陷，Dask 与 pandas 的语法不同，异步操作，未包含所有 pandas 函数，并且不支持自动扩展。
 - en: Terality’s Data Processing Engine solves these issues.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: Terality 的数据处理引擎解决了这些问题。
 - en: Is Terality FREE to use?
+  id: totrans-31
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Terality 是否可以免费使用？
 - en: '[Terality](https://www.terality.com/pricing) has a free plan with which you
     can process up to 500 GB of data per month. It also offers a paid plan for companies
     and individuals with greater requirements.'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Terality](https://www.terality.com/pricing)提供一个免费计划，允许你每月处理最多 500 GB 的数据。它还为需求更大的公司和个人提供付费计划。'
 - en: In this article, we’ll focus on the free plan as it’s applicable to many Data
     Scientists.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们将重点关注免费计划，因为它适用于许多数据科学家。
 - en: How does Terality calculate data usage? ([From Terality’s documentation](https://www.terality.com/pricing))
+  id: totrans-34
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: Terality 如何计算数据使用量？ ([来自 Terality 的文档](https://www.terality.com/pricing))
 - en: ''
+  id: totrans-35
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Consider a dataset with a total size of 15GB in memory, as would be returned
     by the operation *df.memory_usage(deep=True).sum()*.
+  id: totrans-36
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 考虑一个总大小为 15GB 的数据集，如操作 *df.memory_usage(deep=True).sum()* 所返回的那样。
 - en: ''
+  id: totrans-37
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: Running one (1) operation on this dataset, such as a *.sum* or a *.sort_values*,
     would consume 15GB of processed data in Terality.
+  id: totrans-38
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 对该数据集执行一个（1）操作，例如 *.sum* 或 *.sort_values*，将消耗 Terality 中 15GB 的处理数据。
 - en: ''
+  id: totrans-39
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: The billable usage is only recorded when task runs enter a Success state.
+  id: totrans-40
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 只有在任务运行成功状态下才会记录可计费使用量。
 - en: What about Data Privacy?
+  id: totrans-41
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 数据隐私如何？
 - en: When a user performs a read operation, the Terality client copies the dataset
     on Terality’s secured cloud storage on Amazon S3.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 当用户执行读取操作时，Terality 客户端将数据集复制到 Terality 在 Amazon S3 上的安全云存储中。
 - en: Terality has a strict policy around data privacy and protection. They guarantee
     that they’ll not use the data and process it securely.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: Terality 对数据隐私和保护有严格的政策。他们保证不会使用数据，并安全地处理数据。
 - en: Terality is not a storage solution. They will delete your data maximum within
     3 days after Terality’s client session is closed.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: Terality 不是存储解决方案。他们将在 Terality 客户端会话关闭后的最多 3 天内删除你的数据。
 - en: Terality processing currently occurs on AWS in the Frankfurt region.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: Terality 处理目前发生在 AWS 的法兰克福区域。
 - en: '[See the security section for more information.](https://docs.terality.com/faq/security)'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '[查看安全部分以获取更多信息。](https://docs.terality.com/faq/security)'
 - en: Does the data need to be public?
+  id: totrans-47
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 数据需要公开吗？
 - en: No!
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 不！
 - en: The user needs to have access to the dataset on his local machine and Terality
     will handle the uploading process behind the scene.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 用户需要访问本地计算机上的数据集，Terality 将在幕后处理上传过程。
 - en: The upload operation is also parallelized so that is faster.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 上传操作也进行了并行处理，因此更快。
 - en: Can Terality process Big Data?
+  id: totrans-51
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Terality 能处理大数据吗？
 - en: At the moment, **in November 2021, **Terality is still in beta. It’s optimized
     for datasets up to 100–200 GB.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前，**在 2021 年 11 月，** Terality 仍处于测试阶段。它优化了最多 100-200 GB 的数据集。
 - en: I asked the team if they plan to increase this and they plan to soon start to
     optimize for Terabytes.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 我询问了团队是否计划增加此功能，他们计划很快开始优化到 Terabytes 级别。
 - en: Let’s take it for a test drive
+  id: totrans-54
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 让我们试驾一下
 - en: '![How to process a DataFrame with millions of rows in seconds?](../Images/5049cb89fc1e3da7e44cdff7875f87a1.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![如何在几秒钟内处理包含数百万行的 DataFrame？](../Images/5049cb89fc1e3da7e44cdff7875f87a1.png)'
 - en: Photo by [Eugene Chystiakov](https://unsplash.com/@eugenechystiakov?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 由 [尤金·赫斯季亚科夫](https://unsplash.com/@eugenechystiakov?utm_source=medium&utm_medium=referral)
+    拍摄的照片，发布在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+    上
 - en: I was surprised that you can simply drop in replace pandas import statement
     with Terality’s package and rerun your analysis.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 我惊讶于你可以简单地用 Terality 的包替换 pandas 的导入语句，然后重新运行你的分析。
 - en: Note, once you import Terality’s Python client, the data processing is not any
     longer performed on your local machine but with Terality’s Data Processing Engine
     in the Cloud.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，一旦你导入了 Terality 的 Python 客户端，数据处理将不再在本地机器上进行，而是在 Terality 的云端数据处理引擎中完成。
 - en: Now, let’s install Terality and try it in practice…
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们安装 Terality 并在实践中尝试一下……
 - en: Setup
+  id: totrans-60
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 设置
 - en: 'You can install Terality by simply running:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过运行以下命令来安装 Terality：
 - en: '[PRE0]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Then you create a free account on [Terality](https://app.terality.com/) and
     generate an API key:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后你在 [Terality](https://app.terality.com/) 上创建一个免费账户，并生成一个 API 密钥：
 - en: '![How to process a DataFrame with millions of rows in seconds?](../Images/0e12eac837f2e08e697cc1a50885c409.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![如何在几秒钟内处理包含数百万行的 DataFrame？](../Images/0e12eac837f2e08e697cc1a50885c409.png)'
 - en: Generate new API key on [Terality](https://app.terality.com/) (screenshot by
     author)
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 [Terality](https://app.terality.com/) 上生成新的 API 密钥（截图由作者提供）
 - en: 'The last step is to enter your API key (also replace the email with your email):'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一步是输入你的 API 密钥（同时用你的电子邮件替换电子邮件）：
 - en: '[PRE1]'
+  id: totrans-67
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Let’s start small…
+  id: totrans-68
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 让我们从小处开始……
 - en: Now, that we have Terality installed, we can run a small example to get familiar
     with it.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们已经安装了 Terality，可以运行一个小示例来熟悉它。
 - en: The practice shows that you get the best of both worlds while using both Terality
     and pandas — one to aggregate the data and the other to analyze the aggregate
     locally
+  id: totrans-70
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 实践表明，使用 Terality 和 pandas 两者结合，你可以充分发挥它们各自的优势——一个用于聚合数据，另一个则在本地分析聚合后的数据
 - en: 'The command below creates a terality.DataFrame by importing a pandas.DataFrame:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下命令通过导入 pandas.DataFrame 创建一个 terality.DataFrame：
 - en: '[PRE2]'
+  id: totrans-72
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Now, that the data is in Terality’s Cloud, we can proceed with analysis:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，数据已经在 Terality 的云端，我们可以继续进行分析：
 - en: '[PRE3]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Running filtering operations and other familiar pandas operations:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行过滤操作和其他熟悉的 pandas 操作：
 - en: '[PRE4]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Once we finish with the analysis, we can convert it back to a pandas DataFrame
     with:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们完成分析，可以使用以下命令将其转换回 pandas DataFrame：
 - en: '[PRE5]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'We can validate that the DataFrames are equal:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以验证 DataFrames 是否相等：
 - en: '[PRE6]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Let’s go Big…
+  id: totrans-81
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 让我们搞大点……
 - en: I would suggest you check [Terality’s Quick Start Jupyter Notebook,](https://docs.terality.com/getting-terality/quick-start/tutorial) which
     takes you through an analysis of 40 GB of Reddit comments dataset. They also have
     a tutorial with a smaller 5 GB dataset.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 我建议你查看 [Terality 的快速入门 Jupyter Notebook，](https://docs.terality.com/getting-terality/quick-start/tutorial)
+    其中介绍了 40 GB Reddit 评论数据集的分析。他们还有一个包含 5 GB 数据集的小型教程。
 - en: I clicked through Terality’s Jupyter Notebook and processed the 40 GB dataset.
     It read the data in 45 seconds and needed 35 seconds to sort it. The merge with
     another table took 1 minute and 17 seconds. It felt like I’m processing a much
     smaller dataset on my laptop.
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 我点击了 Terality 的 Jupyter Notebook 并处理了 40 GB 的数据集。它在 45 秒内读取了数据，并花费了 35 秒进行排序。与另一个表的合并花费了
+    1 分钟 17 秒。感觉就像在我的笔记本电脑上处理一个更小的数据集。
 - en: Then I tried loading the same 40GB dataset with pandas on my laptop with 16
     GB of main memory — it returned an out-of-memory exception.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我尝试在我的笔记本电脑（配备 16 GB 主内存）上用 pandas 加载相同的 40GB 数据集——结果返回了内存不足的异常。
 - en: '[Official Terality tutorial takes you through the analysis of a 5GB file with
     Reddit comments.](https://docs.terality.com/getting-terality/quick-start/tutorial)'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '[官方 Terality 教程带你分析一个包含 Reddit 评论的 5GB 文件。](https://docs.terality.com/getting-terality/quick-start/tutorial)'
 - en: Conclusion
+  id: totrans-86
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 结论
 - en: '![How to process a DataFrame with millions of rows in seconds?](../Images/008b2b1520e546c7af167ea70812c0aa.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![如何在几秒钟内处理包含数百万行的 DataFrame？](../Images/008b2b1520e546c7af167ea70812c0aa.png)'
 - en: Photo by [Sven Scheuermeier](https://unsplash.com/@sveninho?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 照片由 [Sven Scheuermeier](https://unsplash.com/@sveninho?utm_source=medium&utm_medium=referral)
+    拍摄，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 - en: I played with Terality quite a bit and my experience was without major issues.
     This surprised me as they are officially still in beta. A great sign is also that
     their support team is really responsive.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 我尝试了 Terality，并且我的体验没有遇到重大问题。这让我感到惊讶，因为它们官方仍在测试阶段。另一个好兆头是他们的支持团队非常响应迅速。
 - en: I see a great use case for Terality when you have a big data set that you can’t
     process on your local machine — may that be because of memory constraints or the
     speed of processing.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你有一个大型数据集无法在本地机器上处理时，我认为 Terality 的应用场景非常出色——无论是因为内存限制还是处理速度。
 - en: Using Dask (or Spark) would require spinning up a cluster which would cost much
     more than using Terality to complete your analysis.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Dask（或 Spark）需要启动一个集群，这样的成本远高于使用 Terality 完成分析的成本。
 - en: Also, configuring such a cluster is a cumbersome process, while with Terality
     you only need to change the import statement.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，配置这样一个集群是一个繁琐的过程，而使用 Terality 你只需要更改导入语句。
 - en: Another thing that I like is that I can use it in my local JupyterLab, because
     I have many extensions, configurations, dark mode, etc.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 我喜欢的另一点是我可以在本地 JupyterLab 中使用它，因为我有许多扩展、配置、深色模式等。
 - en: I’m looking forward to the progress that the team makes with Terality in the
     coming months.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 我期待着团队在接下来的几个月中取得的 Terality 进展。
 - en: '**[Roman Orac](https://www.linkedin.com/in/romanorac/?originalSubdomain=si)**
     is a Machine Learning engineer with notable successes in improving systems for
     document classification and item recommendation. Roman has experience with managing
     teams, mentoring beginners and explaining complex concepts to non-engineers.'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Roman Orac](https://www.linkedin.com/in/romanorac/?originalSubdomain=si)**
+    是一位机器学习工程师，在改进文档分类和项目推荐系统方面取得了显著成功。Roman 具有管理团队、指导初学者和向非工程师解释复杂概念的经验。'
 - en: '[Original](https://towardsdatascience.com/how-to-process-a-dataframe-with-millions-of-rows-in-seconds-fe7065b8f986).
     Reposted with permission.'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/how-to-process-a-dataframe-with-millions-of-rows-in-seconds-fe7065b8f986)。经许可转载。'
 - en: More On This Topic
+  id: totrans-97
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多相关主题
 - en: '[Create Stunning Data Viz in Seconds with ChatGPT](https://www.kdnuggets.com/create-stunning-data-viz-in-seconds-with-chatgpt)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[利用 ChatGPT 在几秒钟内创建惊人的数据可视化](https://www.kdnuggets.com/create-stunning-data-viz-in-seconds-with-chatgpt)'
 - en: '[How to Select Rows and Columns in Pandas Using [ ], .loc, iloc, .at…](https://www.kdnuggets.com/2019/06/select-rows-columns-pandas.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 [ ], .loc, iloc, .at… 在 Pandas 中选择行和列](https://www.kdnuggets.com/2019/06/select-rows-columns-pandas.html)'
 - en: '[3 Ways to Append Rows to Pandas DataFrames](https://www.kdnuggets.com/2022/08/3-ways-append-rows-pandas-dataframes.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[3 种将行附加到 Pandas DataFrames 的方法](https://www.kdnuggets.com/2022/08/3-ways-append-rows-pandas-dataframes.html)'
 - en: '[How to Convert JSON Data into a DataFrame with Pandas](https://www.kdnuggets.com/how-to-convert-json-data-into-a-dataframe-with-pandas)'
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何将 JSON 数据转换为 Pandas DataFrame](https://www.kdnuggets.com/how-to-convert-json-data-into-a-dataframe-with-pandas)'
 - en: '[Pandas vs. Polars: A Comparative Analysis of Python''s Dataframe Libraries](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)'
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Pandas 与 Polars：Python 数据框库的比较分析](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)'
 - en: '[Frameworks for Approaching the Machine Learning Process](https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html)'
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习过程的框架方法](https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html)'
