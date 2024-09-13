@@ -1,19 +1,28 @@
 - en: PyTorch Tensor Basics
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: PyTorch 张量基础
 - en: 原文：[https://www.kdnuggets.com/2018/05/pytorch-tensor-basics.html](https://www.kdnuggets.com/2018/05/pytorch-tensor-basics.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/05/pytorch-tensor-basics.html](https://www.kdnuggets.com/2018/05/pytorch-tensor-basics.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: Now that we know [what a tensor is](/2018/05/wtf-tensor.html), and saw how Numpy's
     `ndarray` can be used to represent them, let's switch gears and see how they are
     represented in PyTorch.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们知道了 [张量是什么](/2018/05/wtf-tensor.html)，并了解了 Numpy 的 `ndarray` 如何用来表示它们，接下来我们来看看它们在
+    PyTorch 中是如何表示的。
 - en: '[PyTorch](https://pytorch.org/) has made an impressive dent on the machine
     learning scene since Facebook open-sourced it in early 2017\. It may not have
     the widespread adoption that TensorFlow has -- which was initially released well
@@ -22,239 +31,382 @@
     ushered in -- but the attention that PyTorch receives in the research community
     especially is quite real. Much of this attention comes both from its relationship
     to [Torch proper](http://torch.ch/), and its dynamic computation graph.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PyTorch](https://pytorch.org/) 自 Facebook 在 2017 年初开源以来，在机器学习领域产生了令人印象深刻的影响。它可能没有
+    TensorFlow 那样广泛的采用——TensorFlow 最初发布的时间早了一年多，得到了 Google 的支持，并且在神经网络工具新潮流兴起时奠定了黄金标准——但
+    PyTorch 在研究界获得的关注确实非常真实。这种关注很大程度上来自于其与 [Torch proper](http://torch.ch/) 的关系，以及其动态计算图。'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的快车道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![Header image](../Images/27f79394bcc1a8c8b2bdb92a788b8013.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![头图](../Images/27f79394bcc1a8c8b2bdb92a788b8013.png)'
 - en: '[Image source](http://noaxiom.org/tensor)As excited as I have recently been
     by turning my own attention to PyTorch, this is not really a *PyTorch* tutorial;
     it''s more of an introduction to PyTorch''s [`Tensor`](https://pytorch.org/docs/master/tensors.html)
     class, which is reasonably analogous to Numpy''s `ndarray`.'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '[图片来源](http://noaxiom.org/tensor) 尽管我最近对 PyTorch 的关注充满了兴奋，但这实际上并不是一个 *PyTorch*
+    教程；它更像是对 PyTorch 的 [`Tensor`](https://pytorch.org/docs/master/tensors.html) 类的介绍，该类与
+    Numpy 的 `ndarray` 类似。'
 - en: '**Tensor (Very) Basics**'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**张量（非常）基础**'
 - en: 'So let''s take a look at some of PyTorch''s tensor basics, starting with creating
     a tensor (using the `Tensor` class):'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以让我们来看看 PyTorch 的一些张量基础，从创建一个张量（使用 `Tensor` 类）开始：
 - en: '[PRE0]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'You can transpose a tensor in one of 2 ways:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过两种方式转置张量：
 - en: '[PRE2]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Both result in the following output:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 两者都产生以下输出：
 - en: '[PRE3]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Note that neither result in a change to the original.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，这两种方法都不会改变原始张量。
 - en: 'Reshape a tensor with view:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用视图重塑张量：
 - en: '[PRE4]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '[PRE5]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'And another example:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个例子：
 - en: '[PRE6]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '[PRE7]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: It should be obvious that mathematical conventions which are followed by Numpy
     carry over to PyTorch Tensors (specifically I'm referring to row and column notation).
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 应该显而易见的是，Numpy 遵循的数学惯例也会延续到 PyTorch 张量中（具体来说，我指的是行和列的表示法）。
 - en: 'Create a tensor and fill it with zeros (you can accomplish something similar
     with `ones()`):'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个张量并用零填充它（你可以用 `ones()` 实现类似的功能）：
 - en: '[PRE8]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '[PRE9]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'Create a tensor with randoms pulled from the normal distribution:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建一个从正态分布中抽取随机数的张量：
 - en: '[PRE10]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '[PRE11]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'Shape, dimensions, and datatype of a tensor object:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 张量对象的形状、维度和数据类型：
 - en: '[PRE12]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '[PRE13]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: It should also be obvious that, beyond mathematical concepts, a number of programmatic
     and instantiation similarities between `ndarray` and `Tensor` implementations
     exist.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 除了数学概念之外，`ndarray` 和 `Tensor` 实现之间还存在许多编程和实例化上的相似之处，这一点也应该显而易见。
 - en: 'You can slice PyTorch tensors the same way you slice `ndarrays`, which should
     be familiar to anyone who uses other Python structures:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以像切片`ndarrays`一样切片PyTorch张量，这对使用其他Python结构的人来说应该很熟悉：
 - en: '[PRE14]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '[PRE15]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '**PyTorch `Tensor` To and From Numpy `ndarray`**'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**PyTorch `Tensor` 与 Numpy `ndarray` 之间的转换**'
 - en: You can easily create a tensors from an `ndarray` and vice versa. These operations
     are fast, since the data of both structures will share the same memory space,
     and so no copying is involved. This is obviously an [efficient approach](https://stsievert.com/blog/2017/09/07/pytorch/).
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以轻松地从`ndarray`创建张量，反之亦然。这些操作很快，因为这两种结构的数据会共享相同的内存空间，所以不涉及复制。这显然是一种[高效的方法](https://stsievert.com/blog/2017/09/07/pytorch/)。
 - en: '[PRE16]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: '[PRE17]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: '[PRE18]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: '[PRE19]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: '**Basic Tensor Operations**'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**基本张量操作**'
 - en: 'Here are a few tensor operations, which you can compare with Numpy implementations
     for fun. First up is the cross product:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里有几个张量操作，你可以与Numpy实现进行比较以增添乐趣。首先是叉积：
 - en: '[PRE20]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: '[PRE21]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: 'Next is the matrix product:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来是矩阵乘积：
 - en: '[PRE22]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE22]'
 - en: '[PRE23]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE23]'
 - en: 'And finally, elementwise multiplication:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后是逐元素相乘：
 - en: '[PRE24]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE24]'
 - en: '[PRE25]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE25]'
 - en: '**A Word About GPUs**'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**关于GPU的一些话**'
 - en: PyTorch tensors have inherent GPU support. Specifying to use the GPU memory
     and CUDA cores for storing and performing tensor calculations is easy; the [`cuda`](https://pytorch.org/docs/master/cuda.html)
     package can help determine whether GPUs are available, and the package's `cuda()`
     method assigns a tensor to the GPU.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: PyTorch张量具有内置的GPU支持。指定使用GPU内存和CUDA核心来存储和执行张量计算非常简单；[`cuda`](https://pytorch.org/docs/master/cuda.html)包可以帮助确定是否有可用的GPU，而该包的`cuda()`方法将张量分配给GPU。
 - en: '[PRE26]'
+  id: totrans-60
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE26]'
 - en: '**Related**:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[WTF is a Tensor?!?](/2018/05/wtf-tensor.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是张量?!?](/2018/05/wtf-tensor.html)'
 - en: '[Getting Started with PyTorch Part 1: Understanding How Automatic Differentiation
     Works](/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyTorch入门第1部分：了解自动微分的工作原理](/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html)'
 - en: '[A Simple Starter Guide to Build a Neural Network](/2018/02/simple-starter-guide-build-neural-network.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建神经网络的简单入门指南](/2018/02/simple-starter-guide-build-neural-network.html)'
 - en: More On This Topic
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标并找到目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
