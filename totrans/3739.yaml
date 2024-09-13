@@ -1,307 +1,466 @@
 - en: Explain NLP Models with LIME
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 LIME 解释 NLP 模型
 - en: 原文：[https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)
 - en: It is very important to know how LIME reaches to its final outputs for explaining
     a prediction done for text data. In this article, I have shared that concept by
     enlightening the components of LIME.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 理解 LIME 如何得出最终输出以解释对文本数据的预测是非常重要的。在这篇文章中，我通过阐明 LIME 的组件分享了这一概念。
 - en: '![Explain NLP models with LIME](../Images/83111f6cff2c0031977b71b290ff7b61.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 LIME 解释 NLP 模型](../Images/83111f6cff2c0031977b71b290ff7b61.png)'
 - en: Photo by [Ethan Medrano](https://unsplash.com/@itsethan?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on [Unsplash](https://unsplash.com/s/photos/magnifying-glass-text?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 由 [Ethan Medrano](https://unsplash.com/@itsethan?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/magnifying-glass-text?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 拍摄
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT 需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Few weeks back I wrote a [blog](https://towardsdatascience.com/explainable-ai-an-illuminator-in-the-field-of-black-box-machine-learning-62d805d54a7a) on
     how different interpretability tools can be used to interpret certain predictions
     done by the black-box models. In that article I shared the mathematics behind
     LIME, SHAP and other interpretability tools, but I did not go much into details
     of implementing those concepts on original data. In this article, I thought of
     sharing how LIME works on text data in a step-by-step manner.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 几周前，我写了一篇 [博客](https://towardsdatascience.com/explainable-ai-an-illuminator-in-the-field-of-black-box-machine-learning-62d805d54a7a) 讨论如何使用不同的可解释性工具解释黑箱模型的预测。在那篇文章中，我分享了
+    LIME、SHAP 和其他可解释性工具背后的数学，但没有详细讲解这些概念在原始数据上的实现。在这篇文章中，我打算逐步分享 LIME 在文本数据上的工作原理。
 - en: 'The data that is used for the whole analysis is taken from [here](https://www.kaggle.com/c/nlp-getting-started/overview) .
     This data is for predicting whether a given tweet is about a real disaster(1)
     or not(0). It has the following columns:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于整个分析的数据来源于 [这里](https://www.kaggle.com/c/nlp-getting-started/overview)。这些数据用于预测给定的推文是否关于真实灾难(1)或不是(0)。它包含以下列：
 - en: '![Explain NLP models with LIME](../Images/ea3fdda6795fee3f3428ce351623f7f3.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![使用 LIME 解释 NLP 模型](../Images/ea3fdda6795fee3f3428ce351623f7f3.png)'
 - en: '[Source](https://www.kaggle.com/c/nlp-getting-started/data)'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '[来源](https://www.kaggle.com/c/nlp-getting-started/data)'
 - en: As the main focus of this blog is to interpret [LIME](https://lime-ml.readthedocs.io/en/latest/lime.html#module-lime.lime_text) and
     its different components so we will quickly build a binary text classification
     model using Random Forest and will focus mainly on LIME interpretation.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于本博客的主要焦点是解释 [LIME](https://lime-ml.readthedocs.io/en/latest/lime.html#module-lime.lime_text) 及其不同组件，因此我们将迅速构建一个使用随机森林的二分类文本分类模型，并主要关注
+    LIME 的解释。
 - en: First, we start with importing the necessary packages. Then we read the data
     and start preprocessing like stop words removal, Lowercase, lemmatization, punctuation
     removal, whitespace removal etc. All the cleaned preprocessed text are stored
     in a new ‘cleaned_text’ column which will be further used for analysis and the
     data is split into train and validation set in a ratio of 80:20.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们从导入必要的包开始。然后，我们读取数据并开始预处理，例如去除停用词、转小写、词形还原、去除标点符号、去除空白等。所有清理后的预处理文本都存储在一个新的“cleaned_text”列中，该列将进一步用于分析，并且数据被分为训练集和验证集，比例为
+    80:20。
 - en: Then we quickly move to converting the text data into vectors using [TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) vectoriser
     and fitting a [Random Forest](https://en.wikipedia.org/wiki/Random_forest) classification
     model on that.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们迅速转向使用[TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)向量化器将文本数据转换为向量，并在此基础上拟合一个[随机森林](https://en.wikipedia.org/wiki/Random_forest)分类模型。
 - en: '![Explain NLP models with LIME](../Images/0409de5351ef5d8565b1c417b090747f.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![使用LIME解释NLP模型](../Images/0409de5351ef5d8565b1c417b090747f.png)'
 - en: Image by author
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Now let’s begin the main interest of this blog which is how to interpret different
     components of LIME.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们开始本博客的主要内容，即如何解释LIME的不同组件。
 - en: First let’s see what is the final output of the LIME interpretation for a particular
     data instance. Then we will go deep dive into the different components of LIME
     in a step by step manner which will finally result the desired output.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们查看LIME解释对于特定数据实例的最终输出。然后，我们将逐步深入探讨LIME的不同组件，最终得到所需的结果。
 - en: '![Explain NLP models with LIME](../Images/9df02ffbb8a78e583d15659474c59d36.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![使用LIME解释NLP模型](../Images/9df02ffbb8a78e583d15659474c59d36.png)'
 - en: Image by author
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Here labels=(1,) is passed as an argument that means we want the explanation
     for the class 1\. The features (words in this case) highlighted with orange are
     the top features that cause a prediction of class 0 (not disaster) with probability
     0.75 and class 1(disaster) with probability 0.25.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里传递了labels=(1,)作为参数，意味着我们希望获取类1的解释。用橙色突出显示的特征（在这个例子中是单词）是导致类0（非灾难）预测概率为0.75和类1（灾难）预测概率为0.25的顶级特征。
 - en: '**NOTE**: char_level is one of the arguments for LimeTextExplainer which is
     a boolean identifying that we treat each character as an independent occurrence
     in the string. Default is False so we don’t consider each character independently
     and IndexedString function is used for tokenization and indexing the words in
     the text instance, otherwise IndexedCharacters function is used.'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意**：char_level是LimeTextExplainer的一个参数，它是一个布尔值，标识我们是否将每个字符视为字符串中的独立出现。默认值为False，因此我们不会将每个字符独立考虑，使用IndexedString函数进行分词和文本实例中的单词索引，否则使用IndexedCharacters函数。'
 - en: '*So, you must be interested to know how these are calculated. Right?*'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '*所以，你一定对这些计算方法感兴趣吧？*'
 - en: Let’s see that.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看这个。
 - en: LIME starts with creating some perturbed samples around the neighbourhood of
     data point of interest. For text data, perturbed samples are created by randomly
     removing some of the words from the instance and cosine distance is used to calculate
     the distance between the original and perturbed samples as default metric.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: LIME首先在感兴趣的数据点周围创建一些扰动样本。对于文本数据，通过随机删除实例中的一些单词来创建扰动样本，默认使用余弦距离来计算原始样本与扰动样本之间的距离。
 - en: 'This returns the array of 5000 perturbed samples(each perturbed sample is of
     length of the original instance and 1 means the word in that position of the original
     instance is present in the perturbed sample), their corresponding prediction probabilities
     and the cosine distances between the original and perturbed samples.A snippet
     of that is as follows:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将返回5000个扰动样本的数组（每个扰动样本的长度与原始实例相同，1表示原始实例中该位置的单词在扰动样本中存在），以及它们对应的预测概率和原始样本与扰动样本之间的余弦距离。部分内容如下：
 - en: '![Explain NLP models with LIME](../Images/6584e38ed39751bc52ad19db4fc33c4d.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![使用LIME解释NLP模型](../Images/6584e38ed39751bc52ad19db4fc33c4d.png)'
 - en: Image by author
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由作者提供
 - en: Now after creating the perturbed samples in the neighbourhood it’s time to give
     weights to those samples. Samples that are near from the original instance are
     given higher weightage than the samples far from the original instance. [Exponential
     kernel](https://www.cs.toronto.edu/~duvenaud/cookbook/) with kernel width 25 is
     used as default to give those weightage.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，在创建了邻域中的扰动样本后，是时候为这些样本分配权重了。距离原始实例较近的样本会获得比距离原始实例较远的样本更高的权重。默认使用宽度为25的[指数核](https://www.cs.toronto.edu/~duvenaud/cookbook/)来分配这些权重。
 - en: 'After that important features(as per num_features: max number of features to
     be explained) are selected by learning a locally linear sparse model from perturbed
     data. There are several methods for choosing the important features using the
     local linear sparse model like ‘auto’(default), ‘forward_selection’, ‘lasso_path’,
     ‘highest_weights’. If we choose ‘auto’ then ‘forward_selection’ is used if num_features≤6,
     else ‘highest_weights’ is used.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后，通过从扰动数据中学习一个局部线性稀疏模型来选择重要特征（按 num_features：最大解释特征数）。使用局部线性稀疏模型选择重要特征的方法有很多，如‘auto’（默认）、‘forward_selection’、‘lasso_path’、‘highest_weights’。如果选择‘auto’，当
+    num_features≤6 时使用‘forward_selection’，否则使用‘highest_weights’。
 - en: '![Explain NLP models with LIME](../Images/4033a8b5526b06a2c468d61c92943a80.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![用LIME解释NLP模型](../Images/4033a8b5526b06a2c468d61c92943a80.png)'
 - en: Image by author
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于作者
 - en: Here we can see that the features selected are [1,5,0,2,3] which are the indices
     of the important words(or features) in the original instance. As here num_features=5
     and method=‘auto’, ‘forward_selection’ method is used for selecting the important
     features.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们可以看到选择的特征是 [1,5,0,2,3]，这些是原始实例中重要词汇（或特征）的索引。由于这里 num_features=5 且 method=‘auto’，因此使用了‘forward_selection’方法来选择重要特征。
 - en: Now let’s see what will happen if we choose method as ‘lasso_path’.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们看看如果我们选择‘lasso_path’方法会发生什么。
 - en: '![Explain NLP models with LIME](../Images/4d26df070bc192e4d766b93318ea777e.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![用LIME解释NLP模型](../Images/4d26df070bc192e4d766b93318ea777e.png)'
 - en: Image by author
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于作者
 - en: Same. Right?
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 一样，对吧？
 - en: '*But you might be interested to go deep dive into this process of selection.
     Don’t worry, I will make that easy.*'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '*但你可能会对深入了解这个选择过程感兴趣。别担心，我会让它变得简单。*'
 - en: It uses the concept of [Least angle regression](http://www.cse.iitm.ac.in/~vplab/courses/SLT/PDF/LAR_hastie_2018.pdf) for
     selecting the top features.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 它使用了 [最小角回归](http://www.cse.iitm.ac.in/~vplab/courses/SLT/PDF/LAR_hastie_2018.pdf)
+    的概念来选择顶级特征。
 - en: Let’s see what will happen if we select method as ‘highest_weights’.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们选择方法为‘highest_weights’，会发生什么呢？
 - en: '![Explain NLP models with LIME](../Images/f2fcf30afefa146658be6bb2a92c131d.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![用LIME解释NLP模型](../Images/f2fcf30afefa146658be6bb2a92c131d.png)'
 - en: Image by author
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于作者
 - en: '*Hang on. We are going deeper in the selection process.*'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '*稍等一下，我们正在深入选择过程。*'
 - en: So now the important features we have selected by using any one of the methods.
     But finally we will have to fit a local linear model to explain the prediction
     done by the black-box model. For that [Ridge Regression](https://en.wikipedia.org/wiki/Ridge_regression) is
     used as default.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经通过任何一种方法选择了重要特征。但最终我们必须拟合一个局部线性模型来解释黑箱模型的预测。为此，使用了默认的 [岭回归](https://en.wikipedia.org/wiki/Ridge_regression)。
 - en: Let’s check how the outputs will look like finally.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们检查一下最终的输出会是什么样的。
 - en: 'If we select method as auto, highest_weights and lasso_path respectively the
     output will look like this:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们分别选择方法为 auto、highest_weights 和 lasso_path，输出将如下所示：
 - en: '![Explain NLP models with LIME](../Images/2323333d776ba785702665162b0a461a.png)'
+  id: totrans-50
   prefs: []
   type: TYPE_IMG
+  zh: '![用LIME解释NLP模型](../Images/2323333d776ba785702665162b0a461a.png)'
 - en: Image by author
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于作者
 - en: These return a tuple (intercept of the local linear model, important features
     indices and its coefficients, R² value of the local linear model, local prediction
     by the explanation model on the original instance).
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些返回一个元组（局部线性模型的截距、重要特征的索引及其系数、局部线性模型的 R² 值、解释模型对原始实例的局部预测）。
 - en: If we compare the above image with
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们将上述图像与
 - en: '![Explain NLP models with LIME](../Images/4aa6bf2aae1fb4991e125047a4a56f75.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![用LIME解释NLP模型](../Images/4aa6bf2aae1fb4991e125047a4a56f75.png)'
 - en: Image by author
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源于作者
 - en: then we can say that the prediction probabilities given in the left most panel
     is the local prediction done by the explanation model. The features and the values
     given in the middle panel are the important features and their coefficients.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么我们可以说，最左侧面板中的预测概率是解释模型的局部预测。中间面板中的特征和数值是重要特征及其系数。
 - en: '**NOTE**: As for this particular data instance the number of words(or features)
     is only 6 and we are selecting the top 5 important features , all the methods
     are giving the same set of top 5 important features. But it may not happen for
     longer sentences.'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意**：对于这个特定的数据实例，词数（或特征数）只有 6，我们正在选择最重要的前 5 个特征，因此所有方法都给出了相同的前 5 个重要特征。但对于更长的句子，这种情况可能不会发生。'
 - en: '**If you like this article please hit recommend. That would be amazing.**'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**如果你喜欢这篇文章，请点击推荐。这将非常棒。**'
 - en: To get the full code please visit my [GitHub](https://github.com/kunduayan/LIME_text_data) repository.
     For my future blogs please follow me on [LinkedIn](https://www.linkedin.com/in/ayan-kundu-a86293149/) and [Medium](https://medium.com/@ayan.kundu09).
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 要获取完整的代码，请访问我的 [GitHub](https://github.com/kunduayan/LIME_text_data) 仓库。请在 [LinkedIn](https://www.linkedin.com/in/ayan-kundu-a86293149/)
+    和 [Medium](https://medium.com/@ayan.kundu09) 关注我的未来博客。
 - en: '**Conclusion**'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**结论**'
 - en: In this article, I tried to explain the final outcome of LIME for text data
     and how the whole explanation process happens for text in a step by step manner.
     Similar explanations can be done for tabular and image data. For that I will highly
     recommend to go through [this](https://github.com/marcotcr/lime).
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我尝试解释了LIME在文本数据中的最终结果，以及整个解释过程是如何逐步进行的。类似的解释也可以用于表格数据和图像数据。为此，我强烈推荐查看 [this](https://github.com/marcotcr/lime)。
 - en: '**References**'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**参考文献**'
 - en: GitHub repository for LIME : [https://github.com/marcotcr/lime](https://github.com/marcotcr/lime)
+  id: totrans-63
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: LIME的GitHub仓库：[https://github.com/marcotcr/lime](https://github.com/marcotcr/lime)
 - en: Documentation on LARS: [http://www.cse.iitm.ac.in/~vplab/courses/SLT/PDF/LAR_hastie_2018.pdf](http://www.cse.iitm.ac.in/~vplab/courses/SLT/PDF/LAR_hastie_2018.pdf)
+  id: totrans-64
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: LARS的文档：[http://www.cse.iitm.ac.in/~vplab/courses/SLT/PDF/LAR_hastie_2018.pdf](http://www.cse.iitm.ac.in/~vplab/courses/SLT/PDF/LAR_hastie_2018.pdf)
 - en: '[https://towardsdatascience.com/python-libraries-for-interpretable-machine-learning-c476a08ed2c7](https://towardsdatascience.com/python-libraries-for-interpretable-machine-learning-c476a08ed2c7)'
+  id: totrans-65
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[https://towardsdatascience.com/python-libraries-for-interpretable-machine-learning-c476a08ed2c7](https://towardsdatascience.com/python-libraries-for-interpretable-machine-learning-c476a08ed2c7)'
 - en: '**[Ayan Kundu](https://www.linkedin.com/in/ayan-kundu-a86293149/)** is a data
     scientist with 2+ years of experience in the field of banking and finance and
     also a passionate learner to help the community as much as possible. Follow Ayan
     on [LinkedIn](https://www.linkedin.com/in/ayan-kundu-a86293149/) and [Medium](https://medium.com/@ayan.kundu09).'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Ayan Kundu](https://www.linkedin.com/in/ayan-kundu-a86293149/)** 是一名具有2年以上银行和金融领域经验的数据科学家，同时也是一个热情的学习者，致力于尽可能帮助社区。请在
+    [LinkedIn](https://www.linkedin.com/in/ayan-kundu-a86293149/) 和 [Medium](https://medium.com/@ayan.kundu09)
+    关注Ayan。'
 - en: More On This Topic
+  id: totrans-67
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[SHAP: Explain Any Machine Learning Model in Python](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SHAP：用Python解释任何机器学习模型](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)'
 - en: '[oBERT: Compound Sparsification Delivers Faster Accurate Models for NLP](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[oBERT：复合稀疏化实现更快准确的NLP模型](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)'
 - en: '[Must Read NLP Papers from the Last 12 Months](https://www.kdnuggets.com/2023/03/must-read-nlp-papers-last-12-months.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[过去12个月必须阅读的NLP论文](https://www.kdnuggets.com/2023/03/must-read-nlp-papers-last-12-months.html)'
 - en: '[The Ultimate Guide To Different Word Embedding Techniques In NLP](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[终极指南：NLP中的不同词嵌入技术](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)'
 - en: '[The Range of NLP Applications in the Real World: A Different…](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[NLP应用在现实世界中的范围：一种不同的…](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)'
 - en: '[Machine Learning’s Sweet Spot: Pure Approaches in NLP and Document Analysis](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习的甜蜜点：NLP和文档分析中的纯粹方法](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)'

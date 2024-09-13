@@ -1,296 +1,450 @@
 - en: Fine-Tuning BERT for Tweets Classification with HuggingFace
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用HuggingFace微调BERT进行推文分类
 - en: 原文：[https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)
 - en: '![Fine-Tuning BERT for Tweets Classification ft. HuggingFace](../Images/224338a7a594756eb34ef183d9c25857.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![使用HuggingFace微调BERT进行推文分类](../Images/224338a7a594756eb34ef183d9c25857.png)'
 - en: Bidirectional Encoder Representations from Transformers (BERT) is a state of
     the art model based on transformers developed by google. It can be pre-trained
     and later fine-tuned for a specific task. we will see fine-tuning in action in
     this post.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 双向编码器表示模型（BERT）是由谷歌开发的基于变换器的最先进模型。它可以进行预训练，然后针对特定任务进行微调。我们将在本文中看到微调的实际操作。
 - en: We will fine-tune BERT on a classification task. The task is to classify the
     sentiment of COVID related tweets.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将对BERT进行分类任务的微调。任务是对与COVID相关的推文进行情感分类。
 - en: Here we are using the HuggingFace library to fine-tune the model. HuggingFace
     makes the whole process easy from text preprocessing to training.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们使用HuggingFace库来微调模型。HuggingFace使整个过程从文本预处理到训练变得简单。
 - en: BERT
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: BERT
 - en: BERT was pre-trained on the BooksCorpus dataset and English Wikipedia. It obtained
     state-of-the-art results on eleven natural language processing tasks.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: BERT在BooksCorpus数据集和英文维基百科上进行了预训练。它在十一项自然语言处理任务上获得了最先进的结果。
 - en: BERT was trained on two tasks simultaneously
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: BERT在两个任务上同时进行训练
 - en: Masked language modelling (MLM) — 15% of the tokens were masked and was trained
     to predict the masked word
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 掩蔽语言建模（MLM）——15%的标记被掩蔽，训练以预测掩蔽的单词
 - en: Next Sentence Prediction(NSP) — Given two sentences A and B, predict whether
     B follows A
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 下一句预测（NSP）——给定两个句子A和B，预测B是否跟在A后面
 - en: BERT is designed to pre-train deep bidirectional representations from an unlabeled
     text by jointly conditioning on both left and right context in all layers.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: BERT旨在通过在所有层中共同条件化左右上下文，从未标记的文本中预训练深度双向表示。
 - en: As a result, the pre-trained BERT model can be finetuned with just one additional
     output layer to create state-of-the-art models for a wide range of tasks, such
     as question answering and language inference, without substantial task-specific
     architecture modifications.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果是，预训练的BERT模型只需通过一个额外的输出层就可以微调，创建适用于广泛任务的最先进模型，例如问答和语言推理，而无需对任务特定的架构进行 substantial
+    modifications。
 - en: Dataset
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 数据集
 - en: We are using the Coronavirus tweets NLP — Text Classification dataset available
     on [Kaggle](https://www.kaggle.com/datatattle/covid-19-nlp-text-classification).
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们使用的是[**Kaggle**](https://www.kaggle.com/datatattle/covid-19-nlp-text-classification)上提供的Coronavirus推文NLP——文本分类数据集。
 - en: The dataset has two files Corona_NLP_test.csv(40k entries) and Corona_NLP_test.csv
     (4k entries).
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据集有两个文件：Corona_NLP_test.csv（4万条记录）和Corona_NLP_test.csv（4千条记录）。
 - en: 'These are the first five entries of training data:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些是训练数据的前五条记录：
 - en: '![Fine-Tuning BERT for Tweets Classification ft. HuggingFace](../Images/b8b81d6ecd8191ec1fcf6b2468cfe7b2.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![使用HuggingFace微调BERT进行推文分类](../Images/b8b81d6ecd8191ec1fcf6b2468cfe7b2.png)'
 - en: 'As you can see we have 5 **features **in our data: UserName, ScreenName Location,
     TweetAt, OriginalTweet, Sentiment, but we are only interested in 2 i.e **OriginalTweet **contains
     the actual tweet and **Sentiment **which are labels for our Tweet.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，我们的数据中有5个**特征**：UserName，ScreenName Location，TweetAt，OriginalTweet，Sentiment，但我们只对其中的2个感兴趣，即**OriginalTweet**包含实际推文，**Sentiment**是我们推文的标签。
 - en: These tweets are classified into 5 categories — ‘Neutral’, ‘Positive’, ‘Extremely
     Negative’, ‘Negative’, ‘Extremely Positive’. Hence the number of **labels **is
     5.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些推文被分为5类——‘中性’，‘积极’，‘极端负面’，‘负面’，‘极端积极’。因此，**标签**的数量是5。
 - en: Loading Data and Preprocessing
+  id: totrans-20
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 数据加载与预处理
 - en: 'We will be using the HuggingFace library for this project. we need to install
     the two modules:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用HuggingFace库进行这个项目。我们需要安装两个模块：
 - en: '[PRE0]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'transformers: HuggingFace implementation of transformers. We can download a
     wide range of pre-trained models'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 变换器：HuggingFace对变换器的实现。我们可以下载各种预训练模型
 - en: 'datasets: Loading the dataset and also different datasets can be downloaded
     that are available of HuggingFace hub'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据集：加载数据集，同时也可以下载HuggingFace hub上提供的不同数据集
 - en: '[PRE1]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Here we are using `load_dataset` from datasets library. `load_dataset` can be
     used to download datasets from the HuggingFace hub or we can load our custom dataset.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们使用来自 datasets 库的`load_dataset`。`load_dataset`可以用来从 HuggingFace hub 下载数据集，或者加载我们自定义的数据集。
 - en: We specified the datatype as CSV, passing file names as dictionaries to `data_files`.
     we are loading our train and test files into the dataset variable.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将数据类型指定为 CSV，将文件名作为字典传递给`data_files`。我们将训练和测试文件加载到数据集变量中。
 - en: 'Here is the output if we print the `dataset` variable:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们打印`dataset`变量，这里是输出结果：
 - en: Preprocessing Data
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 预处理数据
 - en: We will keep it simple and only do 2 pre-processing steps i.e tokenization and
     converting labels into integers.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将保持简单，只做两个预处理步骤，即分词和将标签转换为整数。
 - en: HuggingFace `AutoTokenizer`takes care of the tokenization part. we can download
     the tokenizer corresponding to our model, which is BERT in this case.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: HuggingFace`AutoTokenizer`负责分词部分。我们可以下载与我们模型（即 BERT）对应的分词器。
 - en: BERT tokenizer automatically convert sentences into tokens, numbers and attention_masks
     in the form which the BERT model expects.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: BERT 分词器会自动将句子转换为 BERT 模型所期望的形式，包括 tokens、numbers 和 attention_masks。
 - en: 'e.g: here is an example sentence that is passed through a tokenizer'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如：这是一个通过分词器处理的示例句子
 - en: '[PRE2]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Now as part of the preprocessing steps, we will perform two steps:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在作为预处理步骤的一部分，我们将执行两个步骤：
 - en: Convert Sentiment into an integer
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将情感转换为整数
 - en: Tokenize the tweets
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对推文进行分词
 - en: We will be using `map` function of the dataset which is similar to apply function
     of the pandas data frame. It takes a function as an argument and applies to the
     entire dataset.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用`map`函数，它类似于 pandas 数据框的 apply 函数。它将函数作为参数，并应用于整个数据集。
 - en: In the above code, we defined a method to convert labels into integers and tokenized
     the tweets also dropped the unwanted columns.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述代码中，我们定义了一种将标签转换为整数的方法，并对推文进行了分词，同时删除了不需要的列。
 - en: Now we are all set for the training part.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经为训练部分做好了准备。
 - en: Training
+  id: totrans-41
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 训练
 - en: There are two ways to train the data, either we write our own training loop
     or we can use trainer from the HuggingFace library.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 有两种方法来训练数据，我们可以自己编写训练循环，也可以使用 HuggingFace 库中的 trainer。
 - en: In this case, we will use trainer from the library. To use trainer, first we
     need to define the training arguments like name, num_epochs, batch_size etc.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，我们将使用来自库的 trainer。要使用 trainer，首先需要定义训练参数，例如名称、num_epochs、batch_size 等等。
 - en: Let’s download the BERT model now, which is very simple using the `AutoModelForSequenceClassificatio`
     class.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们下载 BERT 模型，使用 `AutoModelForSequenceClassification` 类，非常简单。
 - en: The classification model downloaded also expects an argument `num_labels` which
     is the number of classes in our data. A linear layer is attached at the end of
     the BERT model to give output equal to the number of classes.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 下载的分类模型也需要一个`num_labels`参数，即我们数据中的类别数量。BERT 模型的末尾附加了一个线性层，以使输出等于类别数量。
 - en: '[PRE3]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The above linear layer is automatically added as the last layer. Since the BERT
     output size is 768 and our data has 5 classes so a linear layer with in_features=768
     and out_features as 5 is added.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述线性层会自动添加为最后一层。由于 BERT 输出大小为 768，我们的数据有 5 个类别，因此添加了一个线性层，in_features=768 和
+    out_features=5。
 - en: Before starting the training, we will split our training data into train and
     evaluation sets. We have 40k in training and 1k in eval set.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开始训练之前，我们将把训练数据拆分为训练集和评估集。我们有 40k 的训练数据和 1k 的评估数据。
 - en: If we are using a HuggingFace trainer we need to import the module `Trainer `and
     pass model, dataset and training arguments to it.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们使用 HuggingFace trainer，则需要导入模块`Trainer`并传递模型、数据集和训练参数。
 - en: That’s it, now we are all set to start the training. We need to call `train `method
     on trainer and training will start
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样，我们现在准备开始训练。我们需要在 trainer 上调用`train`方法，训练将开始。
 - en: '[PRE4]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Training will run for 3 epochs which can be adjusted from the training arguments.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练将进行 3 个周期，这可以通过训练参数进行调整。
 - en: Once training is done we can run `trainer.evalute()` to check the accuracy,
     but before that, we need to import metrics.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦训练完成，我们可以运行`trainer.evaluate()`来检查准确率，但在此之前，我们需要导入指标。
 - en: The datasets library offers a wide range of metrics. We are using accuracy here.
     On our data, we got an accuracy of 83% by training for only 3 epochs.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: datasets 库提供了广泛的指标。我们在这里使用准确率。我们的数据通过训练仅 3 个周期获得了 83% 的准确率。
 - en: Accuracy can be further increased by training for some more time or doing some
     more pre-processing of data like removing mentions from tweets and unwanted clutter,
     but that’s for some other time.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 准确性可以通过多训练一段时间或进一步的数据预处理来提高，例如从推文中删除提及和不必要的杂乱，但这些可以留到其他时间再做。
 - en: Thanks for reading.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢阅读。
 - en: '[My Linkedin](https://www.linkedin.com/in/codistro/)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我的 LinkedIn](https://www.linkedin.com/in/codistro/)'
 - en: '[Colab Notebook](https://github.com/codistro/Articles/blob/main/covid_tweet_classification.ipynb)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Colab 笔记本](https://github.com/codistro/Articles/blob/main/covid_tweet_classification.ipynb)'
 - en: '[HuggingFace](https://huggingface.co/)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[HuggingFace](https://huggingface.co/)'
 - en: '**[Rajan Choudhary](https://www.linkedin.com/in/codistro/)** is a QA Engineer
     at Mcafee with 2+ years experience.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Rajan Choudhary](https://www.linkedin.com/in/codistro/)** 是 Mcafee 的 QA
+    工程师，拥有 2 年以上的经验。'
 - en: '* * *'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-62
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT'
 - en: '* * *'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-67
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[RAG vs Finetuning: Which Is the Best Tool to Boost Your LLM Application?](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[RAG 与微调：哪种工具最能提升你的 LLM 应用？](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)'
 - en: '[Answering Questions with HuggingFace Pipelines and Streamlit](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 HuggingFace Pipelines 和 Streamlit 回答问题](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)'
 - en: '[Simple NLP Pipelines with HuggingFace Transformers](https://www.kdnuggets.com/2023/02/simple-nlp-pipelines-huggingface-transformers.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 HuggingFace Transformers 的简单 NLP Pipelines](https://www.kdnuggets.com/2023/02/simple-nlp-pipelines-huggingface-transformers.html)'
 - en: '[A Simple to Implement End-to-End Project with HuggingFace](https://www.kdnuggets.com/a-simple-to-implement-end-to-end-project-with-huggingface)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个简单实现的端到端 HuggingFace 项目](https://www.kdnuggets.com/a-simple-to-implement-end-to-end-project-with-huggingface)'
 - en: '[HuggingFace Has Launched a Free Deep Reinforcement Learning Course](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[HuggingFace 推出了免费的深度强化学习课程](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)'
 - en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 BERT 分类长文本文档](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'

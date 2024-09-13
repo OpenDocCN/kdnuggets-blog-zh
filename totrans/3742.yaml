@@ -1,61 +1,87 @@
 - en: Natural Language Interface to DataTable
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 自然语言界面到数据表
 - en: 原文：[https://www.kdnuggets.com/2019/06/natural-language-interface-datatable.html](https://www.kdnuggets.com/2019/06/natural-language-interface-datatable.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/06/natural-language-interface-datatable.html](https://www.kdnuggets.com/2019/06/natural-language-interface-datatable.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Yogesh Kulkarni](https://www.linkedin.com/in/yogeshkulkarni), Yati.io**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Yogesh Kulkarni](https://www.linkedin.com/in/yogeshkulkarni), Yati.io**'
 - en: A good amount of structured data is stored in the form of relational databases
     as tables. Considering just one table as a simplified case, even to access the
     values in various cells, one needs to either program the logic or open it in a
     spreadsheet software and find them manually. Won’t it be better if one can just
     query the fields using a natural language, like English.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 大量结构化数据以关系数据库中的表格形式存储。以一个表格作为简化的例子，即使要访问各个单元格中的值，也需要编写逻辑或在电子表格软件中打开并手动查找。如果可以仅通过自然语言（如英语）查询字段，岂不是更好吗？
 - en: For example, if you have table like in **Figure 1**, and it would be nicer to
     just send a query “Which City held Olympics in 2008?” in a chatbot and you would
     get the answer as, “Beijing”. This is far more user-friendly than writing a program
     or manually searching a huge table.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，如果你有一个像**图 1**中那样的表格，那么在聊天机器人中发送一个“2008年哪个城市举办了奥运会？”的查询会更好，你会得到“北京”这样的答案。这比编写程序或手动搜索一个庞大的表格要用户友好得多。
 - en: '![olympics](../Images/fbe88c33f89149d6d59bfafe75a81dca.png)'
+  id: totrans-6
   prefs: []
   type: TYPE_IMG
+  zh: '![olympics](../Images/fbe88c33f89149d6d59bfafe75a81dca.png)'
 - en: 'Figure 1: Wiki Table Questions (Source: Stanford NLP Group Research Blog)'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 1：维基表格问题（来源：斯坦福 NLP 组研究博客）
 - en: The example given above is surely a very simplistic version of the enormous
     possibilities one can imagine for providing natural language interface to the
     datasets or databases. Natural Language Understanding (NLU) is the key technology
     here, which would parse the query in the natural language like English, ‘understand’
     it, and then fire data-format-specific query to fetch the desired answer.  This
     article demonstrates how this can be achieved using Rasa NLU framework.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述例子确实是为数据集或数据库提供自然语言界面的巨大可能性的非常简单版本。自然语言理解（NLU）是关键技术，它会解析自然语言查询（如英语），‘理解’它，然后发出数据格式特定的查询以获取所需的答案。本文演示了如何使用
+    Rasa NLU 框架实现这一点。
 - en: '[Rasa](https://rasa.com/) is an open source chatbot framework. It has two parts,
     ‘NLU’ for understanding intents and entities from the user-text whereas ‘Core’
     is for dialog management. One of the salient points of Rasa framework is that
     its functionalities are machine/deep learning based and are trained locally. There
     is no need to send your data (ie user text) over the net to some hosted service
     for NLU or dialog management.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Rasa](https://rasa.com/) 是一个开源聊天机器人框架。它分为两个部分，‘NLU’用于理解用户文本中的意图和实体，而‘Core’则用于对话管理。Rasa
+    框架的一个显著特点是其功能基于机器/深度学习，并且是在本地训练的。无需将你的数据（即用户文本）发送到某些托管服务进行 NLU 或对话管理。'
 - en: Example Chatbot
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 示例聊天机器人
 - en: Say, you wish to build a General Knowledge chatbot for querying information
     of various countries in the world. Queries like “What’s the population of China?”,
     “What is the area of India?”, etc.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 比如，你希望构建一个通用知识聊天机器人，用于查询世界各国的信息。查询如“中华人民共和国的总人口是多少？”，“印度的面积是多少？”等。
 - en: The [World FactBook](https://www.cia.gov/library/publications/the-world-factbook/) 
     is a wonderful source of such data about the countries. Information is arranged
     in the form of country-wise-webpages, having sections like “Geography”, “Economy”,
@@ -63,16 +89,21 @@
     drop-down list, find “People and Society” section and then you get to see that
     the population of China, which is “1,384,688,986 (July 2018 est.)”. A chatbot
     would be far more effective in such cases.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '[世界概况手册](https://www.cia.gov/library/publications/the-world-factbook/) 是一个关于各国数据的极好来源。信息以国家网页的形式排列，包含“地理”、“经济”等部分。要查找中国的人口，首先需要在下拉列表中滚动到中国，找到“人民与社会”部分，然后你会看到中国的人口为“1,384,688,986（2018年7月估计）”。在这种情况下，聊天机器人会更有效。'
 - en: Data Collection
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据收集
 - en: First important step is to get the data, which is spread across various webpages,
     into a single table. This [KDNuggets Article](/2018/03/web-scraping-python-cia-world-factbook.html)
     explains the process of web scraping, nicely. The output is a table with rows
     as countries and various fields as columns.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: Now we need to build a natural language interface to fields or cells of this
@@ -81,9 +112,11 @@
     named “Population”. To put simply, from the natural language query, we need to
     extract two entities, “Population as Column” and “China as Row” (in the column
     “Country”). Rasa NLU is being used for the entity extraction here.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: Entity Extraction
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -91,17 +124,21 @@
     to pre-defined entity types. Named Entity Recognition (NER) is the supervised
     method to extract the entities, using algorithms such as Conditional Random Fields
     (CRF), etc.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: To train RASA NLU’s NER, we need to provide training data which has sample sentences
     with entities annotated.  Sample training file is shown in **Figure 2**.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: '![RASA NLU](../Images/8c43ea0be0a268b33fffbf3a3566b153.png)'
+  id: totrans-19
   prefs: []
   type: TYPE_IMG
 - en: Here “savings” and “yen” are the actual values of the entity types “source account”
     and “currency” respectively.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
 - en: Building such training data for the given table, would again be a manual and
@@ -109,133 +146,168 @@
     rows and columns of the table . There is no need to provide examples of all the
     columns or rows, as the abstract pattern is learnt and not the hardcoded actual
     values in the cells.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: 'Code sample for generation of training file can be seen below:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Although only two sentence formats are shown above, one can add more variations.
     The automatically generated NLU training file looks like:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Using the training data, NER model is trained. When a user query comes, the
     model is then able to extract “row” and “column” names. With both, one can locate
     the value in the given table. The value is returned to the user.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: 'Sample conversation workflow is shown below:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: '![Chatbot conversation](../Images/352c7696999f11ca4d0b8612156fe833.png)Source
     code of the chatbot can be found at "[DataFrame Chatbot](https://github.com/yogeshhk/DataFrameChatbot)".'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: Limitations and Future Scope
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: 'The chatbot example shown is very simplistic. It can be enhanced further with
     following capabilities:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: Queries across multiple tables.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Queries with aggregations and relations, like “Which countries have more than
     100 Million population and GDP per capita less than $1000?”.
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Partial/Full SQL support ie to convert natural language query into an equivalent
     SQL query.
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Conclusion
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: This article demonstrates building of a chatbot to interface with a datatable
     in a user-friendly manner. It has varied applications for the domains where such
     tabular data is available.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Yogesh Kulkarni](https://www.linkedin.com/in/yogeshkulkarni)** is a
     Data Science Instructor-Researcher at Yati.io.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: '[Build Your First Chatbot Using Python & NLTK](/2019/05/build-chatbot-python-nltk.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[TNLP –  Building a Question Answering Model](/2018/04/nlp-question-answering-model.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Using Deep Learning To Extract Knowledge From Job Descriptions](/2017/05/deep-learning-extract-knowledge-job-descriptions.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-42
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[ChatGPT CLI: Transform Your Command-Line Interface Into ChatGPT](https://www.kdnuggets.com/2023/07/chatgpt-cli-transform-commandline-interface-chatgpt.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Introducing DataCamps AI-Powered Chat Interface: DataLab](https://www.kdnuggets.com/introducing-datacamps-ai-powered-chat-interface-datalab)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[N-gram Language Modeling in Natural Language Processing](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Natural Language Processing Key Terms, Explained](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
