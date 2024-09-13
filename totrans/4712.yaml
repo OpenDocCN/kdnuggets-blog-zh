@@ -3,19 +3,23 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 NumPy 和图像分类的人工神经网络实现
 - en: 原文：[https://www.kdnuggets.com/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html](https://www.kdnuggets.com/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html](https://www.kdnuggets.com/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html?page=2#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html?page=2#comments)'
 - en: '![](../Images/5f757b54b8113b34e602f5c2cef47590.png)'
   id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5f757b54b8113b34e602f5c2cef47590.png)'
 - en: 'This tutorial builds artificial neural network in Python using NumPy from scratch
     in order to do an image classification application for the Fruits360 dataset.
     Everything (i.e. images and source codes) used in this tutorial, rather than the
@@ -27,11 +31,16 @@
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程使用 NumPy 从零开始构建人工神经网络，以实现 Fruits360 数据集的图像分类应用。教程中使用的所有内容（即图像和源代码），除了颜色的
+    Fruits360 图像外，均为我所著书籍的独占版权，书名为 ***"Ahmed Fawzy Gad 'Practical Computer Vision
+    Applications Using Deep Learning with CNNs'. Dec. 2018, Apress, 978-1-4842-4167-7"***。这本书可以在
+    Springer 上找到，链接为：[https://springer.com/us/book/9781484241660](https://springer.com/us/book/9781484241660)。
 - en: 'The source code used in this tutorial is available in my GitHub page here:
     [https://github.com/ahmedfgad/NumPyANN](https://github.com/ahmedfgad/NumPyANN)'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程中使用的源代码可以在我的 GitHub 页面找到，链接为：[https://github.com/ahmedfgad/NumPyANN](https://github.com/ahmedfgad/NumPyANN)
 - en: The example being used in the book is about classification of the Fruits360
     image dataset using artificial neural network (ANN). The example does not assume
     that the reader neither extracted the features nor implemented the ANN as it discusses
@@ -44,11 +53,15 @@
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 书中使用的示例涉及使用人工神经网络（ANN）对 Fruits360 图像数据集进行分类。该示例不假设读者已经提取特征或实现了 ANN，因为它讨论了适合使用的特征集以及如何从零开始在
+    NumPy 中实现 ANN。Fruits360 数据集包含60个水果类别，如苹果、番石榴、鳄梨、香蕉、樱桃、枣、猕猴桃、桃子等。为了简化问题，它仅处理4个选定的类别：Braeburn
+    苹果、Meyer 柠檬、芒果和覆盆子。每个类别大约有491张用于训练的图像和162张用于测试的图像。图像大小为100x100像素。
 - en: Feature Extraction
   id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 特征提取
 - en: The book starts by selecting the suitable set of features in order to achieve
     the highest classification accuracy. Based on the sample images from the 4 selected
     classes shown below, it seems that their color is different. This is why the color
@@ -56,10 +69,12 @@
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 这本书首先通过选择合适的特征集来实现最高的分类准确率。根据下面显示的4个选定类别的样本图像，似乎它们的颜色不同。这就是为什么颜色特征适合用于此任务的原因。
 - en: '![](../Images/5144782453ae88a2f3f04a8244732c5f.png)'
   id: totrans-9
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5144782453ae88a2f3f04a8244732c5f.png)'
 - en: The RGB color space does not isolates color information from other types of
     information such as illumination. Thus, if the RGB is used for representing the
     images, the 3 channels will be involved in the calculations. For such a reason,
@@ -70,10 +85,13 @@
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: RGB 颜色空间不会将颜色信息与其他类型的信息（如光照）隔离开来。因此，如果使用 RGB 来表示图像，那么三个通道将参与计算。因此，最好使用将颜色信息隔离到单个通道中的颜色空间，如
+    HSV。在这种情况下，颜色通道是色调通道（H）。下图显示了之前呈现的4个样本的色调通道。我们可以注意到每张图像的色调值与其他图像不同。
 - en: '![](../Images/95d2d57c5c54bab7efe5c74f5d9c5d5f.png)'
   id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/95d2d57c5c54bab7efe5c74f5d9c5d5f.png)'
 - en: The hue channel size is still 100x100\. If the entire channel is applied to
     the ANN, then the input layer will have 10,000 neurons. The network is still huge.
     In order to reduce the amounts of data being used, we can use the histogram for
@@ -175,42 +193,52 @@
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
   id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 关于这个话题的更多内容
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
   id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为出色数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
 - en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
   id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个初学者数据科学家应掌握的 6 个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
 - en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
   id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
 - en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
   id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用管道编写清晰的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
 - en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
   id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用卷积神经网络 (CNNs) 进行图像分类](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
   id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并通过找到目标来……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
