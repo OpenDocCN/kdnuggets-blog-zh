@@ -1,251 +1,355 @@
 - en: 'K-means Clustering with Dask: Image Filters for Cat Pictures'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2019/06/k-means-clustering-dask-image-filters.html](https://www.kdnuggets.com/2019/06/k-means-clustering-dask-image-filters.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
 - en: '**By [Luciano Strika](http://www.datastuff.tech), MercadoLibre**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: '![Picture of a kitten. It will be compressed using K means clustering.](../Images/d0f4d993a98270043bb07a9e804b179d.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
 - en: Applying filters to images is not a new concept to anyone. We take a picture,
     make a few changes to it, and now it looks cooler. But where does Artificial Intelligence
     come in? Let’s try out a fun use case of **Unsupervised Machine Learning** with
     K Means Clustering in Python.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: I’ve written before about **K Means Clustering**, so I will assume that you’re **familiar** with
     the algorithm. If you’re not, this is the [in-depth introduction that I wrote](http://www.datastuff.tech/machine-learning/k-means-clustering-unsupervised-learning-for-recommender-systems/).
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
 - en: Moreover, I also tried my hand at **image compression** (well, reconstruction)
     with [autoencoders](http://www.datastuff.tech/machine-learning/autoencoder-deep-learning-tensorflow-eager-api-keras/),
     to varying degrees of success.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: However, this time, my goal is **not to reconstruct** the best possible image,
     but just to see the effects of **recreating a picture** with the least possible
     colors.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: Instead of making the picture look as similar to the original as possible, I
     just want us to look at it and say “neat!”.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: So how do we do this? I’m glad you asked.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: How to do image filters with K-means Clustering
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: First of all, it’s always good to remember an **image** is just a **vector of
     pixels**. Each pixel is a tuple of three integer values between 0 and 255 (an
     unsigned byte), which represent that pixel’s color’s RGB values.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: We want to use K-means clustering to find the* k ***colors** that best **characterize
     an image**. That just means we could treat each **pixel** as a **single data point** (in
     3-dimensional space), and cluster them.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: So first, we’ll want to turn an image into a** vector of pixels** in Python.
     Here’s how we do it.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
 - en: As an aside, I don’t think the *vector_of_pixels* function needs to use a Python
     list. I’m sure there has to be some way to **flatten a numpy array**, I just couldn’t
     find any (at least not one that did it in the order I wanted).
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
 - en: If you can think of any way, let me know in the comments!
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
 - en: The next step is **fitting** the model to the image, so that it **clusters the
     pixels** into *k *colors. Then, it’s just a matter of assigning the corresponding
     cluster color to each position in the image.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: 'For instance, maybe our pic has only three colors: two reddish ones and a greenish
     one. If we fit that to 2 clusters, all the reddish pixels would turn some different
     shade of red (getting clustered together), and the other ones would turn into
     some greenish one.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
 - en: But enough with the explanations, let’s see the program in action!
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 但解释够了，让我们看看程序的实际效果！
 - en: As usual, you are free to run it yourself with any pic you want, here’s the [GitHub
     repository](https://github.com/StrikingLoo/K-means-image-compression) with the
     code.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 和往常一样，你可以用任何你想要的图片自行运行，以下是带有代码的[GitHub 仓库](https://github.com/StrikingLoo/K-means-image-compression)。
 - en: The results
+  id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结果
 - en: We will apply the filter to pictures of kittens, taken from the awesome “Cats
     vs Dogs” [kaggle dataset](https://www.kaggle.com/c/dogs-vs-cats).
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将把滤镜应用于小猫的图片，这些图片取自令人惊叹的“Cats vs Dogs”[kaggle 数据集](https://www.kaggle.com/c/dogs-vs-cats)。
 - en: 'We’ll start with a picture of a cat, and apply the filter with different values
     for *k*. Here’s the original picture:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将从一张猫的图片开始，并使用不同的*k*值应用滤镜。以下是原始图片：
 - en: '![Picture of a kitten. It will be compressed using K means clustering.](../Images/02437fb057943adcc789ae8c047b6b57.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![一张小猫的图片。它将使用K均值聚类进行压缩。](../Images/02437fb057943adcc789ae8c047b6b57.png)'
 - en: First, let’s check how many colors this picture originally had.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们来检查一下这张图片最初有多少种颜色。
 - en: With just one line of *Numpy*, we count the unique values a pixel takes on this
     picture. This image in particular has **243 different colors**, even though it
     has a total of **166167 pixels**.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅用一行*Numpy*代码，我们计算了这张图片上像素的唯一值。这张图片特别有**243种不同颜色**，尽管它总共有**166167个像素**。
 - en: Now, let’s see the result of clustering it to 2, 5 and 10 different colors only.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们看看将其聚类为2、5和10种不同颜色后的结果。
 - en: '![cat image](../Images/6abccd2057d9dfedb5424988395cf7d6.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![猫的图片](../Images/6abccd2057d9dfedb5424988395cf7d6.png)'
 - en: With only two colors, all it’s doing is marking the darkest and lightest areas.
     This could however be useful if you’re an artist, drawing something in black and
     white (with ink, for instance) and would like to see what your reference’s outlines
     look like.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 只有两种颜色，它所做的只是标记最暗和最亮的区域。不过，如果你是艺术家，正在用黑白（例如墨水）绘制某些东西，并希望看到参考图像的轮廓，这可能会很有用。
 - en: '![Figure](../Images/55971350b7a0f1861ef6c9fc9935b1d4.png)With only 5 different
     colors, the cat is already recognizable!![This kitten picture was compressed using
     K means Clustering.](../Images/3ec93a8e54a7b5bb0554d1b33de1e723.png)The 10 colors
     picture may look a bit trippy, but it represents the original’s content pretty
     clearly.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '![图像](../Images/55971350b7a0f1861ef6c9fc9935b1d4.png)只有5种不同的颜色，这只猫已经可以辨认出来了！！[这只小猫的图片是使用K均值聚类压缩的。](../Images/3ec93a8e54a7b5bb0554d1b33de1e723.png)10种颜色的图片可能看起来有点迷幻，但它比较清晰地展示了原图的内容。'
 - en: Did you notice a trend? Each color we add has diminishing returns. The difference
     between having 2 colors and having 5, is a lot more than the difference between
     5 and 10\. However with 10 colors, the flat areas are smaller, and we have more
     granularity. Moving on to 15 and 24 colors!
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 你注意到什么趋势了吗？我们添加的每一种颜色的回报递减。拥有2种颜色和5种颜色之间的差别远大于5种和10种之间的差别。然而，10种颜色时，平坦区域更小，细节更丰富。接下来看看15种和24种颜色！
 - en: '![Compressed picture of a kitten.](../Images/a048d65e65c7bdbbe0a10aeffb618639.png)![Compressed
     picture of a kitten.](../Images/3054055891015af45daf4acd7511ce6c.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![小猫的压缩图片。](../Images/a048d65e65c7bdbbe0a10aeffb618639.png)![小猫的压缩图片。](../Images/3054055891015af45daf4acd7511ce6c.png)'
 - en: Though it’s clear that the above image is filtered with 24 colors (10% of the
     original amount), we are representing the cat well enough and to a certain level
     of detail.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管很明显，上面的图片使用了24种颜色的滤镜（原始数量的10%），但我们足够好地展示了猫，并达到了一定的细节水平。
 - en: 'Moving on to a different picture: Here’s the original (256 different colors)
     and here’s a compressed one (24 colors again).'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 继续看另一张图片：这是原图（256种不同颜色），这是压缩后的图片（24种颜色）。
 - en: '![wo pictures of the same white kitten side by side. One was compressed using
     K means Clustering.](../Images/c424ebe8bd42fd56e98c70ef317bcb56.png)256 colors
     vs 24 colors. Notice any difference?'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '![两个相同的白色小猫并排显示。其中一个是用K均值聚类压缩的。](../Images/c424ebe8bd42fd56e98c70ef317bcb56.png)256种颜色与24种颜色。注意到有什么区别吗？'
 - en: As an interesting note, the “compressed” image weighs 18KB and the uncompressed
     one 16KB. I don’t really know why this is, since compressors are pretty complicated
     beasts, but would love to read your theories in the comments.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 有趣的是，“压缩”图像的大小为18KB，而未压缩的图像为16KB。我不太清楚为什么会这样，因为压缩器是相当复杂的，但希望看到你们在评论中的理论。
 - en: Conclusions
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: We were able to make new images with only 10% of the original’s colors, which
     looked very similar to them. We also got some cool looking filters thanks to K
     means clustering. Can you think of any other fun application for clustering? Do
     you think other clustering techniques could have yielded more interesting results?
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们能够仅用原图 10% 的颜色生成新图像，且看起来非常相似。得益于 K-means 聚类，我们还获得了一些酷炫的滤镜。你能想到其他有趣的聚类应用吗？你认为其他聚类技术会产生更有趣的结果吗？
 - en: If you want to answer any of these questions, feel free to contact me on [Twitter](https://twitter.com/strikingloo), [Medium](https://medium.com/@strikingloo)
     or [Dev.to](http://www.dev.to/strikingloo).
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想回答这些问题，可以通过 [Twitter](https://twitter.com/strikingloo)、[Medium](https://medium.com/@strikingloo)
+    或 [Dev.to](http://www.dev.to/strikingloo) 与我联系。
 - en: '**Bio: [Luciano Strika](http://www.datastuff.tech)** is a computer science
     student at Buenos Aires University, and a data scientist at MercadoLibre. He also
     writes about machine learning and data on [**www.datastuff.tech**](http://www.datastuff.tech).'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [Luciano Strika](http://www.datastuff.tech)** 是布宜诺斯艾利斯大学的计算机科学学生，兼任 MercadoLibre
+    的数据科学家。他还在[**www.datastuff.tech**](http://www.datastuff.tech)撰写有关机器学习和数据的文章。'
 - en: '[Original](http://www.datastuff.tech/machine-learning/k-means-clustering-with-dask-editing-pictures-of-kittens).
     Reposted with permission.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](http://www.datastuff.tech/machine-learning/k-means-clustering-with-dask-editing-pictures-of-kittens)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[K-Means Clustering: Unsupervised Learning for Recommender Systems](/2019/04/k-means-clustering-unsupervised-learning-recommender-systems.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[K-Means 聚类：推荐系统的无监督学习](/2019/04/k-means-clustering-unsupervised-learning-recommender-systems.html)'
 - en: '[Boost Your Image Classification Model](/2019/05/boost-your-image-classification-model.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提升你的图像分类模型](/2019/05/boost-your-image-classification-model.html)'
 - en: '[Introducing Dask-SearchCV: Distributed hyperparameter optimization with Scikit-Learn](/2018/12/solve-image-classification-problem-quickly-easily.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[介绍 Dask-SearchCV：使用 Scikit-Learn 进行分布式超参数优化](/2018/12/solve-image-classification-problem-quickly-easily.html)'
 - en: '* * *'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-47
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-52
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Clustering Unleashed: Understanding K-Means Clustering](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[聚类释放：理解 K-Means 聚类](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)'
 - en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[K-means 聚类的质心初始化方法](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
 - en: '[What is K-Means Clustering and How Does its Algorithm Work?](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是 K-Means 聚类及其算法如何工作？](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)'
 - en: '[Hands-On with Unsupervised Learning: K-Means Clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动手实践无监督学习：K-Means 聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
 - en: '[A Brief Introduction to Kalman Filters](https://www.kdnuggets.com/2022/12/brief-introduction-kalman-filters.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[卡尔曼滤波器简要介绍](https://www.kdnuggets.com/2022/12/brief-introduction-kalman-filters.html)'
 - en: '[Introduction to Clustering in Python with PyCaret](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 PyCaret 在 Python 中进行聚类介绍](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)'

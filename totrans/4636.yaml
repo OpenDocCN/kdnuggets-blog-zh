@@ -3,62 +3,77 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Numpy 加速你的 Python 代码的一个简单技巧
 - en: 原文：[https://www.kdnuggets.com/2019/06/speeding-up-python-code-numpy.html](https://www.kdnuggets.com/2019/06/speeding-up-python-code-numpy.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/06/speeding-up-python-code-numpy.html](https://www.kdnuggets.com/2019/06/speeding-up-python-code-numpy.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)![figure-name](../Images/3dca2a2ec5dce62853868c8be29e6f66.png)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)![figure-name](../Images/3dca2a2ec5dce62853868c8be29e6f66.png)'
 - en: Python is huge.
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 非常庞大。
 - en: Over the past several years the popularity of Python has grown rapidly. A big
     part of that has been the rise of Data Science, Machine Learning, and AI, all
     of which have high-level Python libraries to work with!
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在过去几年中，Python 的受欢迎程度迅速增长。其重要原因之一是数据科学、机器学习和人工智能的兴起，这些领域都有高层次的 Python 库可供使用！
 - en: '* * *'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前 3 个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: When using Python for those types of work, it’s often necessary to work with
     very large datasets. Those large datasets get read directly into memory, and are
     stored and processed as Python arrays, lists, or dictionaries.
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在使用 Python 进行这些工作时，通常需要处理非常大的数据集。这些大型数据集直接读取到内存中，并作为 Python 数组、列表或字典进行存储和处理。
 - en: Working with such huge arrays can be time consuming; really that’s just the
     nature of the problem. You have thousands, millions, or even billions of data
     points. Every microsecond added to the processing of a single one of those points
@@ -67,20 +82,24 @@
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 处理如此庞大的数组可能会很耗时；这实际上就是问题的本质。你有成千上万、数百万甚至数十亿的数据点。每个数据点处理过程中增加的微秒会因为数据规模的巨大而显著拖慢你的速度。
 - en: The slow way
   id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 慢速方式
 - en: The slow way of processing large datasets is by using raw Python. We can demonstrate
     this with a very simple example.
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 处理大型数据集的慢速方式是使用原始 Python。我们可以通过一个非常简单的例子来演示这一点。
 - en: The code below multiplies the value of 1.0000001 by itself, 5 million times!
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面的代码将 1.0000001 的值自乘 500 万次！
 - en: '[PRE0]'
   id: totrans-16
   prefs: []
@@ -93,20 +112,25 @@
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 我家里有一台相当不错的 CPU，Intel i7–8700k，加上 32GB 的 3000MHz RAM。尽管如此，将这 500 万个数据点相乘仍然需要
+    0.21367 秒。如果我将`num_multiplies`的值改为 10 亿次，处理时间变成了 43.24129 秒！
 - en: Let’s try another one with an array.
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们再试一个带有数组的例子。
 - en: We’ll build a Numpy array of size 1000x1000 with a value of 1 at each and again
     try to multiple each element by a float 1.0000001\. The code is shown below.
   id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将构建一个大小为 1000x1000 的 Numpy 数组，每个元素的值为 1，再尝试将每个元素乘以一个浮点数 1.0000001。代码如下。
 - en: On the same machine, multiplying those array values by 1.0000001 in a regular
     floating point loop took 1.28507 seconds.
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 在同一台机器上，将这些数组值乘以 1.0000001 的常规浮点循环耗时 1.28507 秒。
 - en: '[PRE1]'
   id: totrans-21
   prefs: []
@@ -117,17 +141,20 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是矢量化？
 - en: Numpy is designed to be efficient with matrix operations. More specifically,
     most processing in Numpy is *vectorized*.
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: Numpy 被设计成在矩阵操作中高效。更具体地说，大多数 Numpy 中的处理都是*矢量化的*。
 - en: Vectorization involves expressing mathematical operations, such as the multiplication
     we’re using here, as occurring on entire arrays rather than their individual elements
     (as in our for-loop).
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 矢量化涉及将数学运算，如我们在这里使用的乘法，表示为作用于整个数组，而不是它们的单个元素（如我们的 for 循环）。
 - en: With vectorization, the underlying code is parallelized such that the operation
     can be run on multiply array elements at once, rather than looping through them
     one at a time. As long as the operation you are applying does not rely on any
@@ -136,60 +163,71 @@
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过矢量化，底层代码被并行化，以便操作可以在多个数组元素上同时运行，而不是一个一个地遍历它们。只要你应用的操作不依赖于其他数组元素，即“状态”，那么矢量化将给你带来一些良好的加速效果。
 - en: Looping over Python arrays, lists, or dictionaries, can be slow. Thus, vectorized
     operations in Numpy are mapped to highly optimized C code, making them much faster
     than their standard Python counterparts.
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 遍历 Python 数组、列表或字典可能会很慢。因此，Numpy 中的矢量化操作被映射到高度优化的 C 代码，使它们比标准 Python 对应操作快得多。
 - en: The fast way
   id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 快速方法
 - en: Here’s the fast way to do things — by using Numpy the way it was *designed* to
     be used.
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是做事的快速方法——按照 Numpy 被*设计*的方式来使用它。
 - en: 'There’s a couple of points we can follow when looking to speed things up:'
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在寻求加速的过程中，我们可以遵循几个要点：
 - en: If there’s a for-loop over an array, there’s a good chance we can replace it
     with some built-in Numpy function
   id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果对数组进行 for 循环，那么很有可能我们可以用一些内置的 Numpy 函数来替代它
 - en: If we see any type of math, there’s a good chance we can replace it with some
     built-in Numpy function
   id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果我们看到任何类型的数学运算，很有可能我们可以用一些内置的 Numpy 函数来替代它
 - en: Both of these points are really focused on replace non-vectorized Python code
     with optimised, vectorized, low-level C code.
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 这两个要点都非常关注将非矢量化的 Python 代码替换为优化过的、矢量化的低级 C 代码。
 - en: Check out the fast version of our first example from before, this time with
     1 billion multiplications.
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看我们之前第一个示例的快速版本，这次进行了 10 亿次乘法运算。
 - en: 'We’ve done something very simple: we saw that we had a for-loop in which we
     were repeating the same mathematical operation many times. That should trigger
     immediately that we should go look for a Numpy function that can replace it.'
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们做了一件非常简单的事情：我们发现有一个 for 循环中重复了多次相同的数学操作。这应该立即提示我们去寻找可以替代它的 Numpy 函数。
 - en: We found one — the `power` function which simply applies a certain power to
     an input value. The dramatically sped of the code to run in 7.6293e-6 seconds — that’s
     a
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们找到了一种——`power` 函数，它简单地对输入值应用一定的幂。代码运行速度大幅提升至 7.6293e-6 秒——这就是一个
 - en: '[PRE2]'
   id: totrans-36
   prefs: []
@@ -201,17 +239,20 @@
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 将值乘入 Numpy 数组的想法非常类似。我们看到我们使用了双重 for 循环，并且应该立即意识到应该有更快的方法。
 - en: Conveniently, Numpy will automatically vectorise our code if we multiple our
     1.0000001 scalar directly. So, we can write our multiplication in the same way
     as if we were multiplying by a Python list.
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 方便的是，如果我们直接将 1.0000001 标量相乘，Numpy 会自动对我们的代码进行矢量化。因此，我们可以像对待 Python 列表一样编写乘法操作。
 - en: The code below demonstrates this and runs in 0.003618 seconds — that’s a 355X
     speedup!
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码演示了这一点，并在 0.003618 秒内运行——这是 355 倍的加速！
 - en: '[PRE3]'
   id: totrans-40
   prefs: []
@@ -222,46 +263,58 @@
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 喜欢学习吗？
 - en: Follow me on[ twitter](https://twitter.com/GeorgeSeif94) where I post all about
     the latest and greatest AI, Technology, and Science! Connect with me on [LinkedIn](https://www.linkedin.com/in/georgeseif/) too!
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 [twitter](https://twitter.com/GeorgeSeif94) 上关注我，我会发布关于最新和最棒的 AI、技术和科学的内容！也可以在
+    [LinkedIn](https://www.linkedin.com/in/georgeseif/) 上与我联系！
 - en: Recommended Reading
   id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 推荐阅读
 - en: Want to learn more about coding in Python? The [***Python Crash Course***](https://amzn.to/2H1JIDw)book
     is the best resource out there for learning how to code in Python!
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 想了解更多关于 Python 编程的内容吗？[***Python Crash Course***](https://amzn.to/2H1JIDw) 书籍是学习
+    Python 编程的最佳资源！
 - en: And just a heads up, I support this blog with Amazon affiliate links to great
     books, because sharing great books helps everyone! As an Amazon Associate I earn
     from qualifying purchases.
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 另外提醒一下，我通过亚马逊联盟链接支持这个博客，因为分享好书对大家都有帮助！作为亚马逊会员，我从合格的购买中获得收益。
 - en: '**Bio: [George Seif](https://towardsdatascience.com/@george.seif94)** is a
     Certified Nerd and AI / Machine Learning Engineer.'
   id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [George Seif](https://towardsdatascience.com/@george.seif94)** 是一位认证的极客和
+    AI / 机器学习工程师。'
 - en: '[Original](https://towardsdatascience.com/one-simple-trick-for-speeding-up-your-python-code-with-numpy-1afc846db418).
     Reposted with permission.'
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/one-simple-trick-for-speeding-up-your-python-code-with-numpy-1afc846db418)。经许可转载。'
 - en: '**Related:**'
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Why You Should Start Using .npy Files More Often](/2018/04/start-using-npy-files-more-often.html)'
   id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么你应该更频繁地使用 .npy 文件](/2018/04/start-using-npy-files-more-often.html)'
 - en: '[Why You Should Forget ‘for-loop’ for Data Science Code and Embrace Vectorization](/2017/11/forget-for-loop-data-science-code-vectorization.html)'
   id: totrans-50
   prefs:
