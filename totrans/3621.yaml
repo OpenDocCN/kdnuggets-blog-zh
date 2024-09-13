@@ -1,104 +1,148 @@
 - en: Machine learning is going real-time
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 机器学习正在走向实时
 - en: 原文：[https://www.kdnuggets.com/2021/01/machine-learning-real-time.html](https://www.kdnuggets.com/2021/01/machine-learning-real-time.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/01/machine-learning-real-time.html](https://www.kdnuggets.com/2021/01/machine-learning-real-time.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Chip Huyen](https://huyenchip.com/), ML Production at Snorkel AI, Teaching
     at Stanford**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Chip Huyen](https://huyenchip.com/)撰写，Snorkel AI的ML生产，斯坦福大学讲师**。'
 - en: '![Real Time](../Images/58a4de630b7ab8bbc230e0e05f8d8a0a.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![实时](../Images/58a4de630b7ab8bbc230e0e05f8d8a0a.png)'
 - en: After talking to machine learning and infrastructure engineers at major Internet
     companies across the US, Europe, and China, I noticed two groups of companies.
     One group has made significant investments (hundreds of millions of dollars) into
     infrastructure to allow real-time machine learning and has already seen returns
     on their investments. Another group still wonders if there’s value in real-time
     ML.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在与来自美国、欧洲和中国主要互联网公司的机器学习和基础设施工程师交流后，我注意到两个公司群体。一个群体在基础设施上投入了大量资金（数亿美元），以实现实时机器学习，并且已经看到了投资回报。另一个群体仍在怀疑实时机器学习是否有价值。
 - en: There seems to be little consensus on what real-time ML means, and there hasn’t
     been a lot of in-depth discussion on how it’s done in the industry. In this post,
     I want to share what I’ve learned after talking to about a dozen companies that
     are doing it.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于实时机器学习的定义似乎没有一致的看法，也没有很多关于它在行业中如何实现的深入讨论。在这篇文章中，我想分享一下在与大约十家公司交流后，我学到的东西。
 - en: There are two levels of real-time machine learning that I’ll go over in this
     post.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文将介绍两个实时机器学习的级别。
 - en: 'Level 1: Your ML system makes predictions in real-time (online predictions).'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Level 1：你的机器学习系统实时进行预测（在线预测）。
 - en: 'Level 2: Your system can incorporate new data and update your model in real-time
     (online learning).'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Level 2：你的系统可以实时地（在线学习）纳入新数据并更新模型。
 - en: I use “model” to refer to the machine learning model and “system” to refer to
     the infrastructure around it, including data pipeline and monitoring systems.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 我使用“模型”来指代机器学习模型，使用“系统”来指代围绕它的基础设施，包括数据管道和监控系统。
 - en: 'Level 1: Online predictions - your system can make predictions in real-time'
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Level 1：在线预测——你的系统可以实时进行预测
 - en: '***Real-time** here is defined to be in the order of milliseconds to seconds.*'
+  id: totrans-12
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '***实时***在这里定义为在毫秒到秒的范围内。'
 - en: '**Use cases**'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**用例**'
 - en: Latency matters, especially for user-facing applications. In 2009, Google’s
     experiments demonstrated that [increasing web search latency 100 to 400 ms reduces
     the daily number of searches per user by 0.2% to 0.6%](https://services.google.com/fh/files/blogs/google_delayexp.pdf).
     In 2019, [Booking.com found that an increase of 30% in latency cost about 0.5%
     in conversion rates — “a relevant cost for our business.”](https://blog.acolyer.org/2019/10/07/150-successful-machine-learning-models/)
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 延迟很重要，特别是对于用户面向的应用程序。在2009年，谷歌的实验表明，[将网页搜索延迟增加100到400毫秒会使用户每天的搜索次数减少0.2%到0.6%](https://services.google.com/fh/files/blogs/google_delayexp.pdf)。在2019年，[Booking.com发现延迟增加30%大约会导致0.5%的转化率下降——“这是对我们业务的一个相关成本。”](https://blog.acolyer.org/2019/10/07/150-successful-machine-learning-models/)
 - en: No matter how great your ML models are, if they take just milliseconds too long
     to make predictions, users are going to click on something else.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 无论你的机器学习模型多么出色，如果它们在预测时仅仅多花费了几毫秒，用户就会去点击其他东西。
 - en: '**Problems with batch predictions**'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**批量预测的问题**'
 - en: One non-solution is to avoid making predictions online. You can generate predictions
     in a batch offline, store them (e.g., in SQL tables), and pull out pre-computed
     predictions when needed.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 一种非解决方案是避免在线进行预测。你可以离线批量生成预测，存储它们（例如，存储在 SQL 表中），并在需要时提取预先计算好的预测结果。
 - en: This can work when the input space is finite – you know exactly how many possible
     inputs to make predictions for. One example is when you need to generate movie
     recommendations for your users – you know exactly how many users there are. So
     you predict a set of recommendations for each user periodically, such as every
     few hours.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 当输入空间是有限的时，这种方法可以奏效——你确切知道有多少个可能的输入需要进行预测。一个例子是当你需要为用户生成电影推荐时——你确切知道有多少用户。因此，你可以定期（例如每几小时）为每个用户预测一组推荐结果。
 - en: To make their user input space finite, many apps make their users choose from
     categories instead of entering wild queries. For example, if you go to TripAdvisor,
     you first have to pick a predefined metropolis area instead of being able to enter
     just any location.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了使用户输入空间有限，许多应用程序要求用户从类别中选择，而不是输入任意查询。例如，如果你访问TripAdvisor，你首先必须选择一个预定义的大都市区域，而不能直接输入任何位置。
 - en: This approach has many limitations. TripAdvisor results are okay within their
     predefined categories, such as **“Restaurants”** in **“San Francisco,”** but are
     pretty bad when you try to enter wild queries like **“high rating Thai restaurants
     in Hayes Valley.”**
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种方法有许多限制。TripAdvisor的结果在其预定义类别中还不错，如**“餐厅”**在**“旧金山”**，但当你尝试输入诸如**“海斯谷高评分泰国餐厅”**这样的任意查询时，效果就很差。
 - en: '![](../Images/23367ba14d3d6d5bcc84a86eddbc7ce9.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/23367ba14d3d6d5bcc84a86eddbc7ce9.png)'
 - en: Limitations caused by batch predictions exist even in more technologically progressive
     companies like Netflix. Say you’ve been watching a lot of horrors lately, so when
     you first log into Netflix, horror movies dominate recommendations. But you’re
@@ -106,14 +150,18 @@
     Netflix should learn and show you more comedy in your list of their recommendations,
     right? But it can’t update the list until the next time batch recommendations
     are generated.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 批量预测所造成的限制即使在像Netflix这样的技术进步公司中也存在。比如你最近看了很多恐怖片，所以当你第一次登录Netflix时，恐怖片占据了推荐列表。但今天你心情不错，于是你搜索“喜剧”并开始浏览喜剧分类。Netflix应该学习并在你的推荐列表中显示更多喜剧内容，对吗？但它不能在下一次生成批量推荐之前更新列表。
 - en: In the two examples above, batch predictions lead to decreases in user experience
     (which is tightly coupled with user engagement/retention), not catastrophic failures.
     Other examples are ad ranking, Twitter’s trending hashtag ranking, Facebook’s
     newsfeed ranking, estimating the time of arrival, etc.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述两个例子中，批量预测导致用户体验下降（这与用户参与度/保留度密切相关），而非灾难性失败。其他例子包括广告排名、Twitter的热门话题排名、Facebook的新闻动态排名、到达时间估算等。
 - en: There are also many applications that, without online predictions, would lead
     to catastrophic failures or just wouldn’t work. Examples include high-frequency
     trading, autonomous vehicles, voice assistants, unlocking your phones using face/fingerprints,
@@ -121,54 +169,78 @@
     fraudulent transaction that happened 3 hours ago is still better than not detecting
     it at all, but being able to detect it in real-time can prevent it from going
     through.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 还有许多应用程序如果没有在线预测，将导致灾难性的失败或根本无法正常工作。例如，高频交易、自动驾驶汽车、语音助手、使用面部/指纹解锁手机、老年人跌倒检测、欺诈检测等。能够检测到三小时前发生的欺诈交易总比根本无法检测到要好，但能够实时检测到可以防止欺诈交易的发生。
 - en: Switching from batch predictions to real-time predictions allows you to use
     dynamic features to make more relevant predictions. Static features are information
     that changes slowly or rarely – age, gender, job, neighborhood, etc. Dynamic features
     are features based on what’s happening right now – what you’re watching, what
     you’ve just liked, etc. Knowing a user’s interests right now will allow your systems
     to make recommendations much more relevant to them.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 从批量预测切换到实时预测可以让你使用动态特征来做出更相关的预测。静态特征是变化缓慢或很少变化的信息——如年龄、性别、职业、邻里等。动态特征是基于当前发生的事情——如你正在观看的内容、你刚刚点赞的内容等。了解用户现在的兴趣将使你的系统能够做出更相关的推荐。
 - en: '![](../Images/d4becf5482ba17f49624c25d3a5cf789.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d4becf5482ba17f49624c25d3a5cf789.png)'
 - en: '**Solutions**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案**'
 - en: 'For your system to be able to make online predictions, it has to have two components:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了使你的系统能够进行在线预测，它必须具备两个组件：
 - en: 'Fast inference: a model that can make predictions in the order of milliseconds.'
+  id: totrans-29
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 快速推断：一个能够以毫秒级别做出预测的模型。
 - en: 'Real-time pipeline: a pipeline that can process data, input it into the model,
     and return a prediction in real-time.'
+  id: totrans-30
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 实时管道：一个可以实时处理数据、输入模型并返回预测结果的管道。
 - en: '**Fast inference**'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**快速推断**'
 - en: 'When a model is too big and taking too long to make predictions, there are
     three approaches:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 当一个模型过于庞大并且预测时间过长时，有三种方法可以解决：
 - en: '**Make models faster (inference optimization)**'
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**加快模型速度（推断优化）**'
 - en: E.g., fusing operations, distributing computations, memory footprint optimization,
     writing high-performance kernels targeting specific hardware, etc.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，融合操作、分布计算、内存占用优化、编写针对特定硬件的高性能内核等。
 - en: '**Make models smaller (model compression)**'
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**使模型更小（模型压缩）**'
 - en: Originally, this family of techniques is to make models smaller to make them
     fit on edge devices. Making models smaller often makes them run faster. The most
     common, general technique for model compression is quantization, e.g., using 16-bit
@@ -177,8 +249,10 @@
     attempted 1-bit representation (binary weight neural networks), e.g., [BinaryConnect](https://arxiv.org/abs/1511.00363) and [Xnor-Net](https://arxiv.org/abs/1603.05279).
     The authors of Xnor-Net spun off Xnor.ai, a startup focused on model compression,
     which was [acquired by Apple for a reported $200M](https://www.geekwire.com/2020/exclusive-apple-acquires-xnor-ai-edge-ai-spin-paul-allens-ai2-price-200m-range/).
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 起初，这一系列技术旨在使模型更小，以便适应边缘设备。使模型更小通常会使其运行更快。模型压缩的最常见通用技术是量化，例如，使用16位浮点数（半精度）或8位整数（定点）代替32位浮点数（全精度）来表示模型权重。在极端情况下，有些人尝试了1位表示（二进制权重神经网络），例如，[BinaryConnect](https://arxiv.org/abs/1511.00363)和[Xnor-Net](https://arxiv.org/abs/1603.05279)。Xnor-Net的作者创办了Xnor.ai，这是一家专注于模型压缩的初创公司，该公司已被[苹果以2亿美元的价格收购](https://www.geekwire.com/2020/exclusive-apple-acquires-xnor-ai-edge-ai-spin-paul-allens-ai2-price-200m-range/)。
 - en: Another popular technique is [knowledge distillation](https://arxiv.org/abs/1503.02531) –
     a small model (student) is trained to mimic a larger model or an ensemble of models
     (teacher). Even though the student is often trained with a pre-trained teacher,
@@ -186,36 +260,50 @@
     used in production is [DistilBERT](https://arxiv.org/abs/1910.01108), which reduces
     the size of a BERT model by 40% while retaining 97% of its language understanding
     capabilities and being 60% faster.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一种流行的技术是[知识蒸馏](https://arxiv.org/abs/1503.02531)——一个小模型（学生）被训练以模仿一个较大的模型或模型集合（教师）。尽管学生通常是通过预训练的教师进行训练，但两者也可以同时训练。一个在生产中使用的蒸馏网络的例子是[DistilBERT](https://arxiv.org/abs/1910.01108)，它将BERT模型的大小减少了40%，同时保留了97%的语言理解能力，并且运行速度快了60%。
 - en: Other techniques include pruning (finding parameters least useful to predictions
     and setting them to 0) and low-rank factorization (replacing the over-parametric
     convolution filters with compact blocks to both reduce the number of parameters
     and increase speed). See [A Survey of Model Compression and Acceleration for Deep
     Neural Networks](https://arxiv.org/abs/1710.09282) (Cheng et al. 2017) for a detailed
     analysis.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 其他技术包括剪枝（找出对预测最不重要的参数并将其设置为0）和低秩分解（用紧凑的块替换过度参数化的卷积滤波器，以减少参数数量并提高速度）。详见[A Survey
+    of Model Compression and Acceleration for Deep Neural Networks](https://arxiv.org/abs/1710.09282)（Cheng
+    et al. 2017）。
 - en: The number of research papers on model compression is growing. Off-the-shelf
     utilities are proliferating. Awesome Open Source has a list of [The Top 40 Model
     Compression Open Source Projects](https://awesomeopensource.com/projects/model-compression).
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于模型压缩的研究论文数量正在增长。现成的工具也在不断增加。Awesome Open Source有一个列表，[前40名模型压缩开源项目](https://awesomeopensource.com/projects/model-compression)。
 - en: '**Make hardware faster**'
+  id: totrans-40
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**使硬件更快**'
 - en: This is another research area that is booming. Big companies and startups alike
     are in a race to develop hardware that allows large ML models to do inference,
     even training, faster both on the cloud and especially on devices. IDC forecasts
     that by 2020, the combination of edge and mobile devices doing inferencing will [total
     3.7 billion units, with a further 116 million units doing training](https://www.arm.com/-/media/global/solutions/artificial-intelligence/ai-ml-on-cpu-whitepaper.pdf?revision=17a2b30b-0f5a-4a42-8681-3d9f3f94e513).
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是另一个蓬勃发展的研究领域。大型公司和初创公司都在竞相开发硬件，以使大型机器学习模型在云端以及尤其在设备上更快地进行推理，甚至训练。IDC预测，到2020年，边缘和移动设备进行推理的总量将[达到37亿台，而进一步有1.16亿台进行训练](https://www.arm.com/-/media/global/solutions/artificial-intelligence/ai-ml-on-cpu-whitepaper.pdf?revision=17a2b30b-0f5a-4a42-8681-3d9f3f94e513)。
 - en: '**Real-time pipeline**'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**实时管道**'
 - en: Suppose you have a ride-sharing app and want to detect fraudulent transactions,
     e.g., payments using stolen credit cards. When the true credit owner discovers
     unauthorized payments, they’ll dispute with their bank, and you’ll have to refund
@@ -224,14 +312,18 @@
     transactions account for an average of [27% of their annual online sales](https://network.americanexpress.com/globalnetwork/dam/jcr:09c34553-b4a2-43ca-bf3e-47cbc911ea51/American%20Express%202019%20Digital%20Payments%20Survey_Insights%20Paper.pdf).
     The longer it takes for you to detect the stolen credit card, the more money you’ll
     lose.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你有一个共享打车应用，并且想要检测欺诈交易，例如使用被盗信用卡进行的支付。当真正的信用卡持有者发现未经授权的支付时，他们会与银行争议，你需要退款。为了最大化利润，欺诈者可能会连续打车或者使用多个账户进行打车。2019年，商家估计欺诈交易占其年度在线销售的平均[27%](https://network.americanexpress.com/globalnetwork/dam/jcr:09c34553-b4a2-43ca-bf3e-47cbc911ea51/American%20Express%202019%20Digital%20Payments%20Survey_Insights%20Paper.pdf)。你检测到被盗信用卡的时间越长，损失的钱就越多。
 - en: To detect whether a transaction is fraudulent, looking at that transaction alone
     isn’t enough. You need to at least look into the recent history of the user involved
     in that transaction, their recent trips and activities in-app, the credit card’s
     recent transactions, and other transactions happening around the same time.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 要检测交易是否欺诈，仅仅查看该交易是不够的。你需要至少查看涉及该交易的用户的近期历史、他们在应用内的最近行程和活动、信用卡的近期交易以及其他同时发生的交易。
 - en: 'To quickly access these types of information, you want to keep as much of them
     in-memory as possible. Every time an event you care about happens – a user choosing
     a location, booking a trip, contacting a driver, canceling a trip, adding a credit
@@ -241,23 +333,32 @@
     The most common tool for this is [Apache Kafka](https://github.com/apache/kafka),
     with alternatives such as Amazon Kinesis. Kafka is a stream storage: it stores
     data as it streams.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了快速访问这些信息，你需要尽可能将它们保存在内存中。每当发生你关心的事件——用户选择位置、预订行程、联系司机、取消行程、添加信用卡、删除信用卡等——这些事件的信息会进入你的内存存储。信息会保留在内存中直到它们仍然有用（通常为几天），然后要么进入永久存储（例如S3），要么被丢弃。最常用的工具是[Apache
+    Kafka](https://github.com/apache/kafka)，还有如Amazon Kinesis这样的替代品。Kafka是一个流存储：它存储数据的同时流入。
 - en: Streaming data is different from static data – data that already exists somewhere
     in its entirety, such as CSV files. When reading from CSV files, you know when
     the job is finished. Streams of data never finish.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 流数据与静态数据不同——静态数据是指已经存在于某个地方的完整数据，如CSV文件。当读取CSV文件时，你知道何时任务完成。而数据流是不会结束的。
 - en: Once you’ve had a way to manage streaming data, you want to extract features
     to input into your ML models. On top of features from streaming data, you might
     also need features from static data (when was this account created, what’s the
     user’s rating, etc.). You need a tool that allows you to process streaming data
     as well as static data and join them together from various data sources.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦你有了处理流数据的方法，你就需要提取特征以输入到你的机器学习模型中。在流数据的特征基础上，你可能还需要静态数据的特征（例如账户创建时间、用户评分等）。你需要一个工具，能够处理流数据和静态数据，并将它们从各种数据源中整合在一起。
 - en: '**Stream processing vs. batch processing**'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**流处理与批处理**'
 - en: People generally use “batch processing” to refer to static data processing because
     you can process them in batches. This is opposed to “stream processing,” which
     processes each event as it arrives. Batch processing is **efficient** – you can
@@ -265,13 +366,18 @@
     is **fast** because you can process each piece of data as soon as it comes. Robert
     Metzger, a PMC member at Apache Flink, disputed that streaming processing could
     be as efficient as batch processing because [batch is a special case of streaming](https://www.ververica.com/blog/batch-is-a-special-case-of-streaming).
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 人们通常使用“批处理”来指代静态数据处理，因为你可以将数据分批处理。这与“流处理”相对，后者处理每个到达的事件。批处理是**高效的**——你可以利用MapReduce等工具处理大量数据。流处理是**快速的**，因为你可以在数据到达时立即处理。Apache
+    Flink的PMC成员Robert Metzger争辩说流处理的效率可以和批处理一样高，因为[批处理是流处理的一个特殊情况](https://www.ververica.com/blog/batch-is-a-special-case-of-streaming)。
 - en: Processing stream data is more difficult because the data amount is unbounded,
     and the data comes in at variable rates and speeds. It’s easier to make a stream
     processor do batch processing than making a batch processor do stream processing.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 处理流数据更为困难，因为数据量是不受限的，而且数据以不同的速率和速度到达。让流处理器进行批处理要比让批处理器进行流处理容易。
 - en: Apache Kafka has some capacity for stream processing, and some companies use
     this capacity on top of their Kafka stream storage, but Kafka stream processing
     is limited in its ability to deal with various data sources. There have been efforts
@@ -279,14 +385,19 @@
     handle data streams [[1](http://cs.brown.edu/~ugur/streamsql.pdf), [2](https://en.wikipedia.org/wiki/StreamSQL)].
     However, the most popular tool for stream processing is [Apache Flink](https://github.com/apache/flink),
     with native support for batch processing.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: Apache Kafka具备一定的流处理能力，一些公司在其Kafka流存储之上利用这一能力，但Kafka的流处理在处理各种数据源方面能力有限。已有努力将SQL这一流行的用于静态数据表的查询语言扩展以处理数据流[[1](http://cs.brown.edu/~ugur/streamsql.pdf),
+    [2](https://en.wikipedia.org/wiki/StreamSQL)]。然而，最流行的流处理工具是[Apache Flink](https://github.com/apache/flink)，它原生支持批处理。
 - en: In the early days of machine learning production, many companies built their
     ML systems on top of their existing MapReduce/Spark/Hadoop data pipeline. When
     these companies want to do real-time inference, they need to build a separate
     pipeline for streaming data.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习生产的早期阶段，许多公司在其现有的MapReduce/Spark/Hadoop数据管道上构建了ML系统。当这些公司需要进行实时推断时，他们需要为流数据建立一个独立的管道。
 - en: Having two different pipelines to process your data is a common cause for bugs
     in ML production, e.g., the changes in one pipeline aren’t correctly replicated
     in the other, leading to two pipelines extracting two different sets of features.
@@ -295,43 +406,60 @@
     the deployment team maintains the stream pipeline for inference. Companies including [Uber](https://www.infoq.com/presentations/sql-streaming-apache-flink/) and [Weibo](https://www.youtube.com/watch?v=WQ520rWgd9A&ab_channel=FlinkForward) have
     made major infrastructure overhaul to unify their batch and stream processing
     pipelines with Flink.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 拥有两个不同的数据处理管道是机器学习生产中常见的错误原因，例如，一个管道中的变化没有在另一个管道中正确复制，导致两个管道提取出不同的特征集。如果两个管道由两个不同的团队维护，这种情况尤其常见，例如，开发团队维护用于训练的批处理管道，而部署团队维护用于推断的流处理管道。包括[Uber](https://www.infoq.com/presentations/sql-streaming-apache-flink/)和[微博](https://www.youtube.com/watch?v=WQ520rWgd9A&ab_channel=FlinkForward)在内的公司已经进行了重大基础设施改革，以通过Flink统一他们的批处理和流处理管道。
 - en: '**Event-driven vs. request-driven**'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: '**事件驱动 vs. 请求驱动**'
 - en: The software world has gone microservices in the last decade. The idea is to
     break your business logic into small components – each component is a self-contained
     service – that can be maintained independently. The owner of each component can
     update to and test that component quickly without having to consult the rest of
     the system.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 过去十年，软件世界已经转向了微服务架构。这个理念是将业务逻辑拆分成小组件——每个组件都是一个独立的服务——以便于独立维护。每个组件的拥有者可以快速更新和测试该组件，而无需咨询系统的其余部分。
 - en: Microservices often go hand-in-hand with REST, a set of methods that let these
     microservices communicate. REST APIs are request-driven. A client (service) sends
     requests to tell its server exactly what to do via methods such as POST and GET,
     and its server responds with the results. A server has to listen to the request
     for the request to register.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 微服务通常与 REST 密切相关，REST 是一组让这些微服务进行通信的方法。REST API 是请求驱动的。客户端（服务）通过 POST 和 GET
+    等方法发送请求，以告诉服务器确切要做什么，服务器则以结果回应。服务器必须监听请求才能使请求注册。
 - en: 'Because in a request-driven world, data is handled via requests to different
     services, no one has an overview of how data flows through the entire system.
     Consider a simple system with 3 services:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为在请求驱动的世界里，数据通过对不同服务的请求来处理，没有人能够概览数据如何在整个系统中流动。考虑一个简单的有 3 个服务的系统：
 - en: A manages drivers availability
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: A 管理司机的可用性
 - en: B manages ride demand
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: B 管理乘车需求
 - en: C predicts the best possible price to show customers each time they request
     a ride
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: C 预测每次客户请求乘车时显示的最佳可能价格
 - en: 'Because prices depend on availability and demands, service C’s output depends
     on the outputs from service A and B. First, this system requires inter-service
     communication: C needs to ping A and B for predictions, A needs to ping B to know
@@ -339,15 +467,22 @@
     them. Second, there’d be no easy way to monitor how changes in A or B logics affect
     the performance of service C, or to map the data flow to debug if service C’s
     performance suddenly goes down.'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于价格依赖于可用性和需求，服务 C 的输出依赖于服务 A 和 B 的输出。首先，该系统需要服务间通信：C 需要向 A 和 B 请求预测，A 需要向 B
+    请求以了解是否需要调动更多司机，并向 C 请求以知道给他们什么价格激励。其次，没有简单的方法来监控 A 或 B 的逻辑变化如何影响服务 C 的性能，或映射数据流以调试如果服务
+    C 的性能突然下降。
 - en: With only 3 services, things are already getting complicated. Imagine having
     hundreds, if not thousands, of services like what major Internet companies have.
     Inter-service communication would blow up. Sending data as JSON blobs over HTTP
     – the way REST requests are commonly made – is also slow. Inter-service data transfer
     can become a bottleneck, slowing down the entire system.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 仅有 3 个服务的情况下，事情已经变得复杂。试想一下，如果有像主要互联网公司那样的数百甚至上千个服务，服务间的通信将会变得非常庞大。通过 HTTP 发送
+    JSON 数据块——这是常见的 REST 请求方式——速度也很慢。服务间的数据传输可能成为瓶颈，减慢整个系统的速度。
 - en: 'Instead of having 20 services ping service A for data, what if whenever an
     event happens within service A, this event is broadcasted to a stream, and whichever
     service wants data from A can subscribe to that stream and pick out what it needs?
@@ -356,22 +491,34 @@
     like Kafka allow you to do. Since all data flows through a stream, you can set
     up a dashboard to monitor your data and its transformation across your system.
     Because it’s based on events broadcasted by services, this architecture is event-driven.'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 与其让 20 个服务向服务 A 请求数据，不如在服务 A 内部发生事件时，将该事件广播到一个流中，任何需要 A 数据的服务可以订阅这个流并挑选所需的数据？如果有一个流，所有服务都可以广播它们的事件并进行订阅呢？这个模型称为
+    pub/sub：发布与订阅。这是像 Kafka 这样的解决方案所允许的。由于所有数据都流经一个流，你可以设置一个仪表板来监控数据及其在系统中的转换。因为它基于服务广播的事件，这种架构是事件驱动的。
 - en: '![](../Images/4ceecb97d4d7ef3d243f242fa13277c7.png)'
+  id: totrans-64
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4ceecb97d4d7ef3d243f242fa13277c7.png)'
 - en: '*[Beyond Microservices: Streams, State and Scalability](https://www.infoq.com/presentations/microservices-streams-state-scalability/) (Gwen
     Shapira, QCon 2019).*'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[超越微服务：流、状态与可扩展性](https://www.infoq.com/presentations/microservices-streams-state-scalability/)
+    (Gwen Shapira, QCon 2019).*'
 - en: Request-driven architecture works well for systems that rely more on logics
     than on data. Event-driven architecture works better for systems that are data-heavy.
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 请求驱动架构适用于依赖逻辑而非数据的系统。事件驱动架构则更适合数据密集型系统。
 - en: '**Challenges**'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '**挑战**'
 - en: Many companies are switching from batch processing to stream processing, from
     request-driven architecture to event-driven architecture. My impression from talking
     to major Internet companies in the US and China is that this change is still slow
@@ -379,48 +526,69 @@
     tied to the popularity of Kafka and Flink. Robert Metzger told me that he observed
     more machine learning workloads with Flink in Asia than in the US. Google Trends
     for “Apache Flink” is consistent with this observation.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多公司正在从批处理转向流处理，从请求驱动架构转向事件驱动架构。我从与美国和中国主要互联网公司的交谈中得到的印象是，这一变化在美国仍然很慢，但在中国则要快得多。流式架构的采用与Kafka和Flink的普及有关。Robert
+    Metzger告诉我，他观察到在亚洲，使用Flink进行机器学习工作负载的情况比在美国更多。关于“Apache Flink”的Google趋势数据与这一观察结果一致。
 - en: '![](../Images/57fdf04eedadbcf1c20c288a28d4c694.png)'
+  id: totrans-69
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/57fdf04eedadbcf1c20c288a28d4c694.png)'
 - en: There are many reasons why streaming isn’t more popular.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 流处理不够普及有很多原因。
 - en: '**Companies don’t see the benefits of streaming**'
+  id: totrans-71
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**公司看不到流处理的好处**'
 - en: Their system isn’t at a scale where inter-service communication is a bottleneck.
+  id: totrans-72
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 他们的系统规模还没有达到服务间通信成为瓶颈的程度。
 - en: They don’t have applications that benefit from online predictions.
+  id: totrans-73
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 他们没有从在线预测中受益的应用程序。
 - en: They have applications that might benefit from online predictions, but they
     don’t know that yet because they have never done online predictions before.
+  id: totrans-74
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 他们可能有应用程序可以从在线预测中受益，但由于他们从未进行过在线预测，所以还未意识到这一点。
 - en: '**High initial investment in infrastructure**'
+  id: totrans-75
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**基础设施的高初始投资**'
 - en: Infrastructure updates are expensive and can jeopardize existing applications.
     Managers might not be willing to invest in upgrading their infra to allow online
     predictions.
+  id: totrans-76
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 基础设施的更新费用昂贵，并可能危及现有应用。管理者可能不愿意投资于升级基础设施以支持在线预测。
 - en: '**Mental shift**'
+  id: totrans-77
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**思维方式的转变**'
 - en: Switching from batch processing to stream processing requires a mental shift.
     With batch processing, you know when a job is done. With stream processing, it’s
     never done. You can make rules such as get the average of all data points in the
@@ -428,88 +596,125 @@
     hasn’t entered the stream yet? With batch processing, you can have well-defined
     tables and join them, but in streaming, there are no tables to join, then what
     does it mean to do a join operation on two streams?
+  id: totrans-78
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 从批处理转向流处理需要一种思维方式的转变。使用批处理时，你知道何时完成任务。使用流处理时，任务永远不会完成。你可以制定规则，比如获取过去2分钟内所有数据点的平均值，但如果一个发生在2分钟前的事件被延迟了，还没有进入流中怎么办？在批处理下，你可以有明确定义的表并进行联接，但在流处理下没有表可以联接，那么在两个流上进行联接操作意味着什么呢？
 - en: '**Python incompatibility**'
+  id: totrans-79
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**Python不兼容**'
 - en: Python is the lingua franca of machine learning, whereas Kafka and Flink run
     on Java and Scala. Introducing streaming might create language incompatibility
     in the workflows. Apache Beam provides a Python interface on top of Flink for
     communicating with streams, but you’d still need people who can work with Java/Scala.
+  id: totrans-80
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: Python是机器学习的通用语言，而Kafka和Flink运行在Java和Scala上。引入流处理可能会在工作流程中造成语言不兼容。Apache Beam在Flink之上提供了一个Python接口用于与流进行通信，但你仍然需要能够使用Java/Scala的人。
 - en: '**Higher processing cost**'
+  id: totrans-81
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**更高的处理成本**'
 - en: Batch processing means you can use your computing resources more efficiently.
     If your hardware is capable of processing 1000 data points at a time, it’s wasteful
     to use it to process only 1 data point at a time.
+  id: totrans-82
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 批处理意味着你可以更高效地利用计算资源。如果你的硬件能够一次处理1000个数据点，那么一次只处理1个数据点就显得非常浪费。
 - en: 'Level 2: Online learning - your system can incorporate new data and update
     in real-time'
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 级别2：在线学习 - 你的系统可以实时地整合新数据并进行更新
 - en: '***Real-time** here is defined to be in the order of minutes*'
+  id: totrans-84
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '***实时** 在这里被定义为分钟级别*'
 - en: '**Defining "online learning"**'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '**定义“在线学习”**'
 - en: 'I used “online learning” instead of “online training” because the latter term
     is contentious. By definition, online training means learning from each incoming
     data point. Very, very few companies actually do this because:'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 我使用“在线学习”而不是“在线训练”，因为后者的定义有争议。按照定义，在线训练意味着从每一个进入的数据点中学习。实际上，很少有公司真正这样做，因为：
 - en: This method suffers from catastrophic forgetting – neural networks abruptly
     forget previously learned information upon learning new information.
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 这种方法存在灾难性遗忘的问题——神经网络在学习新信息时会突然忘记之前学到的信息。
 - en: It can be more expensive to run a learning step on only one data point than
     on a batch (this can be mitigated by having hardware just powerful enough to process
     exactly one data point).
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在只有一个数据点的情况下运行学习步骤可能比在批量数据上运行要昂贵（这可以通过拥有刚好足够处理一个数据点的硬件来缓解）。
 - en: Even if a model is learning with each incoming data point, it doesn’t mean the
     new weights are deployed after each data point. With our current limited understanding
     of how ML algorithms learn, the updated model needs to be evaluated first to see
     how well it does.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使一个模型在每个数据点到来时都在学习，这也并不意味着新的权重在每个数据点后都会被部署。由于我们对机器学习算法学习方式的理解仍然有限，更新的模型需要先进行评估，以查看其表现如何。
 - en: For most companies that do so-called online training, their models learn in
     micro-batches and are evaluated after a certain period of time. Only after its
     performance is evaluated to be satisfactory is the model deployed wider. For Weibo,
     their iteration cycle from learning to deploying model updates is 10 minutes.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于大多数所谓的在线培训公司，它们的模型在微批次中学习，并在一段时间后进行评估。只有在性能被评估为令人满意之后，模型才会被更广泛地部署。对于微博来说，他们从学习到部署模型更新的迭代周期是
+    10 分钟。
 - en: '![](../Images/2b26a0ab4dcd1b6e180e6e7347bb5be9.png)'
+  id: totrans-91
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2b26a0ab4dcd1b6e180e6e7347bb5be9.png)'
 - en: '*[Machine learning with Flink in Weibo](https://www.youtube.com/watch?v=WQ520rWgd9A) (Qian
     Yu, Flink Forward 2020).*'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[微博中的 Flink 机器学习](https://www.youtube.com/watch?v=WQ520rWgd9A)（钱宇，Flink Forward
+    2020）。*'
 - en: '**Use cases**'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '**用例**'
 - en: TikTok is incredibly addictive. Its secret lies in its [recommendation systems](https://newsroom.tiktok.com/en-us/how-tiktok-recommends-videos-for-you) that
     can learn your preferences quickly and suggest videos that you are likely to watch
     next, giving its users an incredible scrolling experience. It’s possible because
     ByteDance, the company behind TikTok, has set up a mature infrastructure that
     allows their recommendation systems to learn their user preferences (“user profiles”
     in their lingo) in real-time.
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: TikTok 非常令人上瘾。其秘密在于其 [推荐系统](https://newsroom.tiktok.com/en-us/how-tiktok-recommends-videos-for-you)，这些系统可以快速学习你的偏好，并建议你可能会观看的视频，为用户提供了令人难以置信的滚动体验。这得益于
+    TikTok 背后的公司 ByteDance 建立了一个成熟的基础设施，使他们的推荐系统能够实时学习用户偏好（他们术语中的“用户档案”）。
 - en: Recommendation systems are perfect candidates for online learning. They have
     natural labels – if a user clicks on a recommendation, it’s a correct prediction.
     Not all recommendation systems need online learning. User preferences for items
@@ -520,58 +725,80 @@
     reason, and now I want to see a video of it”). As preferences for online content
     change in real-time, ad systems also need to be updated in real-time to show relevant
     ads.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 推荐系统是在线学习的完美候选者。它们有自然的标签——如果用户点击了推荐，这是一个正确的预测。并不是所有的推荐系统都需要在线学习。用户对房子、汽车、航班、酒店等物品的偏好不太可能在一分钟内发生变化，因此系统不断学习意义不大。然而，用户对在线内容——视频、文章、新闻、推文、帖子、表情包——的偏好可以迅速变化（“我刚刚读到章鱼有时会无缘无故地打鱼，现在我想看一段相关视频”）。随着在线内容偏好的实时变化，广告系统也需要实时更新以显示相关广告。
 - en: Online learning is crucial for systems to adapt to rare events. Consider online
     shopping on Black Friday. Because Black Friday happens only once a year, there’s
     no way Amazon or other e-commerce sites can get enough historical data to learn
     how users are going to behave that day, so their systems need to continually learn
     on that day to adapt.
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: 在线学习对于系统适应罕见事件至关重要。考虑一下黑色星期五的在线购物。由于黑色星期五一年只有一次，亚马逊或其他电子商务网站无法获得足够的历史数据来了解用户当天的行为，因此它们的系统需要在当天不断学习以适应变化。
 - en: Or consider a Twitter search when someone famous tweets something stupid. For
     example, as soon as the news about “Four Seasons Total Landscaping” went live,
     many people were going to search “total landscaping.” If your system doesn’t immediately
     learn that “total landscaping” here refers to the press conference, your users
     are going to get a lot of gardening recommendations.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 或者考虑一下当某位名人发了一条愚蠢的推文时在 Twitter 上的搜索。例如，当“四季园艺”新闻上线时，许多人会去搜索“总园艺”。如果你的系统没有立即学会“总园艺”在这里指的是新闻发布会，你的用户就会收到很多园艺推荐。
 - en: Online learning can also help with the cold start problem. A user just joined
     your app, and you have no information on them yet. If you don’t have the capacity
     for any form of online learning, you’ll have to serve your users generic recommendations
     until the next time your model is trained offline.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 在线学习也可以帮助解决冷启动问题。当用户刚加入你的应用时，你对他们一无所知。如果你没有进行任何形式的在线学习的能力，你将不得不为用户提供通用的推荐，直到下次你的模型离线训练时。
 - en: '**Solutions**'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解决方案**'
 - en: Since online learning is still fairly new and most companies who are doing it
     aren’t talking publicly about it in detail yet, there’s no standard solution.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于在线学习仍然相对较新，并且大多数进行在线学习的公司尚未公开详细信息，因此没有标准解决方案。
 - en: Online learning doesn’t mean “no batch training.” The companies that have most
     successfully used online learning also train their models offline in parallel
     and then combine the online version with the offline version.
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 在线学习并不意味着“没有批量训练。”那些最成功使用在线学习的公司通常也会并行进行离线训练，然后将在线版本与离线版本结合起来。
 - en: '**Challenges**'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '**挑战**'
 - en: There are many challenges facing online learning, both theoretical and practical.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 在线学习面临许多挑战，包括理论上的和实际的。
 - en: '**Theoretical**'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**理论上的**'
 - en: Online learning flips a lot of what we’ve learned about machine learning on
     its head. In introductory machine learning classes, students are probably taught
     different versions of “train your model with a sufficient number of epochs until
     convergence.” In online learning, there’s no epoch – your model sees each data
     point only once. There’s no such thing as convergence either. Your underlying
     data distribution keeps on shifting. There’s nothing stationary to converge to.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 在线学习颠覆了我们对机器学习的许多认知。在入门级的机器学习课程中，学生可能会学习到“用足够多的周期训练你的模型直到收敛”的不同版本。在在线学习中，没有周期——你的模型每次只见到一个数据点。也不存在收敛的概念。你的基础数据分布不断变化，没有固定的目标可以收敛。
 - en: Another theoretical challenge for online learning is model evaluation. In traditional
     batch training, you evaluate your models on stationary held out test sets. If
     a new model performs better than the existing model on the same test set, we say
@@ -579,156 +806,228 @@
     model to constantly changing data. If your updated model is trained to adapt to
     data now, and we know that data now is different from data in the past, it wouldn’t
     make sense to use old data to test your updated model.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 在线学习的另一个理论挑战是模型评估。在传统的批量训练中，你会在固定的保留测试集上评估模型。如果一个新模型在相同的测试集上表现优于现有模型，我们会说新模型更好。然而，在线学习的目标是使你的模型适应不断变化的数据。如果你的更新模型已经适应了现在的数据，而我们知道现在的数据与过去的数据不同，那么用旧数据测试你的更新模型就没有意义了。
 - en: Then how do we know that the model trained on data from the last 10 minutes
     is better than the model trained on data from 20 minutes ago? We have to compare
     these two models on current data. Online training demands online evaluation, but
     serving a model that hasn’t been tested on users sounds like a recipe for disaster.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么我们如何知道在过去10分钟的数据上训练的模型是否优于在20分钟前的数据上训练的模型呢？我们必须在当前数据上比较这两个模型。在线训练要求在线评估，但使用未经用户测试的模型似乎是灾难的开端。
 - en: Many companies do it anyway. New models are first subjected to offline tests
     to make sure they aren’t disastrous, then evaluated online in parallel with the
     existing models via a complex A/B testing system. Only when a model is shown to
     be better than an existing model in some metrics the company cares about that
     it can be deployed wider. (Don’t get me started on choosing a metric for online
     evaluation).
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 许多公司仍然在进行在线学习。新模型首先会接受离线测试以确保它们不会造成灾难，然后通过复杂的A/B测试系统与现有模型进行在线评估。只有当一个模型在公司关心的某些指标上表现优于现有模型时，才会被更广泛地部署。（别让我谈论选择在线评估指标的问题。）
 - en: '**Practical**'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**实用性**'
 - en: There are not yet standard infrastructures for online training. Some companies
     have converged to streaming architecture with [parameter servers](https://web.eecs.umich.edu/~mosharaf/Readings/Parameter-Server.pdf),
     but other than that, companies that do online training that I’ve talked to have
     to build a lot of their infrastructures in house. I’m reluctant to discuss this
     online since some companies asked me to keep this information confidential because
     they’re building solutions for them – it’s their competitive advantage.
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前尚无标准化的在线训练基础设施。一些公司已经趋向于流式架构和[参数服务器](https://web.eecs.umich.edu/~mosharaf/Readings/Parameter-Server.pdf)，但除此之外，我所接触到的进行在线训练的公司需要在内部构建很多基础设施。我不愿意在线讨论这个问题，因为一些公司要求我保密这些信息，因为他们正在为他们构建解决方案——这是他们的竞争优势。
 - en: The MLOps race between the US and China
+  id: totrans-111
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 美国和中国的MLOps竞赛
 - en: I’ve read a lot about the AI race between the US and China, but most comparisons
     seem to focus on the number of [research papers, patents, citations, and funding](https://datainnovation.org/2019/08/who-is-winning-the-ai-race-china-the-eu-or-the-united-states/).
     Only after I’ve started talking to both American and Chinese companies about real-time
     machine learning that I noticed a staggering difference in their MLOps infrastructures.
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 我读了很多关于美国和中国在人工智能竞赛中的对比，但大多数比较似乎关注于[研究论文、专利、引用和资助](https://datainnovation.org/2019/08/who-is-winning-the-ai-race-china-the-eu-or-the-united-states/)。只有在我开始与美国和中国公司讨论实时机器学习后，我才注意到他们的MLOps基础设施存在惊人的差异。
 - en: Few American Internet companies have attempted online learning, and even among
     these companies, online learning is used for simple models such as logistic regression.
     My impression from both talking directly to Chinese companies and talking with
     people who have worked with companies in both countries is that online learning
     is more common in China, and Chinese engineers are more eager to make the jump.
     You can see some of the conversations [here](https://twitter.com/chipro/status/1337077324936663040) and [here](https://www.linkedin.com/posts/chiphuyen_mlops-machinelearning-activity-6742844916705177600-taRd).
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: 很少有美国互联网公司尝试在线学习，即使在这些公司中，在线学习也仅用于简单的模型，如逻辑回归。我从直接与中国公司交流和与在两个国家工作过的人的交流中得到的印象是，在线学习在中国更为普遍，中国工程师更渴望进行尝试。你可以在[这里](https://twitter.com/chipro/status/1337077324936663040)和[这里](https://www.linkedin.com/posts/chiphuyen_mlops-machinelearning-activity-6742844916705177600-taRd)看到一些对话。
 - en: '![](../Images/11a1db19b83783be99737342f17b6bea.png)'
+  id: totrans-114
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/11a1db19b83783be99737342f17b6bea.png)'
 - en: Conclusion
+  id: totrans-115
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: Machine learning is going real-time, whether you’re ready or not. While the
     majority of companies are still debating whether there’s value in online inference
     and online learning, some of those who do it correctly have already seen returns
     on investment, and their real-time algorithms might be a major contributing factor
     that helps them stay ahead of their competitors.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习正在变得实时，无论你是否准备好。虽然大多数公司仍在争论在线推断和在线学习是否有价值，但那些正确实施这些技术的公司已经看到了投资回报，他们的实时算法可能是帮助他们领先于竞争对手的主要因素。
 - en: I have a lot more thoughts on real-time machine learning, but this post is already
     long. If you’re interested in chatting about this, shoot me an email.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 我对实时机器学习还有很多想法，但这篇文章已经很长了。如果你对讨论这个话题感兴趣，可以给我发封邮件。
 - en: Acknowledgments
+  id: totrans-118
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 致谢
 - en: This post is a synthesis of many conversations with the following wonderful
     engineers and academics. I’d like to thank Robert Metzger, Neil Lawrence, Savin
     Goyal, Zhenzhong Xu, Ville Tuulos, Dat Tran, Han Xiao, Hien Luu, Ledio Ago, Peter
     Skomoroch, Piero Molino, Daniel Yao, Jason Sleight, Becket Qin, Tien Le, Abraham
     Starosta, Will Deaderick, Caleb Kaiser, Miguel Ramos.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇文章综合了许多与以下优秀工程师和学者的对话。我要感谢 Robert Metzger、Neil Lawrence、Savin Goyal、Zhenzhong
+    Xu、Ville Tuulos、Dat Tran、Han Xiao、Hien Luu、Ledio Ago、Peter Skomoroch、Piero Molino、Daniel
+    Yao、Jason Sleight、Becket Qin、Tien Le、Abraham Starosta、Will Deaderick、Caleb Kaiser、Miguel
+    Ramos。
 - en: '[Original](https://huyenchip.com/2020/12/27/real-time-machine-learning.html).
     Reposted with permission.'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://huyenchip.com/2020/12/27/real-time-machine-learning.html)。经许可转载。'
 - en: '**Bio:** [Chip Huyen](https://twitter.com/chipro) is a writer and computer
     scientist. She works to bring the best engineering practices to machine learning
     research and production. She writes about culture, people, and tech.'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：** [Chip Huyen](https://twitter.com/chipro) 是一位作家和计算机科学家。她致力于将最佳的工程实践应用于机器学习研究和生产。她写作关于文化、人和技术。'
 - en: '**Related:**'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[The ravages of concept drift in stream learning applications and how to deal
     with it](https://www.kdnuggets.com/2019/12/ravages-concept-drift-stream-learning-applications.html)'
+  id: totrans-123
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[流学习应用中的概念漂移的破坏及应对方法](https://www.kdnuggets.com/2019/12/ravages-concept-drift-stream-learning-applications.html)'
 - en: '[Recommendation Engines and Real-time personalization – download guidebook](https://www.kdnuggets.com/2017/10/dataiku-recommendation-engines-real-time-personalization-download-guidebook.html)'
+  id: totrans-124
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[推荐引擎和实时个性化 – 下载指南](https://www.kdnuggets.com/2017/10/dataiku-recommendation-engines-real-time-personalization-download-guidebook.html)'
 - en: '[How to Use MLOps for an Effective AI Strategy](https://www.kdnuggets.com/2021/01/mlops-effective-ai-strategy.html)'
+  id: totrans-125
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何利用MLOps制定有效的人工智能策略](https://www.kdnuggets.com/2021/01/mlops-effective-ai-strategy.html)'
 - en: '* * *'
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-127
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 加速进入网络安全职业轨道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-129
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT工作'
 - en: '* * *'
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-132
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[How to Stay on Top of What''s Going on in the AI World](https://www.kdnuggets.com/2022/03/stay-top-going-ai-world.html)'
+  id: totrans-133
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何保持对人工智能世界动态的了解](https://www.kdnuggets.com/2022/03/stay-top-going-ai-world.html)'
 - en: '[Sentiment Analysis in Python: Going Beyond Bag of Words](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
+  id: totrans-134
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python中的情感分析：超越词袋模型](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)'
 - en: '[5 Machine Learning Skills Every Machine Learning Engineer Should…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
+  id: totrans-135
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个机器学习工程师都应该掌握的5项机器学习技能……](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)'
 - en: '[KDnuggets News, December 14: 3 Free Machine Learning Courses for…](https://www.kdnuggets.com/2022/n48.html)'
+  id: totrans-136
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，12月14日：3门免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)'
 - en: '[A Solid Plan for Learning Data Science, Machine Learning, and Deep Learning](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
+  id: totrans-137
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学、机器学习和深度学习的稳固计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)'
 - en: '[AI, Analytics, Machine Learning, Data Science, Deep Learning…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
+  id: totrans-138
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[人工智能、分析、机器学习、数据科学、深度学习……](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)'
