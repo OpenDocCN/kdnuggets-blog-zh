@@ -3,55 +3,70 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Dataflow 扩展计算机视觉模型
 - en: 原文：[https://www.kdnuggets.com/2020/07/scaling-computer-vision-models-dataflow.html](https://www.kdnuggets.com/2020/07/scaling-computer-vision-models-dataflow.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/07/scaling-computer-vision-models-dataflow.html](https://www.kdnuggets.com/2020/07/scaling-computer-vision-models-dataflow.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Pablo Soto](https://www.linkedin.com/in/psoto23/), Founding Partner at
     [Pento](https://pento.ai/)**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Pablo Soto](https://www.linkedin.com/in/psoto23/)，[Pento](https://pento.ai/)
+    的创始合伙人**'
 - en: '![Image](../Images/3c33a6f2dd790f9371940a8acaa33124.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/3c33a6f2dd790f9371940a8acaa33124.png)'
 - en: '* * *'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业轨道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT'
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: We will shortly introduce the Google Cloud service [Dataflow](https://cloud.google.com/dataflow),
     and how it can be used to run predictions on millions of images in a serverless
     way. No cluster creation, no maintenance, and you only pay for what you use. We
@@ -60,24 +75,28 @@
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将简要介绍 Google Cloud 服务 [Dataflow](https://cloud.google.com/dataflow)，以及它如何以无服务器的方式运行数百万张图像的预测。无需创建集群，无需维护，您只需为您使用的部分付费。我们将首先提供一个背景，说明我们为什么认为这很重要，简要介绍几个概念，然后直接进入一个用例。
 - en: 'Scaling Machine Learning models is hard and expensive. It is costly mainly
     for two reasons: because the infrastructure is expensive, and because your experimentation
     pipeline is slow causing your ML team to be constantly waiting for the results.'
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 扩展机器学习模型是困难且昂贵的。主要有两个原因：基础设施成本高，以及您的实验管道缓慢，导致机器学习团队不断等待结果。
 - en: It is easy to underestimate how is expensive it is to have an ML team waiting
     for results. Not only because of the time wasted but also because people get frustrated
     and end up losing motivation.
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 很容易低估拥有一个等待结果的机器学习团队的费用。这不仅仅是因为浪费的时间，还因为人们会感到沮丧并最终失去动力。
 - en: One way to optimize your ML experimentation process it is to build and manage
     your own infrastructure. This is common in big companies, but this is often prohibitively
     expensive for smaller companies.
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 优化您的机器学习实验过程的一种方法是建立和管理自己的基础设施。这在大公司中很常见，但对于小公司来说，这往往代价高昂。
 - en: 'Traditional software development had similar challenges years ago, companies
     needed to scale, mainly driven by business needs (slow services/API/website don''t
     scale). Cloud Providers saw an opportunity to provide services that allow companies
@@ -88,6 +107,8 @@
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 传统的软件开发几年前面临类似的挑战，企业需要扩展，这主要是由业务需求驱动的（服务/API/网站缓慢不适合扩展）。云服务提供商看到了提供服务的机会，这些服务允许公司在没有前期成本的情况下扩展。他们主要通过两种方式来解决这个问题：易于管理的服务和无服务器服务。后者对没有大规模
+    DevOps 团队或资金不足以支付自己基础设施的小公司尤其具有吸引力。
 - en: A similar trend is happening in Machine Learning. This time is driven by the
     scarcity and high cost of ML talent. Like SW, small companies can't invest a huge
     amount of money to create a custom optimized infrastructure to ML, it requires
@@ -95,6 +116,7 @@
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习中也出现了类似的趋势。这次是由机器学习人才的稀缺和高成本驱动的。像软件一样，小公司无法投入大量资金创建定制的优化基础设施，这需要一支专家团队来构建和维护。
 - en: Cloud Providers saw an opportunity to add value similarly by providing Serverless
     solutions to ML. GCP, in particular, has done this for a while. GCP AI Platform
     offers different services for each stage of an ML project. But they also count
