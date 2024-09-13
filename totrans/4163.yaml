@@ -1,775 +1,1201 @@
 - en: Hands-On Reinforcement Learning Course, Part 2
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 动手强化学习课程，第 2 部分
 - en: 原文：[https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Pau Labarta Bajo](https://www.linkedin.com/in/pau-labarta-bajo-4432074b/),
     mathematician and data scientist**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Pau Labarta Bajo](https://www.linkedin.com/in/pau-labarta-bajo-4432074b/)，数学家和数据科学家**。'
 - en: '![](../Images/c19e83adecd71128d40a6a9cf495faea.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c19e83adecd71128d40a6a9cf495faea.png)'
 - en: '*Venice’s taxis by [Helena Jankovičová Kováčová](https://www.pexels.com/@helen1?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) from [Pexels](https://www.pexels.com/photo/blue-and-black-boat-on-dock-5870314/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels).*'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '*威尼斯的出租车，来自 [Helena Jankovičová Kováčová](https://www.pexels.com/@helen1?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
+    的 [Pexels](https://www.pexels.com/photo/blue-and-black-boat-on-dock-5870314/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)。*'
 - en: This is part 2 of my hands-on course on reinforcement learning, which takes
     you from zero to HERO. Today we will learn about Q-learning, a classic RL algorithm
     born in the 90s.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我的动手强化学习课程的第二部分，它将带你从零到英雄。今天我们将学习 Q-learning，这是一种诞生于 90 年代的经典 RL 算法。
 - en: If you missed **[part 1](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)**,
     please read it to get the reinforcement learning jargon and basics in place.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你错过了**[第 1 部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)**，请先阅读它，以掌握强化学习的术语和基础知识。
 - en: Today we are solving our first learning problem…
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天我们将解决第一个学习问题……
 - en: We are going to train an agent to drive a taxi!
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将训练一个代理来驾驶出租车！
 - en: Well, a simplified version of a taxi environment, but a taxi at the end of the
     day.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 好吧，这是一个简化版本的出租车环境，但总的来说就是一个出租车。
 - en: We will use Q-learning, one of the earliest and most used RL algorithms.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用 Q-learning，这是最早且最常用的 RL 算法之一。
 - en: And, of course, Python.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，还会用到 Python。
 - en: All the code for this lesson is in [this Github repo](https://github.com/Paulescu/hands-on-rl). Git
     clone it to follow along with today’s problem.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 本课程的所有代码都在 [这个 Github 仓库](https://github.com/Paulescu/hands-on-rl)中。克隆它以跟随今天的问题。
 - en: '![](../Images/8e791db2e016c67f84eb37e4ce3a49dd.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8e791db2e016c67f84eb37e4ce3a49dd.png)'
 - en: 1\. The taxi driving problem
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1\. 出租车驾驶问题
 - en: We will teach an agent to drive a taxi using Reinforcement Learning.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将教一个代理使用强化学习来驾驶出租车。
 - en: 'Driving a taxi in the real world is a very complex task to start with. Because
     of this, we will work in a simplified environment that captures the 3 essential
     things a good taxi driver does, which are:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在现实世界中驾驶出租车是一项非常复杂的任务。因此，我们将在一个简化的环境中工作，该环境捕捉到一个优秀出租车司机需要做的三个基本方面：
 - en: pick up passengers and drop them at their desired destination.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 接载乘客并将他们送到指定的目的地。
 - en: drive safely, meaning no crashes.
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 安全驾驶，避免碰撞。
 - en: drive them in the shortest time possible.
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 尽可能缩短时间将他们送达。
 - en: We will use an environment from OpenAI Gym, called the [Taxi-v3](https://gym.openai.com/envs/Taxi-v3/) environment.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用来自 OpenAI Gym 的一个环境，称为 [Taxi-v3](https://gym.openai.com/envs/Taxi-v3/)
+    环境。
 - en: '![](../Images/f7f84ad98333cb3b04f6f7c173c9c2b7.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f7f84ad98333cb3b04f6f7c173c9c2b7.png)'
 - en: There are four designated locations in the grid world indicated by R(ed), G(reen),
     Y(ellow), and B(lue).
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在网格世界中有四个指定位置，分别用 R(红色)、G(绿色)、Y(黄色) 和 B(蓝色) 标识。
 - en: When the episode starts, the taxi starts off at a random square, and the passenger
     is at a random location (R, G, Y, or B).
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 当回合开始时，出租车从一个随机的方格出发，乘客位于随机的位置（R、G、Y 或 B）。
 - en: The taxi drives to the passenger’s location, picks up the passenger, drives
     to the passenger’s destination (another one of the four specified locations),
     and then drops off the passenger. While doing so, our taxi driver needs to drive
     carefully to avoid hitting any wall, marked as **|**. Once the passenger is dropped
     off, the episode ends.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 出租车驱动到乘客的位置，接载乘客，驾车到乘客的目的地（四个指定位置之一），然后将乘客放下。在此过程中，我们的出租车司机需要小心驾驶，以避免撞到标记为**|**的墙壁。一旦乘客被放下，当前回合结束。
 - en: 'This is how the q-learning agent we will build drives today:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是我们今天要构建的 Q-learning 代理的驾驶方式：
 - en: Before we get there, let’s understand well what are the actions, states, and
     rewards for this environment.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们到达之前，让我们了解一下这个环境中的动作、状态和奖励。
 - en: 2\. Environment, actions, states, rewards
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2\. 环境、动作、状态、奖励
 - en: '[**notebooks/00_environment.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/00_environment.ipynb)'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**notebooks/00_environment.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/00_environment.ipynb)'
 - en: 'Let’s first load the environment:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们首先加载环境：
 - en: '![](../Images/d94758758bcf33c2f4f5d6bcb912764b.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d94758758bcf33c2f4f5d6bcb912764b.png)'
 - en: What are the **actions** the agent can choose from at each step?
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 代理在每一步可以选择的 **动作** 是什么？
 - en: 0 drive down
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 0 向下行驶
 - en: 1 drive up
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 1 向上行驶
 - en: 2 drive right
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 2 向右行驶
 - en: 3 drive left
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 3 向左行驶
 - en: 4 pick up a passenger
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 4 载客
 - en: 5 drop off a passenger
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 5 让乘客下车
 - en: '![](../Images/dda1b6f218b71cf9befdb3e7f08564b4.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/dda1b6f218b71cf9befdb3e7f08564b4.png)'
 - en: And the **states**?
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 那 **状态** 呢？
 - en: 25 possible taxi positions because the world is a 5×5 grid.
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 25 个可能的出租车位置，因为世界是一个 5×5 的网格。
 - en: 5 possible locations of the passenger, which are R, G, Y, B, plus the case when
     the passenger is in the taxi.
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 5 个可能的乘客位置，分别是 R、G、Y、B，加上乘客在出租车中的情况。
 - en: 4 destination locations
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 4 个目的地
 - en: which gives us 25 x 5 x 4 = 500 states.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 这给我们提供了 25 x 5 x 4 = 500 个状态。
 - en: '![](../Images/986bb09fe9fad037114572c7c4d44de4.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/986bb09fe9fad037114572c7c4d44de4.png)'
 - en: What about **rewards**?
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 那 **奖励** 呢？
 - en: '**-1** default per-step reward.'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**-1** 每步的默认奖励。'
 - en: '*Why -1, and not simply 0? *Because we want to encourage the agent to spend
     the shortest time, by penalizing each extra step. This is what you expect from
     a taxi driver, don’t you?'
+  id: totrans-48
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: '*为什么是 -1，而不是简单的 0？* 因为我们希望通过惩罚每一步多余的时间来鼓励代理尽快完成。这是你对出租车司机的期望，不是吗？'
 - en: '**+20** reward for delivering the passenger to the correct destination.'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**+20** 奖励用于将乘客送到正确的目的地。'
 - en: '**-10** reward for executing a pickup or dropoff at the wrong location.'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**-10** 奖励用于在错误的位置执行接送操作。'
 - en: You can read the rewards and the environment transitions *(state, action ) →
     next_state *from *env.P*.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以从 *env.P* 中读取奖励和环境转换 *(state, action) → next_state*。
 - en: '![](../Images/d4ea29025d74a7700ca3c4aadaf1ff85.png)'
+  id: totrans-52
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d4ea29025d74a7700ca3c4aadaf1ff85.png)'
 - en: 'By the way, you can render the environment under each state to double-check
     this env.P vectors make sense:'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 顺便说一下，你可以在每个状态下渲染环境，以重新检查这些 env.P 向量是否有意义：
 - en: 'From *state=123*:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 从 *state=123* 开始：
 - en: '![](../Images/8b865fde7b191545b18bdfa4f094c93e.png)'
+  id: totrans-55
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8b865fde7b191545b18bdfa4f094c93e.png)'
 - en: 'the agent moves south action=0 to get to state=223:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 代理向南移动 action=0 到达状态=223：
 - en: '![](../Images/3c1edb78e1242f57ff161a7946fb2eaa.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3c1edb78e1242f57ff161a7946fb2eaa.png)'
 - en: And the reward is -1, as neither the episode ended nor the driver incorrectly
     picked or dropped.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 奖励是 -1，因为既没有回合结束，也没有司机错误地接送乘客。
 - en: 3\. Random agent baseline
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3. 随机代理基线
 - en: '[**notebooks/01_random_agent_baseline.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/01_random_agent_baseline.ipynb)'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**notebooks/01_random_agent_baseline.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/01_random_agent_baseline.ipynb)'
 - en: Before you start implementing any complex algorithm, you should always build
     a baseline model.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 在你开始实现任何复杂算法之前，你应该始终建立一个基线模型。
 - en: This advice applies not only to Reinforcement Learning problems but Machine
     Learning problems in general.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个建议不仅适用于强化学习问题，也适用于一般的机器学习问题。
 - en: It is very tempting to jump straight into the complex/fancy algorithms, but
     unless you are really experienced, you will fail terribly.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 直接跳入复杂/高级算法是非常诱人的，但除非你真的有经验，否则你会失败得很惨。
 - en: Let’s use a random agent as a baseline model.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用一个随机代理作为基线模型。
 - en: '![](../Images/270c825aa8e14bc646cb67792dd766a1.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/270c825aa8e14bc646cb67792dd766a1.png)'
 - en: 'We can see how this agent performs for a given initial state=198:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到该代理在给定初始状态=198 时的表现：
 - en: '![](../Images/578ffc63657a1a6466048286ab8ae753.png)'
+  id: totrans-67
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/578ffc63657a1a6466048286ab8ae753.png)'
 - en: 3,804 steps is a lot!
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 3,804 步是很多的！
 - en: 'Please watch it yourself in this video:'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 请在此视频中自行观看：
 - en: To get a more representative measure of performance, we can repeat the same
     evaluation loop n=100 times starting each time at a random state.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了获得更具代表性的性能衡量，我们可以重复相同的评估循环 n=100 次，每次从一个随机状态开始。
 - en: '![](../Images/8581ccf4cbc20b3b16ed446c7fab83dd.png)'
+  id: totrans-71
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8581ccf4cbc20b3b16ed446c7fab83dd.png)'
 - en: If you plot *timesteps_per_episode* and *penalties_per_episode* you can observe
     that none of them decreases as the agent completes more episodes. In other words,
     the agent is NOT LEARNING anything.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你绘制 *timesteps_per_episode* 和 *penalties_per_episode*，你可以观察到它们都不会随着代理完成更多的回合而减少。换句话说，代理没有学到任何东西。
 - en: '![](../Images/715c8031ae7d6e6fb4b69fae9adb7f7f.png)'
+  id: totrans-73
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/715c8031ae7d6e6fb4b69fae9adb7f7f.png)'
 - en: '![](../Images/8364e5fd83678d1eef7326595dd5e42e.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8364e5fd83678d1eef7326595dd5e42e.png)'
 - en: 'If you want summary statistics of performance, you can take averages:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想了解性能的总结统计数据，你可以计算平均值：
 - en: '![](../Images/ae1fb6f5e11b1f427f518492d87865b1.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ae1fb6f5e11b1f427f518492d87865b1.png)'
 - en: Implementing agents that learn is the goal of Reinforcement Learning, and of
     this course too.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 实现能学习的智能体是强化学习的目标，也是本课程的目标。
 - en: Let’s implement our first “intelligent” agent using Q-learning, one of the earliest
     and most used RL algorithms that exist.
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用 Q-learning 实现第一个“智能”智能体，Q-learning 是最早和最常用的 RL 算法之一。
 - en: 4\. Q-learning agent
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 4\. Q-learning 智能体
 - en: '[**notebooks/02_q_agent.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/02_q_agent.ipynb)'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**notebooks/02_q_agent.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/02_q_agent.ipynb)'
 - en: '[Q-learning](https://www.gatsby.ucl.ac.uk/~dayan/papers/cjch.pdf) (by [Chris
     Walkins](http://www.cs.rhul.ac.uk/~chrisw/) and [Peter Dayan](https://en.wikipedia.org/wiki/Peter_Dayan))
     is an algorithm to find the optimal q-value function.'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Q-learning](https://www.gatsby.ucl.ac.uk/~dayan/papers/cjch.pdf)（由 [Chris
+    Walkins](http://www.cs.rhul.ac.uk/~chrisw/) 和 [Peter Dayan](https://en.wikipedia.org/wiki/Peter_Dayan)
+    提出）是一个用于寻找最优 q 值函数的算法。'
 - en: As we said in [part 1](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html),
     the q-value function **Q(s, a)** associated with a policy **π** is the total reward
     the agent expects to get when at state **s** the agent takes action **a** and
     follows policy **π** thereafter.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们在 [第 1 部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)
+    中所说，q 值函数 **Q(s, a)** 与策略 **π** 相关，表示当智能体在状态 **s** 时采取动作 **a** 并随后遵循策略 **π** 时，智能体期望获得的总奖励。
 - en: The optimal q-value function **Q*(s, a)**is the q-value function associated
     with the optimal policy **π*.**
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 最优 q 值函数 **Q*(s, a)** 是与最优策略 **π*** 相关的 q 值函数。
 - en: 'If you know **Q*(s, a),** you can infer π*: i.e., you pick as the next action
     the one that maximizes Q*(s, a) for the current state s.'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你知道 **Q*(s, a)**，你可以推断 π*：即选择下一个动作，使其在当前状态 s 下最大化 Q*(s, a)。
 - en: Q-learning is an iterative algorithm to compute better and better approximations
     to the optimal q-value function **Q*(s, a)**, starting from an arbitrary initial
     guess **Q⁰(s, a)**.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: Q-learning 是一个迭代算法，用于逐步计算更好地接近最优 q 值函数 **Q*(s, a)** 的近似值，从一个任意初始猜测 **Q⁰(s, a)**
+    开始。
 - en: '![](../Images/2e0bbb83d32186622b9afecd12bf3c5b.png)'
+  id: totrans-86
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2e0bbb83d32186622b9afecd12bf3c5b.png)'
 - en: In a tabular environment like Taxi-v3 with a finite number of states and actions,
     a q-function is essentially a matrix. It has as many rows as states and columns
     as actions, i.e. 500 x 6.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 在像 Taxi-v3 这样的有限状态和动作数量的表格环境中，q 函数实际上是一个矩阵。它有与状态数量相同的行和与动作数量相同的列，即 500 x 6。
 - en: Ok, *but how exactly do you compute the next approximation Q¹(s, a) from Q⁰(s,
     a)?*
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，*那么你是如何从 Q⁰(s, a) 计算下一个近似 Q¹(s, a) 的？*
 - en: 'This is the key formula in Q-learning:'
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是 Q-learning 中的关键公式：
 - en: '![](../Images/2043cf6a1d4117afe3a6e636a3fdb2e0.png)'
+  id: totrans-90
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2043cf6a1d4117afe3a6e636a3fdb2e0.png)'
 - en: As our q-agent navigates the environment and observes the next state ***s’*** and
     reward ***r***, you update your q-value matrix with this formula.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们的 q-agent 在环境中导航并观察到下一个状态 ***s’*** 和奖励 ***r*** 时，你会使用这个公式来更新你的 q 值矩阵。
 - en: '*What is the learning rate* **????** *in this formula?*'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '*在这个公式中，学习率**????**是什么？*'
 - en: The **learning rate** (as usual in machine learning) is a small number that
     controls how large are the updates to the q-function. You need to tune it, as
     too large of a value will cause unstable training, and too small might not be
     enough to escape local minima.
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '**学习率**（如同机器学习中的常规做法）是一个小数字，用来控制对 q 函数的更新幅度。你需要调整它，因为值过大会导致训练不稳定，而值过小可能不足以摆脱局部最小值。'
 - en: '*And this discount factor ****????****?*'
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: '*而这个折扣因子****????****呢？*'
 - en: The **discount factor** is a (hyper) parameter between 0 and 1 that determines
     how much our agent cares about rewards in the distant future relative to those
     in the immediate future.
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '**折扣因子** 是一个介于 0 和 1 之间的（超）参数，用于决定我们的智能体对未来远期奖励的关注程度相对于即时奖励的程度。'
 - en: When ????=0, the agent only cares about maximizing immediate reward. As it happens
     in life, maximizing immediate reward is not the best recipe for optimal long-term
     outcomes. This happens in RL agents too.
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当 ????=0 时，智能体只关注最大化即时奖励。正如生活中所发生的那样，最大化即时奖励并不是实现最佳长期结果的最佳方法。RL 智能体也会出现这种情况。
 - en: When ????=1, the agent evaluates each of its actions based on the sum total
     of all of its future rewards. In this case, the agent weights equally immediate
     rewards and future rewards.
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 当 ????=1 时，智能体基于所有未来奖励的总和来评估每一个动作。在这种情况下，智能体对即时奖励和未来奖励赋予相等的权重。
 - en: The discount factor is typically an intermediate value, e.g., 0.6.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 折扣因子通常是一个中间值，例如 0.6。
 - en: To sum up, if you
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结一下，如果你
 - en: train long enough
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 训练足够长时间
 - en: with a decent learning rate and discount factor
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用一个合适的学习率和折扣因子
 - en: and the agent explores enough the state space
+  id: totrans-102
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 并且智能体充分探索状态空间
 - en: and you update the q-value matrix with the Q-learning formula,
+  id: totrans-103
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 并且你用 Q-learning 公式更新 q 值矩阵，
 - en: your initial approximation will eventually converge to optimal q-matrix. Voila!
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 你的初始近似值最终会收敛到最优 q 矩阵。瞧！
 - en: Let’s implement a Python class for a Q-agent then.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，让我们实现一个 Q-agent 的 Python 类吧。
 - en: '![](../Images/e6ff5ddac5a22c63f93bf1c9d3611c52.png)'
+  id: totrans-106
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e6ff5ddac5a22c63f93bf1c9d3611c52.png)'
 - en: Its API is the same as for the *RandomAgent *above, but with an extra method *update_parameters()*.
     This method takes the transition vector (*state*, *action*, *reward*, *next_state)* and
     updates the q-value matrix approximation *self.q_table* using the Q-learning formula
     from above.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 它的 API 与上面的 *RandomAgent* 相同，但多了一个方法 *update_parameters()*。这个方法接受过渡向量（*state*，*action*，*reward*，*next_state*）并使用上述
+    Q-learning 公式更新 q 值矩阵近似 *self.q_table*。
 - en: Now, we need to plug this agent into a training loop and call its update_parameters() method
     every time the agent collects a new experience.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们需要将这个智能体插入到训练循环中，并每次智能体收集到新经验时调用它的 update_parameters() 方法。
 - en: Also, remember we need to guarantee the agent explores enough the state space.
     Remember the exploration-exploitation parameter we talked about in [part 1](https://towardsdatascience.com/hands-on-reinforcement-learning-course-part-1-269b50e39d08)?
     This is when the epsilon parameter enters into the game.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，请记住我们需要确保智能体充分探索状态空间。记得我们在 [part 1](https://towardsdatascience.com/hands-on-reinforcement-learning-course-part-1-269b50e39d08)
+    中讨论的探索-利用参数吗？这就是 epsilon 参数介入的地方。
 - en: 'Let’s train the agent for *n_episodes =* 10,000 and use *epsilon* = 10%:'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们训练智能体 *n_episodes =* 10,000 次，并使用 *epsilon* = 10%：
 - en: '![](../Images/13d747cc47923b46f098a8f91d33694c.png)'
+  id: totrans-111
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/13d747cc47923b46f098a8f91d33694c.png)'
 - en: 'And plot *timesteps_per_episode* and *penalties_per_episode*:'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: 并绘制 *timesteps_per_episode* 和 *penalties_per_episode*：
 - en: '![](../Images/ab3528a3546bf82ed0349404ec3d7de2.png)'
+  id: totrans-113
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ab3528a3546bf82ed0349404ec3d7de2.png)'
 - en: '![](../Images/1364060daf13431e85edbf87a14deb5b.png)'
+  id: totrans-114
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1364060daf13431e85edbf87a14deb5b.png)'
 - en: '![](../Images/311f38bac5b8e7a468a7b92b29ba3765.png)'
+  id: totrans-115
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/311f38bac5b8e7a468a7b92b29ba3765.png)'
 - en: Nice! These graphs look much much better than for the RandomAgent. Both metrics
     decrease with training, which means our agent is learning.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 很好！这些图形比 *RandomAgent* 的图形好得多。两个指标随着训练的进行而下降，这意味着我们的智能体正在学习。
 - en: We can actually see how the agent drives starting from the same state = 123 as
     we used for the *RandomAgent*.
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们实际上可以看到智能体从相同的状态 = 123 开始驾驶，正如我们在 *RandomAgent* 中使用的那样。
 - en: '![](../Images/8fb85955227b640bc71c33d8932f8d36.png)'
+  id: totrans-118
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8fb85955227b640bc71c33d8932f8d36.png)'
 - en: Nice ride by our Q-agent!
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的 Q-agent 表现不错！
 - en: If you want to compare hard numbers, you can evaluate the performance of the
     q-agent on, let’s say, 100 random episodes and compute the average number of timestamps
     and penalties incurred.
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想比较具体的数字，你可以评估 q-agent 在 100 次随机回合中的表现，并计算平均时间戳和惩罚次数。
 - en: '***A little bit about epsilon-greedy policies***'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '***关于 epsilon-贪婪策略的简介***'
 - en: When you evaluate the agent, it is still good practice to use a positive epsilon value,
     and not epsilon = 0.
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你评估智能体时，仍然建议使用一个正的 epsilon 值，而不是 epsilon = 0。
 - en: W*hy so? Isn’t our agent fully trained? Why do we need to keep this source of
     randomness when we choose the next action?*
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: '*为什么呢？难道我们的智能体已经完全训练好了吗？我们为什么需要在选择下一个动作时保留这种随机性？*'
 - en: The reason is to prevent overfitting.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: 原因是为了防止过拟合。
 - en: Even for such a small state, action space in Taxi-v3 (i.e., 500 x 6), it is
     likely that during training, our agent has not visited enough certain states.
     Hence, its performance in these states might not be 100% optimal, causing the
     agent to get “caught” in an almost infinite loop of suboptimal actions. If epsilon
     is a small positive number (e.g., 5%), we can help the agent escape these infinite
     loops of suboptimal actions.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使在如此小的状态空间中，如 Taxi-v3（即 500 x 6），在训练过程中，我们的智能体可能没有访问到足够的某些状态。因此，在这些状态中的表现可能不是
+    100% 最优，导致智能体陷入一个几乎无限的次优动作循环中。如果 epsilon 是一个较小的正数（例如 5%），我们可以帮助智能体摆脱这些次优动作的无限循环。
 - en: By using a small epsilon at evaluation, we are adopting a so-called **epsilon-greedy
     strategy**.
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过在评估时使用较小的 epsilon，我们采用了所谓的 **epsilon-贪婪策略**。
 - en: 'Let’s evaluate our trained agent on *n_episodes* = 100 using *epsilon* = 0.05. Observe
     how the loop looks almost exactly as the train loop above, but without the call
     to *update_parameters()*:'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用 *epsilon* = 0.05 对训练好的智能体进行评估，*n_episodes* = 100。观察训练循环几乎与上面的训练循环完全相同，但没有调用
+    *update_parameters()*：
 - en: '![](../Images/4bdb7fd14f852c58f8af97e677c9e50b.png)'
+  id: totrans-128
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/4bdb7fd14f852c58f8af97e677c9e50b.png)'
 - en: '![](../Images/0b8eb1bd615841db2864097453637088.png)'
+  id: totrans-129
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/0b8eb1bd615841db2864097453637088.png)'
 - en: These numbers look much much better than for the *RandomAgent*.
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些数字比*RandomAgent*要好得多。
 - en: We can say our agent has learned to drive the taxi!
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以说我们的代理已经学会了驾驶出租车！
 - en: Q-learning gives us a method to compute optimal q-values. But, *what about the
     hyper-parameters* alpha, gamma, and epsilon?
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: Q学习为我们提供了一种计算最佳q值的方法。但*超参数*alpha、gamma和epsilon呢？
 - en: I chose them for you, rather arbitrarily. But in practice, you will need to
     tune them for your RL problems.
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 我为你选择了它们，虽然有些随意。但在实际中，你需要为你的RL问题调整这些参数。
 - en: Let’s explore their impact on learning to get a better intuition of what is
     going on.
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们探讨它们对学习的影响，以更好地理解发生了什么。
 - en: 5\. Hyper-parameter tuning
+  id: totrans-135
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 5. 超参数调整
 - en: '[**notebooks/03_q_agent_hyperparameters_analysis.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/03_q_agent_hyperparameters_analysis.ipynb)'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**notebooks/03_q_agent_hyperparameters_analysis.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/03_q_agent_hyperparameters_analysis.ipynb)'
 - en: Let’s train our q-agent using different values for alpha (learning rate) and gamma (discount
     factor). As for epsilon, we keep it at 10%.
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们使用不同的*alpha*（学习率）和*gamma*（折扣因子）来训练我们的q-agent。至于*epsilon*，我们保持在10%。
 - en: In order to keep the code clean, I encapsulated the q-agent definition inside [src/q_agent.py](https://github.com/Paulescu/hands-on-rl/blob/50c61a385bbd511a6250407ffb1fcb59fbfb983f/01_taxi/src/q_agent.py#L4) and
     the training loop inside the *train()* function in [src/loops.py](https://github.com/Paulescu/hands-on-rl/blob/50c61a385bbd511a6250407ffb1fcb59fbfb983f/01_taxi/src/loops.py#L9).
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了保持代码整洁，我将q-agent的定义封装在[src/q_agent.py](https://github.com/Paulescu/hands-on-rl/blob/50c61a385bbd511a6250407ffb1fcb59fbfb983f/01_taxi/src/q_agent.py#L4)中，将训练循环封装在[src/loops.py](https://github.com/Paulescu/hands-on-rl/blob/50c61a385bbd511a6250407ffb1fcb59fbfb983f/01_taxi/src/loops.py#L9)中的*train()*函数中。
 - en: '![](../Images/c35eb95c735324dc4505b38a2ad7668c.png)'
+  id: totrans-139
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c35eb95c735324dc4505b38a2ad7668c.png)'
 - en: '![](../Images/8c69f52dbca2b84b531a06eb04cd097c.png)'
+  id: totrans-140
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8c69f52dbca2b84b531a06eb04cd097c.png)'
 - en: Let us plot the timesteps per episode for each combination of hyper-parameters.
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们绘制每种超参数组合的*timesteps*每集数。
 - en: '![](../Images/37e768096b4617468f5503bc37104e27.png)'
+  id: totrans-142
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/37e768096b4617468f5503bc37104e27.png)'
 - en: '![](../Images/f36d4911367f3da23ee5b0b4640e52dd.png)'
+  id: totrans-143
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f36d4911367f3da23ee5b0b4640e52dd.png)'
 - en: The graph looks artsy but a bit too noisy.
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表看起来很有艺术感，但有点过于嘈杂。
 - en: Something you can observe, though, is that when alpha = 0.01 the learning is
     slower. alpha (learning rate) controls how much we update the q-values in each
     iteration. Too small of a value implies slower learning.
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: 不过，你可以观察到，当*alpha* = 0.01时，学习速度较慢。*alpha*（学习率）控制我们在每次迭代中更新q值的程度。值过小会导致学习速度变慢。
 - en: Let’s discard alpha = 0.01 and do 10 runs of training for each combination of
     hyper-parameters. We average the timesteps for each episode number, from 1 to
     1000, using these 10 runs.
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们丢弃*alpha* = 0.01，并对每种超参数组合进行10次训练。我们将这10次训练中每集数1到1000的*timesteps*取平均值。
 - en: 'I created the function [train_many_runs()](https://github.com/Paulescu/hands-on-rl/blob/50c61a385bbd511a6250407ffb1fcb59fbfb983f/01_taxi/src/loops.py#L121) in src/loops.py to
     keep the notebook code cleaner:'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在[src/loops.py](https://github.com/Paulescu/hands-on-rl/blob/50c61a385bbd511a6250407ffb1fcb59fbfb983f/01_taxi/src/loops.py#L121)中创建了函数[train_many_runs()](https://github.com/Paulescu/hands-on-rl/blob/50c61a385bbd511a6250407ffb1fcb59fbfb983f/01_taxi/src/loops.py#L121)，以保持笔记本代码的整洁。
 - en: '![](../Images/386888060649efc27e0ceb07e7259785.png)'
+  id: totrans-148
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/386888060649efc27e0ceb07e7259785.png)'
 - en: '![](../Images/59289224f49ade16b59396cfd9c8de35.png)'
+  id: totrans-149
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/59289224f49ade16b59396cfd9c8de35.png)'
 - en: It looks like *alpha* = 1.0 is the value that works best, while gamma seems
     to have less of an impact.
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: 看起来*alpha* = 1.0是效果最好的值，而gamma似乎影响较小。
 - en: Congratulations! You have tuned your first learning rate in this course.
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: 恭喜！你已经调整了本课程中的第一个学习率。
 - en: Tuning hyper-parameters can be time-consuming and tedious. There are excellent
     libraries to automate the manual process we just followed, like [Optuna](https://optuna.org/),
     but this is something we will play with later in the course. For the time being,
     enjoy the speed-up in training we have just found.
+  id: totrans-152
   prefs: []
   type: TYPE_NORMAL
+  zh: 调整超参数可能耗时且乏味。有一些优秀的库可以自动化我们刚刚执行的手动过程，比如[Optuna](https://optuna.org/)，但这是我们在课程后面会深入探讨的内容。暂时，享受我们刚刚发现的训练加速吧。
 - en: Wait, what happens with this epsilon = 10% that I told you to trust me on?
+  id: totrans-153
   prefs: []
   type: TYPE_NORMAL
+  zh: 等等，那我让你相信的*epsilon = 10%*呢？
 - en: Is the current 10% value the best?
+  id: totrans-154
   prefs: []
   type: TYPE_NORMAL
+  zh: 当前的10%值是最佳的吗？
 - en: Let’s check it ourselves.
+  id: totrans-155
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们自己检查一下。
 - en: We take the best alpha and gamma we found, i.e.,
+  id: totrans-156
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们采用了找到的最佳*alpha*和*gamma*，即，
 - en: alpha = 1.0
+  id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: alpha = 1.0
 - en: gamma = 0.9 (we could have taken 0.1 or 0.6 too)
+  id: totrans-158
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`gamma = 0.9`（我们也可以选择 `0.1` 或 `0.6`）'
 - en: And train with different epsilons = [0.01, 0.1, 0.9]
+  id: totrans-159
   prefs: []
   type: TYPE_NORMAL
+  zh: 并使用不同的 epsilon 值进行训练 = [0.01, 0.1, 0.9]
 - en: '![](../Images/f3ff67521f028c7c23c9c8e4bc068f22.png)'
+  id: totrans-160
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f3ff67521f028c7c23c9c8e4bc068f22.png)'
 - en: 'And plot the resulting timesteps and penalties curves:'
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: 并绘制出结果中的 `timesteps` 和 `penalties` 曲线：
 - en: '![](../Images/5b890652973f1ba39b436e503b6a015f.png)'
+  id: totrans-162
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5b890652973f1ba39b436e503b6a015f.png)'
 - en: '![](../Images/413e32ca2b896c8c893181927bea73c7.png)'
+  id: totrans-163
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/413e32ca2b896c8c893181927bea73c7.png)'
 - en: As you can see, both epsilon = 0.01 and epsilon = 0.1 seem to work equally well,
     as they strike the right balance between exploration and exploitation.
+  id: totrans-164
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如你所看到的，`epsilon = 0.01` 和 `epsilon = 0.1` 似乎都表现得非常好，因为它们在探索和利用之间达到了正确的平衡。
 - en: On the other side, epsilon = 0.9 is too large of a value, causing “too much”
     randomness during training and preventing our q-matrix from converging to the
     optimal one. Observe how the performance plateaus at around 250 timesteps per
     episode.
+  id: totrans-165
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一方面，`epsilon = 0.9` 是一个过大的值，会导致训练过程中的“过多”随机性，并阻止我们的 q 矩阵收敛到最佳状态。观察一下性能如何在每回合约 `250
+    timesteps` 处达到平稳。
 - en: In general, the best strategy to choose the epsilon hyper-parameter is **progressive
     epsilon decay**. That is, at the beginning of training, when the agent is very
     uncertain about its q-value estimation, it is best to visit as many states as
     possible, and for that, a large epsilon is great (e.g., 50%)
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: 一般来说，选择 `epsilon` 超参数的最佳策略是 **渐进式 epsilon 衰减**。也就是说，在训练的开始阶段，当代理对其 q 值估计非常不确定时，最好访问尽可能多的状态，而为此，大的 `epsilon`
+    是非常有用的（例如，50%）。
 - en: As training progresses and the agent refines its q-value estimation, it is no
     longer optimal to explore that much. Instead, by decreasing epsilon, the agent
     can learn to perfect and fine-tune the q-values to make them converge faster to
     the optimal ones. Too large of epsilon can cause convergence issues, as we see
     for epsilon = 0.9.
+  id: totrans-167
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着训练的进行，代理逐渐完善其 q 值估计，探索的必要性就减少了。相反，通过降低 `epsilon`，代理可以学会完善和微调 q 值，使其更快地收敛到最佳值。过大的 `epsilon`
+    可能会导致收敛问题，就像我们看到的 `epsilon = 0.9` 一样。
 - en: We will be tunning epsilons along the course, so I will not insist too much
     for the moment. Again, enjoy what we have done today. It is pretty remarkable.
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将在课程中调整 epsilon 值，因此目前我不会过多坚持。再次，享受我们今天所做的事情。这是非常值得的。
 - en: '![](../Images/e7bfc9562614ee6e044325600418c393.png)'
+  id: totrans-169
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e7bfc9562614ee6e044325600418c393.png)'
 - en: '*B-R-A-V-O! (Image by the author).*'
+  id: totrans-170
   prefs: []
   type: TYPE_NORMAL
+  zh: '*B-R-A-V-O!（图片来自作者）。*'
 - en: Recap
+  id: totrans-171
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 复习
 - en: Congratulations on (probably) solving your first Reinforcement Learning problem.
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: 祝贺你（可能）解决了你的第一个强化学习问题。
 - en: 'These are the key learnings I want you to sleep on:'
+  id: totrans-173
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些是我希望你仔细思考的关键学习点：
 - en: The difficulty of a Reinforcement Learning problem is directly related to the
     number of possible actions and states. Taxi-v3 is a tabular environment (i.e.
     finite number of states and actions), so it is an easy one.
+  id: totrans-174
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 强化学习问题的难度与可能的动作和状态的数量直接相关。 `Taxi-v3` 是一个表格环境（即有限数量的状态和动作），所以它比较简单。
 - en: Q-learning is a learning algorithm that works excellent for tabular environments.
+  id: totrans-175
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Q-learning 是一种在表格环境中表现优秀的学习算法。
 - en: No matter what RL algorithm you use, there are hyper-parameters you need to
     tune to make sure your agent learns the optimal strategy.
+  id: totrans-176
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 无论你使用什么强化学习算法，都需要调整超参数以确保你的代理学习到最佳策略。
 - en: Tunning hyper-parameters is a time-consuming process but necessary to ensure
     our agents learn. We will get better at this as the course progresses.
+  id: totrans-177
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 调整超参数是一个耗时的过程，但对于确保我们的代理能学习是必要的。随着课程的进展，我们会在这方面做得更好。
 - en: Homework
+  id: totrans-178
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 作业
 - en: '[**notebooks/04_homework.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/04_homework.ipynb)'
+  id: totrans-179
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**notebooks/04_homework.ipynb**](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/04_homework.ipynb)'
 - en: 'This is what I want you to do:'
+  id: totrans-180
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是我希望你做的事情：
 - en: '[Git clone](https://github.com/Paulescu/hands-on-rl) the repo to your local
     machine.'
+  id: totrans-181
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[将 Git 仓库克隆](https://github.com/Paulescu/hands-on-rl) 到你的本地机器上。'
 - en: '[Setup](https://github.com/Paulescu/hands-on-rl/tree/main/01_taxi#quick-setup) the
     environment for this lesson 01_taxi.'
+  id: totrans-182
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[设置](https://github.com/Paulescu/hands-on-rl/tree/main/01_taxi#quick-setup)
+    这个课程的环境 01_taxi。'
 - en: Open [01_taxi/otebooks/04_homework.ipynb](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/04_homework.ipynb)
     and try completing the 2 challenges.
+  id: totrans-183
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 打开 [01_taxi/otebooks/04_homework.ipynb](https://github.com/Paulescu/hands-on-rl/blob/main/01_taxi/notebooks/04_homework.ipynb)
+    并尝试完成这两个挑战。
 - en: I call them challenges (not exercises) because they are not easy. I want you
     to try them, get your hands dirty, and (maybe) succeed.
+  id: totrans-184
   prefs: []
   type: TYPE_NORMAL
+  zh: 我称这些为挑战（而不是练习），因为它们并不容易。我希望你能尝试这些挑战，动手实践，并（也许）成功。
 - en: In the first challenge, I dare you to update the train()function src/loops.py to
     accept an episode-dependent epsilon.
+  id: totrans-185
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第一个挑战中，我敢打赌你会更新`train()`函数`src/loops.py`以接受一个依赖于回合的epsilon。
 - en: In the second challenge, I want you to upgrade your Python skills and implement
     paralleling processing to speed up hyper-parameter experimentation.
+  id: totrans-186
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第二个挑战中，我希望你提升你的 Python 技能，并实现并行处理以加速超参数实验。
 - en: As usual, if you get stuck and you need feedback, drop me a line at plabartabajo@gmail.com.
+  id: totrans-187
   prefs: []
   type: TYPE_NORMAL
+  zh: 如往常一样，如果你遇到困难并需要反馈，请发邮件给我，邮箱是 plabartabajo@gmail.com。
 - en: I will be more than happy to help you.
+  id: totrans-188
   prefs: []
   type: TYPE_NORMAL
+  zh: 我会非常乐意帮助你。
 - en: If you want to get updates on the course, subscribe to the [**datamachines**](https://datamachines.xyz/subscribe/)
     newsletter.
+  id: totrans-189
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想获取课程更新，请订阅[**datamachines**](https://datamachines.xyz/subscribe/)通讯。
 - en: '[Original](http://datamachines.xyz/2021/12/06/hands-on-reinforcement-learning-course-part-2/).
     Reposted with permission.'
+  id: totrans-190
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始](http://datamachines.xyz/2021/12/06/hands-on-reinforcement-learning-course-part-2/)。经许可转载。'
 - en: '* * *'
+  id: totrans-191
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-192
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-193
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业之路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-194
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-195
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-196
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-197
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Hands-on Reinforcement Learning Course Part 3: SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)'
+  id: totrans-198
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[实际操作强化学习课程第3部分：SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)'
 - en: '[Hands-On Reinforcement Learning Course, Part 1](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)'
+  id: totrans-199
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[实际操作强化学习课程，第1部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)'
 - en: '[HuggingFace Has Launched a Free Deep Reinforcement Learning Course](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)'
+  id: totrans-200
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[HuggingFace 推出了免费的深度强化学习课程](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)'
 - en: '[Hands-On with Supervised Learning: Linear Regression](https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression)'
+  id: totrans-201
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[实际操作监督学习：线性回归](https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression)'
 - en: '[Hands-On with Unsupervised Learning: K-Means Clustering](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
+  id: totrans-202
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[实际操作无监督学习：K均值聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)'
 - en: '[Generative AI with Large Language Models: Hands-On Training](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)'
+  id: totrans-203
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[大型语言模型的生成式 AI：实践培训](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)'

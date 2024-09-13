@@ -1,22 +1,27 @@
 - en: Alternative Feature Selection Methods in Machine Learning
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '![Alternative Feature Selection Methods in Machine Learning](../Images/46a2cd0981a5ec1c8ee11314fd34e20c.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
 - en: Image by [Gerd Altmann](https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1594742)
     from [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1594742)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: You’ve probably done your online searches on "Feature Selection", and you've
     probably found tons of articles describing the three umbrella terms that group
     selection methodologies, i.e., "Filter Methods", "Wrapper Methods" and "Embedded
     Methods".
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: Under the "Filter Methods", we find statistical tests that select features based
@@ -24,6 +29,7 @@
     they do not render good features for our models. In addition, when we have big
     datasets, p-values for statistical tests tend to be very small, highlighting as
     significant tiny differences in distributions, that may not be really important.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: The "Wrapper Methods" category includes greedy algorithms that will try every
@@ -31,6 +37,7 @@
     search. For each feature combination, these methods will train a machine learning
     model, usually with cross-validation, and determine its performance. Thus, wrapper
     methods are very computationally expensive, and often, impossible to carry out.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
 - en: The "Embedded Methods," on the other hand, train a single machine learning model
@@ -42,118 +49,166 @@
     the importance values returned by decision tree based algorithms, which may mask
     their real importance. Finally, decision tree based algorithms may not perform
     well in very big feature spaces, and thus, the importance values might be unreliable.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: Filter Methods are hard to interpret and are not commonly used in practice;
     Wrapper Methods are computationally expensive and often impossible to carry out;
     and Embedded Methods are not suitable in every scenario or for every machine learning
     model. What do we do then? How else can we select predictive features?
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: Fortunately, there are more ways to select features for supervised learning.
     And I will cover three of them in detail throughout this blog post. For more feature
     selection methods, check out the online course [Feature Selection for Machine
     Learning](https://www.trainindata.com/p/feature-selection-for-machine-learning).
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，还有更多方法可以选择监督学习的特征。我将在这篇博客文章中详细介绍其中三种方法。有关更多特征选择方法，请查看在线课程[机器学习特征选择](https://www.trainindata.com/p/feature-selection-for-machine-learning)。
 - en: '**Alternative feature selection methods**'
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**替代特征选择方法**'
 - en: In this article, I will describe three algorithms that select features based
     on their impact on model performance. They are often referred to as "Hybrid Methods"
     because they share characteristics of Wrapper and Embedded methods. Some of these
     methods rely on training more than one machine learning model, a bit like wrapper
     methods. Some selection procedures rely on feature importance like Embedded Methods.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我将描述三种基于特征对模型性能影响的算法。它们通常被称为“混合方法”，因为它们具有Wrapper和Embedded方法的特征。一些方法依赖于训练多个机器学习模型，有点像Wrapper方法。某些选择程序则依赖于特征重要性，如Embedded方法。
 - en: But nomenclature aside, these methods have been successfully used in the industry
     or in data science competitions, and provide additional ways of finding the most
     predictive features for a certain machine learning model.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 抛开术语不谈，这些方法在工业界或数据科学竞赛中已被成功应用，并提供了额外的方式来发现某个机器学习模型的最具预测性的特征。
 - en: Throughout the article, I will lay out the logic and procedure of some of these
     feature selection methods and show how we can implement them in Python using the
     open source library Feature-engine. Let's get started.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在整个文章中，我将展示一些特征选择方法的逻辑和过程，并展示如何使用开源库Feature-engine在Python中实现它们。让我们开始吧。
 - en: 'We will discuss selection by:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将通过以下方式进行讨论：
 - en: Feature shuffling
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 特征洗牌
 - en: Feature performance
+  id: totrans-16
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 特征性能
 - en: Target mean performance
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 目标均值性能
 - en: '**Feature shuffling**'
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**特征洗牌**'
 - en: Feature shuffling, or permutation feature importance consists of assigning importance
     to a feature based on the decrease in a model performance score when the values
     of a single feature are randomly shuffled. Shuffling the order of the feature
     values (across the rows of the dataset) alters the original relationship between
     the feature and the target, so the drop in the model performance score is indicative
     of how much the model depends on that feature.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征洗牌，或称为排列特征重要性，指的是通过随机洗牌单一特征的值来评估该特征的重要性，这种方法通过观察模型性能得分的下降来进行。洗牌特征值的顺序（跨数据集的行）会改变特征与目标之间的原始关系，因此模型性能得分的下降表明模型对该特征的依赖程度。
 - en: '![Alternative Feature Selection Methods in Machine Learning](../Images/7231c0d175f848878d579e52e63b790c.png)'
+  id: totrans-20
   prefs: []
   type: TYPE_IMG
+  zh: '![机器学习中的替代特征选择方法](../Images/7231c0d175f848878d579e52e63b790c.png)'
 - en: 'The procedure works as follows:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 该过程如下：
 - en: It trains a machine learning model and determines its performance.
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它训练一个机器学习模型并确定其性能。
 - en: It shuffles the order of the values of 1 feature.
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它洗牌一个特征的值的顺序。
 - en: It makes predictions with the model trained in step 1, and determines the performance.
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它用第1步中训练的模型进行预测，并确定其性能。
 - en: If the performance drops below a threshold, it keeps the feature, otherwise
     it removes it.
+  id: totrans-25
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果性能下降低于阈值，则保留该特征，否则将其移除。
 - en: It repeats from step 2 until all features are examined.
+  id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它从第2步开始重复，直到所有特征都被检查过。
 - en: Selection by shuffling features has several advantages. First, we need to train
     only one machine learning model. The importance is subsequently assigned by shuffling
     the feature values and making predictions with that model. Second, we can select
     features for any supervised machine learning model of our choice. Third, we can
     implement this selection procedure utilizing open source, and we will see how
     to do this in the coming paragraphs.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过洗牌特征进行选择有几个优点。首先，我们只需训练一个机器学习模型。重要性随后通过洗牌特征值并用该模型进行预测来分配。其次，我们可以为我们选择的任何监督机器学习模型选择特征。第三，我们可以利用开源实施这一选择程序，接下来的段落中我们将看到如何做到这一点。
 - en: '**Pros:**'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**优点：**'
 - en: It only trains one machine learning model, so it is quick.
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它只训练一个机器学习模型，因此速度较快。
 - en: It is suitable for any supervised machine learning model.
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它适用于任何监督机器学习模型。
 - en: It is available in Feature-engine, a Python open source library.
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它可以在Feature-engine中找到，这是一个Python开源库。
 - en: On the downside, if two features are correlated, when one of the features is
     shuffled, the model will still have access to the information through its correlated
     variable. This may result in a lower importance value for both features, even
@@ -163,121 +218,182 @@
     shuffling features introduces an element of randomness, so for features with borderline
     importance, that is, importance values close to the threshold, different runs
     of the algorithm may return different subsets of features.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 不利的一面是，如果两个特征相关，当其中一个特征被洗牌时，模型仍然可以通过其相关变量访问信息。这可能导致两个特征的重要性值较低，即使它们可能*实际上*是重要的。此外，为了选择特征，我们需要定义一个任意的重要性阈值，低于该阈值的特征将被移除。阈值越高，选择的特征就越少。最后，特征洗牌引入了随机性因素，因此对于重要性边界的特征，即接近阈值的特征，算法的不同运行可能会返回不同的特征子集。
 - en: '**Considerations:**'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '**考虑因素：**'
 - en: Correlations may affect the interpretation of the feature's importance.
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 相关性可能会影响特征重要性的解释。
 - en: The user needs to define an arbitrary threshold.
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用户需要定义一个任意的阈值。
 - en: The element of randomness makes the selection procedure non-deterministic.
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 随机性的因素使得选择过程具有非确定性。
 - en: With this in mind, selecting features by feature shuffling is a good feature
     selection method that focuses on highlighting those variables that directly affect
     the model performance. We can manually derive the [permutation importance](https://scikit-learn.org/stable/modules/generated/sklearn.inspection.permutation_importance.html)
     with Scikit-learn, and then select those variables that show an importance above
     a certain threshold. Or we can automate the entire procedure with Feature-engine.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 鉴于此，通过特征洗牌选择特征是一种良好的特征选择方法，侧重于突出直接影响模型性能的变量。我们可以使用 Scikit-learn 手动推导[置换重要性](https://scikit-learn.org/stable/modules/generated/sklearn.inspection.permutation_importance.html)，然后选择那些显示出高于某个阈值的变量。或者，我们可以使用
+    Feature-engine 自动化整个过程。
 - en: '**Python Implementation**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Python 实现**'
 - en: 'Let’s see how to carry out selection by feature shuffling with Feature-engine.
     We will use the diabetes dataset that comes with Scikit-learn. First, we load
     the data:'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看如何使用 Feature-engine 进行特征洗牌选择。我们将使用 Scikit-learn 提供的糖尿病数据集。首先，我们加载数据：
 - en: '[PRE0]'
+  id: totrans-40
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'We set up the machine learning model we are interested in:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们设置了我们感兴趣的机器学习模型：
 - en: '[PRE1]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'We will select features based on the drop in the r² using 3 fold cross-validation:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将基于 r² 的下降使用 3 折交叉验证来选择特征：
 - en: '[PRE2]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: With the method fit() the transformer finds the important variables —those that
     cause a drop in r² when shuffled. By default, features will be selected if the
     performance drop is bigger than the mean drop caused by all features.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 fit() 方法，转换器会找出重要变量——那些在打乱时导致 r² 下降的变量。默认情况下，如果性能下降超过所有特征引起的平均下降，则特征将被选择。
 - en: '[PRE3]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'With the method transform() we drop the unselected features from the dataset:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 transform() 方法，我们从数据集中删除未选择的特征：
 - en: '[PRE4]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'We can inspect the individual feature’s importance through one of the transformer’s
     attributes:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过转换器的一个属性检查单个特征的重要性：
 - en: '[PRE5]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'We can access to the names of the features that will be removed in another
     attribute:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以访问将被移除的特征名称，这些名称会在另一个属性中显示：
 - en: '[PRE6]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: That’s it, simple. We have a reduced dataframe in Xt.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样，简单。我们在 Xt 中得到了一个减少的数据框。
 - en: '**Feature performance**'
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**特征性能**'
 - en: A direct way of determining the importance of a feature is to train a machine
     learning model using solely that feature. In this case, the "importance" of the
     feature is given by the performance score of the model. In other words, how well
     a model trained on a single feature predicts the target. Poor performance metrics
     speak of weak or non-predictive features.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 确定特征重要性的直接方法是仅使用该特征训练机器学习模型。在这种情况下，特征的“重要性”由模型的性能得分决定。换句话说，就是用单个特征训练的模型对目标的预测效果如何。差的性能指标表明特征较弱或无法预测。
 - en: 'The procedure works as follows:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 该过程如下：
 - en: It trains a machine learning model for each feature.
+  id: totrans-57
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它为每个特征训练一个机器学习模型。
 - en: For each model, it makes predictions and determines model performance.
+  id: totrans-58
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于每个模型，它会进行预测并确定模型性能。
 - en: It selects features with performance metrics above a threshold.
+  id: totrans-59
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它选择性能指标高于阈值的特征。
 - en: In this selection procedure, we train one machine learning model per feature.
     The model uses an individual feature to predict the target variable. Then, we
     determine the model performance, usually with cross-validation, and select features
     whose performance falls above a certain threshold.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个选择过程中，我们为每个特征训练一个机器学习模型。该模型使用一个特征来预测目标变量。然后，我们通过交叉验证来确定模型性能，并选择性能高于某个阈值的特征。
 - en: On one hand, this method is more computationally costly because we would train
     as many models as features we have in our data set. On the other hand, models
     trained on a single feature tend to train fairly quickly.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 一方面，这种方法计算成本较高，因为我们需要训练与数据集中特征数量相同的模型。另一方面，基于单一特征训练的模型往往训练速度较快。
 - en: With this method, we can select features for any model that we want, because
     the importance is given by the performance metric. On the downside, we need to
     provide an arbitrary threshold for the feature selection. With higher threshold
@@ -285,189 +401,283 @@
     intuitive. For example, if the performance metric is the roc-auc, we can select
     features whose performance is above 0.5\. For other metrics, like accuracy, what
     determines a good value is not so clear.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用这种方法，我们可以为任何我们想要的模型选择特征，因为重要性由性能指标决定。缺点是，我们需要提供一个任意的阈值来进行特征选择。阈值较高时，我们选择的特征组较小。有些阈值可能比较直观。例如，如果性能指标是
+    roc-auc，我们可以选择性能高于 0.5 的特征。对于其他指标，如准确率，什么值算好并不那么明确。
 - en: '**Pros:**'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '**优点：**'
 - en: It is suitable for any supervised machine learning model.
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它适用于任何监督式机器学习模型。
 - en: It explores features individually, thus avoiding correlation issues.
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它逐个探索特征，从而避免了相关性问题。
 - en: It is available in Feature-engine, a Python open source project.
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 该方法在 Feature-engine 中可用，这是一个 Python 开源项目。
 - en: '**Considerations:**'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '**考虑事项：**'
 - en: Training one model per feature can be computationally costly.
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 每个特征训练一个模型可能会计算成本较高。
 - en: The user needs to define an arbitrary threshold.
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用户需要定义一个任意的阈值。
 - en: It does not pick up feature interactions.
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它不会捕捉特征交互。
 - en: We can implement selection by single feature performance utilizing Feature-engine.
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以利用 Feature-engine 通过单特征性能来实现选择。
 - en: '**Python Implementation**'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Python 实现**'
 - en: 'Let’s load the diabetes dataset from Scikit-learn:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从 Scikit-learn 加载糖尿病数据集：
 - en: '[PRE7]'
+  id: totrans-74
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: We want to select features whose r² > 0.01, utilizing a linear regression and
     using 3 fold cross-validation.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们想要选择 r² > 0.01 的特征，利用线性回归并使用 3 折交叉验证。
 - en: '[PRE8]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: The transformer uses the method fit() to fit 1 model per feature, determine
     performance, and select the important features.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 变换器使用 fit() 方法为每个特征拟合 1 个模型，确定性能，并选择重要特征。
 - en: '[PRE9]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: 'We can explore the features that will be dropped:'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以探索将被丢弃的特征：
 - en: '[PRE10]'
+  id: totrans-80
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'We can also examine each individual feature’s performance:'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以检查每个单独特征的性能：
 - en: '[PRE11]'
+  id: totrans-82
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: 'With the method transform() we remove the features from the dataset:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 transform() 方法，我们可以从数据集中移除特征：
 - en: '[PRE12]'
+  id: totrans-84
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: And that’s it. Now we have a reduced dataset.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样。现在我们有了一个减少的数据集。
 - en: '**Target mean performance**'
+  id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**目标均值性能**'
 - en: The selection procedure that I will discuss now was introduced in the KDD 2009
     data science competition by [Miller and co-workers](http://proceedings.mlr.press/v7/miller09/miller09.pdf).
     The authors do not attribute any name to the technique, but since it uses the
     mean target value per group of observations as a proxy for predictions, I like
     to call this technique "Selection by Target Mean Performance."
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 我现在讨论的选择过程是在 KDD 2009 数据科学竞赛中由 [Miller 和同事](http://proceedings.mlr.press/v7/miller09/miller09.pdf)
+    引入的。作者没有给这项技术命名，但由于它使用每组观察的目标均值作为预测的代理，我喜欢将这项技术称为“基于目标均值性能的选择”。
 - en: This selection methodology also assigns an "importance" value to each feature.
     This importance value is derived from a performance metric. Interestingly, the
     model does not train any machine learning models. Instead, it uses a much simpler
     proxy as a prediction.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种选择方法还为每个特征分配了一个“重要性”值。这个重要性值是从性能指标中得出的。有趣的是，该模型不训练任何机器学习模型。相反，它使用了一个简单的代理作为预测。
 - en: In a nutshell, the procedure uses the mean target value per category or per
     interval (if the variable is continuous) as a proxy for prediction. With this
     prediction, it derives a performance metric, like r², accuracy, or any other metric
     that assesses a prediction against the truth.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 简而言之，该过程使用每个类别或每个区间（如果变量是连续的）的目标均值作为预测的代理。基于这个预测，它导出一个性能指标，如 r²、准确率或任何其他评估预测与实际情况的指标。
 - en: How does this procedure exactly work?
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个过程具体是如何工作的？
 - en: 'For categorical variables:'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于分类变量：
 - en: It splits the dataframe into a training and a testing set.
+  id: totrans-92
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它将数据框分成训练集和测试集。
 - en: For every categorical feature, it determines the mean target value per category
     (using the train set).
+  id: totrans-93
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于每个分类特征，它确定每个类别的平均目标值（使用训练集）。
 - en: It replaces categories with corresponding target mean values in the test.
+  id: totrans-94
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它用相应的目标均值替换测试中的类别。
 - en: It determines a performance metric using the encoded features and the target
     (on the test set).
+  id: totrans-95
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它使用编码特征和目标（在测试集上）确定一个性能指标。
 - en: It selects features whose performance is above a threshold.
+  id: totrans-96
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它选择性能高于阈值的特征。
 - en: For categorical values, the mean value of the target is determined for each
     category based on the training set. Then, the categories are replaced by the learned
     values in the test set, and these values are used to determine the performance
     metric.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于分类值，基于训练集确定每个类别的目标均值。然后，在测试集中用学习到的值替换这些类别，并使用这些值来确定性能指标。
 - en: 'For continuous variables, the procedure is fairly similar:'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于连续变量，这个过程相当类似：
 - en: It splits the dataframe into a training and a testing set.
+  id: totrans-99
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它将数据框分成训练集和测试集。
 - en: For every continuous feature, it sorts the values into discrete intervals finding
     the limits using the train set.
+  id: totrans-100
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于每个连续特征，它将值排序到离散区间中，使用训练集找出这些区间的边界。
 - en: It determines the mean target value per interval (using a training set).
+  id: totrans-101
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它确定每个区间的平均目标值（使用训练集）。
 - en: It sorts variables in the test set into the intervals identified in 2.
+  id: totrans-102
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它将测试集中的变量按照2中识别出的区间进行排序。
 - en: It replaces intervals with corresponding target mean values (using the test
     set).
+  id: totrans-103
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它用相应的目标均值替换区间（使用测试集）。
 - en: It determines a performance metric between the encoded feature and the target
     (on the test set).
+  id: totrans-104
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它确定编码特征和目标之间的性能指标（在测试集上）。
 - en: It selects features whose performance is above a threshold.
+  id: totrans-105
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 它选择性能高于阈值的特征。
 - en: For continuous variables, the authors first separated the observations into
     bins, a process otherwise called discretization. They used 1% quantiles. Then
     they determined the mean value of the target in each bin using the training set
     and evaluated the performance after replacing the bin values with the target mean
     in the test set.
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于连续变量，作者首先将观测值分到箱子中，这一过程称为离散化。他们使用了1%的分位数。然后，他们使用训练集确定每个箱子中的目标均值，并在测试集中用目标均值替换箱子值后评估性能。
 - en: This feature selection technique is very simple; it involves taking the mean
     of the responses for each level (category or interval), and comparing these values
     to the target values to obtain a performance metric. Despite its simplicity, it
     has a number of advantages.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 该特征选择技术非常简单；它涉及对每个水平（类别或区间）的响应进行平均，然后将这些值与目标值进行比较，以获得一个性能指标。尽管其简单，但它有许多优点。
 - en: First, it does not involve training a machine learning model, so it is incredibly
     fast to compute. Second, it captures non-linear relationships with the target.
     Third, it is suitable for categorical variables, unlike the great majority of
@@ -476,31 +686,45 @@
     performance between categorical and numerical variables. And, it is model-agnostic.
     The features selected by this procedure should, in theory, be suitable for any
     machine learning model.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，它不涉及训练机器学习模型，因此计算速度极快。其次，它能够捕捉与目标的非线性关系。第三，它适用于分类变量，这与绝大多数现有选择算法不同。它对异常值具有鲁棒性，因为这些值会被分配到一个极端的箱子中。根据作者的说法，它在分类变量和数值变量之间提供了相当的性能。而且，它是模型无关的。理论上，这个过程选择的特征适用于任何机器学习模型。
 - en: '**Pros:**'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '**优点：**'
 - en: It is fast because no machine learning model is trained.
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它计算速度快，因为没有训练机器学习模型。
 - en: It is suitable for categorical and numerical variables alike.
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它适用于分类变量和数值变量。
 - en: It is robust to outliers.
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它对异常值具有鲁棒性。
 - en: It captures non-linear relationships between features and the target.
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它捕捉特征与目标之间的非线性关系。
 - en: It is model-agnostic.
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它是模型无关的。
 - en: This selection method also presents some limitations. First, for continuous
     variables, the user needs to define an arbitrary number of intervals in which
     the values will be sorted. This poses a problem for skewed variables, where most
@@ -509,123 +733,183 @@
     categories. Therefore, the mean target value per category will be unreliable.
     In extreme cases, if a category was not present in the training set, we would
     not have a mean target value to use as a proxy to determine performance.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种选择方法也有一些局限性。首先，对于连续变量，用户需要定义一个任意数量的区间来对值进行排序。这对于偏态变量来说是一个问题，因为大多数值可能会落在一个箱子里。其次，标签不频繁的分类变量可能导致不可靠的结果，因为这些类别的观察值很少。因此，每个类别的平均目标值将是不可靠的。在极端情况下，如果一个类别在训练集中不存在，我们将没有平均目标值作为代理来确定性能。
 - en: '**Considerations:**'
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: '**注意事项：**'
 - en: It needs tuning of interval numbers for skewed variables.
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 需要对偏态变量的区间数量进行调整。
 - en: Rare categories will offer unreliable performance proxies or make the method
     impossible to compute.
+  id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 稀有类别将提供不可靠的性能代理，或使该方法无法计算。
 - en: With these considerations in mind, we can select variables based on the target
     mean performance with Feature-engine.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 牢记这些注意事项，我们可以使用Feature-engine基于目标均值性能来选择变量。
 - en: '**Python implementation**'
+  id: totrans-120
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Python 实现**'
 - en: We will use this method to select variables from the Titanic dataset, which
     has a mix of numerical and categorical variables. When loading the data, I will
     do some preprocessing to facilitate the demonstration and then separate it into
     train and test.
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用此方法从泰坦尼克号数据集中选择变量，该数据集混合了数值和分类变量。在加载数据时，我会进行一些预处理以方便演示，然后将其分为训练集和测试集。
 - en: '[PRE13]'
+  id: totrans-122
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: We will select features based on the roc-auc using 2 fold cross-validation.
     The first thing to note is that Feature-engine allows us to use cross-validation,
     which is an improvement with respect to the original method described by the authors.
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将基于roc-auc使用2折交叉验证来选择特征。首先需要注意的是，Feature-engine允许我们使用交叉验证，这是对作者原始方法的改进。
 - en: Feature-engine also allows us to decide how we will determine the intervals
     for numerical variables. We can choose equal frequency or equal width intervals.
     The authors used 1% quantiles, which is suitable for continuous variables with
     a fair spread of values, but not often suitable for skewed variables. In this
     demo, we will separate numerical variables into equal frequency intervals.
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: Feature-engine还允许我们决定如何确定数值变量的区间。我们可以选择等频或等宽区间。作者使用了1%分位数，这适用于值分布较广的连续变量，但不适用于偏态变量。在这个演示中，我们将数值变量分成等频区间。
 - en: Finally, we want to select features for which the roc-auc is greater than 0.6.
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终，我们希望选择roc-auc大于0.6的特征。
 - en: '[PRE14]'
+  id: totrans-126
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'With the method fit() the transformer:'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用fit()方法，转换器：
 - en: replaces categories by the target mean
+  id: totrans-128
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用目标均值替换类别
 - en: sorts numerical variables into equal frequency bins
+  id: totrans-129
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将数值变量排序为等频箱
 - en: replaces bins by the target mean
+  id: totrans-130
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 用目标均值替换箱子
 - en: using the target mean encoded variables returns the roc-auc
+  id: totrans-131
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用目标均值编码变量返回roc-auc
 - en: selects features whose roc-auc > 0.6
+  id: totrans-132
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 选择roc-auc > 0.6的特征
 - en: '[PRE15]'
+  id: totrans-133
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: 'We can explore the ROC-AUC for each feature:'
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以探索每个特征的ROC-AUC：
 - en: '[PRE16]'
+  id: totrans-135
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: 'We can find the features that will be dropped from the data:'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以找到将从数据中删除的特征：
 - en: '[PRE17]'
+  id: totrans-137
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: 'With the method transform() we drop the features from the data sets:'
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用transform()方法，我们从数据集中删除特征：
 - en: '[PRE18]'
+  id: totrans-139
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: Simple. Now we have reduced versions of the train and test sets.
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单。现在我们已经减少了训练集和测试集的版本。
 - en: '**Wrapping up**'
+  id: totrans-141
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**总结**'
 - en: We’ve reached the end of the article. If you made it this far, well done and
     thank you for reading. If you want to know more about feature selection, including
     Filter, Wrapper, Embedded and a number of Hybrid methods, check out the online
     course [Feature Selection for Machine Learning](https://www.trainindata.com/p/feature-selection-for-machine-learning).
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们已经结束了文章。如果你看到这里，做得好，谢谢你的阅读。如果你想了解更多关于特征选择的内容，包括过滤器、包裹法、嵌入法和多种混合方法，请查看在线课程[机器学习特征选择](https://www.trainindata.com/p/feature-selection-for-machine-learning)。
 - en: For additional courses on machine learning, including Feature Engineering, Hyperparameter
     Optimization and Model Deployment, visit our [website](https://www.trainindata.com/).
+  id: totrans-143
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关机器学习的更多课程，包括特征工程、超参数优化和模型部署，请访问我们的[网站](https://www.trainindata.com/)。
 - en: To implement Filter, Wrapper, Embedded and Hybrid selection methods in Python,
     check out the selection modules in [Scikit-learn](https://scikit-learn.org/stable/modules/feature_selection.html),
     [MLXtend](http://rasbt.github.io/mlxtend/user_guide/feature_selection/SequentialFeatureSelector/)
     and [Feature-engine](https://feature-engine.readthedocs.io/en/latest/index.html).
     The libraries come with extensive documentation that will help you understand
     the underlying methodology.
+  id: totrans-144
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在Python中实现过滤器、包装器、嵌入式和混合选择方法，可以查看[Scikit-learn](https://scikit-learn.org/stable/modules/feature_selection.html)、[MLXtend](http://rasbt.github.io/mlxtend/user_guide/feature_selection/SequentialFeatureSelector/)和[Feature-engine](https://feature-engine.readthedocs.io/en/latest/index.html)中的选择模块。这些库附带了详尽的文档，将帮助你深入理解其背后的方法论。
 - en: '**Bio: [Soledad Galli, PhD](https://linkedin.com/in/soledad-galli)** is the
     Lead Data Scientist and machine learning instructor at [Train in Data](https://www.trainindata.com/).
     Sole teaches intermediate and advanced courses in data science and machine learning.
@@ -635,58 +919,90 @@
     of the Python open source library [Feature-engine](https://feature-engine.readthedocs.io/en/latest/index.html).
     Sole is passionate about sharing knowledge and helping others succeed in data
     science.'
+  id: totrans-145
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历: [Soledad Galli, PhD](https://linkedin.com/in/soledad-galli)** 是[Train
+    in Data](https://www.trainindata.com/)的首席数据科学家和机器学习讲师。Sole教授中级和高级数据科学及机器学习课程。她曾在金融和保险行业工作，2018年获得了[数据科学领袖奖](https://www.information-age.com/data-leaders-awards-2018-revealed-123472520/)，并于2019年被选为"[LinkedIn的声音](https://www.linkedin.com/pulse/linkedin-top-voices-2019-data-science-analytics-lorenzetti-soper/)"。她还是Python开源库[Feature-engine](https://feature-engine.readthedocs.io/en/latest/index.html)的创作者和维护者。Sole对分享知识和帮助他人在数据科学领域取得成功充满热情。'
 - en: '* * *'
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-147
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-149
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-150
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT工作'
 - en: '* * *'
+  id: totrans-151
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-152
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Advanced Feature Selection Techniques for Machine Learning Models](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
+  id: totrans-153
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习模型的高级特征选择技术](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)'
 - en: '[Feature Selection: Where Science Meets Art](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
+  id: totrans-154
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征选择: 科学与艺术的结合](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
 - en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  id: totrans-155
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征存储峰会2022: 免费的特征工程会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
 - en: '[OpenChatKit: Open-Source ChatGPT Alternative](https://www.kdnuggets.com/2023/03/openchatkit-opensource-chatgpt-alternative.html)'
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[OpenChatKit: 开源ChatGPT替代品](https://www.kdnuggets.com/2023/03/openchatkit-opensource-chatgpt-alternative.html)'
 - en: '[8 Open-Source Alternative to ChatGPT and Bard](https://www.kdnuggets.com/2023/04/8-opensource-alternative-chatgpt-bard.html)'
+  id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[8个开源ChatGPT和Bard的替代品](https://www.kdnuggets.com/2023/04/8-opensource-alternative-chatgpt-bard.html)'
 - en: '[ChatGLM-6B: A Lightweight, Open-Source ChatGPT Alternative](https://www.kdnuggets.com/2023/04/chatglm6b-lightweight-opensource-chatgpt-alternative.html)'
+  id: totrans-158
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ChatGLM-6B: 轻量级开源ChatGPT替代品](https://www.kdnuggets.com/2023/04/chatglm6b-lightweight-opensource-chatgpt-alternative.html)'
