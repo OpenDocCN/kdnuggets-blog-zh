@@ -1,257 +1,379 @@
 - en: 'Interpretability: Cracking open the black box, Part 2'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 解释性：破解黑箱，第2部分
 - en: 原文：[https://www.kdnuggets.com/2019/12/interpretability-black-box-part-2.html](https://www.kdnuggets.com/2019/12/interpretability-black-box-part-2.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '[原文](https://www.kdnuggets.com/2019/12/interpretability-black-box-part-2.html)'
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Manu Joseph](https://www.linkedin.com/in/manujosephv/), Problem Solver,
     Practitioner, Researcher at Thoucentric Analytics**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Manu Joseph](https://www.linkedin.com/in/manujosephv/)，问题解决者、从业者、Thoucentric
+    Analytics的研究员**。'
 - en: In the [last post](https://www.kdnuggets.com/2019/12/explainability-black-box-part1.html) in
     the series, we defined what interpretability is and looked at a few interpretable
     models and the quirks and ‘gotchas’ in it. Now let’s dig deeper into the post-hoc
     interpretation techniques which is useful when your model itself is not transparent.
     This resonates with most real-world use cases because whether we like it or not,
     we get better performance with a black box model.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在[上一篇文章](https://www.kdnuggets.com/2019/12/explainability-black-box-part1.html)中，我们定义了解释性是什么，并查看了一些可解释的模型以及它们的怪癖和“陷阱”。现在，让我们深入探讨事后解释技术，这在模型本身不透明时非常有用。这与大多数实际应用场景相呼应，因为无论我们喜欢与否，黑箱模型通常能提供更好的性能。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的IT组织'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '**Data Set**'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据集**'
 - en: 'For this exercise, I have chosen the [Adult dataset a.k.a Census Income](https://archive.ics.uci.edu/ml/datasets/adult)
     dataset. **Census Income** is a pretty popular dataset which has demographic information
     like age, occupation, along with a column which tells us if the income of the
     particular person >50k or not. We are using this column to run a binary classification
     using Random Forest. The reasons for choosing Random Forest are two-fold:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于本练习，我选择了[成人数据集，即人口普查收入](https://archive.ics.uci.edu/ml/datasets/adult)数据集。**人口普查收入**是一个相当受欢迎的数据集，包含年龄、职业等人口统计信息，以及一个列指示该人的收入是否超过50k。我们使用这一列进行随机森林的二分类。选择随机森林的原因有两个：
 - en: Random Forest is one of the most popularly used algorithm, along with Gradient
     Boosted Trees. Both of them are from the family of ensemble algorithms with Decision
     Trees.
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 随机森林是最常用的算法之一，与梯度提升树一样。它们都属于决策树的集成算法家族。
 - en: There are a few techniques that are specific to tree-based models, which I want
     to discuss.
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 有一些特定于基于树的模型的技术，我想讨论。
 - en: '![](../Images/3c89b369fec627eecc6f3f59ecfc7f28.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3c89b369fec627eecc6f3f59ecfc7f28.png)'
 - en: '*Overview of Census Income Dataset.*'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '*人口普查收入数据集概述*'
 - en: '![](../Images/54a25a4b4d365eccb2fbf5effa25f251.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/54a25a4b4d365eccb2fbf5effa25f251.png)'
 - en: '*Sample Data from Census Income Dataset.*'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '*人口普查收入数据集中的示例数据*'
 - en: Post-hoc Interpretation
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 事后解释
 - en: Now let’s look at techniques to do post-hoc interpretation to understand our
     black box models. All through the rest of the blog, the discussion will be based
     on machine learning models(and not deep learning) and will be based on structured
     data. While many of the methods here are model agnostic, since there are a lot
     of specific ways to interpret deep learning models, especially on unstructured
     data, we leave that out of our current scope.(Maybe another blog, another day.)
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们来看一下事后解释技术，以理解我们的黑箱模型。在接下来的博客中，讨论将基于机器学习模型（而非深度学习）以及结构化数据。虽然这里许多方法是模型无关的，但由于解释深度学习模型，尤其是非结构化数据中的方法众多，我们将其排除在当前范围之外。（也许另一个博客，另一天。）
 - en: '**DATA PREPROCESSING**'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据预处理**'
 - en: Encoded the target variable into numerical variables
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将目标变量编码为数值变量
 - en: Dealt with missing values
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 处理了缺失值
 - en: Transformed *marital_status*into a binary variable by combining a few values
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 通过合并一些值将*婚姻状况*转换为二进制变量。
 - en: Dropped *education*because *education_num* gives the same info, but in numerical
     format
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 去除了*教育*，因为*教育年限*提供了相同的信息，但以数字格式表示。
 - en: Dropped *capital_gain*and *capital_loss* because they do not have any information.
     More than 90% of them are zeroes
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 去除了*资本增益*和*资本损失*，因为它们没有提供任何信息。超过90% 的值为零。
 - en: Dropped *native_country*because of high cardinality and skew towards US
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 去除了*native_country*，因为其基数较高且偏向美国。
 - en: Dropped *relationship*because of a lot of overlap with marital_status
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 去除了*关系*，因为与婚姻状况有较多重叠。
 - en: A Random Forest algorithm was tuned and trained on the data with 83.58% performance.
     It is a decent score considering the best scores vary from 78-86% based on the
     way you model and test set. But for our purposes, the model performance is more
     than enough.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 随机森林算法在数据上进行调优和训练，性能达到83.58%。考虑到最佳得分在78%到86%之间，这个得分还算不错，具体取决于你如何建模和测试。但对于我们的目的来说，模型性能已经足够。
 - en: 1) Mean Decrease in Impurity
+  id: totrans-30
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1) 杂质减少的平均值
 - en: This is by far the most popular way of explaining a tree-based model and it’s
     ensembles. A lot of it is because of Sci-Kit Learn, and its easy to use implementation
     of the same. Fitting a Random Forest or a Gradient Boosting Model and plotting
     the “feature importance” has become the most used and abused technique among Data
     Scientist.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是解释树模型及其集成的最流行方法。这在很大程度上归功于 Sci-Kit Learn，它提供了易于使用的实现。拟合随机森林或梯度提升模型并绘制“特征重要性”已经成为数据科学家中最常用且被滥用的技术。
 - en: The mean decrease in impurity importance of a feature is computed by measuring
     how effective the feature is at reducing uncertainty (classifiers) or variance
     (regressors) when creating decision trees within any ensemble Decision Tree method(Random
     Forest, Gradient Boosting, etc.).
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征的平均杂质减少重要性是通过测量特征在创建决策树时减少不确定性（分类器）或方差（回归器）的效果来计算的，适用于任何集成决策树方法（如随机森林、梯度提升等）。
 - en: 'The **advantages** of the technique are:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 该技术的**优点**是：
 - en: A fast and easy way of getting feature importance
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 获取特征重要性的快速简便方法
 - en: Readily available in Sci-kit Learn and Decision Tree implementation in R
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 Sci-kit Learn 和 R 的决策树实现中现成可用。
 - en: It is pretty intuitive to explain to a layman
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 向外行解释这一点相当直观。
 - en: '**ALGORITHM**'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**算法**'
 - en: During tree construction, whenever a split is made, we keep track of which feature
     made the split, what was the Gini impurity before and after, and how many samples
     did it affect
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在树的构建过程中，每当进行拆分时，我们会记录是哪个特征进行了拆分，拆分前后的基尼杂质是什么，以及它影响了多少样本。
 - en: At the end of the tree building process, you calculate the total gain in Gini
     Index attributed to each feature
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在树构建过程结束时，计算每个特征在基尼指数中所占的总增益。
 - en: And in case of a Random Forest or a Gradient Boosted Trees, we average this
     score over all the trees in the ensemble
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在随机森林或梯度提升树的情况下，我们将这个得分在所有树中取平均。
 - en: '**IMPLEMENTATION**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**实现**'
 - en: Sci-kit Learn implements this by default in the “feature importance” in tree-based
     models. So retrieving them and plotting the top 25 features is very simple.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: Sci-kit Learn 默认在树模型的“特征重要性”中实现了这一点。因此，检索并绘制前25个特征非常简单。
 - en: '[PRE0]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![](../Images/1ba0c8f1e81dc3032bcb92eebb9e5877.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1ba0c8f1e81dc3032bcb92eebb9e5877.png)'
 - en: '[Click here for full interactive plot](https://chart-studio.plot.ly/~manujosephv/25)'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '[点击这里查看完整交互式图](https://chart-studio.plot.ly/~manujosephv/25)'
 - en: We can also retrieve and plot the mean decrease in the impurity of each tree
     as a box plot.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还可以检索并绘制每棵树的杂质减少的均值作为箱形图。
 - en: '[PRE1]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![](../Images/6765d702c2ad3f9016d787935576dc61.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6765d702c2ad3f9016d787935576dc61.png)'
 - en: '[Click for full interactive plot](https://chart-studio.plot.ly/~manujosephv/27)'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '[点击查看完整交互式图](https://chart-studio.plot.ly/~manujosephv/27)'
 - en: '**INTERPRETATION**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解释**'
 - en: The top 4 features are *marital status, education_num, age,*and *hours_worked*.
     This makes perfect sense, as they have a lot to do with how much you earn
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 排名前4的特征是*婚姻状况、教育年限、年龄*和*工作时长*。这完全合乎逻辑，因为它们与收入的关系密切。
 - en: Notice the two features fnlwgt and random in there? Are they more important
     than the occupation of a person?
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 注意到其中的两个特征 fnlwgt 和 random 吗？它们比一个人的职业更重要吗？
 - en: One other caveat here is that we are looking at the one-hot features as separate
     features and it may have some bearing on why the occupation features are ranked
     lower than random. Dealing with One-hot features when looking at feature importance
     is a whole other topic
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 另一个警告是，我们将 one-hot 特征视为单独的特征，这可能会影响为什么职业特征排名低于随机特征。处理 one-hot 特征时查看特征重要性是一个完全不同的话题。
 - en: Let’s take a look at what fnlwgt and random are.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看看 fnlwgt 和随机是什么。
 - en: The description of the dataset for fnlwgt is a long and convoluted description
     of how the census agency uses sampling to create “weighted tallies” of any specified
     socio-economic characteristics of the population. In short, it is a sampling weight
     and nothing to do with how much a person earns
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 关于 fnlwgt 数据集的描述是关于人口普查机构如何使用采样来创建任何指定的社会经济特征的“加权统计”的冗长而复杂的描述。简而言之，它是一个采样权重，与个人收入无关。
 - en: And *random*is just what the name says. Before fitting the model, I made a column
     with random numbers and called it random
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 而*随机*正如其名。在拟合模型之前，我制作了一列随机数字，并将其称为随机。
 - en: Now, surely, these features cannot be more important than other features like
     occupation, work_class, sex etc. If that is the case, then something is wrong.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，这些特征不可能比其他特征，如职业、工作类别、性别等更重要。如果是这样的话，那就有问题了。
 - en: '**THE JOKER IN THE PACK A.K.A. THE ‘GOTCHA’**'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**包中的小丑即“得逞”**'
 - en: 'Of course… there is. The mean decrease in impurity measure is a **biased measure
     of feature importance**. It favours continuous features and features with high
     cardinality. In 2007, Strobl *et al* [1] also pointed out in [Bias in random forest
@@ -259,106 +381,158 @@
     “*the variable importance measures of Breiman’s original Random Forest method
     … are not reliable in situations where potential predictor variables vary in their
     scale of measurement or their number of categories*.”'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然……确实有。均值减少 impurity 测量是一个**有偏的特征重要性测量**。它偏向于连续特征和高基数特征。在2007年，Strobl *et al*
+    [1] 也在 [随机森林变量重要性测量中的偏差：插图、来源和解决方案](https://link.springer.com/article/10.1186%2F1471-2105-8-25)
+    中指出，“*Breiman 原始随机森林方法的变量重要性测量……在潜在预测变量在测量尺度或类别数量上有所不同的情况下是不可靠的*。”
 - en: Let’s try to understand why it is biased. Remember how the mean decrease in
     impurity is calculated? Each time a node is split on a feature, the decrease in
     gini index is recorded. And when a feature is continuous or has high cardinality,
     the feature may be split many more times than other features. This inflates the
     contribution of that particular feature. And what do our two culprit features
     have in common- they are both continuous variables.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们尝试理解为什么它有偏差。记得如何计算 impurity 的均值减少吗？每当一个节点在某个特征上被拆分时，gini 指数的减少量会被记录下来。当一个特征是连续的或具有高基数时，这个特征可能会被拆分多于其他特征。这会夸大那个特定特征的贡献。我们的两个罪魁祸首特征有什么共同点——它们都是连续变量。
 - en: 2) Drop Column Importance a.k.a Leave One Co-variate Out (LOOC)
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2) 删除列重要性即留一个协变量法 (LOOC)
 - en: Drop Column feature importance is another intuitive way of looking at the feature
     importance. As the name suggests, it’s a way of iteratively removing a feature
     and calculating the difference in performance.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 删除列特征重要性是另一种直观的方法来查看特征重要性。顾名思义，这是一种迭代地删除一个特征并计算性能差异的方法。
 - en: 'The **advantages** of the technique are:'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 该技术的**优点**包括：
 - en: Gives a pretty accurate picture of the predictive power of each feature
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 提供了每个特征预测能力的相当准确的图像。
 - en: One of the most intuitive way to look at feature importance
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 查看特征重要性的一个直观方式
 - en: Model agnostic. Can be applied to any model
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型不可知。可以应用于任何模型。
 - en: The way it is calculated, it automatically takes into account all the interactions
     in the model. If the information in a feature is destroyed, all its interactions
     are also destroyed
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 由于其计算方式，它会自动考虑模型中的所有交互。如果一个特征中的信息被破坏，它所有的交互也会被破坏。
 - en: '**ALGORITHM**'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '**算法**'
 - en: Use your trained model parameters and calculate the metric of your choice on
     an OOB sample. You can use cross validation to get the score. This is your baseline.
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用你训练好的模型参数，在 OOB 样本上计算你选择的指标。你可以使用交叉验证来获得得分。这是你的基准线。
 - en: Now, drop one column at a time from your training set, and retrain the model
     (with the **same parameters**and **random state**) and calculate the OOB score.
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 现在，从你的训练集里每次删除一列，然后重新训练模型（使用**相同的参数**和**随机状态**），并计算 OOB 得分。
 - en: '*Importance = OOB score – Baseline*'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*重要性 = OOB得分 – 基线*'
 - en: '**IMPLEMENTATION**'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '**实施**'
 - en: '[PRE2]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Let’s do a 50 fold cross validation to estimate our OOB score. (I know it’s
     excessive, but let’s keep it to increase the samples for our boxplot) Like before,
     we are plotting the mean decrease in accuracy as well as the boxplot to understand
     the distribution across cross validation trials.
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们进行50次交叉验证来估计我们的OOB得分。（我知道这有些过头，但让我们这样做以增加我们的箱线图样本）像以前一样，我们绘制了准确率的均值减少和箱线图，以了解交叉验证试验中的分布。
 - en: '[PRE3]'
+  id: totrans-75
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![](../Images/2813d405d0ef6e9d87d261583852d5e8.png)'
+  id: totrans-76
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2813d405d0ef6e9d87d261583852d5e8.png)'
 - en: '[Click for full interactive plot](https://plot.ly/~manujosephv/33/)'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '[点击查看完整互动图](https://plot.ly/~manujosephv/33/)'
 - en: '![](../Images/7d7cf1ede5162364fc02bb641edd3e2b.png)'
+  id: totrans-78
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7d7cf1ede5162364fc02bb641edd3e2b.png)'
 - en: '[Click for full interactive plot](https://plot.ly/~manujosephv/35/)'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '[点击查看完整互动图](https://plot.ly/~manujosephv/35/)'
 - en: '**INTERPRETATION**'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解释**'
 - en: The top 4 features are still *marital status, education_num, age,*and *hours_worked*.
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 前四个特征仍然是*marital status*、*education_num*、*age*和*hours_worked*。
 - en: '*fnlwgt*is pushed down the list and now features after some of the one-hot
     encoded occupations.'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*fnlwgt*被排到列表的后面，现在排在一些one-hot编码的职业之后。'
 - en: '*random*still occupies a high rank, positioning itself right after the *hours_worked*'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*random*仍然保持在高排名，紧跟在*hours_worked*之后'
 - en: As expected, the *fnlwgt* was much less important that we were led to believe
     from the Mean Decrease in Impurity importance. The high position of the *random* perplexed
     me a little bit and I re-ran the importance calculation considering all one-hot
@@ -367,16 +541,22 @@
     lower than *occupation*, and *workclass*](https://plot.ly/~manujosephv/37/). At
     the risk of making the post bigger than it already is, let’s leave that investigation
     for another day.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如预期的那样，*fnlwgt* 的重要性远不如我们从“均值减少不纯度”中得出的结论。*random*的高排名让我有些困惑，我重新进行了重要性计算，将所有的one-hot特征视为一个特征。也就是说，删除所有的职业列，检查职业的预测能力。当我这样做时，我可以[看到*random*和*fnlwgt*的排名低于*occupation*和*workclass*](https://plot.ly/~manujosephv/37/)。为了避免让帖子变得更长，我们将这项调查留到另一日。
 - en: So, have we got the perfect solution? The results are aligned with the Mean
     Decrease in Impurity, they make coherent sense, and they can be applied to any
     model.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，我们是否得到了完美的解决方案？结果与“均值减少不纯度”一致，逻辑自洽，并且可以应用于任何模型。
 - en: '**JOKER IN THE PACK**'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '**包中的黑马**'
 - en: The kicker here is the **computation** involved. To carry out this kind of importance
     calculation, you have to train a model multiple times, one for each feature you
     have and repeat that for the number of cross validation loops you want to do.
@@ -386,79 +566,111 @@
     validation loops (which, of course, can be improved with parallel processing,
     but you get the point). And if you have a large model which is takes two days
     to train, then you can forget about this technique.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里的关键是**计算**的复杂性。要进行这种重要性计算，你必须多次训练模型，每个特征训练一次，并对所需的交叉验证循环重复操作。即使你的模型在一分钟内完成训练，计算所需的时间也会随着特征数量的增加而爆炸。举个例子，我用36个特征和50次交叉验证循环计算特征重要性花了**2小时44分钟**（当然，使用并行处理可以改善这一点，但你明白我的意思）。如果你的模型需要两天时间来训练，那么你可以忘记这种技术。
 - en: Another concern I have with this method is that since we are retraining the
     model every time with a new set of features, we are not doing a fair comparison.
     We remove one column and train the model again, it will find another way to derive
     the same information if it can, and this gets amplifies when there are collinear
     features. So we are mixing two things when we investigate – the predictive power
     of the feature and the way the model configures itself.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 我对这种方法的另一个担忧是，由于我们每次都用新的特征集重新训练模型，因此我们并没有进行公平的比较。我们删除一列并再次训练模型，它会找到另一种方式来推导相同的信息（如果可以的话），当存在共线特征时，这种情况会被放大。因此，当我们进行调查时，我们混淆了特征的预测能力和模型如何配置自身。
 - en: 3) Permutation Importance
+  id: totrans-89
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3) 排列重要性
 - en: The permutation feature importance is defined to be the decrease in a model
     score when a single feature value is randomly shuffled [2]. This technique measures
     the difference in performance if you permute or shuffle a feature vector. The
     key idea is that a feature is important if the model performance drops if that
     feature is shuffled.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 排列特征重要性被定义为当单个特征值随机打乱时模型分数的下降 [2]。这种技术测量如果你打乱特征向量，性能的差异。关键点在于，如果模型性能下降则该特征很重要。
 - en: 'The **advantages** of this technique are:'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 这种技术的 **优点** 包括：
 - en: It is very intuitive. What is the drop in performance if the information in
     a feature is destroyed by shuffling it?
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 直观易懂。打乱特征信息后，性能下降多少？
 - en: Model agnostic. Even though the method was initially developed for Random Forest
     by Breiman, it was soon adapted to a model agnostic framework
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型无关。尽管这种方法最初是由 Breiman 为随机森林开发的，但很快被适应到一个模型无关的框架中。
 - en: The way it is calculated, it automatically takes into account all the interactions
     in the model. If the information in a feature is destroyed, all its interactions
     are also destroyed
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 计算方式会自动考虑模型中的所有交互。如果一个特征中的信息被破坏，那么所有与之相关的交互也会被破坏。
 - en: The model need not be retrained, and hence we save on computation
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型不需要重新训练，因此我们节省了计算资源。
 - en: '**ALGORITHM**'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '**算法**'
 - en: Calculate a baseline score using the metric, trained model, the feature matrix
     and the target vector
+  id: totrans-97
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用指标、训练模型、特征矩阵和目标向量计算基线分数。
 - en: For each feature in the feature matrix, make a copy of the feature matrix.
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于特征矩阵中的每个特征，复制特征矩阵。
 - en: Shuffle the feature column, pass it through the trained model to get a prediction
     and use the metric to calculate the performance.
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 打乱特征列，通过训练模型进行预测，并使用指标计算性能。
 - en: Importance = Baseline – Score
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 重要性 = 基线 – 分数
 - en: Repeat for N times for statistical stability and take an average importance
     across trials
+  id: totrans-101
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 为了统计稳定性，重复 N 次，并计算试验的平均重要性。
 - en: '**IMPLEMENTATION**'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '**实现**'
 - en: The permutation importance is implemented in at least three libraries in python
     – [ELI5](https://eli5.readthedocs.io/en/latest/autodocs/sklearn.html#module-eli5.sklearn.permutation_importance), [mlxtend](http://rasbt.github.io/mlxtend/user_guide/evaluate/feature_importance_permutation/),
     and in a [development branch of Sci-kit Learn](https://scikit-learn.org/dev/modules/generated/sklearn.inspection.permutation_importance.html#sklearn.inspection.permutation_importance).
@@ -467,57 +679,91 @@
     statistical properties*.” as opposed to normalizing the importance values by dividing
     by the standard deviation. I have checked the source code for mlxtend and Sci-kit
     Learn, and they do not normalize them.
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: 排列重要性在 Python 的至少三个库中实现—— [ELI5](https://eli5.readthedocs.io/en/latest/autodocs/sklearn.html#module-eli5.sklearn.permutation_importance),
+    [mlxtend](http://rasbt.github.io/mlxtend/user_guide/evaluate/feature_importance_permutation/)，以及在
+    [Sci-kit Learn 的开发分支](https://scikit-learn.org/dev/modules/generated/sklearn.inspection.permutation_importance.html#sklearn.inspection.permutation_importance)
+    中。我选择了 mlxtend 版本纯粹是因为便利。根据 Strobl *et al.* [3]，“*原始 [排列] 重要性… 具有更好的统计特性*。” 而不是通过标准差来规范化重要性值。我已经检查了
+    mlxtend 和 Sci-kit Learn 的源代码，它们没有对其进行规范化。
 - en: '[PRE4]'
+  id: totrans-104
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: We also plot a box plot of all trials to get a sense of the deviation.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还绘制了所有试验的箱型图，以了解偏差情况。
 - en: '[PRE5]'
+  id: totrans-106
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![](../Images/e44cb1e73bbbd0b8385563291fbdcf15.png)'
+  id: totrans-107
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e44cb1e73bbbd0b8385563291fbdcf15.png)'
 - en: '[Click for full interactive plot](https://plot.ly/~manujosephv/29/)'
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: '[点击查看完整交互式图表](https://plot.ly/~manujosephv/29/)'
 - en: '![](../Images/b65fd9518806cd1c8f93c56e711e989e.png)'
+  id: totrans-109
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b65fd9518806cd1c8f93c56e711e989e.png)'
 - en: '[Click for full interactive plot](https://plot.ly/~manujosephv/31/)'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '[点击查看完整交互式图表](https://plot.ly/~manujosephv/31/)'
 - en: '**INTERPRETATION**'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解释**'
 - en: The top 4 remains the same, but the first three(*marital_status, education,
     age*) are much more pronounced in the permutation importance
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 前 4 名保持不变，但前三个（*marital_status, education, age*）在排列重要性中更加突出。
 - en: '*fnlwgt*and *random* does not even make it to the top 25'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*fnlwgt* 和 *random* 连前 25 名都未能进入。'
 - en: Being an *Exec Manager, or Prof-speciality *has a lot to do with whether you
     are earning >50k or not
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 成为 *Exec Manager* 或 *Prof-speciality* 与是否能赚取超过 50k 的收入关系密切。
 - en: All in all, it resonates with our mental model of the process
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 总的来说，这与我们对过程的心理模型相吻合。
 - en: Everything is hunky-dory in feature importance land? Have we got the best way
     of explaining what features the model is using for predictions?
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征重要性领域一切都很美好吗？我们是否找到了最好的方式来解释模型用于预测的特征？
 - en: '**THE JOKER IN THE PACK**'
+  id: totrans-117
   prefs: []
   type: TYPE_NORMAL
+  zh: '**包中的小丑**'
 - en: We know from life that nothing is perfect and neither is this technique. It’s
     Achilles’ Heel is the correlation between features. Just like drop column importance,
     this technique is also affected by the effect of correlation between features.
@@ -529,32 +775,47 @@
     which picked feature B would work well and keep the performance high and vice
     versa. What this will result in is that both the correlated features A and B will
     have inflated importance.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 从生活中我们知道，任何事物都不完美，这项技术也不例外。它的致命弱点是特征之间的相关性。就像删除列重要性一样，这项技术也受到特征间相关性影响。Strobl
+    *et al.* 在《随机森林中的条件变量重要性》中[3] 表示“*置换重要性高估了相关预测变量的重要性*”。特别是在树的集成中，如果有两个相关变量，某些树可能选择特征
+    A，而其他树可能选择特征 B。在进行此分析时，如果没有特征 A，那么选择特征 B 的树会表现良好并保持高性能，反之亦然。这将导致相关特征 A 和 B 的重要性都被夸大。
 - en: Another drawback of the technique is that the core idea in the technique is
     about permuting a feature. But that is essentially randomness that is not in our
     control. And because of this, the results **may** vary greatly. We don’t see it
     here, but if the box plot shows a large variation in importance for a feature
     across trials, I’ll be wary in my interpretation.
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 这项技术的另一个缺点是其核心思想在于置换特征。但这本质上是我们无法控制的随机性。因此，结果**可能**会有很大差异。虽然我们在这里没有看到，但如果箱型图显示特征在各次试验中的重要性变化很大，我会在解释时保持警惕。
 - en: '![](../Images/b8b315f6fced91d271d764ef75ad9c74.png)'
+  id: totrans-120
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b8b315f6fced91d271d764ef75ad9c74.png)'
 - en: '[Correlation Coefficient](https://phik.readthedocs.io/en/latest/introduction.html) [7]
     (in-built in pandas profiling which considers categorical variables as well).'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '[相关系数](https://phik.readthedocs.io/en/latest/introduction.html) [7]（内置于 pandas
+    profiling 中，也考虑了分类变量）。'
 - en: There is yet another drawback to this technique, which in my opinion, is the **most
     concerning**. Giles Hooker et al. [6] says, *“When features in the training set
     exhibit statistical dependence, permutation methods can be highly misleading when
     applied to the original model.”*
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 这项技术还有另一个缺点，在我看来，这是**最令人担忧**的。Giles Hooker 等人[6] 说，*“当训练集中的特征表现出统计依赖性时，置换方法在应用于原始模型时可能会非常误导。”*
 - en: 'Let’s consider *occupation *and* education*. We can understand this from two
     perspectives:'
+  id: totrans-123
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们考虑*职业*和*教育*。我们可以从两个角度来理解这一点：
 - en: '**Logical**: If you think about it, *occupation*and *education* have a definite
     dependence. You can only get a few jobs if you have sufficient education and statistically,
     you can draw parallels between them. So if we are permuting any one of those columns,
@@ -562,62 +823,86 @@
     make a lot of sense, does it? So, when we are evaluating the model, we are evaluating
     nonsensical cases like these, which muddles up the metric which we use to assess
     the feature importance.'
+  id: totrans-124
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**逻辑**：如果你仔细考虑，*职业*和*教育*之间有明确的依赖性。如果你有足够的教育，你能找到的工作也就有限，从统计学上看，你可以在它们之间画出相似之处。因此，如果我们对这些列中的任何一列进行置换，就会创建一些没有意义的特征组合。一个*教育*为*10年级*和*职业*为*专业*的人并没有太大意义，对吧？因此，当我们评估模型时，我们评估的是像这样的无意义情况，这会混淆我们用来评估特征重要性的指标。'
 - en: '**Mathematical**: *occupation*and *education* have strong statistical dependence(we
     can see that from the correlation plot above). So, when we are permuting any one
     of these features, we are forcing the model to explore unseen sub-spaces in the
     high-dimensional feature space. And this forces the model to extrapolate and this
     extrapolation is a significant source of error.'
+  id: totrans-125
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**数学**：*职业*和*教育*之间有很强的统计依赖性（我们可以从上面的相关性图中看到）。因此，当我们对这些特征中的任何一个进行置换时，我们实际上是在强迫模型探索高维特征空间中未见过的子空间。这迫使模型进行外推，而这种外推是一个显著的误差来源。'
 - en: Giles Hooker et al. [6] suggests alternative methodologies that combine LOOC
     and Permutation methods, but all the alternatives are computationally more intensive
     and do not have a strong theoretical guarantee of having better statistical properties.
+  id: totrans-126
   prefs: []
   type: TYPE_NORMAL
+  zh: Giles Hooker 等人 [6] 建议使用结合了 LOOC 和置换方法的替代方法，但所有这些替代方法在计算上更为密集，并且没有强有力的理论保证其具有更好的统计性质。
 - en: '**DEALING WITH CORRELATED FEATURES**'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: '**处理相关特征**'
 - en: After identifying the highly correlated features, there are two ways of dealing
     with correlated features.
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 识别出高度相关的特征后，有两种处理相关特征的方法。
 - en: Group the highly correlated variables together and evaluate only one feature
     from the group as a representative of the group
+  id: totrans-129
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将高度相关的变量分组，并仅从该组中评估一个特征作为该组的代表。
 - en: When you permute the columns, permute the whole group of features in one trial.
+  id: totrans-130
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 当你置换列时，一次试验中要置换整个特征组。
 - en: '*N.B. The second method is the same method that I would suggest to deal with
     one-hot variables.*'
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: '*注意：第二种方法与我建议处理一热变量的方法相同。*'
 - en: '**SIDENOTE (TRAIN OR VALIDATION)**'
+  id: totrans-132
   prefs: []
   type: TYPE_NORMAL
+  zh: '**附注（训练集或验证集）**'
 - en: During the discussion of both Drop Column importance and Permutation importance,
     one question should have come to your mind. We passed the test/validation set
     to the methods to calculate the importance. Why not train set?
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: 在讨论 Drop Column 重要性和置换重要性时，你应该想到一个问题。我们将测试/验证集传递给这些方法来计算重要性。为什么不使用训练集呢？
 - en: This is a grey area in the application of some of these methods. There is no
     right or wrong here because there are arguments for and against both. In Interpretable
     Machine Learning, Christoph Molnar argues a case for both train and validation
     sets.
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是应用某些方法的灰色地带。这里没有对错之分，因为两者都有利弊。在《可解释机器学习》中，Christoph Molnar 为训练集和验证集的使用都提出了论据。
 - en: The case for test/validation data is a no-brainer. For the same reason why we
     do not judge a model by the error in the training set, we cannot judge the feature
     importance on the performance on the training set (especially since the importance
     is intrinsically linked to the error).
+  id: totrans-135
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于测试/验证数据的情况是不言而喻的。由于我们不通过训练集中的误差来评估模型，因此也不能通过训练集上的表现来评估特征的重要性（尤其是因为重要性本质上与误差相关）。
 - en: The case for train data is counter-intuitive. But if you think about it, you’ll
     see that what we want to measure is how the model is using the features. And what
     better data to judge that than the training set on which the model was trained?
@@ -626,159 +911,229 @@
     to check performances on. In Interpretable Machine Learning [5], section 5.5.2
     discusses this issue at length and even with a synthetic example of an overfitting
     SVM.
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于训练数据的情况是违反直觉的。但如果你考虑一下，你会发现我们想要测量的是模型如何使用特征。还有什么比训练集更适合判断这一点的数据呢？另一个显而易见的问题是，我们理想情况下会在所有可用数据上训练模型，在这种理想情况下，不会有测试或验证数据来检查性能。在《可解释机器学习》
+    [5] 中，第 5.5.2 节对此问题进行了详细讨论，甚至提供了一个过拟合 SVM 的合成示例。
 - en: It all comes down to whether you want to know what features the model relies
     on to make predictions or the predictive power of each feature on unseen data.
     For e.g., if you are evaluating feature importance in the context of feature selection,
     do not use test data in any circumstances (there you are overfitting your feature
     selection to fit the test data).
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 这归结于你是否想知道模型依赖哪些特征来进行预测，还是每个特征在未见数据上的预测能力。例如，如果你在特征选择的背景下评估特征重要性，任何情况下都不应使用测试数据（因为这会使你的特征选择过度拟合测试数据）。
 - en: 4) Partial Dependence Plots (PDP) and Individual Conditional Expectation (ICE)
     plots
+  id: totrans-138
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 4) 部分依赖图（PDP）和个体条件期望图（ICE）
 - en: All the techniques we reviewed until now looked at the relative importance of
     different features. Now let’s move slightly in a different direction and look
     at a few techniques which explore how a particular feature interacts with the
     target variable.
+  id: totrans-139
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们到目前为止审查的所有技术都关注于不同特征的相对重要性。现在让我们稍微改变方向，看看一些技术，这些技术探索了某个特征如何与目标变量互动。
 - en: 'Partial Dependence Plots and Individual Conditional Expectation plots help
     us understand the functional relationship between the features and the target.
     They are graphical visualizations of the marginal effect of a given variable(or
     multiple variables) on an outcome. Friedman(2001) introduced this technique in
     his seminal paper *Greedy function approximation: A gradient boosting machine*[8].'
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 部分依赖图和个体条件期望图帮助我们理解特征与目标之间的函数关系。它们是给定变量（或多个变量）对结果的边际效应的图形可视化。Friedman（2001）在他的开创性论文*贪婪函数逼近：一种梯度提升机器*中介绍了这一技术。
 - en: Partial Dependence Plots show an average effect, whereas ICE plots show the
     functional relationship for individual observations. PD plots show the average
     effect whereas ICE plots show the dispersion or heterogeneity of the effect.
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 部分依赖图显示了平均效应，而ICE图显示了单个观察的函数关系。PD图显示平均效应，而ICE图显示效应的离散性或异质性。
 - en: 'The **advantages** of this technique are:'
+  id: totrans-142
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一技术的**优点**包括：
 - en: The calculation is very intuitive and is easy to explain in layman terms
+  id: totrans-143
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 计算非常直观，并且容易用通俗的语言解释。
 - en: We can understand the relationship between a feature or a combination of features
     with the target variable, i.e. if it is linear, monotonic, exponential etc.
+  id: totrans-144
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们可以理解特征或特征组合与目标变量之间的关系，即是否是线性、单调、指数等。
 - en: They are easy to compute and implement
+  id: totrans-145
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它们计算和实现起来很简单。
 - en: They give a causal interpretation, as opposed to a feature importance style
     interpretation. But what we have to keep in mind is that the causal interpretation
     of how the model sees the world and now the real world.
+  id: totrans-146
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它们提供了因果解释，而不是特征重要性风格的解释。但我们需要记住的是，模型对世界的因果解释与现实世界的因果解释之间的差异。
 - en: '**ALGORITHM**'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: '**算法**'
 - en: 'Let’s consider a simple situation where we plot the PD plot for a single feature *x*,
     with unique values ![\{x_1, x_2, .... x_n\}](../Images/d886e2b0f9f958256f9b8bdf8340be34.png
     "\{x_1, x_2, .... x_n\}"). The PD plot can be constructed as follows:'
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们考虑一个简单的情况，即我们绘制单个特征*x*的PD图，包含唯一值 ![\{x_1, x_2, .... x_n\}](../Images/d886e2b0f9f958256f9b8bdf8340be34.png
+    "\{x_1, x_2, .... x_n\}")。PD图可以按如下方式构建：
 - en: 'For ![i\: \epsilon \: \{1,2,...k\}](../Images/ea33b476be75ae3dbf6b1d7d906d1ad4.png
     "i\: \epsilon \: \{1,2,...k\}")'
+  id: totrans-149
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '对于 ![i\: \epsilon \: \{1,2,...k\}](../Images/ea33b476be75ae3dbf6b1d7d906d1ad4.png
+    "i\: \epsilon \: \{1,2,...k\}")'
 - en: Copy the training data and replace the original values of *x *with ![x_i](../Images/8bbdd65717c97be8e583a6e702e26520.png
     "x_i")
+  id: totrans-150
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 复制训练数据并用 ![x_i](../Images/8bbdd65717c97be8e583a6e702e26520.png "x_i") 替换原始的
+    *x* 值。
 - en: Use the trained model to generate predictions for the modified copy of the entire
     training data
+  id: totrans-151
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用训练好的模型生成修改后的整个训练数据的预测值。
 - en: Store all the predictions against ![x_i](../Images/8bbdd65717c97be8e583a6e702e26520.png
     "x_i") in a map-like data structure
+  id: totrans-152
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将所有关于 ![x_i](../Images/8bbdd65717c97be8e583a6e702e26520.png "x_i") 的预测存储在类似地图的数据结构中。
 - en: 'For PD plot:'
+  id: totrans-153
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于PD图：
 - en: 'Calculate the average predictions for each ![x_i \: for \: i \: \epsilon \:
     \{1,2,...k\}](../Images/ba1ead72d9538c10cada95fc2622d613.png "x_i \: for \: i
     \: \epsilon \: \{1,2,...k\}")'
+  id: totrans-154
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '计算每个 ![x_i \: for \: i \: \epsilon \: \{1,2,...k\}](../Images/ba1ead72d9538c10cada95fc2622d613.png
+    "x_i \: for \: i \: \epsilon \: \{1,2,...k\}") 的平均预测值。'
 - en: 'Plot the pairs ![\{x_i, mean(all\: predictions \:with\: x_i)\}](../Images/69d5ad37d71913e692ea8fdd020376dd.png
     "\{x_i, mean(all\: predictions \:with\: x_i)\}")'
+  id: totrans-155
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '绘制对 ![\{x_i, mean(all\: predictions \:with\: x_i)\}](../Images/69d5ad37d71913e692ea8fdd020376dd.png
+    "\{x_i, mean(all\: predictions \:with\: x_i)\}")。'
 - en: 'For ICE plot:'
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于ICE图：
 - en: Plot all the pairs ![\{x_i, f(x_i,rest\:of\:features)_n\} \:where\:n\epsilon\{1,
     2, ...N\}](../Images/f80f0ad34cb01d3565e750f8361679f6.png "\{x_i, f(x_i,rest\:of\:features)_n\}
     \:where\:n\epsilon\{1, 2, ...N\}"). N is the total number of observations in the
     training set.
+  id: totrans-157
   prefs:
   - PREF_IND
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 绘制所有对 ![\{x_i, f(x_i,rest\:of\:features)_n\} \:where\:n\epsilon\{1, 2, ...N\}](../Images/f80f0ad34cb01d3565e750f8361679f6.png
+    "\{x_i, f(x_i,rest\:of\:features)_n\} \:where\:n\epsilon\{1, 2, ...N\}")。N是训练集中的总观察数。
 - en: In practice, instead of taking all the possible values of a feature, we define
     a grid of intervals for the continuous variable to save on computation.
+  id: totrans-158
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在实践中，为了节省计算时间，我们定义一个连续变量的区间网格，而不是取特征的所有可能值。
 - en: For a categorical variable also, this definition holds, But we won’t be defining
     a grid there. Instead we take all the unique values in the category(or all the
     one-hot encoded variables pertaining to a categorical feature) and calculate the
     ICE and PD plots using the same methodology.
+  id: totrans-159
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 对于分类变量，这一定义也适用，但我们不会在这里定义网格。相反，我们取所有唯一的分类值（或与分类特征相关的所有独热编码变量），并使用相同的方法计算ICE和PD图。
 - en: If the process is still unclear to you, I suggest looking at this [medium post](https://towardsdatascience.com/introducing-pdpbox-2aa820afd312)
     (by the author of PDPbox, a python library for plotting PD plots.
+  id: totrans-160
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果过程对你仍然不清楚，我建议查看这个[medium post](https://towardsdatascience.com/introducing-pdpbox-2aa820afd312)（由PDPbox的作者编写，这是一个用于绘制PD图的python库）。
 - en: '**IMPLEMENTATION**'
+  id: totrans-161
   prefs: []
   type: TYPE_NORMAL
+  zh: '**实施**'
 - en: I have found the PD plots implemented in [PDPbox](https://github.com/SauceCat/PDPbox), [skater](https://github.com/oracle/Skater) and [Sci-kit
     Learn](https://scikit-learn.org/stable/modules/partial_dependence.html). And the
     ICE plots in [PDPbox](https://github.com/SauceCat/PDPbox), [pyCEbox](https://github.com/AustinRochford/PyCEbox),
     and [skater](https://github.com/oracle/Skater). Out of all of these, I found PDPbox
     to be the most polished. And they also support 2 variable PDP plots as well.
+  id: totrans-162
   prefs: []
   type: TYPE_NORMAL
+  zh: 我发现了在[PDPbox](https://github.com/SauceCat/PDPbox)、[skater](https://github.com/oracle/Skater)和[Sci-kit
+    Learn](https://scikit-learn.org/stable/modules/partial_dependence.html)中实现的PD图。以及在[PDPbox](https://github.com/SauceCat/PDPbox)、[pyCEbox](https://github.com/AustinRochford/PyCEbox)和[skater](https://github.com/oracle/Skater)中的ICE图。在这些工具中，我发现PDPbox是最精致的，它们还支持2变量PDP图。
 - en: '[PRE6]'
+  id: totrans-163
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![](../Images/8c00551a4dd062453bae710d097dfc5b.png)'
+  id: totrans-164
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8c00551a4dd062453bae710d097dfc5b.png)'
 - en: '![](../Images/b71eff4075340bb4ff026d7ba958ac3b.png)'
+  id: totrans-165
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b71eff4075340bb4ff026d7ba958ac3b.png)'
 - en: '*ICE plot for Age.*'
+  id: totrans-166
   prefs: []
   type: TYPE_NORMAL
+  zh: '*年龄的ICE图。*'
 - en: Let me take some time to explain the plot. On the x-axis, you can find the values
     of the feature you are trying to understand, i.e., age. On the y-axis, you find
     the prediction. In the case of classification, it is the prediction probability
@@ -790,64 +1145,92 @@
     between the feature and target. All the lines in the ICE plot show the heterogeneity
     in the training data, i.e., how all the observations in the training data vary
     with the different values of the age.
+  id: totrans-167
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我花点时间来解释这个图。x轴显示了你想要理解的特征的值，即年龄。y轴显示了预测值。在分类的情况下，它是预测概率，而在回归的情况下，它是实际值预测。底部的条形图表示训练数据点在不同分位数的分布。它帮助我们评估推断的好坏。在点数很少的地方，模型看到的例子较少，解释可能会很棘手。PD图中的单一线条显示了特征与目标之间的平均功能关系。ICE图中的所有线条显示了训练数据中的异质性，即训练数据中所有观察值如何随年龄的不同值变化。
 - en: '**INTERPRETATION**'
+  id: totrans-168
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解释**'
 - en: '*age*has a largely monotonic relationship with the earning capacity of a person.
     The older a person is, the more likely he is to earn above 50k'
+  id: totrans-169
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '*年龄*与一个人的收入能力有着基本单调的关系。一个人越老，收入超过50k的可能性越大。'
 - en: The ICE plots show a lot of dispersion. But all of it shows the same kind of
     behaviour that we see in the PD plot
+  id: totrans-170
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: ICE图显示了很多离散度。但所有的离散度都表现出我们在PD图中看到的相同行为。
 - en: The training observations are considerable well balanced across the different
     quantiles.
+  id: totrans-171
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 训练观察在不同分位数之间相当平衡。
 - en: Now, let’s also take an example with a categorical feature, like *education*.
     PDPbox has a very nice feature where it lets you pass a list of features as an
     input and it will calculate the PDP for them considering them as categorical features.
+  id: totrans-172
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们还可以用一个分类特征，如*教育*，来举例说明。PDPbox有一个很好的功能，允许你传递一个特征列表作为输入，它会将这些特征视为分类特征来计算PDP。
 - en: '[PRE7]'
+  id: totrans-173
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![](../Images/be9e8e3dab406df235ceae32fcb4165f.png)'
+  id: totrans-174
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/be9e8e3dab406df235ceae32fcb4165f.png)'
 - en: '**INTERPRETATION**'
+  id: totrans-175
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解释**'
 - en: Most of the occupations have very minimal effect on how much you earn.
+  id: totrans-176
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 大多数职业对你的收入影响非常有限。
 - en: The ones that stand out from the rest are, Exec-managerial, Prof-speciality,
     and Tech Support
+  id: totrans-177
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从中突出的有，Exec-managerial、Prof-speciality和Tech Support。
 - en: But, from the distribution, we know that there were very little training examples
     for Tech-support, and hence we take that with a grain of salt.
+  id: totrans-178
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 但是，从分布来看，我们知道Tech-support的训练示例非常少，因此我们对此持保留态度。
 - en: '**INTERACTION BETWEEN MULTIPLE FEATURES**'
+  id: totrans-179
   prefs: []
   type: TYPE_NORMAL
+  zh: '**多个特征之间的交互**'
 - en: PD plots can be theoretically drawn for any number of features to show their
     interaction effect, as well. But practically, we can only do it for two, at the
     max three. Let’s take a look at an interaction plot between two continuous features* age* and *education*(education
     and age are not truly continuous, but for lack of better example we are choosing
     them).
+  id: totrans-180
   prefs: []
   type: TYPE_NORMAL
+  zh: 理论上，可以为任意数量的特征绘制PD图以展示它们的交互效应。但实际上，我们最多只能做两个，最多三个。让我们看看两个连续特征*年龄*和*教育*之间的交互图（教育和年龄并不真正连续，但为了缺乏更好的例子我们选择它们）。
 - en: There are two ways you can plot a PD plot between two features. There are three
     dimensions here, feature value 1, feature value 2, and the target prediction.
     Either, we can plot a 3-D plot or a 2-D plot with the 3rd dimension depicted as
@@ -856,17 +1239,25 @@
     the relationship. PDPbox implements the 2-D interaction plots, both as a contour
     plot and grid. Contour works best for continuous features and grid for categorical
     features.
+  id: totrans-181
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以用两种方式绘制两个特征之间的PD图。这里有三个维度，特征值1，特征值2和目标预测。我们可以绘制3D图或将第三维度表现为颜色的2D图。我更喜欢2D图，因为我认为它比3D图更清晰，3D图需要查看3D形状以推断关系。PDPbox实现了2D交互图，既有轮廓图也有网格图。轮廓图最适合连续特征，网格图适合分类特征。
 - en: '[PRE8]'
+  id: totrans-182
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![](../Images/3813382752552964a3e62fcb6ba8147c.png)'
+  id: totrans-183
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3813382752552964a3e62fcb6ba8147c.png)'
 - en: '**INTERPRETATION**'
+  id: totrans-184
   prefs: []
   type: TYPE_NORMAL
+  zh: '**解释**'
 - en: Even though we observed a monotonic relationship with age when looked at isolation,
     now we know that it is not universal. For e.g., look at the contour line to the
     right of the *12th*education level. It’s pretty flat as compared to the lines
@@ -874,134 +1265,198 @@
     more than 50k doesn’t only increase with age, but it also has a bearing on your
     education. *A college degree ensures you increase your earning potential as you
     get older.*
+  id: totrans-185
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 即使我们观察到年龄与单独看时的单调关系，现在我们知道这并非普遍。例如，看看*12*教育水平右侧的轮廓线。与一些大学及以上的线相比，它相当平坦。这实际上表明，你获得超过50k的概率不仅随着年龄增长而增加，还与教育有关。*大学学位确保了你随着年龄的增长增加收入潜力。*
 - en: This is also a very useful technique to investigate bias(the ethical kind) in
     your algorithms. Suppose if we want to look at the algorithmic bias in the *sex* dimension.
+  id: totrans-186
   prefs: []
   type: TYPE_NORMAL
+  zh: 这也是调查算法中的偏见（伦理类型）非常有用的技术。假设我们想查看*性别*维度中的算法偏见。
 - en: '[PRE9]'
+  id: totrans-187
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![](../Images/fa44ba48c933d8693189debdd077e05b.png)'
+  id: totrans-188
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fa44ba48c933d8693189debdd077e05b.png)'
 - en: '*PD Plot of sex on the left and PD interaction plot of sex and marital_status
     on the right.*'
+  id: totrans-189
   prefs: []
   type: TYPE_NORMAL
+  zh: '*左侧是性别的PD图，右侧是性别与婚姻状况的PD交互图。*'
 - en: If we look at just the PD plot of sex, we would conclude that there is no real
     discrimination based on the sex of the person.
+  id: totrans-190
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果我们仅查看性别的PD图，我们会得出结论，没有基于性别的真实歧视。
 - en: But, just take a look at the interaction plot with marital_status. On the left-hand
     side(married), both the squares have the same color and value, but on the right-hand
     side(single) there is a difference between Female and Male
+  id: totrans-191
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 不过，只需看看与婚姻状况的交互图。左侧（已婚），两个方块的颜色和值相同，但右侧（单身）则存在女性和男性之间的差异。
 - en: We can conclude that being a single male gives you a much better chance of getting
     more than 50k than being a single female. (Although I wouldn’t start an all-out
     war against sexual discrimination based on this, it would definitely be a starting
     point in the investigation.
+  id: totrans-192
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们可以得出结论，单身男性比单身女性获得超过50k的机会要大得多。（虽然我不会基于此对性别歧视发动全面战争，但它肯定是调查的一个起点。）
 - en: '**JOKER IN THE PACK**'
+  id: totrans-193
   prefs: []
   type: TYPE_NORMAL
+  zh: '**包装中的小丑**'
 - en: The assumption of independence between the features is the biggest flaw in this
     approach. The same flaw that is present in LOOC importance and Permutation Importance
     is applicable to PDP and ICE plots. [Accumulated Local Effects](https://christophm.github.io/interpretable-ml-book/ale.html) plots
     are a solution to this problem.  ALE plots solve this problem by calculating –
     also based on the conditional distribution of the features – **differences in
     predictions instead of averages**.
+  id: totrans-194
   prefs: []
   type: TYPE_NORMAL
+  zh: 特征之间的独立性假设是该方法最大的缺陷。LOOC重要性和置换重要性中存在的相同缺陷也适用于PDP和ICE图。[累积局部效应](https://christophm.github.io/interpretable-ml-book/ale.html)图是解决此问题的方案。ALE图通过计算——同样基于特征的条件分布——**预测差异而非平均值**来解决这个问题。
 - en: 'To summarize how each type of plot (PDP, ALE) calculates the effect of a feature
     at a certain grid value v:'
+  id: totrans-195
   prefs: []
   type: TYPE_NORMAL
+  zh: 总结每种图（PDP，ALE）如何计算特征在某个网格值 v 上的影响：
 - en: '**Partial Dependence Plots**: “Let me show you what the model predicts on average
     when each data instance has the value v for that feature. I ignore whether the
     value v makes sense for all data instances.”'
+  id: totrans-196
   prefs: []
   type: TYPE_NORMAL
+  zh: '**部分依赖图**：“让我展示当每个数据实例在该特征上具有值 v 时，模型平均预测结果。我忽略了值 v 对所有数据实例是否合理。”'
 - en: '**ALE plots**: “Let me show you how the model predictions change in a small
     ‘window’ of the feature around v for data instances in that window.”'
+  id: totrans-197
   prefs: []
   type: TYPE_NORMAL
+  zh: '**ALE 图**：“让我展示在该窗口内的数据实例的特征值 v 附近，模型预测如何在特征的一个小‘窗口’中变化。”'
 - en: In the python environment, there is no good and stable library for ALE. I’ve
     only found one [ALEpython](https://github.com/blent-ai/ALEPython), which is still
     very much in development. I managed to get an ALE plot of age, which you can find
     below. But got an error when I tried an interaction plot. It’s also not developed
     for categorical features.
+  id: totrans-198
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Python 环境中，没有好的稳定的 ALE 库。我只找到一个[ALEpython](https://github.com/blent-ai/ALEPython)，仍在开发中。我设法获得了年龄的
+    ALE 图，如下所示。但在尝试绘制交互图时出现了错误。它也没有针对分类特征进行开发。
 - en: '![](../Images/7f9fe847ca2903fdbc25600c71acca0b.png)'
+  id: totrans-199
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7f9fe847ca2903fdbc25600c71acca0b.png)'
 - en: '*ALE plot for age.*'
+  id: totrans-200
   prefs: []
   type: TYPE_NORMAL
+  zh: '*年龄的 ALE 图。*'
 - en: This is where we break off again and push the rest of the stuff to the next
     blog post. In the next part, we take a look at LIME, SHAP, Anchors, and more.
+  id: totrans-201
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里我们再次分开，将其余内容推迟到下一个博客帖子。在下一部分，我们将查看 LIME、SHAP、Anchors 等。
 - en: Full Code is available in my [Github](https://github.com/manujosephv/interpretability_blog).
+  id: totrans-202
   prefs: []
   type: TYPE_NORMAL
+  zh: 完整代码可以在我的[Github](https://github.com/manujosephv/interpretability_blog)上找到。
 - en: '[Original](https://deep-and-shallow.com/2019/11/16/interpretability-cracking-open-the-black-box-part-ii/).
     Reposted with permission.'
+  id: totrans-203
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://deep-and-shallow.com/2019/11/16/interpretability-cracking-open-the-black-box-part-ii/)。经许可转载。'
 - en: '**Bio: **[Manu Joseph](https://www.linkedin.com/in/manujosephv/) ([@manujosephv](https://twitter.com/manujosephv))
     is an inherently curious and self-taught Data Scientist with about 8+ years of
     professional experience working with Fortune 500 companies, including a researcher at [Thoucentric](https://www.thoucentric.com/) Analytics.'
+  id: totrans-204
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：**[Manu Joseph](https://www.linkedin.com/in/manujosephv/) ([@manujosephv](https://twitter.com/manujosephv))
+    是一位天生好奇的自学数据科学家，拥有超过 8 年的专业经验，曾在财富 500 强公司工作，包括[Thoucentric](https://www.thoucentric.com/)分析公司的研究员。'
 - en: '**Related:**'
+  id: totrans-205
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Explainability: Cracking open the black box, Part 1](https://www.kdnuggets.com/2019/12/explainability-black-box-part1.html)'
+  id: totrans-206
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[可解释性：破解黑箱，第一部分](https://www.kdnuggets.com/2019/12/explainability-black-box-part1.html)'
 - en: '[Python Libraries for Interpretable Machine Learning](https://www.kdnuggets.com/2019/09/python-libraries-interpretable-machine-learning.html)'
+  id: totrans-207
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用于可解释机器学习的 Python 库](https://www.kdnuggets.com/2019/09/python-libraries-interpretable-machine-learning.html)'
 - en: '[“Please, explain.” Interpretability of machine learning models](https://www.kdnuggets.com/2019/05/interpretability-machine-learning-models.html)'
+  id: totrans-208
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[“请解释一下。” 机器学习模型的可解释性](https://www.kdnuggets.com/2019/05/interpretability-machine-learning-models.html)'
 - en: More On This Topic
+  id: totrans-209
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[The Quest for Model Confidence: Can You Trust a Black Box?](https://www.kdnuggets.com/the-quest-for-model-confidence-can-you-trust-a-black-box)'
+  id: totrans-210
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[模型可信度探索：你能相信一个黑箱吗？](https://www.kdnuggets.com/the-quest-for-model-confidence-can-you-trust-a-black-box)'
 - en: '[Simplifying Decision Tree Interpretability with Python & Scikit-learn](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
+  id: totrans-211
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过 Python 和 Scikit-learn 简化决策树可解释性](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)'
 - en: '[Using SHAP Values for Model Interpretability in Machine Learning](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
+  id: totrans-212
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 SHAP 值进行机器学习模型可解释性](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)'
 - en: '[Bounding Box Deep Learning: The Future of Video Annotation](https://www.kdnuggets.com/2022/07/bounding-box-deep-learning-future-video-annotation.html)'
+  id: totrans-213
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[边界框深度学习：视频标注的未来](https://www.kdnuggets.com/2022/07/bounding-box-deep-learning-future-video-annotation.html)'
 - en: '[Black Friday Deal - Master Machine Learning for Less with DataCamp](https://www.kdnuggets.com/2022/11/datacamp-black-friday-deal-master-machine-learning-less-datacamp.html)'
+  id: totrans-214
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[黑色星期五优惠 - 通过 DataCamp 以更低价格掌握机器学习](https://www.kdnuggets.com/2022/11/datacamp-black-friday-deal-master-machine-learning-less-datacamp.html)'
 - en: '[Open Assistant: Explore the Possibilities of Open and Collaborative…](https://www.kdnuggets.com/2023/04/open-assistant-explore-possibilities-open-collaborative-chatbot-development.html)'
+  id: totrans-215
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[开放助手：探索开放和协作聊天机器人的可能性](https://www.kdnuggets.com/2023/04/open-assistant-explore-possibilities-open-collaborative-chatbot-development.html)'
