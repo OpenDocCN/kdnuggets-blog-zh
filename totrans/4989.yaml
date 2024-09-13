@@ -1,317 +1,443 @@
 - en: 'Web Scraping for Dataset Curation, Part 1: Collecting Craft Beer Data'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据集整理的网页抓取，第1部分：收集手工啤酒数据
 - en: 原文：[https://www.kdnuggets.com/2017/02/web-scraping-dataset-curation-part-1.html](https://www.kdnuggets.com/2017/02/web-scraping-dataset-curation-part-1.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/02/web-scraping-dataset-curation-part-1.html](https://www.kdnuggets.com/2017/02/web-scraping-dataset-curation-part-1.html)
 - en: '**By Jean-Nicholas Hould, [JeanNicholasHould.com](http://JeanNicholasHould.com/?utm_source=kdnugget).**'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Jean-Nicholas Hould，[JeanNicholasHould.com](http://JeanNicholasHould.com/?utm_source=kdnugget)。**'
 - en: If you have read some of my posts in the past, you know by now that I enjoy
     a good craft beer. I decided to mix business with pleasure and write a tutorial
     about how to scrape a craft beer dataset from a website in Python.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你读过我过去的一些文章，你现在知道我喜欢好的手工啤酒。我决定将工作与乐趣结合起来，编写一个关于如何用Python从网站抓取手工啤酒数据集的教程。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的IT工作'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'This post is separated in two sections: scraping and tidying the data. In the
     first part, we’ll plan and write the code to collect a dataset from a website.
     In the second part, we’ll apply the “tidy data” principles to this freshly scraped
     dataset. At the end of this post, we’ll have a clean dataset of craft beers.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文分为两个部分：抓取和整理数据。在第一部分中，我们将规划和编写代码以从网站收集数据集。在第二部分中，我们将把“整洁数据”原则应用于这个新抓取的数据集。文章末尾，我们将拥有一个干净的手工啤酒数据集。
 - en: Web Scraping
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 网页抓取
 - en: A web scraper is a piece of code that will automatically load web pages and
     pull specific data for you. The web scraper will do a repetitive task that would
     otherwise be too long for you to manually do.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 网页抓取器是一段代码，它会自动加载网页并提取特定数据。网页抓取器会执行一个重复的任务，这个任务如果由你手动完成会非常耗时。
 - en: For example, we could code a web scraper that will pull a list of product names
     and their rating from an e-commerce website and write them in a CSV file.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，我们可以编写一个网络抓取器，从一个电子商务网站提取产品名称及其评分，并将其写入CSV文件中。
 - en: Scraping a website is a great way to acquire a new dataset that would otherwise
     be unavailable.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 抓取网站是获取原本无法获得的新数据集的好方法。
 - en: A few rules on scraping
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 几条关于抓取的规则
 - en: 'As Greg Reda pointed out a few years ago [in his excellent web scraping tutorial](http://www.gregreda.com/2013/03/03/web-scraping-101-with-python/),
     there are a few rules that you need to know about scraping:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如Greg Reda几年前在他的[出色的网页抓取教程](http://www.gregreda.com/2013/03/03/web-scraping-101-with-python/)中指出的那样，关于抓取你需要知道一些规则：
 - en: Respect the website terms & conditions.
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 尊重网站的条款和条件。
 - en: Don’t stress the servers. *A scraper can make thousands of web page requests
     in a second. Make sure you don’t put too much pressure on the server.*
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 不要给服务器带来压力。*一个抓取器可以在一秒钟内发出成千上万次网页请求。确保你不会给服务器施加过多压力。*
 - en: Your scraper code will break.*Web pages change often. Your scraper code will
     be outdated soon.*
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 你的抓取器代码将会失效。*网页经常变化。你的抓取器代码很快就会过时。*
 - en: Planning
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 规划
 - en: The first step in building a scraper is the planning phase. Obviously, you want
     to decide what data that you want to pull and from which website.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 构建抓取器的第一步是规划阶段。显然，你需要决定你想要提取什么数据以及从哪个网站提取。
 - en: In our case, we want to pull data from a website called [CraftCans](http://craftcans.com/db.php?search=all&sort=beerid&ord=desc&view=text).
     This website lists 2692 craft canned beers. For this specific dataset, we wouldn’t
     need to build a scraper to pull the data. The way it’s laid out, we could easily
     copy and paste it into an Excel spreadsheet.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的案例中，我们想要从一个名为[CraftCans](http://craftcans.com/db.php?search=all&sort=beerid&ord=desc&view=text)的网站提取数据。这个网站列出了2692种手工罐装啤酒。对于这个特定的数据集，我们不需要构建一个抓取器来提取数据。按照它的布局，我们可以很容易地将数据复制粘贴到Excel表格中。
 - en: '![](../Images/df6135b546e71463baa458485cec59da.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
 - en: 'For each beer, the website presents some details:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: Name
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Style
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Size
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Alcohol by volume (ABV)
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: IBU’s
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Brewer name
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: Brewer location
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**Inspect the HTML**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: We’d like our scraper to pull all of this information for us. In order to give
     our scraper specific instructions, we need to look at the HTML code of CraftCans
     website. Most modern web browser offer a way to inspect the HTML source code of
     a web page by right click on the page.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: On Google Chrome, you can right click on an element in a web page and the click
     on “Inspect” to see the HTML code.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/eba7c3a77238c4f275dcdb502c0793b0.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
 - en: '**Identify patterns**'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: Looking at the HTML code on the main page, you can see that this big list of
     beer is in fact an HTML table. Each beer represents a row in this table. Generally,
     a repeating pattern, such as an HTML table, is ideal for web scraping because
     the logic is straightforward.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0a729e08a7fa6263370d4df52fd81299.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
 - en: Libraries used
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: For this project, we’ll import four libraries.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: '**urlopen**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: The first one `urlopen` will be used to request an HTML page on the web and
     return it’s content. That’s it.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: '**BeautifulSoup4**'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: The second one, `BeautifulSoup4`, is a library that makes it easy to navigate
     in an HTML document. For example, with this library you can easily select a table
     in an HTML document and iterate over its rows.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: '**pandas**'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: The third one is `pandas`. We will not use this library for the scraping part.
     We will use it for the tidying part. `pandas` is a library designed to facilitate
     data manipulation and analysis.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: '**re for regular expressions**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: Finally, we’ll be using `re` which is part of the Python Standard Library. This
     lib provides regular expression matching operations. Regular expressions are ways
     to manipulate strings. For example, we can use regular expressions to list all
     of the numbers in a string.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: Write the code
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '**Challenges with the HTML**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: After some investigation on CraftCans web page, I realized there is no clean
     ways to scrape the CraftCans website.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: The HTML structure of CraftCans is kind of old school. The whole layout of the
     page is in tables. This was a common practice in the past but now the layout is
     generally set with some CSS.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
 - en: Furthermore, there are no class or identifiers on the HTML table or rows that
     contains the beer entries. Pointing the scraper to the specific table that we
     want is challenging without a clean HTML structure or identifiers.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: '**Solution: List all table rows**'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: The solution I found to scrape the website is most likely not the cleanest but
     it works.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: Since there are no identifiers on the table that contains the data, I use `BeautifulSoup4`
     `findAll` function to load all of the table rows `tr` present in the CraftCans
     page. This function returns an exhaustive list of table rows, whether or not they
     are from the table we want to scrape.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: 'For each row, I run a test to determine whether or not it’s a row containing
     a beer entry or if it’s something else. The heuristic to determine if a row is
     a beer data entry is straightforward: the row needs to contain eight cells and
     the first cell must contain a valid numeric id.'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于每一行，我运行测试以确定它是否包含啤酒条目或其他内容。判断一行是否为啤酒数据条目的启发式方法很简单：该行需要包含八个单元格，并且第一个单元格必须包含有效的数字
+    ID。
 - en: Now that we have the functions to determine if a row is indeed a beer entry,
     we can now scrape the whole web page. We need to decide in which format we want
     to store the collected data from the website. I’d like to have a JSON document
     like this one for each beer entry in CraftCans.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经有了判断一行是否确实为啤酒条目的函数，我们可以抓取整个网页。我们需要决定以何种格式存储从网站收集的数据。我希望每个 CraftCans 的啤酒条目都像这样的
+    JSON 文档。
 - en: '**Example Beer JSON Entry**'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '**示例啤酒 JSON 条目**'
 - en: The reason I like to store the data in JSON document is because I can easily
     transform them into a pandas `DataFrame`.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 我喜欢将数据存储在 JSON 文档中的原因是，我可以轻松地将其转换为 pandas `DataFrame`。
 - en: Run the Scraper
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 运行抓取器
 - en: Having our functions written, we can then request the CraftCans web page with
     `urlopen` and have our code take care of the rest.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 函数编写完成后，我们可以使用 `urlopen` 请求 CraftCans 网页，并让代码处理其余部分。
 - en: With the list of beers returned by `get_all_beers`, we can easily create a new
     `pandas`*DataFrame* to conveniently visualize and manipulate our data.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 有了 `get_all_beers` 返回的啤酒列表，我们可以轻松创建一个新的 `pandas`*DataFrame* 来方便地可视化和操作数据。
 - en: '**Bio: Jean-Nicholas Hould** is a [Data Scientist from Montreal, Canada](http://jeannicholashould.com/?utm_source=kdnugget).
     Author at JeanNicholasHould.com.'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：Jean-Nicholas Hould** 是来自 [加拿大蒙特利尔的数据科学家](http://jeannicholashould.com/?utm_source=kdnugget)。JeanNicholasHould.com
+    的作者。'
 - en: '[Original](http://www.jeannicholashould.com/python-web-scraping-tutorial-for-craft-beers.html).
     Reposted with permission.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](http://www.jeannicholashould.com/python-web-scraping-tutorial-for-craft-beers.html)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Tidying Data in Python](/2017/01/tidying-data-python.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Python 中整理数据](/2017/01/tidying-data-python.html)'
 - en: '[Doing Statistics with SQL](/2016/08/doing-statistics-sql.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 SQL 进行统计分析](/2016/08/doing-statistics-sql.html)'
 - en: '[Data Science Statistics 101](/2016/07/data-science-statistics-101.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学统计 101](/2016/07/data-science-statistics-101.html)'
 - en: More On This Topic
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[A Beginner’s Guide to Web Scraping Using Python](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 网页抓取初学者指南](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)'
 - en: '[A Step-by-Step Guide to Web Scraping with Python and Beautiful Soup](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 和 Beautiful Soup 的逐步网页抓取指南](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)'
 - en: '[Mastering Web Scraping with BeautifulSoup](https://www.kdnuggets.com/mastering-web-scraping-with-beautifulsoup)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 BeautifulSoup 掌握网页抓取](https://www.kdnuggets.com/mastering-web-scraping-with-beautifulsoup)'
 - en: '[Octoparse 8.5: Empowering Local Scraping and More](https://www.kdnuggets.com/2022/02/octoparse-85-empowering-local-scraping.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Octoparse 8.5：赋能本地抓取及更多](https://www.kdnuggets.com/2022/02/octoparse-85-empowering-local-scraping.html)'
 - en: '[ChatGPT-Powered Data Exploration: Unlock Hidden Insights in Your Dataset](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ChatGPT 驱动的数据探索：解锁数据集中的隐藏洞察](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)'
 - en: '[How to Correctly Select a Sample From a Huge Dataset in Machine Learning](https://www.kdnuggets.com/2019/05/sample-huge-dataset-machine-learning.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在机器学习中正确选择来自庞大数据集的样本](https://www.kdnuggets.com/2019/05/sample-huge-dataset-machine-learning.html)'
