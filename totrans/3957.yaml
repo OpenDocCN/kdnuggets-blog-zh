@@ -1,17 +1,25 @@
 - en: How to Handle Outliers in Dataset with Pandas
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何在数据集中使用Pandas处理异常值
 - en: 原文：[https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas](https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas](https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas)
 - en: '![How to Handle Outliers in Dataset with Pandas](../Images/6bd591dc6b7d3f45f9bd398b27035931.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![如何在数据集中使用Pandas处理异常值](../Images/6bd591dc6b7d3f45f9bd398b27035931.png)'
 - en: Image by Author
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片作者
 - en: Outliers are abnormal observations that differ significantly from the rest of
     your data. They may occur due to experimentation error, measurement error, or
     simply that variability is present within the data itself. These outliers can
@@ -19,160 +27,241 @@
     how a top performer in relative grading at universities can raise the average
     and affect the grading criteria. Handling outliers is a crucial part of the data
     cleaning procedure.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 异常值是与其余数据显著不同的异常观察值。它们可能由于实验误差、测量误差或数据本身的变异性而出现。这些异常值可能会严重影响模型的表现，导致结果偏差——就像大学中的相对评分的顶尖表现者可以提高平均分数并影响评分标准一样。处理异常值是数据清理过程中的关键部分。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的IT工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In this article, I'll share how you can spot outliers and different ways to
     deal with them in your dataset.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我将分享如何发现异常值以及在数据集中处理它们的不同方法。
 - en: Detecting Outliers
+  id: totrans-12
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 检测异常值
 - en: 'There are several methods used to detect outliers. If I were to classify them,
     here is how it looks:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 有几种方法可以用来检测异常值。如果我来分类的话，情况如下：
 - en: '**Visualization-Based Methods:** Plotting scatter plots or box plots to see
     data distribution and inspect it for abnormal data points.'
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**基于可视化的方法：** 绘制散点图或箱线图，以查看数据分布并检查异常数据点。'
 - en: '**Statistics-Based Methods:** These approaches involve z scores and IQR (Interquartile
     Range) which offer reliability but may be less intuitive.'
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '**基于统计的方法：** 这些方法涉及z分数和IQR（四分位距），它们提供可靠性，但可能不够直观。'
 - en: 'I won''t cover these methods extensively to stay focused, on the topic. However,
     I''ll include some references at the end, for exploration. We will use the IQR
     method in our example. Here is how this method works:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我不会详细介绍这些方法，以保持主题的专注。然而，我会在最后提供一些参考资料以供探索。我们将在示例中使用IQR方法。方法如下：
 - en: '*IQR (Interquartile Range) = Q3 (75th percentile) - Q1 (25th percentile)*'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '*IQR（四分位距） = Q3（75百分位数） - Q1（25百分位数）*'
 - en: The IQR method states that any data points below **Q1 - 1.5 * IQR** or above
     **Q3 + 1.5 * IQR** are marked as outliers. Let's generate some random data points
     and detect the outliers using this method.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: IQR方法指出，任何低于**Q1 - 1.5 * IQR**或高于**Q3 + 1.5 * IQR**的数据点都被标记为异常值。让我们生成一些随机数据点，并使用此方法检测异常值。
 - en: 'Make the necessary imports and generate the random data using `np.random`:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 导入必要的库并使用`np.random`生成随机数据：
 - en: '[PRE0]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Detect the outliers from the dataset using the IQR Method:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用IQR方法从数据集中检测异常值：
 - en: '[PRE1]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '**Output ⇒** Number of outliers detected: 8'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**输出 ⇒** 检测到的异常值数量：8'
 - en: Visualize the dataset using scatter and box plots to see how it looks
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用散点图和箱线图可视化数据集，以查看其外观
 - en: '[PRE2]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![Original Dataset](../Images/4f18796d0b43052494447fa3076c1afe.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![原始数据集](../Images/4f18796d0b43052494447fa3076c1afe.png)'
 - en: Original Dataset
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 原始数据集
 - en: Now that we have detected the outliers, let's discuss some of the different
     ways to handle the outliers.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 既然我们已经检测到异常值，接下来让我们讨论处理异常值的几种不同方法。
 - en: Handling Outliers
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 处理异常值
 - en: 1\. Removing Outliers
+  id: totrans-30
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 1\. 移除异常值
 - en: 'This is one of the simplest approaches but not always the right one. You need
     to consider certain factors. If removing these outliers significantly reduces
     your dataset size or if they hold valuable insights, then excluding them from
     your analysis not be the most favorable decision. However, if they''re due to
     measurement errors and few in number, then this approach is suitable. Let''s apply
     this technique to the dataset generated above:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一种最简单的方法，但并不总是正确的。你需要考虑一些因素。如果移除这些离群点显著减少了你的数据集大小，或者它们包含有价值的见解，那么将它们排除在分析之外可能不是最好的决策。然而，如果它们是由于测量误差且数量较少，那么这种方法是合适的。让我们将这种技术应用于上述生成的数据集：
 - en: '[PRE3]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![Removing Outliers](../Images/3e24516c50b914c495dc20d4588f5806.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![移除离群点](../Images/3e24516c50b914c495dc20d4588f5806.png)'
 - en: Removing Outliers
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 移除离群点
 - en: Notice that the distribution of the data can actually be changed by removing
     outliers. If you remove some initial outliers, the definition of what is an outlier
     may very well change. Therefore, data that would have been in the normal range
     before, may be considered outliers under a new distribution. You can see a new
     outlier with the new box plot.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，通过移除离群点，数据的分布实际上可以发生变化。如果你移除一些初始的离群点，离群点的定义可能会发生变化。因此，之前在正常范围内的数据，可能会在新的分布下被视为离群点。你可以通过新的箱线图看到新的离群点。
 - en: 2\. Capping Outliers
+  id: totrans-36
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 2\. 截尾离群点
 - en: 'This technique is used when you do not want to discard your data points but
     keeping those extreme values can also impact your analysis. So, you set a threshold
     for the maximum and the minimum values and then bring the outliers within this
     range. You can apply this capping to outliers or to your dataset as a whole too.
     Let''s apply the capping strategy to our complete dataset to bring it within the
     range of the 5th-95th percentile. Here is how you can execute this:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你不想丢弃数据点但保持这些极端值也会影响你的分析时，可以使用这种技术。因此，你设定一个最大值和最小值的阈值，然后将离群点调整到这个范围内。你可以将这种截尾应用于离群点或整个数据集。让我们将截尾策略应用于我们的完整数据集，使其在第5到第95百分位数的范围内。这是你可以执行的方法：
 - en: '[PRE4]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![Capping Outliers](../Images/e37acd91d38a3c64ca676c3afb13d6ba.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![截尾离群点](../Images/e37acd91d38a3c64ca676c3afb13d6ba.png)'
 - en: Capping Outliers
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 截尾离群点
 - en: You can see from the graph that the upper and lower points in the scatter plot
     appear to be in a line due to capping.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 从图表中可以看到，散点图中的上点和下点由于**截尾**而似乎在一条直线上。
 - en: 3\. Imputing Outliers
+  id: totrans-42
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 3\. 填补离群点
 - en: 'Sometimes removing values from the analysis isn''t an option as it may lead
     to information loss, and you also don''t want those values to be set to max or
     min like in capping. In this situation, another approach is to substitute these
@@ -180,26 +269,38 @@
     depending on the domain of data under observation, but be mindful of not introducing
     biases while using this technique. Let''s replace our outliers with the mode (the
     most frequently occurring value) value and see how the graph turns out:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 有时从分析中移除值不是一个选项，因为这可能会导致信息丢失，而你也不希望这些值像**截尾**那样被设为最大值或最小值。在这种情况下，另一种方法是用更有意义的选项，如均值、中位数或众数，来替代这些值。选择依据观察数据的领域而异，但在使用这种技术时要注意不要引入偏差。让我们用众数（出现频率最高的值）替换我们的离群点，看看图表效果如何：
 - en: '[PRE5]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![Imputing Outliers](../Images/1743fdb42e0d8bf5950eb9642a87bb47.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![填补离群点](../Images/1743fdb42e0d8bf5950eb9642a87bb47.png)'
 - en: Imputing Outliers
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 填补离群点
 - en: Notice that now we don't have any outliers, but this doesn't guarantee that
     outliers will be removed since after the imputation, the IQR also changes. You
     need to experiment to see what fits best for your case.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，现在我们没有任何离群点，但这并不能保证离群点会被移除，因为在填补数据后，IQR（四分位距）也会发生变化。你需要进行实验以找到最适合你情况的方法。
 - en: 4\. Applying a Transformation
+  id: totrans-48
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 4\. 应用变换
 - en: 'Transformation is applied to your complete dataset instead of specific outliers.
     You basically change the way your data is represented to reduce the impact of
     the outliers. There are several transformation techniques like log transformation,
@@ -207,77 +308,109 @@
     min-max scaling, etc. Choosing the right transformation for your case depends
     on the nature of the data and your end goal of the analysis. Here are a few tips
     to help you select the right transformation technique:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 转换应用于你的完整数据集，而不是特定的异常值。你基本上是改变数据的表示方式，以减少异常值的影响。有几种转换技术，如对数转换、平方根转换、Box-Cox转换、Z缩放、Yeo-Johnson转换、最小-最大缩放等。选择适合你的情况的正确转换取决于数据的性质和分析的最终目标。以下是一些提示，帮助你选择正确的转换技术：
 - en: '**For right-skewed data:** Use log, square root, or Box-Cox transformation.
     Log is even better when you want to compress small number values that are spread
     over a large scale. Square root is better when, apart from right skew, you want
     a less extreme transformation and also want to handle zero values, while Box-Cox
     also normalizes your data, which the other two don''t.'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**对于右偏数据：** 使用对数、平方根或Box-Cox转换。对数转换在你想要压缩在大范围内分布的小数值时效果更佳。平方根转换在你想要一种较少极端的转换并处理零值时更好，而Box-Cox还会对数据进行标准化，这是其他两种方法做不到的。'
 - en: '**For left-skewed data:** Reflect the data first and then apply the techniques
     mentioned for right-skewed data.'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**对于左偏数据：** 先反射数据，然后应用针对右偏数据的技术。'
 - en: '**To stabilize variance:** Use Box-Cox or Yeo-Johnson (similar to Box-Cox but
     handles zero and negative values as well).'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**为了稳定方差：** 使用Box-Cox或Yeo-Johnson（类似于Box-Cox，但也处理零和负值）。'
 - en: '**For mean-centering and scaling:** Use z-score standardization (standard deviation
     = 1).'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**对于均值中心化和缩放：** 使用z-score标准化（标准差 = 1）。'
 - en: '**For range-bound scaling (fixed range i.e., [2,5]):** Use min-max scaling.'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**对于范围缩放（固定范围即[2,5]）：** 使用最小-最大缩放。'
 - en: 'Let''s generate a right-skewed dataset and apply the log transformation to
     the complete data to see how this works:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们生成一个右偏的数据集，并对完整的数据应用对数转换，看看效果如何：
 - en: '[PRE6]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![Applying Log Transformation](../Images/c917598f2da447d949b0d68e87c141f7.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![应用对数转换](../Images/c917598f2da447d949b0d68e87c141f7.png)'
 - en: Applying Log Transformation
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 应用对数转换
 - en: You can see that a simple transformation has handled most of the outliers itself
     and reduced them to just one. This shows the power of transformation in handling
     outliers. In this case, it’s necessary to be cautious and know your data well
     enough to choose appropriate transformation because failing to do so may cause
     problems for you.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以看到一个简单的转换已经处理了大部分异常值，并将它们减少到仅一个。这显示了转换在处理异常值中的强大能力。在这种情况下，必须小心并充分了解你的数据，以选择适当的转换，因为不这样做可能会给你带来问题。
 - en: Wrapping Up
+  id: totrans-60
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 总结
 - en: 'This brings us to the end of our discussion about outliers, different ways
     to detect them, and how to handle them. This article is part of the pandas series,
     and you can check other articles on my author page. As mentioned above, here are
     some additional resources for you to study more about outliers:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 这使我们结束了关于异常值、不同检测方法以及如何处理异常值的讨论。本文是pandas系列的一部分，你可以在我的作者页面查看其他文章。如上所述，以下是一些额外的资源，供你深入研究异常值：
 - en: '[Outlier detection methods in Machine Learning](https://towardsdatascience.com/outlier-detection-methods-in-machine-learning-1c8b7cca6cb8)'
+  id: totrans-62
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[机器学习中的异常值检测方法](https://towardsdatascience.com/outlier-detection-methods-in-machine-learning-1c8b7cca6cb8)'
 - en: '[Different transformations in Machine Learning](https://medium.com/@vinodkumargr/09-data-transformations-in-ml-different-transformations-in-machine-learning-log-transformer-d794d61d143d)'
+  id: totrans-63
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[机器学习中的不同转换](https://medium.com/@vinodkumargr/09-data-transformations-in-ml-different-transformations-in-machine-learning-log-transformer-d794d61d143d)'
 - en: '[Types Of Transformations For Better Normal Distribution](https://towardsdatascience.com/types-of-transformations-for-better-normal-distribution-61c22668d3b9)'
+  id: totrans-64
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '[为了更好的正态分布的转换类型](https://towardsdatascience.com/types-of-transformations-for-better-normal-distribution-61c22668d3b9)'
 - en: '**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)****
     Kanwal is a machine learning engineer and a technical writer with a profound passion
     for data science and the intersection of AI with medicine. She co-authored the
@@ -286,33 +419,52 @@
     as a Teradata Diversity in Tech Scholar, Mitacs Globalink Research Scholar, and
     Harvard WeCode Scholar. Kanwal is an ardent advocate for change, having founded
     FEMCodes to empower women in STEM fields.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)****
+    Kanwal 是一名机器学习工程师和技术作家，对数据科学以及人工智能与医学的交叉领域充满深厚的热情。她共同编写了电子书《利用 ChatGPT 提高生产力》。作为
+    2022 年亚太地区的 Google Generation 学者，她倡导多样性和学术卓越。她还被认定为 Teradata 技术多样性学者、Mitacs Globalink
+    研究学者和哈佛 WeCode 学者。Kanwal 是变革的积极倡导者，创立了 FEMCodes 以赋能女性进入 STEM 领域。'
 - en: More On This Topic
+  id: totrans-66
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Removing Outliers Using Standard Deviation in Python](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 中的标准差去除异常值](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)'
 - en: '[How to Handle Time Zones and Timestamps Accurately with Pandas](https://www.kdnuggets.com/how-to-handle-time-zones-and-timestamps-accurately-with-pandas)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Pandas 准确处理时区和时间戳](https://www.kdnuggets.com/how-to-handle-time-zones-and-timestamps-accurately-with-pandas)'
 - en: '[7 Techniques to Handle Imbalanced Data](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理不平衡数据的 7 种技巧](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)'
 - en: '[Masked Arrays in NumPy to Handle Missing Data](https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[NumPy 中的掩码数组处理缺失数据](https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data)'
 - en: '[KDnuggets News, August 31: The Complete Data Science Study Roadmap…](https://www.kdnuggets.com/2022/n35.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻，8 月 31 日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)'
 - en: '[How to Handle Missing Data with Scikit-learn''s Imputer Module](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 Scikit-learn 的 Imputer 模块处理缺失数据](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)'
