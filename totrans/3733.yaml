@@ -1,28 +1,42 @@
 - en: How Fast Can BERT Go With Sparsity?
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: '**BERT**在稀疏性下能有多快？'
 - en: 原文：[https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)
 - en: Here’s A Little Secret
+  id: totrans-2
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 这里有一个小秘密
 - en: 'If you want to analyze how fast 19 sparse BERT models perform inference, you’ll
     only need a YAML file and 16GB of RAM to find out. And spoiler alert:'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想分析19个稀疏BERT模型的推理速度，你只需一个YAML文件和16GB的RAM即可。剧透警告：
 - en: … they run on CPUs.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: … 它们在CPU上运行。
 - en: … and they’re super fast!
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: … 而且它们超级快！
 - en: '![How Fast Can BERT Go With Sparsity?](../Images/7fd1f48b71edcf8e057b4e538b41dab7.png)'
+  id: totrans-6
   prefs: []
   type: TYPE_IMG
+  zh: '![**BERT**在稀疏性下能有多快？](../Images/7fd1f48b71edcf8e057b4e538b41dab7.png)'
 - en: The latest feature from Neural Magic’s [**DeepSparse**](https://github.com/neuralmagic/deepsparse)repo
     is the DeepSparse Server! And the objective of this article is to show not only
     how seamless it is to serve up to 19 sparse BERT models, but how much the impact
@@ -32,201 +46,307 @@
     model. And for this demo, we’ll be using various BERT models and loading them
     for inference to show the trade-off between accuracy and speed relative to the
     model’s sparsification.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: Neural Magic最新的[**DeepSparse**](https://github.com/neuralmagic/deepsparse)库中的功能是DeepSparse
+    Server！本文的目的是展示如何无缝服务多达19个稀疏BERT模型，以及稀疏性对模型性能的影响。简要背景，稀疏化是指在训练好的深度学习模型中去除冗余信息，从而得到一个更快、更小的模型。对于本次演示，我们将使用各种BERT模型并加载它们进行推理，以展示准确性与速度之间的权衡。
 - en: The DeepSparse Server is built on top of our DeepSparse Engine and the popular
     FastAPI web framework allowing anyone to deploy sparse models in production with
     GPU-class speed but on CPUs! With the DeepSparse Engine, we can integrate into
     popular deep learning libraries (e.g., Hugging Face, Ultralytics) allowing you
     to deploy sparse models with ONNX.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: DeepSparse Server建立在我们的DeepSparse Engine和流行的FastAPI网络框架之上，允许任何人在CPU上以GPU级别的速度部署稀疏模型！通过DeepSparse
+    Engine，我们可以集成到流行的深度学习库中（如Hugging Face、Ultralytics），使你能够使用ONNX部署稀疏模型。
 - en: 'As previously mentioned, all of the configuration required to run your models
     in production only requires a YAML file and a small bit of memory (thanks to sparsity).
     To get quickly started with serving four BERT models trained on the question answering
     task, this is what the config YAML file would look like:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 如前所述，运行模型所需的所有配置只需要一个YAML文件和少量内存（多亏了稀疏性）。要快速开始服务四个在问答任务上训练的BERT模型，这就是配置YAML文件的样子：
 - en: '![How Fast Can BERT Go With Sparsity?](../Images/5321e6afbfbb2d1eb2fa67a1b71c851e.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![**BERT**在稀疏性下能有多快？](../Images/5321e6afbfbb2d1eb2fa67a1b71c851e.png)'
 - en: config.yaml
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: config.yaml
 - en: 'If you want to go big and load all of the 19 Neural Magic sparse BERT models:
     this is what the config file would look like ??:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想大规模加载所有19个Neural Magic稀疏BERT模型：配置文件将是这样的??：
 - en: '![How Fast Can BERT Go With Sparsity?](../Images/fbcb2b8b37b344fab6f06912a005b387.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![**BERT**在稀疏性下能有多快？](../Images/fbcb2b8b37b344fab6f06912a005b387.png)'
 - en: For ease of use, we’ve built a demo on top of Streamlit for anyone to demo the
     server and models for the question answering task in NLP. In order to test 19
     models simultaneously, the app was tested on a virtual machine on the Google Cloud
     Platform.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了方便使用，我们在Streamlit上构建了一个演示，以便任何人都可以演示服务器和用于NLP问答任务的模型。为了同时测试19个模型，该应用程序在Google
+    Cloud Platform上的虚拟机上进行了测试。
 - en: 'To give some grounding on what I used for computing in my tests, here are the
     deets:'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了让你了解我在测试中使用的计算方法，这里是一些详细信息：
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '*Keep in mind that bare-metal machines will actually perform faster under the
     same computing constraints described in this article. However, since the models
     are already super fast, I feel comfortable showing their speed via virtualization.*'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '*请记住，在相同的计算约束下，裸金属机器实际上会表现得更快。然而，由于模型已经非常快，我觉得通过虚拟化展示它们的速度是可以的。*'
 - en: 'We not only strongly encourage you to run the same tests on a VM for benchmarking
     performance but also so you’ll have the RAM required to load all 19 BERTs into
     memory, otherwise you’ll get this ??:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们不仅强烈鼓励你在虚拟机上运行相同的测试来基准测试性能，还因为你需要足够的RAM来加载所有19个BERT，否则你会遇到这个??：
 - en: If you prefer to get started quickly on a local machine without worrying about
     out-of-memory problems, you should try only loading a few models into memory.
     And the code below will show you how to do exactly this with 4 models (even though
     most sparse models are super light and you can possibly add more at your discretion).
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你希望在本地机器上快速启动而无需担心内存不足的问题，你应该尝试只加载几个模型到内存中。以下代码将演示如何使用 4 个模型来完成这个操作（尽管大多数稀疏模型非常轻便，你也可以根据需要添加更多）。
 - en: Getting Started With The SparseServer.UI
+  id: totrans-20
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 SparseServer.UI 入门
 - en: 'We split our app into separate server and client directories. The server directory
     holds the YAML files for loading the models and the client has the logic for the
     Streamlit app:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将应用程序分成了独立的服务器和客户端目录。服务器目录包含用于加载模型的 YAML 文件，而客户端目录则包含 Streamlit 应用的逻辑：
 - en: '[PRE1]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '1\. Clone the DeepSparse repo:'
+  id: totrans-23
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 1\. 克隆 DeepSparse 仓库：
 - en: '[PRE2]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '2\. Install the DeepSparse Server and Streamlit:'
+  id: totrans-25
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 2\. 安装 DeepSparse 服务器和 Streamlit：
 - en: '[PRE3]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Before we run the server, you can configure the `host` and `port` parameters
     in our startup CLI command. If you choose to use the default settings, it will
     run the server on `localhost` and port `5543` . For more info on the CLI arguments
     run:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在运行服务器之前，你可以在我们的启动 CLI 命令中配置`host`和`port`参数。如果你选择使用默认设置，它将会在`localhost`上运行服务器，并使用端口`5543`。有关
+    CLI 参数的更多信息，请运行：
 - en: '[PRE4]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '3\. Run the DeepSparse Server:'
+  id: totrans-29
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 3\. 运行 DeepSparse 服务器：
 - en: Ok! It’s time to serve all of the models defined in the `config.yaml`. This
     YAML file will download the four models from Neural Magic’s [SparseZoo](https://sparsezoo.neuralmagic.com/?domain=nlp&sub_domain=question_answering&page=1) ??.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的！现在是时候服务`config.yaml`中定义的所有模型了。这个 YAML 文件将从 Neural Magic 的[SparseZoo](https://sparsezoo.neuralmagic.com/?domain=nlp&sub_domain=question_answering&page=1)下载四个模型??。
 - en: '[PRE5]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: After downloading the models and your server is up and running, open a second
     terminal to test out the client.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 下载模型并且服务器运行后，打开第二个终端来测试客户端。
 - en: '*If you altered the *`*host*`* and *`*port*`* configuration when you first
     ran the server, please adjust these variables in the *`*pipelineclient.py*`* module
     as well.*'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '*如果你在第一次运行服务器时修改了*`host`*和*`port`*配置，请在*pipelineclient.py*模块中也相应调整这些变量。*'
 - en: '4\. Run the Streamlit Client:'
+  id: totrans-34
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 4\. 运行 Streamlit 客户端：
 - en: '[PRE6]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: That’s it! Click on the URL in your terminal, and you are ready to start interacting
     with the demo. You can choose examples from a list, or you can add your own context
     and question.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样！点击终端中的 URL，你就可以开始与演示进行交互了。你可以从列表中选择示例，或者添加你自己的上下文和问题。
 - en: '![How Fast Can BERT Go With Sparsity?](../Images/63c104fe1ff452f0fdc484024f56d9ed.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![BERT 在稀疏性下能有多快？](../Images/63c104fe1ff452f0fdc484024f56d9ed.png)'
 - en: In the future, we’ll be expanding the number of NLP tasks outside of just question
     answering so you get a wider scope in performance with sparsity.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 未来，我们将扩展 NLP 任务的范围，不仅仅局限于问答，以便你能在稀疏性上获得更广泛的性能。
 - en: 'For the full code: check out the [SparseServer.UI](https://github.com/neuralmagic/deepsparse/tree/main/examples/sparseserver-ui) …'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 完整代码：查看[SparseServer.UI](https://github.com/neuralmagic/deepsparse/tree/main/examples/sparseserver-ui)…
 - en: …and don’t forget to give the DeepSparse repo a GitHub ⭐!
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: …并且不要忘记给 DeepSparse 仓库一个 GitHub ⭐！
 - en: '**[Ricky Costa](https://www.linkedin.com/in/ricky-costa-nlp/)** is focused
     on User Interface at [Neural Magic](https://neuralmagic.com/).'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Ricky Costa](https://www.linkedin.com/in/ricky-costa-nlp/)** 专注于[Neural
+    Magic](https://neuralmagic.com/)的用户界面。'
 - en: '[Original](https://pub.towardsai.net/sparse-transformers-a-demo-58b6b1ebf3e4).
     Reposted with permission.'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://pub.towardsai.net/sparse-transformers-a-demo-58b6b1ebf3e4)。经许可转载。'
 - en: '* * *'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-44
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大推荐课程
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行 IT 管理'
 - en: '* * *'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用HuggingFace对BERT进行推文分类的微调](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
 - en: '[Classifying Long Text Documents Using BERT](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用BERT对长文本进行分类](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)'
 - en: '[8 Innovative BERT Knowledge Distillation Papers That Have Changed…](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[8篇改变了NLP领域的创新性BERT知识蒸馏论文](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)'
 - en: '[Comparing Natural Language Processing Techniques: RNNs, Transformers, BERT](https://www.kdnuggets.com/comparing-natural-language-processing-techniques-rnns-transformers-bert)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[比较自然语言处理技术：RNN、Transformers、BERT](https://www.kdnuggets.com/comparing-natural-language-processing-techniques-rnns-transformers-bert)'
 - en: '[Extractive Summarization with LLM using BERT](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用BERT进行抽取式总结](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)'
 - en: '[How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用Hugging Face Transformers对BERT进行情感分析的微调](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'

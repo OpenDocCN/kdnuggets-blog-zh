@@ -1,246 +1,377 @@
 - en: Can We Query a Table with T5?
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 我们能用 T5 查询表格吗？
 - en: 原文：[https://www.kdnuggets.com/2022/05/query-table-t5.html](https://www.kdnuggets.com/2022/05/query-table-t5.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2022/05/query-table-t5.html](https://www.kdnuggets.com/2022/05/query-table-t5.html)
 - en: '![Can We Query a Table with T5?](../Images/aee45eb918738c5942550836c22227f7.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![Can We Query a Table with T5?](../Images/aee45eb918738c5942550836c22227f7.png)'
 - en: 'Source: Adobe Stock'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：Adobe Stock
 - en: Do you remember the first time you started to build some SQL queries to analyse
     your data? I’m sure most of the time you just wanted to see the “Top selling products”
     or “Count of product visits by weekly”. Why write SQL queries instead of just
     asking what you have in your mind in natural language?
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 你还记得第一次开始构建一些 SQL 查询来分析数据的情景吗？我相信大多数时候你只是想查看“畅销产品”或“按周统计的产品访问次数”。为什么要写 SQL 查询，而不是直接用自然语言提问呢？
 - en: This is now possible thanks to the recent advancements in NLP. You can now not
     just use the LLM (Large Language Model) but also teach them new skills. This is
     called transfer learning. You can use a pretrained model as a starting point.
     Even with smaller labeled datasets you can get great performances compared to
     training on the data alone.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 这现在得益于最近在自然语言处理领域的进展。你现在不仅可以使用 LLM（大型语言模型），还可以教授它们新技能。这称为迁移学习。你可以将预训练模型作为起点。即使使用较小的标注数据集，相较于单独训练数据，你也可以获得很好的性能。
 - en: 'In this tutorial we are going to do transfer learning with text-to-text generation
     model [T5 by Google](https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html) with
     our custom data so that it can convert basic questions to SQL queries. We will
     add a new task to T5 called: `translate English to SQL`. At the end of this article
     you will have a trained model that can translate the following sample query:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将使用文本到文本生成模型 [T5 by Google](https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html) 进行迁移学习，使用我们的自定义数据，以便将基本问题转换为
+    SQL 查询。我们将为 T5 添加一个新任务，称为：`translate English to SQL`。在本文末尾，你将拥有一个训练好的模型，能够翻译以下示例查询：
 - en: '[PRE0]'
+  id: totrans-7
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'into the following SQL query:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 成为以下 SQL 查询：
 - en: '[PRE1]'
+  id: totrans-9
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: You can find the [Gradio](https://gradio.app/) demo [**here**](https://huggingface.co/spaces/mecevit/english-to-sql) and
     the Layer Project [**here**](https://app.layer.ai/layer/t5-fine-tuning-with-layer).
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在 [Gradio](https://gradio.app/) 演示 [**这里**](https://huggingface.co/spaces/mecevit/english-to-sql) 找到，Layer
+    项目 [**这里**](https://app.layer.ai/layer/t5-fine-tuning-with-layer)。
 - en: Build the Training Data
+  id: totrans-11
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 构建训练数据
 - en: 'Unlike the common language to language translation datasets, we can build custom
     English to SQL translation pairs programmatically with the help of templates.
     Now, time to come up with some templates:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 与常见的语言到语言翻译数据集不同，我们可以借助模板以编程方式构建自定义的英语到 SQL 翻译对。现在，来想一些模板吧：
 - en: We can build our function which will use these templates and generate our dataset.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以构建我们的函数，它将使用这些模板并生成我们的数据集。
 - en: 'As you can see we have used Layer [@dataset](https://docs.app.layer.ai/docs/sdk-library/dataset-decorator) decorator
     here. We can now pass this function to Layer easily with:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，我们在这里使用了 Layer [@dataset](https://docs.app.layer.ai/docs/sdk-library/dataset-decorator) 装饰器。我们现在可以轻松地将此功能传递给
+    Layer：
 - en: '[PRE2]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Once the run is complete, we can start building our custom dataset loader to
     fine tune T5.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦运行完成，我们可以开始构建自定义数据集加载器来微调 T5。
 - en: Create Dataloader
+  id: totrans-17
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 创建数据加载器
 - en: Our dataset is basically a [PyTorch Dataset](https://pytorch.org/tutorials/beginner/basics/data_tutorial.html) implementation
     specific to our custom built dataset.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的数据集基本上是一个 [PyTorch Dataset](https://pytorch.org/tutorials/beginner/basics/data_tutorial.html) 实现，特定于我们自定义构建的数据集。
 - en: Finetune T5
+  id: totrans-19
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 微调 T5
 - en: Our dataset is ready and registered to Layer. Now we are going to develop the
     fine tuning logic. Decorate the function with [@model](https://docs.app.layer.ai/docs/sdk-library/model-decorator) and
     pass it to Layer. This trains the model on Layer infra and registers it under
     our project.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的数据集已经准备好并注册到 Layer。现在我们要开发微调逻辑。用 [@model](https://docs.app.layer.ai/docs/sdk-library/model-decorator) 装饰该函数，并将其传递给
+    Layer。这会在 Layer 基础设施上训练模型，并将其注册到我们的项目下。
 - en: 'Here we use three separate Layer decorators:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里我们使用了三个独立的 Layer 装饰器：
 - en: '`[@model](https://docs.app.layer.ai/docs/sdk-library/model-decorator)`: Tells
     Layer that this function trains an ML model'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[@model](https://docs.app.layer.ai/docs/sdk-library/model-decorator)`: 告诉
+    Layer 这个函数训练一个 ML 模型'
 - en: '`[@fabric](https://docs.app.layer.ai/docs/sdk-library/fabric-decorator)`: Tells
     Layer the computation resources (CPU, GPU etc.) needed to train the model. T5
     is a big model and we need GPU to fine tune it. Here is a list of the [available
     fabrics](https://docs.app.layer.ai/docs/reference/fabrics) you can use with Layer.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[@fabric](https://docs.app.layer.ai/docs/sdk-library/fabric-decorator)`：告诉
+    Layer 训练模型所需的计算资源（CPU、GPU 等）。T5 是一个大模型，我们需要 GPU 来微调它。以下是你可以与 Layer 一起使用的[可用 fabrics](https://docs.app.layer.ai/docs/reference/fabrics)列表。'
 - en: '`[@pip_requirements](https://docs.app.layer.ai/docs/sdk-library/pip-requirements-decorator)`:
     The Python packages needed to fine tune our model.'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`[@pip_requirements](https://docs.app.layer.ai/docs/sdk-library/pip-requirements-decorator)`：微调模型所需的
+    Python 包。'
 - en: Now we can just pass the tokenizer and model training functions to Layer to
     train our model on a remote GPU instance.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们只需将 tokenizer 和模型训练函数传递给 Layer，以便在远程 GPU 实例上训练我们的模型。
 - en: '[PRE3]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Once the training is complete, we can find our models and the metrics in the
     Layer UI. Here is our loss curve:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练完成后，我们可以在 Layer UI 中找到我们的模型和相关的指标。这是我们的损失曲线：
 - en: '![Can We Query a Table with T5?](../Images/49ef8dc9e9a1ddcc3f4ac46e7265a408.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![我们可以用 T5 查询表格吗？](../Images/49ef8dc9e9a1ddcc3f4ac46e7265a408.png)'
 - en: Build the Gradio Demo
+  id: totrans-29
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 构建 Gradio 演示
 - en: '[Gradio](https://gradio.app/) is the fastest way to demo your machine learning
     model with a friendly web interface so that anyone can use it, anywhere! We will
     build an interactive demo with [Gradio](https://gradio.app/) to provide a UI for
     people want to try our model.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Gradio](https://gradio.app/) 是演示机器学习模型的最快方式，提供友好的网页界面，使任何人都可以在任何地方使用它！我们将使用[Gradio](https://gradio.app/)构建一个互动演示，为希望尝试我们模型的用户提供
+    UI。'
 - en: 'Let’s get to coding. Create a Python file called `app.py` and put the following
     code:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始编程吧。创建一个名为`app.py`的 Python 文件，并添加以下代码：
 - en: 'In the above code:'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述代码中：
 - en: We fetch the our fine-tuned model and the related tokenizer from Layer
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们从 Layer 中获取我们微调的模型和相关的 tokenizer
 - en: 'Create a simple UI with Gradio: an input textfield for query input and an output
     textfield to display the predicted SQL query'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 Gradio 创建一个简单的 UI：一个用于查询输入的文本字段和一个用于显示预测 SQL 查询的输出文本字段
 - en: 'We will need some extra libraries for this small Python application, so create
     a `requirements.txt` file with the following content:'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要一些额外的库来支持这个小的 Python 应用，因此创建一个`requirements.txt`文件，内容如下：
 - en: '[PRE4]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'We are ready to publish our Gradio app now:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在准备发布我们的 Gradio 应用：
 - en: Go to Hugging face and [create a space](https://huggingface.co/login?next=/new-space).
+  id: totrans-38
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 访问 Hugging Face 并[创建一个空间](https://huggingface.co/login?next=/new-space)。
 - en: Don’t forget to select Gradio as the Space SDK
+  id: totrans-39
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 不要忘记选择 Gradio 作为 Space SDK
 - en: 'Now clone your repo into your local directory with:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在将你的仓库克隆到本地目录中，使用以下命令：
 - en: '[PRE5]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'Put the `requirements.txt`and `app.py` file into to cloned directory and run
     the following commands in your terminal:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 将`requirements.txt`和`app.py`文件放入克隆的目录中，并在终端中运行以下命令：
 - en: '[PRE6]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Now head over to your Hugging face space, you will see your example once the
     app is deployed
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在前往你的 Hugging Face 空间，你会看到应用部署后你的示例
 - en: '![Can We Query a Table with T5?](../Images/929ccd3e3686d638f27ccd9dfd4e0b03.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![我们可以用 T5 查询表格吗？](../Images/929ccd3e3686d638f27ccd9dfd4e0b03.png)'
 - en: Final Thoughts
+  id: totrans-46
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 最后的想法
 - en: We learned how to fine tune a large language model to teach them a new skill.
     You can now design your own task and fine tune T5 for your own use.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们学习了如何微调大型语言模型来教授它们一项新技能。现在你可以设计自己的任务，并为自己的用途微调 T5。
 - en: Check out the full [Fine Tuning T5](https://app.layer.ai/layer/t5-fine-tuning-with-layer) project
     and modify it for your own task.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 查看完整的[微调 T5](https://app.layer.ai/layer/t5-fine-tuning-with-layer)项目并将其修改为适应你的任务。
 - en: Resources
+  id: totrans-49
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 资源
 - en: '[https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html](https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html](https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html)'
 - en: '[https://app.layer.ai/layer/t5-fine-tuning-with-layer](https://app.layer.ai/layer/t5-fine-tuning-with-layer)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://app.layer.ai/layer/t5-fine-tuning-with-layer](https://app.layer.ai/layer/t5-fine-tuning-with-layer)'
 - en: '[https://huggingface.co/spaces](https://huggingface.co/spaces)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[https://huggingface.co/spaces](https://huggingface.co/spaces)'
 - en: '**[Mehmet Ecevit](https://www.linkedin.com/in/mecevt/)** is Co-founder & CEO
     at Layer: Collaborative Machine Learning.'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Mehmet Ecevit](https://www.linkedin.com/in/mecevt/)** 是 Layer: Collaborative
+    Machine Learning 的联合创始人兼首席执行官。'
 - en: More On This Topic
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Query Your Pandas DataFrames with SQL](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 SQL 查询你的 Pandas 数据框](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
 - en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 查询优化技术](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
 - en: '[5 Tips for Improving SQL Query Performance](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提升 SQL 查询性能的 5 个技巧](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)'
 - en: '[How Fast Can BERT Go With Sparsity?](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[BERT 在稀疏性下能有多快？](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)'
 - en: '[How You Can Use Machine Learning to Automatically Label Data](https://www.kdnuggets.com/2022/02/machine-learning-automatically-label-data.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用机器学习自动标记数据](https://www.kdnuggets.com/2022/02/machine-learning-automatically-label-data.html)'
 - en: '[How a Level System can Help Forecast AI Costs](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[等级系统如何帮助预测 AI 成本](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)'

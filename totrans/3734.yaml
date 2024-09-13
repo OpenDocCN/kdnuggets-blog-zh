@@ -1,137 +1,207 @@
 - en: Answering Questions with HuggingFace Pipelines and Streamlit
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 HuggingFace Pipelines 和 Streamlit 回答问题
 - en: 原文：[https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
 - en: '![Figure](../Images/0aefc4543f04744a7aa115275535d83d.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/0aefc4543f04744a7aa115275535d83d.png)'
 - en: Image by [Arek Socha](https://pixabay.com/users/qimono-1962238/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2492009)
     from [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2492009)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片由 [Arek Socha](https://pixabay.com/users/qimono-1962238/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2492009)
+    提供，来源于 [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2492009)
 - en: There are so many possibilities of projects to build when you put together a
     few prominent data science libraries, some good ideas, and Python. This article
     will show just how easy this can be, and how few lines of code are needed to achieve
     something interesting.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 当你将几个突出的数据科学库、一些好主意和 Python 结合在一起时，有很多项目可能性。本文将展示这有多么简单，以及实现有趣内容所需的代码行数。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'HuggingFace''s [Transformers](https://huggingface.co/transformers/) library
     is full of SOTA NLP models which can be used out of the box as-is, as well as
     fine-tuned for specific uses and high performance. The library''s pipelines can
     be summed up as:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: HuggingFace 的 [Transformers](https://huggingface.co/transformers/) 库充满了可以开箱即用的
+    SOTA NLP 模型，也可以针对特定用途和高性能进行微调。该库的管道可以总结为：
 - en: The pipelines are a great and easy way to use models for inference. These pipelines
     are objects that abstract most of the complex code from the library, offering
     a simple API dedicated to several tasks, including Named Entity Recognition, Masked
     Language Modeling, Sentiment Analysis, Feature Extraction and Question Answering.
+  id: totrans-12
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这些管道是使用模型进行推理的绝佳简便方式。这些管道是抽象了库中大部分复杂代码的对象，提供了一个简单的 API，专注于多个任务，包括命名实体识别、掩码语言建模、情感分析、特征提取和问答。
 - en: We won't give any further explanation of the Transformer pipelines here, but
     you can read [this article](/2021/06/create-deploy-sentiment-analysis-app-api.html)
     for an overview of creating a simple sentiment analysis API app, leveraging HuggingFace's
     library to do so.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们在这里不会进一步解释 Transformer 管道，但你可以阅读 [这篇文章](/2021/06/create-deploy-sentiment-analysis-app-api.html)，了解如何创建一个简单的情感分析
+    API 应用，利用 HuggingFace 的库来实现。
 - en: 'If you don''t know about [Streamlit](https://streamlit.io/), this is the 30,000
     foot overview:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你还不了解 [Streamlit](https://streamlit.io/)，这是一个 30,000 英尺的概述：
 - en: Streamlit turns data scripts into shareable web apps in minutes. All in Python.
     All for free. No front‑end experience required.
+  id: totrans-15
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: Streamlit 可以将数据脚本转化为可共享的网页应用，仅需几分钟。全部使用 Python，完全免费，无需前端经验。
 - en: You can read a more in-depth introduction to implementing a project with Streamlit
     [here](/2021/09/automl-pipeline-optimization-sandbox.html).
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在 [这里](/2021/09/automl-pipeline-optimization-sandbox.html) 阅读更深入的介绍，了解如何使用
+    Streamlit 实现一个项目。
 - en: Both Streamlit and the Transformer library's pipelines can help make data science
     projects much easier to implement. Combine the two, and this ease of implementation
     is even more noteworthy.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: Streamlit 和 Transformer 库的管道可以帮助简化数据科学项目的实施。将两者结合，这种实施的便捷性更为显著。
 - en: Let's have a look at the complete code required to create a functioning web
     app. This concise script below does everything needed to create the question answering
     app.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们来看一下创建一个功能性 web 应用程序所需的完整代码。下面这个简洁的脚本完成了创建问答应用程序所需的一切。
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Now let''s get the web app up and running. Assuming you have saved the above
     script as `nlp_question_answering.py`, this will do it:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们让 web 应用程序启动并运行。假设你已经将上述脚本保存为 `nlp_question_answering.py`，下面的代码将完成这项工作：
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: This should open up your browser and the web app. For demonstration purposes,
     I will click the "browse files" button and select a recent popular KDnuggets article,
     "[Avoid These Five Behaviors That Make You Look Like A Data Novice](/2021/10/avoid-five-behaviors-data-novice.html),"
     which I have copied and cleaned of all non-essential text. Once this happens,
     the Transformer question answering pipeline will be built, and so the app will
     run for a few seconds.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 这应该会打开你的浏览器和网络应用程序。为了演示，我将点击“浏览文件”按钮并选择一篇最近的热门 KDnuggets 文章，“[避免这些让你看起来像数据新手的五种行为](/2021/10/avoid-five-behaviors-data-novice.html)”，这篇文章我已经复制并清除了所有非必要的文本。一旦完成，Transformer
+    问答管道将会建立，因此应用程序将运行几秒钟。
 - en: '![Image](../Images/7dbadb422b767642d07361fb8166af87.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/7dbadb422b767642d07361fb8166af87.png)'
 - en: 'You can read the entire article if the topic is of interest (it''s very good);
     otherwise, here is a relevant excerpt:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你对这个话题感兴趣，可以阅读整篇文章（非常好）；否则，以下是相关摘录：
 - en: '`Unless it’s a focus group with people that are representative of your customer
     base (I even have doubts about survey results from focus groups, but that’s another
     topic), 30 data points usually won’t give you any robust insights.`'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '`除非是一个代表你客户群的焦点小组（我甚至对焦点小组的调查结果有疑虑，但那是另一个话题），30 个数据点通常不会给你任何可靠的见解。`'
 - en: 'Now let''s ask a question, using the "ask a question" field, and check the
     response:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们使用“提问”字段提一个问题，并检查响应：
 - en: '[PRE2]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[PRE3]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: And we have a fairly confident answer to our first question. Excellent!
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们对第一个问题有一个相当有信心的答案。太好了！
 - en: 'Now have a look at this excerpt:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在来看一下这个摘录：
 - en: '`Try this instead: Talk to your stakeholders before building any data product.
     Understand the business’ needs at the current stage: If it’s a startup, I bet
     your stakeholder won’t care too much about the format and color of the data visualizations
@@ -139,40 +209,60 @@
     and insights from them. Similarly, truly understand the audience and use case;
     for example, you would spend more time on a polished and simple user interface
     if the data product is intended to be used regularly by non-technical audiences.`'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '`尝试这个：在构建任何数据产品之前与利益相关者沟通。理解当前阶段的业务需求：如果是初创公司，我敢打赌你的利益相关者不会太在意你构建的数据可视化的格式和颜色，而是更关注数据的准确性及其背后的见解。同样，真正理解受众和使用场景；例如，如果数据产品是为了让非技术受众定期使用，你应该花更多时间在一个精致且简单的用户界面上。`'
 - en: Let's ask a few questions related to this second excerpt and check out the responses.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们提出几个与第二个摘录相关的问题，并查看回应。
 - en: '[PRE4]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '[PRE5]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '`The stakeholder will want to focus on what?`'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '`利益相关者会想要关注什么？`'
 - en: '[PRE6]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '`What should you truly understand?`'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '`你应该真正理解什么？`'
 - en: '[PRE7]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: You can see the varying confidence scores for the different answers to the questions
     we posed. Try out the app for yourself, and see what happens when you ask questions
     it doesn't have answers for.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以看到我们提出的问题的不同答案的置信度评分。自己尝试一下这个应用程序，看看当你问它没有答案的问题时会发生什么。
 - en: I hope this has been a helpful demonstration of how easy it is to patch together
     Python libraries with some good ideas. With some added layers of complexity, such
     projects can be useful additions to a portfolio of projects to share with other
     data scientists or prospective employers.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望这能对你演示如何将 Python 库与一些好主意结合起来的过程有所帮助。通过添加一些复杂的层次，这样的项目可以成为分享给其他数据科学家或潜在雇主的项目组合中的有用补充。
 - en: '**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13))
     is a Data Scientist and the Editor-in-Chief of KDnuggets, the seminal online Data
     Science and Machine Learning resource. His interests lie in natural language processing,
@@ -180,33 +270,41 @@
     automated approaches to machine learning. Matthew holds a Master''s degree in
     computer science and a graduate diploma in data mining. He can be reached at editor1
     at kdnuggets[dot]com.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Post GPT-4: Answering Most Asked Questions About AI](https://www.kdnuggets.com/2023/04/post-gpt4-answering-asked-questions-ai.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Simple NLP Pipelines with HuggingFace Transformers](https://www.kdnuggets.com/2023/02/simple-nlp-pipelines-huggingface-transformers.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Fine-Tuning BERT for Tweets Classification with HuggingFace](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[A Simple to Implement End-to-End Project with HuggingFace](https://www.kdnuggets.com/a-simple-to-implement-end-to-end-project-with-huggingface)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[HuggingFace Has Launched a Free Deep Reinforcement Learning Course](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[DIY Automated Machine Learning with Streamlit](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
