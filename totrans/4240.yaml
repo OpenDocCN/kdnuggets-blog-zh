@@ -1,274 +1,401 @@
 - en: Understanding BERT with Hugging Face
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 Hugging Face 理解 BERT
 - en: 原文：[https://www.kdnuggets.com/2021/07/understanding-bert-hugging-face.html](https://www.kdnuggets.com/2021/07/understanding-bert-hugging-face.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/07/understanding-bert-hugging-face.html](https://www.kdnuggets.com/2021/07/understanding-bert-hugging-face.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '![bert-lg-hugging-face.jpg](../Images/095380cfb6379c817ecc69910337478f.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![bert-lg-hugging-face.jpg](../Images/095380cfb6379c817ecc69910337478f.png)'
 - en: '**Using BERT and Hugging Face to Create a Question Answer Model**'
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**使用 BERT 和 Hugging Face 创建问答模型**'
 - en: In a recent post on[ BERT](https://www.exxactcorp.com/blog/Deep-Learning/how-do-bert-transformers-work),
     we discussed BERT transformers and how they work on a basic level. The article
     covers BERT architecture, training data, and training tasks.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在最近的一篇关于[BERT](https://www.exxactcorp.com/blog/Deep-Learning/how-do-bert-transformers-work)的文章中，我们讨论了
+    BERT 转换器及其基本工作原理。文章涵盖了 BERT 的架构、训练数据和训练任务。
 - en: However, we don’t really understand something before we implement it ourselves.
     So in this post, we will implement a Question Answering Neural Network using BERT
     and a Hugging Face Library.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，我们在真正实现之前并不了解某些东西。所以在这篇文章中，我们将使用 BERT 和 Hugging Face 库实现一个问答神经网络。
 - en: '**What is a Question Answering Task?**'
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**什么是问答任务？**'
 - en: In this task, we are given a question and a paragraph in which the answer lies
     to our [BERT Architecture](https://www.exxactcorp.com/blog/Deep-Learning/a-deep-dive-into-the-transformer-architecture-the-development-of-transformer-models) and
     the objective is to determine the start and end span for the answer in the paragraph.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个任务中，我们给定一个问题和一个段落，其中包含答案的段落是我们的[BERT架构](https://www.exxactcorp.com/blog/Deep-Learning/a-deep-dive-into-the-transformer-architecture-the-development-of-transformer-models)，目标是确定答案在段落中的起始和结束跨度。
 - en: '![Figure](../Images/042fb23b542c92d878f7fb880dd4e8ff.png)'
+  id: totrans-9
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/042fb23b542c92d878f7fb880dd4e8ff.png)'
 - en: '*Image of BERT Finetuning for Question-Answer Task*'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '*BERT微调问答任务示意图*'
 - en: As explained in the previous post, in the above example we provide two inputs
     to the BERT architecture. The paragraph and the question are separated by the
     <SEP> token. The purple layers are the output of the BERT encoder.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如上一篇文章中所解释的，在上述示例中，我们向 BERT 架构提供两个输入。段落和问题通过<SEP>标记分隔。紫色层是 BERT 编码器的输出。
 - en: 'We now define two vectors S and E (which will be learned during fine-tuning)
     both having shapes (1x768). We then take a dot product of these vectors with the
     second sentence’s output vectors from BERT, giving us some scores. We then apply
     Softmax over these scores to get probabilities. The training objective is the
     sum of the log-likelihoods of the correct start and end positions. Mathematically,
     for the Probability vector for Start positions:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在定义两个向量 S 和 E（在微调过程中将被学习），它们的形状为 (1x768)。然后我们将这些向量与 BERT 的第二句输出向量进行点积，得到一些分数。我们随后对这些分数应用
+    Softmax 以获得概率。训练目标是正确起始和结束位置的对数似然的总和。在数学上，对于起始位置的概率向量：
 - en: '![equation-700.jpg](../Images/2457015fb5dfbd7b790e050ef2eb1594.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![equation-700.jpg](../Images/2457015fb5dfbd7b790e050ef2eb1594.png)'
 - en: Where T_i is the word we are focusing on. An analogous formula is for End positions.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中 T_i 是我们关注的词。结束位置的公式是类似的。
 - en: To predict a span, we get all the scores — S.T and E.T and get the best span
     as the span having the maximum Score, that is max(S.T_i + E.T_j) among all j≥i.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了预测一个跨度，我们获取所有的分数 — S.T 和 E.T，并选择得分最高的跨度，即在所有 j≥i 中最大化(S.T_i + E.T_j)的跨度。
 - en: '**How Do We Do This Using Hugging Face?**'
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**我们如何使用 Hugging Face 实现这一点？**'
 - en: '[Hugging Face](https://huggingface.co/) provides a pretty straightforward way
     to do this.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Hugging Face](https://huggingface.co/) 提供了一种相当直接的方法来实现这一点。'
 - en: 'The output is:'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 输出是：
 - en: '[PRE0]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: So, here we just used the pretrained tokenizer and model on the [SQuAD dataset](https://huggingface.co/datasets/squad) provided
     by Hugging Face to get this done.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，我们仅使用了 Hugging Face 提供的[SQuAD 数据集](https://huggingface.co/datasets/squad)上的预训练分词器和模型来完成这个任务。
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Once we have the model we just get the start and end probability scores and
     predict the span as the one that lies between the token that has the maximum start
     score and the token that has the maximum end score.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们有了模型，我们只需获取起始和结束概率分数，并预测跨度为起始分数最高的 token 和结束分数最高的 token 之间的那个跨度。
 - en: 'For example, if the start scores for paragraph are:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，如果段落的起始分数是：
 - en: '[PRE2]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'And the end scores are:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 而结束分数是：
 - en: '[PRE3]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: We will get the output as input_ids[answer_start:answer_end] where answer_start
     is the index of word general(one with max start score) and answer_end is index
     of (BERT(One with max end score). And the answer would be “general purpose architectures”.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将得到输出为input_ids[answer_start:answer_end]，其中answer_start是词“general”（最大开始分数的词）的索引，answer_end是BERT（最大结束分数的词）的索引。答案将是“general
+    purpose architectures”。
 - en: '**Fine-Tuning Our Own Model Using a Question-Answering Dataset**'
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**使用问答数据集微调我们自己的模型**'
 - en: In most cases, we will want to train our own QA model on our own datasets. In
     this situation, we will start from the SQuAD dataset and the base BERT Model in
     the Hugging Face library to finetune it.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在大多数情况下，我们将希望在自己的数据集上训练自己的QA模型。在这种情况下，我们将从SQuAD数据集和Hugging Face库中的基础BERT模型开始进行微调。
 - en: 'Let''s look at how the SQuAD Dataset looks before we start fine tuning:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看在开始微调之前，SQuAD数据集的样子：
 - en: '[PRE4]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: We can see each example containing the Context, Answer and the Start token for
     the Answer. We can use the script below to preprocess the data to the required
     format once we have the data in the above form. The script takes care of a lot
     of things amongst which the most important are the cases where the answer lies
     around max_length and calculating the span using the answer and the start token
     index.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以看到每个示例包含上下文、答案和答案的开始标记。我们可以使用下面的脚本将数据预处理为所需的格式。一旦我们拥有上述格式的数据，脚本将处理很多事情，其中最重要的是答案在max_length附近的情况以及使用答案和开始标记索引计算跨度。
 - en: Once we have data in the required format we can just fine tune our BERT base
     model from there.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们获得了所需格式的数据，我们就可以从那里对我们的BERT基础模型进行微调。
 - en: '[PRE5]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![Figure](../Images/f592cf5eaa766177b529c57fd508cca9.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/f592cf5eaa766177b529c57fd508cca9.png)'
 - en: '*Output from Fine Tuning BERT Base Model*'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '*微调BERT基础模型的输出*'
 - en: 'Once we train our model we can use it as:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们训练了模型，我们可以这样使用它：
 - en: In this case also we take the index of max start scores and max end scores and
     predict the answer as the one that is between. If we want to get the exact implementation
     as provided in the BERT Paper we can tweak the above code a little and find out
     the indexes which maximize (start_score + end_score)
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，我们也取最大开始分数和最大结束分数的索引，并预测答案为它们之间的内容。如果我们想获得BERT论文中提供的精确实现，我们可以稍微调整上述代码，找出最大化（start_score
+    + end_score）的索引。
 - en: '![Figure](../Images/6827e92363f87bb01fd57443ee9d9ccf.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/6827e92363f87bb01fd57443ee9d9ccf.png)'
 - en: '*Code Output from Model Training*'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '*模型训练中的代码输出*'
 - en: '**References**'
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**参考文献**'
 - en: '[Attention Is All You Need](https://arxiv.org/abs/1706.03762): The Paper which
     introduced Transformers.'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Attention Is All You Need](https://arxiv.org/abs/1706.03762)：介绍Transformer的论文。'
 - en: '[BERT Paper](https://arxiv.org/abs/1810.04805): Do read this paper.'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[BERT论文](https://arxiv.org/abs/1810.04805)：请阅读这篇论文。'
 - en: '[Hugging Face](https://huggingface.co/transformers/usage.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Hugging Face](https://huggingface.co/transformers/usage.html)'
 - en: In this post, I covered how we can create a Question Answering Model from scratch
     using BERT. I hope it would have been useful both for understanding BERT as well
     as Hugging Face library.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我介绍了如何从零开始使用BERT创建一个问答模型。我希望这对理解BERT以及Hugging Face库都很有用。
 - en: 'If you want to look at other posts in this series check these out:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想查看本系列中的其他文章，可以查看这些：
 - en: '[Understanding Transformers, the Data Science Way](https://mlwhiz.com/blog/2020/09/20/transformers/)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从数据科学的角度理解Transformers](https://mlwhiz.com/blog/2020/09/20/transformers/)'
 - en: '[Understanding Transformers, the Programming Way](https://mlwhiz.com/blog/2020/10/10/create-transformer-from-scratch/)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从编程的角度理解Transformers](https://mlwhiz.com/blog/2020/10/10/create-transformer-from-scratch/)'
 - en: '[Explaining BERT Simply Using Sketches](https://mlwhiz.medium.com/explaining-bert-simply-using-sketches-ba30f6f0c8cb)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用草图简单解释BERT](https://mlwhiz.medium.com/explaining-bert-simply-using-sketches-ba30f6f0c8cb)'
 - en: We will be writing more topics like this in the future, so let us know what
     you think about it. Should we write on heavily technical topics or aim more for
     beginner level? The comment section is your friend. Use it.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将来会写更多类似的主题，所以请告诉我们你的想法。我们应该写一些技术性很强的主题，还是更偏向于初学者水平？评论区是你的朋友，使用它吧。
 - en: '[Original](https://www.exxactcorp.com/blog/Deep-Learning/understanding-bert-with-hugging-face).
     Reposted with permission.'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.exxactcorp.com/blog/Deep-Learning/understanding-bert-with-hugging-face)。经允许转载。'
 - en: '**Related:**'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[The Best Way to Learn Practical NLP?](/2021/06/best-way-learn-practical-nlp.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习实用NLP的最佳方法？](/2021/06/best-way-learn-practical-nlp.html)'
 - en: '[How To Generate Meaningful Sentences Using a T5 Transformer](/2021/05/generate-meaningful-sentences-t5-transformer.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[How to Create and Deploy a Simple Sentiment Analysis App via API](/2021/06/create-deploy-sentiment-analysis-app-api.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-57
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-62
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[How to Fine-Tune BERT for Sentiment Analysis with Hugging Face Transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Top 10 Machine Learning Demos: Hugging Face Spaces Edition](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[A community developing a Hugging Face for customer data modeling](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Build AI Chatbot in 5 Minutes with Hugging Face and Gradio](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[How to Use Hugging Face AutoTrain to Fine-tune LLMs](https://www.kdnuggets.com/how-to-use-hugging-face-autotrain-to-finetune-llms)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[How to Finetune Mistral AI 7B LLM with Hugging Face AutoTrain](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
