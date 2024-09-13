@@ -1,17 +1,25 @@
 - en: Artificial Neural Network Implementation using NumPy and Image Classification
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 NumPy 实现人工神经网络并进行图像分类
 - en: 原文：[https://www.kdnuggets.com/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html](https://www.kdnuggets.com/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html](https://www.kdnuggets.com/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html?page=2#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html?page=2#comments)'
 - en: '![](../Images/5f757b54b8113b34e602f5c2cef47590.png)'
+  id: totrans-3
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5f757b54b8113b34e602f5c2cef47590.png)'
 - en: 'This tutorial builds artificial neural network in Python using NumPy from scratch
     in order to do an image classification application for the Fruits360 dataset.
     Everything (i.e. images and source codes) used in this tutorial, rather than the
@@ -20,12 +28,19 @@
     Dec. 2018, Apress, 978-1-4842-4167-7 "***. The book is available at Springer at
     this link: [https://springer.com/us/book/9781484241660](https://springer.com/us/book/9781484241660)
     .'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程使用 NumPy 从头开始构建人工神经网络，以进行 Fruits360 数据集的图像分类应用。教程中使用的所有内容（即图像和源代码），除了颜色 Fruits360
+    图像外，都是我书籍中的专有权利，书名为 ***"Ahmed Fawzy Gad 'Practical Computer Vision Applications
+    Using Deep Learning with CNNs'. Dec. 2018, Apress, 978-1-4842-4167-7"***。这本书可以在
+    Springer 查阅，链接为：[https://springer.com/us/book/9781484241660](https://springer.com/us/book/9781484241660)。
 - en: 'The source code used in this tutorial is available in my GitHub page here:
     [https://github.com/ahmedfgad/NumPyANN](https://github.com/ahmedfgad/NumPyANN)'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程中使用的源代码可在我的 GitHub 页面查阅，链接为：[https://github.com/ahmedfgad/NumPyANN](https://github.com/ahmedfgad/NumPyANN)
 - en: The example being used in the book is about classification of the Fruits360
     image dataset using artificial neural network (ANN). The example does not assume
     that the reader neither extracted the features nor implemented the ANN as it discusses
@@ -35,21 +50,32 @@
     things simpler, it just works on 4 selected classes which are apple Braeburn,
     lemon Meyer, mango, and raspberry. Each class has around 491 images for training
     and another 162 for testing. The image size is 100x100 pixels.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 书中使用的示例是关于使用人工神经网络（ANN）对 Fruits360 图像数据集进行分类的。该示例不假设读者已经提取了特征或实现了 ANN，因为它讨论了适合使用的特征集，并且如何从头开始在
+    NumPy 中实现 ANN。Fruits360 数据集包含 60 类水果，如苹果、番石榴、鳄梨、香蕉、樱桃、枣、猕猴桃、桃子等。为了简化问题，本示例仅处理
+    4 个选择的类别，分别是苹果 Braeburn、柠檬 Meyer、芒果和覆盆子。每个类别约有 491 张用于训练的图像和 162 张用于测试的图像。图像尺寸为
+    100x100 像素。
 - en: Feature Extraction
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 特征提取
 - en: The book starts by selecting the suitable set of features in order to achieve
     the highest classification accuracy. Based on the sample images from the 4 selected
     classes shown below, it seems that their color is different. This is why the color
     features are suitable ones for use in this task.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 书籍从选择适合的特征集开始，以实现最高的分类准确率。根据下方显示的 4 个选择类别的样本图像，它们的颜色似乎不同。这就是为什么颜色特征适合用于此任务的原因。
 - en: '![](../Images/5144782453ae88a2f3f04a8244732c5f.png)'
+  id: totrans-9
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5144782453ae88a2f3f04a8244732c5f.png)'
 - en: The RGB color space does not isolates color information from other types of
     information such as illumination. Thus, if the RGB is used for representing the
     images, the 3 channels will be involved in the calculations. For such a reason,
@@ -57,11 +83,16 @@
     channel such as HSV. The color channel in this case is the hue channel (H). The
     next figure shows the hue channel of the 4 samples presented previously. We can
     notice how the hue value for each image is different from the other images.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: RGB 色彩空间无法将颜色信息与其他类型的信息如照明隔离开。因此，如果使用 RGB 来表示图像，三个通道都会参与计算。因此，最好使用一个将颜色信息隔离到单个通道的色彩空间，如
+    HSV。在这种情况下，颜色通道是色调通道（H）。下图展示了之前呈现的 4 个样本的色调通道。我们可以注意到每张图像的色调值与其他图像不同。
 - en: '![](../Images/95d2d57c5c54bab7efe5c74f5d9c5d5f.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/95d2d57c5c54bab7efe5c74f5d9c5d5f.png)'
 - en: The hue channel size is still 100x100\. If the entire channel is applied to
     the ANN, then the input layer will have 10,000 neurons. The network is still huge.
     In order to reduce the amounts of data being used, we can use the histogram for
@@ -74,17 +105,25 @@
     with its bins range from 90 to 110\. The margin between each of the classes makes
     it easier to reduce the ambiguity in classification and thus increasing the prediction
     accuracy.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 色调通道的大小仍然是100x100。如果整个通道应用于ANN，则输入层将有10,000个神经元。网络仍然很庞大。为了减少使用的数据量，我们可以使用直方图来表示色调通道。直方图将有360个箱子，反映色调值的可能值数量。以下是4张样本图像的直方图。使用360箱的色调通道直方图，似乎每种水果都投票给直方图中的某些特定箱子。与使用RGB颜色空间中的任何通道相比，不同类别之间的重叠较少。例如，苹果直方图中的箱子范围为0到10，而芒果的箱子范围为90到110。各类别之间的间隔使得减少分类歧义变得更容易，从而提高了预测准确性。
 - en: '![](../Images/6e96815abd2c84e2d0d8b6e32f3d197c.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6e96815abd2c84e2d0d8b6e32f3d197c.png)'
 - en: Here is the code that calculates the hue channel histogram from the 4 images.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是从4张图像中计算色调通道直方图的代码。
 - en: '[PRE0]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: By looping through all images in the 4 image classes used, we can extract the
     features from all images. The next code does this. According to the number of
     images in the 4 classes (1,962) and the feature vector length extracted from each
@@ -97,73 +136,110 @@
     histogram from each of them, assign each image a class label, and finally saves
     the extracted features and the class labels using the pickle library. You can
     also use NumPy for saving the resultant NumPy arrays rather than pickle.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过遍历4个图像类别中的所有图像，我们可以从所有图像中提取特征。下面的代码实现了这一点。根据4个类别中的图像数量（1,962）和从每个图像中提取的特征向量长度（360），创建了一个零数组，并将其保存到**dataset_features**变量中。为了存储每个图像的类别标签，创建了另一个名为**outputs**的NumPy数组。苹果的类别标签为0，柠檬为1，芒果为2，覆盆子为3。代码期望在一个包含4个按**fruits**列表中的水果名称命名的文件夹的根目录中运行。它遍历所有文件夹中的所有图像，提取每个图像的色调直方图，为每个图像分配一个类别标签，并最终使用pickle库保存提取的特征和类别标签。你也可以使用NumPy来保存结果的NumPy数组，而不是pickle。
 - en: '[PRE1]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Currently, each image is represented using a feature vector of 360 elements.
     Such elements are filtered in order to just keep the most relevant elements for
     differentiating the 4 classes. The reduced feature vector length is 102 rather
     than 360\. Using less elements helps to do faster training than before. The **dataset_features**
     variable shape will be **1962x102**. You can read more in the book for reducing
     the feature vector length.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 目前，每个图像使用360个元素的特征向量表示。这些元素经过筛选，以保留仅用于区分4个类别的最相关元素。减少后的特征向量长度为102，而不是360。使用较少的元素可以加快训练速度。**dataset_features**变量的形状将为**1962x102**。你可以在书中阅读更多关于减少特征向量长度的内容。
 - en: Up to this point, the training data (features and class labels) are ready. Next
     is implement the ANN using NumPy.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，训练数据（特征和类别标签）已准备好。接下来是使用NumPy实现ANN。
 - en: '* * *'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-21
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的 IT'
 - en: '* * *'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为优秀数据科学家所需的 5 个关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
 - en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个初学者数据科学家都应该掌握的 6 个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
 - en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
 - en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
 - en: '[Image Classification with Convolutional Neural Networks (CNNs)](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用卷积神经网络 (CNNs) 进行图像分类](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并寻找目标以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
