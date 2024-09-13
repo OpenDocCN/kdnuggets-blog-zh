@@ -1,243 +1,357 @@
 - en: 'Prefect: How to Write and Schedule Your First ETL Pipeline with Python'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 'Prefect: 如何用Python编写和调度您的第一个ETL管道'
 - en: 原文：[https://www.kdnuggets.com/2021/08/prefect-write-schedule-etl-pipeline-python.html](https://www.kdnuggets.com/2021/08/prefect-write-schedule-etl-pipeline-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/08/prefect-write-schedule-etl-pipeline-python.html](https://www.kdnuggets.com/2021/08/prefect-write-schedule-etl-pipeline-python.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Dario Radečić](https://www.linkedin.com/in/darioradecic/), Consultant
     at NEOS**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Dario Radečić](https://www.linkedin.com/in/darioradecic/)，NEOS的顾问**'
 - en: '![](../Images/5249229d128331d161c3d8fb44a6d46d.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5249229d128331d161c3d8fb44a6d46d.png)'
 - en: Photo by [**Helena Lopes**](https://www.pexels.com/@wildlittlethingsphoto?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) from [**Pexels**](https://www.pexels.com/photo/young-man-writing-reminder-on-fridge-and-drinking-coffee-at-home-3867001/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 照片由 [**Helena Lopes**](https://www.pexels.com/@wildlittlethingsphoto?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
+    提供，来自 [**Pexels**](https://www.pexels.com/photo/young-man-writing-reminder-on-fridge-and-drinking-coffee-at-home-3867001/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
+    Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
+    Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
+    Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您在IT领域的组织'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Prefect is a Python-based workflow management system based on a simple premise *—
     Your code probably works, but sometimes it doesn’t* ([source](https://docs.prefect.io/core/)).
     No one thinks about workflow systems when everything works as expected. But when
     things go south, Prefect will guarantee your code fails successfully.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: Prefect是一个基于Python的工作流管理系统，基于一个简单的前提*— 您的代码可能正常工作，但有时它并不*([source](https://docs.prefect.io/core/))。当一切按预期工作时，没有人会考虑工作流系统。但当事情出问题时，Prefect将确保您的代码成功失败。
 - en: As a workflow management system, Prefect makes it easy to add logging, retries,
     dynamic mapping, caching, failure notifications, and more to your data pipelines.
     It is invisible when you don’t need it — when everything works as expected, and
     visible when you do. Something like insurance.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为一个工作流管理系统，Prefect使得在数据管道中添加日志记录、重试、动态映射、缓存、失败通知等变得非常容易。当您不需要它时，它是隐形的——当一切按预期运行时；而当您需要它时，它是可见的。就像保险一样。
 - en: While Prefect isn’t the only available workflow management system for Python
     users, it is undoubtedly the most proficient one. Alternatives such as Apache
     Airflow usually work well, but introduce a lot of headaches when working on big
     projects. You can read a detailed comparison between Prefect and Airflow [here](https://docs.prefect.io/core/getting_started/why-not-airflow.html#overview).
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然Prefect不是唯一的Python用户工作流管理系统，但它无疑是最高效的一个。像Apache Airflow这样的替代品通常表现良好，但在处理大型项目时会带来很多麻烦。您可以在[这里](https://docs.prefect.io/core/getting_started/why-not-airflow.html#overview)阅读Prefect与Airflow的详细比较。
 - en: This article covers the basics of the library, such as tasks, flows, parameters,
     failures, and schedules, and also explains how to set up the environment both
     locally and in the cloud. We’ll use [Saturn Cloud](https://www.saturncloud.io/s/?utm_source=dario-radecic) for
     that part, as it makes the configuration effortless. It is a cloud platform made
     by data scientists, so most of the heavy lifting is done for you.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文涵盖了库的基础知识，例如任务、流程、参数、失败和计划，并解释了如何在本地和云端设置环境。我们将使用 [Saturn Cloud](https://www.saturncloud.io/s/?utm_source=dario-radecic)
+    来完成这部分，因为它使配置变得毫不费力。这是由数据科学家制作的云平台，因此大部分繁重的工作都为您完成了。
 - en: Saturn Cloud can handle Prefect workflows without breaking a sweat. It is also
     a cutting-edge solution for anything from dashboards to distributed machine learning,
     deep learning, and GPU training.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: Saturn Cloud可以轻松处理Prefect工作流。它也是从仪表板到分布式机器学习、深度学习和GPU训练的前沿解决方案。
 - en: 'Today you’ll learn how to:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天您将学习如何：
 - en: Install Prefect locally
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 本地安装 Prefect
 - en: Write a simple ETL pipeline with Python
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 Python 编写一个简单的 ETL 管道
 - en: Use Prefect to declare tasks, flows, parameters, schedules and handle failures
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 使用 Prefect 声明任务、流程、参数、调度并处理失败
 - en: Run Prefect in Saturn Cloud
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 Saturn Cloud 中运行 Prefect
 - en: How to Install Prefect Locally
+  id: totrans-22
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 如何在本地安装 Prefect
 - en: 'We’ll install the Prefect library inside a virtual environment. The following
     commands will create and activate the environment named `prefect_env` through
     Anaconda, based on Python 3.8:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将在虚拟环境中安装 Prefect 库。以下命令将通过 Anaconda 创建并激活一个名为`prefect_env`的环境，基于 Python 3.8：
 - en: '[PRE0]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'You’ll have to enter `y` a couple of times to instruct Anaconda to proceed,
     but that’s the case with every installation. Library-wise, we’ll need *Pandas* for
     data manipulation, *Requests* for downloading the data, and of course, *Prefect* for
     workflow management:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 你需要输入`y`几次来指示 Anaconda 继续，但这在每次安装时都是这样的。在库方面，我们需要*Pandas*用于数据处理，*Requests*用于下载数据，当然，还需要*Prefect*用于工作流管理：
 - en: '[PRE1]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: We now have everything needed to start writing Python code. Let’s do that next.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在拥有了开始编写 Python 代码所需的一切。接下来我们开始动手吧。
 - en: Writing an ETL Pipeline With Python
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 用 Python 编写 ETL 管道
 - en: 'We’ll use Prefect to complete a relatively simple task today — run an ETL pipeline.
     This pipeline will download the data from a dummy API, transform it, and save
     it as a CSV. The [JSON Placeholder](https://jsonplaceholder.typicode.com/) website
     will serve as our dummy API. Among other things, it contains fake data for ten
     users:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天我们将使用 Prefect 完成一个相对简单的任务——运行一个 ETL 管道。这个管道将从一个虚拟 API 下载数据，转换数据，并将其保存为 CSV
+    文件。[JSON Placeholder](https://jsonplaceholder.typicode.com/) 网站将作为我们的虚拟 API。除此之外，它还包含十个用户的虚假数据：
 - en: '![](../Images/bcfa7885385bdf0fd93c4cf2ac283a07.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/bcfa7885385bdf0fd93c4cf2ac283a07.png)'
 - en: '*Image 1 — Fake user data (source: *[*https://jsonplaceholder.typicode.com/users)*](https://jsonplaceholder.typicode.com/users))* (image
     by author)*'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 1 — 虚假用户数据（来源：*[*https://jsonplaceholder.typicode.com/users)*](https://jsonplaceholder.typicode.com/users))*（图片由作者提供）*'
 - en: Let’s start by creating a Python file — I’ve named mine `01_etl_pipeline.py`.
     Also, make sure to have a folder where extracted and transformed data will be
     saved. I’ve called it `data`, and it’s located right where the Python scripts
     are.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先创建一个 Python 文件——我将其命名为`01_etl_pipeline.py`。另外，请确保有一个文件夹来保存提取和转换的数据。我称之为`data`，它位于
+    Python 脚本所在的位置。
 - en: 'Any ETL pipeline needs three functions implemented — for extracting, transforming,
     and loading the data. Here’s what these functions will do in our case:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 任何 ETL 管道都需要实现三个功能——用于提取、转换和加载数据。在我们的案例中，这些功能将完成以下任务：
 - en: '`extract(url: str) -> dict` — makes a GET request to the `url` parameter. Tests
     to see if some data was returned — in that case, it is returned as a dictionary.
     Otherwise, an exception is raised.'
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`extract(url: str) -> dict` — 对`url`参数发出一个 GET 请求。测试是否返回了一些数据——如果是的话，它将作为字典返回。否则，会抛出一个异常。'
 - en: '`transform(data: dict) -> pd.DataFrame `— transforms the data so only specific
     attributes are kept: ID, name, username, email, address, phone number, and company.
     Returns the transformed data as a Pandas DataFrame.'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`transform(data: dict) -> pd.DataFrame` — 转换数据，仅保留特定的属性：ID、姓名、用户名、电子邮件、地址、电话号码和公司。将转换后的数据作为
+    Pandas DataFrame 返回。'
 - en: '`load(data: pd.DataFrame, path: str) -> None` — saves the previously transformed `data` to
     a CSV file at `path`. We’ll also append a timestamp to the file name, so the files
     don’t get overwritten.'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`load(data: pd.DataFrame, path: str) -> None` — 将之前转换过的`data`保存到`path`处的 CSV
+    文件中。我们还会在文件名中添加时间戳，以免文件被覆盖。'
 - en: 'After function declaration, all three are called when the Python script is
     executed. Here’s the complete code snippet:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 在函数声明之后，所有三个函数在执行 Python 脚本时都会被调用。这是完整的代码片段：
 - en: 'You can now run the script by executing the following from the Terminal:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你可以通过在终端中执行以下命令来运行脚本：
 - en: '[PRE2]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'You shouldn’t see any output if everything ran correctly. However, you should
     see CSV file(s) in the `data` folder (I’ve run the file twice):'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果一切正常，你不应该看到任何输出。然而，你应该在`data`文件夹中看到 CSV 文件（我运行了文件两次）：
 - en: '![](../Images/d3079cf5ba91efe531e3ead0424c981e.png)'
+  id: totrans-41
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d3079cf5ba91efe531e3ead0424c981e.png)'
 - en: '*Image 2 — List of CSV files in the data folder after running the ETL pipeline
     twice (image by author)*'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 2 — 运行 ETL 管道两次后 data 文件夹中的 CSV 文件列表（图片由作者提供）*'
 - en: As you can see, the ETL pipeline runs and finishes without any errors. But what
     if you want to run the pipeline at a schedule? That’s where *Prefect* comes in.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如你所看到的，ETL 管道运行并完成没有任何错误。但如果你想按照计划运行管道呢？这时*Prefect*派上用场了。
 - en: Exploring the Basics of Prefect
+  id: totrans-44
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 探索 Prefect 的基础知识
 - en: In this section, you’ll learn the basics of *Prefect* tasks, flows, parameters,
     schedules, and much more.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: Prefect Tasks
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: Let’s start with the most simple one — tasks. It’s basically a single step of
     your workflow. To follow along, create a new Python file called `02_task_conversion.py`.
     Copy everything from `01_etl_pipeline.py`, and you’re ready to go.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: 'To convert a Python function to a Prefect Task, you first need to make the
     necessary import — `from prefect import task`, and decorate any function of interest.
     Here’s an example:'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE3]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'That’s all you have to do! Here’s the updated version of our ETL pipeline:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: 'Let’s run it and see what happens:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE4]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![](../Images/f77285a7859419a9f8af5f5a4caa7b1e.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
 - en: '*Image 3 — Function to Task conversion with Prefect (image by author)*'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: It looks like something is wrong. That’s because *Prefect Task* can’t be run
     without the *Prefect Flow.* Let’s implement it next.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: Prefect Flow
+  id: totrans-56
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: Copy everything from `02_task_conversion.py` to a new file — `03_flow.py`. You’ll
     need to import `Flow` from the `prefect` library before declaring it.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
 - en: To declare a Flow, we’ll write another Python function — `prefect_flow()`. It
@@ -245,389 +359,577 @@
     we’ll use Python’s context manager to create a flow. The flow should contain the
     same three lines that were previously inside the `if __name__ == ‘__main__”` code
     block.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: In the mentioned block, we’ll now have to run the flow with the corresponding `run()` function.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: 'Here’s the complete code for this file:'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
 - en: 'Let’s run it and see what happens:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![](../Images/e9143ea481b80645655a29a2fdbabdc9.png)'
+  id: totrans-63
   prefs: []
   type: TYPE_IMG
 - en: '*Image 4 — Running the Prefect Flow for the first time (image by author)*'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: 'Now that’s something! Not only is the ETL pipeline executed, but we also get
     detailed information about when every task started and finished. I’ve run the
     file twice, so two new CSV files should get saved to the `data` folder. Let’s
     verify if that’s the case:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/2669022cbf0222d1245d5ff7cef47ee1.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
 - en: '*Image 5 — CSV files generated by the Prefect Flow (image by author)*'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
 - en: And that’s how you can run a simple ETL pipeline with Prefect. It doesn’t have
     many benefits over a pure Python implementation yet, but we’ll change that quickly.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
 - en: Prefect Parameters
+  id: totrans-69
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: Hardcoding parameter values is never a good idea. That’s where *Prefect Parameters* come
     in. To start, copy everything from `03_flow.py` to a new file — `04_parameters.py`.
     You’ll need to import the `Parameter` class from the `prefect` package.
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
 - en: 'You can use this class inside the flow context manager. Here are the arguments
     you’ll find helpful:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
 - en: '`name` — name of the parameter, will be used later upon running the flow.'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`required` — a boolean value, specifies if the parameter is required for the
     flow to execute.'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '`default` — specifies the default value for the parameter.'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: We’ll declare a parameter for the API URL — `param_url = Parameter(name=’p_url’,
     required=True)`.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
 - en: To assign values to the parameters, you’ll need to specify the `parameters` dictionary
     as an argument to the `run()` function. Parameter names and values should be written
     as key-value pairs.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 要给参数赋值，你需要将 `parameters` 字典指定为 `run()` 函数的一个参数。参数名称和值应以键值对的形式编写。
 - en: 'Here’s the complete code for this file:'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是该文件的完整代码：
 - en: 'Let’s run the file and see what happens:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们运行文件，看看会发生什么：
 - en: '[PRE6]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '![](../Images/d1c9d67e156af243c384a1e213f22675.png)'
+  id: totrans-80
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d1c9d67e156af243c384a1e213f22675.png)'
 - en: '*Image 6 — Running the Prefect Flow containing Parameters (image by author)*'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 6 — 运行包含参数的 Prefect 流（图像作者提供）*'
 - en: 'I’ve run the file twice, so two new CSV files should appear in the `data` folder.
     Let’s verify if that’s true:'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 我已经运行了两次文件，因此`data`文件夹中应出现两个新的 CSV 文件。让我们确认一下：
 - en: '![](../Images/fd67d3d16e5347058c72fd92f0e7cc86.png)'
+  id: totrans-83
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fd67d3d16e5347058c72fd92f0e7cc86.png)'
 - en: '*Image 7 — CSV files generated by Prefect Flow containing Parameters (image
     by author)*'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 7 — Prefect 流生成的 CSV 文件（图像作者提供）*'
 - en: And there you have it — parameter value specification at one place. It makes
     it easy to make changes down the road and also to manage more complex workflows.
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样——在一个地方指定参数值。这使得将来进行更改变得容易，也方便管理更复杂的工作流。
 - en: Up next, we’ll explore a feature of Prefect that makes it particularly useful
     — schedules.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将探讨 Prefect 的一个特别有用的功能——调度。
 - en: Prefect Schedules
+  id: totrans-87
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Prefect 调度
 - en: We’ll explore two ways to schedule tasks today — *Interval schedule* and *Cron
     schedule*. The second one might sound familiar, as Cron is a well-known method
     of scheduling tasks on Unix.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 今天我们将探讨两种调度任务的方法——*间隔调度*和*Cron 调度*。第二种可能听起来很熟悉，因为 Cron 是在 Unix 上调度任务的著名方法。
 - en: We’ll begin with the **Interval Scheduler**. To start, copy everything from `04_intervals.py` to `05_interval_scheduler.py`.
     You’ll have to import `IntervalScheduler` from `prefect.schedules`.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将从 **间隔调度器** 开始。首先，将`04_intervals.py`中的所有内容复制到`05_interval_scheduler.py`。你需要从`prefect.schedules`中导入`IntervalScheduler`。
 - en: Then, we’ll make an instance of the imported class right before the `prefect_flow()` function
     declaration and instruct it to run every ten seconds. That can be done by setting
     the value of the `interval` parameter.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们将在 `prefect_flow()` 函数声明之前创建导入类的实例，并指示其每十秒运行一次。这可以通过设置 `interval` 参数的值来实现。
 - en: To connect a scheduler to the workflow, you’ll have to specify the value for
     the `schedule` parameter when initializing the `Flow` class with the context manager.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 要将调度器连接到工作流，你需要在使用上下文管理器初始化`Flow`类时为`schedule`参数指定值。
 - en: 'The whole script file should look like this:'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 整个脚本文件应如下所示：
 - en: 'Let’s run the file and see what happens:'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们运行文件，看看会发生什么：
 - en: '[PRE7]'
+  id: totrans-94
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '![](../Images/c78581f0667eedf10c00cad7735337d4.png)'
+  id: totrans-95
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c78581f0667eedf10c00cad7735337d4.png)'
 - en: '*Image 8 — Using Interval Schedule (image by author)*'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 8 — 使用间隔调度（图像作者提供）*'
 - en: As you can see, the entire ETL pipeline ran two times. Prefect will report to
     the Terminal when the next execution will occur.
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，整个 ETL 管道运行了两次。Prefect 将向终端报告下一次执行的时间。
 - en: Now, let’s explore the **Cron Scheduler**. Copy everything from `05_interval_scheduler.py` to `06_cron_scheduler.py`.
     This time you’ll import `CronSchedule` instead of `IntervalSchedule`.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们探讨 **Cron 调度器**。将`05_interval_scheduler.py`中的所有内容复制到`06_cron_scheduler.py`。这一次，你将导入`CronSchedule`而不是`IntervalSchedule`。
 - en: Upon class initialization, you’ll specify a cron pattern to the `cron` parameter.
     Five star symbols will ensure the workflow runs every minute. That’s the lowest
     possible interval with Cron.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 在类初始化时，你需要为`cron`参数指定一个 cron 模式。五个星号符号将确保工作流每分钟运行一次。这是 Cron 的最低可能间隔。
 - en: 'The rest of the file remains identical. Here’s the code:'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 其余部分保持不变。以下是代码：
 - en: 'Let’s run the file:'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们运行文件：
 - en: '[PRE8]'
+  id: totrans-102
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![](../Images/e150c047bec34dc8d3ca8f32bee62a5e.png)'
+  id: totrans-103
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e150c047bec34dc8d3ca8f32bee62a5e.png)'
 - en: '*Image 9 — Using Cron Schedule (image by author)*'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 9 — 使用 Cron 调度（图像作者提供）*'
 - en: As you can see, the ETL pipeline was run twice every full minute, as specified
     by the Cron pattern. For the final part of this section, we’ll explore how to
     handle failure — and explain why you should always prepare for it.
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，ETL 管道每分钟运行两次，正如 Cron 模式所指定的。接下来的部分，我们将探讨如何处理失败——并解释为什么你应该总是做好准备。
 - en: Prefect Failures
+  id: totrans-106
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 完美失败
 - en: Sooner or later, an unexpected error will happen in your workflow. Prefect provides
     a ridiculously easy way to retry the execution of a task. To start, copy everything
     from `04_parameters.py` to a new file — `07_failures.py`.
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: 迟早，你的工作流中会发生意外错误。Prefect 提供了一种极其简单的方法来重试任务的执行。首先，将`04_parameters.py`中的所有内容复制到一个新文件中
+    — `07_failures.py`。
 - en: The `extract()` function could fail for different network reasons. For example,
     maybe the API isn’t available at the moment but will be in a couple of seconds.
     These things happen in a production environment and shouldn’t crash your application
     altogether.
+  id: totrans-108
   prefs: []
   type: TYPE_NORMAL
+  zh: '`extract()`函数可能因为各种网络原因而失败。例如，API 可能暂时不可用，但几秒钟后会恢复。这些情况在生产环境中时有发生，不应该完全崩溃你的应用程序。'
 - en: To avoid unwanted crashes, we can extend our `task` decorator a bit. It can
     accept different parameters, and today we’ll use `max_retries` and `retry_delay`.
     Both are self-explanatory, so I won’t bother with further explanation.
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了避免不必要的崩溃，我们可以稍微扩展一下`task`装饰器。它可以接受不同的参数，今天我们将使用`max_retries`和`retry_delay`。这两个参数不言自明，所以我不会进一步解释。
 - en: 'The only problem is — our workflow won’t fail as is. But it will if we place
     a non-existing URL as a parameter value inside `flow.run()`. Here’s the code:'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: 唯一的问题是 — 我们的工作流现在不会失败。但如果我们在`flow.run()`内部放置一个不存在的 URL 作为参数值，它会失败。以下是代码：
 - en: 'Let’s run the file:'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们运行文件：
 - en: '[PRE9]'
+  id: totrans-112
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![](../Images/a04275dc4d17dbd8e87e9e0e2949d3b3.png)'
+  id: totrans-113
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a04275dc4d17dbd8e87e9e0e2949d3b3.png)'
 - en: '*Image 10 — Preventing failures with Prefect (image by author)*'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 10 — 使用 Prefect 防止失败（作者提供的图像）*'
 - en: The task failed, but the workflow didn’t crash. Of course, it will crash after
     ten retries, but you can always change the parameter specification.
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: 任务失败了，但工作流并没有崩溃。当然，在经过十次重试后，它会崩溃，不过你始终可以更改参数规格。
 - en: And that does it for working with Prefect locally. Next, let’s move our code
     to the cloud and explore the changes.
+  id: totrans-116
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是在本地使用 Prefect 的所有内容。接下来，让我们将代码移到云端，并探讨一下变化。
 - en: Running Prefect in Saturn Cloud
+  id: totrans-117
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在 Saturn Cloud 中运行 Prefect
 - en: Let’s get our hands dirty right away. To start, sign up for a free version of
     a [Prefect Cloud](https://www.prefect.io/cloud/) account. The registration process
     is straightforward and requires no further explanation. Once registered, create
     a project. I’ve named mine `SaturnCloudDemo`.
+  id: totrans-118
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们立即开始动手吧。首先，注册一个免费的[Prefect Cloud](https://www.prefect.io/cloud/)账户。注册过程简单明了，不需要进一步解释。注册完成后，创建一个项目。我将其命名为`SaturnCloudDemo`。
 - en: 'Before going over to [Saturn Cloud](https://www.saturncloud.io/s/?utm_source=dario-radecic),
     you’ll have to create an API key in Prefect that will connect the two. You’ll
     find the *API Key* option under settings. As you can see, I’ve named mine `SaturnDemoKey`:'
+  id: totrans-119
   prefs: []
   type: TYPE_NORMAL
+  zh: 在转到[Saturn Cloud](https://www.saturncloud.io/s/?utm_source=dario-radecic)之前，你需要在
+    Prefect 中创建一个 API 密钥来连接这两个服务。你可以在设置中找到*API Key*选项。如你所见，我将其命名为`SaturnDemoKey`：
 - en: '![](../Images/51a921e70591960e8bb016d1cb1a8878.png)'
+  id: totrans-120
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/51a921e70591960e8bb016d1cb1a8878.png)'
 - en: '*Image 11 — Prefect Cloud API key creation (image by author)*'
+  id: totrans-121
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 11 — 创建 Prefect Cloud API 密钥（作者提供的图像）*'
 - en: 'You now have everything needed, so go over to [Saturn Cloud](https://www.saturncloud.io/s/?utm_source=dario-radecic) and
     create a free account. Once on the dashboard, you’ll see multiple options for
     project creation. Select the *Prefect* option, like the one you can see below:'
+  id: totrans-122
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你已经具备了所需的一切，前往[Saturn Cloud](https://www.saturncloud.io/s/?utm_source=dario-radecic)创建一个免费账户。一旦进入仪表板，你会看到多个项目创建选项。选择*Prefect*选项，如下所示：
 - en: '![](../Images/6f2a97587fad4691545cb6573270fad3.png)'
+  id: totrans-123
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/6f2a97587fad4691545cb6573270fad3.png)'
 - en: '*Image 12 — Creating a Prefect project in Saturn Cloud (image by author)*'
+  id: totrans-124
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 12 — 在 Saturn Cloud 中创建 Prefect 项目（作者提供的图像）*'
 - en: 'Saturn Cloud will now automatically do all the heavy lifting for you, and a
     couple of minutes later, you’ll be able to open a JupyterLab instance by clicking
     on the button:'
+  id: totrans-125
   prefs: []
   type: TYPE_NORMAL
+  zh: Saturn Cloud 现在会自动为你完成所有繁重的工作，几分钟后，你可以通过点击按钮打开 JupyterLab 实例：
 - en: '![](../Images/cc518b006f6e7688278f377bbb321d64.png)'
+  id: totrans-126
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cc518b006f6e7688278f377bbb321d64.png)'
 - en: '*Image 13 — Opening JupyterLab in Saturn Cloud (image by author)*'
+  id: totrans-127
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 13 — 在 Saturn Cloud 中打开 JupyterLab（作者提供的图像）*'
 - en: 'You’ll have access to two notebooks — the second one shows a quick demonstration
     of using Prefect in Saturn Cloud. Here’s how it looks:'
+  id: totrans-128
   prefs: []
   type: TYPE_NORMAL
+  zh: 你将可以访问两个笔记本 — 第二个笔记本展示了在 Saturn Cloud 中使用 Prefect 的快速演示。如下所示：
 - en: '![](../Images/a040269b2120ae00bcc1a264f5c2b070.png)'
+  id: totrans-129
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a040269b2120ae00bcc1a264f5c2b070.png)'
 - en: '*Image 14 — Prefect Cloud notebook in Saturn Cloud (image by author)*'
+  id: totrans-130
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 14 — Saturn Cloud 中的 Prefect Cloud 笔记本（作者提供的图像）*'
 - en: 'You’ll need to change only two things for a notebook to work. First, change
     the project name to the name of your project in Prefect Cloud. Second, replace `<your_api_key_here>` with
     an API key generated a couple of minutes ago. If you did everything correctly,
     you should see the following message:'
+  id: totrans-131
   prefs: []
   type: TYPE_NORMAL
+  zh: 你只需要更改两个设置来使笔记本正常工作。首先，将项目名称更改为 Prefect Cloud 中你的项目名称。其次，将 ` <your_api_key_here>
+    ` 替换为几分钟前生成的 API 密钥。如果你做对了，你应该会看到以下消息：
 - en: '![](../Images/e1632b0fc736cfe7b6c53c700f27baee.png)'
+  id: totrans-132
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e1632b0fc736cfe7b6c53c700f27baee.png)'
 - en: '*Image 15 — Login successful message in Saturn Cloud (image by author)*'
+  id: totrans-133
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 15 — Saturn Cloud 中的登录成功消息（图片由作者提供）*'
 - en: 'To test, run every cell that follows in the notebook. Then go over to the Prefect
     Cloud dashboard and open up your project. It won’t be empty as it was a couple
     of minutes ago:'
+  id: totrans-134
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了进行测试，请运行接下来的每个单元格。然后转到 Prefect Cloud 仪表板并打开你的项目。它不会像几分钟前那样空着：
 - en: '![](../Images/c6def1d6bd1f03d8c29ba18bfc905410.png)'
+  id: totrans-135
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c6def1d6bd1f03d8c29ba18bfc905410.png)'
 - en: '*Image 16 — Successful Prefect task scheduling (image by author)*'
+  id: totrans-136
   prefs: []
   type: TYPE_NORMAL
+  zh: '*图 16 — 成功的 Prefect 任务调度（图片由作者提供）*'
 - en: And that’s all you have to do! Feel free to copy/paste our ETL pipeline and
     verify that it works. That’s where Saturn Cloud shines — you can copy/paste the
     code from the local machine with minimal changes, as everything tedious is configured
     automatically.
+  id: totrans-137
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是你需要做的全部！随意复制/粘贴我们的 ETL 管道并验证其是否有效。这就是 Saturn Cloud 的亮点——你可以从本地机器上复制/粘贴代码，几乎无需更改，因为所有繁琐的配置都自动完成。
 - en: Let’s wrap things up in the next section.
+  id: totrans-138
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们在下一部分总结一下。
 - en: Final Thoughts
+  id: totrans-139
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 最后的思考
 - en: And there you have it — the basics of Prefect explained, both locally and on
     the cloud. I hope you can see the value of workflow management systems for production
     applications even if you knew nothing about the topic before reading this article.
+  id: totrans-140
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，这就是 Prefect 的基础知识介绍，包括本地和云端的内容。我希望即使在阅读这篇文章之前你对这个话题一无所知，也能看到工作流管理系统在生产应用中的价值。
 - en: For more advanced guides, i.e., configuring logging and Slack notifications,
     please refer to the [official documentation](https://docs.prefect.io/core/). The
     provided examples are more than enough to get you started.
+  id: totrans-141
   prefs: []
   type: TYPE_NORMAL
+  zh: 要获取更高级的指南，即配置日志记录和 Slack 通知，请参考 [官方文档](https://docs.prefect.io/core/)。提供的示例足以帮助你入门。
 - en: Stay Connected
+  id: totrans-142
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 保持联系
 - en: Follow me on [Medium](https://medium.com/@radecicdario) for more stories like
     this
+  id: totrans-143
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 [Medium](https://medium.com/@radecicdario) 上关注我，获取更多类似的故事
 - en: Sign up for my [newsletter](https://mailchi.mp/46a3d2989d9b/bdssubscribe)
+  id: totrans-144
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 订阅我的 [新闻通讯](https://mailchi.mp/46a3d2989d9b/bdssubscribe)
 - en: Connect on [LinkedIn](https://www.linkedin.com/in/darioradecic/)
+  id: totrans-145
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 在 [LinkedIn](https://www.linkedin.com/in/darioradecic/) 上连接
 - en: '**Bio: [Dario Radečić](https://www.linkedin.com/in/darioradecic/)** is a consultant
     at NEOS.'
+  id: totrans-146
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Dario Radečić](https://www.linkedin.com/in/darioradecic/)** 是 NEOS 的顾问。'
 - en: '[Original](https://towardsdatascience.com/prefect-how-to-write-and-schedule-your-first-etl-pipeline-with-python-54005a34f10b).
     Reposted with permission.'
+  id: totrans-147
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/prefect-how-to-write-and-schedule-your-first-etl-pipeline-with-python-54005a34f10b)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-148
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Development & Testing of ETL Pipelines for AWS Locally](/2021/08/development-testing-etl-pipelines-aws-locally.html)'
+  id: totrans-149
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AWS 本地 ETL 管道的开发与测试](/2021/08/development-testing-etl-pipelines-aws-locally.html)'
 - en: '[What’s ETL?](/2021/04/whats-etl.html)'
+  id: totrans-150
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是 ETL？](/2021/04/whats-etl.html)'
 - en: '[dbt for Data Transformation – Hands-on Tutorial](/2021/07/dbt-data-transformation-tutorial.html)'
+  id: totrans-151
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[dbt 数据转换 – 实用教程](/2021/07/dbt-data-transformation-tutorial.html)'
 - en: More On This Topic
+  id: totrans-152
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[The Best ETL Tools in 2021](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
+  id: totrans-153
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)'
 - en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  id: totrans-154
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
 - en: '[Building Your First ETL Pipeline with Bash](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)'
+  id: totrans-155
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Bash 构建你的第一个 ETL 管道](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)'
 - en: '[Building Data Pipeline with Prefect](https://www.kdnuggets.com/building-data-pipeline-with-prefect)'
+  id: totrans-156
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Prefect 构建数据管道](https://www.kdnuggets.com/building-data-pipeline-with-prefect)'
 - en: '[5 Key Skills Needed To Become a Great Data Scientist](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
+  id: totrans-157
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成为伟大数据科学家所需的 5 个关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)'
 - en: '[6 Predictive Models Every Beginner Data Scientist Should Master](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
+  id: totrans-158
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)'
