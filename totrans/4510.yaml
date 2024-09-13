@@ -145,10 +145,12 @@
   id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/097f871695d5bde58ac8cb0c6ea3ce37.png)'
 - en: Hyperparameter tuning process with Keras Tuner
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Keras Tuner 进行超参数调优过程
 - en: First, a tuner is defined. Its role is to determine which hyperparameter combinations
     should be tested. The library search function performs the iteration loop, which
     evaluates a certain number of hyperparameter combinations. Evaluation is performed
@@ -156,30 +158,36 @@
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，定义一个调优器。它的作用是确定应该测试哪些超参数组合。库的搜索功能执行迭代循环，评估一定数量的超参数组合。评估通过计算训练模型在保留的验证集上的准确性来进行。
 - en: Finally, the best hyperparameter combination in terms of validation accuracy
     can be tested on a held-out test set.
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，可以在保留的测试集上测试验证准确性方面最佳的超参数组合。
 - en: Getting started
   id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 入门
 - en: Let's get started! With this tutorial, you'll have an end-to-end pipeline to
     tune a simple convolutional network's hyperparameters for object classification
     on the CIFAR10 dataset.
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 开始吧！通过这个教程，你将拥有一个端到端的流程来调整一个简单卷积网络的超参数，以进行 CIFAR10 数据集上的物体分类。
 - en: '**Installation step**'
   id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**安装步骤**'
 - en: 'First, install Keras Tuner from your terminal:'
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，从终端安装 Keras Tuner：
 - en: '[PRE0]'
   id: totrans-30
   prefs: []
@@ -190,19 +198,24 @@
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，你可以打开你最喜欢的 IDE/文本编辑器，开始编写 Python 脚本以完成剩下的教程！
 - en: '**Dataset**'
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据集**'
 - en: '![Figure](../Images/e672a903de2a97375208768a28755d49.png)'
   id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/e672a903de2a97375208768a28755d49.png)'
 - en: CIFAR10 random samples. [The dataset](https://www.cs.toronto.edu/~kriz/cifar.html) is
     composed of 60000 images belonging to one out of 10 object classes.
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: CIFAR10 随机样本。 [数据集](https://www.cs.toronto.edu/~kriz/cifar.html) 由 60000 张图像组成，这些图像属于
+    10 个对象类别中的一个。
 - en: This tutorial uses the CIFAR10 dataset. CIFAR10 is a common benchmarking dataset
     in computer vision. It contains 10 classes and is relatively small, with 60000
     images. This size allows for a relatively short training time which we'll take
@@ -210,33 +223,40 @@
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程使用 CIFAR10 数据集。CIFAR10 是计算机视觉中的常见基准数据集。它包含 10 个类别，并且相对较小，共有 60000 张图像。这个大小允许相对较短的训练时间，我们将利用这一点来进行多次超参数调优迭代。
 - en: 'Load and pre-process data:'
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 加载和预处理数据：
 - en: The tuner expects floats as inputs, and the division by 255 is a data normalization
     step.
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 调优器期望输入为浮点数，而除以 255 是数据归一化步骤。
 - en: Model definition
   id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型定义
 - en: Here, we'll experiment with a simple convolutional model to classify each image
     into one of the 10 available classes.
   id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们将尝试一个简单的卷积模型，将每个图像分类为 10 个可用类别中的一个。
 - en: '![Figure](../Images/abe25951bd2ac4c9f7e89b929e7ae541.png)'
   id: totrans-40
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/abe25951bd2ac4c9f7e89b929e7ae541.png)'
 - en: Simple CNN representation, from this great [blog post about CNNs](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53)
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 简单 CNN 表示，来自这个优秀的 [关于 CNN 的博客文章](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53)
 - en: Each input image will go through two convolutional blocks (2 convolution layers
     followed by a pooling layer) and a dropout layer for regularization purposes.
     Finally, each output is flattened and goes through a dense layer that classify
@@ -244,15 +264,19 @@
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个输入图像将经过两个卷积块（2 个卷积层后跟一个池化层）和一个用于正则化的 dropout 层。最后，每个输出被展平并经过一个密集层，将图像分类为 10
+    个类别中的一个。
 - en: 'In Keras, this model can be defined as below :'
   id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Keras 中，这个模型可以如下定义：
 - en: Search Space definition
   id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 搜索空间定义
 - en: 'To perform hyperparameter tuning, we need to define the search space, that
     is to say which hyperparameters need to be optimized and in what range. Here,
     for this relatively small model, there are already 6 hyperparameters that can
@@ -260,42 +284,50 @@
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 要进行超参数调优，我们需要定义搜索空间，即哪些超参数需要优化以及在什么范围内。在这里，对于这个相对较小的模型，已经有 6 个超参数可以调整：
 - en: the dropout rate for the three dropout layers
   id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 三个 dropout 层的丢弃率
 - en: the number of filters for the convolutional layers
   id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 卷积层的滤波器数量
 - en: the number of units for the dense layer
   id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 密集层的单元数
 - en: its activation function
   id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 它的激活函数
 - en: 'In Keras Tuner, hyperparameters have a type (possibilities are Float, Int,
     Boolean, and Choice) and a unique name. Then, a set of options to help guide the
     search need to be set:'
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Keras Tuner 中，超参数有类型（可能是 Float、Int、Boolean 和 Choice）和唯一名称。然后，需要设置一组选项来帮助引导搜索：
 - en: a minimal, a maximal and a default value for the Float and the Int types
   id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Float 和 Int 类型的最小值、最大值和默认值
 - en: a set of possible values for the Choice type
   id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Choice 类型的可能值集合
 - en: optionally, a sampling method within linear, log or reversed log. Setting this
     parameter allows to add prior knowledge you might have about the tuned parameter.
     We'll see in the next section how it can be used to tune the learning rate for
