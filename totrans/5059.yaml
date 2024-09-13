@@ -1,18 +1,22 @@
 - en: Implementing Your Own k-Nearest Neighbor Algorithm Using Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2016/01/implementing-your-own-knn-using-python.html](https://www.kdnuggets.com/2016/01/implementing-your-own-knn-using-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '**By Natasha Latysheva**.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '*Editor''s note*: Natasha is active in the [Cambridge Coding Academy](https://cambridgecoding.com/),
     which is holding an upcoming [Data Science Bootcamp in Python](https://cambridgecoding.com/datascience-bootcamp)
     on 20-21 February 2016, where you can learn state-of-the-art machine learning
     techniques for real-world problems.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: 'In machine learning, you may often wish to build predictors that allows to
@@ -20,9 +24,11 @@
     it is possible to provide a diagnosis to a patient based on data from previous
     patients. Classification can involve constructing highly non-linear boundaries
     between classes, as in the case of the red, green and blue classes [below](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm):'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
 - en: '![kNN boundaries](../Images/4322b5f9ae66be35375b65bec3b6c05f.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
 - en: 'Many algorithms have been developed for automated classification, and common
@@ -43,37 +49,48 @@
     learning (though somewhat confusingly, in kNN there is no explicit training phase;
     see [lazy learning](https://en.wikipedia.org/wiki/Lazy_learning)). The kNN task
     can be broken down into writing 3 primary functions:'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
 - en: 1\. Calculate the distance between any two points
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
 - en: 2\. Find the nearest neighbours based on these pairwise distances
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: 3\. Majority vote on a class labels based on the nearest neighbour list
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: The steps in the following diagram provide a high-level overview of the tasks
     you'll need to accomplish in your code.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: '[![kNN algorithm](../Images/39dbb98036b866c0b324bcb95cf9762c.png)](https://cambridgecoding.files.wordpress.com/2016/01/knn2.jpg)'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: '**The algorithm**'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: Briefly, you would like to build a script that, for each input that needs classification,
     searches through the entire training set for the k-most similar instances. The
     class labels of the most similar instances should then be summarised by majority
     voting and returned as predictions for the test cases.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 简而言之，你将构建一个脚本，对于每个需要分类的输入，搜索整个训练集中的 k 个最相似的实例。然后，通过多数投票总结最相似实例的类别标签，并将其作为测试案例的预测结果返回。
 - en: The complete code is at the end of the post. Now, let's go through the different
     parts separately and explain what they do.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 完整的代码在文章的最后。现在，让我们分别查看不同部分并解释它们的功能。
 - en: 'Loading the data and splitting into train and test sets To get up and running,
     you’ll use some helper functions: although we can [download the iris data](https://archive.ics.uci.edu/ml/datasets/Iris)
     ourselves and use [csv.reader](https://docs.python.org/2/library/csv.html) to
@@ -86,43 +103,67 @@
     the real, underlying trend. You do any sort of model tuning (e.g. picking the
     number of neighbours, k) on the training set only - the test set acts as a stand-alone,
     untouched dataset that you use to test your final model performance on.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 加载数据并拆分为训练集和测试集。为了快速上手，你将使用一些辅助函数：虽然我们可以自己[下载鸢尾花数据](https://archive.ics.uci.edu/ml/datasets/Iris)并使用[csv.reader](https://docs.python.org/2/library/csv.html)加载它，你也可以直接从
+    scikit-learn 快速获取鸢尾花数据。此外，你可以使用 train_test_split 函数进行 60/40 的训练/测试拆分，但你也可以自己随机分配行（请参见此类型的实现）。在机器学习中，训练/测试拆分用于减少过拟合——在完整数据集上训练模型往往会导致模型过拟合数据的噪声和特性，而不是实际的底层趋势。你只在训练集上进行任何类型的模型调整（例如，选择邻居的数量
+    k）——测试集作为一个独立的、未触及的数据集，用于测试最终模型的性能。
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Here is an overview of the iris dataset, the data split, and a quick guide to
     the indexing.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是鸢尾花数据集、数据拆分以及索引的简要指南。
 - en: '[![Splitting the iris dataset](../Images/8099def34ac1f68142c2841020df09ca.png)](https://cambridgecoding.files.wordpress.com/2016/01/knn3.jpg)'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![拆分鸢尾花数据集](../Images/8099def34ac1f68142c2841020df09ca.png)](https://cambridgecoding.files.wordpress.com/2016/01/knn3.jpg)'
 - en: More On This Topic
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[From Theory to Practice: Building a k-Nearest Neighbors Classifier](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从理论到实践：构建一个 k-最近邻分类器](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)'
 - en: '[Nearest Neighbors for Classification](https://www.kdnuggets.com/2022/04/nearest-neighbors-classification.html)'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分类的最近邻](https://www.kdnuggets.com/2022/04/nearest-neighbors-classification.html)'
 - en: '[K-nearest Neighbors in Scikit-learn](https://www.kdnuggets.com/2022/07/knearest-neighbors-scikitlearn.html)'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Scikit-learn 中的 k-最近邻](https://www.kdnuggets.com/2022/07/knearest-neighbors-scikitlearn.html)'
 - en: '[LangChain 101: Build Your Own GPT-Powered Applications](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[LangChain 101：构建你自己的 GPT 驱动应用](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)'
 - en: '[Build Your Own PandasAI with LlamaIndex](https://www.kdnuggets.com/build-your-own-pandasai-with-llamaindex)'
+  id: totrans-24
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 LlamaIndex 构建你自己的 PandasAI](https://www.kdnuggets.com/build-your-own-pandasai-with-llamaindex)'
 - en: '[Make Your Own GPTs with ChatGPT''s GPTs!](https://www.kdnuggets.com/make-your-own-gpts-with-chatgpts-gpts)'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 ChatGPT 的 GPTs 创建你自己的 GPT](https://www.kdnuggets.com/make-your-own-gpts-with-chatgpts-gpts)'
