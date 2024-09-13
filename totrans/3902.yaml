@@ -1,24 +1,36 @@
 - en: Stop Hurting Your Pandas!
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 不要再伤害你的 Pandas 了！
 - en: 原文：[https://www.kdnuggets.com/2020/04/stop-hurting-pandas.html](https://www.kdnuggets.com/2020/04/stop-hurting-pandas.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/04/stop-hurting-pandas.html](https://www.kdnuggets.com/2020/04/stop-hurting-pandas.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[comments](#comments)'
 - en: '**By [Pawel Rzeszucinski](https://www.linkedin.com/in/pawelrzeszucinski/),
     [Codewise](http://www.codewise.com/)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Pawel Rzeszucinski](https://www.linkedin.com/in/pawelrzeszucinski/)，[Codewise](http://www.codewise.com/)**'
 - en: '![Figure](../Images/47801c4858e2d8ce22b79bb7b046ad4b.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![Figure](../Images/47801c4858e2d8ce22b79bb7b046ad4b.png)'
 - en: 'Source: Wikimedia Commons'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：Wikimedia Commons
 - en: Pandas is the king of data wrangling for virtually all data related tasks performed
     in Python.It's been around for 12 years now, although we've only just seen the
     release of the version 1.0 back in January of 2020\. Manipulation, slicing and
@@ -28,8 +40,13 @@
     is intended. This post will address the issues that can arise when Pandas slicing
     is used improperly. If you see the warning that reads "*A value is trying to be
     set on a copy of a slice from a DataFrame*", this post is for you.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 是几乎所有在 Python 中执行的数据处理任务的王者。它已经存在了 12 年，尽管我们直到 2020 年 1 月才见到了 1.0 版本的发布。使用
+    Pandas 进行数据操作、切片和更新非常直观，这可能就是为什么这个包从一开始就取得了成功的原因。尽管语法简单而一致，但在某些情况下，仍需特别小心，以确保准确实现预期的操作。本文将讨论在不当使用
+    Pandas 切片时可能出现的问题。如果你看到警告信息 "*A value is trying to be set on a copy of a slice
+    from a DataFrame*"，那么这篇文章适合你。
 - en: Pandas provides clear rules how to properly slice DataFrames and a good overview
     can be found [here](/2019/06/select-rows-columns-pandas.html). However, we don't
     always follow best practice as doing so requires both acquiring necessary knowledge
@@ -37,167 +54,260 @@
     in guidelines, Pandas allows us to access elements of Dataframes in many different
     ways. This may create a temptation to also try and perform data assignments in
     ways that may turn out to be inappropriate, resulting in some unexpected effects.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 提供了明确的规则来正确切片 DataFrame，详细概述可以在 [这里](/2019/06/select-rows-columns-pandas.html)
+    找到。然而，我们并不总是遵循最佳实践，因为这需要获取必要的知识并保持一定的自我严格。除了指南中概述的选项外，Pandas 还允许我们以多种不同的方式访问 DataFrame
+    元素。这可能会引发试图以不适当的方式进行数据分配的诱惑，从而产生一些意想不到的效果。
 - en: 'Let''s start off by defining out a simple test dataframe:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们首先定义一个简单的测试数据框：
 - en: "[PRE0] df = pd.DataFrame({'x':[1,5,4,3,4,5],  \t\t\t\t   'y':[.1,.5,.4,.3,.4,.5],\
     \  \t\t\t\t   'w':[11,15,14,13,14,15]})       x    y   w  0  1  0.1  11  1  5\
     \  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15 [PRE1]`"
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: "[PRE0] df = pd.DataFrame({'x':[1,5,4,3,4,5],  \t\t\t\t   'y':[.1,.5,.4,.3,.4,.5],\
+    \  \t\t\t\t   'w':[11,15,14,13,14,15]})       x    y   w  0  1  0.1  11  1  5\
+    \  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15 [PRE1]`"
 - en: Say we wanted to find all the DataFrame elements that correspond to 'x' column
     being larger than 3, and based on this change all the corresponding 'y' values
     to 50.
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设我们想找到所有 'x' 列大于 3 的 DataFrame 元素，并基于此将所有对应的 'y' 值更改为 50。
 - en: 'How to perform this correctly, according to Pandas best practice? By using
     the `.loc` method in this case:'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 如何根据 Pandas 的最佳实践正确执行此操作？在这种情况下，使用 `.loc` 方法：
 - en: '[PRE2] df.loc[df[''x'']>3,''y'']=50 [PRE3]`'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE2] df.loc[df[''x'']>3,''y'']=50 [PRE3]`'
 - en: We locate the row elements that meet our initial criterion (first argument),
     and the column which we want to update (second argument), all evaluated in a single
     call to the DataFrame.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们定位符合初始标准的行元素（第一个参数），以及我们想更新的列（第二个参数），所有这些都在对 DataFrame 的一次调用中进行评估。
 - en: The result is as expected.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果如预期那样。
 - en: '[PRE4]    x     y   w  0  1   0.1  11  1  5  50.0  15  2  4  50.0  14  3  3   0.3  13  4  4  50.0  14  5  5  50.0  15
     [PRE5]`'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE4]    x     y   w  0  1   0.1  11  1  5  50.0  15  2  4  50.0  14  3  3   0.3  13  4  4  50.0  14  5  5  50.0  15
+    [PRE5]`'
 - en: As mentioned a moment ago, Pandas provides a number of different ways of accessing
     (but not necessarily modifying!) the data.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 如前所述，Pandas 提供了多种访问（但不一定是修改！）数据的方式。
 - en: 'Not sticking to the script (guidelines) may lead us into trouble. For instance
     it may be more natural for some people to write the same operation as follows:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 不遵守脚本（指南）可能会让我们陷入困境。例如，有些人可能会更自然地写出以下相同的操作：
 - en: '[PRE6] df[df[''x'']>3][''y'']=50 [PRE7]`'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE6] df[df[''x'']>3][''y'']=50 [PRE7]`'
 - en: That's pretty clear, isn't it? Take the subset of the `df` that corresponds
     to `'x'>3`, and subsequently change the values in column 'y' to be equal to 50.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 很明显，不是吗？选择对应于 `'x'>3` 的 `df` 子集，然后将列'y'的值更改为 50。
 - en: 'Let''s do that:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们试试：
 - en: '[PRE8]    x    y   w  0  1  0.1  11  1  5  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15
     [PRE9]`'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE8]    x    y   w  0  1  0.1  11  1  5  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15
+    [PRE9]`'
 - en: I probably did a typo or something, let me run this once again.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我可能打错了什么，重新运行一次。
 - en: '[PRE10] df[df[''x'']>3][''y'']=50       x    y   w  0  1  0.1  11  1  5  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15
     [PRE11]`'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE10] df[df[''x'']>3][''y'']=50       x    y   w  0  1  0.1  11  1  5  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15
+    [PRE11]`'
 - en: No change whatsoever! Why?
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 完全没有变化！为什么？
 - en: We've encountered a so called 'chained indexing' effect, where essentially two
     indexers are used one after another e.g. `df[][]`
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们遇到了所谓的“链式索引”效应，本质上是一个接一个地使用两个索引器，例如 `df[][]`
 - en: 'Let''s decompose our command:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们分解一下我们的命令：
 - en: '`df[df[''x'']>3]` results in Pandas creating a separate copy of the original
     DataFrame'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`df[df[''x'']>3]` 导致 Pandas 创建了原始 DataFrame 的单独副本'
 - en: '`df[df[''x'']>3][''y''] = 50` assigns the new values to the column ''y'' but
     on this temporarily created copy, not our original DataFrame.'
+  id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`df[df[''x'']>3][''y''] = 50` 将新值赋给列''y''，但这是在临时创建的副本上，而不是原始 DataFrame 上。'
 - en: A way of observing this explicitly is to use [the base 'id' function](https://docs.python.org/3/library/functions.html#id)
     which returns the address of the given object in the memory of the machine.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过使用[基础 'id' 函数](https://docs.python.org/3/library/functions.html#id)可以明确观察到这一点，该函数返回给定对象在机器内存中的地址。
 - en: '[PRE12] id(df)  2838845867680    id(df[df[''x'']>3])  2838845989832    id(id)
     == id(df[df[''x'']>3])  False [PRE13]`'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE12] id(df)  2838845867680    id(df[df[''x'']>3])  2838845989832    id(id)
+    == id(df[df[''x'']>3])  False [PRE13]`'
 - en: 'Interestingly, when we invert the order of the slice in our command i.e. call
     the columns first and then the criterion we want to satisfy, we get the expected
     result:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 有趣的是，当我们倒转命令中的切片顺序，即先调用列，然后是我们要满足的条件时，我们会得到预期的结果：
 - en: '[PRE14] df[''y''][df[''x'']>3]=50       x     y   w  0  1   0.1  11  1  5  50.0  15  2  4  50.0  14  3  3   0.3  13  4  4  50.0  14  5  5  50.0  15
     [PRE15]`'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE14] df[''y''][df[''x'']>3]=50       x     y   w  0  1   0.1  11  1  5  50.0  15  2  4  50.0  14  3  3   0.3  13  4  4  50.0  14  5  5  50.0  15
+    [PRE15]`'
 - en: That's down to a fact, that when we select only one column from the DataFrame,
     Pandas creates a view, not a copy.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是因为当我们只从 DataFrame 中选择一列时，Pandas 创建了视图，而不是副本。
 - en: What's a view? It's essentially a proxy for the same object i.e. no new objects
     are created in the process.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 什么是视图？它本质上是同一对象的代理，即在此过程中没有创建新对象。
 - en: '[PRE16] z = df[''y''] #z being a view of df[''y'']  id(df[''y'']) == id(z)  True
     [PRE17]`'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE16] z = df[''y''] # z 是 df[''y''] 的视图  id(df[''y'']) == id(z)  True [PRE17]`'
 - en: 'Even though we''ve achieved our goal, some side effects might have been triggered:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管我们达到了目标，但可能会触发一些副作用：
 - en: Let's look at this sequence of commands.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看这一系列命令。
 - en: '[PRE18] df # original dataframe     x    y   w  0  1  0.1  11  1  5  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15    z
     = df[''y''] # view of column ''y''  z[z>=0.5] = 30    z  0     0.1  1    30.0  2     0.4  3     0.3  4     0.4  5    30.0    df     x     y   w  0  1   0.1  11  1  5  30.0  15  2  4   0.4  14  3  3   0.3  13  4  4   0.4  14  5  5  30.0  15
     [PRE19]`'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE18] df # 原始 DataFrame     x    y   w  0  1  0.1  11  1  5  0.5  15  2  4  0.4  14  3  3  0.3  13  4  4  0.4  14  5  5  0.5  15    z
+    = df[''y''] # 列''y''的视图  z[z>=0.5] = 30    z  0     0.1  1    30.0  2     0.4  3     0.3  4     0.4  5    30.0    df     x     y   w  0  1   0.1  11  1  5  30.0  15  2  4   0.4  14  3  3   0.3  13  4  4   0.4  14  5  5  30.0  15
+    [PRE19]`'
 - en: Whoa! We though we created a separate object, called 'z' that is independent
     from `df` and the values of `df` are safe when we manipulate 'z'. Nope.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 哇！我们以为我们创建了一个独立于`df`的对象'z'，并且在操作'z'时`df`的值是安全的。不对。
 - en: We've only created a view. The good thing is that Pandas will display the good
     ol' warning.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们只创建了一个视图。好在 Pandas 会显示传统的警告。
 - en: Pandas is doing this because it doesn't know if we want to change just the 'y'
     series (via proxy 'z'), or the value of the original `df`.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 这样做是因为它不知道我们是想仅仅修改'y'系列（通过代理'z'），还是想改变原始`df`的值。
 - en: OK, so what if we wanted to extract 'z' as an independent object? The Pandas
     method `.copy()` serves exactly this purpose.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 好的，那么如果我们想提取'z'作为独立对象呢？Pandas 方法 `.copy()` 正好可以实现这个目的。
 - en: When we update our command to the one shown below, we will create a completely
     new object with its own address in the memory, and any updated on 'z' will leave
     `df` unaffected.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我们将命令更新为下方所示时，我们将创建一个具有自己内存地址的全新对象，任何对 'z' 的更新都将不会影响到 `df`。
 - en: '[PRE20] z = df[''y''].copy()  id(df[''y'']) == id(z)  False [PRE21]`'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '[PRE20] z = df[''y''].copy()  id(df[''y'']) == id(z)  False [PRE21]`'
 - en: 'There are really two takeaways that will keep us guarded from any unwanted
     effects when working with slices and data manipulations:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，有两个要点可以防止我们在处理切片和数据操作时出现不必要的副作用：
 - en: 'avoid chained indexing. Always go for the `.loc`/`.iloc` (or `.at`/`.iat`)
     option:'
+  id: totrans-46
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 避免链式索引。始终选择 `.loc`/`.iloc`（或 `.at`/`.iat`）选项。
 - en: '`copy()` your variables to create independent objects and safeguard original
     sources from being unwillingly manipulated.'
+  id: totrans-47
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: '`copy()` 你的变量以创建独立的对象，并保护原始数据源不被无意间修改。'
 - en: '**Bio: [Dr Pawel Rzeszucinski](https://www.linkedin.com/in/pawelrzeszucinski/)**
     is the author of over 30 publications and patents in the field of broadly defined
     data analytics. He obtained a master''s degree in computer science from Cranfield
@@ -207,73 +317,115 @@
     at ABB Corporate Research Center and Senior Risk Modeler at Strategic Analytics
     for HSBC. He is currently working as a Chief Data Scientist at Codewise, an AdTech
     company. Dr Pawel Rzeszucinski is a member of the Forbes Technology Council.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介： [Pawel Rzeszucinski 博士](https://www.linkedin.com/in/pawelrzeszucinski/)**
+    是 30 多篇出版物和专利的作者，涉及广义的数据分析领域。他获得了克兰菲尔德大学计算机科学硕士学位，然后前往曼彻斯特大学，获得了与 QinetiQ 相关的直升机齿轮箱诊断分析解决方案的博士学位。回到波兰后，他曾在
+    ABB 企业研究中心担任高级科学家，并在汇丰银行战略分析部担任高级风险建模师。他目前在 AdTech 公司 Codewise 担任首席数据科学家。Pawel
+    Rzeszucinski 博士是《福布斯》技术委员会成员。'
 - en: '**Related:**'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[How to select rows and columns in Pandas using [ ], .loc, iloc, .at and .iat](/2019/06/select-rows-columns-pandas.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用 [ ]、.loc、iloc、.at 和 .iat 在 Pandas 中选择行和列](/2019/06/select-rows-columns-pandas.html)'
 - en: '[Python for data analysis… is it really that simple?!?](/2020/04/python-data-analysis-really-that-simple.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据分析的 Python… 真的那么简单吗？！?](/2020/04/python-data-analysis-really-that-simple.html)'
 - en: '[Build Pipelines with Pandas Using pdpipe](/2019/12/build-pipelines-pandas-pdpipe.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 pdpipe 构建管道](/2019/12/build-pipelines-pandas-pdpipe.html)'
 - en: '* * *'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-54
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并通过寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[分析 90 亿美元 AI 失败](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
