@@ -1,237 +1,347 @@
 - en: A Crash Course in MXNet Tensor Basics & Simple Automatic Differentiation
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: MXNet 张量基础和简单自动微分的速成课程
 - en: 原文：[https://www.kdnuggets.com/2018/08/mxnet-tensor-basics-simple-derivatives.html](https://www.kdnuggets.com/2018/08/mxnet-tensor-basics-simple-derivatives.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/08/mxnet-tensor-basics-simple-derivatives.html](https://www.kdnuggets.com/2018/08/mxnet-tensor-basics-simple-derivatives.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: I originally intended to play around with MXNet **long** ago, around the time
     that Gluon was released publicly. Things got busy. I got sidetracked.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 我原本打算很早之前就玩弄 MXNet，大约在 Gluon 公共发布的时候。事情变得忙碌了，我被分散了注意力。
 - en: I finally started using MXNet recently. In the interests of getting to know
     my way around, I thought covering some basics, such as how tensors and derivatives
     are handled, might be a good place to start (such as I did [here](/2018/05/pytorch-tensor-basics.html)
     and [here with PyTorch](/2018/05/simple-derivatives-pytorch.html)).
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 我最近终于开始使用 MXNet。为了了解我的工作方式，我认为覆盖一些基础知识，比如张量和导数的处理，可能是一个好的开始（就像我在 [这里](/2018/05/pytorch-tensor-basics.html)
+    和 [这里与 PyTorch](/2018/05/simple-derivatives-pytorch.html) 所做的那样）。
 - en: This won't repeat what is in those previous PyTorch articles step by step, so
     look at those if you want any further context. What's below should be relatively
     straightforward, however.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 这不会一步步重复之前的 PyTorch 文章中的内容，所以如果你想要进一步的背景，可以查看那些文章。下面的内容应该相对简单明了。
 - en: '![Image](../Images/c9ead3edd581b0c90d3776aceec4f638.png)'
+  id: totrans-6
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/c9ead3edd581b0c90d3776aceec4f638.png)'
 - en: '[MXNet](https://mxnet.apache.org/) is an open source neural network framework,
     a "flexible and efficient library for deep learning." [Gluon](https://gluon-crash-course.mxnet.io/)
     is the imperative high-level API for MXNet, which provides additional flexibility
     and ease of use. You can think of the relationship between MXNet and Gluon as
     being similar to TensorFlow and Keras. We won''t cover Gluon any further herein,
     but will explore it in future posts.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '[MXNet](https://mxnet.apache.org/) 是一个开源神经网络框架，一个“灵活且高效的深度学习库。” [Gluon](https://gluon-crash-course.mxnet.io/)
+    是 MXNet 的命令式高级 API，它提供了额外的灵活性和易用性。你可以把 MXNet 和 Gluon 之间的关系看作类似于 TensorFlow 和 Keras。我们在这里不会进一步介绍
+    Gluon，但会在未来的文章中探索它。'
 - en: MXNet's tensor implementation comes in the form of the `[ndarray](https://mxnet.apache.org/api/python/ndarray/ndarray.html)`
     package. Here you will find what's needed to build multidimensional (*n*-dimensional)
     arrays and perform some of the operations on them required for implementing neural
     networks, along with the [`autograd`](http://mxnet.apache.org/api/python/autograd/autograd.html)
     package. It is this package we will make use of below.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: MXNet 的张量实现以 `[ndarray](https://mxnet.apache.org/api/python/ndarray/ndarray.html)`
+    包的形式存在。在这里，你将找到构建多维（*n*维）数组所需的内容，并执行一些实现神经网络所需的操作，以及 [`autograd`](http://mxnet.apache.org/api/python/autograd/autograd.html)
+    包。我们将在下面利用这个包。
 - en: '**`ndarray` (Very) Basics**'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '**`ndarray`（非常）基础**'
 - en: 'First, let''s import what we need from the library, in such a way as to simplify
     making our API calls:'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们从库中导入我们需要的内容，以简化 API 调用：
 - en: '[PRE0]'
+  id: totrans-11
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Now, let''s create a basic `ndarray` (on the CPU):'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，让我们在 CPU 上创建一个基本的 `ndarray`：
 - en: '[PRE1]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '[PRE2]'
+  id: totrans-14
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Note that printing an `ndarray` also prints out the type of the object (again,
     `NDArray`), as well as its size and the device to which it is attached (in this
     case, CPU).
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，打印 `ndarray` 也会打印出对象的类型（再次是 `NDArray`），以及其大小和附加的设备（在这个例子中是 CPU）。
 - en: 'What if we wanted to create an ndarray object with a GPU [context](https://mxnet-test.readthedocs.io/en/latest/api/context.html)
     (note that a context is the device type and ID which should be used to perform
     operations on the object)? First, let''s determine whether or not there is a [GPU
     available to MXNet](https://stackoverflow.com/questions/49076092/is-there-a-way-to-check-if-mxnet-uses-my-gpu):'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们想用 GPU 创建一个 `ndarray` 对象 [上下文](https://mxnet-test.readthedocs.io/en/latest/api/context.html)（注意上下文是指用于在对象上执行操作的设备类型和
+    ID）怎么办？首先，让我们确定是否有 [GPU 可供 MXNet 使用](https://stackoverflow.com/questions/49076092/is-there-a-way-to-check-if-mxnet-uses-my-gpu)：
 - en: '[PRE3]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: This response denotes that there is a GPU device, and its ID is 0.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个响应表示存在一个 GPU 设备，其 ID 为 0。
 - en: 'Let''s create an `ndarray` on this device:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们在这个设备上创建一个 `ndarray`：
 - en: '[PRE5]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '[PRE6]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The output here confirms that an `ndarray` of zeros of size 2 x 2 was created
     with a context of GPU.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里的输出确认创建了一个大小为 2 x 2 的全零 `ndarray`，并且上下文为 GPU。
 - en: 'To get a returned transposed `ndarray` (as opposed to simply a transpose view
     of the original):'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 要获取一个返回的转置`ndarray`（而不仅仅是原始的转置视图）：
 - en: '[PRE7]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '[PRE8]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'Reshape an `ndarray` as a view, without alteration of the original data:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE9]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '[PRE10]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: 'Some ndarray info:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE11]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '[PRE12]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '[See here](https://gluon.mxnet.io/chapter01_crashcourse/ndarray.html) for more
     on `ndarray` basics.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
 - en: '**MXNet `ndarray` To and From Numpy `ndarray`**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: It's easy to go from Numpy `ndarrays` to MXNet `ndarrays` and vice versa.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE13]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '[PRE14]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '[PRE15]'
+  id: totrans-38
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '[PRE16]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: '**Matrix-matrix multiplication**'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
 - en: 'Here''s how to compute a matrix-matrix dot product:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE17]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: '[PRE18]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: '[See here](https://gluon.mxnet.io/chapter01_crashcourse/linear-algebra.html)
     for more on linear algebra operations with `ndarray`.'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: '**Using autograd to Find and Solve a Derivative**'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: On to solving a derivative with the MXNet `[autograd](http://mxnet.apache.org/api/python/autograd/autograd.html)`
     package for automatic differentiation.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: 'First we will need a function for which to find the derivative. Arbitrarily,
     let''s use this:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '![Equation](../Images/f63c40b9d1ac08484e874bdc8ba90142.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
 - en: To see us work out the first order derivative of this function by hand, as well
     as find the value of our derivative function for a given value of *x*, [see this
     post](/2018/05/simple-derivatives-pytorch.html).
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: 'For reasons which should be obvious, we have to represent our function in Python
     as such:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE19]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: 'Now let''s find the value of our derivative function for a given value of *x*.
     Let''s arbitrarily use 2:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE20]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: 'Line by line, the above code:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: defines the value (2) we want to compute the derivative with regard to as an
     MXNet ndarray object
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: uses `**attach_grad()**` to allocate space for the gradient to be computed
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: the code block denoted with `**ag.record()**` contains the computation to be
     performed with regard to computing and tracking the gradient
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: defines the function we want to compute the derivative of
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: uses autograd's **backward()** to compute the sum of gradients, using the chain
     rule
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: outputs the value stored in the *x* `ndarray`'s **grad** attribute, which, as
     shown below
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[PRE21]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: This value, 233, matches what we calculated by hand [in this post](/2018/05/simple-derivatives-pytorch.html).
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: '[See here](https://gluon.mxnet.io/chapter01_crashcourse/autograd.html) for
     more on automatic differentiation with `autograd`.'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
 - en: This has been a very basic overview of simple `ndarray` operations and derivatives
@@ -240,79 +350,114 @@
     blocks, and allow for diving in to some more complex code. Next time we will create
     some simple neural networks with MXNet and Gluon, exploring the libraries more
     in-depth.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: For more (right now!) on MXNet, Gluon, and deep learning in general, the freely-available
     book [**Deep Learning - The Straight Dope**](https://gluon.mxnet.io/), written
     by those intimately involved in the development and evangelizing of these libraries,
     is definitely worth looking at.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related**:'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
 - en: '[PyTorch Tensor Basics](/2018/05/pytorch-tensor-basics.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Simple Derivatives with PyTorch](/2018/05/simple-derivatives-pytorch.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[WTF is a Tensor?!?](/2018/05/wtf-tensor.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-71
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织进行IT服务'
 - en: '* * *'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-76
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Free Artificial Intelligence And Deep Learning Crash Course](https://www.kdnuggets.com/2022/07/free-artificial-intelligence-deep-learning-crash-course.html)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[免费人工智能与深度学习速成课程](https://www.kdnuggets.com/2022/07/free-artificial-intelligence-deep-learning-crash-course.html)'
 - en: '[Free Python Crash Course](https://www.kdnuggets.com/2022/07/free-python-crash-course.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[免费Python速成课程](https://www.kdnuggets.com/2022/07/free-python-crash-course.html)'
 - en: '[Free MLOps Crash Course for Beginners](https://www.kdnuggets.com/2022/08/free-mlops-crash-course.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[免费初学者MLOps速成课程](https://www.kdnuggets.com/2022/08/free-mlops-crash-course.html)'
 - en: '[Free Intermediate Python Programming Crash Course](https://www.kdnuggets.com/2022/12/free-intermediate-python-programming-crash-course.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[免费中级Python编程速成课程](https://www.kdnuggets.com/2022/12/free-intermediate-python-programming-crash-course.html)'
 - en: '[Unlock Your Potential with This FREE DevOps Crash Course](https://www.kdnuggets.com/2023/03/corise-unlock-potential-with-this-free-devops-crash-course.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过这个免费的DevOps速成课程释放你的潜力](https://www.kdnuggets.com/2023/03/corise-unlock-potential-with-this-free-devops-crash-course.html)'
 - en: '[WTF is a Tensor?!?](https://www.kdnuggets.com/2018/05/wtf-tensor.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[什么是张量?!?](https://www.kdnuggets.com/2018/05/wtf-tensor.html)'
