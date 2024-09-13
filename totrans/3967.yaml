@@ -1,17 +1,25 @@
 - en: How to Deal with Missing Data Using Interpolation Techniques in Pandas
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何使用插值技术处理 Pandas 中的缺失数据
 - en: 原文：[https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)
 - en: '![Missing Data Using Interpolation Techniques in Pandas](../Images/dda5fbd49996fb026458e295787c567f.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![使用插值技术处理缺失数据的 Pandas](../Images/dda5fbd49996fb026458e295787c567f.png)'
 - en: Image by Author | DALLE-3 & Canva
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源 | DALLE-3 & Canva
 - en: Missing values in real-world datasets are a common problem. This can occur for
     various reasons, such as missed observations, data transmission errors, sensor
     malfunctions, etc. We cannot simply ignore them as they can skew the results of
@@ -21,176 +29,258 @@
     like imputation and interpolation. People often confuse these two techniques;
     imputation is a more common term known to beginners. Before we proceed further,
     let me draw a clear boundary between these two techniques.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 现实世界数据集中的缺失值是一个常见问题。这可能由于各种原因发生，例如遗漏的观察、数据传输错误、传感器故障等。我们不能简单忽略它们，因为这可能会扭曲我们模型的结果。我们必须从分析中移除这些值或对其进行处理，以确保数据集的完整性。删除这些值会导致信息丧失，这是我们不希望的。因此，科学家们设计了各种处理缺失值的方法，如插补和插值。人们经常混淆这两种技术；插补是初学者更常用的术语。在我们进一步讨论之前，让我为这两种技术划定一个清晰的界限。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的 IT 工作'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Imputation is basically filling the missing values with statistical measures
     like mean, median, or mode. It is pretty simple, but it does not take into account
     the trend of the dataset. However, interpolation estimates the value of missing
     values based on the surrounding trends and patterns. This approach is more feasible
     to use when your missing values are not scattered too much.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 插补基本上是用统计测量值（如均值、中位数或众数）来填补缺失值。这相当简单，但它没有考虑数据集的趋势。然而，插值基于周围的趋势和模式来估算缺失值。当缺失值没有过多分散时，这种方法更为可行。
 - en: Now that we know the difference between these techniques, let's discuss some
     of the interpolation methods available in Pandas, then I will walk you through
     an example. After which I will share some tips to help you choose the right interpolation
     technique.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经了解了这些技术之间的区别，让我们讨论一些 Pandas 中可用的插值方法，然后我将带你通过一个示例。之后，我将分享一些技巧，帮助你选择合适的插值技术。
 - en: Types of Interpolation Methods in Pandas
+  id: totrans-13
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: Pandas 中的插值方法类型
 - en: 'Pandas offers various interpolation methods *(''linear'', ''time'', ''index'',
     ''values'', ''pad'', ''nearest'', ''zero'', ''slinear'', ''quadratic'', ''cubic'',
     ''barycentric'', ''krogh'', ''polynomial'', ''spline'', ''piecewise_polynomial'',
     ''from_derivatives'', ''pchip'', ''akima'', ''cubicspline'')* that you can access
     using the `interpolate()` function. The syntax of this method is as follows:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas 提供了各种插值方法 *('linear', 'time', 'index', 'values', 'pad', 'nearest', 'zero',
+    'slinear', 'quadratic', 'cubic', 'barycentric', 'krogh', 'polynomial', 'spline',
+    'piecewise_polynomial', 'from_derivatives', 'pchip', 'akima', 'cubicspline')*，你可以使用
+    `interpolate()` 函数访问这些方法。该方法的语法如下：
 - en: '[PRE0]'
+  id: totrans-15
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'I know these are a lot of methods, and I don’t want to overwhelm you. So, we
     will discuss a few of them that are commonly used:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 我知道这些方法很多，我不想让你感到不知所措。所以，我们将讨论一些常用的方法：
 - en: '**Linear Interpolation:** This is the default method, which is computationally
     fast and simple. It connects the known data points by drawing a straight line,
     and this line is used to estimate the missing values.'
+  id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**线性插值：** 这是默认方法，计算速度快且简单。它通过绘制一条直线连接已知数据点，并使用这条直线来估计缺失值。'
 - en: '**Time Interpolation:** Time-based interpolation is useful when your data is
     not evenly spaced in terms of position but is linearly distributed over time.
     For this, your index needs to be a datetime index, and it fills in the missing
     values by considering the time intervals between the data points.'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**时间插值：** 当你的数据在位置上不均匀分布但在时间上线性分布时，时间插值非常有用。为此，你的索引需要是一个 datetime 索引，它通过考虑数据点之间的时间间隔来填补缺失值。'
 - en: '**Index Interpolation:** This is similar to time interpolation, where it uses
     the index value to calculate the missing values. However, here it does not need
     to be a datetime index but needs to convey some meaningful information like temperature,
     distance, etc.'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**索引插值：** 这类似于时间插值，它使用索引值来计算缺失值。然而，这里不需要是 datetime 索引，但需要传达一些有意义的信息，如温度、距离等。'
 - en: '**Pad (Forward Fill) and Backward Fill Method:** This refers to copying the
     already existent value to fill in the missing value. If the direction of propagation
     is forward, it will forward fill the last valid observation. If it''s backward,
     it uses the next valid observation.'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**填充（前向填充）和反向填充方法：** 这指的是复制已存在的值来填补缺失值。如果传播方向是向前，它将前向填充最后一个有效观测值。如果是向后，它将使用下一个有效观测值。'
 - en: '**Nearest Interpolation:** As the name suggests, it uses the local variations
     in the data to fill in the values. Whatever value is nearest to the missing one
     will be used to fill it in.'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**最近邻插值：** 顾名思义，它利用数据的局部变化来填补缺失值。离缺失值最近的值将被用来填补它。'
 - en: '**Polynomial Interpolation:** We know that real-world datasets are mainly non-linear.
     So this function fits a polynomial function to the data points to estimate the
     missing value. You will also need to specify the order for this (e.g., order=2 for
     quadratic).'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**多项式插值：** 我们知道实际数据集通常是非线性的。因此，这个函数将多项式函数拟合到数据点上，以估计缺失值。你还需要指定多项式的阶数（例如，order=2
+    代表二次多项式）。'
 - en: '**Spline Interpolation:** Don’t be intimidated by the complex name. A spline
     curve is formed using piecewise polynomial functions to connect the data points,
     resulting in a final smooth curve. You will note that the interpolate function
     also has `piecewise_polynomial` as a separate method. The difference between the
     two is that the latter does not ensure continuity of the derivatives at the boundaries,
     meaning it can take more abrupt changes.'
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**样条插值：** 不要被这个复杂的名称吓倒。样条曲线是使用分段多项式函数连接数据点，从而形成一个最终的平滑曲线。你会注意到插值函数还有 `piecewise_polynomial`
+    作为一个单独的方法。这两者的区别在于后者不保证在边界处导数的连续性，这意味着它可以发生更突兀的变化。'
 - en: Enough theory; let's use the Airline Passengers dataset, which contains monthly
     passenger data from 1949 to 1960 to see how interpolation works.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 理论够了；让我们使用包含 1949 到 1960 年每月乘客数据的航空乘客数据集，看看插值是如何工作的。
 - en: 'Code Implementation: Airline Passenger Dataset'
+  id: totrans-25
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 代码实现：航空乘客数据集
 - en: We will introduce some missing values in the Airline Passenger Dataset and then
     interpolate them using one of the above techniques.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将在航空乘客数据集中引入一些缺失值，然后使用上述技术之一对其进行插值。
 - en: 'Step 1: Making Imports & Loading Dataset'
+  id: totrans-27
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '步骤 1: 导入库 & 加载数据集'
 - en: Import the basic libraries as mentioned below and load the CSV file of this
     dataset into a DataFrame using the `pd.read_csv` function.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 按如下方式导入基本库，并使用 `pd.read_csv` 函数将该数据集的 CSV 文件加载到 DataFrame 中。
 - en: '[PRE1]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '`parse_dates` will convert the ‘Month’ column to a `datetime` object, and `index_col`
     sets it as the DataFrame''s index.'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '`parse_dates` 将‘Month’列转换为 `datetime` 对象，而 `index_col` 将其设置为 DataFrame 的索引。'
 - en: 'Step 2: Introduce Missing Values'
+  id: totrans-31
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '步骤 2: 引入缺失值'
 - en: Now, we will randomly select 15 different instances and mark the ‘Passengers’
     column as `np.nan`, representing the missing values.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们将随机选择 15 个不同的实例，并将‘Passengers’列标记为 `np.nan`，表示缺失值。
 - en: '[PRE2]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: 'Step 3: Plotting Data with Missing Values'
+  id: totrans-34
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: '步骤 3: 绘制带有缺失值的数据'
 - en: We will use Matplotlib to visualize how our data looks after introducing 15
     missing values.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将使用 Matplotlib 可视化引入 15 个缺失值后的数据情况。
 - en: '[PRE3]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![Graph after interpolation](../Images/e9dd40ecbd7dbfdc49f35a8dc895278b.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![插值后的图表](../Images/e9dd40ecbd7dbfdc49f35a8dc895278b.png)'
 - en: Graph of original dataset
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 原始数据集的图表
 - en: You can see that the graph is split in between, showing the absence of values
     at those locations.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以看到图表在中间被分割，显示了这些位置上缺少值的情况。
 - en: 'Step 4: Using Interpolation'
+  id: totrans-40
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 步骤4：使用插值
 - en: Though I will share some tips later to help you pick the right interpolation
     technique, let’s focus on this dataset. We know that it is time-series data, but
     since the trend doesn’t seem to be linear, simple time-based interpolation that
@@ -198,65 +288,93 @@
     oscillations along with linear trends within a small neighborhood only. Considering
     these factors, spline interpolation will work well here. So, let's apply that
     and check how the visualization turns out after interpolating the missing values.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管稍后我会分享一些技巧来帮助你选择合适的插值技术，但让我们先专注于这个数据集。我们知道这是时间序列数据，但由于趋势似乎不是线性的，简单的线性插值不适合这里。我们可以观察到一些模式和振荡，以及线性趋势在小范围内。考虑到这些因素，样条插值将在这里表现良好。因此，让我们应用它，并检查插值后缺失值的可视化效果。
 - en: '[PRE4]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![Graph after interpolation](../Images/2d70d3ccedc65c63fac5ce32bdffcbe0.png)'
+  id: totrans-43
   prefs: []
   type: TYPE_IMG
+  zh: '![插值后的图表](../Images/2d70d3ccedc65c63fac5ce32bdffcbe0.png)'
 - en: Graph after interpolation
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 插值后的图表
 - en: We can see from the graph that the interpolated values complete the data points
     and also preserve the pattern. It can now be used for further analysis or forecasting.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 从图表中可以看到，插值后的值填补了数据点，并且保留了模式。现在可以用于进一步分析或预测。
 - en: Tips for Choosing the Interpolation Method
+  id: totrans-46
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 选择插值方法的技巧
 - en: 'This bonus part of the article focuses on some tips:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇文章的附加部分集中于一些技巧：
 - en: Visualize your data to understand its distribution and pattern. If the data
     is evenly spaced and/or the missing values are randomly distributed, simple interpolation
     techniques will work well.
+  id: totrans-48
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 可视化你的数据以了解其分布和模式。如果数据均匀间隔和/或缺失值随机分布，简单的插值技术将效果良好。
 - en: If you observe trends or seasonality in your time series data, using spline
     or polynomial interpolation is better to preserve these trends while filling in
     the missing values, as demonstrated in the example above.
+  id: totrans-49
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果你在时间序列数据中观察到趋势或季节性，使用样条或多项式插值更能保留这些趋势，同时填补缺失值，如上例所示。
 - en: Higher-degree polynomials can fit more flexibly but are prone to overfitting.
     Keep the degree low to avoid unreasonable shapes.
+  id: totrans-50
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 高次多项式可以更灵活地拟合，但容易过拟合。保持低次，以避免不合理的形状。
 - en: For unevenly spaced values, use indexed-based methods like index, and time to
     fill gaps without distorting the scale. You can also use backfill or forward-fill
     here.
+  id: totrans-51
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于不均匀间隔的值，使用基于索引的方法，如索引和时间来填补间隙，而不会扭曲比例。你也可以在这里使用回填或前向填充。
 - en: If your values do not change frequently or follow a pattern of rising and falling,
     using the nearest valid value also works well.
+  id: totrans-52
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果你的值变化不频繁或遵循上升和下降的模式，使用最近的有效值也很有效。
 - en: Test different methods on a sample of the data and evaluate how well the interpolated
     values fit versus actual data points.
+  id: totrans-53
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 在数据样本上测试不同的方法，并评估插值值与实际数据点的拟合程度。
 - en: 'If you want to explore other parameters of the `dataframe.interpolate` method,
     the Pandas documentation is the best place to check it out: [Pandas Documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.interpolate.html).'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你想探索`dataframe.interpolate`方法的其他参数，Pandas文档是最佳的参考资料：[Pandas Documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.interpolate.html)。
 - en: '**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)****
     Kanwal is a machine learning engineer and a technical writer with a profound passion
     for data science and the intersection of AI with medicine. She co-authored the
@@ -265,33 +383,51 @@
     as a Teradata Diversity in Tech Scholar, Mitacs Globalink Research Scholar, and
     Harvard WeCode Scholar. Kanwal is an ardent advocate for change, having founded
     FEMCodes to empower women in STEM fields.'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)**
+    Kanwal是一位机器学习工程师和技术作家，对数据科学及人工智能与医学的交汇处充满热情。她合著了电子书《利用ChatGPT最大化生产力》。作为2022年APAC地区的Google
+    Generation Scholar，她倡导多样性和学术卓越。她还被认定为Teradata多样性技术学者、Mitacs Globalink研究学者和哈佛WeCode学者。Kanwal是变革的坚定倡导者，创办了FEMCodes，以赋权女性进入STEM领域。'
 - en: More On This Topic
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题更多内容
 - en: '[How to Deal with Categorical Data for Machine Learning](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何处理机器学习中的分类数据](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)'
 - en: '[5 Ways to Deal with the Lack of Data in Machine Learning](https://www.kdnuggets.com/2019/06/5-ways-lack-data-machine-learning.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[应对机器学习中数据不足的5种方法](https://www.kdnuggets.com/2019/06/5-ways-lack-data-machine-learning.html)'
 - en: '[Black Friday Deal - Master Machine Learning for Less with DataCamp](https://www.kdnuggets.com/2022/11/datacamp-black-friday-deal-master-machine-learning-less-datacamp.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[黑色星期五特惠 - 通过DataCamp以更低的价格精通机器学习](https://www.kdnuggets.com/2022/11/datacamp-black-friday-deal-master-machine-learning-less-datacamp.html)'
 - en: '[The Optimal Way to Input Missing Data with Pandas fillna()](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Pandas fillna()填补缺失数据的最佳方法](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)'
 - en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Datawig，一个AWS深度学习库进行缺失值插补](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
 - en: '[How to Identify Missing Data in Time-Series Datasets](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何识别时间序列数据集中的缺失数据](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)'
