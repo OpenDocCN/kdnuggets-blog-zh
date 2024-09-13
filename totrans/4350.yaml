@@ -1,476 +1,729 @@
 - en: How to Create Custom Real-time Plots in Deep Learning
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何在深度学习中创建自定义实时图表
 - en: 原文：[https://www.kdnuggets.com/2020/12/create-custom-real-time-plots-deep-learning.html](https://www.kdnuggets.com/2020/12/create-custom-real-time-plots-deep-learning.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/12/create-custom-real-time-plots-deep-learning.html](https://www.kdnuggets.com/2020/12/create-custom-real-time-plots-deep-learning.html)
 - en: '[comments](#comments)![Figure](../Images/09f302a5f8f4d5b2f8b8eda6d0830a4f.png)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)![图像](../Images/09f302a5f8f4d5b2f8b8eda6d0830a4f.png)'
 - en: Image source: [**Pixabay**](https://pixabay.com/photos/garage-floors-parking-construction-1149542/)
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图像来源：[**Pixabay**](https://pixabay.com/photos/garage-floors-parking-construction-1149542/)
 - en: What do we mean by real-time plots?
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我们所说的实时图表是什么意思？
 - en: Training a complex deep learning model with a large dataset can be time-consuming.
     As the epochs go by, reams of numbers flash on your screen. Your eyes (and the
     brain) get tired.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练一个复杂的深度学习模型和一个大数据集可能是非常耗时的。随着训练轮次的增加，大量数字在屏幕上闪烁。你的眼睛（和大脑）会感到疲倦。
 - en: Where is that exciting accuracy plot constantly updating you about the progress?
     How do you know if the model is learning something useful? And, just how fast?
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 那个令人兴奋的准确度图表在哪里，不断更新你的进展情况？你怎么知道模型是否在学习有用的东西？以及，学习的速度有多快？
 - en: A ***real-time visual update ***would be pretty great, won’t it?
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 一个***实时视觉更新***会非常棒，不是吗？
 - en: Humans, after all, are visual creatures.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 毕竟，人类是视觉动物。
 - en: '[**Humans Are Visual Creatures**](https://www.seyens.com/humans-are-visual-creatures/)'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**人类是视觉动物**](https://www.seyens.com/humans-are-visual-creatures/)'
 - en: Here we gathered some interesting facts to emphasize why using visual aids in
     scientific communication is so important...
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们收集了一些有趣的事实，以强调在科学交流中使用视觉辅助工具的重要性...
 - en: And by *visual*, I don’t mean all the scores of numbers pouring down on your
     screen as you turned the verbosity of the model ON.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 说到*视觉*，我并不是指在你打开模型的详细输出时屏幕上滚动的大量数字。
 - en: '**Not this.**'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '**不是这个。**'
 - en: '![Image for post](../Images/a09377ffebfe8e2b0f095871e98d674f.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![文章图像](../Images/a09377ffebfe8e2b0f095871e98d674f.png)'
 - en: '**We want that.**'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**我们要这个。**'
 - en: '![Image for post](../Images/97fbf52e2cd7ee6dd47da8a45468611f.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![文章图像](../Images/97fbf52e2cd7ee6dd47da8a45468611f.png)'
 - en: Let’s see how we can get there.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看如何实现这个目标。
 - en: Where is that exciting accuracy plot constantly updating you about the progress?
     How do you know if the model is learning something useful? And, just how fast?
+  id: totrans-17
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 那个令人兴奋的准确度图表在哪里，不断更新你的进展情况？你怎么知道模型是否在学习有用的东西？以及，学习的速度有多快？
 - en: What do we mean by custom plots?
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 我们所说的自定义图表是什么意思？
 - en: There are established tools for regular jobs. But many a time, we need customized
     output.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于常规任务，有很多现成的工具。但许多时候，我们需要定制化的输出。
 - en: Tensorboard is cool but may not work for all needs
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Tensorboard 很酷，但可能无法满足所有需求。
 - en: If you are working with TensorFlow/Keras for your deep learning tasks, chances
     are strong that you have heard about or used Tensorboard. It is a fantastic dashboarding
     utility where you can pass on the log of the training and can get fantastic visual
     updates.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你在进行深度学习任务时使用 TensorFlow/Keras，可能你已经听说过或使用过 Tensorboard。它是一个非常棒的仪表板工具，你可以传递训练日志，并获得极佳的可视化更新。
 - en: '[**Get started with TensorBoard | TensorFlow**](https://www.tensorflow.org/tensorboard/get_started)'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**开始使用 TensorBoard | TensorFlow**](https://www.tensorflow.org/tensorboard/get_started)'
 - en: In machine learning, to improve something you often need to be able to measure
     it. TensorBoard is a tool for providing...
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习中，要改进某些东西，你通常需要能够衡量它。TensorBoard 是一个提供...
 - en: '![Figure](../Images/3d58a74739c05eb95f99ced75497b5ee.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/3d58a74739c05eb95f99ced75497b5ee.png)'
 - en: Image source: [**Tensorboard**](https://www.tensorflow.org/tensorboard)
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 图像来源：[**Tensorboard**](https://www.tensorflow.org/tensorboard)
 - en: You can get standard loss, accuracy plots very easily with Tensorboard. If you
     just want to monitor those and nothing else in your DL model, you can stop reading
     this article and just go with the Tensorboard.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以非常轻松地使用 Tensorboard 获取标准的损失和准确度图表。如果你只想监控这些内容，而不关心其他内容，可以停止阅读本文，直接使用 Tensorboard。
 - en: But what about the case when you have a highly imbalanced dataset to work with,
     and you want to plot **precision, recall, and F1-score**? Or, another less advertised
     classification metric like [**Matthew’s coefficient**](https://en.wikipedia.org/wiki/Matthews_correlation_coefficient)?
     How about the case where you just care about the ratio of True Negative and False
     Negative and want to create your own metric?
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 但如果你有一个高度不平衡的数据集，并且你想绘制**精准度、召回率和 F1 分数**呢？或者，另一种不那么常见的分类指标，比如 [**马修斯系数**](https://en.wikipedia.org/wiki/Matthews_correlation_coefficient)？再或者，你只关心真正负样本和假负样本的比例，想创建你自己的指标？
 - en: How do you see a live, real-time update of these non-standard metrics as your
     training progresses?
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 如何在训练过程中看到这些非标准指标的实时更新？
 - en: Keras has built-in calculations for a confusion matrix
+  id: totrans-29
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Keras 有内置的混淆矩阵计算功能
 - en: Fortunately, Keras provides the basic logs of four fundamental quantities corresponding
     to a confusion matrix — True Positive (TP), False Positive (FP), True Negative
     (TN), and False Negative (FN). They come from the Keras Metrics module.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，Keras 提供了与混淆矩阵相关的四个基本量的基本日志——真正的正例 (TP)、假正例 (FP)、真正的负例 (TN) 和假负例 (FN)。这些来自
+    Keras Metrics 模块。
 - en: '[**Module: tf.keras.metrics | TensorFlow Core v2.3.0**](https://www.tensorflow.org/api_docs/python/tf/keras/metrics)'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**模块: tf.keras.metrics | TensorFlow Core v2.3.0**](https://www.tensorflow.org/api_docs/python/tf/keras/metrics)'
 - en: Built-in metrics.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 内置指标。
 - en: We can simply define a list of metrics we want in the training log of your model
     and pass that list while compiling the model.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以简单地在模型的训练日志中定义一个指标列表，并在编译模型时传递该列表。
 - en: '[PRE0]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: And then,
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，
 - en: '[PRE1]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: So, we can get these measures (they are calculated on the training dataset though)
     as part of the training log. Once we get them, we can compute any custom metrics
     we want for a classification task from the first-principle definitions. For example,
     here we show the formulae for some of those non-standard metrics,
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，我们可以将这些度量（尽管它们是在训练数据集上计算的）作为训练日志的一部分。一旦得到这些度量，我们可以根据原理定义计算我们想要的任何自定义指标。例如，这里展示了一些非标准指标的公式，
 - en: '![Figure](../Images/8de41f4b30ce8573040d305b52603e3e.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/8de41f4b30ce8573040d305b52603e3e.png)'
 - en: Image source: [Wikipedia](https://en.wikipedia.org/wiki/Precision_and_recall)
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '图片来源: [维基百科](https://en.wikipedia.org/wiki/Precision_and_recall)'
 - en: But, how do we create the custom real-time plots from these computed values?
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，我们如何从这些计算值创建自定义实时图表呢？
 - en: '**We use callbacks, of course!**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**我们当然使用回调！**'
 - en: How do you see a live, real-time update of these non-standard metrics as your
     training progresses?
+  id: totrans-42
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 如何在训练过程中看到这些非标准指标的实时更新？
 - en: Custom callbacks for live visualization
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 用于实时可视化的自定义回调
 - en: Callbacks are a class of amazing utility that can be called at certain points
     (or on every epoch if you like) of your training. In short, they can be used to **process
     data (related to the model performance or the algorithm) on a real-time basis** while
     the training is undergoing.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 回调是一种神奇的工具类，可以在训练的某些点（或者每个纪元）被调用。简而言之，它们可以在训练过程中**实时处理与模型性能或算法相关的数据**。
 - en: Here is the TensorFlow official page for the Keras callbacks. But for our purpose, **we
     have to write a custom plotting class** derived from the base Callback class.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是 TensorFlow 官方的 Keras 回调页面。但为了我们的目的，**我们必须编写一个自定义绘图类**，它派生自基础 Callback 类。
 - en: '[**Module: tf.keras.callbacks | TensorFlow Core v2.3.0**](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks)'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**模块: tf.keras.callbacks | TensorFlow Core v2.3.0**](https://www.tensorflow.org/api_docs/python/tf/keras/callbacks)'
 - en: 'Callbacks: utilities called at certain points during model training.'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 回调：在模型训练过程中在特定点调用的工具。
 - en: Demo Jupyter notebook
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 演示 Jupyter notebook
 - en: The demo Jupyter notebook is [**located here**](https://github.com/tirthajyoti/Deep-learning-with-Python/blob/master/Notebooks/Custom-real-time-plots-with-callbacks.ipynb) on
     my Github repo. [**This repository**](https://github.com/tirthajyoti/Deep-learning-with-Python) contains
     many other useful deep learning tutorial-style notebooks. So, please feel free
     to star or fork.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 演示 Jupyter notebook 在我的 Github 仓库中 [**位于这里**](https://github.com/tirthajyoti/Deep-learning-with-Python/blob/master/Notebooks/Custom-real-time-plots-with-callbacks.ipynb)。[**这个仓库**](https://github.com/tirthajyoti/Deep-learning-with-Python)
+    包含许多其他有用的深度学习教程风格的笔记本。请随意加星或 fork。
 - en: An imbalanced dataset
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 一个不平衡的数据集
 - en: '![Figure](../Images/47bc59c70b76f2bef4725c3d7edbd46f.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/47bc59c70b76f2bef4725c3d7edbd46f.png)'
 - en: Image source: [**Pixabay**](https://pixabay.com/illustrations/balance-swing-equality-measurement-2108024/)
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '图片来源: [**Pixabay**](https://pixabay.com/illustrations/balance-swing-equality-measurement-2108024/)'
 - en: We created a synthetic dataset with imbalanced class frequencies (much more
     negatives than positives) for the binary classification task in the demo. This
     situation is quite common in practical data analytics projects and it emphasizes
     the need to have a visual dashboard for custom classification metrics, where accuracy
     is not a good metric.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们为演示中的二分类任务创建了一个具有不平衡类别频率（负样本远多于正样本）的合成数据集。这种情况在实际数据分析项目中非常常见，它强调了需要一个用于自定义分类指标的可视化仪表盘的必要性，在这种情况下准确率不是一个好的指标。
 - en: The following code creates a dataset with **90% negative and 10% positive** samples.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下代码创建了一个包含**90% 负样本和 10% 正样本**的数据集。
 - en: '[PRE2]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: The pairplot below shows a sample data distribution with the two classes. Note
     the imbalance in the kernel density plots.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 下图显示了两个类别的样本数据分布。注意核密度图的失衡。
 - en: '![Figure](../Images/b9d660279e2cc9116455c123a2a1f065.png)'
+  id: totrans-57
   prefs: []
   type: TYPE_IMG
+  zh: '![图像](../Images/b9d660279e2cc9116455c123a2a1f065.png)'
 - en: '**Data distribution by classes for the synthetic dataset**'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: '**合成数据集按类别分布**'
 - en: Callbacks are a class of amazing utility that can be called at certain points
     (or on every epoch if you like) of your training.
+  id: totrans-59
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 回调是一类很棒的工具，可以在训练的某些点（或者每个周期）调用。
 - en: The custom callback class
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 自定义回调类
 - en: The custom callback class essentially does the following,
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 自定义回调类主要执行以下操作，
 - en: initiates a bunch of lists to store values
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 初始化一系列列表以存储值
 - en: extracts the metrics from the model at the end of each epoch
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从模型中提取每个周期结束时的指标
 - en: computes classification metrics from those extractions
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 从这些提取中计算分类指标
 - en: and store them in those lists
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 并将其存储在这些列表中
 - en: creates multiple plots
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 创建多个图表
 - en: Here is the **initialization**,
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是**初始化**，
 - en: '![Image for post](../Images/3856b6e836edad3d0db2e702a284186f.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子图像](../Images/3856b6e836edad3d0db2e702a284186f.png)'
 - en: Here is the **extraction**,
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是**提取**，
 - en: '![Image for post](../Images/e99f274458bc9262b27380369b1ba64c.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子图像](../Images/e99f274458bc9262b27380369b1ba64c.png)'
 - en: Here is the **computation**,
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是**计算**，
 - en: '![Image for post](../Images/c2458e1c6d89203ed6bb98ee11c5d469.png)'
+  id: totrans-72
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子图像](../Images/c2458e1c6d89203ed6bb98ee11c5d469.png)'
 - en: Here is the **storage**,
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是**存储**，
 - en: '![Image for post](../Images/b7d4cec14b79606613bb18250242275f.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子图像](../Images/b7d4cec14b79606613bb18250242275f.png)'
 - en: And, I won’t bore you with a standard Matplotlib code for plotting except the
     following bit, which **refreshes your Jupyter notebook plots on every iteration**.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，我不会用标准的 Matplotlib 绘图代码来让你觉得枯燥，除了以下这部分，它**在每次迭代时刷新你的 Jupyter notebook 图表**。
 - en: '[PRE3]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: Also, **you don’t have to plot every epoch** as that may be taxing and slowing
     down the display or the machine. You can choose to plot, say, every 5th epoch.
     Just put the whole plotting code under a condition (here `epoch` is the epoch
     number you get from the training log)
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 此外，**你不必每个周期都绘图**，因为这可能会增加负担并减慢显示或机器的速度。你可以选择每隔 5 个周期绘制一次。只需将整个绘图代码放在一个条件下（这里`epoch`是你从训练日志中获得的周期数）
 - en: '[PRE4]'
+  id: totrans-78
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Don’t worry about how all of these work together, as the [**demo notebook is
     still there**](https://github.com/tirthajyoti/Deep-learning-with-Python/blob/master/Notebooks/Custom-real-time-plots-with-callbacks.ipynb) for
     you.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: 不用担心这些如何协同工作，因为[**演示笔记本仍然在这里**](https://github.com/tirthajyoti/Deep-learning-with-Python/blob/master/Notebooks/Custom-real-time-plots-with-callbacks.ipynb)供你使用。
 - en: Result
+  id: totrans-80
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结果
 - en: Here is a typical result, showing loss and precision/recall/F1-score in a simple
     dashboard style. Note, how the recall starts at a high value but the precision
     and F1-scores are low for this imbalanced dataset. These are the metrics you can
     compute and monitor in real-time with this kind of callback!
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是一个典型的结果，显示了损失和精度/召回率/F1 分数的简单仪表板风格。注意，召回率开始时较高，但精度和 F1 分数对于这个不平衡的数据集较低。这些是你可以通过这种回调实时计算和监控的指标！
 - en: '![Image for post](../Images/a30fe77c85543471d9015055dbbd5a71.png)'
+  id: totrans-82
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子图像](../Images/a30fe77c85543471d9015055dbbd5a71.png)'
 - en: More results — probability distributions!
+  id: totrans-83
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多结果 — 概率分布！
 - en: You can do whatever computation you want with the model (trained at that point),
     at each epoch end and visualize the result. For example, we could predict the
     output probabilities, and plot their distributions.
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在每个周期结束时对模型（在那个点训练好的）进行任何计算，并可视化结果。例如，我们可以预测输出概率，并绘制它们的分布。
 - en: '[PRE5]'
+  id: totrans-85
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Note, how few are given high probabilities at the beginning and slowly the model
     starts learning the true distribution of the data.
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，开始时只有少数样本获得高概率，随着时间的推移，模型开始学习数据的真实分布。
 - en: '![Image for post](../Images/c56c2ff6cae1a1770cdaac86d7f82ec8.png)'
+  id: totrans-87
   prefs: []
   type: TYPE_IMG
+  zh: '![帖子图像](../Images/c56c2ff6cae1a1770cdaac86d7f82ec8.png)'
 - en: Summary
+  id: totrans-88
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 摘要
 - en: We showed how you can create a dashboard of living, breathing visualizations
     of a deep learning model performance, with simple code snippets. Following the
     approach, outlined here, you don’t have to depend on Tensorboard or any third-party
     software. You can create your own computations and plots, customized to the fullest
     extent as you want.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们展示了如何通过简单的代码片段创建一个实时深度学习模型性能的仪表板。按照这里概述的方法，你无需依赖 Tensorboard 或任何第三方软件。你可以创建自己的计算和图表，尽可能自定义。
 - en: Note that the method described above works only for Jupyter notebooks. You have
     to adapt it differently for standalone Python scripts.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，上述方法仅适用于 Jupyter Notebook。对于独立的 Python 脚本，您需要进行不同的调整。
 - en: On that, there is another fantastic article written on this subject, which you
     can check here.
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: 关于这个话题，还有另一篇精彩的文章，您可以在这里查看。
 - en: '[**How to plot the model training in Keras — using custom callback function
     and using TensorBoard**](https://medium.com/@kapilvarshney/how-to-plot-the-model-training-in-keras-using-custom-callback-function-and-using-tensorboard-41e4ce3cb401)'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**如何在 Keras 中绘制模型训练图 — 使用自定义回调函数和 TensorBoard**](https://medium.com/@kapilvarshney/how-to-plot-the-model-training-in-keras-using-custom-callback-function-and-using-tensorboard-41e4ce3cb401)'
 - en: I started exploring the different ways to visualize the training process while
     working on the Dog breed identification...
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: 在处理犬种识别时，我开始探索不同的训练过程可视化方法……
 - en: You may also like…
+  id: totrans-94
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 您可能还喜欢……
 - en: If you liked this article, you may also like the following deep learning articles
     from me,
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果您喜欢这篇文章，您可能还会喜欢以下我撰写的深度学习文章，
 - en: '[**Are you using the “Scikit-learn wrapper” in your Keras Deep Learning model?**](https://towardsdatascience.com/are-you-using-the-scikit-learn-wrapper-in-your-keras-deep-learning-model-a3005696ff38)'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**您是否在 Keras 深度学习模型中使用了“Scikit-learn 包装器”？**](https://towardsdatascience.com/are-you-using-the-scikit-learn-wrapper-in-your-keras-deep-learning-model-a3005696ff38)'
 - en: How to use the special wrapper classes from Keras for hyperparameter tuning?
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: 如何使用 Keras 的特殊包装类进行超参数调优？
 - en: '[**Activation maps for deep learning models in a few lines of code**](https://towardsdatascience.com/a-single-function-to-streamline-image-classification-with-keras-bd04f5cfe6df)'
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**深度学习模型的激活图，几行代码搞定**](https://towardsdatascience.com/a-single-function-to-streamline-image-classification-with-keras-bd04f5cfe6df)'
 - en: We illustrate how to show the activation maps of various layers in a deep CNN
     model with just a couple of lines of...
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们展示了如何用几行代码展示深度 CNN 模型中各层的激活图……
 - en: '[**A single function to streamline image classification with Keras**](https://towardsdatascience.com/a-single-function-to-streamline-image-classification-with-keras-bd04f5cfe6df)'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**一个简化 Keras 图像分类的单函数**](https://towardsdatascience.com/a-single-function-to-streamline-image-classification-with-keras-bd04f5cfe6df)'
 - en: We show, how to construct a single, generalized, utility function to pull images
     automatically from a directory and...
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们展示了如何构建一个通用的工具函数来自动从目录中提取图像，并……
 - en: You can check the author’s [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** repositories **for
     code, ideas, and resources in machine learning and data science. If you are, like
     me, passionate about AI/machine learning/data science, please feel free to [add
     me on LinkedIn](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) or [follow
     me on Twitter](https://twitter.com/tirthajyotiS).
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: 您可以查看作者的 [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** 代码库**，以获取机器学习和数据科学的代码、想法和资源。如果您和我一样，对
+    AI/机器学习/数据科学充满热情，请随时 [在 LinkedIn 上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) 或 [在
+    Twitter 上关注我](https://twitter.com/tirthajyotiS)。
 - en: '[**Tirthajyoti Sarkar - Sr. Principal Engineer - Semiconductor, AI, Machine
     Learning - ON…**](https://towardsdatascience.com/activation-maps-for-deep-learning-models-in-a-few-lines-of-code-ed9ced1e8d21)'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**Tirthajyoti Sarkar - 高级首席工程师 - 半导体、AI、机器学习 - ON…**](https://towardsdatascience.com/activation-maps-for-deep-learning-models-in-a-few-lines-of-code-ed9ced1e8d21)'
 - en: 'Making data science/ML concepts easy to understand through writing: https://medium.com/@tirthajyoti
     Open-source and...'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过写作让数据科学/机器学习概念易于理解：https://medium.com/@tirthajyoti 开源和……
 - en: '[Original](https://towardsdatascience.com/how-to-create-custom-real-time-plots-in-deep-learning-ecbdb3e7922f).
     Reposted with permission.'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/how-to-create-custom-real-time-plots-in-deep-learning-ecbdb3e7922f)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[Simple Python Package for Comparing, Plotting & Evaluating Regression Models](/2020/11/simple-python-package-comparing-plotting-evaluating-regression-models.html)'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用于比较、绘图和评估回归模型的简单 Python 包](/2020/11/simple-python-package-comparing-plotting-evaluating-regression-models.html)'
 - en: '[20 Core Data Science Concepts for Beginners](/2020/12/20-core-data-science-concepts-beginners.html)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[初学者的 20 个核心数据科学概念](/2020/12/20-core-data-science-concepts-beginners.html)'
 - en: '[Learn Deep Learning with this Free Course from Yann LeCun](/2020/11/learn-deep-learning-free-course-yann-lecun.html)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过 Yann LeCun 的免费课程学习深度学习](/2020/11/learn-deep-learning-free-course-yann-lecun.html)'
 - en: '* * *'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-111
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-113
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-114
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织在 IT 领域'
 - en: '* * *'
+  id: totrans-115
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-116
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[How To Create Custom Context Managers in Python](https://www.kdnuggets.com/how-to-create-custom-context-managers-in-python)'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在 Python 中创建自定义上下文管理器](https://www.kdnuggets.com/how-to-create-custom-context-managers-in-python)'
 - en: '[Introducing OpenChat: The Free & Simple Platform for Building…](https://www.kdnuggets.com/2023/06/introducing-openchat-free-simple-platform-building-custom-chatbots-minutes.html)'
+  id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[介绍 OpenChat：一个免费且简单的构建平台…](https://www.kdnuggets.com/2023/06/introducing-openchat-free-simple-platform-building-custom-chatbots-minutes.html)'
 - en: '[Tailor ChatGPT to Fit Your Needs with Custom Instructions](https://www.kdnuggets.com/2023/08/tailor-chatgpt-fit-needs-custom-instructions.html)'
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用自定义指令调整 ChatGPT 以满足您的需求](https://www.kdnuggets.com/2023/08/tailor-chatgpt-fit-needs-custom-instructions.html)'
 - en: '[How to Create a Dataset for Machine Learning](https://www.kdnuggets.com/2022/02/create-dataset-machine-learning.html)'
+  id: totrans-120
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何为机器学习创建数据集](https://www.kdnuggets.com/2022/02/create-dataset-machine-learning.html)'
 - en: '[Create a Time Series Ratio Analysis Dashboard](https://www.kdnuggets.com/2023/06/wolfer-create-time-series-ratio-analysis-dashboard.html)'
+  id: totrans-121
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[创建时间序列比率分析仪表板](https://www.kdnuggets.com/2023/06/wolfer-create-time-series-ratio-analysis-dashboard.html)'
 - en: '[From Zero to Hero: Create Your First ML Model with PyTorch](https://www.kdnuggets.com/from-zero-to-hero-create-your-first-ml-model-with-pytorch)'
+  id: totrans-122
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从零到英雄：使用 PyTorch 创建您的第一个 ML 模型](https://www.kdnuggets.com/from-zero-to-hero-create-your-first-ml-model-with-pytorch)'
