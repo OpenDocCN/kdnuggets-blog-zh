@@ -1,164 +1,247 @@
 - en: A Guide for Customer Retention Analysis with SQL
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 客户留存分析指南
 - en: 原文：[https://www.kdnuggets.com/2017/12/guide-customer-retention-analysis-sql.html/2](https://www.kdnuggets.com/2017/12/guide-customer-retention-analysis-sql.html/2)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/12/guide-customer-retention-analysis-sql.html/2](https://www.kdnuggets.com/2017/12/guide-customer-retention-analysis-sql.html/2)
 - en: '**Other techniques for customer retention**'
+  id: totrans-2
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**其他客户留存技术**'
 - en: 'There are, of course, other ways to think about customer retention analysis.
     In particular, we might want to look at how to deal with returning customers:
     if in p1 there are 100 customers and in p2 80 of them return, in p3 do we want
     to keep the original 100 or look only at the 80?'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 当然，还有其他方法来考虑客户留存分析。特别是，我们可能需要查看如何处理回访客户：如果在 p1 中有 100 个客户，而在 p2 中有 80 个回访，那么在
+    p3 中我们是要保留最初的 100 个客户，还是只关注那 80 个？
 - en: In the above example, I talked only about period-to-period retention, but I
     also classified those who were “laggers,” or who took more than one month to return.
     A business may want, through targeted marketing efforts, to reward customers who
     keep a monthly visit pattern, or perhaps, to encourage those who visit less than
     once a month to come back more often.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在上述示例中，我只讨论了期到期的留存情况，但我也分类了那些“滞后者”或那些需要超过一个月才能回访的人。通过有针对性的营销活动，企业可能希望奖励那些保持每月访问模式的客户，或者鼓励那些少于每月一次访问的客户更频繁地回访。
 - en: So, another way to look at it would be to look at what proportion of our visitors
     in any given month are retained, how many are returning, and how many are new.
     In this case, we would want to change our perspective slightly, and look not at
     the next visit, but at the previous one.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，另一种方法是查看我们在任何给定月份的访客中有多少比例被留存，多少是回访用户，多少是新用户。在这种情况下，我们需要稍微改变一下视角，不是看下一个访问，而是看上一个访问。
 - en: '[PRE0]'
+  id: totrans-6
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: So then, it’s simple to count the number of each type of customer in any given
     month.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，简单地统计任何给定月份的每种类型客户的数量是很容易的。
 - en: '[PRE1]'
+  id: totrans-8
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'With a simple export and graph, you will get something that looks like this:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过简单的导出和图表，你将得到如下所示的结果：
 - en: '![](../Images/06bbf2a36485a2126a2fde49610ed717.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/06bbf2a36485a2126a2fde49610ed717.png)'
 - en: Data visualized with [Statsbot](https://statsbot.co/solutions/product-analytics?utm_source=blog&utm_medium=article&utm_campaign=retention)
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据通过 [Statsbot](https://statsbot.co/solutions/product-analytics?utm_source=blog&utm_medium=article&utm_campaign=retention)
+    进行可视化
 - en: '**Cohort tables**'
+  id: totrans-12
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**队列表**'
 - en: A popular way to analyze customer retention is through the use of cohorts, i.e.
     defining each user by their first visit, and then seeing how they return over
     time.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 一种流行的客户留存分析方法是通过使用队列，即根据用户的第一次访问来定义每个用户，然后查看他们随时间的回访情况。
 - en: 'Ideally, our end product will be a table like this:'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 理想情况下，我们的最终产品将是这样的表格：
 - en: '[![](../Images/576d75b8d5ef77fe52b287521d5bacb7.png)](https://cdn-images-1.medium.com/max/1000/1*V5RIvodtHhnYwPkkxVbPhg.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/576d75b8d5ef77fe52b287521d5bacb7.png)](https://cdn-images-1.medium.com/max/1000/1*V5RIvodtHhnYwPkkxVbPhg.png)'
 - en: Well, actually, ideally, our table will show that the number of new users is
     increasing every month, and that retention is improving over time. But you get
     the idea!
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，理想情况下，我们的表格将显示每月新用户数量的增加以及留存率的提高。但你明白我的意思！
 - en: In order to build this, we need first to establish the number of new users for
     each month, and the amount of time that they stick around. Then, getting the percentages
     will be easy.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了建立这个数据，我们首先需要确定每个月的新用户数量以及他们的留存时间。然后，获取百分比将变得简单。
 - en: Our first subquery will classify each customer according to their initial visit,
     and the length of time that they are retained.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的第一个子查询将根据客户的初次访问以及他们的留存时间来分类每个客户。
 - en: '[PRE2]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: By month, we can then calculate the number of new users.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 按月计算，我们可以确定新用户的数量。
 - en: '[PRE3]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: We also want to get a picture of whether a new user in, say, month 1, returned
     in both month 2 and 3 or only in month 3\. So, we’ll create a subquery that allows
     us to track the visit pattern of each customer.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还希望了解，比如说第 1 个月的新用户是否在第 2 个月和第 3 个月都回访，还是仅在第 3 个月回访。因此，我们将创建一个子查询，以跟踪每个客户的访问模式。
 - en: '[PRE4]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Then, we’ll combine these to get a lovely final product. For each month a new
     user is recruited, we’ll have the size of their group, as well as, for each subsequent
     month, the percentage of those users who returned. Just like the table above!
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们将这些数据合并以获得最终的成果。对于每个月招募的新用户，我们将获得他们的组大小，以及每个后续月份的回访百分比。就像上面的表格一样！
 - en: 'In order to do that, we run the following script:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了做到这一点，我们运行以下脚本：
 - en: '[PRE5]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: 'This would give us a table which looks like this:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 这将给我们一个如下所示的表格：
 - en: '![](../Images/fbb300660ec5330666fa3ee299aef4d1.png)'
+  id: totrans-28
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/fbb300660ec5330666fa3ee299aef4d1.png)'
 - en: We can then do a pivot table in Excel (or similar) in order to get the table
     above, or use a business intelligence tool such as [**Statsbot**](https://statsbot.co/solutions/product-analytics?utm_source=blog&utm_medium=article&utm_campaign=retention) to
     get data right from our database without coding SQL.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们可以在 Excel（或类似工具）中创建一个数据透视表，以获得上面的表格，或者使用像 [**Statsbot**](https://statsbot.co/solutions/product-analytics?utm_source=blog&utm_medium=article&utm_campaign=retention)
+    这样的商业智能工具，从数据库中直接获取数据，无需编写 SQL 代码。
 - en: '![](../Images/2d3b3ed685d6d5a4bf107380eac7f5f2.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2d3b3ed685d6d5a4bf107380eac7f5f2.png)'
 - en: '****Interpretation****'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '****解释****'
 - en: Producing such a table is, of course, only the first step, and a pretty useless
     one at that if we don’t know how to interpret the numbers.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 生成这样的表格当然只是第一步，如果我们不知道如何解释这些数字，那将是相当无用的。
 - en: Taking our original table again, I’ll run through the basics of cohort analysis.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次以我们原始的表格为基础，我将介绍基础的队列分析。
 - en: '[![](../Images/576d75b8d5ef77fe52b287521d5bacb7.png)](https://cdn-images-1.medium.com/max/1000/1*V5RIvodtHhnYwPkkxVbPhg.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '[![](../Images/576d75b8d5ef77fe52b287521d5bacb7.png)](https://cdn-images-1.medium.com/max/1000/1*V5RIvodtHhnYwPkkxVbPhg.png)'
 - en: First of all, we’re going to look at the number of new users per month. Are
     we managing to recruit a healthy number of clients for our business? Here we can
     see that we are recruiting between 500 and 600 new clients per month. Is this
     what we had aimed to do? This is a discussion that should be had with the marketing
     team.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们要查看每月的新用户数量。我们是否能够为我们的业务招募到健康数量的客户？这里我们可以看到我们每月招募了 500 到 600 名新客户。这是我们原本计划做的事情吗？这是一个需要与营销团队讨论的问题。
 - en: Then, is the number of new clients per month rising? If not, why? Are there
     peaks and troughs? So, for example, we can see that there were only 504 new customers
     in period 6, but 583 in period 5 and 598 in period 7\. These are huge swings in
     the numbers. If there is something to explain it, like we’re a business that caters
     to school groups and there was a week of school vacation during that period, fine.
     But we need to have an explanation.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么，每月的新客户数量是否在上升？如果没有，上升的趋势是否存在波动？例如，我们可以看到第 6 期只有 504 名新客户，而第 5 期有 583 名，第
+    7 期有 598 名。这些数字的波动非常大。如果有解释，比如我们是服务于学校团体的业务，并且在那段时间有一个学校假期，那也可以。但我们需要一个解释。
 - en: After that, the actual retention percentages. One business objective is going
     to be to improve our retention over time, i.e. to have an upward trend as we go
     down the lines. So, if we retain a higher percentage of new users who joined in
     period 2 than those who joined in period 1, we are on track.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后，我们将查看实际的保留百分比。一个业务目标是随着时间的推移提高我们的保留率，即在每一行下方保持上升的趋势。因此，如果我们保留了更多第 2 期的新用户，而不是第
+    1 期的用户，我们就是在走对的道路上。
 - en: 'As we see in the table above, this is what happened: after 1 month, 63% of
     new users from period 1 returned, but 68% of new users from period 2 returned.
     So we’re doing well! Basically, our customer experience should be getting better
     over time, so that people are more likely to come back.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们在上面的表格中看到的那样，这发生了什么：在 1 个月后，第 1 期的 63% 的新用户回归了，但第 2 期的 68% 的新用户回归了。所以我们做得很好！基本上，我们的客户体验应该随着时间的推移而改善，这样人们更有可能回来。
 - en: After that, another metric we will look at is the rate at which we lose people.
     It is expected that, over time, retention will fall. This is the reason that we
     always need to keep recruiting! But, if we can slow customer attrition, so that
@@ -166,24 +249,32 @@
     serving client needs, and not just on trying to find new clients. This, in turn,
     will help retention, as clients will like that we are paying more attention to
     them.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 之后，我们将查看另一个指标，即我们失去客户的速率。预计随着时间的推移，保留率会下降。这就是为什么我们需要不断招募的原因！但如果我们能减缓客户流失速度，使每个时期之间的下降幅度变小，那么我们可以将更多的资源用于满足客户需求，而不仅仅是寻找新客户。这反过来会帮助保留，因为客户会喜欢我们更多地关注他们。
 - en: '****Frequency of visits****'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '****访问频率****'
 - en: One element that I have neglected until now is frequency of visits, which is
     the other side of customer retention analysis. It is generally accepted that a
     customer who remains loyal to your business is worth much more than a new customer,
     or even one whose engagement is patchy (i.e. returning customers).
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 直到现在，我忽略的一个元素是访问频率，这是客户保留分析的另一面。普遍认为，忠诚于你的业务的客户比新客户甚至那些参与度不稳定（即回头客）的客户更有价值。
 - en: Adding a count of visits per customer, per month, or average lag time will complete
     the picture of how customers are interacting with your business. You can also
     build cohorts with the amount of customers, revenue from returning customers,
     etc.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: '**Final thoughts**'
+  id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -193,81 +284,101 @@
     don’t come back, then there’s something to be worked on, either in terms of the
     quality of your product, or in terms of the relationship that you have with your
     customers. Retention analysis allows for easy flagging of this type of issue.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
 - en: '**Bio: [Luba Belokon](https://www.linkedin.com/in/luba-belokon-35078512b/)**
     is Content Jedi at Statsbot.'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: '[Original](https://blog.statsbot.co/customer-retention-analysis-93af9daee46b?utm_source=kdnuggets&utm_medium=post&utm_campaign=sql).
     Reposted with permission.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '[Machine Learning Algorithms: Which One to Choose for Your Problem](/2017/11/machine-learning-algorithms-choose-your-problem.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Ensemble Learning to Improve Machine Learning Results](/2017/09/ensemble-learning-improve-machine-learning-results.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[A Guide For Time Series Prediction Using Recurrent Neural Networks (LSTMs)](/2017/10/guide-time-series-prediction-recurrent-neural-networks-lstms.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-52
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[How To Collect Data For Customer Sentiment Analysis](https://www.kdnuggets.com/2022/12/collect-data-customer-sentiment-analysis.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[A Step by Step Guide to Reading and Understanding SQL Queries](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Breaking Down DENSE_RANK(): A Step-by-Step Guide for SQL Enthusiasts](https://www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[The Essential Guide to SQL’s Execution Order](https://www.kdnuggets.com/the-essential-guide-to-sql-execution-order)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Data Cleaning in SQL: How To Prepare Messy Data for Analysis](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Collection of Guides on Mastering SQL, Python, Data Cleaning, Data…](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
