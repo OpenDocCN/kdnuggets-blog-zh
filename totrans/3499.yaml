@@ -1,71 +1,106 @@
 - en: 'Beyond One-Hot: an exploration of categorical variables'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 超越独热编码：分类变量的探讨
 - en: 原文：[https://www.kdnuggets.com/2015/12/beyond-one-hot-exploration-categorical-variables.html](https://www.kdnuggets.com/2015/12/beyond-one-hot-exploration-categorical-variables.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2015/12/beyond-one-hot-exploration-categorical-variables.html](https://www.kdnuggets.com/2015/12/beyond-one-hot-exploration-categorical-variables.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By Will McGinnis**.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：Will McGinnis**。'
 - en: 'In machine learning, data are king. The algorithms and models used to make
     predictions with the data are important, and very interesting, but ML is still
     subject to the idea of garbage-in-garbage-out. With that in mind, let’s look at
     a little subset of those input data: categorical variables.'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习中，数据为王。用于数据预测的算法和模型很重要且非常有趣，但机器学习仍然受限于“垃圾进，垃圾出”的理念。考虑到这一点，让我们看看这些输入数据中的一个小子集：分类变量。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业的快车道。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 部门'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![mushrooms-cars](../Images/56c0fdcb94cc15a810d93943d1ca52f4.png)'
+  id: totrans-11
   prefs: []
   type: TYPE_IMG
+  zh: '![mushrooms-cars](../Images/56c0fdcb94cc15a810d93943d1ca52f4.png)'
 - en: 'Categorical variables ([wiki](https://en.wikipedia.org/wiki/Categorical_variable))
     are those that represent a fixed number of possible values, rather than a continuous
     number.  Each value assigns the measurement to one of those finite groups, or
     categories.  They differ from ordinal variables in that the distance from one
     category to another ought to be equal regardless of the number of categories,
     as opposed to ordinal variables which have some intrinsic ordering.  As an example:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 分类变量（[wiki](https://en.wikipedia.org/wiki/Categorical_variable)）是那些表示固定数量可能值的变量，而不是连续的数值。每个值将测量结果分配到这些有限的组或类别之一。它们与有序变量的区别在于，从一个类别到另一个类别的距离应当是相等的，不论类别的数量，而有序变量则具有某种内在的排序。举个例子：
 - en: 'Ordinal: low, medium, high'
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 有序变量：低、中、高
 - en: 'Categorical: Georgia, Alabama, South Carolina, … , New York'
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 分类变量：乔治亚州、阿拉巴马州、南卡罗来纳州、……、纽约
 - en: The machine learning algorithms we will later use tend to want numbers, and
     not strings, as their inputs so we need some method of coding to convert them.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们稍后将使用的机器学习算法倾向于需要数字而非字符串作为输入，因此我们需要某种编码方法将其转换。
 - en: 'A quick interjection: there is one other concept that will come up frequently
     in this post, and that is the concept of dimensionality.  In simplistic terms,
     it is just the number of columns in the dataset, but it has significant downstream
@@ -77,244 +112,368 @@
     those parameters. If the number of rows in the dataset is fixed, addition of extra
     dimensions without adding more information for the models to learn from can have
     a detrimental effect on the eventual model accuracy.'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 简短插曲：在这篇文章中还有一个经常出现的概念，那就是维度的概念。简单来说，它只是数据集中列的数量，但对最终模型有重要的影响。在极端情况下，“[维度灾难](https://en.wikipedia.org/wiki/Curse_of_dimensionality)”的概念讨论了在高维空间中，一些东西可能无法正常工作。即使在相对低维的问题中，维度更多的数据集也需要更多的参数来让模型理解，这意味着需要更多的行来可靠地学习这些参数。如果数据集中的行数固定，增加额外的维度而不增加更多的模型学习信息可能对最终模型的准确性产生负面影响。
 - en: 'To circle back to the problem at hand: we want to code categorical variables
     into numbers, but we are concerned about this dimensionality problem.  The obvious
     answer is to just assign an integer to each category (we are assuming we know
     all of the possible categories up front).  This is called ordinal coding.  It
     does not add any dimensions to the problem, but implies an order to the variable
     that may not actually exist.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 回到当前的问题：我们希望将类别变量编码为数字，但我们担心这种维度问题。显而易见的答案是直接为每个类别分配一个整数（我们假设我们事先知道所有可能的类别）。这被称为序数编码。它不会增加任何维度，但暗示了一个实际可能不存在的变量顺序。
 - en: Methodology
+  id: totrans-18
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 方法论
 - en: 'To find out how well this works, I put together a simple python script to test
     different coding methods on common datasets.  First an overview of the process:'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了了解这效果如何，我编写了一个简单的 Python 脚本来测试不同的编码方法在常见数据集上的表现。首先是过程概述：
 - en: We gather a dataset for a classification problem that has categorical variables
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们收集一个有类别变量的分类问题的数据集。
 - en: We use some method of coding to convert the X dataset into numeric values
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们使用某种编码方法将 X 数据集转换为数值。
 - en: We use scikit-learn’s cross-validation-score and a BernoulliNB() classifier
     to generate scores for the dataset. This is repeated 10x for each dataset and
     the mean of all scores is used.
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们使用 scikit-learn 的交叉验证分数和 BernoulliNB() 分类器生成数据集的分数。每个数据集重复 10 次，然后使用所有分数的均值。
 - en: We store the dimensionality of the dataset, mean score, and time to code the
     data and generate the scores.
+  id: totrans-23
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们存储数据集的维度、均分和编码数据及生成分数的时间。
 - en: 'This is all repeated for a few different datasets from the UCI dataset repository:'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些内容在 UCI 数据集库中的几个不同数据集上重复出现：
 - en: '[Car Evaluation](https://archive.ics.uci.edu/ml/datasets/Car+Evaluation)'
+  id: totrans-25
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[汽车评估](https://archive.ics.uci.edu/ml/datasets/Car+Evaluation)'
 - en: '[Mushrooms](https://archive.ics.uci.edu/ml/datasets/Mushroom)'
+  id: totrans-26
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[蘑菇](https://archive.ics.uci.edu/ml/datasets/Mushroom)'
 - en: '[Splice Junctions](http://archive.ics.uci.edu/ml/machine-learning-databases/molecular-biology/splice-junction-gene-sequences/)'
+  id: totrans-27
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[剪接位点](http://archive.ics.uci.edu/ml/machine-learning-databases/molecular-biology/splice-junction-gene-sequences/)'
 - en: 'I tried 7 different encoding methods (descriptions of 4-7 are taken from [statsmodel’s
     docs](http://statsmodels.sourceforge.net/devel/contrasts.html)):'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我尝试了 7 种不同的编码方法（4-7 的描述取自 [statsmodel’s docs](http://statsmodels.sourceforge.net/devel/contrasts.html)）：
 - en: 'Ordinal: as described above'
+  id: totrans-29
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 序数：如上所述
 - en: 'One-Hot: one column per category, with a 1 or 0 in each cell for if the row
     contained that column’s category'
+  id: totrans-30
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: One-Hot：每个类别一列，每个单元格中为该列类别的行填入1或0。
 - en: 'Binary: first the categories are encoded as ordinal, then those integers are
     converted into binary code, then the digits from that binary string are split
     into separate columns.  This encodes the data in fewer dimensions that one-hot,
     but with some distortion of the distances.'
+  id: totrans-31
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Binary：首先将类别编码为序数，然后将这些整数转换为二进制代码，再将二进制字符串中的数字拆分为单独的列。这种方法将数据编码在比 One-Hot 更少的维度中，但会对距离产生一定的扭曲。
 - en: 'Sum: compares the mean of the dependent variable for a given level to the overall
     mean of the dependent variable over all the levels. That is, it uses contrasts
     between each of the first k-1 levels and level k In this example, level 1 is compared
     to all the others, level 2 to all the others, and level 3 to all the others.'
+  id: totrans-32
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Sum：将给定级别的因变量的均值与所有级别的因变量的总体均值进行比较。也就是说，它使用每个前 k-1 级别与级别 k 之间的对比。在这个例子中，级别 1
+    与所有其他级别进行比较，级别 2 与所有其他级别进行比较，级别 3 与所有其他级别进行比较。
 - en: Polynomial: The coefficients taken on by polynomial coding for k=4 levels are
     the linear, quadratic, and cubic trends in the categorical variable. The categorical
     variable here is assumed to be represented by an underlying, equally spaced numeric
     variable. Therefore, this type of encoding is used only for ordered categorical
     variables with equal spacing.
+  id: totrans-33
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 多项式：多项式编码对于 k=4 级别所采用的系数是类别变量中的线性、二次和三次趋势。这里假设类别变量由一个底层的、等间距的数值变量表示。因此，这种编码仅用于具有等间距的有序类别变量。
 - en: Backward Difference: the mean of the dependent variable for a level is compared
     with the mean of the dependent variable for the prior level. This type of coding
     may be useful for a nominal or an ordinal variable.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 后向差异：将一个级别的因变量均值与前一个级别的因变量均值进行比较。这种编码方法可能对名义变量或序数变量有用。
 - en: Helmert: The mean of the dependent variable for a level is compared to the mean
     of the dependent variable over all previous levels. Hence, the name ‘reverse’
     being sometimes applied to differentiate from forward Helmert coding.
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: Helmert：对某一水平的因变量均值与所有前面水平的因变量均值进行比较。因此，有时会使用“反向”这个名称来区分于前向 Helmert 编码。
 - en: Results
+  id: totrans-36
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结果
 - en: Mushroom
+  id: totrans-37
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 蘑菇
 - en: '|  | Coding | Dimensionality | Avg. Score | Elapsed Time |'
+  id: totrans-38
   prefs: []
   type: TYPE_TB
+  zh: '|  | 编码 | 维度 | 平均得分 | 用时 |'
 - en: '| 0 | Ordinal | 22 | 0.81 | 3.65 |'
+  id: totrans-39
   prefs: []
   type: TYPE_TB
+  zh: '| 0 | 顺序编码 | 22 | 0.81 | 3.65 |'
 - en: '| 1 | One-Hot Encoded | 117 | 0.81 | 8.19 |'
+  id: totrans-40
   prefs: []
   type: TYPE_TB
+  zh: '| 1 | 独热编码 | 117 | 0.81 | 8.19 |'
 - en: '| 6 | Helmert Coding | 117 | 0.84 | 5.43 |'
+  id: totrans-41
   prefs: []
   type: TYPE_TB
+  zh: '| 6 | Helmert 编码 | 117 | 0.84 | 5.43 |'
 - en: '| 5 | Backward Difference Coding | 117 | 0.85 | 7.83 |'
+  id: totrans-42
   prefs: []
   type: TYPE_TB
+  zh: '| 5 | 反向差分编码 | 117 | 0.85 | 7.83 |'
 - en: '| 3 | Sum Coding | 117 | 0.85 | 4.93 |'
+  id: totrans-43
   prefs: []
   type: TYPE_TB
+  zh: '| 3 | 总和编码 | 117 | 0.85 | 4.93 |'
 - en: '| 4 | Polynomial Coding | 117 | 0.86 | 6.14 |'
+  id: totrans-44
   prefs: []
   type: TYPE_TB
+  zh: '| 4 | 多项式编码 | 117 | 0.86 | 6.14 |'
 - en: '| 2 | Binary Encoded | 43 | 0.87 | 3.95 |'
+  id: totrans-45
   prefs: []
   type: TYPE_TB
+  zh: '| 2 | 二进制编码 | 43 | 0.87 | 3.95 |'
 - en: Cars
+  id: totrans-46
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 汽车
 - en: '|  | Coding | Dimensionality | Avg. Score | Elapsed Time |'
+  id: totrans-47
   prefs: []
   type: TYPE_TB
+  zh: '|  | 编码 | 维度 | 平均得分 | 用时 |'
 - en: '| 10 | Sum Coding | 21 | 0.55 | 1.46 |'
+  id: totrans-48
   prefs: []
   type: TYPE_TB
+  zh: '| 10 | 总和编码 | 21 | 0.55 | 1.46 |'
 - en: '| 13 | Helmert Coding | 21 | 0.58 | 1.46 |'
+  id: totrans-49
   prefs: []
   type: TYPE_TB
+  zh: '| 13 | Helmert 编码 | 21 | 0.58 | 1.46 |'
 - en: '| 7 | Ordinal | 6 | 0.64 | 1.47 |'
+  id: totrans-50
   prefs: []
   type: TYPE_TB
+  zh: '| 7 | 顺序编码 | 6 | 0.64 | 1.47 |'
 - en: '| 8 | One-Hot Encoded | 21 | 0.65 | 1.39 |'
+  id: totrans-51
   prefs: []
   type: TYPE_TB
+  zh: '| 8 | 独热编码 | 21 | 0.65 | 1.39 |'
 - en: '| 11 | Polynomial Coding | 21 | 0.67 | 1.49 |'
+  id: totrans-52
   prefs: []
   type: TYPE_TB
+  zh: '| 11 | 多项式编码 | 21 | 0.67 | 1.49 |'
 - en: '| 12 | Backward Difference Coding | 21 | 0.70 | 1.50 |'
+  id: totrans-53
   prefs: []
   type: TYPE_TB
+  zh: '| 12 | 反向差分编码 | 21 | 0.70 | 1.50 |'
 - en: '| 9 | Binary Encoded | 9 | 0.70 | 1.44 |'
+  id: totrans-54
   prefs: []
   type: TYPE_TB
+  zh: '| 9 | 二进制编码 | 9 | 0.70 | 1.44 |'
 - en: Splice
+  id: totrans-55
   prefs:
   - PREF_H4
   type: TYPE_NORMAL
+  zh: 拼接
 - en: '|  | Coding | Dimensionality | Avg. Score | Elapsed Time |'
+  id: totrans-56
   prefs: []
   type: TYPE_TB
+  zh: '|  | 编码 | 维度 | 平均得分 | 用时 |'
 - en: '| 14 | Ordinal | 61 | 0.68 | 5.11 |'
+  id: totrans-57
   prefs: []
   type: TYPE_TB
+  zh: '| 14 | 顺序编码 | 61 | 0.68 | 5.11 |'
 - en: '| 17 | Sum Coding | 3465 | 0.92 | 25.90 |'
+  id: totrans-58
   prefs: []
   type: TYPE_TB
+  zh: '| 17 | 总和编码 | 3465 | 0.92 | 25.90 |'
 - en: '| 16 | Binary Encoded | 134 | 0.94 | 3.35 |'
+  id: totrans-59
   prefs: []
   type: TYPE_TB
+  zh: '| 16 | 二进制编码 | 134 | 0.94 | 3.35 |'
 - en: '| 15 | One-Hot Encoded | 3465 | 0.95 | 2.56 |'
+  id: totrans-60
   prefs: []
   type: TYPE_TB
+  zh: '| 15 | 独热编码 | 3465 | 0.95 | 2.56 |'
 - en: Conclusions
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: This is by no means an exhaustive study, but it seems that with decent consistency
     binary coding performs well, without a significant increase in dimensionality.
      Ordinal, as expected, performs consistently poorly.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 这绝不是一项详尽的研究，但似乎二进制编码在一定的一致性下表现良好，而维度增加并不显著。 顺序编码，如预期的那样，一直表现不佳。
 - en: If you’d like to look at the source, add or suggest new datasets, or new coding
     methods, I’ve put everything (including datasets) up on github: [https://github.com/wdm0006/categorical_encoding](https://github.com/wdm0006/categorical_encoding).
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '如果你想查看源代码、添加或建议新的数据集或新的编码方法，我已将所有内容（包括数据集）上传到 github: [https://github.com/wdm0006/categorical_encoding](https://github.com/wdm0006/categorical_encoding)。'
 - en: Feel free to either contribute directly there, or comment with suggestions here.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 请随时在那儿直接贡献，或在此评论提出建议。
 - en: '[Original](http://willmcginnis.com/2015/11/29/beyond-one-hot-an-exploration-of-categorical-variables/
     ).'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](http://willmcginnis.com/2015/11/29/beyond-one-hot-an-exploration-of-categorical-variables/
+    ).'
 - en: '**Related:**'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Data Mining Medicare Data – What Can We Find?](/2014/04/data-mining-medicare-data.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据挖掘医疗数据 – 我们能发现什么？](/2014/04/data-mining-medicare-data.html)'
 - en: '[5 Tribes of Machine Learning – Questions and Answers](/2015/11/domingos-5-tribes-machine-learning-questions-answers.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习的 5 个部落 – 问题与答案](/2015/11/domingos-5-tribes-machine-learning-questions-answers.html)'
 - en: '[Fraud Detection Solutions](/solutions/fraud-detection.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[欺诈检测解决方案](/solutions/fraud-detection.html)'
 - en: More On This Topic
+  id: totrans-70
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[How to Deal with Categorical Data for Machine Learning](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何处理机器学习中的分类数据](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)'
 - en: '[Encoding Categorical Features with MultiLabelBinarizer](https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 MultiLabelBinarizer 编码分类特征](https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html)'
 - en: '[Building a Visual Search Engine - Part 1: Data Exploration](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建视觉搜索引擎 - 第 1 部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)'
 - en: '[ChatGPT-Powered Data Exploration: Unlock Hidden Insights in Your Dataset](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ChatGPT 驱动的数据探索：揭示数据集中的隐藏洞察](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)'
 - en: '[Beyond Coding: Why The Human Touch Matters](https://www.kdnuggets.com/beyond-coding-why-the-human-touch-matters)'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超越编码：为什么人工触感很重要](https://www.kdnuggets.com/beyond-coding-why-the-human-touch-matters)'
 - en: '[Beyond Pipelines: Graphs as Scikit-Learn Metaestimators](https://www.kdnuggets.com/2022/09/graphs-scikitlearn-metaestimators.html)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超越管道：图作为 Scikit-Learn 元估计器](https://www.kdnuggets.com/2022/09/graphs-scikitlearn-metaestimators.html)'
