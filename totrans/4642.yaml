@@ -1,46 +1,71 @@
 - en: 'Scalable Python Code with Pandas UDFs: A Data Science Application'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用Pandas UDFs的可扩展Python代码：数据科学应用
 - en: 原文：[https://www.kdnuggets.com/2019/06/scalable-python-code-pandas-udfs.html](https://www.kdnuggets.com/2019/06/scalable-python-code-pandas-udfs.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/06/scalable-python-code-pandas-udfs.html](https://www.kdnuggets.com/2019/06/scalable-python-code-pandas-udfs.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Ben Weber](https://www.linkedin.com/in/ben-weber-3b87482/), Data Scientist
     at Zynga and Advisor at Mischief**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Ben Weber](https://www.linkedin.com/in/ben-weber-3b87482/)，Zynga的数据科学家及Mischief顾问**'
 - en: '![figure-name](../Images/9c97c2e4ab5c7ae71e54f8cb66b86416.png)Source:[https://pxhere.com/en/photo/1417846](https://pxhere.com/en/photo/1417846)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/9c97c2e4ab5c7ae71e54f8cb66b86416.png)来源：[https://pxhere.com/en/photo/1417846](https://pxhere.com/en/photo/1417846)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在的组织进行IT管理'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: PySpark is a really powerful tool, because it enables writing Python code that
     can scale from a single machine to a large cluster. While libraries such as MLlib
     provide good coverage of the standard tasks that a data scientists may want to
@@ -52,8 +77,13 @@
     support distributed execution. This post discusses how bridge this gap using the
     the functionality provided by [Pandas UDFs](https://databricks.com/blog/2017/10/30/introducing-vectorized-udfs-for-pyspark.html) in
     Spark 2.3+.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: PySpark是一个非常强大的工具，因为它能够让Python代码从单台机器扩展到大型集群。虽然像MLlib这样的库提供了对数据科学家在这种环境中可能想要执行的标准任务的良好支持，但Python库提供了在分布式环境中未配置的广泛功能。虽然像
+    [Koalas](https://github.com/databricks/koalas) 这样的库应该可以更容易地将Python库移植到PySpark中，但在可扩展运行时所需的库集合与支持分布式执行的库之间仍然存在差距。这篇文章讨论了如何使用Spark
+    2.3+中的 [Pandas UDFs](https://databricks.com/blog/2017/10/30/introducing-vectorized-udfs-for-pyspark.html)
+    功能来弥合这一差距。
 - en: I encountered Pandas UDFs, because I needed a way of scaling up automated feature
     engineering for a project I developed at Zynga. We have dozens of games with diverse
     event taxonomies, and needed an automated approach for generating features for
@@ -62,31 +92,44 @@
     Pandas on a single machine. Our use case required scaling up to a large cluster
     and we needed to run the Python library in a parallelized and distributed mode.
     I was able to present our approach for achieving this scale at Spark Summit 2019.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 我遇到了Pandas UDFs，因为我需要一种方法来扩展我在Zynga开发的项目的自动特征工程。我们有几十款游戏，事件分类各异，需要一种自动化方法来为不同模型生成特征。计划是使用
+    [Featuretools](https://github.com/Featuretools/featuretools) 库来完成这一任务，但面临的挑战是它仅支持在单台机器上的Pandas。我们的用例需要扩展到大型集群，并且我们需要以并行和分布式模式运行Python库。我在2019年Spark峰会上展示了我们实现这一规模的方法。
 - en: 'The approach we took was to first perform a task on the driver node in a Spark
     cluster using a sample of data, and then scale up to the full data set using Pandas
     UDFs to handle billions of records of data. We used this approach for our feature
     generation step in our modeling pipeline. This method can also be applied to different
     steps in a data science workflow, and can also be used in domains outside of data
     science. We provide a deep dive into our approach in the following post on Medium:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们采取的方法是首先在Spark集群中的驱动节点上使用数据样本执行任务，然后使用Pandas UDFs扩展到完整的数据集，以处理数十亿条记录。我们在建模管道的特征生成步骤中使用了这种方法。这种方法也可以应用于数据科学工作流中的不同步骤，并且可以用于数据科学之外的领域。我们在以下Medium文章中对我们的方法进行了深入探讨：
 - en: '[**Portfolio-Scale Machine Learning at Zynga**'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**Zynga的Portfolio-Scale机器学习**'
 - en: '*Automating predictive modeling across dozens of games*medium.com](https://medium.com/zynga-engineering/portfolio-scale-machine-learning-at-zynga-bda8e29ee561)'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '*自动化处理数十款游戏的预测建模*medium.com](https://medium.com/zynga-engineering/portfolio-scale-machine-learning-at-zynga-bda8e29ee561)'
 - en: This post walks through an example where Pandas UDFs are used to scale up the
     model application step of a batch prediction pipeline, but the use case for UDFs
     are much more extensive than covered in this blog.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这篇文章通过一个例子展示了如何使用Pandas UDFs扩展批量预测管道的模型应用步骤，但UDFs的使用案例远比博客中涵盖的要广泛。
 - en: A Data Science Application
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据科学应用
 - en: Pandas UDFs can be used in a variety of applications for data science, ranging
     from feature generation to statistical testing to distributed model application.
     However, this method for scaling up Python is not limited to data science, and
@@ -98,31 +141,43 @@
     records. The full source code for this post is available on [github](https://github.com/bgweber/StartupDataScience/blob/master/python/SK_Scale.ipynb),
     and the libraries that we’ll use are pre-installed on the Databricks community
     edition.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas UDFs可以用于数据科学中的各种应用，从特征生成到统计测试再到分布式模型应用。然而，这种扩展Python的方法并不限于数据科学，只要你可以将数据编码为数据框并将任务分解为子问题，它可以应用于各种领域。为了展示Pandas
+    UDFs如何用于扩展Python代码，我们将通过一个示例演示，其中批处理过程用于创建购买可能性模型，首先使用单台机器，然后使用集群扩展到可能的数十亿条记录。此帖子的完整源代码可在[github](https://github.com/bgweber/StartupDataScience/blob/master/python/SK_Scale.ipynb)上获取，我们将使用的库已预安装在Databricks社区版中。
 - en: The first step in our notebook is loading the libraries that we’ll use to perform
     distributed model application. We need Pandas to load our dataset and to implement
     the user-defined function, sklearn to build a classification model, and pyspark
     libraries for defining a UDF.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们笔记本中的第一步是加载我们将用于执行分布式模型应用的库。我们需要Pandas来加载数据集和实现用户定义的函数，需要sklearn来构建分类模型，以及用于定义UDF的pyspark库。
 - en: Next, we’ll load a data set for building a classification model. In this code
     snippet, a CSV is eagerly fetched into memory using the Pandas `read_csv`function
     and then converted to a Spark dataframe. The code also appends a unique ID for
     each record and a partition ID that is used to distribute the data frame when
     using a PDF.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们将加载一个数据集以构建分类模型。在这个代码片段中，一个CSV文件被急切地加载到内存中，使用Pandas的`read_csv`函数，然后转换为Spark数据框。代码还为每条记录附加了一个唯一ID和一个用于分发数据框的分区ID。
 - en: The output of this step is shown in the table below. The Spark dataframe is
     a collection of records, where each records specifies if a user has previously
     purchase a set of games in the catalog, the label specifies if the user purchased
     a new game release, and the user_id and parition_id fields are generated using
     the spark sql statement from the snippet above.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 该步骤的输出见下表。Spark数据框是记录的集合，每条记录指定用户是否以前购买过目录中的一组游戏，标签指定用户是否购买了新游戏发行，user_id和partition_id字段是使用上面代码片段中的Spark
+    SQL语句生成的。
 - en: '![figure-name](../Images/5fb756e02f53f580bd1a8f9fca103b6a.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/5fb756e02f53f580bd1a8f9fca103b6a.png)'
 - en: We now have a Spark dataframe that we can use to perform modeling tasks. However,
     for this example we’ll focus on tasks that we can perform when pulling a sample
     of the data set to the driver node. When running the `toPandas()` command, the
@@ -131,20 +186,30 @@
     a best practice to sample your data set before using the toPandas function. Once
     we pull the data frame to the driver node, we can use sklearn to build a logistic
     regression model.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们有一个 Spark 数据框，可以用来执行建模任务。然而，对于这个例子，我们将专注于当将数据集的样本拉取到驱动节点时可以执行的任务。运行 `toPandas()`
+    命令时，整个数据框会被急切地提取到驱动节点的内存中。由于我们处理的是一个小数据集，这种做法没问题。但在使用 toPandas 函数之前，最好先对数据集进行采样。一旦将数据框拉取到驱动节点后，我们可以使用
+    sklearn 来构建逻辑回归模型。
 - en: As long as your complete data set can fit into memory, you can use the single
     machine approach to model application shown below, to apply the sklearn model
     to a new data frame. However, if you need to score millions or billions of records,
     then this single machine approach may fail.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 只要你的完整数据集能够适应内存，你可以使用下面展示的单机方法将 sklearn 模型应用于新的数据框。然而，如果需要对数百万或数十亿条记录进行评分，这种单机方法可能会失败。
 - en: The outcome of this step is a data frame of user IDs and model predictions.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 这一阶段的结果是一个包含用户 ID 和模型预测的数据框。
 - en: '![figure-name](../Images/eb8ffafef48ebd22b3285de170ac448f.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/eb8ffafef48ebd22b3285de170ac448f.png)'
 - en: In the last step in the notebook, we’ll use a Pandas UDF to scale the model
     application process. Instead of pulling the full dataset into memory on the driver
     node, we can use Pandas UDFs to distribute the dataset across a Spark cluster,
@@ -152,38 +217,56 @@
     The result is the same as the code snippet above, but in this case the data frame
     is distributed across the worker nodes in the cluster, and the task is executed
     in parallel on the cluster.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在笔记本的最后一步，我们将使用 Pandas UDF 来扩展模型应用过程。我们可以使用 Pandas UDF 将数据集分布到 Spark 集群中，而不是将整个数据集拉取到驱动节点的内存中，并使用
+    pyarrow 在 Spark 和 Pandas 数据框表示之间进行转换。结果与上面的代码片段相同，但在这种情况下，数据框分布在集群的工作节点上，任务在集群上并行执行。
 - en: The result is the same as before, but the computation has now moved from the
     driver node to a cluster of worker nodes. The input and output of this process
     is a Spark dataframe, even though we’re using Pandas to perform a task within
     our UDF.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果与之前相同，但计算现在已从驱动节点转移到工作节点集群。这个过程的输入和输出是一个 Spark 数据框，即使我们使用 Pandas 在 UDF 内执行任务。
 - en: '![figure-name](../Images/b1c4e6103b662858295fbdb9769d5e07.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/b1c4e6103b662858295fbdb9769d5e07.png)'
 - en: For more details on setting up a Pandas UDF, check out my prior post on getting
     up and running with PySpark.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 有关设置 Pandas UDF 的更多详细信息，请查看我之前关于如何开始使用 PySpark 的帖子。
 - en: '[**A Brief Introduction to PySpark**'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**PySpark 简介**](https://towardsdatascience.com/a-brief-introduction-to-pyspark-ff4284701873)'
 - en: '*PySpark is a great language for performing exploratory data analysis at scale,
     building machine learning pipelines, and…*towardsdatascience.com](https://towardsdatascience.com/a-brief-introduction-to-pyspark-ff4284701873)'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '*PySpark 是一种用于大规模执行探索性数据分析、构建机器学习管道的优秀语言，等等* [towardsdatascience.com](https://towardsdatascience.com/a-brief-introduction-to-pyspark-ff4284701873)'
 - en: This was an introduction that showed how to move sklearn processing from the
     driver node in a Spark cluster to the worker nodes. I’ve also used this functionality
     to scale up the[Featuretools](https://github.com/Featuretools/featuretools) library
     to work with billions of records and create hundreds of predictive models.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个介绍，展示了如何将 sklearn 处理从 Spark 集群的驱动节点移动到工作节点。我还使用了这个功能，将 [Featuretools](https://github.com/Featuretools/featuretools)
+    库扩展到处理数十亿条记录并创建数百个预测模型。
 - en: Conclusion
+  id: totrans-34
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: Pandas UDFs are a feature that enable Python code to run in a distributed environment,
     even if the library was developed for single node execution. Data scientist can
     benefit from this functionality when building scalable data pipelines, but many
@@ -192,56 +275,86 @@
     for automated feature generation. There’s many applications of UDFs that haven’t
     yet been explored and there’s a new scale of compute that is now available for
     Python developers.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: Pandas UDFs 是一种功能，允许 Python 代码在分布式环境中运行，即使该库最初是为单节点执行开发的。数据科学家在构建可扩展的数据管道时可以受益于这一功能，但许多不同领域也可以从这一新功能中获益。我提供了一个批处理模型应用的示例，并链接到一个使用
+    Pandas UDFs 进行自动化特征生成的项目。UDFs 的许多应用尚未被探索，现在为 Python 开发者提供了新的计算规模。
 - en: '**Bio: [Ben Weber](https://www.linkedin.com/in/ben-weber-3b87482/)** is a distinguished
     Data Scientist at Zynga and Advisor at Mischief.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Ben Weber](https://www.linkedin.com/in/ben-weber-3b87482/)** 是 Zynga
+    的杰出数据科学家以及 Mischief 的顾问。'
 - en: '[Original](https://towardsdatascience.com/scalable-python-code-with-pandas-udfs-a-data-science-application-dd515a628896).
     Reposted with permission.'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/scalable-python-code-with-pandas-udfs-a-data-science-application-dd515a628896)。已获得许可转载。'
 - en: '**Related:**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Optimus v2: Agile Data Science Workflows Made Easy](/2018/08/optimus-v2-agile-data-science-workflows-made-easy.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Optimus v2：简化的数据科学工作流](/2018/08/optimus-v2-agile-data-science-workflows-made-easy.html)'
 - en: '[Swiftapply  – Automatically efficient pandas apply operations](/2018/04/swiftapply-automatically-efficient-pandas-apply-operations.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Swiftapply  – 自动化高效的 pandas apply 操作](/2018/04/swiftapply-automatically-efficient-pandas-apply-operations.html)'
 - en: '[Deep Learning With Apache Spark: Part 1](/2018/04/deep-learning-apache-spark-part-1.html)'
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Apache Spark 进行深度学习：第 1 部分](/2018/04/deep-learning-apache-spark-part-1.html)'
 - en: More On This Topic
+  id: totrans-42
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Building a Scalable ETL with SQL + Python](https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 SQL + Python 构建可扩展的 ETL](https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html)'
 - en: '[How to Build a Scalable Data Architecture with Apache Kafka](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何利用 Apache Kafka 构建可扩展的数据架构](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)'
 - en: '[Generalized and Scalable Optimal Sparse Decision Trees(GOSDT)](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通用且可扩展的最优稀疏决策树（GOSDT）](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)'
 - en: '[Creating a Web Application to Extract Topics from Audio with Python](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 创建从音频中提取主题的 Web 应用](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)'
 - en: '[Building a Geospatial Application in Python with Google Earth…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Google Earth 在 Python 中构建地理空间应用…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)'
 - en: '[Build An AI Application with Python in 10 Easy Steps](https://www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 在 10 个简单步骤中构建 AI 应用](https://www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps)'

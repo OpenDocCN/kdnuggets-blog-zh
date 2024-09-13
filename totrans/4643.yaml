@@ -1,22 +1,32 @@
 - en: How to Automate Hyperparameter Optimization
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何自动化超参数优化
 - en: 原文：[https://www.kdnuggets.com/2019/06/automate-hyperparameter-optimization.html](https://www.kdnuggets.com/2019/06/automate-hyperparameter-optimization.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/06/automate-hyperparameter-optimization.html](https://www.kdnuggets.com/2019/06/automate-hyperparameter-optimization.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Suleka Helmini](https://www.linkedin.com/in/suleka-helmini-09803b132/detail/recent-activity/),
     WSO2**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Suleka Helmini](https://www.linkedin.com/in/suleka-helmini-09803b132/detail/recent-activity/)，WSO2**'
 - en: A Beginner’s Guide to Using Bayesian Optimization With Scikit-Optimize
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 《使用贝叶斯优化和 Scikit-Optimize 的初学者指南》
 - en: In the machine learning and deep learning paradigm, model “parameters” and “hyperparameters”
     are two frequently used terms where “parameters” define configuration variables
     that are internal to the model and whose values can be estimated from the training
@@ -24,16 +34,20 @@
     the model and whose values cannot be estimated from the training data ([What is
     the Difference Between a Parameter and a Hyperparameter?](https://machinelearningmastery.com/difference-between-a-parameter-and-a-hyperparameter/) ).
     Thus, the hyperparameter values need to be manually assigned by the practitioner.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 在机器学习和深度学习范式中，“参数”和“超参数”是两个常用的术语，其中“参数”定义了模型内部的配置变量，这些变量的值可以通过训练数据来估计，而“超参数”定义了模型外部的配置变量，这些变量的值不能从训练数据中估计出来（[什么是参数和超参数的区别？](https://machinelearningmastery.com/difference-between-a-parameter-and-a-hyperparameter/)）。因此，超参数的值需要由实践者手动设置。
 - en: Every machine learning and deep learning model that we make has a different
     set of hyperparameter values that need to be fine-tuned to be able to obtain a
     satisfactory result. Compared to machine learning models, deep learning models
     tend to have a larger number of hyperparameters that need optimizing in order
     to get the desired predictions due to its architectural complexity over typical
     machine learning models.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们制作的每个机器学习和深度学习模型都有一组不同的超参数值，这些值需要进行微调才能获得令人满意的结果。与机器学习模型相比，深度学习模型往往有更多的超参数需要优化，以获得期望的预测结果，因为深度学习模型的结构复杂度高于典型的机器学习模型。
 - en: Repeatedly experimenting with different value combinations manually to derive
     the optimal hyperparameter values for each of these hyperparameters can be a very
     time consuming and tedious task that requires good intuition, a lot of experience,
@@ -46,8 +60,12 @@
     become more straightforward. These libraries aid in implementing different hyperparameter
     optimization algorithms with less effort. A few such libraries are[ Scikit-Optimize](https://scikit-optimize.github.io/), [Scikit-Learn](https://scikit-learn.org/stable/),
     and [Hyperopt](https://github.com/hyperopt/hyperopt).
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 手动反复试验不同的值组合，以获得每个超参数的最佳值，可能是一个非常耗时且繁琐的任务，需要良好的直觉、大量的经验和对模型的深刻理解。此外，一些超参数值可能需要连续值，这会有不确定数量的可能性，即使超参数需要离散值，其可能性也非常巨大，因此手动执行这一任务是相当困难的。尽管如此，超参数优化可能看起来令人望而却步，但由于网络上有多个现成的库，这一任务变得更加简单。这些库帮助实现不同的超参数优化算法，减少了工作量。一些这样的库包括
+    [Scikit-Optimize](https://scikit-optimize.github.io/)、[Scikit-Learn](https://scikit-learn.org/stable/)
+    和 [Hyperopt](https://github.com/hyperopt/hyperopt)。
 - en: There are several hyperparameter optimization algorithms that have been employed
     frequently throughout the years, they are Grid Search, Random Search, and automated
     hyperparameter optimization methods. Grid Search and Random Search both set up
@@ -63,29 +81,45 @@
     Tuning using Grid and Random Search](https://www.kaggle.com/willkoehrsen/intro-to-model-tuning-grid-and-random-search)).
     Research has shown that Bayesian optimization can yield better hyperparameter
     combinations than Random Search ([Bayesian Optimization for Hyperparameter Tuning](https://arimo.com/data-science/2016/bayesian-optimization-hyperparameter-tuning/)).
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 多年来经常使用的几种超参数优化算法包括 Grid Search、Random Search 和自动超参数优化方法。Grid Search 和 Random
+    Search 都设置了一个超参数的网格，但在 Grid Search 中，每一种值组合都会被穷尽地探索，以找到提供最佳准确性值的超参数组合，使得这种方法非常低效。另一方面，Random
+    Search 会从网格中重复选择随机组合，直到满足指定的迭代次数，已被证明比 Grid Search 产生更好的结果。然而，即使它能够给出一个好的超参数组合，我们也不能确定这是否是最终的最佳组合。自动超参数优化使用不同的技术，如贝叶斯优化，进行有指导的最佳超参数搜索
+    ([使用网格和随机搜索的超参数调优](https://www.kaggle.com/willkoehrsen/intro-to-model-tuning-grid-and-random-search))。研究表明，贝叶斯优化能比
+    Random Search 产生更好的超参数组合 ([贝叶斯优化用于超参数调优](https://arimo.com/data-science/2016/bayesian-optimization-hyperparameter-tuning/))。
 - en: In this article, we will be providing a step-by-step guide into performing a
     hyperparameter optimization task on a deep learning model by employing Bayesian
     Optimization that uses the Gaussian Process. We used the [gp_minimize](https://scikit-optimize.github.io/#skopt.gp_minimize) package
     provided by the [Scikit-Optimize (skopt)](https://scikit-optimize.github.io/) library
     to perform this task. We will be performing the hyperparameter optimization on
     a simple stock closing price forecasting model developed using [TensorFlow](https://www.tensorflow.org/).
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本文中，我们将提供一个逐步指南，通过使用高斯过程的贝叶斯优化，执行深度学习模型的超参数优化任务。我们使用了由 [Scikit-Optimize (skopt)](https://scikit-optimize.github.io/)
+    库提供的 [gp_minimize](https://scikit-optimize.github.io/#skopt.gp_minimize) 包来执行此任务。我们将在一个使用
+    [TensorFlow](https://www.tensorflow.org/) 开发的简单股票收盘价格预测模型上进行超参数优化。
 - en: Scikit-Optimize (skopt)
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Scikit-Optimize (skopt)
 - en: Scikit-Optimize is a library that is relatively easy to use than other hyperparameter
     optimization libraries and also has better community support and documentation.
     This library implements several methods for sequential model-based optimization
     by reducing expensive and noisy black-box functions.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: Scikit-Optimize 是一个相较于其他超参数优化库更易于使用的库，同时也有更好的社区支持和文档。该库通过减少昂贵且噪声较大的黑箱函数，实施了几种基于模型的顺序优化方法。
 - en: Bayesian Optimization using the Gaussian Process
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用高斯过程的贝叶斯优化
 - en: Bayesian optimization is one of the many functions that skopt offers. Bayesian
     optimization finds a posterior distribution as the function to be optimized during
     the parameter optimization, then uses an acquisition function (eg. Expected Improvement-EI,
@@ -95,67 +129,102 @@
     better configurations faster compared to the exhaustive parameter optimization
     techniques such as Grid Search and Random Search. You can read more about the
     Bayesian Optimizer in skopt from [here](https://orbi.uliege.be/bitstream/2268/226433/1/PyData%202017_%20Bayesian%20optimization%20with%20Scikit-Optimize.pdf).
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 贝叶斯优化是 skopt 提供的众多功能之一。贝叶斯优化在参数优化过程中寻找一个后验分布作为要优化的函数，然后使用一个采集函数（例如，期望改进-EI，或其他函数）从该后验分布中进行采样，以找到下一个要探索的参数集。由于贝叶斯优化基于考虑可用数据的更系统方法来决定下一个点，因此与网格搜索和随机搜索等全面的参数优化技术相比，它预计能够更快地实现更好的配置。您可以从
+    [这里](https://orbi.uliege.be/bitstream/2268/226433/1/PyData%202017_%20Bayesian%20optimization%20with%20Scikit-Optimize.pdf)
+    阅读更多关于 skopt 的贝叶斯优化器的内容。
 - en: Code Alert!
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 代码警报！
 - en: So, enough with the theory, let’s get down to business!
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 所以，理论部分足够了，我们开始实际操作吧！
 - en: This example code is done using python and TensorFlow. Furthermore, the goal
     of this hyperparameter optimization task is to obtain the set of hyperparameter
     values that can give the lowest possible Root Mean Square Error (RMSE) for our
     deep learning model. We hope this will be very straight forward for any first-timer.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个示例代码使用了 python 和 TensorFlow。此外，这个超参数优化任务的目标是获得一组可以为我们的深度学习模型提供最低可能均方根误差（RMSE）的超参数值。我们希望这对任何第一次接触的人来说都非常简单。
 - en: First, let us install Scikit-Optimize. You can install it using pip by executing
     this command.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们安装 Scikit-Optimize。您可以通过执行此命令使用 pip 进行安装。
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Please note that you will have to make some adjustments to your existing deep
     learning model code in order to make it work with the optimization.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，您需要对现有的深度学习模型代码做一些调整，以使其能够与优化一起工作。
 - en: First, let’s do some necessary imports.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们进行一些必要的导入。
 - en: '[PRE1]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: We will now set the TensorFlow and Numpy seed as we want to get reproducible
     results.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将设置 TensorFlow 和 Numpy 的种子，以便获得可重复的结果。
 - en: '[PRE2]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Shown below are some essential python global variables that we have declared.
     Among the variables, we have also declared the hyperparameters that we are hoping
     to optimize (the 2nd set of variables).
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 下方展示了一些我们声明的重要 python 全局变量。在这些变量中，我们还声明了我们希望优化的超参数（第二组变量）。
 - en: '[PRE3]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: The “input_size” depicts a part of the shape of the prediction. The “features”
     depict the number of features in the data set and the “columns” list has the header
     names of the two features. The “column_min_max” variable contains the upper and
     lower scaling bounds of both the features (this was taken by examining validation
     and training splits).
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: “input_size” 描述了预测的部分形状。“features” 描述了数据集中的特征数量，而“columns” 列表包含了两个特征的标题名称。“column_min_max”
+    变量包含了两个特征的上下缩放边界（这是通过检查验证和训练分割得出的）。
 - en: After declaring all these variables it’s finally time to declare the search
     space for each of the hyperparameters we are hoping to optimize.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 在声明了所有这些变量之后，终于到了声明我们希望优化的每个超参数的搜索空间的时间。
 - en: '[PRE4]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: If you look closely you will be able to see that we have declared the ‘lstm_init_learning_rate’
     prior to log-uniform without just putting uniform. What this does is that, if
     you had put prior as uniform, the optimizer will have to search from 1e-4 (0.0001
@@ -163,33 +232,46 @@
     optimizer will search between -4 and -1, thus making the process much more efficient.
     This has been [advised](https://scikit-optimize.github.io/notebooks/hyperparameter-optimization.html) when
     assigning the search space for learning rate by the skopt library.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你仔细观察，你会发现我们在 log-uniform 之前声明了 ‘lstm_init_learning_rate’，而不是直接使用 uniform。这是因为，如果你使用
+    uniform，优化器将从 1e-4（0.0001）到 1e-1（0.1）的均匀分布中进行搜索。但当声明为 log-uniform 时，优化器将在 -4 和
+    -1 之间搜索，从而使过程更高效。这是 [skopt 库](https://scikit-optimize.github.io/notebooks/hyperparameter-optimization.html)
+    在为学习率分配搜索空间时所建议的。
 - en: There are several data types using which you can define the search space. Those
     are Categorical, Real and Integer. When defining a search space that involves
     floating point values you should go for “Real” and if it involves integers, go
     for “Integer”. If your search space involves categorical values like different
     activation functions, then you should go for the “Categorical” type.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用几种数据类型来定义搜索空间，包括Categorical、Real和Integer。当定义涉及浮点值的搜索空间时，你应该选择“Real”；当涉及整数时，选择“Integer”。如果你的搜索空间涉及如不同激活函数这样的分类值，则应选择“Categorical”类型。
 - en: We are now going to put down the parameters that we are going to optimize in
     the ‘dimensions’ list. This list will be passed to the ‘gp_minimize’ function
     later on. You can see that we have also declared the ‘default_parameters’. These
     are the default parameter values we have given to each hyperparameter. ****Remember
     to type in the default values in the same order as you listed the hyperparameters
     in the ‘dimensions’ list.****
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在要将待优化的参数列出在“dimensions”列表中。这个列表稍后将传递给‘gp_minimize’函数。你可以看到我们也声明了‘default_parameters’。这些是我们为每个超参数设置的默认值。****记得按照你在“dimensions”列表中列出超参数的顺序输入默认值。****
 - en: '[PRE5]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: The most important thing to remember is that the hyperparameters in the “default_parameters”
     list will be the starting point of your optimization task. The Bayesian Optimizer
     will use the default parameters that you have declared in the first iteration
     and depending on the result, the acquisition function will determine which point
     it wants to explore next.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 最重要的一点是，“default_parameters”列表中的超参数将是你优化任务的起始点。贝叶斯优化器将在第一次迭代中使用你声明的默认参数，根据结果，获取函数将决定下一个要探索的点。
 - en: It can be said that if you have run the model several times previously and found
     a decent set of hyperparameter values, you can put them as the default hyperparameter
     values and start your exploration from there. What this may do is that it will
@@ -197,72 +279,98 @@
     do keep in mind that this might not always be true. Also, remember to assign a
     value that is within the search space that you have defined when assigning the
     default values.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以说，如果你之前多次运行模型并找到了一组不错的超参数值，你可以将它们作为默认超参数值，从那里开始探索。这可能会帮助算法更快地找到最低的RMSE值（减少迭代次数）。然而，请记住这并不总是成立的。此外，分配默认值时请记得赋值在你定义的搜索空间内。
 - en: What we have done up to now is setting up all the initial work for the hyperparameter
     optimization task. We will now focus on the implementation of our deep learning
     model. We will not be discussing the data pre-processing of the model development
     process as this article only focuses on the hyperparameter optimization task.
     We will include the GitHub link of the complete implementation at the end of this
     article.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 到目前为止，我们完成了超参数优化任务的所有初步工作。接下来我们将专注于深度学习模型的实现。由于本文仅关注超参数优化任务，因此我们不会讨论模型开发过程中的数据预处理。我们将在文章末尾提供完整实现的GitHub链接。
 - en: However, to give you a little bit more context, we divided our data set into
     three splits for training, validation, and testing. The training set was used
     to train the model and the validation set was used to do the hyperparameter optimization
     task. As mentioned before, we are using the Root Mean Square Error (RMSE) to evaluate
     the model and perform the optimization (minimize RMSE).
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了提供更多背景，我们将数据集分为训练集、验证集和测试集。训练集用于训练模型，验证集用于超参数优化任务。如前所述，我们使用均方根误差（RMSE）来评估模型并进行优化（最小化RMSE）。
 - en: The accuracy assessed using the validation split cannot be used to evaluate
     the model since the selected hyperparameters minimizing the RMSE with validation
     split can be overfitted to the validation set during the hyperparameter optimization
     process. Therefore, it is standard procedure to use a test split that has not
     used at any point in the pipeline to measure the accuracy of the final model.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用验证集评估的准确性不能用来评估模型，因为在超参数优化过程中，最小化RMSE的超参数可能会对验证集过拟合。因此，标准做法是使用未在任何管道中使用的测试集来测量最终模型的准确性。
 - en: 'Shown below is the implementation of our deep learning model:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面展示了我们深度学习模型的实现：
 - en: '[PRE6]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The “setupRNN” function contains our deep learning model. Still, you may not
     want to understand those details, as Bayesian optimization considers that function
     as a black-box that takes certain hyperparameters as the inputs and then outputs
     the prediction. So if you are not interested in understanding what we have inside
     that function, you may skip the next paragraph.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: “setupRNN”函数包含我们的深度学习模型。尽管如此，你可能不需要了解这些细节，因为贝叶斯优化将该函数视为一个黑箱，接受某些超参数作为输入，然后输出预测结果。所以，如果你不感兴趣了解我们在那个函数内部做了什么，你可以跳过下一段。
 - en: Our deep learning model contains an LSTM layer, a dropout layer and an output
     layer. The necessary information required for the model to work needs to be sent
     to this function (in our case, it was the input and the dropout rate). You can
     then proceed with implementing your deep learning model inside this function.
     In our case, we used an LSTM layer to identify the temporal dependencies of our
     stock data-set.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的深度学习模型包含一个 LSTM 层、一个 dropout 层和一个输出层。需要传递给这个函数的模型工作所需的信息（在我们的例子中，是输入和 dropout
+    率）。然后，你可以继续在这个函数内部实现你的深度学习模型。在我们的例子中，我们使用了一个 LSTM 层来识别我们股票数据集的时间依赖关系。
 - en: We then fed the last output of the LSTM to the dropout layer for regularization
     purposes and obtained the prediction through the output layer. Finally, remember
     to return this prediction (in a classification task this can be your logit) to
     the function that will be passed to the Bayesian Optimization ( “setupRNN” will
     be called by this function).
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将 LSTM 的最后输出传递给 dropout 层进行正则化处理，并通过输出层获得预测结果。最后，记得将这个预测结果（在分类任务中，这可以是你的 logit）返回给将传递给贝叶斯优化的函数（“setupRNN”
+    将由此函数调用）。
 - en: If you are performing a hyperparameter optimization for a machine learning algorithm
     (using a library like Scikit-Learn) you will not need a separate function to implement
     your model as the model itself is already given by the library and you will only
     be writing code to train and obtain predictions. Therefore, this code can go inside
     the function that will be returned to the Bayesian Optimization.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你正在为机器学习算法执行超参数优化（使用类似 Scikit-Learn 的库），你将不需要一个单独的函数来实现你的模型，因为模型本身已经由库提供，你只需要编写代码来训练和获取预测。因此，这段代码可以放在将返回给贝叶斯优化的函数内部。
 - en: We have now come to the most important section of the hyperparameter optimization
     task, the ‘fitness’ function.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在来到了超参数优化任务中最重要的部分——‘fitness’函数。
 - en: '[PRE7]'
+  id: totrans-45
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: As shown above, we are passing the hyperparameter values to a function named
     “fitness.” The “fitness” function will be passed to the Bayesian hyperparameter
     optimization process (*gp_minimize*). Note that in the first iteration, the values
@@ -271,309 +379,455 @@
     We then assign the chosen values to the python global variables we declared at
     the beginning so that we will be able to use the latest chosen hyperparameter
     values outside the fitness function.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 如上所示，我们将超参数值传递给一个名为“fitness”的函数。“fitness”函数将被传递到贝叶斯超参数优化过程（*gp_minimize*）。注意，在第一次迭代中，传递给该函数的值将是你定义的默认值，从那时起，贝叶斯优化将自动选择超参数值。然后，我们将选择的值分配给我们在开始时声明的
+    Python 全局变量，以便我们能够在“fitness”函数之外使用最新选择的超参数值。
 - en: We then come to a rather critical point in our optimization task. If you have
     used TensorFlow prior to this article, you would know that TensorFlow operates
     by creating a computational graph for any kind of deep learning model that you
     make.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在进入优化任务中的一个关键点。如果你在阅读本文之前使用过 TensorFlow，你会知道 TensorFlow 是通过创建计算图来操作你所制作的任何深度学习模型的。
 - en: During the hyperparameter optimization process, in each iteration, we will be
     resetting the existing graph and constructing a new one. This process is done
     to minimize the memory taken for the graph and prevent the graphs from stacking
     on top of each other. Immediately after resetting the graph you will have to set
     the TensorFlow random seed in order to obtain reproducible results. After the
     above process, we can finally declare the TensorFlow session.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 在超参数优化过程中，在每次迭代中，我们将重置现有图并构建一个新的图。这一过程是为了最小化图占用的内存并防止图重叠堆积。在重置图后，你需要设置 TensorFlow
+    随机种子，以获得可重复的结果。在上述过程之后，我们可以最终声明 TensorFlow 会话。
 - en: After this point, you can start adding code responsible for training and validating
     your deep learning model as you normally would. This section is not really related
     to the optimization process but the code after this point will start utilizing
     the hyperparameter values chosen by the Bayesian Optimization.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这一点之后，你可以像平常一样开始添加负责训练和验证深度学习模型的代码。这一部分实际上与优化过程无关，但此后的代码将开始利用贝叶斯优化选择的超参数值。
 - en: The main point to remember here is to ****return**** the final metric value
     (in this case the RMSE value) obtained for the validation split. This value will
     be returned to the Bayesian Optimization process and will be used when deciding
     the next set of hyperparameters that it wants to explore.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里主要需要记住的是****返回****最终度量值（在本例中为 RMSE 值），该值将被返回到贝叶斯优化过程中，并在决定下一组要探索的超参数时使用。
 - en: '****Note****: if you are dealing with a classification problem you would want
     to put your accuracy as a negative value (eg. -96) because, even though the higher
     the accuracy the better the model, the Bayesian function will keep trying to reduce
     the value as it is designed to find the hyperparameter values for the ****lowest**** value
     that is returned to it.'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '****注意****：如果你处理的是分类问题，你可能需要将准确度设置为负值（例如 -96），因为尽管准确度越高模型越好，贝叶斯函数会不断尝试减少这个值，因为它设计用于找到返回值最****低****的超参数值。'
 - en: Let us now put down the execution point for this whole process, the “main” function.
     Inside the main function, we have declared the “gp_minimize” function. We are
     then passing several essential parameters to this function.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们列出整个过程的执行点，即 “main” 函数。在 main 函数内部，我们声明了 “gp_minimize” 函数。然后，我们将几个关键参数传递给该函数。
 - en: '[PRE8]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: 'The “func” parameter is the function you would want to finally model using
     the Bayesian Optimizer. The “dimensions” parameter is the set of hyperparameters
     that you are hoping to optimize and the “acq_func” stands for the acquisition
     function and is the function that helps to decide the next set of hyperparameter
     values that should be used. There are 4 types of acquisition functions supported
     by *gp_minimize*. They are:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: “func” 参数是你最终想要使用贝叶斯优化器建模的函数。“dimensions” 参数是一组你希望优化的超参数，而 “acq_func” 代表获取函数，是帮助决定下一组应该使用的超参数值的函数。*gp_minimize*
+    支持 4 种类型的获取函数。它们是：
 - en: 'LCB: lower confidence bound'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: LCB：下置信界限
 - en: 'EI: expected improvement'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: EI：期望改进
 - en: 'PI: probability of improvement'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: PI：改进概率
 - en: 'gp_hedge: probabilistically choose one of the above three acquisition functions
     at every iteration'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: gp_hedge：在每次迭代时以概率选择上述三种获取函数之一
 - en: The above information was extracted from the documentation. Each of these has
     its own advantages but if you are a beginner to Bayesian Optimization, try using
     “EI” or “gp_hedge” as “EI” is the most widely used acquisition function and “gp_hedge”
     will choose one of the above-stated acquisition functions probabilistically thus,
     you wouldn't have to worry too much about that.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述信息摘自文档。每种获取函数都有其自身的优点，但如果你是贝叶斯优化的初学者，可以尝试使用 “EI” 或 “gp_hedge”，因为 “EI” 是最广泛使用的获取函数，而
+    “gp_hedge” 会以概率方式选择上述获取函数，因此你不必过于担心这个问题。
 - en: Keep in mind that when using different acquisition functions there might be
     other parameters that you might want to change that affects your chosen acquisition
     function. Please refer the parameter list in the [documentation](https://scikit-optimize.github.io/#skopt.gp_minimize) for
     this.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 请记住，在使用不同的获取函数时，可能还会有其他你需要调整的参数，这些参数会影响你选择的获取函数。有关这些参数的详细信息，请参阅 [文档](https://scikit-optimize.github.io/#skopt.gp_minimize)。
 - en: Back to explaining the rest of the parameters, the “n_calls” parameter is the
     number of times you would want to run the fitness function. The optimization task
     will start by using the hyperparameter values defined by “x0", the default hyperparameter
     values. Finally, we are setting the random state of the hyperparameter optimizer
     as we need reproducible results.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 回到其他参数的解释， “n_calls” 参数是你希望运行适应度函数的次数。优化任务将以 “x0” 定义的超参数值，即默认超参数值开始。最后，我们设置了超参数优化器的随机状态，以便获得可重复的结果。
 - en: 'Now when you run the *gp_optimize* function the flow of events will be:'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，当你运行 *gp_optimize* 函数时，事件流程将是：
 - en: The fitness function will use with the parameters passed to x0\. The LSTM will
     be trained with the specified epochs and the validation input will be run to get
     the RMSE value for its predictions. Then depending on that value, the Bayesian
     optimizer will decide what the next set of hyperparameter values it wants to explore
     with the help of the acquisition function.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 适应度函数将使用传递给x0的参数。LSTM将按照指定的epoch进行训练，验证输入将被运行以获得预测的RMSE值。然后根据该值，贝叶斯优化器将决定使用获取函数探索下一组超参数值。
 - en: In the 2nd iteration, the fitness function will run with the hyperparameter
     values that the Bayesian optimization has derived and the same process will repeat
     until it has iterated “n_call” times. When the complete process comes to an end,
     the Scikit-Optimize object will get assigned to the “search _result” variable.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 在第2次迭代中，适应度函数将使用贝叶斯优化得出的超参数值进行运行，并且这一过程将重复，直到迭代了“n_call”次。当完整过程结束时，Scikit-Optimize
+    对象将被分配给“search_result”变量。
 - en: We can use this object to retrieve useful information as stated in the documentation.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用这个对象来检索文档中所述的有用信息。
 - en: 'x [list]: location of the minimum.'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'x [list]: 最小值的位置。'
 - en: 'fun [float]: function value at the minimum.'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'fun [float]: 最小值处的函数值。'
 - en: 'models: surrogate models used for each iteration.'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'models: 每次迭代中使用的替代模型。'
 - en: 'x_iters [list of lists]: location of function evaluation for each iteration.'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'x_iters [list of lists]: 每次迭代的函数评估位置。'
 - en: 'func_vals [array]: function value for each iteration.'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'func_vals [array]: 每次迭代的函数值。'
 - en: 'space [Space]: the optimization space.'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'space [Space]: 优化空间。'
 - en: 'specs [dict]`: the call specifications.'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'specs [dict]`: 调用规格。'
 - en: 'rng [RandomState instance]: State of the random state at the end of minimization.'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'rng [RandomState 实例]: 最小化结束时的随机状态。'
 - en: The “search_result.x” gives us optimal hyperparameter values and using “search_result.fun”
     we can obtain the RMSE value of the validation set corresponding to the obtained
     hyperparameter values (The lowest RMSE value obtained for the validation set).
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: “search_result.x”给出了最佳超参数值，使用“search_result.fun”我们可以获得对应于这些超参数值的验证集的RMSE值（验证集中获得的最低RMSE值）。
 - en: Shown below are the optimal hyperparameter values that we obtained for our model
     and the lowest RMSE value of the validation set. If you are finding it hard to
     figure out the order in which the hyperparameter values are being listed when
     using “search_result.x”, it is in the same order as you specified your hyperparameters
     in the “dimensions” list.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 下图展示了我们为模型获得的最佳超参数值及验证集的最低RMSE值。如果你发现很难确定在使用“search_result.x”时超参数值的排列顺序，它与在“dimensions”列表中指定超参数的顺序一致。
 - en: '****Hyperparameter Values:****'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '****超参数值：****'
 - en: 'lstm_num_steps: 6'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'lstm_num_steps: 6'
 - en: 'lstm_size: 171'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'lstm_size: 171'
 - en: 'lstm_init_epoch: 3'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'lstm_init_epoch: 3'
 - en: 'lstm_max_epoch: 58'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'lstm_max_epoch: 58'
 - en: 'lstm_learning_rate_decay: 0.7518394019565194'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'lstm_learning_rate_decay: 0.7518394019565194'
 - en: 'lstm_batch_size: 24'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'lstm_batch_size: 24'
 - en: 'lstm_dropout_rate: 0.21830825193089087'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'lstm_dropout_rate: 0.21830825193089087'
 - en: 'lstm_init_learning_rate: 0.0006401363567813549'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 'lstm_init_learning_rate: 0.0006401363567813549'
 - en: '****Lowest RMSE:**** 2.73755355221523'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '****最低RMSE:**** 2.73755355221523'
 - en: Convergence Graph
+  id: totrans-86
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 收敛图
 - en: The hyperparameters that produced the lowest point of the Bayesian Optimization
     in this graph is what we get as the optimal set of hyperparameter values.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这张图中产生贝叶斯优化最低点的超参数就是我们得到的最佳超参数值集合。
 - en: '![figure-name](../Images/bdd75378596d881565195f7e17f34e3b.png)'
+  id: totrans-88
   prefs: []
   type: TYPE_IMG
+  zh: '![figure-name](../Images/bdd75378596d881565195f7e17f34e3b.png)'
 - en: The graph shows a comparison of the lowest RMSE values recorded for each iteration
     (50 iterations) in Bayesian Optimization and Random Search. We can see that the
     Bayesian Optimization has been able to converge rather better than the Random
     Search. However, in the beginning, we can see that Random search has found a better
     minimum faster than the Bayesian Optimizer. This can be due to random sampling
     being the nature of Random Search.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 图表显示了贝叶斯优化和随机搜索中每次迭代（50次迭代）记录的最低RMSE值的比较。我们可以看到贝叶斯优化的收敛效果明显优于随机搜索。然而，在开始阶段，我们可以看到随机搜索比贝叶斯优化器更快地找到了更好的最小值。这可能是因为随机搜索的性质就是随机采样。
 - en: We have finally come to the end of this article, so to conclude, we hope this
     article made your deep learning model building task easier by showing you a better
     way of finding the optimal set of hyperparameters. Here’s to no more stressing
     over hyperparameter optimization. Happy coding, fellow geeks!
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们终于来到了这篇文章的结尾，总结一下，我们希望这篇文章通过展示一种更好的方式来找到最优的超参数集，从而使你的深度学习模型构建任务变得更简单。希望你不再为超参数优化而感到压力。祝编码愉快，亲爱的极客们！
 - en: 'Useful Materials:'
+  id: totrans-91
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实用材料：
 - en: The complete code can be found through this [link](https://github.com/suleka96/Bayesian_Hyperparameter_optimization/tree/master).
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 完整的代码可以通过这个 [链接](https://github.com/suleka96/Bayesian_Hyperparameter_optimization/tree/master)
+    找到。
 - en: For more information about Bayesian optimization, you can refer to this [paper](https://arxiv.org/pdf/1807.02811.pdf).
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 欲了解有关贝叶斯优化的更多信息，可以参阅这篇 [论文](https://arxiv.org/pdf/1807.02811.pdf)。
 - en: For more information about acquisition functions, refer to this [paper](https://www.cse.wustl.edu/~garnett/cse515t/spring_2015/files/lecture_notes/12.pdf).
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 欲了解有关采集函数的更多信息，请参阅这篇 [论文](https://www.cse.wustl.edu/~garnett/cse515t/spring_2015/files/lecture_notes/12.pdf)。
 - en: '**Bio: [Suleka Helmini](https://www.linkedin.com/in/suleka-helmini-09803b132/)**
     is a Software Engineer at WS02.'
+  id: totrans-95
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Suleka Helmini](https://www.linkedin.com/in/suleka-helmini-09803b132/)**
+    是 WS02 的软件工程师。'
 - en: '[Original](https://dzone.com/articles/how-to-automate-hyperparameter-optimization).
     Reposted with permission.'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://dzone.com/articles/how-to-automate-hyperparameter-optimization)。经允许转载。'
 - en: '**Related:**'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[The Intuitions Behind Bayesian Optimization with Gaussian Processes](/2018/10/intuitions-behind-bayesian-optimization-gaussian-processes.html)'
+  id: totrans-98
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[高斯过程的贝叶斯优化直观理解](/2018/10/intuitions-behind-bayesian-optimization-gaussian-processes.html)'
 - en: '[Keras Hyperparameter Tuning in Google Colab Using Hyperas](/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)'
+  id: totrans-99
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Google Colab 中使用 Hyperas 进行 Keras 超参数调整](/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)'
 - en: '[Using AutoML to Generate Machine Learning Pipelines with TPOT](/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-4.html)'
+  id: totrans-100
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 AutoML 生成具有 TPOT 的机器学习管道](/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-4.html)'
 - en: '* * *'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-102
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-104
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-105
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-106
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-107
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超参数优化：10 大 Python 库](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
 - en: '[5 Tasks To Automate With Python](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Python 自动化的 5 项任务](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)'
 - en: '[Automate Microsoft Excel and Word Using Python](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
+  id: totrans-110
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Python 自动化 Microsoft Excel 和 Word](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)'
 - en: '[Automate the Boring Stuff with GPT-4 and Python](https://www.kdnuggets.com/2023/03/automate-boring-stuff-chatgpt-python.html)'
+  id: totrans-111
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 GPT-4 和 Python 自动化无聊的工作](https://www.kdnuggets.com/2023/03/automate-boring-stuff-chatgpt-python.html)'
 - en: '[Automate Your Codebase with Promptr and GPT](https://www.kdnuggets.com/2023/04/automate-codebase-promptr-gpt.html)'
+  id: totrans-112
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 Promptr 和 GPT 自动化你的代码库](https://www.kdnuggets.com/2023/04/automate-codebase-promptr-gpt.html)'
 - en: '[Automate Graphic Design Activity with ChatGPT Canva Plugin](https://www.kdnuggets.com/automate-graphic-design-activity-with-chatgpt-canva-plugin)'
+  id: totrans-113
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 ChatGPT Canva 插件自动化图形设计活动](https://www.kdnuggets.com/automate-graphic-design-activity-with-chatgpt-canva-plugin)'
