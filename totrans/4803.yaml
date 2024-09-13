@@ -164,6 +164,8 @@
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了更具体地理解原型设计思维和生产思维之间的区别，让我们使用一些真实数据。我们将使用来自点对点借贷网站[Lending Club](https://www.dataquest.io/blog/programming-best-practices-for-data-science/www.lendingclub.com)的借贷数据。与银行不同，Lending
+    Club 并不直接借出资金。Lending Club 实际上是一个市场，供借款人向寻求贷款的个人提供贷款（如家庭维修、婚礼费用等）。我们可以利用这些数据构建模型，预测给定的贷款申请是否会成功。我们不会在这篇文章中深入探讨构建预测机器学习管道，但在我们的[机器学习项目演练课程](https://www.dataquest.io/course/machine-learning-project)中有涉及。
 - en: Lending Club offers detailed, historical data on both completed loans (loan
     applications that were approved by Lending Club and they found lenders) and declined
     loans (loan application was declined by Lending Club and money never changed hands).
@@ -172,35 +174,44 @@
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: Lending Club 提供详细的历史数据，涵盖已完成的贷款（Lending Club 批准的贷款申请，并找到贷方）和被拒绝的贷款（Lending Club
+    拒绝的贷款申请，资金未发生变动）。请前往他们的[data download page](https://www.lendingclub.com/info/download-data.action)并在**DOWLNOAD
+    LOAN DATA**下选择**2007-2011**。
 - en: '![lendingclub](../Images/5893dcd88190c71f1a9b9914ef8fd8e0.png)'
   id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![lendingclub](../Images/5893dcd88190c71f1a9b9914ef8fd8e0.png)'
 - en: '**Prototype mindset**'
   id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**原型思维**'
 - en: 'In the prototype mindset, we''re interested in quickly iterating and trying
     to understand some properties and truths about the data. Create a new Jupyter
     notebook and add a Markdown cell that explains:'
   id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在原型思维中，我们关注的是快速迭代，尝试理解数据的一些属性和真相。创建一个新的 Jupyter notebook，并添加一个 Markdown 单元格来解释：
 - en: Any research you did on Lending Club to better understand the platform
   id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 您对 Lending Club 进行的任何研究，以更好地了解该平台
 - en: Any information on the data set you downloaded
   id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 有关您下载的数据集的任何信息
 - en: First things first, let's read the CSV file into pandas.
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们将 CSV 文件读入 pandas。
 - en: '[PRE0]'
   id: totrans-33
   prefs: []
@@ -210,6 +221,7 @@
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们得到两部分输出，首先是一个警告。
 - en: '[PRE1]'
   id: totrans-35
   prefs: []
@@ -220,16 +232,20 @@
   id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后是数据框的前 5 行，我们在这里避免展示（因为内容较长）。
 - en: 'We also got the following dataframe output:'
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们还得到了以下数据框输出：
 - en: '|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
     Notes offered by Prospectus (https://www.lendingclub.com/info/prospectus.action)
     |'
   id: totrans-38
   prefs: []
   type: TYPE_TB
+  zh: '|  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+    注释由 Prospectus 提供 ([链接](https://www.lendingclub.com/info/prospectus.action))'
 - en: '| d | member_id | loan_amnt | funded_amnt | funded_amnt_inv | term | int_rate
     | installment | grade | sub_grade | emp_title | emp_length | home_ownership |
     annual_inc | verification_status | issue_d | loan_status | pymnt_plan | url |
