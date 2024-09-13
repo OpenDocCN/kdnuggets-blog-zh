@@ -1,102 +1,130 @@
 - en: Content-based Recommender Using Natural Language Processing (NLP)
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
 - en: 原文：[https://www.kdnuggets.com/2019/11/content-based-recommender-using-natural-language-processing-nlp.html](https://www.kdnuggets.com/2019/11/content-based-recommender-using-natural-language-processing-nlp.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
 - en: '**By [James Ng](https://www.linkedin.com/in/jnyh/), Data Science, Project Management**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/7f8e754ee66d96b7400675d994e0621d.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
 - en: Screen capture from Netflix
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
 - en: When we provide ratings for products and services on the internet, all the preferences
     we express and data we share (explicitly or not), are used to generate recommendations
     by recommender systems. The most common examples are that of Amazon, Google and
     Netflix.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
 - en: 'There are 2 types of recommender systems:'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
 - en: '**collaborative** filters — based on user rating and consumption to group similar
     users together, then to recommend products/services to users'
+  id: totrans-14
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '**content-based** filters — to make recommendations based on similar products/services
     according to their attributes.'
+  id: totrans-15
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '![](../Images/2dcdb2ad2ab5c8169026821cdf25dc26.png)'
+  id: totrans-16
   prefs: []
   type: TYPE_IMG
 - en: In this article, I have combined movie attributes such as genre, plot, director
     and main actors to calculate its cosine similarity with another movie. The dataset
     is IMDB top 250 English movies downloaded from [data.world](https://data.world/studentoflife/imdb-top-250-lists-and-5000-or-so-data-records).
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
 - en: '**Step 1: import Python libraries and dataset, perform EDA**'
+  id: totrans-18
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Ensure that the [Rapid Automatic Keyword Extraction](https://pypi.org/project/rake-nltk/) (RAKE)
     library has been installed (or pip install rake_nltk).
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Exploring the dataset, there are 250 movies (rows) and 38 attributes (columns).
     However, only 5 attributes are useful: ‘Title’, ’Director’, ’Actors’, ’Plot’,
     and ’Genre’. Below shows a list of 10 popular directors.'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE1]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '![Figure](../Images/143eada4ced3d015d1a321b93796f356.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
 - en: Top 10 popular directors amongst the 250 movies
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: '**Step 2: data pre-processing **to remove stop words, punctuation, white space,
     and convert all words to lower case'
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -104,193 +132,291 @@
     that contains all the attributes (in words) of each movie. After that, this information
     is converted into numbers by vectorization, where scores are assigned to each
     word. Subsequently cosine similarities can be calculated.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
 - en: I used the Rake function to extract the most relevant words from whole sentences
     in the ‘Plot’ column. In order to do this, I applied this function to each row
     under the ‘Plot’ column and assigned the list of key words to a new column ‘Key_words’.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 我使用Rake函数从‘Plot’列中的整个句子中提取最相关的词。为此，我将该函数应用于‘Plot’列下的每一行，并将关键字列表分配给新列‘Key_words’。
 - en: '[PRE2]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '![Figure](../Images/bcdf4a2340589736a2acc2c23f0548f2.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/bcdf4a2340589736a2acc2c23f0548f2.png)'
 - en: Rake function to extract key words
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: Rake函数用于提取关键字
 - en: The names of actors and directors are transformed into unique identity values.
     This is done by merging all first and last names into one word, so that Chris
     Evans and Chris Hemsworth will appear different (if not, they will be 50% similar
     because they both have ‘Chris’). Every word needs to be converted to lowercase
     to avoid duplications.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 演员和导演的名字被转换为唯一的身份值。这是通过将所有名字和姓氏合并为一个词来完成的，这样Chris Evans和Chris Hemsworth将显示为不同的（否则，它们将有50%的相似度，因为它们都有‘Chris’）。每个词都需要转换为小写以避免重复。
 - en: '[PRE3]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![Figure](../Images/b8795a8fae02d7d719a9cbe33210019e.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/b8795a8fae02d7d719a9cbe33210019e.png)'
 - en: All names are transformed into unique identity values
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有名字都被转换为唯一的身份值
 - en: '**Step 3: create word representation by combining column attributes to Bag_of_words**'
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**步骤3：通过结合列属性创建‘Bag_of_words’的词表示**'
 - en: After data pre-processing, these 4 columns ‘Genre’, ‘Director’, ‘Actors’ and
     ‘Key_words’ are combined into a new column ‘Bag_of_words’. The final DataFrame
     has only 2 columns.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 数据预处理后，这4列‘Genre’，‘Director’，‘Actors’和‘Key_words’被合并成一列‘Bag_of_words’。最终的数据框只有2列。
 - en: '[PRE4]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![Figure](../Images/91daeda133caf11fa48dc92452cf647b.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/91daeda133caf11fa48dc92452cf647b.png)'
 - en: Final word representation is the new column ‘Bag_of_words’
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 最终的词表示是新列‘Bag_of_words’
 - en: '**Step 4: create vector representation for Bag_of_words, and create the similarity
     matrix**'
+  id: totrans-40
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**步骤4：为‘Bag_of_words’创建向量表示，并创建相似度矩阵**'
 - en: The recommender model can only read and compare a vector (matrix) with another,
     so we need to convert the ‘Bag_of_words’ into vector representation using **CountVectorizer**,
     which is a simple frequency counter for each word in the ‘Bag_of_words’ column.
     Once I have the matrix containing the count for all words, I can apply the cosine_similarity
     function to compare similarities between movies.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 推荐模型只能读取和比较一个向量（矩阵）与另一个向量，因此我们需要使用**CountVectorizer**将‘Bag_of_words’转换为向量表示，这是一种对‘Bag_of_words’列中每个词的频率进行计数的简单计数器。一旦得到包含所有词计数的矩阵，就可以应用cosine_similarity函数来比较电影之间的相似度。
 - en: '![Figure](../Images/b0f86d764647679bc9d67f18e2fa7d1d.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/b0f86d764647679bc9d67f18e2fa7d1d.png)'
 - en: Cosine Similarity formula to calculate values in Similarity Matrix
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算相似度矩阵中值的余弦相似度公式
 - en: '[PRE5]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![Figure](../Images/1d1df8bd478bfd856cc8ae17e8f9f435.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/1d1df8bd478bfd856cc8ae17e8f9f435.png)'
 - en: Similarity Matrix (250 rows x 250 columns)
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 相似度矩阵（250行 x 250列）
 - en: Next is to create a Series of movie titles, so that the series index can match
     the row and column index of the similarity matrix.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来是创建一个电影标题系列，以便系列索引可以匹配相似度矩阵的行和列索引。
 - en: '[PRE6]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '**Step 5: run and test the recommender model**'
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**步骤5：运行并测试推荐模型**'
 - en: The final step is to create a function that takes in a movie title as input,
     and returns the top 10 similar movies. This function will match the input movie
     title with the corresponding index of the Similarity Matrix, and extract the row
     of similarity values in descending order. The top 10 similar movies can be found
     by extracting the top 11 values and subsequently discarding the first index (which
     is the input movie itself).
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后的步骤是创建一个函数，该函数以电影标题作为输入，并返回前10部相似电影。该函数将输入的电影标题与相似度矩阵的对应索引匹配，并按降序提取相似度值的行。通过提取前11个值并随后丢弃第一个索引（即输入电影本身），可以找到前10部相似电影。
 - en: '[PRE7]'
+  id: totrans-51
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: Now I am ready to test the model. Let’s input my favourite movie “The Avengers”
     and see the recommendations.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我准备好测试模型了。让我们输入我最喜欢的电影“复仇者联盟”，看看推荐结果。
 - en: '[PRE8]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '![Figure](../Images/2a87a4521728f581560f69a88a9a7a1f.png)'
+  id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/2a87a4521728f581560f69a88a9a7a1f.png)'
 - en: Top 10 movies similar to “The Avengers”
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 与“复仇者联盟”相似的前10部电影
 - en: Conclusion
+  id: totrans-56
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: The model has recommended very similar movies. From my “domain knowledge”, I
     can see some similarities mainly based on directors and plot. I have already watched
     most of these recommended movies, and am looking forward to watch those few unseen
     ones.
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型推荐了非常相似的电影。根据我的“领域知识”，我可以看到一些相似性主要基于导演和情节。我已经看过大多数这些推荐电影，并期待观看那些少数未看过的电影。
 - en: '**Python** codes with inline comments are available on my [GitHub](https://github.com/JNYH),
     do feel free to refer to them.'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 带有内联注释的**Python**代码可在我的[GitHub](https://github.com/JNYH)上找到，欢迎参考。
 - en: '[**JNYH/movie_recommender**'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**JNYH/movie_recommender**'
 - en: Content-based recommender using Natural Language Processing (NLP). A guide to
     build a content-based movie recommender...](https://github.com/JNYH/movie_recommender?source=post_page-----159d0925a649----------------------)
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用自然语言处理（NLP）的内容推荐系统。构建基于内容的电影推荐器的指南……](https://github.com/JNYH/movie_recommender?source=post_page-----159d0925a649----------------------)
 - en: Thank you for reading!
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 感谢阅读！
 - en: '**Bio: [James Ng](https://www.linkedin.com/in/jnyh/)** has a deep interest
     in uncovering insights from data, excited about combining hands-on data science,
     strong business domain knowledge and agile methodologies to create exponential
     values for business and society. Passionate about improving data fluency and making
     data easily understood, so that business can make data-driven decisions.'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[James Ng](https://www.linkedin.com/in/jnyh/)** 对从数据中发掘洞察有深入的兴趣，热衷于将实践数据科学、强大的业务领域知识和敏捷方法论结合起来，为企业和社会创造指数级的价值。热衷于提升数据流畅度，使数据易于理解，以便业务能够做出数据驱动的决策。'
 - en: '[Original](https://towardsdatascience.com/content-based-recommender-using-natural-language-processing-nlp-159d0925a649).
     Reposted with permission.'
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/content-based-recommender-using-natural-language-processing-nlp-159d0925a649).
+    经许可转载。'
 - en: '**Related:**'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[How YouTube is Recommending Your Next Video](/2019/10/youtube-recommending-next-video.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[YouTube 如何推荐你的下一个视频](/2019/10/youtube-recommending-next-video.html)'
 - en: '[Topics Extraction and Classification of Online Chats](/2019/11/topics-extraction-classification-online-chats.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在线聊天的主题提取与分类](/2019/11/topics-extraction-classification-online-chats.html)'
 - en: '[Text Encoding: A Review](/2019/11/text-encoding-review.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本编码：回顾](/2019/11/text-encoding-review.html)'
 - en: More On This Topic
+  id: totrans-68
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[N-gram Language Modeling in Natural Language Processing](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理中的 N-gram 语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)'
 - en: '[How to Start Using Natural Language Processing With PyTorch](https://www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何开始使用 PyTorch 进行自然语言处理](https://www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html)'
 - en: '[Natural Language Processing Key Terms, Explained](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理关键术语解析](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)'
 - en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理任务的数据表示](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
 - en: '[Transfer Learning for Image Recognition and Natural Language Processing](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[图像识别和自然语言处理的迁移学习](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)'
 - en: '[A Gentle Introduction to Natural Language Processing](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理的温和介绍](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)'
