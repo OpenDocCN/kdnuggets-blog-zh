@@ -1,25 +1,35 @@
 - en: 'Implementing Deep Learning Methods and Feature Engineering for Text Data: The
     Skip-gram Model'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 实现深度学习方法和文本数据的特征工程：跳词模型
 - en: 原文：[https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-skip-gram.html](https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-skip-gram.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-skip-gram.html](https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-skip-gram.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**Editor''s note:** This post is only one part of a far more thorough and in-depth
     original, [found here](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa),
     which covers much more than what is included here.'
+  id: totrans-3
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**编辑注释：** 本文只是一个更全面和深入的原始内容的一部分，[可以在这里找到](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa)，涵盖了比这里包含的内容更多的内容。'
 - en: The Skip-gram Model
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 跳词模型
 - en: The Skip-gram model architecture usually tries to achieve the reverse of what
     the CBOW model does. It tries to predict the source context words (surrounding
     words) given a target word (the center word). Considering our simple sentence
@@ -32,40 +42,65 @@
     word from its target word. Hence the task becomes to predict the context ***[quick,
     fox]*** given target word ***‘brown’*** or ***[the, brown]*** given target word ***‘quick’*** and
     so on. Thus the model tries to predict the context_window words based on the target_word.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 跳词模型的架构通常试图实现与CBOW模型相反的目标。它试图根据目标词（中心词）预测源上下文词（周围词）。考虑到我们之前的简单句子，***“the quick
+    brown fox jumps over the lazy dog”。*** 如果我们使用CBOW模型，我们会得到***(context_window, target_word)***的配对，例如考虑上下文窗口大小为2时，我们会得到类似于***([quick,
+    fox], brown), ([the, brown], quick), ([the, dog], lazy)***的例子。现在考虑到跳词模型的目标是根据目标词预测上下文，模型通常会反转上下文和目标，并试图从目标词预测每个上下文词。因此，任务变成了预测上下文***[quick,
+    fox]***给定目标词***‘brown’***，或***[the, brown]***给定目标词***‘quick’***，等等。因此，该模型试图根据目标词预测上下文窗口中的词汇。
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织在IT领域'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![](../Images/07676425bba068c4ffcce509c873b346.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/07676425bba068c4ffcce509c873b346.png)'
 - en: The Skip-gram model architecture (Source: [https://arxiv.org/pdf/1301.3781.pdf](https://arxiv.org/pdf/1301.3781.pdf) Mikolov
     el al.)
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 跳词模型架构（来源：[https://arxiv.org/pdf/1301.3781.pdf](https://arxiv.org/pdf/1301.3781.pdf)
+    Mikolov等）
 - en: Just like we discussed in the CBOW model, we need to model this Skip-gram architecture
     now as a deep learning classification model such that we take in the *target word
     as our input *and try to *predict the context words.*This becomes slightly complex
@@ -75,8 +110,13 @@
     transformed into pairs like ***(brown, quick), (brown, fox), (quick, the), (quick,
     brown)*** and so on. But how to supervise or train the model to know what is contextual
     and what is not?
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 就像我们在 CBOW 模型中讨论的那样，我们现在需要将这个 Skip-gram 架构建模为一个深度学习分类模型，以便我们以 *目标词作为输入* 并尝试
+    *预测上下文词*。这变得稍微复杂，因为我们的上下文中有多个词。我们通过将每个 ***(目标, 上下文_词) 对*** 拆分为 ***(目标, 上下文) 对***
+    来进一步简化这一点，其中每个上下文仅包含一个词。因此，我们之前的数据集被转换为像 ***(brown, quick), (brown, fox), (quick,
+    the), (quick, brown)*** 等对。但如何监督或训练模型以了解哪些是上下文相关的，哪些是不相关的呢？
 - en: For this, we feed our skip-gram model pairs of ***(X, Y)*** where ***X ***is
     our ***input ***and ***Y ***is our ***label***. We do this by using ***[(target,
     context), 1] ***pairs as ***positive input samples*** where ***target ***is our
@@ -89,100 +129,149 @@
     do this so that the model can then learn which pairs of words are contextually
     relevant and which are not and generate similar embeddings for semantically similar
     words.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，我们将 ***(X, Y)*** 对馈入 skip-gram 模型，其中 ***X*** 是我们的 ***输入***，***Y*** 是我们的 ***标签***。我们通过使用
+    ***[(目标, 上下文), 1]*** 对作为 ***正输入样本***，其中 ***目标*** 是我们感兴趣的词，***上下文*** 是出现在目标词附近的上下文词，而
+    ***正标签 1*** 表示这是一个在上下文中相关的对。我们还将 ***[(目标, 随机), 0]*** 对作为 ***负输入样本***，其中 ***目标***
+    仍然是我们感兴趣的词，但 ***随机*** 只是从词汇表中随机选择的一个词，与目标词没有上下文或关联。因此，***负标签 0*** 表示这是一个在上下文中不相关的对。我们这样做是为了让模型学习哪些词对在上下文中是相关的，哪些是不相关的，并为语义相似的词生成相似的嵌入。
 - en: Implementing the Skip-gram Model
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实现 Skip-gram 模型
 - en: Let’s now try and implement this model from scratch to gain some perspective
     on how things work behind the scenes and also so that we can compare it with our
     implementation of the CBOW model. We will leverage our Bible corpus as usual which
     is contained in the `**norm_bible**` variable for training our model. The implementation
     will focus on five parts
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们尝试从头开始实现这个模型，以了解幕后工作原理，并与我们的 CBOW 模型实现进行比较。我们将像往常一样利用我们的圣经语料库，该语料库包含在 `**norm_bible**`
+    变量中用于训练我们的模型。实现将集中于五个部分
 - en: '**Build the corpus vocabulary**'
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**构建语料库词汇表**'
 - en: '**Build a skip-gram [(target, context), relevancy] generator**'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**构建一个 skip-gram [(目标, 上下文), 相关性] 生成器**'
 - en: '**Build the skip-gram model architecture**'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**构建 skip-gram 模型架构**'
 - en: '**Train the Model**'
+  id: totrans-21
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**训练模型**'
 - en: '**Get Word Embeddings**'
+  id: totrans-22
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**获取词嵌入**'
 - en: Let’s get cracking and build our skip-gram Word2Vec model!
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始动手构建我们的 skip-gram Word2Vec 模型吧！
 - en: '**Build the corpus vocabulary**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**构建语料库词汇表**'
 - en: To start off, we will follow the standard process of building our corpus vocabulary
     where we extract out each unique word from our vocabulary and assign a unique
     identifier, similar to what we did in the CBOW model. We also maintain mappings
     to transform words to their unique identifiers and vice-versa.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们将遵循构建语料库词汇表的标准流程，从中提取每个独特的词，并分配一个唯一的标识符，类似于我们在 CBOW 模型中所做的。我们还维护映射关系，以便将词转换为其唯一标识符，反之亦然。
 - en: '[PRE0]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Just like we wanted, each unique word from the corpus is a part of our vocabulary
     now with a unique numeric identifier.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如我们所期望的，语料库中的每个独特词汇现在都是我们词汇表的一部分，并且拥有一个唯一的数字标识符。
 - en: '**Build a skip-gram [(target, context), relevancy] generator**'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '**构建一个 skip-gram [(目标, 上下文), 相关性] 生成器**'
 - en: It’s now time to build out our skip-gram generator which will give us pair of
     words and their relevance like we discussed earlier. Luckily, `keras` has a nifty `skipgrams` utility
     which can be used and we don’t have to manually implement this generator like
     we did in CBOW.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是时候构建我们的skip-gram生成器，它将像我们之前讨论的那样给出词对及其相关性。幸运的是，`keras`提供了一个方便的`skipgrams`工具，我们不需要像在CBOW中那样手动实现这个生成器。
 - en: '**Note:** The function `[**skipgrams(…)**](https://keras.io/preprocessing/sequence/#skipgrams)` is
     present in `[**keras.preprocessing.sequence**](https://keras.io/preprocessing/sequence)`'
+  id: totrans-30
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**注意：** 函数`[**skipgrams(…)**](https://keras.io/preprocessing/sequence/#skipgrams)`存在于`[**keras.preprocessing.sequence**](https://keras.io/preprocessing/sequence)`'
 - en: ''
+  id: totrans-31
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: 'This function transforms a sequence of word indexes (list of integers) into
     tuples of words of the form:'
+  id: totrans-32
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 这个函数将词索引的序列（整数列表）转换为如下形式的词对：
 - en: '- (word, word in the same window), with label 1 (positive samples).'
+  id: totrans-33
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '- （词，同一窗口中的词），标签为1（正样本）。'
 - en: '- (word, random word from the vocabulary), with label 0 (negative samples).'
+  id: totrans-34
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '- （词，词汇中的随机词），标签为0（负样本）。'
 - en: '[PRE1]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Thus you can see we have successfully generated our required skip-grams and
     based on the sample skip-grams in the preceding output, you can clearly see what
     is relevant and what is irrelevant based on the label (0 or 1).
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，你可以看到我们已经成功生成了所需的skip-grams，并且基于前面输出的样本skip-grams，你可以清楚地看到基于标签（0或1）哪些是相关的，哪些是无关的。
 - en: '**Build the skip-gram model architecture**'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**构建skip-gram模型架构**'
 - en: We now leverage `keras` on top of `tensorflow` to build our deep learning architecture
     for the skip-gram model. For this our inputs will be our target word and context
     or random word pair. Each of which are passed to an embedding layer (initialized
@@ -194,14 +283,20 @@
     label (***Y***), compute the loss by leveraging the `mean_squared_error` loss
     and perform backpropagation with each epoch to update the embedding layer in the
     process. Following code shows us our model architecture.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在在`tensorflow`之上利用`keras`构建skip-gram模型的深度学习架构。为此，我们的输入将是目标词和上下文或随机词对。每个输入都会传递到一个自己的嵌入层（初始化时权重随机）。一旦我们获得目标词和上下文词的词嵌入，我们将其传递到一个合并层，在那里计算这两个向量的点积。然后，我们将这个点积值传递到一个密集的sigmoid层，该层根据词对的上下文相关性预测1或0（***Y’***）。我们将其与实际相关性标签（***Y***）进行匹配，通过利用`mean_squared_error`损失计算损失，并在每个周期中执行反向传播，以更新嵌入层。以下代码展示了我们的模型架构。
 - en: '![](../Images/237c9b10ed40a7418f23231b8adcd717.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/237c9b10ed40a7418f23231b8adcd717.png)'
 - en: Skip-gram model summary and architecture
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: Skip-gram模型总结和架构
 - en: Understanding the above deep learning model is pretty straightforward. However,
     I will try to summarize the core concepts of this model in simple terms for ease
     of understanding. We have a pair of input words for each training example consisting
@@ -218,49 +313,78 @@
     label Y (1 or 0), compute the loss, backpropagate the errors to adjust the weights
     (in the embedding layer) and repeat this process for all ***(target, context)*** pairs
     for multiple epochs. The following figure tries to explain the same.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 理解上述深度学习模型相当简单。然而，我将尝试用简单的术语总结该模型的核心概念，以便于理解。对于每个训练示例，我们有一对输入词，其中包含***一个输入目标词***，具有唯一的数字标识符，以及***一个上下文词***，也具有唯一的数字标识符。如果它是***正样本***，则该词具有上下文意义，是***上下文词***，我们的***标签
+    Y=1***；如果是***负样本***，则该词没有上下文意义，仅是***随机词***，我们的***标签 Y=0***。我们将每个词传递到各自的***嵌入层***，其大小为`**(vocab_size
+    x embed_size)**`，这将为这两个词提供***密集词嵌入***，`**(每个词 1 x embed_size)**`。接下来，我们使用***合并层***来计算这两个嵌入的***点积***并获得点积值。然后将其发送到***密集
+    sigmoid 层***，输出 1 或 0。我们将其与实际标签 Y（1 或 0）进行比较，计算损失，反向传播误差以调整权重（在嵌入层中），并对所有***(目标词,
+    上下文词)***对重复此过程多次。下图尝试解释相同内容。
 - en: '![](../Images/f9906c94dce46e3afb30e51283843aab.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f9906c94dce46e3afb30e51283843aab.png)'
 - en: Visual depiction of the Skip-gram deep learning model
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: Skip-gram 深度学习模型的视觉表示
 - en: Let’s now start training our model with our skip-grams.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们开始训练我们的 Skip-gram 模型。
 - en: '**Train the Model**'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**训练模型**'
 - en: Running the model on our complete corpus takes a fair bit of time but lesser
     than the CBOW model. Hence I just ran it for 5 epochs. You can leverage the following
     code and increase it for more epochs if necessary.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 在完整语料库上运行模型需要相当多的时间，但比 CBOW 模型少。因此，我只运行了 5 个周期。你可以利用以下代码并根据需要增加更多周期。
 - en: '[PRE2]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Once this model is trained, similar words should have similar weights based
     off the embedding layer and we can test out the same.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦训练完成，这个模型中相似的词应该会基于嵌入层具有相似的权重，我们可以进行测试。
 - en: '**Get Word Embeddings**'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**获取词嵌入**'
 - en: To get word embeddings for our entire vocabulary, we can extract out the same
     from our embedding layer by leveraging the following code. Do note that we are
     only interested in the target word embedding layer, hence we will extract the
     embeddings from our `**word_model**` embedding layer. We don’t take the embedding
     at position 0 since none of our words in the vocabulary have a numeric identifier
     of 0 and we ignore it.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 要获取我们整个词汇表的词嵌入，我们可以通过以下代码从嵌入层中提取相同的内容。请注意，我们仅对目标词嵌入层感兴趣，因此我们将从`**word_model**`嵌入层中提取嵌入。我们不取位置
+    0 的嵌入，因为我们词汇中的词没有数字标识符 0，我们将其忽略。
 - en: '![](../Images/2995edd6df7b95adfff70a43eb9d79d3.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2995edd6df7b95adfff70a43eb9d79d3.png)'
 - en: Word Embeddings for our vocabulary based on the Skip-gram model
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 基于 Skip-gram 模型的词汇表词嵌入
 - en: Thus you can clearly see that each word has a dense embedding of size `**(1x100)**` as
     depicted in the preceding output similar to what we had obtained from the CBOW
     model. Let’s now apply the euclidean distance metric on these dense embedding
@@ -268,79 +392,121 @@
     We can then find out the n-nearest neighbors of each word of interest based on
     the shortest (euclidean) distance similar to what we did on the embeddings from
     our CBOW model.
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，你可以清楚地看到每个词都有一个大小为`**(1x100)**`的密集嵌入，如之前的输出所示，与我们从 CBOW 模型获得的相似。现在，让我们对这些密集嵌入向量应用欧氏距离度量，以生成词汇中每个词的成对距离度量。然后，我们可以根据最短的（欧氏）距离找出每个感兴趣的词的
+    n 个最近邻，类似于我们在 CBOW 模型的嵌入上所做的。
 - en: '[PRE3]'
+  id: totrans-54
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: You can clearly see from the results that a lot of the similar words for each
     of the words of interest are making sense and we have obtained better results
     as compared to our CBOW model. Let’s visualize these words embeddings now using [**t-SNE**](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding)which
     stands for [***t-distributed stochastic neighbor embedding***](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding)a
     popular [dimensionality reduction](https://en.wikipedia.org/wiki/Dimensionality_reduction) technique
     to visualize higher dimension spaces in lower dimensions (e.g. 2-D).
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 从结果中可以清楚地看到，每个感兴趣的单词的许多相似单词是有意义的，并且我们相比于 CBOW 模型获得了更好的结果。现在让我们使用[**t-SNE**](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding)来可视化这些单词嵌入，它代表了[***t-distributed
+    stochastic neighbor embedding***](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding)，这是一个流行的[降维](https://en.wikipedia.org/wiki/Dimensionality_reduction)技术，用于将高维空间可视化到低维空间（例如
+    2-D）。
 - en: '![](../Images/9916982cd1c109657827c078892b3b62.png)'
+  id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9916982cd1c109657827c078892b3b62.png)'
 - en: Visualizing skip-gram word2vec word embeddings using t-SNE
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 t-SNE 可视化 skip-gram word2vec 单词嵌入
 - en: I have marked some circles in red which seemed to show different words of contextual
     similarity positioned near each other in the vector space. If you find any other
     interesting patterns feel free to let me know!
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在一些圆圈中标记了红色，这些圆圈似乎显示了在向量空间中彼此靠近的不同上下文相似单词。如果你发现任何其他有趣的模式，请随时告诉我！
 - en: '**Bio: [Dipanjan Sarkar](https://www.linkedin.com/in/dipanzan)** is a Data
     Scientist @Intel, an author, a mentor @Springboard, a writer, and a sports and
     sitcom addict.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介： [Dipanjan Sarkar](https://www.linkedin.com/in/dipanzan)** 是 Intel 的数据科学家、作者、Springboard
+    的导师、作家以及体育和情景喜剧爱好者。'
 - en: '[Original](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa).
     Reposted with permission.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Text Data Preprocessing: A Walkthrough in Python](/2018/03/text-data-preprocessing-walkthrough-python.html)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本数据预处理：Python 实践指南](/2018/03/text-data-preprocessing-walkthrough-python.html)'
 - en: '[A General Approach to Preprocessing Text Data](/2017/12/general-approach-preprocessing-text-data.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[文本数据预处理的一般方法](/2017/12/general-approach-preprocessing-text-data.html)'
 - en: '[A Framework for Approaching Textual Data Science Tasks](/2017/11/framework-approaching-textual-data-tasks.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理文本数据科学任务的框架](/2017/11/framework-approaching-textual-data-tasks.html)'
 - en: More On This Topic
+  id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Feature Store Summit 2022: A free conference on Feature Engineering](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Feature Store Summit 2022：一场免费的特征工程会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)'
 - en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的替代特征选择方法](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
 - en: '[A Practical Approach To Feature Engineering In Machine Learning](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中实用的特征工程方法](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)'
 - en: '[Building a Tractable, Feature Engineering Pipeline for Multivariate…](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为多变量时间序列构建一个可操作的特征工程管道](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)'
 - en: '[Using RAPIDS cuDF to Leverage GPU in Feature Engineering](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 RAPIDS cuDF 利用 GPU 进行特征工程](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)'
 - en: '[Feature Engineering for Beginners](https://www.kdnuggets.com/feature-engineering-for-beginners)'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征工程入门](https://www.kdnuggets.com/feature-engineering-for-beginners)'

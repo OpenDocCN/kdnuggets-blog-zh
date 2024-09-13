@@ -1,262 +1,392 @@
 - en: 'Getting Started with PyTorch Part 1: Understanding How Automatic Differentiation
     Works'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 开始使用PyTorch 第1部分：理解自动微分的工作原理
 - en: 原文：[https://www.kdnuggets.com/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html](https://www.kdnuggets.com/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html](https://www.kdnuggets.com/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html?page=2#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html?page=2#comments)'
 - en: '**By [Ayoosh Kathuria](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/),
     Research Intern**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Ayoosh Kathuria](https://www.linkedin.com/in/ayoosh-kathuria-44a319132/)
+    研究实习生提供**'
 - en: When I started to code neural networks, I ended up using what everyone else
     around me was using. TensorFlow.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 当我开始编写神经网络代码时，我最终使用了周围所有人都在用的东西——TensorFlow。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: But recently, PyTorch has emerged as a major contender in the race to be the
     king of deep learning frameworks. What makes it really luring is it’s dynamic
     computation graph paradigm. Don’t worry if the last line doesn’t make sense to
     you now. By the end of this post, it will. But take my word that it makes debugging
     neural networks way easier.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 但最近，PyTorch已经成为深度学习框架的主要竞争者。它真正吸引人的地方在于其动态计算图范式。如果最后一句话现在对你没有意义，不用担心。到这篇文章的末尾，你会明白的。但请相信它确实使调试神经网络变得更容易。
 - en: I've been using PyTorch a few months now and I've never felt better. I have
     more energy. My skin is clearer. My eye sight has improved.
+  id: totrans-12
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 我使用PyTorch已经几个月了，感觉比以前好多了。我有了更多的精力。我的皮肤更清晰了。我的视力也改善了。
 - en: ''
+  id: totrans-13
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: — Andrej Karpathy (@karpathy) [May 26, 2017](https://twitter.com/karpathy/status/868178954032513024?ref_src=twsrc%5Etfw)
+  id: totrans-14
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: — Andrej Karpathy (@karpathy) [2017年5月26日](https://twitter.com/karpathy/status/868178954032513024?ref_src=twsrc%5Etfw)
 - en: If you’re wondering why your energy has been low lately, switch to PyTorch!
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你最近感到精力不足，试试PyTorch吧！
 - en: Prerequisites
+  id: totrans-16
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 先决条件
 - en: 'Before we begin, I must point out that you should have at least the basic idea
     about:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们开始之前，我必须指出你应该至少了解以下基本概念：
 - en: Concepts related to training of neural networks, particularly backpropagation
     and gradient descent.
+  id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 与神经网络训练相关的概念，特别是反向传播和梯度下降。
 - en: Applying the chain rule to compute derivatives.
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 应用链式法则计算导数。
 - en: How classes work in Python. (Or a general idea about Object Oriented Programming)
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: Python中的类如何工作。（或者面向对象编程的一般概念）
 - en: In case, you’re missing any of the above, I’ve provided links at the end of
     the article to guide you.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你缺少上述任何内容，我已经在文章末尾提供了相关链接供你参考。
 - en: So, it’s time to get started with PyTorch. This is the first in a series of
     tutorials on PyTorch.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在是时候开始学习PyTorch了。这是关于PyTorch的系列教程中的第一部分。
 - en: This is the part 1 where I’ll describe the basic building blocks, and *Autograd*.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是第一部分，我将描述基本构建块和*Autograd*。
 - en: '**NOTE: **An important thing to notice is that the tutorial is made for PyTorch
     0.3 and lower versions. The latest version on offer is 0.4\. I’ve decided to stick
     with 0.3 because as of now, 0.3 is the version that is shipped in Conda and pip
     channels. Also, most of PyTorch code that is used in open source hasn’t been updated
     to incorporate some of the changes proposed in 0.4\. I, however, will point out
     at certain places where things differ in 0.3 and 0.4.'
+  id: totrans-24
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**注意：**一个重要的事情是，这个教程是针对PyTorch 0.3及更低版本的。现在提供的最新版本是0.4。我决定使用0.3，因为目前0.3是Conda和pip频道中提供的版本。此外，大多数开源PyTorch代码尚未更新以包含0.4中提出的一些更改。不过，我会在某些地方指出0.3和0.4之间的差异。'
 - en: 'Building Block #1 : Tensors'
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '构建模块 #1 ：张量'
 - en: If you’ve ever done machine learning in python, you’ve probably come across
     NumPy. The reason why we use Numpy is because it’s much faster than Python lists
     at doing matrix ops. Why? Because it does most of the heavy lifting in C.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你曾经用Python做过机器学习，你可能接触过NumPy。我们使用NumPy的原因是它在执行矩阵操作时比Python列表快得多。为什么？因为它的大部分计算工作是在C语言中完成的。
 - en: But, in case of training deep neural networks, NumPy arrays simply don’t cut
     it. I’m too lazy to do the actual calculations here (google for “FLOPS in one
     iteration of ResNet to get an idea), but code utilising NumPy arrays alone would
     take months to train some of the state of the art networks.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 但是，在训练深度神经网络时，NumPy数组根本不够用。我太懒得在这里进行实际计算（可以搜索“ResNet中一次迭代的FLOPS以了解情况”），但仅使用NumPy数组的代码会需要几个月的时间来训练一些最先进的网络。
 - en: This is where **Tensors** come into play. PyTorch provides us with a data structure
     called a *Tensor*, which is very similar to NumPy’s *ndarray.* But unlike the
     latter, **tensors can tap into the resources of a GPU to significantly speed up
     matrix operations.**
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是**张量**发挥作用的地方。PyTorch为我们提供了一种称为*Tensor*的数据结构，它与NumPy的*ndarray*非常相似。但与后者不同的是，**张量可以利用GPU资源显著加速矩阵操作。**
 - en: Here is how you make a Tensor.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面是如何创建一个Tensor。
 - en: '[PRE0]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 'Building Block #2 : Computation Graph'
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '构建模块 #2 ：计算图'
 - en: Now, we are at the business side of things. When a neural network is trained,
     we need to compute gradients of the loss function, with respect to every weight
     and bias, and then update these weights using gradient descent.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们进入业务方面。当神经网络被训练时，我们需要计算损失函数的梯度，相对于每个权重和偏置，然后使用梯度下降法更新这些权重。
 - en: With neural networks hitting billions of weights, doing the above step efficiently
     can make or break the feasibility of training.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 当神经网络的权重达到数十亿时，高效地完成上述步骤可以决定训练的可行性。
 - en: '**Building Block #2.1: Computation Graphs**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**构建模块 #2.1: 计算图**'
 - en: Computation graphs lie at the heart of the way modern deep learning networks
     work, and PyTorch is no exception. Let us first get the hang of what they are.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算图是现代深度学习网络工作原理的核心，PyTorch也不例外。让我们首先了解一下它们是什么。
 - en: 'Suppose, your model is described like this:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你的模型是这样描述的：
 - en: '[PRE1]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: If I were to actually draw the computation graph, it would probably look like
     this.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我真的画出计算图，它可能会是这样的。
 - en: '![](../Images/b1185cdfd81dacc7da52b88949b4cd17.png)'
+  id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b1185cdfd81dacc7da52b88949b4cd17.png)'
 - en: Computation Graph for our Model
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们模型的计算图
 - en: '**NOW**, you must note, that the above figure is not entirely an accurate representation
     of how the graph is represented under the hood by PyTorch. However, for now, it’s
     enough to drive our point home.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**现在**，你必须注意，上面的图并不完全准确地表示PyTorch内部如何表示图形。然而，目前这足以让我们理解要点。'
 - en: Why should we create such a graph when we can sequentially execute the operations
     required to compute the output?
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 为什么我们要创建这样一个图，而不是顺序执行计算输出所需的操作？
 - en: Imagine, what were to happen, if you didn’t merely have to calculate the output
     but also train the network. You’ll have to compute the gradients for all the weights
     labelled by purple nodes. That would require you to figure your way around chain
     rule, and then update the weights.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象一下，如果你不仅需要计算输出，还需要训练网络会发生什么。你需要计算所有由紫色节点标记的权重的梯度。这将要求你绕过链式法则，然后更新权重。
 - en: '**The computation graph is simply a data structure that allows you to efficiently
     apply the chain rule to compute gradients for all of your parameters.**'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '**计算图只是一种数据结构，使你能够高效地应用链式法则来计算所有参数的梯度。**'
 - en: '![](../Images/142a367a1968d0a892540f69c74dedc3.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/142a367a1968d0a892540f69c74dedc3.png)'
 - en: Applying the chain rule using computation graphs
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用计算图应用链式法则
 - en: Here are a couple of things to notice. First, that the directions of the arrows
     are now reversed in the graph. That’s because we are backpropagating, and arrows
     marks the flow of gradients backwards.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 有几点需要注意。首先，箭头的方向在图中现在被反转了。这是因为我们正在进行反向传播，箭头标记了梯度的反向流动。
 - en: Second, for the sake of these example, you can think of the gradients I have
     written as *edge weights*. Notice, these gradients don’t require chain rule to
     be computed.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 其次，为了这些示例，你可以把我写的梯度看作是 *边权重*。注意，这些梯度不需要链式法则来计算。
 - en: Now, in order to compute the *gradient of any node, say, L, with respect of
     any other node, say c ( dL / dc) *all we have to do is.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，为了计算 *任何节点的梯度，例如 L，相对于其他节点，例如 c ( dL / dc )*，我们只需进行以下操作。
 - en: Trace the path *from L to c*. This would be* L → d → c.*
+  id: totrans-50
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 追踪路径 *从 L 到 c*。这将是 *L → d → c*。
 - en: 'Multiply all the *edge weights* as you traverse along this path. The quantity
     you end up with is: ( *dL / dd ) * *( *dd / dc ) = ( dL / dc)*'
+  id: totrans-51
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 乘以你沿着这条路径遍历时遇到的所有 *边权重*。你最终得到的量是：( *dL / dd* ) * *( *dd / dc* ) = ( dL / dc
+    )*
 - en: If there are multiple paths, add their results. For example in case of *dL/da, *we
     have two paths.* L → d → c → a and L → d → b→ a. *We add their contributions to
     get the gradient of* L w.r.t. a.*
+  id: totrans-52
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果有多个路径，将它们的结果相加。例如，在 *dL/da* 的情况下，我们有两个路径。*L → d → c → a 和 L → d → b → a*。我们将它们的贡献加起来，以获得
+    *L 相对于 a 的梯度*。
 - en: '*[*( *dL / dd ) * *( *dd / dc ) * *( *dc / da )] *+ *[*( *dL / dd ) * *( *dd
     / db ) * *( *db / da )]*'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '*[*( *dL / dd* ) * *( *dd / dc* ) * *( *dc / da* )] *+ *[*( *dL / dd* ) * *(
+    *dd / db* ) * *( *db / da* )]*'
 - en: In principle, one could start at *L*, and start traversing the graph backwards,
     calculating gradients for every node that comes along the way.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 原则上，你可以从 *L* 开始，反向遍历图，计算沿途每个节点的梯度。
 - en: More On This Topic
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Getting Started with PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyTorch Lightning 入门指南](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
 - en: '[Getting Started with PyTorch in 5 Steps](https://www.kdnuggets.com/5-steps-getting-started-pytorch)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[5 步骤入门 PyTorch](https://www.kdnuggets.com/5-steps-getting-started-pytorch)'
 - en: '[How to Ace Data Science Assessment Test by Using Automatic EDA Tools](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何通过自动 EDA 工具掌握数据科学评估测试](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)'
 - en: '[How I Did Automatic Image Labeling Using Grounding DINO](https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我如何使用 Grounding DINO 进行自动图像标注](https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html)'
 - en: '[How ChatGPT Works: The Model Behind The Bot](https://www.kdnuggets.com/2023/04/chatgpt-works-model-behind-bot.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[ChatGPT 如何工作：模型背后的机器人](https://www.kdnuggets.com/2023/04/chatgpt-works-model-behind-bot.html)'
 - en: '[The Burtch Works 2023 Data Science & AI Professionals Salary Report…](https://www.kdnuggets.com/2023/08/burtch-works-2023-data-science-ai-professionals-salary-report.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Burtch Works 2023 数据科学与 AI 专业人员薪资报告…](https://www.kdnuggets.com/2023/08/burtch-works-2023-data-science-ai-professionals-salary-report.html)'
