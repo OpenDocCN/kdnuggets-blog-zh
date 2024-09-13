@@ -1,56 +1,85 @@
 - en: 'skops: A New Library to Improve Scikit-learn in Production'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: skops：提升Scikit-learn生产环境的全新库
 - en: 原文：[https://www.kdnuggets.com/2023/02/skops-new-library-improve-scikitlearn-production.html](https://www.kdnuggets.com/2023/02/skops-new-library-improve-scikitlearn-production.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/02/skops-new-library-improve-scikitlearn-production.html](https://www.kdnuggets.com/2023/02/skops-new-library-improve-scikitlearn-production.html)
 - en: There are various challenges when it comes to machine learning models in production.
     These range from reproducibility in versioning to secure serialization. In this
     blog post, I will walk you through a library called `skops`, to tackle these challenges.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 在生产环境中处理机器学习模型时面临各种挑战。这些挑战包括版本控制中的可重现性和安全序列化。在这篇博客文章中，我将带你了解一个名为`skops`的库，以应对这些挑战。
 - en: 'We will see an end-to-end example: train a model first, serialize it, document
     our model, and host it.'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将看到一个端到端的示例：首先训练一个模型，然后序列化它，记录我们的模型，并托管它。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在组织的IT'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '[PRE0]'
+  id: totrans-10
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: Secure Serialization
+  id: totrans-11
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 安全序列化
 - en: We will now save the model. We can save the model using any format, including,
     `joblib`, `pickle` or `skops`.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们将保存模型。我们可以使用任何格式保存模型，包括`joblib`、`pickle`或`skops`。
 - en: '`skops` introduces a new serialization format. The motivation here is to avoid
     the use of pickle or `joblib` to serialize `sklearn` models.  Serialization with
     `pickle` or `joblib` can result in bad actors executing code on your local machine
@@ -59,166 +88,248 @@
     code in binary format, thus, it’s not human-readable. It can practically do anything:
     remove everything on your machine or install malware. You should only deserialize
     a pickle from a source that you trust.'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '`skops`引入了一种新的序列化格式。其动机是避免使用pickle或`joblib`来序列化`sklearn`模型。使用`pickle`或`joblib`进行序列化可能导致恶意行为者在你的本地机器上执行代码，如果pickle文件来自你不信任的来源，应该避免反序列化。它是一种将代码指令序列化为二进制格式的序列化协议，因此不可读。它可以实际做任何事情：删除你机器上的所有内容或安装恶意软件。你应该仅从你信任的来源反序列化pickle。'
 - en: The serialization format introduced by `skops` doesn’t rely on `pickle` and
     lets users see what a given file contains without loading it. You can read more
     about it [here](https://skops.readthedocs.io/en/stable/modules/classes.html#module-skops.io).
     Let’s take a look at the API.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '`skops`引入的序列化格式不依赖于`pickle`，并允许用户在加载文件之前查看文件的内容。你可以在[这里](https://skops.readthedocs.io/en/stable/modules/classes.html#module-skops.io)阅读更多相关信息。我们来看一下API。'
 - en: You can save a `sklearn` model or pipeline by passing the object and the file
     path that it will be saved to.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以通过传递对象和保存路径来保存一个`sklearn`模型或管道。
 - en: '[PRE1]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The tricky part is to load the model from a file. We will pass the file path
     to `load`. We have one more parameter called `trusted` which can be either `True`,
     list of trusted types, or `False`. If set to `False`, it will only load the trusted
     types. Let's take a look.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 棘手的部分是从文件中加载模型。我们将把文件路径传递给`load`。我们还有一个参数叫做`trusted`，它可以是`True`、受信任类型的列表或`False`。如果设置为`False`，它将仅加载受信任的类型。让我们来看看。
 - en: '[PRE2]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: We can get a list of untrusted types using `get_untrusted_types`.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用`get_untrusted_types`来获取未受信任的类型列表。
 - en: '[PRE3]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: You can directly pass the above list to `trusted`.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以直接将上述列表传递给`trusted`。
 - en: '[PRE4]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: If you try to load without the transformer on top, loading will fail with an
     `UntrustedTypesFoundException`.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你尝试在没有变换器的情况下加载，加载将失败并抛出`UntrustedTypesFoundException`。
 - en: '[PRE5]'
+  id: totrans-24
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Note that you always need to pass something to `trusted`, as this prompts the
     user to determine whether to trust this file or not.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，你总是需要将某些内容传递给`trusted`，因为这会提示用户确定是否信任该文件。
 - en: '[PRE6]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: Model Hosting
+  id: totrans-27
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 模型托管
 - en: If you’d like to host models open to everyone, you can do that with `skops`
     and [ Hugging Face Hub](https://huggingface.co/). This enables easy inference
     without downloading the model, model documentation in the model repository, and
     building interfaces with one line of code.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你希望将模型公开托管，可以使用 `skops` 和 [Hugging Face Hub](https://huggingface.co/)。这使得无需下载模型即可进行推理，模型文档在模型库中，并且只需一行代码即可构建接口。
 - en: '![skops: a new library to improve scikit-learn in production](../Images/2ae00b9390b39d888be239bc775340c6.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![skops: 一个用于提升 scikit-learn 生产环境的新库](../Images/2ae00b9390b39d888be239bc775340c6.png)'
 - en: Hugging Face Model Repository
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: Hugging Face 模型库
 - en: '![skops: a new library to improve scikit-learn in production](../Images/d2eb37c88c6eaabc93dbcb60dbc5eb51.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![skops: 一个用于提升 scikit-learn 生产环境的新库](../Images/d2eb37c88c6eaabc93dbcb60dbc5eb51.png)'
 - en: This is built with one line of code
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 这只需一行代码即可构建
 - en: Let’s see how to create these programmatically.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看如何以编程方式创建这些内容。
 - en: '`hub_utils.init` creates a local folder containing the model in the given path,
     and the configuration file containing the requirements of the environment the
     model is trained in, the training objective, a sample from the dataset, and more.
     The sample data and the task identifier passed to the `init` will help Hugging
     Face Hub enable the inference widget on the model page as well as discoverability
     features to find the model.'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '`hub_utils.init` 创建一个包含模型的本地文件夹，并且配置文件包含模型训练环境的要求、训练目标、数据集样本等。传递给 `init` 的样本数据和任务标识符将帮助
+    Hugging Face Hub 启用模型页面上的推理小部件以及发现功能来找到模型。'
 - en: '**Note:** The inference widget, inference API, and `gradio` integration only
     work with pickle format for now. We are currently developing support for `skops`
     format. Therefore, we will save the model in `pickle` for now.'
+  id: totrans-35
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**注意：** 目前推理小部件、推理 API 和 `gradio` 集成仅支持 pickle 格式。我们目前正在开发对 `skops` 格式的支持。因此，我们将暂时以
+    `pickle` 格式保存模型。'
 - en: '[PRE7]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: 'The repository now contains the model and the configuration file that enable
     inference, build environment to load the model and more. The configuration file
     is a JSON that contains:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 该库现在包含启用推理的模型和配置文件，构建环境以加载模型等。配置文件是一个 JSON 文件，其中包含：
 - en: a small sample of the dataset,
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据集的小样本，
 - en: columns of the dataset,
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 数据集的列，
 - en: the environment requirements to load the model,
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 加载模型的环境要求，
 - en: relative path to the model file inside the repository,
+  id: totrans-41
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型文件在库中的相对路径，
 - en: the task that is being solved.
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 正在解决的任务。
 - en: 'Now, we will document our model by creating a model card. The model cards in
     skops follow the format of Hugging Face Hub model cards: it consists of a markdown
     part and yaml metadata section. You can check out the keys of the metadata section
     [here](https://huggingface.co/docs/hub/models-cards#model-card-metadata) for better
     discoverability of the models. The model card follows a template that consists
     of:'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，我们将通过创建模型卡来记录我们的模型。skops 中的模型卡遵循 Hugging Face Hub 模型卡的格式：包括一个 markdown 部分和一个
+    yaml 元数据部分。你可以在 [这里](https://huggingface.co/docs/hub/models-cards#model-card-metadata)
+    查看元数据部分的键，以便更好地发现模型。模型卡遵循的模板包括：
 - en: YAML section on top for metadata (task ID, license, library name used for training,
     and more)
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 顶部的 YAML 部分用于元数据（任务 ID、许可证、用于训练的库名称等）
 - en: free text section in the format of markdown and sections to be filled (e.g.
     description of the model, intended use, limitations and more),
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 以 markdown 格式呈现的自由文本部分和需要填写的部分（例如模型描述、预期用途、限制等），
 - en: 'Below sections of the model card are automatically generated by skops:'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 模型卡的以下部分由 skops 自动生成：
 - en: Hyperparameters of the model,
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型的超参数，
 - en: Interactive diagram of the model,
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 模型的交互式图示，
 - en: A small snippet that shows how to load and use the model,
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 下面是一个展示如何加载和使用模型的小示例，
 - en: For metadata, library name, task identifier (e.g. tabular-classification), and
     information required by the inference widget is filled.
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 元数据、库名称、任务标识符（例如表格分类）以及推理小部件所需的信息已填写。
 - en: skops enables programmatic editing of the model card through various methods.
     The documentation on the card module and the default template provided by skops
     is [ here](https://github.com/skops-dev/skops/blob/main/skops/card/default_template.md).
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: skops 通过各种方法支持程序化编辑模型卡。有关卡片模块的文档以及 skops 提供的默认模板，请参见 [这里](https://github.com/skops-dev/skops/blob/main/skops/card/default_template.md)。
 - en: You can instantiate the Card class from skops to create the model card. This
     class is an intermediate data structure that is later rendered to markdown. We
     will later save this card to the repository where the model will be hosted. During
@@ -228,126 +339,195 @@
     metadata, so you can use the metadata_from_config method to extract the metadata
     from the configuration file and pass it to the card when you create it. You can
     use `add` method to add information and edit metadata.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以从skops中实例化Card类来创建模型卡。这个类是一个中间数据结构，稍后会渲染为markdown。我们将把这个卡片保存到托管模型的仓库中。在初始化仓库时，任务名称（例如，tabular-regression）和库名称（例如，scikit-learn）会写入配置文件。任务和库名称也需要在卡片的元数据中，所以你可以使用metadata_from_config方法从配置文件中提取元数据，并在创建卡片时将其传递给卡片。你可以使用`add`方法来添加信息和编辑元数据。
 - en: '[PRE8]'
+  id: totrans-53
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: We can evaluate the model and write it to the model card as metric. We can use
     the `add_metrics` method which adds metrics to our model card and writes as a
     table.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以评估模型并将其写入模型卡作为指标。我们可以使用`add_metrics`方法将指标添加到我们的模型卡中，并以表格形式写入。
 - en: '[PRE9]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: Plots that visualize model performance can be added using `add_plots`.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以使用`add_plots`添加可视化模型性能的图表。
 - en: '[PRE10]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: Let’s save the model card in the local repository. The file name here should
     be `README.md` since it is what Hugging Face Hub expects.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们将模型卡保存在本地仓库中。这里的文件名应该是`README.md`，因为这是Hugging Face Hub所期望的。
 - en: '[PRE11]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: The repository is now ready for push to Hugging Face Hub. We can use `hub_utils`
     for this.  Hugging Face Hub follows an authentication flow with tokens, so we
     can pass our token in push.
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 仓库现在已准备好推送到Hugging Face Hub。我们可以使用`hub_utils`来完成这项操作。Hugging Face Hub 遵循带有令牌的认证流程，因此我们可以在推送时传递我们的令牌。
 - en: '[PRE12]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: Once the model is on the Hugging Face Hub, it can be downloaded by anyone using
     `download`, unless the model is private. The repository contains the model, model
     card, and model configuration that contains a small sample of the dataset for
     reproducibility, requirements, and more.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦模型在 Hugging Face Hub 上，它可以被任何人使用`download`下载，除非该模型是私有的。仓库包含模型、模型卡和模型配置，模型配置包含数据集的小样本用于重现性、要求等。
 - en: '[PRE13]'
+  id: totrans-63
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: The model can be easily tested using the inference widget.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 可以使用推理小部件轻松测试模型。
 - en: '![skops: a new library to improve scikit-learn in production](../Images/a0fe949f7d05a401bf767dcc47b7618d.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![skops: 一个用于改进生产环境中的 scikit-learn 的新库](../Images/a0fe949f7d05a401bf767dcc47b7618d.png)'
 - en: Inference Widget in Repository
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 仓库中的推理小部件
 - en: We can now use `gradio` integration for `skops`. We’ve created the interface
     below with only one line of code! ????
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们可以使用`gradio`集成来处理`skops`。我们只用一行代码就创建了下面的接口！ ????
 - en: '![skops: a new library to improve scikit-learn in production](../Images/ea88ae3bf3960a27251583080be7d1a1.png)'
+  id: totrans-68
   prefs: []
   type: TYPE_IMG
+  zh: '![skops: 一个用于改进生产环境中的 scikit-learn 的新库](../Images/ea88ae3bf3960a27251583080be7d1a1.png)'
 - en: Gradio UI for our model
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们模型的Gradio UI
 - en: '[PRE14]'
+  id: totrans-70
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: 'We can further customize this UI like the following:'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以进一步自定义这个UI，如下所示：
 - en: We can pass title, description, and more to the loaded UI. Check out gradio
     documentation on [Interface class](https://gradio.app/docs/#interface) for more
     information on what you can customize.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以将标题、描述等信息传递给加载的UI。有关可以自定义的更多信息，请查看gradio文档中的[Interface class](https://gradio.app/docs/#interface)。
 - en: '[PRE15]'
+  id: totrans-73
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: The resulting repository is [here](https://huggingface.co/scikit-learn/blog-example).
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果仓库在[这里](https://huggingface.co/scikit-learn/blog-example)。
 - en: Further Resources
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 进一步资源
 - en: '[skops documentation](https://skops.readthedocs.org/)'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[skops 文档](https://skops.readthedocs.org/)'
 - en: '[scikit-learn organization on ???? Hub](https://huggingface.co/scikit-learn)'
+  id: totrans-77
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[scikit-learn 组织在 ???? Hub](https://huggingface.co/scikit-learn)'
 - en: '**[Merve Noyan](https://www.linkedin.com/in/merve-noyan-28b1a113a/)** is a
     Google developer expert on machine learning and developer advocate at Hugging
     Face.'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[Merve Noyan](https://www.linkedin.com/in/merve-noyan-28b1a113a/)** 是一位谷歌机器学习开发专家，并且是Hugging
+    Face的开发者推广专家。'
 - en: More On This Topic
+  id: totrans-79
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[A Full End-to-End Deployment of a Machine Learning Algorithm into a…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将机器学习算法完整端到端部署到…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)'
 - en: '[Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[检测数据漂移以确保生产机器学习模型质量使用Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
 - en: '[Prioritizing Data Science Models for Production](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为生产优先排序数据科学模型](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)'
 - en: '[Operationalizing Machine Learning from PoC to Production](https://www.kdnuggets.com/2022/05/operationalizing-machine-learning-poc-production.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从概念验证到生产的机器学习操作化](https://www.kdnuggets.com/2022/05/operationalizing-machine-learning-poc-production.html)'
 - en: '[Feature Store Summit 2023: Practical Strategies for Deploying ML…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
+  id: totrans-84
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2023年特征存储峰会：部署机器学习的实用策略…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)'
 - en: '[Metadata Store for Production ML!](https://www.kdnuggets.com/2022/05/layer-metadata-store-production-ml.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[生产机器学习的元数据存储！](https://www.kdnuggets.com/2022/05/layer-metadata-store-production-ml.html)'
