@@ -1,39 +1,56 @@
 - en: Making Python Speak SQL with pandasql
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 让 Python 使用 SQL 通过 pandasql
 - en: 原文：[https://www.kdnuggets.com/2017/02/python-speak-sql-pandasql.html](https://www.kdnuggets.com/2017/02/python-speak-sql-pandasql.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/02/python-speak-sql-pandasql.html](https://www.kdnuggets.com/2017/02/python-speak-sql-pandasql.html)
 - en: This post originally appeared on the [Yhat blog](http://blog.yhat.com/). [**Yhat**](https://www.yhat.com/)
     is a Brooklyn based company whose goal is to make data science applicable for
     developers, data scientists, and businesses alike. Yhat provides a software platform
     for deploying and managing predictive algorithms as REST APIs, while eliminating
     the painful engineering obstacles associated with production environments like
     testing, versioning, scaling and security.
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文最初出现在 [Yhat 博客](http://blog.yhat.com/)。**Yhat**（[官网](https://www.yhat.com/)）是一家位于布鲁克林的公司，旨在使数据科学对开发人员、数据科学家和企业都适用。Yhat
+    提供一个软件平台，用于部署和管理预测算法作为 REST API，同时消除了与生产环境相关的痛苦工程障碍，如测试、版本控制、扩展和安全性。
 - en: '* * *'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Introduction
+  id: totrans-4
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 介绍
 - en: One of my favorite things about Python is that users get the benefit of observing
     the R community and then emulating the best parts of it. I'm a big believer that
     a language is only as helpful as its libraries and tools.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 我最喜欢 Python 的一件事是，用户可以观察 R 社区，然后模仿其中的最佳部分。我坚信，语言的有用性在于它的库和工具。
 - en: This post is about `pandasql`, a Python package we (Yhat) wrote that emulates
     the R package [`sqldf`](https://github.com/ggrothendieck/sqldf). It's a small
     but mighty library comprised of just [358 lines of code](https://github.com/yhat/pandasql).
     The idea of `pandasql` is to make Python speak SQL. For those of you who come
     from a SQL-first background or still "think in SQL", `pandasql` is a nice way
     to take advantage of the strengths of both languages.
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文介绍了 `pandasql`，这是我们（Yhat）编写的一个 Python 包，用于模拟 R 包 [`sqldf`](https://github.com/ggrothendieck/sqldf)。它是一个小巧但强大的库，由仅仅
+    [358 行代码](https://github.com/yhat/pandasql) 组成。`pandasql` 的理念是让 Python 能够使用 SQL。对于那些来自
+    SQL 为主背景或仍然“以 SQL 为思维方式”的用户，`pandasql` 是一个不错的方式，可以充分利用这两种语言的优势。
 - en: In this introduction, we'll show you to get up and running with `pandasql` inside
     of [Rodeo](https://www.yhat.com/products/rodeo), the integrated development environment
     (IDE) we built for data exploration and analysis. Rodeo is an open source and
@@ -45,254 +62,392 @@
     including adding SQL support so that you can run your SQL queries right inside
     of Rodeo, even without our handy little `pandasql`. More on that in the next week
     or two!
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本介绍中，我们将展示如何在我们为数据探索和分析构建的集成开发环境（IDE）[Rodeo](https://www.yhat.com/products/rodeo)
+    内部快速上手 `pandasql`。Rodeo 是一个开源且完全免费的工具。如果你是 R 用户，它类似于 [RStudio](https://www.rstudio.com/)
+    的工具。到目前为止，Rodeo 只能运行 Python 代码，但上周 [我们添加了](http://blog.yhat.com/posts/rodeo-2.4.0.html)
+    对其他多种语言（markdown、JSON、julia、SQL、markdown）的语法高亮支持。正如你可能读到或猜到的那样，我们对 Rodeo 有大计划，包括添加
+    SQL 支持，以便你可以在 Rodeo 内部直接运行 SQL 查询，即使没有我们便捷的 `pandasql`。更多内容将在接下来的一两周内发布！
 - en: Downloading Rodeo
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 下载 Rodeo
 - en: Start by downloading Rodeo for Mac, Windows or Linux from the [Rodeo page on
     the Yhat website](https://www.yhat.com/products/rodeo).
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 从 [Yhat 网站上的 Rodeo 页面](https://www.yhat.com/products/rodeo) 下载适用于 Mac、Windows
+    或 Linux 的 Rodeo 开始。
 - en: ps If you download Rodeo and encounter a problem or simply have a question,
     we monitor our [discourse forum](http://discuss.yhat.com/) 24/7 (okay, almost).
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: ps 如果你下载 Rodeo 遇到问题或有疑问，我们全天候（好吧，差不多）监控我们的 [讨论论坛](http://discuss.yhat.com/)。
 - en: A bit of background, if you're curious
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 如果你感兴趣的话，提供一点背景信息
 - en: Behind the scenes, `pandasql` uses the `pandas.io.sql` module to transfer data
     between `DataFrame` and SQLite databases. Operations are performed in SQL, the
     results returned, and the database is then torn down. The library makes heavy
     use of `pandas` `write_frame`and `frame_query`, two functions which let you read
     and write to/from `pandas` and (most) any SQL database.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在幕后，`pandasql` 使用 `pandas.io.sql` 模块在 `DataFrame` 和 SQLite 数据库之间转移数据。操作在 SQL
+    中执行，结果返回，然后数据库被销毁。该库大量使用 `pandas` 的 `write_frame` 和 `frame_query`，这两个函数让你可以读写
+    `pandas` 和（大多数）任何 SQL 数据库。
 - en: Install `pandasql`
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 安装 `pandasql`
 - en: Install `pandasql` using the package manager pane in Rodeo. Simply search for
     `pandasql` and click Install Package.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Rodeo 的包管理器窗格安装 `pandasql`。只需搜索 `pandasql` 并点击安装包。
 - en: '![Rodeo](../Images/df01e2be992655e3d8df842a35b7b555.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![Rodeo](../Images/df01e2be992655e3d8df842a35b7b555.png)'
 - en: You can also run `! pip install pandasql` from the text editor if you prefer
     to install that way.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你喜欢这种方式，你也可以在文本编辑器中运行 `! pip install pandasql` 来安装。
 - en: Check out the datasets
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 查看数据集
 - en: '`pandasql` has two built-in datasets which we''ll use for the examples below.'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pandasql` 有两个内置的数据集，我们将在下面的示例中使用它们。'
 - en: '`meat`: Dataset from the U.S. Dept. of Agriculture containing metrics on livestock,
     dairy, and poultry outlook and production'
+  id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`meat`：来自美国农业部的数据集，包含有关牲畜、乳制品和家禽展望及生产的指标'
 - en: '`births`: Dataset from the United Nations Statistics Division containing demographic
     statistics on live births by month'
+  id: totrans-20
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`births`：来自联合国统计司的数据集，包含按月的活产统计数据'
 - en: Run the following code to check out the data sets.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行以下代码来查看数据集。
 - en: Inside Rodeo, you really don't even need the print.variable.head() statements,
     since you can actually just examine the dataframes directly.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Rodeo 内部，你实际上不需要使用 print.variable.head() 语句，因为你可以直接检查数据框。
 - en: '![Rodeo](../Images/e16146ab2559389c09b51db6b64af166.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![Rodeo](../Images/e16146ab2559389c09b51db6b64af166.png)'
 - en: An odd graph
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 奇怪的图表
 - en: Notice that the plot appears both in the console and the plot tab (bottom right
     tab).
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，图表会同时出现在控制台和图表标签（右下角标签）中。
 - en: 'Tip: You can "pop out" your plot by clicking the arrows at the top of the pane.
     This is handy if you''re working on multiple monitors and want to dedicate one
     just to your data visualzations.'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 提示：你可以通过点击窗格顶部的箭头来“弹出”你的图表。如果你在使用多个显示器，并希望将其中一个专门用于数据可视化，这非常方便。
 - en: '![Rodeo](../Images/033f5bc0a2de9b060afac0a299c60ecc.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![Rodeo](../Images/033f5bc0a2de9b060afac0a299c60ecc.png)'
 - en: Usage
+  id: totrans-28
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用方法
 - en: To keep this post concise and easy to read, we've just given the code snippets
     and a few lines of results for most of the queries below.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了使这篇文章简洁易读，我们只给出了大部分查询的代码片段和几行结果。
 - en: 'If you''re following along in Rodeo, a few tips as you''re getting started:'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你在使用 Rodeo，这里有一些开始时的提示：
 - en: '`Run Script` will indeed run everything you have written in the text editor'
+  id: totrans-31
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`Run Script` 确实会运行你在文本编辑器中编写的所有内容。'
 - en: You can highlight a code chunk and run it by clicking `Run Line` or pressing
     Command + Enter
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你可以突出显示一段代码并通过点击 `Run Line` 或按 Command + Enter 来运行它。
 - en: You can resize the panes (when I'm not making plots I shrink down the bottom
     right pane)
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 你可以调整窗格的大小（当我不做绘图时，我会缩小右下角的窗格）。
 - en: '**Basics**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**基础知识（Basics）**'
 - en: Write some SQL and execute it against your `pandas` `DataFrame` by substituting
     DataFrames for tables.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 编写一些 SQL 语句并通过将 DataFrames 替换为表格来在你的 `pandas` `DataFrame` 上执行。
 - en: '`pandasql` creates a DB, schema and all, loads your data, and runs your SQL.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pandasql` 创建一个数据库、架构及所有内容，加载你的数据，并运行你的 SQL。'
 - en: '**Aggregation**'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '**聚合（Aggregation）**'
 - en: '`pandasql` supports aggregation. You can use [aliased column names](http://www.w3schools.com/sql/sql_alias.asp)
     or column numbers in your `group by` clause.'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pandasql` 支持聚合。你可以在 `group by` 子句中使用[别名列名](http://www.w3schools.com/sql/sql_alias.asp)或列号。'
 - en: '**`locals()` vs. `globals()`**'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**`locals()` 与 `globals()`**'
 - en: '`pandasql` needs to have access to other variables in your session/environment.
     You can pass `locals()` to `pandasql` when executing a SQL statement, but if you''re
     running a lot of queries that might be a pain. To avoid passing locals all the
     time, you can add this helper function to your script to set `globals()` like
     so:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pandasql` 需要访问你会话/环境中的其他变量。你可以在执行 SQL 语句时将 `locals()` 传递给 `pandasql`，但如果你运行很多查询，这可能会很麻烦。为了避免每次都传递
+    locals，你可以在脚本中添加这个辅助函数来设置 `globals()`，如下所示：'
 - en: '**joins**'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '**连接（joins）**'
 - en: You can join dataframes using normal SQL syntax.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以使用普通 SQL 语法来连接数据框。
 - en: '**`WHERE` conditions**'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**`WHERE` 条件**'
 - en: Here's a `WHERE` clause.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是一个 `WHERE` 子句。
 - en: It's just SQL
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 这只是 SQL
 - en: Since `pandasql` is powered by [SQLite3](https://docs.python.org/2/library/sqlite3.html),
     you can do most anything you can do in SQL. Here are some examples using common
     SQL features such as subqueries, order by, functions, and unions.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于 `pandasql` 是由 [SQLite3](https://docs.python.org/2/library/sqlite3.html) 驱动的，你可以做几乎所有
+    SQL 能做的事情。这里有一些使用常见 SQL 特性（如子查询、排序、函数和联合）的示例。
 - en: Final thoughts
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 最后的思考
 - en: '![Rodeo](../Images/9d2174120c35e418253586777099d061.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![Rodeo](../Images/9d2174120c35e418253586777099d061.png)'
 - en: '`pandas` is an incredible tool for data analysis in large part, we think, because
     it is extremely digestible, succinct, and expressive. Ultimately, there are *tons*
     of reasons to learn the nuances of `merge`, `join`, `concatenate`, `melt` and
     other native `pandas` features for slicing and dicing data. Check out the [docs](http://pandas.pydata.org/pandas-docs/stable/merging.html)
     for some examples.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '`pandas` 是一个非常出色的数据分析工具，我们认为这主要归功于它极易理解、简洁且表达力强。最终，有*大量*理由去学习`merge`、`join`、`concatenate`、`melt`和其他原生`pandas`特性，以便更好地切割和处理数据。查看一下[文档](http://pandas.pydata.org/pandas-docs/stable/merging.html)获取一些示例。'
 - en: Our hope is that `pandasql` will be a helpful learning tool for folks new to
     Python and `pandas`. In my own personal experience learning R, `sqldf` was a familiar
     interface helping me become highly productive with a new tool as quickly as possible.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们希望`pandasql`能成为Python和`pandas`新手的有用学习工具。在我个人学习R的经历中，`sqldf`是一个熟悉的接口，帮助我尽快高效地使用新工具。
 - en: We hope you'll check out `pandasql` and Rodeo; if you do, please [let us know
     what you think](http://discuss.yhat.com/)!
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们希望你能查看`pandasql`和Rodeo；如果你这样做了，请[告诉我们你的想法](http://discuss.yhat.com/)！
 - en: '[Original](http://blog.yhat.com/posts/pandasql-intro.html). Reposted with permission.'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](http://blog.yhat.com/posts/pandasql-intro.html)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Great Collection of Minimal and Clean Implementations of Machine Learning
     Algorithms](/2017/01/great-collection-clean-machine-learning-algorithms.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[优秀的机器学习算法极简和干净实现合集](/2017/01/great-collection-clean-machine-learning-algorithms.html)'
 - en: '[Pandas Cheat Sheet: Data Science and Data Wrangling in Python](/2017/01/pandas-cheat-sheet.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Pandas 备忘单：Python 中的数据科学和数据整理](/2017/01/pandas-cheat-sheet.html)'
 - en: '[Statistical Data Analysis in Python](/2016/07/statistical-data-analysis-python.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python 中的统计数据分析](/2016/07/statistical-data-analysis-python.html)'
 - en: '* * *'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-58
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织的IT工作'
 - en: '* * *'
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-63
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[SQL in Pandas with Pandasql](https://www.kdnuggets.com/sql-in-pandas-with-pandasql)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 Pandas 中使用 Pandasql 进行 SQL 操作](https://www.kdnuggets.com/sql-in-pandas-with-pandasql)'
 - en: '[Making Predictions: A Beginner''s Guide to Linear Regression in Python](https://www.kdnuggets.com/2023/06/making-predictions-beginner-guide-linear-regression-python.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[预测制作：Python 中线性回归的初学者指南](https://www.kdnuggets.com/2023/06/making-predictions-beginner-guide-linear-regression-python.html)'
 - en: '[Ploomber vs Kubeflow: Making MLOps Easier](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Ploomber 与 Kubeflow：简化 MLOps](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)'
 - en: '[The Significance of Data Quality in Making a Successful Machine…](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据质量在成功机器学习中的重要性](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)'
 - en: '[Making Intelligent Document Processing Smarter: Part 1](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)'
+  id: totrans-68
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[让智能文档处理更智能：第一部分](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)'
 - en: '[From Data Analyst to Data Strategist: The Career Path for Making an Impact](https://www.kdnuggets.com/2023/05/data-analyst-data-strategist-career-path-making-impact.html)'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[从数据分析师到数据策略师：产生影响的职业路径](https://www.kdnuggets.com/2023/05/data-analyst-data-strategist-career-path-making-impact.html)'
