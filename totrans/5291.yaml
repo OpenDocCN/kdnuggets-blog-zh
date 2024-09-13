@@ -1,226 +1,336 @@
 - en: SQL-like Query Language for Real-time Streaming Analytics
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 实时流处理分析的类似SQL查询语言
 - en: 原文：[https://www.kdnuggets.com/2015/03/sql-query-language-realtime-streaming-analytics.html](https://www.kdnuggets.com/2015/03/sql-query-language-realtime-streaming-analytics.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2015/03/sql-query-language-realtime-streaming-analytics.html](https://www.kdnuggets.com/2015/03/sql-query-language-realtime-streaming-analytics.html)
 - en: By Srinath Perera ([@srinath_perera](https://twitter.com/srinath_perera)).
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: 作者：Srinath Perera（[@srinath_perera](https://twitter.com/srinath_perera)）
 - en: I was at [Strata+Hadoop World 2015](http://strataconf.com/big-data-conference-ca-2015)
     last week and certainly interest for realtime analytics was at it’s top.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 我上周在[Strata+Hadoop World 2015](http://strataconf.com/big-data-conference-ca-2015)参加了会议，确实对实时分析的兴趣达到了顶峰。
 - en: Realtime analytics, or what people call Realtime Analytics, has two flavors.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 实时分析，或者人们称之为实时分析，有两种类型。
 - en: Realtime Streaming Analytics ( static queries given once that do not change,
     they process data as they come in without storing. CEP, Apache Strom, Apache Samza
     etc., are examples of this.
+  id: totrans-5
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 实时流处理分析（静态查询一次给出，不会改变，它们处理数据时无需存储。CEP、Apache Storm、Apache Samza等是这方面的例子）
 - en: Realtime Interactive/Ad-hoc Analytics (user issue ad-hoc dynamic queries and
     system responds). Druid, SAP Hana, VoltDB, MemSQL, Apache Drill are examples of
     this.
+  id: totrans-6
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 实时交互/临时分析（用户发出临时动态查询，系统响应）。Druid、SAP Hana、VoltDB、MemSQL、Apache Drill是这方面的例子。
 - en: In this post, I am focusing on Realtime Streaming Analytics. (Ad-hoc analytics
     uses a SQL like query language anyway.)
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我专注于实时流处理分析。（临时分析无论如何都会使用类似SQL的查询语言。）
 - en: '![database size time analytics](../Images/df8caa7ba3c18e86df3a5eb6f177b447.png)'
+  id: totrans-8
   prefs: []
   type: TYPE_IMG
+  zh: '![数据库大小时间分析](../Images/df8caa7ba3c18e86df3a5eb6f177b447.png)'
 - en: Still when thinking about Realtime Analytics, people think only counting use
     cases. However, that is the tip of the iceberg. Due to the time dimension of the
     data inherent in realtime use cases, there are lot more you can do. Lets us look
     at few common patterns.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 当谈到实时分析时，人们仍然只考虑计数用例。然而，这只是冰山一角。由于实时用例中数据的时间维度，您可以做的还有很多。让我们看看一些常见的模式。
 - en: Simple counting (e.g. failure count)
+  id: totrans-10
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 简单计数（例如，故障计数）
 - en: Counting with Windows ( e.g. failure count every hour)
+  id: totrans-11
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用窗口进行计数（例如，每小时的故障计数）
 - en: 'Preprocessing: filtering, transformations (e.g. data cleanup)'
+  id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 预处理：过滤、转换（例如，数据清理）
 - en: Alerts , thresholds (e.g. Alarm on high temperature)
+  id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 警报，阈值（例如，高温报警）
 - en: Data Correlation, Detect missing events, detecting erroneous data (e.g. detecting
     failed sensors)
+  id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 数据关联，检测丢失事件，检测错误数据（例如，检测失败的传感器）
 - en: Joining event streams (e.g. detect a hit on soccer ball)
+  id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 连接事件流（例如，检测到足球的击打）
 - en: Merge with data in a database, collect, update data conditionally Detecting
     Event Sequence Patterns (e.g. small transaction followed by large transaction)
+  id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 与数据库中的数据合并，收集，按条件更新数据，检测事件序列模式（例如，小交易后跟随大交易）
 - en: Tracking - follow some related entity’s state in space, time etc. (e.g. location
     of airline baggage, vehicle, tracking wild life)
+  id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 跟踪——在空间、时间等方面跟踪相关实体的状态（例如，航空公司行李的位置、车辆、野生动物追踪）
 - en: Detect trends – Rise, turn, fall, Outliers, Complex trends like triple bottom
     etc., (e.g. algorithmic trading, SLA, load balancing)
+  id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 检测趋势——上升、转折、下降、异常值、复杂趋势如三重底等（例如，算法交易、SLA、负载均衡）
 - en: Learning a Model (e.g. Predictive maintenance)
+  id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 学习模型（例如，预测性维护）
 - en: Predicting next value and corrective actions (e.g. automated car)
+  id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 预测下一个值和纠正措施（例如，自动驾驶汽车）
 - en: Why we need SQL like query language for Realtime Streaming Analytics?
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 为什么我们需要类似SQL的查询语言用于实时流处理分析？
 - en: Each of above has come up in use cases, and we have implemented them using SQL
     like CEP query languages. Knowing the internal of implementing the CEP core concepts
     like sliding windows, temporal query patterns, I do not think every Streaming
     use case developer should rewrite those. Algorithms are not trivial, and those
     are very hard to get right!
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述每一个都在用例中出现过，我们已经使用类似SQL的CEP查询语言实现了它们。了解实现CEP核心概念（如滑动窗口、时间查询模式）的内部细节，我认为每个流处理用例开发者都不应该重新编写这些。算法并非简单，而且很难做到准确！
 - en: Instead, we need higher levels of abstractions. We should implement those once
     and for all, and reuse them. Best lesson we can learn from Hive and Hadoop, which
     does exactly that for batch analytics. I have explained Big Data with Hive many
     time, most gets it right away. Hive has become the major programming API most
     Big Data use cases.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 相反，我们需要更高层次的抽象。我们应该一次性实现这些抽象，并重复使用它们。我们可以从 Hive 和 Hadoop 中学到的最佳教训就是它们正好为批量分析做了这些工作。我多次解释了
+    Hive 中的大数据，大多数人很快就能理解。Hive 已成为大多数大数据用例的主要编程 API。
 - en: Following is list of reasons for SQL like query language.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是 SQL 类查询语言的一些理由。
 - en: Realtime analytics are hard. Every developer do not want to hand implement sliding
     windows and temporal event patterns, etc.
+  id: totrans-25
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 实时分析很困难。每个开发者都不愿意手动实现滑动窗口和时间事件模式等。
 - en: Easy to follow and learn for people who knows SQL, which is pretty much everybody
+  id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对于熟悉 SQL 的人（几乎每个人都知道），它易于跟随和学习。
 - en: SQL like languages are Expressive, short, sweet and fast!!
+  id: totrans-27
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: SQL 类语言表达力强，简洁、甜美且快速！！
 - en: SQL like languages define core operations that covers 90% of problems
+  id: totrans-28
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: SQL 类语言定义了涵盖 90% 问题的核心操作
 - en: They experts dig in when they like!
+  id: totrans-29
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 专家们可以随时深入研究！
 - en: Realtime analytics runtime can better optimize the executions with SQL like
     model. Most optimisations are already studied, and there is lot you can just borrow
     from database optimisations.
+  id: totrans-30
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 实时分析运行时可以更好地优化 SQL 类模型的执行。大多数优化已经被研究过，还有很多可以借鉴数据库优化的经验。
 - en: Finally what are such languages? There are lot defined in world of Complex Event
     processing (e.g. WSO2 Siddhi, Esper, Tibco StreamBase, IBM Infosphere Streams
     etc. SQL stream has fully ANSI SQL comment version of it. Last week I did a talk
     on Strata discussing this problem in detail and how CEP could match the bill.
     Here are the slides
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 那么这些语言是什么呢？在复杂事件处理的世界里定义了很多（例如 WSO2 Siddhi、Esper、Tibco StreamBase、IBM Infosphere
+    Streams 等）。SQL 流有一个完全符合 ANSI SQL 的版本。上周我在 Strata 会议上详细讨论了这个问题以及 CEP 如何满足要求。这里是幻灯片
 - en: '**[Scalable Realtime Analytics with declarative SQL like Complex Event Processing
     Scripts](http://www.slideshare.net/hemapani/scalable-realtime-analytics-with-declarative-sql-like-complex-event-processing-scripts
     "Scalable Realtime Analytics with declarative SQL like Complex Event Processing
     Scripts")** from **[Srinath Perera](http://www.slideshare.net/hemapani)**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[可扩展的实时分析与声明式 SQL 类复杂事件处理脚本](http://www.slideshare.net/hemapani/scalable-realtime-analytics-with-declarative-sql-like-complex-event-processing-scripts
+    "可扩展的实时分析与声明式 SQL 类复杂事件处理脚本")** 来自 **[Srinath Perera](http://www.slideshare.net/hemapani)**'
 - en: 'Bio: [Srinath Perera](http://people.apache.org/~hemapani/) is a scientist,
     software architect, and a programmer that works on distributed systems.'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 个人简介：[Srinath Perera](http://people.apache.org/~hemapani/) 是一位科学家、软件架构师和程序员，专注于分布式系统。
 - en: 'Original: [srinathsview.blogspot.com/2015/02/why-we-need-sql-like-query-language-for.html](https://srinathsview.blogspot.com/2015/02/why-we-need-sql-like-query-language-for.html)'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 原文：[srinathsview.blogspot.com/2015/02/why-we-need-sql-like-query-language-for.html](https://srinathsview.blogspot.com/2015/02/why-we-need-sql-like-query-language-for.html)
 - en: '**Related:**'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Interview: Ted Dunning, MapR on The Real Meaning of Real-Time in Big Data](/2015/03/interview-ted-dunning-mapr-real-time-big-data.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[采访：Ted Dunning，MapR 讲述大数据中实时性的真正含义](/2015/03/interview-ted-dunning-mapr-real-time-big-data.html)'
 - en: '[8 Trends In Big Data For 2015](/2015/01/recruiter-8-trends-big-data-2015.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2015 年大数据的 8 大趋势](/2015/01/recruiter-8-trends-big-data-2015.html)'
 - en: '[Upcoming Webcasts on Analytics, Big Data, Data Science – Mar 10 and beyond](/2015/03/upcoming-webcasts-mar10-analytics-big-data-science.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[即将举行的分析、大数据、数据科学网络广播 – 3 月 10 日及以后](/2015/03/upcoming-webcasts-mar10-analytics-big-data-science.html)'
 - en: '* * *'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Query Your Pandas DataFrames with SQL](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[用 SQL 查询你的 Pandas DataFrames](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)'
 - en: '[Can We Query a Table with T5?](https://www.kdnuggets.com/2022/05/query-table-t5.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我们能用 T5 查询表格吗？](https://www.kdnuggets.com/2022/05/query-table-t5.html)'
 - en: '[SQL Query Optimization Techniques](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[SQL 查询优化技巧](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)'
 - en: '[5 Tips for Improving SQL Query Performance](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[提高 SQL 查询性能的 5 个技巧](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)'
 - en: '[How to Build a Streaming Semi-structured Analytics Platform on Snowflake](https://www.kdnuggets.com/2023/07/build-streaming-semistructured-analytics-platform-snowflake.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何在 Snowflake 上构建流式半结构化分析平台](https://www.kdnuggets.com/2023/07/build-streaming-semistructured-analytics-platform-snowflake.html)'
 - en: '[Simple and Fast Data Streaming for Machine Learning Projects](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为机器学习项目提供简单快速的数据流](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)'
