@@ -1,51 +1,78 @@
 - en: 'Ensemble Methods for Machine Learning: AdaBoost'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 机器学习的集成方法：AdaBoost
 - en: 原文：[https://www.kdnuggets.com/2019/09/ensemble-methods-machine-learning-adaboost.html](https://www.kdnuggets.com/2019/09/ensemble-methods-machine-learning-adaboost.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/09/ensemble-methods-machine-learning-adaboost.html](https://www.kdnuggets.com/2019/09/ensemble-methods-machine-learning-adaboost.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Valentina Alto](https://www.linkedin.com/in/valentina-alto-6a0590148/),
     MSc in Data Science and Business Analytics**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Valentina Alto](https://www.linkedin.com/in/valentina-alto-6a0590148/)，数据科学与商业分析硕士**'
 - en: '![Figure](../Images/26b9379c1fabe60e9ebe05ecbb777c55.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/26b9379c1fabe60e9ebe05ecbb777c55.png)'
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT 需求'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In statistics and machine learning, ensemble methods use multiple learning algorithms
     to obtain better predictive performance than could not be obtained from any of
     the constituent learning algorithms alone.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 在统计学和机器学习中，集成方法使用多个学习算法来获得比任何单个学习算法所能获得的更好的预测性能。
 - en: The idea of combining multiple algorithms was first developed by computer scientist
     and Professor Michael Kerns, who was wondering whether* “weakly learnability is
     equivalent to strong learnability* “. The goal was turning a weak algorithm, barely
@@ -53,21 +80,29 @@
     if we ask the weak algorithm to create a whole bunch of classifiers (all weak
     for definition), and then combine them all, what may figure out is a stronger
     classifier.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 结合多个算法的想法最初由计算机科学家兼教授 Michael Kerns 提出，他想知道 *“弱学习能力是否等同于强学习能力”*。目标是将一个略好于随机猜测的弱算法转变为强学习算法。结果发现，如果我们要求弱算法创建一堆分类器（定义上都很弱），然后将它们结合起来，可能会得到一个更强的分类器。
 - en: '**AdaBoost**, which stays for ‘Adaptive Boosting’, is a machine learning meta-algorithm
     which can be used in conjunction with many other types of learning algorithms
     to improve performance.'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**AdaBoost**，即“自适应提升”，是一种机器学习元算法，可与许多其他类型的学习算法结合使用，以提高性能。'
 - en: In this article, I’m going to provide an idea of the maths behind Adaboost,
     plus I’ll provide an implementation in Python.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我将介绍 Adaboost 背后的数学原理，并提供一个 Python 实现。
 - en: Intuition and Maths behind AdaBoost
+  id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: AdaBoost 的直觉和数学
 - en: Imagine we have our sample, divided into a training set and test set, and a
     bunch of classifiers. Each of them is trained on a random subset of the training
     set (note that those subsets can actually overlap-it is not the same as, for example,
@@ -78,194 +113,286 @@
     which have been misclassified, so that they will represent a larger part of the
     next classifiers training set, with the aim that, this time, the next classifier
     trained will perform better on them.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 想象一下，我们有一个样本，将其划分为训练集和测试集，以及一堆分类器。每个分类器在训练集的随机子集上进行训练（注意这些子集实际上可以重叠——这与交叉验证不同）。然后，对于每个子集中的每个观察值，AdaBoost
+    分配一个权重，决定该观察值出现在训练集中的概率。权重较高的观察值更有可能被包含在训练集中。因此，AdaBoost 倾向于将更高的权重分配给那些被误分类的观察值，以便它们在下一个分类器的训练集中占据更大份额，目标是使下一个训练的分类器在这些观察值上表现更好。
 - en: 'Considering a simple binary classification problem, whose targets are represented
     by the signs ‘positive’ or ‘negative’ (expressed as 1 and -1), the equation of
     the final classifier looks like that:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 考虑一个简单的二分类问题，其目标由‘正’或‘负’（表示为1和-1）的符号表示，最终分类器的方程如下：
 - en: '![](../Images/c03f7c3b8451945e633f3a7f3cf98e2e.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c03f7c3b8451945e633f3a7f3cf98e2e.png)'
 - en: Basically, the output of the final classifier for observation x is equal to
     sign of the weighted sum of the outputs h_t(x) of T weak classifiers, with weights
     equal to α_t.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 基本上，最终分类器对观察值x的输出等于T个弱分类器的输出h_t(x)的加权和的符号，权重为α_t。
 - en: 'More specifically, α_t is the weight assigned to the output of classifier t
     (note that this weight is different from that which will be assigned to observations,
     which will be discussed later on). It is computed as follows:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 更具体地说，α_t是分配给分类器t输出的权重（注意，这个权重与分配给观察值的权重不同，后续将讨论）。它的计算方式如下：
 - en: '![](../Images/41d5e1430758a1697ef0c4497fdf9154.png)'
+  id: totrans-21
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/41d5e1430758a1697ef0c4497fdf9154.png)'
 - en: 'Where ε_t is the error term of classifier t (misclassified observations/total
     observations). Of course, classifiers with low error will be prioritized in the
     sum, hence their weight will be higher. Indeed, if we look at the alpha corresponding
     to different errors:'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中ε_t是分类器t的误差项（错误分类的观察值/总观察值）。当然，误差低的分类器会在加权和中优先考虑，因此它们的权重会更高。实际上，如果我们查看不同误差对应的α：
 - en: '[PRE0]'
+  id: totrans-23
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![](../Images/43ba9afe4690ce8223532df31f52ab79.png)'
+  id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/43ba9afe4690ce8223532df31f52ab79.png)'
 - en: As you can see, the classifier’s weight grows exponentially as the error approaches
     0, while it grows exponentially negative as the error approaches 1.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 正如你所见，当误差接近0时，分类器的权重会指数增长，而当误差接近1时，它会指数地减少。
 - en: 'The value of alpha is then used to compute the other type of weights, those
     that will be attributed to the observations of the subset. For the first classifier,
     the weights are equally initialized, so that each observation has a weight=1/n
     (where n=size of the subset). From the second classifier, each weight is recursively
     computed as:'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，α的值用于计算另一种类型的权重，即分配给子集观察值的权重。对于第一个分类器，权重被均等初始化，因此每个观察值的权重=1/n（其中n为子集的大小）。从第二个分类器开始，每个权重递归计算如下：
 - en: '![](../Images/cac8c965366dafdd076e5fa69a729af6.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/cac8c965366dafdd076e5fa69a729af6.png)'
 - en: Where y_t is the target value (either 1 or -1) and the variable w_t is a vector
     of weights, with one weight for each training example in the training set. ‘i’
     is the training example number. This equation shows you how to update the weight
     for the ith training example.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 其中y_t是目标值（1或-1），变量w_t是权重向量，每个训练样本都有一个权重。‘i’是训练样本的编号。这个方程展示了如何更新第i个训练样本的权重。
 - en: 'We can look at w_t as a distribution: it is consistent with what we said at
     the beginning, that is, weights represent the probability that training example
     will be selected as part of the training set.'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以将w_t视为一个分布：这与我们一开始所说的一致，即权重表示训练样本被选为训练集的一部分的概率。
 - en: To make it a distribution, all of these probabilities should add up to 1\. To
     ensure this, we normalize the weights by dividing each of them by the sum of all
     the weights, Z_t.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了使其成为一个分布，这些概率的总和应该为1。为确保这一点，我们通过将每个权重除以所有权重之和Z_t来归一化权重。
 - en: 'Let’s interpret this formula. Since we are dealing with binary classification
     (-1 vs 1), the product y_t*h_t(x_i) will be positive if both the actual and fitted
     values have the same sign (well-classified), negative if they have different signs
     (misclassified). Hence:'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们解释一下这个公式。由于我们处理的是二分类问题（-1与1），如果实际值和拟合值具有相同的符号（分类正确），则y_t*h_t(x_i)的乘积为正；如果它们的符号不同（分类错误），则乘积为负。因此：
 - en: if the product is positive and alpha is greater than zero (strong classifier),
     the weight attributed to the ith observation will be small
+  id: totrans-32
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果产品为正且α大于零（强分类器），则分配给第i个观察值的权重会很小。
 - en: if the product is positive and alpha is less than zero (weak classifier), the
     weight attributed to the ith observation will be high
+  id: totrans-33
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果产品为正且α小于零（弱分类器），则分配给第i个观察值的权重会很高。
 - en: if the product is negative and alpha is greater than zero (strong classifier),
     the weight attributed to the ith observation will be high
+  id: totrans-34
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果产品为负且α大于零（强分类器），则分配给第i个观察值的权重会很高。
 - en: if the product is negative and alpha is less than zero (weak classifier), the
     weight attributed to the ith observation will be small
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果产品为负且alpha小于零（弱分类器），则分配给第i个观察值的权重将很小。
 - en: 'Note: when I say ‘small’ and ‘high’ I’m mean, if we consider the exponential
     before normalization, respectively less than 1 and greater than 1\. Indeed:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意：当我说‘小’和‘高’时，我指的是如果我们考虑归一化前的指数，分别小于1和大于1。实际上：
 - en: '![](../Images/2905ba18f9999d808b571fddea1c10b5.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2905ba18f9999d808b571fddea1c10b5.png)'
 - en: Now that we have an idea of how AdaBoost works, let’s see its implementation
     in Python using the well-known Iris Dataset.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们对AdaBoost的工作原理有了了解，让我们看看它在Python中的实现，使用的是著名的鸢尾花数据集。
 - en: Implementation with Python
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用Python实现
 - en: 'Let’s first import our data:'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，让我们导入数据：
 - en: '[PRE1]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: The default algorithm in AdaBoost is decision tree, but you can decide to manually
     set a different classifier. Here, I’m going to use the Support Vector Machine
     classifier (you can read more about SVM [here](https://medium.com/swlh/support-vector-machine-from-scratch-ce095a47dc5c)).
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: AdaBoost的默认算法是决策树，但你可以决定手动设置不同的分类器。在这里，我将使用支持向量机分类器（你可以在[这里](https://medium.com/swlh/support-vector-machine-from-scratch-ce095a47dc5c)阅读更多关于SVM的内容）。
 - en: '[PRE2]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: As you can see, almost 98% of our observations have been correctly classified.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 如你所见，我们几乎98%的观察结果已被正确分类。
 - en: Conclusions
+  id: totrans-45
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结论
 - en: AdaBoost is a technique easy to implement. It iteratively corrects the mistakes
     of the weak classifier improving accuracy. However, it is not free from *caveats*.
     Indeed, since it looks for a reduction in the training error, it is particularly
     sensitive to outliers, with the risk of producing an overfitted model which won’t
     fit new, unlabeled data well, since it lacks of generalization (you can read more
     about overfitting [here](https://towardsdatascience.com/preventing-overfitting-regularization-5eda7d5753bc)).
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: AdaBoost是一种易于实现的技术。它通过迭代纠正弱分类器的错误，提高准确性。然而，它并非没有*陷阱*。实际上，由于它寻求减少训练误差，因此对异常值特别敏感，存在生成过拟合模型的风险，这种模型无法很好地适应新的、未标记的数据，因为它缺乏泛化能力（你可以在[这里](https://towardsdatascience.com/preventing-overfitting-regularization-5eda7d5753bc)阅读更多关于过拟合的内容）。
 - en: '*Originally published at *[*http://datasciencechalktalk.com*](https://datasciencechalktalk.com/2019/09/07/ensemble-methods-for-machine-learning-adaboost/)* on
     September 7, 2019.*'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: '*最初发布于*[*http://datasciencechalktalk.com*](https://datasciencechalktalk.com/2019/09/07/ensemble-methods-for-machine-learning-adaboost/)*于2019年9月7日。*'
 - en: '**Bio: [Valentina Alto](https://www.linkedin.com/in/valentina-alto-6a0590148/)**
     is a Machine Learning and Statistics enthusiast, currently pursuing a MSc in Data
     Science at Bocconi University.'
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Valentina Alto](https://www.linkedin.com/in/valentina-alto-6a0590148/)**
+    是一位机器学习和统计学爱好者，目前在博科尼大学攻读数据科学硕士学位。'
 - en: '[Original](https://medium.com/@valentinaalto/ensemble-methods-for-machine-learning-adaboost-2ff70d5518f3).
     Reposted with permission.'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始](https://medium.com/@valentinaalto/ensemble-methods-for-machine-learning-adaboost-2ff70d5518f3)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Intuitive Ensemble Learning Guide with Gradient Boosting](/2018/07/intuitive-ensemble-learning-guide-gradient-boosting.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[梯度提升的直观集成学习指南](/2018/07/intuitive-ensemble-learning-guide-gradient-boosting.html)'
 - en: '[Ensemble Learning: 5 Main Approaches](/2019/01/ensemble-learning-5-main-approaches.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[集成学习：5种主要方法](/2019/01/ensemble-learning-5-main-approaches.html)'
 - en: '[Understanding Gradient Boosting Machines](/2019/02/understanding-gradient-boosting-machines.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[理解梯度提升机](/2019/02/understanding-gradient-boosting-machines.html)'
 - en: More On This Topic
+  id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 进一步阅读
 - en: '[Implementing Adaboost in Scikit-learn](https://www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html)'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在Scikit-learn中实现Adaboost](https://www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html)'
 - en: '[Ensemble Learning with Examples](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[带例子的集成学习](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)'
 - en: '[Ensemble Learning Techniques: A Walkthrough with Random Forests in Python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[集成学习技术：Python中随机森林的演练](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)'
 - en: '[When Would Ensemble Techniques be a Good Choice?](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[何时集成技术是一个好的选择？](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)'
 - en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的替代特征选择方法](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
 - en: '[Centroid Initialization Methods for k-means Clustering](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[k-means 聚类的质心初始化方法](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)'
