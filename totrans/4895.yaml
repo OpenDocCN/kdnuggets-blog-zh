@@ -1,17 +1,25 @@
 - en: Simple Ways Of Working With Medium To Big Data Locally
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 在本地处理中到大型数据的简单方法
 - en: 原文：[https://www.kdnuggets.com/2017/12/simple-medium-big-data-locally.html](https://www.kdnuggets.com/2017/12/simple-medium-big-data-locally.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/12/simple-medium-big-data-locally.html](https://www.kdnuggets.com/2017/12/simple-medium-big-data-locally.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2017/12/simple-medium-big-data-locally.html/#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2017/12/simple-medium-big-data-locally.html/#comments)'
 - en: '**By Francisco Juretig, creator of [nitroproc](https://www.nitroproc.com)**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 Francisco Juretig 创作，[nitroproc](https://www.nitroproc.com) 的作者**'
 - en: As data scientists, we are typically exposed to datasets ranging from a few
     dozen million to hundreds of millions of records, with possibly dozens or hundreds
     of columns. This data is typically received in csv files, and processed in many
@@ -26,20 +34,31 @@
     if the objective is to process a few big files occasionally). In this article,
     we focus on simple techniques (both for installing and running) for working with
     this kind of datasets.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为数据科学家，我们通常会接触到从几十万到几亿条记录的数据集，可能还有几十列或几百列。这些数据通常以 csv 文件的形式接收，并通过多种方式处理，最终目的是在
+    Python 或 R 中运行复杂的机器学习算法。然而，这些数据通常无法完全载入到内存中，因此需要设计替代工具。当然，所有这些数据可以分配到集群中并在那里处理，但这需要繁琐的上传文件过程、支付服务器时间费用、处理敏感数据时的安全问题、相当复杂的编程技巧，并花费时间下载结果。当然，本地
+    Spark 会话总是可以创建，但学习曲线很陡峭，对初学者来说，安装可能具有挑战性（尤其是当目标是偶尔处理几个大文件时）。在本文中，我们关注于处理这类数据集的简单技术（包括安装和运行）。
 - en: '**First option: Looping through the files**'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第一个选项：循环遍历文件**'
 - en: 'Python or R can always be used to quickly loop through files. In this case
     we will use to loop through a very big file. The dataset is the following: 5,379,074
     observations and 8 columns, with integers, dates and strings, with a file size
     of 212Megabytes on disc.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: Python 或 R 总是可以用来快速遍历文件。在这种情况下，我们将用它来遍历一个非常大的文件。数据集如下：5,379,074 个观测值和 8 列，包括整数、日期和字符串，文件大小为
+    212 兆字节。
 - en: '![](../Images/390332cac746a67b57f33863b31133b9.png)'
+  id: totrans-7
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/390332cac746a67b57f33863b31133b9.png)'
 - en: We will generate a class for working with this file. In this class we will define
     two simple operations, the first one will calculate the maximum, and the second
     one will filter the records corresponding to a particular name. In the last three
@@ -47,11 +66,16 @@
     not using pandas.read_csv since this dataset will generally not fit into memory
     (depending on your computer). Also notice we are excluding the first record, since
     it contains the file headers.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将为处理这个文件生成一个类。在这个类中，我们将定义两个简单的操作，第一个将计算最大值，第二个将筛选出特定名称的记录。在最后三行中，我们实例化这个类并调用它的方法。请注意，我们没有使用
+    pandas.read_csv，因为这个数据集通常无法适应内存（具体取决于你的计算机）。另外，请注意我们排除了第一条记录，因为它包含文件头。
 - en: '![](../Images/66152942dab10647e87649f8206a8d19.png)'
+  id: totrans-9
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/66152942dab10647e87649f8206a8d19.png)'
 - en: 'The problem is that in most practical scenarios, the very same moment we deviate
     from simple sub-setting operations, the complexity of the code will increase in
     an astonishing way. For example, even coding a simple sort procedure using files
@@ -60,11 +84,15 @@
     will require a good implementation of a sort procedure: merging, transposing,
     and summarizing are not only difficult by themselves, but they will always require
     sorted data to run on reasonable time.'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 问题在于，在大多数实际场景中，只要我们从简单的子集操作偏离，代码的复杂性就会惊人地增加。例如，即使是编写一个简单的文件排序程序也是极其复杂的，更不用说处理缺失值、多个变量类型、日期格式等了。更糟糕的是，大多数数据处理操作都需要良好的排序实现：合并、转置和汇总不仅本身困难，而且总是需要对数据进行排序，以便在合理的时间内运行。
 - en: '**Second option: SAS**'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第二种选择：SAS**'
 - en: 'SAS has been the best software for statistical analysis for many decades. Apart
     from its excellent statistical methods implementations, SAS allows us to work
     with hundreds of millions of observations easily. It achieves this trick by using
@@ -72,28 +100,39 @@
     would do). Apart from that, these files can have thousands of columns. The SAS
     programming language is very easy and flexible. For instance, reading a file and
     sorting it can be achieved in very few lines:'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: SAS 多年来一直是统计分析的最佳软件。除了其卓越的统计方法实现外，SAS 还允许我们轻松处理数亿个观察值。它通过使用硬盘存储数据，而不是 RAM 内存（如大多数软件所做的），来实现这一点。此外，这些文件可以有数千列。SAS
+    编程语言非常简单且灵活。例如，读取一个文件并对其排序可以用很少的代码实现：
 - en: '[PRE0]'
+  id: totrans-13
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: A usually overlooked aspect of SAS, yet one of its strongest features, are its
     log files. They are an extremely powerful tool for identifying weird observations,
     missing values, abnormal results. For example, when merging two files with millions
     of observations, you can immediately identify problems by looking into how many
     observations where read in both files versus how much was written as an output.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: SAS 的一个常被忽视但非常强大的功能是其日志文件。它们是识别异常观察值、缺失值和不正常结果的极其强大的工具。例如，在合并两个包含数百万个观察值的文件时，你可以通过查看两个文件中读取的观察值数量与输出中写入的数量，立即识别出问题。
 - en: You won’t generally find any sort of restriction or limitation. Yet for extremely
     big files, it will be more convenient to work with a distributed environment,
     using Spark running on a cluster (but that is beyond the scope of this article).
     Unfortunately, SAS licenses will generally be quite expensive, and it only runs
     on computers.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 你通常不会发现任何限制或约束。然而，对于极大的文件，使用集群上运行的 Spark 的分布式环境会更方便（但这超出了本文的范围）。不幸的是，SAS 许可证通常非常昂贵，并且仅能在计算机上运行。
 - en: '**Third option: nitroproc**'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '**第三种选择：nitroproc**'
 - en: '*nitroproc* is a free cross platform software (currently available in Windows/MacOS/Android/iOS)
     designed for data manipulation (specially for data scientists). It can be called
     via batch mode through Python or R. In a similar fashion to SAS, it is designed
@@ -108,31 +147,47 @@
     produces very powerful logs for identifying weird data, wrong merges, etc. Additionally,
     it also produces another log file, called logtracer used for logically analysing
     how the different instructions in your script are related.'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '*nitroproc* 是一款免费的跨平台软件（目前支持 Windows/MacOS/Android/iOS），专为数据处理设计（特别适合数据科学家）。它可以通过
+    Python 或 R 以批处理模式调用。类似于 SAS，它被设计为使用硬盘进行操作，因此对数据大小几乎没有限制。它的脚本可以部署到任何设备上，语法不需修改（除非显然需要处理正确的输入文件路径）。在本文中，我们将展示如何使用
+    Windows 和 Android 版本（iOS 版本也可以从 App Store 下载）。它处理不同的变量类型、文件格式和缺失值。当前版本允许你进行排序、合并、筛选、子集、计算虚拟变量、聚合以及其他许多传统数据科学家使用的数据处理操作。类似于
+    SAS，*nitroproc* 生成非常强大的日志，用于识别异常数据、错误合并等。此外，它还生成另一个日志文件，称为 logtracer，用于逻辑分析脚本中不同指令的关系。'
 - en: '*Sorting 5.4 million observations by one key*'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: '*按一个关键字段排序 540 万个观察值*'
 - en: In this example, we will sort a very big file in both a PC and an (old) Android
     phone, just to show the sheer power of *nitroproc*. We will use the same dataset
     we used in Figure 1 5.4 million records dataset. Remember that this dataset has
     5,379,074 observations and 8 columns, with integers, dates and strings, with a
     file size of 212Megabytes on disc.  In this case we will sort it by its first
     column (User_id).
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这个示例中，我们将在 PC 和一部（旧版）Android 手机上对一个非常大的文件进行排序，仅为展示 *nitroproc* 的强大功能。我们将使用图
+    1 中相同的数据集——540 万条记录的数据集。请记住，这个数据集有 5,379,074 个观察值和 8 列，包含整数、日期和字符串，文件大小为 212 兆字节。在这种情况下，我们将按其第一列（User_id）进行排序。
 - en: 'You can download the csv file from: [https://www.nitroproc.com/download.html](https://www.nitroproc.com/download.html)
     to replicate the same results we show here. In that case I suggest you run the
     tests with the phone connected to the PC/Mac, and with no other processes running
     on the background.'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以从[https://www.nitroproc.com/download.html](https://www.nitroproc.com/download.html)下载csv文件，以复制我们在此处展示的结果。在这种情况下，我建议你在手机连接到PC/Mac且后台没有其他进程运行的情况下运行测试。
 - en: 'The syntax is really simple, we just write:'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 语法非常简单，我们只需写：
 - en: '[PRE1]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: All the parameters are pretty self explanatory. Order specifies whether we want
     asc, or desc, out_first_row is used to specify whether we want to output the file
     headers or not. You might notice that we are not specifying any headers because
@@ -141,28 +196,42 @@
     but for the Android and iOS versions, only the file names are necessary, as the
     files paths are recovered automatically (for Android the /Downloads folder is
     used and for iPhone/iPad the App folder is used – it can be accessed via iTunes).
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有参数都非常自解释。Order指定我们是需要升序还是降序，out_first_row用于指定是否要输出文件头。你可能会注意到我们没有指定任何头部，因为csv已经包含它们。如果它们没有包含，我们需要输入headers=[colum_name1,…,column_namek]。对于PC，我们需要指定正确的文件路径，但对于Android和iOS版本，只需文件名即可，因为文件路径会自动恢复（对于Android使用/Downloads文件夹，对于iPhone/iPad使用App文件夹
+    – 可通过iTunes访问）。
 - en: Sorting is particularly important in nitroproc as it used for merging files,
     summarizing files, and other operations.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 排序在nitroproc中尤其重要，因为它用于合并文件、总结文件和其他操作。
 - en: '*PC Version*'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '*PC 版本*'
 - en: 'It takes 1 min and 25 seconds (Check Figure 3: log file produced by nitroproc
     - PC Version) to finish on a quite standard (from 2012) desktop Intel i5-4430
     @3.00 GHz and a standard Seagate 500GB ST500DM002 hard drive. On newest Intel
     devices, for example i7-4970k, and using solid state drives, the scripts will
     be at least 3x faster (even greater speeds can be achieved via overclocking).'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 在一台标准的（2012年）Intel i5-4430 @3.00 GHz桌面电脑和一块标准的Seagate 500GB ST500DM002硬盘上，完成需要1分25秒（参见图3：nitroproc生成的日志文件
+    - PC版本）。在最新的Intel设备上，例如i7-4970k，并且使用固态硬盘，脚本将至少快3倍（通过超频可以达到更高的速度）。
 - en: '![](../Images/8f897cff1f6ac9825bb3d25d3b34bb2e.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8f897cff1f6ac9825bb3d25d3b34bb2e.png)'
 - en: '*Android Version*'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: '*Android 版本*'
 - en: Running the same script on aNexus 5x at Android 7.0 Nougat is much slower (Figure
     4 log file produced by nitroproc - Android version, but it still works flawlessly).
     This phone was released on 2015, with a 1.8Ghz processor (bear in mind this is**not**
@@ -170,14 +239,20 @@
     high end Android phones, you should expect to run this script in half this time
     (7 minutes). Since basically no RAM is used, nitroproc can run very well in RAM
     deprived systems.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 在Android 7.0 Nougat的Nexus 5x上运行相同的脚本要慢得多（图4 nitroproc生成的日志文件 - Android版本，但它仍然运行良好）。这款手机发布于2015年，配备了1.8GHz的处理器（请注意，这**不是**一款高端手机）。如图1所示，完成需要15分钟。在最新的（2017年）高端Android手机上，你应该期望在一半的时间内运行这个脚本（7分钟）。由于几乎不使用RAM，nitroproc可以在内存不足的系统中很好地运行。
 - en: '![](../Images/2a54d184a4337c266d08dd657ef0405d.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/2a54d184a4337c266d08dd657ef0405d.png)'
 - en: '*iOS Version*'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '*iOS 版本*'
 - en: Finally, take a look at the output produced by the iOS version, running on an
     iPhone 8 Plus (A11 Bionic Chip). These results surprised me like no benchmark
     before (and I used to be an enthusiast overclocker). Apple claims that the iPhone
@@ -192,76 +267,119 @@
     of writes and reads, since there are lots of intermediate operations. The fact
     that the A11, together with its operating system can move so much data so fast
     from its hard drive, is almost surreal.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，看看iOS版本在iPhone 8 Plus（A11 Bionic芯片）上的输出。这些结果让我惊讶，如同之前的基准测试没有给我这样的惊喜（我曾经是个热衷的超频爱好者）。苹果声称iPhone
+    8和X是最快的手机，但这可能是低估了。你可以看到它在2分钟42秒内排序文件，比我们的桌面Intel CPU所需的时间少不到两倍（考虑到PC消耗超过250瓦，而iPhone
+    8约为6.96瓦），并且比普通的Android手机快了将近5.5倍。对于iPhone 8 Plus（以及iPhone X，因为它们共享相同的芯片），一个更准确的说法是，它是工程上的奇迹，提供了与桌面游戏CPU类似的性能，而后者消耗了35倍的电力。考虑到nitroproc在I/O操作方面非常密集，而在这种情况下，有数亿次读写操作，因为有很多中间操作。A11及其操作系统能够如此快速地从硬盘移动如此多的数据，几乎是超现实的。
 - en: '![](../Images/27f05ce8f36fcf2bf39131750dfa300f.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/27f05ce8f36fcf2bf39131750dfa300f.png)'
 - en: '**Related**'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**'
 - en: '[**How Big Data and New Technologies Are Changing Aging**](https://www.kdnuggets.com/2017/12/big-data-changing-aging.html)'
+  id: totrans-35
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**大数据和新技术如何改变老龄化**](https://www.kdnuggets.com/2017/12/big-data-changing-aging.html)'
 - en: '[**How Do You Build A Great Analytic Culture?**](https://www.kdnuggets.com/2017/12/jmp-build-great-analytic-culture.html)'
+  id: totrans-36
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**如何建立一个伟大的分析文化？**](https://www.kdnuggets.com/2017/12/jmp-build-great-analytic-culture.html)'
 - en: '[**How (& Why) Data Scientists and Data Engineers Should Share a Platform**](https://www.kdnuggets.com/2017/11/cazena-data-scientists-data-engineers-should-share-platform.html)'
+  id: totrans-37
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[**数据科学家和数据工程师为何应共享平台**](https://www.kdnuggets.com/2017/11/cazena-data-scientists-data-engineers-should-share-platform.html)'
 - en: '* * *'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-39
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您组织的IT工作'
 - en: '* * *'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[A Simple Guide to Running LlaMA 2 Locally](https://www.kdnuggets.com/a-simple-guide-to-running-llama-2-locally)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[本地运行LlaMA 2的简单指南](https://www.kdnuggets.com/a-simple-guide-to-running-llama-2-locally)'
 - en: '[Ollama Tutorial: Running LLMs Locally Made Super Simple](https://www.kdnuggets.com/ollama-tutorial-running-llms-locally-made-super-simple)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Ollama教程：轻松本地运行LLMs](https://www.kdnuggets.com/ollama-tutorial-running-llms-locally-made-super-simple)'
 - en: '[3 Simple Ways to Speed Up Your Python Code](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[加速你的Python代码的3种简单方法](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)'
 - en: '[Working with Big Data: Tools and Techniques](https://www.kdnuggets.com/working-with-big-data-tools-and-techniques)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理大数据：工具与技术](https://www.kdnuggets.com/working-with-big-data-tools-and-techniques)'
 - en: '[Getting Deep Learning working in the wild: A Data-Centric Course](https://www.kdnuggets.com/2022/04/corise-deep-learning-wild-data-centric-course.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在实际环境中实现深度学习：数据驱动课程](https://www.kdnuggets.com/2022/04/corise-deep-learning-wild-data-centric-course.html)'
 - en: '[6 Soft Skills for Data Scientists Working Remotely](https://www.kdnuggets.com/2022/05/6-soft-skills-data-scientists-working-remotely.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学家远程工作的6种软技能](https://www.kdnuggets.com/2022/05/6-soft-skills-data-scientists-working-remotely.html)'
