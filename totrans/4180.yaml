@@ -1,55 +1,79 @@
 - en: Build a Serverless News Data Pipeline using ML on AWS Cloud
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用ML在AWS云上构建一个无服务器新闻数据管道
 - en: 原文：[https://www.kdnuggets.com/2021/11/build-serverless-news-data-pipeline-ml-aws-cloud.html](https://www.kdnuggets.com/2021/11/build-serverless-news-data-pipeline-ml-aws-cloud.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/11/build-serverless-news-data-pipeline-ml-aws-cloud.html](https://www.kdnuggets.com/2021/11/build-serverless-news-data-pipeline-ml-aws-cloud.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Maria Zentsova](https://www.linkedin.com/in/maria-zentsova-6058b6ab/),
     Senior Data Analyst at Wood Mackenzie**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Maria Zentsova](https://www.linkedin.com/in/maria-zentsova-6058b6ab/)，Wood
+    Mackenzie高级数据分析师**'
 - en: As an analyst, I spend a lot of time tracking news and industry updates. Thinking
     about this problem on my maternity leave, I've decided to build a simple [app](https://www.sustinero.com/)
     to track news on green tech and renewable energy.  Using AWS Lambda and other
     AWS services like EventBridge, SNS, DynamoDB, and Sagemaker it's very easy to
     get started and build a prototype in a couple of days.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为一名分析师，我花费了很多时间跟踪新闻和行业动态。在产假期间思考这个问题后，我决定构建一个简单的[应用程序](https://www.sustinero.com/)来追踪绿色技术和可再生能源的新闻。使用AWS
+    Lambda及其他AWS服务，如EventBridge、SNS、DynamoDB和Sagemaker，可以非常轻松地入门，并在几天内构建一个原型。
 - en: The app is powered by a series of serverless Lambda functions and a text summarization
     Machine Learning model deployed as SageMaker endpoint. Every 24 hours AWS EventBridge
     rule triggers Lambda function to fetch feeds from the DynamoDB database.
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个应用程序由一系列无服务器的Lambda函数和一个作为SageMaker端点部署的文本总结机器学习模型提供支持。每24小时，AWS EventBridge规则触发Lambda函数，从DynamoDB数据库中获取信息流。
 - en: '![Image](../Images/1b41cc9dd533268335c40fb8cf393aaa.png)'
+  id: totrans-6
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/1b41cc9dd533268335c40fb8cf393aaa.png)'
 - en: These feeds are then sent as SNS topics to trigger multiple lambdas to parse
     feeds and extract news URLs. Each website updates its RSS feeds daily with just
     a couple of articles at most, so this way we won't send a lot of traffic, which
     might result in consuming too many resources of any particular news publication.
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些信息流随后作为SNS主题发送，触发多个Lambda函数以解析信息流并提取新闻URL。每个网站每天更新其RSS信息流，最多只有几篇文章，因此这样我们不会发送大量流量，避免消耗某个新闻出版物的过多资源。
 - en: The big problem, however, is to extract the full text of the article, because
     every website is different. Luckily for us, libraries such as goose3 solve this
     problem by applying ML methods to extract the body of the page. I can't store
     the full text of the article due to copyright, that's why I apply a HuggingFace
     text summarization transformer [model](https://huggingface.co/facebook/bart-large-cnn)
     to generate a short summary.
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，大问题在于提取文章的全文，因为每个网站都不同。幸运的是，像goose3这样的库通过应用ML方法来提取页面主体，从而解决了这个问题。由于版权问题，我不能存储文章的全文，这就是为什么我应用一个HuggingFace文本总结变换器[模型](https://huggingface.co/facebook/bart-large-cnn)来生成简短的摘要。
 - en: Here is a detailed guide on how to build your own news aggregation pipeline
     powered by ML.
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里是一个详细的指南，介绍如何构建由ML驱动的新闻聚合管道。
 - en: '**1\. Set up IAM role with necessary permissions.**'
+  id: totrans-10
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**1\. 设置具有必要权限的IAM角色。**'
 - en: Although this data pipeline is very simple, it connects a number of AWS resources.
     To grant our functions access to all the resources it needs, we need to set up
     [IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html). This
@@ -57,160 +81,244 @@
     as DynamoDB, Sagemaker, CloudWatch, and SNS. For security reasons, it is best
     not to give full AWS administrative access to our IAM role, and only allow it
     to use the resources it needs.
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管这个数据管道非常简单，但它连接了多个AWS资源。为了授予我们的函数访问所有所需资源的权限，我们需要设置[IAM角色](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)。该角色为我们的函数分配了使用云中其他资源的权限，例如DynamoDB、Sagemaker、CloudWatch和SNS。出于安全考虑，最好不要给予IAM角色完全的AWS管理访问权限，仅允许它使用所需的资源。
 - en: '![Image](../Images/7c666a6a9d80f8bdd5d6c7f4faea8d6c.png)'
+  id: totrans-12
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/7c666a6a9d80f8bdd5d6c7f4faea8d6c.png)'
 - en: '**2\. Fetch RSS feeds from DynamoDB in an RSS Dispatcher Lambda**'
+  id: totrans-13
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**2\. 从DynamoDB中获取RSS信息流到RSS分发Lambda**'
 - en: With AWS Lambda one can do almost anything, it's a very powerful serverless
     compute service and is great for short tasks. The main advantage for me is that
     it's very easy to access other services in the AWS ecosystem.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用AWS Lambda几乎可以做任何事情，它是一个非常强大的无服务器计算服务，非常适合短期任务。对我来说，主要的优势是它可以非常方便地访问AWS生态系统中的其他服务。
 - en: I store all RSS feeds in a DynamoDB table and it's really easy to access it
     from the lambda using [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html)
     library. Once I fetch all the feeds from the database, I send them as SNS messages
     to trigger feed parsing lambdas.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 我将所有 RSS 源存储在 DynamoDB 表中，并且从 Lambda 使用 [boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html)
+    库访问它非常容易。一旦我从数据库中获取了所有源，我将它们作为 SNS 消息发送，以触发 feed 解析的 Lambda 函数。
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 3\. **Creating Layers with necessary libraries**
+  id: totrans-17
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3\. **创建带有必要库的 Layers**
 - en: To use some specific libraries in AWS Lambdas, you need to import them as a
     [Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
     To prepare the library for import, it needs to be in a python.zip archive, which
     then we can upload on AWS and use in the function. To create a layer, just cd
     in a python folder, run the pip install command, zip it and it's ready to be uploaded.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 要在 AWS Lambdas 中使用一些特定的库，你需要将它们作为 [Layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
+    导入。为了准备库进行导入，它需要打包成一个 python.zip 文件，我们可以将其上传到 AWS 并在函数中使用。要创建一个 Layer，只需进入 python
+    文件夹，运行 pip install 命令，打包成 zip 文件，然后就可以上传了。
 - en: '[PRE1]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: However, I had some difficulty deploying the goose3 library as a layer. After
     a short investigation, it turns out some libraries like LXML need to be compiled
     in a Lambda-like environment, which is Linux. So if the library was compiled,
     for instance, on Windows and then imported into the function, the error will occur.
     To solve this problem, before creating an archive we need to install the library
     on Linux.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，我在将 goose3 库部署为 Layer 时遇到了一些困难。经过简短的调查，结果发现像 LXML 这样的库需要在类似 Lambda 的环境中编译，即
+    Linux。因此，如果库是在 Windows 上编译的，然后再导入到函数中，就会出现错误。为了解决这个问题，在创建归档之前，我们需要在 Linux 上安装库。
 - en: There are two ways to do it. First, to install on [simulated lambda environment](https://aws.amazon.com/premiumsupport/knowledge-center/lambda-layer-simulated-docker/)
     with docker. For me, the easiest way was to use the AWS [sam build](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html)
     command. Once the function is built, I just copy the required packages from the
     build folder and upload them as a layer.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 有两种方法可以做到这一点。首先，可以在 [模拟的 Lambda 环境](https://aws.amazon.com/premiumsupport/knowledge-center/lambda-layer-simulated-docker/)
+    中使用 docker 进行安装。对我来说，最简单的方法是使用 AWS [sam build](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-cli-command-reference-sam-build.html)
+    命令。一旦函数构建完成，我只需从构建文件夹中复制所需的包，然后将它们作为 Layer 上传。
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '**4\. Launch Lambda functions to parse a feed**'
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**4\. 启动 Lambda 函数以解析 feed**'
 - en: Once we send news URLs to SNS as topics, we could trigger multiple lambdas to
     go and fetch news articles from the RSS feeds. Some RSS feeds are different, but
     the feed parser library allows us to work with different formats. Our URL is a
     part of the event object, so we need to extract it by key.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦我们将新闻 URL 发送到 SNS 作为主题，我们可以触发多个 Lambda 函数去从 RSS 源中获取新闻文章。一些 RSS 源有所不同，但 feed
+    解析库允许我们处理不同的格式。我们的 URL 是事件对象的一部分，因此我们需要通过键提取它。
 - en: '[PRE3]'
+  id: totrans-25
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '**5\. Creating and deploying text summarization model on Sagemaker**'
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**5\. 在 Sagemaker 上创建和部署文本摘要模型**'
 - en: Sagemaker is a service that makes it easy to write, train and deploy ML models
     on AWS. HuggingFace has [partnered](https://aws.amazon.com/blogs/machine-learning/aws-and-hugging-face-collaborate-to-simplify-and-accelerate-adoption-of-natural-language-processing-models/)
     with AWS to make it even easier to deploy its models to the cloud.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: Sagemaker 是一个服务，它使在 AWS 上编写、训练和部署 ML 模型变得更加容易。HuggingFace 已与 AWS [合作](https://aws.amazon.com/blogs/machine-learning/aws-and-hugging-face-collaborate-to-simplify-and-accelerate-adoption-of-natural-language-processing-models/)
+    以使在云中部署其模型变得更加容易。
 - en: Here I write a simple text summarization model in Jupiter notebook and deploy
     it using deploy() command.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Jupiter notebook 中，我编写了一个简单的文本摘要模型，并使用 deploy() 命令部署它。
 - en: '[PRE4]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Once it is deployed, we could get endpoint information from Sagemaker -> Inference
     -> Endpoint configuration and use it in our lamdas.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 部署完成后，我们可以从 Sagemaker -> 推理 -> 端点配置中获取端点信息，并在我们的 Lambda 中使用它。
 - en: '**6\. Get the full text of the article, summarize it and store results in DynamoDB**'
+  id: totrans-31
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**6\. 获取文章的完整文本，总结它并将结果存储在 DynamoDB 中**'
 - en: We shouldn't store full text due to copyright, that's why all the processing
     work happens in one lambda. I launch text processing lambda, once URL made its
     way to the DynamoDB table. To achieve this, I set up a DynamoDB item creation,
     as a trigger to launch a lambda. I set up batch size of one, so that lambda deals
     only with one article at a time.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   我们不应存储完整的文本，因为这涉及版权问题，因此所有处理工作都在一个 lambda 函数中完成。我在 URL 进入 DynamoDB 表后启动文本处理
+    lambda 函数。为此，我设置了一个 DynamoDB 项目创建作为触发器来启动 lambda 函数。我设置了批处理大小为 1，以便 lambda 只处理一篇文章。'
 - en: '![Image](../Images/c9b8da0d517979b663d0a037f7053934.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
+  zh: '-   ![图片](../Images/c9b8da0d517979b663d0a037f7053934.png)'
 - en: '[PRE5]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Here is how using AWS  tools, we've built and deployed a simple serverless data
     pipeline to read the latest news. If you have any ideas, how it could be improved
     or have any questions do not hesitate to contact me.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   这是使用 AWS 工具构建和部署的一个简单无服务器数据管道，用于读取最新新闻。如果你有任何改进建议或问题，请随时联系我。'
 - en: '**Bio: [Maria Zentsova](https://www.linkedin.com/in/maria-zentsova-6058b6ab/)**
     is a Senior Data Analyst at Wood Mackenzie. She works on data collection and analysis,
     ETL pipelines and data exploration tools.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   **简介：[Maria Zentsova](https://www.linkedin.com/in/maria-zentsova-6058b6ab/)**
+    是 Wood Mackenzie 的高级数据分析师。她从事数据收集和分析、ETL 管道以及数据探索工具的工作。'
 - en: '**Related:**'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: '-   **相关：**'
 - en: '[How I Redesigned over 100 ETL into ELT Data Pipelines](/2021/11/redesigned-over-100-etl-elt-data-pipelines.html)'
+  id: totrans-38
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[我如何将 100 多个 ETL 重新设计为 ELT 数据管道](/2021/11/redesigned-over-100-etl-elt-data-pipelines.html)'
 - en: '[The Best Ways for Data Professionals to Market AWS Skills in 2022](/2021/11/best-ways-data-professionals-market-aws-skills.html)'
+  id: totrans-39
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2022 年数据专业人士推广 AWS 技能的最佳方法](/2021/11/best-ways-data-professionals-market-aws-skills.html)'
 - en: '[Prefect: How to Write and Schedule Your First ETL Pipeline with Python](/2021/08/prefect-write-schedule-etl-pipeline-python.html)'
+  id: totrans-40
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Prefect：如何使用 Python 编写和安排你的第一个 ETL 管道](/2021/08/prefect-write-schedule-etl-pipeline-python.html)'
 - en: More On This Topic
+  id: totrans-41
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '-   更多相关主题'
 - en: '[11 Best Practices of Cloud and Data Migration to AWS Cloud](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)'
+  id: totrans-42
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[迁移到 AWS 云的 11 个最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)'
 - en: '[6 Data Science Technologies You Need to Build Your Supply Chain Pipeline](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[构建供应链管道所需的 6 种数据科学技术](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)'
 - en: '[Using Datawig, an AWS Deep Learning Library for Missing Value Imputation](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Datawig，一个用于缺失值插补的 AWS 深度学习库](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)'
 - en: '[AWS AI & ML Scholarship Program Overview](https://www.kdnuggets.com/2022/09/aws-ai-ml-scholarship-program-overview.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[AWS AI & ML 奖学金项目概述](https://www.kdnuggets.com/2022/09/aws-ai-ml-scholarship-program-overview.html)'
 - en: '[Setup and use JupyterHub (TLJH) on AWS EC2](https://www.kdnuggets.com/2023/01/setup-jupyterhub-tljh-aws-ec2.html)'
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在 AWS EC2 上设置和使用 JupyterHub (TLJH)](https://www.kdnuggets.com/2023/01/setup-jupyterhub-tljh-aws-ec2.html)'
 - en: '[Top 8 GenAI Courses for AWS to Take Now](https://www.kdnuggets.com/top-8-genai-courses-for-aws-to-take-now)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[现在就选修的前 8 门 AWS GenAI 课程](https://www.kdnuggets.com/top-8-genai-courses-for-aws-to-take-now)'
