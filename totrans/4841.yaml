@@ -360,47 +360,58 @@
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下公式描述了网络输出如何转化为边界框预测。
 - en: '![YOLO Equations](../Images/e289a333ec5b258865fdfe26bf2f7f99.png)'
   id: totrans-54
   prefs: []
   type: TYPE_IMG
+  zh: '![YOLO 公式](../Images/e289a333ec5b258865fdfe26bf2f7f99.png)'
 - en: '*bx, by, bw, bh* are the x,y center co-ordinates, width and height of our prediction. *tx,
     ty, tw, th* is what the network outputs. *cx* and *cy* are the top-left co-ordinates
     of the grid. *pw* and *ph* are anchors dimensions for the box.'
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: '*bx, by, bw, bh* 是我们预测的 x, y 中心坐标、宽度和高度。*tx, ty, tw, th* 是网络输出的内容。*cx* 和 *cy*
+    是网格的左上角坐标。*pw* 和 *ph* 是框的锚点维度。'
 - en: '**Center Coordinates**'
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: '**中心坐标**'
 - en: Notice we are running our center coordinates prediction through a sigmoid function.
     This forces the value of the output to be between 0 and 1\. Why should this be
     the case? Bear with me.
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意，我们将中心坐标预测通过了一个 sigmoid 函数。这强制输出值在 0 和 1 之间。为什么会这样？请耐心等待。
 - en: 'Normally, YOLO doesn''t predict the absolute coordinates of the bounding box''s
     center. It predicts offsets which are:'
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，YOLO 不预测边界框中心的绝对坐标。它预测的是偏移量，这些偏移量是：
 - en: Relative to the top left corner of the grid cell which is predicting the object.
   id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 相对于预测物体的网格单元的左上角。
 - en: Normalised by the dimensions of the cell from the feature map, which is, 1.
   id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 由特征图的单元维度规范化，即 1。
 - en: For example, consider the case of our dog image. If the prediction for center
     is (0.4, 0.7), then this means that the center lies at (6.4, 6.7) on the 13 x
     13 feature map. (Since the top-left co-ordinates of the red cell are (6,6)).
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，考虑我们的狗图像的情况。如果中心的预测是 (0.4, 0.7)，这意味着中心位于 13 x 13 特征图上的 (6.4, 6.7)。（因为红色单元的左上角坐标是
+    (6,6)）。
 - en: But wait, what happens if the predicted x,y co-ordinates are greater than one,
     say (1.2, 0.7). This means center lies at (7.2, 6.7). Notice the center now lies
     in cell just right to our red cell, or the 8th cell in the 7th row. **This breaks
@@ -410,30 +421,37 @@
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 但等一下，如果预测的 x, y 坐标大于 1，比如 (1.2, 0.7)，这意味着中心位于 (7.2, 6.7)。注意到中心现在位于紧邻我们红色单元的单元中，即第
+    7 行的第 8 个单元。**这破坏了 YOLO 背后的理论**，因为如果我们假设红色框负责预测狗，则狗的中心必须位于红色单元内，而不是旁边的单元内。
 - en: Therefore, to remedy this problem, the output is passed through a sigmoid function,
     which squashes the output in a range from 0 to 1, effectively keeping the center
     in the grid which is predicting.
   id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，为了弥补这个问题，输出会通过一个 sigmoid 函数，这会将输出压缩到 0 到 1 的范围内，有效地将中心保持在预测的网格中。
 - en: '**Dimensions of the Bounding Box**'
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: '**边界框的维度**'
 - en: The dimensions of the bounding box are predicted by applying a log-space transform
     to the output and then multiplying with an anchor.
   id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过对输出应用对数空间变换并与锚点相乘来预测边界框的维度。
 - en: '![](../Images/03bf22eecaa530eb1eeca50c8e76f07b.png)'
   id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/03bf22eecaa530eb1eeca50c8e76f07b.png)'
 - en: '*How the detector output is transformed to give the final prediction. Image
     Credits. [http://christopher5106.github.io/](http://christopher5106.github.io/)*'
   id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: '*检测器输出如何转化为最终预测。图片来源。[http://christopher5106.github.io/](http://christopher5106.github.io/)*'
 - en: The resultant predictions, *bw* and *bh*, are normalised by the height and width
     of the image. (Training labels are chosen this way). So, if the predictions *bx* and *by* for
     the box containing the dog are (0.3, 0.8), then the actual width and height on
@@ -441,31 +459,38 @@
   id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果预测的 *bw* 和 *bh* 由图像的高度和宽度进行规范化（训练标签以这种方式选择）。所以，如果包含狗的框的预测 *bx* 和 *by* 是 (0.3,
+    0.8)，那么在 13 x 13 特征图上的实际宽度和高度是 (13 x 0.3, 13 x 0.8)。
 - en: '**Objectness Score**'
   id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '**物体性得分**'
 - en: Object score represents the probability that an object is contained inside a
     bounding box. It should be nearly 1 for the red and the neighboring grids, whereas
     almost 0 for, say, the grid at the corners.
   id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 物体得分表示物体被包含在边界框中的概率。对于红色和邻近网格，它应该接近 1，而对于例如角落的网格，它几乎应该是 0。
 - en: The objectness score is also passed through a sigmoid, as it is to be interpreted
     as a probability.
   id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 物体性得分也通过一个 sigmoid，因为它需要被解释为概率。
 - en: '**Class Confidences**'
   id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '**类别置信度**'
 - en: Class confidences represent the probabilities of the detected object belonging
     to a particular class (Dog, cat, banana, car etc). Before v3, YOLO used to softmax
     the class scores.
   id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 类别置信度表示检测到的物体属于特定类别（如狗、猫、香蕉、汽车等）的概率。在 v3 之前，YOLO 使用 softmax 计算类别得分。
 - en: However, that design choice has been dropped in v3, and authors have opted for
     using sigmoid instead. The reason is that Softmaxing class scores assume that
     the classes are mutually exclusive. In simple words, if an object belongs to one

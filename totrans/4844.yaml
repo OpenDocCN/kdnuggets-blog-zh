@@ -4,21 +4,26 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 TensorFlow 和 Flask RESTful Python API 构建 ConvNet 基于 HTTP 的应用程序完整指南
 - en: 原文：[https://www.kdnuggets.com/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html](https://www.kdnuggets.com/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html](https://www.kdnuggets.com/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html?page=2#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html?page=2#comments)'
 - en: This tutorial takes you along the steps required to create a convolutional neural
     network (CNN/ConvNet) using TensorFlow and get it into production by allowing
     remote access via a HTTP-based application using Flask RESTful API.
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程将引导你完成使用 TensorFlow 创建卷积神经网络 (CNN/ConvNet) 的步骤，并通过允许通过基于 HTTP 的 Flask RESTful
+    API 应用程序进行远程访问来投入生产。
 - en: In this tutorial, a CNN is to be built using TensorFlow NN (tf.nn) module. The
     CNN model architecture is created and trained and tested against the CIFAR10 dataset.
     To make the model remotely accessible, a Flask Web application is created using
@@ -29,102 +34,127 @@
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程将使用 TensorFlow NN (tf.nn) 模块构建一个 CNN。CNN 模型架构将被创建、训练并在 CIFAR10 数据集上进行测试。为了使模型可以远程访问，将使用
+    Python 创建一个 Flask Web 应用程序，通过 HTTP 接收上传的图像并返回其分类标签。除了 TensorFlow 外，Windows 上还使用了
+    Anaconda3 和 CPU 支持。本教程假设你对 CNN 有基本了解，如层、步幅和填充。同时需要了解 Python。
 - en: '* * *'
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: 'The tutorial is summarized into the following steps:'
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 本教程总结为以下步骤：
 - en: Preparing the Environment by Installing Python, TensorFlow, PyCharm, and Flask
     API.
   id: totrans-12
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 通过安装 Python、TensorFlow、PyCharm 和 Flask API 准备环境。
 - en: Downloading and Preparing the CIFAR-10 Dataset.
   id: totrans-13
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 下载并准备 CIFAR-10 数据集。
 - en: Building the CNN Computational Graph using TensorFlow.
   id: totrans-14
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 TensorFlow 构建 CNN 计算图。
 - en: Training the CNN.
   id: totrans-15
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 训练 CNN。
 - en: Saving the Trained CNN Model.
   id: totrans-16
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 保存训练好的 CNN 模型。
 - en: Preparing the Test Data and Restoring the Trained CNN Model.
   id: totrans-17
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 准备测试数据并恢复训练好的 CNN 模型。
 - en: Testing the Trained CNN Model.
   id: totrans-18
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 测试训练好的 CNN 模型。
 - en: Building the Flask Web Application.
   id: totrans-19
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 构建 Flask Web 应用程序。
 - en: Upload an Image using HTML Form.
   id: totrans-20
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用 HTML 表单上传图像。
 - en: Creating Helper HTML, JavaScript, and CSS Files.
   id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 创建辅助 HTML、JavaScript 和 CSS 文件。
 - en: HTTP-Based Remote Accessing the Trained Model for Prediction.
   id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 基于 HTTP 的远程访问训练模型进行预测。
 - en: 1\. Installing Python, TensorFlow, PyCharm, and Flask API
   id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1\. 安装 Python、TensorFlow、PyCharm 和 Flask API
 - en: Before starting building the project, it is required to prepare its environment.
     Python is the first tool to start installing because the environment is fully
     dependent on it. If you already have the environment prepared, you can skip the
@@ -132,10 +162,12 @@
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 在开始构建项目之前，需要准备环境。Python 是第一个需要安装的工具，因为环境完全依赖于它。如果你已经准备好了环境，可以跳过第一步。
 - en: '**1.1 Anaconda/Python Installation**'
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1.1 Anaconda/Python 安装**'
 - en: It is possible to install the native Python distribution but it is recommended
     to use an all-in-one package such as Anaconda because it does some stuff for you.
     In this project, Anaconda 3 is used. For Windows, the executable file can be downloaded
@@ -281,16 +313,19 @@
   id: totrans-48
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/f2a8dea501640dc9d2fd5bcafcac3083.png)'
 - en: '**1.4 Flask Installation**'
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**1.4 Flask安装**'
 - en: 'The last tool to get installed is the Flask RESTful API. It is a library to
     be installed using pip/conda installer under the TF venv using the following CMD
     command:'
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后一个需要安装的工具是Flask RESTful API。这是一个需要使用pip/conda安装器在TF venv中安装的库，使用以下CMD命令：
 - en: '[PRE3]'
   id: totrans-51
   prefs: []
@@ -301,16 +336,19 @@
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果尚未安装，NumPy和SciPy应安装在venv中，以便能够读取和处理图像。
 - en: By installing Anaconda (Python), TensorFlow, PyCharm, and Flask, we are ready
     to start building the project.
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过安装Anaconda（Python）、TensorFlow、PyCharm和Flask，我们准备好开始构建项目。
 - en: 2\. Downloading and Preparing the CIFAR-10 Dataset
   id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2\. 下载和准备CIFAR-10数据集
 - en: The Python version of the 10 classes CIFAR dataset (CIFAR-10) could be downloaded
     from this page [https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html).
     The dataset contains 60,000 images divided into training and testing data. There
@@ -323,12 +361,14 @@
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: CIFAR-10数据集的Python版本可以从此页面[https://www.cs.toronto.edu/~kriz/cifar.html](https://www.cs.toronto.edu/~kriz/cifar.html)下载。该数据集包含60,000张图像，分为训练数据和测试数据。有五个文件保存训练数据，每个文件包含10,000张图像。这些图像为RGB，大小为32x32x3。训练文件命名为**data_batch_1**、**data_batch_2**等。测试数据保存在一个名为**test_batch**的文件中，包含10,000张图像。还有一个名为**batches.meta**的元数据文件，其中包含数据集类别标签，分别为**飞机**、**汽车**、**鸟**、**猫**、**鹿**、**狗**、**青蛙**、**马**、**船**和**卡车**。
 - en: 'Because each file in the dataset is a binary file, it should be decoded in
     order to retrieve the actual image data. For such reason, a function called unpickle_patch
     is created to do such job defined as follows:'
   id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于数据集中的每个文件都是二进制文件，因此应解码以检索实际的图像数据。因此，创建了一个名为unpickle_patch的函数来执行此任务，定义如下：
 - en: '[PRE4]'
   id: totrans-57
   prefs: []
@@ -340,6 +380,7 @@
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 该方法接受二进制文件名并返回一个包含该文件详细信息的字典。字典包含文件中所有10,000个样本的数据以及它们的标签。
 - en: In order to decode the entire training data, a new function called get_dataset_images
     is created. That function accepts the dataset path and works only on the training
     data. As a result, it filters the files under this path and returns only files
@@ -348,6 +389,7 @@
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了解码整个训练数据，创建了一个名为get_dataset_images的新函数。该函数接受数据集路径，仅对训练数据进行操作。结果，它会过滤此路径下的文件，并仅返回以**data_batch_**开头的文件。测试数据将在构建和训练CNN之后准备。
 - en: For each training file, it is decoded by calling the unpickle_patch function.
     Based on the dictionary returned by such function, the get_dataset_images function
     returns both the images data and their class labels. The images data is retrieved
@@ -355,6 +397,7 @@
   id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于每个训练文件，通过调用unpickle_patch函数进行解码。根据该函数返回的字典，get_dataset_images函数返回图像数据及其类别标签。图像数据从**‘data’**键中获取，其类别标签从**‘labels’**键中获取。
 - en: Because the images data are saved as 1D vector, it should be reshaped to be
     of 3 dimensions. This is because TensorFlow accepts the images of such shape.
     For such reason, the get_dataset_images function accepts the number of rows/columns
@@ -362,10 +405,12 @@
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 因为图像数据以1D向量形式保存，所以需要将其重塑为3维。这是因为TensorFlow接受这种形状的图像。因此，get_dataset_images函数接受除了每个图像的通道数外，还接受行/列数作为参数。
 - en: 'The implementation of such function is as follows:'
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 该函数的实现如下：
 - en: '[PRE5]'
   id: totrans-63
   prefs: []
@@ -375,11 +420,13 @@
   id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过准备训练数据，我们可以使用TF构建和训练CNN模型。
 - en: 3\. Building the CNN Computational Graph using TensorFlow
   id: totrans-65
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3\. 使用TensorFlow构建CNN计算图
 - en: The computational graph of the CNN is created inside a function called create_CNN.
     It creates a stack of convolution (conv), ReLU, max pooling, dropout, and fully
     connected (FC) layers and returns the results of the last fully connected layer.
