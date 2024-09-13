@@ -1,241 +1,379 @@
 - en: Road Lane Line Detection using Computer Vision models
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用计算机视觉模型进行道路车道线检测
 - en: 原文：[https://www.kdnuggets.com/2017/07/road-lane-line-detection-using-computer-vision-models.html](https://www.kdnuggets.com/2017/07/road-lane-line-detection-using-computer-vision-models.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2017/07/road-lane-line-detection-using-computer-vision-models.html](https://www.kdnuggets.com/2017/07/road-lane-line-detection-using-computer-vision-models.html)
 - en: '**By Vijay Ramakrishnan**.'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 Vijay Ramakrishnan 提供**。'
 - en: Detecting lane lines is a fundamental task for autonomous vehicles while driving
     on the road. It is the building block to other path planning and control actions
     like breaking and steering. Lets get started implementing them!
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 车道线检测是自动驾驶汽车在道路上行驶时的一个基本任务。它是其他路径规划和控制动作（如刹车和转向）的基础。让我们开始实现这些功能吧！
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你组织的 IT 部门'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![](../Images/7a992963ff20ff065c613a4986e26864.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/7a992963ff20ff065c613a4986e26864.png)'
 - en: '**Fig 1\. Final output of this project**'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '**图 1\. 本项目的最终输出**'
 - en: 'Note: This project was derived from [Udacity blog](https://github.com/udacity/CarND-LaneLines-P1).
     All media generated used custom CV configurations explained in this article.'
+  id: totrans-12
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 注意：此项目源自 [Udacity 博客](https://github.com/udacity/CarND-LaneLines-P1)。所有生成的媒体使用了本文解释的自定义
+    CV 配置。
 - en: '**Step 0: Introduction**'
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 0：介绍**'
 - en: Before we work with videos, lets work with static images since it is much easier
     to debug with. Here is the image we will be working with.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在处理视频之前，让我们先处理静态图像，因为静态图像更容易调试。这里是我们将要处理的图像。
 - en: '![](../Images/e8f072f35ceec435a7d0e66babd21c0d.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e8f072f35ceec435a7d0e66babd21c0d.png)'
 - en: '***Fig. Input image***'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '***图. 输入图像***'
 - en: 'I am running python 3 with the following imports in a jupyter notebook:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在 jupyter notebook 中运行 Python 3，导入了以下库：
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-19
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'The lane detection pipeline follows these steps:'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 车道检测管道遵循以下步骤：
 - en: Pre-process image using grayscale and gaussian blur
+  id: totrans-21
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 使用灰度图像和高斯模糊进行图像预处理
 - en: Apply canny edge detection to the image
+  id: totrans-22
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对图像应用 Canny 边缘检测
 - en: Apply masking region to the image
+  id: totrans-23
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对图像应用掩膜区域
 - en: Apply Hough transform to the image
+  id: totrans-24
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 对图像应用霍夫变换
 - en: Extrapolate the lines found in the hough transform to construct the left and
     right lane lines
+  id: totrans-25
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将霍夫变换中找到的线条进行外推，以构建左侧和右侧车道线
 - en: Add the extrapolated lines to the input image
+  id: totrans-26
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 将外推的线条添加到输入图像中
 - en: '**Step 1: Pre-processing of image**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 1：图像预处理**'
 - en: We grayscale the input image which is needed for canny edge detection.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将输入图像转换为灰度图像，这是进行 Canny 边缘检测所需的。
 - en: '[PRE2]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[PRE3]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '[PRE4]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![](../Images/3890713a560d8e34476af175fcf028a9.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3890713a560d8e34476af175fcf028a9.png)'
 - en: '***Fig. Gray-scaled image***'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: '***图. 灰度图像***'
 - en: We then apply a gaussian smoothing function to the image. Again, this is needed
     for the canny edge detection to average out anomalous gradients in the image.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，我们对图像应用高斯平滑函数。同样，这对于 Canny 边缘检测是必要的，以平滑图像中的异常梯度。
 - en: '[PRE5]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '[PRE6]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '[PRE7]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '**Step 2: Canny Edge Detection**'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 2：Canny 边缘检测**'
 - en: We need to detect edges for lane detection since the contrast between the lane
     and the surrounding road surface provides us with useful information on detecting
     the lane lines.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们需要检测边缘以进行车道检测，因为车道与周围路面之间的对比为我们提供了检测车道线的有用信息。
 - en: Canny edge detection is an operator that uses the horizontal and vertical gradients
     of the pixel values of an image to detect edges. A more deeper understanding of
     the algorithm can be found [here](http://docs.opencv.org/trunk/da/d22/tutorial_py_canny.html).
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: Canny 边缘检测是一种运算符，利用图像像素值的水平和垂直梯度来检测边缘。可以在 [这里](http://docs.opencv.org/trunk/da/d22/tutorial_py_canny.html)
+    找到对该算法的更深入理解。
 - en: '[PRE8]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '[PRE9]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '[PRE10]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '![](../Images/8e9646d2efb5b21233e6fae0a2961584.png)'
+  id: totrans-44
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/8e9646d2efb5b21233e6fae0a2961584.png)'
 - en: '*Notice the edge detector captures all the lane lines, along with surrounding
     edges like trees*'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '*注意边缘检测器捕捉到了所有车道线以及像树木这样的周围边缘*'
 - en: '**Step 3: Mask out points that are not in the region of interest**'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 3：遮罩掉不在兴趣区域中的点**'
 - en: The region of interest for the car’s camera is only the two lanes immediately
     in it’s field of view and not anything extraneous. We can filter out the extraneous
     pixels by making a polygon region of interest and removing all other pixels that
     are not in the polygon.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 汽车摄像头的兴趣区域仅包括其视野中的两个车道，而不包括任何其他区域。我们可以通过创建一个多边形兴趣区域来过滤掉这些额外的像素，并移除所有不在该多边形中的像素。
 - en: '[PRE11]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '[PRE12]'
+  id: totrans-49
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '[PRE13]'
+  id: totrans-50
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '![](../Images/1fa94ca382f7d5cc7aff7f61ec5738e7.png)'
+  id: totrans-51
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1fa94ca382f7d5cc7aff7f61ec5738e7.png)'
 - en: '***Fig. Removed all pixels not in the region of interest***'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: '***图。移除了所有不在兴趣区域中的像素***'
 - en: '**Step 4: Hough Transform**'
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: '**步骤 4：霍夫变换**'
 - en: Now that we have detected edges in the region of interest, we want to identify
     lines which indicate lane lines. This is where the hough transform comes in handy.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经检测到了兴趣区域中的边缘，我们希望识别出指示车道线的直线。这就是霍夫变换发挥作用的地方。
 - en: The Hough transformation converts a “x vs. y” line to a point in “gradient vs.
     intercept” space. Points in the image will correspond to lines in hough space.
     An intersection of lines in hough space will thus correspond to a line in Cartesian
     space. Using this technique, we can find lines from the pixel outputs of the canny
     edge detection output. A detailed explanation of the Hough transformation can
     be found here.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 霍夫变换将“x 对 y”直线转换为“梯度对截距”空间中的一个点。图像中的点将对应于霍夫空间中的直线。霍夫空间中直线的交点将对应于笛卡尔空间中的一条直线。利用这种技术，我们可以从
+    Canny 边缘检测输出的像素中找到直线。有关霍夫变换的详细解释可以在这里找到。
 - en: '[PRE14]'
+  id: totrans-56
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '[PRE15]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '[PRE16]'
+  id: totrans-58
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: More On This Topic
+  id: totrans-59
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 相关主题
 - en: '[DINOv2: Self-Supervised Computer Vision Models by Meta AI](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[DINOv2：Meta AI 的自监督计算机视觉模型](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)'
 - en: '[TensorFlow for Computer Vision - Transfer Learning Made Easy](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[TensorFlow 用于计算机视觉 - 转移学习简化版](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)'
 - en: '[Discover the World of Computer Vision: Introducing MLM''s Latest…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[探索计算机视觉的世界：介绍 MLM 的最新……](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)'
 - en: '[5 Applications of Computer Vision](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[计算机视觉的 5 种应用](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)'
 - en: '[6 Things You Need To Know About Data Management And Why It Matters…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你需要了解的 6 件数据管理相关的事以及为何重要……](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)'
 - en: '[KDnuggets News March 9, 2022: Build a Machine Learning Web App in 5…](https://www.kdnuggets.com/2022/n10.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[KDnuggets 新闻 2022 年 3 月 9 日：5 步构建机器学习 Web 应用](https://www.kdnuggets.com/2022/n10.html)'
