@@ -1,435 +1,676 @@
 - en: Multi-Class Text Classification with Doc2Vec & Logistic Regression
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用Doc2Vec和逻辑回归进行多类文本分类
 - en: 原文：[https://www.kdnuggets.com/2018/11/multi-class-text-classification-doc2vec-logistic-regression.html](https://www.kdnuggets.com/2018/11/multi-class-text-classification-doc2vec-logistic-regression.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2018/11/multi-class-text-classification-doc2vec-logistic-regression.html](https://www.kdnuggets.com/2018/11/multi-class-text-classification-doc2vec-logistic-regression.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Susan Li](https://www.linkedin.com/in/susanli/), Sr. Data Scientist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者 [Susan Li](https://www.linkedin.com/in/susanli/), 高级数据科学家**'
 - en: '![Image](../Images/c6e1000365d1d4cdf2a6c616c7362e9a.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![Image](../Images/c6e1000365d1d4cdf2a6c616c7362e9a.png)'
 - en: 'Photo credit: Pexels'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：Pexels
 - en: '[Doc2vec](https://cs.stanford.edu/~quocle/paragraph_vector.pdf) is an [NLP](https://en.wikipedia.org/wiki/Natural_language_processing) tool
     for representing documents as a vector and is a generalizing of the [word2vec](https://en.wikipedia.org/wiki/Word2vec)
     method.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Doc2vec](https://cs.stanford.edu/~quocle/paragraph_vector.pdf) 是一种[NLP](https://en.wikipedia.org/wiki/Natural_language_processing)工具，用于将文档表示为向量，是[word2vec](https://en.wikipedia.org/wiki/Word2vec)方法的推广。'
 - en: 'In order to understand doc2vec, it is advisable to understand word2vec approach.
     However, the complete mathematical details is out of scope of this article. If
     you are new to word2vec and doc2vec, the following resources can help you to get
     start:'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了理解doc2vec，建议先了解word2vec方法。然而，完整的数学细节超出了本文的范围。如果你对word2vec和doc2vec不熟悉，以下资源可以帮助你入门：
 - en: '[Distributed Representations of Words and Phrases and their Compositionality](https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf)'
+  id: totrans-8
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[词语和短语的分布式表示及其组合性](https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf)'
 - en: '[Distributed Representations of Sentences and Documents](https://cs.stanford.edu/~quocle/paragraph_vector.pdf)'
+  id: totrans-9
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[句子和文档的分布式表示](https://cs.stanford.edu/~quocle/paragraph_vector.pdf)'
 - en: '[A gentle introduction to Doc2Vec](https://medium.com/scaleabout/a-gentle-introduction-to-doc2vec-db3e8c0cce5e)'
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Doc2Vec的温和介绍](https://medium.com/scaleabout/a-gentle-introduction-to-doc2vec-db3e8c0cce5e)'
 - en: '[Gensim Doc2Vec Tutorial on the IMDB Sentiment Dataset](https://github.com/RaRe-Technologies/gensim/blob/3c3506d51a2caf6b890de3b1b32a8b85f7566ca5/docs/notebooks/doc2vec-IMDB.ipynb)'
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[IMDB情感数据集上的Gensim Doc2Vec教程](https://github.com/RaRe-Technologies/gensim/blob/3c3506d51a2caf6b890de3b1b32a8b85f7566ca5/docs/notebooks/doc2vec-IMDB.ipynb)'
 - en: '[Document classification with word embeddings tutorial](https://github.com/RaRe-Technologies/movie-plots-by-genre/blob/master/ipynb_with_output/Document%20classification%20with%20word%20embeddings%20tutorial%20-%20with%20output.ipynb)'
+  id: totrans-12
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用词嵌入进行文档分类教程](https://github.com/RaRe-Technologies/movie-plots-by-genre/blob/master/ipynb_with_output/Document%20classification%20with%20word%20embeddings%20tutorial%20-%20with%20output.ipynb)'
 - en: Using the same data set when we did [Multi-Class Text Classification with Scikit-Learn](https://towardsdatascience.com/multi-class-text-classification-with-scikit-learn-12f1e60e0a9f),
     In this article, we’ll classify complaint narrative by product using doc2vec techniques
     in [Gensim](https://radimrehurek.com/gensim/models/doc2vec.html). Let’s get started!
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用相同的数据集进行[使用Scikit-Learn进行多类文本分类](https://towardsdatascience.com/multi-class-text-classification-with-scikit-learn-12f1e60e0a9f)，在本文中，我们将使用doc2vec技术通过[Gensim](https://radimrehurek.com/gensim/models/doc2vec.html)按产品对投诉叙述进行分类。让我们开始吧！
 - en: The Data
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 数据
 - en: The goal is to classify consumer finance complaints into 12 pre-defined classes.
     The data can be downloaded from [data.gov](https://catalog.data.gov/dataset/consumer-complaint-database).
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 目标是将消费者金融投诉分类到12个预定义的类别中。数据可以从[data.gov](https://catalog.data.gov/dataset/consumer-complaint-database)下载。
 - en: '[PRE0]'
+  id: totrans-16
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '![](../Images/a0e2f4588ff2e456b23dec77eeddb694.png)'
+  id: totrans-17
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/a0e2f4588ff2e456b23dec77eeddb694.png)'
 - en: Figure 1
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 图1
 - en: After remove null values in narrative columns, we will need to re-index the
     data frame.
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 在移除叙述列中的空值之后，我们需要重新索引数据框。
 - en: '[PRE1]'
+  id: totrans-20
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: '***(318718, 2)***'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '***(318718, 2)***'
 - en: '[PRE2]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '***63420212***'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '***63420212***'
 - en: We have over 63 million words, it is a relatively large data set.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们拥有超过6300万字的数据集，这相对来说是一个比较大的数据集。
 - en: Exploring
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 探索
 - en: '[PRE3]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: '![](../Images/3b3413fbe1d726f0312bf26deb0d0cff.png)'
+  id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/3b3413fbe1d726f0312bf26deb0d0cff.png)'
 - en: Figure 2
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 图2
 - en: The classes are imbalanced, however, a naive classifier that predicts everything
     to be Debt collection will only achieve over 20% accuracy.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 类别不平衡，然而，一个将所有预测都为“债务催收”的简单分类器只能达到超过20%的准确率。
 - en: Let’s have a look a few examples of complaint narrative and its associated product.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们看看一些投诉叙述及其相关的产品。
 - en: '[PRE4]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '![](../Images/26c8a0ee1adfc8728acddb906e566102.png)'
+  id: totrans-32
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/26c8a0ee1adfc8728acddb906e566102.png)'
 - en: Figure 3
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 3
 - en: '[PRE5]'
+  id: totrans-34
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: '![](../Images/b5dc8a3b74a32d321ee2cea0f9029af2.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b5dc8a3b74a32d321ee2cea0f9029af2.png)'
 - en: Figure 4
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 4
 - en: Text Preprocessing
+  id: totrans-37
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 文本预处理
 - en: Below we define a function to convert text to lower-case and strip punctuation/symbols
     from words and so on.
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 下面我们定义一个函数，将文本转换为小写，并去除标点符号/符号等。
 - en: '[PRE6]'
+  id: totrans-39
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: The following steps include train/test split of 70/30, remove stop-words and
     tokenize text using [NLTK tokenizer](https://www.nltk.org/api/nltk.tokenize.html).
     For our first try we tag every complaint narrative with its product.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下步骤包括 70/30 的训练/测试拆分，移除停用词，并使用 [NLTK tokenizer](https://www.nltk.org/api/nltk.tokenize.html)
+    对文本进行分词。首次尝试时，我们为每个投诉叙述标记其产品。
 - en: '[PRE7]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '[PRE8]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: This is what a training entry looks like — an example complaint narrative tagged
     by “Credit reporting”.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 这就是一个训练条目的样子——一个被标记为“信用报告”的示例投诉叙述。
 - en: '[PRE9]'
+  id: totrans-44
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: '![](../Images/edba2147c4c6cc20fae5fdc97f372915.png)'
+  id: totrans-45
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/edba2147c4c6cc20fae5fdc97f372915.png)'
 - en: Figure 5
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 5
 - en: Set-up Doc2Vec Training & Evaluation Models
+  id: totrans-47
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 设置 Doc2Vec 训练与评估模型
 - en: First, we instantiate a doc2vec model — Distributed Bag of Words (DBOW). In
     the word2vec architecture, the two algorithm names are “continuous bag of words”
     (CBOW) and “skip-gram” (SG); in the doc2vec architecture, the corresponding algorithms
     are “distributed memory” (DM) and “distributed bag of words” (DBOW).
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们实例化一个 doc2vec 模型——分布式词袋（DBOW）。在 word2vec 架构中，两个算法名称是“连续词袋”（CBOW）和“跳字”（SG）；在
+    doc2vec 架构中，相应的算法是“分布式记忆”（DM）和“分布式词袋”（DBOW）。
 - en: '**Distributed Bag of Words (DBOW)**'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: '**分布式词袋（DBOW）**'
 - en: DBOW is the doc2vec model analogous to Skip-gram model in word2vec. The paragraph
     vectors are obtained by training a neural network on the task of predicting a
     probability distribution of words in a paragraph given a randomly-sampled word
     from the paragraph.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: DBOW 是 doc2vec 模型，相当于 word2vec 中的 Skip-gram 模型。段落向量是通过在预测段落中词汇概率分布的任务上训练神经网络获得的，给定一个从段落中随机抽样的词。
 - en: 'We will vary the following parameters:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们将调整以下参数：
 - en: If `dm=0`, distributed bag of words (PV-DBOW) is used; if `dm=1`,‘distributed
     memory’ (PV-DM) is used.
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 如果`dm=0`，使用分布式词袋（PV-DBOW）；如果`dm=1`，使用“分布式记忆”（PV-DM）。
 - en: 300- dimensional feature vectors.
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 300 维特征向量。
 - en: '`min_count=2`, ignores all words with total frequency lower than this.'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`min_count=2`，忽略所有总频率低于该值的词汇。'
 - en: '`negative=5` , specifies how many “noise words” should be drawn.'
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`negative=5`，指定应该抽取多少个“噪声词”。'
 - en: '`hs=0` , and negative is non-zero, negative sampling will be used.'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`hs=0`，且负采样非零时，将使用负采样。'
 - en: '`sample=0` , the threshold for configuring which higher-frequency words are
     randomly down sampled.'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`sample=0`，配置随机下采样的高频词汇的阈值。'
 - en: '`workers=cores` , use these many worker threads to train the model (=faster
     training with multicore machines).'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '`workers=cores`，使用这些工作线程来训练模型（=使用多核机器加速训练）。'
 - en: '[PRE10]'
+  id: totrans-59
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '**Building a Vocabulary**'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**构建词汇表**'
 - en: '[PRE11]'
+  id: totrans-61
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: '![](../Images/52b897e3f9ff007f1bb5b72ca0340e74.png)'
+  id: totrans-62
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/52b897e3f9ff007f1bb5b72ca0340e74.png)'
 - en: Figure 6
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 6
 - en: Training a doc2vec model is rather straight-forward in Gensim, we initialize
     the model and train for 30 epochs.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Gensim 中训练 doc2vec 模型非常简单，我们初始化模型并训练 30 个周期。
 - en: '[PRE12]'
+  id: totrans-65
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '![](../Images/d8f61dbc939a64cb44aed9b05c66aa1c.png)'
+  id: totrans-66
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/d8f61dbc939a64cb44aed9b05c66aa1c.png)'
 - en: Figure 7
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 7
 - en: '**Building the Final Vector Feature for the Classifier**'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '**为分类器构建最终向量特征**'
 - en: '[PRE13]'
+  id: totrans-69
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: '**Train the Logistic Regression Classifier.**'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '**训练逻辑回归分类器。**'
 - en: '[PRE14]'
+  id: totrans-71
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE14]'
 - en: '***Testing accuracy 0.6683609437751004***'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: '***测试准确率 0.6683609437751004***'
 - en: '***Testing F1 score: 0.651646431211616***'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: '***测试F1分数：0.651646431211616***'
 - en: '****Distributed Memory (DM)****'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '****分布式记忆（DM）****'
 - en: Distributed Memory (DM) acts as a memory that remembers what is missing from
     the current context — or as the topic of the paragraph. While the word vectors
     represent the concept of a word, the document vector intends to represent the
     concept of a document. We again instantiate a Doc2Vec model with a vector size
     with 300 words and iterating over the training corpus 30 times.
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 分布式记忆（DM）作为一个记忆，记住当前上下文中缺少的内容——或作为段落的主题。虽然词向量表示的是词汇的概念，但文档向量旨在表示文档的概念。我们再次实例化一个
+    Doc2Vec 模型，词向量大小为 300，并对训练语料库进行 30 次迭代。
 - en: '[PRE15]'
+  id: totrans-76
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE15]'
 - en: '![](../Images/009bfaf05814cf40458f63da080f08cb.png)'
+  id: totrans-77
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/009bfaf05814cf40458f63da080f08cb.png)'
 - en: Figure 8
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 8
 - en: '[PRE16]'
+  id: totrans-79
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE16]'
 - en: '![](../Images/5b50b1a8c8a6ac7a9b1a9b7d70281bbe.png)'
+  id: totrans-80
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/5b50b1a8c8a6ac7a9b1a9b7d70281bbe.png)'
 - en: Figure 9
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 图 9
 - en: '**Train the Logistic Regression Classifier**'
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: '**训练逻辑回归分类器**'
 - en: '[PRE17]'
+  id: totrans-83
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE17]'
 - en: '***Testing accuracy 0.47498326639892907***'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '***测试准确率 0.47498326639892907***'
 - en: '***Testing F1 score: 0.4445833078167434***'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '***测试F1分数：0.4445833078167434***'
 - en: '**Model Pairing**'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '**模型配对**'
 - en: According to [Gensim doc2vec tutorial on the IMDB sentiment data set](https://github.com/RaRe-Technologies/gensim/blob/3c3506d51a2caf6b890de3b1b32a8b85f7566ca5/docs/notebooks/doc2vec-IMDB.ipynb),
     combining a paragraph vector from Distributed Bag of Words (DBOW) and Distributed
     Memory (DM) improves performance. We will follow, pairing the models together
     for evaluation.
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据[Gensim doc2vec IMDB情感数据集教程](https://github.com/RaRe-Technologies/gensim/blob/3c3506d51a2caf6b890de3b1b32a8b85f7566ca5/docs/notebooks/doc2vec-IMDB.ipynb)，将分布式词袋模型（DBOW）和分布式记忆（DM）的段落向量结合起来可以提高性能。我们将按照这个方法，将模型进行配对进行评估。
 - en: First, we delete temporary training data to free up RAM.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先，我们删除临时训练数据以释放RAM。
 - en: '[PRE18]'
+  id: totrans-89
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE18]'
 - en: Concatenate two models.
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 连接两个模型。
 - en: '[PRE19]'
+  id: totrans-91
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE19]'
 - en: Building feature vectors.
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: 构建特征向量。
 - en: '[PRE20]'
+  id: totrans-93
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE20]'
 - en: Train the Logistic Regression
+  id: totrans-94
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练逻辑回归模型
 - en: '[PRE21]'
+  id: totrans-95
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE21]'
 - en: '***Testing accuracy 0.6778572623828648***'
+  id: totrans-96
   prefs: []
   type: TYPE_NORMAL
+  zh: '***测试准确率 0.6778572623828648***'
 - en: '***Testing F1 score: 0.664561533967402***'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '***测试F1得分: 0.664561533967402***'
 - en: The result improved by 1%.
+  id: totrans-98
   prefs: []
   type: TYPE_NORMAL
+  zh: 结果提高了1%。
 - en: For this article, I used training set to train doc2vec, however, in [Gensim’s
     tutorial](https://github.com/RaRe-Technologies/gensim/blob/develop/docs/notebooks/doc2vec-IMDB.ipynb),
     the whole data set was used for training, I tried that approach, using the whole
     data set to train doc2vec classifier for our consumer complaint classification,
     I was able to achieve 70% accuracy. You can find that [notebook](https://github.com/susanli2016/NLP-with-Python/blob/master/Doc2Vec%20Consumer%20Complaint.ipynb)here,
     it is a little different approach.
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于这篇文章，我使用训练集来训练doc2vec。然而，在[Gensim的教程](https://github.com/RaRe-Technologies/gensim/blob/develop/docs/notebooks/doc2vec-IMDB.ipynb)中，使用了整个数据集进行训练。我尝试了这种方法，使用整个数据集训练doc2vec分类器，用于我们的消费者投诉分类，我能够获得70%的准确率。你可以在这里找到那个[笔记本](https://github.com/susanli2016/NLP-with-Python/blob/master/Doc2Vec%20Consumer%20Complaint.ipynb)，它是一种稍有不同的方法。
 - en: The [Jupyter notebook](https://github.com/susanli2016/NLP-with-Python/blob/master/Doc2Vec%20Consumer%20Complaint_3.ipynb) for
     the above analysis can be found on [Github](https://github.com/susanli2016/NLP-with-Python/blob/master/Doc2Vec%20Consumer%20Complaint_3.ipynb).
     I look forward to hearing any questions.
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述分析的[Jupyter笔记本](https://github.com/susanli2016/NLP-with-Python/blob/master/Doc2Vec%20Consumer%20Complaint_3.ipynb)可以在[Github](https://github.com/susanli2016/NLP-with-Python/blob/master/Doc2Vec%20Consumer%20Complaint_3.ipynb)上找到。我期待听到任何问题。
 - en: '**Bio: [Susan Li](https://www.linkedin.com/in/susanli/)** is changing the world,
     one article at a time. She is a Sr. Data Scientist, located in Toronto, Canada.'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Susan Li](https://www.linkedin.com/in/susanli/)** 正在通过一篇文章改变世界。她是位于加拿大多伦多的高级数据科学家。'
 - en: '[Original](https://towardsdatascience.com/multi-class-text-classification-with-doc2vec-logistic-regression-9da9947b43f4).
     Reposted with permission.'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/multi-class-text-classification-with-doc2vec-logistic-regression-9da9947b43f4)。转载已获许可。'
 - en: '**Related:**'
+  id: totrans-103
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容:**'
 - en: '[Machine Learning for Text Classification Using SpaCy in Python](/2018/09/machine-learning-text-classification-using-spacy-python.html)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用SpaCy进行文本分类的机器学习](/2018/09/machine-learning-text-classification-using-spacy-python.html)'
 - en: '[Topic Modeling with LSA, PLSA, LDA & lda2Vec](/2018/08/topic-modeling-lsa-plsa-lda-lda2vec.html)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用LSA、PLSA、LDA和lda2Vec进行主题建模](/2018/08/topic-modeling-lsa-plsa-lda-lda2vec.html)'
 - en: '[Multi-Class Text Classification with Scikit-Learn](/2018/08/multi-class-text-classification-scikit-learn.html)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Scikit-Learn进行多类别文本分类](/2018/08/multi-class-text-classification-scikit-learn.html)'
 - en: '* * *'
+  id: totrans-107
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-108
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前3名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-109
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-110
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-111
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的IT需求'
 - en: '* * *'
+  id: totrans-112
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-113
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Logistic Regression for Classification](https://www.kdnuggets.com/2022/04/logistic-regression-classification.html)'
+  id: totrans-114
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[逻辑回归分类](https://www.kdnuggets.com/2022/04/logistic-regression-classification.html)'
 - en: '[Classification Metrics Walkthrough: Logistic Regression with…](https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html)'
+  id: totrans-115
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Comparing Linear and Logistic Regression](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)'
+  id: totrans-116
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[An Overview of Logistic Regression](https://www.kdnuggets.com/2022/02/overview-logistic-regression.html)'
+  id: totrans-117
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Linear vs Logistic Regression: A Succinct Explanation](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)'
+  id: totrans-118
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[KDnuggets News 22:n12, March 23: Best Data Science Books for…](https://www.kdnuggets.com/2022/n12.html)'
+  id: totrans-119
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
