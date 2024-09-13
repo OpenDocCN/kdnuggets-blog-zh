@@ -3,59 +3,75 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 如何将 PyTorch Lightning 模型部署到生产环境中
 - en: 原文：[https://www.kdnuggets.com/2020/11/deploy-pytorch-lightning-models-production.html](https://www.kdnuggets.com/2020/11/deploy-pytorch-lightning-models-production.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/11/deploy-pytorch-lightning-models-production.html](https://www.kdnuggets.com/2020/11/deploy-pytorch-lightning-models-production.html)
 - en: '[comments](#comments)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Caleb Kaiser](https://www.linkedin.com/in/caleb-kaiser-843249126/), Cortex
     Labs**'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Caleb Kaiser](https://www.linkedin.com/in/caleb-kaiser-843249126/)，Cortex
+    Labs**'
 - en: '![Figure](../Images/514b91d766979480cf4b46bcfd1d1f32.png)'
   id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/514b91d766979480cf4b46bcfd1d1f32.png)'
 - en: Source: [Pexels](https://www.pexels.com/photo/lightning-over-sea-against-storm-clouds-248775/)
   id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '来源: [Pexels](https://www.pexels.com/photo/lightning-over-sea-against-storm-clouds-248775/)'
 - en: '* * *'
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业道路。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析能力'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织的 IT'
 - en: '* * *'
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Looking at the machine learning landscape, one of the major trends is the proliferation
     of projects focused on applying software engineering principles to machine learning. [Cortex](https://github.com/cortexlabs/cortex),
     for example, recreates the experience of deploying serverless functions, but with
@@ -64,12 +80,15 @@
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 从机器学习的角度来看，主要趋势之一是越来越多的项目专注于将软件工程原则应用于机器学习。例如，[Cortex](https://github.com/cortexlabs/cortex)
+    重新创建了无服务器函数的部署体验，但用于推理管道。类似地，DVC 实现了现代版本控制和 CI/CD 管道，但用于机器学习。
 - en: PyTorch Lightning has a similar philosophy, only applied to training. The frameworks
     provides a Python wrapper for PyTorch that lets data scientists and engineers
     write clean, manageable, and performant training code.
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: PyTorch Lightning 有类似的理念，只是应用于训练。该框架提供了一个 PyTorch 的 Python 包装器，使数据科学家和工程师可以编写干净、可管理且高效的训练代码。
 - en: As people who built an [entire deployment platform](https://towardsdatascience.com/why-we-built-a-platform-for-machine-learning-engineering-not-data-science-54004d5b6e95) in
     part because we hated writing boilerplate, we’re huge fans of PyTorch Lightning.
     In that spirit, I’ve put together this guide to deploying PyTorch Lightning models
@@ -78,44 +97,55 @@
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为那些部分原因是因为厌倦了编写样板代码而建立了[完整部署平台](https://towardsdatascience.com/why-we-built-a-platform-for-machine-learning-engineering-not-data-science-54004d5b6e95)的人，我们非常喜欢
+    PyTorch Lightning。怀着这种精神，我整理了这份关于将 PyTorch Lightning 模型部署到生产环境中的指南。在过程中，我们将探讨几种将
+    PyTorch Lightning 模型导出以纳入推理管道的不同选项。
 - en: Every way to deploy a PyTorch Lightning model for inference
   id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 部署 PyTorch Lightning 模型进行推理的所有方式
 - en: 'There are three ways to export a PyTorch Lightning model for serving:'
   id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 有三种方法可以将 PyTorch Lightning 模型导出以供服务：
 - en: Saving the model as a PyTorch checkpoint
   id: totrans-17
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将模型保存为 PyTorch 检查点
 - en: Converting the model to ONNX
   id: totrans-18
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将模型转换为 ONNX
 - en: Exporting the model to Torchscript
   id: totrans-19
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 将模型导出为 Torchscript
 - en: We can serve all three with Cortex.
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以用 Cortex 服务这三种方式。
 - en: 1\. Package and deploy PyTorch Lightning modules directly
   id: totrans-21
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1\. 直接打包和部署 PyTorch Lightning 模块
 - en: Starting with the simplest approach, let’s deploy a PyTorch Lightning model
     without any conversion steps.
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 从最简单的方法开始，让我们在没有任何转换步骤的情况下部署一个 PyTorch Lightning 模型。
 - en: 'The PyTorch Lightning Trainer, a class which abstracts boilerplate training
     code (think training and validation steps), has a builtin save_checkpoint() function
     which will save your model as a .ckpt file. To save your model as a checkpoint,
@@ -123,14 +153,18 @@
   id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: PyTorch Lightning Trainer，一个抽象样板训练代码的类（想想训练和验证步骤），具有一个内置的 save_checkpoint()
+    函数，可以将你的模型保存为 .ckpt 文件。要将模型保存为检查点，只需将以下代码添加到你的训练脚本中：
 - en: '![Figure](../Images/fa36e3e0e9699769f07f58afcdc33958.png)'
   id: totrans-24
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/fa36e3e0e9699769f07f58afcdc33958.png)'
 - en: 'Source: Author'
   id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：作者
 - en: Now, before we get into serving this checkpoint, it’s important to note that
     while I keep saying “PyTorch Lightning model,” PyTorch Lightning is a wrapper
     around PyTorch — the project’s README literally says “PyTorch Lightning is just
@@ -139,93 +173,116 @@
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，在我们开始服务这个检查点之前，重要的是要注意，虽然我一直说“PyTorch Lightning 模型”，但 PyTorch Lightning 是
+    PyTorch 的一个封装——项目的 README 上明确写道“PyTorch Lightning 只是组织好的 PyTorch”。因此，导出的模型是一个普通的
+    PyTorch 模型，可以相应地提供服务。
 - en: 'With a saved checkpoint, we can serve the model pretty easily in Cortex. If
     you’re unfamiliar with Cortex, you can [familiarize yourself quickly here](https://docs.cortex.dev/),
     but the simple overview of the deployment process with Cortex is:'
   id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 有了保存的检查点，我们可以在 Cortex 中很容易地服务模型。如果你对 Cortex 不熟悉，可以 [在这里快速了解](https://docs.cortex.dev/)，但
+    Cortex 的部署过程的简单概述是：
 - en: We write a prediction API for our model in Python
   id: totrans-28
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们用 Python 为我们的模型编写一个预测 API
 - en: We define our APIs infrastructure and behavior in YAML
   id: totrans-29
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们在 YAML 中定义我们的 API 基础设施和行为
 - en: We deploy the API with a command from the CLI
   id: totrans-30
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 我们使用 CLI 中的命令部署 API
 - en: 'Our prediction API will use Cortex’s Python Predictor class to define an init()
     function to initialize our API and load the model, and a predict() function to
     serve predictions when queried:'
   id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的预测 API 将使用 Cortex 的 Python Predictor 类来定义一个 init() 函数来初始化 API 并加载模型，以及一个
+    predict() 函数来在查询时提供预测：
 - en: Pretty simple. We repurpose some code from our training code, add a little inference
     logic, and that’s it. One thing to note is that if you upload your model to S3
     (recommended), you’ll need to add some logic for accessing it.
   id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 相当简单。我们从训练代码中重新利用一些代码，添加一点推理逻辑，仅此而已。需要注意的一点是，如果你将模型上传到 S3（推荐），你需要添加一些逻辑来访问它。
 - en: 'Next, we configure our infrastructure in YAML:'
   id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们在 YAML 中配置我们的基础设施：
 - en: Again, simple. We give our API a name, tell Cortex where our prediction API
     is, and allocate some CPU.
   id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次，简单。我们给 API 命名，告诉 Cortex 我们的预测 API 在哪里，并分配一些 CPU。
 - en: 'Next, we deploy it:'
   id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 接下来，我们进行部署：
 - en: '![Figure](../Images/4e5a3fd4b57f69ed3e24ee6e222eaddd.png)'
   id: totrans-36
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/4e5a3fd4b57f69ed3e24ee6e222eaddd.png)'
 - en: 'Source: Author'
   id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：作者
 - en: 'Note that we can also deploy to a cluster, spun up and managed by Cortex:'
   id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，我们也可以将模型部署到由 Cortex 启动和管理的集群中：
 - en: '![Figure](../Images/7bc660b5730754bcc2ef26e2da7bfa2e.png)'
   id: totrans-39
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/7bc660b5730754bcc2ef26e2da7bfa2e.png)'
 - en: 'Source: Author'
   id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：作者
 - en: With all deployments, Cortex containerizes our API and exposes it as a web service.
     With cloud deployments, Cortex configures load balancing, autoscaling, monitoring,
     updating, and many other infrastructure features.
   id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有部署中，Cortex 会将我们的 API 容器化，并将其公开为网络服务。在云部署中，Cortex 配置负载均衡、自动缩放、监控、更新以及许多其他基础设施功能。
 - en: And that’s it! We now have a live web API serving predictions from our model
     on request.
   id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 就这样！现在我们有一个实时的 web API，根据请求从我们的模型中提供预测。
 - en: 2\. Export to ONNX and serve via ONNX Runtime
   id: totrans-43
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2\. 导出为 ONNX 并通过 ONNX Runtime 提供服务
 - en: Now that we’ve deployed a vanilla PyTorch checkpoint, lets complicate things
     a bit.
   id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们已经部署了一个普通的 PyTorch 检查点，让我们稍微复杂化一下。
 - en: 'PyTorch Lightning recently added a convenient abstraction for exporting models
     to ONNX (previously, you could use PyTorch’s built-in conversion functions, though
     they required a bit more boilerplate). To export your model to ONNX, just add
@@ -233,67 +290,84 @@
   id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: PyTorch Lightning 最近增加了一个方便的抽象层，用于将模型导出为 ONNX（之前，你可以使用 PyTorch 内置的转换函数，但需要更多的样板代码）。要将你的模型导出为
+    ONNX，只需在你的训练脚本中添加这段代码：
 - en: '![Figure](../Images/b70f75a4b628c2f6275d1578a94ef3b4.png)'
   id: totrans-46
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/b70f75a4b628c2f6275d1578a94ef3b4.png)'
 - en: 'Source: Author'
   id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：作者
 - en: Note that your input sample should mimic the shape of your actual model input.
   id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 请注意，你的输入样本应该模拟实际模型输入的形状。
 - en: 'Once you’ve exported an ONNX model, you can serve it using Cortex’s ONNX Predictor.
     The code will basically look the same, and the process is identical. For example,
     this is an ONNX prediction API:'
   id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦你导出了 ONNX 模型，你可以使用 Cortex 的 ONNX Predictor 来服务。代码基本相同，过程也完全一样。例如，这是一个 ONNX
+    预测 API：
 - en: Basically the same. The only difference is that instead of initializing the
     model directly, we access it through the onnx_client, which is an ONNX Runtime
     container Cortex spins up for serving our model.
   id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 基本上是一样的。唯一的区别是，我们不是直接初始化模型，而是通过 onnx_client 访问它，这是 Cortex 启动的一个 ONNX Runtime
+    容器，用于提供模型服务。
 - en: 'Our YAML also looks pretty similar:'
   id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们的 YAML 看起来也相当相似：
 - en: ‍I added a monitoring flag here just to show how easy it is to configure, and
     there are some ONNX specific fields, but otherwise it’s the same YAML.
   id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 我在这里添加了一个监控标志，只是为了展示配置的简便性，虽然有一些 ONNX 特定的字段，但除此之外，它还是相同的 YAML。
 - en: Finally, we deploy by using the same $ cortex deploy command as before, and
     our ONNX API is live.
   id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，我们使用之前相同的 $ cortex deploy 命令进行部署，我们的 ONNX API 现已上线。
 - en: 3\. Serialize with Torchscript’s JIT compiler
   id: totrans-54
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3\. 使用 Torchscript 的 JIT 编译器序列化
 - en: 'For a final deployment, we’re going to export our PyTorch Lightning model to
     Torchscript and serve it using PyTorch’s JIT compiler. To export the model, simply
     add this to your training script:'
   id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于最终部署，我们将 PyTorch Lightning 模型导出到 Torchscript 并使用 PyTorch 的 JIT 编译器进行服务。要导出模型，只需将以下内容添加到你的训练脚本中：
 - en: '![Figure](../Images/92ec2c3c612cab32fbd93c9d8b535b75.png)'
   id: totrans-56
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/92ec2c3c612cab32fbd93c9d8b535b75.png)'
 - en: 'Source: Author'
   id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：作者
 - en: 'The Python API for this is nearly identical to the vanilla PyTorch example:'
   id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个 Python API 与普通的 PyTorch 示例几乎一样：
 - en: 'The YAML stays the same as before, and the CLI command of course is consistent.
     If we want, we can actually update our previous PyTorch API to use the new model
     by simply replacing our old predictor.py script with the new one, and running$
@@ -301,34 +375,42 @@
   id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: YAML 保持不变，CLI 命令当然也一致。如果需要，我们实际上可以通过简单地用新的脚本替换旧的 predictor.py 脚本，然后重新运行 $ cortex
+    deploy 来更新之前的 PyTorch API：
 - en: '![Figure](../Images/3c280b57c196afaf26a0d27b74be83d1.png)'
   id: totrans-60
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/3c280b57c196afaf26a0d27b74be83d1.png)'
 - en: 'Source: Author'
   id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：作者
 - en: Cortex automatically performs a rolling update here, in which a new API is spun
     up and then swapped with the old API, preventing any downtime between model updates.
   id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: Cortex 在这里自动执行滚动更新，即启动一个新的 API 然后与旧的 API 交换，防止模型更新之间出现任何停机时间。
 - en: And that’s all there is to it. Now you have a fully operational prediction API
     for realtime inference, serving predictions from a Torchscript model.
   id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 就是这样。现在你有一个完全操作的实时推理预测 API，能够从 Torchscript 模型中提供预测。
 - en: So, which method should you use?
   id: totrans-64
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 那么，你应该使用哪种方法呢？
 - en: The obvious question here is which method performs best. The truth is that there
     isn’t a straightforward answer here, as it depends on your model.
   id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 这里显而易见的问题是哪个方法表现最好。事实是没有简单的答案，因为这取决于你的模型。
 - en: For Transformer models like BERT and GPT-2, ONNX can offer incredible optimizations
     (we measured a [40x improvement in throughput on CPUs](https://www.cortex.dev/post/40x-nlp-inference-with-hugging-face-and-onnx)).
     For other models, Torchscript likely performs better than vanilla PyTorch — though
@@ -336,51 +418,64 @@
   id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于像 BERT 和 GPT-2 这样的 Transformer 模型，ONNX 可以提供惊人的优化（我们测得 [在 CPU 上吞吐量提升了 40 倍](https://www.cortex.dev/post/40x-nlp-inference-with-hugging-face-and-onnx)）。对于其他模型，Torchscript
+    的表现可能优于普通 PyTorch —— 尽管这也有一些 caveats，因为并非所有模型都能顺利导出到 Torchscript。
 - en: Fortunately, with how easy it is to deploy using any option, you can test all
     three in parallel and see which performs best for your particular API.‍
   id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，使用任何选项进行部署都非常简单，你可以同时测试这三种方法，看看哪一种在你的特定 API 上表现最好。
 - en: '**Bio: [Caleb Kaiser](https://www.linkedin.com/in/caleb-kaiser-843249126/)**
     ([@KaiserFrose](https://twitter.com/KaiserFrose)) is on the founding team of Cortex
     Labs, where he helps maintain Cortex.'
   id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: '**个人简介：[Caleb Kaiser](https://www.linkedin.com/in/caleb-kaiser-843249126/)**
+    ([@KaiserFrose](https://twitter.com/KaiserFrose)) 是 Cortex Labs 创始团队成员之一，他帮助维护
+    Cortex。'
 - en: '[Original](https://towardsdatascience.com/how-to-deploy-pytorch-lightning-models-to-production-7e887d69109f).
     Reposted with permission.'
   id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/how-to-deploy-pytorch-lightning-models-to-production-7e887d69109f)。经许可转载。'
 - en: '**Related:**'
   id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[PyTorch Multi-GPU Metrics Library and More in New PyTorch Lightning Release](/2020/07/pytorch-multi-gpu-metrics-library-pytorch-lightning.html)'
   id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[PyTorch 多 GPU 指标库及新 PyTorch Lightning 发布的更多内容](/2020/07/pytorch-multi-gpu-metrics-library-pytorch-lightning.html)'
 - en: '[Pytorch Lightning vs PyTorch Ignite vs Fast.ai](/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html)'
   id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Pytorch Lightning vs PyTorch Ignite vs Fast.ai](/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html)'
 - en: '[9 Tips For Training Lightning-Fast Neural Networks In Pytorch](/2019/08/9-tips-training-lightning-fast-neural-networks-pytorch.html)'
   id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[训练 Lightning 快速神经网络的 9 个技巧](/2019/08/9-tips-training-lightning-fast-neural-networks-pytorch.html)'
 - en: More On This Topic
   id: totrans-74
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Getting Started with PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
   id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[入门 PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)'
 - en: '[Introduction to Deep Learning Libraries: PyTorch and Lightning AI](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)'
   id: totrans-76
   prefs:
