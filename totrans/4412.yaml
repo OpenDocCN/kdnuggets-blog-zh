@@ -1,18 +1,26 @@
 - en: Implementing a Deep Learning Library from Scratch in Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 从零开始用 Python 实现深度学习库
 - en: 原文：[https://www.kdnuggets.com/2020/09/implementing-deep-learning-library-scratch-python.html](https://www.kdnuggets.com/2020/09/implementing-deep-learning-library-scratch-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/09/implementing-deep-learning-library-scratch-python.html](https://www.kdnuggets.com/2020/09/implementing-deep-learning-library-scratch-python.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Parmeet Bhatia](https://www.linkedin.com/in/parmeet-bhatia-616b0923/),
     Machine Learning Practitioner and Deep Learning Enthusiast**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Parmeet Bhatia](https://www.linkedin.com/in/parmeet-bhatia-616b0923/)，机器学习从业者和深度学习爱好者**'
 - en: Deep Learning has evolved from simple neural networks to quite complex architectures
     in a short span of time. To support this rapid expansion, many different deep
     learning platforms and libraries are developed along the way. One of the primary
@@ -28,87 +36,134 @@
     Along the way, we will learn various components of a deep learning framework.
     The library is just under 100 lines of code and hence should be fairly easy to
     follow. The complete source code can be found at [https://github.com/parmeet/dll_numpy](https://github.com/parmeet/dll_numpy)
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 深度学习在短时间内从简单的神经网络演变为相当复杂的架构。为了支持这一快速扩展，沿途开发了许多不同的深度学习平台和库。这些库的主要目标之一是提供易于使用的接口来构建和训练深度学习模型，以便用户可以更多地专注于手头的任务。为实现这一目标，可能需要在几个抽象层后隐藏核心实现单元，这使得理解深度学习库所基于的基本原理变得困难。因此，本文的目标是提供对深度学习库构建块的见解。我们首先回顾一下深度学习的背景，以了解功能需求，然后使用
+    NumPy 在 Python 中实现一个简单而完整的库，该库能够对神经网络模型（非常简单的类型）进行端到端的训练。在这个过程中，我们将学习深度学习框架的各种组件。该库代码不到
+    100 行，因此应该相对容易跟随。完整的源代码可以在 [https://github.com/parmeet/dll_numpy](https://github.com/parmeet/dll_numpy)
+    找到。
 - en: '* * *'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-6
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升您的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持您的组织 IT'
 - en: '* * *'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Background
+  id: totrans-11
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 背景
 - en: Typically a deep learning computation library (like TensorFlow and PyTorch)
     consists of components shown in the figure below.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 通常，一个深度学习计算库（如 TensorFlow 和 PyTorch）由下图所示的组件组成。
 - en: '![Figure](../Images/c3a6400e0a75c7504f995143deb1b261.png)'
+  id: totrans-13
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/c3a6400e0a75c7504f995143deb1b261.png)'
 - en: Components of Deep Learning Framework
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 深度学习框架的组件
 - en: '**Operators**'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '**操作符**'
 - en: Also used interchangeably with layers, they are the basic building blocks of
     any neural network. Operators are vector-valued functions that transform the data.
     Some commonly used operators are layers like linear, convolution, and pooling,
     and activation functions like ReLU and Sigmoid.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 也常与层互换使用，它们是任何神经网络的基本构建块。操作符是将数据转换的向量值函数。一些常用的操作符包括线性层、卷积层、池化层和 ReLU、Sigmoid
+    等激活函数。
 - en: '**Optimizers**'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: '**优化器**'
 - en: They are the backbones of any deep learning library. They provide the necessary
     recipe to update model parameters using their gradients with respect to the optimization
     objective. Some well-known optimizers are SGD, RMSProp, and Adam.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 它们是任何深度学习库的基础。它们提供了使用梯度来更新模型参数的必要配方，以实现优化目标。一些著名的优化器有SGD、RMSProp和Adam。
 - en: '**Loss Functions**'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**损失函数**'
 - en: They are closed-form and differentiable mathematical expressions that are used
     as surrogates for the optimization objective of the problem at hand. For example,
     cross-entropy loss and Hinge loss are commonly used loss functions for the classification
     tasks.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 它们是闭式和可微分的数学表达式，用作当前问题优化目标的代理。例如，交叉熵损失和铰链损失是分类任务中常用的损失函数。
 - en: '**Initializers**'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: '**初始化器**'
 - en: They provide the initial values for the model parameters at the start of training.
     Initialization plays an important role in training deep neural networks, as bad
     parameter initialization can lead to slow or no convergence. There are many ways
     one can initialize the network weights like small random weights drawn from the
     normal distribution. You may have a look at [https://keras.io/initializers/](https://keras.io/initializers/) for
     a comprehensive list.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 它们提供了模型参数在训练开始时的初始值。初始化在训练深度神经网络中起着重要作用，因为不良的参数初始化可能导致收敛缓慢或无法收敛。有很多方法可以初始化网络权重，例如，从正态分布中抽取的小随机权重。你可以查看[https://keras.io/initializers/](https://keras.io/initializers/)以获取全面的列表。
 - en: '**Regularizers**'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: '**正则化器**'
 - en: They provide the necessary control mechanism to avoid overfitting and promote
     generalization. One can regulate overfitting either through explicit or implicit
     measures. Explicit methods impose structural constraints on the weights, for example,
@@ -116,52 +171,72 @@
     respectively. Implicit measures are specialized operators that do the transformation
     of intermediate representations, either through explicit normalization, for example,
     BatchNorm, or by changing the network connectivity, for example, DropOut and DropConnect.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 它们提供了必要的控制机制，以避免过拟合并促进泛化。可以通过显式或隐式措施来调节过拟合。显式方法对权重施加结构性约束，例如，通过最小化其L1-范数和L2-范数，使权重变得更稀疏或更均匀。隐式措施则是专门的操作符，通过显式归一化（例如，BatchNorm）或通过改变网络连接性（例如，DropOut和DropConnect）来对中间表示进行变换。
 - en: The above-mentioned components basically belong to the front-end part of the
     library. By front-end, I mean the components that are exposed to the user for
     them to efficiently design neural network architectures. On the back-end side,
     these libraries provide support for automatically calculating gradients of the
     loss function with respect to various parameters in the model. This technique
     is commonly referred to as Automatic Differentiation (AD).
+  id: totrans-25
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 上述组件基本上属于库的前端部分。前端指的是那些暴露给用户的组件，使他们能够高效地设计神经网络架构。在后端，这些库提供了自动计算模型中各种参数的损失函数梯度的支持。这种技术通常被称为自动微分（AD）。
 - en: '**Automatic Differentiation (AD)**'
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: '**自动微分（AD）**'
 - en: 'Every deep learning library provides a flavor of AD so that a user can focus
     on defining the model structure (computation graph)and delegate the task of gradients
     computation to the AD module. Let us go through an example to see how it works.
     Say we want to calculate partial derivatives of the following function with respect
     to its input variables *X₁* and *X₂*:'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 每个深度学习库都提供了一种AD的实现，使用户可以专注于定义模型结构（计算图），并将梯度计算的任务委托给AD模块。让我们通过一个例子来看它是如何工作的。假设我们要计算以下函数相对于输入变量*X₁*和*X₂*的偏导数：
 - en: '[PRE0]'
+  id: totrans-28
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: The following figure, which I have borrowed from [https://en.wikipedia.org/wiki/Automatic_differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation),
     shows it’s computation graph and calculation of derivatives via chain-rule.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下图表来自[https://en.wikipedia.org/wiki/Automatic_differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation)，展示了计算图及通过链式法则计算导数的过程。
 - en: '![Figure](../Images/8dcd59b20e328b571d97078b37274497.png)'
+  id: totrans-30
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/8dcd59b20e328b571d97078b37274497.png)'
 - en: Computation graph and calculation of derivatives via chain-rule
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 计算图和通过链式法则计算导数
 - en: What you see in the above figure is a flavor of reverse-mode automatic differentiation
     (AD). The well known Back-propagation algorithm is a special case of the above
     algorithm where the function at the top is loss function. AD exploits the fact
     that every composite function consists of elementary arithmetic operations and
     elementary functions, and hence the derivatives can be computed by recursively
     applying the chain-rule to these operations.
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: 上图展示了反向模式自动微分（AD）的一个示例。众所周知的反向传播算法是上述算法的一个特殊情况，其中顶部的函数是损失函数。AD利用了每个复合函数由基本算术操作和基本函数组成的事实，因此可以通过递归应用链式法则来计算这些操作的导数。
 - en: Implementation
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 实现
 - en: 'In the previous section, we have gone through all the necessary components
     to come up with our first deep learning library that can do end-to-end training.
     To keep things simple, I will mimic the design pattern ofthe[Caffe](https://github.com/BVLC/caffe)Library.
@@ -171,28 +246,40 @@
     another for holding their gradients. All the parameters in various layers/operators
     will be of type “Tensor”. Before we dig deeper, the following figure provides
     a high-level overview of the library.'
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 在前一节中，我们已经介绍了所有必要的组件，以构建第一个可以进行端到端训练的深度学习库。为了简单起见，我将模仿[Caffe](https://github.com/BVLC/caffe)库的设计模式。在这里我们定义了两个抽象类：“Function”类和“Optimizer”类。此外，还有一个“Tensor”类，它是一个简单的结构，包含两个NumPy多维数组，一个用于保存参数的值，另一个用于保存它们的梯度。各种层/运算符中的所有参数将是“Tensor”类型。在我们深入之前，以下图提供了库的高层次概述。
 - en: '![Figure](../Images/5251108980bc9bcd32e9045178708a96.png)'
+  id: totrans-35
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/5251108980bc9bcd32e9045178708a96.png)'
 - en: UML diagram of Library
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 图书馆的UML图
 - en: At the time of this writing, the library comes with the implementation of the
     linear layer, ReLU activation, and SoftMaxLoss Layer along with the SGD optimizer.
     Hence the library can be used to train a classification model comprising of fully
     connected layers and ReLU non-linearity. Lets now go through some details of the
     two abstract classes we have.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 在撰写本文时，该库包含线性层、ReLU激活函数和SoftMaxLoss层的实现，以及SGD优化器。因此，该库可以用于训练包含全连接层和ReLU非线性的分类模型。现在让我们来看看我们拥有的两个抽象类的细节。
 - en: 'The “Function” abstract class provides an interface for operators and is defined
     as follows:'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: “Function”抽象类提供了运算符的接口，其定义如下：
 - en: Abstract Function class
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 抽象Function类
 - en: All the operators are implemented by inheriting the “Function” abstract class.
     Each operator must provide an implementation of **forward(…)** and **backward(…)** methods
     and optionally implement **getParams** function to provide access to its parameters
@@ -202,15 +289,21 @@
     respect to the operator’s output and implements the partial derivatives of loss
     with respect to the operator’s input and parameters (if there are any). Note that **backward(…)** function
     essentially provides the capability for our library to perform automatic differentiation.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有的运算符都是通过继承“Function”抽象类来实现的。每个运算符必须提供**forward(…)**和**backward(…)**方法的实现，并可选地实现**getParams**函数以提供对其参数（如果有的话）的访问。**forward(…)**方法接收输入并返回运算符的变换结果。它还会进行必要的维护，以计算梯度。**backward(…)**方法接收损失函数相对于运算符输出的偏导数，并实现损失函数相对于运算符输入和参数（如果有的话）的偏导数。请注意，**backward(…)**函数本质上为我们的库提供了执行自动微分的能力。
 - en: 'To make things concrete let’s look at the implementation of the Linear function
     as shown in the following code snippet:'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了使事情具体化，让我们看看下面代码片段中线性函数的实现：
 - en: Implementation of Linear function
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 线性函数的实现
 - en: The **forward(…)** function implements the transformation of the form **Y =
     X*W+b **and returns it. It also stores the input X as this is needed to compute
     the gradients of **W** in the backward function. The **backward(…)** function
@@ -218,136 +311,196 @@
     implements the partial derivatives with respect to input **X** and parameters **W** and **b**.
     Furthermore, it returns the partial derivatives with respect to the input **X**,
     that will be passed on to the previous layer.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '**forward(…)**函数实现了形式为**Y = X*W+b**的转换并返回它。它还存储输入X，因为在反向函数中计算**W**的梯度时需要它。**backward(…)**函数接收损失相对于输出**Y**的偏导数**dY**，并实现相对于输入**X**以及参数**W**和**b**的偏导数。此外，它返回相对于输入**X**的偏导数，这些偏导数将传递给前一层。'
 - en: 'The abstract “Optimizer” class provides an interface for optimizers and is
     defined as follows:'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 抽象的“Optimizer”类提供了优化器的接口，定义如下：
 - en: Abstract Optimizer class
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 抽象优化器类
 - en: All the optimizers are implemented by inheriting the “Optimizer” base class.
     The concrete optimization class must provide the implementation for the **step()** function.
     This method updates the model parameters using their partial derivatives with
     respect to the loss we are optimizing. The reference to various model parameters
     is provided in the **__init__(…) **function.Note that the common functionality
     of resetting gradients is implemented in the base class itself.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 所有优化器都是通过继承“Optimizer”基类实现的。具体的优化类必须提供**step()**函数的实现。该方法使用相对于我们正在优化的损失的偏导数来更新模型参数。各种模型参数的引用在**__init__(…)**函数中提供。注意，重置梯度的公共功能是在基类中实现的。
 - en: To make things concrete, let’s look at the implementation of stochastic gradient
     descent (SGD) with momentum and weight decay.
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了使事情具体化，我们来看看具有动量和权重衰减的随机梯度下降（SGD）的实现。
 - en: Getting to the real stuff
+  id: totrans-48
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 进入实质内容
 - en: 'To this end, we have all the ingredients to train a (deep) neural network model
     using our library. To do so, we would need the following:'
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，我们拥有了使用我们的库训练（深度）神经网络模型的所有组成部分。为此，我们需要以下内容：
 - en: '**Model: **This is our computation graph'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**模型：** 这是我们的计算图'
 - en: '**Data and Target: **This is our training data'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**数据和目标：** 这是我们的训练数据'
 - en: '**Loss Function:** Surrogate for our optimization objective'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**损失函数：** 这是我们优化目标的替代指标'
 - en: '**Optimizer:** To update model parameters'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**优化器：** 更新模型参数'
 - en: 'The following pseudo-code depicts a typical training cycle:'
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下伪代码描绘了一个典型的训练周期：
 - en: '[PRE1]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'Though not a necessary ingredient for a deep learning library, it may be a
     good idea to encapsulate the above functionality in a class so that we don’t have
     to repeat ourselves every time we need to train a new model (this is in line with
     the philosophy of higher-level abstraction frameworks like [Keras](https://keras.io/)).
     To achieve this, let’s define a class “Model” as shown in the following code snippet:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 虽然这不是深度学习库的必要组成部分，但将上述功能封装在一个类中可能是个好主意，这样我们在训练新模型时就无需重复这些步骤（这与像[Keras](https://keras.io/)这样的高层抽象框架的理念是一致的）。为此，我们可以定义一个“Model”类，如以下代码片段所示：
 - en: 'This class serves the following functionalities:'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: 这个类提供了以下功能：
 - en: '**Computation Graph:** Through **add(…)** function, one can define a sequential
     model. Internally, the class will simply store all the operators in a list named **computation_graph**.'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**计算图：** 通过**add(…)**函数，可以定义一个顺序模型。在内部，该类将所有操作符存储在名为**computation_graph**的列表中。'
 - en: '**Parameter Initialization:** The class will automatically initialize model
     parameters with small random values drawn from uniform distribution at the start
     of training.'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**参数初始化：** 该类将在训练开始时自动用从均匀分布中抽取的小随机值初始化模型参数。'
 - en: '**Model Training:** Through **fit(…)** function, the class provides a common
     interface to train the models. This function requires the training data, optimizer,
     and the loss function.'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**模型训练：** 通过**fit(…)**函数，该类提供了一个通用接口来训练模型。此函数需要训练数据、优化器和损失函数。'
 - en: '**Model Inference:** Through **predict(…) **function, the class provides a
     common interface for making predictions using the trained model.'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**模型推断：** 通过**predict(…)**函数，该类提供了一个通用接口来使用训练好的模型进行预测。'
 - en: Since this class does not serve as a fundamental building block for deep learning,
     I implemented it in a separate module called utilities.py. Note that the **fit(…)** function
     makes use of **DataGenerator** Class whose implementation is also provided in
     the utilities.py module. This class is just a wrapper around our training data
     and generate mini-batches for each training iteration.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于这个类不作为深度学习的基本构建块，我将其实现放在了一个名为utilities.py的单独模块中。请注意，**fit(…)**函数利用了**DataGenerator**类，该类的实现也提供在utilities.py模块中。这个类只是我们训练数据的一个包装器，为每次训练迭代生成小批量数据。
 - en: Training our first model
+  id: totrans-63
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 训练我们的第一个模型
 - en: Let’s now go through the final piece of code that trains a neural network model
     using the proposed library. Inspired by the [blog-post](http://cs231n.github.io/neural-networks-case-study/) of [Andrej
     Karapathy](https://cs.stanford.edu/people/karpathy/), I am going to train a hidden
     layer neural network model on spiral data. The code for generating the data and
     it’s visualization is available in the utilities.py file.
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在让我们来看一下使用所提出的库训练神经网络模型的最终代码。受到[Andrej Karapathy](https://cs.stanford.edu/people/karpathy/)的[博客文章](http://cs231n.github.io/neural-networks-case-study/)的启发，我将对螺旋数据训练一个隐藏层神经网络模型。生成数据和可视化的代码可在utilities.py文件中找到。
 - en: '![Figure](../Images/4524ac07f45160565ccaab24e31f5421.png)'
+  id: totrans-65
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/4524ac07f45160565ccaab24e31f5421.png)'
 - en: Spiral data with three classes
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 三类螺旋数据
 - en: A three-class spiral data is shown in the above figure. The data is non-linearly
     separable. So we hope that our one hidden layer neural network can learn the non-linear
     decision boundary. Bringing it all together, the following code snippet will train
     our model.
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
+  zh: 上图展示了三类螺旋数据。数据是非线性可分的。因此，我们希望我们的一个隐藏层神经网络能够学习非线性决策边界。将所有内容汇总，以下代码片段将训练我们的模型。
 - en: End to end code for training a neural network model
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 用于训练神经网络模型的端到端代码
 - en: The following figure shows the same spiral data together with the decision boundaries
     of the trained model.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 下图展示了相同的螺旋数据及其训练模型的决策边界。
 - en: '![Figure](../Images/f41f4c85abac1fd5f062ded4d23e3751.png)'
+  id: totrans-70
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/f41f4c85abac1fd5f062ded4d23e3751.png)'
 - en: Spiral data with the corresponding decision boundaries of the trained model
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
+  zh: 训练模型的螺旋数据及其对应的决策边界
 - en: Concluding remarks
+  id: totrans-72
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 总结性 remarks
 - en: 'With the ever-increasing complexity of deep learning models, the libraries
     tend to grow at exponential rates both in terms of functionalities and their underlying
     implementation. That said, the very core functionalities can still be implemented
@@ -357,76 +510,113 @@
     including (but not limited to) vision, speech, and text. With that said, I think
     this is also an opportunity to fork the base implementation and add missing functionalities
     to get your hands-on experience. Some of the things you can try to implement are:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着深度学习模型复杂性的不断增加，这些库的功能和底层实现也以指数级增长。尽管如此，核心功能仍可以用相对少量的代码行实现。虽然该库可以用来训练端到端的神经网络模型（简单类型），但它仍然在许多方面受到限制，这使得深度学习框架可以用于包括（但不限于）视觉、语音和文本等各种领域。尽管如此，我认为这也是一个分支基本实现并添加缺失功能以获得实际操作经验的机会。你可以尝试实现的一些功能包括：
 - en: '**Operators:** Convolution Pooling etc.'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**运算符：**卷积 池化等。'
 - en: '**Optimizers:** Adam RMSProp etc.'
+  id: totrans-75
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**优化器：**Adam RMSProp等。'
 - en: '**Regularizers: **BatchNorm DropOut etc.'
+  id: totrans-76
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '**正则化器：**BatchNorm DropOut等。'
 - en: I hope this article gives you a glimpse of what happens under the hood when
     you use any deep learning library to train your models. Thank you for your attention
     and I look forward to your comments or any questions in the comment section.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: 我希望这篇文章能让你了解在使用任何深度学习库训练模型时，背后发生了什么。感谢你的关注，期待你在评论区提出意见或问题。
 - en: '**Bio: [Parmeet Bhatia](https://www.linkedin.com/in/parmeet-bhatia-616b0923/)**
     is a Machine learning practitioner and deep learning enthusiast. He is an experienced
     Machine Learning Engineer and R&D professional with a demonstrated history of
     developing and productization of ML and data-driven products. He is highly passionate
     about building end-to-end intelligent systems at scale.'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简历：[Parmeet Bhatia](https://www.linkedin.com/in/parmeet-bhatia-616b0923/)**
+    是一位机器学习从业者和深度学习爱好者。他是一位经验丰富的机器学习工程师和研发专业人士，拥有开发和产品化ML及数据驱动产品的丰富经验。他对大规模构建端到端智能系统充满热情。'
 - en: '[Original](https://towardsdatascience.com/on-implementing-deep-learning-library-from-scratch-in-python-c93c942710a8).
     Reposted with permission.'
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://towardsdatascience.com/on-implementing-deep-learning-library-from-scratch-in-python-c93c942710a8)。经允许转载。'
 - en: '**Related:**'
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Autograd: The Best Machine Learning Library You’re Not Using?](/2020/09/autograd-best-machine-learning-library-not-using.html)'
+  id: totrans-81
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Autograd：你没在用的最佳机器学习库？](/2020/09/autograd-best-machine-learning-library-not-using.html)'
 - en: '[10 Things You Didn’t Know About Scikit-Learn](/2020/09/10-things-know-scikit-learn.html)'
+  id: totrans-82
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[你不知道的 10 个关于 Scikit-Learn 的事]( /2020/09/10-things-know-scikit-learn.html)'
 - en: '[Deep Learning for Signal Processing: What You Need to Know](/2020/07/deep-learning-signal-processing.html)'
+  id: totrans-83
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[信号处理中的深度学习：你需要知道的]( /2020/07/deep-learning-signal-processing.html)'
 - en: More On This Topic
+  id: totrans-84
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关内容
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-85
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-86
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让 Python 成为初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学去寻找目标，并且去寻找目标...](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学学习统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一个 90 亿美元的 AI 失败，深度剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
