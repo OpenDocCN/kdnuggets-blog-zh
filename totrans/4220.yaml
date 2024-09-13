@@ -1,322 +1,479 @@
 - en: Do You Read Excel Files with Python? There is a 1000x Faster Way
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 你用 Python 读取 Excel 文件吗？有一种 1000 倍更快的方法
 - en: 原文：[https://www.kdnuggets.com/2021/09/excel-files-python-1000x-faster-way.html](https://www.kdnuggets.com/2021/09/excel-files-python-1000x-faster-way.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/09/excel-files-python-1000x-faster-way.html](https://www.kdnuggets.com/2021/09/excel-files-python-1000x-faster-way.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Nicolas Vandeput](https://www.linkedin.com/in/vandeputnicolas/), Supply
     Chain Data Scientist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Nicolas Vandeput](https://www.linkedin.com/in/vandeputnicolas/)，供应链数据科学家**'
 - en: '![](../Images/870526c4d2f2a30af50ff93f0461b495.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/870526c4d2f2a30af50ff93f0461b495.png)'
 - en: Source: [https://www.hippopx.com/](https://www.hippopx.com/), public domain
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 来源：[https://www.hippopx.com/](https://www.hippopx.com/)，公有领域
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的 3 个最佳课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 在 IT 领域支持你的组织'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: As a Python user, I use excel files to load/store data as business people like
     to share data in excel or csv format. Unfortunately, Python is especially slow
     with Excel files.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 作为 Python 用户，我使用 Excel 文件来加载/存储数据，因为商务人士喜欢以 Excel 或 csv 格式共享数据。不幸的是，Python 处理
+    Excel 文件特别慢。
 - en: In this article, I’ll show you five ways to load data in Python. In the end,
     we’ll achieve a speedup of 3 orders of magnitude. It’ll be lightning-fast.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我将向你展示在 Python 中加载数据的五种方法。最后，我们将实现 3 个数量级的加速，速度将非常快。
 - en: '*Edit (18/07/2021): I found a way to make the process ****5 times faster ****(resulting
     in a 5000x speedup). I added it as a bonus at the end of the article.*'
+  id: totrans-14
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '*编辑 (18/07/2021)：我找到了使过程****快 5 倍****（实现 5000 倍加速）的方法。我把它作为文章末尾的一个附加内容。*'
 - en: Experimental Setup
+  id: totrans-15
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 实验设置
 - en: Let’s imagine that we want to load 10 Excel files with 20000 rows and 25 columns
     (that’s around 70MB in total). This is a representative case where you want to
     load transactional data from an ERP (SAP) to Python to perform some analysis.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们假设我们要加载 10 个包含 20000 行和 25 列的 Excel 文件（总共约 70MB）。这是一个代表性的案例，假设你要将 ERP（SAP）中的事务数据加载到
+    Python 中进行一些分析。
 - en: Let’s populate this dummy data and import the required libraries (we’ll discuss
     pickle and joblib later in the article).
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们填充这些虚拟数据并导入所需的库（稍后在文章中我们会讨论 pickle 和 joblib）。
 - en: '[PRE0]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: 5 Ways to Load Data in Python
+  id: totrans-19
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 在 Python 中加载数据的 5 种方法
 - en: 'Idea #1: Load an Excel File in Python'
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '想法 #1：在 Python 中加载 Excel 文件'
 - en: Let’s start with a straightforward way to load these files. We’ll create a first
     Pandas Dataframe and then append each Excel file to it.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们从一种简单的方法开始加载这些文件。我们将创建第一个 Pandas Dataframe，然后将每个 Excel 文件附加到它上面。
 - en: '[PRE1]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: A simple way to import Excel files in Python.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Python 中导入 Excel 文件的简单方法。
 - en: It takes around 50 seconds to run. Pretty slow.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 运行时间约为 50 秒。相当慢。
 - en: 'Idea #2: Use CSVs rather than Excel Files'
+  id: totrans-25
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '想法 #2：使用 CSV 而不是 Excel 文件'
 - en: Let’s now imagine that we saved these files as .csv (rather than .xlsx) from
     our ERP/System/SAP.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们假设我们将这些文件从 ERP/System/SAP 保存为 .csv（而不是 .xlsx）。
 - en: '[PRE2]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Importing csv files in Python is 100x faster than Excel files.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 在 Python 中导入 csv 文件的速度比 Excel 文件快 100 倍。
 - en: We can now load these files in 0.63 seconds. That’s nearly 10 times faster!
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们现在可以在 0.63 秒内加载这些文件。这几乎快了 10 倍！
 - en: '**Python loads CSV files 100 times faster than Excel files. Use CSVs.**'
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Python 加载 CSV 文件的速度是 Excel 文件的 100 倍。使用 CSV 文件。**'
 - en: '**Con**: csv files are nearly always bigger than .xlsx files. In this example
     .csv files are 9.5MB, whereas .xlsx are 6.4MB.'
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: '**缺点**：csv 文件通常比 .xlsx 文件大。在这个例子中，.csv 文件为 9.5MB，而 .xlsx 文件为 6.4MB。'
 - en: 'Idea #3: Smarter Pandas DataFrames Creation'
+  id: totrans-32
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '想法 #3：更智能的 Pandas DataFrames 创建'
 - en: We can speed up our process by changing the way we create our pandas DataFrames.
     Instead of appending each file to an existing DataFrame,
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以通过改变创建 pandas DataFrames 的方式来加快我们的进程。与其将每个文件附加到现有的 DataFrame，
 - en: We load each DataFrame independently in a list.
+  id: totrans-34
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 不如将每个 DataFrame 独立地加载到一个列表中。
 - en: Then concatenate the whole list in a single DataFrame.
+  id: totrans-35
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 然后将整个列表连接成一个 DataFrame。
 - en: '[PRE3]'
+  id: totrans-36
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: A smarter way to import csv files in Python
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 更聪明的CSV文件导入方式
 - en: We reduced the time by a few percent. Based on my experience, this trick will
     become useful when you deal with bigger Dataframes (df >> 100MB).
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们减少了几个百分点的时间。根据我的经验，这个技巧在处理更大的数据框（df >> 100MB）时会非常有用。
 - en: 'Idea #4: Parallelize CSV Imports with Joblib'
+  id: totrans-39
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 想法#4：使用Joblib并行化CSV导入
 - en: We want to load 10 files in Python. Instead of loading each file **one by one**,
     why not loading them all, at once, in parallel?
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们想在Python中加载10个文件。与其一个一个加载，为什么不一次性并行加载所有文件呢？
 - en: We can do this easily using [joblib](https://joblib.readthedocs.io/en/latest/parallel.html).
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用[joblib](https://joblib.readthedocs.io/en/latest/parallel.html)轻松实现这一点。
 - en: '[PRE4]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: Import CSV files in Python in Parallel using Joblib.
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用Joblib在Python中并行导入CSV文件。
 - en: That’s nearly twice as fast as the single core version. However, as a general
     rule, do not expect to speed up your processes eightfold by using 8 cores (here,
     I got x2 speed up by using 8 cores on a Mac Air using the new M1 chip).
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 这几乎是单核版本速度的两倍。然而，作为一般规则，不要指望通过使用8核来将你的过程加速八倍（在这里，我在使用新M1芯片的Mac Air上，通过使用8核实现了x2的速度提升）。
 - en: '**Simple Paralellization in Python with Joblib**'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Python中使用Joblib进行简单的并行化**'
 - en: '[Joblib](https://joblib.readthedocs.io/en/latest/parallel.html) is a simple
     Python library that allows you to run a function in //. In practice, joblib works
     as a list comprehension. Except each iteration is performed by a different thread.
     Here’s an example.'
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Joblib](https://joblib.readthedocs.io/en/latest/parallel.html)是一个简单的Python库，允许你在//中运行函数。实际上，joblib的工作方式类似于列表推导式，只不过每次迭代由不同的线程执行。以下是一个例子。'
 - en: '[PRE5]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: Think as joblib as a smart list comprehension.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 将joblib看作是一个智能的列表推导式。
 - en: 'Idea #5: Use Pickle Files'
+  id: totrans-49
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 想法#5：使用Pickle文件
 - en: You can go (much) faster by storing data in pickle files — a specific format
     used by Python — rather than .csv files.
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过将数据存储在pickle文件中——Python使用的一种特定格式——而不是.csv文件，你可以（大大）加快速度。
 - en: '**Con**: you won’t be able to manually open a pickle file and see what’s in
     it.'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**缺点**：你不能手动打开pickle文件查看其中的内容。'
 - en: '[PRE6]'
+  id: totrans-52
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: We just cut the running time by 80%!
+  id: totrans-53
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们刚刚将运行时间缩短了80%！
 - en: In general, it is much faster to work with pickle files than csv files. But,
     on the other hand, pickles files usually take more space on your drive (not in
     this specific example).
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 一般来说，处理pickle文件比处理csv文件要快得多。不过，另一方面，pickle文件通常会占用更多的磁盘空间（在这个具体的例子中除外）。
 - en: In practice, you will not be able to extract data from a system directly in
     pickle files.
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 实际上，你可能无法直接从系统中提取数据到pickle文件中。
 - en: 'I would advise using pickles in the two following cases:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 我建议在以下两种情况下使用pickle文件：
 - en: You want to save data from one of your Python processes (and you don’t plan
     on opening it on Excel) to use it later/in another process. Save your Dataframes
     as pickles instead of .csv
+  id: totrans-57
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 如果你想保存来自Python进程的数据（并且不打算在Excel中打开），以便以后/在其他进程中使用。将你的数据框保存为pickle文件，而不是.csv。
 - en: You need to reload the same file(s) multiple times. The first time you open
     a file, save it as a pickle so that you will be able to load the pickle version
     directly next time.
+  id: totrans-58
   prefs:
   - PREF_OL
   type: TYPE_NORMAL
+  zh: 你需要多次重新加载相同的文件。第一次打开文件时，将其保存为pickle文件，以便下次能够直接加载pickle版本。
 - en: 'Example: Imagine that you use transactional monthly data (each month you load
     a new month of data). You can save all historical data as .pickle and, each time
     you receive a new file, you can load it once as a .csv and then keep it as a .pickle
     for the next time.'
+  id: totrans-59
   prefs:
   - PREF_IND
   type: TYPE_NORMAL
+  zh: 示例：假设你使用的是交易性月度数据（每个月你加载一个新的数据月）。你可以将所有历史数据保存为.pickle，每次收到新文件时，你可以先将其作为.csv加载，然后保留为.pickle以备下次使用。
 - en: 'Bonus: Loading Excel Files in Parallel'
+  id: totrans-60
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 奖励：并行加载Excel文件
 - en: Let’s imagine that you received excel files and that you have no other choice
     but to load them as is. You can also use joblib to parallelize this. Compared
     to our pickle code from above, we **only **need to update the loop function.
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 假设你收到的是Excel文件，你别无选择，只能按原样加载它们。你也可以使用joblib来并行化这个过程。相比我们上面提到的pickle代码，我们**只需**更新循环函数。
 - en: '[PRE7]'
+  id: totrans-62
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: How to load excel files using parallelization in Python.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
+  zh: 如何使用Python中的并行化加载Excel文件。
 - en: We could reduce the loading time by 70% (from 50 seconds to 13 seconds).
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以将加载时间减少70%（从50秒降到13秒）。
 - en: You can also use this loop to create pickle files on the fly. So that, next
     time you load these files, you’ll be able to achieve lightning fast loading times.
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 你也可以使用这个循环来动态创建pickle文件。这样，下次你加载这些文件时，你将能够实现闪电般的加载速度。
 - en: '[PRE8]'
+  id: totrans-66
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: Recap
+  id: totrans-67
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 回顾
 - en: By loading pickle files in parallel, we decreased the loading time from 50 seconds
     to less than a tenth of a second.
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过并行加载pickle文件，我们将加载时间从50秒减少到不到十分之一秒。
 - en: 'Excel: 50 seconds'
+  id: totrans-69
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'CSV: 0.63 seconds'
+  id: totrans-70
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Smarter CSV: 0.62 seconds'
+  id: totrans-71
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'CSV in //: 0.34 seconds'
+  id: totrans-72
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Pickle in //: 0.07 seconds'
+  id: totrans-73
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Excel in //: 13.5 seconds'
+  id: totrans-74
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Bonus #2: 4x Faster Parallelization'
+  id: totrans-75
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
 - en: Joblib allows to change the parallelization backend to remove some overheads.
     You can do this by giving *prefer=”threads"* to *Parallel*.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
 - en: Using prefer=”threads” will allow you to run your process even faster.
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
 - en: We obtain a speed of around 0.0096 seconds (over 50 runs with a 2021 MacBook
     Air).
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
 - en: Using prefer=”threads” with CSV and Excel parallelization gives the following
     results.
+  id: totrans-79
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/f4abcdaa5e2876e17f0f4ef998cc1ec8.png)'
+  id: totrans-80
   prefs: []
   type: TYPE_IMG
 - en: As you can see using the “Thread” backend results in a worse score when reading
     Excel files. But to an astonishing performance with pickles (it takes 50 seconds
     to load Excel files one by one, and only 0.01 seconds to load the data reading
     pickles files in //).
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
 - en: ???? [Let’s connect on LinkedIn!](https://www.linkedin.com/in/vandeputnicolas/)
+  id: totrans-82
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -331,55 +488,71 @@
     France. He published [*Data Science for Supply Chain Forecasting*](https://www.amazon.com/Data-Science-Supply-Chain-Forecasting/dp/3110671107) in
     2018 (2nd edition in 2021) and [*Inventory Optimization: Models and Simulations*](https://www.amazon.com/Inventory-Optimization-Simulations-Nicolas-Vandeput/dp/3110673916) in
     2020.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
 - en: '![Image](../Images/c9c860202a525c83ddd9799118ea3978.png)'
+  id: totrans-84
   prefs: []
   type: TYPE_IMG
 - en: '[Original](https://towardsdatascience.com/read-excel-files-with-python-1000x-faster-407d07ad0ed8).
     Reposted with permission.'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
 - en: '**Related:**'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
 - en: '[Vaex: Pandas but 1000x faster](/2021/05/vaex-pandas-1000x-faster.html)'
+  id: totrans-87
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[How to Query Your Pandas Dataframe](/2021/08/query-pandas-dataframe.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Make Pandas 3 Times Faster with PyPolars](/2021/05/pandas-faster-pypolars.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: More On This Topic
+  id: totrans-90
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: '[Write Clean Python Code Using Pipes](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Building a solid data team](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Is There a Way to Bridge the MLOps Tools Gap?](https://www.kdnuggets.com/2022/08/way-bridge-mlops-tools-gap.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[A Faster Way to Prepare Time-Series Data with the AI & Analytics Engine](https://www.kdnuggets.com/2021/12/piexchange-faster-way-prepare-timeseries-data-ai-analytics-engine.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
 - en: '[There and Back Again… a RAPIDS Tale](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[《往返之旅… 一个 RAPIDS 故事》](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)'
