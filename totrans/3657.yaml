@@ -1,14 +1,20 @@
 - en: Ensuring Reliable Few-Shot Prompt Selection for LLMs
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 确保 LLM 的可靠少样本提示选择
 - en: 原文：[https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)
 - en: '***Authors:** Chris Mauck, Jonas Mueller*'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '***作者：** 克里斯·毛克，乔纳斯·穆勒*'
 - en: In this article, we prompt the Davinci Large Language Model from [OpenAI](https://platform.openai.com/docs/models/overview)
     (the model underpinning GPT-3/ChatGPT) with [few-shot](https://www.promptingguide.ai/techniques/fewshot)
     prompts in an effort to classify the intent of customer service requests at a
@@ -21,36 +27,60 @@
     become significantly more accurate if we instead use data-centric AI algorithms
     like [**Confident Learning**](https://arxiv.org/abs/1911.00068) to ensure *only
     high-quality* few-shot examples are selected for inclusion in the prompt template.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们使用来自 [OpenAI](https://platform.openai.com/docs/models/overview)（支持
+    GPT-3/ChatGPT 的模型）的 Davinci 大型语言模型，通过 [少样本](https://www.promptingguide.ai/techniques/fewshot)
+    提示来分类一家大型银行的客户服务请求意图。按照通常的做法，我们从一个已有的人工标注请求示例数据集中获取少样本示例，包含在提示模板中。然而，结果显示 LLM
+    预测*不可靠*——仔细检查表明，这是因为现实世界的数据杂乱且易出错。手动修改提示模板以缓解潜在的噪音数据只能稍微提高 LLM 在客户服务意图分类任务中的表现。如果我们改用像
+    [**Confident Learning**](https://arxiv.org/abs/1911.00068) 这样的数据驱动 AI 算法来确保*仅选择高质量*的少样本示例纳入提示模板，LLM
+    预测会显著更准确。
 - en: '* * *'
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速入门网络安全职业'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你所在的组织的 IT 工作'
 - en: '* * *'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/1194feb4d6096b8263a3d472288bc90d.png)'
+  id: totrans-10
   prefs: []
   type: TYPE_IMG
+  zh: '![确保 LLM 的可靠少样本提示选择](../Images/1194feb4d6096b8263a3d472288bc90d.png)'
 - en: 'Let’s consider how we can curate high-quality few-shot examples for prompting
     LLMs to produce the most reliable predictions. The need to ensure high-quality
     examples in the few-shot prompt may seem obvious, but many engineers don’t know
@@ -58,31 +88,47 @@
     an entire scientific discipline of *Data-Centric AI*). Such algorithmic data curation
     has many advantages, it is: fully automated, systematic, and broadly applicable
     to general LLM applications beyond intent classification.'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们探讨如何策划高质量的少样本示例，以促使 LLM 提供最可靠的预测。确保少样本提示中的高质量示例的必要性可能显而易见，但许多工程师不知道有算法/软件可以更系统地帮助你做到这一点（实际上，这是一个完整的科学学科——*数据驱动的
+    AI*）。这种算法数据策划具有许多优势，它是：完全自动化、系统化，并广泛适用于超越意图分类的一般 LLM 应用。
 - en: Banking Intent Dataset
+  id: totrans-12
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 银行业意图数据集
 - en: This article studies a 50-class variant of the [Banking-77 Dataset](https://arxiv.org/abs/2003.04807)
     which contains online banking queries annotated with their corresponding intents
     (the **label** shown below). We evaluate models that predict this label using
     a fixed test dataset containing ~500 phrases, and have a pool of ~1000 labeled
     phrases which we consider as candidates to include amongst our few-shot examples.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文研究了 [Banking-77 数据集](https://arxiv.org/abs/2003.04807) 的 50 类变体，该数据集包含带有对应意图的在线银行查询（下面显示的
+    **标签**）。我们评估了使用固定测试数据集（包含 ~500 个短语）的模型，这些模型预测该标签，并拥有 ~1000 个标记短语的池，我们认为这些短语可以作为我们少样本示例的候选。
 - en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/42e34feea9b0995270e4c9f57d382248.png)'
+  id: totrans-14
   prefs: []
   type: TYPE_IMG
+  zh: '![确保 LLM 的可靠少样本提示选择](../Images/42e34feea9b0995270e4c9f57d382248.png)'
 - en: You can download the candidate pool of few-shot examples and test set [here](https://s.cleanlab.ai/banking-intent-50/examples-pool.csv)
     and [here](https://s.cleanlab.ai/banking-intent-50/test.csv). Here’s a [notebook](https://colab.research.google.com/github/cleanlab/cleanlab-tools/blob/master/few_shot_prompt_selection/few_shot_prompt_selection.ipynb)
     you can run to reproduce the results shown in this article.
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以从 [这里](https://s.cleanlab.ai/banking-intent-50/examples-pool.csv) 和 [这里](https://s.cleanlab.ai/banking-intent-50/test.csv)
+    下载少样本示例候选池和测试集。你可以运行 [这个 notebook](https://colab.research.google.com/github/cleanlab/cleanlab-tools/blob/master/few_shot_prompt_selection/few_shot_prompt_selection.ipynb)
+    来重现本文中显示的结果。
 - en: Few-shot Prompting
+  id: totrans-16
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 少样本提示
 - en: 'Few-shot prompting (also known as *in-context learning*) is a NLP technique
     that enables pretrained foundation models to perform complex tasks without any
     explicit training (i.e. updates to model parameters). In few-shot prompting, we
@@ -93,34 +139,53 @@
     input: “*Is San Francisco in California?*”, a LLM will better know what type of
     output is desired if this prompt is augmented with a fixed template such that
     the new prompt looks something like:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 少样本提示（也称为 *上下文学习*）是一种 NLP 技术，使预训练的基础模型能够执行复杂任务，而无需任何明确的训练（即对模型参数的更新）。在少样本提示中，我们向模型提供有限数量的输入-输出对，作为提示模板的一部分，该模板包含在用于指导模型如何处理特定输入的提示中。提示模板提供的额外上下文帮助模型更好地推断所需的输出类型。例如，给定输入：“*旧金山在加州吗？*”，如果这个提示增加了一个固定模板，使新的提示看起来像这样，LLM
+    将更好地知道所需的输出类型：
 - en: 'Text: Is Boston in Massachusetts?'
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 文本：波士顿在马萨诸塞州吗？
 - en: 'Label: Yes'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 标签：是
 - en: 'Text: Is Denver in California?'
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 文本：丹佛在加州吗？
 - en: 'Label: No'
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 标签：否
 - en: 'Text: Is San Fransisco in California?'
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 文本：旧金山在加州吗？
 - en: 'Label:'
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 标签：
 - en: Few-shot prompting is particularly useful in text classification scenarios where
     your classes are *domain-specific* (as is typically the case in customer service
     applications within different businesses).
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 少样本提示在文本分类场景中尤其有用，其中你的类别是 *特定领域的*（通常在不同业务的客户服务应用中就是这样）。
 - en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/76596657a9a62bfb41fc93a1de70875d.png)'
+  id: totrans-25
   prefs: []
   type: TYPE_IMG
+  zh: '![确保 LLM 的可靠少样本提示选择](../Images/76596657a9a62bfb41fc93a1de70875d.png)'
 - en: In our case, we have a dataset with 50 possible classes (intents) to provide
     context for, such that OpenAI’s pretrained LLM can learn the difference between
     classes in context. Using [LangChain](https://github.com/hwchase17/langchain),
@@ -128,60 +193,88 @@
     candidate examples) and construct a 50-shot prompt template. We also append a
     string that lists the possible classes before the few-shot examples to ensure
     the LLM output is a valid class (i.e. intent category).
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的案例中，我们有一个包含 50 个可能类别（意图）的数据集，以便为 OpenAI 预训练的 LLM 提供上下文，使其能够学习类别之间的差异。使用
+    [LangChain](https://github.com/hwchase17/langchain)，我们从每个 50 个类别中随机选择一个示例（从我们的标记候选示例池中），并构建一个
+    50-shot 提示模板。我们还在少样本示例之前附加了一个列出所有可能类别的字符串，以确保 LLM 输出是一个有效的类别（即意图类别）。
 - en: The above 50-shot prompt is used as input for the LLM to get it to classify
     each of the examples in the test set (**target text** above is the only part of
     this input that changes between different test examples). These predictions are
     compared against the ground truth labels to evaluate the LLM accuracy produced
     using a selected few-shot prompt template.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: 上述50-shot提示用作LLM的输入，以使其对测试集中每个示例进行分类（**target text** 是这输入中在不同测试示例之间唯一改变的部分）。这些预测与实际标签进行比较，以评估使用选定的少量提示模板产生的LLM准确性。
 - en: Baseline Model Performance
+  id: totrans-28
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 基线模型表现
 - en: '[PRE0]'
+  id: totrans-29
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: Running each of the test examples through the LLM with the 50-shot prompt shown
     above, we achieve an accuracy of 59.6% which not bad for a 50-class problem. But
     this is not quite satisfactory for our bank’s customer service application, so
     let’s take a closer look at the dataset (i.e. pool) of candidate examples. When
     ML performs poorly, the data is often to blame!
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过上述50-shot提示将每个测试示例输入LLM，我们达到了59.6%的准确率，对于一个50类别的问题来说还不错。但这对于我们银行的客户服务应用来说还不够令人满意，因此我们需要更仔细地查看候选示例的数据集（即池）。当机器学习表现不佳时，数据往往是罪魁祸首！
 - en: Issues in Our Data
+  id: totrans-32
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们数据中的问题
 - en: Via close inspection of the candidate pool of examples from which our few-shot
     prompt was drawn, we find mislabeled phrases and outliers lurking in the data.
     Here are a few examples that were clearly annotated incorrectly.
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 通过仔细检查我们从中提取少量示例的候选池，我们发现数据中潜藏着标记错误的短语和异常值。这里是一些明显标注错误的示例。
 - en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/208774df2ebe3704d899f90b2e6d65c3.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![确保LLM可靠的少量提示选择](../Images/208774df2ebe3704d899f90b2e6d65c3.png)'
 - en: Previous [research](https://labelerrors.com/) has observed many popular datasets
     contain incorrectly labeled examples because data annotation teams are imperfect.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: 以前的[研究](https://labelerrors.com/)观察到许多流行数据集包含标记错误的示例，因为数据标注团队并不完美。
 - en: It is also common for customer service datasets to contain out-of-scope examples
     that were accidentally included. Here we see a few strange-looking examples that
     do not correspond to valid banking customer service requests.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 客户服务数据集中也常常包含不相关的示例，这些示例被意外包含在内。这里我们看到了一些看起来奇怪的示例，它们与有效的银行客户服务请求不符。
 - en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/d9b5bc6f85de53b7d669fca790f67634.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![确保LLM可靠的少量提示选择](../Images/d9b5bc6f85de53b7d669fca790f67634.png)'
 - en: Why Do These Issues Matter?
+  id: totrans-38
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 为什么这些问题很重要？
 - en: As the context size for LLMs grows, it is becoming common for prompts to include
     many examples. As such, it may not be possible to manually validate all of the
     examples in your few-shot prompt, especially with a large number of classes (or
@@ -189,58 +282,85 @@
     examples contains issues like those shown above (as many real-world datasets do),
     then errant examples may find their way into your prompts. The rest of the article
     examines the impact of this problem and how we can mitigate it.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 随着LLM的上下文大小不断增长，提示中包含许多示例变得越来越普遍。因此，可能无法手动验证少量提示中的所有示例，特别是在类别数量较多（或缺乏相关领域知识）时。如果这些少量示例的数据源存在上述问题（许多真实世界的数据集确实如此），则错误示例可能会出现在你的提示中。本文其余部分将探讨此问题的影响以及我们如何减轻它。
 - en: Can we warn the LLM the examples may be noisy?
+  id: totrans-40
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们可以提醒LLM这些示例可能存在噪声吗？
 - en: What if we just include a “disclaimer warning” in the prompt telling the LLM
     that some labels in the provided few-shot examples may be incorrect? Here we consider
     the following modification to our prompt template, which still includes the same
     50 few-shot examples as before.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们在提示中仅加入一个“免责声明”警告，告知LLM提供的少量示例中的一些标签可能不正确，会怎样？这里我们考虑对提示模板进行如下修改，仍然包括之前相同的50个少量示例。
 - en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/d63bcc15df5c67ef916a9a8bc094cedf.png)'
+  id: totrans-42
   prefs: []
   type: TYPE_IMG
+  zh: '![确保LLM可靠的少量提示选择](../Images/d63bcc15df5c67ef916a9a8bc094cedf.png)'
 - en: '[PRE2]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: Using the above prompt, we achieve an accuracy of 62%. Marginally better, but
     still not good enough to use the LLM for intent classification in our bank’s customer
     service system!
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用上述提示，我们达到了62%的准确率。稍有改善，但仍不足以在我们银行的客户服务系统中使用LLM进行意图分类！
 - en: Can we remove the noisy examples entirely?
+  id: totrans-45
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们可以完全删除这些噪声示例吗？
 - en: Since we can’t trust the labels in the few-shot examples pool, what if we just
     remove them entirely from the prompt and only rely on the powerful LLM? Rather
     than few-shot prompting, we are doing zero-shot prompting in which the only example
     included in the prompt is the one the LLM is supposed to classify. Zero-shot prompting
     entirely relies on the LLM’s pretrained knowledge to get the correct outputs.
+  id: totrans-46
   prefs: []
   type: TYPE_NORMAL
+  zh: 既然我们不能信任少样本示例池中的标签，那如果我们完全从提示中移除它们，只依赖强大的 LLM 呢？与少样本提示不同，我们在进行零样本提示，其中提示中唯一的示例是
+    LLM 应该分类的那个。零样本提示完全依赖 LLM 的预训练知识来获得正确的输出。
 - en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/2a6236640cf7440403632d4e3ef76348.png)'
+  id: totrans-47
   prefs: []
   type: TYPE_IMG
+  zh: '![确保 LLMs 的可靠少样本提示选择](../Images/2a6236640cf7440403632d4e3ef76348.png)'
 - en: '[PRE3]'
+  id: totrans-48
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: After removing the poor-quality few-shot examples entirely, we achieve an accuracy
     of 67.4% which is the best that we’ve done so far!
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 在完全移除低质量少样本示例后，我们达到了 67.4% 的准确率，这是我们迄今为止的最佳表现！
 - en: '**t seems that noisy few-shot examples can actually** ***harm*** **model performance
     instead of boosting it as they are supposed to do.**'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: '**似乎嘈杂的少样本示例实际上可能** ***损害*** **模型性能，而不是像预期那样提升性能。**'
 - en: Can we identify and correct the noisy examples?
+  id: totrans-51
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们能否识别并纠正嘈杂的示例？
 - en: Instead of modifying the prompt or removing the examples entirely, the smarter
     (yet more complex) way to improve our dataset would be to find and fix the label
     issues by hand. This simultaneously removes a noisy data point that is harming
@@ -249,35 +369,53 @@
     effortlessly correct the data using [Cleanlab Studio](https://cleanlab.ai/studio/),
     a platform that implements [Confident Learning](https://l7.curtisnorthcutt.com/confident-learning)
     algorithms to automatically find and fix label issues.
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
+  zh: 与其修改提示或完全移除示例，更聪明（但更复杂）的方法是手动查找并修复标签问题。这同时移除了一个对模型有害的嘈杂数据点，并增加了一个准确的数据点，应该通过少样本提示来提升性能，但手动进行这样的修正是繁琐的。我们在这里使用
+    [Cleanlab Studio](https://cleanlab.ai/studio/) 轻松地纠正数据，该平台实现了 [Confident Learning](https://l7.curtisnorthcutt.com/confident-learning)
+    算法，以自动找到并修复标签问题。
 - en: '![Ensuring Reliable Few-Shot Prompt Selection for LLMs](../Images/8bfe5599114e784f3a76f5e63d13c28e.png)'
+  id: totrans-53
   prefs: []
   type: TYPE_IMG
+  zh: '![确保 LLMs 的可靠少样本提示选择](../Images/8bfe5599114e784f3a76f5e63d13c28e.png)'
 - en: After replacing the estimated bad labels with ones estimated to be more suitable
     via Confident Learning, we re-run the original 50-shot prompt through the LLM
     with each test example, except this time we use the **auto-corrected label** which
     ensures we provide the LLM with 50 high-quality examples in its few-shot prompt.
+  id: totrans-54
   prefs: []
   type: TYPE_NORMAL
+  zh: 在通过 Confident Learning 用估计更合适的标签替换估计不良标签后，我们将原始的 50-shot 提示重新通过 LLM 运行，每个测试示例都是这样，除了这次我们使用**自动修正的标签**，这确保了我们在少样本提示中提供了
+    50 个高质量示例。
 - en: '[PRE4]'
+  id: totrans-55
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: After doing this, we achieve an accuracy of 72% which is **quite impressive**
     for the 50-class problem.
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这样做之后，我们达到了 72% 的准确率，这对于 50 类问题来说是**相当令人印象深刻**的。
 - en: '**We’ve now shown that noisy few-shot examples can considerably decrease LLM
     performance and that it is suboptimal to just manually change the prompt (via
     adding caveats or removing examples). To achieve the highest performance, you
     should also try correcting your examples using Data-centric AI techniques like
     Confident Learning.**'
+  id: totrans-57
   prefs: []
   type: TYPE_NORMAL
+  zh: '**我们现在已经展示了嘈杂的少样本示例可以显著降低 LLM 性能，仅仅手动更改提示（通过添加警告或移除示例）是次优的。要实现最高性能，您还应尝试使用数据中心
+    AI 技术如 Confident Learning 来纠正示例。**'
 - en: Importance of Data-centric AI
+  id: totrans-58
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 数据中心 AI 的重要性
 - en: This article highlights the significance of ensuring reliable few-shot prompt
     selection for language models, specifically focusing on customer service intent
     classification in the banking domain. Through the exploration of a large bank's
@@ -290,37 +428,57 @@
     improved accuracy. This study emphasizes the role of algorithmic data curation
     in obtaining reliable few-shot prompts, and highlights the utility of such techniques
     in enhancing Language Model performance across various domains.
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文强调了确保语言模型中可靠的少量示例提示选择的重要性，特别是关注银行领域的客户服务意图分类。通过对一家大型银行的客户服务请求数据集的探索以及使用Davinci
+    LLM进行的少量示例提示技术的应用，我们遇到了来自嘈杂和错误示例的挑战。我们展示了仅修改提示或删除示例无法保证模型的最佳性能。相反，像Confident Learning这样的数据驱动AI算法在Cleanlab
+    Studio等工具中的应用被证明在识别和纠正标签问题方面更为有效，从而显著提高了准确性。本研究强调了算法数据策展在获取可靠少量示例提示中的作用，并突出了这些技术在提升语言模型在各个领域性能方面的实用性。
 - en: '**[Chris Mauck](https://www.linkedin.com/in/chris-mauck/)** is Data Scientist
     at Cleanlab.'
+  id: totrans-60
   prefs: []
   type: TYPE_NORMAL
+  zh: '**[克里斯·莫克](https://www.linkedin.com/in/chris-mauck/)** 是Cleanlab的数据科学家。'
 - en: More On This Topic
+  id: totrans-61
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关话题
 - en: '[Unlocking Reliable Generations through Chain-of-Verification: A…](https://www.kdnuggets.com/unlocking-reliable-generations-through-chain-of-verification)'
+  id: totrans-62
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[通过验证链解锁可靠生成：一个…](https://www.kdnuggets.com/unlocking-reliable-generations-through-chain-of-verification)'
 - en: '[Detecting Data Drift for Ensuring Production ML Model Quality Using Eurybia](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
+  id: totrans-63
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用Eurybia检测数据漂移以确保生产ML模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)'
 - en: '[Data Masking: The Core of Ensuring GDPR and other Regulatory…](https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html)'
+  id: totrans-64
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据掩码：确保GDPR及其他法规合规的核心](https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html)'
 - en: '[Design effective & reliable machine learning systems!](https://www.kdnuggets.com/2023/05/manning-design-effective-reliable-machine-learning-systems.html)'
+  id: totrans-65
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[设计有效且可靠的机器学习系统！](https://www.kdnuggets.com/2023/05/manning-design-effective-reliable-machine-learning-systems.html)'
 - en: '[Feature Selection: Where Science Meets Art](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
+  id: totrans-66
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[特征选择：科学与艺术的交汇点](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)'
 - en: '[Alternative Feature Selection Methods in Machine Learning](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
+  id: totrans-67
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[机器学习中的替代特征选择方法](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)'
