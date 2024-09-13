@@ -1,185 +1,255 @@
 - en: Hands on Hyperparameter Tuning with Keras Tuner
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 实践超参数调整与Keras Tuner
 - en: 原文：[https://www.kdnuggets.com/2020/02/hyperparameter-tuning-keras-tuner.html](https://www.kdnuggets.com/2020/02/hyperparameter-tuning-keras-tuner.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/02/hyperparameter-tuning-keras-tuner.html](https://www.kdnuggets.com/2020/02/hyperparameter-tuning-keras-tuner.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Julie Prost](https://www.linkedin.com/in/julie-prost-a169b1129/), Data
     Scientist @ Sicara**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**作者：[Julie Prost](https://www.linkedin.com/in/julie-prost-a169b1129/)，Sicara的数据科学家**'
 - en: This post will explain how to perform automatic hyperparameter tuning with Keras
     Tuner and Tensorflow 2.0 to boost accuracy on a computer vision problem.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文将解释如何使用Keras Tuner和Tensorflow 2.0自动进行超参数调整，以提高计算机视觉问题的准确性。
 - en: '![](../Images/e8b6551630e4efbbb2e97530dbd9eab2.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e8b6551630e4efbbb2e97530dbd9eab2.png)'
 - en: 'Here you are : your model is running and producing a first set of results.
     However they fall far from the top results you were expecting. You''re missing
     one crucial step : hyperparameter tuning!'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，你的模型正在运行并产生第一组结果。然而，它们远未达到你期望的最佳结果。你错过了一个关键步骤：超参数调整！
 - en: In this post, we'll go through a whole hyperparameter tuning pipeline step by
     step. Full code is available on [Github](https://github.com/JulieProst/keras-tuner-tutorial).
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我们将逐步通过整个超参数调整流程。完整的代码可以在[Github](https://github.com/JulieProst/keras-tuner-tutorial)上找到。
 - en: What is hyperparameter tuning and why you should care
+  id: totrans-8
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 什么是超参数调整以及为什么你应该关注
 - en: 'A machine learning model has two types of parameters:'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: 机器学习模型有两种类型的参数：
 - en: trainable parameters, which are learned by the algorithm during training. For
     instance, the weights of a neural network are trainable parameters.
+  id: totrans-10
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可训练参数是在训练过程中由算法学习的。例如，神经网络的权重就是可训练参数。
 - en: hyperparameters, which need to be set before launching the learning process.
     The learning rate or the number of units in a dense layer are hyperparameters.
+  id: totrans-11
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 超参数需要在启动学习过程之前设置。学习率或密集层中的单元数量就是超参数。
 - en: 'Hyperparameters can be numerous even for small models. Tuning them can be a
     real brain teaser but worth the challenge: a good hyperparameter combination can
     highly improve your model''s performance. Here we''ll see that on a simple CNN
     model, it can help you gain 10% accuracy on the test set!'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 即使是小型模型，超参数也可能非常多。调整它们可能是一个真正的脑筋急转弯，但值得挑战：一个好的超参数组合可以大幅提高模型的性能。在这里，我们将看到，在一个简单的CNN模型中，它可以帮助你在测试集上提高10%的准确率！
 - en: Thankfully, open-source libraries are available to automatically perform this
     step for you!
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 幸运的是，现有的开源库可以自动为你执行这一步骤！
 - en: Tensorflow 2.0 and Keras Tuner
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Tensorflow 2.0和Keras Tuner
 - en: '[Tensorflow](https://www.tensorflow.org/) is a vastly used, open-source, machine
     learning library. In September 2019, [Tensorflow 2.0 was released](https://blog.tensorflow.org/2019/09/tensorflow-20-is-now-available.html)
     with major improvements, notably in user-friendliness. With this new version,
     [Keras](https://keras.io/), a higher-level Python deep learning API, became Tensorflow''s
     main API.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '[Tensorflow](https://www.tensorflow.org/)是一个广泛使用的开源机器学习库。2019年9月，[Tensorflow
+    2.0发布了](https://blog.tensorflow.org/2019/09/tensorflow-20-is-now-available.html)，带来了重大的改进，特别是在用户友好性方面。随着这个新版本的发布，[Keras](https://keras.io/)，一个高级Python深度学习API，成为了Tensorflow的主要API。'
 - en: Shortly after, the Keras team released [Keras Tuner](https://keras-team.github.io/keras-tuner/),
     a library to easily perform hyperparameter tuning with Tensorflow 2.0\. This post
     will show how to use it with an application to object classification. It will
     also include a comparison of the different hyperparameter tuning methods available
     in the library.
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 不久之后，Keras团队发布了[Keras Tuner](https://keras-team.github.io/keras-tuner/)，这是一个可以轻松进行超参数调整的库，适用于Tensorflow
+    2.0。本文将展示如何在目标分类应用中使用它，并包括对库中不同超参数调整方法的比较。
 - en: Keras Tuner is now out of beta! v1 is out on PyPI.[https://t.co/riqnIr4auA](https://t.co/riqnIr4auA)
+  id: totrans-17
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: Keras Tuner现在已经脱离了beta版本！v1已在PyPI发布。[https://t.co/riqnIr4auA](https://t.co/riqnIr4auA)
 - en: Fully-featured, scalable, easy-to-use hyperparameter tuning for Keras & beyond.
     [pic.twitter.com/zUDISXPdBw](https://t.co/zUDISXPdBw)
+  id: totrans-18
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 功能全面、可扩展、易于使用的Keras及其以外的超参数调整。[pic.twitter.com/zUDISXPdBw](https://t.co/zUDISXPdBw)
 - en: — François Chollet (@fchollet) [October 31, 2019](https://twitter.com/fchollet/status/1189992078991708160?ref_src=twsrc%5Etfw)
+  id: totrans-19
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: — François Chollet (@fchollet) [2019年10月31日](https://twitter.com/fchollet/status/1189992078991708160?ref_src=twsrc%5Etfw)
 - en: Hyperparameter tuning with Keras Tuner
+  id: totrans-20
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 使用Keras Tuner进行超参数调整
 - en: Before diving into the code, a bit of theory about Keras Tuner. How does it
     work?
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 在深入代码之前，先了解一下Keras Tuner的理论。它是如何工作的？
 - en: '![Figure](../Images/097f871695d5bde58ac8cb0c6ea3ce37.png)'
+  id: totrans-22
   prefs: []
   type: TYPE_IMG
 - en: Hyperparameter tuning process with Keras Tuner
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
 - en: First, a tuner is defined. Its role is to determine which hyperparameter combinations
     should be tested. The library search function performs the iteration loop, which
     evaluates a certain number of hyperparameter combinations. Evaluation is performed
     by computing the trained model's accuracy on a held-out validation set.
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
 - en: Finally, the best hyperparameter combination in terms of validation accuracy
     can be tested on a held-out test set.
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
 - en: Getting started
+  id: totrans-26
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Let's get started! With this tutorial, you'll have an end-to-end pipeline to
     tune a simple convolutional network's hyperparameters for object classification
     on the CIFAR10 dataset.
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
 - en: '**Installation step**'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
 - en: 'First, install Keras Tuner from your terminal:'
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE0]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: You can now open your favorite IDE/text editor and start a Python script for
     the rest of the tutorial!
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
 - en: '**Dataset**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/e672a903de2a97375208768a28755d49.png)'
+  id: totrans-33
   prefs: []
   type: TYPE_IMG
 - en: CIFAR10 random samples. [The dataset](https://www.cs.toronto.edu/~kriz/cifar.html) is
     composed of 60000 images belonging to one out of 10 object classes.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
 - en: This tutorial uses the CIFAR10 dataset. CIFAR10 is a common benchmarking dataset
     in computer vision. It contains 10 classes and is relatively small, with 60000
     images. This size allows for a relatively short training time which we'll take
     advantage of to perform multiple hyperparameter tuning iterations.
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
 - en: 'Load and pre-process data:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
 - en: The tuner expects floats as inputs, and the division by 255 is a data normalization
     step.
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
 - en: Model definition
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
 - en: Here, we'll experiment with a simple convolutional model to classify each image
     into one of the 10 available classes.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
 - en: '![Figure](../Images/abe25951bd2ac4c9f7e89b929e7ae541.png)'
+  id: totrans-40
   prefs: []
   type: TYPE_IMG
 - en: Simple CNN representation, from this great [blog post about CNNs](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53)
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
 - en: Each input image will go through two convolutional blocks (2 convolution layers
     followed by a pooling layer) and a dropout layer for regularization purposes.
     Finally, each output is flattened and goes through a dense layer that classify
     the image into one of the 10 classes.
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
 - en: 'In Keras, this model can be defined as below :'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
 - en: Search Space definition
+  id: totrans-44
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -187,34 +257,42 @@
     is to say which hyperparameters need to be optimized and in what range. Here,
     for this relatively small model, there are already 6 hyperparameters that can
     be tuned:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
 - en: the dropout rate for the three dropout layers
+  id: totrans-46
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: the number of filters for the convolutional layers
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: the number of units for the dense layer
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: its activation function
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'In Keras Tuner, hyperparameters have a type (possibilities are Float, Int,
     Boolean, and Choice) and a unique name. Then, a set of options to help guide the
     search need to be set:'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
 - en: a minimal, a maximal and a default value for the Float and the Int types
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: a set of possible values for the Choice type
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
@@ -222,248 +300,373 @@
     parameter allows to add prior knowledge you might have about the tuned parameter.
     We'll see in the next section how it can be used to tune the learning rate for
     instance
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可选地，可以选择线性、对数或反对数的采样方法。设置此参数允许添加您对调节参数的先验知识。我们将在下一节中看到如何利用它来调整学习率。
 - en: optionally, a step value, i.e the minimal step between two hyperparameter values
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: 可选地，设置步长值，即两个超参数值之间的最小步长。
 - en: 'For instance, to set the hyperparameter ''number of filters'' you can use:'
+  id: totrans-55
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，要设置超参数“滤波器数量”，可以使用：
 - en: 'The dense layer has two hyperparameters, the number of units and the activation
     function:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
+  zh: 密集层有两个超参数，即单元数和激活函数：
 - en: Model Compilation
+  id: totrans-57
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 模型编译
 - en: 'Then let''s move to model compilation, where other hyperparameters are also
     present. The compilation step is where the optimizer along with the loss function
     and the metric are defined. Here, we''ll use categorical entropy as a loss function
     and accuracy as a metric. For the optimizer, different options are available.
     We''ll use the popular [Adam](https://keras.io/optimizers/):'
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后让我们进入模型编译步骤，在这里还存在其他超参数。编译步骤是定义优化器、损失函数和指标的地方。在这里，我们将使用分类熵作为损失函数，准确率作为指标。对于优化器，有不同的选项可供选择。我们将使用流行的
+    [Adam](https://keras.io/optimizers/)。
 - en: 'Here, the learning rate, which represents how fast the learning algorithm progresses,
     is often an important hyperparameter. Usually, the learning rate is chosen on
     a log scale. This prior knowledge can be incorporated in the search through the
     setting of the sampling method:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，学习率（表示学习算法的进展速度）通常是一个重要的超参数。通常，学习率是在对数尺度上选择的。这些先验知识可以通过设置采样方法来纳入搜索中：
 - en: Keras Tuner Hypermodels
+  id: totrans-60
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Keras Tuner Hypermodels
 - en: 'To put the whole hyperparameter search space together and perform hyperparameter
     tuning, Keras Tuners uses `HyperModel` instances. Hypermodels are reusable class
     object introduced with the library, defined as follows:'
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
+  zh: 为了将整个超参数搜索空间整合在一起并执行超参数调优，Keras Tuners 使用 `HyperModel` 实例。Hypermodels 是库中引入的可重用类对象，定义如下：
 - en: The library already offers two on-the-shelf hypermodels for computer vision,
     HyperResNet and HyperXception.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
+  zh: 该库已经提供了两个现成的计算机视觉超模型：HyperResNet 和 HyperXception。
 - en: Choose the tuner
+  id: totrans-63
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 选择调优器
 - en: 'Keras Tuner offers the main hyperparameter tuning methods: random search, Hyperband,
     and Bayesian optimization.'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
+  zh: Keras Tuner 提供了主要的超参数调优方法：随机搜索、Hyperband 和贝叶斯优化。
 - en: 'In this tutorial, we''ll focus on random search and Hyperband. We won''t go
     into theory, but if you want to know more about random search and Bayesian Optimization,
     I wrote a post about it: [Bayesian optimization for hyperparameter tuning](https://www.sicara.ai/blog/2019-14-07-determine-network-hyper-parameters-with-bayesian-optimization).
     As for [Hyperband](https://arxiv.org/abs/1603.06560), its main idea is to optimize
     Random Search in terms of search time.'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
+  zh: 在本教程中，我们将重点关注随机搜索和 Hyperband。我们不会深入理论，但如果您想了解更多关于随机搜索和贝叶斯优化的信息，我写了一篇文章：[贝叶斯优化超参数调优](https://www.sicara.ai/blog/2019-14-07-determine-network-hyper-parameters-with-bayesian-optimization)。至于
+    [Hyperband](https://arxiv.org/abs/1603.06560)，其主要思想是优化随机搜索的搜索时间。
 - en: 'For every tuner, a seed parameter can be defined for experiments reproducibility:
     `SEED = 1`.'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于每个调优器，可以定义一个种子参数以确保实验的可重复性：`SEED = 1`。
 - en: Random Search
+  id: totrans-67
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Random Search
 - en: The most intuitive way to perform hyperparameter tuning is to randomly sample
     hyperparameter combinations and test them out. This is exactly what the RandomSearch
     tuner does!
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
+  zh: 执行超参数调优的最直观方法是随机抽样超参数组合并进行测试。这正是 RandomSearch 调优器所做的！
 - en: The objective is the function to optimize. The tuner infers if it is a maximization
     or a minimization problem based on its value.
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
+  zh: 目标是要优化的函数。调优器根据其值推断这是一个最大化问题还是最小化问题。
 - en: Then, the `max_trials` variable represents the number of hyperparameter combinations
     that will be tested by the tuner, while the `execution_per_trial` variable is
     the number of models that should be built and fit for each trial for robustness
     purposes. The next section explains how to set them
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，`max_trials` 变量表示调优器将测试的超参数组合的数量，而 `execution_per_trial` 变量是每次试验中应该构建和拟合的模型数量，以保证鲁棒性。下一节将解释如何设置这些参数。
 - en: Hyperband
+  id: totrans-71
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: Hyperband
 - en: Hyperband is an optimized version of random search which uses early-stopping
     to speed up the hyperparameter tuning process. The main idea is to fit a large
     number of models for a small number of epochs and to only continue training for
     the models achieving the highest accuracy on the validation set. The max_epochs
     variable is the max number of epochs that a model can be trained for.
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
+  zh: Hyperband 是随机搜索的优化版本，它使用早停法来加快超参数调整过程。其主要思想是为少量轮数训练大量模型，并仅继续训练在验证集上表现最佳的模型。max_epochs
+    变量是模型可以训练的最大轮数。
 - en: Hyperparameters for the tuners?
+  id: totrans-73
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 调优器的超参数？
 - en: '![Figure](../Images/4e6e124d63e9ac6346050b824b2c95da.png)'
+  id: totrans-74
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/4e6e124d63e9ac6346050b824b2c95da.png)'
 - en: 'You might be wondering how useful this whole process is seeing that several
     parameters also have to be set for the different tuners:'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可能会想知道这个过程的实际效果，因为不同调优器还需要设置多个参数：
 - en: But here the problem is slightly different than the determination of hyperparameters.
     Indeed, these settings here will mostly depend on your computing time and resources.
     The highest number of trials you can perform, the better! Regarding the number
     of epochs, it's best if you know how many epochs your model needs to converge.
     You can also use early-stopping to prevent overfitting.
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: 但这里的问题与确定超参数稍有不同。实际上，这些设置主要依赖于你的计算时间和资源。你可以进行的试验次数越多，效果越好！关于训练轮数，最好知道你的模型需要多少轮才能收敛。你还可以使用早停法来防止过拟合。
 - en: Hyperparameter tuning
+  id: totrans-77
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 超参数调整
 - en: 'Once the model and the tuner are set up, a summary of the task is easily available:'
+  id: totrans-78
   prefs: []
   type: TYPE_NORMAL
+  zh: 一旦模型和调优器设置好，任务摘要就可以轻松获得：
 - en: '![Figure](../Images/9866d12d58e70a81d56062254cc937bb.png)'
+  id: totrans-79
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/9866d12d58e70a81d56062254cc937bb.png)'
 - en: Search space summary output
+  id: totrans-80
   prefs: []
   type: TYPE_NORMAL
+  zh: 搜索空间摘要输出
 - en: Tuning can start!
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: 调优可以开始了！
 - en: The search function takes as input the training data and a validation split
     to perform hyperparameter combinations evaluation. The epochs parameter is used
     in random search and Bayesian Optimization to define the number of training epochs
     for each hyperparameter combination.
+  id: totrans-82
   prefs: []
   type: TYPE_NORMAL
+  zh: 搜索功能以训练数据和验证拆分作为输入来执行超参数组合评估。epochs 参数在随机搜索和贝叶斯优化中用于定义每个超参数组合的训练轮数。
 - en: 'Finally, the search results can be summarized and used as follows:'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，搜索结果可以总结并如下使用：
 - en: Results
+  id: totrans-84
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 结果
 - en: 'You can find this post code on [Github](https://github.com/JulieProst/keras-tuner-tutorial).
     The following results were obtained after running it on an RTX 2080 GPU:'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以在 [Github](https://github.com/JulieProst/keras-tuner-tutorial) 上找到这篇文章的代码。以下结果是在
+    RTX 2080 GPU 上运行后获得的：
 - en: '![Figure](../Images/3291ad3fb8c89275b14bac5f57f30281.png)'
+  id: totrans-86
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/3291ad3fb8c89275b14bac5f57f30281.png)'
 - en: 'Keras Tuner results. Worst baseline: model achieving the worst validation accuracy
     with one of random search''s set of hyperparameters. Default baseline : obtained
     by setting all hyperparameters to their default value.'
+  id: totrans-87
   prefs: []
   type: TYPE_NORMAL
+  zh: Keras Tuner 结果。最差基准：使用随机搜索的一组超参数中表现最差的模型。默认基准：通过将所有超参数设置为默认值获得。
 - en: These results are far from the 99.3% accuracy achieved by [state-of-the-art
     models on the CIFAR10 dataset](https://paperswithcode.com/sota/image-classification-on-cifar-10)
     but not so bad for such a simple network structure. You can already see notable
     improvement between the baselines and the tuned models, with a boost of more than
     10% in accuracy between Random Search and the first baseline.
+  id: totrans-88
   prefs: []
   type: TYPE_NORMAL
+  zh: 这些结果远未达到 [最先进模型在 CIFAR10 数据集上](https://paperswithcode.com/sota/image-classification-on-cifar-10)
+    达到的 99.3% 准确率，但对于如此简单的网络结构来说也不算太差。你可以看到基准模型和调优模型之间的显著改进，其中随机搜索和第一个基准之间的准确率提升超过
+    10%。
 - en: Overall, the Keras Tuner library is a nice and easy to learn option to perform
     hyperparameter tuning for your Keras and Tensorflow 2.O models. The main step
     you'll have to work on is adapting your model to fit the hypermodel format. Indeed,
     few standard hypermodels are available in the library for now.
+  id: totrans-89
   prefs: []
   type: TYPE_NORMAL
+  zh: 总的来说，Keras Tuner 库是一个不错且易于学习的选项，用于为你的 Keras 和 TensorFlow 2.0 模型进行超参数调整。你需要工作的主要步骤是将模型调整为适应超模型格式。实际上，库中目前提供的标准超模型较少。
 - en: Complementary documentation and tutorials are available on [Keras Tuner’s website](https://keras-team.github.io/keras-tuner/)
     and their [Github repo](https://github.com/keras-team/keras-tuner)!
+  id: totrans-90
   prefs: []
   type: TYPE_NORMAL
+  zh: 补充文档和教程可以在 [Keras Tuner 的网站](https://keras-team.github.io/keras-tuner/) 和他们的
+    [Github 仓库](https://github.com/keras-team/keras-tuner) 上找到！
 - en: '**Bio: [Julie Prost](https://www.linkedin.com/in/julie-prost-a169b1129/)**
     ([**@JPro20**](https://twitter.com/JPro20)) is a Data Scientist at Sicara.'
+  id: totrans-91
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[朱莉·普罗斯特](https://www.linkedin.com/in/julie-prost-a169b1129/)** ([**@JPro20**](https://twitter.com/JPro20))
+    是 Sicara 的数据科学家。'
 - en: '[Original](https://www.sicara.ai/blog/hyperparameter-tuning-keras-tuner). Reposted
     with permission.'
+  id: totrans-92
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://www.sicara.ai/blog/hyperparameter-tuning-keras-tuner)。转载经许可。'
 - en: '**Related:**'
+  id: totrans-93
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Automated Machine Learning Project Implementation Complexities](/2019/11/automl-implementation-complexities.html)'
+  id: totrans-94
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自动化机器学习项目实施复杂性](/2019/11/automl-implementation-complexities.html)'
 - en: '[Advanced Keras — Constructing Complex Custom Losses and Metrics](/2019/04/advanced-keras-constructing-complex-custom-losses-metrics.html)'
+  id: totrans-95
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[高级 Keras — 构建复杂的自定义损失和指标](/2019/04/advanced-keras-constructing-complex-custom-losses-metrics.html)'
 - en: '[Convolutional Neural Networks: A Python Tutorial Using TensorFlow and Keras](/2019/07/convolutional-neural-networks-python-tutorial-tensorflow-keras.html)'
+  id: totrans-96
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[卷积神经网络：使用 TensorFlow 和 Keras 的 Python 教程](/2019/07/convolutional-neural-networks-python-tutorial-tensorflow-keras.html)'
 - en: '* * *'
+  id: totrans-97
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-98
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三名课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-99
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-100
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析水平'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-101
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织 IT'
 - en: '* * *'
+  id: totrans-102
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-103
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 了解更多相关主题
 - en: '[Hyperparameter Tuning Using Grid Search and Random Search in Python](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
+  id: totrans-104
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 Grid Search 和 Random Search 进行超参数调优](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)'
 - en: '[Hyperparameter Tuning: GridSearchCV and RandomizedSearchCV, Explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
+  id: totrans-105
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超参数调优：GridSearchCV 和 RandomizedSearchCV 解析](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)'
 - en: '[Building and Training Your First Neural Network with TensorFlow and Keras](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
+  id: totrans-106
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[使用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)'
 - en: '[Keras 3.0: Everything You Need To Know](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)'
+  id: totrans-107
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Keras 3.0：你需要知道的一切](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)'
 - en: '[Hyperparameter Optimization: 10 Top Python Libraries](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
+  id: totrans-108
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[超参数优化：十大 Python 库](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)'
 - en: '[Hands-on Reinforcement Learning Course Part 3: SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)'
+  id: totrans-109
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[动手强化学习课程第三部分：SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)'
