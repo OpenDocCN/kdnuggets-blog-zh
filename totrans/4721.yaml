@@ -1,213 +1,313 @@
 - en: 'ELMo: Contextual Language Embedding'
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: ELMo：上下文化语言嵌入
 - en: 原文：[https://www.kdnuggets.com/2019/01/elmo-contextual-language-embedding.html](https://www.kdnuggets.com/2019/01/elmo-contextual-language-embedding.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2019/01/elmo-contextual-language-embedding.html](https://www.kdnuggets.com/2019/01/elmo-contextual-language-embedding.html)
 - en: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_IMG
+  zh: '![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)'
 - en: '**By [Josh Taylor](https://www.linkedin.com/in/josh-taylor-24806975/), Advanced
     Analytics Specialist**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由[Josh Taylor](https://www.linkedin.com/in/josh-taylor-24806975/)撰写，高级分析专家**'
 - en: '![Figure](../Images/a74f9c9205ba620c8eb635c5ce9a34be.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![图](../Images/a74f9c9205ba620c8eb635c5ce9a34be.png)'
 - en: Semantic sentence similarity using the state-of-the-art ELMo natural language
     model
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用最先进的ELMo自然语言模型进行语义句子相似性分析
 - en: This article will explore the latest in natural language modelling; deep contextualised
     word embeddings. The focus is more practical than theoretical with a worked example
     of how you can use the state-of-the-art ELMo model to review sentence similarity
     in a given document as well as creating a simple semantic search engine. The full
     code can be viewed in the Colab notebook [here](https://colab.research.google.com/drive/13f6dKakC-0yO6_DxqSqo0Kl41KMHT8A1).
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文将探讨自然语言建模的最新进展——深度上下文化词嵌入。重点在于实践而非理论，包含了如何使用最先进的ELMo模型来审查给定文档中的句子相似性，以及创建一个简单的语义搜索引擎的实际示例。完整代码可以在
+    Colab 笔记本中查看，链接在[这里](https://colab.research.google.com/drive/13f6dKakC-0yO6_DxqSqo0Kl41KMHT8A1)。
 - en: '**The importance of context in NLP**'
+  id: totrans-7
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**上下文在自然语言处理中的重要性**'
 - en: 'As we know, language is complex. Context can completely change the meaning
     of the individual words in a sentence. For example:'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们知道，语言是复杂的。上下文可以完全改变句子中单个词的含义。例如：
 - en: He kicked the **bucket.**
+  id: totrans-9
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 他踢翻了**桶**。
 - en: ''
+  id: totrans-10
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: I have yet to cross-off all the items on my **bucket** list.
+  id: totrans-11
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 我还没有完成我**人生愿望清单**上的所有项目。
 - en: ''
+  id: totrans-12
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
 - en: The **bucket** was filled with water.
+  id: totrans-13
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: '**桶**里装满了水。'
 - en: In these sentences, whilst the word ‘bucket’ is always the same, it’s meaning
     is very different.
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这些句子中，虽然“桶”这个词始终相同，但其含义却大相径庭。
 - en: '![](../Images/ab68e5ad764de2c7ec2ad19eca2d8a9f.png)'
+  id: totrans-15
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/ab68e5ad764de2c7ec2ad19eca2d8a9f.png)'
 - en: Words can have different meanings depending on context
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 词语的含义可能会根据上下文而有所不同
 - en: Whilst we can easily decipher these complexities in language, creating a model
     which can understand the different nuances of the meaning of words given the surrounding
     text is difficult.
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 尽管我们可以轻松解读这些语言中的复杂性，但创建一个可以理解给定文本周围词语不同细微含义的模型却很困难。
 - en: It is for this reason that traditional word embeddings (word2vec, GloVe, fastText)
     fall short. They only have one representation per word, therefore they cannot
     capture how the meaning of each word can change based on surrounding context.
+  id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 正因如此，传统的词嵌入（如word2vec、GloVe、fastText）显得力不从心。它们每个词只有一种表示，因此无法捕捉每个词在不同上下文中含义的变化。
 - en: '**Introducing ELMo; Deep Contextualised Word Representations**'
+  id: totrans-19
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**介绍ELMo：深度上下文化词表示**'
 - en: Enter ELMo. Developed in 2018 by AllenNLP, it goes beyond traditional embedding
     techniques. It uses a deep, bi-directional LSTM model to create word representations.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: ELMo应运而生。ELMo由AllenNLP于2018年开发，超越了传统的嵌入技术。它使用深度双向LSTM模型来创建词表示。
 - en: Rather than a dictionary of words and their corresponding vectors, ELMo analyses
     words within the context that they are used. It is also character based, allowing
     the model to form representations of out-of-vocabulary words.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 与其说ELMo拥有一个词汇表及其对应向量，不如说ELMo在词语使用的上下文中进行分析。它还是基于字符的，使模型能够形成对超出词汇表范围的词的表示。
 - en: This therefore means that the way ELMo is used is quite different to word2vec
     or fastText. Rather than having a dictionary ‘look-up’ of words and their corresponding
     vectors, ELMo instead creates vectors on-the-fly by passing text through the deep
     learning model.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，ELMo的使用方式与word2vec或fastText截然不同。ELMo不是通过字典“查找”词及其对应的向量，而是通过将文本传递给深度学习模型即时创建向量。
 - en: '**A worked example, a practical use for ELMo in less than 5 minutes**'
+  id: totrans-23
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**一个实际示例，5分钟内ELMo的实际应用**'
 - en: Lets get started! I will add the main snippets of code here but if you want
     to review the full set of code (or indeed want the strange satisfaction that comes
     with clicking through each of the cells in a notebook), please see the corresponding [Colab
     output here](https://colab.research.google.com/drive/13f6dKakC-0yO6_DxqSqo0Kl41KMHT8A1).
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 让我们开始吧！我会在这里添加主要的代码片段，但如果你想查看完整的代码集（或者确实想体验点击笔记本中每个单元格的奇妙感觉），请查看相应的 [Colab 输出](https://colab.research.google.com/drive/13f6dKakC-0yO6_DxqSqo0Kl41KMHT8A1)。
 - en: As per my last few posts, the data we will be using is based on Modern Slavery
     returns. These are mandatory statements by companies to communicate how they are
     addressing Modern Slavery both internally, and within their supply chains. We
     will be deep-diving into ASOS’s return in this article (a British, online fashion
     retailer).
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 根据我最近几篇文章，我们将使用的数据基于现代奴隶制的报告。这些是公司必须发布的声明，用以说明它们如何在内部及其供应链中解决现代奴隶制问题。我们将在本文中深入分析
+    ASOS 的报告（一个英国的在线时尚零售商）。
 - en: If you are interested in seeing other posts in what is fast becoming a mini-series
     of NLP experiments performed on this dataset, I have included links to these at
     the end of this article.
+  id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你对查看其他与此数据集相关的 NLP 实验感兴趣，这些实验正在快速成为一个迷你系列，我在本文末尾包含了这些文章的链接。
 - en: '**1\. Get the text data, clean and tokenize**'
+  id: totrans-27
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**1\. 获取文本数据，清理并分词**'
 - en: 'It is amazing how simple this is to do using Python string functions and spaCy.
     Here we do some basic text cleaning by:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用 Python 字符串函数和 spaCy 来做到这一点是如此简单。这里我们通过以下方式进行一些基本的文本清理：
 - en: a) removing line breaks, tabs and excess whitespace as well as the mysterious
     ‘xa0’ character;
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: a) 移除换行符、制表符和多余的空白，以及神秘的‘xa0’字符；
 - en: b) splitting the text into sentences using spaCy’s ‘.sents’ iterator.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: b) 使用 spaCy 的‘.sents’迭代器将文本拆分成句子。
 - en: ELMo can receive either a list of sentence strings or a list of lists (sentences
     and words). Here we have gone for the former. We know that ELMo is character based,
     therefore tokenizing words should not have any impact on performance.
+  id: totrans-31
   prefs: []
   type: TYPE_NORMAL
+  zh: ELMo 可以接收一个句子字符串列表或一个列表的列表（句子和单词）。在这里，我们选择了前者。我们知道 ELMo 是基于字符的，因此对单词进行分词应该不会影响性能。
 - en: '[PRE0]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '**2\. Get the ELMo model using TensorFlow Hub:**'
+  id: totrans-33
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**2\. 使用 TensorFlow Hub 获取 ELMo 模型：**'
 - en: If you have not yet come across TensorFlow Hub, it is a massive time saver in
     serving-up a large number of pre-trained models for use in TensorFlow. Luckily
     for us, one of these models is ELMo. We can load in a fully trained model in just
     two few lines of code. How satisfying…
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你还没遇到 TensorFlow Hub，它是一个极大的时间节省工具，用于提供大量的预训练模型以供 TensorFlow 使用。幸运的是，其中一个模型是
+    ELMo。我们只需两行代码即可加载一个完全训练好的模型。多么令人满意啊……
 - en: '[PRE1]'
+  id: totrans-35
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: 'To then use this model in anger we just need a few more lines of code to point
     it in the direction of our text document and create sentence vectors:'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，要使用这个模型，我们只需多写几行代码，将其指向我们的文本文件并创建句子向量：
 - en: '[PRE2]'
+  id: totrans-37
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '**3\. Use visualisation to sense-check outputs**'
+  id: totrans-38
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: '**3\. 使用可视化来检查输出的准确性**'
 - en: It is amazing how often visualisation is overlooked as a way of gaining greater
     understanding of data. Pictures speak a thousand words and we are going to create
     a chart *of *a thousand words to prove this point (actually it is 8,511 words).
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 可视化被忽视作为获得数据更深入理解的一种方式，这真是太惊人了。图片胜过千言万语，我们将创建一个*千言万语*的图表来证明这一点（实际上是 8,511 个单词）。
 - en: Here we will use PCA and t-SNE to reduce the 1,024 dimensions which are output
     from ELMo down to 2 so that we can review the outputs from the model. I have included
     further reading on how this is achieved at the end of the article if you want
     to find out more.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这里，我们将使用 PCA 和 t-SNE 将 ELMo 输出的 1,024 维降到 2，以便我们可以查看模型的输出。如果你想了解更多，我在文章末尾包含了进一步的阅读材料。
 - en: '[PRE3]'
+  id: totrans-41
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: 'Using the amazing Plotly library, we can create a beautiful, interactive plot
     in no time at all. The below code shows how to render the results of our dimensionality
     reduction and join this back up to the sentence text. Colour has also been added
     based on the sentence length. As we are using Colab, the last line of code downloads
     the HTML file. This can be found below:'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: 使用惊人的 Plotly 库，我们可以在短时间内创建一个美丽的交互式图表。下面的代码展示了如何呈现我们降维的结果，并将其与句子文本结合起来。颜色也根据句子长度添加。由于我们使用的是
+    Colab，最后一行代码下载了 HTML 文件。可以在下面找到：
 - en: '[**Sentence encode**'
+  id: totrans-43
   prefs: []
   type: TYPE_NORMAL
+  zh: '[**句子编码**'
 - en: '*Interactive sentence embedding* drive.google.com](https://drive.google.com/open?id=17gseqOhQl9c1iPTfzxGcCfB6TOTvSU_i)'
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: '*交互式句子嵌入* drive.google.com](https://drive.google.com/open?id=17gseqOhQl9c1iPTfzxGcCfB6TOTvSU_i)'
 - en: 'The code to create this is below:'
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 创建这个的代码如下：
 - en: '[PRE4]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: 'Exploring this visualisation, we can see ELMo has done sterling work in grouping
     sentences by their semantic similarity. In fact it is quite incredible how effective
     the model is:'
+  id: totrans-47
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/037e9b1b847b7fdcf675ce65cecca0d8.png)'
+  id: totrans-48
   prefs: []
   type: TYPE_IMG
 - en: Download the HTML for yourself (link above) to see ELMo in action
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
 - en: '**4\. Create a semantic search engine:**'
+  id: totrans-50
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
@@ -215,171 +315,240 @@
     it to work in a semantic search engine. The idea is that this will allow us to
     search through the text not by keywords but by semantic closeness to our search
     query.
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
 - en: 'This is actually really simple to implement:'
+  id: totrans-52
   prefs: []
   type: TYPE_NORMAL
 - en: First we take a search query and run ELMo over it;
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: We then use cosine similarity to compare this against the vectors in our text
     document;
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: We can then return the ’n’ closest matches to the search query from the document.
+  id: totrans-55
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
 - en: 'Google Colab has some great features to create form inputs which are perfect
     for this use case. For example, creating an input is as simple as adding ***#@param ***after
     a variable. The below shows this for a string input:'
+  id: totrans-56
   prefs: []
   type: TYPE_NORMAL
 - en: '[PRE5]'
+  id: totrans-57
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: In addition to using Colab form inputs, I have used ‘IPython.display.HTML’ to
     beautify the output text and some basic string matching to highlight common words
     between the search query and the results.
+  id: totrans-58
   prefs: []
   type: TYPE_NORMAL
 - en: 'Lets put it to the test. Let us see what ASOS are doing with regards to a code
     of ethics in their Modern Slavery return:'
+  id: totrans-59
   prefs: []
   type: TYPE_NORMAL
 - en: '![](../Images/12eb9c43b35ea7f42e9db71d586de9f0.png)'
+  id: totrans-60
   prefs: []
   type: TYPE_IMG
 - en: A fully interactive semantic search engine in just a few minutes!
+  id: totrans-61
   prefs: []
   type: TYPE_NORMAL
 - en: This is magical! The matches go beyond keywords, the search engine clearly knows
     that ‘ethics’ and ethical are closely related. We find hits for both a code of
     integrity and also ethical standards and policies. Both relevant to our search
     query but not directly linked based on key words.
+  id: totrans-62
   prefs: []
   type: TYPE_NORMAL
 - en: I hope you enjoyed the post. Please do leave comments if you have any questions
     or suggestions.
+  id: totrans-63
   prefs: []
   type: TYPE_NORMAL
 - en: '***Further reading:***'
+  id: totrans-64
   prefs: []
   type: TYPE_NORMAL
 - en: 'Below are my other posts in what is now becoming a mini series on NLP and exploration
     of companies Modern Slavery returns:'
+  id: totrans-65
   prefs: []
   type: TYPE_NORMAL
 - en: '[**Clean your data with unsupervised machine learning**'
+  id: totrans-66
   prefs: []
   type: TYPE_NORMAL
 - en: '*Cleaning data does not have to be painful! This post is a quick example of
     how to use unsupervised machine learning to…* towardsdatascience.com](https://towardsdatascience.com/clean-your-data-with-unsupervised-machine-learning-8491af733595)'
+  id: totrans-67
   prefs: []
   type: TYPE_NORMAL
 - en: '[**Supercharging word vectors**'
+  id: totrans-68
   prefs: []
   type: TYPE_NORMAL
 - en: '*A simple technique to boost fastText and other word vectors in your NLP projects*
     towardsdatascience.com](https://towardsdatascience.com/supercharging-word-vectors-be80ee5513d)'
+  id: totrans-69
   prefs: []
   type: TYPE_NORMAL
 - en: 'To find out more on the dimensionality reduction process used, I recommend
     the below post:'
+  id: totrans-70
   prefs: []
   type: TYPE_NORMAL
 - en: '[**Visualising high-dimensional datasets using PCA and t-SNE in Python**'
+  id: totrans-71
   prefs: []
   type: TYPE_NORMAL
 - en: '*The first step around any data related challenge is to start by exploring
     the data itself. This could be by looking at…* medium.com](https://medium.com/@luckylwk/visualising-high-dimensional-datasets-using-pca-and-t-sne-in-python-8ef87e7915b)'
+  id: totrans-72
   prefs: []
   type: TYPE_NORMAL
 - en: 'Finally, for more information on state of the art language models, the below
     is a good read:'
+  id: totrans-73
   prefs: []
   type: TYPE_NORMAL
+  zh: 最后，关于最先进的语言模型，下面的内容是值得一读的：
 - en: '[http://jalammar.github.io/illustrated-bert/](http://jalammar.github.io/illustrated-bert/)'
+  id: totrans-74
   prefs: []
   type: TYPE_NORMAL
+  zh: '[http://jalammar.github.io/illustrated-bert/](http://jalammar.github.io/illustrated-bert/)'
 - en: '**Bio: [Josh Taylor](https://www.linkedin.com/in/josh-taylor-24806975/)** (**[@josh_taylor_01](https://twitter.com/josh_taylor_01)**)
     is a specialist in producing insights through advanced analytics, machine learning
     and visualisation, currently working for Her Majesty''s Government. All opinions
     are my own.'
+  id: totrans-75
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介：[Josh Taylor](https://www.linkedin.com/in/josh-taylor-24806975/)** (**[@josh_taylor_01](https://twitter.com/josh_taylor_01)**)
+    是一位通过先进分析、机器学习和可视化技术生成洞见的专家，目前为女王陛下的政府工作。所有观点均为个人意见。'
 - en: '[Original](https://towardsdatascience.com/elmo-contextual-language-embedding-335de2268604).
     Reposted with permission.'
+  id: totrans-76
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原始内容](https://towardsdatascience.com/elmo-contextual-language-embedding-335de2268604)。经授权转载。'
 - en: '**Related:**'
+  id: totrans-77
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关：**'
 - en: '[Word Embeddings & Self-Supervised Learning, Explained](/2019/01/burkov-self-supervised-learning-word-embeddings.html)'
+  id: totrans-78
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[词嵌入与自监督学习，解释说明](/2019/01/burkov-self-supervised-learning-word-embeddings.html)'
 - en: '[Data Representation for Natural Language Processing Tasks](/2018/11/data-representation-natural-language-processing.html)'
+  id: totrans-79
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理任务的数据表示](/2018/11/data-representation-natural-language-processing.html)'
 - en: '[Top 20 Python Libraries for Data Science in 2018](/2018/06/top-20-python-libraries-data-science-2018.html)'
+  id: totrans-80
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[2018年数据科学领域的前20大Python库](/2018/06/top-20-python-libraries-data-science-2018.html)'
 - en: '* * *'
+  id: totrans-81
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-82
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-83
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-84
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-85
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT工作'
 - en: '* * *'
+  id: totrans-86
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: More On This Topic
+  id: totrans-87
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[The Ultimate Guide To Different Word Embedding Techniques In NLP](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)'
+  id: totrans-88
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[终极指南：NLP中不同的词嵌入技术](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)'
 - en: '[N-gram Language Modeling in Natural Language Processing](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)'
+  id: totrans-89
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理中的N-gram语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)'
 - en: '[Python: The programming language of machine learning](https://www.kdnuggets.com/2022/06/mlm-python-programming-language-machine-learning.html)'
+  id: totrans-90
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python：机器学习的编程语言](https://www.kdnuggets.com/2022/06/mlm-python-programming-language-machine-learning.html)'
 - en: '[Natural Language Processing Key Terms, Explained](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)'
+  id: totrans-91
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理关键术语解释](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)'
 - en: '[Data Representation for Natural Language Processing Tasks](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
+  id: totrans-92
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[自然语言处理任务的数据表示](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-93
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[是什么让Python成为创业公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
