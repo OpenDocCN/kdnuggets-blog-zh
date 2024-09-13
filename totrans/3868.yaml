@@ -1,219 +1,330 @@
 - en: Applying Python’s Explode Function to Pandas DataFrames
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 将Python的Explode函数应用于Pandas数据框
 - en: 原文：[https://www.kdnuggets.com/2021/05/applying-pythons-explode-function-pandas-dataframes.html](https://www.kdnuggets.com/2021/05/applying-pythons-explode-function-pandas-dataframes.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2021/05/applying-pythons-explode-function-pandas-dataframes.html](https://www.kdnuggets.com/2021/05/applying-pythons-explode-function-pandas-dataframes.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: '**By [Michael Mosesov](https://www.linkedin.com/in/michael-mosesov-2a04191a6/),
     Data Analyst**'
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: '**由 [Michael Mosesov](https://www.linkedin.com/in/michael-mosesov-2a04191a6/)
+    提供，数据分析师**'
 - en: '![](../Images/c17f6a5e21136f2e36c660d112b1ee87.png)'
+  id: totrans-4
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/c17f6a5e21136f2e36c660d112b1ee87.png)'
 - en: '**Initial csv file**'
+  id: totrans-5
   prefs: []
   type: TYPE_NORMAL
+  zh: '**初始csv文件**'
 - en: '* * *'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-7
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前3个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速入门网络安全职业。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的IT需求'
 - en: '* * *'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: In our case we would use a historical data set of Russian leaders since the
     foundation of the Russian Empire in 1696, particularly their names, abbreviation
     of the government and years in power. The aim would be to clone/explode the dataset,
     so that each governor could be accessed by the year. For example, the current
     dataset format would not display who was the leader in year 1700 if you try to
     access that row.
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: 在我们的案例中，我们将使用自1696年俄罗斯帝国建立以来的俄罗斯领导人的历史数据集，特别是他们的姓名、政府的缩写和在任年限。目标是克隆/展开数据集，以便每位总督都可以按年份访问。例如，当前的数据集格式将无法显示如果你尝试访问1700年的那一行谁是领导人。
 - en: This could be solved by splaying the “Years” column by a hyphen (-) between
     two dates.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 这可以通过在两个日期之间用破折号（-）分开“年份”列来解决。
 - en: '**Our aim is to transform each element of a list-like to a row, while keeping
     the same index that was assigned by Python to each row.**'
+  id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: '**我们的目标是将列表类型的每个元素转换为一行，同时保持Python为每行分配的相同索引。**'
 - en: '*P.s. There were about 5 years between 1917 and 1922 of civil war with no single
     official state.*'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: '*附注：1917年至1922年之间有约5年的内战期间没有单一官方国家。*'
 - en: '*P.s.s. The dataset was cut down to last approximately 300 years, there were
     more leaders of Russia since 862.*'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: '*附注：数据集被削减到大约300年，862年以后还有更多的俄罗斯领导人。*'
 - en: 'In the beginning, we import the Pandas library into the Jupyter Notebook and
     take a look at the first and last rows of our data. The first step of data manipulation
     process is to create a data frame using the pd.DataFrame:'
+  id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: 一开始，我们将Pandas库导入Jupyter Notebook，并查看数据的第一行和最后一行。数据操作过程的第一步是使用pd.DataFrame创建数据框：
 - en: '![](../Images/488418ea54866050564b9005bf3a43d3.png)'
+  id: totrans-18
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/488418ea54866050564b9005bf3a43d3.png)'
 - en: '**Quick Jupyter Notebook exploratory data preview**'
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: '**快速的Jupyter Notebook数据预览**'
 - en: The explode() function is used to transform each element of a list-like to a
     row, therefore our first task is to create a list, separated by commas, of the
     values in the “Years” column.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: explode()函数用于将列表类型的每个元素转换为一行，因此我们的第一项任务是创建一个以逗号分隔的“年份”列中的值列表。
 - en: But before that, it is vital to make all values numerical inside the “Years”
     column. Based on the observation of the last row, we see that extra editing is
     required for Python to apply the explode function and splaying the years in the
     “Years” column, converting all of the values to numbers, which means to replace
     the “currently” with “2021”, as this is the year when the article is written.
+  id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 但在此之前，必须将“年份”列中的所有值转换为数字。根据最后一行的观察，我们看到Python在应用explode函数并展开“年份”列中的年份时需要额外编辑，将所有值转换为数字，这意味着将“currently”替换为“2021”，因为这是撰写文章的年份。
 - en: Replacement of values in such cases could be done using the lambda() function
     and x.replace, as demonstrated in the code below it also works for all the values
     in data frame if you need to change it in many rows.
+  id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这种情况下，值的替换可以通过使用lambda()函数和x.replace来完成，如下代码所示，这种方法也适用于数据框中的所有值，如果需要在多个行中进行更改的话。
 - en: '![](../Images/02cb016338c38638ce46238de8841d8b.png)'
+  id: totrans-23
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/02cb016338c38638ce46238de8841d8b.png)'
 - en: '**Lambda function assists in replacing values in data frames of any size and
     rows at any place**'
+  id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: '**Lambda函数帮助替换任何大小和任何位置的行中的数据框值**'
 - en: 'The next step is to split the dates in the “Years” column by a hyphen in order
     to expand/splay the data frame. The aim of the action, as been mentioned above,
     is to automatically splay and expand the hyphen between the two years. The following
     functions would help us to create lists of dates which is separated by a comma
     instead of hyphen:'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步是通过连字符拆分“Years”列中的日期，以展开/扩展数据框。正如上面提到的，操作的目的是自动展开和扩展两个年份之间的连字符。以下函数将帮助我们创建由逗号而非连字符分隔的日期列表：
 - en: '![](../Images/1e74e9eaa8a1b5b51a01f5e527a87525.png)'
+  id: totrans-26
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/1e74e9eaa8a1b5b51a01f5e527a87525.png)'
 - en: '**Although those steps could be done separately, Python allows to fit them
     in one line of code**'
+  id: totrans-27
   prefs: []
   type: TYPE_NORMAL
+  zh: '**尽管这些步骤可以单独完成，Python允许将它们合并在一行代码中**'
 - en: 'The following result should display after the manipulation with data frame:'
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 操作数据框后，结果应显示如下：
 - en: '![](../Images/9e3273bf825c03b2b4af30c69834a85e.png)'
+  id: totrans-29
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9e3273bf825c03b2b4af30c69834a85e.png)'
 - en: After assuring that all of our values in rows of the “Years” column are in the
     format of lists, we can finally apply the explode function to the whole dataset.
+  id: totrans-30
   prefs: []
   type: TYPE_NORMAL
+  zh: 在确保“Years”列中的所有值都以列表格式存在之后，我们可以最终将explode函数应用于整个数据集。
 - en: '![](../Images/e8a213805d892c3155b6d40f1669d992.png)'
+  id: totrans-31
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/e8a213805d892c3155b6d40f1669d992.png)'
 - en: '**Result of applied explode() function to the entire data frame**'
+  id: totrans-32
   prefs: []
   type: TYPE_NORMAL
+  zh: '**应用explode()函数到整个数据框的结果**'
 - en: 'Now we are able to see the result of explode function which could be used in
     the cases such as the following when there is a need to splay and expand on column
     in your data frame and make it more accessible. The reset_index() could be applied
     in case there is a need for an extra index in addition to the one initially assigned
     one to the unique row. It is also vital to create a new “exploded” pd.DataFrame
     to save the results to data set in csv format:'
+  id: totrans-33
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在我们能够看到explode函数的结果，该函数可以用于例如以下情况，当需要在数据框中的列上进行展开和扩展，以使其更易于访问时。可以应用reset_index()，以便在初始分配给唯一行的索引之外需要额外的索引时。创建一个新的“爆炸”pd.DataFrame以将结果保存到csv格式的数据集中也是至关重要的：
 - en: '![](../Images/9f55eda8ba31cd396d6b3017dbde2c4e.png)'
+  id: totrans-34
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/9f55eda8ba31cd396d6b3017dbde2c4e.png)'
 - en: '**Saving new, exploded data frame**'
+  id: totrans-35
   prefs: []
   type: TYPE_NORMAL
+  zh: '**保存新的“爆炸”数据框**'
 - en: In result of the explode() the dates in the “Years” column have splayed throughout
     the data set and now each year of governing by each leader represents a new row.
     Prior to that, functions such as lambda(), list() and map() allowed us to save
     time and automatically expand the values (in our case years) between the dates.
     Such approach is useful when manipulating with dates and can be easily applied
     to small or large datasets in any field.
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 在explode()的结果中，“Years”列中的日期已在数据集中展开，现在每位领导的每一年代表一行。在此之前，lambda()、list()和map()等函数使我们能够节省时间，并自动扩展日期之间的值（在我们这里是年份）。这种方法在处理日期时非常有用，可以轻松应用于任何领域的小型或大型数据集。
 - en: 'Below is the preview of exported data set in csv. While initial “index” was
     left assigned to each unique value (from splayed “Years”), there is an added index
     on the left for each of 348 rows:'
+  id: totrans-37
   prefs: []
   type: TYPE_NORMAL
+  zh: 以下是导出数据集的csv预览。虽然初始“index”被保留分配给每个唯一值（来自展开的“Years”），左侧增加了每348行的索引：
 - en: '![](../Images/b2fb008b83da219b93af67366983c814.png)'
+  id: totrans-38
   prefs: []
   type: TYPE_IMG
+  zh: '![](../Images/b2fb008b83da219b93af67366983c814.png)'
 - en: '**Preview of the final edited version**'
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: '**最终编辑版预览**'
 - en: '**Bio: [Michael Mosesov](https://www.linkedin.com/in/michael-mosesov-2a04191a6/)**
     is a Data Analyst located in Russia.'
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: '**简介: [Michael Mosesov](https://www.linkedin.com/in/michael-mosesov-2a04191a6/)**
+    是一位位于俄罗斯的数据分析师。'
 - en: '[Original](https://mosesov62.medium.com/applying-python-explode-function-to-pd-dataframe-e5f6dfc20690).
     Reposted with permission.'
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: '[原文](https://mosesov62.medium.com/applying-python-explode-function-to-pd-dataframe-e5f6dfc20690)。经许可转载。'
 - en: '**Related:**'
+  id: totrans-42
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关内容：**'
 - en: '[A Simple Way to Time Code in Python](/2021/03/simple-way-time-code-python.html)'
+  id: totrans-43
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[在Python中计时代码的简单方法](/2021/03/simple-way-time-code-python.html)'
 - en: '[How to Speed Up Pandas with Modin](/2021/03/speed-up-pandas-modin.html)'
+  id: totrans-44
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[如何使用Modin加速Pandas](/2021/03/speed-up-pandas-modin.html)'
 - en: '[11 Essential Code Blocks for Complete EDA (Exploratory Data Analysis)](/2021/03/11-essential-code-blocks-exploratory-data-analysis.html)'
+  id: totrans-45
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[完整 EDA（探索性数据分析）的 11 个基本代码块](/2021/03/11-essential-code-blocks-exploratory-data-analysis.html)'
 - en: More On This Topic
+  id: totrans-46
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[Three R Libraries Every Data Scientist Should Know (Even if You Use Python)](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
+  id: totrans-47
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)'
 - en: '[What Makes Python An Ideal Programming Language For Startups](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
+  id: totrans-48
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[为什么 Python 是初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)'
 - en: '[Stop Learning Data Science to Find Purpose and Find Purpose to…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
+  id: totrans-49
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[停止学习数据科学以寻找目标，并找到目标以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)'
 - en: '[A $9B AI Failure, Examined](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
+  id: totrans-50
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[一项 90 亿美元的 AI 失败，深度剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)'
 - en: '[Top Resources for Learning Statistics for Data Science](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
+  id: totrans-51
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)'
 - en: '[The 5 Characteristics of a Successful Data Scientist](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)'
