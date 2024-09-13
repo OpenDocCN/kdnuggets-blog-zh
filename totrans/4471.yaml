@@ -1,55 +1,84 @@
 - en: Dataset Splitting Best Practices in Python
+  id: totrans-0
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: Python中的数据集拆分最佳实践
 - en: 原文：[https://www.kdnuggets.com/2020/05/dataset-splitting-best-practices-python.html](https://www.kdnuggets.com/2020/05/dataset-splitting-best-practices-python.html)
+  id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/05/dataset-splitting-best-practices-python.html](https://www.kdnuggets.com/2020/05/dataset-splitting-best-practices-python.html)
 - en: '[comments](#comments)'
+  id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)'
 - en: So you have a monolithic dataset and need to split it into training and testing
     data. Perhaps you are doing so for supervised machine learning and perhaps you
     are using Python to do so.
+  id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 因此，你有一个整体数据集，需要将其拆分为训练数据和测试数据。也许你是为了监督学习而这样做，也许你使用Python来实现。
 - en: This is a discussion of three particular considerations to take into account
     when splitting your dataset, the manner in which to deal with these considerations,
     and how to practically implement these considerations using Python.
+  id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: 这是讨论在拆分数据集时需要考虑的三个具体因素，处理这些因素的方法，以及如何使用Python实际实现这些考虑事项。
 - en: '![Figure](../Images/922becb2b4f738b82d06e86e5aed0c65.png)'
+  id: totrans-5
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/922becb2b4f738b82d06e86e5aed0c65.png)'
 - en: 'Source: [Adi Bronshtein](https://towardsdatascience.com/train-test-split-and-cross-validation-in-python-80b61beca4b6)'
+  id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '来源: [Adi Bronshtein](https://towardsdatascience.com/train-test-split-and-cross-validation-in-python-80b61beca4b6)'
 - en: '* * *'
+  id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
+  id: totrans-8
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前3个课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
+  id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速进入网络安全职业生涯。'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
+  id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
+  id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持你的组织IT'
 - en: '* * *'
+  id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: For our examples we will use Scikit-learn's [`train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)
     module, which is useful for splitting your datasets whether or not you will be
     using Scikit-learn to perform your machine learning tasks. You could manually
@@ -57,203 +86,301 @@
     module includes some useful functionality to make this a bit easier. But pay attention;
     perhaps you have been using this module to perform your data splits in the past
     but have not taken certain of these considerations into account while doing so.
+  id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: 对于我们的示例，我们将使用Scikit-learn的[`train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html)模块，该模块对拆分数据集很有用，无论你是否使用Scikit-learn来执行机器学习任务。你可以用其他方式手动进行这些拆分（例如，仅使用Numpy），但Scikit-learn模块包含一些有用的功能，使得这一过程更简单。但请注意；也许你过去使用过这个模块进行数据拆分，但在进行时没有考虑到某些因素。
 - en: 1\. Randomly shuffling instances
+  id: totrans-14
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 1\. 随机打乱实例
 - en: 'The first consideration is: are your instances shuffled? So long as there is
     no reason for *not* shuffling our data (your data is time series, for example),
     we want to make certain that our instances are not just sequentially split as
     they are encountered in the dataset, as our instances may have been added in such
     a way that will introduce some unwanted bias into our model.'
+  id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 第一个考虑因素是：你的实例是否被打乱？只要没有理由*不*打乱数据（例如，你的数据是时间序列），我们希望确保我们的实例不会仅仅按顺序分割，因为我们的实例可能以某种方式被添加，从而将一些不必要的偏差引入模型中。
 - en: 'For example, look at how the version of the iris dataset included with Scikit-learn
     has its instances arranged upon loading:'
+  id: totrans-16
   prefs: []
   type: TYPE_NORMAL
+  zh: 例如，查看Scikit-learn中包含的iris数据集版本在加载时如何排列实例：
 - en: '[PRE0]'
+  id: totrans-17
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE0]'
 - en: '[PRE1]'
+  id: totrans-18
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE1]'
 - en: If you were to split your dataset with 3 classes of equal numbers of instances
     as 2/3 for training and 1/3 for testing, your newly separated datasets would have
     zero label crossover. That's obviously a problem when trying to learn features
     to predict class labels. Thankfully, the `train_test_split` module automatically
     shuffles data first by default (you can override this by setting the `shuffle`
     parameter to `False`).
+  id: totrans-19
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果你将数据集按照3个类别的实例数量相等的比例分为2/3用于训练和1/3用于测试，你的新分离数据集将没有标签交叉。这在学习特征以预测类别标签时显然是个问题。幸运的是，`train_test_split`模块默认会先对数据进行洗牌（你可以通过将`shuffle`参数设置为`False`来覆盖此设置）。
 - en: To do so, both the `feature` and `target` vectors (`X` and `y`) must be passed
     to the module. You should set a `random_state` for reproducibility. Either `train_size`
     or `test_size` needs to be set, but both are not necessary. If you do explicitly
     set both, they must add up to 1.
+  id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 为此，必须将`feature`和`target`向量（`X`和`y`）传递给模块。你应该设置一个`random_state`以确保可重复性。需要设置`train_size`或`test_size`中的一个，但两个都不是必需的。如果你明确设置了两个，它们的总和必须等于1。
 - en: '[PRE2]'
+  id: totrans-21
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE2]'
 - en: '[PRE3]'
+  id: totrans-22
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE3]'
 - en: You can see that we now have our instances shuffled.
+  id: totrans-23
   prefs: []
   type: TYPE_NORMAL
+  zh: 你可以看到我们现在已经将实例打乱了。
 - en: 2\. Stratifying classes
+  id: totrans-24
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 2. 类别分层
 - en: 'The next consideration is this: are the class counts of our newly-split training
     and testing datasets evenly distributed?'
+  id: totrans-25
   prefs: []
   type: TYPE_NORMAL
+  zh: 下一步需要考虑的是：我们新分离的训练集和测试集的类别计数是否均匀分布？
 - en: '[PRE4]'
+  id: totrans-26
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE4]'
 - en: '[PRE5]'
+  id: totrans-27
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE5]'
 - en: This is not an even split. This relates to the idea of whether our algorithm
     gets equal opportunity to learn the features of each of the dataset's classes,
     and subsequently test what it has learned on the same number of instances of each
     class. This is of particular interest in smaller datasets, but should be a persistent
     concern.
+  id: totrans-28
   prefs: []
   type: TYPE_NORMAL
+  zh: 这不是一个均匀的划分。这涉及到算法是否有平等的机会学习数据集中每个类别的特征，并随后在每个类别的相同数量的实例上测试其学习成果。在较小的数据集中特别重要，但应始终关注。
 - en: We can force the class proportion across train and test splits with `train_test_split`'s
     `stratify` option, noting that we will stratify with respect to the class distribution
     in `y`.
+  id: totrans-29
   prefs: []
   type: TYPE_NORMAL
+  zh: 我们可以使用`train_test_split`的`stratify`选项强制训练集和测试集中的类别比例保持一致，注意我们将根据`y`中的类别分布进行分层。
 - en: '[PRE6]'
+  id: totrans-30
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE6]'
 - en: '[PRE7]'
+  id: totrans-31
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE7]'
 - en: '[PRE8]'
+  id: totrans-32
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE8]'
 - en: '[PRE9]'
+  id: totrans-33
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE9]'
 - en: This looks better now, and the raw numbers tell us that this is the most optimally
     stratified split possible.
+  id: totrans-34
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在看起来更好了，原始数据告诉我们这是最优的分层划分。
 - en: 3\. Splitting the splits
+  id: totrans-35
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 3. 划分分割
 - en: 'The third consideration relates to our testing data: is our modeling task content
     having only a single testing dataset, made up of previously-unseen data, or should
     we be using two such sets — one for validating our model during its fine-tuning,
     and perhaps multiple models, and another as a final holdout set for model comparison
     and selection.'
+  id: totrans-36
   prefs: []
   type: TYPE_NORMAL
+  zh: 第三个考虑因素与我们的测试数据有关：我们的建模任务内容是否只有一个由之前未见数据组成的测试数据集，还是应该使用两个这样的数据集——一个用于在微调过程中验证我们的模型，可能还有多个模型，另一个作为最终的保留集用于模型比较和选择。
 - en: '![Figure](../Images/ac02dfdbbfffb5b5dc458a3431a91328.png)'
+  id: totrans-37
   prefs: []
   type: TYPE_IMG
+  zh: '![图示](../Images/ac02dfdbbfffb5b5dc458a3431a91328.png)'
 - en: 'Source: [Stack Exchange](https://datascience.stackexchange.com/questions/61467/clarification-on-train-test-and-val-and-how-to-use-implement-it)'
+  id: totrans-38
   prefs: []
   type: TYPE_NORMAL
+  zh: '来源: [Stack Exchange](https://datascience.stackexchange.com/questions/61467/clarification-on-train-test-and-val-and-how-to-use-implement-it)'
 - en: If we chose 2 such sets, this would mean that there would be one set of data
     that is held out until all assumptions have been tested, all hyperparameters tuned,
     and all models trained to their best performance, which is then only seen once
     by the models as the final step in our experiments. There is a body of work you
     can consult on testing versus validation sets; I won't go any further into the
     reasoning and arguments here.
+  id: totrans-39
   prefs: []
   type: TYPE_NORMAL
+  zh: 如果我们选择两个这样的集合，这意味着会有一个数据集在所有假设测试、所有超参数调优以及所有模型训练到最佳性能之后才会被使用，作为实验的最后一步，这个数据集只会被模型看到一次。关于测试集与验证集的工作有很多，你可以查阅相关资料；我在这里不会进一步探讨其理由和论点。
 - en: Assuming, however, that you conclude you *do* want to use testing and validation
     sets (and you should conclude this), crafting them using `train_test_split` is
     easy; we split the entire dataset once, separating the training from the remaining
     data, and then again to split the remaining data into testing and validation sets.
+  id: totrans-40
   prefs: []
   type: TYPE_NORMAL
+  zh: 然而，假设你得出结论你*确实*想要使用测试集和验证集（你应该得出这个结论），使用`train_test_split`来构建它们很简单；我们将整个数据集分一次，分离出训练数据，然后再分一次，将剩余的数据划分为测试集和验证集。
 - en: Below, using the digits dataset, we split 70% for the training dataset, and
     temporarily assign the remainder to the testing set. We continue to enforce the
     best practices covered above.
+  id: totrans-41
   prefs: []
   type: TYPE_NORMAL
+  zh: 在下面，使用数字数据集，我们将70%用于训练数据集，并暂时将剩余部分分配给测试集。我们继续执行上述最佳实践。
 - en: '[PRE10]'
+  id: totrans-42
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE10]'
 - en: '[PRE11]'
+  id: totrans-43
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE11]'
 - en: Note the stratified classes across the training and temporary testing sets.
+  id: totrans-44
   prefs: []
   type: TYPE_NORMAL
+  zh: 注意训练集和临时测试集中的分层类别。
 - en: We then re-split the testing set in the same way — this time modifying the output
     variable names, the input variable names, and being careful to change the `stratify`
     class vector reference — using a 50/50 split for the testing and validation sets.
+  id: totrans-45
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后我们以相同的方式重新拆分测试集——这次修改输出变量名称、输入变量名称，并小心更改`stratify`类向量引用——使用50/50的拆分比例用于测试和验证集。
 - en: '[PRE12]'
+  id: totrans-46
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE12]'
 - en: '[PRE13]'
+  id: totrans-47
   prefs: []
   type: TYPE_PRE
+  zh: '[PRE13]'
 - en: Note, again, the class stratification across all datasets, which is optimal
     and ideal.
+  id: totrans-48
   prefs: []
   type: TYPE_NORMAL
+  zh: 再次注意所有数据集中的类别分层，这样是最优和理想的。
 - en: You are now ready to train, validate, and test as many machine learning models
     as you see fit with your data.
+  id: totrans-49
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在你可以根据数据的需要训练、验证和测试尽可能多的机器学习模型。
 - en: 'Another consideration: you might want to think about using cross-validation
     instead of a simple train/test or train/validate/test strategy. We will cover
     cross-stratification considerations next time.'
+  id: totrans-50
   prefs: []
   type: TYPE_NORMAL
+  zh: 另一个考虑因素：你可能想要考虑使用交叉验证，而不是简单的训练/测试或训练/验证/测试策略。我们将下一次讨论交叉分层的考虑因素。
 - en: '**Related**:'
+  id: totrans-51
   prefs: []
   type: TYPE_NORMAL
+  zh: '**相关**：'
 - en: '[Sparse Matrix Representation in Python](/2020/05/sparse-matrix-representation-python.html)'
+  id: totrans-52
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Python中的稀疏矩阵表示](/2020/05/sparse-matrix-representation-python.html)'
 - en: '[5 Great New Features in Scikit-learn 0.23](/2020/05/5-great-new-features-scikit-learn.html)'
+  id: totrans-53
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[Scikit-learn 0.23中的5个伟大新特性](/2020/05/5-great-new-features-scikit-learn.html)'
 - en: '[The 5 Most Useful Techniques to Handle Imbalanced Datasets](/2020/01/5-most-useful-techniques-handle-imbalanced-datasets.html)'
+  id: totrans-54
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[处理不平衡数据集的5个最有用技巧](/2020/01/5-most-useful-techniques-handle-imbalanced-datasets.html)'
 - en: More On This Topic
+  id: totrans-55
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 更多相关主题
 - en: '[5 Python Best Practices for Data Science](https://www.kdnuggets.com/5-python-best-practices-for-data-science)'
+  id: totrans-56
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据科学中的5个Python最佳实践](https://www.kdnuggets.com/5-python-best-practices-for-data-science)'
 - en: '[MLOps: The Best Practices and How To Apply Them](https://www.kdnuggets.com/2022/04/mlops-best-practices-apply.html)'
+  id: totrans-57
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[MLOps：最佳实践及其应用](https://www.kdnuggets.com/2022/04/mlops-best-practices-apply.html)'
 - en: '[Best Practices for Creating Domain-Specific AI Models](https://www.kdnuggets.com/2022/07/best-practices-creating-domainspecific-ai-models.html)'
+  id: totrans-58
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[创建领域特定AI模型的最佳实践](https://www.kdnuggets.com/2022/07/best-practices-creating-domainspecific-ai-models.html)'
 - en: '[Integrating ChatGPT Into Data Science Workflows: Tips and Best Practices](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)'
+  id: totrans-59
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[将ChatGPT集成到数据科学工作流程中：提示和最佳实践](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)'
 - en: '[Data Warehousing and ETL Best Practices](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)'
+  id: totrans-60
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[数据仓库和ETL最佳实践](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)'
 - en: '[11 Best Practices of Cloud and Data Migration to AWS Cloud](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)'
+  id: totrans-61
   prefs:
   - PREF_UL
   type: TYPE_NORMAL
+  zh: '[迁移到AWS云的11个最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)'
