@@ -3,50 +3,63 @@
   prefs:
   - PREF_H1
   type: TYPE_NORMAL
+  zh: 使用 TensorFlow 进行简单的图像数据集增强
 - en: 原文：[https://www.kdnuggets.com/2020/02/easy-image-dataset-augmentation-tensorflow.html](https://www.kdnuggets.com/2020/02/easy-image-dataset-augmentation-tensorflow.html)
   id: totrans-1
   prefs:
   - PREF_BQ
   type: TYPE_NORMAL
+  zh: 原文：[https://www.kdnuggets.com/2020/02/easy-image-dataset-augmentation-tensorflow.html](https://www.kdnuggets.com/2020/02/easy-image-dataset-augmentation-tensorflow.html)
 - en: '[comments](#comments)![Figure](../Images/75da29ec9b82fa9d10c4cef5605e5a59.png)'
   id: totrans-2
   prefs: []
   type: TYPE_NORMAL
+  zh: '[评论](#comments)![图](../Images/75da29ec9b82fa9d10c4cef5605e5a59.png)'
 - en: 'Image source: [Nanonets](https://nanonets.com/blog/data-augmentation-how-to-use-deep-learning-when-you-have-limited-data-part-2/)'
   id: totrans-3
   prefs: []
   type: TYPE_NORMAL
+  zh: 图片来源：[Nanonets](https://nanonets.com/blog/data-augmentation-how-to-use-deep-learning-when-you-have-limited-data-part-2/)
 - en: '* * *'
   id: totrans-4
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: Our Top 3 Course Recommendations
   id: totrans-5
   prefs:
   - PREF_H2
   type: TYPE_NORMAL
+  zh: 我们的前三大课程推荐
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity
     Certificate](https://www.kdnuggets.com/google-cybersecurity) - Get on the fast
     track to a career in cybersecurity.'
   id: totrans-6
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity)
+    - 快速开启网络安全职业生涯'
 - en: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics
     Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - Up
     your data analytics game'
   id: totrans-7
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics)
+    - 提升你的数据分析技能'
 - en: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support
     Professional Certificate](https://www.kdnuggets.com/google-itsupport) - Support
     your organization in IT'
   id: totrans-8
   prefs: []
   type: TYPE_NORMAL
+  zh: '![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport)
+    - 支持组织的 IT 工作'
 - en: '* * *'
   id: totrans-9
   prefs: []
   type: TYPE_NORMAL
+  zh: '* * *'
 - en: The success of image classification is driven, at least significantly, by large
     amounts of available training data. Putting aside concerns such as overfitting
     for a moment, the more image data you train with, the better chances you have
@@ -54,12 +67,14 @@
   id: totrans-10
   prefs: []
   type: TYPE_NORMAL
+  zh: 图像分类的成功，至少在很大程度上，取决于大量可用的训练数据。暂且不谈诸如过拟合等问题，训练数据越多，你建立一个有效模型的机会就越大。
 - en: But what can we do when we don't have a substantial amount of training data?
     A few broad approaches to this particular problem come to mind right away, notably
     transfer learning and data augmentation.
   id: totrans-11
   prefs: []
   type: TYPE_NORMAL
+  zh: 但当我们没有大量训练数据时，我们该怎么办？对于这个特定问题，立刻想到的几种广泛方法是迁移学习和数据增强。
 - en: '**Transfer learning** is the process of applying existing machine learning
     models to scenarios for which they were not originally intended. This leveraging
     can save training time and extend the usefulness of existing machine learning
@@ -70,6 +85,7 @@
   id: totrans-12
   prefs: []
   type: TYPE_NORMAL
+  zh: '**迁移学习** 是将现有机器学习模型应用于原本不打算用于这些场景的过程。这种利用可以节省训练时间，并扩展现有机器学习模型的实用性，这些模型可能在大数据集上经过了长时间的训练。如果我们在大数据集上训练一个模型，然后可以将结果调整为在我们较小的数据集上有效。至少，这就是我们的想法。'
 - en: '**Data augmentation** is the increase of an existing training dataset''s size
     and diversity without the requirement of manually collecting any new data. This
     augmented data is acquired by performing a series of preprocessing transformations
@@ -82,6 +98,7 @@
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: '**数据增强** 是在不需要手动收集任何新数据的情况下，增加现有训练数据集的大小和多样性。这些增强的数据是通过对现有数据执行一系列预处理转换来获取的，这些转换可以包括水平和垂直翻转、倾斜、裁剪、旋转等，尤其是在图像数据的情况下。总的来说，这些增强的数据能够模拟各种微妙不同的数据点，而不仅仅是重复相同的数据。这些“附加”图像的微小差异应该足够帮助训练出一个更强大的模型。再说一次，这就是我们的想法。'
 - en: The practical implementation of this second approach to mitigating the problem
     of small amounts of image training data — data augmentation — in TensorFlow is
     the focus of this article, while a similar practical treatment of transfer learning
@@ -89,11 +106,13 @@
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 本文重点介绍了在 TensorFlow 中解决图像训练数据量不足问题的第二种方法——数据增强的实际实施，而迁移学习的类似实际处理将在稍后时间进行。
 - en: How Image Augmentation Helps
   id: totrans-15
   prefs:
   - PREF_H3
   type: TYPE_NORMAL
+  zh: 图像增强的帮助
 - en: As convolutional neural networks learn image features, we want to ensure that
     these features appear at a variety of orientations, in order for a trained model
     to be able to recognize that a human's legs can appear in images both vertically
