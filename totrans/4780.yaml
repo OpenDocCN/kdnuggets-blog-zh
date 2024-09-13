@@ -102,6 +102,8 @@
   id: totrans-13
   prefs: []
   type: TYPE_NORMAL
+  zh: IoT 解决方案的一部分是网关。它在设备（温度、湿度传感器）和云之间充当中介。在我之前的帖子中，我解释了如何将笔记本电脑转换为 IoT 设备，提供了如何将数据从设备发送到
+    AWS，并实现端到端解决方案的详细信息 ([kdnuggets.com/2018/06/zimbres-iot-aws-machine-learning-dashboard.html](/2018/06/zimbres-iot-aws-machine-learning-dashboard.html))。
 - en: In this post, I will explain how to run an IoT project from the command line,
     without graphical interface, using Ubuntu Core in a Raspberry Pi 3\. An easier
     way is to use Raspbian, that provides a graphical interface for your projects.
@@ -112,15 +114,19 @@
   id: totrans-14
   prefs: []
   type: TYPE_NORMAL
+  zh: 在这篇文章中，我将解释如何从命令行运行 IoT 项目，不使用图形界面，使用树莓派 3 的 Ubuntu Core。更简单的方法是使用 Raspbian，它为你的项目提供了图形界面。Raspbian
+    是一个基于 Debian 的计算机操作系统。然而，我决定尝试 Ubuntu Core，因为安全性应成为 IoT 中的主要关注点。Ubuntu Core 可以用于数字标牌、机器人、无人机和边缘网关。这是一个更具挑战性和安全性的决定。
 - en: 'The picture below shows the difference between regular Linux systems and Ubuntu
     Core:'
   id: totrans-15
   prefs: []
   type: TYPE_NORMAL
+  zh: 下图显示了普通 Linux 系统和 Ubuntu Core 之间的区别：
 - en: '![Image](../Images/a5e7f3adc3484ae89e68266b09368abe.png)'
   id: totrans-16
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/a5e7f3adc3484ae89e68266b09368abe.png)'
 - en: Ubuntu Core is a lightweight system, with “security at its heart”. It is composed
     of snaps, “self contained, isolated and protected bits of code”. It’s quite difficult
     to alter a read-only file in the system, even using ESC :w !sudo tee % at vim
@@ -128,6 +134,8 @@
   id: totrans-17
   prefs: []
   type: TYPE_NORMAL
+  zh: Ubuntu Core 是一个轻量级系统，核心在于**安全**。它由 snaps 组成，即“自包含、隔离和保护的代码片段”。即使使用 vim 命令 `ESC
+    :w !sudo tee %`，也很难修改系统中的只读文件。
 - en: As it is an ARM system, it’s quite different to install Machine Learning libraries
     in it, since there are some specific packages for this type of system and lots
     of dependencies are not included, not even “wget”. So let’s start. When you buy
@@ -139,24 +147,30 @@
   id: totrans-18
   prefs: []
   type: TYPE_NORMAL
+  zh: 由于这是一个 ARM 系统，在其上安装机器学习库是相当不同的，因为有一些特定于此类型系统的包，并且许多依赖项没有包含，连“wget”也没有。所以，让我们开始吧。当你购买树莓派时，它没有能源源（右上角下面）和
+    SD 卡（右侧突出）。Model 3 B 具有 4 个 USB 接口和一个以太网接口。它还包含 HDMI、音频和摄像头接口。在这个项目中，我们不会使用鼠标，显示器、以太网电缆和键盘仅在系统的第一次运行中用于设置互联网连接。
 - en: '![Image](../Images/f27e7c1f698f424d0ea244fcd8ec074f.png)'
   id: totrans-19
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/f27e7c1f698f424d0ea244fcd8ec074f.png)'
 - en: The first thing to do is to install an Operating System in the SDCard (micro).
     So, download Ubuntu Core image from their website at [http://cdimage.ubuntu.com/ubuntu-core/16/stable/current/ubuntu-core-16-pi3.img.xz](http://cdimage.ubuntu.com/ubuntu-core/16/stable/current/ubuntu-core-16-pi3.img.xz)
   id: totrans-20
   prefs: []
   type: TYPE_NORMAL
+  zh: 首先要做的是在 SD 卡（micro）上安装操作系统。因此，从他们的网站下载 Ubuntu Core 镜像：[http://cdimage.ubuntu.com/ubuntu-core/16/stable/current/ubuntu-core-16-pi3.img.xz](http://cdimage.ubuntu.com/ubuntu-core/16/stable/current/ubuntu-core-16-pi3.img.xz)
 - en: 'Then, download Etcher in order to flash the image into the card: [https://etcher.io/](https://etcher.io/)'
   id: totrans-21
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，下载 Etcher 以将映像刷入卡中：[https://etcher.io/](https://etcher.io/)
 - en: Now, you have to generate the private and public keys, that will be uploaded
     to your Ubuntu One account (https://login.ubuntu.com/).
   id: totrans-22
   prefs: []
   type: TYPE_NORMAL
+  zh: 现在，你需要生成私钥和公钥，这些密钥将上传到你的 Ubuntu One 账户（https://login.ubuntu.com/）。
 - en: '[PRE0]'
   id: totrans-23
   prefs: []
@@ -166,6 +180,7 @@
   id: totrans-24
   prefs: []
   type: TYPE_NORMAL
+  zh: 然后，复制密钥代码并粘贴到你的 Ubuntu One 账户中：
 - en: '[PRE1]'
   id: totrans-25
   prefs: []
@@ -176,10 +191,12 @@
   id: totrans-26
   prefs: []
   type: TYPE_NORMAL
+  zh: 将卡插入树莓派，并打开电源开关。瞧，系统将启动：
 - en: '![Image](../Images/ffa8de6308b05378de320279508b99ee.png)'
   id: totrans-27
   prefs: []
   type: TYPE_IMG
+  zh: '![图片](../Images/ffa8de6308b05378de320279508b99ee.png)'
 - en: This will take a couple of seconds in the first time it runs, and you will be
     directed to the network configuration. Configure DHCP and your Wi-Fi username
     and password. Then Ubuntu Core will provide you with the address you are supposed
