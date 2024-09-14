@@ -1,5 +1,4 @@
- +   [使用 Python、SpaCy 和 Streamlit 构建结构化金融新闻源](docs/-structured-financial-newsfeed-using-python-spacy-and-streamlit.md)
-+   [KDN](docs/0000.md)
++   [使用 Python、SpaCy 和 Streamlit 构建结构化金融新闻源](docs/-structured-financial-newsfeed-using-python-spacy-and-streamlit.md)
 +   [===人工智能===](docs/0001.md)
 +   [在边缘AI应用中最大化性能](docs/0080.md)
 +   [我们可以期待GPT-5带来什么？](docs/0145.md)
